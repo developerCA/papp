@@ -45,6 +45,9 @@ public class ConsultasUtil {
 			int filas=20;
 			if(parameters.get("filas")!=null)
 				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+			String[] columnas={"padreid","orden"};
+			String[] orderBy = columnas;
+			menuTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			int primero=(pagina*filas)-filas;
 			menuTO.setFirstResult(primero);
 			menuTO.setMaxResults(filas);

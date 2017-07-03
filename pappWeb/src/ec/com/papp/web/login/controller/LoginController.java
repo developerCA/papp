@@ -7,7 +7,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import ec.com.papp.seguridad.to.UsuarioTO;
+import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
 
@@ -33,59 +36,17 @@ public class LoginController {
 		ModelAndView mav =null;
 		mav= new ModelAndView("index");
 		//Se ha logueado con exito
-//		if(username!=null){
-//			UsuarioTO usuarioTO = new UsuarioTO();
-//			usuarioTO.setUsuario(username);
-//			UtilSession.setUsuario(request, usuarioTO);
-//			log.println("usuario logueado***:  " + UtilSession.getUsuario(request).getNombre());
-//			//Verifico si la contrasenia debe ser cambiada
-//			log.println("cambiar clave: " + UtilSession.getUsuario(request).getCambiarclave());
-//			if(UtilSession.getUsuario(request).getCambiarclave().equals("1")){
-//				request.getSession().setAttribute("param_nuevo", "true");
-//				log.println("sesion: " + (String)request.getSession().getAttribute("param.nuevo"));
-//				mav = new ModelAndView("cambiarClaveCaducada");
-//			}
-//			else if(UtilSession.getUsuario(request).getFechaClave()!=null){
-//				ParametroTO diasclave=UtilSession.adminsitracionServicio.transObtenerParametroTO(Integer.valueOf(MensajesWeb.getString("parametro.tiempo.cambioclave")));
-//				Date fecha=UtilGeneral.modificarFecha(UtilSession.getUsuario(request).getFechaClave(), (Integer.valueOf(diasclave.getValor())).intValue(), 0, 0);
-//				//Comparo si la fecha es menor a la fecha actual no pido cambio de clave si es mayor o igual pido cambio de clave
-//				log.println("fecha modificada: " + fecha);
-//				log.println("fecha actual: " + new Date());
-//				long resultado=fecha.compareTo(new Date());
-//				log.println("resultado comparacion fecha: " + resultado);
-//				if(resultado<0){
-//					request.getSession().setAttribute("param_caducada", "true");
-//					mav = new ModelAndView("cambiarClaveCaducada");
-//				}
-//				else{
-//					log.println("no pide cambio de clave");
-//					mav= new ModelAndView("index");
-//				}
-//			}
-//			//Usuario sin autenticar
-//			else{
-//				mav= new ModelAndView("index");
-//			}
-//			//Subo a sesion los anios y el mes que debe salir seleccionado por defecto
-//			Collection<Anio> anios=new ArrayList<>();
-//			for(int i=UtilGeneral.obtenerValorFecha(new Date(), "yyyy"); i>=2005;i--){
-//				Anio anio=new Anio();
-//				anio.setAnio(i);
-//				anios.add(anio);
-//			}
-//			request.getSession().setAttribute("param_anios", anios);
-//			Collection<Anio> anioactual=new ArrayList<>();
-//			Anio anio=new Anio();
-//			anio.setAnio(UtilGeneral.obtenerValorFecha(new Date(), "yyyy"));
-//			anioactual.add(anio);
-//			request.getSession().setAttribute("param_anioactual", anioactual);
-//
-//		}
-//		//Usuario sin autenticar
-//		else{
-//
-//			mav = new ModelAndView(new RedirectView("login.jsp"));
-//		}
+		if(username!=null){
+			UsuarioTO usuarioTO = new UsuarioTO();
+			usuarioTO.setUsuario(username);
+			UtilSession.setUsuario(request, usuarioTO);
+			mav= new ModelAndView("index");
+		}
+		//Usuario sin autenticar
+		else{
+
+			mav = new ModelAndView(new RedirectView("login.jsp"));
+		}
 		log.println("va a salir por##: " + mav);
 		return mav;
 	}

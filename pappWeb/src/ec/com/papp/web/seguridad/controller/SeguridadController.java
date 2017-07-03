@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.hazelcast.spi.impl.Response;
 
 import ec.com.papp.estructuraorganica.id.UsuariounidadID;
 import ec.com.papp.estructuraorganica.to.UnidadTO;
@@ -31,6 +32,7 @@ import ec.com.papp.seguridad.to.PermisoTO;
 import ec.com.papp.seguridad.to.PermisoobjetoTO;
 import ec.com.papp.seguridad.to.UsuarioTO;
 import ec.com.papp.web.comun.util.Mensajes;
+import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.papp.web.seguridad.util.ConsultasUtil;
@@ -272,10 +274,11 @@ public class SeguridadController {
 	
 	
 	@RequestMapping(value = "/consultar/{clase}/{parametro}", method = RequestMethod.GET)
-	public String consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
-		log.println("ingresa a consultar: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
+	public Respuesta consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
+		log.println("ingresa a consultar%%: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		try{
 			String[] pares = parametro.split("&");
 			Map<String, String> parameters = new HashMap<String, String>();
@@ -320,15 +323,20 @@ public class SeguridadController {
 			else if(clase.equals("usuariounidad")){
 				jsonObject=ConsultasUtil.consultaUsuariounidad(parameters, jsonObject);
 			}
-
+			mensajes.setMsg("Exito al obtener");
+			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			log.println("json retornado: " + jsonObject.toString()); 
 		}catch (Exception e) {
 			e.printStackTrace();
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			mensajes.setDescripcion(e.getMessage());
+			respuesta.setEstado(false);
 		}
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}	
 }

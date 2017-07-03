@@ -44,20 +44,12 @@ public class UtilSession {
 	 * 
 	 * @param request - La petición que se está procesando
 	 */
-	public static void setUsuario(HttpServletRequest request,String usuario){
+	public static void setUsuario(HttpServletRequest request,UsuarioTO usuario){
 		log.println("Entra a cargar el usuario");
 
 		try{
-			UsuarioTO usuarioTO=new UsuarioTO();
-			usuarioTO.setUsuario(usuario);
-			Collection<UsuarioTO> usuariosCol = seguridadServicio.transObtenerusuario(usuarioTO);
-			if(usuariosCol!=null && !usuariosCol.isEmpty()){
-				log.println("usuarios encontrados: " + usuariosCol.size());
-				UsuarioTO usuarioAutenticado = usuariosCol.iterator().next();			
-				log.println("Nombre: " + usuarioAutenticado.getNombre());
-//				request.getSession(true).setAttribute(ConstantesSesion.USUARIO_LOGIN,usuarioAutenticado);
+			request.getSession(true).setAttribute(ConstantesSesion.USUARIO_LOGIN,usuario);
 //				log.println("usuariologin****: " + request.getSession().getAttribute(ConstantesSesion.USUARIO_LOGIN));
-			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}

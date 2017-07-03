@@ -4,14 +4,9 @@ public class Mensajes {
 
 	private String msg;
 	private String type;
-	private Boolean show;
-	private String seccion;
-	private Boolean link;
+	private String descripcion;
 	
 	public Mensajes() {
-		// TODO Auto-generated constructor stub
-		this.show=false;
-		this.link=false;
 	}
 	public String getMsg() {
 		return msg;
@@ -25,22 +20,11 @@ public class Mensajes {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Boolean getShow() {
-		return show;
+	public String getDescripcion() {
+		return descripcion;
 	}
-	public void setShow(Boolean show) {
-		this.show = show;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
-	public String getSeccion() {
-		return seccion;
-	}
-	public void setSeccion(String seccion) {
-		this.seccion = seccion;
-	}
-	public Boolean getLink() {
-		return link;
-	}
-	public void setLink(Boolean link) {
-		this.link = link;
-	}
+
 }
