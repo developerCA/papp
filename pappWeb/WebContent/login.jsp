@@ -9,7 +9,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" href="css/images/favicon.png">
-		<title>PAPP</title>
+		<title>PAPP WEB</title>
 	</head>
   	<body onLoad="document.f.j_username.focus();" class="texture" style="opacity:1;margin-left:0px;">
 		<div id="cl-wrapper" class="login-container">
