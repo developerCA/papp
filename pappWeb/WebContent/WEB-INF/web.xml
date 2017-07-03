@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+      version="3.0">
+
+    <display-name>Papp</display-name>
+
+	<!--
+	  - Location of the XML file that defines the root application context
+	  - Applied by ContextLoaderListener.
+	  -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/papp-servlet.xml
+			/WEB-INF/contextoAplicacion.xml			
+		</param-value>
+	</context-param>
+
+   <!-- Nothing below here needs to be modified -->	
+
+	<filter>
+	  <filter-name>cors</filter-name>
+	  <filter-class>ec.com.papp.web.comun.util.CorsFilter</filter-class>
+	</filter>
+	  
+	<filter-mapping>
+	  <filter-name>cors</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping>
+ 	   <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <async-supported>true</async-supported>
+    </filter>
+
+    <filter-mapping>
+      <filter-name>springSecurityFilterChain</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>  
+ <!--
+	- Provides core MVC application controller. See contacts-servlet.xml.
+    -->
+	
+	<servlet>
+		<servlet-name>papp</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>papp</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+    		
+	<listener>
+        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
+
+ 	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	 <!--Tiempo en minutos que dura una session -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+
+	<error-page>
+	  <error-code>404</error-code>
+	  <location>/redirect</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error.html</location>
+	</error-page>
+
+
+</web-app>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:jee="http://www.springframework.org/schema/jee"
+
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+          http://www.springframework.org/schema/jee 
+          http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<jee:jndi-lookup id="pappDS" jndi-name="java:jboss/datasources/pappDS"/> 
+
+	<beans:bean id="authenticationEntryPoint" class="ec.com.papp.web.util.security.AjaxAwareAuthenticationEntryPoint">
+    	<beans:constructor-arg name="loginUrl" value="/login.jsp"/>
+	</beans:bean>
+      <http auto-config="true" use-expressions="true" entry-point-ref="authenticationEntryPoint" >
+		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/login.jsp" access="permitAll" />
+<!-- 		<intercept-url pattern="/j_spring_security_switch_user" access="ROLE_SUPERVISOR" /> -->
+		<intercept-url pattern="/css/**" access="permitAll" />
+		<intercept-url pattern="/images/**" access="permitAll" />
+		<intercept-url pattern="/js/**" access="permitAll" />
+<!-- 		<intercept-url pattern="/templates/**" access="ROLE_WEBMASTER" /> -->
+<!-- 		<intercept-url pattern="/web/error/**" access="ROLE_USER" /> -->
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+<!-- 		<intercept-url pattern="/jsp/*" access="hasRole('ROLE_USER')" /> -->
+<!-- 		<intercept-url pattern="/common/*" access="hasRole('ROLE_USER')" /> -->
+<!-- 		<intercept-url pattern="/visita" access="ROLE_USER" /> -->
+
+		<form-login login-page="/login.jsp" default-target-url='/login'
+			authentication-failure-url="/login.jsp?login_error=1" />
+		<access-denied-handler error-page="/login.jsp"/>
+		<logout invalidate-session="true" logout-url="/login.jsp?loggedout=true" logout-success-url="/login.jsp?loggedout=true" />
+		
+<!-- 		<session-management invalid-session-url="/login" -->
+<!--                         session-fixation-protection="newSession"> -->
+<!--     	</session-management> -->
+	</http>
+
+	<authentication-manager alias="authenticationManager">
+	  <authentication-provider>
+		    <password-encoder hash="md5"/>
+		   <jdbc-user-service data-source-ref="pappDS"
+		    
+			users-by-username-query="select
+				        u.USUARIOUSUARIO ,
+				        u.USUARIOCLAVE,
+				        u.USUARIOESTADO1
+				      from
+				        comaco01.USUARIO u
+				      where
+				        u.USUARIOUSUARIO = ?"
+
+		    authorities-by-username-query="select
+			           u.USUARIOUSUARIO,
+			                    case pp.PERFILPERMISOLECTURA WHEN 1 THEN r.PERMISODESCRIPCION || 'LECTURA'
+			                    ELSE r.PERMISODESCRIPCION END as privilege  
+			        from
+			        comaco01.USUARIO u
+			        inner join comaco01.PERFIL p on (u.PERFILID = p.PERFILID)
+			        inner join comaco01.PERFILPERMISO pp on (p.PERFILID = pp.PERFILID)
+			        inner join comaco01.PERMISO r on (pp.PERMISOID = r.PERMISOID)
+			                       where
+			        u.USUARIOUSUARIO = ?"
+
+						  />		
+			</authentication-provider>
+	</authentication-manager>
+
+
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basename" value="ec.com.papp.web.resource.mensajeWeb"></beans:property>
+	</beans:bean>
+
+</beans:beans>
