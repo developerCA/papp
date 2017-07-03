@@ -26,7 +26,7 @@
 		<intercept-url pattern="/js/**" access="permitAll" />
 <!-- 		<intercept-url pattern="/templates/**" access="ROLE_WEBMASTER" /> -->
 <!-- 		<intercept-url pattern="/web/error/**" access="ROLE_USER" /> -->
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_APP')" />
 <!-- 		<intercept-url pattern="/jsp/*" access="hasRole('ROLE_USER')" /> -->
 <!-- 		<intercept-url pattern="/common/*" access="hasRole('ROLE_USER')" /> -->
 <!-- 		<intercept-url pattern="/visita" access="ROLE_USER" /> -->
