@@ -1,0 +1,118 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Servicios</h1>
+			<span class="mainDescription">Lista de servicios que brinda el
+				establecimiento o el local.</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+
+
+<div class="container-fluid container-fullw bg-white"
+	ng-controller="ServiciosCtrl" ng-init="traerServicios()">
+
+
+	<div class="col-sm-12" ng-show="edit">
+		<div class="panel panel-white">
+			<div class="panel-heading border-light">
+				<h4 class="panel-title">
+					<button class="btn btn-light-azure" ng-click="nuevo()">
+						<i class="ti-plus"> </i>Agregar
+					</button>
+				</h4>
+
+			</div>
+			<div class="panel-body">
+
+				<div class="col-md-12">
+
+					<div class="table-responsive">
+						<table ng-table="tableParams" show-filter="true"
+							class="table  table-hover table-striped">
+							<tr ng-repeat="ser in $data">
+								<td data-title="'Nombre'" filter="{ 'nombre': 'text' }">
+									{{ser.nombre}}</td>
+								<td data-title="'Tiempo Preparaci&oacute;n(min)'">{{ser.tiempoPreparacion}}</td>
+
+								<td style="width: 25%">
+									<button type="button" class="btn btn-info "
+										uib-tooltip="Editar" tooltip-placement="top"
+										ng-click="editarServicio(ser.codigo)">
+										<i class="ti-pencil-alt"></i>
+									</button>
+									<button type="button" class="btn btn-danger "
+										uib-tooltip="Eliminar" tooltip-placement="top"
+										ng-click="eliminarServicio(ser.codigo)">
+										<i class="ti-trash"></i>
+									</button>
+								</td>
+							</tr>
+						</table>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-12" ng-show="!edit">
+		<div class="col-md-12">
+
+			<uib-tabset active="active" class="tabbable"> <uib-tab>
+			<uib-tab-heading> Datos Generales </uib-tab-heading>
+
+			<form name="Form" id="form1" novalidate>
+				<div class="row">
+
+					<div class="col-md-6">
+						<div class="form-group"
+							ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
+							<label class="control-label"> Nombre <span
+								class="symbol required"></span>
+							</label> <input type="text" placeholder="Ingrese el nombre del servicio"
+								class="form-control" name="nombre" ng-model="servicio.nombre"
+								required /> <span class="error text-small block"
+								ng-if="Form.nombre.$dirty && Form.nombre.$invalid">Nombre
+								es obligatorio </span> <span class="success text-small"
+								ng-if="Form.nombre.$valid">Listo!</span>
+						</div>
+						<div class="form-group"
+							ng-class="{'has-error':Form.telefono.$dirty && Form.tiempo.$invalid, 'has-success':Form.tiempo.$valid}">
+							<label class="control-label"> Tiempo
+								preparaci&oacute;n(min) <span class="symbol required"></span>
+							</label> <input type="text"
+								placeholder="Ingrese el tiempo de preparaci&oacute;n"
+								ng-maxlength="3" required class="form-control" name="tiempo"
+								ng-model="servicio.tiempoPreparacion" ng-pattern="/^[0-9]*$/" />
+							<span class="error text-small block"
+								ng-if="Form.tiempo.$error.maxlength">Incorrecto(3
+								cifras)!</span>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="pull-right margin-right-30">
+
+						<button type="reset" class="btn btn-danger btn-o"
+							ng-click="form.resetear(Form)">Cerrar</button>
+						<button ng-click="form.submit(Form)" class="btn btn-primary">Guardar</button>
+					</div>
+				</div>
+
+			</form>
+			</uib-tab> </uib-tabset>
+			<p></p>
+		</div>
+
+	</div>
+
+
+
+</div>

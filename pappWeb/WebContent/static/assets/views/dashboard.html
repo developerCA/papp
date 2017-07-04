@@ -1,0 +1,162 @@
+<!-- start: DASHBOARD TITLE -->
+<!-- end: DASHBOARD TITLE -->
+<!-- start: FEATURED BOX LINKS -->
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="panel panel-white no-radius text-center">
+				<div class="panel-body">
+					<span class="fa-stack fa-2x"> <i class="fa fa-calendar-o fa-stack-2x text-primary"></i>  </span>
+					<h2 class="StepTitle"></h2>
+					<p class="text-small">
+						Numero total de citas atendidas
+					</p>
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="panel panel-white no-radius text-center">
+				<div class="panel-body">
+					<span class="fa-stack fa-2x"> <i class="fa fa-minus-circle fa-stack-2x text-danger"></i>  </span>
+					<h2 class="StepTitle"></h2>
+					<p class="text-small">
+						Numero de citas canceladas.
+					</p>
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="panel panel-white no-radius text-center">
+				<div class="panel-body">
+					<span class="fa-stack fa-2x"> <i class="fa fa-calendar fa-stack-2x text-warning"></i>  </span>
+					<h2 class="StepTitle"></h2>
+					<p class="text-small">
+						Numero de citas pendientes.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: FEATURED BOX LINKS -->
+<!-- start: FIRST SECTION -->
+<div class="container-fluid container-fullw padding-bottom-10">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-md-7 col-lg-12">
+					<div class="panel panel-white no-radius" id="visits">
+						<div class="panel-heading border-light">
+							<h4 class="panel-title"> Estadistica de Citas </h4>
+							<ul class="panel-heading-tabs border-light">
+								
+								
+								<li class="panel-tools">
+									<ct-paneltool tool-refresh="load1"></ct-paneltool>
+								</li>
+							</ul>
+						</div>
+						<div uib-collapse="visits" ng-init="visits=false" class="panel-wrapper">
+							<div class="panel-body">
+								<!-- /// controller:  'VisitsCtrl' -  localtion: assets/js/controllers/dashboardCtrl.js /// -->
+								<div ng-controller="VisitsCtrl" class="height-350">
+									<canvas class="tc-chart" tc-chartjs-line chart-options="options" chart-data="data" chart-legend="chart1" width="100%"></canvas>
+									<div class="margin-top-20">
+										<div tc-chartjs-legend chart-legend="chart1" class="inline pull-left"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- <div class="col-md-5 col-lg-4">
+					<div class="panel panel-white no-radius">
+						<div class="panel-heading border-light">
+							<h4 class="panel-title"> Servicios </h4>
+						</div>
+						<div class="panel-body">
+							<h3 class="inline-block no-margin">26</h3> servicios realizados <uib-progressbar value="40" class="progress-xs no-radius" type="success"></uib-progressbar>
+							<div class="row">
+							
+								<div class="col-sm-4">
+									<h4 class="no-margin">15</h4>
+									<uib-progressbar value="80" class="progress-xs no-radius no-margin" type="danger"></uib-progressbar>
+									Corte de Hombre
+								</div>
+								<div class="col-sm-4">
+									<h4 class="no-margin">7</h4>
+									<uib-progressbar value="60" class="progress-xs no-radius no-margin" type="info"></uib-progressbar>
+									Cepillado
+								</div>
+								<div class="col-sm-4">
+									<h4 class="no-margin">4</h4>
+									<uib-progressbar value="40" class="progress-xs no-radius no-margin" type="warning"></uib-progressbar>
+									Maquillaje
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			 -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: FIRST SECTION -->
+<!-- start: SECOND SECTION -->
+<!-- 
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-white no-radius">
+				<div class="panel-body">
+					<div class="partition-light-grey padding-15 text-center margin-bottom-20">
+						<h4 class="no-margin">Estadisticas de Clientes</h4>
+						<span class="text-light">Basado en las citas aprobadas</span>
+					</div>
+					<v-accordion class="vAccordion--default">
+						add expanded attribute to open first section
+						<v-pane expanded>
+							<v-pane-header>
+								Este mes
+							</v-pane-header>
+							<v-pane-content>
+								<table class="table margin-bottom-0">
+									<tbody>
+										<tr>
+											<td class="center">1</td>
+											<td>Christian Aguilar</td>
+											<td class="center">49</td>
+											<td><i class="fa fa-caret-down text-red"></i></td>
+										</tr>
+										<tr>
+											<td class="center">2</td>
+											<td>Carolina Urquizo</td>
+											<td class="center">3</td>
+											<td><i class="fa fa-caret-up text-green"></i></td>
+										</tr>
+										<tr>
+											<td class="center">3</td>
+											<td>Juan Alvelaez</td>
+											<td class="center">1</td>
+											<td><i class="fa fa-caret-up text-green"></i></td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</v-pane-content>
+						</v-pane>
+					
+					
+					</v-accordion>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+ -->
