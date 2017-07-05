@@ -46,7 +46,7 @@ function ($translateProvider) {
     // prefix and suffix information  is required to specify a pattern
     // You can simply use the static-files loader with this pattern:
     $translateProvider.useStaticFilesLoader({
-        prefix: 'assets/i18n/',
+        prefix: 'static/assets/i18n/',
         suffix: '.json'
     });
 
@@ -71,10 +71,6 @@ app.config( function(blockUIConfig) {
 	blockUIConfig.message = 'Procesando..';
 	
 });
-
-app.config(["tmhDynamicLocaleProvider", function(tmhDynamicLocaleProvider) {
-	tmhDynamicLocaleProvider.localeLocationPattern('bower_components/moment/locale/es.js');
-}]);
 
 app.config(['cfpLoadingBarProvider',
 function (cfpLoadingBarProvider) {

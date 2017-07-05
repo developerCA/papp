@@ -16,8 +16,6 @@ angular.module("clip-two", [
 	'duScroll',
 	'pascalprecht.translate',
 	'restangular',
-	'tmh.dynamicLocale',
-	'ui.calendar',
 	'blockUI',
 ]);
 
