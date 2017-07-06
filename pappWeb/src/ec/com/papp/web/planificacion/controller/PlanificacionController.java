@@ -58,6 +58,7 @@ import ec.com.papp.planificacion.to.TareaunidadTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.comun.util.Mensajes;
+import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.papp.web.planificacion.util.ConsultasUtil;
 import ec.com.papp.web.resource.MensajesWeb;
@@ -78,9 +79,10 @@ public class PlanificacionController {
 	private Log log = new Log(PlanificacionController.class);
 	
 	@RequestMapping(value = "/{clase}", method = RequestMethod.POST)
-	public String grabar(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
+	public Respuesta grabar(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo grabar**: " + clase + " - " + objeto);
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		Gson gson = new Gson();
 		JSONObject jsonObject=new JSONObject();
 		String id="";
@@ -402,20 +404,24 @@ public class PlanificacionController {
 			log.println("error grabar");
 			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
 		log.println("existe mensaje: " + mensajes.getMsg());
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		log.println("resultado: " + jsonObject.toString());
-		return jsonObject.toString();	
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/nuevo/{clase}/{id}/{ejercicio}/{tipo}", method = RequestMethod.GET)
-	public String nuevo(@PathVariable String clase,@PathVariable Long id,@PathVariable Long ejercicio,@PathVariable String tipo,HttpServletRequest request){
+	public Respuesta nuevo(@PathVariable String clase,@PathVariable Long id,@PathVariable Long ejercicio,@PathVariable String tipo,HttpServletRequest request){
 		log.println("entra al metodo nuevo: " + clase + " - " + id +  " - "+ ejercicio +  " -  " + tipo);
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		try {
 			//Objetivo
 			if(clase.equals("objetivo")){
@@ -664,18 +670,22 @@ public class PlanificacionController {
 			log.println("error al obtener para editar");
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/{clase}/{id}/{parametro}", method = RequestMethod.GET)
-	public String editarniveles(@PathVariable String clase,@PathVariable Long id,@PathVariable String parametro,HttpServletRequest request){
+	public Respuesta editarniveles(@PathVariable String clase,@PathVariable Long id,@PathVariable String parametro,HttpServletRequest request){
 		log.println("entra al metodo editar niveles: " + clase + " - " + id  + " - " + parametro);
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		try {
 			if(parametro.equals("0"))
 				parametro="parametro=0";
@@ -1048,18 +1058,22 @@ public class PlanificacionController {
 			log.println("error al obtener para editar");
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/{clase}/{id}/{id2}", method = RequestMethod.DELETE)
 	//@ResponseStatus(HttpStatus.NO_CONTENT)
-	public String eliminar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,HttpServletRequest request){
+	public Respuesta eliminar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,HttpServletRequest request){
 		log.println("entra al metodo eliminar");
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
 		try {
 			//Objetivo
@@ -1115,22 +1129,26 @@ public class PlanificacionController {
 			log.println("error al eliminar");
 			mensajes.setMsg(MensajesWeb.getString("error.eliminar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null){
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-			log.println("existen mensajes");
-		}
+//		if(mensajes.getMsg()!=null){
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+//			log.println("existen mensajes");
+//		}
 		log.println("devuelve**** " + jsonObject.toString());
-		return jsonObject.toString();
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	
 	@RequestMapping(value = "/consultar/{clase}/{parametro}", method = RequestMethod.GET)
-	public String consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro, Principal principal) {
+	public Respuesta consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro, Principal principal) {
 		log.println("ingresa a consultar: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		try{
 			String[] pares = parametro.split("&");
 			Map<String, String> parameters = new HashMap<String, String>();
@@ -1288,18 +1306,22 @@ public class PlanificacionController {
 			e.printStackTrace();
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 		}
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	
 	@RequestMapping(value = "/cronograma/{id}/{acumulador}/{unidad}/{tipo}/{tipometa}/{ejerciciofiscal}", method = RequestMethod.GET)
-	public String cronograma(@PathVariable Long id,@PathVariable Long acumulador,@PathVariable Long unidad,@PathVariable String tipo,@PathVariable String tipometa,@PathVariable String ejerciciofiscal,HttpServletRequest request){
+	public Respuesta cronograma(@PathVariable Long id,@PathVariable Long acumulador,@PathVariable Long unidad,@PathVariable String tipo,@PathVariable String tipometa,@PathVariable String ejerciciofiscal,HttpServletRequest request){
 		log.println("entra al metodo recuperar: " + id + "- "+  acumulador + "- "+ unidad + "- "+ tipo + "- "+ tipometa + "- "+ ejerciciofiscal);
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		try {
 			//Metas (cronograma y cronograma linea) distribucion de presupuesto
 			//..if(clase.equals("cronograma")){
@@ -1353,11 +1375,14 @@ public class PlanificacionController {
 			log.println("error al obtener para editar");
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 }

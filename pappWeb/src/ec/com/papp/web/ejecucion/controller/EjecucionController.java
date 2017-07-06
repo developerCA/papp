@@ -36,6 +36,7 @@ import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.to.OrdengastolineaTO;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.comun.util.Mensajes;
+import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.papp.web.ejecucion.util.ConsultasUtil;
 import ec.com.papp.web.resource.MensajesWeb;
@@ -56,9 +57,10 @@ public class EjecucionController {
 	private Log log = new Log(EjecucionController.class);
 	
 	@RequestMapping(value = "/{clase}", method = RequestMethod.POST)
-	public String grabar(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
+	public Respuesta grabar(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo grabar: " + objeto);
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		Gson gson = new Gson();
 		JSONObject jsonObject=new JSONObject();
 		String id="";
@@ -208,19 +210,23 @@ public class EjecucionController {
 			log.println("error grabar");
 			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
 		log.println("existe mensaje: " + mensajes.getMsg());
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/nuevo/{clase}/{id}", method = RequestMethod.GET)
-	public String nuevo(@PathVariable String clase,@PathVariable Long id,HttpServletRequest request){
+	public Respuesta nuevo(@PathVariable String clase,@PathVariable Long id,HttpServletRequest request){
 		log.println("entra al metodo nuevo: " + id);
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		try {
 			//Certificacion
 			if(clase.equals("certificacion")){
@@ -314,18 +320,22 @@ public class EjecucionController {
 			log.println("error al obtener para editar");
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/{clase}/{id}/{id2}", method = RequestMethod.GET)
-	public String editar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,HttpServletRequest request){
+	public Respuesta editar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,HttpServletRequest request){
 		log.println("entra al metodo recuperar: " + id);
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		try {
 			//Certificacion
 			if(clase.equals("certificacion")){
@@ -444,17 +454,21 @@ public class EjecucionController {
 			log.println("error al obtener para editar");
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/flujo/{id}/{tipo}", method = RequestMethod.GET)
-	public String flujo(@PathVariable Long id,@PathVariable String tipo,HttpServletRequest request){
+	public Respuesta flujo(@PathVariable Long id,@PathVariable String tipo,HttpServletRequest request){
 		log.println("entra al metodo flujo");
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
 		try {
 			CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
@@ -469,20 +483,24 @@ public class EjecucionController {
 			log.println("error al eliminar");
 			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null){
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-			log.println("existen mensajes");
-		}
+//		if(mensajes.getMsg()!=null){
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+//			log.println("existen mensajes");
+//		}
 		log.println("devuelve**** " + jsonObject.toString());
-		return jsonObject.toString();
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/flujoordenes/{id}/{tipo}/{cur}", method = RequestMethod.GET)
-	public String flujoordenes(@PathVariable Long id,@PathVariable String tipo,@PathVariable String cur,HttpServletRequest request){
+	public Respuesta flujoordenes(@PathVariable Long id,@PathVariable String tipo,@PathVariable String cur,HttpServletRequest request){
 		log.println("entra al metodo flujo");
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
 		try {
 			OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
@@ -499,20 +517,24 @@ public class EjecucionController {
 			log.println("error al eliminar");
 			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null){
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-			log.println("existen mensajes");
-		}
+//		if(mensajes.getMsg()!=null){
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+//			log.println("existen mensajes");
+//		}
 		log.println("devuelve**** " + jsonObject.toString());
-		return jsonObject.toString();
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/flujodevengo/{id}/{tipo}", method = RequestMethod.GET)
-	public String flujoordenes(@PathVariable Long id,@PathVariable String tipo,HttpServletRequest request){
+	public Respuesta flujoordenes(@PathVariable Long id,@PathVariable String tipo,HttpServletRequest request){
 		log.println("entra al metodo flujo");
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
 		try {
 			OrdendevengoTO ordendevengoTO=UtilSession.planificacionServicio.transObtenerOrdendevengoTO(id);
@@ -527,6 +549,7 @@ public class EjecucionController {
 			log.println("error al eliminar");
 			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
 		if(mensajes.getMsg()!=null){
@@ -534,14 +557,15 @@ public class EjecucionController {
 			log.println("existen mensajes");
 		}
 		log.println("devuelve**** " + jsonObject.toString());
-		return jsonObject.toString();
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/consultar/{clase}/{parametro}", method = RequestMethod.GET)
-	public String consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
+	public Respuesta consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
 		log.println("ingresa a consultar: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		try{
 			String[] pares = parametro.split("&");
 			Map<String, String> parameters = new HashMap<String, String>();
@@ -591,10 +615,13 @@ public class EjecucionController {
 			e.printStackTrace();
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 		}
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	

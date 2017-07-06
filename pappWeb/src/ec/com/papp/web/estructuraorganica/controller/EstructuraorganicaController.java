@@ -36,6 +36,7 @@ import ec.com.papp.estructuraorganica.to.UnidadarbolplazaTO;
 import ec.com.papp.estructuraorganica.to.UnidadarbolplazaempleadoTO;
 import ec.com.papp.estructuraorganica.to.UnidadinstTO;
 import ec.com.papp.web.comun.util.Mensajes;
+import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.papp.web.estructuraorganica.util.ConsultasUtil;
 import ec.com.papp.web.resource.MensajesWeb;
@@ -56,9 +57,10 @@ public class EstructuraorganicaController {
 	private Log log = new Log(EstructuraorganicaController.class);
 	
 	@RequestMapping(value = "/{clase}", method = RequestMethod.POST)
-	public String grabar(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
+	public Respuesta grabar(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo grabar: " + clase + " - "+ objeto);
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		Gson gson = new Gson();
 		JSONObject jsonObject=new JSONObject();
 		String id="";
@@ -211,19 +213,23 @@ public class EstructuraorganicaController {
 			log.println("error grabar");
 			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
 		log.println("existe mensaje: " + mensajes.getMsg());
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/{clase}/{id}/{id2}/{id3}", method = RequestMethod.GET)
-	public String editar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,@PathVariable Long id3,HttpServletRequest request){
+	public Respuesta editar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,@PathVariable Long id3,HttpServletRequest request){
 		log.println("entra al metodo recuperar: " + id);
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		try {
 
 			//Instituto entidad
@@ -291,18 +297,22 @@ public class EstructuraorganicaController {
 			log.println("error al obtener para editar");
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	@RequestMapping(value = "/{clase}/{id}/{id2}/{di3}", method = RequestMethod.DELETE)
 	//@ResponseStatus(HttpStatus.NO_CONTENT)
-	public String eliminar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,@PathVariable Long id3,HttpServletRequest request){
+	public Respuesta eliminar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,@PathVariable Long id3,HttpServletRequest request){
 		log.println("entra al metodo eliminar");
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
 		try {
 			
@@ -355,22 +365,26 @@ public class EstructuraorganicaController {
 			log.println("error al eliminar");
 			mensajes.setMsg(MensajesWeb.getString("error.eliminar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null){
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-			log.println("existen mensajes");
-		}
+//		if(mensajes.getMsg()!=null){
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+//			log.println("existen mensajes");
+//		}
 		log.println("devuelve**** " + jsonObject.toString());
-		return jsonObject.toString();
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 	
 	
 	@RequestMapping(value = "/consultar/{clase}/{parametro}", method = RequestMethod.GET)
-	public String consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
+	public Respuesta consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
 		log.println("ingresa a consultar: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		try{
 			String[] pares = parametro.split("&");
 			Map<String, String> parameters = new HashMap<String, String>();
@@ -441,10 +455,13 @@ public class EstructuraorganicaController {
 			e.printStackTrace();
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 		}
-		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		return jsonObject.toString();	
+//		if(mensajes.getMsg()!=null)
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
 	}
 
 //	@RequestMapping(value = "/cambiarClave", method = RequestMethod.POST)

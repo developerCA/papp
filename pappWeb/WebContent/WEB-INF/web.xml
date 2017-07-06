@@ -21,15 +21,22 @@
 
    <!-- Nothing below here needs to be modified -->	
 
-	<filter>
-	  <filter-name>cors</filter-name>
-	  <filter-class>ec.com.papp.web.comun.util.CorsFilter</filter-class>
-	</filter>
+	<servlet>
+		<description></description>
+		<display-name>cors</display-name>
+		<servlet-name>cors</servlet-name>
+		<servlet-class>ec.com.papp.web.comun.util.CorsFilter</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+<!-- 	<filter> -->
+<!-- 	  <filter-name>cors</filter-name> -->
+<!-- 	  <filter-class>ec.com.papp.web.comun.util.CorsFilter</filter-class> -->
+<!-- 	</filter> -->
 	  
-	<filter-mapping>
-	  <filter-name>cors</filter-name>
-	  <url-pattern>/*</url-pattern>
-	</filter-mapping>
+<!-- 	<filter-mapping> -->
+<!-- 	  <filter-name>cors</filter-name> -->
+<!-- 	  <url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
  	   <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
