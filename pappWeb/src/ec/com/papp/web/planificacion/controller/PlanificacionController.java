@@ -74,7 +74,7 @@ import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
 */
 
 @RestController
-@RequestMapping("/planificacion")
+@RequestMapping("/rest/planificacion")
 public class PlanificacionController {
 	private Log log = new Log(PlanificacionController.class);
 	

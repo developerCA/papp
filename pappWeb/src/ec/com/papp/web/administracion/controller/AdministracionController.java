@@ -77,7 +77,7 @@ import ec.com.xcelsa.utilitario.metodos.Log;
 */
 
 @RestController
-@RequestMapping("/administrar")
+@RequestMapping("/rest/administrar")
 public class AdministracionController {
 	private Log log = new Log(AdministracionController.class);
 	

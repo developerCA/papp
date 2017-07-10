@@ -49,7 +49,7 @@ import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.metodos.Log;
 
 @RestController
-@RequestMapping("/comun")
+@RequestMapping("/rest/comun")
 public class ComunController {
 
 	private Log log = new Log(ComunController.class);

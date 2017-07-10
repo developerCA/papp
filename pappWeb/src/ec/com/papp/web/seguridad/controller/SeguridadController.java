@@ -47,7 +47,7 @@ import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
 */
 
 @RestController
-@RequestMapping("/seguridad")
+@RequestMapping("/rest/seguridad")
 public class SeguridadController {
 	private Log log = new Log(SeguridadController.class);
 	

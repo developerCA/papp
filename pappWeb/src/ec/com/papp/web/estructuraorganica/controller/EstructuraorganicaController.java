@@ -52,7 +52,7 @@ import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
 */
 
 @RestController
-@RequestMapping("/estructuraorganica")
+@RequestMapping("/rest/estructuraorganica")
 public class EstructuraorganicaController {
 	private Log log = new Log(EstructuraorganicaController.class);
 	

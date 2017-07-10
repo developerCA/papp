@@ -52,7 +52,7 @@ import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
 */
 
 @RestController
-@RequestMapping("/ejecucion")
+@RequestMapping("/rest/ejecucion")
 public class EjecucionController {
 	private Log log = new Log(EjecucionController.class);
 	
