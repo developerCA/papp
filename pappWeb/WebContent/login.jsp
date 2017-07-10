@@ -3,78 +3,93 @@
 
 <html>
 <head>
-<meta Content-Type="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="utf-8" />
+
+<title>PAPP</title>
+<meta name="description"
+	content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
-<meta name="description" content="{{app.description}}" />
-<meta name="keywords"
-	content="app, responsive, angular, bootstrap, dashboard, admin" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="HandheldFriendly" content="true" />
-<meta name="apple-touch-fullscreen" content="yes" />
+
+<link rel="stylesheet" href="css/bootstrap.css" ></link>
+<link rel="stylesheet" href="css/font-awesome.min.css" ></link>
+
+<!-- <link rel="stylesheet" href="/css/bootstrap-theme.min.css"></link> -->
 
 
-<link rel="shortcut icon" href="css/images/favicon.png">
-<title>PAPP WEB</title>
 
-<!-- Bootstrap -->
-<link rel="stylesheet"
-	href="static/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-<!-- Font Awesome -->
-<link rel="stylesheet"
-	href="static/bower_components/font-awesome/css/font-awesome.min.css" />
-<!-- Themify Icons -->
-<link rel="stylesheet"
-	href="static/bower_components/themify-icons/css/themify-icons.css" />
+<style>
+.panel-heading {
+    padding: 5px 15px;
+}
 
-<link rel="stylesheet" href="static/assets/css/styles.css" />
-<link rel="stylesheet" href="static/assets/css/plugins.css" />
+.panel-footer {
+	padding: 1px 15px;
+	color: #A0A0A0;
+}
+
+.profile-img {
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 10px;
+	display: block;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+/* html {  */
+/*   background: url('../static/img/back.jpg') no-repeat center center fixed;  */
+/*   -webkit-background-size: cover; */
+/*   -moz-background-size: cover; */
+/*   -o-background-size: cover; */
+/*   background-size: cover; */
+/* } */
+body{
+	background:Transparent;
+}
+</style>
 
 
 </head>
-<body  class="texture"
-	style="opacity: 1; margin-left: 0px;">
-	<div id="cl-wrapper" class="login-container">
-		<div class="middle-login">
-			<div class="block-flat">
+<body>
 
-				<div>
-					<form name="f" action="<c:url value='j_spring_security_check'/>"
+  <div class="container" style="margin-top:40px;">
+		<div class="row">
+			<div class="col-sm-6 col-md-4 col-md-offset-4">
+				<div class="panel panel-default">
+					
+					<div class="panel-body">
+						<form name="f" action="<c:url value='j_spring_security_check'/>"
 						method="POST" style="margin-bottom: 0px !important;"
-						class="form-horizontal">
-
-						<div class="row">
-							<div
-								class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-
-								<!-- start: LOGIN BOX -->
-								<div class="box-login">
-									<div class="logo" align="center">
-										<img src="static/assets/images/ffaa.png"  alt="logo" />
+						class="form-horizontal" >
+							<fieldset>
+								<div class="row">
+									<div class="center-block">
+										<center><img
+											src="img/ffaa.png" alt="" width="250px" />
+										</center><br/>
 									</div>
-
-									<fieldset>
-										<legend> Acceso al sistema </legend>
-										<p>Por favor ingresar tu usuario y contraseña.</p>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 col-md-10  col-md-offset-1">
 										<div class="form-group">
-											<span class="input-icon"> <input type="text"
+											<div class="input-group">
+												<span class="input-group-addon">
+													<i class="glyphicon glyphicon-user"></i>
+												</span> 
+												<input type="text"
 												name="j_username" id="j_username" class="form-control"
 												style="background: #FFF;" placeholder="Usuario"
 												value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>' />
-												<i class="fa fa-user"></i>
-											</span>
+											</div>
 										</div>
-										<div class="form-group form-actions">
-											<span class="input-icon"> <input type="password" name="j_password" id="j_password"
-											class="form-control" placeholder="Contraseña" /> <i class="fa fa-lock"></i></span>
-											<!--<a class="forgot" ui-sref="login.forgot">
-								I forgot my password
-							</a> </span>-->
+										<div class="form-group">
+											<div class="input-group">
+												<span class="input-group-addon">
+													<i class="glyphicon glyphicon-lock"></i>
+												</span>
+												<input type="password" name="j_password" id="j_password"
+											class="form-control" placeholder="Contraseña" />
+											</div>
 										</div>
 										
 										<c:if test="${not empty param.login_error}">
@@ -84,36 +99,20 @@
 												incorrectos..
 											</div>
 										</c:if>
-							
 										
-											
-
-										
-
-										<div class="form-actions">
-
-											<button type="submit" class="btn btn-primary pull-right">
-												Ingresar <i class="fa fa-arrow-circle-right"></i>
-											</button>
-
+										<div class="form-group">
+											<input type="submit" class="btn btn-lg btn-success btn-block" value="Entrar" />
 										</div>
-										
-									</fieldset>
-
-									<!-- start: COPYRIGHT -->
-									<div class="copyright">2017 &copy; Empresa S.A.</div>
-									<!-- end: COPYRIGHT -->
+									</div>
 								</div>
-								<!-- end: LOGIN BOX -->
-							</div>
-						</div>
-
-
-					</form>
-				</div>
+							</fieldset>
+						</form>
+					</div>
+					
+                </div>
 			</div>
-			
 		</div>
 	</div>
+
 </body>
 </html>

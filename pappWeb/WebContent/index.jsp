@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
   <link rel="stylesheet" href="css/font.css" type="text/css" />
   <link rel="stylesheet" href="css/app.css" type="text/css" />
+  <link rel="stylesheet" href="vendor/angular/angular-block-ui/angular-block-ui.css"/>
 </head>
 <body ng-controller="AppCtrl">
   <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
@@ -21,6 +22,8 @@
 
   <!-- Angular -->
   <script src="vendor/angular/angular.js"></script>
+  <script src="vendor/angular/lodash/dist/lodash.min.js"></script>
+  <script src="vendor/angular/restangular/restangular.js"></script>
   
   <script src="vendor/angular/angular-animate/angular-animate.js"></script>
   <script src="vendor/angular/angular-cookies/angular-cookies.js"></script>
@@ -40,6 +43,10 @@
   <script src="vendor/angular/angular-translate/loader-static-files.js"></script>
   <script src="vendor/angular/angular-translate/storage-cookie.js"></script>
   <script src="vendor/angular/angular-translate/storage-local.js"></script>
+  
+    <!-- angular-blockUI-->
+
+ <script src="vendor/angular/angular-block-ui/angular-block-ui.js"></script>
 
   <!-- App -->
   <script src="js/app.js"></script>

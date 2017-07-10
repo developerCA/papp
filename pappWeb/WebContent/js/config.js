@@ -28,4 +28,12 @@ angular.module('app')
     $translateProvider.preferredLanguage('en');
     // Tell the module to store the language in the local storage
     $translateProvider.useLocalStorage();
-  }]);
+  }])
+//blockUI
+.config( function(blockUIConfig) {
+	blockUIConfig.message = 'Procesando..';
+	
+})
+.config(["RestangularProvider", function(RestangularProvider) {
+	  RestangularProvider.setBaseUrl('api');
+}]);
