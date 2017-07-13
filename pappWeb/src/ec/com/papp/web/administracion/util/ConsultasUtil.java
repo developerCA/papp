@@ -68,19 +68,19 @@ public class ConsultasUtil {
 		String campo="";
 		EjerciciofiscalTO ejerciciofiscalTO=new EjerciciofiscalTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=200;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=200;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="anio";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			ejerciciofiscalTO.setFirstResult(primero);
-			ejerciciofiscalTO.setMaxResults(filas);
+//			ejerciciofiscalTO.setFirstResult(primero);
+//			ejerciciofiscalTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("asc"))
 				ejerciciofiscalTO.setOrderByField(OrderBy.orderAsc(orderBy));
@@ -90,13 +90,14 @@ public class ConsultasUtil {
 				ejerciciofiscalTO.setAnio(Long.valueOf(parameters.get("anio")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				ejerciciofiscalTO.setEstado(parameters.get("estado"));
-			SearchResultTO<EjerciciofiscalTO> resultado=UtilSession.adminsitracionServicio.transObtenerEjerciciofiscalPaginado(ejerciciofiscalTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),ejerciciofiscalTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<EjerciciofiscalTO> resultado=UtilSession.adminsitracionServicio.transObtenerEjerciciofiscalPaginado(ejerciciofiscalTO);
+			Collection<EjerciciofiscalTO> resultado=UtilSession.adminsitracionServicio.transObtenerEjerciciofiscal(ejerciciofiscalTO);
+			//long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+			//HashMap<String, String>  totalMap=new HashMap<String, String>();
+			//totalMap.put("valor", resultado.getCountResults().toString());
+			//log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,ejerciciofiscalTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
