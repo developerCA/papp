@@ -1,0 +1,30 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" >Ejercicios Fiscales</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: SIMPLE TABLE WITH PAGINATION -->
+<div class="container-fluid container-fullw" ng-controller="EjerciciosFiscalesController" ng-init="consultar()">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                   <!-- <h5 class="over-title margin-bottom-15">Ejercicios  <span class="text-bold">with pagination</span></h5>-->
+                    <!-- /// controller:  'ngTableCtrl' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+                    <div >
+                      
+                        <table ng-table="tableParams" class="table table-striped">
+                            <tr ng-repeat="eje in $data">
+                                <td data-title="'A&ntilde;o'">{{eje.anio}}</td>
+                                <td data-title="'Cerrado'">{{eje.cerrado}}</td>
+                               </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
