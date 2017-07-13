@@ -71,7 +71,7 @@ public class ConsultasUtil {
 			int pagina=1;
 			if(parameters.get("pagina")!=null)		
 				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
+			int filas=200;
 			if(parameters.get("filas")!=null)
 				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 			int primero=(pagina*filas)-filas;
@@ -82,10 +82,10 @@ public class ConsultasUtil {
 			ejerciciofiscalTO.setFirstResult(primero);
 			ejerciciofiscalTO.setMaxResults(filas);
 			String[] orderBy = columnas;
-			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
-				ejerciciofiscalTO.setOrderByField(OrderBy.orderDesc(orderBy));
-			else
+			if(parameters.get("sord")!=null && parameters.get("sord").equals("asc"))
 				ejerciciofiscalTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			else
+				ejerciciofiscalTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			if(parameters.get("anio")!=null && !parameters.get("anio").equals(""))
 				ejerciciofiscalTO.setAnio(Long.valueOf(parameters.get("anio")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
