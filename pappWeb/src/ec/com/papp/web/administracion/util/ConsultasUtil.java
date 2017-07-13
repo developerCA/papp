@@ -19,7 +19,6 @@ import ec.com.papp.administracion.to.ClasificacionTO;
 import ec.com.papp.administracion.to.ConsecutivoTO;
 import ec.com.papp.administracion.to.DivisiongeograficaTO;
 import ec.com.papp.administracion.to.EjerciciofiscalTO;
-import ec.com.papp.administracion.to.EmpleadoTO;
 import ec.com.papp.administracion.to.EscalarmuTO;
 import ec.com.papp.administracion.to.EspecialidadTO;
 import ec.com.papp.administracion.to.FuentefinanciamientoTO;
@@ -93,8 +92,8 @@ public class ConsultasUtil {
 //			SearchResultTO<EjerciciofiscalTO> resultado=UtilSession.adminsitracionServicio.transObtenerEjerciciofiscalPaginado(ejerciciofiscalTO);
 			Collection<EjerciciofiscalTO> resultado=UtilSession.adminsitracionServicio.transObtenerEjerciciofiscal(ejerciciofiscalTO);
 			//long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			//HashMap<String, String>  totalMap=new HashMap<String, String>();
-			//totalMap.put("valor", resultado.getCountResults().toString());
+			//HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+			//resultado.size().put("valor", resultado.getCountResults().toString());
 			//log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,ejerciciofiscalTO.getJsonConfig()));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
@@ -117,19 +116,19 @@ public class ConsultasUtil {
 		String campo="";
 		InstitucionTO institucionTO=new InstitucionTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			institucionTO.setFirstResult(primero);
-			institucionTO.setMaxResults(filas);
+//			institucionTO.setFirstResult(primero);
+//			institucionTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				institucionTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -146,11 +145,11 @@ public class ConsultasUtil {
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				institucionTO.setNombre(parameters.get("nombre"));
 			Collection<InstitucionTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerInstitucion(institucionTO);	
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
-			log.println("totalresultado: " + resultado.size());
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", Integer.valueOf(resultado.size()).toString());
+//			log.println("totalresultado: " + resultado.size());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,institucionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -201,11 +200,11 @@ public class ConsultasUtil {
 //					divisiongeograficaTO2.setNptipopadre(padreTO.getTipo());
 //				}
 //			}
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", Integer.valueOf(resultado.size()).toString());
 			log.println("totalresultado: " + resultado.size());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,divisiongeograficaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -228,7 +227,7 @@ public class ConsultasUtil {
 			int pagina=1;
 			if(parameters.get("pagina")!=null)		
 				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
+			int filas=200;
 			if(parameters.get("filas")!=null)
 				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 			int primero=(pagina*filas)-filas;
@@ -253,9 +252,9 @@ public class ConsultasUtil {
 				divisiongeograficaTO.setDivisiongeograficapadreid(Long.valueOf(parameters.get("padreid")));
 			SearchResultTO<DivisiongeograficaTO> resultado=UtilSession.adminsitracionServicio.transObtenerDivisiongeograficaPaginado(divisiongeograficaTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getClass().toString());
+			totalMap.put("valor", resultado.getCountResults().toString());
 			log.println("totalresultado: " + resultado.getClass().toString());
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),divisiongeograficaTO.getJsonConfig()));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,divisiongeograficaTO.getJsonConfig()));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -277,19 +276,19 @@ public class ConsultasUtil {
 		UnidadmedidaTO unidadmedidaTO=new UnidadmedidaTO();
 		GrupomedidaTO grupomedidaTO=new GrupomedidaTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			unidadmedidaTO.setFirstResult(primero);
-			unidadmedidaTO.setMaxResults(filas);
+//			unidadmedidaTO.setFirstResult(primero);
+//			unidadmedidaTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				unidadmedidaTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -307,13 +306,14 @@ public class ConsultasUtil {
 				grupomedidaTO.setNombre(parameters.get("nombregrupo"));
 
 			unidadmedidaTO.setGrupomedida(grupomedidaTO);
-			SearchResultTO<UnidadmedidaTO> resultado=UtilSession.adminsitracionServicio.transObtenerUnidadmedidaPaginado(unidadmedidaTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadmedidaTO.getJsonConfigComun()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<UnidadmedidaTO> resultado=UtilSession.adminsitracionServicio.transObtenerUnidadmedidaPaginado(unidadmedidaTO);
+			Collection<UnidadmedidaTO> resultado=UtilSession.adminsitracionServicio.transObtenerUnidadmedida(unidadmedidaTO);
+			//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+			//HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+			//resultado.size().put("valor", resultado.getCountResults().toString());
+			//log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,unidadmedidaTO.getJsonConfigComun()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -333,19 +333,19 @@ public class ConsultasUtil {
 		String campo="";
 		ParametroTO parametroTO=new ParametroTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="nombre";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			parametroTO.setFirstResult(primero);
-			parametroTO.setMaxResults(filas);
+//			parametroTO.setFirstResult(primero);
+//			parametroTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				parametroTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -355,13 +355,14 @@ public class ConsultasUtil {
 				parametroTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				parametroTO.setEstado(parameters.get("estado"));
-			SearchResultTO<ParametroTO> resultado=UtilSession.adminsitracionServicio.transObtenerParametroPaginado(parametroTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),parametroTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<ParametroTO> resultado=UtilSession.adminsitracionServicio.transObtenerParametroPaginado(parametroTO);
+			Collection<ParametroTO> resultado=UtilSession.adminsitracionServicio.transObtenerParametrol(parametroTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,parametroTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -381,19 +382,19 @@ public class ConsultasUtil {
 		String campo="";
 		ConsecutivoTO consecutivoTO=new ConsecutivoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="nombre";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			consecutivoTO.setFirstResult(primero);
-			consecutivoTO.setMaxResults(filas);
+//			consecutivoTO.setFirstResult(primero);
+//			consecutivoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				consecutivoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -407,13 +408,14 @@ public class ConsultasUtil {
 				consecutivoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				consecutivoTO.setConsecutivoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-			SearchResultTO<ConsecutivoTO> resultado=UtilSession.adminsitracionServicio.transObtenerConsecutivoPaginado(consecutivoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),consecutivoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<ConsecutivoTO> resultado=UtilSession.adminsitracionServicio.transObtenerConsecutivoPaginado(consecutivoTO);
+			Collection<ConsecutivoTO> resultado=UtilSession.adminsitracionServicio.transObtenerConsecutivo(consecutivoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,consecutivoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -433,19 +435,19 @@ public class ConsultasUtil {
 		String campo="";
 		TipoidentificacionTO tipoidentificacionTO=new TipoidentificacionTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="nombre";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			tipoidentificacionTO.setFirstResult(primero);
-			tipoidentificacionTO.setMaxResults(filas);
+//			tipoidentificacionTO.setFirstResult(primero);
+//			tipoidentificacionTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				tipoidentificacionTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -453,13 +455,14 @@ public class ConsultasUtil {
 				tipoidentificacionTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				tipoidentificacionTO.setNombre(parameters.get("nombre"));
-			SearchResultTO<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacionPaginado(tipoidentificacionTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),tipoidentificacionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacionPaginado(tipoidentificacionTO);
+			Collection<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacion(tipoidentificacionTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipoidentificacionTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -479,19 +482,19 @@ public class ConsultasUtil {
 		String campo="";
 		FuentefinanciamientoTO fuentefinanciamientoTO=new FuentefinanciamientoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			fuentefinanciamientoTO.setFirstResult(primero);
-			fuentefinanciamientoTO.setMaxResults(filas);
+//			fuentefinanciamientoTO.setFirstResult(primero);
+//			fuentefinanciamientoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				fuentefinanciamientoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -505,13 +508,14 @@ public class ConsultasUtil {
 				fuentefinanciamientoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				fuentefinanciamientoTO.setFuentefinanejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-			SearchResultTO<FuentefinanciamientoTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuentefinanciamientoPaginado(fuentefinanciamientoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),fuentefinanciamientoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<FuentefinanciamientoTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuentefinanciamientoPaginado(fuentefinanciamientoTO);
+			Collection<FuentefinanciamientoTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuentefinanciamiento(fuentefinanciamientoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,fuentefinanciamientoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -531,19 +535,19 @@ public class ConsultasUtil {
 		String campo="";
 		OrganismoTO organismoTO=new OrganismoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			organismoTO.setFirstResult(primero);
-			organismoTO.setMaxResults(filas);
+//			organismoTO.setFirstResult(primero);
+//			organismoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				organismoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -557,13 +561,14 @@ public class ConsultasUtil {
 				organismoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				organismoTO.setOrganismoejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-			SearchResultTO<OrganismoTO> resultado=UtilSession.adminsitracionServicio.transObtenerOrganismoPaginado(organismoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),organismoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<OrganismoTO> resultado=UtilSession.adminsitracionServicio.transObtenerOrganismoPaginado(organismoTO);
+			Collection<OrganismoTO> resultado=UtilSession.adminsitracionServicio.transObtenerOrganismo(organismoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,organismoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -584,19 +589,19 @@ public class ConsultasUtil {
 		OrganismoprestamoTO organismoprestamoTO=new OrganismoprestamoTO();
 		OrganismoTO organismoTO=new OrganismoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			organismoprestamoTO.setFirstResult(primero);
-			organismoprestamoTO.setMaxResults(filas);
+//			organismoprestamoTO.setFirstResult(primero);
+//			organismoprestamoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				organismoprestamoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -615,13 +620,14 @@ public class ConsultasUtil {
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				organismoTO.setOrganismoejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			organismoprestamoTO.setOrganismo(organismoTO);
-			SearchResultTO<OrganismoprestamoTO> resultado=UtilSession.planificacionServicio.transObtenerOrganismoprestamoPaginado(organismoprestamoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),organismoprestamoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<OrganismoprestamoTO> resultado=UtilSession.planificacionServicio.transObtenerOrganismoprestamoPaginado(organismoprestamoTO);
+			Collection<OrganismoprestamoTO> resultado=UtilSession.planificacionServicio.transObtenerOrganismoprestamo(organismoprestamoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,organismoprestamoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -641,19 +647,19 @@ public class ConsultasUtil {
 		String campo="";
 		ProcedimientoTO procedimientoTO=new ProcedimientoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="nombre";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			procedimientoTO.setFirstResult(primero);
-			procedimientoTO.setMaxResults(filas);
+//			procedimientoTO.setFirstResult(primero);
+//			procedimientoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				procedimientoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -663,13 +669,14 @@ public class ConsultasUtil {
 				procedimientoTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				procedimientoTO.setActivo(Integer.valueOf(parameters.get("estado")));
-			SearchResultTO<ProcedimientoTO> resultado=UtilSession.adminsitracionServicio.transObtenerProcedimientoPaginado(procedimientoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),procedimientoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<ProcedimientoTO> resultado=UtilSession.adminsitracionServicio.transObtenerProcedimientoPaginado(procedimientoTO);
+			Collection<ProcedimientoTO> resultado=UtilSession.adminsitracionServicio.transObtenerProcedimiento(procedimientoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,procedimientoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -689,19 +696,19 @@ public class ConsultasUtil {
 		String campo="";
 		TiporegimenTO tiporegimenTO=new TiporegimenTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="nombre";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			tiporegimenTO.setFirstResult(primero);
-			tiporegimenTO.setMaxResults(filas);
+//			tiporegimenTO.setFirstResult(primero);
+//			tiporegimenTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				tiporegimenTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -711,13 +718,14 @@ public class ConsultasUtil {
 				tiporegimenTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				tiporegimenTO.setActivo(Integer.valueOf(parameters.get("estado")));
-			SearchResultTO<TiporegimenTO> resultado=UtilSession.adminsitracionServicio.transObtenerTiporegimenPaginado(tiporegimenTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),tiporegimenTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<TiporegimenTO> resultado=UtilSession.adminsitracionServicio.transObtenerTiporegimenPaginado(tiporegimenTO);
+			Collection<TiporegimenTO> resultado=UtilSession.adminsitracionServicio.transObtenerTiporegimen(tiporegimenTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tiporegimenTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -737,19 +745,19 @@ public class ConsultasUtil {
 		String campo="";
 		TipoproductoTO tipoproductoTO=new TipoproductoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="nombre";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			tipoproductoTO.setFirstResult(primero);
-			tipoproductoTO.setMaxResults(filas);
+//			tipoproductoTO.setFirstResult(primero);
+//			tipoproductoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				tipoproductoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -759,13 +767,14 @@ public class ConsultasUtil {
 				tipoproductoTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				tipoproductoTO.setActivo(Integer.valueOf(parameters.get("estado")));
-			SearchResultTO<TipoproductoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoproductoPaginado(tipoproductoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),tipoproductoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<TipoproductoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoproductoPaginado(tipoproductoTO);
+			Collection<TipoproductoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoproducto(tipoproductoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipoproductoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -785,19 +794,19 @@ public class ConsultasUtil {
 		String campo="";
 		ObraTO obraTO=new ObraTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			obraTO.setFirstResult(primero);
-			obraTO.setMaxResults(filas);
+//			obraTO.setFirstResult(primero);
+//			obraTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				obraTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -811,13 +820,14 @@ public class ConsultasUtil {
 				obraTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				obraTO.setObraejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-			SearchResultTO<ObraTO> resultado=UtilSession.adminsitracionServicio.transObtenerObraPaginado(obraTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),obraTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<ObraTO> resultado=UtilSession.adminsitracionServicio.transObtenerObraPaginado(obraTO);
+			Collection<ObraTO> resultado=UtilSession.adminsitracionServicio.transObtenerObra(obraTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,obraTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -837,19 +847,19 @@ public class ConsultasUtil {
 		String campo="";
 		ItemTO itemTO=new ItemTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			itemTO.setFirstResult(primero);
-			itemTO.setMaxResults(filas);
+//			itemTO.setFirstResult(primero);
+//			itemTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				itemTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -865,13 +875,14 @@ public class ConsultasUtil {
 				itemTO.setTipo(parameters.get("tipo"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				itemTO.setItemejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-			SearchResultTO<ItemTO> resultado=UtilSession.adminsitracionServicio.transObtenerItemPaginado(itemTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),itemTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<ItemTO> resultado=UtilSession.adminsitracionServicio.transObtenerItemPaginado(itemTO);
+			Collection<ItemTO> resultado=UtilSession.adminsitracionServicio.transObtenerItem(itemTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,itemTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -891,19 +902,19 @@ public class ConsultasUtil {
 		String campo="";
 		SubitemTO subitemTO=new SubitemTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo,"nombre"};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			subitemTO.setFirstResult(primero);
-			subitemTO.setMaxResults(filas);
+//			subitemTO.setFirstResult(primero);
+//			subitemTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				subitemTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -930,13 +941,14 @@ public class ConsultasUtil {
 			}
 			subitemTO.setUnidadmedida(new UnidadmedidaTO());
 			subitemTO.setItem(new ItemTO());
-			SearchResultTO<SubitemTO> resultado=UtilSession.adminsitracionServicio.transObtenerSubitemPaginado(subitemTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),subitemTO.getJsonConfigedit()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<SubitemTO> resultado=UtilSession.adminsitracionServicio.transObtenerSubitemPaginado(subitemTO);
+			Collection<SubitemTO> resultado=UtilSession.adminsitracionServicio.transObtenerSubitem(subitemTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,subitemTO.getJsonConfigedit()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -956,19 +968,19 @@ public class ConsultasUtil {
 		String campo="";
 		GrupomedidaTO grupomedidaTO=new GrupomedidaTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			grupomedidaTO.setFirstResult(primero);
-			grupomedidaTO.setMaxResults(filas);
+//			grupomedidaTO.setFirstResult(primero);
+//			grupomedidaTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				grupomedidaTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -980,13 +992,14 @@ public class ConsultasUtil {
 				grupomedidaTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				grupomedidaTO.setEstado(parameters.get("estado"));
-			SearchResultTO<GrupomedidaTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrupomedidaPaginado(grupomedidaTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),grupomedidaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<GrupomedidaTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrupomedidaPaginado(grupomedidaTO);
+			Collection<GrupomedidaTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrupomedida(grupomedidaTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,grupomedidaTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1006,19 +1019,19 @@ public class ConsultasUtil {
 		String campo="";
 		ClaseregistroTO claseregistroTO=new ClaseregistroTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			claseregistroTO.setFirstResult(primero);
-			claseregistroTO.setMaxResults(filas);
+//			claseregistroTO.setFirstResult(primero);
+//			claseregistroTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				claseregistroTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1032,13 +1045,14 @@ public class ConsultasUtil {
 				claseregistroTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				claseregistroTO.setClaseregistroejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-			SearchResultTO<ClaseregistroTO> resultado=UtilSession.adminsitracionServicio.transObtenerClaseregistroPaginado(claseregistroTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),claseregistroTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<ClaseregistroTO> resultado=UtilSession.adminsitracionServicio.transObtenerClaseregistroPaginado(claseregistroTO);
+			Collection<ClaseregistroTO> resultado=UtilSession.adminsitracionServicio.transObtenerClaseregistro(claseregistroTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,claseregistroTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1060,19 +1074,19 @@ public class ConsultasUtil {
 		String campo="";
 		ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO=new ClaseregistroclasemodificacionTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			claseregistroclasemodificacionTO.setFirstResult(primero);
-			claseregistroclasemodificacionTO.setMaxResults(filas);
+//			claseregistroclasemodificacionTO.setFirstResult(primero);
+//			claseregistroclasemodificacionTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				claseregistroclasemodificacionTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1087,13 +1101,14 @@ public class ConsultasUtil {
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				claseregistroclasemodificacionTO.setClaseregistrocmejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			claseregistroclasemodificacionTO.setClaseregistro(new ClaseregistroTO());
-			SearchResultTO<ClaseregistroclasemodificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerClaseregistroclasemodificacionPaginado(claseregistroclasemodificacionTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),claseregistroclasemodificacionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<ClaseregistroclasemodificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerClaseregistroclasemodificacionPaginado(claseregistroclasemodificacionTO);
+			Collection<ClaseregistroclasemodificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerClaseregistroclasemodificacion(claseregistroclasemodificacionTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,claseregistroclasemodificacionTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1113,19 +1128,19 @@ public class ConsultasUtil {
 		String campo="";
 		TipodocumentoTO tipodocumentoTO=new TipodocumentoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			tipodocumentoTO.setFirstResult(primero);
-			tipodocumentoTO.setMaxResults(filas);
+//			tipodocumentoTO.setFirstResult(primero);
+//			tipodocumentoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				tipodocumentoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1139,13 +1154,14 @@ public class ConsultasUtil {
 				tipodocumentoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				tipodocumentoTO.setTipodocumentoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-			SearchResultTO<TipodocumentoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipodocumentoPaginado(tipodocumentoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),tipodocumentoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<TipodocumentoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipodocumentoPaginado(tipodocumentoTO);
+			Collection<TipodocumentoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipodocumento(tipodocumentoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipodocumentoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1166,19 +1182,19 @@ public class ConsultasUtil {
 		TipoidentificacionTO tipoidentificacionTO=new TipoidentificacionTO();
 		TipoidentificaciontipoTO tipoidentificaciontipoTO=new TipoidentificaciontipoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="tipoidentificacion.nombre";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			tipoidentificaciontipoTO.setFirstResult(primero);
-			tipoidentificaciontipoTO.setMaxResults(filas);
+//			tipoidentificaciontipoTO.setFirstResult(primero);
+//			tipoidentificaciontipoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				tipoidentificaciontipoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1189,13 +1205,14 @@ public class ConsultasUtil {
 			if(parameters.get("identificacionid")!=null && !parameters.get("identificacionid").equals(""))
 				tipoidentificaciontipoTO.getId().setIdentificacionid(Long.valueOf(parameters.get("nombre")));
 			tipoidentificaciontipoTO.setTipoidentificacion(tipoidentificacionTO);
-			SearchResultTO<TipoidentificaciontipoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificaciontipoPaginado(tipoidentificaciontipoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),tipoidentificacionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<TipoidentificaciontipoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificaciontipoPaginado(tipoidentificaciontipoTO);
+			Collection<TipoidentificaciontipoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificaciontipo(tipoidentificaciontipoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipoidentificacionTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1215,31 +1232,32 @@ public class ConsultasUtil {
 		String campo="";
 		TipoidentificacionTO tipoidentificacionTO=new TipoidentificacionTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="nombre";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			tipoidentificacionTO.setFirstResult(primero);
-			tipoidentificacionTO.setMaxResults(filas);
+//			tipoidentificacionTO.setFirstResult(primero);
+//			tipoidentificacionTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				tipoidentificacionTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			else
 				tipoidentificacionTO.setOrderByField(OrderBy.orderAsc(orderBy));
-			SearchResultTO<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacionPaginado(tipoidentificacionTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),tipoidentificacionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacionPaginado(tipoidentificacionTO);
+			Collection<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacion(tipoidentificacionTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipoidentificacionTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1259,19 +1277,19 @@ public class ConsultasUtil {
 		String campo="";
 		ParametroindicadorTO parametroindicadorTO=new ParametroindicadorTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			parametroindicadorTO.setFirstResult(primero);
-			parametroindicadorTO.setMaxResults(filas);
+//			parametroindicadorTO.setFirstResult(primero);
+//			parametroindicadorTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				parametroindicadorTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1281,13 +1299,14 @@ public class ConsultasUtil {
 				parametroindicadorTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				parametroindicadorTO.setNombre(parameters.get("nombre"));
-			SearchResultTO<ParametroindicadorTO> resultado=UtilSession.adminsitracionServicio.transObtenerParametroindicadorPaginado(parametroindicadorTO);	
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),parametroindicadorTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<ParametroindicadorTO> resultado=UtilSession.adminsitracionServicio.transObtenerParametroindicadorPaginado(parametroindicadorTO);
+			Collection<ParametroindicadorTO> resultado=UtilSession.adminsitracionServicio.transObtenerParametroindicador(parametroindicadorTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,parametroindicadorTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1307,19 +1326,19 @@ public class ConsultasUtil {
 		String campo="";
 		FuerzaTO fuerzaTO=new FuerzaTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			fuerzaTO.setFirstResult(primero);
-			fuerzaTO.setMaxResults(filas);
+//			fuerzaTO.setFirstResult(primero);
+//			fuerzaTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				fuerzaTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1333,13 +1352,14 @@ public class ConsultasUtil {
 				fuerzaTO.setNombre(parameters.get("sigla"));
 			if(tipo.equals("busquedafuerza"))
 				fuerzaTO.setEstado(MensajesAplicacion.getString("estado.activo"));
-			SearchResultTO<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerzaPaginado(fuerzaTO);	
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),fuerzaTO.getJsonConfigConsulta()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerzaPaginado(fuerzaTO);
+			Collection<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerza(fuerzaTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,fuerzaTO.getJsonConfigConsulta()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1360,19 +1380,19 @@ public class ConsultasUtil {
 		String campo="";
 		SocionegocioTO socionegocioTO=new SocionegocioTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			socionegocioTO.setFirstResult(primero);
-			socionegocioTO.setMaxResults(filas);
+//			socionegocioTO.setFirstResult(primero);
+//			socionegocioTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				socionegocioTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1400,18 +1420,19 @@ public class ConsultasUtil {
 				socionegocioTO.setEsempleado(1);
 			if(tipo.equals("socionegocio"))
 				socionegocioTO.setEsempleado(null);
-			SearchResultTO<SocionegocioTO> resultado=UtilSession.adminsitracionServicio.transObtenerSocionegocioPaginado(socionegocioTO);	
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
+//			SearchResultTO<SocionegocioTO> resultado=UtilSession.adminsitracionServicio.transObtenerSocionegocioPaginado(socionegocioTO);
+			Collection<SocionegocioTO> resultado=UtilSession.adminsitracionServicio.transObtenerSocionegocio(socionegocioTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
 			if(tipo.equals("socionegocio"))
-				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),socionegocioTO.getJsonConfig()));
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,socionegocioTO.getJsonConfig()));
 			else if(tipo.equals("empleado"))
-				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),socionegocioTO.getJsonConfigEmpleado()));
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,socionegocioTO.getJsonConfigEmpleado()));
 			else
-				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),socionegocioTO.getJsonConfigBusqueda()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,socionegocioTO.getJsonConfigBusqueda()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1435,19 +1456,19 @@ public class ConsultasUtil {
 		String campo="";
 		GradoTO gradoTO=new GradoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			gradoTO.setFirstResult(primero);
-			gradoTO.setMaxResults(filas);
+//			gradoTO.setFirstResult(primero);
+//			gradoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				gradoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1462,13 +1483,14 @@ public class ConsultasUtil {
 			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
 				gradoTO.setSigla(parameters.get("sigla"));
 			gradoTO.setGrupo(new GrupoTO());
-			SearchResultTO<GradoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradoPaginado(gradoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),gradoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<GradoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradoPaginado(gradoTO);
+			Collection<GradoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrado(gradoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,gradoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1489,18 +1511,18 @@ public class ConsultasUtil {
 		ClasificacionTO clasificacionTO=new ClasificacionTO();
 		try{
 			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			clasificacionTO.setFirstResult(primero);
-			clasificacionTO.setMaxResults(filas);
+//			clasificacionTO.setFirstResult(primero);
+//			clasificacionTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				clasificacionTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1512,13 +1534,14 @@ public class ConsultasUtil {
 				clasificacionTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				clasificacionTO.setEstado(parameters.get("estado"));
-			SearchResultTO<ClasificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerClasificacionPaginado(clasificacionTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),clasificacionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<ClasificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerClasificacionPaginado(clasificacionTO);
+			Collection<ClasificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerClasificacion(clasificacionTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,clasificacionTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1539,19 +1562,19 @@ public class ConsultasUtil {
 		String campo="";
 		GrupoTO grupoTO=new GrupoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			grupoTO.setFirstResult(primero);
-			grupoTO.setMaxResults(filas);
+//			grupoTO.setFirstResult(primero);
+//			grupoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				grupoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1565,13 +1588,14 @@ public class ConsultasUtil {
 				grupoTO.setSigla(parameters.get("sigla"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				grupoTO.setEstado(parameters.get("estado"));
-			SearchResultTO<GrupoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrupoPaginado(grupoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),grupoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<GrupoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrupoPaginado(grupoTO);
+			Collection<GrupoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrupo(grupoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,grupoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1592,19 +1616,19 @@ public class ConsultasUtil {
 		String campo="";
 		FuerzaTO fuerzaTO=new FuerzaTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			fuerzaTO.setFirstResult(primero);
-			fuerzaTO.setMaxResults(filas);
+//			fuerzaTO.setFirstResult(primero);
+//			fuerzaTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				fuerzaTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1616,13 +1640,14 @@ public class ConsultasUtil {
 				fuerzaTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				fuerzaTO.setEstado(parameters.get("estado"));
-			SearchResultTO<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerzaPaginado(fuerzaTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),fuerzaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerzaPaginado(fuerzaTO);
+			Collection<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerza(fuerzaTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,fuerzaTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1642,19 +1667,19 @@ public class ConsultasUtil {
 		String campo="";
 		GradofuerzaTO gradofuerzaTO=new GradofuerzaTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			gradofuerzaTO.setFirstResult(primero);
-			gradofuerzaTO.setMaxResults(filas);
+//			gradofuerzaTO.setFirstResult(primero);
+//			gradofuerzaTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				gradofuerzaTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1676,13 +1701,14 @@ public class ConsultasUtil {
 			gradofuerzaTO.setFuerza(fuerzaTO);
 			gradoTO.setGrupo(grupoTO);
 			gradofuerzaTO.setGrado(gradoTO);
-			SearchResultTO<GradofuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradofuerzaPaginado(gradofuerzaTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),gradofuerzaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<GradofuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradofuerzaPaginado(gradofuerzaTO);
+			Collection<GradofuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradofuerza(gradofuerzaTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,gradofuerzaTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1702,19 +1728,19 @@ public class ConsultasUtil {
 		String campo="";
 		EspecialidadTO especialidadTO=new EspecialidadTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			especialidadTO.setFirstResult(primero);
-			especialidadTO.setMaxResults(filas);
+//			especialidadTO.setFirstResult(primero);
+//			especialidadTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				especialidadTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1727,13 +1753,14 @@ public class ConsultasUtil {
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				especialidadTO.setEstado(parameters.get("estado"));
 			especialidadTO.setFuerza(new FuerzaTO());
-			SearchResultTO<EspecialidadTO> resultado=UtilSession.adminsitracionServicio.transObtenerEspecialidadPaginado(especialidadTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),especialidadTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<EspecialidadTO> resultado=UtilSession.adminsitracionServicio.transObtenerEspecialidadPaginado(especialidadTO);
+			Collection<EspecialidadTO> resultado=UtilSession.adminsitracionServicio.transObtenerEspecialidad(especialidadTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,especialidadTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1753,19 +1780,19 @@ public class ConsultasUtil {
 		String campo="";
 		CargoTO cargoTO=new CargoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			cargoTO.setFirstResult(primero);
-			cargoTO.setMaxResults(filas);
+//			cargoTO.setFirstResult(primero);
+//			cargoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				cargoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1777,13 +1804,14 @@ public class ConsultasUtil {
 				cargoTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				cargoTO.setEstado(parameters.get("estado"));
-			SearchResultTO<CargoTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargoPaginado(cargoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),cargoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<CargoTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargoPaginado(cargoTO);
+			Collection<CargoTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargo(cargoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,cargoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1803,19 +1831,19 @@ public class ConsultasUtil {
 		String campo="";
 		EscalarmuTO escalarmuTO=new EscalarmuTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			escalarmuTO.setFirstResult(primero);
-			escalarmuTO.setMaxResults(filas);
+//			escalarmuTO.setFirstResult(primero);
+//			escalarmuTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				escalarmuTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1829,13 +1857,14 @@ public class ConsultasUtil {
 				escalarmuTO.setGrupoocupacional(parameters.get("grupoocupacional"));
 			if(parameters.get("gradocodigo")!=null && !parameters.get("gradocodigo").equals(""))
 				escalarmuTO.setGradocodigo(parameters.get("gradocodigo"));
-			SearchResultTO<EscalarmuTO> resultado=UtilSession.adminsitracionServicio.transObtenerEscalarmuPaginado(escalarmuTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),escalarmuTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<EscalarmuTO> resultado=UtilSession.adminsitracionServicio.transObtenerEscalarmuPaginado(escalarmuTO);
+			Collection<EscalarmuTO> resultado=UtilSession.adminsitracionServicio.transObtenerEscalarmu(escalarmuTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,escalarmuTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1855,19 +1884,19 @@ public class ConsultasUtil {
 		String campo="";
 		GradoescalaTO gradoescalaTO=new GradoescalaTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			gradoescalaTO.setFirstResult(primero);
-			gradoescalaTO.setMaxResults(filas);
+//			gradoescalaTO.setFirstResult(primero);
+//			gradoescalaTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				gradoescalaTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1897,13 +1926,14 @@ public class ConsultasUtil {
 			gradofuerzaTO.setGrado(gradoTO);
 			gradoescalaTO.setGradofuerza(gradofuerzaTO);
 			gradoescalaTO.setEscalarmu(escalarmuTO);
-			SearchResultTO<GradoescalaTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradoescalaPaginado(gradoescalaTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),gradoescalaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<GradoescalaTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradoescalaPaginado(gradoescalaTO);
+			Collection<GradoescalaTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescalaTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,gradoescalaTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1923,19 +1953,19 @@ public class ConsultasUtil {
 		String campo="";
 		CargoescalaTO cargoescalaTO=new CargoescalaTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			cargoescalaTO.setFirstResult(primero);
-			cargoescalaTO.setMaxResults(filas);
+//			cargoescalaTO.setFirstResult(primero);
+//			cargoescalaTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				cargoescalaTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1959,13 +1989,14 @@ public class ConsultasUtil {
 				escalarmuTO.setGrupoocupacional(parameters.get("npgrupoocupacional"));
 			cargoescalaTO.setCargo(cargoTO);
 			cargoescalaTO.setEscalarmu(escalarmuTO);
-			SearchResultTO<CargoescalaTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargoescalaPaginado(cargoescalaTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),cargoescalaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<CargoescalaTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargoescalaPaginado(cargoescalaTO);
+			Collection<CargoescalaTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargoescala(cargoescalaTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,cargoescalaTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1985,19 +2016,19 @@ public class ConsultasUtil {
 		String campo="";
 		NivelorganicoTO nivelorganicoTO=new NivelorganicoTO();
 		try{
-			int pagina=1;
-			if(parameters.get("pagina")!=null)		
-				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
-			if(parameters.get("filas")!=null)
-				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-			int primero=(pagina*filas)-filas;
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-			nivelorganicoTO.setFirstResult(primero);
-			nivelorganicoTO.setMaxResults(filas);
+//			nivelorganicoTO.setFirstResult(primero);
+//			nivelorganicoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				nivelorganicoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -2007,13 +2038,14 @@ public class ConsultasUtil {
 				nivelorganicoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				nivelorganicoTO.setEstado(parameters.get("estado"));
-			SearchResultTO<NivelorganicoTO> resultado=UtilSession.planificacionServicio.transObtenerNivelorganidoPaginado(nivelorganicoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),nivelorganicoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+//			SearchResultTO<NivelorganicoTO> resultado=UtilSession.planificacionServicio.transObtenerNivelorganidoPaginado(nivelorganicoTO);
+			Collection<NivelorganicoTO> resultado=UtilSession.planificacionServicio.transObtenerNivelorganido(nivelorganicoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+//			resultado.size().put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,nivelorganicoTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
