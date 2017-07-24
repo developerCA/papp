@@ -1,30 +1,69 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-    <h4 class="mainTitle no-margin" >Ejercicios Fiscales</h4>
+	<h4 class="mainTitle no-margin">Ejercicios Fiscales</h4>
 
-    <div ncy-breadcrumb class="pull-right"></div>
+	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <!-- end: BREADCRUMB -->
 <!-- start: SIMPLE TABLE WITH PAGINATION -->
-<div class="container-fluid container-fullw" ng-controller="EjerciciosFiscalesController" ng-init="consultar()">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-white">
-                <div class="panel-body">
-                   <!-- <h5 class="over-title margin-bottom-15">Ejercicios  <span class="text-bold">with pagination</span></h5>-->
-                    <!-- /// controller:  'ngTableCtrl' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
-                    <div >
-                      
-                        <table ng-table="tableParams" class="table table-striped">
-                            <tr ng-repeat="eje in $data">
-                                <td data-title="'A&ntilde;o'">{{eje.anio}}</td>
-                                <td data-title="'Cerrado'">{{eje.cerrado}}</td>
-                               </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="container-fluid container-fullw"
+	ng-controller="EjerciciosFiscalesController" ng-init="consultar()">
 
+	<div class="row">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="panel panel-white">
+                                     
+
+				<div class="panel-body">
+<button type="button" class="btn btn-lg btn-danger" data-template-url="aside/docs/aside.demo.tpl.html" data-placement="left" data-animation="am-slide-left" bs-aside="aside" data-container="body">Custom aside
+  <br>
+  <small>(using data-template)</small>
+</button>
+				<a class="btn btn-wide btn-red" ng-click ="busqueda()"><i class="fa fa-trash-o"></i> Delete Item</a>
+  
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=false"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="form-group">
+									<label for="exampleInputEmail1"> Email address </label> <input
+										type="email" class="form-control" id="exampleInputEmail1"
+										placeholder="Enter email">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1"> Password </label> <input
+										type="password" class="form-control"
+										id="exampleInputPassword1" placeholder="Password">
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="eje in $data">
+								<td><a class="btn btn-sm btn-primary" href="#"><i
+										class="fa fa-pencil"></i></a></td>
+								<td data-title="'A&ntilde;o'">{{eje.anio}}</td>
+								<td data-title="'Estado'">{{eje.npestado}}</td>
+								<td data-title="'Fiscal Cerrado'"><span
+									ng-if="eje.cerrado==0">ABIERTO</span><span
+									ng-if="eje.cerrado==1">CERRADO</span></td>
+
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
