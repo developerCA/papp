@@ -109,8 +109,10 @@ public class AdministracionController {
 				log.println("ejercicios fiscales: " + ejerciciofiscalTOs.size());
 				boolean grabar=true;
 				if(ejerciciofiscalTOs.size()>0){
-					//ejerciciofiscalTO2=(EjerciciofiscalTO)ejerciciofiscalTOs.iterator().next();
-					//if(ejerciciofiscalTO.getId()!=null && ejerciciofiscalTO2.getId().longValue()!=ejerciciofiscalTO.getId().longValue())
+					ejerciciofiscalTO2=(EjerciciofiscalTO)ejerciciofiscalTOs.iterator().next();
+					if((ejerciciofiscalTO.getId()!=null && ejerciciofiscalTO.getId().longValue()!=0) && ejerciciofiscalTO2.getId().longValue()!=ejerciciofiscalTO.getId().longValue())
+						grabar=false;
+					else if((ejerciciofiscalTO.getId()==null || (ejerciciofiscalTO.getId()!=null && ejerciciofiscalTO2.getId().longValue()!=ejerciciofiscalTO.getId().longValue())) && ejerciciofiscalTO.getAnio()!=null && ejerciciofiscalTO2.getAnio().equals(ejerciciofiscalTO.getAnio()))
 						grabar=false;
 				}
 				if(!grabar){
@@ -130,10 +132,10 @@ public class AdministracionController {
 				//pregunto si ya existe el nombre en el nivel actual
 				DivisiongeograficaTO divisiongeograficaTO2=new DivisiongeograficaTO();
 				divisiongeograficaTO2.setCodigo(divisiongeograficaTO.getCodigo());
-				SearchResultTO<DivisiongeograficaTO> ejerciciofiscalTOs=UtilSession.adminsitracionServicio.transObtenerDivisiongeograficaPaginado(divisiongeograficaTO2);
+				SearchResultTO<DivisiongeograficaTO> divisiongeograficaTOs=UtilSession.adminsitracionServicio.transObtenerDivisiongeograficaPaginado(divisiongeograficaTO2);
 				boolean grabar=true;
-				if(ejerciciofiscalTOs.getCountResults()>0){
-					divisiongeograficaTO2=(DivisiongeograficaTO)ejerciciofiscalTOs.getResults().iterator().next();
+				if(divisiongeograficaTOs.getCountResults()>0){
+					divisiongeograficaTO2=(DivisiongeograficaTO)divisiongeograficaTOs.getResults().iterator().next();
 					if((divisiongeograficaTO.getId()!=null && divisiongeograficaTO.getId().longValue()!=0) && divisiongeograficaTO2.getId().longValue()!=divisiongeograficaTO.getId().longValue())
 						grabar=false;
 					else if((divisiongeograficaTO.getId()==null || (divisiongeograficaTO.getId()!=null && divisiongeograficaTO2.getId().longValue()!=divisiongeograficaTO.getId().longValue())) && divisiongeograficaTO.getCodigo()!=null && divisiongeograficaTO2.getCodigo().equals(divisiongeograficaTO.getCodigo()))
