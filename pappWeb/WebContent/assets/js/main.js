@@ -72,12 +72,19 @@ app.config(["RestangularProvider", function(RestangularProvider) {
 	  
 	  // add a response interceptor
 	    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+	    	
+	    	
+	         
 	      var extractedData;
 	      // .. to look for getList operations
 	      if (operation === "getList") {
-	        // .. and handle the data and meta data
-	    	
-	        extractedData = data.json.result;
+	       
+	    	if (data.json.result==null){
+	    		 extractedData = data.json;
+	    	}else{
+	    		extractedData = data.json.result;
+	    	}
+	        
 	        extractedData.meta = data.estado;
 	      } else {
 	        extractedData = data;

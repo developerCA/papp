@@ -12,47 +12,62 @@
 	<div class="row">
 		<div class="col-md-12"></div>
 	</div>
+
 	<div class="row">
 		<div class="col-md-12">
 
 			<div class="panel panel-white">
-                                     
 
-				<div class="panel-body">
-<button type="button" class="btn btn-lg btn-danger" data-template-url="aside/docs/aside.demo.tpl.html" data-placement="left" data-animation="am-slide-left" bs-aside="aside" data-container="body">Custom aside
-  <br>
-  <small>(using data-template)</small>
-</button>
-				<a class="btn btn-wide btn-red" ng-click ="busqueda()"><i class="fa fa-trash-o"></i> Delete Item</a>
-  
+
+				<div class="panel-body" ng-show="!edicion">
+
+
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse" ></ct-paneltool>
 						</div>
-						<div uib-collapse="panel1" ng-init="panel1=false"
+						<div uib-collapse="panel1" ng-init="panel1=true"
 							class="panel-wrapper">
 							<div class="panel-body">
-								<div class="form-group">
-									<label for="exampleInputEmail1"> Email address </label> <input
-										type="email" class="form-control" id="exampleInputEmail1"
-										placeholder="Enter email">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> A&ntilde;o </label> <input type="text"
+												class="form-control" ng-model="anioFiltro">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> Estado </label> <select name="country"
+												ng-model="estadoFiltro" class="form-control">
+												<option value>Todos</option>
+												<option value="A">Activo</option>
+												<option value="I">Inactivo</option>
+											</select>
+										</div>
+									</div>
 								</div>
-								<div class="form-group">
-									<label for="exampleInputPassword1"> Password </label> <input
-										type="password" class="form-control"
-										id="exampleInputPassword1" placeholder="Password">
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+											class="fa fa-search"></i> Buscar</a> <a
+											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+									</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
 
+					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"><i
+						class="fa fa-plus-square"></i> Agregar</a>
+
+
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="eje in $data">
-								<td><a class="btn btn-sm btn-primary" href="#"><i
-										class="fa fa-pencil"></i></a></td>
+								<td><a class="btn btn-sm btn-primary"
+									ng-click="editar(eje.id)"><i class="fa fa-pencil"></i></a></td>
 								<td data-title="'A&ntilde;o'">{{eje.anio}}</td>
 								<td data-title="'Estado'">{{eje.npestado}}</td>
 								<td data-title="'Fiscal Cerrado'"><span
@@ -63,7 +78,93 @@
 						</table>
 					</div>
 				</div>
+
+
+				<div ng-show="edicion" class="panel-body" id="panel1">
+
+					<div class="panel-heading">
+						<h5 class="panel-title">Ejercicio Fiscal</h5>
+					</div>
+
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+						<div class="row">
+							<div class="col-md-6">
+
+
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.anio.$dirty && Form.anio.$invalid, 'has-success':Form.anio.$valid}">
+									<label class="control-label"> A&ntilde;o <span
+										class="symbol required"></span>
+									</label> <input type="text" placeholder="Ingrese el a&ntilde;o fiscal"
+										class="form-control" name="anio" required
+										ng-pattern="/^[0-9]*$/" ng-model="objeto.anio" ng-minlength="4"
+										ng-maxlength="4" /> <span class="error text-small block"
+										ng-if="Form.anio.$dirty && Form.anio.$invalid">A&ntilde;o
+										es incorrecto</span> <span class="success text-small"
+										ng-if="Form.anio.$valid">Listo</span>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+									<label for="form-field-select-1"> Estado <span
+										class="symbol required"></span>
+									</label> <select class="form-control" name="estado"
+										ng-model="objeto.estado" required>
+										<option value="A">Activo</option>
+										<option value="I">Inactivo</option>
+									</select>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.ejefis.$dirty && Form.ejefis.$invalid, 'has-success':Form.ejefis.$valid}">
+									<label for="form-field-select-1"> Ejercicio Fiscal <span
+										class="symbol required"></span>
+									</label> <select class="form-control" name="ejefis"
+										ng-model="objeto.cerrado" required>
+										<option value=0>Abierto</option>
+										<option value=1>Cerrado</option>
+									</select>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">Guardar
+									</button>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">Cancelar</button>
+
+								</div>
+							</div>
+						</div>
+					</form>
+
+
+
+
+
+				</div>
+
+
+
+
+
+
+
+
+
+
+
 			</div>
 		</div>
 	</div>
 </div>
+
+
+
+
