@@ -3,18 +3,20 @@
  * controller for angular-menu
  * 
  */
-app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$filter", "ngTableParams","ejercicioFiscalFactory",  function($scope,$rootScope,$filter, ngTableParams,ejercicioFiscalFactory) {
+app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$aside","$filter", "ngTableParams","ejercicioFiscalFactory",  function($scope,$rootScope,$aside,$filter, ngTableParams,ejercicioFiscalFactory) {
     
 	
 	
 	$scope.consultar=function(){
 		
 		$scope.data=[];
+		$scope.txtbusqueda="";
+		
 		ejercicioFiscalFactory.traerEjercicios(1).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
-			console.log($scope.data);
+			
 			
 		})
 	
@@ -24,8 +26,8 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$filter"
 		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
-			count : 5, // count per page
-			
+			count : 8, // count per page
+			filter: {} 	
 		}, {
 			total : $scope.data.length, // length of data
 			getData : function($defer, params) {
@@ -41,6 +43,19 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$filter"
 		});
 	});
 	
+	
+	$scope.busqueda=function(){
+	
+		var myAside = $aside({title: 'My Title', content: 'My Content', show: true});
+
+		  // Pre-fetch an external template populated with a custom scope
+		  var myOtherAside = $aside({scope: $scope, template: 'aside/view/papp/filtros.html'});
+		  // Show when some event occurs (use $promise property to ensure the template has been loaded)
+		  myOtherAside.$promise.then(function() {
+		    myOtherAside.show();
+		  })
+		
+	}
 	
 
 } ]);

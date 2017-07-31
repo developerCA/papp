@@ -30,8 +30,7 @@
     <link rel="stylesheet" href="bower_components/angular-ui-switch/angular-ui-switch.min.css">
     <!-- Angular Toaster Css -->
     <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css">
-    <!-- Angular Ng-Aside Css -->
-    <link rel="stylesheet" href="bower_components/angular-aside/dist/css/angular-aside.min.css">
+   
     <!-- Angular Notification Icons Css -->
     <link rel="stylesheet" href="bower_components/angular-notification-icons/dist/angular-notification-icons.min.css">
     <!-- V-Accordion Css -->
@@ -48,10 +47,8 @@
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css">
     <!-- BlockUI Css -->
-    
     <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.min.css"/>
-    
-    <!-- Packet CSS -->
+     <!-- Packet CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/plugins.css">
     <!-- Packet Theme -->
@@ -106,9 +103,12 @@
 	<script src="bower_components/angular-underscore-module/angular-underscore-module.js"></script>
 	
     <!-- BlockUI -->
-   <script src="bower_components/angular-block-ui/dist/angular-block-ui.min.js"></script>
-		
-    <!-- oclazyload -->
+    <script src="bower_components/angular-block-ui/dist/angular-block-ui.min.js"></script>
+    <!-- Aside Strap -->
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    
+	<!-- oclazyload -->
     <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
     <!-- breadcrumb -->
     <script src="bower_components/angular-breadcrumb/dist/angular-breadcrumb.min.js"></script>
@@ -132,8 +132,7 @@
     <script src="bower_components/angular-ui-switch/angular-ui-switch.min.js"></script>
     <!-- Angular Toaster -->
     <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
-    <!-- Angular Ng-Aside -->
-    <script src="bower_components/angular-aside/dist/js/angular-aside.min.js"></script>
+    
     <!-- V-Accordion -->
     <script src="bower_components/v-accordion/dist/v-accordion.min.js"></script>
     <!-- V-Button -->

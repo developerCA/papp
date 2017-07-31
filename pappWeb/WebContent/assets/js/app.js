@@ -18,7 +18,6 @@ angular.module("packet", [
 	'truncate',
 	'uiSwitch',
 	'toaster',
-	'ngAside',
 	'vAccordion',
 	'vButton',
 	'oitozero.ngSweetAlert',
@@ -33,4 +32,5 @@ angular.module("packet", [
 	'FBAngular',
 	'underscore',
 	'blockUI',
+	'mgcrea.ngStrap',
 ]);
