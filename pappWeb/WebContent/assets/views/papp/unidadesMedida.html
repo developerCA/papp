@@ -1,0 +1,173 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin">Unidades de Medida</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: SIMPLE TABLE WITH PAGINATION -->
+<div class="container-fluid container-fullw"
+     ng-controller="UnidadesMedidaController" ng-init="init()">
+
+    <div class="row">
+        <div class="col-md-12"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-white">
+
+                <div class="panel-body" ng-show="!edicion">
+                    <div class="panel panel-white" id="panel1">
+                        <div class="panel-heading">
+                            <h4 class="panel-title text-primary">Filtros</h4>
+                            <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+                        </div>
+                        <div uib-collapse="panel1" ng-init="panel1=true"
+                             class="panel-wrapper">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Nombre</label> <input type="text"
+                                                                               class="form-control" ng-model="nombre" ng-change="mayusculas()">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label> Grupo Medida </label>
+                                            <select name="grupo" ng-model="nombregrupo" class="form-control">
+                                                <option value="">--Seleccione un grupo--</option>
+                                                <option ng-repeat="grupo in grupos" value="{{grupo.nombre}}">{{grupo.nombre}}</option>
+                                            </select>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label> Estado </label> <select name="estado" ng-model="estado" class="form-control">
+                                                <option value>Todos</option>
+                                                <option value="A">Activo</option>
+                                                <option value="I">Inactivo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <a class="btn btn-wide btn-dark-azure" ng-click="filtrar()">
+                                            <i class="fa fa-search"></i> Buscar
+                                        </a> <a class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();">
+                        <i class="fa fa-plus-square"></i> Agregar
+                    </a>
+
+
+                    <div>
+                        <table ng-table="tableParams" class="table table-striped">
+                            <tr ng-repeat="data in $data">
+                                <td>
+                                    <a class="btn btn-sm btn-primary"
+                                       ng-click="editar(data.id)"><i class="fa fa-pencil"></i></a>
+                                </td>
+                                <td data-title="'Codigo'">{{data.codigo}}</td>
+                                <td data-title="'Nombre'">{{data.nombre}}</td>
+                                <td data-title="'Grupo Medida'">{{data.npNombregrupo}}</td>
+                                <td data-title="'Estado'">
+                                    <span ng-if="data.estado=='I'">INACTIVO</span>
+                                    <span ng-if="data.estado=='A'">ACTIVO</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div ng-show="edicion" class="panel-body" id="panel1">
+
+                    <div class="panel-heading">
+                        <h5 class="panel-title">Grupos de Medida</h5>
+                    </div>
+
+                    <form name="Form" id="form1" novalidate
+                          ng-submit="form.submit(Form)">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="form-group" ng-class="{'has-error': Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+                                    <label class="control-label">
+                                        C&oacute;digo
+                                        <span class="symbol required"></span>
+                                    </label>
+                                    <input type="text" placeholder="Ingrese el c&oacute;digo"
+                                           class="form-control" name="codigo" required ng-model="objeto.codigo" ng-minlength="2" />
+                                    <span class="error text-small block" ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo incorrecto</span>
+                                    <span class="success text-small" ng-if="Form.anio.$valid">Listo</span>
+                                </div>
+
+                                <div class="form-group"
+                                     ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
+                                    <label class="control-label">
+                                        Nombre
+                                        <span class="symbol required"></span>
+                                    </label> <input type="text" placeholder="Ingrese el nombre"
+                                                    class="form-control" name="nombre" required
+                                                    ng-model="objeto.nombre" /> <span class="error text-small block"
+                                                                                      ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
+                                        Nombre incorrecto
+                                    </span> <span class="success text-small"
+                                                  ng-if="Form.anio.$valid">Listo</span>
+                                </div>
+
+                                <div class="form-group"
+                                     ng-class="{'has-error':Form.grupo.$dirty && Form.grupo.$invalid, 'has-success':Form.grupo.$valid}">
+                                    <label for="form-field-select-1">
+                                        Grupo <span class="symbol required"></span>
+                                    </label>
+                                    <select name="unidadmedidagrupomedidaid" ng-model="objeto.unidadmedidagrupomedidaid" 
+                                            ng-options="grupo.id as grupo.nombre for grupo in grupos"                                                      
+                                            class="form-control" required>                                                                              
+                                    </select>
+                                </div>
+
+                                <div class="form-group"
+                                     ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+                                    <label for="form-field-select-1">
+                                        Estado <span class="symbol required"></span>
+                                    </label> <select class="form-control" name="estado"
+                                                     ng-model="objeto.estado" required>
+                                        <option value="A">Activo</option>
+                                        <option value="I">Inactivo</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-primary">
+                                        Guardar
+                                    </button>
+                                    <button type="reset" class="btn btn-default btn-o"
+                                            ng-click="form.reset(Form)">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

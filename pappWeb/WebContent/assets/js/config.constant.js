@@ -60,7 +60,14 @@ app.constant('JS_REQUIRES', {
         'SeguridadFactory':'assets/js/factory/seguridadFactory.js',
         'EjerciciosCtrl':'assets/js/controllers/papp/ejerciciosFiscalesCtrl.js',
         'EjerciciosFactory':'assets/js/factory/ejerciciosFiscalesFactory.js',
-        
+        'GruposMedidaCtrl':'assets/js/controllers/papp/gruposMedidaCtrl.js',
+        'GruposMedidaFactory':'assets/js/factory/gruposMedidaFactory.js',
+        'UnidadesMedidaCtrl':'assets/js/controllers/papp/unidadesMedidaCtrl.js',
+        'UnidadesMedidaFactory': 'assets/js/factory/unidadesMedidaFactory.js',
+        'TipoIdentificacionCtrl': 'assets/js/controllers/papp/tipoIdentificacionCtrl.js',
+        'TipoIdentificacionFactory': 'assets/js/factory/tipoIdentificacionFactory.js',
+        'ObrasCtrl': 'assets/js/controllers/papp/obrasCtrl.js',
+        'ObrasFactory': 'assets/js/factory/obrasFactory.js',
     },
     //*** angularJS Modules
     modules: [{

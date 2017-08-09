@@ -114,6 +114,39 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Ejercicios Fiscales'
         }
+    }).state('app.grupomedida', {
+        url: "/grupos-medida",
+        templateUrl: "assets/views/papp/gruposMedida.html",
+        resolve: loadSequence('ngTable','GruposMedidaCtrl','GruposMedidaFactory'),
+        title: 'Grupos Medida',
+        
+        ncyBreadcrumb: {
+            label: 'Grupos Medida'
+        }
+    }).state('app.unidadesmedida', {
+        url: "/unidades-medida",
+        templateUrl: "assets/views/papp/unidadesMedida.html",
+        resolve: loadSequence('ngTable','UnidadesMedidaCtrl','UnidadesMedidaFactory'),
+        title: 'Unidades Medida',        
+        ncyBreadcrumb: {
+            label: 'Unidades Medida'
+        }
+    }).state('app.tipoidentificacion', {
+        url: "/tipo-identificacion",
+        templateUrl: "assets/views/papp/tipoIdentificacion.html",
+        resolve: loadSequence('ngTable', 'TipoIdentificacionCtrl', 'TipoIdentificacionFactory'),
+        title: 'Tipo Identificacion',
+        ncyBreadcrumb: {
+            label: 'Tipo Identificación'
+        }
+    }).state('app.obras', {
+        url: "/obras",
+        templateUrl: "assets/views/papp/obras.html",
+        resolve: loadSequence('ngTable', 'ObrasCtrl', 'ObrasFactory'),
+        title: 'Obras',
+        ncyBreadcrumb: {
+            label: 'Obras'
+        }
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",
