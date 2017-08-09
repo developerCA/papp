@@ -7512,7 +7512,7 @@ legend {
 }
 
 .input-group-addon {
-  background-color: #58748B;
+  background-color: #2A5289 /* 58748B*/ ;
   border: 1px solid #58748B;
   color: #ffffff;
 }
@@ -9090,7 +9090,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .btn-primary {
-  background-color: #58748B;
+  background-color: #2A5289 /* /58748B*/;
   border-color: #58748B;
   color: #ffffff;
 }
