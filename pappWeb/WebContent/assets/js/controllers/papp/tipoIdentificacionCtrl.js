@@ -82,7 +82,6 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
     $scope.editar = function (id) {
 
         tipoIdentificacionFactory.traerTipo(id).then(function (resp) {
-
             if (resp.estado)
                 $scope.objeto = resp.json.tipoidentificacion;
             $scope.edicion = true;
@@ -115,16 +114,18 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
                 return;
 
             } else {
+                console.clear();
+                console.log($scope.objeto);
                 tipoIdentificacionFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Tipo de Identificaci&oacute;n", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Tipo de Identificación", "Registro satisfactorio!", "success");
 
                     } else {
-                        SweetAlert.swal("Tipo de Identificaci&oacute;n", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Tipo de Identificación", resp.mensajes.msg, "error");
 
                     }
 

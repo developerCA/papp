@@ -108,6 +108,26 @@
                                                   ng-if="Form.longminima.$valid">Listo</span>
                                 </div>
 
+                                <div class="form-group"
+                                     ng-class="{'has-error':Form.longmaxima.$dirty && Form.longmaxima.$invalid, 'has-success':Form.longmaxima.$valid}">
+                                    <label class="control-label">
+                                        Longitud m&aacute;xima
+                                        <span class="symbol required"></span>
+                                    </label> <input type="number" placeholder="Ingrese la longitud m&aacute;xima"
+                                                    class="form-control" name="nombre" required
+                                                    ng-model="objeto.longmaxima" /> <span class="error text-small block"
+                                                                                          ng-if="Form.longmaxima.$dirty && Form.longmaxima.$invalid">
+                                        Valor incorrecto
+                                    </span> <span class="success text-small"
+                                                  ng-if="Form.longmaxima.$valid">Listo</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Usa Verificaci&oacute;n</label>
+
+                                    <input type="checkbox" value="" ng-model="objeto.usaverifica" ng-checked="objeto.usaverifica==1"/>
+                                </div>
+
                             </div>
                         </div>
 

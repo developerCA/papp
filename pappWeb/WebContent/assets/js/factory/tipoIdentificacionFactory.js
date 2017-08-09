@@ -22,7 +22,7 @@ app.factory("TipoIdentificacionFactory", ["Restangular", function (Restangular) 
 
         traerTipo: function (id) {
 
-            var url = "administrar/tipoidentificaciontipo/" + id + "/-1";
+            var url = "administrar/tipoidentificacion/" + id + "/-1";
             return Restangular.allUrl(url).customGET();
 
         },

@@ -5,10 +5,9 @@
  */
 app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "ObrasFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, obrasFactory) {
 
+    $scope.codigo = null;
     $scope.nombre = null;
-    $scope.longminima = null;
-    $scope.longmaxima = null;
-    $scope.usaverifica = 0;
+    $scope.estado = null;
     $scope.edicion = false;
     $scope.objeto = {};
 
@@ -22,7 +21,7 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
 
         $scope.data = [];
 
-        tipoIdentificacionFactory.traerTipos(pagina).then(function (resp) {
+        obrasFactory.traerObras(pagina).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         });
@@ -40,12 +39,12 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
             getData: function ($defer, params) {
                 var orderedData = params.filter() ? $filter('filter')(
 						$scope.data, params.filter()) : $scope.data;
-                $scope.tipos = orderedData.slice(
+                $scope.obras = orderedData.slice(
 						(params.page() - 1) * params.count(), params
 								.page()
 								* params.count());
                 params.total(orderedData.length);
-                $defer.resolve($scope.tipos);
+                $defer.resolve($scope.obras);
             }
         });
     });
@@ -53,7 +52,7 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
     $scope.filtrar = function () {
 
         $scope.data = [];
-        tipoIdentificacionFactory.traerTiposFiltro(pagina, $scope.nombre).then(function (resp) {
+        obrasFactory.traerObrasFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         })
@@ -67,10 +66,9 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
     }
 
     $scope.limpiar = function () {
+        $scope.codigo = null;
         $scope.nombre = null;
-        $scope.longminima = null;
-        $scope.longmaxima = null;
-        $scope.usaverifica = 0;
+        $scope.estado = null;
         $scope.consultar();
     };
 
@@ -81,10 +79,10 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
 
     $scope.editar = function (id) {
 
-        tipoIdentificacionFactory.traerTipo(id).then(function (resp) {
+        obrasFactory.traerObra(id).then(function (resp) {
 
             if (resp.estado)
-                $scope.objeto = resp.json.tipoidentificacion;
+                $scope.objeto = resp.json.obra;
             $scope.edicion = true;
 
         })
@@ -115,16 +113,16 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
                 return;
 
             } else {
-                tipoIdentificacionFactory.guardar($scope.objeto).then(function (resp) {
+                obrasFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Tipo de Identificaci&oacute;n", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Tipo de Identificación", "Registro satisfactorio!", "success");
 
                     } else {
-                        SweetAlert.swal("Tipo de Identificaci&oacute;n", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Tipo de Identificación", resp.mensajes.msg, "error");
 
                     }
 
