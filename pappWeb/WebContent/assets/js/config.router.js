@@ -165,6 +165,22 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Obras'
         }
+    }).state('app.fuentefin', {
+        url: "/fuentefin",
+        templateUrl: "assets/views/papp/fuentefinanciamiento.html",
+        resolve: loadSequence('ngTable','FuenteCtrl','FuenteFactory'),
+        title: 'Fuentes de Financiamiento',
+        ncyBreadcrumb: {
+            label: 'Fuentes de Financiamiento'
+        }
+    }).state('app.organismo', {
+        url: "/organismo",
+        templateUrl: "assets/views/papp/organismo.html",
+        resolve: loadSequence('ngTable','FuenteCtrl','FuenteFactory'),
+        title: 'Organismos',
+        ncyBreadcrumb: {
+            label: 'Organismos'
+        }    
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

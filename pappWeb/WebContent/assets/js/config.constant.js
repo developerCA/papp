@@ -72,6 +72,9 @@ app.constant('JS_REQUIRES', {
         'ParametroFactory':'assets/js/factory/parametroFactory.js',
         'ConsecutivoCtrl':'assets/js/controllers/papp/consecutivoCtrl.js',
         'ConsecutivoFactory':'assets/js/factory/consecutivoFactory.js',
+        'FuenteCtrl':'assets/js/controllers/papp/fuentefinanciamientoCtrl.js',
+        'FuenteFactory':'assets/js/factory/fuentefinanciamientoFactory.js',
+        
     },
     //*** angularJS Modules
     modules: [{
