@@ -10,12 +10,13 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<link rel="stylesheet" href="css/bootstrap.css" ></link>
-<link rel="stylesheet" href="css/font-awesome.min.css" ></link>
-
-<!-- <link rel="stylesheet" href="/css/bootstrap-theme.min.css"></link> -->
-
-
+<!-- Bootstrap -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Packet CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/plugins.css">
 
 <style>
 .panel-heading {
@@ -36,16 +37,19 @@
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
 }
-/* html {  */
-/*   background: url('../static/img/back.jpg') no-repeat center center fixed;  */
-/*   -webkit-background-size: cover; */
-/*   -moz-background-size: cover; */
-/*   -o-background-size: cover; */
-/*   background-size: cover; */
-/* } */
-body{
-	background:Transparent;
+
+body
+{
+    background: url('assets/images/comaco_colors.png') fixed;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
 }
+
+.vertical-offset-100{
+    padding-top:100px;
+}
+
 </style>
 
 
@@ -65,7 +69,7 @@ body{
 								<div class="row">
 									<div class="center-block">
 										<center><img
-											src="img/ffaa.png" alt="" width="250px" />
+											src="assets/images/ffaa.png" alt="" width="250px" />
 										</center><br/>
 									</div>
 								</div>
@@ -101,7 +105,7 @@ body{
 										</c:if>
 										
 										<div class="form-group">
-											<input type="submit" class="btn btn-lg btn-success btn-block" value="Entrar" />
+											<input type="submit" class="btn btn-lg btn-primary btn-block" value="Entrar" />
 										</div>
 									</div>
 								</div>
