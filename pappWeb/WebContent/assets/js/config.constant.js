@@ -68,6 +68,10 @@ app.constant('JS_REQUIRES', {
         'TipoIdentificacionFactory': 'assets/js/factory/tipoIdentificacionFactory.js',
         'ObrasCtrl': 'assets/js/controllers/papp/obrasCtrl.js',
         'ObrasFactory': 'assets/js/factory/obrasFactory.js',
+        'ParametroCtrl':'assets/js/controllers/papp/parametroCtrl.js',
+        'ParametroFactory':'assets/js/factory/parametroFactory.js',
+        'ConsecutivoCtrl':'assets/js/controllers/papp/consecutivoCtrl.js',
+        'ConsecutivoFactory':'assets/js/factory/consecutivoFactory.js',
     },
     //*** angularJS Modules
     modules: [{

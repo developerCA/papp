@@ -131,13 +131,31 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Unidades Medida'
         }
+    }).state('app.parametros', {
+        url: "/param",
+        templateUrl: "assets/views/papp/parametros.html",
+        resolve: loadSequence('ngTable','ParametroCtrl','ParametroFactory'),
+        title: 'ParÃ¡metros',
+        
+        ncyBreadcrumb: {
+            label: 'Parametros'
+        }
+    }).state('app.consecutivos', {
+        url: "/consecutivos",
+        templateUrl: "assets/views/papp/consecutivos.html",
+        resolve: loadSequence('ngTable','ConsecutivoCtrl','ConsecutivoFactory'),
+        title: 'Consecutivos',
+        
+        ncyBreadcrumb: {
+            label: 'Consecutivos'
+        }    
     }).state('app.tipoidentificacion', {
         url: "/tipo-identificacion",
         templateUrl: "assets/views/papp/tipoIdentificacion.html",
         resolve: loadSequence('ngTable', 'TipoIdentificacionCtrl', 'TipoIdentificacionFactory'),
         title: 'Tipo Identificacion',
         ncyBreadcrumb: {
-            label: 'Tipo Identificación'
+            label: 'Tipo Identificaciï¿½n'
         }
     }).state('app.obras', {
         url: "/obras",
