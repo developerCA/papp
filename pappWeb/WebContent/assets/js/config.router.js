@@ -176,11 +176,19 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.organismo', {
         url: "/organismo",
         templateUrl: "assets/views/papp/organismo.html",
-        resolve: loadSequence('ngTable','FuenteCtrl','FuenteFactory'),
+        resolve: loadSequence('ngTable','OrganismoCtrl','OrganismoFactory'),
         title: 'Organismos',
         ncyBreadcrumb: {
             label: 'Organismos'
-        }    
+        } 
+    }).state('app.clasesregistro', {
+        url: "/claseregistro",
+        templateUrl: "assets/views/papp/clasesregistro.html",
+        resolve: loadSequence('ngTable','ClaseRegistroCtrl','ClaseRegistroFactory'),
+        title: 'Clases de Registro',
+        ncyBreadcrumb: {
+            label: 'Clases de Registro'
+        }     
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

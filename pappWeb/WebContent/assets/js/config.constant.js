@@ -74,6 +74,12 @@ app.constant('JS_REQUIRES', {
         'ConsecutivoFactory':'assets/js/factory/consecutivoFactory.js',
         'FuenteCtrl':'assets/js/controllers/papp/fuentefinanciamientoCtrl.js',
         'FuenteFactory':'assets/js/factory/fuentefinanciamientoFactory.js',
+        'OrganismoCtrl':'assets/js/controllers/papp/organismoCtrl.js',
+        'OrganismoFactory':'assets/js/factory/organismoFactory.js',
+        'ClaseRegistroCtrl':'assets/js/controllers/papp/claseRegistroCtrl.js',
+        'ClaseRegistroFactory':'assets/js/factory/claseRegistroFactory.js',
+        
+        
         
     },
     //*** angularJS Modules
