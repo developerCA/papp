@@ -189,6 +189,32 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Clases de Registro'
         }     
+    
+    }).state('app.procedimientos', {
+        url: "/procedimientos",
+        templateUrl: "assets/views/papp/procedimientos.html",
+        resolve: loadSequence('ngTable', 'ProcedimientoCtrl', 'ProcedimientoFactory'),
+        title: 'Modulo de Procedimientos',
+        ncyBreadcrumb: {
+            label: 'Modulo de Procedimientos'
+        }
+    }).state('app.item', {
+        url: "/items",
+        templateUrl: "assets/views/papp/item.html",
+        resolve: loadSequence('ngTable', 'ItemCtrl', 'ItemFactory'),
+        title: 'Modulo de Items',
+        ncyBreadcrumb: {
+            label: 'Modulo de Items'
+        }
+    }).state('app.tipoproducto', {
+        url: "/tipo-producto",
+        templateUrl: "assets/views/papp/tipoProducto.html",
+        resolve: loadSequence('ngTable', 'TipoProductoCtrl', 'TipoProductoFactory'),
+        title: 'Modulo de Tipo Productos',
+        ncyBreadcrumb: {
+            label: 'Modulo de Tipo Productos'
+        }
+       
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

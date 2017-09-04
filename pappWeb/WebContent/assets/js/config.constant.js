@@ -78,7 +78,12 @@ app.constant('JS_REQUIRES', {
         'OrganismoFactory':'assets/js/factory/organismoFactory.js',
         'ClaseRegistroCtrl':'assets/js/controllers/papp/claseRegistroCtrl.js',
         'ClaseRegistroFactory':'assets/js/factory/claseRegistroFactory.js',
-        
+        'ProcedimientoCtrl': 'assets/js/controllers/papp/procedimientoCtrl.js',
+        'ProcedimientoFactory': 'assets/js/factory/procedimientoFactory.js',
+        'TipoProductoCtrl': 'assets/js/controllers/papp/tipoProductoCtrl.js',
+        'TipoProductoFactory': 'assets/js/factory/tipoProductoFactory.js',
+        'ItemCtrl': 'assets/js/controllers/papp/itemCtrl.js',
+        'ItemFactory': 'assets/js/factory/itemFactory.js',
         
         
     },

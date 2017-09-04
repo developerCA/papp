@@ -10,6 +10,7 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
     $scope.longmaxima= null;
     $scope.usaverifica = 0;
     $scope.edicion = false;
+    $scope.detalleNuevo = false;
     $scope.objeto = {};
 
     var pagina = 1;
@@ -50,6 +51,27 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
         });
     });
 
+    $scope.$watch('detalles', function () {
+
+        $scope.detalleParams = new ngTableParams({
+            page: 1, // show first page
+            count: 5, // count per page
+            filter: {}
+        }, {
+            total: $scope.detalles.length, // length of data
+            getData: function ($defer, params) {
+                var orderedData = params.filter() ? $filter('filter')(
+						$scope.detalles, params.filter()) : $scope.detalles;
+                $scope.dets = orderedData.slice(
+						(params.page() - 1) * params.count(), params
+								.page()
+								* params.count());
+                params.total(orderedData.length);
+                $defer.resolve($scope.dets);
+            }
+        });
+    });
+
     $scope.filtrar = function () {
 
         $scope.data = [];
@@ -82,12 +104,45 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
     $scope.editar = function (id) {
 
         tipoIdentificacionFactory.traerTipo(id).then(function (resp) {
+        	console.clear();
+        	console.log("============");
+        	console.log(resp.json.details);
+        	console.log("============");
             if (resp.estado)
                 $scope.objeto = resp.json.tipoidentificacion;
+            $scope.detalles = resp.json.details;
             $scope.edicion = true;
 
         })
 
+    };
+
+    $scope.nuevoDetalle = function () {
+        $scope.detalleNuevo = true;
+    };
+
+    $scope.cancelarDetalle = function () {
+        $scope.detalleNuevo = false;
+        $scope.nuevoDetalleTipo = '';
+    };
+
+    $scope.agregarDetalle = function () {
+        var obj = {
+            tipo: $scope.nuevoDetalleTipo,
+            npnombretipo: $scope.objeto.nombre,
+            id: {
+                identificacionid: $scope.objeto.id,
+                identificaciontipoid : null
+            },
+            identificacionid: $scope.objeto.id,
+            identificaciontipoid: null
+        };
+        $scope.detalles.push(obj);
+        $scope.detalleNuevo = false;
+    }
+
+    $scope.eliminarDetalle = function (index) {
+        $scope.detalles.splice(index, 1);
     };
 
     $scope.form = {
@@ -114,18 +169,17 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
                 return;
 
             } else {
-                console.clear();
-                console.log($scope.objeto);
+                $scope.objeto.details = $scope.detalles;
                 tipoIdentificacionFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Tipo de Identificación", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Tipo de Identificaci&oacute;n", "Registro satisfactorio!", "success");
 
                     } else {
-                        SweetAlert.swal("Tipo de Identificación", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Tipo de Identificaci&oacute;n", resp.mensajes.msg, "error");
 
                     }
 
@@ -141,7 +195,7 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
             $scope.edicion = false;
             $scope.objeto = {};
 
-        }
+        },        
     };
 
 }]);

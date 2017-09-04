@@ -1,13 +1,12 @@
-/// <reference path="../../factory/gruposMedidaFactory.js" />
 'use strict';
 /**
  * controller for angular-menu
  * 
  */
-app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "gruposMedidaFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, gruposMedidaFactory) {
+app.controller('ProcedimientoController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "ProcedimientoFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, procedimientoFactory) {
 
     $scope.nombre = null;
-    $scope.estado = null;
+    $scope.activo = 1;
     $scope.edicion = false;
     $scope.objeto = {};
 
@@ -17,7 +16,7 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
 
         $scope.data = [];
 
-        gruposMedidaFactory.traerGrupos(pagina).then(function (resp) {
+        procedimientoFactory.traerProcedimientos(pagina).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         })
@@ -48,24 +47,25 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
     $scope.filtrar = function () {
 
         $scope.data = [];
-        gruposMedidaFactory.traerGruposFiltro(pagina, $scope.nombre, $scope.estado).then(function (resp) {
+        procedimientoFactory.traerProcedimientosFiltro(pagina, $scope.nombre, $scope.activo).then(function (resp) {
 
             if (resp.meta)
 
                 $scope.data = resp;
         })
 
-    };
+    }
 
     $scope.mayusculas = function () {
 
         $scope.nombre = $scope.nombre.toUpperCase();
 
-    };
+    }
 
     $scope.limpiar = function () {
         $scope.nombre = null;
-        $scope.estado = null;
+        $scope.activo = 1;
+        $scope.descripcion = null;
         $scope.consultar();
     };
 
@@ -73,18 +73,36 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
 
         $scope.objeto = { id: null };
         $scope.edicion = true;
-    };
+    }
 
     $scope.editar = function (id) {
-        
-        gruposMedidaFactory.traerGrupo(id).then(function (resp) {
-
-            if (resp.estado)
-                $scope.objeto = resp.json.grupomedida;
+        procedimientoFactory.traerProcedimiento(id).then(function (resp) {
+            $scope.objeto = resp.json.procedimiento;
             $scope.edicion = true;
 
         })
+    };
 
+    $scope.eliminar = function (id) {
+
+        SweetAlert.swal({
+            title: "Módulo de Procedimiento",
+            text: "Confirma eliminar el registro?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: true
+            },
+            function () {
+                procedimientoFactory.eliminar(id).then(function (resp) {
+                    if (resp.estado) {
+                        SweetAlert.swal("Módulo de Procedimiento", "Registro eliminado!", "success");
+                    } else {
+                        SweetAlert.swal("Módulo de Procedimiento", resp.mensajes.msg, "error");
+                    }
+                })
+            });
     };
 
     $scope.form = {
@@ -111,18 +129,20 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
                 return;
 
             } else {
-
-                gruposMedidaFactory.guardar($scope.objeto).then(function (resp) {
+                if ($scope.objeto.activo == true) {
+                    $scope.objeto.activo = 1;
+                } else if ($scope.objeto.activo == false) {
+                    $scope.objeto.activo = 0;
+                }
+                procedimientoFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Grupo Medida", "Registro satisfactorio!", "success");
-
+                        SweetAlert.swal("Módulo de Procedimiento", "Registro satisfactorio!", "success");
                     } else {
-                        SweetAlert.swal("Grupo Medida", resp.mensajes.msg, "error");
-
+                        SweetAlert.swal("Módulo de Procedimiento", resp.mensajes.msg, "error");
                     }
 
                 })

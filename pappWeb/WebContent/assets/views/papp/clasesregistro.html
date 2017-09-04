@@ -102,10 +102,10 @@
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese el Codigo"
 										class="form-control" name="codigo" ng-model="objeto.codigo"
-										required ng-minlength="4" ng-maxlength="4" /> <span
+										required ng-minlength="3" ng-maxlength="3" style='text-transform:uppercase' /> <span
 										class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">Debe
-										ingresar m&iacute;nimo cuatro n&uacute;meros</span> <span
+										ingresar m&iacute;nimo tres letras</span> <span
 										class="success text-small" ng-if="Form.codigo.$valid">Listo</span>
 								</div>
 
@@ -170,11 +170,11 @@
 														<td data-title="'C&oacute;digo'"><input type="text"
 															placeholder="Ingrese el Codigo" class="form-control"
 															name="codigo_{{$index}}" required ng-model="obj.codigo"
-															ng-minlength="4" ng-maxlength="4"
+															ng-minlength="3" ng-maxlength="3" style='text-transform:uppercase'
 															ng-disabled="obj.codigo!=null" /><span
 															class="error text-small block"
 															ng-if="Form['codigo_'+$index].$dirty && Form['codigo_'+$index].$invalid">Debe
-																ingresar m&iacute;nimo cuatro n&uacute;meros </span></td>
+																ingresar m&iacute;nimo tres letras </span></td>
 														<td data-title="'Nombre'"><input type="text"
 															placeholder="Ingrese el Nombre" class="form-control"
 															name="nombre_{{$index}}" required ng-model="obj.nombre" /><span

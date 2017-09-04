@@ -77,6 +77,7 @@
 
                     <form name="Form" id="form1" novalidate
                           ng-submit="form.submit(Form)">
+
                         <div class="row">
                             <div class="col-md-6">
 
@@ -128,6 +129,53 @@
                                     <input type="checkbox" value="" ng-model="objeto.usaverifica" ng-checked="objeto.usaverifica==1"/>
                                 </div>
 
+
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5 class="panel-title">Tipo</h5>
+                                        <button type="button" class="btn btn-primary" ng-click="nuevoDetalle()">
+                                            <i class="fa fa-plus"></i> Agregar
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="detalleNuevo">
+                                    <br />
+                                    <div class="col-md-6">
+                                        <select ng-model="nuevoDetalleTipo">
+                                            <option value="N" selected>Natural</option>
+                                            <option value="J">Jur&iacute;dica</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a class="btn btn-sm btn-success" ng-click="agregarDetalle()">
+                                            &nbsp;<i class="fa fa-check"></i>&nbsp;
+                                        </a>&nbsp;
+                                        <a class="btn btn-sm btn-default" ng-click="cancelarDetalle()">
+                                            &nbsp;<i class="fa fa-times"></i>&nbsp;
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table ng-table="detalleParams" class="table table-striped">
+                                            <tr ng-repeat="dets in detalles">
+                                                <td data-title="'T'">{{dets.identificaciontipoid}}</td>
+                                                <td data-title="'Tipo'" class="text-center">
+                                                    <span ng-if="dets.tipo=='N'">Natural</span>
+                                                    <span ng-if="dets.tipo=='J'">Jur&iacute;dica</span>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-danger"
+                                                       ng-click="eliminarDetalle($index)"><i class="fa fa-times"></i></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -144,7 +192,8 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </form>                    
+
                 </div>
             </div>
         </div>

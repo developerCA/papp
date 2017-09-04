@@ -1,10 +1,9 @@
-/// <reference path="../../factory/gruposMedidaFactory.js" />
 'use strict';
 /**
  * controller for angular-menu
  * 
  */
-app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "gruposMedidaFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, gruposMedidaFactory) {
+app.controller('TipoProductoController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "TipoProductoFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, tipoProductoFactory) {
 
     $scope.nombre = null;
     $scope.estado = null;
@@ -17,7 +16,7 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
 
         $scope.data = [];
 
-        gruposMedidaFactory.traerGrupos(pagina).then(function (resp) {
+        tipoProductoFactory.traerTipos(pagina).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         })
@@ -48,20 +47,20 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
     $scope.filtrar = function () {
 
         $scope.data = [];
-        gruposMedidaFactory.traerGruposFiltro(pagina, $scope.nombre, $scope.estado).then(function (resp) {
+        tipoProductoFactory.traerTiposFiltro(pagina, $scope.nombre, $scope.estado).then(function (resp) {
 
             if (resp.meta)
 
                 $scope.data = resp;
         })
 
-    };
+    }
 
     $scope.mayusculas = function () {
 
         $scope.nombre = $scope.nombre.toUpperCase();
 
-    };
+    }
 
     $scope.limpiar = function () {
         $scope.nombre = null;
@@ -73,18 +72,36 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
 
         $scope.objeto = { id: null };
         $scope.edicion = true;
-    };
+    }
 
     $scope.editar = function (id) {
-        
-        gruposMedidaFactory.traerGrupo(id).then(function (resp) {
-
-            if (resp.estado)
-                $scope.objeto = resp.json.grupomedida;
+        tipoProductoFactory.traerTipo(id).then(function (resp) {
+            $scope.objeto = resp.json.tipoproducto;
             $scope.edicion = true;
 
         })
+    };
 
+    $scope.eliminar = function (id) {
+
+        SweetAlert.swal({
+            title: "Módulo de Tipo Productos",
+            text: "Confirma eliminar el registro?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: true
+        },
+            function () {
+                tipoProductoFactory.eliminar(id).then(function (resp) {
+                    if (resp.estado) {
+                        SweetAlert.swal("Módulo de Tipo Productos", "Registro eliminado!", "success");
+                    } else {
+                        SweetAlert.swal("Módulo de Tipo Productos", resp.mensajes.msg, "error");
+                    }
+                })
+            });
     };
 
     $scope.form = {
@@ -111,18 +128,20 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
                 return;
 
             } else {
-
-                gruposMedidaFactory.guardar($scope.objeto).then(function (resp) {
+                if ($scope.objeto.activo == true) {
+                    $scope.objeto.activo = 1;
+                } else if ($scope.objeto.activo == false) {
+                    $scope.objeto.activo = 0;
+                }
+                tipoProductoFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Grupo Medida", "Registro satisfactorio!", "success");
-
+                        SweetAlert.swal("Módulo de Tipo Productos", "Registro satisfactorio!", "success");
                     } else {
-                        SweetAlert.swal("Grupo Medida", resp.mensajes.msg, "error");
-
+                        SweetAlert.swal("Módulo de Tipo Productos", resp.mensajes.msg, "error");
                     }
 
                 })

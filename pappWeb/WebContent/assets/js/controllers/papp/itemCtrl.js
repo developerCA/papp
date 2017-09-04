@@ -1,26 +1,41 @@
-/// <reference path="../../factory/gruposMedidaFactory.js" />
+/// <reference path="../../factory/itemsFactory.js" />
 'use strict';
 /**
  * controller for angular-menu
  * 
  */
-app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "gruposMedidaFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, gruposMedidaFactory) {
+app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "ItemsFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, itemsFactory) {
 
     $scope.nombre = null;
     $scope.estado = null;
+    $scope.nombregrupo = null;
     $scope.edicion = false;
-    $scope.objeto = {};
+    $scope.url = "";
+    $scope.objeto = { unidadmedidagrupomedidaid: null };
 
     var pagina = 1;
+
+    $scope.init = function () {
+
+        $scope.grupos = [];
+
+        itemsFactory.traerItems(pagina).then(function (resp) {
+            if (resp.meta)
+                $scope.grupos = resp;
+            console.log($scope.grupos);
+        });
+
+        $scope.consultar();
+    };
 
     $scope.consultar = function () {
 
         $scope.data = [];
 
-        gruposMedidaFactory.traerGrupos(pagina).then(function (resp) {
+        itemsFactory.traerItems(pagina).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
-        })
+        });
 
     };
 
@@ -48,24 +63,23 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
     $scope.filtrar = function () {
 
         $scope.data = [];
-        gruposMedidaFactory.traerGruposFiltro(pagina, $scope.nombre, $scope.estado).then(function (resp) {
-
+        itemsFactory.traerItemsFiltro(pagina, $scope.nombre, $scope.estado, $scope.nombregrupo).then(function (resp) {
             if (resp.meta)
-
                 $scope.data = resp;
         })
 
-    };
+    }
 
     $scope.mayusculas = function () {
 
         $scope.nombre = $scope.nombre.toUpperCase();
 
-    };
+    }
 
     $scope.limpiar = function () {
         $scope.nombre = null;
         $scope.estado = null;
+        $scope.nombregrupo = null;
         $scope.consultar();
     };
 
@@ -73,14 +87,17 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
 
         $scope.objeto = { id: null };
         $scope.edicion = true;
-    };
+    }
 
     $scope.editar = function (id) {
-        
-        gruposMedidaFactory.traerGrupo(id).then(function (resp) {
+
+        itemsFactory.traerItem(id).then(function (resp) {
 
             if (resp.estado)
-                $scope.objeto = resp.json.grupomedida;
+                $scope.objeto = resp.json.unidadmedida;
+            console.log("*************");
+            console.log($scope.objeto.unidadmedidagrupomedidaid);
+            console.log("*************");
             $scope.edicion = true;
 
         })
@@ -111,17 +128,18 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
                 return;
 
             } else {
-
-                gruposMedidaFactory.guardar($scope.objeto).then(function (resp) {
+                //OJO
+                $scope.objeto.unidadmedidagrupomedidaid = $scope.objeto.unidadmedidagrupomedidaid.id;
+                itemsFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Grupo Medida", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Unidad de Medida", "Registro satisfactorio!", "success");
 
                     } else {
-                        SweetAlert.swal("Grupo Medida", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Unidad de Medida", resp.mensajes.msg, "error");
 
                     }
 

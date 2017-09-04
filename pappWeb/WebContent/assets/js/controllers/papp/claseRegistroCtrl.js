@@ -74,8 +74,6 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 		claseRegistroFactory.traerClase(id).then(function(resp){
 			
 			if (resp.estado)
-			
-			   console.log(resp);	
 			   $scope.objeto=resp.json.claseregistro;
 			   $scope.detalles=resp.json.details;
 			   $scope.edicion=true;
@@ -122,17 +120,17 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 		                
 		            	$scope.objeto.details=$scope.detalles;
 		            	
-		            	organismoFactory.guardar($scope.objeto).then(function(resp){
+		            	claseRegistroFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Organismo!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Clase de Registro!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Fuente de Financiamiento!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Clase de Registro!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
