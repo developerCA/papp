@@ -339,7 +339,7 @@ h5.over-title {
   margin-right: -15px;
   padding-left: 30px;
   padding-right: 30px;
-  padding-top: 30px;
+  padding-top: 3px;
   padding-bottom: 15px;
   position: relative;
 }
@@ -394,7 +394,7 @@ span[role="slider"] {
   background: #2C2F3B;
   border-bottom: 1px solid transparent;
   position: relative;
-  height: 60px;
+  height: 75px;
 }
 @media (min-width: 768px) {
   .navbar .navbar-header {
@@ -527,7 +527,7 @@ span[role="slider"] {
     -webkit-transition: margin 0.5s;
     transition: margin 0.5s;
     margin-left: 260px;
-    height: 60px !important;
+    height: 75px !important;
   }
   .navbar .navbar-collapse .nav {
     height: auto !important;

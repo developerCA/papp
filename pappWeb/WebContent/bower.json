@@ -1,8 +1,8 @@
 {
-  "name": "Packet",
+  "name": "PAP",
   "version": "1.0.0",
   "authors": [
-    "ClipTheme"
+    "PAP"
   ],
   "description": "AngularJs Bootstrap Admin Template",
   "keywords": [

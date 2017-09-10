@@ -31,7 +31,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     $stateProvider.state('app', {
         url: "/app",
         templateUrl: "assets/views/app.html",
-        resolve: loadSequence('chartjs', 'chart.js', 'chatCtrl','MenuCtrl','SeguridadFactory'),
+        resolve: loadSequence('chartjs', 'chart.js', 'chatCtrl','MenuCtrl','SeguridadFactory',"ngTable","EjerciciosCtrl","EjerciciosFactory"),
         abstract: true
     }).state('app.dashboard', {
         url: "/dashboard",
@@ -214,7 +214,54 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Modulo de Tipo Productos'
         }
-       
+    }).state('app.clasesmodificacion', {
+        url: "/clasesmodificacion",
+        templateUrl: "assets/views/papp/clasesmodificacion.html",
+        resolve: loadSequence('ngTable','ClaseModificacionCtrl','ClaseModificacionFactory'),
+        title: 'Clases de Modificacion',
+        ncyBreadcrumb: {
+            label: 'Clases de Modificacion'
+        }   
+    }).state('app.tipodocumento', {
+        url: "/tipodocumento",
+        templateUrl: "assets/views/papp/tipoDocumento.html",
+        resolve: loadSequence('ngTable','TipoDocumentoCtrl','TipoDocumentoFactory'),
+        title: 'Tipos de Documento',
+        ncyBreadcrumb: {
+            label: 'Tipos de Documento'
+        } 
+    }).state('app.tiporegimen', {
+        url: "/tiporegimen",
+        templateUrl: "assets/views/papp/tipoRegimen.html",
+        resolve: loadSequence('ngTable','TipoRegimenCtrl','TipoRegimenFactory'),
+        title: 'Tipos de Regimen',
+        ncyBreadcrumb: {
+            label: 'Tipos de Regimen'
+        } 
+    }).state('app.nivelorganico', {
+        url: "/nivelorganico",
+        templateUrl: "assets/views/papp/nivelOrganico.html",
+        resolve: loadSequence('ngTable','NivelOrganicoCtrl','NivelOrganicoFactory'),
+        title: 'Nivel Organico',
+        ncyBreadcrumb: {
+            label: 'Nivel Organico'
+        } 
+    }).state('app.grupojerarquico', {
+        url: "/grupojerarquico",
+        templateUrl: "assets/views/papp/grupoJerarquico.html",
+        resolve: loadSequence('ngTable','GrupoJerarquicoCtrl','GrupoJerarquicoFactory'),
+        title: 'Grupo Jerarquico',
+        ncyBreadcrumb: {
+            label: 'Grupo Jerarquico'
+        }  
+    }).state('app.cargos', {
+        url: "/cargos",
+        templateUrl: "assets/views/papp/cargos.html",
+        resolve: loadSequence('ngTable','CargoCtrl','CargoFactory'),
+        title: 'Cargos',
+        ncyBreadcrumb: {
+            label: 'Cargos'
+        }     
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

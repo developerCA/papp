@@ -18,7 +18,7 @@
 			ui-sref="app.dashboard"> <img
 			ng-src="{{app.layout.logoCollapsed}}" alt="" />
 		</a>
-		
+
 	</div>
 	<!-- end: NAVBAR HEADER -->
 	<!-- start: NAVBAR COLLAPSE -->
@@ -43,38 +43,63 @@
 
 				<div class="col-md-12">
 					<h5 class="over-title margin-top-20">
-						<span class="text-danger text-large">P.A.P</span> - <span
-							class="text-bold ">Sistema de Gesti&oacute;n Institucional</span>
+						<span class="text-white text-large">P.A.P</span> - <span
+							class="text-bold text-white">Sistema de Gesti&oacute;n Institucional</span>
 					</h5>
 
 				</div>
 
 
 			</li>
-			 
+
+			<li>
+				<div >
+					<form class="form-horizontal" role="form"
+						ng-controller="EjerciciosFiscalesController"
+						ng-init="iniciaAplicacion()">
+						<div class="form-group ">
+
+							<div class="col-md-12">
+								<select class="col-md-12  margin-top-15"
+									ng-model="ejercicioSistema" ng-change="cambiarEjercicio()"
+									ng-options="ejercicioFiscal.id as ejercicioFiscal.anio for ejercicioFiscal in ejerciciosFiscales"
+									class="form-control" required>
+								</select>
+							
+							</div>
+
+							
+
+							
+						</div>
+
+					</form>
+
+				</div>
+
+
+			</li>
+
+
 		</ul>
-		
+
 		<ul class="nav navbar-right hidden-sm hidden-xs">
-		<li class="dropdown" uib-dropdown on-toggle="toggled(open)">
-                <a href class="dropdown-toggle" uib-dropdown-toggle> <i class="ti-user" ></i><span>&nbsp;Administrador</span> </a>
-                <ul role="menu" class="dropdown-menu dropdown-light animated fadeInUpShort ">
-                    <li>
-                        <a  class="menu-toggler"> Cerrar Sesion </a>
-                    </li>
-                </ul>
-            </li>
+			<li class="dropdown" uib-dropdown on-toggle="toggled(open)"><a
+				href class="dropdown-toggle" uib-dropdown-toggle> <i
+					class="ti-user"></i><span>&nbsp;Administrador</span>
+			</a>
+				<ul role="menu"
+					class="dropdown-menu dropdown-light animated fadeInUpShort ">
+					<li><a class="menu-toggler"> Cerrar Sesion </a></li>
+				</ul></li>
 		</ul>
 
-	
 
-		
+
+
 	</div>
 
 
-	<button
-		class="sidebar-mobile-toggler dropdown-off-sidebar btn hidden-md hidden-lg"
-		ng-click="toggle('off-sidebar')" v-pressable>&nbsp;</button>
-	<button class="dropdown-off-sidebar btn hidden-sm hidden-xs"
-		ng-click="toggle('off-sidebar')" v-pressable>&nbsp;</button>
+
 	<!-- end: NAVBAR COLLAPSE -->
 </header>

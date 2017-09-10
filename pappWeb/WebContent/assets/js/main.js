@@ -12,8 +12,8 @@ function ($rootScope, $state, $stateParams) {
     // GLOBAL APP SCOPE
     // set below basic information
     $rootScope.app = {
-        name: 'Packet', // name of your project
-        author: 'ClipTheme', // author's name or company name
+        name: 'PAP', // name of your project
+        author: 'COMACO', // author's name or company name
         description: 'Angular Bootstrap Admin Template', // brief description
         version: '1.0', // current version
         year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
@@ -42,6 +42,10 @@ function ($rootScope, $state, $stateParams) {
         job: 'ng-Dev',
         picture: 'app/img/user/02.jpg'
     };
+    
+    $rootScope.ejefiscal=null;
+    
+    
 }]);
 // translate config
 app.config(['$translateProvider',

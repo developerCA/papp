@@ -1,4 +1,4 @@
-app.factory("claseRegistroFactory", [ "Restangular", function(Restangular) {
+app.factory("grupoJerarquicoFactory", [ "Restangular", function(Restangular) {
 
 		
 	var service = Restangular.service("/administrar");
@@ -6,34 +6,36 @@ app.factory("claseRegistroFactory", [ "Restangular", function(Restangular) {
 	return {
 		
 		
-		traerClases : function(pagina,ejercicio) {
-			 
-			  return Restangular.allUrl("administrar/consultar/claseregistro/pagina="+pagina+"&ejerciciofiscalid="+ejercicio).getList();
+		traerGrupos : function(pagina) {
+			  
+			  return Restangular.allUrl("administrar/consultar/grupo/pagina="+pagina).getList();
 			  
 		},
 		
-		traerClasesFiltro : function(pagina,ejercicio,nombre,codigo,estado) {
+		traerGruposFiltro : function(pagina,nombre,codigo,estado,sigla) {
 			  
-			var url = "administrar/consultar/claseregistro/pagina="+pagina+"&ejerciciofiscalid="+ejercicio;
+			var url = "administrar/consultar/grupo/pagina="+pagina;
 
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
 			if(estado!=null && estado != "" ) url += "&estado=" + estado;
+			if(sigla!=null && sigla != "" ) url += "&sigla=" + sigla;
+			
 			 
 			return Restangular.allUrl(url).getList();
 			  
 		},
 		
-		traerClase : function(id) {
+		traerGrupo : function(id) {
 			  
-			var url = "administrar/claseregistro/"+id+"/-1";
+			var url = "administrar/grupo/"+id+"/-1";
 		   
 		    return Restangular.allUrl(url).customGET();
 			  
 		},
 		
 		guardar:function(objeto){
-			var url = "administrar/claseregistro/";
+			var url = "administrar/grupo/";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 		

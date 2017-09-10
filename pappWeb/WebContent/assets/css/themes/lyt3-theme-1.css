@@ -27,7 +27,7 @@ body {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2) !important;
 }
 .navbar .navbar-header {
-  background: #ffffff !important;
+  background: #516b8c !important;
   border-right-color: transparent !important;
   border-bottom-color: transparent !important;
 }
@@ -71,7 +71,7 @@ body {
   color: #ffffff !important;
 }
 .navbar .navbar-collapse {
-  background: #ffffff !important;
+  background: #516b8c !important;
   border-bottom-color: transparent !important;
   box-shadow: transparent !important;
 }
@@ -332,7 +332,7 @@ ul.sub-menu li.open > a {
   color: #333 !important;
 }
 ul.sub-menu li.active, ul.sub-menu li.active:hover {
-  background: #e6e6e6 !important;
+  background: #cdd4ef !important;
 }
 ul.sub-menu li.active > a, ul.sub-menu li.active:hover > a {
   color: #333 !important;

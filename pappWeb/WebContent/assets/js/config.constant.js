@@ -84,6 +84,22 @@ app.constant('JS_REQUIRES', {
         'TipoProductoFactory': 'assets/js/factory/tipoProductoFactory.js',
         'ItemCtrl': 'assets/js/controllers/papp/itemCtrl.js',
         'ItemFactory': 'assets/js/factory/itemFactory.js',
+        'ClaseModificacionCtrl':'assets/js/controllers/papp/claseModificacionCtrl.js',
+        'ClaseModificacionFactory':'assets/js/factory/claseModificacionFactory.js',
+        'TipoDocumentoCtrl':'assets/js/controllers/papp/tipoDocumentoCtrl.js',
+        'TipoDocumentoFactory':'assets/js/factory/tipoDocumentoFactory.js',
+        'TipoRegimenCtrl':'assets/js/controllers/papp/tipoRegimenCtrl.js',
+        'TipoRegimenFactory':'assets/js/factory/tipoRegimenFactory.js',
+        'NivelOrganicoCtrl':'assets/js/controllers/papp/nivelOrganicoCtrl.js',
+        'NivelOrganicoFactory':'assets/js/factory/nivelOrganicoFactory.js',
+        'GrupoJerarquicoCtrl':'assets/js/controllers/papp/grupoJerarquicoCtrl.js',
+        'GrupoJerarquicoFactory':'assets/js/factory/grupoJerarquicoFactory.js',
+        'CargoCtrl':'assets/js/controllers/papp/cargoCtrl.js',
+        'CargoFactory':'assets/js/factory/cargoFactory.js',
+        
+        
+        
+        
         
         
     },

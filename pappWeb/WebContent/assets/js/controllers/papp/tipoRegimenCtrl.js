@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","claseRegistroFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,claseRegistroFactory) {
+app.controller('TipoRegimenController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","tipoRegimenFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,tipoRegimenFactory) {
     
 	
 	$scope.nombreFiltro=null;
@@ -8,18 +8,16 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
-	$scope.detalles=[];
 	
 	var pagina = 1;
 	
 	$scope.consultar=function(){
 		
-		
 		$scope.data=[];
-		claseRegistroFactory.traerClases(pagina,$rootScope.ejefiscal).then(function(resp){
+		tipoRegimenFactory.traerTiposRegimen(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-			
+				console.log($scope.data);
 		})
 	
 	};
@@ -49,7 +47,7 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		claseRegistroFactory.traerClasesFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		tipoRegimenFactory.traerTiposRegimenFiltro(pagina,$scope.nombreFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -67,32 +65,22 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 	
 	$scope.nuevo=function(){
 		$scope.objeto={id:null};
-		$scope.detalles=[];
+		
 		$scope.edicion=true;
 	}
 	
 	$scope.editar=function(id){
-		claseRegistroFactory.traerClase(id).then(function(resp){
-			
+		tipoRegimenFactory.traerTipo(id).then(function(resp){
+			;
 			if (resp.estado)
-			   $scope.objeto=resp.json.claseregistro;
-			   $scope.detalles=resp.json.details;
+			   $scope.objeto=resp.json.tiporegimen;
+			console.log($scope.objeto);
 			   $scope.edicion=true;
 
 		})
 		
 	};
 	
-	$scope.agregarDetalle=function(){
-		var obj={codigo:null,estado:"A",nombre:null};
-		$scope.detalles.push(obj);
-		
-	}
-	
-	$scope.removerDetalle=function(index){
-		$scope.detalles.splice(index,1);
-		
-	}
 	
 	
 	 $scope.form = {
@@ -119,19 +107,16 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 
 		            } else {
 		                
-		            	$scope.objeto.details=$scope.detalles;
-		            	
-		            	claseRegistroFactory.guardar($scope.objeto).then(function(resp){
+		            	tipoRegimenFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
-			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Clase de Registro!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Tipo Regimen!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Clase de Registro!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Tipo Regimen", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

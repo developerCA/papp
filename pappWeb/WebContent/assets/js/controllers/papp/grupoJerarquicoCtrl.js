@@ -1,25 +1,24 @@
 'use strict';
 
-app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","claseRegistroFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,claseRegistroFactory) {
+app.controller('GrupoJerarquicoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","grupoJerarquicoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,grupoJerarquicoFactory) {
     
 	
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
+	$scope.siglaFiltro=null;
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
-	$scope.detalles=[];
 	
 	var pagina = 1;
 	
 	$scope.consultar=function(){
 		
-		
 		$scope.data=[];
-		claseRegistroFactory.traerClases(pagina,$rootScope.ejefiscal).then(function(resp){
+		grupoJerarquicoFactory.traerGrupos(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-			
+				
 		})
 	
 	};
@@ -49,7 +48,7 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		claseRegistroFactory.traerClasesFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		grupoJerarquicoFactory.traerGruposFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro,$scope.siglaFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -60,39 +59,28 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;
 		$scope.estadoFiltro=null;
-		
+		$scope.siglaFiltro=null;
 		$scope.consultar();
 		
 	};
 	
 	$scope.nuevo=function(){
 		$scope.objeto={id:null};
-		$scope.detalles=[];
+		
 		$scope.edicion=true;
 	}
 	
 	$scope.editar=function(id){
-		claseRegistroFactory.traerClase(id).then(function(resp){
+		grupoJerarquicoFactory.traerGrupo(id).then(function(resp){
 			
 			if (resp.estado)
-			   $scope.objeto=resp.json.claseregistro;
-			   $scope.detalles=resp.json.details;
-			   $scope.edicion=true;
-
+				$scope.objeto=resp.json.grupo;
+				$scope.edicion=true;
+				
 		})
 		
 	};
 	
-	$scope.agregarDetalle=function(){
-		var obj={codigo:null,estado:"A",nombre:null};
-		$scope.detalles.push(obj);
-		
-	}
-	
-	$scope.removerDetalle=function(index){
-		$scope.detalles.splice(index,1);
-		
-	}
 	
 	
 	 $scope.form = {
@@ -119,19 +107,16 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 
 		            } else {
 		                
-		            	$scope.objeto.details=$scope.detalles;
-		            	
-		            	claseRegistroFactory.guardar($scope.objeto).then(function(resp){
+		            	grupoJerarquicoFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
-			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Clase de Registro!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Grupo Jerarquico!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Clase de Registro!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Grupo Jerarquico!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

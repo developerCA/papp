@@ -1,4 +1,4 @@
-app.factory("claseRegistroFactory", [ "Restangular", function(Restangular) {
+app.factory("nivelOrganicoFactory", [ "Restangular", function(Restangular) {
 
 		
 	var service = Restangular.service("/administrar");
@@ -6,15 +6,15 @@ app.factory("claseRegistroFactory", [ "Restangular", function(Restangular) {
 	return {
 		
 		
-		traerClases : function(pagina,ejercicio) {
-			 
-			  return Restangular.allUrl("administrar/consultar/claseregistro/pagina="+pagina+"&ejerciciofiscalid="+ejercicio).getList();
+		traerNiveles : function(pagina) {
+			  
+			  return Restangular.allUrl("administrar/consultar/nivelorganico/pagina="+pagina).getList();
 			  
 		},
 		
-		traerClasesFiltro : function(pagina,ejercicio,nombre,codigo,estado) {
+		traerNivelesFiltro : function(pagina,nombre,codigo,estado) {
 			  
-			var url = "administrar/consultar/claseregistro/pagina="+pagina+"&ejerciciofiscalid="+ejercicio;
+			var url = "administrar/consultar/nivelorganico/pagina="+pagina;
 
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
@@ -24,16 +24,16 @@ app.factory("claseRegistroFactory", [ "Restangular", function(Restangular) {
 			  
 		},
 		
-		traerClase : function(id) {
+		traerNivel : function(id) {
 			  
-			var url = "administrar/claseregistro/"+id+"/-1";
+			var url = "administrar/nivelorganico/"+id+"/-1";
 		   
 		    return Restangular.allUrl(url).customGET();
 			  
 		},
 		
 		guardar:function(objeto){
-			var url = "administrar/claseregistro/";
+			var url = "administrar/nivelorganico/";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 		

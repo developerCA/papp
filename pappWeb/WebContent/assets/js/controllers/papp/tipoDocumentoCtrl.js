@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","claseRegistroFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,claseRegistroFactory) {
+app.controller('TipoDocumentoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","tipoDocumentoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,tipoDocumentoFactory) {
     
 	
 	$scope.nombreFiltro=null;
@@ -16,7 +16,7 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 		
 		
 		$scope.data=[];
-		claseRegistroFactory.traerClases(pagina,$rootScope.ejefiscal).then(function(resp){
+		tipoDocumentoFactory.traerTipos(pagina,$rootScope.ejefiscal).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 			
@@ -49,7 +49,7 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		claseRegistroFactory.traerClasesFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		tipoDocumentoFactory.traerTiposFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -72,10 +72,10 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 	}
 	
 	$scope.editar=function(id){
-		claseRegistroFactory.traerClase(id).then(function(resp){
+		tipoDocumentoFactory.traerTipo(id).then(function(resp){
 			
 			if (resp.estado)
-			   $scope.objeto=resp.json.claseregistro;
+			   $scope.objeto=resp.json.tipodocumento;
 			   $scope.detalles=resp.json.details;
 			   $scope.edicion=true;
 
@@ -121,17 +121,17 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 		                
 		            	$scope.objeto.details=$scope.detalles;
 		            	
-		            	claseRegistroFactory.guardar($scope.objeto).then(function(resp){
+		            	tipoDocumentoFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Clase de Registro!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Tipo de Documento!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Clase de Registro!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Tipo de Documento!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

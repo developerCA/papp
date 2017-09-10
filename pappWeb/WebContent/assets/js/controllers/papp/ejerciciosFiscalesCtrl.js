@@ -3,13 +3,13 @@
  * controller for angular-menu
  * 
  */
-app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","ejercicioFiscalFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,ejercicioFiscalFactory) {
+app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$location","SweetAlert","$filter", "ngTableParams","ejercicioFiscalFactory",  function($scope,$rootScope,$location,SweetAlert,$filter, ngTableParams,ejercicioFiscalFactory) {
     
 	$scope.anioFiltro=null;
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
-	
+	$scope.ejercicioSistema;
 	var pagina = 1;
 	
 	$scope.consultar=function(){
@@ -21,6 +21,44 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","SweetAle
 		})
 	
 	};
+	
+	$scope.iniciaAplicacion=function(){
+		$scope.data=[];
+		$scope.ejerciciosFiscales=[];
+		ejercicioFiscalFactory.traerEjercicios(pagina).then(function(resp){
+			if (resp.meta)
+				$scope.ejerciciosFiscales=resp;
+			    $rootScope.ejefiscal=$scope.ejerciciosFiscales[0].id;
+			    $scope.ejercicioSistema= $rootScope.ejefiscal;
+				    
+		});
+	
+	};
+	
+	$scope.cambiarEjercicio=function(){
+		
+		 SweetAlert.swal({
+	            title: "Ejericio Fiscal",
+	            text: "Esta seguro de cambiar el ejercicio fiscal del sistema?",
+	            type: "warning",
+	            showCancelButton: true,
+	            confirmButtonColor: "#DD6B55",
+	            confirmButtonText: "Si!"
+	        }, function () {
+	        	$rootScope.ejefiscal=$scope.ejercicioSistema;
+	        	
+	            SweetAlert.swal({
+	                title: "Ejercicio Fiscal se ha cambiado",
+	                confirmButtonColor: "#007AFF"
+	            });
+	            
+	            $location.path( "/index" );
+	        });
+		 
+		
+		
+	}
+	
 	
 	$scope.$watch('data', function() {
 		
