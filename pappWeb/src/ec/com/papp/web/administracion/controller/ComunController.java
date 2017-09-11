@@ -44,6 +44,7 @@ import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.ObjetivoTO;
 import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.web.comun.util.Mensajes;
+import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.metodos.Log;
@@ -59,6 +60,7 @@ public class ComunController {
 	public String consultar(@PathVariable String parametros,HttpServletRequest request,HttpServletResponse response) throws IOException {
 		log.println("ingresa a consultar: " + parametros);
 		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
 		try{
 			//Itero los parametros para saber cuantas consultas debo devover
