@@ -38,7 +38,7 @@
                                         <div class="form-group">
                                             <label> Padre Nombre</label>
                                             <input type="text"
-                                                   class="form-control" ng-model="codigo">
+                                                   class="form-control" ng-model="padre">
                                         </div>
                                     </div>
                                 </div>
@@ -53,8 +53,9 @@
                                         <div class="form-group">
                                             <label> Tipo </label>
                                             <select name="tipo" ng-model="tipo" class="form-control">
-                                                <option value="">--Seleccione un grupo--</option>
-                                                <option ng-repeat="tipo in tipos" value="{{tipo.nombre}}">{{tipo.nombre}}</option>
+                                                <option value="" selected="selected">(Todos)</option>
+                                                <option value="I">Ingresos</option>
+                                                <option value="E">Egresos</option>
                                             </select>
                                         </div>
                                     </div>
@@ -113,7 +114,7 @@
                 <div ng-show="edicion" class="panel-body" id="panel1">
 
                     <div class="panel-heading">
-                        <h5 class="panel-title">Grupos de Medida</h5>
+                        <h5 class="panel-title">Items</h5>
                     </div>
 
                     <form name="Form" id="form1" novalidate
@@ -149,11 +150,45 @@
                                 <div class="form-group"
                                      ng-class="{'has-error':Form.grupo.$dirty && Form.grupo.$invalid, 'has-success':Form.grupo.$valid}">
                                     <label for="form-field-select-1">
-                                        Grupo <span class="symbol required"></span>
+                                        Padre <span class="symbol required"></span>
                                     </label>
-                                    <select name="unidadmedidagrupomedidaid" ng-model="objeto.unidadmedidagrupomedidaid"
-                                            ng-options="grupo.id as grupo.nombre for grupo in grupos"
-                                            class="form-control" required></select>
+                                    <select>
+
+                                    </select>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Aplica IVA</label>
+                                            <input type="checkbox" ng-model="iva" ng-true-value="1" ng-false-value="0" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group"
+                                     ng-class="{'has-error':Form.tipo.$dirty && Form.tipo.$invalid, 'has-success':Form.tipo.$valid}">
+                                    <label for="form-field-select-1">
+                                        Tipo<span class="symbol required"></span>
+                                    </label> <select class="form-control" name="tipo"
+                                                     ng-model="objeto.tipo" required>
+                                        <option value="I">Ingreso</option>
+                                        <option value="E">Egreso</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group"
+                                     ng-class="{'has-error':Form.tipobien.$dirty && Form.tipobien.$invalid, 'has-success':Form.tipobien.$valid}">
+                                    <label for="form-field-select-1">
+                                        Tipo Bien <span class="symbol required"></span>
+                                    </label> <select class="form-control" name="tipobien"
+                                                     ng-model="objeto.tipobien" required>
+                                        <option value="T" selected="selected">Sin Tipo</option>
+                                        <option value="B">Bien</option>
+                                        <option value="S">Servicio</option>
+                                        <option value="O">Obra</option>
+                                        <option value="C">Consultoría</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group"

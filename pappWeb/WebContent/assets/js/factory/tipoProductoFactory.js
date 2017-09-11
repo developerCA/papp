@@ -11,12 +11,9 @@ app.factory("TipoProductoFactory", ["Restangular", function (Restangular) {
         },
 
         traerTiposFiltro: function (pagina, nombre, estado) {
-
             var url = "administrar/consultar/tipoproducto/pagina=" + pagina;
-
             if (nombre != null && nombre != "") url += "&nombre=" + nombre.toUpperCase();
-            // if (estado != null && estado != "") url += "&estado=" + estado;
-
+            url += "&estado=" + estado;
             return Restangular.allUrl(url).getList();
 
         },

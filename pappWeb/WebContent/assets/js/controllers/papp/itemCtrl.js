@@ -4,25 +4,27 @@
  * controller for angular-menu
  * 
  */
-app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "ItemsFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, itemsFactory) {
+app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "selectize", "ItemsFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, selectize, itemsFactory) {
 
     $scope.nombre = null;
+    $scope.codigo = null;
+    $scope.padre = null;
+    $scope.tipo = null;
     $scope.estado = null;
-    $scope.nombregrupo = null;
     $scope.edicion = false;
     $scope.url = "";
-    $scope.objeto = { unidadmedidagrupomedidaid: null };
+    $scope.objeto = null;
 
     var pagina = 1;
 
     $scope.init = function () {
 
-        $scope.grupos = [];
+        $scope.items = [];
 
         itemsFactory.traerItems(pagina).then(function (resp) {
             if (resp.meta)
-                $scope.grupos = resp;
-            console.log($scope.grupos);
+                $scope.items = resp;
+            console.log($scope.items);
         });
 
         $scope.consultar();
@@ -63,7 +65,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filte
     $scope.filtrar = function () {
 
         $scope.data = [];
-        itemsFactory.traerItemsFiltro(pagina, $scope.nombre, $scope.estado, $scope.nombregrupo).then(function (resp) {
+        itemsFactory.traerItemsFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado, $scope.tipo).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         })
@@ -78,8 +80,10 @@ app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filte
 
     $scope.limpiar = function () {
         $scope.nombre = null;
+        $scope.codigo = null;
+        $scope.padre = null;
+        $scope.tipo = null;
         $scope.estado = null;
-        $scope.nombregrupo = null;
         $scope.consultar();
     };
 

@@ -6,19 +6,17 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
 
         traerItems: function (pagina) {
 
-            return Restangular.allUrl("administrar/consultar/item/pagina=" + pagina).getList();
+            return Restangular.allUrl("administrar/consultar/item/pagina=" + pagina + "&filas=20").getList();
 
         },
 
-        traerItemsFiltro: function (pagina, unidad, estado, nombregrupo) {
+        traerItemsFiltro: function (pagina, codigo, nombre, estado, tipo, ejerciciofiscalid) {
 
             var url = "administrar/consultar/item/pagina=" + pagina;
-
-            if (unidad != null && unidad != "") url += "&nombre=" + unidad.toUpperCase();
-            if (nombregrupo != null && nombregrupo != "") url += "&nombregrupo=" + nombregrupo;
+            if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();
+            if (nombre != null && nombre != "") url += "&nombre=" + nombre;
+            if (tipo != null && tipo != "") url += "&tipo=" + tipo;
             if (estado != null && estado != "") url += "&estado=" + estado;
-            console.clear();
-            console.log(url);
             return Restangular.allUrl(url).getList();
 
         },

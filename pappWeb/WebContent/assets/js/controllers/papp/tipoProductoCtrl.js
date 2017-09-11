@@ -6,7 +6,7 @@
 app.controller('TipoProductoController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "TipoProductoFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, tipoProductoFactory) {
 
     $scope.nombre = null;
-    $scope.estado = null;
+    $scope.activo = 1;
     $scope.edicion = false;
     $scope.objeto = {};
 
@@ -17,7 +17,7 @@ app.controller('TipoProductoController', ["$scope", "$rootScope", "SweetAlert", 
         $scope.data = [];
 
         tipoProductoFactory.traerTipos(pagina).then(function (resp) {
-            if (resp.meta)
+            if (resp)
                 $scope.data = resp;
         })
 
@@ -47,10 +47,8 @@ app.controller('TipoProductoController', ["$scope", "$rootScope", "SweetAlert", 
     $scope.filtrar = function () {
 
         $scope.data = [];
-        tipoProductoFactory.traerTiposFiltro(pagina, $scope.nombre, $scope.estado).then(function (resp) {
-
-            if (resp.meta)
-
+        tipoProductoFactory.traerTiposFiltro(pagina, $scope.nombre, $scope.activo).then(function (resp) {
+            if (resp)
                 $scope.data = resp;
         })
 
@@ -64,7 +62,7 @@ app.controller('TipoProductoController', ["$scope", "$rootScope", "SweetAlert", 
 
     $scope.limpiar = function () {
         $scope.nombre = null;
-        $scope.estado = null;
+        $scope.activo = 1;
         $scope.consultar();
     };
 
@@ -78,7 +76,6 @@ app.controller('TipoProductoController', ["$scope", "$rootScope", "SweetAlert", 
         tipoProductoFactory.traerTipo(id).then(function (resp) {
             $scope.objeto = resp.json.tipoproducto;
             $scope.edicion = true;
-
         })
     };
 
@@ -128,11 +125,6 @@ app.controller('TipoProductoController', ["$scope", "$rootScope", "SweetAlert", 
                 return;
 
             } else {
-                if ($scope.objeto.activo == true) {
-                    $scope.objeto.activo = 1;
-                } else if ($scope.objeto.activo == false) {
-                    $scope.objeto.activo = 0;
-                }
                 tipoProductoFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
