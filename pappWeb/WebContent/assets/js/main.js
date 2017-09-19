@@ -31,7 +31,7 @@ function ($rootScope, $state, $stateParams) {
             isFooterFixed: false, // true if you want to initialize the template with fixed footer
             isBoxedPage: false, // true if you want to initialize the template with boxed layout
             theme: 'lyt3-theme-1', // indicate the theme chosen for your project
-            logo: 'assets/images/logo2.png', // relative path of the project logo
+            logo: 'assets/images/logopap.png', // relative path of the project logo
             logoCollapsed: 'assets/images/logo-collapsed2.png' // relative path of the collapsed logo
         },
         layout: ''
@@ -82,7 +82,7 @@ app.config(["RestangularProvider", function(RestangularProvider) {
 	      var extractedData;
 	      // .. to look for getList operations
 	      if (operation === "getList") {
-	       
+	      
 	    	if (data.json.result==null){
 	    		 extractedData = data.json;
 	    	}else{

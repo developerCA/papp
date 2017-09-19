@@ -1,13 +1,13 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-	<h4 class="mainTitle no-margin">Clases de Registro</h4>
+	<h4 class="mainTitle no-margin">Unidades</h4>
 
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <!-- end: BREADCRUMB -->
 <!-- start: SIMPLE TABLE WITH PAGINATION -->
 <div class="container-fluid container-fullw"
-	ng-controller="ClaseRegistroController" ng-init="consultar()">
+	ng-controller="UnidadController" ng-init="consultar()">
 
 	<div class="row">
 		<div class="col-md-12"></div>
@@ -74,10 +74,10 @@
 							<tr ng-repeat="obj in $data">
 								<td><a class="btn btn-sm btn-primary"
 									ng-click="editar(obj.id)"><i class="fa fa-pencil"></i></a></td>
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+								<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
 								<td data-title="'Estado'">{{obj.npestado}}</td>
-
+								<td data-title="'ORUltimo Usado'">{{obj.orultimousado}}</td>
 
 							</tr>
 						</table>
@@ -88,7 +88,7 @@
 				<div ng-show="edicion" class="panel-body" id="panel1">
 
 					<div class="panel-heading">
-						<h5 class="panel-title">Clase de Registro</h5>
+						<h5 class="panel-title">Unidad</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
@@ -102,7 +102,8 @@
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese el Codigo"
 										class="form-control" name="codigo" ng-model="objeto.codigo"
-										required ng-minlength="3" ng-maxlength="3" style='text-transform:uppercase' /> <span
+										required ng-minlength="3" ng-maxlength="3"
+										style='text-transform: uppercase' /> <span
 										class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">Debe
 										ingresar m&iacute;nimo tres letras</span> <span
@@ -170,7 +171,8 @@
 														<td data-title="'C&oacute;digo'"><input type="text"
 															placeholder="Ingrese el Codigo" class="form-control"
 															name="codigo_{{$index}}" required ng-model="obj.codigo"
-															ng-minlength="3" ng-maxlength="3" style='text-transform:uppercase'
+															ng-minlength="3" ng-maxlength="3"
+															style='text-transform: uppercase'
 															ng-disabled="obj.codigo!=null" /><span
 															class="error text-small block"
 															ng-if="Form['codigo_'+$index].$dirty && Form['codigo_'+$index].$invalid">Debe

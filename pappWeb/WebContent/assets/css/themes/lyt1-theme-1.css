@@ -272,7 +272,7 @@ body, #app {
   }
 }
 #sidebar > div nav > ul > li a {
-  color: #666;
+  color: #000;
 }
 #sidebar > div nav > ul > li a .icon-arrow {
   color: #666;

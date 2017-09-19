@@ -96,6 +96,9 @@ app.constant('JS_REQUIRES', {
         'GrupoJerarquicoFactory':'assets/js/factory/grupoJerarquicoFactory.js',
         'CargoCtrl':'assets/js/controllers/papp/cargoCtrl.js',
         'CargoFactory':'assets/js/factory/cargoFactory.js',
+        'UnidadCtrl':'assets/js/controllers/papp/unidadCtrl.js',
+        'UnidadFactory':'assets/js/factory/unidadFactory.js',
+        
         
         
         

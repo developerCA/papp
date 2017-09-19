@@ -39,7 +39,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
         title: 'Dashboard',
         ncyBreadcrumb: {
-            label: 'Dashboard'
+            label: '.'
         }
     }).state('app.pagelayouts', {
         url: '/ui',
@@ -261,7 +261,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         title: 'Cargos',
         ncyBreadcrumb: {
             label: 'Cargos'
-        }     
+        }  
+    
+    }).state('app.unidades', {
+        url: "/unidades",
+        templateUrl: "assets/views/papp/unidades.html",
+        resolve: loadSequence('ngTable','UnidadCtrl','UnidadFactory'),
+        title: 'Unidades',
+        ncyBreadcrumb: {
+            label: 'Unidades'
+        }   
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

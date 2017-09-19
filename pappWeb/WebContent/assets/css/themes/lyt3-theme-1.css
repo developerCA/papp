@@ -289,7 +289,7 @@ body {
   }
 }
 #sidebar > div nav > ul > li a {
-  color: #666;
+  color: #000;
 }
 #sidebar > div nav > ul > li.open, #sidebar > div nav > ul > li:hover {
   background: #f2f2f2 !important;
