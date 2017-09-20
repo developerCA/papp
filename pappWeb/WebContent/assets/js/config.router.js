@@ -271,6 +271,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Unidades'
         }   
+    }).state('app.divgeografica', {
+        url: "/divisionesgeo",
+        templateUrl: "assets/views/papp/divisiones.html",
+        resolve: loadSequence('ngTable','DivisionGeograficaCtrl','ModalDivisionGeograficaCtrl','DivisionGeograficaFactory'),
+        title: 'Divisiones Geograficas',
+        ncyBreadcrumb: {
+            label: 'Divisiones Geograficas'
+        } 
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

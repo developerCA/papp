@@ -98,6 +98,11 @@ app.constant('JS_REQUIRES', {
         'CargoFactory':'assets/js/factory/cargoFactory.js',
         'UnidadCtrl':'assets/js/controllers/papp/unidadCtrl.js',
         'UnidadFactory':'assets/js/factory/unidadFactory.js',
+        'DivisionGeograficaCtrl':'assets/js/controllers/papp/divisionGeograficaCtrl.js',
+        'DivisionGeograficaFactory':'assets/js/factory/divisionGeograficaFactory.js',
+        'ModalDivisionGeograficaCtrl':'assets/js/controllers/papp/modales/modalDivisionGeograficaCtrl.js',
+         
+        
         
         
         
