@@ -279,6 +279,39 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Divisiones Geograficas'
         } 
+
+    }).state('app.grados', {
+        url: "/grados",
+        templateUrl: "assets/views/papp/grados.html",
+        resolve: loadSequence('ngTable','GradoCtrl','GrupoJerarquicoFactory','GradoFactory'),
+        title: 'Grados',
+        ncyBreadcrumb: {
+            label: 'Grados'
+        }     
+    }).state('app.clasificaciones', {
+        url: "/grados",
+        templateUrl: "assets/views/papp/clasificaciones.html",
+        resolve: loadSequence('ngTable','ClasificacionCtrl','ClasificacionFactory'),
+        title: 'Clasificaciones',
+        ncyBreadcrumb: {
+            label: 'Clasificaciones'
+        }     
+    }).state('app.fuerzas', {
+        url: "/fuerzas",
+        templateUrl: "assets/views/papp/fuerzas.html",
+        resolve: loadSequence('ngTable','FuerzaCtrl','FuerzaFactory'),
+        title: 'Fuerzas',
+        ncyBreadcrumb: {
+            label: 'Fuerzas'
+        }     
+    }).state('app.escalasremuneracion', {
+        url: "/escalasremuneracion",
+        templateUrl: "assets/views/papp/escalasRemuneracion.html",
+        resolve: loadSequence('ngTable','EscalaRemuneracionCtrl','EscalaRemuneracionFactory'),
+        title: 'Fuerzas',
+        ncyBreadcrumb: {
+            label: 'Fuerzas'
+        }     
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

@@ -4,7 +4,7 @@
  * controller for angular-menu
  * 
  */
-app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "selectize", "ItemsFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, selectize, itemsFactory) {
+app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "ItemsFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, itemsFactory) {
 
     $scope.nombre = null;
     $scope.codigo = null;
@@ -20,8 +20,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filte
     $scope.init = function () {
 
         $scope.items = [];
-
-        itemsFactory.traerItems(pagina).then(function (resp) {
+        itemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.items = resp;
             console.log($scope.items);
@@ -34,7 +33,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filte
 
         $scope.data = [];
 
-        itemsFactory.traerItems(pagina).then(function (resp) {
+        itemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         });

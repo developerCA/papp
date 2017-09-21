@@ -1,24 +1,24 @@
 'use strict';
 
-app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","cargoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,cargoFactory) {
-    
-	
+app.controller('FuerzaController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","fuerzaFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,fuerzaFactory) {
+    	
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.estadoFiltro=null;
+	$scope.siglaFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
+	$scope.detalles=[];
 	
 	var pagina = 1;
 	
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		cargoFactory.traerCargos(pagina).then(function(resp){
+		fuerzaFactory.traerFuerzas(pagina).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
-				$scope.data=resp;
-				
+				$scope.data=resp;				
 		})
 	
 	};
@@ -48,7 +48,7 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		cargoFactory.traerCargosFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		fuerzaFactory.traerFuerzasFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.sigla, $scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -65,23 +65,35 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	
 	$scope.nuevo=function(){
 		$scope.objeto={id:null};
-		
+		$scope.detalles=[];
 		$scope.edicion=true;
 	}
 	
 	$scope.editar=function(id){
-		cargoFactory.traerCargo(id).then(function(resp){
+		fuerzaFactory.traerFuerza(id).then(function(resp){
 			
 			if (resp.estado)
 				
 				$scope.objeto=resp.json.cargo;
+				$scope.detalles=resp.json.details;
+				console.clear();
+				console.log("==================");
+				console.log($scope.detalles);
 				$scope.edicion=true;
 				console.log($scope.objeto);
 		})
 		
 	};
 	
+	$scope.agregarDetalle=function(){
+		var obj={codigo:null,estado:"A",nombre:null};
+		$scope.detalles.push(obj);
+		
+	}
 	
+	$scope.removerDetalle=function(index){
+		$scope.detalles.splice(index,1);		
+	}
 	
 	 $scope.form = {
 
@@ -106,17 +118,20 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 		                return;
 
 		            } else {
-		                
-		            	cargoFactory.guardar($scope.objeto).then(function(resp){
+		            	
+		            	$scope.objeto.details=$scope.detalles;
+		            	
+		            	fuerzaFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
+			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Cargo!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Fuerza!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Cargo!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Fuerza!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

@@ -101,7 +101,15 @@ app.constant('JS_REQUIRES', {
         'DivisionGeograficaCtrl':'assets/js/controllers/papp/divisionGeograficaCtrl.js',
         'DivisionGeograficaFactory':'assets/js/factory/divisionGeograficaFactory.js',
         'ModalDivisionGeograficaCtrl':'assets/js/controllers/papp/modales/modalDivisionGeograficaCtrl.js',
-         
+        'GradoCtrl':'assets/js/controllers/papp/gradoCtrl.js',
+        'GradoFactory':'assets/js/factory/gradoFactory.js',
+        'ClasificacionCtrl':'assets/js/controllers/papp/clasificacionCtrl.js',
+        'ClasificacionFactory':'assets/js/factory/clasificacionFactory.js',
+        'FuerzaCtrl':'assets/js/controllers/papp/fuerzaCtrl.js',
+        'FuerzaFactory':'assets/js/factory/fuerzaFactory.js',
+        'EscalaRemuneracionCtrl':'assets/js/controllers/papp/escalaRemuneracionCtrl.js',
+        'EscalaRemuneracionFactory':'assets/js/factory/escalaRemuneracionFactory.js',
+        
         
         
         

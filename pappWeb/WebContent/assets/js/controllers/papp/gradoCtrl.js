@@ -1,24 +1,44 @@
 'use strict';
 
-app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","cargoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,cargoFactory) {
-    
-	
+app.controller('GradoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","grupoJerarquicoFactory", "gradoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams, grupoJerarquicoFactory, gradoFactory) {
+    	
 	$scope.nombreFiltro=null;
-	$scope.codigoFiltro=null;
-	$scope.estadoFiltro=null;
+	$scope.siglaFiltro=null;
+	$scope.grupoFiltro=null;
+	$scope.esteadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
+	$scope.grupos = [];
+	$scope.grupo = null;
+	$scope.grupoJerarquico = null;
 	
 	var pagina = 1;
+	
+	$scope.init = function(){
+		
+		$scope.traerGrupos();
+		$scope.consultar();
+		
+	};
+	
+	$scope.traerGrupos = function(){
+		
+		grupoJerarquicoFactory.traerGrupos(pagina).then(function(resp){
+			console.clear();
+			console.log(resp);
+			if (resp.meta)
+				$scope.grupos=resp;				
+		})
+		
+	};
 	
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		cargoFactory.traerCargos(pagina).then(function(resp){
-			console.log(resp);
+		gradoFactory.traerGrados(pagina).then(function(resp){
 			if (resp.meta)
-				$scope.data=resp;
-				
+				console.log(resp);
+				$scope.data=resp;				
 		})
 	
 	};
@@ -48,8 +68,9 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		cargoFactory.traerCargosFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
-			
+		gradoFactory.traerGradosFiltro(pagina,$scope.nombreFiltro,$scope.siglaFiltro, $scope.grupoFiltro,$scope.estadoFiltro).then(function(resp){
+			console.clear();
+			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -70,19 +91,18 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	}
 	
 	$scope.editar=function(id){
-		cargoFactory.traerCargo(id).then(function(resp){
+		
+		gradoFactory.traerGrado(id).then(function(resp){
 			
 			if (resp.estado)
 				
-				$scope.objeto=resp.json.cargo;
+				$scope.objeto=resp.json.grado;
 				$scope.edicion=true;
-				console.log($scope.objeto);
+
 		})
 		
 	};
-	
-	
-	
+		
 	 $scope.form = {
 
 		        submit: function (form) {
@@ -107,16 +127,16 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 
 		            } else {
 		                
-		            	cargoFactory.guardar($scope.objeto).then(function(resp){
+		            	gradoFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Cargo!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Grado!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Cargo!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Grado!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
