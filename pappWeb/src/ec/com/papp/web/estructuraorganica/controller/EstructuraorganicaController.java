@@ -258,8 +258,9 @@ public class EstructuraorganicaController {
 				unidadinstTO.setInstitucionentidad(institucionentidadTO);
 				Collection<UnidadinstTO> unidadinstTOs = UtilSession.estructuraorganicaServicio.transObtenerUnidadinst(unidadinstTO);
 				//Asigno la variable que necesitan para la administracion
-				for(UnidadinstTO unidadinstTO2:unidadinstTOs)
+				for(UnidadinstTO unidadinstTO2:unidadinstTOs){
 					unidadinstTO2.setUnidadinstitucionid(unidadinstTO2.getId().getId());
+				}
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(unidadinstTOs,unidadinstTO.getJsonConfig()));
 			}
 
