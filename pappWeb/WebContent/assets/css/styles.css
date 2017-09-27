@@ -1156,7 +1156,7 @@ span[role="slider"] {
 }
 @media (min-width: 768px) {
   .lyt-3 .navbar .navbar-header .navbar-brand {
-    padding: 0 25px;
+    padding: 0 5px;
   }
 }
 @media (min-width: 992px) {

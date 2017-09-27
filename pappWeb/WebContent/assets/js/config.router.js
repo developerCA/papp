@@ -311,7 +311,47 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         title: 'Fuerzas',
         ncyBreadcrumb: {
             label: 'Fuerzas'
-        }     
+        } 
+    }).state('app.menuseguridades', {
+        url: "/menuseguridades",
+        templateUrl: "assets/views/papp/menuSeguridades.html",
+        resolve: loadSequence('ngTable','MenuSeguridadesCtrl','MenuPadreCtrl','MenuSeguridadesFactory'),
+        title: 'Menu',
+        ncyBreadcrumb: {
+            label: 'Menu'
+        } 
+    }).state('app.permisos', {
+        url: "/permisos",
+        templateUrl: "assets/views/papp/permisos.html",
+        resolve: loadSequence('ngTable','PermisosCtrl','PermisosFactory'),
+        title: 'Permisos',
+        ncyBreadcrumb: {
+            label: 'Permisos'
+        } 
+    }).state('app.perfiles', {
+        url: "/perfiles",
+        templateUrl: "assets/views/papp/perfiles.html",
+        resolve: loadSequence('ngTable','PerfilesCtrl','PerfilesFactory'),
+        title: 'Perfiles',
+        ncyBreadcrumb: {
+            label: 'Perfiles'
+        } 
+    }).state('app.usuarios', {
+        url: "/usuarios",
+        templateUrl: "assets/views/papp/usuarios.html",
+        resolve: loadSequence('ngTable','UsuariosCtrl','UsuariosFactory'),
+        title: 'Usuarios',
+        ncyBreadcrumb: {
+            label: 'Usuarios'
+        } 
+    }).state('app.cambiarcontrasena', {
+        url: "/cambiarcontrasena",
+        templateUrl: "assets/views/papp/cambiarContrasena.html",
+        resolve: loadSequence('ngTable','CambiarContrasenaCtrl','CambiarContrasenaFactory'),
+        title: 'Cambiar Contrase&ntilde;a',
+        ncyBreadcrumb: {
+            label: 'Cambiar Contraseña'
+        } 
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

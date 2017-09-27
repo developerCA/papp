@@ -109,6 +109,17 @@ app.constant('JS_REQUIRES', {
         'FuerzaFactory':'assets/js/factory/fuerzaFactory.js',
         'EscalaRemuneracionCtrl':'assets/js/controllers/papp/escalaRemuneracionCtrl.js',
         'EscalaRemuneracionFactory':'assets/js/factory/escalaRemuneracionFactory.js',
+        'MenuSeguridadesCtrl':'assets/js/controllers/papp/menuSeguridadesCtrl.js',
+        'MenuSeguridadesFactory':'assets/js/factory/menuSeguridadesFactory.js',
+        'MenuPadreCtrl':'assets/js/controllers/papp/modales/menuPadreCtrl.js',   
+        'PermisosCtrl':'assets/js/controllers/papp/permisosCtrl.js',
+        'PermisosFactory':'assets/js/factory/permisosFactory.js',
+        'PerfilesCtrl':'assets/js/controllers/papp/perfilesCtrl.js',
+        'PerfilesFactory':'assets/js/factory/perfilesFactory.js',
+        'UsuariosCtrl':'assets/js/controllers/papp/usuariosCtrl.js',
+        'UsuariosFactory':'assets/js/factory/usuariosFactory.js',
+        'CambiarContrasenaCtrl':'assets/js/controllers/papp/cambiarContrasenaCtrl.js',
+        'CambiarContrasenaFactory':'assets/js/factory/cambiarContrasenaFactory.js',
         
         
         
