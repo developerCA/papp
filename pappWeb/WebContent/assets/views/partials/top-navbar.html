@@ -12,12 +12,13 @@
 			id="sidebar-toggler" ng-click="toggle('sidebar')" v-pressable>
 			<i class="fa fa-bars"></i>
 		</button>
-		<a class="navbar-brand" ui-sref="app.dashboard"> <img
-			ng-src="{{app.layout.logo}}" alt="{{app.name}}" />
+		<a class="navbar-brand" ui-sref="app.dashboard" uib-tooltip="Inicio" tooltip-placement="right">
+			<img ng-src="{{app.layout.logo}}" alt="{{app.name}}" width="200"
+			height="40" />
 		</a> <a class="navbar-brand navbar-brand-collapsed"
-			ui-sref="app.dashboard"> <img
-			ng-src="{{app.layout.logoCollapsed}}" alt="" />
-		</a>
+			ui-sref="app.dashboard"><h4 class="over-title margin-top-20">
+				<span class="text-white text-large">P.A.P</span>
+			</h4> </a>
 
 	</div>
 	<!-- end: NAVBAR HEADER -->
@@ -28,7 +29,7 @@
 		<ul class="nav navbar-left hidden-sm hidden-xs">
 			<li class="sidebar-toggler-wrapper">
 				<div>
-					<button href="javascript:void(0)"
+					<button href="javascript:void(0)" uib-tooltip="Minimizar Menu" tooltip-placement="right"
 						class="btn sidebar-toggler visible-md visible-lg"
 						ng-click="app.layout.isSidebarClosed = !app.layout.isSidebarClosed"
 						v-pressable>
@@ -42,10 +43,10 @@
 			<li>
 
 				<div class="col-md-12">
-					<h5 class="over-title margin-top-20">
-						<span class="text-white text-large">P.A.P</span> - <span
-							class="text-bold text-white">Sistema de Gesti&oacute;n Institucional</span>
-					</h5>
+					<h4 class="over-title margin-top-20">
+						<span class="text-bold text-white">Sistema de
+							Gesti&oacute;n Institucional</span>
+					</h4>
 
 				</div>
 
@@ -53,7 +54,7 @@
 			</li>
 
 			<li>
-				<div >
+				<div>
 					<form class="form-horizontal" role="form"
 						ng-controller="EjerciciosFiscalesController"
 						ng-init="iniciaAplicacion()">
@@ -65,12 +66,12 @@
 									ng-options="ejercicioFiscal.id as ejercicioFiscal.anio for ejercicioFiscal in ejerciciosFiscales"
 									class="form-control" required>
 								</select>
-							
+
 							</div>
 
-							
 
-							
+
+
 						</div>
 
 					</form>
@@ -83,16 +84,30 @@
 
 		</ul>
 
-		<ul class="nav navbar-right hidden-sm hidden-xs">
-			<li class="dropdown" uib-dropdown on-toggle="toggled(open)"><a
-				href class="dropdown-toggle" uib-dropdown-toggle> <i
-					class="ti-user"></i><span>&nbsp;Administrador</span>
-			</a>
-				<ul role="menu"
-					class="dropdown-menu dropdown-light animated fadeInUpShort ">
-					<li><a class="menu-toggler"> Cerrar Sesion </a></li>
-				</ul></li>
+		<ul class="nav navbar-right">
+
+
+			<li>
+				<div class="navbar-header">
+
+					<button class="btn btn-primary btn-sm">
+						<i class=" ti-user"></i> Administrador
+					</button>
+					
+					<button class="btn btn-primary btn-sm">
+						<i class=" ti-power-off"></i> Cerrar Sesi&oacute;n
+					</button>
+
+				</div>
+			</li>
+
 		</ul>
+	</div>
+
+	</li>
+
+
+	</ul>
 
 
 

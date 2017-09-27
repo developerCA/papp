@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","cargoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,cargoFactory) {
+app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","divisionGeograficaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,divisionGeograficaFactory) {
     
 	
 	$scope.nombreFiltro=null;
@@ -14,11 +14,10 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		cargoFactory.traerCargos(pagina).then(function(resp){
-			console.log(resp);
+		divisionGeograficaFactory.traerDivisiones(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-				
+			
 		})
 	
 	};
@@ -27,7 +26,7 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
-			count : 10, // count per page
+			count : 5, // count per page
 			filter: {} 	
 		}, {
 			total : $scope.data.length, // length of data
@@ -48,7 +47,7 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		cargoFactory.traerCargosFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		divisionGeograficaFactory.traerDivisionesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -59,6 +58,7 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;
 		$scope.estadoFiltro=null;
+		
 		$scope.consultar();
 		
 	};
@@ -70,15 +70,40 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	}
 	
 	$scope.editar=function(id){
-		cargoFactory.traerCargo(id).then(function(resp){
+		divisionGeograficaFactory.traerDivision(id).then(function(resp){
 			
 			if (resp.estado)
-				
-				$scope.objeto=resp.json.cargo;
-				$scope.edicion=true;
-				console.log($scope.objeto);
+			   $scope.objeto=resp.json.divisiongeografica;
+			   $scope.edicion=true;
+			   console.log($scope.objeto);
+
 		})
 		
+	};
+	
+	$scope.buscarDivision=function(){
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalDiviviones.html',
+			controller : 'ModalDivisionController',
+			size : 'md',
+			resolve : {
+				tipo : function() {
+					return $scope.objeto.tipo;
+				}
+			}
+		});
+
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.npcodigopadre = obj.codigo;
+			$scope.objeto.npnombrepadre = obj.nombre;
+			$scope.objeto.nptipopadrenombre = obj.nptipopadrenombre;
+			
+			
+		}, function() {
+			
+		});
+
 	};
 	
 	
@@ -107,16 +132,16 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 
 		            } else {
 		                
-		            	cargoFactory.guardar($scope.objeto).then(function(resp){
+		            	divisionGeograficaFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Cargo!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Division Geografica!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Cargo!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Division Geografica!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
@@ -135,3 +160,4 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 		        }
     };
 } ]);
+

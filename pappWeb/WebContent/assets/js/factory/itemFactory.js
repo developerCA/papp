@@ -4,9 +4,8 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
 
     return {
 
-        traerItems: function (pagina) {
-
-            return Restangular.allUrl("administrar/consultar/item/pagina=" + pagina + "&filas=20").getList();
+        traerItems: function (pagina, ejercicio) {
+        	return Restangular.allUrl("administrar/consultar/item/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio).getList();
 
         },
 

@@ -96,6 +96,22 @@ app.constant('JS_REQUIRES', {
         'GrupoJerarquicoFactory':'assets/js/factory/grupoJerarquicoFactory.js',
         'CargoCtrl':'assets/js/controllers/papp/cargoCtrl.js',
         'CargoFactory':'assets/js/factory/cargoFactory.js',
+        'UnidadCtrl':'assets/js/controllers/papp/unidadCtrl.js',
+        'UnidadFactory':'assets/js/factory/unidadFactory.js',
+        'DivisionGeograficaCtrl':'assets/js/controllers/papp/divisionGeograficaCtrl.js',
+        'DivisionGeograficaFactory':'assets/js/factory/divisionGeograficaFactory.js',
+        'ModalDivisionGeograficaCtrl':'assets/js/controllers/papp/modales/modalDivisionGeograficaCtrl.js',
+        'GradoCtrl':'assets/js/controllers/papp/gradoCtrl.js',
+        'GradoFactory':'assets/js/factory/gradoFactory.js',
+        'ClasificacionCtrl':'assets/js/controllers/papp/clasificacionCtrl.js',
+        'ClasificacionFactory':'assets/js/factory/clasificacionFactory.js',
+        'FuerzaCtrl':'assets/js/controllers/papp/fuerzaCtrl.js',
+        'FuerzaFactory':'assets/js/factory/fuerzaFactory.js',
+        'EscalaRemuneracionCtrl':'assets/js/controllers/papp/escalaRemuneracionCtrl.js',
+        'EscalaRemuneracionFactory':'assets/js/factory/escalaRemuneracionFactory.js',
+        
+        
+        
         
         
         

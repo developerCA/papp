@@ -1,13 +1,13 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-	<h4 class="mainTitle no-margin">Clases de Registro</h4>
+	<h4 class="mainTitle no-margin">Escalas de Remuneraci&oacute;n</h4>
 
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <!-- end: BREADCRUMB -->
 <!-- start: SIMPLE TABLE WITH PAGINATION -->
 <div class="container-fluid container-fullw"
-	ng-controller="ClaseRegistroController" ng-init="consultar()">
+	ng-controller="EscalaRemuneracionController" ng-init="consultar()">
 
 	<div class="row">
 		<div class="col-md-12"></div>
@@ -43,6 +43,7 @@
 												class="form-control" ng-model="codigoFiltro">
 										</div>
 									</div>
+									
 									<div class="col-sm-4">
 										<div class="form-group">
 											<label> Estado </label> <select name="country"
@@ -88,7 +89,7 @@
 				<div ng-show="edicion" class="panel-body" id="panel1">
 
 					<div class="panel-heading">
-						<h5 class="panel-title">Clase de Registro</h5>
+						<h5 class="panel-title">Cargo</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
@@ -102,11 +103,10 @@
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese el Codigo"
 										class="form-control" name="codigo" ng-model="objeto.codigo"
-										required ng-minlength="3" ng-maxlength="3" style='text-transform:uppercase' /> <span
-										class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">Debe
-										ingresar m&iacute;nimo tres letras</span> <span
-										class="success text-small" ng-if="Form.codigo.$valid">Listo</span>
+										required /> <span class="error text-small block"
+										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo
+										es incorrecto</span> <span class="success text-small"
+										ng-if="Form.prefijo.$valid">Listo</span>
 								</div>
 
 								<div class="form-group"
@@ -121,8 +121,7 @@
 										es incorrecto</span> <span class="success text-small"
 										ng-if="Form.nombre.$valid">Listo</span>
 								</div>
-
-
+								
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
@@ -140,66 +139,6 @@
 						</div>
 
 						<div class="row">
-							<div class="col-sm-12">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<a uib-tooltip="Agregar"
-											class="pull-right btn btn-sm btn-info"
-											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
-										</a>
-										<h4 class="panel-title">Pr&eacute;stamo</h4>
-
-
-									</div>
-									<div class="panel-body no-padding panel-white">
-										<div class="col-md-12 panel-white no-padding">
-											<div>
-												<table class="table table-striped">
-													<tr>
-														<td></td>
-														<th>C&oacute;digo</th>
-														<th>Nombre</th>
-														<th>Estado</th>
-
-													</tr>
-													<tr ng-repeat="obj in detalles">
-														<td><a uib-tooltip="Eliminar"
-															class="btn btn-sm btn-danger"
-															ng-click="removerDetalle($index)"><i
-																class="fa fa-trash"></i></a></td>
-														<td data-title="'C&oacute;digo'"><input type="text"
-															placeholder="Ingrese el Codigo" class="form-control"
-															name="codigo_{{$index}}" required ng-model="obj.codigo"
-															ng-minlength="3" ng-maxlength="3" style='text-transform:uppercase'
-															ng-disabled="obj.codigo!=null" /><span
-															class="error text-small block"
-															ng-if="Form['codigo_'+$index].$dirty && Form['codigo_'+$index].$invalid">Debe
-																ingresar m&iacute;nimo tres letras </span></td>
-														<td data-title="'Nombre'"><input type="text"
-															placeholder="Ingrese el Nombre" class="form-control"
-															name="nombre_{{$index}}" required ng-model="obj.nombre" /><span
-															class="error text-small block"
-															ng-if="Form['nombre_'+$index].$dirty && Form['nombre_'+$index].$invalid">Nombre
-																es incorrecto</span></td>
-														<td data-title="'Estado'"><select
-															class="form-control" name="estado_{{$index}}"
-															ng-model="obj.estado" required>
-																<option value="A">Activo</option>
-																<option value="I">Inactivo</option>
-														</select></td>
-
-
-													</tr>
-												</table>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-
-						</div>
-						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
 									<button type="submit" class="btn btn-primary">Guardar
@@ -216,7 +155,3 @@
 		</div>
 	</div>
 </div>
-
-
-
-

@@ -1,10 +1,10 @@
 'use strict';
 
-app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","cargoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,cargoFactory) {
-    
-	
+app.controller('ClasificacionController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","clasificacionFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,clasificacionFactory) {
+    	
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
+	$scope.siglaFiltro=null;
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
@@ -14,11 +14,10 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		cargoFactory.traerCargos(pagina).then(function(resp){
+		clasificacionFactory.traerClasificaciones(pagina).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
-				$scope.data=resp;
-				
+				$scope.data=resp;				
 		})
 	
 	};
@@ -48,7 +47,7 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		cargoFactory.traerCargosFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		clasificacionFactory.traerClasificacionesFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, $scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -70,11 +69,11 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	}
 	
 	$scope.editar=function(id){
-		cargoFactory.traerCargo(id).then(function(resp){
+		clasificacionFactory.traerClasificacion(id).then(function(resp){
 			
 			if (resp.estado)
 				
-				$scope.objeto=resp.json.cargo;
+				$scope.objeto=resp.json.clasificacion;
 				$scope.edicion=true;
 				console.log($scope.objeto);
 		})
@@ -107,16 +106,16 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 
 		            } else {
 		                
-		            	cargoFactory.guardar($scope.objeto).then(function(resp){
+		            	clasificacionFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Cargo!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Clasificación!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Cargo!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Clasificación!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
