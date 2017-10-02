@@ -2,6 +2,7 @@ package ec.com.papp.web.seguridad.controller;
 
 import java.io.StringReader;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ import ec.com.papp.seguridad.to.PerfilpermisoTO;
 import ec.com.papp.seguridad.to.PermisoTO;
 import ec.com.papp.seguridad.to.PermisoobjetoTO;
 import ec.com.papp.seguridad.to.UsuarioTO;
+import ec.com.papp.web.comun.util.CambioClave;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
@@ -167,7 +169,7 @@ public class SeguridadController {
 				PerfilpermisoTO perfilpermisoTO=new PerfilpermisoTO();
 				perfilpermisoTO.getId().setPerfilid(perfilTO.getId());
 				Collection<PerfilpermisoTO> perfilpermisoTOs=UtilSession.seguridadServicio.transObtenerPerfilpermiso(perfilpermisoTO);
-				jsonObject.put("perfilpermisos", (JSONArray)JSONSerializer.toJSON(perfilpermisoTOs,perfilpermisoTO.getJsonConfig()));
+				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(perfilpermisoTOs,perfilpermisoTO.getJsonConfig()));
 			}
 
 			//Permisoobjeto
@@ -194,7 +196,7 @@ public class SeguridadController {
 				usuariounidadTO.setUnidadTO(new UnidadTO());
 				usuariounidadTO.setUsuarioTO(new UsuarioTO());
 				Collection<UsuariounidadTO> usuariounidadTOs=UtilSession.estructuraorganicaServicio.transObtenerUsuariounidad(usuariounidadTO);
-				jsonObject.put("usuariounidades", (JSONArray)JSONSerializer.toJSON(usuariounidadTOs,usuariounidadTO.getJsonConfig()));
+				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(usuariounidadTOs,usuariounidadTO.getJsonConfig()));
 			}
 
 			//Usuariounidad
@@ -350,4 +352,69 @@ public class SeguridadController {
 		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}	
+	
+	/**
+	* Metodo para llamar al cambio de clave
+	*/
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String cambioclave(HttpServletRequest request){
+		JSONObject jsonObject=new JSONObject();
+		UsuarioTO usuarioTO=(UsuarioTO)UtilSession.getUsuario(request);
+		jsonObject.put("ususario", (JSONObject)JSONSerializer.toJSON(usuarioTO,usuarioTO.getJsonConfig()));
+		return jsonObject.toString();
+	}
+	
+	@RequestMapping(value = "/cambiarClave", method = RequestMethod.POST)
+	public Respuesta cambiarClave(@RequestBody String objeto,HttpServletRequest request){
+		log.println("entra cambiar la clave: " + objeto);
+		Gson gson = new Gson();
+		JSONObject jsonObject=new JSONObject();
+		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
+		try {
+			CambioClave cambioClave = gson.fromJson(new StringReader(objeto), CambioClave.class);
+			//Usuario logeado
+			UsuarioTO usuario = UtilSession.getUsuario(request);//preguntar esto!!!
+			//Recupero el usuario de sesion
+			log.println("clave anterior: " +usuario.getClave());
+			if(ConsultasUtil.encriptarClave(cambioClave.getClaveanterior()).equals(usuario.getClave())){
+			//if(bean.getPassword()!=null && bean.getPassword().length()>=8){
+				if(cambioClave.getClave().equals(cambioClave.getConfirmacion())){
+					if(!(ConsultasUtil.encriptarClave(cambioClave.getClave())).equals(usuario.getClave())){
+						usuario.setClave(ConsultasUtil.encriptarClave(cambioClave.getClave()));
+						//usuario.setFechaClave(new Date());
+						//usuario.setCambiarclave("0");
+						log.println("va a guardar el usuario");
+						log.println("el nombre de usuario es:"+usuario.getNombre());
+						UtilSession.seguridadServicio.transCrearModificarusuario(usuario);
+					}
+					else{
+						log.println("La clave es igual a la guardada en base");
+						mensajes.setMsg(MensajesWeb.getString("error.claveIgual"));
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+				}
+				else{
+					log.println("La nueva clave es diferente a la confirmacion");
+					mensajes.setMsg(MensajesWeb.getString("error.claveValidacion"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+			}
+			else{
+				log.println("La nueva clave es diferente a la confirmacion");
+				mensajes.setMsg("La clave anterior ingresada esta incorrecta");
+				mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.println("error al obtener para editar");
+			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+		}
+		if(mensajes.getMsg()!=null)
+			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
+	}
 }

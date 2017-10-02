@@ -4,6 +4,8 @@ public class CambioClave {
 
 	String clave;
 	String confirmacion;
+	String claveanterior;
+	
 	public String getClave() {
 		return clave;
 	}
@@ -15,6 +17,12 @@ public class CambioClave {
 	}
 	public void setConfirmacion(String confirmacion) {
 		this.confirmacion = confirmacion;
+	}
+	public String getClaveanterior() {
+		return claveanterior;
+	}
+	public void setClaveanterior(String claveanterior) {
+		this.claveanterior = claveanterior;
 	}
 	
 	

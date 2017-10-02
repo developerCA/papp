@@ -10,6 +10,8 @@ import net.sf.json.JSONSerializer;
 
 import org.hibernate.tools.commons.to.OrderBy;
 import org.hibernate.tools.commons.to.SearchResultTO;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import ec.com.papp.estructuraorganica.to.UnidadTO;
 import ec.com.papp.estructuraorganica.to.UsuariounidadTO;
@@ -346,5 +348,16 @@ public class ConsultasUtil {
 			throw new MyException(e);
 		}
 		return jsonObject;
+	}
+	/**
+	 * Funcion para encriptar claves
+	 * @param clave
+	 * @return claveEncriptada
+	 * @throws MyException
+	 */
+	public static String encriptarClave(String clave) {
+		PasswordEncoder encoder = new Md5PasswordEncoder();
+	    String claveEncriptada = encoder.encodePassword(clave, null);
+		return claveEncriptada;
 	}
 }

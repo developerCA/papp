@@ -1,5 +1,7 @@
 package ec.com.papp.web.login.controller;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,6 +41,8 @@ public class LoginController {
 		if(username!=null){
 			UsuarioTO usuarioTO = new UsuarioTO();
 			usuarioTO.setUsuario(username);
+			Collection<UsuarioTO> usuarioTOs=UtilSession.seguridadServicio.transObtenerusuario(usuarioTO);
+			usuarioTO=usuarioTOs.iterator().next();
 			UtilSession.setUsuario(request, usuarioTO);
 			mav= new ModelAndView("index");
 		}

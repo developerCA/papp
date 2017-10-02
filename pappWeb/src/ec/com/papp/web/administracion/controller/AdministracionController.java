@@ -1215,6 +1215,7 @@ public class AdministracionController {
 				jsonObject.put("fuerza", (JSONObject)JSONSerializer.toJSON(fuerzaTO,fuerzaTO.getJsonConfig()));
 				FuerzaclasificacionTO fuerzaclasificacionTO=new FuerzaclasificacionTO();
 				fuerzaclasificacionTO.getId().setFuerzaid(fuerzaTO.getId());
+				fuerzaclasificacionTO.setFuerzaTO(new FuerzaTO());
 				Collection<FuerzaclasificacionTO> fuerzaclasificacionTOs=UtilSession.adminsitracionServicio.transObtenerFuerzaclasificacion(fuerzaclasificacionTO);
 				//Asigno la variable que necesitan para la administracion
 				for(FuerzaclasificacionTO fuerzaclasificacionTO2:fuerzaclasificacionTOs)
