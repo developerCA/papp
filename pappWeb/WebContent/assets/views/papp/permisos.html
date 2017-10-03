@@ -58,8 +58,8 @@
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
 								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Listar" ng-click="listar(obj.id)"><i
-										class="fa fa-desktop"></i></a></td>
+									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
+										class="fa fa-pencil"></i></a></td>
 
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
 
@@ -88,7 +88,7 @@
 									<span ng-if="!guardar">
 										<input type="text" placeholder="Ingrese el Id"
 											class="form-control" name="id" ng-model="objeto.id"
-											required ng-disabled="true" />
+											required />
 									</span>
 									<span ng-if="guardar">
 										<input type="text" placeholder="Ingrese el Id"
@@ -110,7 +110,7 @@
 										<input type="text" placeholder="Ingrese el Nombre"
 											class="form-control" name="nombre" required
 											ng-model="objeto.nombre" ng-minlength="1"
-											ng-disabled="true" />
+											 />
 									</span>
 									<span ng-if="guardar">
 										<input type="text" placeholder="Ingrese el Nombre"

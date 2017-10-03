@@ -109,6 +109,65 @@
 						</div>
 
 						<div class="row">
+							<div class="col-sm-12">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<a uib-tooltip="Agregar"
+											class="pull-right btn btn-sm btn-info"
+											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
+										</a>
+										<h4 class="panel-title">Permisos</h4>
+
+
+									</div>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<td></td>
+														<th>C&oacute;digo</th>
+														<th>Nombre</th>
+													</tr>
+													<tr ng-repeat="obj in objetolista">
+														<td>
+															<a uib-tooltip="Eliminar" ng-disabled="obj.perfilpermisolectura==0"
+																class="btn btn-sm btn-danger"
+																ng-click="removerDetalle($index)">
+																<i class="fa fa-trash"></i>
+															</a>
+														</td>
+														<td data-title="'C&oacute;digo'">
+															<input type="text" placeholder="Ingrese el Codigo"
+																class="form-control" name="codigo_{{$index}}"
+																required ng-model="obj.id.permisoid"
+																ng-minlength="1" ng-maxlength="4"
+																ng-disabled="obj.perfilpermisolectura==0" />
+															<span class="error text-small block"
+																ng-if="Form['codigo_'+$index].$dirty && Form['codigo_'+$index].$invalid">
+																Debe ingresar m&iacute;nimo un n&uacute;meros</span>
+														</td>
+														<td data-title="'Nombre'">
+															<input type="text" placeholder="Ingrese el Nombre"
+																class="form-control" name="nombre_{{$index}}"
+																required ng-model="obj.nombre"
+																ng-disabled="obj.perfilpermisolectura==0" />
+															<span class="error text-small block"
+																ng-if="Form['nombre_'+$index].$dirty && Form['nombre_'+$index].$invalid">
+																Nombre es incorrecto</span>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
 									<span ng-if="guardar">

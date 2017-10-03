@@ -15,7 +15,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 		
 		$scope.data=[];
 		usuariosFactory.traerUsuarios(pagina).then(function(resp){
-			
+			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 			

@@ -9,6 +9,7 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.edicion=false;
 	$scope.guardar=false;
 	$scope.objeto={};
+	$scope.objetolista={};
 	
 	var pagina = 1;
 	
@@ -74,16 +75,28 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	$scope.editar=function(id){
 		perfilesFactory.traerPermiso(id).then(function(resp){
-console.log(resp);
-			if (resp.estado)
+console.clear();
+console.log(resp.json.perfilpermisos);
+			if (resp.estado) {
 			   $scope.objeto=resp.json.perfil;
+			   $scope.objetolista=resp.json.perfilpermisos;
+			}
 			$scope.edicion=true;
 			$scope.guardar=false;
 
 		})
 		
 	};
-	
+
+	$scope.agregarDetalle=function(){
+		var obj={id:{permisoid:null},perfilpermisolectura:null};
+		$scope.objetolista.push(obj);
+	}
+
+	$scope.removerDetalle=function(index){
+		$scope.objetolista.splice(index,1);
+	}
+
 	$scope.abrirPermisoPadre = function() {
 
 		var modalInstance = $uibModal.open({

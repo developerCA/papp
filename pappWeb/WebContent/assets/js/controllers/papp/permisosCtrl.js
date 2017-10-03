@@ -72,9 +72,9 @@ app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetA
 		$scope.guardar=true;
 	}
 	
-	$scope.listar=function(id){
+	$scope.editar=function(id){
 		permisosFactory.traerPermiso(id).then(function(resp){
-
+console.log(resp);
 			if (resp.estado)
 			   $scope.objeto=resp.json.permiso;
 			$scope.edicion=true;

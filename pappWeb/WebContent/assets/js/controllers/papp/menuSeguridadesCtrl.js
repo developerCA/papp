@@ -15,7 +15,7 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","S
 		
 		$scope.data=[];
 		menuSeguridadesFactory.traerMenus(pagina).then(function(resp){
-			
+			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 			
@@ -102,8 +102,13 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","S
 		
 		menuSeguridadesFactory.eliminar(id).then(function(resp){
 			console.log(resp);
-			if (resp.estado)
+			if (resp.estado){
 				$scope.limpiar();
+				SweetAlert.swal("Menu!", "Menu eliminado satisfactoriamente!", "success");
+			}
+			else{
+				SweetAlert.swal("Menu!", resp.mensajes.msg, "error");
+			}
 
 		})
 		
@@ -141,7 +146,7 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","S
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Menu!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Menu!", "Menu registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Menu!", resp.mensajes.msg, "error");

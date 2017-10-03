@@ -37,8 +37,9 @@ app.factory("menuSeguridadesFactory", [ "Restangular", function(Restangular) {
 		},
 		
 		eliminar:function(id){
-			var url = "seguridad/menu/";
-			return Restangular.allUrl(url).remove(id);
+			var url = "seguridad/menu/"+id+"/-1";
+			console.log(url);
+			return Restangular.allUrl(url).remove();
 		},
 		
 	
