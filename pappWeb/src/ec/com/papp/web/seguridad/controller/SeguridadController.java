@@ -168,6 +168,8 @@ public class SeguridadController {
 				//traigo los permisos
 				PerfilpermisoTO perfilpermisoTO=new PerfilpermisoTO();
 				perfilpermisoTO.getId().setPerfilid(perfilTO.getId());
+				perfilpermisoTO.setPerfil(new PerfilTO());
+				perfilpermisoTO.setPermiso(new PermisoTO());
 				Collection<PerfilpermisoTO> perfilpermisoTOs=UtilSession.seguridadServicio.transObtenerPerfilpermiso(perfilpermisoTO);
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(perfilpermisoTOs,perfilpermisoTO.getJsonConfig()));
 			}

@@ -1216,7 +1216,9 @@ public class AdministracionController {
 				FuerzaclasificacionTO fuerzaclasificacionTO=new FuerzaclasificacionTO();
 				fuerzaclasificacionTO.getId().setFuerzaid(fuerzaTO.getId());
 				fuerzaclasificacionTO.setFuerzaTO(new FuerzaTO());
+				fuerzaclasificacionTO.setClasificacionTO(new ClasificacionTO());
 				Collection<FuerzaclasificacionTO> fuerzaclasificacionTOs=UtilSession.adminsitracionServicio.transObtenerFuerzaclasificacion(fuerzaclasificacionTO);
+				log.println("fuerza clasificacion: " + fuerzaclasificacionTOs.size());
 				//Asigno la variable que necesitan para la administracion
 				for(FuerzaclasificacionTO fuerzaclasificacionTO2:fuerzaclasificacionTOs)
 					fuerzaclasificacionTO2.setFuerzaclasificacionid(fuerzaclasificacionTO2.getId().getFuerzaclasificacionid());
