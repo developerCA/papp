@@ -1,13 +1,13 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-    <h4 class="mainTitle no-margin">Unidades de Medida</h4>
+    <h4 class="mainTitle no-margin">Socios Negocio</h4>
 
     <div ncy-breadcrumb class="pull-right"></div>
 </div>
 <!-- end: BREADCRUMB -->
 <!-- start: SIMPLE TABLE WITH PAGINATION -->
 <div class="container-fluid container-fullw"
-     ng-controller="UnidadesMedidaController" ng-init="init()">
+     ng-controller="SocioNegocioController" ng-init="consultar()">
 
     <div class="row">
         <div class="col-md-12"></div>
@@ -28,27 +28,22 @@
                              class="panel-wrapper">
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                	<div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>Nombre</label>
-                                            <input type="text"
-                                            	class="form-control" ng-model="nombre" ng-change="mayusculas()">
+                                            <label>C&oacute;digo</label> 
+                                            <input type="text" class="form-control" ng-model="codigo">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label> Grupo Medida </label>
-                                            <select name="grupo" ng-model="nombregrupo" class="form-control">
-                                                <option value="">--Seleccione un grupo--</option>
-                                                <option ng-repeat="grupo in grupos" value="{{grupo.nombre}}">{{grupo.nombre}}</option>
-                                            </select>
-                                        </div>                                        
+                                            <label>Nombre</label> <input type="text"
+                                                                               class="form-control" ng-model="nombre" ng-change="mayusculas()">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label> Estado </label> <select name="estado" ng-model="estado" class="form-control">
+                                            <label> Estado </label> <select name="estado"
+                                                                            ng-model="estado" class="form-control">
                                                 <option value>Todos</option>
                                                 <option value="A">Activo</option>
                                                 <option value="I">Inactivo</option>
@@ -80,7 +75,14 @@
                                 </td>
                                 <td data-title="'Codigo'">{{data.codigo}}</td>
                                 <td data-title="'Nombre'">{{data.nombre}}</td>
-                                <td data-title="'Grupo Medida'">{{data.npNombregrupo}}</td>
+                                <td data-title="'Es Proveedor'">
+                                    <span ng-if="data.esproveedor=='1'">Si</span>
+                                    <span ng-if="data.esproveedor=='0'">No</span>
+                                </td>
+                                <td data-title="'Es Empleado'">
+                                    <span ng-if="data.esempleado=='1'">Si</span>
+                                    <span ng-if="data.esempleado=='0'">No</span>
+                                </td>
                                 <td data-title="'Estado'">
                                     <span ng-if="data.estado=='I'">INACTIVO</span>
                                     <span ng-if="data.estado=='A'">ACTIVO</span>
@@ -90,11 +92,10 @@
                     </div>
                 </div>
 
-
                 <div ng-show="edicion" class="panel-body" id="panel1">
 
                     <div class="panel-heading">
-                        <h5 class="panel-title">Grupos de Medida</h5>
+                        <h5 class="panel-title">Socio Negocio</h5>
                     </div>
 
                     <form name="Form" id="form1" novalidate
@@ -108,7 +109,7 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <input type="text" placeholder="Ingrese el c&oacute;digo"
-                                           class="form-control" name="codigo" required ng-model="objeto.codigo" ng-minlength="2" />
+                                           class="form-control" name="codigo" required ng-model="objeto.codigo" ng-minlength="2"/>
                                     <span class="error text-small block" ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo incorrecto</span>
                                     <span class="success text-small" ng-if="Form.anio.$valid">Listo</span>
                                 </div>
@@ -121,20 +122,31 @@
                                     </label> <input type="text" placeholder="Ingrese el nombre"
                                                     class="form-control" name="nombre" required
                                                     ng-model="objeto.nombre" /> <span class="error text-small block"
-                                                                                      ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
+                                                                              ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
                                         Nombre incorrecto
                                     </span> <span class="success text-small"
                                                   ng-if="Form.anio.$valid">Listo</span>
                                 </div>
 
-                                <div class="form-group"
-                                     ng-class="{'has-error':Form.grupo.$dirty && Form.grupo.$invalid, 'has-success':Form.grupo.$valid}">
+								 <div class="form-group"
+                                     ng-class="{'has-error':Form.esproveedor.$dirty && Form.esproveedor.$invalid, 'has-success':Form.esproveedor.$valid}">
                                     <label for="form-field-select-1">
-                                        Grupo <span class="symbol required"></span>
-                                    </label>
-                                    <select name="unidadmedidagrupomedidaid" ng-model="objeto.unidadmedidagrupomedidaid" 
-                                            ng-options="grupo.id as grupo.nombre for grupo in grupos"                                                      
-                                            class="form-control" required>                                                                              
+                                        Es Proveedor <span class="symbol required"></span>
+                                    </label> <select class="form-control" name="estado"
+                                                     ng-model="objeto.esproveedor" required>
+                                        <option value="1">Si</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group"
+                                     ng-class="{'has-error':Form.esempleado.$dirty && Form.esempleado.$invalid, 'has-success':Form.esempleado.$valid}">
+                                    <label for="form-field-select-1">
+                                        Es Proveedor <span class="symbol required"></span>
+                                    </label> <select class="form-control" name="estado"
+                                                     ng-model="objeto.esempleado" required>
+                                        <option value="1">Si</option>
+                                        <option value="0">No</option>
                                     </select>
                                 </div>
 
@@ -171,3 +183,7 @@
         </div>
     </div>
 </div>
+
+
+
+

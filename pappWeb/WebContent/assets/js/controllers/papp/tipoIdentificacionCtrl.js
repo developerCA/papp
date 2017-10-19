@@ -141,9 +141,9 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
         $scope.detalleNuevo = false;
     }
 
-    $scope.eliminarDetalle = function (index) {
-        $scope.detalles.splice(index, 1);
-    };
+    $scope.removerDetalle=function(index){
+		$scope.detalles.splice(index,1);		
+	}
 
     $scope.form = {
 
@@ -176,10 +176,10 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Tipo de Identificaci&oacute;n", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Tipo de Identificación", "Registro satisfactorio!", "success");
 
                     } else {
-                        SweetAlert.swal("Tipo de Identificaci&oacute;n", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Tipo de Identificación", resp.mensajes.msg, "error");
 
                     }
 

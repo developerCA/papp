@@ -1,26 +1,26 @@
 'use strict';
 
-app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","usuariosFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, usuariosFactory) {
-    
-	
-	$scope.nombreFiltro=null;
-	$scope.ordenFiltro=null;
-	
+app.controller('GradoFuerzaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","gradofuerzaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, gradofuerzaFactory) {
+
+	$scope.codigo=null;
+	$scope.fuerza=null;
+	$scope.grado=null;
+	$scope.padre=null;
+	$scope.estado=null;
+
 	$scope.edicion=false;
+	$scope.nuevoar=false;
+	$scope.guardar=false;
 	$scope.objeto={};
-	$scope.objetoDetalles={};
 	
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
 		$scope.data=[];
-		usuariosFactory.traerUsuarios(pagina).then(function(resp){
-			//console.log(resp);
+		gradofuerzaFactory.traerGradoFuerza(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
-	
 	};
 	
 	$scope.$watch('data', function() {
@@ -42,80 +42,101 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
 		$scope.data=[];
-		usuariosFactory.traerUsuariosFiltro(pagina,$scope.nombreFiltro,$scope.ordenFiltro).then(function(resp){
-			
+		gradofuerzaFactory.traerGradoFuerzaFiltro(pagina,$scope.codigo,$scope.fuerza,$scope.grado,$scope.padre,$scope.estado).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
 	
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.ordenFiltro=null;
+		$scope.codigo=null;
+		$scope.fuerza=null;
+		$scope.grado=null;
+		$scope.padre=null;
+		$scope.estado=null;
 
 		$scope.consultar();
 		
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
-		$scope.objetoDetalles=[];
-		$scope.objetolista=[];
-		var obj={id:{permisoid:null},perfilpermisolectura:null};
-//		console.log(obj);
-		$scope.objetolista.push(obj);
-		console.log($scope.objetolista);
+		$scope.objeto={id:null,estado:"A"};
 
 		$scope.edicion=true;
+		$scope.nuevoar=true;
+		$scope.guardar=true;
 	}
 	
 	$scope.editar=function(id){
-		usuariosFactory.traerUsuario(id).then(function(resp){
+		gradofuerzaFactory.traerGradoFuerzaEditar(id).then(function(resp){
 //console.clear();
+//console.log('AQUIIII-111');
 //console.log(resp);
-		if (resp.estado)
-			   $scope.objeto=resp.json.usuario;
-		       $scope.objetoDetalles=resp.json.details;
-			   $scope.edicion=true;
-			   //console.log($scope.objeto);
+			if (resp.estado) {
+			    $scope.objeto=resp.json.gradofuerza;
+			    //$scope.objeto.npnombrepadre='111';
+			    
+			    //console.log($scope.objeto);
+			}
+			$scope.edicion=true;
+			$scope.nuevoar=false;
+			$scope.guardar=true;
 		})
-		
 	};
-	
-	$scope.abrirUsuarioPadre = function() {
 
+	$scope.abrirFuerza = function(index) {
+		//console.log("aqui");
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalUsuarioPadre.html',
-			controller : 'UsuarioPadreController',
+			templateUrl : 'modalFuerza.html',
+			controller : 'ModalFuerzaController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.padreid = obj.id;
-			$scope.objeto.nombrepadre=obj.nombre;
+			//console.log(obj);
+			$scope.objeto.gradofuerzafuerzaid = obj.id;
+			$scope.objeto.npnombrefuerza = obj.nombre;
 		}, function() {
 			console.log("close modal");
 		});
 	};
-		
-	$scope.eliminar=function(id){
-		
-		usuariosFactory.eliminar(id).then(function(resp){
-			console.log(resp);
-			if (resp.estado)
-				$scope.limpiar();
 
-		})
-		
+	$scope.abrirGrado = function(index) {
+		//console.log("aqui");
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalGrado.html',
+			controller : 'ModalGradoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.gradofuerzagradoid = obj.id;
+			$scope.objeto.npnombregrado = obj.nombre;
+		}, function() {
+			console.log("close modal");
+		});
 	};
-	
-	
-	
-	 $scope.form = {
+
+	$scope.abrirGradoSuperior = function(index) {
+		//console.log("aqui");
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalGrado.html',
+			controller : 'ModalGradoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			
+			$scope.objeto.gradofuerzapadreid = obj.id;
+			$scope.objeto.npnombrepadre = obj.nombre;
+			console.log($scope.objeto);
+		}, function() {
+			console.log("close modal");
+		});
+	};
+
+	$scope.form = {
 
 		        submit: function (form) {
 		            var firstError = null;
@@ -139,16 +160,16 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 
 		            } else {
 		                
-		            	usuariosFactory.guardar($scope.objeto).then(function(resp){
+		            	gradofuerzaFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Usuario!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Grado - Fuerza!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Usuario!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Grado - Fuerza!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
@@ -166,29 +187,4 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 
 		        }
     };
-
-		$scope.agregarDetalle=function(){
-			var obj={id:{id:$scope.objeto.id, unidad:null},npunidad:null};
-			$scope.objetoDetalles.push(obj);
-		}
-
-		$scope.removerDetalle=function(index){
-			$scope.objetoDetalles.splice(index,1);
-		}
-
-		$scope.abrirUnudad = function(index) {
-
-			var modalInstance = $uibModal.open({
-				templateUrl : 'modalUsuariosUnidades.html',
-				controller : 'UsuariosUnidadesController',
-				size : 'lg'
-			});
-			modalInstance.result.then(function(obj) {
-				$scope.objetoDetalles[index].id.unidad = obj.id;
-				$scope.objetoDetalles[index].npunidad=obj.nombre;
-			}, function() {
-				console.log("close modal");
-			});
-		};
-
 } ]);

@@ -13,8 +13,7 @@
 			<i class="fa fa-bars"></i>
 		</button>
 		<a class="navbar-brand" ui-sref="app.dashboard" uib-tooltip="Inicio" tooltip-placement="right">
-			<img ng-src="{{app.layout.logo}}" alt="{{app.name}}" width="80"
-			height="70"  /> <span class="text-bold text-white">CC.FF.AA</span>  
+			<img ng-src="{{app.layout.logo}}" alt="{{app.name}}" class="margin-top-5" width="60px"/>&nbsp;&nbsp;<span class="text-white">CC.FF.AA</span>
 		</a> <a class="navbar-brand navbar-brand-collapsed"
 			ui-sref="app.dashboard"><h4 class="over-title margin-top-20">
 				<span class="text-white text-large">P.A.P</span>
@@ -86,26 +85,20 @@
 
 		<ul class="nav navbar-right">
 
-
-			<li>
-				<div class="navbar-header">
-
-					<button class="btn btn-primary btn-sm">
-						<i class=" ti-user"></i> Administrador
-					</button>
-					
-					<button class="btn btn-primary btn-sm">
-						<i class=" ti-power-off"></i> Cerrar Sesi&oacute;n
-					</button>
-
-				</div>
-			</li>
+			<li class="dropdown" uib-dropdown="" on-toggle="toggled(open)" style="">
+                <a href="" class="dropdown-toggle text-white" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="ti-user"></i><span class="ng-binding text-bold text-white">&nbsp;Administrador</span></a>
+                <ul role="menu" class="dropdown-menu dropdown-light animated fadeInUpShort ">
+                    <li class="ng-scope">
+                        <a ng-click="language.set(localeId, $event)" href="javascript:void(0)" class="menu-toggler ng-binding"> Cambiar contrase&ntilde;a </a>
+                    </li>
+                    <li class="ng-scope">
+                        <a ng-click="language.set(localeId, $event)" href="javascript:void(0)" class="menu-toggler ng-binding"> Cerrar sesi&oacute;n </a>
+                    </li>
+                </ul>
+            </li>
 
 		</ul>
 	</div>
-
-	
-
 
 
 	<!-- end: NAVBAR COLLAPSE -->

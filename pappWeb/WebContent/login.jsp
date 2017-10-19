@@ -57,19 +57,17 @@ body {
 <body>
 
 	<div class="container" style="margin-top: 40px;">
+		
+		<div class="row">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<center><h3>Sistema de Gesti&oacute;n Institucional P.A.P</h3></center>
+			</div>
+		</div>
+	
 		<div class="row">
 			<div class="col-sm-6 col-md-4 col-md-offset-4">
 
-
-
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h5 class="over-title margin-top-20">
-							<span class="text-bold text-danger text-large">P.A.P</span> - <span
-								class="text-bold ">Sistema de Gesti&oacute;n
-								Institucional</span>
-						</h5>
-					</div>
+				<div class="">
 					<div class="panel-body">
 
 						<form name="f" action="<c:url value='j_spring_security_check'/>"

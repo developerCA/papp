@@ -1,14 +1,14 @@
 app.factory("CambiarContrasenaFactory", [ "Restangular", function(Restangular) {
 
-	var service = Restangular.service("/seguridad");
+//	var service = Restangular.service("/seguridad");
 
 	return {
 
 		traerUsuario : function() {
-			  
-			var url = "seguridad/usuario/-1/-1";
-		   
-		    return Restangular.allUrl(url).customGET();
+//			var url = "seguridad/usuario/-1/-1";
+			var url = "seguridad/";
+
+			return Restangular.allUrl(url).customGET();
 			  
 		},
 
@@ -21,7 +21,7 @@ app.factory("CambiarContrasenaFactory", [ "Restangular", function(Restangular) {
 //		},
 
 		guardar:function(objeto){
-			var url = "seguridad/usuario/";
+			var url = "seguridad/cambiarClave/";
 			return Restangular.allUrl(url).customPOST(objeto);
 		}
 

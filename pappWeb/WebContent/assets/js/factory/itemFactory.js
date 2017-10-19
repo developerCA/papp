@@ -6,7 +6,6 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
 
         traerItems: function (pagina, ejercicio) {
         	return Restangular.allUrl("administrar/consultar/item/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio).getList();
-
         },
 
         traerItemsFiltro: function (pagina, codigo, nombre, estado, tipo, ejerciciofiscalid) {

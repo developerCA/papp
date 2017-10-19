@@ -158,39 +158,29 @@
 												<table class="table table-striped">
 													<tr>
 														<td></td>
-														<th>C&oacute;digo</th>
-														<th>Nombre</th>
-														<th>Estado</th>
-
+														<th>Descrip&oacute;n</th>
 													</tr>
 													<tr ng-repeat="obj in detalles">
-														<td><a uib-tooltip="Eliminar"
-															class="btn btn-sm btn-danger"
-															ng-click="removerDetalle($index)"><i
-																class="fa fa-trash"></i></a></td>
-														<td data-title="'C&oacute;digo'"><input type="text"
-															placeholder="Ingrese el Codigo" class="form-control"
-															name="codigo_{{$index}}" required ng-model="obj.codigo"
-															ng-minlength="3" ng-maxlength="3"
-															style='text-transform: uppercase'
-															ng-disabled="obj.codigo!=null" /><span
-															class="error text-small block"
-															ng-if="Form['codigo_'+$index].$dirty && Form['codigo_'+$index].$invalid">Debe
-																ingresar m&iacute;nimo tres letras </span></td>
-														<td data-title="'Nombre'"><input type="text"
-															placeholder="Ingrese el Nombre" class="form-control"
-															name="nombre_{{$index}}" required ng-model="obj.nombre" /><span
-															class="error text-small block"
-															ng-if="Form['nombre_'+$index].$dirty && Form['nombre_'+$index].$invalid">Nombre
-																es incorrecto</span></td>
-														<td data-title="'Estado'"><select
-															class="form-control" name="estado_{{$index}}"
-															ng-model="obj.estado" required>
-																<option value="A">Activo</option>
-																<option value="I">Inactivo</option>
-														</select></td>
-
-
+														<td><!--  ng-disabled="obj.perfilpermisolectura==0" -->
+															<a uib-tooltip="Eliminar"
+																class="btn btn-sm btn-danger"
+																ng-click="removerDetalle($index)">
+																<i class="fa fa-trash"></i>
+															</a>
+														</td>
+														<td data-title="'Nombre'">
+									<div class="input-group">
+										<input type="text" placeholder="Seleccione uno"
+											class="form-control" name="npnombreinstitucion" ng-disabled="true"
+											ng-model="obj.npnombreinstitucion" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirInstitutoEntidad($index)">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+														</td>
 													</tr>
 												</table>
 											</div>
@@ -213,6 +203,34 @@
 							</div>
 						</div>
 					</form>
+
+					<script type="text/ng-template" id="modalInstitutoEntidad.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Institutos entididaes</h3>
+                            </div>
+                            <div class="modal-body">
+
+				<div class="panel-body" ng-init="consultar();" >
+
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td><a class="btn btn-sm btn-primary"
+									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+										class="fa fa-check"></i></a></td>
+
+								<td data-title="'Nombre'">{{obj.nombre}}</td>
+
+							</tr>
+						</table>
+					</div>
+
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+                            </div>
+                    </script>
 				</div>
 			</div>
 		</div>

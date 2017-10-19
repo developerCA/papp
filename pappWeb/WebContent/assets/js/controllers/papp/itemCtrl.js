@@ -4,7 +4,7 @@
  * controller for angular-menu
  * 
  */
-app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "ItemsFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, itemsFactory) {
+app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAlert", "$filter", "ngTableParams", "ItemsFactory", function ($scope, $rootScope, $uibModal, SweetAlert, $filter, ngTableParams, itemsFactory) {
 
     $scope.nombre = null;
     $scope.codigo = null;
@@ -95,17 +95,39 @@ app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filte
     $scope.editar = function (id) {
 
         itemsFactory.traerItem(id).then(function (resp) {
-
+        	console.log(resp);
             if (resp.estado)
-                $scope.objeto = resp.json.unidadmedida;
+                $scope.objeto = resp.json.item;
             console.log("*************");
-            console.log($scope.objeto.unidadmedidagrupomedidaid);
+            console.log($scope.objeto);
             console.log("*************");
             $scope.edicion = true;
 
         })
 
     };
+    
+    $scope.buscarItem=function(){
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalItems.html',
+			controller : 'ModalItemController',
+			size : 'md',
+			resolve : {
+				tipo : function() {
+					return $scope.objeto.tipo;
+				}
+			}
+		});
+
+		modalInstance.result.then(function(obj) {
+			$scope.objeto.itempadreid = obj.codigo;
+			$scope.objeto.npnombrepadre = obj.nombre;			
+			
+		}, function() {
+			
+		});
+
+	};
 
     $scope.form = {
 
@@ -132,18 +154,16 @@ app.controller('ItemsController', ["$scope", "$rootScope", "SweetAlert", "$filte
 
             } else {
                 //OJO
-                $scope.objeto.unidadmedidagrupomedidaid = $scope.objeto.unidadmedidagrupomedidaid.id;
                 itemsFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Unidad de Medida", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Item", "Registro satisfactorio!", "success");
 
                     } else {
-                        SweetAlert.swal("Unidad de Medida", resp.mensajes.msg, "error");
-
+                        SweetAlert.swal("Item", resp.mensajes.msg, "error");
                     }
 
                 })

@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('UnidadController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","unidadFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,unidadFactory) {
+app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","unidadFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,unidadFactory) {
     
 	
 	$scope.nombreFiltro=null;
@@ -13,15 +13,11 @@ app.controller('UnidadController', [ "$scope","$rootScope","SweetAlert","$filter
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
-		
 		$scope.data=[];
 		unidadFactory.traerUnidades(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-			
 		})
-	
 	};
 	
 	$scope.$watch('data', function() {
@@ -74,12 +70,11 @@ app.controller('UnidadController', [ "$scope","$rootScope","SweetAlert","$filter
 	$scope.editar=function(id){
 		
 		unidadFactory.traerUnidad(id).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.estado)
 			   $scope.objeto=resp.json.unidad;
 			   $scope.detalles=resp.json.details;
 			   $scope.edicion=true;
-
 		})
 		
 	};
@@ -94,8 +89,7 @@ app.controller('UnidadController', [ "$scope","$rootScope","SweetAlert","$filter
 		$scope.detalles.splice(index,1);
 		
 	}
-	
-	
+
 	 $scope.form = {
 
 		        submit: function (form) {
@@ -142,12 +136,27 @@ app.controller('UnidadController', [ "$scope","$rootScope","SweetAlert","$filter
 
 		        },
 		        reset: function (form) {
-
 		            $scope.myModel = angular.copy($scope.master);
 		            form.$setPristine(true);
 		            $scope.edicion=false;
 		            $scope.objeto={};
-
 		        }
     };
+
+
+		$scope.abrirInstitutoEntidad = function(index) {
+			//console.log("aqui");
+			var modalInstance = $uibModal.open({
+				templateUrl : 'modalInstitutoEntidad.html',
+				controller : 'ModalInstitutoEntidadController',
+				size : 'lg'
+			});
+			modalInstance.result.then(function(obj) {
+				//console.log(obj);
+				$scope.detalles[index].id.permisoid = obj.id;
+				$scope.detalles[index].nppermiso=obj.nombre;
+			}, function() {
+				console.log("close modal");
+			});
+		};
 } ]);

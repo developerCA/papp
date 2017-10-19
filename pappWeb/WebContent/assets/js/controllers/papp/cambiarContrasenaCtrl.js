@@ -1,15 +1,16 @@
 'use strict';
 
-app.controller('CambiarContrasenaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","CambiarContrasenaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,CambiarContrasenaFactory) {
+app.controller('CambiarContrasenaController', [ "$scope","$rootScope","$location","$uibModal","SweetAlert","$filter", "ngTableParams","CambiarContrasenaFactory",  function($scope,$rootScope,$location,$uibModal,SweetAlert,$filter, ngTableParams,CambiarContrasenaFactory) {
 	
 	$scope.objeto={};
 
 	$scope.editar=function(){
-		console.log("aqui");
 		CambiarContrasenaFactory.traerUsuario().then(function(resp){
-			console.log(resp);
-			if (resp.estado)
-			   $scope.objeto=resp.json.menu;
+			//console.log("AQUIIIIII");
+			//console.log(resp);
+			if (resp.ususario)
+			   $scope.objeto=resp.ususario;
+			   $scope.objeto.clave=''; 
 			   $scope.edicion=true;
 			   console.log($scope.objeto);
 		})
@@ -52,13 +53,10 @@ app.controller('CambiarContrasenaController', [ "$scope","$rootScope","$uibModal
 		            } else {
 		                
 		            	CambiarContrasenaFactory.guardar($scope.objeto).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Cambiar Contraseña!", "Registro registrado satisfactoriamente!", "success");
-	 
+console.log(resp);
+		            		if (resp.estado){
+		        				 SweetAlert.swal("Cambiar Contraseña!", "Registro registrado satisfactoriamente!", "success");
+		        				 $location.path("/index");
 		        			 }else{
 			 		             SweetAlert.swal("Cambiar Contraseña!", resp.mensajes.msg, "error");
 		        				 

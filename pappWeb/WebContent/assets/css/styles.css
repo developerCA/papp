@@ -1156,7 +1156,7 @@ span[role="slider"] {
 }
 @media (min-width: 768px) {
   .lyt-3 .navbar .navbar-header .navbar-brand {
-    padding: 0 5px;
+    padding: 0 25px;
   }
 }
 @media (min-width: 992px) {
@@ -1697,6 +1697,16 @@ span[role="slider"] {
 .lyt-3 #sidebar > div nav > ul > li .sub-menu li > a {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.lyt-3 #sidebar > div nav > ul > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight:bold;
+}
+.lyt-3 #sidebar > div nav > ul > li > ul > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight:bold;
 }
 @media (max-width: 991px) {
   .lyt-3 #sidebar .sidebar-container {

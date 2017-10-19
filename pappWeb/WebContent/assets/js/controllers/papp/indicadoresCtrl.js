@@ -1,28 +1,26 @@
 'use strict';
 
-app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","usuariosFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, usuariosFactory) {
-    
-	
-	$scope.nombreFiltro=null;
-	$scope.ordenFiltro=null;
-	
+app.controller('IndicadoresController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","indicadoresFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, indicadoresFactory) {
+
+	$scope.codigo=null;
+	$scope.nombre=null;
+
 	$scope.edicion=false;
+	$scope.nuevoar=false;
+	$scope.guardar=false;
 	$scope.objeto={};
-	$scope.objetoDetalles={};
 	
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
 		$scope.data=[];
-		usuariosFactory.traerUsuarios(pagina).then(function(resp){
-			//console.log(resp);
+		indicadoresFactory.traerIndicadores(pagina).then(function(resp){
+//			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
-	
 	};
-	
+
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
@@ -42,80 +40,82 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
 		$scope.data=[];
-		usuariosFactory.traerUsuariosFiltro(pagina,$scope.nombreFiltro,$scope.ordenFiltro).then(function(resp){
-			
+		indicadoresFactory.traerIndicadoresFiltro(pagina,$scope.codigo,$scope.nombre).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
 	
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.ordenFiltro=null;
+		$scope.codigo=null;
+		$scope.fuerza=null;
+		$scope.grado=null;
+		$scope.padre=null;
+		$scope.estado=null;
 
 		$scope.consultar();
 		
 	};
-	
+
+	$scope.agregarDetalle=function(){
+		var obj={id:{id:$scope.objeto.id,metodoid:$scope.metodocount},estado:'I'};
+		$scope.objetodetalle.push(obj);
+	}
+
+	$scope.removerDetalle=function(index){
+		$scope.objetodetalle.splice(index,1);
+	}
+
 	$scope.nuevo=function(){
 		$scope.objeto={id:null};
-		$scope.objetoDetalles=[];
-		$scope.objetolista=[];
-		var obj={id:{permisoid:null},perfilpermisolectura:null};
-//		console.log(obj);
-		$scope.objetolista.push(obj);
-		console.log($scope.objetolista);
-
+		$scope.objetodetalle=[];
 		$scope.edicion=true;
+		$scope.nuevoar=true;
+		$scope.guardar=true;
+		$scope.metodocount=1;
 	}
 	
 	$scope.editar=function(id){
-		usuariosFactory.traerUsuario(id).then(function(resp){
+		indicadoresFactory.traerIndicadoresEditar(id).then(function(resp){
 //console.clear();
-//console.log(resp);
-		if (resp.estado)
-			   $scope.objeto=resp.json.usuario;
-		       $scope.objetoDetalles=resp.json.details;
-			   $scope.edicion=true;
-			   //console.log($scope.objeto);
+//console.log('AQUIIII-111');
+console.log(resp);
+			if (resp.estado) {
+			    $scope.objeto=resp.json.indicador;
+			    $scope.objetodetalle=resp.json.indicadormetodo;
+			    $scope.metodocount=$scope.objetodetalle.length+1;
+			    console.log($scope.objeto);
+			    //console.log($scope.objetodetalle);
+			}
+			$scope.edicion=true;
+			$scope.nuevoar=false;
+			$scope.guardar=true;
 		})
-		
 	};
-	
-	$scope.abrirUsuarioPadre = function() {
 
+	$scope.abrirUnidadMedida = function(index) {
+		//console.log("aqui");
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalUsuarioPadre.html',
-			controller : 'UsuarioPadreController',
+			templateUrl : 'modalUnidadMedida.html',
+			controller : 'ModalUnidadMedidaController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.padreid = obj.id;
-			$scope.objeto.nombrepadre=obj.nombre;
+			//console.log(obj);
+			$scope.objeto.indicadorunidadmedidaid = obj.id;
+			$scope.objeto.npNombreunidad = obj.nombre;
+			$scope.objeto.npCodigounidad = obj.codigo;
+			$scope.objeto.npNombregrupo = obj.npNombregrupo;
+			$scope.objeto.npCodigogrupo = obj.npCodigogrupo;
 		}, function() {
 			console.log("close modal");
 		});
 	};
-		
-	$scope.eliminar=function(id){
-		
-		usuariosFactory.eliminar(id).then(function(resp){
-			console.log(resp);
-			if (resp.estado)
-				$scope.limpiar();
 
-		})
-		
-	};
-	
-	
-	
-	 $scope.form = {
+	$scope.form = {
 
 		        submit: function (form) {
 		            var firstError = null;
@@ -138,17 +138,17 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 		                return;
 
 		            } else {
-		                
-		            	usuariosFactory.guardar($scope.objeto).then(function(resp){
+		                $scope.objeto.indicarmetodo=$scope.objetodetalle;
+		            	indicadoresFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Usuario!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Indicadores!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Usuario!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Indicadores!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
@@ -166,29 +166,4 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 
 		        }
     };
-
-		$scope.agregarDetalle=function(){
-			var obj={id:{id:$scope.objeto.id, unidad:null},npunidad:null};
-			$scope.objetoDetalles.push(obj);
-		}
-
-		$scope.removerDetalle=function(index){
-			$scope.objetoDetalles.splice(index,1);
-		}
-
-		$scope.abrirUnudad = function(index) {
-
-			var modalInstance = $uibModal.open({
-				templateUrl : 'modalUsuariosUnidades.html',
-				controller : 'UsuariosUnidadesController',
-				size : 'lg'
-			});
-			modalInstance.result.then(function(obj) {
-				$scope.objetoDetalles[index].id.unidad = obj.id;
-				$scope.objetoDetalles[index].npunidad=obj.nombre;
-			}, function() {
-				console.log("close modal");
-			});
-		};
-
 } ]);

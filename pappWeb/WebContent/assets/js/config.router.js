@@ -198,13 +198,31 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Modulo de Procedimientos'
         }
+    }).state('app.subitem', {
+        url: "/subitems",
+        templateUrl: "assets/views/papp/subitem.html",
+        resolve: loadSequence('ngTable', 'SubItemCtrl', 'ModalItemCtrl', 'ModalUnidadCtrl', 'SubItemsFactory', 'ItemFactory', 'UnidadesMedidaFactory'),
+        title: 'Modulo de Sub Items',
+        ncyBreadcrumb: {
+            label: 'Modulo de Sub Items'
+        }
+    
     }).state('app.item', {
         url: "/items",
         templateUrl: "assets/views/papp/item.html",
-        resolve: loadSequence('ngTable', 'ItemCtrl', 'ItemFactory'),
+        resolve: loadSequence('ngTable', 'ItemCtrl', 'ModalItemCtrl', 'ItemFactory'),
         title: 'Modulo de Items',
         ncyBreadcrumb: {
             label: 'Modulo de Items'
+        }
+    }).state('app.socionegocio', {
+        url: "/socionegocio",
+        templateUrl: "assets/views/papp/socioNegocio.html",
+        resolve: loadSequence('ngTable','SociosNegocioCtrl','SociosNegocioFactory'),
+        title: 'Socios Negocio',
+        
+        ncyBreadcrumb: {
+            label: 'Socios Negocio'
         }
     }).state('app.tipoproducto', {
         url: "/tipo-producto",
@@ -299,18 +317,18 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.fuerzas', {
         url: "/fuerzas",
         templateUrl: "assets/views/papp/fuerzas.html",
-        resolve: loadSequence('ngTable','FuerzaCtrl','FuerzaFactory'),
+        resolve: loadSequence('ngTable','FuerzaCtrl','ModalClasificacionCtrl','FuerzaFactory', 'ClasificacionFactory'),
         title: 'Fuerzas',
         ncyBreadcrumb: {
             label: 'Fuerzas'
-        }     
+        }    
     }).state('app.escalasremuneracion', {
         url: "/escalasremuneracion",
         templateUrl: "assets/views/papp/escalasRemuneracion.html",
         resolve: loadSequence('ngTable','EscalaRemuneracionCtrl','EscalaRemuneracionFactory'),
-        title: 'Fuerzas',
+        title: 'Escalas',
         ncyBreadcrumb: {
-            label: 'Fuerzas'
+            label: 'Escalas'
         } 
     }).state('app.menuseguridades', {
         url: "/menuseguridades",
@@ -331,7 +349,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.perfiles', {
         url: "/perfiles",
         templateUrl: "assets/views/papp/perfiles.html",
-        resolve: loadSequence('ngTable','PerfilesCtrl','PerfilesFactory'),
+        resolve: loadSequence('ngTable','PerfilesCtrl','PerfilesPermisosCtrl','PerfilesFactory','PermisosFactory'),
         title: 'Perfiles',
         ncyBreadcrumb: {
             label: 'Perfiles'
@@ -339,7 +357,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.usuarios', {
         url: "/usuarios",
         templateUrl: "assets/views/papp/usuarios.html",
-        resolve: loadSequence('ngTable','UsuariosCtrl','UsuariosFactory'),
+        resolve: loadSequence('ngTable','UsuariosCtrl','UsuariosUnidadesCtrl','UsuariosFactory','UnidadFactory'),
         title: 'Usuarios',
         ncyBreadcrumb: {
             label: 'Usuarios'
@@ -352,6 +370,54 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Cambiar Contraseña'
         } 
+    }).state('app.institucion', {
+        url: "/institucion",
+        templateUrl: "assets/views/papp/institucion.html",
+        resolve: loadSequence('ngTable','InstitucionCtrl','InstitucionFactory'),
+        title: 'Instituci&otilde;n',
+        ncyBreadcrumb: {
+            label: 'Institución'
+        }
+    }).state('app.plannacional', {
+        url: "/plannacional",
+        templateUrl: "assets/views/papp/plannacional.html",
+        resolve: loadSequence('ngTable','PlanNacionalCtrl','PlanNacionalFactory'),
+        title: 'Plan Nacional',
+        ncyBreadcrumb: {
+            label: 'Plan Nacional'
+        }
+    }).state('app.gradofuerza', {
+        url: "/gradofuerza",
+        templateUrl: "assets/views/papp/gradofuerza.html",
+        resolve: loadSequence('ngTable','GradoFuerzaCtrl','ModalFuerzaCtrl','ModalGradoCtrl','GradoFuerzaFactory','FuerzaFactory','GradoFactory'),
+        title: 'Grado - Fuerza',
+        ncyBreadcrumb: {
+            label: 'Grado - Fuerza'
+        }
+    }).state('app.especialidades', {
+        url: "/especialidades",
+        templateUrl: "assets/views/papp/especialidades.html",
+        resolve: loadSequence('ngTable','EspecialidadesCtrl','ModalFuerzaCtrl','EspecialidadesFactory','FuerzaFactory'),
+        title: 'Grado - Fuerza',
+        ncyBreadcrumb: {
+            label: 'Grado - Fuerza'
+        }
+    }).state('app.estructuraorganica', {
+        url: "/estructuraorganica",
+        templateUrl: "assets/views/papp/estructuraorganica.html",
+        resolve: loadSequence('ngTable','EstructuraOrganicaCtrl','EstructuraOrganicaFactory'),
+        title: 'Estructura Organica',
+        ncyBreadcrumb: {
+            label: 'Estructura Organica'
+        }
+    }).state('app.indicadores', {
+        url: "/indicadores",
+        templateUrl: "assets/views/papp/indicadores.html",
+        resolve: loadSequence('ngTable','IndicadoresCtrl','ModalUnidadMedidaCtrl','IndicadoresFactory','UnidadesMedidaFactory'),
+        title: 'Indicadores',
+        ncyBreadcrumb: {
+            label: 'Indicadores'
+        }
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

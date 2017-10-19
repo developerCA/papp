@@ -1,36 +1,26 @@
-app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "SweetAlert", "$filter", "ngTableParams", "SubItemsFactory", function ($scope, $rootScope, $uibModal, SweetAlert, $filter, ngTableParams, subitemsFactory) {
+'use strict';
+/**
+ * controller for angular-menu
+ * 
+ */
+app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "sociosNegocioFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, sociosNegocioFactory) {
 
     $scope.nombre = null;
     $scope.codigo = null;
-    $scope.padre = null;
-    $scope.tipo = null;
     $scope.estado = null;
     $scope.edicion = false;
-    $scope.url = "";
-    $scope.objeto = null;
+    $scope.objeto = {};
 
     var pagina = 1;
-
-    $scope.init = function () {
-
-        $scope.items = [];
-        subitemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
-            if (resp.meta)
-                $scope.items = resp;
-            console.log($scope.items);
-        });
-
-        $scope.consultar();
-    };
 
     $scope.consultar = function () {
 
         $scope.data = [];
 
-        subitemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
+        sociosNegocioFactory.traer(pagina).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
-        });
+        })
 
     };
 
@@ -50,7 +40,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 								.page()
 								* params.count());
                 params.total(orderedData.length);
-                $defer.resolve($scope.items);
+                $defer.resolve($scope.gruposMedida);
             }
         });
     });
@@ -58,8 +48,10 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     $scope.filtrar = function () {
 
         $scope.data = [];
-        subitemsFactory.traerItemsFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado, $scope.tipo).then(function (resp) {
+        sociosNegocioFactory.traerFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado).then(function (resp) {
+
             if (resp.meta)
+
                 $scope.data = resp;
         })
 
@@ -74,8 +66,6 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     $scope.limpiar = function () {
         $scope.nombre = null;
         $scope.codigo = null;
-        $scope.padre = null;
-        $scope.tipo = null;
         $scope.estado = null;
         $scope.consultar();
     };
@@ -87,60 +77,16 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     };
 
     $scope.editar = function (id) {
-
-    	subitemsFactory.traerItem(id).then(function (resp) {
-        	if (resp.estado)
-                $scope.objeto = resp.json.subitem;
+        
+        sociosNegocioFactory.traerObj(id).then(function (resp) {
+        	console.log(resp);
+            if (resp.estado)
+                $scope.objeto = resp.json.socionegocio;
             $scope.edicion = true;
+
         })
 
     };
-    
-    $scope.buscarItem=function(){
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalItems.html',
-			controller : 'ModalItemController',
-			size : 'md',
-			resolve : {
-				tipo : function() {
-					return $scope.objeto.tipo;
-				}
-			}
-		});
-
-		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.npitemcodigo = obj.codigo;
-			$scope.objeto.npitemnombre = obj.nombre;			
-			
-		}, function() {
-			
-		});
-
-	};
-	
-	$scope.buscarUnidadMedida = function(){
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalUnidades.html',
-			controller : 'ModalUnidadesController',
-			size : 'md',
-			resolve : {
-				tipo : function() {
-					return $scope.objeto.tipo;
-				}
-			}
-		});
-
-		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.subitemunidadmedidaid = obj.codigo;
-			$scope.objeto.npunidadnombre = obj.nombre;			
-			
-		}, function() {
-			
-		});
-
-	};
 
     $scope.form = {
 
@@ -166,17 +112,18 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
                 return;
 
             } else {
-                //OJO
-            	subitemsFactory.guardar($scope.objeto).then(function (resp) {
+
+                sociosNegocioFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("SubItem", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Grupo Medida", "Registro satisfactorio!", "success");
 
                     } else {
-                        SweetAlert.swal("SubItem", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Grupo Medida", resp.mensajes.msg, "error");
+
                     }
 
                 })

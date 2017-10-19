@@ -68,28 +68,34 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	$scope.nuevo=function(){
 		$scope.objeto={id:null};
-		
+		$scope.objetolista=[];
+		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
+//		console.log(obj);
+		$scope.objetolista.push(obj);
+//		console.log($scope.objetolista);
+
 		$scope.edicion=true;
 		$scope.guardar=true;
 	}
 	
 	$scope.editar=function(id){
 		perfilesFactory.traerPermiso(id).then(function(resp){
-console.clear();
-console.log(resp.json.perfilpermisos);
+//console.clear();
+//console.log(resp.json);
 			if (resp.estado) {
 			   $scope.objeto=resp.json.perfil;
-			   $scope.objetolista=resp.json.perfilpermisos;
+			   $scope.objetolista=resp.json.details;
+			   //console.log($scope.objetolista);
 			}
 			$scope.edicion=true;
-			$scope.guardar=false;
+			$scope.guardar=true;
 
 		})
 		
 	};
 
 	$scope.agregarDetalle=function(){
-		var obj={id:{permisoid:null},perfilpermisolectura:null};
+		var obj={id:{perfilid:$scope.objeto,permisoid:null},nppermiso:null};
 		$scope.objetolista.push(obj);
 	}
 
@@ -97,17 +103,17 @@ console.log(resp.json.perfilpermisos);
 		$scope.objetolista.splice(index,1);
 	}
 
-	$scope.abrirPermisoPadre = function() {
-
+	$scope.abrirPerfilesPermisos = function(index) {
+		//console.log("aqui");
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalPermisoPadre.html',
-			controller : 'PermisoPadreController',
+			templateUrl : 'modalPerfilesPermisos.html',
+			controller : 'PerfilesPermisosController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.padreid = obj.id;
-			$scope.objeto.nombrepadre=obj.nombre;
+			//console.log(obj);
+			$scope.objetolista[index].id.permisoid = obj.id;
+			$scope.objetolista[index].nppermiso=obj.nombre;
 		}, function() {
 			console.log("close modal");
 		});

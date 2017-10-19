@@ -160,9 +160,7 @@
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
 										</a>
-										<h4 class="panel-title">Pr&eacute;stamo</h4>
-
-
+										<h4 class="panel-title">Clasificaci&oacute;n</h4>
 									</div>
 									<div class="panel-body no-padding panel-white">
 										<div class="col-md-12 panel-white no-padding">
@@ -178,14 +176,19 @@
 															class="btn btn-sm btn-danger"
 															ng-click="removerDetalle($index)"><i
 																class="fa fa-trash"></i></a></td>
-														<td data-title="'Clasificaci&oacute;n C&oacute;digo'"><input type="text"
-															placeholder="Ingrese el Codigo" class="form-control"
-															name="codigo_{{$index}}" required ng-model="obj.codigo"
-															ng-minlength="4" ng-maxlength="4"
-															ng-disabled="obj.codigo!=null" /><span
-															class="error text-small block"
-															ng-if="Form['codigo_'+$index].$dirty && Form['codigo_'+$index].$invalid">Debe
-																ingresar m&iacute;nimo cuatro n&uacute;meros </span></td>
+														<td>
+															<div class="input-group">
+																<input type="text" placeholder="Seleccione el codigo de clasifiaci&oacute;n"
+																	class="form-control" name="codigoclasificacion"
+																	ng-model="objeto.npcodigoclasificacion" ng-disabled="true" /> <span
+																	class="input-group-btn">
+																	<button type="button" class="btn btn-primary"
+																		ng-click="buscarClasificacion()">
+																		<i class="fa fa-search"></i> Buscar
+																	</button>
+																</span>
+															</div>
+														</td>
 														<td data-title="'Clasificaci&oacute;n Nombre'"><input type="text"
 															placeholder="Ingrese el Nombre" class="form-control"
 															name="nombre_{{$index}}" required ng-model="obj.nombre" /><span
@@ -216,12 +219,78 @@
 							</div>
 						</div>
 					</form>
+
+<script type="text/ng-template" id="modalClasificacion.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Lista de Selecci&oacute;n Clasificaci&oacute;n</h3>
+                            </div>
+                            <div class="modal-body">
+                               	<div class="panel-body" ng-init="consultar()" >
+
+
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label> Clasificaci&oacute;n c&oacute;digo </label> <input type="text"
+												class="form-control" ng-model="codigoFiltro">
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label> Clasificaci&oacute;n Nombre </label> <input type="text"
+												class="form-control" ng-model="nombreFiltro">
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label> Clasificaci&oacute;n Sigla </label> <input type="text"
+												class="form-control" ng-model="siglaFiltro">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+											class="fa fa-search"></i> Buscar</a> <a
+											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				
+
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td><a class="btn btn-sm btn-primary" uib-tooltip="Seleccionar"
+									ng-click="seleccionar(obj)"><i class="fa fa-check"></i></a></td>
+								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+								<td data-title="'Nombre'">{{obj.nombre}}</td>
+								<td data-title="'Sigla'">{{obj.sigla}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+                            </div>
+                            <div class="modal-footer">
+                               
+                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+                            </div>
+                        </script>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
 

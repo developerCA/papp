@@ -1,29 +1,33 @@
 'use strict';
 
-app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","usuariosFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, usuariosFactory) {
+app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","plannacionalFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, plannacionalFactory) {
     
 	
 	$scope.nombreFiltro=null;
 	$scope.ordenFiltro=null;
 	
 	$scope.edicion=false;
+	$scope.guardar=false;
 	$scope.objeto={};
-	$scope.objetoDetalles={};
+	$scope.objetolista={};
 	
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
+		console.log('AQUIIII-111');
 		$scope.data=[];
-		usuariosFactory.traerUsuarios(pagina).then(function(resp){
-			//console.log(resp);
+		plannacionalFactory.traerInstitucion(pagina).then(function(resp){
+			console.log('AQUIIII');
+			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
+			    
 		})
 	
 	};
 	
 	$scope.$watch('data', function() {
+		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -45,8 +49,9 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	
 	$scope.filtrar=function(){
+		
 		$scope.data=[];
-		usuariosFactory.traerUsuariosFiltro(pagina,$scope.nombreFiltro,$scope.ordenFiltro).then(function(resp){
+		plannacionalFactory.traerInstitucionFiltro(pagina,$scope.nombreFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -56,66 +61,66 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
 		$scope.ordenFiltro=null;
-
+		
+		
 		$scope.consultar();
 		
 	};
 	
 	$scope.nuevo=function(){
 		$scope.objeto={id:null};
-		$scope.objetoDetalles=[];
 		$scope.objetolista=[];
-		var obj={id:{permisoid:null},perfilpermisolectura:null};
+		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
 //		console.log(obj);
 		$scope.objetolista.push(obj);
-		console.log($scope.objetolista);
+//		console.log($scope.objetolista);
 
 		$scope.edicion=true;
+		$scope.guardar=true;
 	}
 	
 	$scope.editar=function(id){
-		usuariosFactory.traerUsuario(id).then(function(resp){
+		plannacionalFactory.traerInstitucion(id).then(function(resp){
 //console.clear();
-//console.log(resp);
-		if (resp.estado)
-			   $scope.objeto=resp.json.usuario;
-		       $scope.objetoDetalles=resp.json.details;
-			   $scope.edicion=true;
-			   //console.log($scope.objeto);
+//console.log(resp.json);
+			if (resp.estado) {
+			   $scope.objeto=resp.json.perfil;
+			   $scope.objetolista=resp.json.details;
+			   //console.log($scope.objetolista);
+			}
+			$scope.edicion=true;
+			$scope.guardar=true;
+
 		})
 		
 	};
-	
-	$scope.abrirUsuarioPadre = function() {
 
+	$scope.agregarDetalle=function(){
+		var obj={id:{perfilid:$scope.objeto,permisoid:null},nppermiso:null};
+		$scope.objetolista.push(obj);
+	}
+
+	$scope.removerDetalle=function(index){
+		$scope.objetolista.splice(index,1);
+	}
+
+	$scope.abrirPerfilesPermisos = function(index) {
+		//console.log("aqui");
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalUsuarioPadre.html',
-			controller : 'UsuarioPadreController',
+			templateUrl : 'modalPerfilesPermisos.html',
+			controller : 'PerfilesPermisosController',
 			size : 'lg'
 		});
-		modalInstance.result.then(function(obj) {
+		/* modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.padreid = obj.id;
-			$scope.objeto.nombrepadre=obj.nombre;
+			$scope.objetolista[index].id.permisoid = obj.id;
+			$scope.objetolista[index].nppermiso=obj.nombre;
 		}, function() {
 			console.log("close modal");
-		});
+		}); */
 	};
-		
-	$scope.eliminar=function(id){
-		
-		usuariosFactory.eliminar(id).then(function(resp){
-			console.log(resp);
-			if (resp.estado)
-				$scope.limpiar();
 
-		})
-		
-	};
-	
-	
-	
-	 $scope.form = {
+	$scope.form = {
 
 		        submit: function (form) {
 		            var firstError = null;
@@ -139,16 +144,16 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 
 		            } else {
 		                
-		            	usuariosFactory.guardar($scope.objeto).then(function(resp){
+		            	plannacionalFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Usuario!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Permiso!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Usuario!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Permiso!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
@@ -166,29 +171,4 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 
 		        }
     };
-
-		$scope.agregarDetalle=function(){
-			var obj={id:{id:$scope.objeto.id, unidad:null},npunidad:null};
-			$scope.objetoDetalles.push(obj);
-		}
-
-		$scope.removerDetalle=function(index){
-			$scope.objetoDetalles.splice(index,1);
-		}
-
-		$scope.abrirUnudad = function(index) {
-
-			var modalInstance = $uibModal.open({
-				templateUrl : 'modalUsuariosUnidades.html',
-				controller : 'UsuariosUnidadesController',
-				size : 'lg'
-			});
-			modalInstance.result.then(function(obj) {
-				$scope.objetoDetalles[index].id.unidad = obj.id;
-				$scope.objetoDetalles[index].npunidad=obj.nombre;
-			}, function() {
-				console.log("close modal");
-			});
-		};
-
 } ]);

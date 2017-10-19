@@ -1,11 +1,11 @@
 'use strict';
 
-app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","cargoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,cargoFactory) {
-    
-	
-	$scope.nombreFiltro=null;
-	$scope.codigoFiltro=null;
-	$scope.estadoFiltro=null;
+app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","escalaRemuneracionFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,escalaRemuneracionFactory) {
+    	
+	$scope.codigo=null;
+	$scope.grado=null;
+	$scope.grupo=null;
+	$scope.estado=null;
 	$scope.edicion=false;
 	$scope.objeto={};
 	
@@ -14,11 +14,10 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		cargoFactory.traerCargos(pagina).then(function(resp){
+		escalaRemuneracionFactory.traerEscalas(pagina).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
-				$scope.data=resp;
-				
+				$scope.data=resp;				
 		})
 	
 	};
@@ -42,23 +41,23 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 				$defer.resolve($scope.lista);
 			}
 		});
-	});
-	
+	});	
 	
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		cargoFactory.traerCargosFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		escalaRemuneracionFactory.traerEscalasFiltro(pagina,$scope.codigo,$scope.grupo,$scope.grado, $scope.estado).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
 		})
-	}
+	};
 	
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.codigoFiltro=null;
-		$scope.estadoFiltro=null;
+		$scope.codigo=null;
+		$scope.grado=null;
+		$scope.grupo=null;
+		$scope.estado=null;
 		$scope.consultar();
 		
 	};
@@ -67,23 +66,22 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 		$scope.objeto={id:null};
 		
 		$scope.edicion=true;
-	}
+	};
 	
 	$scope.editar=function(id){
-		cargoFactory.traerCargo(id).then(function(resp){
-			
+		escalaRemuneracionFactory.traerEscala(id).then(function(resp){
+			console.clear();
+			console.log(resp);
 			if (resp.estado)
 				
-				$scope.objeto=resp.json.cargo;
+				$scope.objeto=resp.json.escalarmu;
 				$scope.edicion=true;
 				console.log($scope.objeto);
 		})
 		
 	};
-	
-	
-	
-	 $scope.form = {
+		
+	$scope.form = {
 
 		        submit: function (form) {
 		            var firstError = null;
@@ -107,16 +105,16 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 
 		            } else {
 		                
-		            	cargoFactory.guardar($scope.objeto).then(function(resp){
+		            	escalaRemuneracionFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Cargo!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Escala Remuneración!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Cargo!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Escala Remuneración!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
@@ -133,5 +131,5 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 		            $scope.objeto={};
 
 		        }
-    };
+    	};
 } ]);

@@ -126,57 +126,61 @@
                                 <div class="form-group">
                                     <label>Usa Verificaci&oacute;n</label>
 
-                                    <input type="checkbox" value="" ng-model="objeto.usaverifica" ng-checked="objeto.usaverifica==1"/>
+                                    <input type="checkbox" value="" ng-model="objeto.usaverifica" ng-checked="objeto.usaverifica==1" />
                                 </div>
 
+                            </div>                            
+                        </div>
 
+                        <div class="row">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <a uib-tooltip="Agregar"
+                                               class="pull-right btn btn-sm btn-info"
+                                               ng-click="agregarDetalle();">
+                                                <i class="fa fa-plus-square"></i>
+                                            </a>
+                                            <h4 class="panel-title">Clase Documento</h4>
+
+
+                                        </div>
+                                        <div class="panel-body no-padding panel-white">
+                                            <div class="col-md-12 panel-white no-padding">
+                                                <div>
+                                                    <table class="table table-striped">
+                                                        <tr>
+                                                            <td></td>
+                                                            <th>Socio Negocio Tipo</th>
+                                                        </tr>
+                                                        <tr ng-repeat="det in detalles">
+                                                            <td>
+                                                                <a uib-tooltip="Eliminar"
+                                                                   class="btn btn-sm btn-danger"
+                                                                   ng-click="removerDetalle($index)">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </a>
+                                                            </td>
+                                                            <td data-title="'Socio Negocio Tipo'">
+                                                                <select class="form-control" name="estado_{{$index}}"
+                                                                        ng-model="det.tipo" required>
+                                                                    <option value="N">Natural</option>
+                                                                    <option value="J">Jur&iacute;dico</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
-                            <div class="col-md-6">
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h5 class="panel-title">Tipo</h5>
-                                        <button type="button" class="btn btn-primary" ng-click="nuevoDetalle()">
-                                            <i class="fa fa-plus"></i> Agregar
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="row" ng-show="detalleNuevo">
-                                    <br />
-                                    <div class="col-md-6">
-                                        <select ng-model="nuevoDetalleTipo">
-                                            <option value="N" selected>Natural</option>
-                                            <option value="J">Jur&iacute;dica</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a class="btn btn-sm btn-success" ng-click="agregarDetalle()">
-                                            &nbsp;<i class="fa fa-check"></i>&nbsp;
-                                        </a>&nbsp;
-                                        <a class="btn btn-sm btn-default" ng-click="cancelarDetalle()">
-                                            &nbsp;<i class="fa fa-times"></i>&nbsp;
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <table ng-table="detalleParams" class="table table-striped">
-                                            <tr ng-repeat="dets in detalles">
-                                                <td data-title="'T'">{{dets.identificaciontipoid}}</td>
-                                                <td data-title="'Tipo'" class="text-center">
-                                                    <span ng-if="dets.tipo=='N'">Natural</span>
-                                                    <span ng-if="dets.tipo=='J'">Jur&iacute;dica</span>
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-sm btn-danger"
-                                                       ng-click="eliminarDetalle($index)"><i class="fa fa-times"></i></a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="row">
@@ -192,7 +196,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>                    
+                    </form>
 
                 </div>
             </div>

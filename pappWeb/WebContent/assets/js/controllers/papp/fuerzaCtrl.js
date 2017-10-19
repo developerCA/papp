@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('FuerzaController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","fuerzaFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,fuerzaFactory) {
+app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","fuerzaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,fuerzaFactory) {
     	
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
@@ -74,7 +74,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","SweetAlert","$filter
 			
 			if (resp.estado)
 				
-				$scope.objeto=resp.json.cargo;
+				$scope.objeto=resp.json.fuerza;
 				$scope.detalles=resp.json.details;
 				console.clear();
 				console.log("==================");
@@ -89,11 +89,38 @@ app.controller('FuerzaController', [ "$scope","$rootScope","SweetAlert","$filter
 		var obj={codigo:null,estado:"A",nombre:null};
 		$scope.detalles.push(obj);
 		
-	}
+	};
 	
 	$scope.removerDetalle=function(index){
 		$scope.detalles.splice(index,1);		
-	}
+	};
+	
+	$scope.buscarClasificacion=function(){
+
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalClasificacion.html',
+			controller : 'ModalClasificacionController',
+			size : 'md',
+			resolve : {
+				tipo : function() {
+					return $scope.objeto.tipo;
+				}
+			}
+		});
+
+		modalInstance.result.then(function(obj) {
+			console.clear();
+			console.log(obj);
+			$scope.objeto.npcodigopadre = obj.codigo;
+			$scope.objeto.npnombrepadre = obj.nombre;
+			$scope.objeto.nptipopadrenombre = obj.nptipopadrenombre;
+			
+			
+		}, function() {
+			
+		});
+
+	};
 	
 	 $scope.form = {
 

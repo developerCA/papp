@@ -1,31 +1,31 @@
 'use strict';
 
-app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","permisosFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, permisosFactory) {
-    
-	
-	$scope.nombreFiltro=null;
-	$scope.ordenFiltro=null;
-	
+app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","estructuraorganicaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, estructuraorganicaFactory) {
+
+	$scope.codigo=null;
+	$scope.fuerza=null;
+	$scope.grado=null;
+	$scope.padre=null;
+	$scope.estado=null;
+
 	$scope.edicion=false;
+	$scope.nuevoar=false;
 	$scope.guardar=false;
 	$scope.objeto={};
 	
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
 		$scope.data=[];
-		permisosFactory.traerPermisos(pagina).then(function(resp){
-
+		console.log('aqi');
+		estructuraorganicaFactory.traerEstructuraOrganica(pagina).then(function(resp){
+			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
-			    
 		})
-	
 	};
 	
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -44,57 +44,94 @@ app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetA
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
-		permisosFactory.traerPermisosFiltro(pagina,$scope.nombreFiltro).then(function(resp){
-			
+		estructuraorganicaFactory.traerEstructuraOrganicaFiltro(pagina,$scope.codigo,$scope.fuerza,$scope.grado,$scope.padre,$scope.estado).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
 	
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.ordenFiltro=null;
-		
-		
+		$scope.codigo=null;
+		$scope.fuerza=null;
+		$scope.grado=null;
+		$scope.padre=null;
+		$scope.estado=null;
+
 		$scope.consultar();
 		
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
-		
+		$scope.objeto={id:null,estado:"A"};
 		$scope.edicion=true;
+		$scope.nuevoar=true;
 		$scope.guardar=true;
 	}
 	
 	$scope.editar=function(id){
-		permisosFactory.traerPermiso(id).then(function(resp){
+		estructuraorganicaFactory.traerEstructuraOrganicaEditar(id).then(function(resp){
+//console.clear();
+//console.log('AQUIIII-111');
 //console.log(resp);
-			if (resp.estado)
-			   $scope.objeto=resp.json.permiso;
+			if (resp.estado) {
+			    $scope.objeto=resp.json.estructuraorganica;
+			    //$scope.objeto.npnombrepadre='111';
+			    
+			    //console.log($scope.objeto);
+			}
 			$scope.edicion=true;
+			$scope.nuevoar=false;
 			$scope.guardar=true;
-
 		})
-		
 	};
-	
-	$scope.abrirPermisoPadre = function() {
 
+	$scope.abrirFuerza = function(index) {
+		//console.log("aqui");
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalPermisoPadre.html',
-			controller : 'PermisoPadreController',
+			templateUrl : 'modalFuerza.html',
+			controller : 'ModalFuerzaController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.padreid = obj.id;
-			$scope.objeto.nombrepadre=obj.nombre;
+			//console.log(obj);
+			$scope.objeto.estructuraorganicafuerzaid = obj.id;
+			$scope.objeto.npnombrefuerza = obj.nombre;
+		}, function() {
+			console.log("close modal");
+		});
+	};
+
+	$scope.abrirGrado = function(index) {
+		//console.log("aqui");
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalGrado.html',
+			controller : 'ModalGradoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.estructuraorganicagradoid = obj.id;
+			$scope.objeto.npnombregrado = obj.nombre;
+		}, function() {
+			console.log("close modal");
+		});
+	};
+
+	$scope.abrirGradoSuperior = function(index) {
+		//console.log("aqui");
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalGrado.html',
+			controller : 'ModalGradoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			
+			$scope.objeto.estructuraorganicapadreid = obj.id;
+			$scope.objeto.npnombrepadre = obj.nombre;
+			console.log($scope.objeto);
 		}, function() {
 			console.log("close modal");
 		});
@@ -124,16 +161,16 @@ app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetA
 
 		            } else {
 		                
-		            	permisosFactory.guardar($scope.objeto).then(function(resp){
+		            	estructuraorganicaFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Permiso!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Grado - Fuerza!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Permiso!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Grado - Fuerza!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
