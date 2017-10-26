@@ -57,7 +57,7 @@
 				        u.USUARIOCLAVE,
 				        u.USUARIOESTADO1
 				      from
-				        comaco01.USUARIO u
+				        USUARIO u
 				      where
 				        u.USUARIOUSUARIO = ?"
 
@@ -66,10 +66,10 @@
 			                    case pp.PERFILPERMISOLECTURA WHEN 1 THEN r.PERMISODESCRIPCION || 'LECTURA'
 			                    ELSE r.PERMISODESCRIPCION END as privilege  
 			        from
-			        comaco01.USUARIO u
-			        inner join comaco01.PERFIL p on (u.PERFILID = p.PERFILID)
-			        inner join comaco01.PERFILPERMISO pp on (p.PERFILID = pp.PERFILID)
-			        inner join comaco01.PERMISO r on (pp.PERMISOID = r.PERMISOID)
+			        USUARIO u
+			        inner join PERFIL p on (u.PERFILID = p.PERFILID)
+			        inner join PERFILPERMISO pp on (p.PERFILID = pp.PERFILID)
+			        inner join PERMISO r on (pp.PERMISOID = r.PERMISOID)
 			                       where
 			        u.USUARIOUSUARIO = ?"
 

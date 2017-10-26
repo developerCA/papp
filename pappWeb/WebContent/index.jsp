@@ -53,6 +53,9 @@
     <link rel="stylesheet" href="assets/css/plugins.css">
     <!-- Packet Theme -->
     <link rel="stylesheet" data-ng-href="assets/css/themes/{{ app.layout.theme }}.css" />
+    <!-- Tree Dnd Css -->
+    <link rel="stylesheet" href="bower_components/angular-tree-dnd/dist/ng-tree-dnd.css"/>
+     
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
@@ -147,6 +150,10 @@
     <script src="bower_components/angular-ladda/dist/angular-ladda.min.js"></script>
     <!-- Angular Slick Carousel -->
     <script src="bower_components/angular-slick-carousel/dist/angular-slick.min.js"></script>
+    
+    <!-- Tree Dnd -->
+    <script src="bower_components/angular-tree-dnd/dist/ng-tree-dnd.min.js"></script>
+     
     <!-- Packet Scripts -->
     <script src="assets/js/app.js"></script>
     <script src="assets/js/main.js"></script>
