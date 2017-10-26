@@ -113,6 +113,7 @@ public class ConsultasUtil {
 	*/
 
 	public static JSONObject consultaIntitucionPaginado(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+		log.println("entra a consultar institucion");
 		String campo="";
 		InstitucionTO institucionTO=new InstitucionTO();
 		try{

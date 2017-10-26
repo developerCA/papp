@@ -1683,6 +1683,7 @@ public class AdministracionController {
 			
 			//Institucion
 			else if(clase.equals("institucion")){
+				log.println("va a consultar institucion");
 				jsonObject=ConsultasUtil.consultaIntitucionPaginado(parameters, jsonObject);
 			}
 			log.println("json retornado: " + jsonObject.toString()); 
