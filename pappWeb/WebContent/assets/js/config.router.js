@@ -418,6 +418,15 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Indicadores'
         }
+    
+    }).state('app.copiarcontenidoejerciciofiscal', {
+        url: "/copiarcontenidoejerciciofiscal",
+        templateUrl: "assets/views/papp/copiarContenidoEjercicioFiscal.html",
+        resolve: loadSequence('ngTable','CopiarContenidoEjercicioFiscalCtrl','ModalEjerciciosFiscalesCtrl','CopiarContenidoEjercicioFiscalFactory','EjercicioFiscalFactory'),
+        title: 'Copiar Contenido Ejercicio Fiscal',
+        ncyBreadcrumb: {
+            label: 'Copiar Contenido Ejercicio Fiscal'
+       } 
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

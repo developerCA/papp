@@ -1,0 +1,160 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+	<h4 class="mainTitle no-margin">Copiar Contenido Ejercicio Fiscal</h4>
+
+	<div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: SIMPLE TABLE WITH PAGINATION -->
+<div class="container-fluid container-fullw"
+	ng-controller="CopiarContenidoEjercicioFiscalController" ng-init="editar()">
+
+	<div class="row">
+		<div class="col-md-12"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="panel panel-white">
+
+				<div ng-show="edicion" class="panel-body" id="panel1">
+
+					<div class="panel-heading">
+						<h5 class="panel-title">Copiar Contenido Ejercicio Fiscal</h5>
+					</div>
+
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+						<div class="row">
+							<div class="col-md-6">
+
+								<div class="form-group"
+									ng-class="{'has-error':objeto.origenanio=='', 'has-success':objeto.origenanio!=''}">
+									<label class="control-label">
+										Ejercicio Fiscal A&ntilde;o Origen
+										<span class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text" placeholder="Seleccione origen"
+											class="form-control" name="nporigen" ng-disabled="true"
+											ng-model="objeto.origenanio" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirEjercicioFiscalOrigen()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+									<span class="error text-small block"
+										ng-if="objeto.origenanio==''">
+										Origen no definido
+									</span>
+									<span class="success text-small" ng-if="objeto.origenanio!=''">
+										Listo
+									</span>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':objeto.destinoanio=='', 'has-success':objeto.destinoanio!=''}">
+									<label class="control-label">
+										Ejercicio Fiscal A&ntilde;o Destino
+										<span class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text" placeholder="Seleccione destino"
+											class="form-control" name="npdestino" ng-disabled="true"
+											ng-model="objeto.destinoanio" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirEjercicioFiscalDestino()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+									<span class="error text-small block"
+										ng-if="objeto.destinoanio==''">
+										Destino no definido
+									</span>
+									<span class="success text-small" ng-if="objeto.destinoanio!=''">
+										Listo
+									</span>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.tipo.$dirty && Form.tipo.$invalid, 'has-success':Form.tipo.$valid}">
+									<label for="form-field-select-1">
+										Contenido
+										<span class="symbol required"></span>
+									</label>
+									<select class="form-control" name="tipo"
+										ng-model="objeto.tipo" required>
+										<option value="">Seleccione un contenido</option>
+										<option value="F">Fuentes de financiamineto</option>
+										<option value="I">Items</option>
+									</select>
+									<span class="error text-small block"
+										ng-if="!Form.tipo.$valid">
+										Contenido sin definir
+									</span>
+									<span class="success text-small" ng-if="Form.tipo.$valid">
+										Listo
+									</span>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<span ng-if="guardar">
+										<button type="submit" class="btn btn-primary">
+											Guardar
+										</button>
+									</span>
+								</div>
+							</div>
+						</div>
+
+					</form>
+
+<script type="text/ng-template" id="modalEjerciciosFiscales.html">
+<div class="modal-header">
+    <h3 class="modal-title">Ejercicios Fiscales</h3>
+</div>
+<div class="modal-body">
+	<div class="panel-body" ng-init="consultar();" >
+		<div>
+			<table ng-table="tableParams" class="table table-striped">
+				<tr ng-repeat="data in $data">
+					<td><a class="btn btn-sm btn-primary"
+						uib-tooltip="Seleccionar" ng-click="seleccionar(data)"><i
+							class="fa fa-check"></i></a></td>
+					<td data-title="'A&ntilde;o'">{{data.anio}}</td>
+					<td data-title="'Estado'">{{data.npestado}}</td>
+					<td data-title="'Fiscal Cerrado'"><span
+						ng-if="data.cerrado==0">ABIERTO</span><span
+						ng-if="data.cerrado==1">CERRADO</span></td>
+				</tr>
+			</table>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+    </div>
+</div>
+</script>
+
+				</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+

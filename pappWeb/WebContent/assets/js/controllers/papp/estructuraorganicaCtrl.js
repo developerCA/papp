@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","estructuraorganicaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, estructuraorganicaFactory) {
+app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","estructuraorganicaFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, estructuraorganicaFactory) {
 
 	$scope.codigo=null;
 	$scope.fuerza=null;
@@ -17,7 +18,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		console.log('aqi');
+		//console.log('aqi');
 		estructuraorganicaFactory.traerEstructuraOrganica(pagina).then(function(resp){
 			console.log(resp);
 			if (resp.meta)

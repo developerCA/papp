@@ -146,8 +146,10 @@ app.constant('JS_REQUIRES', {
         'SubItemsFactory': 'assets/js/factory/subitemFactory.js',
         'SociosNegocioCtrl': 'assets/js/controllers/papp/socioNegocioCtrl.js',
         'SociosNegocioFactory': 'assets/js/factory/socioNegocioFactory.js',
-
-        
+        'CopiarContenidoEjercicioFiscalCtrl':'assets/js/controllers/papp/copiarContenidoEjercicioFiscalCtrl.js',
+        'CopiarContenidoEjercicioFiscalFactory':'assets/js/factory/copiarContenidoEjercicioFiscalFactory.js',
+        'ModalEjerciciosFiscalesCtrl':'assets/js/controllers/papp/modales/modalEjerciciosFiscalesCtrl.js',
+        'EjercicioFiscalFactory':'assets/js/factory/ejercicioFiscalFactory.js',
         
         
         
