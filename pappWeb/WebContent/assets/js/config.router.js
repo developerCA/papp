@@ -418,7 +418,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Indicadores'
         }
-    
     }).state('app.copiarcontenidoejerciciofiscal', {
         url: "/copiarcontenidoejerciciofiscal",
         templateUrl: "assets/views/papp/copiarContenidoEjercicioFiscal.html",
