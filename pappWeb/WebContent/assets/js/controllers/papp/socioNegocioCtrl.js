@@ -17,7 +17,7 @@ app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", 
 
         $scope.data = [];
 
-        sociosNegocioFactory.traer(pagina).then(function (resp) {
+        sociosNegocioFactory.traer(pagina, $rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         })

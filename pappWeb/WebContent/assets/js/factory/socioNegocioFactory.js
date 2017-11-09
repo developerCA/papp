@@ -4,9 +4,9 @@ app.factory("sociosNegocioFactory", ["Restangular", function (Restangular) {
 
     return {
 
-        traer: function (pagina) {
+        traer: function (pagina, ejercicio) {
 
-            return Restangular.allUrl("administrar/consultar/socionegocio/pagina=" + pagina).getList();
+            return Restangular.allUrl("administrar/consultar/socionegocio/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio).getList();
 
         },
 

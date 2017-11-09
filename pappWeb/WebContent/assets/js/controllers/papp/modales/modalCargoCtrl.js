@@ -1,23 +1,30 @@
 'use strict';
 
-app.controller('ModalFuerzaController', ["$scope", "$rootScope", "$uibModalInstance","$filter", "ngTableParams","fuerzaFactory",
-	function($scope, $rootScope, $uibModalInstance,$filter, ngTableParams,fuerzaFactory) {
+app.controller('ModalCargoController', ["$scope", "$rootScope", "$uibModalInstance","$filter", "ngTableParams", "cargoFactory",
+	function($scope, $rootScope, $uibModalInstance,$filter, ngTableParams, cargoFactory) {
 	
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.estadoFiltro=null;
-	$scope.siglaFiltro=null;
-		
-	var pagina = 1;
+	$scope.edicion=false;
+	$scope.objeto={};
 	
-	$scope.consultar=function(){
+	var pagina = 1;
 		
-		$scope.data=[];
-		fuerzaFactory.traerFuerzas(pagina).then(function(resp){
-			console.log(resp);
-			if (resp.meta)
-				$scope.data=resp;				
-		})
+	$scope.init=function(){
+		$scope.consultar();
+	};
+		
+	
+$scope.consultar=function(){
+		
+	$scope.data=[];
+	cargoFactory.traerCargos(pagina).then(function(resp){
+		console.log(resp);
+		if (resp.meta)
+			$scope.data=resp;
+			
+	})
 	
 	};
 	
@@ -46,7 +53,7 @@ app.controller('ModalFuerzaController', ["$scope", "$rootScope", "$uibModalInsta
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		fuerzaFactory.traerFuerzasFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.sigla, $scope.estadoFiltro).then(function(resp){
+		cargoFactory.traerCargosFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -58,7 +65,6 @@ app.controller('ModalFuerzaController', ["$scope", "$rootScope", "$uibModalInsta
 		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;
 		$scope.estadoFiltro=null;
-		$scope.siglaFiltro=null;
 		
 		$scope.consultar();
 		

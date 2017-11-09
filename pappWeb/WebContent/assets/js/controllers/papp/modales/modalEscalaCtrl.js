@@ -1,19 +1,21 @@
 'use strict';
 
-app.controller('ModalFuerzaController', ["$scope", "$rootScope", "$uibModalInstance","$filter", "ngTableParams","fuerzaFactory",
-	function($scope, $rootScope, $uibModalInstance,$filter, ngTableParams,fuerzaFactory) {
+app.controller('ModalEscalaController', ["$scope", "$rootScope", "$uibModalInstance","$filter", "ngTableParams","escalaRemuneracionFactory",
+	function($scope, $rootScope, $uibModalInstance,$filter, ngTableParams,escalaRemuneracionFactory) {
 	
-	$scope.nombreFiltro=null;
-	$scope.codigoFiltro=null;
-	$scope.estadoFiltro=null;
-	$scope.siglaFiltro=null;
+	$scope.codigo=null;
+	$scope.grado=null;
+	$scope.grupo=null;
+	$scope.estado=null;
+	$scope.edicion=false;
+	$scope.objeto={};
 		
 	var pagina = 1;
 	
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		fuerzaFactory.traerFuerzas(pagina).then(function(resp){
+		escalaRemuneracionFactory.traer(pagina).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;				
@@ -46,7 +48,7 @@ app.controller('ModalFuerzaController', ["$scope", "$rootScope", "$uibModalInsta
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		fuerzaFactory.traerFuerzasFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.sigla, $scope.estadoFiltro).then(function(resp){
+		escalaRemuneracionFactory.traerFiltro(pagina,$scope.grupo,$scope.codigo,$scope.grado, $scope.estado).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -55,10 +57,10 @@ app.controller('ModalFuerzaController', ["$scope", "$rootScope", "$uibModalInsta
 	
 	$scope.limpiar=function(){
 		
-		$scope.nombreFiltro=null;
-		$scope.codigoFiltro=null;
-		$scope.estadoFiltro=null;
-		$scope.siglaFiltro=null;
+		$scope.codigo=null;
+		$scope.grado=null;
+		$scope.grupo=null;
+		$scope.estado=null;
 		
 		$scope.consultar();
 		

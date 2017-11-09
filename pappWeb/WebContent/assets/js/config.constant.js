@@ -150,6 +150,14 @@ app.constant('JS_REQUIRES', {
         'CopiarContenidoEjercicioFiscalFactory':'assets/js/factory/copiarContenidoEjercicioFiscalFactory.js',
         'ModalEjerciciosFiscalesCtrl':'assets/js/controllers/papp/modales/modalEjerciciosFiscalesCtrl.js',
         'EjercicioFiscalFactory':'assets/js/factory/ejercicioFiscalFactory.js',
+        'GradoEscalaCtrl': 'assets/js/controllers/papp/gradoEscalaCtrl.js',
+        'GradoEscalaFactory': 'assets/js/factory/gradoEscalaFactory.js',
+        'ModalFuerzaCtrl':'assets/js/controllers/papp/modales/modalFuerzaCtrl.js',
+        'ModalGradoCtrl':'assets/js/controllers/papp/modales/modalGradoCtrl.js',
+        'CargoEscalaCtrl': 'assets/js/controllers/papp/cargoEscalaCtrl.js',
+        'CargoEscalaFactory': 'assets/js/factory/cargoEscalaFactory.js',
+        'ModalEscalaCtrl':'assets/js/controllers/papp/modales/modalEscalaCtrl.js',
+        'ModalCargoCtrl':'assets/js/controllers/papp/modales/modalCargoCtrl.js',
         
         
     },

@@ -20,7 +20,6 @@ app.factory("gradoFactory", [ "Restangular", function(Restangular) {
 			if(sigla!=null && sigla != "") url += "&gruposigla=" + sigla;	
 			if(grupo!=null && grupo != "") url += "&nombregrupo=" + grupo;	
 			if(estado!=null && estado != "" ) url += "&estado=" + estado;			
-			alert(url);
 			return Restangular.allUrl(url).getList();
 			  
 		},

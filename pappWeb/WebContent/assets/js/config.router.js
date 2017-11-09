@@ -426,6 +426,25 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Copiar Contenido Ejercicio Fiscal'
        } 
+    
+    }).state('app.gradoescala', {
+        url: "/gradoescala",
+        templateUrl: "assets/views/papp/gradoEscala.html",
+        resolve: loadSequence('ngTable','GradoEscalaCtrl','GradoEscalaFactory','ModalFuerzaCtrl', 'FuerzaFactory', 'ModalGradoCtrl', 'GrupoJerarquicoFactory', 'GradoFactory'),
+        title: 'Grado Escala',
+        
+        ncyBreadcrumb: {
+            label: 'Grado Escala'
+        }
+    }).state('app.cargoescala', {
+        url: "/cargoescala",
+        templateUrl: "assets/views/papp/cargoEscala.html",
+        resolve: loadSequence('ngTable','CargoEscalaCtrl','CargoEscalaFactory','ModalEscalaCtrl', 'EscalaRemuneracionFactory', 'ModalCargoCtrl', 'CargoFactory'),
+        title: 'Grado Escala',
+        
+        ncyBreadcrumb: {
+            label: 'Grado Escala'
+        }
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

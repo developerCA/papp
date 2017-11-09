@@ -1,10 +1,10 @@
 'use strict';
 
-app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","escalaRemuneracionFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,escalaRemuneracionFactory) {
+app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","CargoEscalaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,cargoEscalaFactory) {
     	
 	$scope.codigo=null;
-	$scope.grado=null;
-	$scope.grupo=null;
+	$scope.nombrecargo=null;
+	$scope.grupoocupacional=null;
 	$scope.estado=null;
 	$scope.edicion=false;
 	$scope.objeto={};
@@ -14,7 +14,7 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		escalaRemuneracionFactory.traer(pagina).then(function(resp){
+		cargoEscalaFactory.traer(pagina).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;				
@@ -46,7 +46,8 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		escalaRemuneracionFactory.traerFiltro(pagina,$scope.grupo,$scope.codigo,$scope.grado, $scope.estado).then(function(resp){
+				
+		cargoEscalaFactory.traerFiltro(pagina,$scope.codigo,$scope.nombrecargo, $scope.grupoocupacional).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -54,30 +55,80 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 	};
 	
 	$scope.limpiar=function(){
+
 		$scope.codigo=null;
-		$scope.grado=null;
-		$scope.grupo=null;
+		$scope.nombrecargo=null;
+		$scope.grupoocupacional=null;
 		$scope.estado=null;
 		$scope.consultar();
 		
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
 		
+		$scope.objeto={id:null};		
 		$scope.edicion=true;
 	};
 	
 	$scope.editar=function(id){
-		escalaRemuneracionFactory.traerObj(id).then(function(resp){
-			
+		
+		cargoEscalaFactory.traerObj(id).then(function(resp){
+			console.clear();
+			console.log(resp.json.cargoescala);
 			if (resp.estado){
-				$scope.objeto=resp.json.escalarmu;
+				$scope.objeto=resp.json.cargoescala;
 				$scope.edicion=true;
 				console.log($scope.objeto);
 			}
 		})
 		
+	};
+	
+	$scope.buscarEscala=function(){
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalEscala.html',
+			controller : 'ModalEscalaController',
+			size : 'md',
+			resolve : {
+				tipo : function() {
+					return $scope.objeto.tipo;
+				}
+			}
+		});
+
+		modalInstance.result.then(function(obj) {
+			console.clear();
+			console.log(obj);
+			$scope.objeto.npcodigoescalarmu = obj.id;
+			$scope.objeto.npgrupoocupacional = obj.grupoocupacional;
+			$scope.objeto.npremuneracion= obj.remuneracion;
+			
+		}, function() {
+			
+		});
+
+	};
+	
+	$scope.buscarCargo = function(){
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalCargo.html',
+			controller : 'ModalCargoController',
+			size : 'md',
+			resolve : {
+				tipo : function() {
+					return $scope.objeto.tipo;
+				}
+			}
+		});
+
+		modalInstance.result.then(function(obj) {
+			$scope.objeto.npcodigocargo = obj.codigo;
+			$scope.objeto.npnombrecargo = obj.nombre;			
+			
+		}, function() {
+			
+		});
+
 	};
 		
 	$scope.form = {
@@ -104,16 +155,16 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 
 		            } else {
 		                
-		            	escalaRemuneracionFactory.guardar($scope.objeto).then(function(resp){
+		            	cargoEscalaFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Escala Remuneración!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Cargo Escala!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Escala Remuneración!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Cargo Escala!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
