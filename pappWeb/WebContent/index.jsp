@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="app">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="{{app.description}}">
     <meta name="keywords" content="app, responsive, angular, bootstrap, dashboard, admin">

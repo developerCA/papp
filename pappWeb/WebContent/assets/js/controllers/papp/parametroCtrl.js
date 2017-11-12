@@ -72,6 +72,7 @@ app.controller('ParametroController', [ "$scope","$rootScope","SweetAlert","$fil
 			if (resp.estado)
 				$scope.objeto=resp.json.parametro;
 			 	$scope.edicion=true;
+			 	
 
 		})
 		

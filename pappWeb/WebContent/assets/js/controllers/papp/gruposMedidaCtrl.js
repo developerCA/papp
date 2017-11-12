@@ -29,7 +29,8 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
             count: 5, // count per page
-            filter: {}
+            filter: {},
+            counts:[5, 10, 15],
         }, {
             total: $scope.data.length, // length of data
             getData: function ($defer, params) {

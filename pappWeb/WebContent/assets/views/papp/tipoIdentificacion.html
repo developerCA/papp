@@ -87,7 +87,7 @@
                                         Nombre
                                         <span class="symbol required"></span>
                                     </label> <input type="text" placeholder="Ingrese el nombre"
-                                                    class="form-control" name="nombre" required
+                                                    class="form-control" name="nombre" ng-disabled="objeto.id !=null" required
                                                     ng-model="objeto.nombre" /> <span class="error text-small block"
                                                                                       ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
                                         Nombre incorrecto
@@ -126,7 +126,7 @@
                                 <div class="form-group">
                                     <label>Usa Verificaci&oacute;n</label>
 
-                                    <input type="checkbox" value="" ng-model="objeto.usaverifica" ng-checked="objeto.usaverifica==1" />
+                                    <input type="checkbox" value="" ng-model="objeto.usaverificaop" ng-checked="objeto.usaverifica==1" />
                                 </div>
 
                             </div>                            

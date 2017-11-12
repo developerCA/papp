@@ -74,6 +74,7 @@ app.controller('ConsecutivoController', [ "$scope","$rootScope","SweetAlert","$f
 			if (resp.estado)
 			   $scope.objeto=resp.json.consecutivo;
 			   $scope.edicion=true;
+			  
 
 		})
 		

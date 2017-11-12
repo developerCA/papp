@@ -97,21 +97,21 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
     };
 
     $scope.nuevo = function () {
-        $scope.objeto = { id: null };
+        $scope.objeto = { id: null,usaverificaop:false };
         $scope.edicion = true;
     }
 
     $scope.editar = function (id) {
 
         tipoIdentificacionFactory.traerTipo(id).then(function (resp) {
-        	console.clear();
-        	console.log("============");
-        	console.log(resp.json.details);
-        	console.log("============");
+        	
             if (resp.estado)
-                $scope.objeto = resp.json.tipoidentificacion;
+            $scope.objeto = resp.json.tipoidentificacion;
+            $scope.objeto.usaverificaop= (($scope.objeto.usaverifica == 1) ? true : false);
+            
             $scope.detalles = resp.json.details;
             $scope.edicion = true;
+            
 
         })
 
@@ -170,16 +170,19 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
 
             } else {
                 $scope.objeto.details = $scope.detalles;
+               
+                $scope.objeto.usaverifica= (($scope.objeto.usaverificaop == true) ? 1 : 0);
+               
                 tipoIdentificacionFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Tipo de IdentificaciÃ³n", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Tipo de Identificación", "Registro guardado satisfactoriamente!", "success");
 
                     } else {
-                        SweetAlert.swal("Tipo de IdentificaciÃ³n", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Tipo de Identificación", resp.mensajes.msg, "error");
 
                     }
 

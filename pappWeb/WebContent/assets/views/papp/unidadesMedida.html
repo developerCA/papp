@@ -78,7 +78,7 @@
                                     <a class="btn btn-sm btn-primary"
                                        ng-click="editar(data.id)"><i class="fa fa-pencil"></i></a>
                                 </td>
-                                <td data-title="'Codigo'">{{data.codigo}}</td>
+                                <td data-title="'C&oacute;digo'">{{data.codigo}}</td>
                                 <td data-title="'Nombre'">{{data.nombre}}</td>
                                 <td data-title="'Grupo Medida'">{{data.npNombregrupo}}</td>
                                 <td data-title="'Estado'">
@@ -108,7 +108,7 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <input type="text" placeholder="Ingrese el c&oacute;digo"
-                                           class="form-control" name="codigo" required ng-model="objeto.codigo" ng-minlength="2" />
+                                           class="form-control" name="codigo" ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null" required ng-model="objeto.codigo" ng-minlength="2" />
                                     <span class="error text-small block" ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo incorrecto</span>
                                     <span class="success text-small" ng-if="Form.anio.$valid">Listo</span>
                                 </div>
