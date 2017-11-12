@@ -1,11 +1,10 @@
 'use strict';
 
-app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","institucionFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, institucionFactory) {
-    
-	
-	$scope.nombreFiltro=null;
-	$scope.ordenFiltro=null;
-	
+app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","institucionFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, institucionFactory) {
+
+	$scope.nombre=null;
+
 	$scope.edicion=false;
 	$scope.guardar=false;
 	$scope.objeto={};
@@ -14,20 +13,14 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		console.log('AQUIIII-111');
 		$scope.data=[];
 		institucionFactory.traerInstitucion(pagina).then(function(resp){
-			console.log('AQUIIII');
-			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
-			    
 		})
-	
 	};
 	
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -46,47 +39,36 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
-		institucionFactory.traerInstitucionFiltro(pagina,$scope.nombreFiltro).then(function(resp){
-			
+		institucionFactory.traerInstitucionFiltro(pagina,$scope.nombre).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
 	
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.ordenFiltro=null;
-		
-		
+		$scope.nombre=null;
+
 		$scope.consultar();
-		
 	};
 	
 	$scope.nuevo=function(){
 		$scope.objeto={id:null};
 		$scope.objetolista=[];
 		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
-//		console.log(obj);
 		$scope.objetolista.push(obj);
-//		console.log($scope.objetolista);
-
 		$scope.edicion=true;
 		$scope.guardar=true;
 	}
 	
 	$scope.editar=function(id){
-		institucionFactory.traerInstitucion(id).then(function(resp){
-//console.clear();
-//console.log(resp.json);
+		institucionFactory.traerInstitucionEditar(id).then(function(resp){
+			console.log(resp.json);
 			if (resp.estado) {
-			   $scope.objeto=resp.json.perfil;
+			   $scope.objeto=resp.json.institucion;
 			   $scope.objetolista=resp.json.details;
-			   //console.log($scope.objetolista);
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;

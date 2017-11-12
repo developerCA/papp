@@ -6,9 +6,7 @@ app.factory("estructuraorganicaFactory", [ "Restangular", function(Restangular) 
 		
 		
 		traerEstructuraOrganica : function(pagina) {
-			  
 			  return Restangular.allUrl("estructuraorganica/consultar/estructuraorganica/pagina="+pagina).getList();
-			  
 		},
 		
 		traerEstructuraOrganicaFiltro : function(pagina,codigo,fuerza,grado,padre,estado) {
@@ -27,7 +25,7 @@ app.factory("estructuraorganicaFactory", [ "Restangular", function(Restangular) 
 		
 		traerEstructuraOrganicaEditar : function(id) {
 			  
-			var url = "estructuraorganica/estructuraorganica/"+id+"/-1";
+			var url = "estructuraorganica/estructuraorganica/"+id+"/-1/-1";
 		   
 		    return Restangular.allUrl(url).customGET();
 			  

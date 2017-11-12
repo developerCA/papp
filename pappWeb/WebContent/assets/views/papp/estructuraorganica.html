@@ -18,9 +18,7 @@
 
 			<div class="panel panel-white">
 
-
 				<div class="panel-body" ng-show="!edicion">
-
 
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
@@ -48,8 +46,8 @@
 									<label class="control-label">
 										Org&aacute;nico nombre
 									</label>
-									<input type="text" placeholder="Ingrese una Fuerza"
-										class="form-control" name="fuerza"
+									<input type="text" placeholder="Ingrese un Nombre"
+										class="form-control" name="nombre"
 										ng-model="fuerza" />
 								</div>
 							</div>
@@ -61,8 +59,8 @@
 									<label class="control-label">
 										Org&aacute;nico versi&oacute;n
 									</label>
-									<input type="text" placeholder="Ingrese un Grado"
-										class="form-control" name="grado"
+									<input type="text" placeholder="Ingrese una Versi&oacute;n"
+										class="form-control" name="version"
 										ng-model="grado" />
 								</div>
 							</div>
@@ -73,9 +71,9 @@
 										Estado
 									</label>
 									<select class="form-control" name="estado" ng-model="estado">
-									  <option value="">Selecione un estado</option>
-									  <option value="A">Activo</option>
-									  <option value="I">Inactivo</option>
+										<option value="">Selecione un estado</option>
+										<option value="P">En proceso</option>
+										<option value="E">Eliminado</option>
 									</select>
 								</div>
 							</div>
@@ -95,27 +93,24 @@
 					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"><i
 						class="fa fa-plus-square"></i> Agregar</a>
 
-
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
 								<td><a class="btn btn-sm btn-primary"
 									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
 										class="fa fa-pencil"></i></a></td>
-
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Nombre'">{{obj.npnombregrado}}</td>
-								<td data-title="'Versi&oacute;n'">{{obj.npsiglagrado}}</td>
-								<td data-title="'Fecha vigencia inicio'">{{obj.npgrupo}}</td>
-								<td data-title="'Fecha vigencia fin'">{{obj.npnombrefuerza}}</td>
-								<td data-title="'Instituci&oacute;n nombre'">{{obj.npsiglafuerza}}</td>
-								<td data-title="'Entidad nombre'">{{obj.npsiglafuerza}}</td>
+								<td data-title="'Nombre'">{{obj.nombre}}</td>
+								<td data-title="'Versi&oacute;n'">{{obj.version}}</td>
+								<td data-title="'Fecha vigencia inicio'">{{obj.npfecviginicioc}}</td>
+								<td data-title="'Fecha vigencia fin'">{{obj.npfecvigfinc}}</td>
+								<td data-title="'Instituci&oacute;n nombre'">{{obj.npnombreinstitucion}}</td>
+								<td data-title="'Entidad nombre'">{{obj.npnombreentidad}}</td>
 								<td data-title="'Estado'">{{obj.npestado}}</td>
 							</tr>
 						</table>
 					</div>
 				</div>
-
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
 
@@ -133,7 +128,7 @@
 										C&oacute;digo
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder=""
+									<input type="text" placeholder="Escribe un c&oacute;digo"
 										class="form-control" name="codigo" required
 										ng-model="objeto.codigo" ng-minlength="1" />
 									<span class="error text-small block"
@@ -145,86 +140,86 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
 									<label class="control-label">
 										Nombre
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder=""
-										class="form-control" name="codigo" required
-										ng-model="objeto.codigo" ng-minlength="1" />
+									<input type="text" placeholder="Escriba un nombre"
+										class="form-control" name="nombre" required
+										ng-model="objeto.nombre" ng-minlength="1" />
 									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
 										Incorrecto</span>
 									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
+										ng-if="Form.nombre.$valid">
 										Listo</span>
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									ng-class="{'has-error':For.version.$dirty && Form.version.$invalid, 'has-success':Form.version.$valid}">
 									<label class="control-label">
 										Versi&oacute;n
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder=""
-										class="form-control" name="codigo" required
-										ng-model="objeto.codigo" ng-minlength="1" />
+									<input type="text" placeholder="Escriba una versi&oacute;n "
+										class="form-control" name="version" required
+										ng-model="objeto.version" ng-minlength="1" />
 									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										ng-if="Form.version.$dirty && Form.version.$invalid">
 										Incorrecto</span>
 									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
+										ng-if="Form.version.$valid">
 										Listo</span>
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									ng-class="{'has-error':For.npfecviginicio.$dirty && Form.npfecviginicio.$invalid, 'has-success':Form.npfecviginicio.$valid}">
 									<label class="control-label">
 										Fecha vigencia inicio
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder=""
-										class="form-control" name="codigo" required
-										ng-model="objeto.codigo" ng-minlength="1" />
+									<input type="text" placeholder="Indique una fecha"
+										class="form-control" name="npfecviginicio" required
+										ng-model="objeto.npfecviginicio" ng-minlength="1" />
 									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										ng-if="Form.npfecviginicio.$dirty && Form.npfecviginicio.$invalid">
 										Incorrecto</span>
 									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
+										ng-if="Form.npfecviginicio.$valid">
 										Listo</span>
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									ng-class="{'has-error':For.npfecvigfin.$dirty && Form.npfecvigfin.$invalid, 'has-success':Form.npfecvigfin.$valid}">
 									<label class="control-label">
 										Fecha vigencia fin
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder=""
-										class="form-control" name="codigo" required
-										ng-model="objeto.codigo" ng-minlength="1" />
+									<input type="text" placeholder="Indique una fecha"
+										class="form-control" name="npfecvigfin" required
+										ng-model="objeto.npfecvigfin" ng-minlength="1" />
 									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										ng-if="Form.npfecvigfin.$dirty && Form.npfecvigfin.$invalid">
 										Incorrecto</span>
 									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
+										ng-if="Form.npfecvigfin.$valid">
 										Listo</span>
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.npnombrefuerza.$dirty && Form.npnombrefuerza.$invalid, 'has-success':Form.npnombrefuerza.$valid}">
+									ng-class="{'has-error':For.eorganicainstitucionid.$dirty && Form.eorganicainstitucionid.$invalid, 'has-success':Form.eorganicainstitucionid.$valid}">
 									<label class="control-label">
 										Instituci&oacute;n ID
 										<span class="symbol required"></span>
 									</label>
 									<div class="input-group">
-										<input type="text" placeholder="Seleccione la Fuerza"
-											class="form-control" name="npnombrefuerza" ng-disabled="true"
-											ng-model="objeto.npnombrefuerza" />
+										<input type="text" placeholder="Seleccione una Instituci&oacute;n"
+											class="form-control" name="eorganicainstitucionid" ng-disabled="true"
+											ng-model="objeto.eorganicainstitucionid" />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-primary"
-												ng-click="abrirFuerza($index)">
+												ng-click="abrirInstitucion()">
 												<i class="fa fa-search"></i> Seleccione
 											</button>
 										</span>
@@ -232,49 +227,49 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									ng-class="{'has-error':For.npcodigoinstitucion.$dirty && Form.npcodigoinstitucion.$invalid, 'has-success':Form.npcodigoinstitucion.$valid}">
 									<label class="control-label">
 										Instituci&oacute;n c&oacute;digo
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder=""
-										class="form-control" name="codigo" required
-										ng-model="objeto.codigo" ng-minlength="1" />
+									<input type="text" placeholder="Sin seleccionar"
+										class="form-control" name="npcodigoinstitucion" required
+										ng-model="objeto.npcodigoinstitucion" ng-minlength="1" />
 									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										ng-if="Form.npcodigoinstitucion.$dirty && Form.npcodigoinstitucion.$invalid">
 										Incorrecto</span>
 									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
+										ng-if="Form.npcodigoinstitucion.$valid">
 										Listo</span>
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									ng-class="{'has-error':For.npnombreinstitucion.$dirty && Form.npnombreinstitucion.$invalid, 'has-success':Form.npnombreinstitucion.$valid}">
 									<label class="control-label">
 										Instituci&oacute;n nombre
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder=""
-										class="form-control" name="codigo" required
-										ng-model="objeto.codigo" ng-minlength="1" />
+									<input type="text" placeholder="Sin seleccionar"
+										class="form-control" name="npnombreinstitucion" required
+										ng-model="objeto.npnombreinstitucion" ng-minlength="1" />
 									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										ng-if="Form.npnombreinstitucion.$dirty && Form.npnombreinstitucion.$invalid">
 										Incorrecto</span>
 									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
+										ng-if="Form.npnombreinstitucion.$valid">
 										Listo</span>
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.npnombrefuerza.$dirty && Form.npnombrefuerza.$invalid, 'has-success':Form.npnombrefuerza.$valid}">
+									ng-class="{'has-error':For.eorganicainstitucionentid.$dirty && Form.eorganicainstitucionentid.$invalid, 'has-success':Form.eorganicainstitucionentid.$valid}">
 									<label class="control-label">
 										Entidad ID
 										<span class="symbol required"></span>
 									</label>
 									<div class="input-group">
-										<input type="text" placeholder="Seleccione la Fuerza"
-											class="form-control" name="npnombrefuerza" ng-disabled="true"
-											ng-model="objeto.npnombrefuerza" />
+										<input type="text" placeholder="Seleccione la Entidad"
+											class="form-control" name="eorganicainstitucionentid" ng-disabled="true"
+											ng-model="objeto.eorganicainstitucionentid" />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-primary"
 												ng-click="abrirFuerza($index)">
@@ -285,36 +280,36 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									ng-class="{'has-error':For.npcodigoentidad.$dirty && Form.npcodigoentidad.$invalid, 'has-success':Form.npcodigoentidad.$valid}">
 									<label class="control-label">
 										Entidad c&oacute;digo
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder=""
-										class="form-control" name="codigo" required
-										ng-model="objeto.codigo" ng-minlength="1" />
+									<input type="text" placeholder="Sin seleccionar"
+										class="form-control" name="npcodigoentidad" required
+										ng-model="objeto.npcodigoentidad" ng-minlength="1" />
 									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										ng-if="Form.npcodigoentidad.$dirty && Form.npcodigoentidad.$invalid">
 										Incorrecto</span>
 									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
+										ng-if="Form.npcodigoentidad.$valid">
 										Listo</span>
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									ng-class="{'has-error':For.npnombreentidad.$dirty && Form.npnombreentidad.$invalid, 'has-success':Form.npnombreentidad.$valid}">
 									<label class="control-label">
 										Entidad nombre
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder=""
-										class="form-control" name="codigo" required
-										ng-model="objeto.codigo" ng-minlength="1" />
+									<input type="text" placeholder="Sin seleccionar"
+										class="form-control" name="npnombreentidad" required
+										ng-model="objeto.npnombreentidad" ng-minlength="1" />
 									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										ng-if="Form.npnombreentidad.$dirty && Form.npnombreentidad.$invalid">
 										Incorrecto</span>
 									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
+										ng-if="Form.npnombreentidad.$valid">
 										Listo</span>
 								</div>
 
@@ -323,9 +318,13 @@
 										Estado
 										<span class="symbol required"></span>
 									</label>
-									<select class="form-control" name="estado" ng-model="objeto.estado">
-									  <option value="A">Activo</option>
-									  <option value="I">Inactivo</option>
+									<select class="form-control" name="estado"
+										placeholder="Seleccione un estado" ng-model="objeto.estado">
+										<option value="">Selecione un estado</option>
+										<option value="V">Vigente</option>
+										<option value="A">Anulado</option>
+										<option value="P">En proceso</option>
+										<option value="E">Eliminado</option>
 									</select>
 									<span class="error text-small block"
 										ng-if="Form.estado.$dirty && Form.estado.$invalid">
@@ -353,12 +352,11 @@
 
 					</form>
 
-					<script type="text/ng-template" id="modalFuerza.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Fuerzas</h3>
-                            </div>
-                            <div class="modal-body">
-
+<script type="text/ng-template" id="modalInstitucion.html">
+            <div class="modal-header">
+            	<h3 class="modal-title">Instituciones</h3>
+            </div>
+			<div class="modal-body">
 				<div class="panel-body" ng-init="consultar();" >
 
 					<div class="panel panel-white" id="panel1">
@@ -372,34 +370,11 @@
 								<div class="row">
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label> C&oacute;digo </label> <input type="text"
-												class="form-control" ng-model="codigoFiltro">
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
 											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>									
-									</div>
-									<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Sigla </label> <input type="text"
-												class="form-control" ng-model="siglaFiltro">
+												class="form-control" ng-model="nombre">
 										</div>
 									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Estado </label> <select name="country"
-												ng-model="estadoFiltro" class="form-control">
-												<option value>Todos</option>
-												<option value="A">Activo</option>
-												<option value="I">Inactivo</option>
-											</select>
-										</div>
-									</div>
+
 								</div>
 								<div class="row">
 									<div class="col-sm-12">
@@ -420,7 +395,6 @@
 										class="fa fa-check"></i></a></td>
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
-								<td data-title="'Sigla'">{{obj.sigla}}</td>
 								<td data-title="'Estado'">{{obj.npestado}}</td>
 							</tr>
 						</table>

@@ -4,12 +4,12 @@ app.factory("indicadoresFactory", [ "Restangular", function(Restangular) {
 
 	return {
 
-		traerIndicadores : function(pagina) {
-			  return Restangular.allUrl("planificacion/consultar/indicador/pagina="+pagina).getList();
+		traerIndicadores : function(pagina,ejefiscal) {
+			  return Restangular.allUrl("planificacion/consultar/indicador/pagina="+pagina+"&indicadorejerciciofiscalid="+ejefiscal).getList();
 		},
 
-		traerIndicadoresFiltro : function(pagina,codigo,nombre) {
-			var url = "planificacion/consultar/indicador/pagina="+pagina;
+		traerIndicadoresFiltro : function(pagina,ejefiscal,codigo,nombre) {
+			var url = "planificacion/consultar/indicador/pagina="+pagina+"&indicadorejerciciofiscalid="+ejefiscal;
 
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
 			if(nombre!=null && fuerza != "") url += "&nombre=" + fuerza;	

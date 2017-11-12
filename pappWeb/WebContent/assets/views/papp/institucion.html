@@ -1,6 +1,6 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-	<h4 class="mainTitle no-margin">Perfiles</h4>
+	<h4 class="mainTitle no-margin">Instituciones</h4>
 
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
@@ -18,9 +18,7 @@
 
 			<div class="panel panel-white">
 
-
 				<div class="panel-body" ng-show="!edicion">
-
 
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
@@ -34,7 +32,7 @@
 									<div class="col-sm-4">
 										<div class="form-group">
 											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
+												class="form-control" ng-model="nombre">
 										</div>
 									</div>
 
@@ -53,26 +51,24 @@
 					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"><i
 						class="fa fa-plus-square"></i> Agregar</a>
 
-
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
 								<td><a class="btn btn-sm btn-primary"
 									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
 										class="fa fa-pencil"></i></a></td>
-
+								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
-
+								<td data-title="'Estado'">{{obj.npestado}}</td>
 							</tr>
 						</table>
 					</div>
 				</div>
 
-
 				<div ng-show="edicion" class="panel-body" id="panel1">
 
 					<div class="panel-heading">
-						<h5 class="panel-title">Perfiles</h5>
+						<h5 class="panel-title">Instituci&otilde;n</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
@@ -81,15 +77,21 @@
 							<div class="col-md-6">
 
 								<div class="form-group"
-									ng-class="{'has-error':For.id.$dirty && Form.id.$invalid, 'has-success':Form.id.$valid}">
-									<label class="control-label"> Id <span
+									ng-class="{'has-error':For.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									<label class="control-label"> C&otilde;odigo <span
 										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Id"
-										class="form-control" name="id" ng-model="objeto.id"
-										required /> <span class="error text-small block"
-										ng-if="Form.id.$dirty && Form.id.$invalid">Id
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.id.$valid">Listo</span>
+									</label>
+									<input type="text" placeholder="Ingrese un c&otilde;digo"
+										class="form-control" name="codigo" ng-model="objeto.codigo"
+										required />
+									<span class="error text-small block"
+										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										Incorrecto
+									</span>
+									<span class="success text-small"
+										ng-if="Form.codigo.$valid">
+										Listo
+									</span>
 								</div>
 
 								<div class="form-group"
@@ -98,13 +100,94 @@
 										class="symbol required"></span>
 									</label> <input type="text" placeholder=""
 										class="form-control" name="nombre" required
-										ng-model="objeto.nombre" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">Nombre
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
+										ng-model="objeto.nombre" ng-minlength="1" />
+									<span class="error text-small block"
+										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										Incorrecto
+									</span>
+									<span class="success text-small"
+										ng-if="Form.codigo.$valid">
+										Listo
+									</span>
 								</div>
 
+								<div class="form-group"
+									ng-class="{'has-error':For.baselegal.$dirty && Form.baselegal.$invalid, 'has-success':Form.baselegal.$valid}">
+									<label class="control-label">
+										Base legal 
+										<span class="symbol required"></span>
+									</label>
+									<textarea placeholder="Especifique la base legal"
+										class="form-control" name="baselegal" required
+										ng-model="objeto.baselegal" rows="5">
+									</textarea>
+									<span class="error text-small block"
+										ng-if="Form.baselegal.$dirty && Form.baselegal.$invalid">
+										Incorrecto
+									</span>
+									<span class="success text-small"
+										ng-if="Form.baselegal.$valid">
+										Listo
+									</span>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':For.mision.$dirty && Form.mision.$invalid, 'has-success':Form.mision.$valid}">
+									<label class="control-label">
+										Misi&otilde;n 
+										<span class="symbol required"></span>
+									</label>
+									<textarea placeholder="Especifique la base legal"
+										class="form-control" name="mision" required
+										ng-model="objeto.mision" rows="5">
+									</textarea>
+									<span class="error text-small block"
+										ng-if="Form.mision.$dirty && Form.mision.$invalid">
+										Incorrecto
+									</span>
+									<span class="success text-small"
+										ng-if="Form.mision.$valid">
+										Listo
+									</span>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':For.vision.$dirty && Form.vision.$invalid, 'has-success':Form.vision.$valid}">
+									<label class="control-label">
+										Visi&otilde;n 
+										<span class="symbol required"></span>
+									</label>
+									<textarea placeholder="Especifique la base legal"
+										class="form-control" name="vision" required
+										ng-model="objeto.vision" rows="5">
+									</textarea>
+									<span class="error text-small block"
+										ng-if="Form.vision.$dirty && Form.vision.$invalid">
+										Incorrecto
+									</span>
+									<span class="success text-small"
+										ng-if="Form.vision.$valid">
+										Listo
+									</span>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">
+										Estado
+										<span class="symbol required"></span>
+									</label>
+									<select class="form-control" name="estado" ng-model="objeto.estado">
+									  <option value="">Seleccione el estado</option>
+									  <option value="A">Activo</option>
+									  <option value="I">Inactivo</option>
+									</select>
+									<span class="error text-small block"
+										ng-if="Form.estado.$dirty && Form.estado.$invalid">
+										Incorrecto</span>
+									<span class="success text-small"
+										ng-if="Form.estado.$valid">
+										Listo</span>
+								</div>
 							</div>
 						</div>
 
@@ -116,7 +199,7 @@
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
 										</a>
-										<h4 class="panel-title">Permisos</h4>
+										<h4 class="panel-title">Entidad</h4>
 
 
 									</div>
@@ -126,7 +209,12 @@
 												<table class="table table-striped">
 													<tr>
 														<td></td>
+														<td>C&oacute;digo</td>
 														<th>Nombre</th>
+														<td>Pa&iacute;s</td>
+														<td>Provincia</td>
+														<td>Cant&oacute;n</td>
+														<td>Estado</td>
 													</tr>
 													<tr ng-repeat="obj in objetolista">
 														<td><!--  ng-disabled="obj.perfilpermisolectura==0" -->
@@ -137,18 +225,31 @@
 															</a>
 														</td>
 <!-- 																required ng-model="obj.id.permisoid" -->
-														<td data-title="'Nombre'">
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione el permiso"
-											class="form-control" name="codigopadre" ng-disabled="true"
-											ng-model="obj.nppermiso" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirPerfilesPermisos($index)">
-												<i class="fa fa-search"></i> Seleccione
-											</button>
-										</span>
-									</div>
+														<td>
+															<input type="text" placeholder="Escriba un c&otilde;digo"
+																class="form-control" name="codigo" ng-disabled="true"
+																ng-model="obj.codigo" />
+														</td>
+														<td>
+															<input type="text" placeholder="Escriba el nombre"
+																class="form-control" name="nombre" ng-disabled="true"
+																ng-model="obj.nombre" />
+														</td>
+														<td>
+															<input type="text" placeholder="Seleccione el pais"
+																class="form-control"/>
+														</td>
+														<td>
+															<input type="text" placeholder="Seleccione una provincia"
+																class="form-control"/>
+														</td>
+														<td>
+															<input type="text" placeholder="Seleccione un cant&otilde;n"
+																class="form-control"/>
+														</td>
+														<td>
+															<input type="text" placeholder="Seleccione un estado"
+																class="form-control"/>
 														</td>
 													</tr>
 												</table>

@@ -405,7 +405,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.estructuraorganica', {
         url: "/estructuraorganica",
         templateUrl: "assets/views/papp/estructuraorganica.html",
-        resolve: loadSequence('ngTable','EstructuraOrganicaCtrl','EstructuraOrganicaFactory'),
+        resolve: loadSequence('ngTable','EstructuraOrganicaCtrl','ModalInstitucionCtrl','EstructuraOrganicaFactory','InstitucionFactory'),
         title: 'Estructura Organica',
         ncyBreadcrumb: {
             label: 'Estructura Organica'
@@ -444,6 +444,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         
         ncyBreadcrumb: {
             label: 'Grado Escala'
+        }
+    }).state('app.empleado', {
+        url: "/empleado",
+        templateUrl: "assets/views/papp/empleado.html",
+        resolve: loadSequence('ngTable','EmpleadoCtrl','EmpleadoFactory'),
+        title: 'Indicadores',
+        ncyBreadcrumb: {
+            label: 'Empleado'
         }
     }).state('app.layouts', {
         url: "/layouts",

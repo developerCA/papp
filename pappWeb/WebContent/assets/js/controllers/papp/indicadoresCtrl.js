@@ -14,7 +14,7 @@ app.controller('IndicadoresController', [ "$scope","$rootScope","$uibModal","Swe
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		indicadoresFactory.traerIndicadores(pagina).then(function(resp){
+		indicadoresFactory.traerIndicadores(pagina,$rootScope.ejefiscal).then(function(resp){
 //			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
@@ -43,7 +43,7 @@ app.controller('IndicadoresController', [ "$scope","$rootScope","$uibModal","Swe
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		indicadoresFactory.traerIndicadoresFiltro(pagina,$scope.codigo,$scope.nombre).then(function(resp){
+		indicadoresFactory.traerIndicadoresFiltro(pagina,$rootScope.ejefiscal,$scope.codigo,$scope.nombre).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})

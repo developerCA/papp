@@ -12,7 +12,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.edicion=false;
 	$scope.nuevoar=false;
 	$scope.guardar=false;
-	$scope.objeto={};
+	$scope.objeto={estado:null};
 	
 	var pagina = 1;
 	
@@ -20,7 +20,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.data=[];
 		//console.log('aqi');
 		estructuraorganicaFactory.traerEstructuraOrganica(pagina).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -66,7 +66,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null,estado:"A"};
+		$scope.objeto={id:null,estado:null};
 		$scope.edicion=true;
 		$scope.nuevoar=true;
 		$scope.guardar=true;
@@ -74,14 +74,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	
 	$scope.editar=function(id){
 		estructuraorganicaFactory.traerEstructuraOrganicaEditar(id).then(function(resp){
-//console.clear();
-//console.log('AQUIIII-111');
-//console.log(resp);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.estructuraorganica;
-			    //$scope.objeto.npnombrepadre='111';
-			    
-			    //console.log($scope.objeto);
 			}
 			$scope.edicion=true;
 			$scope.nuevoar=false;
@@ -89,17 +83,17 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		})
 	};
 
-	$scope.abrirFuerza = function(index) {
-		//console.log("aqui");
+	$scope.abrirInstitucion = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalFuerza.html',
-			controller : 'ModalFuerzaController',
+			templateUrl : 'modalInstitucion.html',
+			controller : 'ModalInstitucionController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			$scope.objeto.estructuraorganicafuerzaid = obj.id;
-			$scope.objeto.npnombrefuerza = obj.nombre;
+			console.log(obj);
+			$scope.objeto.eorganicainstitucionid = obj.id;
+			$scope.objeto.npcodigoinstitucion = obj.codigo;
+			$scope.objeto.npnombreinstitucion = obj.nombre;
 		}, function() {
 			console.log("close modal");
 		});
@@ -116,23 +110,6 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			//console.log(obj);
 			$scope.objeto.estructuraorganicagradoid = obj.id;
 			$scope.objeto.npnombregrado = obj.nombre;
-		}, function() {
-			console.log("close modal");
-		});
-	};
-
-	$scope.abrirGradoSuperior = function(index) {
-		//console.log("aqui");
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalGrado.html',
-			controller : 'ModalGradoController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			
-			$scope.objeto.estructuraorganicapadreid = obj.id;
-			$scope.objeto.npnombrepadre = obj.nombre;
-			console.log($scope.objeto);
 		}, function() {
 			console.log("close modal");
 		});
