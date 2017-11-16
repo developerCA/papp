@@ -63,7 +63,7 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 		
 		$scope.edicion=true;
 	};
@@ -110,10 +110,10 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Escala RemuneraciÃ³n!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Escala Remuneración!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Escala RemuneraciÃ³n!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Escala Remuneración!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

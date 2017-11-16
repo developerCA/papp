@@ -66,7 +66,7 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 	
 	$scope.nuevo=function(){
 		
-		$scope.objeto={id:null};		
+		$scope.objeto={id:null,estado:'A'};		
 		$scope.edicion=true;
 	};
 	
@@ -161,7 +161,7 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Cargo Escala!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Cargo Escala!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Cargo Escala!", resp.mensajes.msg, "error");

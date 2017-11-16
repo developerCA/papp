@@ -64,7 +64,7 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 		
 		$scope.edicion=true;
 	}
@@ -113,7 +113,7 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Cargo!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Cargo!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Cargo!", resp.mensajes.msg, "error");

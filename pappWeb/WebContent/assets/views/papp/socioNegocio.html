@@ -74,7 +74,7 @@
                                        ng-click="editar(data.id)"><i class="fa fa-pencil"></i></a>
                                 </td>
                                 <td data-title="'Codigo'">{{data.codigo}}</td>
-                                <td data-title="'Nombre'">{{data.nombre}}</td>
+                                <td data-title="'Nombre'">{{data.nombremostrado}}</td>
                                 <td data-title="'Es Proveedor'">
                                     <span ng-if="data.esproveedor=='1'">Si</span>
                                     <span ng-if="data.esproveedor=='0'">No</span>
@@ -109,9 +109,9 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <input type="text" placeholder="Ingrese el c&oacute;digo"
-                                           class="form-control" name="codigo" required ng-model="objeto.codigo" ng-minlength="2"/>
+                                           class="form-control" name="codigo" ng-disabled="objeto.id !=null" required ng-model="objeto.codigo" ng-minlength="2"/>
                                     <span class="error text-small block" ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo incorrecto</span>
-                                    <span class="success text-small" ng-if="Form.anio.$valid">Listo</span>
+                                    <span class="success text-small" ng-if="Form.codigo.$valid">Listo</span>
                                 </div>
 
                                 <div class="form-group"

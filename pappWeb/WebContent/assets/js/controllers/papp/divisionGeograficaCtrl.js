@@ -64,7 +64,7 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 		
 		$scope.edicion=true;
 	}
@@ -138,10 +138,10 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Division Geografica!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Division Geográfica!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Division Geografica!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Division Geográfica!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

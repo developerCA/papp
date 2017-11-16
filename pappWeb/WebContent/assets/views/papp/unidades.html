@@ -101,8 +101,8 @@
 									<label class="control-label"> C&oacute;digo <span
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese el Codigo"
-										class="form-control" name="codigo" ng-model="objeto.codigo"
-										required ng-minlength="3" ng-maxlength="3"
+										class="form-control" name="codigo" ng-model="objeto.codigopresup"
+										ng-disabled="objeto.id !=null" required ng-minlength="3" ng-maxlength="3"
 										style='text-transform: uppercase' /> <span
 										class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">Debe
@@ -148,7 +148,7 @@
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
 										</a>
-										<h4 class="panel-title">Pr&eacute;stamo</h4>
+										<h4 class="panel-title">Instituci&oacute;n</h4>
 
 
 									</div>

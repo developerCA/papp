@@ -68,7 +68,7 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 	
 	$scope.nuevo=function(){
 		
-		$scope.objeto={id:null};		
+		$scope.objeto={id:null,estado:'A'};		
 		$scope.edicion=true;
 	};
 	
@@ -173,7 +173,7 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Grado Escala!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Grado Escala!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Grado Escala!", resp.mensajes.msg, "error");		        				 

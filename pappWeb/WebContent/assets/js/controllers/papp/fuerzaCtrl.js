@@ -16,7 +16,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 		
 		$scope.data=[];
 		fuerzaFactory.traerFuerzas(pagina).then(function(resp){
-			console.log(resp);
+			
 			if (resp.meta)
 				$scope.data=resp;				
 		})
@@ -64,7 +64,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 		$scope.detalles=[];
 		$scope.edicion=true;
 	}
@@ -76,9 +76,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 				
 				$scope.objeto=resp.json.fuerza;
 				$scope.detalles=resp.json.details;
-				console.clear();
-				console.log("==================");
-				console.log($scope.detalles);
+				
 				$scope.edicion=true;
 				console.log($scope.objeto);
 		})
@@ -155,7 +153,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 			 		             $scope.objeto={};
 			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Fuerza!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Fuerza!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Fuerza!", resp.mensajes.msg, "error");

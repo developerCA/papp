@@ -70,11 +70,12 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 	$scope.editar=function(id){
 		
 		unidadFactory.traerUnidad(id).then(function(resp){
-			//console.log(resp);
+			
 			if (resp.estado)
 			   $scope.objeto=resp.json.unidad;
 			   $scope.detalles=resp.json.details;
 			   $scope.edicion=true;
+			  console.log($scope.objeto);
 		})
 		
 	};

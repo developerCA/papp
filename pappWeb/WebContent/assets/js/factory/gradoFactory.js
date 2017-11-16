@@ -17,7 +17,7 @@ app.factory("gradoFactory", [ "Restangular", function(Restangular) {
 			var url = "administrar/consultar/grado/pagina="+pagina;
 
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
-			if(sigla!=null && sigla != "") url += "&gruposigla=" + sigla;	
+			if(sigla!=null && sigla != "") url += "&sigla=" + sigla;	
 			if(grupo!=null && grupo != "") url += "&nombregrupo=" + grupo;	
 			if(estado!=null && estado != "" ) url += "&estado=" + estado;			
 			return Restangular.allUrl(url).getList();

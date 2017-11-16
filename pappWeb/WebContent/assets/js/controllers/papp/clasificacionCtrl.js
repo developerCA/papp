@@ -15,7 +15,7 @@ app.controller('ClasificacionController', [ "$scope","$rootScope","SweetAlert","
 		
 		$scope.data=[];
 		clasificacionFactory.traerClasificaciones(pagina).then(function(resp){
-			console.log(resp);
+			
 			if (resp.meta)
 				$scope.data=resp;				
 		})
@@ -63,7 +63,7 @@ app.controller('ClasificacionController', [ "$scope","$rootScope","SweetAlert","
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 		
 		$scope.edicion=true;
 	}

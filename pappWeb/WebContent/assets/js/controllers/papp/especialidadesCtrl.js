@@ -60,7 +60,7 @@ app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 
 		$scope.edicion=true;
 		$scope.nuevoar=true;
@@ -130,10 +130,10 @@ app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Grado - Fuerza!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Especialidad!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Grado - Fuerza!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Especialidad!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

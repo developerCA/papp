@@ -20,6 +20,7 @@ app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", 
         sociosNegocioFactory.traer(pagina, $rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
+               console.log($scope.data);
         })
 
     };
@@ -72,7 +73,7 @@ app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", 
 
     $scope.nuevo = function () {
 
-        $scope.objeto = { id: null };
+        $scope.objeto = { id: null,estado:'A' };
         $scope.edicion = true;
     };
 
@@ -119,10 +120,10 @@ app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", 
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Grupo Medida", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Socio Negocio", "Registro guardado satisfactoriamente!", "success");
 
                     } else {
-                        SweetAlert.swal("Grupo Medida", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Socio Negocio", resp.mensajes.msg, "error");
 
                     }
 

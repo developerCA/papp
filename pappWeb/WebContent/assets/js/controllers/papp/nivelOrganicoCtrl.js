@@ -64,7 +64,7 @@ app.controller('NivelOrganicoController', [ "$scope","$rootScope","SweetAlert","
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 		
 		$scope.edicion=true;
 	}
@@ -112,10 +112,10 @@ app.controller('NivelOrganicoController', [ "$scope","$rootScope","SweetAlert","
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Nivel organico!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Nivel orgánico!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Nivel organico!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Nivel orgánico!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

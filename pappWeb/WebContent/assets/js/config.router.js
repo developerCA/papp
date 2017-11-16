@@ -307,7 +307,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             label: 'Grados'
         }     
     }).state('app.clasificaciones', {
-        url: "/grados",
+        url: "/clasificacion",
         templateUrl: "assets/views/papp/clasificaciones.html",
         resolve: loadSequence('ngTable','ClasificacionCtrl','ClasificacionFactory'),
         title: 'Clasificaciones',
