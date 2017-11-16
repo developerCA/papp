@@ -4,7 +4,7 @@
  * controller for angular-menu
  * 
  */
-app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "UnidadesMedidaFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, unidadesMedidaFactory) {
+app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "UnidadesMedidaFactory","gruposMedidaFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, unidadesMedidaFactory,gruposMedidaFactory) {
 
     $scope.nombre = null;
     $scope.estado = null;
@@ -19,10 +19,10 @@ app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert"
 
         $scope.grupos = [];
 
-        unidadesMedidaFactory.traerGrupos(pagina).then(function (resp) {
+        gruposMedidaFactory.traerGruposFiltro(pagina,'','A').then(function (resp) {
             if (resp.meta)
                 $scope.grupos = resp;
-            console.log($scope.grupos);
+            
         });
 
         $scope.consultar();
@@ -85,7 +85,7 @@ app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert"
 
     $scope.nuevo = function () {
 
-        $scope.objeto = { id: null };
+        $scope.objeto = { id: null,estado:'A' };
         $scope.edicion = true;
     }
 
@@ -95,9 +95,7 @@ app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert"
 
             if (resp.estado)
                 $scope.objeto = resp.json.unidadmedida;
-            console.log("*************");
-            console.log($scope.objeto.unidadmedidagrupomedidaid);
-            console.log("*************");
+           
             $scope.edicion = true;
 
         })
@@ -128,9 +126,9 @@ app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert"
                 return;
 
             } else {
-                //OJO
-                $scope.objeto.unidadmedidagrupomedidaid = $scope.objeto.unidadmedidagrupomedidaid.id;
-                unidadesMedidaFactory.guardar($scope.objeto).then(function (resp) {
+               
+            	unidadesMedidaFactory.guardar($scope.objeto).then(function (resp) {
+            		console.log($scope.objeto);
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;

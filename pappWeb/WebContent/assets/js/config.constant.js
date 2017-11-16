@@ -139,11 +139,10 @@ app.constant('JS_REQUIRES', {
         'ModalUnidadMedidaCtrl':'assets/js/controllers/papp/modales/modalUnidadMedidaCtrl.js',   
         'ModalClasificacionCtrl':'assets/js/controllers/papp/modales/modalClasificacionCtrl.js',
         'ModalItemCtrl':'assets/js/controllers/papp/modales/modalItemCtrl.js',
-        'SubItemCtrl': 'assets/js/controllers/papp/subItemCtrl.js',
-        'SubItemFactory': 'assets/js/factory/subItemFactory.js',
+        'SubItemCtrl': 'assets/js/controllers/papp/subitemCtrl.js',
+        'SubItemsFactory': 'assets/js/factory/subitemFactory.js',
         'ModalSubItemCtrl':'assets/js/controllers/papp/modales/modalSubItemCtrl.js',        
         'ModalUnidadCtrl':'assets/js/controllers/papp/modales/modalUnidadesCtrl.js',
-        'SubItemsFactory': 'assets/js/factory/subitemFactory.js',
         'SociosNegocioCtrl': 'assets/js/controllers/papp/socioNegocioCtrl.js',
         'SociosNegocioFactory': 'assets/js/factory/socioNegocioFactory.js',
         'CopiarContenidoEjercicioFiscalCtrl':'assets/js/controllers/papp/copiarContenidoEjercicioFiscalCtrl.js',
@@ -160,6 +159,7 @@ app.constant('JS_REQUIRES', {
         'ModalCargoCtrl':'assets/js/controllers/papp/modales/modalCargoCtrl.js',
         'EmpleadoCtrl':'assets/js/controllers/papp/empleadoCtrl.js',
         'EmpleadoFactory':'assets/js/factory/empleadoFactory.js',
+        'ModalGradoFuerzaCtrl':'assets/js/controllers/papp/modales/modalGradoFuerzaCtrl.js',
         
         
     },

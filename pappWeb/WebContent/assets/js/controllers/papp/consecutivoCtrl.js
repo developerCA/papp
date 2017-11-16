@@ -14,7 +14,7 @@ app.controller('ConsecutivoController', [ "$scope","$rootScope","SweetAlert","$f
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		consecutivoFactory.traerConsecutivos(pagina).then(function(resp){
+		consecutivoFactory.traerConsecutivos(pagina,$rootScope.ejefiscal).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -46,7 +46,7 @@ app.controller('ConsecutivoController', [ "$scope","$rootScope","SweetAlert","$f
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		consecutivoFactory.traerConsecutivoFiltro(pagina,$scope.nombreFiltro,$scope.prefijoFiltro,$scope.estadoFiltro).then(function(resp){
+		consecutivoFactory.traerConsecutivoFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.prefijoFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -112,7 +112,7 @@ app.controller('ConsecutivoController', [ "$scope","$rootScope","SweetAlert","$f
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Consecutivo!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Consecutivo!", "Consecutivo registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Consecutivo!", resp.mensajes.msg, "error");

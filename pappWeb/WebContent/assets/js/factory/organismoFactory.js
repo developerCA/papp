@@ -6,15 +6,15 @@ app.factory("organismoFactory", [ "Restangular", function(Restangular) {
 	return {
 		
 		
-		traerOrganismos : function(pagina) {
+		traerOrganismos : function(pagina,ejercicio) {
 			  
-			  return Restangular.allUrl("administrar/consultar/organismo/pagina="+pagina).getList();
+			  return Restangular.allUrl("administrar/consultar/organismo/pagina="+pagina+ "&ejerciciofiscalid=" + ejercicio).getList();
 			  
 		},
 		
-		traerOrganismosFiltro : function(pagina,nombre,codigo,estado) {
+		traerOrganismosFiltro : function(pagina,ejercicio,nombre,codigo,estado) {
 			  
-			var url = "administrar/consultar/organismo/pagina="+pagina;
+			var url = "administrar/consultar/organismo/pagina="+pagina+ "&ejerciciofiscalid=" + ejercicio;
 
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	

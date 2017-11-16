@@ -126,7 +126,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.unidadesmedida', {
         url: "/unidades-medida",
         templateUrl: "assets/views/papp/unidadesMedida.html",
-        resolve: loadSequence('ngTable','UnidadesMedidaCtrl','UnidadesMedidaFactory'),
+        resolve: loadSequence('ngTable','UnidadesMedidaCtrl','UnidadesMedidaFactory','GruposMedidaFactory'),
         title: 'Unidades Medida',        
         ncyBreadcrumb: {
             label: 'Unidades Medida'
@@ -135,10 +135,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/param",
         templateUrl: "assets/views/papp/parametros.html",
         resolve: loadSequence('ngTable','ParametroCtrl','ParametroFactory'),
-        title: 'ParÃ¡metros',
+        title: 'Parámetros',
         
         ncyBreadcrumb: {
-            label: 'Parametros'
+            label: 'Parámetros'
         }
     }).state('app.consecutivos', {
         url: "/consecutivos",
@@ -153,9 +153,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/tipo-identificacion",
         templateUrl: "assets/views/papp/tipoIdentificacion.html",
         resolve: loadSequence('ngTable', 'TipoIdentificacionCtrl', 'TipoIdentificacionFactory'),
-        title: 'Tipo Identificacion',
+        title: 'Tipo Identificación',
         ncyBreadcrumb: {
-            label: 'Tipo Identificaciï¿½n'
+            label: 'Tipo Identificación'
         }
     }).state('app.obras', {
         url: "/obras",
@@ -406,9 +406,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/estructuraorganica",
         templateUrl: "assets/views/papp/estructuraorganica.html",
         resolve: loadSequence('ngTable','EstructuraOrganicaCtrl','ModalInstitucionCtrl','EstructuraOrganicaFactory','InstitucionFactory'),
-        title: 'Estructura Organica',
+        title: 'Estructura Orgánica',
         ncyBreadcrumb: {
-            label: 'Estructura Organica'
+            label: 'Estructura Orgánica'
         }
     }).state('app.indicadores', {
         url: "/indicadores",
@@ -430,7 +430,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.gradoescala', {
         url: "/gradoescala",
         templateUrl: "assets/views/papp/gradoEscala.html",
-        resolve: loadSequence('ngTable','GradoEscalaCtrl','GradoEscalaFactory','ModalFuerzaCtrl', 'FuerzaFactory', 'ModalGradoCtrl', 'GrupoJerarquicoFactory', 'GradoFactory'),
+        resolve: loadSequence('ngTable','GradoEscalaCtrl','GradoEscalaFactory','ModalFuerzaCtrl', 'FuerzaFactory', 'ModalGradoFuerzaCtrl', 'GrupoJerarquicoFactory', 'GradoFuerzaFactory','ModalEscalaCtrl', 'EscalaRemuneracionFactory'),
         title: 'Grado Escala',
         
         ncyBreadcrumb: {

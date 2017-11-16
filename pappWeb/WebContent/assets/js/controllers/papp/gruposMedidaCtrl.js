@@ -72,7 +72,7 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
 
     $scope.nuevo = function () {
 
-        $scope.objeto = { id: null };
+        $scope.objeto = { id: null ,estado:'A'};
         $scope.edicion = true;
     };
 

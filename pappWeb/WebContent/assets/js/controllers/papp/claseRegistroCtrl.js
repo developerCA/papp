@@ -66,7 +66,7 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A',claseregistroejerfiscalid:$rootScope.ejefiscal};
 		$scope.detalles=[];
 		$scope.edicion=true;
 	}
@@ -78,6 +78,7 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 			   $scope.objeto=resp.json.claseregistro;
 			   $scope.detalles=resp.json.details;
 			   $scope.edicion=true;
+			   
 
 		})
 		
@@ -128,7 +129,7 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 			 		             $scope.objeto={};
 			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Clase de Registro!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Clase de Registro!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Clase de Registro!", resp.mensajes.msg, "error");

@@ -37,8 +37,17 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label> Padre Nombre</label>
-                                            <input type="text"
-                                                   class="form-control" ng-model="padre">
+                                <div class="input-group">
+										<input type="text" placeholder="Seleccione el codigo padre"
+											class="form-control" name="codigopadre"
+											ng-model="objeto.itempadreid" ng-disabled="true" /> <span
+											class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="buscarItem()">
+												<i class="fa fa-search"></i> Buscar
+											</button>
+										</span>
+									</div>
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +140,9 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <input type="text" placeholder="Ingrese el c&oacute;digo"
-                                           class="form-control" name="codigo" required ng-model="objeto.codigo" ng-minlength="2" />
+                                           class="form-control" name="codigo"
+                                           ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null"
+                                           required ng-model="objeto.codigo" ng-minlength="2" />
                                     <span class="error text-small block" ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo incorrecto</span>
                                     <span class="success text-small" ng-if="Form.anio.$valid">Listo</span>
                                 </div>
@@ -150,6 +161,8 @@
                                                   ng-if="Form.anio.$valid">Listo</span>
                                 </div>
 
+                            <div class="form-group">
+                                <label> Padre C&oacute;digo</label>
                                 <div class="input-group">
 										<input type="text" placeholder="Seleccione el codigo padre"
 											class="form-control" name="codigopadre"
@@ -161,6 +174,7 @@
 											</button>
 										</span>
 									</div>
+							</div>
 								
 								<div class="form-group">
 									<label class="control-label"> Padre Nombre </label> <input

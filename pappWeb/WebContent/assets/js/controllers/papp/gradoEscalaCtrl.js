@@ -86,10 +86,10 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		
 	};
 	
-	$scope.buscarFuerza=function(){
+	$scope.buscarEscala=function(){
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalFuerza.html',
-			controller : 'ModalFuerzaController',
+			templateUrl : 'modalEscala.html',
+			controller : 'ModalEscalaController',
 			size : 'md',
 			resolve : {
 				tipo : function() {
@@ -99,9 +99,12 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		});
 
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.npcodigofuerza = obj.codigo;
-			$scope.objeto.npnombrefuerza = obj.nombre;			
-			
+			console.log("==========()==========");
+			console.log(obj);
+			console.log("==========()==========");
+			$scope.escala = obj;
+			$scope.objeto.geescalarmuid = obj.id;
+			$scope.objeto.npcodigoescalarmu = obj.id;			
 		}, function() {
 			
 		});
@@ -110,8 +113,8 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 	
 	$scope.buscarGrado=function(){
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalGrado.html',
-			controller : 'ModalGradoController',
+			templateUrl : 'modalGradoFuerza.html',
+			controller : 'ModalGradoFuerzaController',
 			size : 'md',
 			resolve : {
 				tipo : function() {
@@ -121,9 +124,16 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		});
 
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.npcodigogrado = obj.codigo;
-			$scope.objeto.npnombregrado = obj.nombre;			
-			
+			console.log("==========**===========");
+			console.log(obj);
+			console.log("==========**===========");
+			$scope.objeto.npcodigofuerza = obj.npcodigofuerza; 
+			$scope.objeto.npcodigogrado = obj.npcodigogrado;
+			$scope.objeto.npnombregrado = obj.npnombregrado;
+			$scope.objeto.npnombrefuerza = obj.npnombrefuerza;
+			$scope.objeto.npsiglafuerza = obj.npsiglafuerza;
+			$scope.objeto.npsiglagrado = obj.npsiglagrado;	
+			$scope.objeto.gegradofuerzaid = obj.id;
 		}, function() {
 			
 		});
@@ -153,9 +163,9 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		                return;
 
 		            } else {
-		            	console.log("==========================");
+		            	console.log("===========<>============");
 	            		console.log($scope.objeto);
-	            		console.log("==========================");
+	            		console.log("===========<>=============");
 	            		gradoEscalaFactory.guardar($scope.objeto).then(function(resp){
 		            		
 		        			 if (resp.estado){

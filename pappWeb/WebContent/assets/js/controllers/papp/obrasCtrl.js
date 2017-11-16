@@ -21,7 +21,7 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
 
         $scope.data = [];
 
-        obrasFactory.traerObras(pagina).then(function (resp) {
+        obrasFactory.traerObras(pagina,$rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         });
@@ -52,7 +52,7 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
     $scope.filtrar = function () {
 
         $scope.data = [];
-        obrasFactory.traerObrasFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado).then(function (resp) {
+        obrasFactory.traerObrasFiltro(pagina, $rootScope.ejefiscal,$scope.codigo, $scope.nombre, $scope.estado).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         })
@@ -73,7 +73,7 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
     };
 
     $scope.nuevo = function () {
-        $scope.objeto = { id: null };
+        $scope.objeto = { id: null,obraejerciciofiscalid:$rootScope.ejefiscal,estado:'A' };
         $scope.edicion = true;
     }
 
@@ -84,6 +84,7 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
             if (resp.estado)
                 $scope.objeto = resp.json.obra;
             $scope.edicion = true;
+            console.log($scope.objeto);
 
         })
 
@@ -119,10 +120,10 @@ app.controller('ObrasController', ["$scope", "$rootScope", "SweetAlert", "$filte
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Tipo de Identificación", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Obras", "Registro guardado satisfactoriamente!", "success");
 
                     } else {
-                        SweetAlert.swal("Tipo de Identificación", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Obras", resp.mensajes.msg, "error");
 
                     }
 

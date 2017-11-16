@@ -4,15 +4,15 @@ app.factory("ObrasFactory", ["Restangular", function (Restangular) {
 
     return {
 
-        traerObras: function (pagina) {
+        traerObras: function (pagina,ejercicio) {
 
-            return Restangular.allUrl("administrar/consultar/obra/pagina=" + pagina).getList();
+            return Restangular.allUrl("administrar/consultar/obra/pagina=" + pagina+ "&ejerciciofiscalid=" + ejercicio).getList();
 
         },
 
-        traerObrasFiltro: function (pagina, codigo, nombre, estado) {
+        traerObrasFiltro: function (pagina, ejercicio,codigo, nombre, estado) {
 
-            var url = "administrar/consultar/obra/pagina=" + pagina;
+            var url = "administrar/consultar/obra/pagina=" + pagina+ "&ejerciciofiscalid=" + ejercicio;
             if (codigo != null && codigo != "") url += "&codigo=" + codigo;
             if (nombre != null && nombre != "") url += "&nombre=" + nombre;
             if (estado != null && estado != "") url += "&estado=" + estado;

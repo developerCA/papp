@@ -98,7 +98,7 @@
 									<label class="control-label"> Nombre <span
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese el Nombre"
-										class="form-control" name="nombre" required
+										class="form-control" name="nombre" ng-disabled="objeto.id !=null" required
 										ng-model="objeto.nombre" ng-minlength="1" /> <span
 										class="error text-small block"
 										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">Nombre

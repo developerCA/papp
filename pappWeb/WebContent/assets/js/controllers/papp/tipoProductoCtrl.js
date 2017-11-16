@@ -88,12 +88,15 @@ app.controller('TipoProductoController', ["$scope", "$rootScope", "SweetAlert", 
             showCancelButton: true,
             confirmButtonText: "Eliminar",
             cancelButtonText: "Cancelar",
-            closeOnConfirm: true
+            closeOnConfirm: false
         },
-            function () {
+            function (isconfirm) {
+        	 if (isconfirm)
                 tipoProductoFactory.eliminar(id).then(function (resp) {
                     if (resp.estado) {
                         SweetAlert.swal("Módulo de Tipo Productos", "Registro eliminado!", "success");
+                        $scope.limpiar();
+                        
                     } else {
                         SweetAlert.swal("Módulo de Tipo Productos", resp.mensajes.msg, "error");
                     }
@@ -131,7 +134,7 @@ app.controller('TipoProductoController', ["$scope", "$rootScope", "SweetAlert", 
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Módulo de Tipo Productos", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Módulode Tipo Productos", "Registro guardado satisfactoriamente!", "success");
                     } else {
                         SweetAlert.swal("Módulo de Tipo Productos", resp.mensajes.msg, "error");
                     }

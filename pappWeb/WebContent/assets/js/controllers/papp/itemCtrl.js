@@ -17,7 +17,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 
     var pagina = 1;
 
-    $scope.init = function () {
+  /*  $scope.init = function () {
 
         $scope.items = [];
         itemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
@@ -27,7 +27,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
         });
 
         $scope.consultar();
-    };
+    };*/
 
     $scope.consultar = function () {
 
@@ -64,7 +64,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
     $scope.filtrar = function () {
 
         $scope.data = [];
-        itemsFactory.traerItemsFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado, $scope.tipo).then(function (resp) {
+        itemsFactory.traerItemsFiltro(pagina, $rootScope.ejefiscal, $scope.codigo, $scope.nombre, $scope.estado, $scope.tipo).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         })

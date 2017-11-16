@@ -6,18 +6,18 @@ app.factory("fuenteFinanciamientoFactory", [ "Restangular", function(Restangular
 	return {
 		
 		
-		traerFuentes : function(pagina) {
-			  
-			  return Restangular.allUrl("administrar/consultar/fuentefinanciamiento/pagina="+pagina).getList();
+		traerFuentes : function(pagina, ejercicio) {
+			  console.log(ejercicio);
+			  return Restangular.allUrl("administrar/consultar/fuentefinanciamiento/pagina="+pagina + "&ejerciciofiscalid=" + ejercicio).getList();
 			  
 		},
 		
-		traerFuentesFiltro : function(pagina,nombre,codigo,estado) {
+		traerFuentesFiltro : function(pagina, ejercicio,nombre,codigo,estado) {
 			  
-			var url = "administrar/consultar/fuentefinanciamiento/pagina="+pagina;
+			var url = "administrar/consultar/fuentefinanciamiento/pagina="+pagina+ "&ejerciciofiscalid=" + ejercicio;
 
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
-			if(codigo!=null && codigo != "") url += "&prefijo=" + codigo;	
+			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
 			if(estado!=null && estado != "" ) url += "&estado=" + estado;
 			 
 			return Restangular.allUrl(url).getList();

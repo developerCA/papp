@@ -6,15 +6,15 @@ app.factory("consecutivoFactory", [ "Restangular", function(Restangular) {
 	return {
 		
 		
-		traerConsecutivos : function(pagina) {
+		traerConsecutivos : function(pagina,ejercicio) {
 			  
-			  return Restangular.allUrl("administrar/consultar/consecutivo/pagina="+pagina).getList();
+			  return Restangular.allUrl("administrar/consultar/consecutivo/pagina="+pagina+ "&ejerciciofiscalid=" + ejercicio).getList();
 			  
 		},
 		
-		traerConsecutivoFiltro : function(pagina,nombre,prefijo,estado) {
+		traerConsecutivoFiltro : function(pagina,ejercicio,nombre,prefijo,estado) {
 			  
-			var url = "administrar/consultar/consecutivo/pagina="+pagina;
+			var url = "administrar/consultar/consecutivo/pagina="+pagina+ "&ejerciciofiscalid=" + ejercicio;
 
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
 			if(prefijo!=null && prefijo != "") url += "&prefijo=" + prefijo;	

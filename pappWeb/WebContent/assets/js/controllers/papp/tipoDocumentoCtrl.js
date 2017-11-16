@@ -66,7 +66,7 @@ app.controller('TipoDocumentoController', [ "$scope","$rootScope","SweetAlert","
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A',tipodocumentoejerfiscalid:$rootScope.ejefiscal};
 		$scope.detalles=[];
 		$scope.edicion=true;
 	}
@@ -78,6 +78,7 @@ app.controller('TipoDocumentoController', [ "$scope","$rootScope","SweetAlert","
 			   $scope.objeto=resp.json.tipodocumento;
 			   $scope.detalles=resp.json.details;
 			   $scope.edicion=true;
+			   console.log($scope.objeto);
 
 		})
 		
@@ -128,7 +129,7 @@ app.controller('TipoDocumentoController', [ "$scope","$rootScope","SweetAlert","
 			 		             $scope.objeto={};
 			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Tipo de Documento!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Tipo de Documento!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Tipo de Documento!", resp.mensajes.msg, "error");

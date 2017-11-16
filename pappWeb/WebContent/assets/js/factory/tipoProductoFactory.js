@@ -31,8 +31,8 @@ app.factory("TipoProductoFactory", ["Restangular", function (Restangular) {
         },
 
         eliminar: function (id) {
-            var url = "administrar/tipoproducto/";
-            return Restangular.allUrl(url).remove(id);
+            var url = "administrar/tipoproducto/"+id+"/-1";
+            return Restangular.allUrl(url).remove();
         }
 
     }

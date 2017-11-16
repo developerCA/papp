@@ -8,9 +8,9 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
         	return Restangular.allUrl("administrar/consultar/item/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio).getList();
         },
 
-        traerItemsFiltro: function (pagina, codigo, nombre, estado, tipo, ejerciciofiscalid) {
+        traerItemsFiltro: function (pagina,ejercicio,codigo, nombre, estado, tipo) {
 
-            var url = "administrar/consultar/item/pagina=" + pagina;
+            var url = "administrar/consultar/item/pagina=" + pagina+ "&ejerciciofiscalid=" + ejercicio;
             if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();
             if (nombre != null && nombre != "") url += "&nombre=" + nombre;
             if (tipo != null && tipo != "") url += "&tipo=" + tipo;

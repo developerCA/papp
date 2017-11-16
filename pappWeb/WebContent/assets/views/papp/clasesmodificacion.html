@@ -69,7 +69,7 @@
 						</div>
 					</div>
 
-					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();" ng-show="false"><i
+					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();" ><i
 						class="fa fa-plus-square"></i> Agregar</a>
 
 
@@ -94,7 +94,7 @@
 				<div ng-show="edicion" class="panel-body" id="panel1">
 
 					<div class="panel-heading">
-						<h5 class="panel-title">Organismo</h5>
+						<h5 class="panel-title">Clase Modificaci&oacute;n</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
@@ -111,8 +111,8 @@
 										required ng-minlength="3" ng-maxlength="3"
 										style='text-transform: uppercase' /> <span
 										class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">Debe
-										ingresar m&iacute;nimo tres letras</span> <span
+										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+										Debe ingresar m&iacute;nimo tres digitos</span> <span
 										class="success text-small" ng-if="Form.codigo.$valid">Listo</span>
 								</div>
 

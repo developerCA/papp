@@ -102,7 +102,7 @@
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese el Codigo"
 										class="form-control" name="codigo" ng-model="objeto.codigo"
-										required ng-minlength="4" ng-maxlength="4" /> <span
+										ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null" required ng-minlength="4" ng-maxlength="4" /> <span
 										class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">Debe
 										ingresar m&iacute;nimo cuatro n&uacute;meros</span> <span

@@ -88,7 +88,7 @@
 				<div ng-show="edicion" class="panel-body" id="panel1">
 
 					<div class="panel-heading">
-						<h5 class="panel-title">Organismo</h5>
+						<h5 class="panel-title">Tipo de Documento</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
@@ -102,6 +102,7 @@
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese el Codigo"
 										class="form-control" name="codigo" ng-model="objeto.codigo"
+										ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null"
 										required ng-minlength="2" ng-maxlength="2" style='text-transform:uppercase' /> <span
 										class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">Debe

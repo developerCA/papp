@@ -36,8 +36,9 @@ app.factory("ProcedimientoFactory", ["Restangular", function (Restangular) {
         },
 
         eliminar: function (id) {
-            var url = "administrar/procedimiento/";
-            return Restangular.allUrl(url).remove(id);
+            var url = "administrar/procedimiento/"+id + "/-1";
+            
+            return Restangular.allUrl(url).remove();
         }
 
     }

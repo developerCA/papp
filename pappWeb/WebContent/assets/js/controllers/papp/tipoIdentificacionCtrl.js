@@ -12,7 +12,7 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
     $scope.edicion = false;
     $scope.detalleNuevo = false;
     $scope.objeto = {};
-
+    $scope.detalles=[];
     var pagina = 1;
 
     $scope.init = function () {
@@ -53,6 +53,7 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
 
     $scope.$watch('detalles', function () {
 
+    	
         $scope.detalleParams = new ngTableParams({
             page: 1, // show first page
             count: 5, // count per page

@@ -14,7 +14,7 @@ app.controller('FuenteController', [ "$scope","$rootScope","SweetAlert","$filter
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		fuenteFinanciamientoFactory.traerFuentes(pagina).then(function(resp){
+		fuenteFinanciamientoFactory.traerFuentes(pagina,$rootScope.ejefiscal).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -46,7 +46,7 @@ app.controller('FuenteController', [ "$scope","$rootScope","SweetAlert","$filter
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		fuenteFinanciamientoFactory.traerFuentesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		fuenteFinanciamientoFactory.traerFuentesFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;

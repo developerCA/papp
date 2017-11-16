@@ -71,7 +71,7 @@ app.controller('ClaseModificacionController', [ "$scope","$rootScope","SweetAler
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A',claseregistrocmejerfiscalid:$rootScope.ejefiscal};
 		$scope.detalles=[];
 		$scope.edicion=true;
 	}
@@ -84,6 +84,7 @@ app.controller('ClaseModificacionController', [ "$scope","$rootScope","SweetAler
 			   $scope.objeto=resp.json.clasemodificacion;
 			   $scope.detalles=resp.json.details;
 			   $scope.edicion=true;
+			   console.log($scope.objeto);
 
 		})
 		

@@ -79,6 +79,7 @@ app.controller('ProcedimientoController', ["$scope", "$rootScope", "SweetAlert",
         procedimientoFactory.traerProcedimiento(id).then(function (resp) {
             $scope.objeto = resp.json.procedimiento;
             $scope.edicion = true;
+            console.log($scope.objeto);
 
         })
     };
@@ -92,12 +93,14 @@ app.controller('ProcedimientoController', ["$scope", "$rootScope", "SweetAlert",
             showCancelButton: true,
             confirmButtonText: "Eliminar",
             cancelButtonText: "Cancelar",
-            closeOnConfirm: true
+            closeOnConfirm: false
             },
-            function () {
+            function (isconfirm) {
+            	if (isconfirm)
                 procedimientoFactory.eliminar(id).then(function (resp) {
                     if (resp.estado) {
                         SweetAlert.swal("Módulo de Procedimiento", "Registro eliminado!", "success");
+                        $scope.limpiar();
                     } else {
                         SweetAlert.swal("Módulo de Procedimiento", resp.mensajes.msg, "error");
                     }
@@ -140,9 +143,9 @@ app.controller('ProcedimientoController', ["$scope", "$rootScope", "SweetAlert",
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Módulo de Procedimiento", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("MÃ³dulo de Procedimiento", "Registro guardado satisfactoriamente!", "success");
                     } else {
-                        SweetAlert.swal("Módulo de Procedimiento", resp.mensajes.msg, "error");
+                        SweetAlert.swal("MÃ³dulo de Procedimiento", resp.mensajes.msg, "error");
                     }
 
                 })

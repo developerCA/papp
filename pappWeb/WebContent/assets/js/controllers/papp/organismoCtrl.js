@@ -15,7 +15,7 @@ app.controller('OrganismoController', [ "$scope","$rootScope","SweetAlert","$fil
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		organismoFactory.traerOrganismos(pagina).then(function(resp){
+		organismoFactory.traerOrganismos(pagina,$rootScope.ejefiscal).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 			
@@ -48,7 +48,7 @@ app.controller('OrganismoController', [ "$scope","$rootScope","SweetAlert","$fil
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		organismoFactory.traerOrganismosFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		organismoFactory.traerOrganismosFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -65,7 +65,7 @@ app.controller('OrganismoController', [ "$scope","$rootScope","SweetAlert","$fil
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A',organismoejerciciofiscalid:$rootScope.ejefiscal};
 		$scope.detalles=[];
 		$scope.edicion=true;
 	}
@@ -76,6 +76,7 @@ app.controller('OrganismoController', [ "$scope","$rootScope","SweetAlert","$fil
 			if (resp.estado)
 			
 			   $scope.objeto=resp.json.organismo;
+			console.log($scope.objeto);
 			   $scope.detalles=resp.json.details;
 			   $scope.edicion=true;
 
@@ -128,10 +129,10 @@ app.controller('OrganismoController', [ "$scope","$rootScope","SweetAlert","$fil
 			 		             $scope.objeto={};
 			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Organismo!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Organismo!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Fuente de Financiamiento!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Organismo!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
