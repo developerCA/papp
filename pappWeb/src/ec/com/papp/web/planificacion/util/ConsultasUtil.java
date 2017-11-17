@@ -201,7 +201,7 @@ public class ConsultasUtil {
 				indicadorTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("id")!=null && !parameters.get("id").equals(""))
 				indicadorTO.setId(Long.valueOf(parameters.get("id")));
-			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
+			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				indicadorTO.setDescripcion(parameters.get("unidadarbolnorganid"));
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				indicadorTO.setCodigo(parameters.get("codigo"));

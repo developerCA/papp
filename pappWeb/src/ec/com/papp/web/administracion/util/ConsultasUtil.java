@@ -1535,6 +1535,8 @@ public class ConsultasUtil {
 				clasificacionTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				clasificacionTO.setEstado(parameters.get("estado"));
+			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
+				clasificacionTO.setSigla(parameters.get("sigla"));
 //			SearchResultTO<ClasificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerClasificacionPaginado(clasificacionTO);
 			Collection<ClasificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerClasificacion(clasificacionTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -1641,6 +1643,8 @@ public class ConsultasUtil {
 				fuerzaTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				fuerzaTO.setEstado(parameters.get("estado"));
+			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
+				fuerzaTO.setSigla(parameters.get("sigla"));
 //			SearchResultTO<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerzaPaginado(fuerzaTO);
 			Collection<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerza(fuerzaTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -2039,6 +2043,8 @@ public class ConsultasUtil {
 				nivelorganicoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				nivelorganicoTO.setEstado(parameters.get("estado"));
+			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
+				nivelorganicoTO.setNombre(parameters.get("nombre"));
 //			SearchResultTO<NivelorganicoTO> resultado=UtilSession.planificacionServicio.transObtenerNivelorganidoPaginado(nivelorganicoTO);
 			Collection<NivelorganicoTO> resultado=UtilSession.planificacionServicio.transObtenerNivelorganido(nivelorganicoTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;

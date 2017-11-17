@@ -379,10 +379,16 @@ public class SeguridadController {
 			UsuarioTO usuario = UtilSession.getUsuario(request);//preguntar esto!!!
 			//Recupero el usuario de sesion
 			log.println("clave anterior: " +usuario.getClave());
+			log.println("clave nueva: " +cambioClave.getClave());
+			log.println("clave confirma: " +cambioClave.getConfirmacion());
+			log.println("clave anterior: " +cambioClave.getClaveanterior());
 			if(ConsultasUtil.encriptarClave(cambioClave.getClaveanterior()).equals(usuario.getClave())){
+				log.println("paso primera");
 			//if(bean.getPassword()!=null && bean.getPassword().length()>=8){
 				if(cambioClave.getClave().equals(cambioClave.getConfirmacion())){
+					log.println("paso segunda");
 					if(!(ConsultasUtil.encriptarClave(cambioClave.getClave())).equals(usuario.getClave())){
+						log.println("paso tercera");
 						usuario.setClave(ConsultasUtil.encriptarClave(cambioClave.getClave()));
 						//usuario.setFechaClave(new Date());
 						//usuario.setCambiarclave("0");

@@ -687,10 +687,20 @@ public class AdministracionController {
 						grabar=false;
 					else if((grupoTO.getId()==null || (grupoTO.getId()!=null && grupoTO2.getId().longValue()!=grupoTO.getId().longValue())) && grupoTO.getCodigo()!=null && grupoTO2.getCodigo().equals(grupoTO.getCodigo()))
 						grabar=false;
-
 				}
+				GrupoTO grupoTO3=new GrupoTO();
+				grupoTO3.setNombre(grupoTO.getNombre());
+				Collection<GrupoTO> grupoTO1s=UtilSession.adminsitracionServicio.transObtenerGrupo(grupoTO3);
+				if(grupoTOs.size()>0){
+					grupoTO3=(GrupoTO)grupoTO1s.iterator().next();
+					if((grupoTO.getId()!=null && grupoTO.getId().longValue()!=0) && grupoTO3.getId().longValue()!=grupoTO.getId().longValue())
+						grabar=false;
+					else if((grupoTO.getId()==null || (grupoTO.getId()!=null && grupoTO3.getId().longValue()!=grupoTO.getId().longValue())) && grupoTO.getNombre()!=null && grupoTO3.getNombre().equals(grupoTO.getNombre()))
+						grabar=false;
+				}
+
 				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+					mensajes.setMsg("El código o el nombre se encuentran repetidos");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
@@ -964,10 +974,20 @@ public class AdministracionController {
 						grabar=false;
 					else if((nivelorganicoTO.getId()==null || (nivelorganicoTO.getId()!=null && nivelorganicoTO2.getId().longValue()!=nivelorganicoTO.getId().longValue())) && nivelorganicoTO.getCodigo()!=null && nivelorganicoTO2.getCodigo().equals(nivelorganicoTO.getCodigo()))
 						grabar=false;
-
+				}
+				NivelorganicoTO nivelorganicoTO3=new NivelorganicoTO();
+				nivelorganicoTO3.setNombre(nivelorganicoTO.getNombre());
+				Collection<NivelorganicoTO> nivelorganicoTO1s=UtilSession.planificacionServicio.transObtenerNivelorganido(nivelorganicoTO3);
+				if(nivelorganicoTO1s.size()>0){
+					nivelorganicoTO3=(NivelorganicoTO)nivelorganicoTO1s.iterator().next();
+					if((nivelorganicoTO.getId()!=null && nivelorganicoTO.getId().longValue()!=0) && nivelorganicoTO3.getId().longValue()!=nivelorganicoTO.getId().longValue())
+						grabar=false;
+					else if((nivelorganicoTO.getId()==null || (nivelorganicoTO.getId()!=null && nivelorganicoTO3.getId().longValue()!=nivelorganicoTO.getId().longValue())) && nivelorganicoTO.getNombre()!=null && nivelorganicoTO3.getNombre().equals(nivelorganicoTO.getNombre())){
+						grabar=false;
+					}
 				}
 				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+					mensajes.setMsg("El código o el nombre se encuentran repetidos");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
@@ -1367,6 +1387,21 @@ public class AdministracionController {
 				UtilSession.adminsitracionServicio.transEliminarClaseregistro(new ClaseregistroTO(id));
 			}
 
+			//Procedimiento
+			else if(clase.equals("procedimiento")){
+				UtilSession.adminsitracionServicio.transEliminarProcedimiento(new ProcedimientoTO(id));
+			}
+			
+			//Tipoproducto
+			else if(clase.equals("tipoproducto")){
+				UtilSession.adminsitracionServicio.transEliminarTipoproducto(new TipoproductoTO(id));
+			}
+			
+			//Tiporegimen
+			else if(clase.equals("tiporegimen")){
+				UtilSession.adminsitracionServicio.transEliminarTiporegimen(new TiporegimenTO(id));
+			}
+			
 			//Clasemodificacion
 			else if(clase.equals("clasemodificacion")){
 				ClaseregistroclasemodificacionID claseregistroclasemodificacionID=new ClaseregistroclasemodificacionID();
@@ -1686,7 +1721,7 @@ public class AdministracionController {
 				log.println("va a consultar institucion");
 				jsonObject=ConsultasUtil.consultaIntitucionPaginado(parameters, jsonObject);
 			}
-			log.println("json retornado: " + jsonObject.toString()); 
+			log.println("json retornado de consulta: " + jsonObject.toString()); 
 		}catch (Exception e) {
 			e.printStackTrace();
 			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
