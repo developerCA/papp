@@ -11,12 +11,12 @@ app.factory("usuariosFactory", [ "Restangular", function(Restangular) {
 			  
 		},
 		
-		traerUsuariosFiltro : function(pagina,nombre,orden) {
+		traerUsuariosFiltro : function(pagina,usuario,nombre) {
 			  
 			var url = "seguridad/consultar/usuario/pagina="+pagina;
 
-			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
-			if(orden!=null && orden != "") url += "&orden=" + orden;	
+			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;
+			if(usuario!=null && usuario != "") url += "&usuario=" + usuario;
 			 
 			return Restangular.allUrl(url).getList();
 			  

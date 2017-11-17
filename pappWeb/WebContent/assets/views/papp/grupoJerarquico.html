@@ -109,7 +109,7 @@
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese el Codigo"
 										class="form-control" name="codigo" ng-model="objeto.codigo"
-										ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null" required /> <span class="error text-small block"
+										ng-maxlength="10" ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null" required /> <span class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo
 										es incorrecto</span> <span class="success text-small"
 										ng-if="Form.prefijo.$valid">Listo</span>

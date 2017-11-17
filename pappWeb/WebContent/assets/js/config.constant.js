@@ -160,6 +160,7 @@ app.constant('JS_REQUIRES', {
         'EmpleadoCtrl':'assets/js/controllers/papp/empleadoCtrl.js',
         'EmpleadoFactory':'assets/js/factory/empleadoFactory.js',
         'ModalGradoFuerzaCtrl':'assets/js/controllers/papp/modales/modalGradoFuerzaCtrl.js',
+        'ModalInstitucionCtrl':'assets/js/controllers/papp/modales/modalInstitucionCtrl.js',
         
         
     },

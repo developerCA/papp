@@ -78,6 +78,7 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 			
 			if (resp.estado){
 				$scope.objeto=resp.json.gradoescala;
+				console.log("==========//==========");
 				console.log($scope.objeto);
 				$scope.edicion=true;
 				console.log($scope.objeto);

@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","permisosFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, permisosFactory) {
+app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","permisosFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, permisosFactory) {
     
 	
 	$scope.nombreFiltro=null;
@@ -8,6 +9,7 @@ app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	$scope.edicion=false;
 	$scope.guardar=false;
+	$scope.nuevo=false;
 	$scope.objeto={};
 	
 	var pagina = 1;
@@ -70,16 +72,17 @@ app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetA
 		
 		$scope.edicion=true;
 		$scope.guardar=true;
+		$scope.nuevo=true;
 	}
 	
 	$scope.editar=function(id){
 		permisosFactory.traerPermiso(id).then(function(resp){
-//console.log(resp);
+			console.log(resp.json);
 			if (resp.estado)
 			   $scope.objeto=resp.json.permiso;
 			$scope.edicion=true;
 			$scope.guardar=true;
-
+			$scope.nuevo=false;;
 		})
 		
 	};

@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","perfilesFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, perfilesFactory) {
+app.controller('PerfilesController', [ "$scope","$rootScope","$uibModalInstance","$uibModal","SweetAlert","$filter", "ngTableParams","perfilesFactory",
+	function($scope,$rootScope,$uibModalInstance,$uibModal,SweetAlert,$filter, ngTableParams, perfilesFactory) {
     
 	
 	$scope.nombreFiltro=null;
@@ -89,7 +90,6 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;
-
 		})
 		
 	};
@@ -170,4 +170,13 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 
 		        }
     };
+	
+	$scope.seleccionar=function(obj){
+		$uibModalInstance.close(obj);
+
+	};
+	
+	$scope.cancelar=function(){
+		$uibModalInstance.dismiss();
+	};
 } ]);

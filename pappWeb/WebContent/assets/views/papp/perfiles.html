@@ -84,9 +84,9 @@
 									ng-class="{'has-error':For.id.$dirty && Form.id.$invalid, 'has-success':Form.id.$valid}">
 									<label class="control-label"> Id <span
 										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Id"
+									</label> <input type="text" placeholder="Id a generar"
 										class="form-control" name="id" ng-model="objeto.id"
-										required /> <span class="error text-small block"
+										required ng-disabled="true"> <span class="error text-small block"
 										ng-if="Form.id.$dirty && Form.id.$invalid">Id
 										es incorrecto</span> <span class="success text-small"
 										ng-if="Form.id.$valid">Listo</span>
@@ -96,7 +96,7 @@
 									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
 									<label class="control-label"> Nombre <span
 										class="symbol required"></span>
-									</label> <input type="text" placeholder=""
+									</label> <input type="text" placeholder="Nombre del perfil"
 										class="form-control" name="nombre" required
 										ng-model="objeto.nombre" ng-minlength="1" /> <span
 										class="error text-small block"

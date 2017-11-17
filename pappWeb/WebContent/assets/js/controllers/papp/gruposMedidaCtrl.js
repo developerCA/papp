@@ -114,12 +114,13 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
             } else {
 
                 gruposMedidaFactory.guardar($scope.objeto).then(function (resp) {
+                	console.log(resp);
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Grupo Medida", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Grupo Medida", "Registro guardado satisfactoriamente!", "success");
 
                     } else {
                         SweetAlert.swal("Grupo Medida", resp.mensajes.msg, "error");

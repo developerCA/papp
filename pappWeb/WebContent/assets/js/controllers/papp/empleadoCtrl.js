@@ -1,28 +1,27 @@
 'use strict';
 
-app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","menuSeguridadesFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,menuSeguridadesFactory) {
-    
-	
+app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","empleadosFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, empleadosFactory) {
+
 	$scope.nombreFiltro=null;
-	$scope.ordenFiltro=null;
-	
+	$scope.codigoFiltro=null;
+	$scope.estadoFiltro=null;
+
 	$scope.edicion=false;
+	$scope.guardar=false;
+	$scope.nuevoar=false;
 	$scope.objeto={};
-	
+	$scope.objetolista={};
+
 	var pagina = 1;
-	
+
 	$scope.consultar=function(){
-		
 		$scope.data=[];
-		menuSeguridadesFactory.traerMenus(pagina).then(function(resp){
+		empleadosFactory.traerEmpleados(pagina).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
-			
-			    
 		})
-	
 	};
 	
 	$scope.$watch('data', function() {
@@ -48,10 +47,9 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","S
 	
 	
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
-		menuSeguridadesFactory.traerMenusFiltro(pagina,$scope.nombreFiltro,$scope.ordenFiltro).then(function(resp){
-			
+
+		empleadosFactory.traerEmpleadosFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro,$scope.estadoFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -68,70 +66,59 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","S
 	
 	$scope.nuevo=function(){
 		$scope.objeto={id:null};
-		
+		$scope.objetolista=[];
+		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
+//		console.log(obj);
+		$scope.objetolista.push(obj);
+//		console.log($scope.objetolista);
+
 		$scope.edicion=true;
+		$scope.guardar=true;
+		$scope.nuevoar=true;
 	}
 	
 	$scope.editar=function(id){
-		menuSeguridadesFactory.traerMenu(id).then(function(resp){
-			
-			if (resp.estado)
-			   $scope.objeto=resp.json.menu;
-			   $scope.edicion=true;
-			   console.log($scope.objeto);
+		empleadosFactory.traerEmpleadosEditar(id).then(function(resp){
+//console.clear();
+console.log(resp);
+			if (resp.estado) {
+			   $scope.objeto=resp.json.perfil;
+			   $scope.objetolista=resp.json.details;
+			   //console.log($scope.objetolista);
+			}
+			$scope.edicion=true;
+			$scope.guardar=true;
+			$scope.nuevoar=false;
 		})
 		
 	};
-	
-	$scope.abrirMenuPadre = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalMenuPadre.html',
-			controller : 'MenuPadreController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.padreid = obj.id;
-			$scope.objeto.nombrepadre=obj.nombre;
-		}, function() {
-			console.log("close modal");
-		});
-	};
-	
-	$scope.abrirPermiso = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalPermiso.html',
-			controller : 'PerfilesPermisosController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.padreid = obj.id;
-			$scope.objeto.nombrepadre=obj.nombre;
-		}, function() {
-			console.log("close modal");
-		});
-	};
-		
-	$scope.eliminar=function(id){
-		
-		menuSeguridadesFactory.eliminar(id).then(function(resp){
-			console.log(resp);
-			if (resp.estado){
-				$scope.limpiar();
-				SweetAlert.swal("Menu!", "Menu eliminado satisfactoriamente!", "success");
-			}
-			else{
-				SweetAlert.swal("Menu!", resp.mensajes.msg, "error");
-			}
 
-		})
-		
+	$scope.agregarDetalle=function(){
+		var obj={id:{perfilid:$scope.objeto,permisoid:null},nppermiso:null};
+		$scope.objetolista.push(obj);
+	}
+
+	$scope.removerDetalle=function(index){
+		$scope.objetolista.splice(index,1);
+	}
+
+	$scope.abrirEmpleadosPermisos = function(index) {
+		//console.log("aqui");
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalEmpleadosPermisos.html',
+			controller : 'EmpleadosPermisosController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objetolista[index].id.permisoid = obj.id;
+			$scope.objetolista[index].nppermiso=obj.nombre;
+		}, function() {
+			console.log("close modal");
+		});
 	};
-	
-	
-	
-	 $scope.form = {
+
+	$scope.form = {
 
 		        submit: function (form) {
 		            var firstError = null;
@@ -155,16 +142,16 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","S
 
 		            } else {
 		                
-		            	menuSeguridadesFactory.guardar($scope.objeto).then(function(resp){
+		            	empleadosFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Menu!", "Menu registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Permiso!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Menu!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Permiso!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

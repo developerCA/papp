@@ -96,9 +96,24 @@
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
-										class="fa fa-pencil"></i></a></td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Modificar" ng-click="editar(obj.id)">
+										<i class="fa fa-pencil"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Unidades" ng-click="editar(obj.id)">
+										<i class="fa fa-code-fork"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Mantener empleados" ng-click="editar(obj.id)">
+										<i class="fa fa-user"></i>
+									</a>
+								</td>
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
 								<td data-title="'Versi&oacute;n'">{{obj.version}}</td>
@@ -128,9 +143,16 @@
 										C&oacute;digo
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder="Escribe un c&oacute;digo"
-										class="form-control" name="codigo" required
-										ng-model="objeto.codigo" ng-minlength="1" />
+									<span ng-if="nuevoar">
+										<input type="text" placeholder="Escribe un c&oacute;digo"
+											class="form-control" name="codigo" required
+											ng-model="objeto.codigo" ng-minlength="1" />
+									</span>
+									<span ng-if="!nuevoar">
+										<input type="text" ng-disabled="true"
+											class="form-control" name="codigo" required
+											ng-model="objeto.codigo" ng-minlength="1" />
+									</span>
 									<span class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
 										Incorrecto</span>
@@ -162,9 +184,16 @@
 										Versi&oacute;n
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder="Escriba una versi&oacute;n "
-										class="form-control" name="version" required
-										ng-model="objeto.version" ng-minlength="1" />
+									<span ng-if="nuevoar">
+										<input type="text" placeholder="Escriba una versi&oacute;n "
+											class="form-control" name="version" required
+											ng-model="objeto.version" ng-minlength="1" />
+									</span>
+									<span ng-if="!nuevoar">
+										<input type="text" ng-disabled="true"
+											class="form-control" name="version" required
+											ng-model="objeto.version" ng-minlength="1" />
+									</span>
 									<span class="error text-small block"
 										ng-if="Form.version.$dirty && Form.version.$invalid">
 										Incorrecto</span>
@@ -232,7 +261,7 @@
 										Instituci&oacute;n c&oacute;digo
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder="Sin seleccionar"
+									<input type="text" placeholder="Sin seleccionar" ng-disabled="true"
 										class="form-control" name="npcodigoinstitucion" required
 										ng-model="objeto.npcodigoinstitucion" ng-minlength="1" />
 									<span class="error text-small block"
@@ -249,7 +278,7 @@
 										Instituci&oacute;n nombre
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder="Sin seleccionar"
+									<input type="text" placeholder="Sin seleccionar" ng-disabled="true"
 										class="form-control" name="npnombreinstitucion" required
 										ng-model="objeto.npnombreinstitucion" ng-minlength="1" />
 									<span class="error text-small block"
@@ -285,7 +314,7 @@
 										Entidad c&oacute;digo
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder="Sin seleccionar"
+									<input type="text" placeholder="Sin seleccionar" ng-disabled="true"
 										class="form-control" name="npcodigoentidad" required
 										ng-model="objeto.npcodigoentidad" ng-minlength="1" />
 									<span class="error text-small block"
@@ -302,7 +331,7 @@
 										Entidad nombre
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder="Sin seleccionar"
+									<input type="text" placeholder="Sin seleccionar" ng-disabled="true"
 										class="form-control" name="npnombreentidad" required
 										ng-model="objeto.npnombreentidad" ng-minlength="1" />
 									<span class="error text-small block"

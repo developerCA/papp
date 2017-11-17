@@ -18,9 +18,7 @@
 
 			<div class="panel panel-white">
 
-
 				<div class="panel-body" ng-show="!edicion">
-
 
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
@@ -31,20 +29,20 @@
 							class="panel-wrapper">
 							<div class="panel-body">
 								<div class="row">
-									<div class="col-sm-4">
+									<div class="col-sm-6">
 										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
+											<label> Usuario </label>
+											<input type="text" class="form-control" ng-model="usuarioFiltro">
 										</div>
 									</div>
-									<div class="col-sm-4">
+									<div class="col-sm-6">
 										<div class="form-group">
-											<label> Orden </label> <input type="text"
-												class="form-control" ng-model="ordenFiltro">
+											<label> Nombre Mostrado </label>
+											<input type="text" class="form-control" ng-model="nombreFiltro">
 										</div>
 									</div>
-
 								</div>
+
 								<div class="row">
 									<div class="col-sm-12">
 										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
@@ -70,17 +68,17 @@
 								<td><a class="btn btn-sm btn-danger" uib-tooltip="Eliminar"
 									ng-click="eliminar(obj.id)"><i class="fa fa-trash"></i></a></td>
 
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-								<td data-title="'Apellido'">{{obj.apellido}}</td>
-								<td data-title="'Orden'">{{obj.id}}</td>
+								<td data-title="'Usuario'">{{obj.usuario}}</td>
+								<td data-title="'C&oacute;digo'">FALTA</td>
+								<td data-title="'Nombre mostrado'">FALTA</td>
 								<td data-title="'Email'">{{obj.email}}</td>
+								<td data-title="'Perfil nombre'">FALTA</td>
 								<td data-title="'Estado'">{{obj.npestado}}</td>
 								<td data-title="'Actualizaci&oacute;n clave'">{{obj.npfechaactualizacionclave}}</td>
 							</tr>
 						</table>
 					</div>
 				</div>
-
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
 
@@ -93,10 +91,11 @@
 						<div class="row">
 							<div class="col-md-6">
 
-								<div class="form-group">
-									<label class="control-label"> Orden </label>
-									<input type="text" ng-disabled="true"
-										class="form-control" name="orden" ng-model="objeto.id" />
+								<div class="form-group"
+									ng-class="{'has-error':For.usuario.$dirty && Form.usuario.$invalid, 'has-success':Form.usuario.$valid}">
+									<label class="control-label"> Usuario </label>
+									<input type="text" ng-disabled="true" placeholder="Ingrese un usuario"
+										class="form-control" name="usuario" ng-model="objeto.usuario" />
 								</div>
 
 								<div class="form-group"
@@ -126,6 +125,40 @@
 								</div>
 
 								<div class="form-group"
+									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid,
+									'has-success':Form.nombre.$valid}">
+									<label class="control-label"> Nueva contrase&ntilde;a <span
+										class="symbol required"></span>
+									</label> <input type="password" placeholder="Nueva contrase&ntilde;a"
+										class="form-control" name="clave" required
+										ng-model="objeto.clave" ng-minlength="1" /> <span
+										class="error text-small block"
+										ng-if="Form.clave.$dirty &&
+										Form.clave.$invalid">Contrase&ntilde;a
+										incorrecto</span> <span class="success text-small"
+										ng-if="Form.clave.$valid &&
+										(Form.confirmacion.$modelValue ==
+										Form.clave.$modelValue)">Listo</span>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid,
+									'has-success':Form.nombre.$valid}">
+									<label class="control-label"> Repetir contrase&ntilde;a <span
+										class="symbol required"></span>
+									</label> <input type="password" placeholder="Repetir Contrase&ntilde;a"
+										class="form-control" name="confirmacion" required
+										ng-model="objeto.confirmacion" ng-minlength="1" /> <span
+										class="error text-small block"
+										ng-if="Form.confirmacion.$dirty &&
+										Form.confirmacion.$invalid">Contrase&ntilde;a
+										incorrecto</span> <span class="success text-small"
+										ng-if="Form.confirmacion.$valid &&
+										(Form.confirmacion.$modelValue ==
+										Form.clave.$modelValue)">Listo</span>
+								</div>
+
+								<div class="form-group"
 									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
 									<label class="control-label"> Email <span
 										class="symbol required"></span>
@@ -139,17 +172,57 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Estado <span
+									ng-class="{'has-error':For.codigopadre.$dirty && Form.codigopadre.$invalid, 'has-success':Form.codigopadre.$valid}">
+									<label class="control-label"> Nombre perfil <span
 										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Apellido"
-										ng-disabled="true"
-										class="form-control" name="nombre" required
-										ng-model="objeto.npestado" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
-										Incorrecto</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
+									</label>
+									<div class="input-group">
+										<input type="text" placeholder="Seleccione un perfil"
+											class="form-control" name="codigopadre" ng-disabled="true"
+											ng-model="objeto.npperfil" /> <span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirNombrePerfil()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':For.empleadocodigo.$dirty && Form.empleadocodigo.$invalid, 'has-success':Form.empleadocodigo.$valid}">
+									<label class="control-label"> Emplado c&oacute;digo <span
+										class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text" placeholder="Seleccione un empleado"
+											class="form-control" name="empleadocodigo" ng-disabled="true"
+											ng-model="objeto.empleadocodigo" /> <span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirEmpleadoCodigo()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':For.npempleadonombremostrado.$dirty && Form.npempleadonombremostrado.$invalid, 'has-success':Form.npempleadonombremostrado.$valid}">
+									<label class="control-label"> Empleado nombre </label>
+									<input type="text" ng-disabled="true" placeholder="Selecione un empleado"
+										class="form-control" name="npempleadonombremostrado"
+										ng-model="objeto.npempleadonombremostrado">
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+									<label for="form-field-select-1"> Estado <span
+										class="symbol required"></span>
+									</label>
+									<select class="form-control" name="estado"
+										ng-model="objeto.estado" required>
+										<option value="A">Activo</option>
+										<option value="I">Inactivo</option>
+									</select>
 								</div>
 
 							</div>
@@ -221,15 +294,13 @@
 
 					</form>
 
-					<script type="text/ng-template" id="modalUsuariosUnidades.html">
+					<script type="text/ng-template" id="modalNombrePerfil.html">
                             <div class="modal-header">
-                                <h3 class="modal-title">Unidades</h3>
+                                <h3 class="modal-title">Perfiles</h3>
                             </div>
                             <div class="modal-body">
-                               
 
 				<div class="panel-body" ng-init="consultar();" >
-
 
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
@@ -242,26 +313,11 @@
 								<div class="row">
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label> Nombres </label> <input type="text"
+											<label> Nombre </label> <input type="text"
 												class="form-control" ng-model="nombreFiltro">
 										</div>
 									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> C&oacute;digo </label> <input type="text"
-												class="form-control" ng-model="codigoFiltro">
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Estado </label> <select name="country"
-												ng-model="estadoFiltro" class="form-control">
-												<option value>Todos</option>
-												<option value="A">Activo</option>
-												<option value="I">Inactivo</option>
-											</select>
-										</div>
-									</div>
+
 								</div>
 								<div class="row">
 									<div class="col-sm-12">
@@ -280,10 +336,73 @@
 								<td><a class="btn btn-sm btn-primary"
 									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
 										class="fa fa-check"></i></a></td>
-								<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+                            </div>
+                    </script>
+
+					<script type="text/ng-template" id="modalEmpleadoCodigo.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Empleados</h3>
+                            </div>
+                            <div class="modal-body">
+
+				<div class="panel-body" ng-init="consultar();" >
+
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> C&oacute;digo </label>
+											<input type="text" class="form-control" ng-model="codigoFiltro">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> Socio Negocio Nombre Mostrado </label>
+											<input type="text" class="form-control" ng-model="nombreFiltro">
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+											class="fa fa-search"></i> Buscar</a> <a
+											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td><a class="btn btn-sm btn-primary"
+									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+										class="fa fa-check"></i></a></td>
+								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+								<td data-title="'Nombre mostrado'">{{obj.nombremostrado}}</td>
+								<td data-title="'Tipo'">{{obj.tipo}}</td>
 								<td data-title="'Estado'">{{obj.npestado}}</td>
-								<td data-title="'ORUltimo Usado'">{{obj.orultimousado}}</td>
+								<td data-title="'Tipo identificaci&oacute;n'">{{obj.tipoidentid}}</td>
+								<td data-title="'Tipo'">{{obj.tipo}}</td>
 							</tr>
 						</table>
 					</div>
