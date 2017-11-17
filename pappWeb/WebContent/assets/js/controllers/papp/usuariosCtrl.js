@@ -1,10 +1,10 @@
 'use strict';
 
-app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","usuariosFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, usuariosFactory) {
-    
-	
+app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","usuariosFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, usuariosFactory) {
+
 	$scope.nombreFiltro=null;
-	$scope.ordenFiltro=null;
+	$scope.usuarioFiltro=null;
 	
 	$scope.edicion=false;
 	$scope.objeto={};
@@ -16,7 +16,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 		
 		$scope.data=[];
 		usuariosFactory.traerUsuarios(pagina).then(function(resp){
-			//console.log(resp);
+			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -46,7 +46,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	$scope.filtrar=function(){
 		$scope.data=[];
-		usuariosFactory.traerUsuariosFiltro(pagina,$scope.nombreFiltro,$scope.ordenFiltro).then(function(resp){
+		usuariosFactory.traerUsuariosFiltro(pagina,$scope.usuarioFiltro,$scope.nombreFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -55,7 +55,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
-		$scope.ordenFiltro=null;
+		$scope.usuarioFiltro=null;
 
 		$scope.consultar();
 		
@@ -76,7 +76,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.editar=function(id){
 		usuariosFactory.traerUsuario(id).then(function(resp){
 //console.clear();
-//console.log(resp);
+		console.log(resp.json);
 		if (resp.estado)
 			   $scope.objeto=resp.json.usuario;
 		       $scope.objetoDetalles=resp.json.details;
@@ -86,22 +86,37 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 		
 	};
 	
-	$scope.abrirUsuarioPadre = function() {
-
+	$scope.abrirNombrePerfil = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalUsuarioPadre.html',
-			controller : 'UsuarioPadreController',
+			templateUrl : 'modalNombrePerfil.html',
+			controller : 'PerfilesController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.padreid = obj.id;
-			$scope.objeto.nombrepadre=obj.nombre;
+			$scope.objeto.perfilid = obj.id;
+			$scope.objeto.npperfil=obj.nombre;
 		}, function() {
-			console.log("close modal");
+			//console.log("close modal");
 		});
 	};
-		
+	
+	$scope.abrirEmpleadoCodigo = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalEmpleadoCodigo.html',
+			controller : 'EmpleadosController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.empleadoid = obj.id;
+			$scope.objeto.empleadocodigo = obj.codigo;
+			$scope.objeto.npempleadonombremostrado = obj.nombremostrado;
+		}, function() {
+			//console.log("close modal");
+		});
+	};
+
 	$scope.eliminar=function(id){
 		
 		usuariosFactory.eliminar(id).then(function(resp){

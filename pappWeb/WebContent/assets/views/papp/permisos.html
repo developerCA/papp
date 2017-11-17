@@ -85,15 +85,15 @@
 									<label class="control-label"> Id <span
 										class="symbol required"></span>
 									</label>
-									<span ng-if="!guardar">
+									<span ng-if="nuevo">
 										<input type="text" placeholder="Ingrese el Id"
 											class="form-control" name="id" ng-model="objeto.id"
-											required />
+											required>
 									</span>
-									<span ng-if="guardar">
+									<span ng-if="!nuevo">
 										<input type="text" placeholder="Ingrese el Id"
 											class="form-control" name="id" ng-model="objeto.id"
-											required />
+											required  ng-disabled="true">
 									</span>
 									<span class="error text-small block"
 										ng-if="Form.id.$dirty && Form.id.$invalid">Id
@@ -106,16 +106,15 @@
 									<label class="control-label"> Nombre <span
 										class="symbol required"></span>
 									</label>
-									<span ng-if="!guardar">
+									<span ng-if="nuevo">
 										<input type="text" placeholder="Ingrese el Nombre"
 											class="form-control" name="nombre" required
-											ng-model="objeto.nombre" ng-minlength="1"
-											 />
+											ng-model="objeto.nombre" ng-minlength="1">
 									</span>
-									<span ng-if="guardar">
+									<span ng-if="!nuevo">
 										<input type="text" placeholder="Ingrese el Nombre"
 											class="form-control" name="nombre" required
-											ng-model="objeto.nombre" ng-minlength="1" />
+											ng-model="objeto.nombre" ng-minlength="1" ng-disabled="true">
 									</span>
 									<span
 										class="error text-small block"

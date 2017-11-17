@@ -99,18 +99,6 @@
 							<div class="col-md-6">
 
 								<div class="form-group"
-									ng-class="{'has-error':For.orden.$dirty && Form.orden.$invalid, 'has-success':Form.orden.$valid}">
-									<label class="control-label"> Orden <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Orden"
-										class="form-control" name="orden" ng-model="objeto.orden"
-										required /> <span class="error text-small block"
-										ng-if="Form.orden.$dirty && Form.orden.$invalid">Orden
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.orden.$valid">Listo</span>
-								</div>
-
-								<div class="form-group"
 									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
 									<label class="control-label"> Nombre <span
 										class="symbol required"></span>
@@ -121,6 +109,46 @@
 										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">Nombre
 										es incorrecto</span> <span class="success text-small"
 										ng-if="Form.nombre.$valid">Listo</span>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':For.codigopadre1.$dirty && Form.codigopadre1.$invalid, 'has-success':Form.codigopadre1.$valid}">
+									<label class="control-label"> Permiso ID <span
+										class="symbol required"></span>
+									</label>
+
+									<div class="input-group">
+										<input type="text" placeholder="FALTA ESTA INFORMACION -- Seleccione el padre"
+											class="form-control" name="codigopadre" ng-disabled="true"
+											ng-model="objeto.padreid1" /> <span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirPermiso()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+
+
+									</div>
+
+								</div>
+
+								<div class="form-group">
+									<label class="control-label"> Nombre del permiso </label>
+									<input type="text" class="form-control" name="nombrepadre1"
+									    placeholder="FALTA ESTA INFORMACION"
+									    ng-disabled="true" ng-model="objeto.nombrepadre1" />
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':For.orden.$dirty && Form.orden.$invalid, 'has-success':Form.orden.$valid}">
+									<label class="control-label"> Orden <span
+										class="symbol required"></span>
+									</label> <input type="text" placeholder="Ingrese el Orden"
+										class="form-control" name="orden" ng-model="objeto.orden"
+										required /> <span class="error text-small block"
+										ng-if="Form.orden.$dirty && Form.orden.$invalid">Orden
+										es incorrecto</span> <span class="success text-small"
+										ng-if="Form.orden.$valid">Listo</span>
 								</div>
 
 								<div class="form-group"
@@ -150,8 +178,17 @@
 										ng-model="objeto.nombrepadre" />
 								</div>
 
-
-
+								<div class="form-group"
+									ng-class="{'has-error':For.orden.$dirty && Form.orden.$invalid, 'has-success':Form.orden.$valid}">
+									<label class="control-label"> Nivel <span
+										class="symbol required"></span>
+									</label> <input type="text" placeholder="FALTA -- Ingrese el Orden"
+										class="form-control" name="orden" ng-model="objeto.nose"
+										required /> <span class="error text-small block"
+										ng-if="Form.orden.$dirty && Form.orden.$invalid">Orden
+										es incorrecto</span> <span class="success text-small"
+										ng-if="Form.orden.$valid">Listo</span>
+								</div>
 
 							</div>
 						</div>
@@ -239,6 +276,62 @@
                             </div>
                     </script>
 
+					<script type="text/ng-template" id="modalPermiso.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Permisos</h3>
+                            </div>
+                            <div class="modal-body">
+                               
+
+				<div class="panel-body" ng-init="consultar();" >
+
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label> Nombre </label> <input type="text"
+												class="form-control" ng-model="nombreFiltro">
+										</div>
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+											class="fa fa-search"></i> Buscar</a> <a
+											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td><a class="btn btn-sm btn-primary"
+									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+										class="fa fa-check"></i></a></td>
+
+								<td data-title="'Nombre'">{{obj.nombre}}</td>
+
+							</tr>
+						</table>
+					</div>
+				</div>
+
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+                            </div>
+                    </script>
 
 				</div>
 			</div>
