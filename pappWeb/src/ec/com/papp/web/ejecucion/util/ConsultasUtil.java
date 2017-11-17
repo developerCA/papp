@@ -107,6 +107,7 @@ public class ConsultasUtil {
 				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),certificacionTO.getJsonConfigconsulta()));
 				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 			}
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);

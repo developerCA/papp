@@ -1029,6 +1029,8 @@ public class AdministracionController {
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}
+			else
+				respuesta.setEstado(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error grabar");
