@@ -909,6 +909,9 @@ public class AdministracionController {
 			else if(clase.equals("gradoescala")){
 				GradoescalaTO gradoescalaTO = gson.fromJson(new StringReader(objeto), GradoescalaTO.class);
 				accion = (gradoescalaTO.getId()==null)?"crear":"actualizar";
+				//valido que no exista creado un registro para ese grado
+//				GradoescalaTO gradoescala=new GradoescalaTO();
+//				gradoescala.set
 				//pregunto si ya existe el codigo en el nivel actual
 				GradoescalaTO gradoescalaTO2=new GradoescalaTO();
 				gradoescalaTO2.setCodigo(gradoescalaTO.getCodigo());
