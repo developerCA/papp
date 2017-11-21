@@ -61,7 +61,7 @@ app.controller('ParametroController', [ "$scope","$rootScope","SweetAlert","$fil
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 		
 		$scope.edicion=true;
 	}
@@ -110,7 +110,7 @@ app.controller('ParametroController', [ "$scope","$rootScope","SweetAlert","$fil
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Parametro!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Parametro!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Parametro!", resp.mensajes.msg, "error");

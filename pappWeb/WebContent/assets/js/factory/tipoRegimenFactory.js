@@ -36,6 +36,10 @@ app.factory("tipoRegimenFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 		
+		eliminar: function (id) {
+	            var url = "administrar/tiporegimen/"+id+"/-1";
+	            return Restangular.allUrl(url).remove();
+	    }
 		
 	
 	}

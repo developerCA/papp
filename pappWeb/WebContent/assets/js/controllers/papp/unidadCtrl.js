@@ -62,7 +62,7 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 		$scope.detalles=[];
 		$scope.edicion=true;
 	}

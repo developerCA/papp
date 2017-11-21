@@ -64,7 +64,7 @@ app.controller('TipoRegimenController', [ "$scope","$rootScope","SweetAlert","$f
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 		
 		$scope.edicion=true;
 	}
@@ -81,7 +81,31 @@ app.controller('TipoRegimenController', [ "$scope","$rootScope","SweetAlert","$f
 		
 	};
 	
-	
+	 $scope.eliminar = function (id) {
+
+	        SweetAlert.swal({
+	            title: "Tipo de r√©fimen",
+	            text: "Confirma eliminar el registro?",
+	            type: "warning",
+	            showCancelButton: true,
+	            confirmButtonText: "Eliminar",
+	            cancelButtonText: "Cancelar",
+	            closeOnConfirm: false
+	        },
+	            function (isconfirm) {
+	        	 if (isconfirm)
+	        		 tipoRegimenFactory.eliminar(id).then(function (resp) {
+	                    if (resp.estado) {
+	                        SweetAlert.swal("Tipo de RÈgimen", "Registro eliminado!", "success");
+	                        $scope.limpiar();
+	                        
+	                    } else {
+	                        SweetAlert.swal("Tipo de RÈgimen", resp.mensajes.msg, "error");
+	                    }
+	                })
+	            });
+	    };
+
 	
 	 $scope.form = {
 
@@ -113,10 +137,10 @@ app.controller('TipoRegimenController', [ "$scope","$rootScope","SweetAlert","$f
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Tipo Regimen!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Tipo RÈgimen!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Tipo Regimen", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Tipo RÈgimen", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

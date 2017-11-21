@@ -10,18 +10,9 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     $scope.objeto = null;
 
     var pagina = 1;
+    $scope.data=[];
 
-    $scope.init = function () {
-
-        $scope.items = [];
-        subitemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
-            if (resp.meta)
-                $scope.items = resp;
-            console.log($scope.items);
-        });
-
-        $scope.consultar();
-    };
+   
 
     $scope.consultar = function () {
 
