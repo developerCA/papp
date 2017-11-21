@@ -293,8 +293,13 @@ public class ConsultasUtil {
 //				unidadarbolplazaempleadoTO.setPrefijo(parameters.get("prefijo"));
 //			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 //				unidadarbolplazaempleadoTO.setNombre(parameters.get("nombre"));
-//			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
-//				unidadarbolplazaempleadoTO.setEstado(parameters.get("estado"));
+			if(parameters.get("unidadarbolerganicaid")!=null && !parameters.get("unidadarbolerganicaid").equals("")){
+				UnidadarbolTO unidadarbolTO=new UnidadarbolTO();
+				unidadarbolTO.setUnidadarbolerganicaid(Long.valueOf(parameters.get("unidadarbolerganicaid")));
+				UnidadarbolplazaTO unidadarbolplazaTO=new UnidadarbolplazaTO();
+				unidadarbolplazaTO.setUnidadarbol(unidadarbolTO);
+				unidadarbolplazaempleadoTO.setUnidadarbolplaza(unidadarbolplazaTO);
+			}
 			unidadarbolplazaempleadoTO.setSocionegocio(new SocionegocioTO());
 			unidadarbolplazaempleadoTO.setUnidadarbolplaza(new UnidadarbolplazaTO());
 			SearchResultTO<UnidadarbolplazaempleadoTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplazaempleadoPaginado(unidadarbolplazaempleadoTO);
@@ -625,6 +630,10 @@ public class ConsultasUtil {
 				unidadarbolTO.setUnidadarbolnorganid(Long.valueOf(parameters.get("unidadarbolnorganid")));
 			if(parameters.get("unidadarbolunidadid")!=null && !parameters.get("unidadarbolunidadid").equals(""))
 				unidadarbolTO.setUnidadarbolunidadid(Long.valueOf(parameters.get("unidadarbolunidadid")));
+			if(parameters.get("unidadarbolerganicaid")!=null && !parameters.get("unidadarbolerganicaid").equals(""))
+				unidadarbolTO.setUnidadarbolerganicaid(Long.valueOf(parameters.get("unidadarbolerganicaid")));
+			if(parameters.get("unidadarbolpadreid")!=null && !parameters.get("unidadarbolerganicaid").equals(""))
+				unidadarbolTO.setUnidadarbolpadreid(Long.valueOf(parameters.get("unidadarbolpadreid")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				unidadarbolTO.setEstado(parameters.get("estado"));
 			Collection<UnidadarbolTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbol(unidadarbolTO);
