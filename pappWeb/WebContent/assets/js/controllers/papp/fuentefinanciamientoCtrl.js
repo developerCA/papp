@@ -63,7 +63,7 @@ app.controller('FuenteController', [ "$scope","$rootScope","SweetAlert","$filter
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,estado:'A'};
 		
 		$scope.edicion=true;
 	}

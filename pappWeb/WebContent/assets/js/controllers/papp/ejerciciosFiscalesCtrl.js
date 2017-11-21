@@ -102,7 +102,7 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:null,cerrado:"0"};
 		
 		$scope.edicion=true;
 	}

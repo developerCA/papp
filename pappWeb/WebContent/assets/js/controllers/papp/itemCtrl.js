@@ -14,20 +14,10 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
     $scope.edicion = false;
     $scope.url = "";
     $scope.objeto = null;
-
+    $scope.data=[];
     var pagina = 1;
 
-  /*  $scope.init = function () {
-
-        $scope.items = [];
-        itemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
-            if (resp.meta)
-                $scope.items = resp;
-            console.log($scope.items);
-        });
-
-        $scope.consultar();
-    };*/
+  
 
     $scope.consultar = function () {
 
@@ -36,12 +26,14 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
         itemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
+            console.log($scope.data);
         });
 
     };
 
     $scope.$watch('data', function () {
 
+    	
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
             count: 5, // count per page
@@ -88,7 +80,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 
     $scope.nuevo = function () {
 
-        $scope.objeto = { id: null };
+        $scope.objeto = { id: null,estado:'A' };
         $scope.edicion = true;
     }
 
@@ -98,10 +90,8 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
         	console.log(resp);
             if (resp.estado)
                 $scope.objeto = resp.json.item;
-            console.log("*************");
-            console.log($scope.objeto);
-            console.log("*************");
-            $scope.edicion = true;
+                console.log($scope.objeto);
+                $scope.edicion = true;
 
         })
 
@@ -160,7 +150,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Item", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("Item", "Registro guardado satisfactoriamente!", "success");
 
                     } else {
                         SweetAlert.swal("Item", resp.mensajes.msg, "error");
