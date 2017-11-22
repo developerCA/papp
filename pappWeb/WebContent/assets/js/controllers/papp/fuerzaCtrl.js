@@ -79,12 +79,14 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 				
 				$scope.edicion=true;
 				console.log($scope.objeto);
+				console.log($scope.detalles);
+				
 		})
 		
 	};
 	
 	$scope.agregarDetalle=function(){
-		var obj={codigo:null,estado:"A",nombre:null};
+		var obj={codigo:null,estado:"A",nombre:null,id:{fuerzaclasificacionid:null}};
 		$scope.detalles.push(obj);
 		
 	};
@@ -93,7 +95,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 		$scope.detalles.splice(index,1);		
 	};
 	
-	$scope.buscarClasificacion=function(){
+	$scope.buscarClasificacion=function(obj){
 
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalClasificacion.html',
@@ -101,18 +103,20 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 			size : 'md',
 			resolve : {
 				tipo : function() {
+					
 					return $scope.objeto.tipo;
 				}
 			}
 		});
 
-		modalInstance.result.then(function(obj) {
-			console.clear();
-			console.log(obj);
-			$scope.objeto.npcodigopadre = obj.codigo;
-			$scope.objeto.npnombrepadre = obj.nombre;
-			$scope.objeto.nptipopadrenombre = obj.nptipopadrenombre;
+		modalInstance.result.then(function(seleccion) {
 			
+			console.log(seleccion);
+			obj.codigo	 = seleccion.codigo;
+			obj.nombre = seleccion.nombre;
+			obj.id.fuerzaclasificacionid=seleccion.id;
+			//$scope.obj.nptipopadrenombre = obj.nptipopadrenombre;
+			console.log(obj);
 			
 		}, function() {
 			
@@ -145,7 +149,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 		            } else {
 		            	
 		            	$scope.objeto.details=$scope.detalles;
-		            	
+		            	console.log($scope.objeto);
 		            	fuerzaFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);

@@ -63,7 +63,7 @@ app.controller('FuenteController', [ "$scope","$rootScope","SweetAlert","$filter
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null,estado:'A'};
+		$scope.objeto={id:null,estado:'A',fuentefinanejerciciofiscalid:$rootScope.ejefiscal};
 		
 		$scope.edicion=true;
 	}
@@ -74,6 +74,7 @@ app.controller('FuenteController', [ "$scope","$rootScope","SweetAlert","$filter
 			if (resp.estado)
 			   $scope.objeto=resp.json.fuentefinanciamiento;
 			   $scope.edicion=true;
+			   console.log($scope.objeto);
 
 		})
 		

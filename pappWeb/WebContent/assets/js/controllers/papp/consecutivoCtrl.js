@@ -63,7 +63,7 @@ app.controller('ConsecutivoController', [ "$scope","$rootScope","SweetAlert","$f
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null,estado:'A'};
+		$scope.objeto={id:null,estado:'A',consecutivoejerfiscalid:$rootScope.ejefiscal};
 		
 		$scope.edicion=true;
 	}

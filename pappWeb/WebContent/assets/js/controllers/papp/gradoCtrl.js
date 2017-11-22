@@ -133,7 +133,7 @@ app.controller('GradoController', [ "$scope","$rootScope","SweetAlert","$filter"
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Grado!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Grado!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Grado!", resp.mensajes.msg, "error");
