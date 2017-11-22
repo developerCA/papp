@@ -947,7 +947,7 @@ public class ConsultasUtil {
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());
 			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),subitemTO.getJsonConfigedit()));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),subitemTO.getJsonConfigconsul()));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 		}catch (Exception e) {
 			e.printStackTrace();
