@@ -112,7 +112,7 @@ app.controller('FuenteController', [ "$scope","$rootScope","SweetAlert","$filter
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Fuente de Financiamiento!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Fuente de Financiamiento!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Fuente de Financiamiento!", resp.mensajes.msg, "error");

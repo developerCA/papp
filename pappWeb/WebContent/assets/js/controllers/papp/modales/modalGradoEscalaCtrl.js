@@ -1,12 +1,13 @@
 'use strict';
 
-app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","clasificacionFactory",
-	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,clasificacionFactory) {
+app.controller('ModalGradoEscalaController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","GradoEscalaFactory",
+	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,gradoEscalaFactory) {
     	
-	$scope.nombreFiltro=null;
-	$scope.codigoFiltro=null;
-	$scope.siglaFiltro=null;
-	$scope.estadoFiltro=null;
+	$scope.codigo=null;
+	$scope.nombregrado=null;
+	$scope.nombrefuerza=null;
+	$scope.grupoocupacional=null;
+	$scope.estado=null;
 	$scope.edicion=false;
 	$scope.objeto={};
 	
@@ -15,7 +16,7 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		clasificacionFactory.traerClasificaciones(pagina).then(function(resp){
+		gradoEscalaFactory.traer(pagina).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;				
@@ -42,23 +43,26 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 				$defer.resolve($scope.lista);
 			}
 		});
-	});
-	
+	});	
 	
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		clasificacionFactory.traerClasificacionesFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, $scope.estadoFiltro).then(function(resp){
+				
+		gradoEscalaFactory.traerFiltro(pagina,$scope.codigo,$scope.nombregrado,$scope.nombrefuerza, $scope.grupoocupacional).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
 		})
-	}
+	};
 	
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.codigoFiltro=null;
-		$scope.estadoFiltro=null;
+
+		$scope.codigo=null;
+		$scope.nombregrado=null;
+		$scope.nombrefuerza=null;
+		$scope.grupoocupacional=null;
+		$scope.estado=null;
 		$scope.consultar();
 		
 	};
