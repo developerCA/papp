@@ -74,13 +74,13 @@ import ec.com.xcelsa.utilitario.metodos.Log;
  * @copyright: Xcelsa
  * @version: 1.0
  * @descripcion Clase para realizar administraciones centralizadas
-*/
+ */
 
 @RestController
 @RequestMapping("/rest/administrar")
 public class AdministracionController {
 	private Log log = new Log(AdministracionController.class);
-	
+
 	@RequestMapping(value = "/{clase}", method = RequestMethod.POST)
 	public Respuesta grabar(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo grabar: " + clase + " - " + objeto);
@@ -97,6 +97,8 @@ public class AdministracionController {
 				//accion = (ejerciciofiscalTO.getId()==null)?"crear":"actualizar";
 				//pregunto si es fuente de financiamiento o items
 				UtilSession.adminsitracionServicio.transCopiardatos(copiar);
+				mensajes.setMsg("Exito al copiar los datos de un ejercicio fiscal a otro");
+				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}
 			//Ejerciciofiscal
 			else if(clase.equals("ejerciciofiscal")){
@@ -148,7 +150,7 @@ public class AdministracionController {
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarDivisiongeografica(divisiongeograficaTO);
 					id=divisiongeograficaTO.getId().toString();
-			//		jsonObject.put("divisiongeografica", (JSONObject)JSONSerializer.toJSON(divisiongeograficaTO,divisiongeograficaTO.getJsonConfig()));
+					//		jsonObject.put("divisiongeografica", (JSONObject)JSONSerializer.toJSON(divisiongeograficaTO,divisiongeograficaTO.getJsonConfig()));
 				}
 			}
 
@@ -180,30 +182,30 @@ public class AdministracionController {
 				}
 			}
 			//Empleado
-//			else if(clase.equals("empleado")){
-//				EmpleadoTO empleadoTO = gson.fromJson(new StringReader(objeto), EmpleadoTO.class);
-//				accion = (empleadoTO.getId()==null)?"crear":"actualizar";
-//				//pregunto si ya existe el codigo en el nivel actual
-//				EmpleadoTO empleadoTO2=new EmpleadoTO();
-//				empleadoTO2.setCodigo(empleadoTO.getCodigo());
-//				Collection<EmpleadoTO> empleadoTOs=UtilSession.adminsitracionServicio.transObtenerEmpleado(empleadoTO);
-//				boolean grabar=true;
-//				if(empleadoTOs.size()>0){
-//					empleadoTO2=(EmpleadoTO)empleadoTOs.iterator().next();
-//					if(empleadoTO.getId()!=null && empleadoTO2.getId().longValue()!=empleadoTO.getId().longValue())
-//						grabar=false;
-//				}
-//				if(!grabar){
-//					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
-//					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-//				}
-//				else{
-//					UtilSession.adminsitracionServicio.transCrearModificarEmpleado(empleadoTO);
-//					id=empleadoTO.getId().toString();
-//					jsonObject.put("item", (JSONObject)JSONSerializer.toJSON(empleadoTO,empleadoTO.getJsonConfig()));
-//				}
-//			}
-			
+			//			else if(clase.equals("empleado")){
+			//				EmpleadoTO empleadoTO = gson.fromJson(new StringReader(objeto), EmpleadoTO.class);
+			//				accion = (empleadoTO.getId()==null)?"crear":"actualizar";
+			//				//pregunto si ya existe el codigo en el nivel actual
+			//				EmpleadoTO empleadoTO2=new EmpleadoTO();
+			//				empleadoTO2.setCodigo(empleadoTO.getCodigo());
+			//				Collection<EmpleadoTO> empleadoTOs=UtilSession.adminsitracionServicio.transObtenerEmpleado(empleadoTO);
+			//				boolean grabar=true;
+			//				if(empleadoTOs.size()>0){
+			//					empleadoTO2=(EmpleadoTO)empleadoTOs.iterator().next();
+			//					if(empleadoTO.getId()!=null && empleadoTO2.getId().longValue()!=empleadoTO.getId().longValue())
+			//						grabar=false;
+			//				}
+			//				if(!grabar){
+			//					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+			//					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+			//				}
+			//				else{
+			//					UtilSession.adminsitracionServicio.transCrearModificarEmpleado(empleadoTO);
+			//					id=empleadoTO.getId().toString();
+			//					jsonObject.put("item", (JSONObject)JSONSerializer.toJSON(empleadoTO,empleadoTO.getJsonConfig()));
+			//				}
+			//			}
+
 			//Unidadmedida
 			else if(clase.equals("unidadmedida")){
 				UnidadmedidaTO unidadmedidaTO = gson.fromJson(new StringReader(objeto), UnidadmedidaTO.class);
@@ -270,6 +272,8 @@ public class AdministracionController {
 				ConsecutivoTO consecutivoTO2=new ConsecutivoTO();
 				consecutivoTO2.setNombre(consecutivoTO.getNombre());
 				consecutivoTO2.setConsecutivoejerfiscalid(consecutivoTO.getConsecutivoejerfiscalid());
+				if(consecutivoTO.getId()==null)
+					consecutivoTO.setUltimousado(0.0);
 				Collection<ConsecutivoTO> fuentefinanciamientoTOs=UtilSession.adminsitracionServicio.transObtenerConsecutivo(consecutivoTO2);
 				boolean grabar=true;
 				if(fuentefinanciamientoTOs.size()>0){
@@ -587,7 +591,7 @@ public class AdministracionController {
 				id=parametroindicadorTO.getId().toString();
 				jsonObject.put("parametroindicador", (JSONObject)JSONSerializer.toJSON(parametroindicadorTO,parametroindicadorTO.getJsonConfig()));
 			}
-			
+
 			//Tipoproducto
 			else if(clase.equals("tipoproducto")){
 				TipoproductoTO tipoproductoTO = gson.fromJson(new StringReader(objeto), TipoproductoTO.class);
@@ -615,7 +619,7 @@ public class AdministracionController {
 					jsonObject.put("tipoproducto", (JSONObject)JSONSerializer.toJSON(tipoproductoTO,tipoproductoTO.getJsonConfig()));
 				}
 			}
-			
+
 			//Tiporegimen
 			else if(clase.equals("tiporegimen")){
 				TiporegimenTO tiporegimenTO = gson.fromJson(new StringReader(objeto), TiporegimenTO.class);
@@ -643,7 +647,7 @@ public class AdministracionController {
 					jsonObject.put("tiporegimen", (JSONObject)JSONSerializer.toJSON(tiporegimenTO,tiporegimenTO.getJsonConfig()));
 				}
 			}
-			
+
 			//Procedimiento
 			else if(clase.equals("procedimiento")){
 				ProcedimientoTO procedimientoTO = gson.fromJson(new StringReader(objeto), ProcedimientoTO.class);
@@ -671,7 +675,7 @@ public class AdministracionController {
 					jsonObject.put("tipoidentificacion", (JSONObject)JSONSerializer.toJSON(procedimientoTO,procedimientoTO.getJsonConfig()));
 				}
 			}
-			
+
 			//Grupo
 			else if(clase.equals("grupo")){
 				GrupoTO grupoTO = gson.fromJson(new StringReader(objeto), GrupoTO.class);
@@ -691,7 +695,7 @@ public class AdministracionController {
 				GrupoTO grupoTO3=new GrupoTO();
 				grupoTO3.setNombre(grupoTO.getNombre());
 				Collection<GrupoTO> grupoTO1s=UtilSession.adminsitracionServicio.transObtenerGrupo(grupoTO3);
-				if(grupoTOs.size()>0){
+				if(grupoTO1s.size()>0){
 					grupoTO3=(GrupoTO)grupoTO1s.iterator().next();
 					if((grupoTO.getId()!=null && grupoTO.getId().longValue()!=0) && grupoTO3.getId().longValue()!=grupoTO.getId().longValue())
 						grabar=false;
@@ -709,7 +713,7 @@ public class AdministracionController {
 					jsonObject.put("grupo", (JSONObject)JSONSerializer.toJSON(grupoTO,grupoTO.getJsonConfig()));
 				}
 			}
-			
+
 			//Grado
 			else if(clase.equals("grado")){
 				GradoTO gradoTO = gson.fromJson(new StringReader(objeto), GradoTO.class);
@@ -737,7 +741,7 @@ public class AdministracionController {
 					jsonObject.put("grado", (JSONObject)JSONSerializer.toJSON(gradoTO,gradoTO.getJsonConfig()));
 				}
 			}
-			
+
 			//Clasificacion
 			else if(clase.equals("clasificacion")){
 				ClasificacionTO clasificacionTO = gson.fromJson(new StringReader(objeto), ClasificacionTO.class);
@@ -765,7 +769,7 @@ public class AdministracionController {
 					jsonObject.put("clasificacion", (JSONObject)JSONSerializer.toJSON(clasificacionTO,clasificacionTO.getJsonConfig()));
 				}
 			}
-			
+
 			//Fuerza
 			else if(clase.equals("fuerza")){
 				FuerzaTO fuerzaTO = gson.fromJson(new StringReader(objeto), FuerzaTO.class);
@@ -793,7 +797,7 @@ public class AdministracionController {
 					jsonObject.put("fuerza", (JSONObject)JSONSerializer.toJSON(fuerzaTO,fuerzaTO.getJsonConfig()));
 				}
 			}
-			
+
 			//Gradofuerza
 			else if(clase.equals("gradofuerza")){
 				GradofuerzaTO gradofuerzaTO = gson.fromJson(new StringReader(objeto), GradofuerzaTO.class);
@@ -821,7 +825,7 @@ public class AdministracionController {
 					//jsonObject.put("gradofuerza", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfig()));
 				}
 			}
-			
+
 			//especialidades
 			else if(clase.equals("especialidades")){
 				EspecialidadTO especialidadTO = gson.fromJson(new StringReader(objeto), EspecialidadTO.class);
@@ -849,7 +853,7 @@ public class AdministracionController {
 					jsonObject.put("especialidades", (JSONObject)JSONSerializer.toJSON(especialidadTO,especialidadTO.getJsonConfig()));
 				}
 			}
-			
+
 			//Cargo
 			else if(clase.equals("cargo")){
 				CargoTO cargoTO = gson.fromJson(new StringReader(objeto), CargoTO.class);
@@ -877,7 +881,7 @@ public class AdministracionController {
 					jsonObject.put("cargo", (JSONObject)JSONSerializer.toJSON(cargoTO,cargoTO.getJsonConfig()));
 				}
 			}
-			
+
 			//Escalarmu
 			else if(clase.equals("escalarmu")){
 				EscalarmuTO escalarmuTO = gson.fromJson(new StringReader(objeto), EscalarmuTO.class);
@@ -905,37 +909,44 @@ public class AdministracionController {
 					jsonObject.put("escalarmu", (JSONObject)JSONSerializer.toJSON(escalarmuTO,escalarmuTO.getJsonConfig()));
 				}
 			}
-			
+
 			else if(clase.equals("gradoescala")){
 				GradoescalaTO gradoescalaTO = gson.fromJson(new StringReader(objeto), GradoescalaTO.class);
 				accion = (gradoescalaTO.getId()==null)?"crear":"actualizar";
 				//valido que no exista creado un registro para ese grado
-//				GradoescalaTO gradoescala=new GradoescalaTO();
-//				gradoescala.set
-				//pregunto si ya existe el codigo en el nivel actual
-				GradoescalaTO gradoescalaTO2=new GradoescalaTO();
-				gradoescalaTO2.setCodigo(gradoescalaTO.getCodigo());
-				Collection<GradoescalaTO> escalarmuTOs=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescalaTO2);
-				boolean grabar=true;
-				if(escalarmuTOs.size()>0){
-					gradoescalaTO2=(GradoescalaTO)escalarmuTOs.iterator().next();
-					if((gradoescalaTO.getId()!=null && gradoescalaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradoescalaTO.getId().longValue())
-						grabar=false;
-					else if((gradoescalaTO.getId()==null || (gradoescalaTO.getId()!=null && gradoescalaTO2.getId().longValue()!=gradoescalaTO.getId().longValue())) && gradoescalaTO.getCodigo()!=null && gradoescalaTO2.getCodigo().equals(gradoescalaTO.getCodigo()))
-						grabar=false;
-
-				}
-				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				GradoescalaTO gradoescala=new GradoescalaTO();
+				gradoescala.setGegradofuerzaid(gradoescalaTO.getGegradofuerzaid());
+				Collection<GradoescalaTO> grados=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescala);
+				if(grados.size()==0){
+					//pregunto si ya existe el codigo en el nivel actual
+					GradoescalaTO gradoescalaTO2=new GradoescalaTO();
+					gradoescalaTO2.setCodigo(gradoescalaTO.getCodigo());
+					Collection<GradoescalaTO> escalarmuTOs=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescalaTO2);
+					boolean grabar=true;
+					if(escalarmuTOs.size()>0){
+						gradoescalaTO2=(GradoescalaTO)escalarmuTOs.iterator().next();
+						if((gradoescalaTO.getId()!=null && gradoescalaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradoescalaTO.getId().longValue())
+							grabar=false;
+						else if((gradoescalaTO.getId()==null || (gradoescalaTO.getId()!=null && gradoescalaTO2.getId().longValue()!=gradoescalaTO.getId().longValue())) && gradoescalaTO.getCodigo()!=null && gradoescalaTO2.getCodigo().equals(gradoescalaTO.getCodigo()))
+							grabar=false;
+	
+					}
+					if(!grabar){
+						mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+					else{
+						UtilSession.adminsitracionServicio.transCrearModificarGradoescala(gradoescalaTO);
+						id=gradoescalaTO.getId().toString();
+						jsonObject.put("gradoescala", (JSONObject)JSONSerializer.toJSON(gradoescalaTO,gradoescalaTO.getJsonConfig()));
+					}
 				}
 				else{
-					UtilSession.adminsitracionServicio.transCrearModificarGradoescala(gradoescalaTO);
-					id=gradoescalaTO.getId().toString();
-					jsonObject.put("gradoescala", (JSONObject)JSONSerializer.toJSON(gradoescalaTO,gradoescalaTO.getJsonConfig()));
+					mensajes.setMsg("Ya existe un registro creado para el grado seleccionado");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
-			
+
 			else if(clase.equals("cargoescala")){
 				CargoescalaTO cargoescalaTO = gson.fromJson(new StringReader(objeto), CargoescalaTO.class);
 				accion = (cargoescalaTO.getId()==null)?"crear":"actualizar";
@@ -962,7 +973,7 @@ public class AdministracionController {
 					jsonObject.put("cargoescala", (JSONObject)JSONSerializer.toJSON(cargoescalaTO,cargoescalaTO.getJsonConfig()));
 				}
 			}
-			
+
 			else if(clase.equals("nivelorganico")){
 				NivelorganicoTO nivelorganicoTO = gson.fromJson(new StringReader(objeto), NivelorganicoTO.class);
 				accion = (nivelorganicoTO.getId()==null)?"crear":"actualizar";
@@ -1026,30 +1037,33 @@ public class AdministracionController {
 			}
 
 			//Registro la auditoria
-//			if(mensajes.getMsg()==null)
-//				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
+			//			if(mensajes.getMsg()==null)
+			//				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
 			if(mensajes.getMsg()==null){
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}
-			else
+			else if(!clase.equals("copiardatos"))
 				respuesta.setEstado(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error grabar");
-			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+			if(clase.equals("copiardatos"))
+				mensajes.setMsg("Los datos ya fueron copiados, no se van a volver a copiar");
+			else
+				mensajes.setMsg(MensajesWeb.getString("error.guardar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
 		log.println("existe mensaje: " + mensajes.getMsg());
-//		if(mensajes.getMsg()!=null)
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		//		if(mensajes.getMsg()!=null)
+		//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
 		return respuesta;		
 	}
-	
+
 	@RequestMapping(value = "/{clase}/{id}/{id2}", method = RequestMethod.GET)
 	public Respuesta editar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,HttpServletRequest request){
 		log.println("entra al metodo recuperar: " + clase + " - " + id);
@@ -1062,7 +1076,7 @@ public class AdministracionController {
 				EjerciciofiscalTO ejerciciofiscalTO = UtilSession.adminsitracionServicio.transObtenerEjerciciofiscalTO(id);
 				jsonObject.put("ejerciciofiscal", (JSONObject)JSONSerializer.toJSON(ejerciciofiscalTO,ejerciciofiscalTO.getJsonConfig()));
 			}
-			
+
 			//Divisiones geograficas
 			else if(clase.equals("divisiongeografica")){
 				DivisiongeograficaTO divisiongeograficaTO = UtilSession.adminsitracionServicio.transObtenerDivisiongeograficaTO(id);
@@ -1074,7 +1088,7 @@ public class AdministracionController {
 				UnidadmedidaTO unidadmedidaTO = UtilSession.adminsitracionServicio.transObtenerUnidadmedidaTO(id);
 				jsonObject.put("unidadmedida", (JSONObject)JSONSerializer.toJSON(unidadmedidaTO,unidadmedidaTO.getJsonConfig()));
 			}
-			
+
 			//Parametro
 			else if(clase.equals("parametro")){
 				ParametroTO parametroTO = UtilSession.adminsitracionServicio.transObtenerParametroTO(id);
@@ -1190,49 +1204,49 @@ public class AdministracionController {
 				SocionegocioTO socionegocioTO = UtilSession.adminsitracionServicio.transObtenerSocionegocioTO(id);
 				jsonObject.put("empleado", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfig()));
 			}
-			
+
 			//Parametroindicador
 			else if(clase.equals("parametroindicador")){
 				ParametroindicadorTO parametroindicadorTO = UtilSession.adminsitracionServicio.transObtenerParametroindicadorTO(id);
 				jsonObject.put("parametroindicador", (JSONObject)JSONSerializer.toJSON(parametroindicadorTO,parametroindicadorTO.getJsonConfig()));
 			}
-			
+
 			//Tipoproducto
 			else if(clase.equals("tipoproducto")){
 				TipoproductoTO tipoproductoTO = UtilSession.adminsitracionServicio.transObtenerTipoproductoTO(id);
 				jsonObject.put("tipoproducto", (JSONObject)JSONSerializer.toJSON(tipoproductoTO,tipoproductoTO.getJsonConfig()));
 			}
-			
+
 			//Tiporegimen
 			else if(clase.equals("tiporegimen")){
 				TiporegimenTO tiporegimenTO = UtilSession.adminsitracionServicio.transObtenerTiporegimenTO(id);
 				jsonObject.put("tiporegimen", (JSONObject)JSONSerializer.toJSON(tiporegimenTO,tiporegimenTO.getJsonConfig()));
 			}
-			
+
 			//Procedimiento
 			else if(clase.equals("procedimiento")){
 				ProcedimientoTO procedimientoTO = UtilSession.adminsitracionServicio.transObtenerProcedimientoTO(id);
 				jsonObject.put("procedimiento", (JSONObject)JSONSerializer.toJSON(procedimientoTO,procedimientoTO.getJsonConfig()));
 			}
-			
+
 			//Grupo
 			else if(clase.equals("grupo")){
 				GrupoTO grupoTO = UtilSession.adminsitracionServicio.transObtenerGrupoTO(id);
 				jsonObject.put("grupo", (JSONObject)JSONSerializer.toJSON(grupoTO,grupoTO.getJsonConfig()));
 			}
-			
+
 			//Grado
 			else if(clase.equals("grado")){
 				GradoTO gradoTO = UtilSession.adminsitracionServicio.transObtenerGradoTO(id);
 				jsonObject.put("grado", (JSONObject)JSONSerializer.toJSON(gradoTO,gradoTO.getJsonConfig()));
 			}
-			
+
 			//Clasificacion
 			else if(clase.equals("clasificacion")){
 				ClasificacionTO clasificacionTO = UtilSession.adminsitracionServicio.transObtenerClasificacionTO(id);
 				jsonObject.put("clasificacion", (JSONObject)JSONSerializer.toJSON(clasificacionTO,clasificacionTO.getJsonConfig()));
 			}
-			
+
 			//Fuerza
 			else if(clase.equals("fuerza")){
 				FuerzaTO fuerzaTO = UtilSession.adminsitracionServicio.transObtenerFuerzaTO(id);
@@ -1250,43 +1264,43 @@ public class AdministracionController {
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(fuerzaclasificacionTOs,fuerzaclasificacionTO.getJsonConfig()));
 
 			}
-			
+
 			//Gradofuerza
 			else if(clase.equals("gradofuerza")){
 				GradofuerzaTO gradofuerzaTO = UtilSession.adminsitracionServicio.transObtenerGradofuerzaTO(id);
 				jsonObject.put("gradofuerza", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfig()));
 			}
-			
+
 			//especialidades
 			else if(clase.equals("especialidades")){
 				EspecialidadTO especialidadTO = UtilSession.adminsitracionServicio.transObtenerEspecialidadTO(id);
 				jsonObject.put("especialidades", (JSONObject)JSONSerializer.toJSON(especialidadTO,especialidadTO.getJsonConfig()));
 			}
-			
+
 			//Cargo
 			else if(clase.equals("cargo")){
 				CargoTO cargoTO = UtilSession.adminsitracionServicio.transObtenerCargoTO(id);
 				jsonObject.put("cargo", (JSONObject)JSONSerializer.toJSON(cargoTO,cargoTO.getJsonConfig()));
 			}
-			
+
 			//Escalarmu
 			else if(clase.equals("escalarmu")){
 				EscalarmuTO escalarmuTO = UtilSession.adminsitracionServicio.transObtenerEscalarmuTO(id);
 				jsonObject.put("escalarmu", (JSONObject)JSONSerializer.toJSON(escalarmuTO,escalarmuTO.getJsonConfig()));
 			}
-			
+
 			//Gradoescala
 			else if(clase.equals("gradoescala")){
 				GradoescalaTO gradoescalaTO = UtilSession.adminsitracionServicio.transObtenerGradoescalaTO(id);
 				jsonObject.put("gradoescala", (JSONObject)JSONSerializer.toJSON(gradoescalaTO,gradoescalaTO.getJsonConfig()));
 			}
-			
+
 			//Cargoescala
 			else if(clase.equals("cargoescala")){
 				CargoescalaTO cargoescalaTO = UtilSession.adminsitracionServicio.transObtenerCargoescalaTO(id);
 				jsonObject.put("cargoescala", (JSONObject)JSONSerializer.toJSON(cargoescalaTO,cargoescalaTO.getJsonConfig()));
 			}
-			
+
 			//Nivelorganico
 			else if(clase.equals("nivelorganico")){
 				NivelorganicoTO nivelorganicoTO = UtilSession.planificacionServicio.transObtenerNivelorganidoTO(id);
@@ -1302,7 +1316,7 @@ public class AdministracionController {
 				Collection<InstitucionentidadTO> institucionentidadTOs=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidad(institucionentidadTO);
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(institucionentidadTOs,institucionentidadTO.getJsonConfig()));
 			}
-			
+
 			log.println("json retornado: " + jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1312,13 +1326,13 @@ public class AdministracionController {
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-//		if(mensajes.getMsg()!=null)
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		//		if(mensajes.getMsg()!=null)
+		//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
-	
+
 	@RequestMapping(value = "/{clase}/{id}/{id2}", method = RequestMethod.DELETE)
 	//@ResponseStatus(HttpStatus.NO_CONTENT)
 	public Respuesta eliminar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,HttpServletRequest request){
@@ -1366,7 +1380,7 @@ public class AdministracionController {
 				UtilSession.adminsitracionServicio.transEliminarOrganismo(new OrganismoTO(id));
 			}
 
-		
+
 			//Obra
 			else if(clase.equals("obra")){
 				UtilSession.adminsitracionServicio.transEliminarObra(new ObraTO());
@@ -1396,17 +1410,17 @@ public class AdministracionController {
 			else if(clase.equals("procedimiento")){
 				UtilSession.adminsitracionServicio.transEliminarProcedimiento(new ProcedimientoTO(id));
 			}
-			
+
 			//Tipoproducto
 			else if(clase.equals("tipoproducto")){
 				UtilSession.adminsitracionServicio.transEliminarTipoproducto(new TipoproductoTO(id));
 			}
-			
+
 			//Tiporegimen
 			else if(clase.equals("tiporegimen")){
 				UtilSession.adminsitracionServicio.transEliminarTiporegimen(new TiporegimenTO(id));
 			}
-			
+
 			//Clasemodificacion
 			else if(clase.equals("clasemodificacion")){
 				ClaseregistroclasemodificacionID claseregistroclasemodificacionID=new ClaseregistroclasemodificacionID();
@@ -1434,52 +1448,52 @@ public class AdministracionController {
 			else if(clase.equals("grupo")){
 				UtilSession.adminsitracionServicio.transEliminarGrupo(new GrupoTO(id));
 			}
-			
+
 			//Grado
 			else if(clase.equals("grado")){
 				UtilSession.adminsitracionServicio.transEliminarGrado(new GradoTO(id));
 			}
-			
+
 			//Clasificacion
 			else if(clase.equals("clasificacion")){
 				UtilSession.adminsitracionServicio.transEliminarClasificacion(new ClasificacionTO(id));
 			}
-			
+
 			//Fuerza
 			else if(clase.equals("fuerza")){
 				UtilSession.adminsitracionServicio.transEliminarFuerza(new FuerzaTO(id));
 			}
-			
+
 			//Gradofuerza
 			else if(clase.equals("gradofuerza")){
 				UtilSession.adminsitracionServicio.transEliminarGradofuerza(new GradofuerzaTO(id));
 			}
-			
+
 			//especialidades
 			else if(clase.equals("especialidades")){
 				UtilSession.adminsitracionServicio.transEliminarEspecialidad(new EspecialidadTO(id));
 			}
-			
+
 			//Cargo
 			else if(clase.equals("cargo")){
 				UtilSession.adminsitracionServicio.transEliminarCargo(new CargoTO(id));
 			}
-			
+
 			//Escalarmu
 			else if(clase.equals("escalarmu")){
 				UtilSession.adminsitracionServicio.transEliminarEscalarmu(new EscalarmuTO(id));
 			}
-			
+
 			//Gradoescala
 			else if(clase.equals("gradoescala")){
 				UtilSession.adminsitracionServicio.transEliminarGradoescala(new GradoescalaTO(id));
 			}
-			
+
 			//Cargoescala
 			else if(clase.equals("cargoescala")){
 				UtilSession.adminsitracionServicio.transEliminarCargoescala(new CargoescalaTO(id));
 			}
-			
+
 			//Nivelorganico
 			else if(clase.equals("nivelorganico")){
 				UtilSession.planificacionServicio.transEliminarNivelorganido(new NivelorganicoTO(id));
@@ -1497,28 +1511,41 @@ public class AdministracionController {
 				UtilSession.estructuraorganicaServicio.transEliminarInstitucion(new InstitucionTO(id));
 			}
 			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
-			mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
-			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
-//			UtilSession.adminsitracionServicio.transCrearModificarAuditoria(auditoriaTO);
+			if(mensajes.getMsg()==null){
+				mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
+				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+			}
+			//			UtilSession.adminsitracionServicio.transCrearModificarAuditoria(auditoriaTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al eliminar");
-			mensajes.setMsg(MensajesWeb.getString("error.eliminar"));
+			if(clase.equals("procedimiento")){
+				mensajes.setMsg("Eliminación no válida, hay información en Subitem Unidad");
+			}
+			else if(clase.equals("tipoproducto")){
+				mensajes.setMsg("Eliminación no válida, hay información en Subitem Unidad");
+			}
+			else if(clase.equals("tiporegimen")){
+				mensajes.setMsg("Eliminación no válida, hay información en Subitem Unidad");
+			}
+			else{
+				mensajes.setMsg(MensajesWeb.getString("error.eliminar"));
+			}
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-//		if(mensajes.getMsg()!=null){
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-//			log.println("existen mensajes");
-//		}
+		//		if(mensajes.getMsg()!=null){
+		//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		//			log.println("existen mensajes");
+		//		}
 		log.println("devuelve**** " + jsonObject.toString());
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
-	
-	
+
+
 	@RequestMapping(value = "/consultar/{clase}/{parametro}", method = RequestMethod.GET)
 	public Respuesta consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
 		log.println("ingresa a consultar: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
@@ -1529,8 +1556,8 @@ public class AdministracionController {
 			String[] pares = parametro.split("&");
 			Map<String, String> parameters = new HashMap<String, String>();
 			for(String pare : pares) {
-			    String[] nameAndValue = pare.split("=");
-			    parameters.put(nameAndValue[0], nameAndValue[1]);
+				String[] nameAndValue = pare.split("=");
+				parameters.put(nameAndValue[0], nameAndValue[1]);
 			}
 			log.println("pagina** " + parameters.get("pagina"));
 			log.println("filas: " + parameters.get("filas"));
@@ -1548,7 +1575,7 @@ public class AdministracionController {
 			else if(clase.equals("divisiongeograficapaginada")){
 				jsonObject=ConsultasUtil.consultaDivisionesgeograficasPaginado(parameters, jsonObject); 
 			}
-			
+
 			//Unidadmedida
 			else if(clase.equals("unidadmedida")){
 				jsonObject=ConsultasUtil.consultaUnidadmedidaPaginado(parameters, jsonObject); 
@@ -1574,12 +1601,12 @@ public class AdministracionController {
 				jsonObject=ConsultasUtil.consultaTipoidentificaciontipoPaginado(parameters, jsonObject);
 			}
 
-			
+
 			//Tipodocumento
 			else if(clase.equals("tipodocumento")){
 				jsonObject=ConsultasUtil.consultaTipodocumentoPaginado(parameters, jsonObject); 
 			}
-			
+
 			//Fuentefinanciamiento
 			else if(clase.equals("fuentefinanciamiento")){
 				jsonObject=ConsultasUtil.consultaFuentefinanciamientoPaginado(parameters, jsonObject); 
@@ -1624,13 +1651,13 @@ public class AdministracionController {
 			else if(clase.equals("socionegocio")){
 				jsonObject=ConsultasUtil.consultaSocionegocioPaginado(parameters, jsonObject,"socionegocio");
 			}
-			
+
 			//Empleado
 			else if(clase.equals("empleado")){
 				jsonObject=ConsultasUtil.consultaSocionegocioPaginado(parameters, jsonObject,"empleado");
 			}
 
-			
+
 			//Busqueda Socionegocio
 			else if(clase.equals("busquedasocionegocio")){
 				jsonObject=ConsultasUtil.consultaSocionegocioPaginado(parameters, jsonObject,"busquedasocionegocio");
@@ -1640,7 +1667,7 @@ public class AdministracionController {
 			else if(clase.equals("parametroindicador")){
 				jsonObject=ConsultasUtil.consultaParametroindicadorPaginado(parameters, jsonObject); 
 			}
-			
+
 			//Busqueda de fuerzas
 			else if(clase.equals("busquedafuerza")){
 				jsonObject=ConsultasUtil.consultaFuerzaPaginado(parameters, jsonObject,"busquedafuerza"); 
@@ -1650,77 +1677,77 @@ public class AdministracionController {
 			else if(clase.equals("organismoprestamo")){
 				jsonObject=ConsultasUtil.consultaOrganismoprestamoPaginado(parameters, jsonObject);
 			}
-			
+
 			//Tipoproducto
 			else if(clase.equals("tipoproducto")){
 				jsonObject=ConsultasUtil.consultaTipoproductoPaginado(parameters, jsonObject);
 			}
-			
+
 			//Tiporegimen
 			else if(clase.equals("tiporegimen")){
 				jsonObject=ConsultasUtil.consultaTiporegimenPaginado(parameters, jsonObject);
 			}
-			
+
 			//Procedimiento
 			else if(clase.equals("procedimiento")){
 				jsonObject=ConsultasUtil.consultaProcedimientoPaginado(parameters, jsonObject);
 			}
-			
+
 			//Grupo
 			else if(clase.equals("grupo")){
 				jsonObject=ConsultasUtil.consultaGrupoPaginado(parameters, jsonObject);
 			}
-			
+
 			//Grado
 			else if(clase.equals("grado")){
 				jsonObject=ConsultasUtil.consultaGradoPaginado(parameters, jsonObject);
 			}
-			
+
 			//Clasificacion
 			else if(clase.equals("clasificacion")){
 				jsonObject=ConsultasUtil.consultaClasificacionPaginado(parameters, jsonObject);
 			}
-			
+
 			//Fuerza
 			else if(clase.equals("fuerza")){
 				jsonObject=ConsultasUtil.consultaFuerzaPaginado(parameters, jsonObject);
 			}
-			
+
 			//Gradofuerza
 			else if(clase.equals("gradofuerza")){
 				jsonObject=ConsultasUtil.consultaGradofuerzaPaginado(parameters, jsonObject);
 			}
-			
+
 			//especialidades
 			else if(clase.equals("especialidades")){
 				jsonObject=ConsultasUtil.consultaEspecialidadPaginado(parameters, jsonObject);
 			}
-			
+
 			//Cargo
 			else if(clase.equals("cargo")){
 				jsonObject=ConsultasUtil.consultaCargoPaginado(parameters, jsonObject);
 			}
-			
+
 			//Escalarmu
 			else if(clase.equals("escalarmu")){
 				jsonObject=ConsultasUtil.consultaEscalarmuPaginado(parameters, jsonObject);
 			}
-			
+
 			//Gradoescala
 			else if(clase.equals("gradoescala")){
 				jsonObject=ConsultasUtil.consultaGradoescalaPaginado(parameters, jsonObject);
 			}
-			
+
 			//Cargoescala
 			else if(clase.equals("cargoescala")){
 				jsonObject=ConsultasUtil.consultaCargoescalaPaginado(parameters, jsonObject);
 			}	
-			
+
 			//Nivelorganico
 			else if(clase.equals("nivelorganico")){
 				jsonObject=ConsultasUtil.consultaNivelorganicoPaginado(parameters, jsonObject);
 			}	
-			
+
 			//Institucion
 			else if(clase.equals("institucion")){
 				log.println("va a consultar institucion");
@@ -1733,55 +1760,55 @@ public class AdministracionController {
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
 			respuesta.setEstado(false);
 		}
-//		if(mensajes.getMsg()!=null)
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		//		if(mensajes.getMsg()!=null)
+		//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
 		return respuesta;		
 	}
 
-//	@RequestMapping(value = "/cambiarClave", method = RequestMethod.POST)
-//	public String cambiarClave(@RequestBody String objeto,HttpServletRequest request){
-//		log.println("entra cambiar la clave: " + objeto);
-//		Gson gson = new Gson();
-//		JSONObject jsonObject=new JSONObject();
-//		Mensajes mensajes=new Mensajes();
-//		try {
-//			CambioClave cambioClave = gson.fromJson(new StringReader(objeto), CambioClave.class);
-//			//Usuario logeado
-//			UsuarioTO usuario = UtilSession.getUsuario(request);//preguntar esto!!!
-//			//Recupero el usuario de sesion
-//			log.println("clave anterior: " +usuario.getClave());
-//			//if(bean.getPassword()!=null && bean.getPassword().length()>=8){
-//				if(cambioClave.getClave().equals(cambioClave.getConfirmacion())){
-//					if(!(FormularioUtil.encriptarClave(cambioClave.getClave())).equals(usuario.getClave())){
-//						usuario.setClave(FormularioUtil.encriptarClave(cambioClave.getClave()));
-//						usuario.setFechaClave(new Date());
-//						usuario.setCambiarclave("0");
-//						log.println("va a guardar el usuario");
-//						log.println("el nombre de usuario es:"+usuario.getNombre());
-//						UtilSession.adminsitracionServicio.transCrearModificarUsuario(usuario);
-//					}
-//					else{
-//						log.println("La clave es igual a la guardada en base");
-//						mensajes.setMsg(MensajesWeb.getString("error.claveIgual"));
-//						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-//					}
-//				}
-//				else{
-//					log.println("La nueva clave es diferente a la confirmacion");
-//					mensajes.setMsg(MensajesWeb.getString("error.claveValidacion"));
-//					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-//				}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			log.println("error al obtener para editar");
-//			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
-//			mensajes.setType(MensajesWeb.getString("mensaje.error"));
-//		}
-//		if(mensajes.getMsg()!=null)
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-//		return jsonObject.toString();	
-//	}
-	
+	//	@RequestMapping(value = "/cambiarClave", method = RequestMethod.POST)
+	//	public String cambiarClave(@RequestBody String objeto,HttpServletRequest request){
+	//		log.println("entra cambiar la clave: " + objeto);
+	//		Gson gson = new Gson();
+	//		JSONObject jsonObject=new JSONObject();
+	//		Mensajes mensajes=new Mensajes();
+	//		try {
+	//			CambioClave cambioClave = gson.fromJson(new StringReader(objeto), CambioClave.class);
+	//			//Usuario logeado
+	//			UsuarioTO usuario = UtilSession.getUsuario(request);//preguntar esto!!!
+	//			//Recupero el usuario de sesion
+	//			log.println("clave anterior: " +usuario.getClave());
+	//			//if(bean.getPassword()!=null && bean.getPassword().length()>=8){
+	//				if(cambioClave.getClave().equals(cambioClave.getConfirmacion())){
+	//					if(!(FormularioUtil.encriptarClave(cambioClave.getClave())).equals(usuario.getClave())){
+	//						usuario.setClave(FormularioUtil.encriptarClave(cambioClave.getClave()));
+	//						usuario.setFechaClave(new Date());
+	//						usuario.setCambiarclave("0");
+	//						log.println("va a guardar el usuario");
+	//						log.println("el nombre de usuario es:"+usuario.getNombre());
+	//						UtilSession.adminsitracionServicio.transCrearModificarUsuario(usuario);
+	//					}
+	//					else{
+	//						log.println("La clave es igual a la guardada en base");
+	//						mensajes.setMsg(MensajesWeb.getString("error.claveIgual"));
+	//						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+	//					}
+	//				}
+	//				else{
+	//					log.println("La nueva clave es diferente a la confirmacion");
+	//					mensajes.setMsg(MensajesWeb.getString("error.claveValidacion"));
+	//					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+	//				}
+	//		} catch (Exception e) {
+	//			e.printStackTrace();
+	//			log.println("error al obtener para editar");
+	//			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+	//			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+	//		}
+	//		if(mensajes.getMsg()!=null)
+	//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+	//		return jsonObject.toString();	
+	//	}
+
 }
