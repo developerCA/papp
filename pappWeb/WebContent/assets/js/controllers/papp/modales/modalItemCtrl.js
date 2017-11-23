@@ -18,6 +18,7 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
 		itemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
+                
         });
 	
 	};
@@ -46,10 +47,9 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
 	
 	$scope.filtrar=function(){
 		
-		console.log($scope.codigoFiltro + "-" +$scope.nombreFiltro + "-" +$scope.estadoFiltro + "-" + $scope.tipoFiltro);
-		
+			
 		$scope.data=[];
-		itemsFactory.traerItemsFiltro(pagina,$scope.codigoFiltro, $scope.nombreFiltro, $scope.estadoFiltro, $scope.tipoFiltro).then(function(resp){
+		itemsFactory.traerItemsFiltro(pagina,$rootScope.ejefiscal,$scope.codigoFiltro, $scope.nombreFiltro, $scope.estadoFiltro, $scope.tipoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;

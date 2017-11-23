@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('MenuPadreController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","menuSeguridadesFactory",  function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,menuSeguridadesFactory) {
+app.controller('MenuPadreController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","menuSeguridadesFactory",
+	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,menuSeguridadesFactory) {
     
 	
 	$scope.nombreFiltro=null;

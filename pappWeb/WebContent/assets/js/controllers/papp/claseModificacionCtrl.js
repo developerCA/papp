@@ -127,6 +127,7 @@ app.controller('ClaseModificacionController', [ "$scope","$rootScope","SweetAler
 		            } else {
 		                
 		            	$scope.objeto.details=$scope.detalles;
+		            	console.log($scope.objeto);
 		            	
 		            	claseModificacionFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){

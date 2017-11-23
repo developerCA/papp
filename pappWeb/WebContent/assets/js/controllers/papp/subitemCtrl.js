@@ -21,6 +21,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
         subitemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
+                console.log($scope.data);
         });
 
     };
@@ -41,7 +42,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 								.page()
 								* params.count());
                 params.total(orderedData.length);
-                $defer.resolve($scope.items);
+                $defer.resolve($scope.gruposMedida);
             }
         });
     });
@@ -73,7 +74,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 
     $scope.nuevo = function () {
 
-        $scope.objeto = { id: null };
+        $scope.objeto = { id: null ,estado:'A'};
         $scope.edicion = true;
     };
 
@@ -82,7 +83,8 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     	subitemsFactory.traerItem(id).then(function (resp) {
         	if (resp.estado)
                 $scope.objeto = resp.json.subitem;
-            $scope.edicion = true;
+            	$scope.edicion = true;
+            	console.log($scope.objeto);
         })
 
     };

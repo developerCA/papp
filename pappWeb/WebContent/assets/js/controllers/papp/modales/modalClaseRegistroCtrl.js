@@ -1,24 +1,27 @@
 'use strict';
 
-app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","clasificacionFactory",
-	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,clasificacionFactory) {
-    	
+app.controller('ModalClaseRegistroController', [ "$scope","$rootScope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","claseRegistroFactory",
+	function($scope,$rootScope,$uibModalInstance,SweetAlert,$filter, ngTableParams,claseRegistroFactory) {
+
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
-	$scope.siglaFiltro=null;
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
+	$scope.detalles=[];
 	
 	var pagina = 1;
 	
 	$scope.consultar=function(){
 		
+		
 		$scope.data=[];
-		clasificacionFactory.traerClasificaciones(pagina).then(function(resp){
+		console.log("Eje.Fis.:"+$rootScope.ejefiscal);
+		claseRegistroFactory.traerClases(pagina,$rootScope.ejefiscal).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
-				$scope.data=resp;				
+				$scope.data=resp;
+			
 		})
 	
 	};
@@ -27,7 +30,7 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
-			count : 10, // count per page
+			count : 5, // count per page
 			filter: {} 	
 		}, {
 			total : $scope.data.length, // length of data
@@ -48,7 +51,7 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		clasificacionFactory.traerClasificacionesFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, $scope.estadoFiltro).then(function(resp){
+		claseRegistroFactory.traerClasesFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -59,16 +62,16 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;
 		$scope.estadoFiltro=null;
+		
 		$scope.consultar();
 		
 	};
 
 	$scope.seleccionar=function(obj){
-		$uibModalInstance.close(obj);
-
+		$uibModalInstance.close(obj);		
 	};
 	
-	$scope.cancelar=function(){
-		$uibModalInstance.dismiss();
+	$scope.cancelar = function() {
+		$uibModalInstance.dismiss('cancel');
 	};
-} ]);
+}]);

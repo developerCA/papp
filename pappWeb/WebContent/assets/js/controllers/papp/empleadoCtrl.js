@@ -11,7 +11,10 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	$scope.guardar=false;
 	$scope.nuevoar=false;
 	$scope.objeto={};
-	$scope.objetolista={};
+	$scope.objetoTipoIdentidicacion={};
+	$scope.objetoGradoEscala={};
+	$scope.objetoEspecialidad={};
+	$scope.objetoClasificacion={};
 
 	var pagina = 1;
 
@@ -80,17 +83,68 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	$scope.editar=function(id){
 		empleadosFactory.traerEmpleadosEditar(id).then(function(resp){
 //console.clear();
-console.log(resp);
+console.log(resp.json);
 			if (resp.estado) {
-			   $scope.objeto=resp.json.perfil;
-			   $scope.objetolista=resp.json.details;
-			   //console.log($scope.objetolista);
+				$scope.objeto=resp.json.empleado;
+
+				//Tipo de identificacion = socionegociotipoidentid
+				empleadosFactory.traerTipoIdentidicacionEditar($scope.objeto.socionegociotipoidentid).then(function(resp){
+					console.log("Tipo Identificacion");
+					console.log(resp.json);
+					if (resp.estado) {
+					   $scope.objetoTipoIdentidicacion=resp.json.tipoidentificacion;
+					}
+				})
+/*
+				//Tipo de identificacion tipo = socionegociotipoidenttipoid
+				empleadosFactory.traerGradoEscalaEditar($scope.objeto.socionegociotipoidenttipoid).then(function(resp){
+					console.log("");
+					console.log(resp.json);
+					if (resp.estado) {
+					   $scope.objeto=resp.json.empleado;
+					}
+				})
+*/
+				//Grado escala = sn emp grado escala id
+				empleadosFactory.traerGradoEscalaEditar($scope.objeto.snempgradoescalaid).then(function(resp){
+					console.log("Grado Escala:");
+					console.log(resp.json);
+					if (resp.estado) {
+					   $scope.objetoGradoEscala = resp.json.gradoescala;
+					}
+				})
+/*
+				//Cargo escala = 
+				empleadosFactory.traerGradoEscalaEditar($scope.objeto.socionegociotipoidenttipoid).then(function(resp){
+					console.log("");
+					console.log(resp.json);
+					if (resp.estado) {
+					   $scope.objeto=resp.json.empleado;
+					}
+				})
+*/
+				//Especialidad = socionegocioempespid
+				empleadosFactory.traerEspecialidadesEditar($scope.objeto.socionegocioempespid).then(function(resp){
+					console.log("Especialidad");
+					console.log(resp.json);
+					if (resp.estado) {
+					   $scope.objetoEspecialidad=resp.json.especialidades;
+					}
+				})
+
+				//Clasificacion = socionegocioempclasifid
+				empleadosFactory.traerClasificacionEditar($scope.objeto.socionegocioempclasifid).then(function(resp){
+					console.log("Clasificacion");
+					console.log(resp.json);
+					if (resp.estado) {
+					   $scope.objetoClasificacion=resp.json.clasificacion;
+					}
+				})
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;
 			$scope.nuevoar=false;
 		})
-		
 	};
 
 	$scope.agregarDetalle=function(){
@@ -102,17 +156,65 @@ console.log(resp);
 		$scope.objetolista.splice(index,1);
 	}
 
-	$scope.abrirEmpleadosPermisos = function(index) {
-		//console.log("aqui");
+	$scope.abrirIdentificacion = function(index) {
+		console.log("aqui");
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalEmpleadosPermisos.html',
-			controller : 'EmpleadosPermisosController',
+			templateUrl : 'modalTipoIdentificacion.html',
+			controller : 'ModalTipoIdentificacionController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objetolista[index].id.permisoid = obj.id;
-			$scope.objetolista[index].nppermiso=obj.nombre;
+			$scope.objeto.socionegociotipoidentid = obj.id;
+			$scope.objetoTipoIdentidicacion = obj;
+		}, function() {
+			console.log("close modal");
+		});
+	};
+
+	$scope.abrirGradoEscala = function(index) {
+		//console.log("aqui");
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalGradoEscala.html',
+			controller : 'ModalGradoEscalaController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.snempgradoescalaid = obj.id;
+			$scope.objetoGradoEscala = obj;
+		}, function() {
+			console.log("close modal");
+		});
+	};
+
+	$scope.abrirEspecialidad = function(index) {
+		console.log("aqui");
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalEspecialidades.html',
+			controller : 'ModalEspecialidadesController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.socionegocioempespid = obj.id;
+			$scope.objetoEspecialidad = obj;
+		}, function() {
+			console.log("close modal");
+		});
+	};
+
+	$scope.abrirClasificacion = function(index) {
+		console.log("aqui");
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalClasificacion.html',
+			controller : 'ModalClasificacionController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.socionegocioempclasifid = obj.id;
+			$scope.objetoClasificacion = obj;
 		}, function() {
 			console.log("close modal");
 		});

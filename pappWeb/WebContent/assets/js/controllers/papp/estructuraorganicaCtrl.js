@@ -20,7 +20,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.data=[];
 		//console.log('aqi');
 		estructuraorganicaFactory.traerEstructuraOrganica(pagina).then(function(resp){
-			//console.log(resp);
+			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -80,6 +80,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.edicion=true;
 			$scope.nuevoar=false;
 			$scope.guardar=true;
+			console.log($scope.objeto);
 		})
 	};
 

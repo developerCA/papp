@@ -135,10 +135,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/param",
         templateUrl: "assets/views/papp/parametros.html",
         resolve: loadSequence('ngTable','ParametroCtrl','ParametroFactory'),
-        title: 'Parámetros',
+        title: 'Parï¿½metros',
         
         ncyBreadcrumb: {
-            label: 'Parámetros'
+            label: 'Parï¿½metros'
         }
     }).state('app.consecutivos', {
         url: "/consecutivos",
@@ -153,9 +153,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/tipo-identificacion",
         templateUrl: "assets/views/papp/tipoIdentificacion.html",
         resolve: loadSequence('ngTable', 'TipoIdentificacionCtrl', 'TipoIdentificacionFactory'),
-        title: 'Tipo Identificación',
+        title: 'Tipo Identificaciï¿½n',
         ncyBreadcrumb: {
-            label: 'Tipo Identificación'
+            label: 'Tipo Identificaciï¿½n'
         }
     }).state('app.obras', {
         url: "/obras",
@@ -406,9 +406,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/estructuraorganica",
         templateUrl: "assets/views/papp/estructuraorganica.html",
         resolve: loadSequence('ngTable','EstructuraOrganicaCtrl','ModalInstitucionCtrl','EstructuraOrganicaFactory','InstitucionFactory'),
-        title: 'Estructura Orgánica',
+        title: 'Estructura Orgï¿½nica',
         ncyBreadcrumb: {
-            label: 'Estructura Orgánica'
+            label: 'Estructura Orgï¿½nica'
         }
     }).state('app.indicadores', {
         url: "/indicadores",
@@ -448,10 +448,29 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.empleado', {
         url: "/empleado",
         templateUrl: "assets/views/papp/empleado.html",
-        resolve: loadSequence('ngTable','EmpleadoCtrl','EmpleadoFactory'),
-        title: 'Indicadores',
+        resolve: loadSequence(
+        		'ngTable','EmpleadoCtrl','EmpleadoFactory',
+        		'ModalGradoEscalaCtrl','GradoEscalaFactory',
+        		'ModalEspecialidadesCtrl','EspecialidadesFactory',
+        		'ModalClasificacionCtrl','ClasificacionFactory',
+        		'ModalTipoIdentificacionCtrl','TipoIdentificacionFactory'
+		),
+        title: 'Certificaciones de fondos',
         ncyBreadcrumb: {
-            label: 'Empleado'
+            label: 'Certificaciones de fondos'
+        }
+    }).state('app.certificacionesfondos', {
+        url: "/certificacionesfondos",
+        templateUrl: "assets/views/papp/certificacionesfondos.html",
+        resolve: loadSequence(
+        		'ngTable','CertificacionesFondosCtrl','CertificacionesFondosFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
+        		'ModalTipoDocumentoCtrl','TipoDocumentoFactory'
+		),
+        title: 'Certificado de Fondos',
+        ncyBreadcrumb: {
+            label: 'Certificado de Fondos'
         }
     }).state('app.layouts', {
         url: "/layouts",

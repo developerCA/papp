@@ -161,7 +161,14 @@ app.constant('JS_REQUIRES', {
         'EmpleadoFactory':'assets/js/factory/empleadoFactory.js',
         'ModalGradoFuerzaCtrl':'assets/js/controllers/papp/modales/modalGradoFuerzaCtrl.js',
         'ModalInstitucionCtrl':'assets/js/controllers/papp/modales/modalInstitucionCtrl.js',
-        
+        'ModalGradoEscalaCtrl':'assets/js/controllers/papp/modales/modalGradoEscalaCtrl.js',
+        'ModalEspecialidadesCtrl':'assets/js/controllers/papp/modales/modalEspecialidadesCtrl.js',
+        'ModalTipoIdentificacionCtrl':'assets/js/controllers/papp/modales/modalTipoIdentificacionCtrl.js',
+        'CertificacionesFondosCtrl':'assets/js/controllers/papp/certificacionesFondosCtrl.js',
+        'CertificacionesFondosFactory':'assets/js/factory/certificacionesFondosFactory.js',
+        'ModalUnidadCtrl':'assets/js/controllers/papp/modales/modalUnidadCtrl.js',
+        'ModalClaseRegistroCtrl':'assets/js/controllers/papp/modales/modalClaseRegistroCtrl.js',
+        'ModalTipoDocumentoCtrl':'assets/js/controllers/papp/modales/modalTipoDocumentoCtrl.js',
         
     },
     //*** angularJS Modules
