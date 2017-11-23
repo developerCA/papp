@@ -1694,7 +1694,7 @@ public class AdministracionController {
 			}
 
 			//Grupo
-			else if(clase.equals("grupo")){
+			else if(clase.equals("grupo")){ 
 				jsonObject=ConsultasUtil.consultaGrupoPaginado(parameters, jsonObject);
 			}
 
