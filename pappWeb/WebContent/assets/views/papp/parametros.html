@@ -69,7 +69,7 @@
 								<td><a class="btn btn-sm btn-primary"
 									ng-click="editar(obj.id)"><i class="fa fa-pencil"></i></a></td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
-								<td data-title="'Valor Num&eacute;rico'">{{obj.valornumerico}}</td>
+								<td data-title="'Valor Num&eacute;rico'">{{convertirDecimal(obj.valornumerico)}} </td>
 								<td data-title="'Valor Caract&eacute;r'">{{obj.valorcaracter}}</td>
 								<td data-title="'Estado'">{{obj.npestado}}</td>
 
@@ -112,7 +112,7 @@
 									<label class="control-label"> Descripci&oacute;n <span
 										class="symbol required"></span>
 									</label> 
-									<textarea placeholder="Default Text" id="form-field-22" name="descripcion" ng-model="objeto.descripcion"
+									<textarea placeholder="Descripcion" id="form-field-22" name="descripcion" ng-model="objeto.descripcion"
 										class="form-control"></textarea>
 									<span class="error text-small block"
 										ng-if="Form.descripcion.$dirty && Form.nombre.$invalid">Descripci&oacute;n
@@ -120,11 +120,11 @@
 										ng-if="Form.nombre.$valid">Listo</span>
 								</div>
 
-
+                                     
 								<div class="form-group"
 									ng-class="{'has-error':Form.valnumerico.$dirty && Form.valnumerico.$invalid, 'has-success':Form.valnumerico.$valid}">
 									<label class="control-label"> Valor num&eacute;rico </label> <input
-										type="number" name="valnumerico" placeholder="Valor numerico"
+										type="number"  name="valnumerico" placeholder="Valor numerico"
 										class="form-control" ng-model="objeto.valornumerico" /> <span
 										class="error text-small block"
 										ng-if="Form.valnumerico.$error.number">Incorrecto!</span>

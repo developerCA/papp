@@ -164,7 +164,7 @@
 								</td>
 								<td>
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Liquidar manualmente" ng-click="liquidarmanualmente(obj.id)">
+										uib-tooltip="Liquidar manualmente" ng-click="liquidarManualMente(obj.id)">
 										<i class="fa fa-clipboard"></i>
 									</a>
 								</td>
@@ -811,6 +811,58 @@
 			</div>
 		</div>
 	</div>
+
+<script type="text/ng-template" id="modalLiquidacionManua.html">
+<div class="modal-header">
+	<h3 class="modal-title">Liquidaci&oacute;n manual</h3>
+</div>
+<div class="modal-body">
+	<div class="panel-body" ng-init="consultar();" >
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="form-group">
+				    <label class="control-label">
+				        <h4>
+							Est&aacute; seguro de liquidar la certificaci&oacute;n de fondos?
+				        </h4>
+				    </label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group"
+				    ng-class="{'has-error':For.CTLCERTIFICACIONMOTIVOLIQUIDACION.$dirty && Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$invalid, 'has-success':Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$valid}">
+				    <label class="control-label">
+				        Motivo liquidaci&oacute;n
+				        <span class="symbol required"></span>
+				    </label>
+				    <textarea name="CTLCERTIFICACIONMOTIVOLIQUIDACION" rows="5" style="width: 100%" placeholder="Escriba un motivo liquidaci&oacute;n"
+				        class="form-control" ng-model="objeto.CTLCERTIFICACIONMOTIVOLIQUIDACION"
+				        required>
+				    </textarea>
+				    <span class="error text-small block"
+				        ng-if="Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$dirty && Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$invalid">
+				        Incorrecto
+				    </span>
+				    <span class="success text-small"
+				        ng-if="Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$valid">
+				        Listo
+				    </span>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="aceptar(objeto.CTLCERTIFICACIONMOTIVOLIQUIDACION);">
+			Aceptar
+		</button>
+		<button class="btn btn-default btn-o" ng-click="cancelar()">
+			Cancelar
+		</button>
+	</div>
+</div>
+</script>
 </div>
 
 

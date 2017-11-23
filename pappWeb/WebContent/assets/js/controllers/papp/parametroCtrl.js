@@ -53,6 +53,11 @@ app.controller('ParametroController', [ "$scope","$rootScope","SweetAlert","$fil
 		})
 	}
 	
+	$scope.convertirDecimal=function (dato) {
+		
+	    return  parseFloat(dato).toFixed(5);
+	};
+	
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
 		$scope.estadoFiltro=null;

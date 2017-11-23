@@ -135,10 +135,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/param",
         templateUrl: "assets/views/papp/parametros.html",
         resolve: loadSequence('ngTable','ParametroCtrl','ParametroFactory'),
-        title: 'Parï¿½metros',
+        title: 'Parámetros',
         
         ncyBreadcrumb: {
-            label: 'Parï¿½metros'
+            label: 'Parámetros'
         }
     }).state('app.consecutivos', {
         url: "/consecutivos",
@@ -455,9 +455,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalClasificacionCtrl','ClasificacionFactory',
         		'ModalTipoIdentificacionCtrl','TipoIdentificacionFactory'
 		),
-        title: 'Certificaciones de fondos',
+        title: 'Empleados',
         ncyBreadcrumb: {
-            label: 'Certificaciones de fondos'
+            label: 'Empleados'
         }
     }).state('app.certificacionesfondos', {
         url: "/certificacionesfondos",
@@ -466,7 +466,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','CertificacionesFondosCtrl','CertificacionesFondosFactory',
         		'ModalUnidadCtrl','UnidadFactory',
         		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
-        		'ModalTipoDocumentoCtrl','TipoDocumentoFactory'
+        		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl'
 		),
         title: 'Certificado de Fondos',
         ncyBreadcrumb: {

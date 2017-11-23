@@ -102,7 +102,7 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null,cerrado:"0"};
+		$scope.objeto={id:null,cerrado:"0",estado:'A'};
 		
 		$scope.edicion=true;
 	}
@@ -151,7 +151,7 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Ejercicio Fiscal!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Ejercicio Fiscal!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Ejercicio Fiscal!", resp.mensajes.msg, "error");
