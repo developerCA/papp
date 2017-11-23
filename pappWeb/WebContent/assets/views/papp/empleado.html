@@ -100,7 +100,7 @@
 									</label>
 									<input type="text" placeholder="Ingrese un c&oacute;digo"
 										class="form-control" name="codigo" ng-model="objeto.codigo"
-										required ng-disabled="!nuevoar">
+										ng-minlength="1" ng-maxlength="30" required ng-disabled="!nuevoar">
 									<span class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
 										Incorrecto

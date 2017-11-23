@@ -15,12 +15,12 @@ app.factory("fuerzaFactory", [ "Restangular", function(Restangular) {
 		traerFuerzasFiltro : function(pagina,nombre,codigo,sigla,estado) {
 			  
 			var url = "administrar/consultar/fuerza/pagina="+pagina;
-
+          
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;
 			if(sigla!=null && sigla != "") url += "&sigla=" + sigla;
 			if(estado!=null && estado != "" ) url += "&estado=" + estado;
-						 
+					 
 			return Restangular.allUrl(url).getList();
 			  
 		},

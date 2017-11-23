@@ -97,11 +97,11 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		});
 
 		modalInstance.result.then(function(obj) {
-			console.clear();
 			console.log(obj);
 			$scope.objeto.npcodigoescalarmu = obj.id;
 			$scope.objeto.npgrupoocupacional = obj.grupoocupacional;
 			$scope.objeto.npremuneracion= obj.remuneracion;
+			$scope.objeto.ceescalarmuid=obj.codigo;
 			
 		}, function() {
 			
@@ -122,6 +122,7 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		});
 
 		modalInstance.result.then(function(obj) {
+			console.log(obj);
 			$scope.objeto.npcodigocargo = obj.codigo;
 			$scope.objeto.npnombrecargo = obj.nombre;			
 			

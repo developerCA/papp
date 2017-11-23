@@ -284,7 +284,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.unidades', {
         url: "/unidades",
         templateUrl: "assets/views/papp/unidades.html",
-        resolve: loadSequence('ngTable','UnidadCtrl','UnidadFactory'),
+        resolve: loadSequence('ngTable','UnidadCtrl','UnidadFactory','ModalInstitutoEntidadCtrl'),
         title: 'Unidades',
         ncyBreadcrumb: {
             label: 'Unidades'
@@ -389,7 +389,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.gradofuerza', {
         url: "/gradofuerza",
         templateUrl: "assets/views/papp/gradofuerza.html",
-        resolve: loadSequence('ngTable','GradoFuerzaCtrl','ModalFuerzaCtrl','ModalGradoCtrl','GradoFuerzaFactory','FuerzaFactory','GradoFactory'),
+        resolve: loadSequence('ngTable','GradoFuerzaCtrl','ModalFuerzaCtrl','ModalGradoCtrl','GradoFuerzaFactory','FuerzaFactory','GradoFactory','GrupoJerarquicoFactory'),
         title: 'Grado - Fuerza',
         ncyBreadcrumb: {
             label: 'Grado - Fuerza'

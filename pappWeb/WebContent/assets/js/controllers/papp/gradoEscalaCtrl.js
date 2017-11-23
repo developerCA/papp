@@ -16,7 +16,7 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		
 		$scope.data=[];
 		gradoEscalaFactory.traer(pagina).then(function(resp){
-			console.log(resp);
+			
 			if (resp.meta)
 				$scope.data=resp;				
 		})
@@ -78,10 +78,9 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 			
 			if (resp.estado){
 				$scope.objeto=resp.json.gradoescala;
-				console.log("==========//==========");
-				console.log($scope.objeto);
+				
 				$scope.edicion=true;
-				console.log($scope.objeto);
+				
 			}
 		})
 		
@@ -100,11 +99,11 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		});
 
 		modalInstance.result.then(function(obj) {
-			console.log("==========()==========");
-			console.log(obj);
-			console.log("==========()==========");
+			//console.log(obj);
 			$scope.escala = obj;
+			$scope.objeto.npgrupoocupacional=obj.grupoocupacional;
 			$scope.objeto.geescalarmuid = obj.id;
+			$scope.objeto.npremuneracion=obj.remuneracion;
 			$scope.objeto.npcodigoescalarmu = obj.id;			
 		}, function() {
 			
