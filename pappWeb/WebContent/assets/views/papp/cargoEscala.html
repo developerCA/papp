@@ -108,13 +108,7 @@
 						<div class="row">
 							<div class="col-md-6">
 							
-								<div class="form-group">
-									<label class="control-label"> ID <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el ID"
-										class="form-control" name="id" ng-model="objeto.id"
-										required readonly="true"/>
-								</div>														
+																				
 
 								<div class="form-group"
 									ng-class="{'has-error':For.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
@@ -122,7 +116,7 @@
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese el Codigo"
 										class="form-control" name="codigo" ng-model="objeto.codigo"
-										ng-disabled="objeto.id !=null" required /> <span class="error text-small block"
+										ng-minlength="1" ng-maxlength="10" ng-disabled="objeto.id !=null" required /> <span class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo
 										es incorrecto</span> <span class="success text-small"
 										ng-if="Form.codigo.$valid">Listo</span>
@@ -169,7 +163,7 @@
 								<div class="form-group">
 									<label class="control-label"> Grado Remuneraci&oacute;n
 									</label> <input type="text"
-										class="form-control" name="siglafuerza" ng-model="objeto.npsiglafuerza"
+										class="form-control" name="siglafuerza" ng-model="objeto.ceescalarmuid"
 										required readonly="true"/>
 								</div>	
 								<div class="form-group">

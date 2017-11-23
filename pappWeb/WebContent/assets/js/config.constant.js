@@ -128,8 +128,8 @@ app.constant('JS_REQUIRES', {
         'PlanNacionalFactory':'assets/js/factory/plannacionalFactory.js',
         'GradoFuerzaCtrl':'assets/js/controllers/papp/gradofuerzaCtrl.js',
         'GradoFuerzaFactory':'assets/js/factory/gradofuerzaFactory.js',
-        'ModalFuerzaCtrl':'assets/js/controllers/papp/modales/modalFuerzaCtrl.js',   
-        'ModalGradoCtrl':'assets/js/controllers/papp/modales/modalGradoCtrl.js',   
+          
+       
         'EspecialidadesCtrl':'assets/js/controllers/papp/especialidadesCtrl.js',
         'EspecialidadesFactory':'assets/js/factory/especialidadesFactory.js',
         'EstructuraOrganicaCtrl':'assets/js/controllers/papp/estructuraorganicaCtrl.js',
@@ -169,6 +169,9 @@ app.constant('JS_REQUIRES', {
         'ModalUnidadCtrl':'assets/js/controllers/papp/modales/modalUnidadCtrl.js',
         'ModalClaseRegistroCtrl':'assets/js/controllers/papp/modales/modalClaseRegistroCtrl.js',
         'ModalTipoDocumentoCtrl':'assets/js/controllers/papp/modales/modalTipoDocumentoCtrl.js',
+        'ModalTipoDocumentoCtrl':'assets/js/controllers/papp/modales/modalTipoDocumentoCtrl.js',
+        'ModalInstitutoEntidadCtrl':'assets/js/controllers/papp/modales/modalInstitutoEntidadCtrl.js',
+        
         
     },
     //*** angularJS Modules

@@ -48,7 +48,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		fuerzaFactory.traerFuerzasFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.sigla, $scope.estadoFiltro).then(function(resp){
+		fuerzaFactory.traerFuerzasFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.siglaFiltro, $scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;

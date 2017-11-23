@@ -116,11 +116,11 @@
 										class="fa fa-pencil"></i></a></td>
 
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Nombre Grado'">{{obj.npnombregrado}}</td>
-								<td data-title="'Sigla Grado'">{{obj.npsiglagrado}}</td>
+								<td data-title="'Grado Nombre'">{{obj.npnombregrado}}</td>
+								<td data-title="'Grado Sigla'">{{obj.npsiglagrado}}</td>
 								<td data-title="'Grupo Nombre'">{{obj.npgrupo}}</td>
-								<td data-title="'Nombre Fuerza'">{{obj.npnombrefuerza}}</td>
-								<td data-title="'Sigla Fuerza'">{{obj.npsiglafuerza}}</td>
+								<td data-title="'Fuerza Nombre'">{{obj.npnombrefuerza}}</td>
+								<td data-title="'Fuerza Sigla'">{{obj.npsiglafuerza}}</td>
 								<td data-title="'Estado'">{{obj.npestado}}</td>
 							</tr>
 						</table>
@@ -146,7 +146,7 @@
 									</label>
 									<input type="text" placeholder=""
 										class="form-control" name="codigo" ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null" required
-										ng-model="objeto.codigo" ng-minlength="1" />
+										ng-model="objeto.codigo" ng-minlength="1" ng-maxlength="10" />
 									<span class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
 										Incorrecto</span>

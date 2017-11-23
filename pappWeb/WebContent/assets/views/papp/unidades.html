@@ -102,11 +102,11 @@
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese el Codigo"
 										class="form-control" name="codigo" ng-model="objeto.codigopresup"
-										ng-disabled="objeto.id !=null" required ng-minlength="3" ng-maxlength="3"
+										ng-disabled="objeto.id !=null" required ng-minlength="1" ng-maxlength="10"
 										style='text-transform: uppercase' /> <span
 										class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">Debe
-										ingresar m&iacute;nimo tres letras</span> <span
+										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo incorrecto
+										</span> <span
 										class="success text-small" ng-if="Form.codigo.$valid">Listo</span>
 								</div>
 
@@ -176,7 +176,7 @@
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-primary"
 												ng-click="abrirInstitutoEntidad($index)">
-												<i class="fa fa-search"></i> Seleccione
+												<i class="fa fa-search"></i> Seleccionar
 											</button>
 										</span>
 									</div>
