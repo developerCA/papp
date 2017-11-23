@@ -97,6 +97,8 @@
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
     <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
     <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+	<script src="bower_components/angular-ui-utils/mask.min.js"></script>
+        
     <!-- Restangular -->
     
     <script src="bower_components/lodash/lodash.js"></script>

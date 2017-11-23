@@ -25,9 +25,10 @@ app.controller('GradoController', [ "$scope","$rootScope","SweetAlert","$filter"
 		
 		grupoJerarquicoFactory.traerGrupos(pagina).then(function(resp){
 			console.clear();
-			console.log(resp);
+			
 			if (resp.meta)
-				$scope.grupos=resp;				
+				$scope.grupos=resp;	
+				console.log($scope.grupos);
 		})
 		
 	};
@@ -37,7 +38,7 @@ app.controller('GradoController', [ "$scope","$rootScope","SweetAlert","$filter"
 		$scope.data=[];
 		gradoFactory.traerGrados(pagina).then(function(resp){
 			if (resp.meta)
-				console.log(resp);
+				
 				$scope.data=resp;				
 		})
 	
@@ -126,7 +127,7 @@ app.controller('GradoController', [ "$scope","$rootScope","SweetAlert","$filter"
 		                return;
 
 		            } else {
-		                
+		                console.log($scope.objeto);
 		            	gradoFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);

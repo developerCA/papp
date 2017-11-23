@@ -112,7 +112,7 @@
 										ng-maxlength="10" ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null" required /> <span class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo
 										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.prefijo.$valid">Listo</span>
+										ng-if="Form.codigo.$valid">Listo</span>
 								</div>
 
 								<div class="form-group"
@@ -133,9 +133,9 @@
 										class="symbol required"></span>
 									</label> <input type="text" placeholder="Ingrese la sigla"
 										class="form-control" name="sigla" required
-										ng-model="objeto.sigla" ng-minlength="1" ng-maxlength="1" /> <span
+										ng-model="objeto.sigla" ng-minlength="1" ng-maxlength="5" /> <span
 										class="error text-small block"
-										ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">Sigla
+										ng-if="Form.sigla.$dirty && Form.sigla.$invalid">Sigla
 										es incorrecta</span> <span class="success text-small"
 										ng-if="Form.sigla.$valid">Listo</span>
 								</div>

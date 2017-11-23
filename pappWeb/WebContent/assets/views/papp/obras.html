@@ -91,7 +91,7 @@
                 <div ng-show="edicion" class="panel-body" id="panel1">
 
                     <div class="panel-heading">
-                        <h5 class="panel-title">Grupos de Medida</h5>
+                        <h5 class="panel-title">Obras</h5>
                     </div>
 
                     <form name="Form" id="form1" novalidate
@@ -106,10 +106,10 @@
                                     </label>
                                     <input type="text" placeholder="Ingrese el c&oacute;digo"
                                            class="form-control" name="codigo"
-                                           ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null" 
+                                           ng-maxlength="10" ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null" 
                                            required ng-model="objeto.codigo" ng-minlength="2" />
                                     <span class="error text-small block" ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo incorrecto</span>
-                                    <span class="success text-small" ng-if="Form.anio.$valid">Listo</span>
+                                    <span class="success text-small" ng-if="Form.codigo.$valid">Listo</span>
                                 </div>
 
                                 <div class="form-group"

@@ -50,7 +50,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     $scope.filtrar = function () {
 
         $scope.data = [];
-        subitemsFactory.traerItemsFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado, $scope.tipo).then(function (resp) {
+        subitemsFactory.traerItemsFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado, $scope.tipo,$rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         })
