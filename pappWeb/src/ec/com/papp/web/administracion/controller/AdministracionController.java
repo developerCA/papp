@@ -1258,9 +1258,9 @@ public class AdministracionController {
 				fuerzaclasificacionTO.setClasificacionTO(new ClasificacionTO());
 				Collection<FuerzaclasificacionTO> fuerzaclasificacionTOs=UtilSession.adminsitracionServicio.transObtenerFuerzaclasificacion(fuerzaclasificacionTO);
 				log.println("fuerza clasificacion: " + fuerzaclasificacionTOs.size());
-				//Asigno la variable que necesitan para la administracion
-				for(FuerzaclasificacionTO fuerzaclasificacionTO2:fuerzaclasificacionTOs)
-					fuerzaclasificacionTO2.setFuerzaclasificacionid(fuerzaclasificacionTO2.getId().getFuerzaclasificacionid());
+//				//Asigno la variable que necesitan para la administracion
+//				for(FuerzaclasificacionTO fuerzaclasificacionTO2:fuerzaclasificacionTOs)
+//					fuerzaclasificacionTO2.setFuerzaclasificacionid(fuerzaclasificacionTO2.getId().getFuerzaclasificacionid());
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(fuerzaclasificacionTOs,fuerzaclasificacionTO.getJsonConfig()));
 
 			}
