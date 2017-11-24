@@ -135,10 +135,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/param",
         templateUrl: "assets/views/papp/parametros.html",
         resolve: loadSequence('ngTable','ParametroCtrl','ParametroFactory'),
-        title: 'Parï¿½metros',
+        title: 'Parámetros',
         
         ncyBreadcrumb: {
-            label: 'Parï¿½metros'
+            label: 'Parámetros'
         }
     }).state('app.consecutivos', {
         url: "/consecutivos",
@@ -407,9 +407,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/estructuraorganica",
         templateUrl: "assets/views/papp/estructuraorganica.html",
         resolve: loadSequence('ngTable','EstructuraOrganicaCtrl','ModalInstitucionCtrl','EstructuraOrganicaFactory','InstitucionFactory'),
-        title: 'Estructura Orgï¿½nica',
+        title: 'Estructura Orgánica',
         ncyBreadcrumb: {
-            label: 'Estructura Orgï¿½nica'
+            label: 'Estructura Orgánica'
         }
     }).state('app.indicadores', {
         url: "/indicadores",

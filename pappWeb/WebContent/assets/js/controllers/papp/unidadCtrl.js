@@ -122,10 +122,10 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 			 		             $scope.objeto={};
 			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Unidad!", "Registro guardado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Clase de Registro!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Unidad!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Clase de Registro!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
@@ -152,10 +152,12 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 			});
 			modalInstance.result.then(function(obj) {
 				console.log(obj);
-				$scope.detalles[index].id.id = obj.institucionentid;
+				$scope.detalles[index].id.id = obj.institucionid;
+				$scope.detalles[index].unidadinstitucionid = obj.institucionid;
+				$scope.detalles[index].id.unidad = obj.institucionentid;
+				$scope.detalles[index].unidadinstitucionentid = obj.institucionentid;
 				$scope.detalles[index].npcodigoinstitucion = obj.npcodigoinstitucion;
 				$scope.detalles[index].npnombreinstitucion = obj.npnombreinstitucion;
-				$scope.detalles[index].unidadinstitucionentid = obj.institucionentid;
 				$scope.detalles[index].npcodigoentidad = obj.codigo;
 				$scope.detalles[index].npnombreentidad = obj.nombre;
 			}, function() {
