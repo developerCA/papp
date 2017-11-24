@@ -134,11 +134,11 @@ public class AdministracionController {
 				//pregunto si ya existe el nombre en el nivel actual
 				DivisiongeograficaTO divisiongeograficaTO2=new DivisiongeograficaTO();
 				divisiongeograficaTO2.setCodigo(divisiongeograficaTO.getCodigo());
-				SearchResultTO<DivisiongeograficaTO> divisiongeograficaTOs=UtilSession.adminsitracionServicio.transObtenerDivisiongeograficaPaginado(divisiongeograficaTO2);
+				Collection<DivisiongeograficaTO> divisiongeograficaTOs=UtilSession.adminsitracionServicio.transObtenerDivisiongeografica(divisiongeograficaTO2);
 				log.println("divisiones... " + divisiongeograficaTOs.toString());
 				boolean grabar=true;
-				if(divisiongeograficaTOs.getCountResults()>0){
-					divisiongeograficaTO2=(DivisiongeograficaTO)divisiongeograficaTOs.getResults().iterator().next();
+				if(divisiongeograficaTOs.size()>0){
+					divisiongeograficaTO2=(DivisiongeograficaTO)divisiongeograficaTOs.iterator().next();
 					if((divisiongeograficaTO.getId()!=null && divisiongeograficaTO.getId().longValue()!=0) && divisiongeograficaTO2.getId().longValue()!=divisiongeograficaTO.getId().longValue())
 						grabar=false;
 					else if((divisiongeograficaTO.getId()==null || (divisiongeograficaTO.getId()!=null && divisiongeograficaTO2.getId().longValue()!=divisiongeograficaTO.getId().longValue())) && divisiongeograficaTO.getCodigo()!=null && divisiongeograficaTO2.getCodigo().equals(divisiongeograficaTO.getCodigo()))
@@ -830,7 +830,7 @@ public class AdministracionController {
 				//valido que no exista creado un registro para ese grado
 				GradofuerzaTO gradoesfuerza=new GradofuerzaTO();
 				gradoesfuerza.setGradofuerzagradoid(gradoesfuerza.getId());
-				Collection<GradofuerzaTO> grados=UtilSession.adminsitracionServicio.transObtenerGradofuerza(gradofuerzaTO);
+				Collection<GradofuerzaTO> grados=UtilSession.adminsitracionServicio.transObtenerGradofuerza(gradoesfuerza);
 				log.println("escalarmu encontrados: " + grados.size());
 				if(grados.size()==0){
 					log.println("entro a grabar");
@@ -854,7 +854,7 @@ public class AdministracionController {
 					else{
 						UtilSession.adminsitracionServicio.transCrearModificarGradofuerza(gradofuerzaTO);
 						id=gradofuerzaTO.getId().toString();
-						jsonObject.put("gradoescala", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfig()));
+//						jsonObject.put("gradoescala", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfig()));
 					}
 				}
 				else{
