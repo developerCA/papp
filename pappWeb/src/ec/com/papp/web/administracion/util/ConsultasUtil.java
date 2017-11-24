@@ -1479,9 +1479,10 @@ public class ConsultasUtil {
 				gradoTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				gradoTO.setEstado(parameters.get("estado"));
-			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
-				gradoTO.setSigla(parameters.get("sigla"));
-			gradoTO.setGrupo(new GrupoTO());
+			GrupoTO grupoTO=new GrupoTO();
+			if(parameters.get("nombregrupo")!=null && !parameters.get("nombregrupo").equals(""))
+				grupoTO.setNombre(parameters.get("nombregrupo"));
+			gradoTO.setGrupo(grupoTO);
 //			SearchResultTO<GradoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradoPaginado(gradoTO);
 			Collection<GradoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrado(gradoTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;

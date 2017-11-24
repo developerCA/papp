@@ -135,6 +135,7 @@ public class AdministracionController {
 				DivisiongeograficaTO divisiongeograficaTO2=new DivisiongeograficaTO();
 				divisiongeograficaTO2.setCodigo(divisiongeograficaTO.getCodigo());
 				SearchResultTO<DivisiongeograficaTO> divisiongeograficaTOs=UtilSession.adminsitracionServicio.transObtenerDivisiongeograficaPaginado(divisiongeograficaTO2);
+				log.println("divisiones... " + divisiongeograficaTOs.toString());
 				boolean grabar=true;
 				if(divisiongeograficaTOs.getCountResults()>0){
 					divisiongeograficaTO2=(DivisiongeograficaTO)divisiongeograficaTOs.getResults().iterator().next();
@@ -513,6 +514,7 @@ public class AdministracionController {
 			//Clasemodificacion
 			else if(clase.equals("clasemodificacion")){
 				ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO = gson.fromJson(new StringReader(objeto), ClaseregistroclasemodificacionTO.class);
+				log.println("ejercicio fiscal::: " + claseregistroclasemodificacionTO.getClaseregistrocmejerfiscalid());
 				accion = (claseregistroclasemodificacionTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
 				ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO2=new ClaseregistroclasemodificacionTO();
@@ -731,8 +733,19 @@ public class AdministracionController {
 						grabar=false;
 
 				}
+				GradoTO gradoTO3=new GradoTO();
+				gradoTO3.setNombre(gradoTO.getNombre());
+				Collection<GradoTO> gradoTOs2=UtilSession.adminsitracionServicio.transObtenerGrado(gradoTO3);
+				log.println("gradoTOs2: "+ gradoTOs2.size());
+				if(gradoTOs2.size()>0){
+					gradoTO3=(GradoTO)gradoTOs2.iterator().next();
+					if((gradoTO.getId()!=null && gradoTO.getId().longValue()!=0) && gradoTO3.getId().longValue()!=gradoTO.getId().longValue())
+						grabar=false;
+					else if((gradoTO.getId()==null || (gradoTO.getId()!=null && gradoTO3.getId().longValue()!=gradoTO.getId().longValue())) && gradoTO.getNombre()!=null && gradoTO3.getNombre().equals(gradoTO.getNombre()))
+						grabar=false;
+				}
 				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+					mensajes.setMsg("El código o el nombre se encuentran repetidos");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
@@ -787,8 +800,19 @@ public class AdministracionController {
 						grabar=false;
 
 				}
+				FuerzaTO fuerzaTO3=new FuerzaTO();
+				fuerzaTO3.setNombre(fuerzaTO.getNombre());
+				Collection<FuerzaTO> fuerzaTOs2=UtilSession.adminsitracionServicio.transObtenerFuerza(fuerzaTO3);
+				log.println("fuerzaTOs2: "+ fuerzaTOs2.size());
+				if(fuerzaTOs2.size()>0){
+					fuerzaTO3=(FuerzaTO)fuerzaTOs2.iterator().next();
+					if((fuerzaTO.getId()!=null && fuerzaTO.getId().longValue()!=0) && fuerzaTO3.getId().longValue()!=fuerzaTO.getId().longValue())
+						grabar=false;
+					else if((fuerzaTO.getId()==null || (fuerzaTO.getId()!=null && fuerzaTO3.getId().longValue()!=fuerzaTO.getId().longValue())) && fuerzaTO.getNombre()!=null && fuerzaTO3.getNombre().equals(fuerzaTO.getNombre()))
+						grabar=false;
+				}
 				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+					mensajes.setMsg("El código o el nombre se encuentran repetidos");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
@@ -801,29 +825,67 @@ public class AdministracionController {
 			//Gradofuerza
 			else if(clase.equals("gradofuerza")){
 				GradofuerzaTO gradofuerzaTO = gson.fromJson(new StringReader(objeto), GradofuerzaTO.class);
+				log.println("grado superior " + gradofuerzaTO.getGradofuerzapadreid());
 				accion = (gradofuerzaTO.getId()==null)?"crear":"actualizar";
-				//pregunto si ya existe el codigo en el nivel actual
-				GradofuerzaTO gradofuerzaTO2=new GradofuerzaTO();
-				gradofuerzaTO2.setCodigo(gradofuerzaTO.getCodigo());
-				Collection<GradofuerzaTO> gradofuerzaTOs=UtilSession.adminsitracionServicio.transObtenerGradofuerza(gradofuerzaTO2);
-				boolean grabar=true;
-				if(gradofuerzaTOs.size()>0){
-					gradofuerzaTO2=(GradofuerzaTO)gradofuerzaTOs.iterator().next();
-					if((gradofuerzaTO.getId()!=null && gradofuerzaTO.getId().longValue()!=0) && gradofuerzaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue())
-						grabar=false;
-					else if((gradofuerzaTO.getId()==null || (gradofuerzaTO.getId()!=null && gradofuerzaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue())) && gradofuerzaTO.getCodigo()!=null && gradofuerzaTO2.getCodigo().equals(gradofuerzaTO.getCodigo()))
-						grabar=false;
-
-				}
-				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				//valido que no exista creado un registro para ese grado
+				GradofuerzaTO gradoesfuerza=new GradofuerzaTO();
+				gradoesfuerza.setGradofuerzagradoid(gradoesfuerza.getId());
+				Collection<GradofuerzaTO> grados=UtilSession.adminsitracionServicio.transObtenerGradofuerza(gradofuerzaTO);
+				log.println("escalarmu encontrados: " + grados.size());
+				if(grados.size()==0){
+					log.println("entro a grabar");
+					//pregunto si ya existe el codigo en el nivel actual
+					GradoescalaTO gradoescalaTO2=new GradoescalaTO();
+					gradoescalaTO2.setCodigo(gradofuerzaTO.getCodigo());
+					Collection<GradoescalaTO> escalarmuTOs=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescalaTO2);
+					boolean grabar=true;
+					if(escalarmuTOs.size()>0){
+						gradoescalaTO2=(GradoescalaTO)escalarmuTOs.iterator().next();
+						if((gradofuerzaTO.getId()!=null && gradofuerzaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue())
+							grabar=false;
+						else if((gradofuerzaTO.getId()==null || (gradofuerzaTO.getId()!=null && gradoescalaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue())) && gradofuerzaTO.getCodigo()!=null && gradoescalaTO2.getCodigo().equals(gradofuerzaTO.getCodigo()))
+							grabar=false;
+	
+					}
+					if(!grabar){
+						mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+					else{
+						UtilSession.adminsitracionServicio.transCrearModificarGradofuerza(gradofuerzaTO);
+						id=gradofuerzaTO.getId().toString();
+						jsonObject.put("gradoescala", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfig()));
+					}
 				}
 				else{
-					UtilSession.adminsitracionServicio.transCrearModificarGradofuerza(gradofuerzaTO);
-					id=gradofuerzaTO.getId().toString();
-					//jsonObject.put("gradofuerza", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfig()));
+					mensajes.setMsg("Ya existe un registro creado para el grado seleccionado");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
+				
+				
+				
+				//pregunto si ya existe el codigo en el nivel actual
+//				GradofuerzaTO gradofuerzaTO2=new GradofuerzaTO();
+//				gradofuerzaTO2.setCodigo(gradofuerzaTO.getCodigo());
+//				Collection<GradofuerzaTO> gradofuerzaTOs=UtilSession.adminsitracionServicio.transObtenerGradofuerza(gradofuerzaTO2);
+//				boolean grabar=true;
+//				if(gradofuerzaTOs.size()>0){
+//					gradofuerzaTO2=(GradofuerzaTO)gradofuerzaTOs.iterator().next();
+//					if((gradofuerzaTO.getId()!=null && gradofuerzaTO.getId().longValue()!=0) && gradofuerzaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue())
+//						grabar=false;
+//					else if((gradofuerzaTO.getId()==null || (gradofuerzaTO.getId()!=null && gradofuerzaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue())) && gradofuerzaTO.getCodigo()!=null && gradofuerzaTO2.getCodigo().equals(gradofuerzaTO.getCodigo()))
+//						grabar=false;
+//
+//				}dfa
+//				if(!grabar){
+//					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+//					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+//				}
+//				else{
+//					UtilSession.adminsitracionServicio.transCrearModificarGradofuerza(gradofuerzaTO);
+//					id=gradofuerzaTO.getId().toString();
+//					//jsonObject.put("gradofuerza", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfig()));
+//				}
 			}
 
 			//especialidades
@@ -871,8 +933,18 @@ public class AdministracionController {
 						grabar=false;
 
 				}
+				CargoTO cargoTO3=new CargoTO();
+				cargoTO3.setNombre(cargoTO.getNombre());
+				Collection<CargoTO> cargoTOs2=UtilSession.adminsitracionServicio.transObtenerCargo(cargoTO3);
+				if(cargoTOs2.size()>0){
+					cargoTO3=(CargoTO)cargoTOs2.iterator().next();
+					if((cargoTO.getId()!=null && cargoTO.getId().longValue()!=0) && cargoTO3.getId().longValue()!=cargoTO.getId().longValue())
+						grabar=false;
+					else if((cargoTO.getId()==null || (cargoTO.getId()!=null && cargoTO3.getId().longValue()!=cargoTO.getId().longValue())) && cargoTO.getNombre()!=null && cargoTO3.getNombre().equals(cargoTO.getNombre()))
+						grabar=false;
+				}
 				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+					mensajes.setMsg("El código o el nombre se encuentran repetidos");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
@@ -890,6 +962,7 @@ public class AdministracionController {
 				EscalarmuTO escalarmuTO2=new EscalarmuTO();
 				escalarmuTO2.setCodigo(escalarmuTO.getCodigo());
 				Collection<EscalarmuTO> escalarmuTOs=UtilSession.adminsitracionServicio.transObtenerEscalarmu(escalarmuTO2);
+				log.println("escalarmu encontrados: " + escalarmuTOs.size());
 				boolean grabar=true;
 				if(escalarmuTOs.size()>0){
 					escalarmuTO2=(EscalarmuTO)escalarmuTOs.iterator().next();
@@ -917,6 +990,7 @@ public class AdministracionController {
 				GradoescalaTO gradoescala=new GradoescalaTO();
 				gradoescala.setGegradofuerzaid(gradoescalaTO.getGegradofuerzaid());
 				Collection<GradoescalaTO> grados=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescala);
+				log.println("escalarmu encontrados: " + grados.size());
 				if(grados.size()==0){
 					//pregunto si ya existe el codigo en el nivel actual
 					GradoescalaTO gradoescalaTO2=new GradoescalaTO();
@@ -1196,7 +1270,7 @@ public class AdministracionController {
 			//Socionegocio
 			else if(clase.equals("socionegocio")){
 				SocionegocioTO socionegocioTO = UtilSession.adminsitracionServicio.transObtenerSocionegocioTO(id);
-				jsonObject.put("socionegocio", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfigEmpleadoedit()));
+				jsonObject.put("socionegocio", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfig()));
 			}
 
 			//Empleado
