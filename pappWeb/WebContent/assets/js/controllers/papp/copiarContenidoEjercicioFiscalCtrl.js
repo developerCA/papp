@@ -68,7 +68,7 @@ app.controller('CopiarContenidoEjercicioFiscalController', [ "$scope","$rootScop
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
-			 		             SweetAlert.swal("Copiar ejercicio fiscal!", "Registro guardado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Copiar ejercicio fiscal!", resp.mensajes.msg, "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Copiar ejercicio fiscal!", resp.mensajes.msg, "error");

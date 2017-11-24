@@ -135,10 +135,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/param",
         templateUrl: "assets/views/papp/parametros.html",
         resolve: loadSequence('ngTable','ParametroCtrl','ParametroFactory'),
-        title: 'Parámetros',
+        title: 'Parï¿½metros',
         
         ncyBreadcrumb: {
-            label: 'Parámetros'
+            label: 'Parï¿½metros'
         }
     }).state('app.consecutivos', {
         url: "/consecutivos",
@@ -284,11 +284,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.unidades', {
         url: "/unidades",
         templateUrl: "assets/views/papp/unidades.html",
-        resolve: loadSequence('ngTable','UnidadCtrl','UnidadFactory','ModalInstitutoEntidadCtrl'),
+        resolve: loadSequence(
+          'ngTable','UnidadCtrl','UnidadFactory','ModalInstitutoEntidadCtrl','InstitutoEntidadFactory'  ),
         title: 'Unidades',
         ncyBreadcrumb: {
             label: 'Unidades'
-        }   
+        }  
     }).state('app.divgeografica', {
         url: "/divisionesgeo",
         templateUrl: "assets/views/papp/divisiones.html",
