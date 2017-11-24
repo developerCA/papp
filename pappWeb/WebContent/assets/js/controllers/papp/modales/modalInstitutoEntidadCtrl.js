@@ -1,16 +1,41 @@
 'use strict';
  
-app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","institutoEntidadFactory",  function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,institutoEntidadFactory) {
+app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","institutoEntidadFactory",
+	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,institutoEntidadFactory) {
 
-		$scope.nombreFiltro=null;
-		$scope.siglaFiltro=null;
-		$scope.grupoFiltro=null;
+		$scope.codigoInstitucionFiltro=null;
+		$scope.nombreInstitucionFiltro=null;
+		$scope.codigoEntidadFiltro=null;
+		$scope.nombreEntidadFiltro=null;
+		$scope.ejercicioFiscalFiltro=null;
 		$scope.esteadoFiltro=null;
 		$scope.edicion=false;
 		$scope.objeto={};
 		$scope.grupos = [];
 		$scope.grupo = null;
 		$scope.grupoJerarquico = null;
+
+		$scope.filtrar=function(){
+			$scope.data=[];
+			institutoEntidadFactory.traerInstitutoEntidadFiltro(
+					pagina,$scope.codigoInstitucionFiltro,$scope.nombreInstitucionFiltro,
+					$scope.codigoEntidadFiltro,$scope.nombreEntidadFiltro,
+					$scope.ejercicioFiscalFiltro,$scope.estadoFiltro
+			).then(function(resp){
+				console.clear();
+				console.log(resp);
+				if (resp.meta)
+					$scope.data=resp;
+			})
+		}
+		
+		$scope.limpiar=function(){
+			$scope.nombreFiltro=null;
+			$scope.codigoFiltro=null;
+			$scope.estadoFiltro=null;
+			$scope.consultar();
+			
+		};
 		
 		var pagina = 1;
 		
@@ -48,26 +73,6 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 				}
 			});
 		});
-		
-		
-		$scope.filtrar=function(){
-			
-			$scope.data=[];
-			institutoEntidadFactory.traerInstitutoEntidadFiltro(pagina,$scope.nombreFiltro,$scope.siglaFiltro, $scope.grupoFiltro,$scope.estadoFiltro).then(function(resp){
-				console.clear();
-				console.log(resp);
-				if (resp.meta)
-					$scope.data=resp;
-			})
-		}
-		
-		$scope.limpiar=function(){
-			$scope.nombreFiltro=null;
-			$scope.codigoFiltro=null;
-			$scope.estadoFiltro=null;
-			$scope.consultar();
-			
-		};
 
 	$scope.seleccionar=function(obj){
 		$uibModalInstance.close(obj);

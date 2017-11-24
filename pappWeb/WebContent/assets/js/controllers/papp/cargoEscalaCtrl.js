@@ -88,20 +88,14 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalEscala.html',
 			controller : 'ModalEscalaController',
-			size : 'md',
-			resolve : {
-				tipo : function() {
-					return $scope.objeto.tipo;
-				}
-			}
+			size : 'lg'
 		});
-
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.npcodigoescalarmu = obj.id;
+			$scope.objeto.npcodigoescalarmu = obj.codigo;
 			$scope.objeto.npgrupoocupacional = obj.grupoocupacional;
 			$scope.objeto.npremuneracion= obj.remuneracion;
-			$scope.objeto.ceescalarmuid=obj.codigo;
+			$scope.objeto.ceescalarmuid=obj.id;
 			
 		}, function() {
 			
@@ -113,19 +107,12 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalCargo.html',
 			controller : 'ModalCargoController',
-			size : 'md',
-			resolve : {
-				tipo : function() {
-					return $scope.objeto.tipo;
-				}
-			}
+			size : 'lg'
 		});
-
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 			$scope.objeto.npcodigocargo = obj.codigo;
 			$scope.objeto.npnombrecargo = obj.nombre;			
-			
 		}, function() {
 			
 		});

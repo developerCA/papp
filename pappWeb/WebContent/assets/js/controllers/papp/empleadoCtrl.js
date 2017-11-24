@@ -220,6 +220,22 @@ console.log(resp.json);
 		});
 	};
 
+	$scope.abrirCargoEscala = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalCargoEscala.html',
+			controller : 'ModalCargoEscalaController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objetoGradoEscala.npcodigogradoid = obj.id;
+			$scope.objetoGradoEscala.npcodigogrado = obj.codigo;
+			$scope.objetoGradoEscala.npnombrecargo = obj.npnombrecargo;
+		}, function() {
+			console.log("close modal");
+		});
+	};
+
 	$scope.form = {
 
 		        submit: function (form) {

@@ -173,6 +173,10 @@ app.constant('JS_REQUIRES', {
         'ModalInstitutoEntidadCtrl':'assets/js/controllers/papp/modales/modalInstitutoEntidadCtrl.js',
         'InstitutoEntidadFactory':'assets/js/factory/institutoEntidadFactory.js',
         'ModalCargoEscalaCtrl':'assets/js/controllers/papp/modales/modalCargoEscalaCtrl.js',
+        'ModalCertificacionesFondoLiquidacionManuaCtrl':'assets/js/controllers/papp/modales/modalCertificacionesFondoLiquidacionManuaCtrl.js',
+        'OrdenGastoCtrl':'assets/js/controllers/papp/ordenGastoCtrl.js',
+        'OrdenGastoFactory':'assets/js/factory/ordenGastoFactory.js',
+        
         
     },
     //*** angularJS Modules

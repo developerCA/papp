@@ -83,6 +83,9 @@ app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", 
         	console.log(resp);
             if (resp.estado)
                 $scope.objeto = resp.json.socionegocio;
+            // Si no se combierten en cadena no los procesa el <SELECT>
+            $scope.objeto.esempleado = "" + $scope.objeto.esempleado;
+            $scope.objeto.esproveedor = "" + $scope.objeto.esproveedor;
             $scope.edicion = true;
 
         })

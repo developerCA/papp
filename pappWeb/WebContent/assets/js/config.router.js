@@ -284,12 +284,11 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.unidades', {
         url: "/unidades",
         templateUrl: "assets/views/papp/unidades.html",
-        resolve: loadSequence(
-          'ngTable','UnidadCtrl','UnidadFactory','ModalInstitutoEntidadCtrl','InstitutoEntidadFactory'  ),
+        resolve: loadSequence('ngTable','UnidadCtrl','UnidadFactory','ModalInstitutoEntidadCtrl','InstitutoEntidadFactory' ),
         title: 'Unidades',
         ncyBreadcrumb: {
             label: 'Unidades'
-        }  
+        } 
     }).state('app.divgeografica', {
         url: "/divisionesgeo",
         templateUrl: "assets/views/papp/divisiones.html",
@@ -454,7 +453,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalGradoEscalaCtrl','GradoEscalaFactory',
         		'ModalEspecialidadesCtrl','EspecialidadesFactory',
         		'ModalClasificacionCtrl','ClasificacionFactory',
-        		'ModalTipoIdentificacionCtrl','TipoIdentificacionFactory'
+        		'ModalTipoIdentificacionCtrl','TipoIdentificacionFactory',
+        		'ModalCargoEscalaCtrl','CargoEscalaFactory'
 		),
         title: 'Empleados',
         ncyBreadcrumb: {
@@ -473,6 +473,20 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         title: 'Certificado de Fondos',
         ncyBreadcrumb: {
             label: 'Certificado de Fondos'
+        }
+    }).state('app.ordengasto', {
+        url: "/ordengasto",
+        templateUrl: "assets/views/papp/ordenGasto.html",
+        resolve: loadSequence(
+        		'ngTable','OrdenGastoCtrl','OrdenGastoFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
+        		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl'
+		),
+        title: 'Orden de Gasto',
+        ncyBreadcrumb: {
+            label: 'Orden de Gasto'
         }
     }).state('app.layouts', {
         url: "/layouts",

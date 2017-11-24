@@ -8,10 +8,15 @@ app.factory("institutoEntidadFactory", [ "Restangular", function(Restangular) {
 			  return Restangular.allUrl("estructuraorganica/consultar/institutoentidad/pagina="+pagina+"&estado=A").getList();
 		},
 		
-		traerInstitutoEntidadFiltro : function(pagina,nombre) {
+		traerInstitutoEntidadFiltro : function(pagina,codigoInstitucion,nombreInstitucion,codigoEntidad,nombreEntidad,ejercicoFiscal,estado) {
 			var url = "estructuraorganica/consultar/institutoentidad/pagina="+pagina;
 
-			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
+			if(codigoInstitucion!=null && codigoInstitucion != "") url += "&codigoInstitucion=" + codigoInstitucion;	
+			if(nombreInstitucion!=null && nombreInstitucion != "") url += "&nombreInstitucion=" + nombreInstitucion;	
+			if(codigoEntidad!=null && codigoEntidad != "") url += "&codigo=" + codigoEntidad;	
+			if(nombreEntidad!=null && nombreEntidad != "") url += "&nombre=" + nombreEntidad;	
+			if(ejercicoFiscal!=null && ejercicoFiscal != "") url += "&ejercicoFiscal=" + ejercicoFiscal;	
+			if(estado!=null && estado != "") url += "&estado=" + estado;	
 			return Restangular.allUrl(url).getList();
 		},
 

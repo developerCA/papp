@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, certificacionesFondosFactory) {
+app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","ordenGastoFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, ordenGastoFactory) {
 
 	$scope.codigo=null;
 	$scope.precompromiso=null;
@@ -22,7 +22,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	$scope.consultar=function(){
 		$scope.data=[];
 		//console.log('aqi');
-		certificacionesFondosFactory.traerCertificacionesFondos(pagina).then(function(resp){
+		ordenGastoFactory.traerOrdenGasto(pagina).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
@@ -51,7 +51,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		certificacionesFondosFactory.traerCertificacionesFondosFiltro(pagina,$scope.codigo,$scope.fuerza,$scope.grado,$scope.padre,$scope.estado).then(function(resp){
+		ordenGastoFactory.traerOrdenGastoFiltro(pagina,$scope.codigo,$scope.fuerza,$scope.grado,$scope.padre,$scope.estado).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -76,8 +76,8 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	}
 	
 	$scope.editar=function(id){
-		certificacionesFondosFactory.traerCertificacionesFondosEditar(id).then(function(resp){
-			console.log(resp.json);
+		ordenGastoFactory.traerOrdenGastoEditar(id).then(function(resp){
+			console.log(resp);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.certificacion;
 			    $scope.objetodetalles=resp.json.certificacionlineas;
@@ -170,7 +170,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			}
 		});
 */
-        SweetAlert.swal("Certificaciones de Fondos!", "No se pudo eliminar porque falta REST para eliminar", "error");
+        SweetAlert.swal("Orden de Gastos!", "No se pudo eliminar porque falta REST para eliminar", "error");
 /*
 		ordenGastoFactory.eliminar(id).then(function(resp){
 			if (resp.estado){
@@ -208,16 +208,16 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 
 		            } else {
 		                
-		            	certificacionesFondosFactory.guardar($scope.objeto).then(function(resp){
+		            	ordenGastoFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Certificaciones de Fondos!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Orden de Gastos!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Orden de Gastos!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
