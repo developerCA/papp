@@ -171,7 +171,8 @@ app.constant('JS_REQUIRES', {
         'ModalTipoDocumentoCtrl':'assets/js/controllers/papp/modales/modalTipoDocumentoCtrl.js',
         'ModalTipoDocumentoCtrl':'assets/js/controllers/papp/modales/modalTipoDocumentoCtrl.js',
         'ModalInstitutoEntidadCtrl':'assets/js/controllers/papp/modales/modalInstitutoEntidadCtrl.js',
-        
+        'InstitutoEntidadFactory':'assets/js/factory/institutoEntidadFactory.js',
+        'ModalCargoEscalaCtrl':'assets/js/controllers/papp/modales/modalCargoEscalaCtrl.js',
         
     },
     //*** angularJS Modules

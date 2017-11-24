@@ -157,8 +157,13 @@
 											<div>
 												<table class="table table-striped">
 													<tr>
-														<td></td>
-														<th>Descrip&oacute;n</th>
+														<th></th>
+														<th>Instituci&oacute;n Id</th>
+														<th>Instituci&oacute;n C&oacute;digo</th>
+														<th>Instituci&oacute;n Nombre</th>
+														<th>Entidad Id</th>
+														<th>Entidad C&oacute;digo</th>
+														<th>Entidad Nombre</th>
 													</tr>
 													<tr ng-repeat="obj in detalles">
 														<td><!--  ng-disabled="obj.perfilpermisolectura==0" -->
@@ -168,18 +173,33 @@
 																<i class="fa fa-trash"></i>
 															</a>
 														</td>
-														<td data-title="'Nombre'">
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione uno"
-											class="form-control" name="npnombreinstitucion" ng-disabled="true"
-											ng-model="obj.npnombreinstitucion" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirInstitutoEntidad($index)">
-												<i class="fa fa-search"></i> Seleccionar
-											</button>
-										</span>
-									</div>
+														<td>
+															{{obj.id.id}}
+														</td>
+														<td>
+															{{obj.npcodigoinstitucion}}
+														</td>
+														<td>
+															{{obj.npnombreinstitucion}}
+														</td>
+														<td>
+															<div class="input-group">
+																<input type="text" placeholder="Seleccione uno"
+																	class="form-control" name="npnombreinstitucion" ng-disabled="true"
+																	ng-model="obj.unidadinstitucionentid" />
+																<span class="input-group-btn">
+																	<button type="button" class="btn btn-primary"
+																		ng-click="abrirInstitutoEntidad($index)">
+																		<i class="fa fa-search"></i>
+																	</button>
+																</span>
+															</div>
+														</td>
+														<td>
+															{{obj.npcodigoentidad}}
+														</td>
+														<td>
+															{{obj.npnombreentidad}}
 														</td>
 													</tr>
 												</table>
@@ -206,7 +226,7 @@
 
 					<script type="text/ng-template" id="modalInstitutoEntidad.html">
                             <div class="modal-header">
-                                <h3 class="modal-title">Institutos entididaes</h3>
+                                <h3 class="modal-title">Institutos Entididades</h3>
                             </div>
                             <div class="modal-body">
 

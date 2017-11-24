@@ -75,20 +75,18 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 			   $scope.objeto=resp.json.unidad;
 			   $scope.detalles=resp.json.details;
 			   $scope.edicion=true;
-			  console.log($scope.objeto);
+			  console.log(resp.json);
 		})
 		
 	};
 	
 	$scope.agregarDetalle=function(){
-		var obj={codigo:null,estado:"A",nombre:null};
+		var obj={id: {id: null}, codigo: null, estado: "A", nombre: null};
 		$scope.detalles.push(obj);
-		
 	}
 	
 	$scope.removerDetalle=function(index){
 		$scope.detalles.splice(index,1);
-		
 	}
 
 	 $scope.form = {
@@ -117,17 +115,17 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 		                
 		            	$scope.objeto.details=$scope.detalles;
 		            	
-		            	claseRegistroFactory.guardar($scope.objeto).then(function(resp){
+		            	unidadFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.detalles=[];
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Clase de Registro!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Unidad!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Clase de Registro!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Unidad!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
@@ -153,9 +151,13 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 				size : 'lg'
 			});
 			modalInstance.result.then(function(obj) {
-				//console.log(obj);
-				$scope.detalles[index].id.permisoid = obj.id;
-				$scope.detalles[index].nppermiso=obj.nombre;
+				console.log(obj);
+				$scope.detalles[index].id.id = obj.institucionentid;
+				$scope.detalles[index].npcodigoinstitucion = obj.npcodigoinstitucion;
+				$scope.detalles[index].npnombreinstitucion = obj.npnombreinstitucion;
+				$scope.detalles[index].unidadinstitucionentid = obj.institucionentid;
+				$scope.detalles[index].npcodigoentidad = obj.codigo;
+				$scope.detalles[index].npnombreentidad = obj.nombre;
 			}, function() {
 				console.log("close modal");
 			});
