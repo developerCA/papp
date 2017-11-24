@@ -64,17 +64,18 @@ app.controller('TipoRegimenController', [ "$scope","$rootScope","SweetAlert","$f
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null,estado:'A'};
+		$scope.objeto={id:null,activo:'1'};
 		
 		$scope.edicion=true;
 	}
 	
 	$scope.editar=function(id){
 		tipoRegimenFactory.traerTipo(id).then(function(resp){
-			;
+			
 			if (resp.estado)
 			   $scope.objeto=resp.json.tiporegimen;
-			console.log($scope.objeto);
+			   $scope.objeto.activo=$scope.objeto.activo.toString();
+			   console.log($scope.objeto);
 			   $scope.edicion=true;
 
 		})
@@ -96,11 +97,11 @@ app.controller('TipoRegimenController', [ "$scope","$rootScope","SweetAlert","$f
 	        	 if (isconfirm)
 	        		 tipoRegimenFactory.eliminar(id).then(function (resp) {
 	                    if (resp.estado) {
-	                        SweetAlert.swal("Tipo de Régimen", "Registro eliminado!", "success");
+	                        SweetAlert.swal("Tipo de Rï¿½gimen", "Registro eliminado!", "success");
 	                        $scope.limpiar();
 	                        
 	                    } else {
-	                        SweetAlert.swal("Tipo de Régimen", resp.mensajes.msg, "error");
+	                        SweetAlert.swal("Tipo de Rï¿½gimen", resp.mensajes.msg, "error");
 	                    }
 	                })
 	            });
@@ -137,7 +138,7 @@ app.controller('TipoRegimenController', [ "$scope","$rootScope","SweetAlert","$f
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Tipo Régimen!", "Registro guardado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Tipo Réimen!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
 			 		             SweetAlert.swal("Tipo Régimen", resp.mensajes.msg, "error");
