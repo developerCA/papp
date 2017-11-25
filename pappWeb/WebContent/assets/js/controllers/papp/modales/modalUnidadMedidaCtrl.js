@@ -1,6 +1,7 @@
 'use strict';
  
-app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "SweetAlert", "$filter", "ngTableParams", "UnidadesMedidaFactory", function ($scope, $uibModalInstance, SweetAlert, $filter, ngTableParams, UnidadesMedidaFactory) {
+app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "SweetAlert", "$filter", "ngTableParams", "UnidadesMedidaFactory",
+	function ($scope, $uibModalInstance, SweetAlert, $filter, ngTableParams, UnidadesMedidaFactory) {
 
 	    $scope.nombre = null;
 	    $scope.estado = null;

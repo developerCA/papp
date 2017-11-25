@@ -115,15 +115,9 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 	$scope.buscarUnidadMedida = function(){
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalUnidades.html',
-			controller : 'ModalUnidadesController',
-			size : 'md',
-			resolve : {
-				tipo : function() {
-					return $scope.objeto.tipo;
-				}
-			}
+			controller : 'ModalUnidadMedidaController',
+			size : 'lg'
 		});
-
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 			$scope.objeto.subitemunidadmedidaid = obj.codigo;

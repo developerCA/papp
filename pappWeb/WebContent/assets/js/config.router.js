@@ -135,10 +135,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/param",
         templateUrl: "assets/views/papp/parametros.html",
         resolve: loadSequence('ngTable','ParametroCtrl','ParametroFactory'),
-        title: 'Parámetros',
+        title: 'Parï¿½metros',
         
         ncyBreadcrumb: {
-            label: 'Parámetros'
+            label: 'Parï¿½metros'
         }
     }).state('app.consecutivos', {
         url: "/consecutivos",
@@ -201,7 +201,11 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.subitem', {
         url: "/subitems",
         templateUrl: "assets/views/papp/subitem.html",
-        resolve: loadSequence('ngTable', 'SubItemCtrl', 'ModalItemCtrl', 'ModalUnidadCtrl', 'SubItemsFactory', 'ItemFactory', 'UnidadesMedidaFactory'),
+        resolve: loadSequence(
+        		'ngTable', 'SubItemCtrl','SubItemsFactory',
+        		'ModalItemCtrl','ItemFactory',
+        		'ModalUnidadMedidaCtrl','UnidadesMedidaFactory'
+		),
         title: 'Modulo de Sub Items',
         ncyBreadcrumb: {
             label: 'Modulo de Sub Items'
@@ -406,9 +410,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/estructuraorganica",
         templateUrl: "assets/views/papp/estructuraorganica.html",
         resolve: loadSequence('ngTable','EstructuraOrganicaCtrl','ModalInstitucionCtrl','EstructuraOrganicaFactory','InstitucionFactory'),
-        title: 'Estructura Orgánica',
+        title: 'Estructura Orgï¿½nica',
         ncyBreadcrumb: {
-            label: 'Estructura Orgánica'
+            label: 'Estructura Orgï¿½nica'
         }
     }).state('app.indicadores', {
         url: "/indicadores",
