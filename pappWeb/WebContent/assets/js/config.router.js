@@ -106,7 +106,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             label: 'Boxed Page'
         }
     }).state('app.ejercicios', {
-        url: "/ej",
+        url: "/ejerciciosfiscales",
         templateUrl: "assets/views/papp/ejerciciosFiscales.html",
         resolve: loadSequence('ngTable','EjerciciosCtrl','EjerciciosFactory'),
         title: 'Ejercicios Fiscales',

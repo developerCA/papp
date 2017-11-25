@@ -4,7 +4,8 @@
  * controller for angular-menu
  * 
  */
-app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "UnidadesMedidaFactory","gruposMedidaFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, unidadesMedidaFactory,gruposMedidaFactory) {
+app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "UnidadesMedidaFactory","gruposMedidaFactory",
+	function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, unidadesMedidaFactory,gruposMedidaFactory) {
 
     $scope.nombre = null;
     $scope.estado = null;
@@ -19,7 +20,7 @@ app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert"
 
         $scope.grupos = [];
 
-        gruposMedidaFactory.traerGruposFiltro(pagina,'','A').then(function (resp) {
+        gruposMedidaFactory.traerGruposFiltro(pagina,'','').then(function (resp) {
             if (resp.meta)
                 $scope.grupos = resp;
             
@@ -92,7 +93,6 @@ app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert"
     $scope.editar = function (id) {
         
         unidadesMedidaFactory.traerUnidad(id).then(function (resp) {
-
             if (resp.estado)
                 $scope.objeto = resp.json.unidadmedida;
            

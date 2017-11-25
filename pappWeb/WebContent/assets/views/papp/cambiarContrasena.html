@@ -26,7 +26,7 @@
 							<div class="col-md-6">
 
 								<div class="form-group"
-									ng-class="{'has-error':For.orden.$dirty && Form.orden.$invalid,
+									ng-class="{'has-error':Form.orden.$dirty && Form.orden.$invalid,
 									'has-success':Form.orden.$valid}">
 									<label class="control-label"> Usuario <span
 										class="symbol required"></span>
@@ -39,22 +39,26 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid,
-									'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Contrase&ntilde;a anterior <span
-										class="symbol required"></span>
-									</label> <input type="password" placeholder="Contrase&ntilde;a anterior"
-										class="form-control" name="claveanterior" required
-										ng-model="objeto.claveanterior" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.claveanterior.$dirty &&
-										Form.claveanterior.$invalid">Contrase&ntilde;a
-										incorrecto</span> <span class="success text-small"
-										ng-if="Form.claveanterior.$valid">Listo</span>
+								    ng-class="{'has-error':Form.claveanterior.$dirty && Form.claveanterior.$invalid, 'has-success':Form.claveanterior.$valid}">
+								    <label class="control-label">
+								        Contrase&ntilde;a anterior
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Escriba la contrase&ntilde;a anterior"
+								        class="form-control" name="claveanterior" ng-model="objeto.claveanterior"
+								        required ng-minlength="1" ng-minlength="20">
+								    <span class="error text-small block"
+								        ng-if="Form.claveanterior.$dirty && Form.claveanterior.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.claveanterior.$valid">
+								        Listo
+								    </span>
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid,
+									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid,
 									'has-success':Form.nombre.$valid}">
 									<label class="control-label"> Nueva contrase&ntilde;a <span
 										class="symbol required"></span>
@@ -71,7 +75,7 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid,
+									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid,
 									'has-success':Form.nombre.$valid}">
 									<label class="control-label"> Repetir contrase&ntilde;a <span
 										class="symbol required"></span>
@@ -88,7 +92,7 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':For.nombre.$dirty && Form.nombre.$invalid,
+									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid,
 									'has-success':Form.nombre.$valid}">
 									<label class="control-label"> Email <span
 										class="symbol required"></span>
