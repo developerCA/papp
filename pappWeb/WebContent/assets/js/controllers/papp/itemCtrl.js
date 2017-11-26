@@ -80,7 +80,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 
     $scope.nuevo = function () {
 
-        $scope.objeto = { id: null,estado:'A' };
+        $scope.objeto = { id: null,estado:'A',itemejerciciofiscalid:$rootScope.ejefiscal };
         $scope.edicion = true;
     }
 
