@@ -416,6 +416,8 @@ public class AdministracionController {
 			//Item
 			else if(clase.equals("item")){
 				ItemTO itemTO = gson.fromJson(new StringReader(objeto), ItemTO.class);
+				log.println("id item: "+ itemTO.getId());
+				log.println("padre: " + itemTO.getItempadreid());
 				accion = (itemTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
 				ItemTO itemTO2=new ItemTO();
@@ -598,6 +600,8 @@ public class AdministracionController {
 			else if(clase.equals("tipoproducto")){
 				TipoproductoTO tipoproductoTO = gson.fromJson(new StringReader(objeto), TipoproductoTO.class);
 				accion = (tipoproductoTO.getId()==null)?"crear":"actualizar";
+				if(tipoproductoTO.getActivo()==null)
+					tipoproductoTO.setActivo(0);
 				//pregunto si ya existe el codigo en el nivel actual
 				TipoproductoTO tipoproductoTO2=new TipoproductoTO();
 				tipoproductoTO2.setNombre(tipoproductoTO.getNombre());
@@ -654,6 +658,8 @@ public class AdministracionController {
 			else if(clase.equals("procedimiento")){
 				ProcedimientoTO procedimientoTO = gson.fromJson(new StringReader(objeto), ProcedimientoTO.class);
 				accion = (procedimientoTO.getId()==null)?"crear":"actualizar";
+				if(procedimientoTO.getActivo()==null)
+					procedimientoTO.setActivo(0);
 				//pregunto si ya existe el codigo en el nivel actual
 				ProcedimientoTO procedimientoTO2=new ProcedimientoTO();
 				procedimientoTO2.setNombre(procedimientoTO.getNombre());
@@ -829,7 +835,7 @@ public class AdministracionController {
 				accion = (gradofuerzaTO.getId()==null)?"crear":"actualizar";
 				//valido que no exista creado un registro para ese grado
 				GradofuerzaTO gradoesfuerza=new GradofuerzaTO();
-				gradoesfuerza.setGradofuerzagradoid(gradoesfuerza.getId());
+				gradoesfuerza.setGradofuerzagradoid(gradoesfuerza.getGradofuerzagradoid());
 				Collection<GradofuerzaTO> grados=UtilSession.adminsitracionServicio.transObtenerGradofuerza(gradoesfuerza);
 				log.println("escalarmu encontrados: " + grados.size());
 				if(grados.size()==0){
@@ -1214,7 +1220,7 @@ public class AdministracionController {
 			//Item
 			else if(clase.equals("item")){
 				ItemTO itemTO = UtilSession.adminsitracionServicio.transObtenerItemTO(id);
-				jsonObject.put("item", (JSONObject)JSONSerializer.toJSON(itemTO,itemTO.getJsonConfig()));
+				jsonObject.put("item", (JSONObject)JSONSerializer.toJSON(itemTO,itemTO.getJsonConfigedit()));
 			}
 
 			//Subitem
@@ -1342,7 +1348,7 @@ public class AdministracionController {
 			//Gradofuerza
 			else if(clase.equals("gradofuerza")){
 				GradofuerzaTO gradofuerzaTO = UtilSession.adminsitracionServicio.transObtenerGradofuerzaTO(id);
-				jsonObject.put("gradofuerza", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfig()));
+				jsonObject.put("gradofuerza", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfigedit()));
 			}
 
 			//especialidades

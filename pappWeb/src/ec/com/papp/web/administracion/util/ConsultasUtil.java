@@ -96,7 +96,10 @@ public class ConsultasUtil {
 			//resultado.size().put("valor", resultado.getCountResults().toString());
 			//log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,ejerciciofiscalTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -150,7 +153,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", Integer.valueOf(resultado.size()).toString());
 //			log.println("totalresultado: " + resultado.size());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,institucionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -205,7 +211,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", Integer.valueOf(resultado.size()).toString());
 			log.println("totalresultado: " + resultado.size());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,divisiongeograficaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -257,6 +266,7 @@ public class ConsultasUtil {
 			log.println("totalresultado: " + resultado.getClass().toString());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,divisiongeograficaTO.getJsonConfig()));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -314,7 +324,10 @@ public class ConsultasUtil {
 			//resultado.size().put("valor", resultado.getCountResults().toString());
 			//log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,unidadmedidaTO.getJsonConfigComun()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -363,7 +376,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,parametroTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -416,7 +432,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,consecutivoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -463,7 +482,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipoidentificacionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -516,7 +538,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,fuentefinanciamientoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -569,7 +594,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,organismoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -628,7 +656,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,organismoprestamoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -677,7 +708,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,procedimientoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -726,7 +760,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tiporegimenTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -775,7 +812,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipoproductoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -828,7 +868,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,obraTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -848,19 +891,19 @@ public class ConsultasUtil {
 		String campo="";
 		ItemTO itemTO=new ItemTO();
 		try{
-//			int pagina=1;
-//			if(parameters.get("pagina")!=null)		
-//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-//			int filas=20;
-//			if(parameters.get("filas")!=null)
-//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-//			int primero=(pagina*filas)-filas;
+			int pagina=1;
+			if(parameters.get("pagina")!=null)		
+				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+			int filas=20;
+			if(parameters.get("filas")!=null)
+				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-//			itemTO.setFirstResult(primero);
-//			itemTO.setMaxResults(filas);
+			itemTO.setFirstResult(primero);
+			itemTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				itemTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -876,14 +919,13 @@ public class ConsultasUtil {
 				itemTO.setTipo(parameters.get("tipo"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				itemTO.setItemejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-//			SearchResultTO<ItemTO> resultado=UtilSession.adminsitracionServicio.transObtenerItemPaginado(itemTO);
-			Collection<ItemTO> resultado=UtilSession.adminsitracionServicio.transObtenerItem(itemTO);
-//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
-//			resultado.size().put("valor", resultado.getCountResults().toString());
-//			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,itemTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			SearchResultTO<ItemTO> resultado=UtilSession.adminsitracionServicio.transObtenerItemPaginado(itemTO);
+			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+			HashMap<String, String>  totalMap=new HashMap<String, String>();
+			totalMap.put("valor", resultado.getCountResults().toString());
+			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),itemTO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -999,7 +1041,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,grupomedidaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1052,7 +1097,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,claseregistroTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1108,7 +1156,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,claseregistroclasemodificacionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1161,7 +1212,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipodocumentoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1212,7 +1266,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipoidentificacionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1250,6 +1307,8 @@ public class ConsultasUtil {
 				tipoidentificacionTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			else
 				tipoidentificacionTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
+				tipoidentificacionTO.setNombre(parameters.get("nombre"));	
 //			SearchResultTO<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacionPaginado(tipoidentificacionTO);
 			Collection<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacion(tipoidentificacionTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -1257,7 +1316,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipoidentificacionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1306,7 +1368,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,parametroindicadorTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1359,7 +1424,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,fuerzaTO.getJsonConfigConsulta()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1490,7 +1558,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,gradoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1543,7 +1614,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,clasificacionTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1597,7 +1671,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,grupoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1651,7 +1728,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,fuerzaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1702,6 +1782,8 @@ public class ConsultasUtil {
 				grupoTO.setNombre(parameters.get("npgrupo"));
 			if(parameters.get("npnombrefuerza")!=null && !parameters.get("npnombrefuerza").equals(""))
 				fuerzaTO.setNombre(parameters.get("npnombrefuerza"));
+			if(parameters.get("idfuerza")!=null && !parameters.get("idfuerza").equals(""))
+				gradofuerzaTO.setGradofuerzafuerzaid(Long.valueOf(parameters.get("idfuerza")));
 			gradofuerzaTO.setFuerza(fuerzaTO);
 			gradoTO.setGrupo(grupoTO);
 			gradofuerzaTO.setGrado(gradoTO);
@@ -1712,7 +1794,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,gradofuerzaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1764,7 +1849,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,especialidadTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1815,7 +1903,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,cargoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1868,7 +1959,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,escalarmuTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -1937,7 +2031,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,gradoescalaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -2000,7 +2097,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,cargoescalaTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -2051,7 +2151,10 @@ public class ConsultasUtil {
 //			resultado.size().put("valor", resultado.getCountResults().toString());
 //			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,nivelorganicoTO.getJsonConfig()));
-			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(resultado.size()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
