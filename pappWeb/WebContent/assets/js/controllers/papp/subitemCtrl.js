@@ -120,7 +120,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.subitemunidadmedidaid = obj.codigo;
+			$scope.objeto.subitemunidadmedidaid = obj.id;
 			$scope.objeto.npunidadnombre = obj.nombre;			
 			
 		}, function() {
@@ -153,14 +153,14 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
                 return;
 
             } else {
-                //OJO
+            	console.log($scope.objeto);
             	subitemsFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("SubItem", "Registro satisfactorio!", "success");
+                        SweetAlert.swal("SubItem", "Registro guardado satisfactioriamente!", "success");
 
                     } else {
                         SweetAlert.swal("SubItem", resp.mensajes.msg, "error");

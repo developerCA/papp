@@ -143,7 +143,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
                 return;
 
             } else {
-                //OJO
+               
                 itemsFactory.guardar($scope.objeto).then(function (resp) {
                     if (resp.estado) {
                         form.$setPristine(true);
