@@ -418,6 +418,8 @@ public class AdministracionController {
 				ItemTO itemTO = gson.fromJson(new StringReader(objeto), ItemTO.class);
 				log.println("id item: "+ itemTO.getId());
 				log.println("padre: " + itemTO.getItempadreid());
+				if(itemTO.getItempadreid()!=null && itemTO.getItempadreid().longValue()==0)
+					itemTO.setItempadreid(null);
 				accion = (itemTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
 				ItemTO itemTO2=new ItemTO();
@@ -448,6 +450,8 @@ public class AdministracionController {
 			else if(clase.equals("subitem")){
 				SubitemTO subitemTO = gson.fromJson(new StringReader(objeto), SubitemTO.class);
 				accion = (subitemTO.getId()==null)?"crear":"actualizar";
+				if(subitemTO.getSubitemunidadmedidaid()!=null && subitemTO.getSubitemunidadmedidaid().longValue()==0)
+					subitemTO.setSubitemunidadmedidaid(null);
 				UtilSession.adminsitracionServicio.transCrearModificarSubitem(subitemTO);
 				id=subitemTO.getId().toString();
 				jsonObject.put("subitem", (JSONObject)JSONSerializer.toJSON(subitemTO,subitemTO.getJsonConfig()));
@@ -837,7 +841,7 @@ public class AdministracionController {
 				accion = (gradofuerzaTO.getId()==null)?"crear":"actualizar";
 				//valido que no exista creado un registro para ese grado
 				GradofuerzaTO gradoesfuerza=new GradofuerzaTO();
-				gradoesfuerza.setGradofuerzagradoid(gradoesfuerza.getGradofuerzagradoid());
+				gradoesfuerza.setGradofuerzagradoid(gradofuerzaTO.getGradofuerzagradoid());
 				Collection<GradofuerzaTO> grados=UtilSession.adminsitracionServicio.transObtenerGradofuerza(gradoesfuerza);
 				log.println("escalarmu encontrados: " + grados.size());
 				if(grados.size()==0){
@@ -1228,6 +1232,7 @@ public class AdministracionController {
 			//Subitem
 			else if(clase.equals("subitem")){
 				SubitemTO subitemTO = UtilSession.adminsitracionServicio.transObtenerSubitemTO(id);
+				log.println("unidadmedida: " + subitemTO.getSubitemunidadmedidaid());
 				jsonObject.put("subitem", (JSONObject)JSONSerializer.toJSON(subitemTO,subitemTO.getJsonConfigedit()));
 			}
 

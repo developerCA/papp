@@ -963,8 +963,8 @@ public class ConsultasUtil {
 				subitemTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			else
 				subitemTO.setOrderByField(OrderBy.orderAsc(orderBy));
-			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
-				subitemTO.setCodigo(parameters.get("codigo"));
+			if(parameters.get("codigoIncop")!=null && !parameters.get("codigoIncop").equals(""))
+				subitemTO.setCodigo(parameters.get("codigoIncop"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				subitemTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
