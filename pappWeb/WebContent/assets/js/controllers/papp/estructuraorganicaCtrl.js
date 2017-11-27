@@ -99,7 +99,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		})
 	};
 	
-	$scop.editarEmpleados=function(){
+	$scope.editarEmpleados=function(id){
 		$scope.estructuraSeleccionada=id;
 		$scope.tabactivo=2;
 		$scope.edicion=true;

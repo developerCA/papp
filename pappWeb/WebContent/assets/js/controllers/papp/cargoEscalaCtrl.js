@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","CargoEscalaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,cargoEscalaFactory) {
+app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","CargoEscalaFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,cargoEscalaFactory) {
     	
 	$scope.codigo=null;
 	$scope.nombrecargo=null;
