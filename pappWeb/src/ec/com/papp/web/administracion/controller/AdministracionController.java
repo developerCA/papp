@@ -439,7 +439,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarItem(itemTO);
-					id=itemTO.getId().toString();
+					//id=itemTO.getId().toString();
 					jsonObject.put("item", (JSONObject)JSONSerializer.toJSON(itemTO,itemTO.getJsonConfig()));
 				}
 			}
@@ -516,6 +516,8 @@ public class AdministracionController {
 			//Clasemodificacion
 			else if(clase.equals("clasemodificacion")){
 				ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO = gson.fromJson(new StringReader(objeto), ClaseregistroclasemodificacionTO.class);
+				if(claseregistroclasemodificacionTO.getId()==null)
+					claseregistroclasemodificacionTO.setId(new ClaseregistroclasemodificacionID());
 				log.println("ejercicio fiscal::: " + claseregistroclasemodificacionTO.getClaseregistrocmejerfiscalid());
 				accion = (claseregistroclasemodificacionTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
