@@ -33,4 +33,5 @@ angular.module("packet", [
 	'underscore',
 	'blockUI',
 	'mgcrea.ngStrap',
+	'ui.tree',
 ]);

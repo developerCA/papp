@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","estructuraorganicaFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, estructuraorganicaFactory) {
+app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","estructuraorganicaFactory","unidadFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, estructuraorganicaFactory,unidadFactory) {
 
 	$scope.codigo=null;
 	$scope.fuerza=null;
@@ -13,6 +13,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.nuevoar=false;
 	$scope.guardar=false;
 	$scope.objeto={estado:null};
+	$scope.tabactivo=0;
+	$scope.arbol={};
 	
 	var pagina = 1;
 	
@@ -81,9 +83,74 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.nuevoar=false;
 			$scope.guardar=true;
 			console.log($scope.objeto);
+			$scope.tabactivo=0;
 		})
 	};
 
+	$scope.editarUnidad=function(id){
+		
+		$scope.tabactivo=1;
+		$scope.edicion=true;
+		
+		unidadFactory.traerUnidadesArbol(pagina,id).then(function(resp){
+			$scope.arbol=resp;
+			
+			console.log($scope.arbol);
+		})
+		
+		
+	};
+	
+	$scope.arbol2 = [{
+        'id': 1,
+        'title': 'node1',
+        'nodes': [
+          {
+            'id': 11,
+            'title': 'node1.1',
+            'nodes': [
+              {
+                'id': 111,
+                'title': 'node1.1.1',
+                'nodes': []
+              }
+            ]
+          },
+          {
+            'id': 12,
+            'title': 'node1.2',
+            'nodes': []
+          }
+        ]
+      }, {
+        'id': 2,
+        'title': 'node2',
+        'nodrop': true, // An arbitrary property to check in custom template for nodrop-enabled
+        'nodes': [
+          {
+            'id': 21,
+            'title': 'node2.1',
+            'nodes': []
+          },
+          {
+            'id': 22,
+            'title': 'node2.2',
+            'nodes': []
+          }
+        ]
+      }, {
+        'id': 3,
+        'title': 'node3',
+        'nodes': [
+          {
+            'id': 31,
+            'title': 'node3.1',
+            'nodes': []
+          }
+        ]
+      }];
+	
+	
 	$scope.abrirInstitucion = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalInstitucion.html',

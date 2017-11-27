@@ -12,6 +12,12 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			  
 		},
 		
+		traerUnidadesArbol : function(pagina,estructuraorganica) {
+			 
+			  return Restangular.allUrl("estructuraorganica/consultar/unidadarbol/pagina="+pagina+"&unidadarbolerganicaid="+estructuraorganica).getList();
+			  
+		},
+		
 		traerUnidadesFiltro : function(pagina,nombre,codigo,estado) {
 			  
 			var url = "estructuraorganica/consultar/unidad/pagina="+pagina;
