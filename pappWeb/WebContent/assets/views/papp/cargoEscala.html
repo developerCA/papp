@@ -204,24 +204,24 @@
 										class="form-control" name="escalaremuneracion" ng-model="objeto.npremuneracion"
 										required readonly="true"/>
 								</div>															
-
+								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.tipo.$dirty && Form.tipo.$invalid, 'has-success':Form.tipo.$valid}">
+								    ng-class="{'has-error':Form.laboraltipo.$dirty && Form.laboraltipo.$invalid, 'has-success':Form.laboraltipo.$valid}">
 								    <label class="control-label">
 								        R&eacute;gimen Laboral Tipo
 								        <span class="symbol required"></span>
 								    </label>
-								    <select class="form-control" name="tipo"
-								        ng-model="objeto.tipo" required>
+								    <select class="form-control" name="laboraltipo"
+								        ng-model="objeto.laboraltipo" required>
 								        <option value="L" ng-selected="selected">LOSEP</option>
-								        <option value="C">C&amp;oacute;digo de Trabajo</option>
+								        <option value="C">C&oacute;digo de Trabajo</option>
 								    </select>
 								    <span class="error text-small block"
-								        ng-if="Form.tipo.$dirty && Form.tipo.$invalid">
+								        ng-if="Form.laboraltipo.$dirty && Form.laboraltipo.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.tipo.$valid">
+								        ng-if="Form.laboraltipo.$valid">
 								        Listo
 								    </span>
 								</div>

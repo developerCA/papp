@@ -48,7 +48,7 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		
 		$scope.data=[];
 				
-		cargoEscalaFactory.traerFiltro(pagina,$scope.codigo,$scope.nombrecargo, $scope.grupoocupacional).then(function(resp){
+		cargoEscalaFactory.traerFiltro(pagina,$scope.codigo,$scope.nombrecargo, $scope.grupoocupacional, $scope.estado).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
