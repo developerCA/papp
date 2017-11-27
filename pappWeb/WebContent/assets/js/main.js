@@ -110,6 +110,12 @@ function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
 
 }]);
+
+app.config(function(treeConfig) {
+	  treeConfig.defaultCollapsed = true; // collapse nodes by default
+	  treeConfig.appendChildOnHover = true; // append dragged nodes as children by default
+});
+
 // Angular-breadcrumb
 // configuration
 app.config(function ($breadcrumbProvider) {

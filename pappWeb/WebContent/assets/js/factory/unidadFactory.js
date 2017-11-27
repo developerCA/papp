@@ -12,9 +12,15 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			  
 		},
 		
-		traerUnidadesArbol : function(pagina,estructuraorganica) {
+		traerUnidadesArbol : function(pagina,estructuraorganica,estado) {
 			 
-			  return Restangular.allUrl("estructuraorganica/consultar/unidadarbol/pagina="+pagina+"&unidadarbolerganicaid="+estructuraorganica).getList();
+			  return Restangular.allUrl("estructuraorganica/consultar/unidadarbol/pagina="+pagina+"&unidadarbolerganicaid="+estructuraorganica+"&estado="+estado).getList();
+			  
+		},
+		
+		traerUnidadesArbolhijos : function(pagina,estructuraorganica,padre,estado) {
+			 
+			  return Restangular.allUrl("estructuraorganica/consultar/unidadarbol/pagina="+pagina+"&unidadarbolerganicaid="+estructuraorganica+"&id="+padre+"&estado="+estado).getList();
 			  
 		},
 		

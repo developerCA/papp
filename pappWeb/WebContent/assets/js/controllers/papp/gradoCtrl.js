@@ -81,6 +81,8 @@ app.controller('GradoController', [ "$scope","$rootScope","SweetAlert","$filter"
 		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;
 		$scope.estadoFiltro=null;
+		$scope.siglaFiltro=null;
+		$scope.grupoFiltro=null;
 		$scope.consultar();
 		
 	};

@@ -75,7 +75,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	}
 	
 	$scope.editar=function(id){
-		estructuraorganicaFactory.traerEstructuraOrganicaEditar(id).then(function(resp){
+		$scope.estructuraSeleccionada=id;
+		estructuraorganicaFactory.traerEstructuraOrganicaEditar($scope.estructuraSeleccionada).then(function(resp){
 			if (resp.estado) {
 			    $scope.objeto=resp.json.estructuraorganica;
 			}
@@ -88,68 +89,54 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	};
 
 	$scope.editarUnidad=function(id){
-		
+		$scope.estructuraSeleccionada=id;
 		$scope.tabactivo=1;
 		$scope.edicion=true;
 		
-		unidadFactory.traerUnidadesArbol(pagina,id).then(function(resp){
-			$scope.arbol=resp;
-			
+		unidadFactory.traerUnidadesArbol(pagina,$scope.estructuraSeleccionada,'A').then(function(resp){
+			$scope.arbol = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 			console.log($scope.arbol);
 		})
-		
-		
 	};
 	
-	$scope.arbol2 = [{
-        'id': 1,
-        'title': 'node1',
-        'nodes': [
-          {
-            'id': 11,
-            'title': 'node1.1',
-            'nodes': [
-              {
-                'id': 111,
-                'title': 'node1.1.1',
-                'nodes': []
-              }
-            ]
-          },
-          {
-            'id': 12,
-            'title': 'node1.2',
-            'nodes': []
-          }
-        ]
-      }, {
-        'id': 2,
-        'title': 'node2',
-        'nodrop': true, // An arbitrary property to check in custom template for nodrop-enabled
-        'nodes': [
-          {
-            'id': 21,
-            'title': 'node2.1',
-            'nodes': []
-          },
-          {
-            'id': 22,
-            'title': 'node2.2',
-            'nodes': []
-          }
-        ]
-      }, {
-        'id': 3,
-        'title': 'node3',
-        'nodes': [
-          {
-            'id': 31,
-            'title': 'node3.1',
-            'nodes': []
-          }
-        ]
-      }];
+	$scop.editarEmpleados=function(){
+		$scope.estructuraSeleccionada=id;
+		$scope.tabactivo=2;
+		$scope.edicion=true;
+		
+	}
+
+	$scope.treeOptions = {
+		    accept: function(sourceNodeScope, destNodesScope, destIndex) {
+		      return true;
+		    },
+	};
 	
+	$scope.modificarUnidad=function(node){
+		console.log(node);
+	};
+	
+	$scope.mantenerPlaza=function(node){
+		console.log(node);
+	};
+	
+	$scope.agregarUnidadHija=function(node){
+		console.log(node);
+	};
+	
+	$scope.cargarHijos=function(node){
+		if (!node.iscargado)
+			console.log(node);
+		    node.iscargado=true;
+		    
+		    unidadFactory.traerUnidadesArbolhijos(pagina,$scope.estructuraSeleccionada,node.id,'A').then(function(resp){
+				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
+				node.nodes=nodes;
+				
+				//console.log($scope.arbol);
+			})
+			
+	}
 	
 	$scope.abrirInstitucion = function() {
 		var modalInstance = $uibModal.open({

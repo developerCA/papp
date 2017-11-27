@@ -59,6 +59,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;
 		$scope.estadoFiltro=null;
+		$scope.siglaFiltro=null;
 		$scope.consultar();
 		
 	};

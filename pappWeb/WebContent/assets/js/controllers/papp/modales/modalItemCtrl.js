@@ -18,7 +18,7 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
 		itemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
-                
+                console.log($scope.data);
         });
 	
 	};

@@ -58,6 +58,7 @@ app.controller('ClasificacionController', [ "$scope","$rootScope","SweetAlert","
 		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;
 		$scope.estadoFiltro=null;
+		$scope.siglaFiltro=null;
 		$scope.consultar();
 		
 	};

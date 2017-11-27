@@ -95,7 +95,7 @@
 										class="fa fa-code-fork"></i>
 								</a></td>
 								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Mantener empleados" ng-click="editar(obj.id)">
+									uib-tooltip="Mantener empleados" ng-click="editarEmpleados(obj.id)">
 										<i class="fa fa-user"></i>
 								</a></td>
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
@@ -382,17 +382,24 @@
 					</uib-tab> <uib-tab heading="Mantener Unidad"> <!-- Nested node template -->
 					<script type="text/ng-template" id="nodes_renderer.html">
   <div ui-tree-handle class="tree-node tree-node-content">
-    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)"><span
+    <a class="btn btn-default btn-xs"  data-nodrag ng-click="toggle(this);cargarHijos(node)"><span
         class="glyphicon"
         ng-class="{
           'glyphicon-chevron-right': collapsed,
           'glyphicon-chevron-down': !collapsed
         }"></span></a>
     {{node.title}}
-    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
-        class="glyphicon glyphicon-remove"></span></a>
-    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
-        class="glyphicon glyphicon-plus"></span></a>
+<div class="pull-right ">
+  <a uib-tooltip="Agregar" class="btn btn-info btn-sm" data-nodrag ng-click="agregarUnidadHija(node);" style="margin-right: 8px;"><span
+        class="glyphicon glyphicon-plus"></span></a>  
+  <a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag ng-click="modificarUnidad(node)"><span
+        class="fa fa-pencil"></span></a>
+    <a uib-tooltip="Mantener Plaza" class="btn btn-info btn-sm" data-nodrag ng-click="mantenerPlaza(node)"><span
+        class="fa fa-user"></span></a>
+
+  
+
+</div>
   </div>
   <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
     <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
@@ -402,9 +409,9 @@
 
 					<div class="row">
 						<div class="col-sm-12">
-							<div ui-tree id="tree-root">
-								<ol ui-tree-nodes ng-model="arbol2">
-									<li ng-repeat="node in arbol2" ui-tree-node
+							<div ui-tree="treeOptions" id="tree-root" data-nodrop-enabled="true" data-drag-enabled="true" >
+								<ol ui-tree-nodes ng-model="arbol">
+									<li ng-repeat="node in arbol" ui-tree-node
 										ng-include="'nodes_renderer.html'"></li>
 								</ol>
 							</div>
@@ -428,7 +435,13 @@
 						</div>
 					</div>
 
-					</uib-tab> </uib-tabset>
+					</uib-tab>
+					
+					<uib-tab
+						heading="Mantener empleados">
+						
+						</uib-tab>
+					 </uib-tabset>
 
 				</div>
 			</div>

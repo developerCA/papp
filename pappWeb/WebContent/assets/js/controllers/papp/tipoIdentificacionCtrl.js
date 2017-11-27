@@ -99,6 +99,7 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
 
     $scope.nuevo = function () {
         $scope.objeto = { id: null,usaverificaop:false };
+        $scope.detalles=[];
         $scope.edicion = true;
     }
 
@@ -180,10 +181,10 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Tipo de Identificación", "Registro guardado satisfactoriamente!", "success");
+                        SweetAlert.swal("Tipo de Identificaciï¿½n", "Registro guardado satisfactoriamente!", "success");
 
                     } else {
-                        SweetAlert.swal("Tipo de Identificación", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Tipo de Identificaciï¿½n", resp.mensajes.msg, "error");
 
                     }
 
