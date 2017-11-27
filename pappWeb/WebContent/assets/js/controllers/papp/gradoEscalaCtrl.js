@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","GradoEscalaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,gradoEscalaFactory) {
+app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","GradoEscalaFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,gradoEscalaFactory) {
     	
 	$scope.codigo=null;
 	$scope.nombregrado=null;
@@ -16,7 +17,7 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		
 		$scope.data=[];
 		gradoEscalaFactory.traer(pagina).then(function(resp){
-			
+			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;				
 		})
@@ -27,7 +28,7 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
-			count : 10, // count per page
+			count : 5, // count per page
 			filter: {} 	
 		}, {
 			total : $scope.data.length, // length of data
@@ -48,7 +49,7 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		
 		$scope.data=[];
 				
-		gradoEscalaFactory.traerFiltro(pagina,$scope.codigo,$scope.nombregrado,$scope.nombrefuerza, $scope.grupoocupacional).then(function(resp){
+		gradoEscalaFactory.traerFiltro(pagina,$scope.codigo,$scope.nombregrado,$scope.nombrefuerza, $scope.grupoocupacional,$scope.estado).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;

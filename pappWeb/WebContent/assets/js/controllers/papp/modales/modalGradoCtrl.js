@@ -23,8 +23,6 @@ app.controller('ModalGradoController', ["$scope", "$rootScope", "$uibModalInstan
 	$scope.traerGrupos = function(){
 		
 		grupoJerarquicoFactory.traerGrupos(pagina).then(function(resp){
-			console.clear();
-			console.log(resp);
 			if (resp.meta)
 				$scope.grupos=resp;				
 		})
@@ -88,10 +86,6 @@ $scope.consultar=function(){
 	
 		
 	$scope.seleccionar=function(obj){
-		alert();
-		console.log("**************");
-		console.log(obj);
-		console.log("**************");
 		$uibModalInstance.close(obj);		
 	};
 	
