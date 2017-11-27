@@ -138,93 +138,244 @@
 						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-6">
-								<div class="form-group"
-									ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
-									<label class="control-label">
-										C&oacute;digo
-										<span class="symbol required"></span>
-									</label>
-									<input type="text" placeholder=""
-										class="form-control" name="codigo" ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null" required
-										ng-model="objeto.codigo" ng-minlength="1" ng-maxlength="10" />
-									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
-										Incorrecto</span>
-									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
-										Listo</span>
-								</div>
 
-								<div class="form-group"
-									ng-class="{'has-error':Form.npnombrefuerza.$dirty && Form.npnombrefuerza.$invalid, 'has-success':Form.npnombrefuerza.$valid}">
-									<label class="control-label"> Fuerza <span
-										class="symbol required"></span>
-									</label>
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione la Fuerza"
-											class="form-control" name="npnombrefuerza" ng-disabled="true"
-											ng-model="objeto.npnombrefuerza" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirFuerza($index)">
-												<i class="fa fa-search"></i> Seleccione
-											</button>
-										</span>
-									</div>
-								</div>
+<div class="form-group"
+    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+    <label class="control-label">
+        C&oacute;digo
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Escriba un c&oacute;digo"
+        class="form-control" name="codigo" ng-model="objeto.codigo" ng-pattern="/^[0-9]*$/"
+        required ng-disabled="!nuevoar">
+    <span class="error text-small block"
+        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.codigo.$valid">
+        Listo
+    </span>
+</div>
 
-								<div class="form-group"
-									ng-class="{'has-error':Form.npnombregrado.$dirty && Form.npnombregrado.$invalid, 'has-success':Form.npnombregrado.$valid}">
-									<label class="control-label"> Grado <span
-										class="symbol required"></span>
-									</label>
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione el Grado"
-											class="form-control" name="npnombregrado" ng-disabled="true"
-											ng-model="objeto.npnombregrado" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirGrado($index)">
-												<i class="fa fa-search"></i> Seleccione
-											</button>
-										</span>
-									</div>
-								</div>
+<div class="form-group"
+    ng-class="{'has-error':Form.npcodigogrado.$dirty && Form.npcodigogrado.$invalid, 'has-success':Form.npcodigogrado.$valid}">
+    <label class="control-label">
+        Grado C&oacute;digo
+        <span class="symbol required"></span>
+    </label>
+    <div class="input-group">
+        <input type="text" placeholder="Escriba un grado c&oacute;digo"
+            class="form-control" name="npcodigogrado" ng-disabled="true"
+            ng-model="objeto.npcodigogrado">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-primary"
+                ng-click="abrirGrado()">
+                <i class="fa fa-search"></i>
+                Seleccione
+            </button>
+        </span>
+    </div>
+    <span class="error text-small block"
+        ng-if="Form.npcodigogrado.$dirty && Form.npcodigogrado.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npcodigogrado.$valid">
+        Listo
+    </span>
+</div>
 
-								<div class="form-group"
-									ng-class="{'has-error':Form.npnombrepadre.$dirty && Form.npnombrepadre.$invalid, 'has-success':Form.npnombrepadre.$valid}">
-									<label class="control-label"> Grado Superior
-									</label>
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione el Grado Superiror"
-											class="form-control" name="npnombrepadre" ng-disabled="true"
-											ng-model="objeto.npnombrepadre" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirGradoSuperior($index)">
-												<i class="fa fa-search"></i> Seleccione
-											</button>
-										</span>
-									</div>
-								</div>
+<div class="form-group"
+    ng-class="{'has-error':Form.npnombregrado.$dirty && Form.npnombregrado.$invalid, 'has-success':Form.npnombregrado.$valid}">
+    <label class="control-label">
+        Grado Nombre
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Seleccione un grado"
+        class="form-control" name="npnombregrado" ng-model="objeto.npnombregrado"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.npnombregrado.$dirty && Form.npnombregrado.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npnombregrado.$valid">
+        Listo
+    </span>
+</div>
 
-								<div class="form-group">
-									<label class="control-label">
-										Estado
-										<span class="symbol required"></span>
-									</label>
-									<select class="form-control" name="estado" ng-model="objeto.estado">
-									  <option value="A">Activo</option>
-									  <option value="I">Inactivo</option>
-									</select>
-									<span class="error text-small block"
-										ng-if="Form.estado.$dirty && Form.estado.$invalid">
-										Incorrecto</span>
-									<span class="success text-small"
-										ng-if="Form.estado.$valid">
-										Listo</span>
-								</div>
+<div class="form-group"
+    ng-class="{'has-error':Form.npsiglagrado.$dirty && Form.npsiglagrado.$invalid, 'has-success':Form.npsiglagrado.$valid}">
+    <label class="control-label">
+        Grado Sigla
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Seleccione un grado"
+        class="form-control" name="npsiglagrado" ng-model="objeto.npsiglagrado"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.npsiglagrado.$dirty && Form.npsiglagrado.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npsiglagrado.$valid">
+        Listo
+    </span>
+</div>
 
+<div class="form-group"
+    ng-class="{'has-error':Form.npgrupo.$dirty && Form.npgrupo.$invalid, 'has-success':Form.npgrupo.$valid}">
+    <label class="control-label">
+        Grupo Nombre
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Seleccione un grado"
+        class="form-control" name="npgrupo" ng-model="objeto.npgrupo"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.npgrupo.$dirty && Form.npgrupo.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npgrupo.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npcodigofuerza.$dirty && Form.npcodigofuerza.$invalid, 'has-success':Form.npcodigofuerza.$valid}">
+    <label class="control-label">
+        Fuerza C&oacute;digo
+        <span class="symbol required"></span>
+    </label>
+    <div class="input-group">
+        <input type="text" placeholder="Escriba un fuerza c&oacute;digo"
+            class="form-control" name="npcodigofuerza" ng-disabled="true"
+            ng-model="objeto.npcodigofuerza">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-primary"
+                ng-click="abrirFuerza()">
+                <i class="fa fa-search"></i>
+                Seleccione
+            </button>
+        </span>
+    </div>
+    <span class="error text-small block"
+        ng-if="Form.npcodigofuerza.$dirty && Form.npcodigofuerza.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npcodigofuerza.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npnombrefuerza.$dirty && Form.npnombrefuerza.$invalid, 'has-success':Form.npnombrefuerza.$valid}">
+    <label class="control-label">
+        Fuerza Nombre
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Seleccione una fuerza"
+        class="form-control" name="npnombrefuerza" ng-model="objeto.npnombrefuerza"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.npnombrefuerza.$dirty && Form.npnombrefuerza.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npnombrefuerza.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npsiglafuerza.$dirty && Form.npsiglafuerza.$invalid, 'has-success':Form.npsiglafuerza.$valid}">
+    <label class="control-label">
+        Fuerza Sigla
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Seleccione una fuerza"
+        class="form-control" name="npsiglafuerza" ng-model="objeto.npsiglafuerza"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.npsiglafuerza.$dirty && Form.npsiglafuerza.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npsiglafuerza.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npnombrepadre.$dirty && Form.npnombrepadre.$invalid, 'has-success':Form.npnombrepadre.$valid}">
+    <label class="control-label">
+        Superior C&oacute;digo
+        <span class="symbol required"></span>
+    </label>
+    <div class="input-group">
+        <input type="text" placeholder="Escriba un superior c&oacute;digo"
+            class="form-control" name="npnombrepadre" ng-disabled="true"
+            ng-model="objeto.npnombrepadre">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-primary"
+                ng-click="abrirSuperior()">
+                <i class="fa fa-search"></i>
+                Seleccione
+            </button>
+        </span>
+    </div>
+    <span class="error text-small block"
+        ng-if="Form.npnombrepadre.$dirty && Form.npnombrepadre.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npnombrepadre.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npnivel.$dirty && Form.npnivel.$invalid, 'has-success':Form.npnivel.$valid}">
+    <label class="control-label">
+        Nivel
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Seleccione un superior"
+        class="form-control" name="npnivel" ng-model="objeto.npnivel"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.npnivel.$dirty && Form.npnivel.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npnivel.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+    <label class="control-label">
+        Estado
+        <span class="symbol required"></span>
+    </label>
+    <select class="form-control" name="estado"
+        ng-model="objeto.estado" required>
+        <option value="A" ng-selected="selected">Activo</option>
+        <option value="I">Inactivo</option>
+    </select>
+    <span class="error text-small block"
+        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.estado.$valid">
+        Listo
+    </span>
+</div>
 							</div>
 						</div>
 

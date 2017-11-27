@@ -39,7 +39,7 @@
 									</div>
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label> Nombre grado </label> <input type="text"
+											<label> Nombre Grado </label> <input type="text"
 												class="form-control" ng-model="nombregrado">
 										</div>
 									</div>
@@ -99,7 +99,10 @@
 									<span ng-if="obj.regimenlaboraltipo=='L'">LOSEP</span>
 									<span ng-if="obj.regimenlaboraltipo!='L'">C&oacute;digo de Trabajo</span>
 								</td>								
-								<td data-title="'Estado'">{{obj.estado}}</td>
+								<td data-title="'Estado'">
+									<span ng-if="obj.estado=='A'">Activo</span>
+									<span ng-if="obj.estado=='I'">Inactivo</span>
+								</td>								
 							</tr>
 						</table>
 					</div>

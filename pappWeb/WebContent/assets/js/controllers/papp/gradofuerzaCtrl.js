@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('GradoFuerzaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","gradofuerzaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, gradofuerzaFactory) {
+app.controller('GradoFuerzaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","gradofuerzaFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, gradofuerzaFactory) {
 
 	$scope.codigo=null;
 	$scope.fuerza=null;
@@ -63,7 +64,7 @@ app.controller('GradoFuerzaController', [ "$scope","$rootScope","$uibModal","Swe
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null,estado:"A"};
+		$scope.objeto={id:null,estado:"A", npnivel:1};
 
 		$scope.edicion=true;
 		$scope.nuevoar=true;
@@ -72,14 +73,8 @@ app.controller('GradoFuerzaController', [ "$scope","$rootScope","$uibModal","Swe
 	
 	$scope.editar=function(id){
 		gradofuerzaFactory.traerGradoFuerzaEditar(id).then(function(resp){
-//console.clear();
-//console.log('AQUIIII-111');
-//console.log(resp);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.gradofuerza;
-			    //$scope.objeto.npnombrepadre='111';
-			    
-			    //console.log($scope.objeto);
 			}
 			$scope.edicion=true;
 			$scope.nuevoar=false;
@@ -87,52 +82,51 @@ app.controller('GradoFuerzaController', [ "$scope","$rootScope","$uibModal","Swe
 		})
 	};
 
+	$scope.abrirGrado = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalGrado.html',
+			controller : 'ModalGradoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.gradofuerzagradoid = obj.id;
+			$scope.objeto.npcodigogrado = obj.codigo;
+			$scope.objeto.npnombregrado = obj.nombre;
+			$scope.objeto.npsiglagrado = obj.sigla;
+			$scope.objeto.npgrupo = obj.npgruponombre;
+		}, function() {
+
+		});
+	};
+
 	$scope.abrirFuerza = function(index) {
-		//console.log("aqui");
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalFuerza.html',
 			controller : 'ModalFuerzaController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
+			console.log(obj);
 			$scope.objeto.gradofuerzafuerzaid = obj.id;
+			$scope.objeto.npcodigofuerza = obj.codigo;
 			$scope.objeto.npnombrefuerza = obj.nombre;
+			$scope.objeto.npsiglafuerza = obj.sigla;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
-	$scope.abrirGrado = function(index) {
-		//console.log("aqui");
+	$scope.abrirSuperior = function(index) {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalGrado.html',
 			controller : 'ModalGradoController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			$scope.objeto.gradofuerzagradoid = obj.id;
-			$scope.objeto.npnombregrado = obj.nombre;
-		}, function() {
-			console.log("close modal");
-		});
-	};
-
-	$scope.abrirGradoSuperior = function(index) {
-		//console.log("aqui");
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalGrado.html',
-			controller : 'ModalGradoController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			
+			console.log(obj);
 			$scope.objeto.gradofuerzapadreid = obj.id;
-			$scope.objeto.npnombrepadre = obj.nombre;
-			console.log($scope.objeto);
+			$scope.objeto.npnombrepadre = obj.codigo;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
