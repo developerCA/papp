@@ -12,6 +12,15 @@ app.factory("clasificacionFactory", [ "Restangular", function(Restangular) {
 			  
 		},
 		
+		traerClasificacionesActivos : function(pagina,estado) {
+			  
+			var url = "administrar/consultar/clasificacion/pagina="+pagina;
+
+			if(estado!=null && estado != "" ) url += "&estado=" + estado;
+						 
+			return Restangular.allUrl(url).getList();
+			  
+		},
 		traerClasificacionesFiltro : function(pagina,codigo,nombre, sigla, estado) {
 			  
 			var url = "administrar/consultar/clasificacion/pagina="+pagina;

@@ -6,7 +6,7 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.siglaFiltro=null;
-	$scope.estadoFiltro=null;
+	$scope.estadoFiltro='A';
 	$scope.edicion=false;
 	$scope.objeto={};
 	
@@ -15,7 +15,7 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		clasificacionFactory.traerClasificaciones(pagina).then(function(resp){
+		clasificacionFactory.traerClasificacionesActivos(pagina,'A').then(function(resp){
 			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;				

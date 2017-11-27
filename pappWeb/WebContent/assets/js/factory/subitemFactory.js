@@ -8,7 +8,7 @@ app.factory("SubItemsFactory", ["Restangular", function (Restangular) {
         	return Restangular.allUrl("administrar/consultar/subitem/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio).getList();
         },
 
-        traerItemsFiltro: function (pagina, codigo, nombre, estado, tipo, ejerciciofiscalid) {
+        traerItemsFiltro: function (pagina, codigo, nombre, estado, tipo, ejercicio) {
 
             var url = "administrar/consultar/subitem/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio;
             if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();

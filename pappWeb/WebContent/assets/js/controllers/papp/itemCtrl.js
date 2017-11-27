@@ -110,7 +110,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 		});
 
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.itempadreid = obj.codigo;
+			$scope.objeto.itempadreid = obj.id;
 			$scope.objeto.npnombrepadre = obj.nombre;			
 			
 		}, function() {

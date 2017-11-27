@@ -104,7 +104,8 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 			$scope.objeto.npitemcodigo = obj.codigo;
-			$scope.objeto.npitemnombre = obj.nombre;			
+			$scope.objeto.npitemnombre = obj.nombre;		
+			$scope.objeto.subitemitemid= obj.id;
 			
 		}, function() {
 			
@@ -121,7 +122,8 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 			$scope.objeto.subitemunidadmedidaid = obj.id;
-			$scope.objeto.npunidadnombre = obj.nombre;			
+			$scope.objeto.npunidadnombre = obj.nombre;		
+			
 			
 		}, function() {
 			

@@ -87,7 +87,7 @@ app.controller('ProcedimientoController', ["$scope", "$rootScope", "SweetAlert",
     $scope.eliminar = function (id) {
 
         SweetAlert.swal({
-            title: "Módulo de Procedimiento",
+            title: "MÃ³dulo de Procedimiento",
             text: "Confirma eliminar el registro?",
             type: "warning",
             showCancelButton: true,
@@ -99,10 +99,10 @@ app.controller('ProcedimientoController', ["$scope", "$rootScope", "SweetAlert",
             	if (isconfirm)
                 procedimientoFactory.eliminar(id).then(function (resp) {
                     if (resp.estado) {
-                        SweetAlert.swal("Módulo de Procedimiento", "Registro eliminado!", "success");
+                        SweetAlert.swal("MÃ³dulo de Procedimiento", "Registro eliminado!", "success");
                         $scope.limpiar();
                     } else {
-                        SweetAlert.swal("Módulo de Procedimiento", resp.mensajes.msg, "error");
+                        SweetAlert.swal("MÃ³dulo de Procedimiento", resp.mensajes.msg, "error");
                     }
                 })
             });
