@@ -98,7 +98,7 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 			$scope.objeto.npcodigopadre = obj.codigo;
 			$scope.objeto.npnombrepadre = obj.nombre;
 			$scope.objeto.nptipopadrenombre = obj.nptipopadrenombre;
-			$scope.objetp.divisiongeograficapadreid=obj.id;
+			$scope.objeto.divisiongeograficapadreid=obj.id;
 			
 		}, function() {
 			
@@ -131,17 +131,17 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 		                return;
 
 		            } else {
-		                
+		                console.log($scope.objeto);
 		            	divisionGeograficaFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Division Geogr�fica!", "Registro guardado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Division Geográfica!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Division Geogr�fica!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Division Geográfica!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
