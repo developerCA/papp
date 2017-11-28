@@ -14,6 +14,7 @@ app.controller('ModalDivisionController', ["$scope", "$uibModalInstance", "tipo"
 	$scope.consultar=function(){
 		
 		$scope.data=[];
+		
 		divisionGeograficaFactory.traerDivisionesTipo(pagina,tipo).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
