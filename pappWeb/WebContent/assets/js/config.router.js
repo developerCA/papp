@@ -409,7 +409,11 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.estructuraorganica', {
         url: "/estructuraorganica",
         templateUrl: "assets/views/papp/estructuraorganica.html",
-        resolve: loadSequence('ngTable','EstructuraOrganicaCtrl','ModalInstitucionCtrl','EstructuraOrganicaFactory','InstitucionFactory','UnidadFactory'),
+        resolve: loadSequence(
+        		'ngTable','EstructuraOrganicaCtrl','EstructuraOrganicaFactory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalUnidadCtrl','UnidadFactory'
+		),
         title: 'Estructura Org�nica',
         ncyBreadcrumb: {
             label: 'Estructura Org�nica'

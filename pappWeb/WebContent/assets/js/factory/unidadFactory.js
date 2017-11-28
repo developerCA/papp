@@ -24,6 +24,15 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			  
 		},
 		
+		traerUnidadArbol : function(id) {
+			  
+			var url = "estructuraorganica/unidadarbol/"+id+"/0/0";
+		    console.log(url);
+		    return Restangular.allUrl(url).customGET();
+			  
+		},
+		
+		
 		traerUnidadesFiltro : function(pagina,nombre,codigo,estado) {
 			  
 			var url = "estructuraorganica/consultar/unidad/pagina="+pagina;
@@ -49,7 +58,9 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 		
-		
-	
+		guardarArbol:function(objeto){
+			var url = "estructuraorganica/unidadarbol/";
+			return Restangular.allUrl(url).customPOST(objeto);
+		},
 	}
 } ]);

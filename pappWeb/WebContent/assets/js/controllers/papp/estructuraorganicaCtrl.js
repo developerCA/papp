@@ -15,7 +15,10 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.objeto={estado:null};
 	$scope.tabactivo=0;
 	$scope.arbol={};
-	
+	$scope.objetoUnidad={};
+	$scope.dUnidad=false;
+	$scope.dUnidadEditar=false;
+
 	var pagina = 1;
 	
 	$scope.consultar=function(){
@@ -66,7 +69,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.consultar();
 		
 	};
-	
+
 	$scope.nuevo=function(){
 		$scope.objeto={id:null,estado:null};
 		$scope.edicion=true;
@@ -88,40 +91,98 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		})
 	};
 
-	$scope.editarUnidad=function(id){
+	$scope.nuevaUnidad=function(){
+		$scope.objeto={id:null,estado:null};
+		$scope.dUnidad=false;
+		$scope.dUnidadEditar=true;
+	}
+
+	$scope.mostrarUnidad=function(id){
 		$scope.estructuraSeleccionada=id;
 		$scope.tabactivo=1;
 		$scope.edicion=true;
-		
+		$scope.dUnidad=true;
+
 		unidadFactory.traerUnidadesArbol(pagina,$scope.estructuraSeleccionada,'A').then(function(resp){
 			$scope.arbol = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 			console.log($scope.arbol);
 		})
 	};
-	
+
 	$scope.editarEmpleados=function(id){
 		$scope.estructuraSeleccionada=id;
 		$scope.tabactivo=2;
 		$scope.edicion=true;
-		
 	}
 
 	$scope.treeOptions = {
-		    accept: function(sourceNodeScope, destNodesScope, destIndex) {
-		      return true;
-		    },
+	    accept: function(sourceNodeScope, destNodesScope, destIndex) {
+	      return true;
+	    },
 	};
 	
 	$scope.modificarUnidad=function(node){
-		console.log(node);
+		unidadFactory.traerUnidadArbol(
+				node.unidadarbolunidadid
+			).then(function(resp){
+				if (resp.estado)
+					$scope.objetoUnidad=resp.json.unidad;
+				$scope.edicion=true;
+				console.log(resp.json);
+				$scope.dUnidad=false;
+				$scope.dUnidadEditar=true;
+		})
 	};
-	
+
+	$scope.formUnidad = {
+        submit: function (formUnidad) {
+			console.log("formUnidad");
+            var firstError = null;
+            if (formUnidad.$invalid) {
+                var field = null, firstError = null;
+                for (field in formUnidad) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !formUnidad[field].$valid) {
+                            firstError = formUnidad[field].$name;
+                        }
+                        if (formUnidad[field].$pristine) {
+                        	formUnidad[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+            	unidadFactory.guardarArbol($scope.objeto).then(function(resp){
+            		if (resp.estado){
+            			formUnidad.$setPristine(true);
+    					$scope.dUnidad=true;
+    					$scope.dUnidadEditar=false;
+	 		            $scope.objetUnidado={};
+	 		            $scope.limpiarUnidad();
+	 		            SweetAlert.swal("Unidad!", "Registro registrado satisfactoriamente!", "success");
+        			}else{
+	 		            SweetAlert.swal("Unidad!", resp.mensajes.msg, "error");
+        			}
+        		})
+            }
+        },
+        reset: function (formUnidad) {
+            $scope.myModel = angular.copy($scope.master);
+            formUnidad.$setPristine(true);
+			$scope.dUnidad=true;
+			$scope.dUnidadEditar=false;
+            $scope.objetoUnidad={};
+        }
+	};
+
 	$scope.mantenerPlaza=function(node){
 		console.log(node);
 	};
 	
 	$scope.agregarUnidadHija=function(node){
 		console.log(node);
+		
 	};
 	
 	$scope.cargarHijos=function(node){
@@ -150,7 +211,6 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.objeto.npcodigoinstitucion = obj.codigo;
 			$scope.objeto.npnombreinstitucion = obj.nombre;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
@@ -166,34 +226,57 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.objeto.estructuraorganicagradoid = obj.id;
 			$scope.objeto.npnombregrado = obj.nombre;
 		}, function() {
-			console.log("close modal");
+		});
+	};
+
+	$scope.abrirCodigoPresupuestario = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalUnidad.html',
+			controller : 'ModalUnidadController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.estructuraorganicagradoid = obj.id;
+			$scope.objeto.npcodigopresupuesto = obj.codigopresup;
+			$scope.objeto.npnombre = obj.nombre;
+		}, function() {
+		});
+	};
+
+	$scope.abrirNivelOrganicoCodigo = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalUnidad.html',
+			controller : 'ModalUnidadController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.estructuraorganicagradoid = obj.id;
+			$scope.objeto.npcodigopresupuesto = obj.codigopresup;
+			$scope.objeto.npnombre = obj.nombre;
+		}, function() {
 		});
 	};
 
 	$scope.form = {
-
 		        submit: function (form) {
 		            var firstError = null;
 		            if (form.$invalid) {
-
 		                var field = null, firstError = null;
 		                for (field in form) {
 		                    if (field[0] != '$') {
 		                        if (firstError === null && !form[field].$valid) {
 		                            firstError = form[field].$name;
 		                        }
-
 		                        if (form[field].$pristine) {
 		                            form[field].$dirty = true;
 		                        }
 		                    }
 		                }
-
 		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
 		                return;
-
 		            } else {
-		                
 		            	estructuraorganicaFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
@@ -201,24 +284,17 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
 			 		             SweetAlert.swal("Grado - Fuerza!", "Registro registrado satisfactoriamente!", "success");
-	 
 		        			 }else{
 			 		             SweetAlert.swal("Grado - Fuerza!", resp.mensajes.msg, "error");
-		        				 
 		        			 }
-		        			
 		        		})
-		        		
 		            }
-
 		        },
 		        reset: function (form) {
-
 		            $scope.myModel = angular.copy($scope.master);
 		            form.$setPristine(true);
 		            $scope.edicion=false;
 		            $scope.objeto={};
-
 		        }
     };
 } ]);
