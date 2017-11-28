@@ -269,7 +269,7 @@ public class EstructuraorganicaController {
 			//Unidad arbol
 			else if(clase.equals("unidadarbol")){
 				UnidadarbolTO unidadarbolTO = UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolTO(id);
-				jsonObject.put("unidadarbol", (JSONObject)JSONSerializer.toJSON(unidadarbolTO,unidadarbolTO.getJsonConfig()));
+				jsonObject.put("unidadarbol", (JSONObject)JSONSerializer.toJSON(unidadarbolTO,unidadarbolTO.getJsonConfigedit()));
 			}
 
 			//Unidad arbol plaza

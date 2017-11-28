@@ -134,15 +134,22 @@ public class AdministracionController {
 				//pregunto si ya existe el nombre en el nivel actual
 				DivisiongeograficaTO divisiongeograficaTO2=new DivisiongeograficaTO();
 				divisiongeograficaTO2.setCodigo(divisiongeograficaTO.getCodigo());
+				log.println("divisiongeografica codigo: " + divisiongeograficaTO2.getCodigo());
 				Collection<DivisiongeograficaTO> divisiongeograficaTOs=UtilSession.adminsitracionServicio.transObtenerDivisiongeografica(divisiongeograficaTO2);
-				log.println("divisiones... " + divisiongeograficaTOs.toString());
+				log.println("divisiones... " + divisiongeograficaTOs.size());
 				boolean grabar=true;
 				if(divisiongeograficaTOs.size()>0){
-					divisiongeograficaTO2=(DivisiongeograficaTO)divisiongeograficaTOs.iterator().next();
-					if((divisiongeograficaTO.getId()!=null && divisiongeograficaTO.getId().longValue()!=0) && divisiongeograficaTO2.getId().longValue()!=divisiongeograficaTO.getId().longValue())
-						grabar=false;
-					else if((divisiongeograficaTO.getId()==null || (divisiongeograficaTO.getId()!=null && divisiongeograficaTO2.getId().longValue()!=divisiongeograficaTO.getId().longValue())) && divisiongeograficaTO.getCodigo()!=null && divisiongeograficaTO2.getCodigo().equals(divisiongeograficaTO.getCodigo()))
-						grabar=false;
+					//divisiongeograficaTO2=(DivisiongeograficaTO)divisiongeograficaTOs.iterator().next();
+					for(DivisiongeograficaTO divisiongeograficaTO3:divisiongeograficaTOs) {
+						if((divisiongeograficaTO.getId()!=null && divisiongeograficaTO.getId().longValue()!=0) && divisiongeograficaTO3.getId().longValue()!=divisiongeograficaTO.getId().longValue() && divisiongeograficaTO3.getCodigo().equals(divisiongeograficaTO.getCodigo())) {
+							log.println("entra por 1");
+							grabar=false;
+						}
+						else if((divisiongeograficaTO.getId()==null || (divisiongeograficaTO.getId()!=null && divisiongeograficaTO3.getId().longValue()!=divisiongeograficaTO.getId().longValue())) && divisiongeograficaTO.getCodigo()!=null && divisiongeograficaTO3.getCodigo().equals(divisiongeograficaTO.getCodigo())) {
+							log.println("entra por 2");
+							grabar=false;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
