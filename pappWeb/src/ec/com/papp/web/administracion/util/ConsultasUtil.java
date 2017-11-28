@@ -944,6 +944,7 @@ public class ConsultasUtil {
 	public static JSONObject consultaSubitemPaginado(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
 		String campo="";
 		SubitemTO subitemTO=new SubitemTO();
+		ItemTO itemTO=new ItemTO();
 		try{
 			int pagina=1;
 			if(parameters.get("pagina")!=null)		
@@ -970,9 +971,12 @@ public class ConsultasUtil {
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				subitemTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals("")){
-				ItemTO itemTO=new ItemTO();
 				itemTO.setItemejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-				subitemTO.setItem(itemTO);
+				log.println("va a consultar por ejerciciofiscal: " + itemTO.getItemejerciciofiscalid());
+			}	
+			if(parameters.get("itemNombre")!=null && !parameters.get("itemNombre").equals("")){
+				itemTO.setNombre(parameters.get("itemNombre"));
+				log.println("va a consultar por ejerciciofiscal: " + itemTO.getItemejerciciofiscalid());
 			}	
 			if(parameters.get("itemunidadid")!=null && !parameters.get("itemunidadid").equals("")){
 				log.println("se envio el itemunidad");
@@ -983,7 +987,7 @@ public class ConsultasUtil {
 				subitemTO.setSubitemitemid(Long.valueOf(parameters.get("itemunidadid")));
 			}
 			subitemTO.setUnidadmedida(new UnidadmedidaTO());
-			subitemTO.setItem(new ItemTO());
+			subitemTO.setItem(itemTO);
 			SearchResultTO<SubitemTO> resultado=UtilSession.adminsitracionServicio.transObtenerSubitemPaginado(subitemTO);
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
@@ -1550,6 +1554,8 @@ public class ConsultasUtil {
 			GrupoTO grupoTO=new GrupoTO();
 			if(parameters.get("nombregrupo")!=null && !parameters.get("nombregrupo").equals(""))
 				grupoTO.setNombre(parameters.get("nombregrupo"));
+			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
+				gradoTO.setSigla(parameters.get("sigla"));
 			gradoTO.setGrupo(grupoTO);
 //			SearchResultTO<GradoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradoPaginado(gradoTO);
 			Collection<GradoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrado(gradoTO);
