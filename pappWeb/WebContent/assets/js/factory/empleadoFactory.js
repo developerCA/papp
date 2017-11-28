@@ -17,7 +17,7 @@ app.factory("empleadosFactory", [ "Restangular", function(Restangular) {
 			var url = "administrar/consultar/empleado/pagina="+pagina;
 
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;
-			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;
+			if(nombre!=null && nombre != "") url += "&nombremostrado=" + nombre;
 			if(estado!=null && estado != "") url += "&estado=" + estado;
 			 
 			return Restangular.allUrl(url).getList();

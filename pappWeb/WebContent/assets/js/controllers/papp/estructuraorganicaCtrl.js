@@ -122,8 +122,9 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	};
 	
 	$scope.modificarUnidad=function(node){
+		console.log(node);
 		unidadFactory.traerUnidadArbol(
-				node.unidadarbolunidadid
+				node.id
 			).then(function(resp){
 				if (resp.estado)
 					$scope.objetoUnidad=resp.json.unidad;

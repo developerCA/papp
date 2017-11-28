@@ -61,7 +61,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
 		$scope.ordenFiltro=null;
-		
+		$scope.codigoFiltro=null;
 		
 		$scope.consultar();
 		

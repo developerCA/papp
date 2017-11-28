@@ -50,7 +50,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     $scope.filtrar = function () {
 
         $scope.data = [];
-        subitemsFactory.traerItemsFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado, $scope.tipo,$rootScope.ejefiscal).then(function (resp) {
+        subitemsFactory.traerItemsFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado, $scope.tipo,$rootScope.ejefiscal,$scope.codigoIncop,$scope.itemNombre).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         })
@@ -69,6 +69,8 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
         $scope.padre = null;
         $scope.tipo = null;
         $scope.estado = null;
+        $scope.codigoIncop=null;
+        $scope.itemNombre=null;
         $scope.consultar();
     };
 
