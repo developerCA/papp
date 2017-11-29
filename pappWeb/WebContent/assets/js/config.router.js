@@ -377,7 +377,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.institucion', {
         url: "/institucion",
         templateUrl: "assets/views/papp/institucion.html",
-        resolve: loadSequence('ngTable','InstitucionCtrl','InstitucionFactory'),
+        resolve: loadSequence(
+    		'ngTable','InstitucionCtrl','InstitucionFactory',
+    		'ModalDivisionGeograficaCtrl','DivisionGeograficaFactory'
+		),
         title: 'Instituci&otilde;n',
         ncyBreadcrumb: {
             label: 'Institución'
@@ -412,7 +415,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence(
         		'ngTable','EstructuraOrganicaCtrl','EstructuraOrganicaFactory',
         		'ModalInstitucionCtrl','InstitucionFactory',
-        		'ModalUnidadCtrl','UnidadFactory'
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalNivelOrganicoCtrl','NivelOrganicoFactory'
 		),
         title: 'Estructura Org�nica',
         ncyBreadcrumb: {

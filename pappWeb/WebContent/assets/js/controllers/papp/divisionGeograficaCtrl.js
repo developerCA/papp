@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","divisionGeograficaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,divisionGeograficaFactory) {
+app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","divisionGeograficaFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,divisionGeograficaFactory) {
     
 	
 	$scope.nombreFiltro=null;

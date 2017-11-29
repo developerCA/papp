@@ -18,6 +18,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.objetoUnidad={};
 	$scope.dUnidad=false;
 	$scope.dUnidadEditar=false;
+	$scope.dEmpleados=false;
+	$scope.dEmpleadosEditar=false;
 
 	var pagina = 1;
 	
@@ -92,27 +94,48 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	};
 
 	$scope.nuevaUnidad=function(){
-		$scope.objeto={id:null,estado:null};
+		$scope.objetoUnidad={id:null,unidadarbolerganicaid:$scope.estructuraSeleccionada,estado:"A"};
 		$scope.dUnidad=false;
 		$scope.dUnidadEditar=true;
+		$scope.nuevoar=true;
 	}
+	
+	$scope.agregarUnidadHija=function(node){
+		console.log(node.unidadarbolerganicaid);
+		console.log(node);
+		$scope.objetoUnidad={id:null,unidadarbolerganicaid:node.unidadarbolerganicaid,estado:"A"};
+		$scope.dUnidad=false;
+		$scope.dUnidadEditar=true;
+		$scope.nuevoar=true;
+	};
 
 	$scope.mostrarUnidad=function(id){
 		$scope.estructuraSeleccionada=id;
 		$scope.tabactivo=1;
 		$scope.edicion=true;
 		$scope.dUnidad=true;
+		$scope.nuevoar=false;
 
 		unidadFactory.traerUnidadesArbol(pagina,$scope.estructuraSeleccionada,'A').then(function(resp){
 			$scope.arbol = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
-			console.log($scope.arbol);
+			//console.log($scope.arbol);
 		})
 	};
 
-	$scope.editarEmpleados=function(id){
+//** Plaza Empleados
+	$scope.mostrarEmpleados=function(id){
 		$scope.estructuraSeleccionada=id;
 		$scope.tabactivo=2;
 		$scope.edicion=true;
+		$scope.dEmpleados=true;
+		console.log("aqui");
+		console.log(id)
+
+		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionada,'A').then(function(resp){
+			$scope.data = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
+			console.log("dataPlazaEmpleados");
+			console.log($scope.data);
+		})
 	}
 
 	$scope.treeOptions = {
@@ -127,7 +150,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 				node.id
 			).then(function(resp){
 				if (resp.estado)
-					$scope.objetoUnidad=resp.json.unidad;
+					$scope.objetoUnidad=resp.json.unidadarbol;
 				$scope.edicion=true;
 				console.log(resp.json);
 				$scope.dUnidad=false;
@@ -154,7 +177,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	unidadFactory.guardarArbol($scope.objeto).then(function(resp){
+            	unidadFactory.guardarArbol($scope.objetoUnidad).then(function(resp){
             		if (resp.estado){
             			formUnidad.$setPristine(true);
     					$scope.dUnidad=true;
@@ -175,15 +198,6 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.dUnidadEditar=false;
             $scope.objetoUnidad={};
         }
-	};
-
-	$scope.mantenerPlaza=function(node){
-		console.log(node);
-	};
-	
-	$scope.agregarUnidadHija=function(node){
-		console.log(node);
-		
 	};
 	
 	$scope.cargarHijos=function(node){
@@ -238,24 +252,24 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.estructuraorganicagradoid = obj.id;
-			$scope.objeto.npcodigopresupuesto = obj.codigopresup;
-			$scope.objeto.npnombre = obj.nombre;
+			$scope.objetoUnidad.unidadarbolunidadid = obj.id;
+			$scope.objetoUnidad.npcodigounidad = obj.codigopresup;
+			$scope.objetoUnidad.npnombreunidad = obj.nombre;
 		}, function() {
 		});
 	};
 
 	$scope.abrirNivelOrganicoCodigo = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalUnidad.html',
-			controller : 'ModalUnidadController',
+			templateUrl : 'modalNivelOrganico.html',
+			controller : 'ModalNivelOrganicoController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.estructuraorganicagradoid = obj.id;
-			$scope.objeto.npcodigopresupuesto = obj.codigopresup;
-			$scope.objeto.npnombre = obj.nombre;
+			$scope.objetoUnidad.unidadarbolnorganid = obj.id;
+			$scope.objetoUnidad.npcodigonivel = obj.codigo;
+			$scope.objetoUnidad.npnombrenivel = obj.nombre;
 		}, function() {
 		});
 	};

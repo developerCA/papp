@@ -1,8 +1,8 @@
 'use strict';
 
-app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$uibModalInstance","pais","provincia","SweetAlert","$filter", "ngTableParams","divisionGeograficaFactory",
-	function($scope,$rootScope,$uibModalInstance,pais,provincia,SweetAlert,$filter, ngTableParams,divisionGeograficaFactory) {
-	
+app.controller('ModalNivelOrganicoController', [ "$scope","$rootScope","$uibModalInstance","$filter", "ngTableParams","nivelOrganicoFactory",
+	function($scope,$rootScope,$uibModalInstance,$filter, ngTableParams,nivelOrganicoFactory) {
+
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.estadoFiltro=null;
@@ -14,42 +14,14 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		divisionGeograficaFactory.traerDivisiones(pagina).then(function(resp){
+		nivelOrganicoFactory.traerNiveles(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-			
+				
 		})
 	
 	};
-
-	$scope.consultarPaises=function(){
-		
-		$scope.data=[];
-		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'A',null).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-
-	$scope.consultarProvincias=function(){
-		$scope.data=[];
-		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'P',pais).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-
-	$scope.consultarCantones=function(){
-		$scope.data=[];
-		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'C',provincia).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-
+	
 	$scope.$watch('data', function() {
 		
 		$scope.tableParams = new ngTableParams({
@@ -75,7 +47,7 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		divisionGeograficaFactory.traerDivisionesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		nivelOrganicoFactory.traerNivelesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -90,12 +62,6 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 		$scope.consultar();
 		
 	};
-	
-	$scope.nuevo=function(){
-		$scope.objeto={id:null,estado:'A'};
-		
-		$scope.edicion=true;
-	}
 
 	$scope.seleccionar=function(obj){
 		$uibModalInstance.close(obj);		

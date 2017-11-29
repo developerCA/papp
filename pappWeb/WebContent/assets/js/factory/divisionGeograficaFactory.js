@@ -29,6 +29,17 @@ app.factory("divisionGeograficaFactory", [ "Restangular", function(Restangular) 
 			return Restangular.allUrl(url).getList();
 			  
 		},
+
+		traerDivisionesFullFiltro : function(pagina,tipo,nombrepadre) {
+			  
+			var url = "administrar/consultar/divisiongeografica/pagina="+pagina;
+
+			if(tipo!=null && tipo != "") url += "&tipo=" + tipo;	
+			if(nombrepadre!=null && nombrepadre != "" ) url += "&nombrepadre=" + nombrepadre;
+			 
+			return Restangular.allUrl(url).getList();
+			  
+		},
 		
 		traerDivisionesTipoFiltro : function(pagina,tipo,nombre,codigo,estado) {
 			  

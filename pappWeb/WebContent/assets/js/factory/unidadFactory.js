@@ -11,11 +11,10 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			  return Restangular.allUrl("estructuraorganica/consultar/unidad/pagina="+pagina).getList();
 			  
 		},
-		
+
+//** Unidades Arbol
 		traerUnidadesArbol : function(pagina,estructuraorganica,estado) {
-			 
 			  return Restangular.allUrl("estructuraorganica/consultar/unidadarbol/pagina="+pagina+"&unidadarbolerganicaid="+estructuraorganica+"&estado="+estado).getList();
-			  
 		},
 		
 		traerUnidadesArbolhijos : function(pagina,estructuraorganica,padre,estado) {
@@ -32,7 +31,15 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			  
 		},
 		
-		
+//** Plaza Empleo
+		traerUnidadesArbolPlazaEmpleado : function(pagina,estructuraorganica,estado) {
+			  return Restangular.allUrl(
+					  "estructuraorganica/consultar/unidadarboldetail/pagina="+pagina
+					  +"&unidadarbolerganicaid="+estructuraorganica
+					  +"&estado="+estado
+			  ).getList();
+		},
+
 		traerUnidadesFiltro : function(pagina,nombre,codigo,estado) {
 			  
 			var url = "estructuraorganica/consultar/unidad/pagina="+pagina;
