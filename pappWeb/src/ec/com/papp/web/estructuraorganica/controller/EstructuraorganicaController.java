@@ -22,7 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import ec.com.papp.administracion.to.ClasificacionTO;
 import ec.com.papp.administracion.to.EmpleadoTO;
+import ec.com.papp.administracion.to.EspecialidadTO;
+import ec.com.papp.administracion.to.FuerzaTO;
+import ec.com.papp.administracion.to.GradoTO;
+import ec.com.papp.administracion.to.GradofuerzaTO;
 import ec.com.papp.estructuraorganica.id.InstitucionentidadID;
 import ec.com.papp.estructuraorganica.id.UnidadarbolplazaID;
 import ec.com.papp.estructuraorganica.id.UnidadarbolplazaempleadoID;
@@ -175,21 +180,23 @@ public class EstructuraorganicaController {
 			//Unidad arbol plaza
 			else if(clase.equals("unidadarbolplaza")){
 				UnidadarbolTO unidadarbolTO = gson.fromJson(new StringReader(objeto), UnidadarbolTO.class);
-				accion = (unidadarbolTO.getId()==null)?"crear":"actualizar";
-				UtilSession.estructuraorganicaServicio.transCrearModificarUnidadarbol(unidadarbolTO);
-				id=unidadarbolTO.getId().toString();
-				jsonObject.put("unidadarbolplaza", (JSONObject)JSONSerializer.toJSON(unidadarbolTO,unidadarbolTO.getJsonConfig()));
+				//accion = (unidadarbolTO.getId()==null)?"crear":"actualizar";
+				UtilSession.estructuraorganicaServicio.transCrearModificarUnidadarbolplaza(unidadarbolTO.getDetails(), unidadarbolTO.getId());
+				//id=unidadarbolTO.getId().toString();
+				//jsonObject.put("unidadarbolplaza", (JSONObject)JSONSerializer.toJSON(unidadarbolTO,unidadarbolTO.getJsonConfig()));
 			}
 
 			//Unidad arbol plaza empleado
 			else if(clase.equals("unidadarbolplazaempleado")){
-				UnidadarbolplazaempleadoTO unidadarbolplazaempleadoTO = gson.fromJson(new StringReader(objeto), UnidadarbolplazaempleadoTO.class);
-				unidadarbolplazaempleadoTO.setFechafin(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechafin()));
-				unidadarbolplazaempleadoTO.setFechainicio(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechainicio()));
-				accion = (unidadarbolplazaempleadoTO.getId()==null)?"crear":"actualizar";
-				UtilSession.estructuraorganicaServicio.transCrearModificarUnidadarbolplazaempleado(unidadarbolplazaempleadoTO);
-				id=unidadarbolplazaempleadoTO.getId().toString();
-				jsonObject.put("unidadarbolplazaempleado", (JSONObject)JSONSerializer.toJSON(unidadarbolplazaempleadoTO,unidadarbolplazaempleadoTO.getJsonConfig()));
+				UnidadarbolplazaTO unidadarbolplazaTO = gson.fromJson(new StringReader(objeto), UnidadarbolplazaTO.class);
+				for(UnidadarbolplazaempleadoTO unidadarbolplazaempleadoTO:unidadarbolplazaTO.getDetails()) {
+					unidadarbolplazaempleadoTO.setFechafin(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechafin()));
+					unidadarbolplazaempleadoTO.setFechainicio(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechainicio()));
+				}
+				//accion = (unidadarbolplazaempleadoTO.getId()==null)?"crear":"actualizar";
+				UtilSession.estructuraorganicaServicio.transCrearModificarUnidadarbolplazaempleado(unidadarbolplazaTO.getDetails(), unidadarbolplazaTO.getId().getId(), unidadarbolplazaTO.getId().getPlazaid());
+				//id=unidadarbolplazaempleadoTO.getId().toString();
+				//jsonObject.put("unidadarbolplazaempleado", (JSONObject)JSONSerializer.toJSON(unidadarbolplazaempleadoTO,unidadarbolplazaempleadoTO.getJsonConfig()));
 			}
 
 			//Unidad institucion
@@ -269,6 +276,22 @@ public class EstructuraorganicaController {
 			//Unidad arbol
 			else if(clase.equals("unidadarbol")){
 				UnidadarbolTO unidadarbolTO = UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolTO(id);
+			}
+			
+			//Unidad arbol
+			else if(clase.equals("unidadarboldetail")){
+				UnidadarbolTO unidadarbolTO = UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolTO(id);
+				//Obtengo los unidadarbolplazaid
+				UnidadarbolplazaTO unidadarbolplazaTO=new UnidadarbolplazaTO();
+				unidadarbolplazaTO.getId().setId(id);
+				unidadarbolplazaTO.setClasificacion(new ClasificacionTO());
+				unidadarbolplazaTO.setEspecialidad(new EspecialidadTO());
+				GradofuerzaTO gradofuerzaTO=new GradofuerzaTO();
+				gradofuerzaTO.setGrado(new GradoTO());
+				gradofuerzaTO.setFuerza(new FuerzaTO());
+				unidadarbolplazaTO.setGradofuerza(gradofuerzaTO);
+				Collection<UnidadarbolplazaTO> unidadarbolplazaTOs=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplaza(unidadarbolplazaTO);
+				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(unidadarbolplazaTOs,unidadarbolplazaTO.getJsonConfig()));
 				jsonObject.put("unidadarbol", (JSONObject)JSONSerializer.toJSON(unidadarbolTO,unidadarbolTO.getJsonConfigedit()));
 			}
 
@@ -277,6 +300,12 @@ public class EstructuraorganicaController {
 				UnidadarbolplazaID unidadarbolplazaID=new UnidadarbolplazaID(id, id2);
 				UnidadarbolplazaTO unidadarbolplazaTO = UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplazaTO(unidadarbolplazaID);
 				jsonObject.put("unidadarbolplaza", (JSONObject)JSONSerializer.toJSON(unidadarbolplazaTO,unidadarbolplazaTO.getJsonConfig()));
+				//traigo las unidadarbolplazaempleado
+				UnidadarbolplazaempleadoTO unidadarbolplazaempleadoTO=new UnidadarbolplazaempleadoTO();
+				unidadarbolplazaempleadoTO.getId().setId(id);
+				unidadarbolplazaempleadoTO.getId().setPlazaid(id2);
+				Collection<UnidadarbolplazaempleadoTO> unidadarbolplazaempleadoTOs=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplazaempleado(unidadarbolplazaempleadoTO);
+				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(unidadarbolplazaempleadoTOs,unidadarbolplazaempleadoTO.getJsonConfig()));
 			}
 
 			//Unidad arbol plaza empleado
