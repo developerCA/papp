@@ -74,7 +74,7 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 	$scope.editar=function(id){
 		
 		cargoEscalaFactory.traerObj(id).then(function(resp){
-			console.clear();
+			
 			console.log(resp.json.cargoescala);
 			if (resp.estado){
 				$scope.objeto=resp.json.cargoescala;
@@ -113,7 +113,9 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 			$scope.objeto.npcodigocargo = obj.codigo;
-			$scope.objeto.npnombrecargo = obj.nombre;			
+			$scope.objeto.npnombrecargo = obj.nombre;
+			$scope.objeto.cecargoid = obj.id;
+			
 		}, function() {
 			
 		});

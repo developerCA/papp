@@ -100,7 +100,7 @@
 										<span class="symbol required"></span>
 									</label>
 									<input type="text" placeholder="Ingrese el a&ntilde;o fiscal"
-										class="form-control" name="anio" required
+										class="form-control" name="anio" ng-disabled="objeto.id !=null" required
 										ng-pattern="/^[0-9]*$/" ng-model="objeto.anio" ng-minlength="4"
 										ng-maxlength="4">
 									<span class="error text-small block"
