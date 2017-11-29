@@ -35,6 +35,5 @@ app.factory("estructuraorganicaFactory", [ "Restangular", function(Restangular) 
 			var url = "estructuraorganica/estructuraorganica/";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
-
 	}
 } ]);
