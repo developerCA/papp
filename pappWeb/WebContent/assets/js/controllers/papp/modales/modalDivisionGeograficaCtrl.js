@@ -1,28 +1,55 @@
 'use strict';
 
-app.controller('ModalDivisionController', ["$scope", "$uibModalInstance", "tipo","$filter", "ngTableParams","divisionGeograficaFactory",
-	function($scope, $uibModalInstance, tipo,$filter, ngTableParams,divisionGeograficaFactory) {
-
+app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$uibModalInstance","pais","provincia","SweetAlert","$filter", "ngTableParams","divisionGeograficaFactory",
+	function($scope,$rootScope,$uibModalInstance,pais,provincia,SweetAlert,$filter, ngTableParams,divisionGeograficaFactory) {
 	
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.estadoFiltro=null;
-	
+	$scope.edicion=false;
+	$scope.objeto={};
 	
 	var pagina = 1;
 	
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		
-		divisionGeograficaFactory.traerDivisionesTipo(pagina,tipo).then(function(resp){
+		divisionGeograficaFactory.traerDivisiones(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 			
 		})
 	
 	};
-	
+
+	$scope.consultarPaises=function(){
+		
+		$scope.data=[];
+		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'A',null).then(function(resp){
+			
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
+
+	$scope.consultarProvincias=function(){
+		$scope.data=[];
+		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'P',pais).then(function(resp){
+			
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
+
+	$scope.consultarCantones=function(){
+		$scope.data=[];
+		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'C',provincia).then(function(resp){
+			
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
+
 	$scope.$watch('data', function() {
 		
 		$scope.tableParams = new ngTableParams({
@@ -48,7 +75,7 @@ app.controller('ModalDivisionController', ["$scope", "$uibModalInstance", "tipo"
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		divisionGeograficaFactory.traerDivisionesTipoFiltro(pagina,tipo,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		divisionGeograficaFactory.traerDivisionesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -64,16 +91,17 @@ app.controller('ModalDivisionController', ["$scope", "$uibModalInstance", "tipo"
 		
 	};
 	
+	$scope.nuevo=function(){
+		$scope.objeto={id:null,estado:'A'};
 		
+		$scope.edicion=true;
+	}
+
 	$scope.seleccionar=function(obj){
-		$uibModalInstance.close(obj);
-		
+		$uibModalInstance.close(obj);		
 	};
 	
 	$scope.cancelar = function() {
-			$uibModalInstance.dismiss('cancel');
+		$uibModalInstance.dismiss('cancel');
 	};
-
-
-
 }]);

@@ -86,20 +86,69 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 		$scope.objetolista.splice(index,1);
 	}
 
-	$scope.abrirPerfilesPermisos = function(index) {
-		//console.log("aqui");
+	$scope.abrirNombrePais = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalPerfilesPermisos.html',
-			controller : 'PerfilesPermisosController',
-			size : 'lg'
+			templateUrl : 'modalPaises.html',
+			controller : 'ModalDivisionGeograficaController',
+			size : 'lg',
+			resolve: {
+				pais: function() {
+					return $scope.objetolista[index].npnombrepais;
+				},
+				provincia: function() {
+					return $scope.objetolista[index].npnombreprovincia;
+				}
+			}
 		});
-		/* modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objetolista[index].id.permisoid = obj.id;
-			$scope.objetolista[index].nppermiso=obj.nombre;
+		console.log('lista antes');
+		console.log($scope.objetolista[index]);
+		modalInstance.result.then(function(obj) {
+			$scope.objetolista[index].institucionentpaisid = obj.id;
+			$scope.objetolista[index].npnombrepais = obj.nombre;
 		}, function() {
-			console.log("close modal");
-		}); */
+		});
+	};
+
+	$scope.abrirNombreProvincia = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalProvincias.html',
+			controller : 'ModalDivisionGeograficaController',
+			size : 'lg',
+			resolve: {
+				pais: function() {
+					return $scope.objetolista[index].npnombrepais;
+				},
+				provincia: function() {
+					return $scope.objetolista[index].npnombreprovincia;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			$scope.objetolista[index].institucionentprovinciaid = obj.id;
+			$scope.objetolista[index].npnombreprovincia = obj.nombre;
+		}, function() {
+		});
+	};
+
+	$scope.abrirNombreCanton = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalCantones.html',
+			controller : 'ModalDivisionGeograficaController',
+			size : 'lg',
+			resolve: {
+				pais: function() {
+					return $scope.objetolista[index].npnombrepais;
+				},
+				provincia: function() {
+					return $scope.objetolista[index].npnombreprovincia;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			$scope.objetolista[index].institucionentcantonid = obj.id;
+			$scope.objetolista[index].npnombrecanton = obj.nombre;
+		}, function() {
+		});
 	};
 
 	$scope.form = {
