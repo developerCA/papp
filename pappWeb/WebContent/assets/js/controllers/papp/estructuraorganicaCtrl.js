@@ -103,7 +103,12 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.agregarUnidadHija=function(node){
 		console.log(node.unidadarbolerganicaid);
 		console.log(node);
-		$scope.objetoUnidad={id:null,unidadarbolerganicaid:node.unidadarbolerganicaid,estado:"A"};
+		$scope.objetoUnidad={
+			id: null,
+			unidadarbolerganicaid: node.unidadarbolerganicaid,
+			unidadarbolpadreid: node.id,
+			estado: "A"
+		};
 		$scope.dUnidad=false;
 		$scope.dUnidadEditar=true;
 		$scope.nuevoar=true;
@@ -183,7 +188,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     					$scope.dUnidad=true;
     					$scope.dUnidadEditar=false;
 	 		            $scope.objetUnidado={};
-	 		            $scope.limpiarUnidad();
+	 		            //$scope.limpiarUnidad();
 	 		            SweetAlert.swal("Unidad!", "Registro registrado satisfactoriamente!", "success");
         			}else{
 	 		            SweetAlert.swal("Unidad!", resp.mensajes.msg, "error");

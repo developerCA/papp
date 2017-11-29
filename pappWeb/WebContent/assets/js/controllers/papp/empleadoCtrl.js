@@ -81,6 +81,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	}
 	
 	$scope.editar=function(id){
+		console.log("Editar empleado");
 		empleadosFactory.traerEmpleadosEditar(id).then(function(resp){
 //console.clear();
 console.log(resp.json);
