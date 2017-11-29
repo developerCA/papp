@@ -396,7 +396,11 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.gradofuerza', {
         url: "/gradofuerza",
         templateUrl: "assets/views/papp/gradofuerza.html",
-        resolve: loadSequence('ngTable','GradoFuerzaCtrl','ModalFuerzaCtrl','ModalGradoCtrl','GradoFuerzaFactory','FuerzaFactory','GradoFactory','GrupoJerarquicoFactory'),
+        resolve: loadSequence(
+    		'ngTable','GradoFuerzaCtrl','ModalFuerzaCtrl',
+    		'ModalGradoCtrl','GradoFuerzaFactory','FuerzaFactory',
+    		'GradoFactory','GrupoJerarquicoFactory','ModalGradoFuerzaSuperiorCtrl'
+		),
         title: 'Grado - Fuerza',
         ncyBreadcrumb: {
             label: 'Grado - Fuerza'
