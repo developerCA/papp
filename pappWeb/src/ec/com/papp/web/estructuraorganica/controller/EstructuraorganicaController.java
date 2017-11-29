@@ -153,7 +153,7 @@ public class EstructuraorganicaController {
 			//Unidad arbol
 			else if(clase.equals("unidadarbol")){
 				UnidadarbolTO unidadarbolTO = gson.fromJson(new StringReader(objeto), UnidadarbolTO.class);
-				unidadarbolTO.setProceso(" ");
+				unidadarbolTO.setProceso("-");
 				accion = (unidadarbolTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
 				UnidadarbolTO unidadarbolTO2=new UnidadarbolTO();
