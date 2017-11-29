@@ -190,7 +190,9 @@ public class EstructuraorganicaController {
 			else if(clase.equals("unidadarbolplazaempleado")){
 				UnidadarbolplazaTO unidadarbolplazaTO = gson.fromJson(new StringReader(objeto), UnidadarbolplazaTO.class);
 				for(UnidadarbolplazaempleadoTO unidadarbolplazaempleadoTO:unidadarbolplazaTO.getDetails()) {
-					unidadarbolplazaempleadoTO.setFechafin(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechafin()));
+					if(unidadarbolplazaempleadoTO.getNpfechafin()!=null)
+						unidadarbolplazaempleadoTO.setFechafin(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechafin()));
+					if(unidadarbolplazaempleadoTO.getNpfechainicio()!=null)
 					unidadarbolplazaempleadoTO.setFechainicio(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechainicio()));
 				}
 				//accion = (unidadarbolplazaempleadoTO.getId()==null)?"crear":"actualizar";
@@ -276,6 +278,7 @@ public class EstructuraorganicaController {
 			//Unidad arbol
 			else if(clase.equals("unidadarbol")){
 				UnidadarbolTO unidadarbolTO = UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolTO(id);
+				jsonObject.put("unidadarbol", (JSONObject)JSONSerializer.toJSON(unidadarbolTO,unidadarbolTO.getJsonConfigedit()));
 			}
 			
 			//Unidad arbol

@@ -241,8 +241,11 @@ public class ConsultasUtil {
 				unidadarbolplazaTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			else
 				unidadarbolplazaTO.setOrderByField(OrderBy.orderAsc(orderBy));
-//			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-//				unidadarbolplazaTO.setNombre(parameters.get("nombre"));
+			if(parameters.get("unidadarbolerganicaid")!=null && !parameters.get("unidadarbolerganicaid").equals("")) {
+				UnidadarbolTO unidadarbolTO=new UnidadarbolTO();
+				unidadarbolTO.setUnidadarbolerganicaid(Long.valueOf(parameters.get("unidadarbolerganicaid")));
+				unidadarbolplazaTO.setUnidadarbol(unidadarbolTO);
+			}
 //			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 //				unidadarbolplazaTO.setEstado(parameters.get("estado"));
 			SearchResultTO<UnidadarbolplazaTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplazaPaginado(unidadarbolplazaTO);
@@ -250,7 +253,7 @@ public class ConsultasUtil {
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());
 			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadarbolplazaTO.getJsonConfig()));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadarbolplazaTO.getJsonConfigconsulta()));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 		}catch (Exception e) {
 			e.printStackTrace();
