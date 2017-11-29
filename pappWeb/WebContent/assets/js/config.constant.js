@@ -176,6 +176,9 @@ app.constant('JS_REQUIRES', {
         'ModalCertificacionesFondoLiquidacionManuaCtrl':'assets/js/controllers/papp/modales/modalCertificacionesFondoLiquidacionManuaCtrl.js',
         'OrdenGastoCtrl':'assets/js/controllers/papp/ordenGastoCtrl.js',
         'OrdenGastoFactory':'assets/js/factory/ordenGastoFactory.js',
+
+//**
+        'ModalNivelOrganicoCtrl':'assets/js/controllers/papp/modales/modalNivelOrganicoCtrl.js',
         
         
     },

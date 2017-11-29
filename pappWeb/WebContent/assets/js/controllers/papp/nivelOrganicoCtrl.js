@@ -1,8 +1,8 @@
 'use strict';
 
-app.controller('NivelOrganicoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","nivelOrganicoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,nivelOrganicoFactory) {
-    
-	
+app.controller('NivelOrganicoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","nivelOrganicoFactory",
+	function($scope,$rootScope,SweetAlert,$filter, ngTableParams,nivelOrganicoFactory) {
+
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.estadoFiltro=null;
@@ -112,10 +112,10 @@ app.controller('NivelOrganicoController', [ "$scope","$rootScope","SweetAlert","
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Nivel orgánico!", "Registro guardado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Nivel orgï¿½nico!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Nivel orgánico!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Nivel orgï¿½nico!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

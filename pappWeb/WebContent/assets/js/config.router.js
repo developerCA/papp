@@ -412,7 +412,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence(
         		'ngTable','EstructuraOrganicaCtrl','EstructuraOrganicaFactory',
         		'ModalInstitucionCtrl','InstitucionFactory',
-        		'ModalUnidadCtrl','UnidadFactory'
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalNivelOrganicoCtrl','NivelOrganicoFactory'
 		),
         title: 'Estructura Org�nica',
         ncyBreadcrumb: {
