@@ -118,9 +118,12 @@ app.controller('GradoFuerzaController', [ "$scope","$rootScope","$uibModal","Swe
 
 	$scope.abrirSuperior = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalGrado.html',
-			controller : 'ModalGradoController',
-			size : 'lg'
+			templateUrl : 'modalGradoFuerzaSuperior.html',
+			controller : 'ModalGradoFuerzaSuperiorController',
+			size : 'lg',
+			resolve: {
+				idfuerza: $scope.objeto.gradofuerzafuerzaid
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);

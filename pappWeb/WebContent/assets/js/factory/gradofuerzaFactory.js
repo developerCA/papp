@@ -10,7 +10,22 @@ app.factory("gradofuerzaFactory", [ "Restangular", function(Restangular) {
 			  return Restangular.allUrl("administrar/consultar/gradofuerza/pagina="+pagina).getList();
 			  
 		},
-		
+
+		traerGradoFuerzaFiltroIdFuerza : function(pagina,idfuerza,codigo,fuerza,grado,padre,estado) {
+			  
+			var url = "administrar/consultar/gradofuerza/pagina="+pagina;
+
+			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
+			if(fuerza!=null && fuerza != "") url += "&npnombrefuerza=" + fuerza;	
+			if(grado!=null && grado != "") url += "&npnombregrado=" + grado;	
+			if(padre!=null && padre != "") url += "&npgrupo=" + padre;	
+			if(estado!=null && estado != "") url += "&estado=" + estado;	
+			if(idfuerza!=null && idfuerza != "") url += "&idfuerza=" + idfuerza;	
+
+			return Restangular.allUrl(url).getList();
+			  
+		},
+
 		traerGradoFuerzaFiltro : function(pagina,codigo,fuerza,grado,padre,estado) {
 			  
 			var url = "administrar/consultar/gradofuerza/pagina="+pagina;
