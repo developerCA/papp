@@ -974,9 +974,8 @@ public class ConsultasUtil {
 				itemTO.setItemejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 				log.println("va a consultar por ejerciciofiscal: " + itemTO.getItemejerciciofiscalid());
 			}	
-			if(parameters.get("itemNombre")!=null && !parameters.get("itemNombre").equals("")){
-				itemTO.setNombre(parameters.get("itemNombre"));
-				log.println("va a consultar por ejerciciofiscal: " + itemTO.getItemejerciciofiscalid());
+			if(parameters.get("itemnombre")!=null && !parameters.get("itemnombre").equals("")){
+				itemTO.setNombre(parameters.get("itemnombre"));
 			}	
 			if(parameters.get("itemunidadid")!=null && !parameters.get("itemunidadid").equals("")){
 				log.println("se envio el itemunidad");

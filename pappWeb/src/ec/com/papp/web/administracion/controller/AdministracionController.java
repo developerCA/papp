@@ -104,6 +104,7 @@ public class AdministracionController {
 			else if(clase.equals("ejerciciofiscal")){
 				EjerciciofiscalTO ejerciciofiscalTO = gson.fromJson(new StringReader(objeto), EjerciciofiscalTO.class);
 				accion = (ejerciciofiscalTO.getId()==null)?"crear":"actualizar";
+				
 				//pregunto si ya existe el nombre en el nivel actual
 				EjerciciofiscalTO ejerciciofiscalTO2=new EjerciciofiscalTO();
 				ejerciciofiscalTO2.setAnio(ejerciciofiscalTO.getAnio());
@@ -131,34 +132,41 @@ public class AdministracionController {
 			else if(clase.equals("divisiongeografica")){
 				DivisiongeograficaTO divisiongeograficaTO = gson.fromJson(new StringReader(objeto), DivisiongeograficaTO.class);
 				accion = (divisiongeograficaTO.getId()==null)?"crear":"actualizar";
-				//pregunto si ya existe el nombre en el nivel actual
-				DivisiongeograficaTO divisiongeograficaTO2=new DivisiongeograficaTO();
-				divisiongeograficaTO2.setCodigo(divisiongeograficaTO.getCodigo());
-				log.println("divisiongeografica codigo: " + divisiongeograficaTO2.getCodigo());
-				Collection<DivisiongeograficaTO> divisiongeograficaTOs=UtilSession.adminsitracionServicio.transObtenerDivisiongeografica(divisiongeograficaTO2);
-				log.println("divisiones... " + divisiongeograficaTOs.size());
-				boolean grabar=true;
-				if(divisiongeograficaTOs.size()>0){
-					//divisiongeograficaTO2=(DivisiongeograficaTO)divisiongeograficaTOs.iterator().next();
-					for(DivisiongeograficaTO divisiongeograficaTO3:divisiongeograficaTOs) {
-						if((divisiongeograficaTO.getId()!=null && divisiongeograficaTO.getId().longValue()!=0) && divisiongeograficaTO3.getId().longValue()!=divisiongeograficaTO.getId().longValue() && divisiongeograficaTO3.getCodigo().equals(divisiongeograficaTO.getCodigo())) {
-							log.println("entra por 1");
-							grabar=false;
-						}
-						else if((divisiongeograficaTO.getId()==null || (divisiongeograficaTO.getId()!=null && divisiongeograficaTO3.getId().longValue()!=divisiongeograficaTO.getId().longValue())) && divisiongeograficaTO.getCodigo()!=null && divisiongeograficaTO3.getCodigo().equals(divisiongeograficaTO.getCodigo())) {
-							log.println("entra por 2");
-							grabar=false;
+				//Si el codigo empieza por el codigo del padre
+				if(divisiongeograficaTO.getCodigo().startsWith(divisiongeograficaTO.getNpcodigopadre())) {
+					//pregunto si ya existe el nombre en el nivel actual
+					DivisiongeograficaTO divisiongeograficaTO2=new DivisiongeograficaTO();
+					divisiongeograficaTO2.setCodigo(divisiongeograficaTO.getCodigo());
+					log.println("divisiongeografica codigo: " + divisiongeograficaTO2.getCodigo());
+					Collection<DivisiongeograficaTO> divisiongeograficaTOs=UtilSession.adminsitracionServicio.transObtenerDivisiongeografica(divisiongeograficaTO2);
+					log.println("divisiones... " + divisiongeograficaTOs.size());
+					boolean grabar=true;
+					if(divisiongeograficaTOs.size()>0){
+						//divisiongeograficaTO2=(DivisiongeograficaTO)divisiongeograficaTOs.iterator().next();
+						for(DivisiongeograficaTO divisiongeograficaTO3:divisiongeograficaTOs) {
+							if((divisiongeograficaTO.getId()!=null && divisiongeograficaTO.getId().longValue()!=0) && divisiongeograficaTO3.getId().longValue()!=divisiongeograficaTO.getId().longValue() && divisiongeograficaTO3.getCodigo().equals(divisiongeograficaTO.getCodigo())) {
+								log.println("entra por 1");
+								grabar=false;
+							}
+							else if((divisiongeograficaTO.getId()==null || (divisiongeograficaTO.getId()!=null && divisiongeograficaTO3.getId().longValue()!=divisiongeograficaTO.getId().longValue())) && divisiongeograficaTO.getCodigo()!=null && divisiongeograficaTO3.getCodigo().equals(divisiongeograficaTO.getCodigo())) {
+								log.println("entra por 2");
+								grabar=false;
+							}
 						}
 					}
+					if(!grabar){
+						mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+					else{
+						UtilSession.adminsitracionServicio.transCrearModificarDivisiongeografica(divisiongeograficaTO);
+						id=divisiongeograficaTO.getId().toString();
+						//		jsonObject.put("divisiongeografica", (JSONObject)JSONSerializer.toJSON(divisiongeograficaTO,divisiongeograficaTO.getJsonConfig()));
+					}
 				}
-				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+				else {
+					mensajes.setMsg(MensajesWeb.getString("advertencia.codigo.divisiong"));
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-				}
-				else{
-					UtilSession.adminsitracionServicio.transCrearModificarDivisiongeografica(divisiongeograficaTO);
-					id=divisiongeograficaTO.getId().toString();
-					//		jsonObject.put("divisiongeografica", (JSONObject)JSONSerializer.toJSON(divisiongeograficaTO,divisiongeograficaTO.getJsonConfig()));
 				}
 			}
 

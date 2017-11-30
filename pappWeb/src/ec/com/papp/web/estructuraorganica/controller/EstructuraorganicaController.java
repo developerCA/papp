@@ -285,6 +285,7 @@ public class EstructuraorganicaController {
 			//Unidad arbol
 			else if(clase.equals("unidadarboldetail")){
 				UnidadarbolTO unidadarbolTO = UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolTO(id);
+				log.println("nombre" + unidadarbolTO.getNombre());
 				//Obtengo los unidadarbolplazaid
 				UnidadarbolplazaTO unidadarbolplazaTO=new UnidadarbolplazaTO();
 				unidadarbolplazaTO.getId().setId(id);
