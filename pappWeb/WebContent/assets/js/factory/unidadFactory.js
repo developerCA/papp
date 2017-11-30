@@ -22,13 +22,18 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			  return Restangular.allUrl("estructuraorganica/consultar/unidadarbol/pagina="+pagina+"&unidadarbolerganicaid="+estructuraorganica+"&id="+padre+"&estado="+estado).getList();
 			  
 		},
-		
+
 		traerUnidadArbol : function(id) {
-			  
 			var url = "estructuraorganica/unidadarbol/"+id+"/0/0";
-		    console.log(url);
+		    //console.log(url);
 		    return Restangular.allUrl(url).customGET();
 			  
+		},
+
+		traerUnidadArbolDetail : function(id) {
+			var url = "estructuraorganica/unidadarboldetail/"+id+"/0/0";
+		    //console.log(url);
+		    return Restangular.allUrl(url).customGET();
 		},
 		
 //** Plaza Empleo

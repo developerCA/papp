@@ -123,7 +123,22 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 		unidadFactory.traerUnidadesArbol(pagina,$scope.estructuraSeleccionada,'A').then(function(resp){
 			$scope.arbol = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
-			//console.log($scope.arbol);
+		})
+	};
+
+	$scope.mantenerPlaza=function(node){
+		console.log(node.id);
+		unidadFactory.traerUnidadArbolDetail(
+				node.id
+			).then(function(resp){
+				if (resp.estado) {
+					$scope.objetoPlaza=resp.json.unidadarbol;
+					$scope.objetoPlazaDetail=resp.json.details;
+				}
+				$scope.edicion=true;
+				console.log(resp.json);
+				$scope.dUnidad=false;
+				$scope.dUnidadPlazaEditar=true;
 		})
 	};
 
@@ -148,7 +163,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	      return true;
 	    },
 	};
-	
+
 	$scope.modificarUnidad=function(node){
 		console.log(node);
 		unidadFactory.traerUnidadArbol(
@@ -188,7 +203,6 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     					$scope.dUnidad=true;
     					$scope.dUnidadEditar=false;
 	 		            $scope.objetUnidado={};
-	 		            //$scope.limpiarUnidad();
 	 		            SweetAlert.swal("Unidad!", "Registro registrado satisfactoriamente!", "success");
         			}else{
 	 		            SweetAlert.swal("Unidad!", resp.mensajes.msg, "error");
