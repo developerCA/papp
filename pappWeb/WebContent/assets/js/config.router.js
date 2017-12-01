@@ -420,7 +420,11 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','EstructuraOrganicaCtrl','EstructuraOrganicaFactory',
         		'ModalInstitucionCtrl','InstitucionFactory',
         		'ModalUnidadCtrl','UnidadFactory',
-        		'ModalNivelOrganicoCtrl','NivelOrganicoFactory'
+        		'ModalNivelOrganicoCtrl','NivelOrganicoFactory',
+        		'ModalCargoCtrl','CargoFactory',
+        		'ModalGradoFuerzaCtrl','GradoFuerzaFactory',
+        		'ModalEspecialidadesCtrl','EspecialidadesFactory',
+        		'ModalClasificacionCtrl','ClasificacionFactory'
 		),
         title: 'Estructura Org�nica',
         ncyBreadcrumb: {

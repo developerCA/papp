@@ -293,6 +293,65 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		});
 	};
 
+	$scope.abrirCargoCodigo = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalCargo.html',
+			controller : 'ModalCargoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objetoPlazaDetail[index].unidadarbolplazacargoid = obj.id;
+			$scope.objetoPlazaDetail[index].npcargocodigo = obj.codigo;
+			$scope.objetoPlazaDetail[index].npcargonombre = obj.nombre;
+		}, function() {
+		});
+	};
+
+	$scope.abrirGradoFuerza = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalGradoFuerza.html',
+			controller : 'ModalGradoFuerzaController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objetoPlazaDetail[index].unidadarbolplazagfid = obj.id;
+			$scope.objetoPlazaDetail[index].npgradonombre = obj.npnombregrado;
+			$scope.objetoPlazaDetail[index].npfuerzanombre = obj.npnombrefuerza;
+		}, function() {
+		});
+	};
+
+	$scope.abrirEspecialidad = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalEspecialidades.html',
+			controller : 'ModalEspecialidadesController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objetoPlazaDetail[index].unidadarbolplazagfid = obj.id;
+			$scope.objetoPlazaDetail[index].npespecialidadcodigo = obj.codigo;
+			$scope.objetoPlazaDetail[index].npespecialdidadnombre = obj.nombre;
+		}, function() {
+		});
+	};
+
+	$scope.abrirClasificacion = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalClasificacion.html',
+			controller : 'ModalClasificacionController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objetoPlazaDetail[index].unidadarbolplazafclasifid = obj.id;
+			$scope.objetoPlazaDetail[index].npclasificacionnombre = obj.nombre;
+		}, function() {
+		});
+	};
+
 	$scope.form = {
 		        submit: function (form) {
 		            var firstError = null;
