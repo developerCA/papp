@@ -142,6 +142,60 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		})
 	};
 
+//** Mantener Empleado
+	$scope.agregarMantenerPlazaDetalle=function(){
+		var obj={id:null,responsable:0,aprueba:0,revisa:0};
+		$scope.objetoPlazaDetail.push(obj);
+	}
+
+	$scope.removerMantenerPlazaDetalle=function(index){
+		$scope.objetoPlazaDetail.splice(index,1);
+	}
+
+	$scope.formUnidadPlaza = {
+	    submit: function (formUnidadPlaza) {
+			console.log("formUnidadPlaza");
+	        var firstError = null;
+	        if (formUnidadPlaza.$invalid) {
+	            var field = null, firstError = null;
+	            for (field in formUnidadPlaza) {
+	                if (field[0] != '$') {
+	                    if (firstError === null && !formUnidadPlaza[field].$valid) {
+	                        firstError = formUnidadPlaza[field].$name;
+	                    }
+	                    if (formUnidadPlaza[field].$pristine) {
+	                    	formUnidadPlaza[field].$dirty = true;
+	                    }
+	                }
+	            }
+	            angular.element('.ng-invalid[name=' + firstError + ']').focus();
+	            return;
+	        } else {
+	        	unidadFactory.guardarArbol($scope.objetoUnidad).then(function(resp){
+	        		if (resp.estado){
+	        			formUnidadPlaza.$setPristine(true);
+						$scope.dUnidad=true;
+						$scope.dUnidadPlazaEditar=false;
+	 		            $scope.objetUnidado={};
+	 		            $scope.objetoPlazaDetail={};
+	 		            SweetAlert.swal("Unidad - Mantener Plazas!", "Registro guardado satisfactoriamente!", "success");
+	    			}else{
+	 		            SweetAlert.swal("Unidad - Mantener Plazas!", resp.mensajes.msg, "error");
+	    			}
+	    		})
+	        }
+	    },
+	    reset: function (formUnidadPlaza) {
+	        $scope.myModel = angular.copy($scope.master);
+	        formUnidadPlaza.$setPristine(true);
+			$scope.dUnidad=true;
+			$scope.dUnidadPlazaEditar=false;
+	        $scope.objetoUnidad={};
+            $scope.objetoPlazaDetail={};
+	    }
+	};
+
+
 //** Plaza Empleados
 	$scope.mostrarEmpleados=function(id){
 		$scope.estructuraSeleccionada=id;
@@ -203,7 +257,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     					$scope.dUnidad=true;
     					$scope.dUnidadEditar=false;
 	 		            $scope.objetUnidado={};
-	 		            SweetAlert.swal("Unidad!", "Registro registrado satisfactoriamente!", "success");
+	 		            SweetAlert.swal("Unidad!", "Registro guardado satisfactoriamente!", "success");
         			}else{
 	 		            SweetAlert.swal("Unidad!", resp.mensajes.msg, "error");
         			}
@@ -376,7 +430,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Grado - Fuerza!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Grado - Fuerza!", "Registro guardado satisfactoriamente!", "success");
 		        			 }else{
 			 		             SweetAlert.swal("Grado - Fuerza!", resp.mensajes.msg, "error");
 		        			 }
