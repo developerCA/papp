@@ -97,6 +97,9 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 				},
 				provincia: function() {
 					return $scope.objetolista[index].npnombreprovincia;
+				},
+				tipo : function() {
+					return null;
 				}
 			}
 		});
@@ -120,6 +123,9 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 				},
 				provincia: function() {
 					return $scope.objetolista[index].npnombreprovincia;
+				},
+				tipo : function() {
+					return null;
 				}
 			}
 		});
@@ -141,6 +147,9 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 				},
 				provincia: function() {
 					return $scope.objetolista[index].npnombreprovincia;
+				},
+				tipo : function() {
+					return null;
 				}
 			}
 		});

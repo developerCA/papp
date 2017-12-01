@@ -296,7 +296,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.divgeografica', {
         url: "/divisionesgeo",
         templateUrl: "assets/views/papp/divisiones.html",
-        resolve: loadSequence('ngTable','DivisionGeograficaCtrl','ModalDivisionGeograficaCtrl','DivisionGeograficaFactory'),
+        resolve: loadSequence(
+    		'ngTable','DivisionGeograficaCtrl','DivisionGeograficaFactory',
+    		'ModalDivisionGeograficaCtrl'),
         title: 'Divisiones Geograficas',
         ncyBreadcrumb: {
             label: 'Divisiones Geograficas'

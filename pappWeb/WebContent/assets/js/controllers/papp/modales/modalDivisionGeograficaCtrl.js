@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$uibModalInstance","pais","provincia","SweetAlert","$filter", "ngTableParams","divisionGeograficaFactory",
-	function($scope,$rootScope,$uibModalInstance,pais,provincia,SweetAlert,$filter, ngTableParams,divisionGeograficaFactory) {
+app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$uibModalInstance","pais","provincia","tipo","SweetAlert","$filter", "ngTableParams","divisionGeograficaFactory",
+	function($scope,$rootScope,$uibModalInstance,pais,provincia,tipo,SweetAlert,$filter, ngTableParams,divisionGeograficaFactory) {
 	
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
@@ -73,9 +73,9 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	
 	
 	$scope.filtrar=function(){
-		
+		//console.log("tipo:'"+tipo+"'");
 		$scope.data=[];
-		divisionGeograficaFactory.traerDivisionesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		divisionGeograficaFactory.traerDivisionesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro,tipo).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;

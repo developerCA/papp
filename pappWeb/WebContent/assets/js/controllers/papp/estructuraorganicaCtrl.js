@@ -127,16 +127,21 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	};
 
 	$scope.mantenerPlaza=function(node){
-		console.log(node.id);
+		//console.log(node.id);
 		unidadFactory.traerUnidadArbolDetail(
 				node.id
 			).then(function(resp){
 				if (resp.estado) {
 					$scope.objetoPlaza=resp.json.unidadarbol;
 					$scope.objetoPlazaDetail=resp.json.details;
+					for (let obj of $scope.objetoPlazaDetail) {
+						obj.responsable = obj.responsable.toString();
+						obj.aprueba = obj.aprueba.toString();
+						obj.revisa = obj.revisa.toString();
+					}
 				}
 				$scope.edicion=true;
-				console.log(resp.json);
+				//console.log(resp.json);
 				$scope.dUnidad=false;
 				$scope.dUnidadPlazaEditar=true;
 		})

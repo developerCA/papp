@@ -179,7 +179,6 @@ app.constant('JS_REQUIRES', {
 
 //**
         'ModalNivelOrganicoCtrl':'assets/js/controllers/papp/modales/modalNivelOrganicoCtrl.js',
-        'ModalDivisionGeograficaCtrl':'assets/js/controllers/papp/modales/modalDivisionGeograficaCtrl.js',
         'ModalGradoFuerzaSuperiorCtrl':'assets/js/controllers/papp/modales/modalGradoFuerzaSuperiorCtrl.js',
         
         
