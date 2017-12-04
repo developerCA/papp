@@ -1,9 +1,7 @@
 'use strict';
-/**
- * controller for angular-menu
- * 
- */
-app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "sociosNegocioFactory", function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, sociosNegocioFactory) {
+
+app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", "$filter", "ngTableParams", "sociosNegocioFactory",
+	function ($scope, $rootScope, SweetAlert, $filter, ngTableParams, sociosNegocioFactory) {
 
     $scope.nombre = null;
     $scope.codigo = null;

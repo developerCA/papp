@@ -206,40 +206,31 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.tabactivo=2;
 		$scope.edicion=true;
 		$scope.dEmpleados=true;
-		//console.log("aqui");
-		//console.log(id)
 
 		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionada,'A').then(function(resp){
 			$scope.data = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
-			//console.log("dataPlazaEmpleados");
-			//console.log($scope.data);
 		})
 	}
 
 	///rest/estructuraorganica/unidadarbolplaza/id/id1/0 donde id es id.id y id1 es id.plazaid de unidadarbolplaza
 	$scope.editarPlazaEmpleados=function(id){
-		console.log(id);
-		$scope.estructuraSeleccionada=id;
-		$scope.edicion=true;
-		$scope.nuevoar=false;
-		$scope.guardar=true;
-		$scope.dEmpleados=false;
-		$scope.dEmpleadosPlazaEditar=true;
-		$scope.tabactivo=2;
-/*
-		estructuraorganicaFactory.traerEstructuraOrganicaEditar($scope.estructuraSeleccionada).then(function(resp){
+		//console.log(id);
+
+		unidadFactory.traerPlazaEmpleadosEditar(id.id, id.plazaid).then(function(resp){
+			console.log(resp.json);
 			if (resp.estado) {
-			    $scope.objeto=resp.json.estructuraorganica;
+			    $scope.objetoPlaza=resp.json.unidadarbolplaza;
+			    $scope.objetoPlazaDetail=resp.json.details;
 			}
+			$scope.estructuraSeleccionada=id;
 			$scope.edicion=true;
 			$scope.nuevoar=false;
 			$scope.guardar=true;
 			$scope.dEmpleados=false;
 			$scope.dEmpleadosPlazaEditar=true;
-			$scope.tabactivo=0;
-			console.log($scope.objeto);
+			$scope.tabactivo=2;
 		})
-*/
+
 	};
 
 	$scope.treeOptions = {
@@ -436,6 +427,58 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		});
 	};
 
+	$scope.abrirEmpleadoSocioNegocio = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalSocioNegocio.html',
+			controller : 'ModalSocioNegocioController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objetoPlazaDetail[index].unidadarbolplaempempid = obj.id;
+			$scope.objetoPlazaDetail[index].npsocionegocioid = obj.codigo;
+			$scope.objetoPlazaDetail[index].npsocionegocio = obj.nombremostrado;
+		}, function() {
+		});
+	};
+
+	$scope.formEmpleadosPlaza = {
+	    //$scope.objetoPlaza=resp.json.unidadarbolplaza;
+	    //$scope.objetoPlazaDetail=resp.json.details;
+        submit: function (formEmpleadosPlaza) {
+            var firstError = null;
+    		var obj = {unidadarbolplaza: $scope.objetoPlaza, details: $scope.objetoPlazaDetail}
+        	unidadFactory.guardarEmpleadosPlaza(obj).then(function(resp){
+        		console.log(resp);
+    			 if (resp.estado){
+    				 formEmpleadosPlaza.$setPristine(true);
+    				 $scope.limpiarEmpleadosPlaza();
+ 		             SweetAlert.swal("Plaza Empleado!", "Registro guardado satisfactoriamente!", "success");
+    			 }else{
+ 		             SweetAlert.swal("Plaza Empleado!", resp.mensajes.msg, "error");
+    			 }
+    		});
+        },
+        reset: function (formEmpleadosPlaza) {
+        	$scope.limpiarEmpleadosPlaza();
+        }
+    };
+
+	$scope.limpiarEmpleadosPlaza = function(){
+        //$scope.myModel = angular.copy($scope.master);
+        //formEmpleadosPlaza.$setPristine(true);
+        $scope.edicion=false;
+        //$scope.objeto={};
+		$scope.edicion=true;
+		$scope.nuevoar=false;
+		$scope.guardar=false;
+		$scope.dEmpleados=true;
+		$scope.dEmpleadosPlazaEditar=false;
+		$scope.tabactivo=2;
+
+		//$scope.consultar();
+	};
+
 	$scope.form = {
 		        submit: function (form) {
 		            var firstError = null;
@@ -472,6 +515,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		            form.$setPristine(true);
 		            $scope.edicion=false;
 		            $scope.objeto={};
+		            $scope.limpiar();
 		        }
     };
 } ]);

@@ -180,7 +180,7 @@ app.constant('JS_REQUIRES', {
 //**
         'ModalNivelOrganicoCtrl':'assets/js/controllers/papp/modales/modalNivelOrganicoCtrl.js',
         'ModalGradoFuerzaSuperiorCtrl':'assets/js/controllers/papp/modales/modalGradoFuerzaSuperiorCtrl.js',
-        
+        'ModalSocioNegocioCtrl':'assets/js/controllers/papp/modales/modalSocioNegocioCtrl.js',
         
     },
     //*** angularJS Modules

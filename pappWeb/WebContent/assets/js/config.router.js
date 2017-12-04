@@ -426,7 +426,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalCargoCtrl','CargoFactory',
         		'ModalGradoFuerzaCtrl','GradoFuerzaFactory',
         		'ModalEspecialidadesCtrl','EspecialidadesFactory',
-        		'ModalClasificacionCtrl','ClasificacionFactory'
+        		'ModalClasificacionCtrl','ClasificacionFactory',
+        		'ModalSocioNegocioCtrl','SociosNegocioFactory'
 		),
         title: 'Estructura Org�nica',
         ncyBreadcrumb: {
