@@ -217,11 +217,16 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	}
 
 	///rest/estructuraorganica/unidadarbolplaza/id/id1/0 donde id es id.id y id1 es id.plazaid de unidadarbolplaza
-
 	$scope.editarPlazaEmpleados=function(id){
 		console.log(id);
-		//$scope.estructuraSeleccionada=id;
-		/*
+		$scope.estructuraSeleccionada=id;
+		$scope.edicion=true;
+		$scope.nuevoar=false;
+		$scope.guardar=true;
+		$scope.dEmpleados=false;
+		$scope.dEmpleadosPlazaEditar=true;
+		$scope.tabactivo=2;
+/*
 		estructuraorganicaFactory.traerEstructuraOrganicaEditar($scope.estructuraSeleccionada).then(function(resp){
 			if (resp.estado) {
 			    $scope.objeto=resp.json.estructuraorganica;
@@ -229,9 +234,12 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.edicion=true;
 			$scope.nuevoar=false;
 			$scope.guardar=true;
-			console.log($scope.objeto);
+			$scope.dEmpleados=false;
+			$scope.dEmpleadosPlazaEditar=true;
 			$scope.tabactivo=0;
-		}) */
+			console.log($scope.objeto);
+		})
+*/
 	};
 
 	$scope.treeOptions = {

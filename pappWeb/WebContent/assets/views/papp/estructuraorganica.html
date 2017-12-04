@@ -870,18 +870,18 @@
 							</div>
 						</div>
 
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Modificar" ng-click="editarPlazaEmpleados(obj.id)"><i
-										class="fa fa-pencil"></i></a></td>
-								<td data-title="'Plaza C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Cargo C&oacute;digo'">{{obj.npcargocodigo}}</td>
-								<td data-title="'Cargo Nombre'">{{obj.npcargonombre}}</td>
-							</tr>
-						</table>
-					</div>
+						<div>
+							<table ng-table="tableParams" class="table table-striped">
+								<tr ng-repeat="obj in $data">
+									<td><a class="btn btn-sm btn-primary"
+										uib-tooltip="Modificar" ng-click="editarPlazaEmpleados(obj.id)"><i
+											class="fa fa-pencil"></i></a></td>
+									<td data-title="'Plaza C&oacute;digo'">{{obj.codigo}}</td>
+									<td data-title="'Cargo C&oacute;digo'">{{obj.npcargocodigo}}</td>
+									<td data-title="'Cargo Nombre'">{{obj.npcargonombre}}</td>
+								</tr>
+							</table>
+						</div>
 
 						<div class="row">
 							<div class="col-md-12">
@@ -891,6 +891,160 @@
 								</div>
 							</div>
 						</div>
+					</div>
+
+					<div ng-show="dEmpleadosPlazaEditar" class="panel-body">
+						<form name="FormEmpleadosPlaza" id="FormEmpleadosPlaza" novalidate
+							ng-submit="formEmpleadosPlaza.submit(FormEmpleadosPlaza)">
+							<div class="panel-heading">
+								<h5 class="panel-title">
+									Unidad Arbol Plaza Empleado
+								</h5>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        C&oacute;digo
+									    </label>
+									    <input type="text"
+									        class="form-control" name="codigoorganico" ng-model="objetoPlaza.codigoorganico"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Cargo C&oacute;digo
+									    </label>
+									    <input type="text"
+									        class="form-control" name="nombre" ng-model="objetoPlaza.nombre"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Grupo Nombre
+									    </label>
+									    <input type="text"
+									        class="form-control" name="sigla" ng-model="objetoPlaza.sigla"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Fuerza Nombre
+									    </label>
+									    <input type="text"
+									        class="form-control" name="descripcion" ng-model="objetoPlaza.descripcion"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Especialidad Nombre
+									    </label>
+									    <input type="text"
+									        class="form-control" name="npnombrenivel" ng-model="objetoPlaza.npnombrenivel"
+									        required ng-disabled="true">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											<a uib-tooltip="Agregar"
+												class="pull-right btn btn-sm btn-info"
+												ng-click="agregarMantenerPlazaDetalle();"><i class="fa fa-plus-square"></i>
+											</a>
+											<h4 class="panel-title">
+												Empleado
+											</h4>
+										</div>
+										<div class="panel-body no-padding panel-white">
+											<div class="col-md-12 panel-white no-padding">
+												<div>
+													<table class="table table-striped">
+														<tr>
+															<th></th>
+															<th>Empleado Id</th>
+															<th>Empleado C&oacute;digo</th>
+															<th>Empleado Nombre Mostrado</th>
+															<th>Fecha Inicio</th>
+															<th>Fecha Fin</th>
+														</tr>
+														<tr ng-repeat="obj in objetoPlazaDetail">
+															<td>
+																<div class="input-group form-group has-success">
+																	<a uib-tooltip="Eliminar"
+																		class="btn btn-sm btn-danger"
+																		ng-click="removerMantenerPlazaDetalle($index)">
+																		<i class="fa fa-trash"></i>
+																	</a>
+																</div>
+															</td>
+															<td>
+																<div class="input-group form-group has-success">
+																	<input type="text" placeholder="Seleccione un cargo"
+																		class="form-control" name="npcargocodigo" ng-disabled="true"
+																		ng-model="obj.npcargocodigo" />
+																	<span class="input-group-btn">
+																		<button type="button" class="btn btn-primary"
+																			ng-click="abrirCargoCodigo($index)">
+																			<i class="fa fa-search"></i>
+																		</button>
+																	</span>
+																</div>
+															</td>
+															<td>
+																<div class="form-group has-success">
+																    <input type="text" placeholder="Escriba un no. partida presup."
+																        class="form-control" name="numpartpres" ng-model="obj.numpartpres">
+																</div>
+															</td>
+															<td>
+																<div class="form-group has-success">
+																    <input type="text" placeholder="Escriba un no. partida presup."
+																        class="form-control" name="numpartpres" ng-model="obj.numpartpres">
+																</div>
+															</td>
+															<td>
+																<div class="form-group has-success">
+																    <input type="text" placeholder="Escriba un cargo nombre"
+																        class="form-control" name="npcargonombre" ng-model="obj.npcargonombre" ng-disabled="true">
+																</div>
+															</td>
+															<td>
+																<div class="form-group has-success">
+																    <input type="text" placeholder="Escriba un dotacion"
+																        class="form-control" name="dotacion" ng-model="obj.dotacion" ng-disabled="true">
+																</div>
+															</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+	
+										</div>
+									</div>
+								</div>
+	
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="pull-right">
+										<button type="submit" class="btn btn-primary">
+											Guardar
+										</button>
+										<button type="reset" class="btn btn-default btn-o"
+											ng-click="formUnidadPlaza.reset(FormUnidadPlaza)">
+											Cancelar
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 
 					</uib-tab>
