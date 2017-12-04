@@ -456,8 +456,8 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarItem(itemTO);
-					log.println("id que llega: " + itemTO.getId());
 					id=itemTO.getNpid().toString();
+					log.println("id del item: " + id);
 					jsonObject.put("item", (JSONObject)JSONSerializer.toJSON(itemTO,itemTO.getJsonConfig()));
 				}
 			}
