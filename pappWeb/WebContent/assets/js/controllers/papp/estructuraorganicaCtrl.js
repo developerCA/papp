@@ -69,7 +69,6 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.estado=null;
 
 		$scope.consultar();
-		
 	};
 
 	$scope.nuevo=function(){
@@ -78,7 +77,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.nuevoar=true;
 		$scope.guardar=true;
 	}
-	
+
 	$scope.editar=function(id){
 		$scope.estructuraSeleccionada=id;
 		estructuraorganicaFactory.traerEstructuraOrganicaEditar($scope.estructuraSeleccionada).then(function(resp){
@@ -207,15 +206,41 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.tabactivo=2;
 		$scope.edicion=true;
 		$scope.dEmpleados=true;
-		console.log("aqui");
-		console.log(id)
+		//console.log("aqui");
+		//console.log(id)
 
 		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionada,'A').then(function(resp){
 			$scope.data = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
-			console.log("dataPlazaEmpleados");
-			console.log($scope.data);
+			//console.log("dataPlazaEmpleados");
+			//console.log($scope.data);
 		})
 	}
+
+	///rest/estructuraorganica/unidadarbolplaza/id/id1/0 donde id es id.id y id1 es id.plazaid de unidadarbolplaza
+	$scope.editarPlazaEmpleados=function(id){
+		console.log(id);
+		$scope.estructuraSeleccionada=id;
+		$scope.edicion=true;
+		$scope.nuevoar=false;
+		$scope.guardar=true;
+		$scope.dEmpleados=false;
+		$scope.dEmpleadosPlazaEditar=true;
+		$scope.tabactivo=2;
+/*
+		estructuraorganicaFactory.traerEstructuraOrganicaEditar($scope.estructuraSeleccionada).then(function(resp){
+			if (resp.estado) {
+			    $scope.objeto=resp.json.estructuraorganica;
+			}
+			$scope.edicion=true;
+			$scope.nuevoar=false;
+			$scope.guardar=true;
+			$scope.dEmpleados=false;
+			$scope.dEmpleadosPlazaEditar=true;
+			$scope.tabactivo=0;
+			console.log($scope.objeto);
+		})
+*/
+	};
 
 	$scope.treeOptions = {
 	    accept: function(sourceNodeScope, destNodesScope, destIndex) {
