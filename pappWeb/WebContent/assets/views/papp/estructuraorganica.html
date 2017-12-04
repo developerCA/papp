@@ -870,16 +870,15 @@
 							</div>
 						</div>
 
-
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
 								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
+									uib-tooltip="Modificar" ng-click="editarPlazaEmpleados(obj.id)"><i
 										class="fa fa-pencil"></i></a></td>
 								<td data-title="'Plaza C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Cargo C&oacute;digo'">{{obj.nombremostrado}}</td>
-								<td data-title="'Cargo Nombre'">{{obj.npestado}}</td>
+								<td data-title="'Cargo C&oacute;digo'">{{obj.npcargocodigo}}</td>
+								<td data-title="'Cargo Nombre'">{{obj.npcargonombre}}</td>
 							</tr>
 						</table>
 					</div>
