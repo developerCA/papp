@@ -1305,7 +1305,7 @@ public class AdministracionController {
 			//Empleado
 			else if(clase.equals("empleado")){
 				SocionegocioTO socionegocioTO = UtilSession.adminsitracionServicio.transObtenerSocionegocioTO(id);
-				jsonObject.put("empleado", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfig()));
+				jsonObject.put("empleado", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfigEmpleadoedit()));
 			}
 
 			//Parametroindicador

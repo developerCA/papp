@@ -921,6 +921,7 @@ public class ConsultasUtil {
 				itemTO.setItemejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			if(parameters.get("codigopadre")!=null && !parameters.get("codigopadre").equals(""))
 				itemTO.setItempadreid(Long.valueOf(parameters.get("codigopadre")));
+			itemTO.setItem(new ItemTO());
 			SearchResultTO<ItemTO> resultado=UtilSession.adminsitracionServicio.transObtenerItemPaginado(itemTO);
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
