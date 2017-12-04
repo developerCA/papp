@@ -125,9 +125,9 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		});
 
 		modalInstance.result.then(function(obj) {
-			console.log("==========**===========");
-			console.log(obj);
-			console.log("==========**===========");
+			//console.log("==========**===========");
+			//console.log(obj);
+			//console.log("==========**===========");
 			$scope.objeto.npcodigofuerza = obj.npcodigofuerza; 
 			$scope.objeto.npcodigogrado = obj.npcodigogrado;
 			$scope.objeto.npnombregrado = obj.npnombregrado;

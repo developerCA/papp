@@ -127,20 +127,79 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	};
 
 	$scope.mantenerPlaza=function(node){
-		console.log(node.id);
+		//console.log(node.id);
 		unidadFactory.traerUnidadArbolDetail(
 				node.id
 			).then(function(resp){
 				if (resp.estado) {
 					$scope.objetoPlaza=resp.json.unidadarbol;
 					$scope.objetoPlazaDetail=resp.json.details;
+					for (let obj of $scope.objetoPlazaDetail) {
+						obj.responsable = obj.responsable.toString();
+						obj.aprueba = obj.aprueba.toString();
+						obj.revisa = obj.revisa.toString();
+					}
 				}
 				$scope.edicion=true;
-				console.log(resp.json);
+				//console.log(resp.json);
 				$scope.dUnidad=false;
 				$scope.dUnidadPlazaEditar=true;
 		})
 	};
+
+//** Mantener Empleado
+	$scope.agregarMantenerPlazaDetalle=function(){
+		var obj={id:null,responsable:0,aprueba:0,revisa:0};
+		$scope.objetoPlazaDetail.push(obj);
+	}
+
+	$scope.removerMantenerPlazaDetalle=function(index){
+		$scope.objetoPlazaDetail.splice(index,1);
+	}
+
+	$scope.formUnidadPlaza = {
+	    submit: function (formUnidadPlaza) {
+			console.log("formUnidadPlaza");
+	        var firstError = null;
+	        if (formUnidadPlaza.$invalid) {
+	            var field = null, firstError = null;
+	            for (field in formUnidadPlaza) {
+	                if (field[0] != '$') {
+	                    if (firstError === null && !formUnidadPlaza[field].$valid) {
+	                        firstError = formUnidadPlaza[field].$name;
+	                    }
+	                    if (formUnidadPlaza[field].$pristine) {
+	                    	formUnidadPlaza[field].$dirty = true;
+	                    }
+	                }
+	            }
+	            angular.element('.ng-invalid[name=' + firstError + ']').focus();
+	            return;
+	        } else {
+	        	unidadFactory.guardarArbol($scope.objetoUnidad).then(function(resp){
+	        		if (resp.estado){
+	        			formUnidadPlaza.$setPristine(true);
+						$scope.dUnidad=true;
+						$scope.dUnidadPlazaEditar=false;
+	 		            $scope.objetUnidado={};
+	 		            $scope.objetoPlazaDetail={};
+	 		            SweetAlert.swal("Unidad - Mantener Plazas!", "Registro guardado satisfactoriamente!", "success");
+	    			}else{
+	 		            SweetAlert.swal("Unidad - Mantener Plazas!", resp.mensajes.msg, "error");
+	    			}
+	    		})
+	        }
+	    },
+	    reset: function (formUnidadPlaza) {
+	        $scope.myModel = angular.copy($scope.master);
+	        formUnidadPlaza.$setPristine(true);
+			$scope.dUnidad=true;
+			$scope.dUnidadPlazaEditar=false;
+	        $scope.objetoUnidad={};
+            $scope.objetoPlazaDetail={};
+	    }
+	};
+
 
 //** Plaza Empleados
 	$scope.mostrarEmpleados=function(id){
@@ -203,7 +262,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     					$scope.dUnidad=true;
     					$scope.dUnidadEditar=false;
 	 		            $scope.objetUnidado={};
-	 		            SweetAlert.swal("Unidad!", "Registro registrado satisfactoriamente!", "success");
+	 		            SweetAlert.swal("Unidad!", "Registro guardado satisfactoriamente!", "success");
         			}else{
 	 		            SweetAlert.swal("Unidad!", resp.mensajes.msg, "error");
         			}
@@ -293,6 +352,65 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		});
 	};
 
+	$scope.abrirCargoCodigo = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalCargo.html',
+			controller : 'ModalCargoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objetoPlazaDetail[index].unidadarbolplazacargoid = obj.id;
+			$scope.objetoPlazaDetail[index].npcargocodigo = obj.codigo;
+			$scope.objetoPlazaDetail[index].npcargonombre = obj.nombre;
+		}, function() {
+		});
+	};
+
+	$scope.abrirGradoFuerza = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalGradoFuerza.html',
+			controller : 'ModalGradoFuerzaController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objetoPlazaDetail[index].unidadarbolplazagfid = obj.id;
+			$scope.objetoPlazaDetail[index].npgradonombre = obj.npnombregrado;
+			$scope.objetoPlazaDetail[index].npfuerzanombre = obj.npnombrefuerza;
+		}, function() {
+		});
+	};
+
+	$scope.abrirEspecialidad = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalEspecialidades.html',
+			controller : 'ModalEspecialidadesController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objetoPlazaDetail[index].unidadarbolplazagfid = obj.id;
+			$scope.objetoPlazaDetail[index].npespecialidadcodigo = obj.codigo;
+			$scope.objetoPlazaDetail[index].npespecialdidadnombre = obj.nombre;
+		}, function() {
+		});
+	};
+
+	$scope.abrirClasificacion = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalClasificacion.html',
+			controller : 'ModalClasificacionController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objetoPlazaDetail[index].unidadarbolplazafclasifid = obj.id;
+			$scope.objetoPlazaDetail[index].npclasificacionnombre = obj.nombre;
+		}, function() {
+		});
+	};
+
 	$scope.form = {
 		        submit: function (form) {
 		            var firstError = null;
@@ -317,7 +435,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Grado - Fuerza!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Grado - Fuerza!", "Registro guardado satisfactoriamente!", "success");
 		        			 }else{
 			 		             SweetAlert.swal("Grado - Fuerza!", resp.mensajes.msg, "error");
 		        			 }

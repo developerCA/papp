@@ -18,13 +18,14 @@ app.factory("divisionGeograficaFactory", [ "Restangular", function(Restangular) 
 			  
 		},
 		
-		traerDivisionesFiltro : function(pagina,nombre,codigo,estado) {
+		traerDivisionesFiltro : function(pagina,nombre,codigo,estado,tipo) {
 			  
 			var url = "administrar/consultar/divisiongeografica/pagina="+pagina;
 
-			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
-			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
+			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;
+			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;
 			if(estado!=null && estado != "" ) url += "&estado=" + estado;
+			if(tipo!=null && tipo != "" ) url += "&tipo=" + tipo;
 			 
 			return Restangular.allUrl(url).getList();
 			  

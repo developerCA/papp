@@ -39,7 +39,7 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 //** Plaza Empleo
 		traerUnidadesArbolPlazaEmpleado : function(pagina,estructuraorganica,estado) {
 			  return Restangular.allUrl(
-					  "estructuraorganica/consultar/unidadarboldetail/pagina="+pagina
+					  "estructuraorganica/consultar/unidadarbolplazaempleado/pagina="+pagina
 					  +"&unidadarbolerganicaid="+estructuraorganica
 					  +"&estado="+estado
 			  ).getList();

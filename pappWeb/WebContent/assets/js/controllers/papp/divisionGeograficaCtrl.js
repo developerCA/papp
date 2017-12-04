@@ -85,9 +85,15 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 	$scope.buscarDivision=function(){
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalDiviviones.html',
-			controller : 'ModalDivisionController',
+			controller : 'ModalDivisionGeograficaController',
 			size : 'md',
-			resolve : {
+			resolve: {
+				pais: function() {
+					return null;
+				},
+				provincia: function() {
+					return null;
+				},
 				tipo : function() {
 					return $scope.objeto.tipo;
 				}

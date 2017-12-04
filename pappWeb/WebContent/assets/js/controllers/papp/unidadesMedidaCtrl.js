@@ -20,7 +20,7 @@ app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert"
 
         $scope.grupos = [];
 
-        gruposMedidaFactory.traerGruposFiltro(pagina,'','').then(function (resp) {
+        gruposMedidaFactory.traerGruposFiltro(pagina,'','A').then(function (resp) {
             if (resp.meta)
                 $scope.grupos = resp;
             
