@@ -101,7 +101,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalItems.html',
 			controller : 'ModalItemController',
-			size : 'md',
+			size : 'lg',
 			resolve : {
 				tipo : function() {
 					return $scope.objeto.tipo;
@@ -112,9 +112,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.itempadreid = obj.id;
 			$scope.objeto.npnombrepadre = obj.nombre;			
-			
 		}, function() {
-			
 		});
 
 	};

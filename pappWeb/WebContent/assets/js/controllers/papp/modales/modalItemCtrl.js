@@ -13,18 +13,16 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
 		$scope.data=[];
 		itemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
+			console.log(resp);
             if (resp.meta)
                 $scope.data = resp;
                 console.log($scope.data);
         });
-	
 	};
-	
+
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page

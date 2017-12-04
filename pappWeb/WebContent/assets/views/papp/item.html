@@ -122,7 +122,6 @@
                     </div>
                 </div>
 
-
                 <div ng-show="edicion" class="panel-body" id="panel1">
 
                     <div class="panel-heading">
@@ -324,6 +323,7 @@
 									ng-click="seleccionar(obj)"><i class="fa fa-check"></i></a></td>
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
+								<td data-title="'Nombre Padre'">{{obj.npnombrepadre}}</td>
 								 <td data-title="'Tipo'">
                                     <span ng-if="obj.tipo=='I'">INGRESO</span>
                                     <span ng-if="obj.tipo=='E'">EGRESO</span>

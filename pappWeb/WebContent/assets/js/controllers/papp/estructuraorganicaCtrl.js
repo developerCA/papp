@@ -279,6 +279,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     					$scope.dUnidadEditar=false;
 	 		            $scope.objetUnidado={};
 	 		            SweetAlert.swal("Unidad!", "Registro guardado satisfactoriamente!", "success");
+
+	 		            $scope.mostrarUnidad($scope.estructuraSeleccionada);
         			}else{
 	 		            SweetAlert.swal("Unidad!", resp.mensajes.msg, "error");
         			}
@@ -291,6 +293,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.dUnidad=true;
 			$scope.dUnidadEditar=false;
             $scope.objetoUnidad={};
+            $scope.mostrarUnidad($scope.estructuraSeleccionada);
         }
 	};
 	
