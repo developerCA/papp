@@ -28,6 +28,7 @@ import ec.com.papp.administracion.to.EspecialidadTO;
 import ec.com.papp.administracion.to.FuerzaTO;
 import ec.com.papp.administracion.to.GradoTO;
 import ec.com.papp.administracion.to.GradofuerzaTO;
+import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.estructuraorganica.id.InstitucionentidadID;
 import ec.com.papp.estructuraorganica.id.UnidadarbolplazaID;
 import ec.com.papp.estructuraorganica.id.UnidadarbolplazaempleadoID;
@@ -309,6 +310,7 @@ public class EstructuraorganicaController {
 				UnidadarbolplazaempleadoTO unidadarbolplazaempleadoTO=new UnidadarbolplazaempleadoTO();
 				unidadarbolplazaempleadoTO.getId().setId(id);
 				unidadarbolplazaempleadoTO.getId().setPlazaid(id2);
+				unidadarbolplazaempleadoTO.setSocionegocio(new SocionegocioTO());
 				Collection<UnidadarbolplazaempleadoTO> unidadarbolplazaempleadoTOs=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplazaempleado(unidadarbolplazaempleadoTO);
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(unidadarbolplazaempleadoTOs,unidadarbolplazaempleadoTO.getJsonConfig()));
 			}

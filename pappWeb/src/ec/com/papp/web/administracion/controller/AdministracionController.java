@@ -124,7 +124,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarEjerciciofiscal(ejerciciofiscalTO);
-					id=ejerciciofiscalTO.getId().toString();
+					id=ejerciciofiscalTO.getNpid().toString();
 					jsonObject.put("ejerciciofiscal", (JSONObject)JSONSerializer.toJSON(ejerciciofiscalTO,ejerciciofiscalTO.getJsonConfig()));
 				}
 			}
@@ -160,7 +160,7 @@ public class AdministracionController {
 					}
 					else{
 						UtilSession.adminsitracionServicio.transCrearModificarDivisiongeografica(divisiongeograficaTO);
-						id=divisiongeograficaTO.getId().toString();
+						id=divisiongeograficaTO.getNpid().toString();
 						//		jsonObject.put("divisiongeografica", (JSONObject)JSONSerializer.toJSON(divisiongeograficaTO,divisiongeograficaTO.getJsonConfig()));
 					}
 				}
@@ -193,7 +193,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarSocionegocio(socionegocioTO);
-					id=socionegocioTO.getId().toString();
+					id=socionegocioTO.getNpid().toString();
 					jsonObject.put("socionegocio", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfig()));
 				}
 			}
@@ -245,7 +245,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarUnidadmedida(unidadmedidaTO);
-					id=unidadmedidaTO.getId().toString();
+					id=unidadmedidaTO.getNpid().toString();
 					jsonObject.put("unidadmedida", (JSONObject)JSONSerializer.toJSON(unidadmedidaTO,unidadmedidaTO.getJsonConfig()));
 				}
 			}
@@ -275,7 +275,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarParametro(parametroTO);
-					id=parametroTO.getId().toString();
+					id=parametroTO.getNpid().toString();
 					jsonObject.put("parametro", (JSONObject)JSONSerializer.toJSON(parametroTO,parametroTO.getJsonConfig()));
 				}
 			}
@@ -306,7 +306,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarConsecutivo(consecutivoTO);
-					id=consecutivoTO.getId().toString();
+					id=consecutivoTO.getNpid().toString();
 					jsonObject.put("consecutivo", (JSONObject)JSONSerializer.toJSON(consecutivoTO,consecutivoTO.getJsonConfig()));
 				}
 			}
@@ -334,7 +334,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarTipoidentificacion(tipoidentificacionTO);
-					id=tipoidentificacionTO.getId().toString();
+					id=tipoidentificacionTO.getNpid().toString();
 					jsonObject.put("tipoidentificacion", (JSONObject)JSONSerializer.toJSON(tipoidentificacionTO,tipoidentificacionTO.getJsonConfig()));
 				}
 			}
@@ -363,7 +363,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarFuentefinanciamiento(fuentefinanciamientoTO);
-					id=fuentefinanciamientoTO.getId().toString();
+					id=fuentefinanciamientoTO.getNpid().toString();
 					jsonObject.put("fuentefinanciamiento", (JSONObject)JSONSerializer.toJSON(fuentefinanciamientoTO,fuentefinanciamientoTO.getJsonConfig()));
 				}
 			}
@@ -393,7 +393,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarOrganismo(organismoTO);
-					id=organismoTO.getId().toString();
+					id=organismoTO.getNpid().toString();
 					jsonObject.put("organismo", (JSONObject)JSONSerializer.toJSON(organismoTO,organismoTO.getJsonConfig()));
 				}
 			}
@@ -423,7 +423,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarObra(obraTO);
-					id=obraTO.getId().toString();
+					id=obraTO.getNpid().toString();
 					jsonObject.put("obra", (JSONObject)JSONSerializer.toJSON(obraTO,obraTO.getJsonConfig()));
 				}
 			}
@@ -456,7 +456,8 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarItem(itemTO);
-					//id=itemTO.getId().toString();
+					log.println("id que llega: " + itemTO.getId());
+					id=itemTO.getNpid().toString();
 					jsonObject.put("item", (JSONObject)JSONSerializer.toJSON(itemTO,itemTO.getJsonConfig()));
 				}
 			}
@@ -468,7 +469,7 @@ public class AdministracionController {
 				if(subitemTO.getSubitemunidadmedidaid()!=null && subitemTO.getSubitemunidadmedidaid().longValue()==0)
 					subitemTO.setSubitemunidadmedidaid(null);
 				UtilSession.adminsitracionServicio.transCrearModificarSubitem(subitemTO);
-				id=subitemTO.getId().toString();
+				id=subitemTO.getNpid().toString();
 				jsonObject.put("subitem", (JSONObject)JSONSerializer.toJSON(subitemTO,subitemTO.getJsonConfig()));
 			}
 
@@ -496,7 +497,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarGrupomedida(grupomedidaTO);
-					id=grupomedidaTO.getId().toString();
+					id=grupomedidaTO.getNpid().toString();
 					jsonObject.put("grupomedida", (JSONObject)JSONSerializer.toJSON(grupomedidaTO,grupomedidaTO.getJsonConfig()));
 				}
 			}
@@ -527,7 +528,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarClaseregistro(claseregistroTO);
-					id=claseregistroTO.getId().toString();
+					id=claseregistroTO.getNpid().toString();
 					jsonObject.put("claseregistro", (JSONObject)JSONSerializer.toJSON(claseregistroTO,claseregistroTO.getJsonConfig()));
 				}
 			}
@@ -590,7 +591,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarTipodocumento(tipodocumentoTO);
-					id=tipodocumentoTO.getId().toString();
+					id=tipodocumentoTO.getNpid().toString();
 					jsonObject.put("tipodocumento", (JSONObject)JSONSerializer.toJSON(tipodocumentoTO,tipodocumentoTO.getJsonConfig()));
 				}
 			}
@@ -613,7 +614,7 @@ public class AdministracionController {
 				ParametroindicadorTO parametroindicadorTO  = gson.fromJson(new StringReader(objeto), ParametroindicadorTO.class);
 				accion = (parametroindicadorTO.getId()==null)?"crear":"actualizar";
 				UtilSession.adminsitracionServicio.transCrearModificarParametroindicador(new ParametroindicadorTO());
-				id=parametroindicadorTO.getId().toString();
+				id=parametroindicadorTO.getNpid().toString();
 				jsonObject.put("parametroindicador", (JSONObject)JSONSerializer.toJSON(parametroindicadorTO,parametroindicadorTO.getJsonConfig()));
 			}
 
@@ -642,7 +643,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarTipoproducto(tipoproductoTO);
-					id=tipoproductoTO.getId().toString();
+					id=tipoproductoTO.getNpid().toString();
 					jsonObject.put("tipoproducto", (JSONObject)JSONSerializer.toJSON(tipoproductoTO,tipoproductoTO.getJsonConfig()));
 				}
 			}
@@ -670,7 +671,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarTiporegimen(tiporegimenTO);
-					id=tiporegimenTO.getId().toString();
+					id=tiporegimenTO.getNpid().toString();
 					jsonObject.put("tiporegimen", (JSONObject)JSONSerializer.toJSON(tiporegimenTO,tiporegimenTO.getJsonConfig()));
 				}
 			}
@@ -700,7 +701,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarProcedimiento(procedimientoTO);
-					id=procedimientoTO.getId().toString();
+					id=procedimientoTO.getNpid().toString();
 					jsonObject.put("tipoidentificacion", (JSONObject)JSONSerializer.toJSON(procedimientoTO,procedimientoTO.getJsonConfig()));
 				}
 			}
@@ -738,7 +739,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarGrupo(grupoTO);
-					id=grupoTO.getId().toString();
+					id=grupoTO.getNpid().toString();
 					jsonObject.put("grupo", (JSONObject)JSONSerializer.toJSON(grupoTO,grupoTO.getJsonConfig()));
 				}
 			}
@@ -777,7 +778,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarGrado(gradoTO);
-					id=gradoTO.getId().toString();
+					id=gradoTO.getNpid().toString();
 					jsonObject.put("grado", (JSONObject)JSONSerializer.toJSON(gradoTO,gradoTO.getJsonConfig()));
 				}
 			}
@@ -805,7 +806,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarClasificacion(clasificacionTO);
-					id=clasificacionTO.getId().toString();
+					id=clasificacionTO.getNpid().toString();
 					jsonObject.put("clasificacion", (JSONObject)JSONSerializer.toJSON(clasificacionTO,clasificacionTO.getJsonConfig()));
 				}
 			}
@@ -844,7 +845,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarFuerza(fuerzaTO);
-					id=fuerzaTO.getId().toString();
+					id=fuerzaTO.getNpid().toString();
 					jsonObject.put("fuerza", (JSONObject)JSONSerializer.toJSON(fuerzaTO,fuerzaTO.getJsonConfig()));
 				}
 			}
@@ -880,7 +881,7 @@ public class AdministracionController {
 					}
 					else{
 						UtilSession.adminsitracionServicio.transCrearModificarGradofuerza(gradofuerzaTO);
-						id=gradofuerzaTO.getId().toString();
+						id=gradofuerzaTO.getNpid().toString();
 //						jsonObject.put("gradoescala", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfig()));
 					}
 				}
@@ -938,7 +939,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarEspecialidad(especialidadTO);
-					id=especialidadTO.getId().toString();
+					id=especialidadTO.getNpid().toString();
 					jsonObject.put("especialidades", (JSONObject)JSONSerializer.toJSON(especialidadTO,especialidadTO.getJsonConfig()));
 				}
 			}
@@ -976,7 +977,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarCargo(cargoTO);
-					id=cargoTO.getId().toString();
+					id=cargoTO.getNpid().toString();
 					jsonObject.put("cargo", (JSONObject)JSONSerializer.toJSON(cargoTO,cargoTO.getJsonConfig()));
 				}
 			}
@@ -1005,7 +1006,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarEscalarmu(escalarmuTO);
-					id=escalarmuTO.getId().toString();
+					id=escalarmuTO.getNpid().toString();
 					jsonObject.put("escalarmu", (JSONObject)JSONSerializer.toJSON(escalarmuTO,escalarmuTO.getJsonConfig()));
 				}
 			}
@@ -1038,7 +1039,7 @@ public class AdministracionController {
 					}
 					else{
 						UtilSession.adminsitracionServicio.transCrearModificarGradoescala(gradoescalaTO);
-						id=gradoescalaTO.getId().toString();
+						id=gradoescalaTO.getNpid().toString();
 						jsonObject.put("gradoescala", (JSONObject)JSONSerializer.toJSON(gradoescalaTO,gradoescalaTO.getJsonConfig()));
 					}
 				}
@@ -1070,7 +1071,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarCargoescala(cargoescalaTO);
-					id=cargoescalaTO.getId().toString();
+					id=cargoescalaTO.getNpid().toString();
 					jsonObject.put("cargoescala", (JSONObject)JSONSerializer.toJSON(cargoescalaTO,cargoescalaTO.getJsonConfig()));
 				}
 			}
@@ -1107,7 +1108,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.planificacionServicio.transCrearModificarNivelorganido(nivelorganicoTO);
-					id=nivelorganicoTO.getId().toString();
+					//.....id=nivelorganicoTO.getNpid().toString();
 					jsonObject.put("cargoescala", (JSONObject)JSONSerializer.toJSON(nivelorganicoTO,nivelorganicoTO.getJsonConfig()));
 				}
 			}
@@ -1132,7 +1133,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.estructuraorganicaServicio.transCrearModificarInstitucion(institucionTO);
-					id=institucionTO.getId().toString();
+					id=institucionTO.getNpid().toString();
 					jsonObject.put("institucion", (JSONObject)JSONSerializer.toJSON(institucionTO,institucionTO.getJsonConfig()));
 				}
 			}
