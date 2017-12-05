@@ -69,7 +69,7 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 		},
 
 		guardarEmpleadosPlaza:function(objeto){
-			var url = "estructuraorganica/unidadarbolplaza/";
+			var url = "estructuraorganica/unidadarbolplazaempleado/";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 	}
