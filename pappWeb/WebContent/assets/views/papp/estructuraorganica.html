@@ -1014,29 +1014,33 @@
 															<td>
 																<div class="form-group">
 					                                                <div class="input-group">
-					                                                    <input type="text"
-					                                                    	class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-required ng-valid-date ng-touched"
-					                                                    	uib-datepicker-popup="dd-MMMM-yyyy" ng-model="obj.npfechainicioc"
-					                                                    	is-open="opened" datepicker-options="datepickerOptions"
-					                                                    	ng-required="true" close-text="Close" required="required"
-					                                                    	style="" name="npfechainicioc">
-				                                                    	<div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)"
-				                                                    		template-url="uib/template/datepickerPopup/popup.html"
-				                                                    		class="ng-pristine ng-untouched ng-valid ng-scope ng-not-empty ng-valid-date-disabled" style="">
-					                                                    	<div></div>
-																		</div>
-					                                                    <span class="input-group-btn">
-					                                                        <button type="button" class="btn btn-primary" ng-click="open()">
-					                                                            <i class="fa fa-calendar"></i>
-					                                                        </button>
-					                                                    </span>
+																		<input type="text" class="form-control"
+																			uib-datepicker-popup="dd/MM/yyyy" 
+																			name="npfechainicioc" ng-model="obj.npfechainicioc"
+																			is-open="popupFechaInicio.opened" datepicker-options="dateOptions"
+																			ng-required="true" close-text="Close">
+																		<span class="input-group-btn">
+																			<button type="button" class="btn btn-primary" ng-click="openFechaInicio()">
+																				<i class="glyphicon glyphicon-calendar"></i>
+																			</button>
+																		</span>
 					                                                </div>
 					                                            </div>
 															</td>
 															<td>
 																<div class="form-group has-success">
-																	<input ng-model="obj.npfechafinc" datetime-picker
-																		date-format="yyyy-MM-dd" date-only>
+					                                                <div class="input-group">
+																		<input type="text" class="form-control"
+																			uib-datepicker-popup="dd/MM/yyyy" 
+																			name="npfechafinc" ng-model="obj.npfechafinc"
+																			is-open="popupFechaFin.opened" datepicker-options="dateOptions"
+																			ng-required="true" close-text="Close">
+																		<span class="input-group-btn">
+																			<button type="button" class="btn btn-primary" ng-click="openFechaFin()">
+																				<i class="glyphicon glyphicon-calendar"></i>
+																			</button>
+																		</span>
+																	</div>
 																</div>
 															</td>
 														</tr>
