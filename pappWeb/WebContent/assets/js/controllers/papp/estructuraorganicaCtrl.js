@@ -469,7 +469,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	    //$scope.objetoPlazaDetail=resp.json.details;
         submit: function (formEmpleadosPlaza) {
             var firstError = null;
-    		var obj = {unidadarbolplaza: $scope.objetoPlaza, details: $scope.objetoPlazaDetail}
+    		let obj = $scope.objetoPlaza;
+    		obj.details = $scope.objetoPlazaDetail;
         	unidadFactory.guardarEmpleadosPlaza(obj).then(function(resp){
         		console.log(resp);
     			 if (resp.estado){

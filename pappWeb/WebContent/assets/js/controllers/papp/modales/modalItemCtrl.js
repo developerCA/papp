@@ -9,6 +9,7 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
 	$scope.estadoFiltro=null;
 	$scope.tipoFiltro=null;
 	$scope.ivaFiltro=null;
+	$scope.codigopadreFiltro=null;
 		
 	var pagina = 1;
 	
@@ -44,11 +45,12 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
 	
 	
 	$scope.filtrar=function(){
-		
-			
 		$scope.data=[];
-		itemsFactory.traerItemsFiltro(pagina,$rootScope.ejefiscal,$scope.codigoFiltro, $scope.nombreFiltro, $scope.estadoFiltro, $scope.tipoFiltro).then(function(resp){
-			
+		itemsFactory.traerItemsFiltro(
+			pagina, $rootScope.ejefiscal, $scope.codigoFiltro,
+			$scope.nombreFiltro, $scope.estadoFiltro,
+			$scope.tipoFiltro, $scope.codigopadreFiltro
+		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
