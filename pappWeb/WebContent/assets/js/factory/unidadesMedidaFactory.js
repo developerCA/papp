@@ -19,7 +19,8 @@ app.factory("UnidadesMedidaFactory", ["Restangular", function (Restangular) {
             if (estado != null && estado != "") url += "&estado=" + estado;
             if (codigo != null && codigo != "") url += "&codigo=" + codigo;
             
-            console.clear();
+            if (codigo != null && codigo != "") url += "&codigo=" + codigo;
+            console.log("FILTRAR:");
             console.log(url);
             return Restangular.allUrl(url).getList();
 

@@ -3,7 +3,8 @@
 app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "SweetAlert", "$filter", "ngTableParams", "UnidadesMedidaFactory",
 	function ($scope, $uibModalInstance, SweetAlert, $filter, ngTableParams, UnidadesMedidaFactory) {
 
-	    $scope.nombre = null;
+		$scope.codigo = null;
+		$scope.nombre = null;
 	    $scope.estado = null;
 	    $scope.nombregrupo = null;
 	    $scope.edicion = false;
@@ -61,7 +62,9 @@ app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "S
 	    });
 
 	    $scope.filtrar = function () {
-
+console.log($scope.nombre);
+console.log($scope.estado);
+console.log($scope.codigo);
 	        $scope.data = [];
 	        UnidadesMedidaFactory.traerUnidadesFiltro(pagina, $scope.nombreFiltro, $scope.estado, $scope.nombregrupo,$scope.codigoFiltro).then(function (resp) {
 	            if (resp.meta)
@@ -74,6 +77,7 @@ app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "S
 	    }
 
 	    $scope.limpiar = function () {
+	    	$scope.codigo = null;
 	        $scope.nombreFiltro = null;
 	        $scope.estado = null;
 	        $scope.nombregrupo = null;
