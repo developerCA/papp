@@ -36,15 +36,15 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label> Padre Nombre</label>
+                                            <label> C&oacute;digo Padre</label>
                                 <div class="input-group">
 										<input type="text" placeholder="Seleccione el codigo padre"
 											class="form-control" name="codigopadre"
-											ng-model="objeto.itempadreid" ng-disabled="true" /> <span
+											ng-model="codigopadre" ng-disabled="true" /> <span
 											class="input-group-btn">
 											<button type="button" class="btn btn-primary"
-												ng-click="buscarItem()">
-												<i class="fa fa-search"></i> Buscar
+												ng-click="buscarItemFiltro()">
+												<i class="fa fa-search"></i>
 											</button>
 										</span>
 									</div>
@@ -165,7 +165,7 @@
                                 <div class="input-group">
 										<input type="text" placeholder="Seleccione el codigo padre"
 											class="form-control" name="codigopadre"
-											ng-model="objeto.itempadreid" ng-disabled="true" /> <span
+											ng-model="objeto.codigopadre" ng-disabled="true" /> <span
 											class="input-group-btn">
 											<button type="button" class="btn btn-primary"
 												ng-click="buscarItem()">
