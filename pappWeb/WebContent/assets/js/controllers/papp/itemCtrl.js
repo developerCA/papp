@@ -61,7 +61,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
         itemsFactory.traerItemsFiltro(
         		pagina, $rootScope.ejefiscal, $scope.codigo,
         		$scope.nombre, $scope.estado,
-        		$scope.tipo, $scope.idpadreFiltro
+        		$scope.tipo, $scope.codigopadre
 		).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
@@ -112,7 +112,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.itempadreid = obj.id;
-			$scope.objeto.codigopadre = obj.codigo;			
+			$scope.objeto.npcodigopadre = obj.codigo;			
 			$scope.objeto.npnombrepadre = obj.nombre;			
 		}, function() {
 		});

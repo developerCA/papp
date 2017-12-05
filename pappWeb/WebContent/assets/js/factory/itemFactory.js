@@ -16,6 +16,7 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
             if (tipo != null && tipo != "") url += "&tipo=" + tipo;
             if (estado != null && estado != "") url += "&estado=" + estado;
             if (codigopadre != null && codigopadre != "") url += "&codigopadre=" + codigopadre;
+            console.log("FILTRAR: " + url);
             return Restangular.allUrl(url).getList();
 
         },
