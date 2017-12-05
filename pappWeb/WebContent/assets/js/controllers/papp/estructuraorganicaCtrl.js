@@ -21,6 +21,20 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.dEmpleados=false;
 	$scope.dEmpleadosEditar=false;
 
+	$scope.popupFechaInicio = {
+		opened: false
+	};
+	$scope.openFechaInicio = function() {
+		$scope.popupFechaInicio.opened = true;
+	}
+
+	$scope.popupFechaFin = {
+		opened: false
+	};
+	$scope.openFechaFin = function() {
+		$scope.popupFechaFin.opened = true;
+	}
+
 	var pagina = 1;
 	
 	$scope.consultar=function(){
@@ -100,8 +114,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	}
 	
 	$scope.agregarUnidadHija=function(node){
-		console.log(node.unidadarbolerganicaid);
-		console.log(node);
+		//console.log(node.unidadarbolerganicaid);
+		//console.log(node);
 		$scope.objetoUnidad={
 			id: null,
 			unidadarbolerganicaid: node.unidadarbolerganicaid,
@@ -140,7 +154,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 					}
 				}
 				$scope.edicion=true;
-				console.log(resp.json);
+				//console.log(resp.json);
 				$scope.dUnidad=false;
 				$scope.dUnidadPlazaEditar=true;
 		})
@@ -206,6 +220,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.tabactivo=2;
 		$scope.edicion=true;
 		$scope.dEmpleados=true;
+		$scope.data=[];
 
 		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionada,'A').then(function(resp){
 			$scope.data = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
@@ -217,10 +232,14 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		//console.log(id);
 
 		unidadFactory.traerPlazaEmpleadosEditar(id.id, id.plazaid).then(function(resp){
-			console.log(resp.json);
+			//console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objetoPlaza=resp.json.unidadarbolplaza;
 			    $scope.objetoPlazaDetail=resp.json.details;
+				for (let obj of $scope.objetoPlazaDetail) {
+					obj.npfechainicioc = Date.parse(obj.npfechainicioc);
+					obj.npfechafinc = Date.parse(obj.npfechafinc);
+				}
 			}
 			$scope.estructuraSeleccionada=id;
 			$scope.edicion=true;
