@@ -9,6 +9,9 @@ app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "S
 	    $scope.edicion = false;
 	    $scope.url = "";
 	    $scope.objeto = { unidadmedidagrupomedidaid : null };
+	    $scope.nombreFiltro=null;
+	    $scope.codigoFiltro=null;
+	    
 	    
 	    var pagina = 1;
 
@@ -60,7 +63,7 @@ app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "S
 	    $scope.filtrar = function () {
 
 	        $scope.data = [];
-	        UnidadesMedidaFactory.traerUnidadesFiltro(pagina, $scope.nombre, $scope.estado, $scope.nombregrupo).then(function (resp) {
+	        UnidadesMedidaFactory.traerUnidadesFiltro(pagina, $scope.nombreFiltro, $scope.estado, $scope.nombregrupo,$scope.codigoFiltro).then(function (resp) {
 	            if (resp.meta)
 	                $scope.data = resp;
 	        })
@@ -71,9 +74,11 @@ app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "S
 	    }
 
 	    $scope.limpiar = function () {
-	        $scope.nombre = null;
+	        $scope.nombreFiltro = null;
 	        $scope.estado = null;
 	        $scope.nombregrupo = null;
+	        $scope.codigoFiltro=null;
+		    
 	        $scope.consultar();
 	    };
 

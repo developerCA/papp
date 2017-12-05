@@ -345,7 +345,7 @@
 									ng-click="seleccionar(obj)"><i class="fa fa-check"></i></a></td>
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
-								<td data-title="'Padre Nombre'">NO LLEGA</td>
+								<td data-title="'Padre Nombre'">{{obj.npnombrepadre}}</td>
 
 								<td data-title="'Aplica Iva'"> <span ng-if="obj.aplicaiva==1">Si</span>
                                     <span ng-if="obj.aplicaiva==0">No</span></td>
@@ -416,6 +416,9 @@
 									ng-click="seleccionar(obj)"><i class="fa fa-check"></i></a></td>
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
+								<td data-title="'C&oacute;digo Grupo'">{{obj.npCodigogrupo}}</td>
+								<td data-title="'Nombre Grupo'">{{obj.npNombregrupo}}</td>
+
 							</tr>
 						</table>
 					</div>
