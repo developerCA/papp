@@ -16,6 +16,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
     $scope.codigopadre = null;
     $scope.url = "";
     $scope.objeto = null;
+    $scope.idpadreFiltro
     $scope.data=[];
     var pagina = 1;
 
@@ -60,7 +61,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
         itemsFactory.traerItemsFiltro(
         		pagina, $rootScope.ejefiscal, $scope.codigo,
         		$scope.nombre, $scope.estado,
-        		$scope.tipo, $scope.codigopadre
+        		$scope.tipo, $scope.idpadreFiltro
 		).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
@@ -80,6 +81,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
         $scope.tipo = null;
         $scope.estado = null;
         $scope.codigopadre = null;
+        $scope.idpadreFiltro=null;
         $scope.consultar();
     };
 
@@ -125,7 +127,8 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.codigopadre = obj.codigo;			
+			$scope.codigopadre = obj.codigo;
+			$scope.idpadreFiltro=obj.id;
 		}, function() {
 		});
 	};
