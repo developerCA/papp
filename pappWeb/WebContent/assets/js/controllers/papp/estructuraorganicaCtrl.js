@@ -140,7 +140,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 					}
 				}
 				$scope.edicion=true;
-				//console.log(resp.json);
+				console.log(resp.json);
 				$scope.dUnidad=false;
 				$scope.dUnidadPlazaEditar=true;
 		})

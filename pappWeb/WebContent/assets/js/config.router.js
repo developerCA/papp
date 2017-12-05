@@ -429,9 +429,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalClasificacionCtrl','ClasificacionFactory',
         		'ModalSocioNegocioCtrl','SociosNegocioFactory'
 		),
-        title: 'Estructura Orgï¿½nica',
+        title: 'Estructura Orgánica',
         ncyBreadcrumb: {
-            label: 'Estructura Orgï¿½nica'
+            label: 'Estructura Orgánica'
         }
     }).state('app.indicadores', {
         url: "/indicadores",

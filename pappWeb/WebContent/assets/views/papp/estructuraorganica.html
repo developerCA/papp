@@ -342,12 +342,12 @@
         }"></span></a>
     {{node.title}}
 <div class="pull-right ">
-  <a uib-tooltip="Agregar" class="btn btn-info btn-sm" data-nodrag ng-click="agregarUnidadHija(node);" style="margin-right: 8px;"><span
+  <a uib-tooltip="Agregar" class="btn btn-info btn-sm" data-nodrag ng-click="agregarUnidadHija(node);"><span
         class="glyphicon glyphicon-plus"></span></a>  
   <a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag ng-click="modificarUnidad(node)"><span
         class="fa fa-pencil"></span></a>
     <a uib-tooltip="Mantener Plaza" class="btn btn-info btn-sm" data-nodrag ng-click="mantenerPlaza(node)"><span
-        class="fa fa-user"></span></a>
+        class="fa fa-building-o"></span></a>
 </div>
   </div>
   <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
@@ -721,7 +721,7 @@
 															<td>
 																<div class="form-group has-success">
 																    <input type="text" placeholder="Escriba un dotacion"
-																        class="form-control" name="dotacion" ng-model="obj.dotacion" ng-disabled="true">
+																        class="form-control" name="dotacion" ng-model="obj.dotacion">
 																</div>
 															</td>
 															<td>
@@ -769,17 +769,17 @@
 																</div>
 															</td>
 															<td>
-<div class="input-group form-group has-success">
-	<input type="text" placeholder="NO ESTA EN OBJETO - Seleccione una Clasificaci&oacute;n"
-		class="form-control" name="npclasificacionnombre" ng-disabled="true"
-		ng-model="obj.npclasificacionnombre" />
-	<span class="input-group-btn">
-		<button type="button" class="btn btn-primary"
-			ng-click="abrirClasificacion($index)">
-			<i class="fa fa-search"></i>
-		</button>
-	</span>
-</div>
+																<div class="input-group form-group has-success">
+																	<input type="text" placeholder="Seleccione una Clasificaci&oacute;n"
+																		class="form-control" name="npclasificacionnombre" ng-disabled="true"
+																		ng-model="obj.npclasificacionnombre" />
+																	<span class="input-group-btn">
+																		<button type="button" class="btn btn-primary"
+																			ng-click="abrirClasificacion($index)">
+																			<i class="fa fa-search"></i>
+																		</button>
+																	</span>
+																</div>
 															</td>
 															<td>
 																<div class="form-group has-success">
@@ -1012,15 +1012,31 @@
 																</div>
 															</td>
 															<td>
-																<div class="form-group has-success">
-																    <input type="text" placeholder="Escriba un cargo nombre"
-																        class="form-control" name="npfechainicioc" ng-model="obj.npfechainicioc">
-																</div>
+																<div class="form-group">
+					                                                <div class="input-group">
+					                                                    <input type="text"
+					                                                    	class="form-control ng-pristine ng-valid ng-isolate-scope ng-not-empty ng-valid-required ng-valid-date ng-touched"
+					                                                    	uib-datepicker-popup="dd-MMMM-yyyy" ng-model="obj.npfechainicioc"
+					                                                    	is-open="opened" datepicker-options="datepickerOptions"
+					                                                    	ng-required="true" close-text="Close" required="required"
+					                                                    	style="" name="npfechainicioc">
+				                                                    	<div uib-datepicker-popup-wrap="" ng-model="date" ng-change="dateSelection(date)"
+				                                                    		template-url="uib/template/datepickerPopup/popup.html"
+				                                                    		class="ng-pristine ng-untouched ng-valid ng-scope ng-not-empty ng-valid-date-disabled" style="">
+					                                                    	<div></div>
+																		</div>
+					                                                    <span class="input-group-btn">
+					                                                        <button type="button" class="btn btn-primary" ng-click="open()">
+					                                                            <i class="fa fa-calendar"></i>
+					                                                        </button>
+					                                                    </span>
+					                                                </div>
+					                                            </div>
 															</td>
 															<td>
 																<div class="form-group has-success">
-																    <input type="text" placeholder="Escriba un dotacion"
-																        class="form-control" name="npfechafinc" ng-model="obj.npfechafinc">
+																	<input ng-model="obj.npfechafinc" datetime-picker
+																		date-format="yyyy-MM-dd" date-only>
 																</div>
 															</td>
 														</tr>
