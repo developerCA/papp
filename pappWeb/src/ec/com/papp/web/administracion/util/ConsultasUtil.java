@@ -1880,19 +1880,19 @@ public class ConsultasUtil {
 		String campo="";
 		CargoTO cargoTO=new CargoTO();
 		try{
-//			int pagina=1;
-//			if(parameters.get("pagina")!=null)		
-//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-//			int filas=20;
-//			if(parameters.get("filas")!=null)
-//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
-//			int primero=(pagina*filas)-filas;
+			int pagina=1;
+			if(parameters.get("pagina")!=null)		
+				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+			int filas=20;
+			if(parameters.get("filas")!=null)
+				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+			int primero=(pagina*filas)-filas;
 			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
-//			cargoTO.setFirstResult(primero);
-//			cargoTO.setMaxResults(filas);
+			cargoTO.setFirstResult(primero);
+			cargoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
 				cargoTO.setOrderByField(OrderBy.orderDesc(orderBy));
@@ -1904,17 +1904,13 @@ public class ConsultasUtil {
 				cargoTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				cargoTO.setEstado(parameters.get("estado"));
-//			SearchResultTO<CargoTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargoPaginado(cargoTO);
-			Collection<CargoTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargo(cargoTO);
-//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-//			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
-//			resultado.size().put("valor", resultado.getCountResults().toString());
-//			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,cargoTO.getJsonConfig()));
-			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
-			totalMap.put("valor", resultado.size());
+			SearchResultTO<CargoTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargoPaginado(cargoTO);
+			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+			HashMap<String, String>  totalMap=new HashMap<String, String>();
+			totalMap.put("valor", resultado.getCountResults().toString());
+			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),cargoTO.getJsonConfig()));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
-
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
