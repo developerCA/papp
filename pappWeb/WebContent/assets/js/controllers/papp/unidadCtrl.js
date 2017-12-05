@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","unidadFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,unidadFactory) {
+app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","unidadFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,unidadFactory) {
     
 	
 	$scope.nombreFiltro=null;

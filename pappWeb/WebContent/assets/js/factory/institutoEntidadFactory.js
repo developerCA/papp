@@ -16,7 +16,9 @@ app.factory("institutoEntidadFactory", [ "Restangular", function(Restangular) {
 			if(codigoEntidad!=null && codigoEntidad != "") url += "&codigo=" + codigoEntidad;	
 			if(nombreEntidad!=null && nombreEntidad != "") url += "&nombre=" + nombreEntidad;	
 			if(ejercicoFiscal!=null && ejercicoFiscal != "") url += "&ejercicoFiscal=" + ejercicoFiscal;	
-			if(estado!=null && estado != "") url += "&estado=" + estado;	
+			if(estado!=null && estado != "") url += "&estado=" + estado;
+
+console.log("FILTRO: "+url);
 			return Restangular.allUrl(url).getList();
 		},
 

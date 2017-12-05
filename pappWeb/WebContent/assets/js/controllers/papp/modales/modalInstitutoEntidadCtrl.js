@@ -18,11 +18,14 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 		$scope.filtrar=function(){
 			$scope.data=[];
 			institutoEntidadFactory.traerInstitutoEntidadFiltro(
-					pagina,$scope.codigoInstitucionFiltro,$scope.nombreInstitucionFiltro,
-					$scope.codigoEntidadFiltro,$scope.nombreEntidadFiltro,
-					$scope.ejercicioFiscalFiltro,$scope.estadoFiltro
+					pagina,
+					$scope.codigoInstitucionFiltro,
+					$scope.nombreInstitucionFiltro,
+					$scope.codigoEntidadFiltro,
+					$scope.nombreEntidadFiltro,
+					$scope.ejercicioFiscalFiltro,
+					$scope.estadoFiltro
 			).then(function(resp){
-				console.clear();
 				console.log(resp);
 				if (resp.meta)
 					$scope.data=resp;
@@ -30,9 +33,12 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 		}
 		
 		$scope.limpiar=function(){
-			$scope.nombreFiltro=null;
-			$scope.codigoFiltro=null;
-			$scope.estadoFiltro=null;
+			$scope.codigoInstitucionFiltro=null;
+			$scope.nombreInstitucionFiltro=null;
+			$scope.codigoEntidadFiltro=null;
+			$scope.nombreEntidadFiltro=null;
+			$scope.ejercicioFiscalFiltro=null;
+			$scope.esteadoFiltro=null;
 			$scope.consultar();
 			
 		};
