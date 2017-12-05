@@ -62,11 +62,14 @@ app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "S
 	    });
 
 	    $scope.filtrar = function () {
-console.log($scope.nombre);
-console.log($scope.estado);
-console.log($scope.codigo);
 	        $scope.data = [];
-	        UnidadesMedidaFactory.traerUnidadesFiltro(pagina, $scope.nombreFiltro, $scope.estado, $scope.nombregrupo,$scope.codigoFiltro).then(function (resp) {
+	        UnidadesMedidaFactory.traerUnidadesFiltro(
+	        		pagina,
+	        		$scope.nombre,
+	        		$scope.estado,
+	        		$scope.nombregrupo,
+	        		$scope.codigo
+    		).then(function (resp) {
 	            if (resp.meta)
 	                $scope.data = resp;
 	        })
@@ -78,10 +81,9 @@ console.log($scope.codigo);
 
 	    $scope.limpiar = function () {
 	    	$scope.codigo = null;
-	        $scope.nombreFiltro = null;
+	        $scope.nombre = null;
 	        $scope.estado = null;
 	        $scope.nombregrupo = null;
-	        $scope.codigoFiltro=null;
 		    
 	        $scope.consultar();
 	    };
