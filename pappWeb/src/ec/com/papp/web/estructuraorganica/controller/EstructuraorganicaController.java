@@ -191,6 +191,9 @@ public class EstructuraorganicaController {
 			//Unidad arbol plaza empleado
 			else if(clase.equals("unidadarbolplazaempleado")){
 				UnidadarbolplazaTO unidadarbolplazaTO = gson.fromJson(new StringReader(objeto), UnidadarbolplazaTO.class);
+				log.println("id** " + unidadarbolplazaTO.getId().getId());
+				log.println("plaza id: " + unidadarbolplazaTO.getId().getPlazaid());
+				log.println("codigo" + unidadarbolplazaTO.getCodigo());
 				for(UnidadarbolplazaempleadoTO unidadarbolplazaempleadoTO:unidadarbolplazaTO.getDetails()) {
 					if(unidadarbolplazaempleadoTO.getNpfechafin()!=null)
 						unidadarbolplazaempleadoTO.setFechafin(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechafin()));

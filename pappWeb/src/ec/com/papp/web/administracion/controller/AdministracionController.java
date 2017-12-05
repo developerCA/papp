@@ -106,17 +106,23 @@ public class AdministracionController {
 				accion = (ejerciciofiscalTO.getId()==null)?"crear":"actualizar";
 				
 				//pregunto si ya existe el nombre en el nivel actual
-				EjerciciofiscalTO ejerciciofiscalTO2=new EjerciciofiscalTO();
-				ejerciciofiscalTO2.setAnio(ejerciciofiscalTO.getAnio());
-				Collection<EjerciciofiscalTO> ejerciciofiscalTOs=UtilSession.adminsitracionServicio.transObtenerEjerciciofiscal(ejerciciofiscalTO2);
+				EjerciciofiscalTO ejerciciofiscalTO3=new EjerciciofiscalTO();
+				ejerciciofiscalTO3.setAnio(ejerciciofiscalTO.getAnio());
+				Collection<EjerciciofiscalTO> ejerciciofiscalTOs=UtilSession.adminsitracionServicio.transObtenerEjerciciofiscal(ejerciciofiscalTO3);
 				log.println("ejercicios fiscales: " + ejerciciofiscalTOs.size());
 				boolean grabar=true;
 				if(ejerciciofiscalTOs.size()>0){
-					ejerciciofiscalTO2=(EjerciciofiscalTO)ejerciciofiscalTOs.iterator().next();
-					if((ejerciciofiscalTO.getId()!=null && ejerciciofiscalTO.getId().longValue()!=0) && ejerciciofiscalTO2.getId().longValue()!=ejerciciofiscalTO.getId().longValue())
-						grabar=false;
-					else if((ejerciciofiscalTO.getId()==null || (ejerciciofiscalTO.getId()!=null && ejerciciofiscalTO2.getId().longValue()!=ejerciciofiscalTO.getId().longValue())) && ejerciciofiscalTO.getAnio()!=null && ejerciciofiscalTO2.getAnio().equals(ejerciciofiscalTO.getAnio()))
-						grabar=false;
+					for(EjerciciofiscalTO ejerciciofiscalTO2:ejerciciofiscalTOs) {
+						//ejerciciofiscalTO2=(EjerciciofiscalTO)ejerciciofiscalTOs.iterator().next();
+						if((ejerciciofiscalTO.getId()!=null && ejerciciofiscalTO.getId().longValue()!=0) && ejerciciofiscalTO2.getId().longValue()!=ejerciciofiscalTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((ejerciciofiscalTO.getId()==null || (ejerciciofiscalTO.getId()!=null && ejerciciofiscalTO2.getId().longValue()!=ejerciciofiscalTO.getId().longValue())) && ejerciciofiscalTO.getAnio()!=null && ejerciciofiscalTO2.getAnio().equals(ejerciciofiscalTO.getAnio())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.anio.duplicado"));
@@ -147,10 +153,12 @@ public class AdministracionController {
 							if((divisiongeograficaTO.getId()!=null && divisiongeograficaTO.getId().longValue()!=0) && divisiongeograficaTO3.getId().longValue()!=divisiongeograficaTO.getId().longValue() && divisiongeograficaTO3.getCodigo().equals(divisiongeograficaTO.getCodigo())) {
 								log.println("entra por 1");
 								grabar=false;
+								break;
 							}
 							else if((divisiongeograficaTO.getId()==null || (divisiongeograficaTO.getId()!=null && divisiongeograficaTO3.getId().longValue()!=divisiongeograficaTO.getId().longValue())) && divisiongeograficaTO.getCodigo()!=null && divisiongeograficaTO3.getCodigo().equals(divisiongeograficaTO.getCodigo())) {
 								log.println("entra por 2");
 								grabar=false;
+								break;
 							}
 						}
 					}
@@ -180,11 +188,17 @@ public class AdministracionController {
 				Collection<SocionegocioTO> socionegocioTOs=UtilSession.adminsitracionServicio.transObtenerSocionegocio(socionegocioTO2);
 				boolean grabar=true;
 				if(socionegocioTOs.size()>0){
-					socionegocioTO2=(SocionegocioTO)socionegocioTOs.iterator().next();
-					if((socionegocioTO.getId()!=null && socionegocioTO.getId().longValue()!=0) && socionegocioTO2.getId().longValue()!=socionegocioTO.getId().longValue())
-						grabar=false;
-					else if((socionegocioTO.getId()==null || (socionegocioTO.getId()!=null && socionegocioTO2.getId().longValue()!=socionegocioTO.getId().longValue())) && socionegocioTO.getCodigo()!=null && socionegocioTO2.getCodigo().equals(socionegocioTO.getCodigo()))
-						grabar=false;
+					for(SocionegocioTO socionegocioTO3:socionegocioTOs) {
+						//socionegocioTO2=(SocionegocioTO)socionegocioTOs.iterator().next();
+						if((socionegocioTO.getId()!=null && socionegocioTO.getId().longValue()!=0) && socionegocioTO3.getId().longValue()!=socionegocioTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((socionegocioTO.getId()==null || (socionegocioTO.getId()!=null && socionegocioTO3.getId().longValue()!=socionegocioTO.getId().longValue())) && socionegocioTO.getCodigo()!=null && socionegocioTO3.getCodigo().equals(socionegocioTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 
 				}
 				if(!grabar){
@@ -227,17 +241,22 @@ public class AdministracionController {
 				UnidadmedidaTO unidadmedidaTO = gson.fromJson(new StringReader(objeto), UnidadmedidaTO.class);
 				accion = (unidadmedidaTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el nombre en el nivel actual
-				UnidadmedidaTO unidadmedidaTO2=new UnidadmedidaTO();
-				unidadmedidaTO2.setCodigo(unidadmedidaTO.getCodigo());
-				Collection<UnidadmedidaTO> unidadmedidaTOs=UtilSession.adminsitracionServicio.transObtenerUnidadmedida(unidadmedidaTO2);
+				UnidadmedidaTO unidadmedidaTO3=new UnidadmedidaTO();
+				unidadmedidaTO3.setCodigo(unidadmedidaTO.getCodigo());
+				Collection<UnidadmedidaTO> unidadmedidaTOs=UtilSession.adminsitracionServicio.transObtenerUnidadmedida(unidadmedidaTO3);
 				boolean grabar=true;
 				if(unidadmedidaTOs.size()>0){
-					unidadmedidaTO2=(UnidadmedidaTO)unidadmedidaTOs.iterator().next();
-					if((unidadmedidaTO.getId()!=null && unidadmedidaTO.getId().longValue()!=0) && unidadmedidaTO2.getId().longValue()!=unidadmedidaTO.getId().longValue())
-						grabar=false;
-					else if((unidadmedidaTO.getId()==null || (unidadmedidaTO.getId()!=null && unidadmedidaTO2.getId().longValue()!=unidadmedidaTO.getId().longValue())) && unidadmedidaTO.getCodigo()!=null && unidadmedidaTO2.getCodigo().equals(unidadmedidaTO.getCodigo()))
-						grabar=false;
-
+					for(UnidadmedidaTO unidadmedidaTO2:unidadmedidaTOs) {
+						//unidadmedidaTO2=(UnidadmedidaTO)unidadmedidaTOs.iterator().next();
+						if((unidadmedidaTO.getId()!=null && unidadmedidaTO.getId().longValue()!=0) && unidadmedidaTO2.getId().longValue()!=unidadmedidaTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((unidadmedidaTO.getId()==null || (unidadmedidaTO.getId()!=null && unidadmedidaTO2.getId().longValue()!=unidadmedidaTO.getId().longValue())) && unidadmedidaTO.getCodigo()!=null && unidadmedidaTO2.getCodigo().equals(unidadmedidaTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -257,17 +276,22 @@ public class AdministracionController {
 				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
 				accion = (socionegocioTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el nombre en el nivel actual
-				ParametroTO parametroTO2=new ParametroTO();
-				parametroTO2.setNombre(parametroTO.getNombre());
-				Collection<ParametroTO> parametroTOs=UtilSession.adminsitracionServicio.transObtenerParametrol(parametroTO2);
+				ParametroTO parametroTO3=new ParametroTO();
+				parametroTO3.setNombre(parametroTO.getNombre());
+				Collection<ParametroTO> parametroTOs=UtilSession.adminsitracionServicio.transObtenerParametrol(parametroTO3);
 				boolean grabar=true;
 				if(parametroTOs.size()>0){
-					parametroTO2=(ParametroTO)parametroTOs.iterator().next();
-					if((parametroTO.getId()!=null && parametroTO.getId().longValue()!=0) && parametroTO2.getId().longValue()!=parametroTO.getId().longValue())
-						grabar=false;
-					else if((parametroTO.getId()==null || (parametroTO.getId()!=null && parametroTO2.getId().longValue()!=parametroTO.getId().longValue())) && parametroTO.getNombre()!=null && parametroTO2.getNombre().equals(parametroTO.getNombre()))
-						grabar=false;
-
+					for(ParametroTO parametroTO2:parametroTOs) {
+						//parametroTO2=(ParametroTO)parametroTOs.iterator().next();
+						if((parametroTO.getId()!=null && parametroTO.getId().longValue()!=0) && parametroTO2.getId().longValue()!=parametroTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((parametroTO.getId()==null || (parametroTO.getId()!=null && parametroTO2.getId().longValue()!=parametroTO.getId().longValue())) && parametroTO.getNombre()!=null && parametroTO2.getNombre().equals(parametroTO.getNombre())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.nombre.duplicado"));
@@ -285,20 +309,25 @@ public class AdministracionController {
 				ConsecutivoTO consecutivoTO = gson.fromJson(new StringReader(objeto), ConsecutivoTO.class);
 				accion = (consecutivoTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				ConsecutivoTO consecutivoTO2=new ConsecutivoTO();
-				consecutivoTO2.setNombre(consecutivoTO.getNombre());
-				consecutivoTO2.setConsecutivoejerfiscalid(consecutivoTO.getConsecutivoejerfiscalid());
+				ConsecutivoTO consecutivoTO3=new ConsecutivoTO();
+				consecutivoTO3.setNombre(consecutivoTO.getNombre());
+				consecutivoTO3.setConsecutivoejerfiscalid(consecutivoTO.getConsecutivoejerfiscalid());
 				if(consecutivoTO.getId()==null)
 					consecutivoTO.setUltimousado(0.0);
-				Collection<ConsecutivoTO> fuentefinanciamientoTOs=UtilSession.adminsitracionServicio.transObtenerConsecutivo(consecutivoTO2);
+				Collection<ConsecutivoTO> consecutivoTOs=UtilSession.adminsitracionServicio.transObtenerConsecutivo(consecutivoTO3);
 				boolean grabar=true;
-				if(fuentefinanciamientoTOs.size()>0){
-					consecutivoTO2=(ConsecutivoTO)fuentefinanciamientoTOs.iterator().next();
-					if((consecutivoTO.getId()!=null && consecutivoTO.getId().longValue()!=0) && consecutivoTO2.getId().longValue()!=consecutivoTO.getId().longValue())
-						grabar=false;
-					else if((consecutivoTO.getId()==null || (consecutivoTO.getId()!=null && consecutivoTO2.getId().longValue()!=consecutivoTO.getId().longValue())) && consecutivoTO.getNombre()!=null && consecutivoTO2.getNombre().equals(consecutivoTO.getNombre()))
-						grabar=false;
-
+				if(consecutivoTOs.size()>0){
+					for(ConsecutivoTO consecutivoTO2:consecutivoTOs) {
+						//consecutivoTO2=(ConsecutivoTO)fuentefinanciamientoTOs.iterator().next();
+						if((consecutivoTO.getId()!=null && consecutivoTO.getId().longValue()!=0) && consecutivoTO2.getId().longValue()!=consecutivoTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((consecutivoTO.getId()==null || (consecutivoTO.getId()!=null && consecutivoTO2.getId().longValue()!=consecutivoTO.getId().longValue())) && consecutivoTO.getNombre()!=null && consecutivoTO2.getNombre().equals(consecutivoTO.getNombre())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.nombre.duplicado"));
@@ -316,17 +345,22 @@ public class AdministracionController {
 				TipoidentificacionTO tipoidentificacionTO = gson.fromJson(new StringReader(objeto), TipoidentificacionTO.class);
 				accion = (tipoidentificacionTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				TipoidentificacionTO tipoidentificacionTO2=new TipoidentificacionTO();
-				tipoidentificacionTO2.setNombre(tipoidentificacionTO.getNombre());
-				Collection<TipoidentificacionTO> fuentefinanciamientoTOs=UtilSession.adminsitracionServicio.transObtenerTipoidentificacion(tipoidentificacionTO2);
+				TipoidentificacionTO tipoidentificacionTO3=new TipoidentificacionTO();
+				tipoidentificacionTO3.setNombre(tipoidentificacionTO.getNombre());
+				Collection<TipoidentificacionTO> tipoidentificacionTOs=UtilSession.adminsitracionServicio.transObtenerTipoidentificacion(tipoidentificacionTO3);
 				boolean grabar=true;
-				if(fuentefinanciamientoTOs.size()>0){
-					tipoidentificacionTO2=(TipoidentificacionTO)fuentefinanciamientoTOs.iterator().next();
-					if((tipoidentificacionTO.getId()!=null && tipoidentificacionTO.getId().longValue()!=0) && tipoidentificacionTO2.getId().longValue()!=tipoidentificacionTO.getId().longValue())
-						grabar=false;
-					else if((tipoidentificacionTO.getId()==null || (tipoidentificacionTO.getId()!=null && tipoidentificacionTO2.getId().longValue()!=tipoidentificacionTO.getId().longValue())) && tipoidentificacionTO.getNombre()!=null && tipoidentificacionTO2.getNombre().equals(tipoidentificacionTO.getNombre()))
-						grabar=false;
-
+				if(tipoidentificacionTOs.size()>0){
+					for(TipoidentificacionTO tipoidentificacionTO2:tipoidentificacionTOs) {
+						//tipoidentificacionTO2=(TipoidentificacionTO)fuentefinanciamientoTOs.iterator().next();
+						if((tipoidentificacionTO.getId()!=null && tipoidentificacionTO.getId().longValue()!=0) && tipoidentificacionTO2.getId().longValue()!=tipoidentificacionTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((tipoidentificacionTO.getId()==null || (tipoidentificacionTO.getId()!=null && tipoidentificacionTO2.getId().longValue()!=tipoidentificacionTO.getId().longValue())) && tipoidentificacionTO.getNombre()!=null && tipoidentificacionTO2.getNombre().equals(tipoidentificacionTO.getNombre())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.nombre.duplicado"));
@@ -344,18 +378,23 @@ public class AdministracionController {
 				FuentefinanciamientoTO fuentefinanciamientoTO = gson.fromJson(new StringReader(objeto), FuentefinanciamientoTO.class);
 				accion = (fuentefinanciamientoTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				FuentefinanciamientoTO fuentefinanciamientoTO2=new FuentefinanciamientoTO();
-				fuentefinanciamientoTO2.setCodigo(fuentefinanciamientoTO.getCodigo());
-				fuentefinanciamientoTO2.setFuentefinanejerciciofiscalid(fuentefinanciamientoTO.getFuentefinanejerciciofiscalid());
-				Collection<FuentefinanciamientoTO> fuentefinanciamientoTOs=UtilSession.adminsitracionServicio.transObtenerFuentefinanciamiento(fuentefinanciamientoTO2);
+				FuentefinanciamientoTO fuentefinanciamientoTO3=new FuentefinanciamientoTO();
+				fuentefinanciamientoTO3.setCodigo(fuentefinanciamientoTO.getCodigo());
+				fuentefinanciamientoTO3.setFuentefinanejerciciofiscalid(fuentefinanciamientoTO.getFuentefinanejerciciofiscalid());
+				Collection<FuentefinanciamientoTO> fuentefinanciamientoTOs=UtilSession.adminsitracionServicio.transObtenerFuentefinanciamiento(fuentefinanciamientoTO3);
 				boolean grabar=true;
 				if(fuentefinanciamientoTOs.size()>0){
-					fuentefinanciamientoTO2=(FuentefinanciamientoTO)fuentefinanciamientoTOs.iterator().next();
-					if((fuentefinanciamientoTO.getId()!=null && fuentefinanciamientoTO.getId().longValue()!=0) && fuentefinanciamientoTO2.getId().longValue()!=fuentefinanciamientoTO.getId().longValue())
-						grabar=false;
-					else if((fuentefinanciamientoTO.getId()==null || (fuentefinanciamientoTO.getId()!=null && fuentefinanciamientoTO2.getId().longValue()!=fuentefinanciamientoTO.getId().longValue())) && fuentefinanciamientoTO.getCodigo()!=null && fuentefinanciamientoTO2.getCodigo().equals(fuentefinanciamientoTO.getCodigo()))
-						grabar=false;
-
+					for(FuentefinanciamientoTO fuentefinanciamientoTO2:fuentefinanciamientoTOs) {
+						//fuentefinanciamientoTO2=(FuentefinanciamientoTO)fuentefinanciamientoTOs.iterator().next();
+						if((fuentefinanciamientoTO.getId()!=null && fuentefinanciamientoTO.getId().longValue()!=0) && fuentefinanciamientoTO2.getId().longValue()!=fuentefinanciamientoTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((fuentefinanciamientoTO.getId()==null || (fuentefinanciamientoTO.getId()!=null && fuentefinanciamientoTO2.getId().longValue()!=fuentefinanciamientoTO.getId().longValue())) && fuentefinanciamientoTO.getCodigo()!=null && fuentefinanciamientoTO2.getCodigo().equals(fuentefinanciamientoTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -373,19 +412,24 @@ public class AdministracionController {
 				OrganismoTO organismoTO = gson.fromJson(new StringReader(objeto), OrganismoTO.class);
 				accion = (organismoTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				OrganismoTO organismoTO2=new OrganismoTO();
-				organismoTO2.setCodigo(organismoTO.getCodigo());
-				organismoTO2.setOrganismoejerciciofiscalid(organismoTO.getOrganismoejerciciofiscalid());
-				Collection<OrganismoTO> organismoTOs=UtilSession.adminsitracionServicio.transObtenerOrganismo(organismoTO2);
+				OrganismoTO organismoTO3=new OrganismoTO();
+				organismoTO3.setCodigo(organismoTO.getCodigo());
+				organismoTO3.setOrganismoejerciciofiscalid(organismoTO.getOrganismoejerciciofiscalid());
+				Collection<OrganismoTO> organismoTOs=UtilSession.adminsitracionServicio.transObtenerOrganismo(organismoTO3);
 				log.println("organismos: " + organismoTOs.size());
 				boolean grabar=true;
 				if(organismoTOs.size()>0){
-					organismoTO2=(OrganismoTO)organismoTOs.iterator().next();
-					if((organismoTO.getId()!=null && organismoTO.getId().longValue()!=0) && organismoTO2.getId().longValue()!=organismoTO.getId().longValue())
-						grabar=false;
-					else if((organismoTO.getId()==null || (organismoTO.getId()!=null && organismoTO2.getId().longValue()!=organismoTO.getId().longValue())) && organismoTO.getCodigo()!=null && organismoTO2.getCodigo().equals(organismoTO.getCodigo()))
-						grabar=false;
-
+					for(OrganismoTO organismoTO2:organismoTOs) {
+						//organismoTO2=(OrganismoTO)organismoTOs.iterator().next();
+						if((organismoTO.getId()!=null && organismoTO.getId().longValue()!=0) && organismoTO2.getId().longValue()!=organismoTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((organismoTO.getId()==null || (organismoTO.getId()!=null && organismoTO2.getId().longValue()!=organismoTO.getId().longValue())) && organismoTO.getCodigo()!=null && organismoTO2.getCodigo().equals(organismoTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -404,18 +448,23 @@ public class AdministracionController {
 				log.println("obra: " + obraTO.getObraejerciciofiscalid());
 				accion = (obraTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				ObraTO obraTO2=new ObraTO();
-				obraTO2.setCodigo(obraTO.getCodigo());
-				obraTO2.setObraejerciciofiscalid(obraTO.getObraejerciciofiscalid());
-				Collection<ObraTO> itemTOs=UtilSession.adminsitracionServicio.transObtenerObra(obraTO2);
+				ObraTO obraTO3=new ObraTO();
+				obraTO3.setCodigo(obraTO.getCodigo());
+				obraTO3.setObraejerciciofiscalid(obraTO.getObraejerciciofiscalid());
+				Collection<ObraTO> obraTOs=UtilSession.adminsitracionServicio.transObtenerObra(obraTO3);
 				boolean grabar=true;
-				if(itemTOs.size()>0){
-					obraTO2=(ObraTO)itemTOs.iterator().next();
-					if((obraTO.getId()!=null && obraTO.getId().longValue()!=0) && obraTO2.getId().longValue()!=obraTO.getId().longValue())
-						grabar=false;
-					else if((obraTO.getId()==null || (obraTO.getId()!=null && obraTO2.getId().longValue()!=obraTO.getId().longValue())) && obraTO.getCodigo()!=null && obraTO2.getCodigo().equals(obraTO.getCodigo()))
-						grabar=false;
-
+				if(obraTOs.size()>0){
+					for(ObraTO obraTO2:obraTOs) {
+						//obraTO2=(ObraTO)obraTOs.iterator().next();
+						if((obraTO.getId()!=null && obraTO.getId().longValue()!=0) && obraTO2.getId().longValue()!=obraTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((obraTO.getId()==null || (obraTO.getId()!=null && obraTO2.getId().longValue()!=obraTO.getId().longValue())) && obraTO.getCodigo()!=null && obraTO2.getCodigo().equals(obraTO.getCodigo())) {
+							grabar=false;
+							break;
+							}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -437,18 +486,23 @@ public class AdministracionController {
 					itemTO.setItempadreid(null);
 				accion = (itemTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				ItemTO itemTO2=new ItemTO();
-				itemTO2.setCodigo(itemTO.getCodigo());
-				itemTO2.setItemejerciciofiscalid(itemTO.getItemejerciciofiscalid());
-				Collection<ItemTO> itemTOs=UtilSession.adminsitracionServicio.transObtenerItem(itemTO2);
+				ItemTO itemTO3=new ItemTO();
+				itemTO3.setCodigo(itemTO.getCodigo());
+				itemTO3.setItemejerciciofiscalid(itemTO.getItemejerciciofiscalid());
+				Collection<ItemTO> itemTOs=UtilSession.adminsitracionServicio.transObtenerItem(itemTO3);
 				boolean grabar=true;
 				if(itemTOs.size()>0){
-					itemTO2=(ItemTO)itemTOs.iterator().next();
-					if((itemTO.getId()!=null && itemTO.getId().longValue()!=0) && itemTO2.getId().longValue()!=itemTO.getId().longValue())
-						grabar=false;
-					else if((itemTO.getId()==null || (itemTO.getId()!=null && itemTO2.getId().longValue()!=itemTO.getId().longValue())) && itemTO.getCodigo()!=null && itemTO2.getCodigo().equals(itemTO.getCodigo()))
-						grabar=false;
-
+					for(ItemTO itemTO2:itemTOs) {
+						//itemTO2=(ItemTO)itemTOs.iterator().next();
+						if((itemTO.getId()!=null && itemTO.getId().longValue()!=0) && itemTO2.getId().longValue()!=itemTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((itemTO.getId()==null || (itemTO.getId()!=null && itemTO2.getId().longValue()!=itemTO.getId().longValue())) && itemTO.getCodigo()!=null && itemTO2.getCodigo().equals(itemTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -478,18 +532,23 @@ public class AdministracionController {
 				GrupomedidaTO grupomedidaTO = gson.fromJson(new StringReader(objeto), GrupomedidaTO.class);
 				accion = (grupomedidaTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				GrupomedidaTO grupomedidaTO2=new GrupomedidaTO();
-				grupomedidaTO2.setCodigo(grupomedidaTO.getCodigo());
-				Collection<GrupomedidaTO> grupomedidaTOs=UtilSession.adminsitracionServicio.transObtenerGrupomedida(grupomedidaTO2);
+				GrupomedidaTO grupomedidaTO3=new GrupomedidaTO();
+				grupomedidaTO3.setCodigo(grupomedidaTO.getCodigo());
+				Collection<GrupomedidaTO> grupomedidaTOs=UtilSession.adminsitracionServicio.transObtenerGrupomedida(grupomedidaTO3);
 				log.println("grupos: " + grupomedidaTOs.size());
 				boolean grabar=true;
 				if(grupomedidaTOs.size()>0){
-					grupomedidaTO2=(GrupomedidaTO)grupomedidaTOs.iterator().next();
-					if((grupomedidaTO.getId()!=null && grupomedidaTO.getId().longValue()!=0) && grupomedidaTO2.getId().longValue()!=grupomedidaTO.getId().longValue())
-						grabar=false;
-					else if((grupomedidaTO.getId()==null || (grupomedidaTO.getId()!=null && grupomedidaTO2.getId().longValue()!=grupomedidaTO.getId().longValue())) && grupomedidaTO.getCodigo()!=null && grupomedidaTO2.getCodigo().equals(grupomedidaTO.getCodigo()))
-						grabar=false;
-
+					for(GrupomedidaTO grupomedidaTO2:grupomedidaTOs) {
+						//grupomedidaTO2=(GrupomedidaTO)grupomedidaTOs.iterator().next();
+						if((grupomedidaTO.getId()!=null && grupomedidaTO.getId().longValue()!=0) && grupomedidaTO2.getId().longValue()!=grupomedidaTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((grupomedidaTO.getId()==null || (grupomedidaTO.getId()!=null && grupomedidaTO2.getId().longValue()!=grupomedidaTO.getId().longValue())) && grupomedidaTO.getCodigo()!=null && grupomedidaTO2.getCodigo().equals(grupomedidaTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -507,20 +566,25 @@ public class AdministracionController {
 				ClaseregistroTO claseregistroTO = gson.fromJson(new StringReader(objeto), ClaseregistroTO.class);
 				accion = (claseregistroTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				ClaseregistroTO claseregistroTO2=new ClaseregistroTO();
-				claseregistroTO2.setCodigo(claseregistroTO.getCodigo());
-				claseregistroTO2.setClaseregistroejerfiscalid(claseregistroTO.getClaseregistroejerfiscalid());
-				Collection<ClaseregistroTO> claseregistroTOs=UtilSession.adminsitracionServicio.transObtenerClaseregistro(claseregistroTO2);
+				ClaseregistroTO claseregistroTO3=new ClaseregistroTO();
+				claseregistroTO3.setCodigo(claseregistroTO.getCodigo());
+				claseregistroTO3.setClaseregistroejerfiscalid(claseregistroTO.getClaseregistroejerfiscalid());
+				Collection<ClaseregistroTO> claseregistroTOs=UtilSession.adminsitracionServicio.transObtenerClaseregistro(claseregistroTO3);
 				log.println("clases encontradas: " + claseregistroTOs.size());
 				boolean grabar=true;
 				if(claseregistroTOs.size()>0){
-					claseregistroTO2=(ClaseregistroTO)claseregistroTOs.iterator().next();
-					log.println("id.... " + claseregistroTO.getId() + " - " + claseregistroTO2.getId());
-					if((claseregistroTO.getId()!=null && claseregistroTO.getId().longValue()!=0) && claseregistroTO2.getId().longValue()!=claseregistroTO.getId().longValue())
-						grabar=false;
-					else if((claseregistroTO.getId()==null || (claseregistroTO.getId()!=null && claseregistroTO2.getId().longValue()!=claseregistroTO.getId().longValue())) && claseregistroTO.getCodigo()!=null && claseregistroTO2.getCodigo().equals(claseregistroTO.getCodigo()))
-						grabar=false;
-
+					for(ClaseregistroTO claseregistroTO2:claseregistroTOs) {
+						//claseregistroTO2=(ClaseregistroTO)claseregistroTOs.iterator().next();
+						log.println("id.... " + claseregistroTO.getId() + " - " + claseregistroTO2.getId());
+						if((claseregistroTO.getId()!=null && claseregistroTO.getId().longValue()!=0) && claseregistroTO2.getId().longValue()!=claseregistroTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((claseregistroTO.getId()==null || (claseregistroTO.getId()!=null && claseregistroTO2.getId().longValue()!=claseregistroTO.getId().longValue())) && claseregistroTO.getCodigo()!=null && claseregistroTO2.getCodigo().equals(claseregistroTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -541,20 +605,25 @@ public class AdministracionController {
 				log.println("ejercicio fiscal::: " + claseregistroclasemodificacionTO.getClaseregistrocmejerfiscalid());
 				accion = (claseregistroclasemodificacionTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO2=new ClaseregistroclasemodificacionTO();
-				claseregistroclasemodificacionTO2.setCodigo(claseregistroclasemodificacionTO.getCodigo());
-				claseregistroclasemodificacionTO2.setClaseregistrocmejerfiscalid(claseregistroclasemodificacionTO.getClaseregistrocmejerfiscalid());
-				Collection<ClaseregistroclasemodificacionTO> claseregistroclasemodificacionTOs=UtilSession.adminsitracionServicio.transObtenerClaseregistroclasemodificacion(claseregistroclasemodificacionTO2);
+				ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO3=new ClaseregistroclasemodificacionTO();
+				claseregistroclasemodificacionTO3.setCodigo(claseregistroclasemodificacionTO.getCodigo());
+				claseregistroclasemodificacionTO3.setClaseregistrocmejerfiscalid(claseregistroclasemodificacionTO.getClaseregistrocmejerfiscalid());
+				Collection<ClaseregistroclasemodificacionTO> claseregistroclasemodificacionTOs=UtilSession.adminsitracionServicio.transObtenerClaseregistroclasemodificacion(claseregistroclasemodificacionTO3);
 				log.println("clases encontradas: " + claseregistroclasemodificacionTOs.size());
 				boolean grabar=true;
 				if(claseregistroclasemodificacionTOs.size()>0){
-					claseregistroclasemodificacionTO2=(ClaseregistroclasemodificacionTO)claseregistroclasemodificacionTOs.iterator().next();
-					log.println("id.... " + claseregistroclasemodificacionTO.getId() + " - " + claseregistroclasemodificacionTO2.getId());
-					if((claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO.getId().getRegistrocmid()!=null && claseregistroclasemodificacionTO.getId().getRegistroid()!=null) && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue())
-						grabar=false;
-					else if((claseregistroclasemodificacionTO.getId()==null || (claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue())) && claseregistroclasemodificacionTO.getCodigo()!=null && claseregistroclasemodificacionTO2.getCodigo().equals(claseregistroclasemodificacionTO.getCodigo()))
-						grabar=false;
-
+					for(ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO2:claseregistroclasemodificacionTOs) {
+						//claseregistroclasemodificacionTO2=(ClaseregistroclasemodificacionTO)claseregistroclasemodificacionTOs.iterator().next();
+						log.println("id.... " + claseregistroclasemodificacionTO.getId() + " - " + claseregistroclasemodificacionTO2.getId());
+						if((claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO.getId().getRegistrocmid()!=null && claseregistroclasemodificacionTO.getId().getRegistroid()!=null) && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((claseregistroclasemodificacionTO.getId()==null || (claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue())) && claseregistroclasemodificacionTO.getCodigo()!=null && claseregistroclasemodificacionTO2.getCodigo().equals(claseregistroclasemodificacionTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -572,18 +641,23 @@ public class AdministracionController {
 				TipodocumentoTO tipodocumentoTO = gson.fromJson(new StringReader(objeto), TipodocumentoTO.class);
 				accion = (tipodocumentoTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				TipodocumentoTO tipodocumentoTO2=new TipodocumentoTO();
-				tipodocumentoTO2.setCodigo(tipodocumentoTO.getCodigo());
-				tipodocumentoTO2.setTipodocumentoejerfiscalid(tipodocumentoTO.getTipodocumentoejerfiscalid());
-				Collection<TipodocumentoTO> socionegocioTOs=UtilSession.adminsitracionServicio.transObtenerTipodocumento(tipodocumentoTO2);
+				TipodocumentoTO tipodocumentoTO3=new TipodocumentoTO();
+				tipodocumentoTO3.setCodigo(tipodocumentoTO.getCodigo());
+				tipodocumentoTO3.setTipodocumentoejerfiscalid(tipodocumentoTO.getTipodocumentoejerfiscalid());
+				Collection<TipodocumentoTO> tipodocumentoTOs=UtilSession.adminsitracionServicio.transObtenerTipodocumento(tipodocumentoTO3);
 				boolean grabar=true;
-				if(socionegocioTOs.size()>0){
-					tipodocumentoTO2=(TipodocumentoTO)socionegocioTOs.iterator().next();
-					if((tipodocumentoTO.getId()!=null && tipodocumentoTO.getId().longValue()!=0) && tipodocumentoTO2.getId().longValue()!=tipodocumentoTO.getId().longValue())
-						grabar=false;
-					else if((tipodocumentoTO.getId()==null || (tipodocumentoTO.getId()!=null && tipodocumentoTO2.getId().longValue()!=tipodocumentoTO.getId().longValue())) && tipodocumentoTO.getCodigo()!=null && tipodocumentoTO2.getCodigo().equals(tipodocumentoTO.getCodigo()))
-						grabar=false;
-
+				if(tipodocumentoTOs.size()>0){
+					for(TipodocumentoTO tipodocumentoTO2:tipodocumentoTOs) {
+						//tipodocumentoTO2=(TipodocumentoTO)tipodocumentoTOs.iterator().next();
+						if((tipodocumentoTO.getId()!=null && tipodocumentoTO.getId().longValue()!=0) && tipodocumentoTO2.getId().longValue()!=tipodocumentoTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((tipodocumentoTO.getId()==null || (tipodocumentoTO.getId()!=null && tipodocumentoTO2.getId().longValue()!=tipodocumentoTO.getId().longValue())) && tipodocumentoTO.getCodigo()!=null && tipodocumentoTO2.getCodigo().equals(tipodocumentoTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -625,17 +699,22 @@ public class AdministracionController {
 				if(tipoproductoTO.getActivo()==null)
 					tipoproductoTO.setActivo(0);
 				//pregunto si ya existe el codigo en el nivel actual
-				TipoproductoTO tipoproductoTO2=new TipoproductoTO();
-				tipoproductoTO2.setNombre(tipoproductoTO.getNombre());
-				Collection<TipoproductoTO> tipoproductoTOs=UtilSession.adminsitracionServicio.transObtenerTipoproducto(tipoproductoTO2);
+				TipoproductoTO tipoproductoTO3=new TipoproductoTO();
+				tipoproductoTO3.setNombre(tipoproductoTO.getNombre());
+				Collection<TipoproductoTO> tipoproductoTOs=UtilSession.adminsitracionServicio.transObtenerTipoproducto(tipoproductoTO3);
 				boolean grabar=true;
 				if(tipoproductoTOs.size()>0){
-					tipoproductoTO2=(TipoproductoTO)tipoproductoTOs.iterator().next();
-					if((tipoproductoTO.getId()!=null && tipoproductoTO.getId().longValue()!=0) && tipoproductoTO2.getId().longValue()!=tipoproductoTO.getId().longValue())
-						grabar=false;
-					else if((tipoproductoTO.getId()==null || (tipoproductoTO.getId()!=null && tipoproductoTO2.getId().longValue()!=tipoproductoTO.getId().longValue())) && tipoproductoTO.getNombre()!=null && tipoproductoTO2.getNombre().equals(tipoproductoTO.getNombre()))
-						grabar=false;
-
+					for(TipoproductoTO tipoproductoTO2:tipoproductoTOs) {
+						//tipoproductoTO2=(TipoproductoTO)tipoproductoTOs.iterator().next();
+						if((tipoproductoTO.getId()!=null && tipoproductoTO.getId().longValue()!=0) && tipoproductoTO2.getId().longValue()!=tipoproductoTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((tipoproductoTO.getId()==null || (tipoproductoTO.getId()!=null && tipoproductoTO2.getId().longValue()!=tipoproductoTO.getId().longValue())) && tipoproductoTO.getNombre()!=null && tipoproductoTO2.getNombre().equals(tipoproductoTO.getNombre())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.nombre.duplicado"));
@@ -653,17 +732,22 @@ public class AdministracionController {
 				TiporegimenTO tiporegimenTO = gson.fromJson(new StringReader(objeto), TiporegimenTO.class);
 				accion = (tiporegimenTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				TiporegimenTO tiporegimenTO2=new TiporegimenTO();
-				tiporegimenTO2.setNombre(tiporegimenTO.getNombre());
-				Collection<TiporegimenTO> tiporegimenTOs=UtilSession.adminsitracionServicio.transObtenerTiporegimen(tiporegimenTO2);
+				TiporegimenTO tiporegimenT3=new TiporegimenTO();
+				tiporegimenT3.setNombre(tiporegimenTO.getNombre());
+				Collection<TiporegimenTO> tiporegimenTOs=UtilSession.adminsitracionServicio.transObtenerTiporegimen(tiporegimenT3);
 				boolean grabar=true;
 				if(tiporegimenTOs.size()>0){
-					tiporegimenTO2=(TiporegimenTO)tiporegimenTOs.iterator().next();
-					if((tiporegimenTO.getId()!=null && tiporegimenTO.getId().longValue()!=0) && tiporegimenTO2.getId().longValue()!=tiporegimenTO.getId().longValue())
-						grabar=false;
-					else if((tiporegimenTO.getId()==null || (tiporegimenTO.getId()!=null && tiporegimenTO2.getId().longValue()!=tiporegimenTO.getId().longValue())) && tiporegimenTO.getNombre()!=null && tiporegimenTO2.getNombre().equals(tiporegimenTO.getNombre()))
-						grabar=false;
-
+					//tiporegimenTO2=(TiporegimenTO)tiporegimenTOs.iterator().next();
+					for(TiporegimenTO tiporegimenTO2:tiporegimenTOs) {
+						if((tiporegimenTO.getId()!=null && tiporegimenTO.getId().longValue()!=0) && tiporegimenTO2.getId().longValue()!=tiporegimenTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((tiporegimenTO.getId()==null || (tiporegimenTO.getId()!=null && tiporegimenTO2.getId().longValue()!=tiporegimenTO.getId().longValue())) && tiporegimenTO.getNombre()!=null && tiporegimenTO2.getNombre().equals(tiporegimenTO.getNombre())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.nombre.duplicado"));
@@ -683,16 +767,22 @@ public class AdministracionController {
 				if(procedimientoTO.getActivo()==null)
 					procedimientoTO.setActivo(0);
 				//pregunto si ya existe el codigo en el nivel actual
-				ProcedimientoTO procedimientoTO2=new ProcedimientoTO();
-				procedimientoTO2.setNombre(procedimientoTO.getNombre());
-				Collection<ProcedimientoTO> procedimientoTOs=UtilSession.adminsitracionServicio.transObtenerProcedimiento(procedimientoTO2);
+				ProcedimientoTO procedimientoTO3=new ProcedimientoTO();
+				procedimientoTO3.setNombre(procedimientoTO.getNombre());
+				Collection<ProcedimientoTO> procedimientoTOs=UtilSession.adminsitracionServicio.transObtenerProcedimiento(procedimientoTO3);
 				boolean grabar=true;
 				if(procedimientoTOs.size()>0){
-					procedimientoTO2=(ProcedimientoTO)procedimientoTOs.iterator().next();
-					if((procedimientoTO.getId()!=null && procedimientoTO.getId().longValue()!=0) && procedimientoTO2.getId().longValue()!=procedimientoTO.getId().longValue())
-						grabar=false;
-					else if((procedimientoTO.getId()==null || (procedimientoTO.getId()!=null && procedimientoTO2.getId().longValue()!=procedimientoTO.getId().longValue())) && procedimientoTO.getNombre()!=null && procedimientoTO2.getNombre().equals(procedimientoTO.getNombre()))
-						grabar=false;
+					for(ProcedimientoTO procedimientoTO2:procedimientoTOs) {
+							//procedimientoTO2=(ProcedimientoTO)procedimientoTOs.iterator().next();
+							if((procedimientoTO.getId()!=null && procedimientoTO.getId().longValue()!=0) && procedimientoTO2.getId().longValue()!=procedimientoTO.getId().longValue()) {
+								grabar=false;
+								break;
+							}
+							else if((procedimientoTO.getId()==null || (procedimientoTO.getId()!=null && procedimientoTO2.getId().longValue()!=procedimientoTO.getId().longValue())) && procedimientoTO.getNombre()!=null && procedimientoTO2.getNombre().equals(procedimientoTO.getNombre())) {
+								grabar=false;
+								break;
+							}
+					}
 
 				}
 				if(!grabar){
@@ -711,28 +801,41 @@ public class AdministracionController {
 				GrupoTO grupoTO = gson.fromJson(new StringReader(objeto), GrupoTO.class);
 				accion = (grupoTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				GrupoTO grupoTO2=new GrupoTO();
-				grupoTO2.setCodigo(grupoTO.getCodigo());
-				Collection<GrupoTO> grupoTOs=UtilSession.adminsitracionServicio.transObtenerGrupo(grupoTO2);
+				GrupoTO grupoTO4=new GrupoTO();
+				grupoTO4.setCodigo(grupoTO.getCodigo());
+				Collection<GrupoTO> grupoTOs=UtilSession.adminsitracionServicio.transObtenerGrupo(grupoTO4);
 				boolean grabar=true;
 				if(grupoTOs.size()>0){
-					grupoTO2=(GrupoTO)grupoTOs.iterator().next();
-					if((grupoTO.getId()!=null && grupoTO.getId().longValue()!=0) && grupoTO2.getId().longValue()!=grupoTO.getId().longValue())
-						grabar=false;
-					else if((grupoTO.getId()==null || (grupoTO.getId()!=null && grupoTO2.getId().longValue()!=grupoTO.getId().longValue())) && grupoTO.getCodigo()!=null && grupoTO2.getCodigo().equals(grupoTO.getCodigo()))
-						grabar=false;
+					for(GrupoTO grupoTO2:grupoTOs) {
+						//grupoTO2=(GrupoTO)grupoTOs.iterator().next();
+						if((grupoTO.getId()!=null && grupoTO.getId().longValue()!=0) && grupoTO2.getId().longValue()!=grupoTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((grupoTO.getId()==null || (grupoTO.getId()!=null && grupoTO2.getId().longValue()!=grupoTO.getId().longValue())) && grupoTO.getCodigo()!=null && grupoTO2.getCodigo().equals(grupoTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
-				GrupoTO grupoTO3=new GrupoTO();
-				grupoTO3.setNombre(grupoTO.getNombre());
-				Collection<GrupoTO> grupoTO1s=UtilSession.adminsitracionServicio.transObtenerGrupo(grupoTO3);
-				if(grupoTO1s.size()>0){
-					grupoTO3=(GrupoTO)grupoTO1s.iterator().next();
-					if((grupoTO.getId()!=null && grupoTO.getId().longValue()!=0) && grupoTO3.getId().longValue()!=grupoTO.getId().longValue())
-						grabar=false;
-					else if((grupoTO.getId()==null || (grupoTO.getId()!=null && grupoTO3.getId().longValue()!=grupoTO.getId().longValue())) && grupoTO.getNombre()!=null && grupoTO3.getNombre().equals(grupoTO.getNombre()))
-						grabar=false;
+				if(grabar) {
+					GrupoTO grupoTO5=new GrupoTO();
+					grupoTO5.setNombre(grupoTO.getNombre());
+					Collection<GrupoTO> grupoTO1s=UtilSession.adminsitracionServicio.transObtenerGrupo(grupoTO5);
+					if(grupoTO1s.size()>0){
+						for(GrupoTO grupoTO3:grupoTO1s) {
+							//grupoTO3=(GrupoTO)grupoTO1s.iterator().next();
+							if((grupoTO.getId()!=null && grupoTO.getId().longValue()!=0) && grupoTO3.getId().longValue()!=grupoTO.getId().longValue()) {
+								grabar=false;
+								break;
+							}
+							else if((grupoTO.getId()==null || (grupoTO.getId()!=null && grupoTO3.getId().longValue()!=grupoTO.getId().longValue())) && grupoTO.getNombre()!=null && grupoTO3.getNombre().equals(grupoTO.getNombre())) {
+								grabar=false;
+								break;
+							}
+						}
+					}
 				}
-
 				if(!grabar){
 					mensajes.setMsg("El código o el nombre se encuentran repetidos");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
@@ -749,28 +852,41 @@ public class AdministracionController {
 				GradoTO gradoTO = gson.fromJson(new StringReader(objeto), GradoTO.class);
 				accion = (gradoTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				GradoTO gradoTO2=new GradoTO();
-				gradoTO2.setCodigo(gradoTO.getCodigo());
-				Collection<GradoTO> gradoTOs=UtilSession.adminsitracionServicio.transObtenerGrado(gradoTO2);
+				GradoTO gradoTO4=new GradoTO();
+				gradoTO4.setCodigo(gradoTO.getCodigo());
+				Collection<GradoTO> gradoTOs=UtilSession.adminsitracionServicio.transObtenerGrado(gradoTO4);
 				boolean grabar=true;
 				if(gradoTOs.size()>0){
-					gradoTO2=(GradoTO)gradoTOs.iterator().next();
-					if((gradoTO.getId()!=null && gradoTO.getId().longValue()!=0) && gradoTO2.getId().longValue()!=gradoTO.getId().longValue())
-						grabar=false;
-					else if((gradoTO.getId()==null || (gradoTO.getId()!=null && gradoTO2.getId().longValue()!=gradoTO.getId().longValue())) && gradoTO.getCodigo()!=null && gradoTO2.getCodigo().equals(gradoTO.getCodigo()))
-						grabar=false;
-
+					for(GradoTO gradoTO2:gradoTOs) {
+						//gradoTO2=(GradoTO)gradoTOs.iterator().next();
+						if((gradoTO.getId()!=null && gradoTO.getId().longValue()!=0) && gradoTO2.getId().longValue()!=gradoTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((gradoTO.getId()==null || (gradoTO.getId()!=null && gradoTO2.getId().longValue()!=gradoTO.getId().longValue())) && gradoTO.getCodigo()!=null && gradoTO2.getCodigo().equals(gradoTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
-				GradoTO gradoTO3=new GradoTO();
-				gradoTO3.setNombre(gradoTO.getNombre());
-				Collection<GradoTO> gradoTOs2=UtilSession.adminsitracionServicio.transObtenerGrado(gradoTO3);
-				log.println("gradoTOs2: "+ gradoTOs2.size());
-				if(gradoTOs2.size()>0){
-					gradoTO3=(GradoTO)gradoTOs2.iterator().next();
-					if((gradoTO.getId()!=null && gradoTO.getId().longValue()!=0) && gradoTO3.getId().longValue()!=gradoTO.getId().longValue())
-						grabar=false;
-					else if((gradoTO.getId()==null || (gradoTO.getId()!=null && gradoTO3.getId().longValue()!=gradoTO.getId().longValue())) && gradoTO.getNombre()!=null && gradoTO3.getNombre().equals(gradoTO.getNombre()))
-						grabar=false;
+				if(grabar) {
+					GradoTO gradoTO5=new GradoTO();
+					gradoTO5.setNombre(gradoTO.getNombre());
+					Collection<GradoTO> gradoTOs2=UtilSession.adminsitracionServicio.transObtenerGrado(gradoTO5);
+					log.println("gradoTOs2: "+ gradoTOs2.size());
+					if(gradoTOs2.size()>0){
+						for(GradoTO gradoTO3:gradoTOs2) {
+							//gradoTO3=(GradoTO)gradoTOs2.iterator().next();
+							if((gradoTO.getId()!=null && gradoTO.getId().longValue()!=0) && gradoTO3.getId().longValue()!=gradoTO.getId().longValue()) {
+								grabar=false;
+								break;
+							}
+							else if((gradoTO.getId()==null || (gradoTO.getId()!=null && gradoTO3.getId().longValue()!=gradoTO.getId().longValue())) && gradoTO.getNombre()!=null && gradoTO3.getNombre().equals(gradoTO.getNombre())) {
+								grabar=false;
+								break;
+							}
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg("El código o el nombre se encuentran repetidos");
@@ -788,17 +904,22 @@ public class AdministracionController {
 				ClasificacionTO clasificacionTO = gson.fromJson(new StringReader(objeto), ClasificacionTO.class);
 				accion = (clasificacionTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				ClasificacionTO clasificacionTO2=new ClasificacionTO();
-				clasificacionTO2.setCodigo(clasificacionTO.getCodigo());
-				Collection<ClasificacionTO> clasificacionTOs=UtilSession.adminsitracionServicio.transObtenerClasificacion(clasificacionTO2);
+				ClasificacionTO clasificacionTO3=new ClasificacionTO();
+				clasificacionTO3.setCodigo(clasificacionTO.getCodigo());
+				Collection<ClasificacionTO> clasificacionTOs=UtilSession.adminsitracionServicio.transObtenerClasificacion(clasificacionTO3);
 				boolean grabar=true;
 				if(clasificacionTOs.size()>0){
-					clasificacionTO2=(ClasificacionTO)clasificacionTOs.iterator().next();
-					if((clasificacionTO.getId()!=null && clasificacionTO.getId().longValue()!=0) && clasificacionTO2.getId().longValue()!=clasificacionTO.getId().longValue())
-						grabar=false;
-					else if((clasificacionTO.getId()==null || (clasificacionTO.getId()!=null && clasificacionTO2.getId().longValue()!=clasificacionTO.getId().longValue())) && clasificacionTO.getCodigo()!=null && clasificacionTO2.getCodigo().equals(clasificacionTO.getCodigo()))
-						grabar=false;
-
+					for(ClasificacionTO clasificacionTO2:clasificacionTOs) {
+						//clasificacionTO2=(ClasificacionTO)clasificacionTOs.iterator().next();
+						if((clasificacionTO.getId()!=null && clasificacionTO.getId().longValue()!=0) && clasificacionTO2.getId().longValue()!=clasificacionTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((clasificacionTO.getId()==null || (clasificacionTO.getId()!=null && clasificacionTO2.getId().longValue()!=clasificacionTO.getId().longValue())) && clasificacionTO.getCodigo()!=null && clasificacionTO2.getCodigo().equals(clasificacionTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -816,28 +937,41 @@ public class AdministracionController {
 				FuerzaTO fuerzaTO = gson.fromJson(new StringReader(objeto), FuerzaTO.class);
 				accion = (fuerzaTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				FuerzaTO fuerzaTO2=new FuerzaTO();
-				fuerzaTO2.setCodigo(fuerzaTO.getCodigo());
-				Collection<FuerzaTO> fuerzaTOs=UtilSession.adminsitracionServicio.transObtenerFuerza(fuerzaTO2);
+				FuerzaTO fuerzaTO4=new FuerzaTO();
+				fuerzaTO4.setCodigo(fuerzaTO.getCodigo());
+				Collection<FuerzaTO> fuerzaTOs=UtilSession.adminsitracionServicio.transObtenerFuerza(fuerzaTO4);
 				boolean grabar=true;
 				if(fuerzaTOs.size()>0){
-					fuerzaTO2=(FuerzaTO)fuerzaTOs.iterator().next();
-					if((fuerzaTO.getId()!=null && fuerzaTO.getId().longValue()!=0) && fuerzaTO2.getId().longValue()!=fuerzaTO.getId().longValue())
-						grabar=false;
-					else if((fuerzaTO.getId()==null || (fuerzaTO.getId()!=null && fuerzaTO2.getId().longValue()!=fuerzaTO.getId().longValue())) && fuerzaTO.getCodigo()!=null && fuerzaTO2.getCodigo().equals(fuerzaTO.getCodigo()))
-						grabar=false;
-
+					for(FuerzaTO fuerzaTO2:fuerzaTOs) {
+						//fuerzaTO2=(FuerzaTO)fuerzaTOs.iterator().next();
+						if((fuerzaTO.getId()!=null && fuerzaTO.getId().longValue()!=0) && fuerzaTO2.getId().longValue()!=fuerzaTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((fuerzaTO.getId()==null || (fuerzaTO.getId()!=null && fuerzaTO2.getId().longValue()!=fuerzaTO.getId().longValue())) && fuerzaTO.getCodigo()!=null && fuerzaTO2.getCodigo().equals(fuerzaTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
-				FuerzaTO fuerzaTO3=new FuerzaTO();
-				fuerzaTO3.setNombre(fuerzaTO.getNombre());
-				Collection<FuerzaTO> fuerzaTOs2=UtilSession.adminsitracionServicio.transObtenerFuerza(fuerzaTO3);
-				log.println("fuerzaTOs2: "+ fuerzaTOs2.size());
-				if(fuerzaTOs2.size()>0){
-					fuerzaTO3=(FuerzaTO)fuerzaTOs2.iterator().next();
-					if((fuerzaTO.getId()!=null && fuerzaTO.getId().longValue()!=0) && fuerzaTO3.getId().longValue()!=fuerzaTO.getId().longValue())
-						grabar=false;
-					else if((fuerzaTO.getId()==null || (fuerzaTO.getId()!=null && fuerzaTO3.getId().longValue()!=fuerzaTO.getId().longValue())) && fuerzaTO.getNombre()!=null && fuerzaTO3.getNombre().equals(fuerzaTO.getNombre()))
-						grabar=false;
+				if(grabar) {
+					FuerzaTO fuerzaTO5=new FuerzaTO();
+					fuerzaTO5.setNombre(fuerzaTO.getNombre());
+					Collection<FuerzaTO> fuerzaTOs2=UtilSession.adminsitracionServicio.transObtenerFuerza(fuerzaTO5);
+					log.println("fuerzaTOs2: "+ fuerzaTOs2.size());
+					if(fuerzaTOs2.size()>0){
+						for(FuerzaTO fuerzaTO3:fuerzaTOs2) {
+							//fuerzaTO3=(FuerzaTO)fuerzaTOs2.iterator().next();
+							if((fuerzaTO.getId()!=null && fuerzaTO.getId().longValue()!=0) && fuerzaTO3.getId().longValue()!=fuerzaTO.getId().longValue()) {
+								grabar=false;
+								break;
+							}
+							else if((fuerzaTO.getId()==null || (fuerzaTO.getId()!=null && fuerzaTO3.getId().longValue()!=fuerzaTO.getId().longValue())) && fuerzaTO.getNombre()!=null && fuerzaTO3.getNombre().equals(fuerzaTO.getNombre())) {
+								grabar=false;
+								break;
+							}
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg("El código o el nombre se encuentran repetidos");
@@ -863,17 +997,22 @@ public class AdministracionController {
 				if(grados.size()==0){
 					log.println("entro a grabar");
 					//pregunto si ya existe el codigo en el nivel actual
-					GradoescalaTO gradoescalaTO2=new GradoescalaTO();
-					gradoescalaTO2.setCodigo(gradofuerzaTO.getCodigo());
-					Collection<GradoescalaTO> escalarmuTOs=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescalaTO2);
+					GradoescalaTO gradoescalaTO3=new GradoescalaTO();
+					gradoescalaTO3.setCodigo(gradofuerzaTO.getCodigo());
+					Collection<GradoescalaTO> gradoescalaTOs=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescalaTO3);
 					boolean grabar=true;
-					if(escalarmuTOs.size()>0){
-						gradoescalaTO2=(GradoescalaTO)escalarmuTOs.iterator().next();
-						if((gradofuerzaTO.getId()!=null && gradofuerzaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue())
-							grabar=false;
-						else if((gradofuerzaTO.getId()==null || (gradofuerzaTO.getId()!=null && gradoescalaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue())) && gradofuerzaTO.getCodigo()!=null && gradoescalaTO2.getCodigo().equals(gradofuerzaTO.getCodigo()))
-							grabar=false;
-	
+					if(gradoescalaTOs.size()>0){
+						for(GradoescalaTO gradoescalaTO2:gradoescalaTOs) {
+							//gradoescalaTO2=(GradoescalaTO)escalarmuTOs.iterator().next();
+							if((gradofuerzaTO.getId()!=null && gradofuerzaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue()) {
+								grabar=false;
+								break;
+							}
+							else if((gradofuerzaTO.getId()==null || (gradofuerzaTO.getId()!=null && gradoescalaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue())) && gradofuerzaTO.getCodigo()!=null && gradoescalaTO2.getCodigo().equals(gradofuerzaTO.getCodigo())) {
+								grabar=false;
+								break;
+							}
+						}
 					}
 					if(!grabar){
 						mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -921,17 +1060,22 @@ public class AdministracionController {
 				EspecialidadTO especialidadTO = gson.fromJson(new StringReader(objeto), EspecialidadTO.class);
 				accion = (especialidadTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				EspecialidadTO especialidadTO2=new EspecialidadTO();
-				especialidadTO2.setCodigo(especialidadTO.getCodigo());
-				Collection<EspecialidadTO> especialidadTOs=UtilSession.adminsitracionServicio.transObtenerEspecialidad(especialidadTO2);
+				EspecialidadTO especialidadTO3=new EspecialidadTO();
+				especialidadTO3.setCodigo(especialidadTO.getCodigo());
+				Collection<EspecialidadTO> especialidadTOs=UtilSession.adminsitracionServicio.transObtenerEspecialidad(especialidadTO3);
 				boolean grabar=true;
 				if(especialidadTOs.size()>0){
-					especialidadTO2=(EspecialidadTO)especialidadTOs.iterator().next();
-					if((especialidadTO.getId()!=null && especialidadTO.getId().longValue()!=0) && especialidadTO2.getId().longValue()!=especialidadTO.getId().longValue())
-						grabar=false;
-					else if((especialidadTO.getId()==null || (especialidadTO.getId()!=null && especialidadTO2.getId().longValue()!=especialidadTO.getId().longValue())) && especialidadTO.getCodigo()!=null && especialidadTO2.getCodigo().equals(especialidadTO.getCodigo()))
-						grabar=false;
-
+					for(EspecialidadTO especialidadTO2:especialidadTOs) {
+						//especialidadTO2=(EspecialidadTO)especialidadTOs.iterator().next();
+						if((especialidadTO.getId()!=null && especialidadTO.getId().longValue()!=0) && especialidadTO2.getId().longValue()!=especialidadTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((especialidadTO.getId()==null || (especialidadTO.getId()!=null && especialidadTO2.getId().longValue()!=especialidadTO.getId().longValue())) && especialidadTO.getCodigo()!=null && especialidadTO2.getCodigo().equals(especialidadTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -949,27 +1093,40 @@ public class AdministracionController {
 				CargoTO cargoTO = gson.fromJson(new StringReader(objeto), CargoTO.class);
 				accion = (cargoTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				CargoTO cargoTO2=new CargoTO();
-				cargoTO2.setCodigo(cargoTO.getCodigo());
-				Collection<CargoTO> cargoTOs=UtilSession.adminsitracionServicio.transObtenerCargo(cargoTO2);
+				CargoTO cargoTO4=new CargoTO();
+				cargoTO4.setCodigo(cargoTO.getCodigo());
+				Collection<CargoTO> cargoTOs=UtilSession.adminsitracionServicio.transObtenerCargo(cargoTO4);
 				boolean grabar=true;
 				if(cargoTOs.size()>0){
-					cargoTO2=(CargoTO)cargoTOs.iterator().next();
-					if((cargoTO.getId()!=null && cargoTO.getId().longValue()!=0) && cargoTO2.getId().longValue()!=cargoTO.getId().longValue())
-						grabar=false;
-					else if((cargoTO.getId()==null || (cargoTO.getId()!=null && cargoTO2.getId().longValue()!=cargoTO.getId().longValue())) && cargoTO.getCodigo()!=null && cargoTO2.getCodigo().equals(cargoTO.getCodigo()))
-						grabar=false;
-
+					for(CargoTO cargoTO2:cargoTOs) {
+						//cargoTO2=(CargoTO)cargoTOs.iterator().next();
+						if((cargoTO.getId()!=null && cargoTO.getId().longValue()!=0) && cargoTO2.getId().longValue()!=cargoTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((cargoTO.getId()==null || (cargoTO.getId()!=null && cargoTO2.getId().longValue()!=cargoTO.getId().longValue())) && cargoTO.getCodigo()!=null && cargoTO2.getCodigo().equals(cargoTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
-				CargoTO cargoTO3=new CargoTO();
-				cargoTO3.setNombre(cargoTO.getNombre());
-				Collection<CargoTO> cargoTOs2=UtilSession.adminsitracionServicio.transObtenerCargo(cargoTO3);
-				if(cargoTOs2.size()>0){
-					cargoTO3=(CargoTO)cargoTOs2.iterator().next();
-					if((cargoTO.getId()!=null && cargoTO.getId().longValue()!=0) && cargoTO3.getId().longValue()!=cargoTO.getId().longValue())
-						grabar=false;
-					else if((cargoTO.getId()==null || (cargoTO.getId()!=null && cargoTO3.getId().longValue()!=cargoTO.getId().longValue())) && cargoTO.getNombre()!=null && cargoTO3.getNombre().equals(cargoTO.getNombre()))
-						grabar=false;
+				if(grabar) {
+					CargoTO cargoTO5=new CargoTO();
+					cargoTO5.setNombre(cargoTO.getNombre());
+					Collection<CargoTO> cargoTOs2=UtilSession.adminsitracionServicio.transObtenerCargo(cargoTO5);
+					if(cargoTOs2.size()>0){
+						for(CargoTO cargoTO3:cargoTOs2) {
+							//cargoTO3=(CargoTO)cargoTOs2.iterator().next();
+							if((cargoTO.getId()!=null && cargoTO.getId().longValue()!=0) && cargoTO3.getId().longValue()!=cargoTO.getId().longValue()) {
+								grabar=false;
+								break;
+							}
+							else if((cargoTO.getId()==null || (cargoTO.getId()!=null && cargoTO3.getId().longValue()!=cargoTO.getId().longValue())) && cargoTO.getNombre()!=null && cargoTO3.getNombre().equals(cargoTO.getNombre())) {
+								grabar=false;
+								break;
+							}
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg("El código o el nombre se encuentran repetidos");
@@ -987,18 +1144,23 @@ public class AdministracionController {
 				EscalarmuTO escalarmuTO = gson.fromJson(new StringReader(objeto), EscalarmuTO.class);
 				accion = (escalarmuTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				EscalarmuTO escalarmuTO2=new EscalarmuTO();
-				escalarmuTO2.setCodigo(escalarmuTO.getCodigo());
-				Collection<EscalarmuTO> escalarmuTOs=UtilSession.adminsitracionServicio.transObtenerEscalarmu(escalarmuTO2);
+				EscalarmuTO escalarmuTO3=new EscalarmuTO();
+				escalarmuTO3.setCodigo(escalarmuTO.getCodigo());
+				Collection<EscalarmuTO> escalarmuTOs=UtilSession.adminsitracionServicio.transObtenerEscalarmu(escalarmuTO3);
 				log.println("escalarmu encontrados: " + escalarmuTOs.size());
 				boolean grabar=true;
 				if(escalarmuTOs.size()>0){
-					escalarmuTO2=(EscalarmuTO)escalarmuTOs.iterator().next();
-					if((escalarmuTO.getId()!=null && escalarmuTO.getId().longValue()!=0) && escalarmuTO2.getId().longValue()!=escalarmuTO.getId().longValue())
-						grabar=false;
-					else if((escalarmuTO.getId()==null || (escalarmuTO.getId()!=null && escalarmuTO2.getId().longValue()!=escalarmuTO.getId().longValue())) && escalarmuTO.getCodigo()!=null && escalarmuTO2.getCodigo().equals(escalarmuTO.getCodigo()))
-						grabar=false;
-
+					for(EscalarmuTO escalarmuTO2:escalarmuTOs) {
+						//escalarmuTO2=(EscalarmuTO)escalarmuTOs.iterator().next();
+						if((escalarmuTO.getId()!=null && escalarmuTO.getId().longValue()!=0) && escalarmuTO2.getId().longValue()!=escalarmuTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((escalarmuTO.getId()==null || (escalarmuTO.getId()!=null && escalarmuTO2.getId().longValue()!=escalarmuTO.getId().longValue())) && escalarmuTO.getCodigo()!=null && escalarmuTO2.getCodigo().equals(escalarmuTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -1021,17 +1183,22 @@ public class AdministracionController {
 				log.println("escalarmu encontrados: " + grados.size());
 				if(grados.size()==0){
 					//pregunto si ya existe el codigo en el nivel actual
-					GradoescalaTO gradoescalaTO2=new GradoescalaTO();
-					gradoescalaTO2.setCodigo(gradoescalaTO.getCodigo());
-					Collection<GradoescalaTO> escalarmuTOs=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescalaTO2);
+					GradoescalaTO gradoescalaTO3=new GradoescalaTO();
+					gradoescalaTO3.setCodigo(gradoescalaTO.getCodigo());
+					Collection<GradoescalaTO> escalarmuTOs=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescalaTO3);
 					boolean grabar=true;
 					if(escalarmuTOs.size()>0){
-						gradoescalaTO2=(GradoescalaTO)escalarmuTOs.iterator().next();
-						if((gradoescalaTO.getId()!=null && gradoescalaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradoescalaTO.getId().longValue())
-							grabar=false;
-						else if((gradoescalaTO.getId()==null || (gradoescalaTO.getId()!=null && gradoescalaTO2.getId().longValue()!=gradoescalaTO.getId().longValue())) && gradoescalaTO.getCodigo()!=null && gradoescalaTO2.getCodigo().equals(gradoescalaTO.getCodigo()))
-							grabar=false;
-	
+						for(GradoescalaTO gradoescalaTO2:escalarmuTOs) {
+							//gradoescalaTO2=(GradoescalaTO)escalarmuTOs.iterator().next();
+							if((gradoescalaTO.getId()!=null && gradoescalaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradoescalaTO.getId().longValue()) {
+								grabar=false;
+								break;
+							}
+							else if((gradoescalaTO.getId()==null || (gradoescalaTO.getId()!=null && gradoescalaTO2.getId().longValue()!=gradoescalaTO.getId().longValue())) && gradoescalaTO.getCodigo()!=null && gradoescalaTO2.getCodigo().equals(gradoescalaTO.getCodigo())) {
+								grabar=false;
+								break;
+							}
+						}
 					}
 					if(!grabar){
 						mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -1053,17 +1220,22 @@ public class AdministracionController {
 				CargoescalaTO cargoescalaTO = gson.fromJson(new StringReader(objeto), CargoescalaTO.class);
 				accion = (cargoescalaTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				CargoescalaTO cargoescalaTO2=new CargoescalaTO();
-				cargoescalaTO2.setCodigo(cargoescalaTO.getCodigo());
-				Collection<CargoescalaTO> cargoescalaTOs=UtilSession.adminsitracionServicio.transObtenerCargoescala(cargoescalaTO2);
+				CargoescalaTO cargoescalaTO3=new CargoescalaTO();
+				cargoescalaTO3.setCodigo(cargoescalaTO.getCodigo());
+				Collection<CargoescalaTO> cargoescalaTOs=UtilSession.adminsitracionServicio.transObtenerCargoescala(cargoescalaTO3);
 				boolean grabar=true;
 				if(cargoescalaTOs.size()>0){
-					cargoescalaTO2=(CargoescalaTO)cargoescalaTOs.iterator().next();
-					if((cargoescalaTO.getId()!=null && cargoescalaTO.getId().longValue()!=0) && cargoescalaTO2.getId().longValue()!=cargoescalaTO.getId().longValue())
-						grabar=false;
-					else if((cargoescalaTO.getId()==null || (cargoescalaTO.getId()!=null && cargoescalaTO2.getId().longValue()!=cargoescalaTO.getId().longValue())) && cargoescalaTO.getCodigo()!=null && cargoescalaTO2.getCodigo().equals(cargoescalaTO.getCodigo()))
-						grabar=false;
-
+					for(CargoescalaTO cargoescalaTO2:cargoescalaTOs) {
+						//cargoescalaTO2=(CargoescalaTO)cargoescalaTOs.iterator().next();
+						if((cargoescalaTO.getId()!=null && cargoescalaTO.getId().longValue()!=0) && cargoescalaTO2.getId().longValue()!=cargoescalaTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((cargoescalaTO.getId()==null || (cargoescalaTO.getId()!=null && cargoescalaTO2.getId().longValue()!=cargoescalaTO.getId().longValue())) && cargoescalaTO.getCodigo()!=null && cargoescalaTO2.getCodigo().equals(cargoescalaTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -1080,26 +1252,39 @@ public class AdministracionController {
 				NivelorganicoTO nivelorganicoTO = gson.fromJson(new StringReader(objeto), NivelorganicoTO.class);
 				accion = (nivelorganicoTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				NivelorganicoTO nivelorganicoTO2=new NivelorganicoTO();
-				nivelorganicoTO2.setCodigo(nivelorganicoTO.getCodigo());
-				Collection<NivelorganicoTO> nivelorganicoTOs=UtilSession.planificacionServicio.transObtenerNivelorganido(nivelorganicoTO2);
+				NivelorganicoTO nivelorganicoTO4=new NivelorganicoTO();
+				nivelorganicoTO4.setCodigo(nivelorganicoTO.getCodigo());
+				Collection<NivelorganicoTO> nivelorganicoTOs=UtilSession.planificacionServicio.transObtenerNivelorganido(nivelorganicoTO4);
 				boolean grabar=true;
 				if(nivelorganicoTOs.size()>0){
-					nivelorganicoTO2=(NivelorganicoTO)nivelorganicoTOs.iterator().next();
-					if((nivelorganicoTO.getId()!=null && nivelorganicoTO.getId().longValue()!=0) && nivelorganicoTO2.getId().longValue()!=nivelorganicoTO.getId().longValue())
-						grabar=false;
-					else if((nivelorganicoTO.getId()==null || (nivelorganicoTO.getId()!=null && nivelorganicoTO2.getId().longValue()!=nivelorganicoTO.getId().longValue())) && nivelorganicoTO.getCodigo()!=null && nivelorganicoTO2.getCodigo().equals(nivelorganicoTO.getCodigo()))
-						grabar=false;
+					for(NivelorganicoTO nivelorganicoTO2:nivelorganicoTOs) {
+						//nivelorganicoTO2=(NivelorganicoTO)nivelorganicoTOs.iterator().next();
+						if((nivelorganicoTO.getId()!=null && nivelorganicoTO.getId().longValue()!=0) && nivelorganicoTO2.getId().longValue()!=nivelorganicoTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((nivelorganicoTO.getId()==null || (nivelorganicoTO.getId()!=null && nivelorganicoTO2.getId().longValue()!=nivelorganicoTO.getId().longValue())) && nivelorganicoTO.getCodigo()!=null && nivelorganicoTO2.getCodigo().equals(nivelorganicoTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
-				NivelorganicoTO nivelorganicoTO3=new NivelorganicoTO();
-				nivelorganicoTO3.setNombre(nivelorganicoTO.getNombre());
-				Collection<NivelorganicoTO> nivelorganicoTO1s=UtilSession.planificacionServicio.transObtenerNivelorganido(nivelorganicoTO3);
-				if(nivelorganicoTO1s.size()>0){
-					nivelorganicoTO3=(NivelorganicoTO)nivelorganicoTO1s.iterator().next();
-					if((nivelorganicoTO.getId()!=null && nivelorganicoTO.getId().longValue()!=0) && nivelorganicoTO3.getId().longValue()!=nivelorganicoTO.getId().longValue())
-						grabar=false;
-					else if((nivelorganicoTO.getId()==null || (nivelorganicoTO.getId()!=null && nivelorganicoTO3.getId().longValue()!=nivelorganicoTO.getId().longValue())) && nivelorganicoTO.getNombre()!=null && nivelorganicoTO3.getNombre().equals(nivelorganicoTO.getNombre())){
-						grabar=false;
+				if(grabar) {
+					NivelorganicoTO nivelorganicoTO5=new NivelorganicoTO();
+					nivelorganicoTO5.setNombre(nivelorganicoTO.getNombre());
+					Collection<NivelorganicoTO> nivelorganicoTO1s=UtilSession.planificacionServicio.transObtenerNivelorganido(nivelorganicoTO5);
+					if(nivelorganicoTO1s.size()>0){
+						for(NivelorganicoTO nivelorganicoTO3:nivelorganicoTO1s) {
+							//nivelorganicoTO3=(NivelorganicoTO)nivelorganicoTO1s.iterator().next();
+							if((nivelorganicoTO.getId()!=null && nivelorganicoTO.getId().longValue()!=0) && nivelorganicoTO3.getId().longValue()!=nivelorganicoTO.getId().longValue()) {
+								grabar=false;
+								break;
+							}
+							else if((nivelorganicoTO.getId()==null || (nivelorganicoTO.getId()!=null && nivelorganicoTO3.getId().longValue()!=nivelorganicoTO.getId().longValue())) && nivelorganicoTO.getNombre()!=null && nivelorganicoTO3.getNombre().equals(nivelorganicoTO.getNombre())){
+								grabar=false;
+								break;
+							}
+						}
 					}
 				}
 				if(!grabar){
@@ -1117,15 +1302,19 @@ public class AdministracionController {
 				InstitucionTO institucionTO = gson.fromJson(new StringReader(objeto), InstitucionTO.class);
 				accion = (institucionTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				InstitucionTO institucionTO2=new InstitucionTO();
-				institucionTO2.setCodigo(institucionTO.getCodigo());
-				institucionTO2.setInstitucionejerciciofiscalid(institucionTO.getInstitucionejerciciofiscalid());
-				Collection<InstitucionTO> itemTOs=UtilSession.estructuraorganicaServicio.transObtenerInstitucion(institucionTO2);
+				InstitucionTO institucionTO3=new InstitucionTO();
+				institucionTO3.setCodigo(institucionTO.getCodigo());
+				institucionTO3.setInstitucionejerciciofiscalid(institucionTO.getInstitucionejerciciofiscalid());
+				Collection<InstitucionTO> institucionTOs=UtilSession.estructuraorganicaServicio.transObtenerInstitucion(institucionTO3);
 				boolean grabar=true;
-				if(itemTOs.size()>0){
-					institucionTO2=(InstitucionTO)itemTOs.iterator().next();
-					if(institucionTO.getId()!=null && institucionTO2.getId().longValue()!=institucionTO.getId().longValue())
-						grabar=false;
+				if(institucionTOs.size()>0){
+					for(InstitucionTO institucionTO2:institucionTOs) {
+						//institucionTO2=(InstitucionTO)itemTOs.iterator().next();
+						if(institucionTO.getId()!=null && institucionTO2.getId().longValue()!=institucionTO.getId().longValue()) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
