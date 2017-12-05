@@ -1,4 +1,5 @@
-app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "SweetAlert", "$filter", "ngTableParams", "SubItemsFactory", function ($scope, $rootScope, $uibModal, SweetAlert, $filter, ngTableParams, subitemsFactory) {
+app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "SweetAlert", "$filter", "ngTableParams", "SubItemsFactory",
+	function ($scope, $rootScope, $uibModal, SweetAlert, $filter, ngTableParams, subitemsFactory) {
 
     $scope.nombre = null;
     $scope.codigo = null;

@@ -10,14 +10,15 @@ app.factory("UnidadesMedidaFactory", ["Restangular", function (Restangular) {
 
         },
 
-        traerUnidadesFiltro: function (pagina, unidad, estado, nombregrupo) {
+        traerUnidadesFiltro: function (pagina, unidad, estado, nombregrupo, codigo) {
 
             var url = "administrar/consultar/unidadmedida/pagina=" + pagina;
 
             if (unidad != null && unidad != "") url += "&nombre=" + unidad.toUpperCase();
             if (nombregrupo != null && nombregrupo != "") url += "&nombregrupo=" + nombregrupo;
             if (estado != null && estado != "") url += "&estado=" + estado;
-            console.clear();
+            if (codigo != null && codigo != "") url += "&codigo=" + codigo;
+            console.log("FILTRAR:");
             console.log(url);
             return Restangular.allUrl(url).getList();
 

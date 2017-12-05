@@ -17,7 +17,6 @@ app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert"
     var pagina = 1;
 
     $scope.init = function () {
-
         $scope.grupos = [];
 
         gruposMedidaFactory.traerGruposFiltro(pagina,'','A').then(function (resp) {
@@ -25,8 +24,7 @@ app.controller('UnidadesMedidaController', ["$scope", "$rootScope", "SweetAlert"
                 $scope.grupos = resp;
             
         });
-
-        $scope.consultar();
+        $scope.limpiar();
     };
 
     $scope.consultar = function () {
