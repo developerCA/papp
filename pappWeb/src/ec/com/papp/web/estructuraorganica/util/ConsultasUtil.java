@@ -191,10 +191,15 @@ public class ConsultasUtil {
 			InstitucionTO institucionTO=new InstitucionTO();
 			if(parameters.get("institucionejerciciofiscalid")!=null && !parameters.get("institucionejerciciofiscalid").equals(""))
 				institucionTO.setInstitucionejerciciofiscalid(Long.valueOf(parameters.get("institucionejerciciofiscalid")));
-			if(parameters.get("nombreinstitucion")!=null && !parameters.get("nombreinstitucion").equals(""))
-				institucionTO.setNombre(parameters.get("nombreinstitucion"));
-			if(parameters.get("codigoinstitucion")!=null && !parameters.get("codigoinstitucion").equals(""))
-				institucionTO.setCodigo(parameters.get("codigoinstitucion"));
+			if(parameters.get("nombreInstitucion")!=null && !parameters.get("nombreInstitucion").equals(""))
+				institucionTO.setNombre(parameters.get("nombreInstitucion"));
+			if(parameters.get("codigoInstitucion")!=null && !parameters.get("codigoInstitucion").equals(""))
+				institucionTO.setCodigo(parameters.get("codigoInstitucion"));
+			if(parameters.get("ejercicioFiscal")!=null && !parameters.get("ejercicioFiscal").equals("")) {
+				EjerciciofiscalTO ejerciciofiscalTO=new EjerciciofiscalTO();
+				ejerciciofiscalTO.setAnio(Long.valueOf(parameters.get("ejercicioFiscal")));
+				institucionTO.setEjerciciofiscal(ejerciciofiscalTO);
+			}
 			institucionTO.setEstado("A");
 			institucionentidadTO.setInstitucion(institucionTO);
 			SearchResultTO<InstitucionentidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidadPaginado(institucionentidadTO);

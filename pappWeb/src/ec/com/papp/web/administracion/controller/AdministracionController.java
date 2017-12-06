@@ -987,11 +987,12 @@ public class AdministracionController {
 			//Gradofuerza
 			else if(clase.equals("gradofuerza")){
 				GradofuerzaTO gradofuerzaTO = gson.fromJson(new StringReader(objeto), GradofuerzaTO.class);
-				log.println("grado superior " + gradofuerzaTO.getGradofuerzapadreid());
+				log.println("grado superior*** " + gradofuerzaTO.getGradofuerzapadreid());
 				accion = (gradofuerzaTO.getId()==null)?"crear":"actualizar";
 				//valido que no exista creado un registro para ese grado
 				GradofuerzaTO gradoesfuerza=new GradofuerzaTO();
 				gradoesfuerza.setGradofuerzagradoid(gradofuerzaTO.getGradofuerzagradoid());
+				gradoesfuerza.setGradofuerzafuerzaid(gradofuerzaTO.getGradofuerzafuerzaid());
 				Collection<GradofuerzaTO> grados=UtilSession.adminsitracionServicio.transObtenerGradofuerza(gradoesfuerza);
 				log.println("escalarmu encontrados: " + grados.size());
 				if(grados.size()==0){
