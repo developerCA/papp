@@ -138,6 +138,15 @@ public class ConsultasUtil {
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals("")){
 				institucionTO.setInstitucionejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			}
+			if(parameters.get("nombreInstitucion")!=null && !parameters.get("nombreInstitucion").equals(""))
+				institucionTO.setNombre(parameters.get("nombreInstitucion"));
+			if(parameters.get("codigoInstitucion")!=null && !parameters.get("codigoInstitucion").equals(""))
+				institucionTO.setCodigo(parameters.get("codigoInstitucion"));
+			if(parameters.get("ejercicoFiscal")!=null && !parameters.get("ejercicoFiscal").equals("")) {
+				EjerciciofiscalTO ejerciciofiscalTO=new EjerciciofiscalTO();
+				ejerciciofiscalTO.setAnio(Long.valueOf(parameters.get("ejercicoFiscal")));
+				institucionTO.setEjerciciofiscal(ejerciciofiscalTO);
+			}
 			institucionentidadTO.setInstitucion(institucionTO);
 			SearchResultTO<InstitucionentidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidadPaginado(institucionentidadTO);
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -195,9 +204,9 @@ public class ConsultasUtil {
 				institucionTO.setNombre(parameters.get("nombreInstitucion"));
 			if(parameters.get("codigoInstitucion")!=null && !parameters.get("codigoInstitucion").equals(""))
 				institucionTO.setCodigo(parameters.get("codigoInstitucion"));
-			if(parameters.get("ejercicioFiscal")!=null && !parameters.get("ejercicioFiscal").equals("")) {
+			if(parameters.get("ejercicoFiscal")!=null && !parameters.get("ejercicoFiscal").equals("")) {
 				EjerciciofiscalTO ejerciciofiscalTO=new EjerciciofiscalTO();
-				ejerciciofiscalTO.setAnio(Long.valueOf(parameters.get("ejercicioFiscal")));
+				ejerciciofiscalTO.setAnio(Long.valueOf(parameters.get("ejercicoFiscal")));
 				institucionTO.setEjerciciofiscal(ejerciciofiscalTO);
 			}
 			institucionTO.setEstado("A");
