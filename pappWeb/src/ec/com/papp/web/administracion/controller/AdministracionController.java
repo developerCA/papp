@@ -995,8 +995,10 @@ public class AdministracionController {
 				gradoesfuerza.setGradofuerzagradoid(gradofuerzaTO.getGradofuerzagradoid());
 				gradoesfuerza.setGradofuerzafuerzaid(gradofuerzaTO.getGradofuerzafuerzaid());
 				Collection<GradofuerzaTO> grados=UtilSession.adminsitracionServicio.transObtenerGradofuerza(gradoesfuerza);
+				if(grados.size()>0)
+					gradoesfuerza=(GradofuerzaTO)grados.iterator().next();
 				log.println("escalarmu encontrados: " + grados.size());
-				if(grados.size()==0){
+				if(grados.size()==0 || (grados.size()>0 && gradoesfuerza.getId().longValue()==gradofuerzaTO.getId().longValue())){
 					log.println("entro a grabar");
 					//pregunto si ya existe el codigo en el nivel actual
 					GradoescalaTO gradoescalaTO3=new GradoescalaTO();
@@ -1182,8 +1184,10 @@ public class AdministracionController {
 				GradoescalaTO gradoescala=new GradoescalaTO();
 				gradoescala.setGegradofuerzaid(gradoescalaTO.getGegradofuerzaid());
 				Collection<GradoescalaTO> grados=UtilSession.adminsitracionServicio.transObtenerGradoescala(gradoescala);
+				if(grados.size()>0)
+					gradoescala=(GradoescalaTO)grados.iterator().next();
 				log.println("escalarmu encontrados: " + grados.size());
-				if(grados.size()==0){
+				if(grados.size()==0 || (grados.size()>0 && gradoescala.getId().longValue()==gradoescalaTO.getId().longValue())){
 					//pregunto si ya existe el codigo en el nivel actual
 					GradoescalaTO gradoescalaTO3=new GradoescalaTO();
 					gradoescalaTO3.setCodigo(gradoescalaTO.getCodigo());
