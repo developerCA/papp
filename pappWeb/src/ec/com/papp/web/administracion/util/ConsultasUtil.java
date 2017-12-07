@@ -1263,7 +1263,7 @@ public class ConsultasUtil {
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				tipoidentificacionTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("identificacionid")!=null && !parameters.get("identificacionid").equals(""))
-				tipoidentificaciontipoTO.getId().setIdentificacionid(Long.valueOf(parameters.get("nombre")));
+				tipoidentificaciontipoTO.getId().setIdentificacionid(Long.valueOf(parameters.get("identificacionid")));
 			tipoidentificaciontipoTO.setTipoidentificacion(tipoidentificacionTO);
 //			SearchResultTO<TipoidentificaciontipoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificaciontipoPaginado(tipoidentificaciontipoTO);
 			Collection<TipoidentificaciontipoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificaciontipo(tipoidentificaciontipoTO);

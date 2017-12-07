@@ -114,7 +114,7 @@ public class AdministracionController {
 				if(ejerciciofiscalTOs.size()>0){
 					for(EjerciciofiscalTO ejerciciofiscalTO2:ejerciciofiscalTOs) {
 						//ejerciciofiscalTO2=(EjerciciofiscalTO)ejerciciofiscalTOs.iterator().next();
-						if((ejerciciofiscalTO.getId()!=null && ejerciciofiscalTO.getId().longValue()!=0) && ejerciciofiscalTO2.getId().longValue()!=ejerciciofiscalTO.getId().longValue()) {
+						if((ejerciciofiscalTO.getId()!=null && ejerciciofiscalTO.getId().longValue()!=0) && ejerciciofiscalTO2.getId().longValue()!=ejerciciofiscalTO.getId().longValue() && ejerciciofiscalTO.getAnio()!=null && ejerciciofiscalTO2.getAnio().equals(ejerciciofiscalTO.getAnio())) {
 							grabar=false;
 							break;
 						}
@@ -190,7 +190,7 @@ public class AdministracionController {
 				if(socionegocioTOs.size()>0){
 					for(SocionegocioTO socionegocioTO3:socionegocioTOs) {
 						//socionegocioTO2=(SocionegocioTO)socionegocioTOs.iterator().next();
-						if((socionegocioTO.getId()!=null && socionegocioTO.getId().longValue()!=0) && socionegocioTO3.getId().longValue()!=socionegocioTO.getId().longValue()) {
+						if((socionegocioTO.getId()!=null && socionegocioTO.getId().longValue()!=0) && socionegocioTO3.getId().longValue()!=socionegocioTO.getId().longValue() && socionegocioTO3.getCodigo().equals(socionegocioTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -248,7 +248,7 @@ public class AdministracionController {
 				if(unidadmedidaTOs.size()>0){
 					for(UnidadmedidaTO unidadmedidaTO2:unidadmedidaTOs) {
 						//unidadmedidaTO2=(UnidadmedidaTO)unidadmedidaTOs.iterator().next();
-						if((unidadmedidaTO.getId()!=null && unidadmedidaTO.getId().longValue()!=0) && unidadmedidaTO2.getId().longValue()!=unidadmedidaTO.getId().longValue()) {
+						if((unidadmedidaTO.getId()!=null && unidadmedidaTO.getId().longValue()!=0) && unidadmedidaTO2.getId().longValue()!=unidadmedidaTO.getId().longValue() && unidadmedidaTO2.getCodigo().equals(unidadmedidaTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -283,7 +283,7 @@ public class AdministracionController {
 				if(parametroTOs.size()>0){
 					for(ParametroTO parametroTO2:parametroTOs) {
 						//parametroTO2=(ParametroTO)parametroTOs.iterator().next();
-						if((parametroTO.getId()!=null && parametroTO.getId().longValue()!=0) && parametroTO2.getId().longValue()!=parametroTO.getId().longValue()) {
+						if((parametroTO.getId()!=null && parametroTO.getId().longValue()!=0) && parametroTO2.getId().longValue()!=parametroTO.getId().longValue() && parametroTO2.getNombre().equals(parametroTO.getNombre())) {
 							grabar=false;
 							break;
 						}
@@ -319,7 +319,7 @@ public class AdministracionController {
 				if(consecutivoTOs.size()>0){
 					for(ConsecutivoTO consecutivoTO2:consecutivoTOs) {
 						//consecutivoTO2=(ConsecutivoTO)fuentefinanciamientoTOs.iterator().next();
-						if((consecutivoTO.getId()!=null && consecutivoTO.getId().longValue()!=0) && consecutivoTO2.getId().longValue()!=consecutivoTO.getId().longValue()) {
+						if((consecutivoTO.getId()!=null && consecutivoTO.getId().longValue()!=0) && consecutivoTO2.getId().longValue()!=consecutivoTO.getId().longValue() && consecutivoTO2.getNombre().equals(consecutivoTO.getNombre())) {
 							grabar=false;
 							break;
 						}
@@ -352,7 +352,7 @@ public class AdministracionController {
 				if(tipoidentificacionTOs.size()>0){
 					for(TipoidentificacionTO tipoidentificacionTO2:tipoidentificacionTOs) {
 						//tipoidentificacionTO2=(TipoidentificacionTO)fuentefinanciamientoTOs.iterator().next();
-						if((tipoidentificacionTO.getId()!=null && tipoidentificacionTO.getId().longValue()!=0) && tipoidentificacionTO2.getId().longValue()!=tipoidentificacionTO.getId().longValue()) {
+						if((tipoidentificacionTO.getId()!=null && tipoidentificacionTO.getId().longValue()!=0) && tipoidentificacionTO2.getId().longValue()!=tipoidentificacionTO.getId().longValue() && tipoidentificacionTO2.getNombre().equals(tipoidentificacionTO.getNombre())) {
 							grabar=false;
 							break;
 						}
@@ -386,7 +386,7 @@ public class AdministracionController {
 				if(fuentefinanciamientoTOs.size()>0){
 					for(FuentefinanciamientoTO fuentefinanciamientoTO2:fuentefinanciamientoTOs) {
 						//fuentefinanciamientoTO2=(FuentefinanciamientoTO)fuentefinanciamientoTOs.iterator().next();
-						if((fuentefinanciamientoTO.getId()!=null && fuentefinanciamientoTO.getId().longValue()!=0) && fuentefinanciamientoTO2.getId().longValue()!=fuentefinanciamientoTO.getId().longValue()) {
+						if((fuentefinanciamientoTO.getId()!=null && fuentefinanciamientoTO.getId().longValue()!=0) && fuentefinanciamientoTO2.getId().longValue()!=fuentefinanciamientoTO.getId().longValue() && fuentefinanciamientoTO2.getCodigo().equals(fuentefinanciamientoTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -421,7 +421,7 @@ public class AdministracionController {
 				if(organismoTOs.size()>0){
 					for(OrganismoTO organismoTO2:organismoTOs) {
 						//organismoTO2=(OrganismoTO)organismoTOs.iterator().next();
-						if((organismoTO.getId()!=null && organismoTO.getId().longValue()!=0) && organismoTO2.getId().longValue()!=organismoTO.getId().longValue()) {
+						if((organismoTO.getId()!=null && organismoTO.getId().longValue()!=0) && organismoTO2.getId().longValue()!=organismoTO.getId().longValue() && organismoTO2.getCodigo().equals(organismoTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -456,7 +456,7 @@ public class AdministracionController {
 				if(obraTOs.size()>0){
 					for(ObraTO obraTO2:obraTOs) {
 						//obraTO2=(ObraTO)obraTOs.iterator().next();
-						if((obraTO.getId()!=null && obraTO.getId().longValue()!=0) && obraTO2.getId().longValue()!=obraTO.getId().longValue()) {
+						if((obraTO.getId()!=null && obraTO.getId().longValue()!=0) && obraTO2.getId().longValue()!=obraTO.getId().longValue() && obraTO2.getCodigo().equals(obraTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -494,7 +494,7 @@ public class AdministracionController {
 				if(itemTOs.size()>0){
 					for(ItemTO itemTO2:itemTOs) {
 						//itemTO2=(ItemTO)itemTOs.iterator().next();
-						if((itemTO.getId()!=null && itemTO.getId().longValue()!=0) && itemTO2.getId().longValue()!=itemTO.getId().longValue()) {
+						if((itemTO.getId()!=null && itemTO.getId().longValue()!=0) && itemTO2.getId().longValue()!=itemTO.getId().longValue() && itemTO2.getCodigo().equals(itemTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -540,11 +540,13 @@ public class AdministracionController {
 				if(grupomedidaTOs.size()>0){
 					for(GrupomedidaTO grupomedidaTO2:grupomedidaTOs) {
 						//grupomedidaTO2=(GrupomedidaTO)grupomedidaTOs.iterator().next();
-						if((grupomedidaTO.getId()!=null && grupomedidaTO.getId().longValue()!=0) && grupomedidaTO2.getId().longValue()!=grupomedidaTO.getId().longValue()) {
+						if((grupomedidaTO.getId()!=null && grupomedidaTO.getId().longValue()!=0) && grupomedidaTO2.getId().longValue()!=grupomedidaTO.getId().longValue()  && grupomedidaTO.getCodigo()!=null && grupomedidaTO2.getCodigo().equals(grupomedidaTO.getCodigo())) {
+							log.println("entro por 1 " + grupomedidaTO.getId() + " - "+grupomedidaTO2.getId());
 							grabar=false;
 							break;
 						}
 						else if((grupomedidaTO.getId()==null || (grupomedidaTO.getId()!=null && grupomedidaTO2.getId().longValue()!=grupomedidaTO.getId().longValue())) && grupomedidaTO.getCodigo()!=null && grupomedidaTO2.getCodigo().equals(grupomedidaTO.getCodigo())) {
+							log.println("entro por 2");
 							grabar=false;
 							break;
 						}
@@ -576,7 +578,7 @@ public class AdministracionController {
 					for(ClaseregistroTO claseregistroTO2:claseregistroTOs) {
 						//claseregistroTO2=(ClaseregistroTO)claseregistroTOs.iterator().next();
 						log.println("id.... " + claseregistroTO.getId() + " - " + claseregistroTO2.getId());
-						if((claseregistroTO.getId()!=null && claseregistroTO.getId().longValue()!=0) && claseregistroTO2.getId().longValue()!=claseregistroTO.getId().longValue()) {
+						if((claseregistroTO.getId()!=null && claseregistroTO.getId().longValue()!=0) && claseregistroTO2.getId().longValue()!=claseregistroTO.getId().longValue() && claseregistroTO2.getCodigo().equals(claseregistroTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -615,7 +617,7 @@ public class AdministracionController {
 					for(ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO2:claseregistroclasemodificacionTOs) {
 						//claseregistroclasemodificacionTO2=(ClaseregistroclasemodificacionTO)claseregistroclasemodificacionTOs.iterator().next();
 						log.println("id.... " + claseregistroclasemodificacionTO.getId() + " - " + claseregistroclasemodificacionTO2.getId());
-						if((claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO.getId().getRegistrocmid()!=null && claseregistroclasemodificacionTO.getId().getRegistroid()!=null) && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue()) {
+						if((claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO.getId().getRegistrocmid()!=null && claseregistroclasemodificacionTO.getId().getRegistroid()!=null) && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue() && claseregistroclasemodificacionTO.getCodigo()!=null && claseregistroclasemodificacionTO2.getCodigo().equals(claseregistroclasemodificacionTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -649,7 +651,7 @@ public class AdministracionController {
 				if(tipodocumentoTOs.size()>0){
 					for(TipodocumentoTO tipodocumentoTO2:tipodocumentoTOs) {
 						//tipodocumentoTO2=(TipodocumentoTO)tipodocumentoTOs.iterator().next();
-						if((tipodocumentoTO.getId()!=null && tipodocumentoTO.getId().longValue()!=0) && tipodocumentoTO2.getId().longValue()!=tipodocumentoTO.getId().longValue()) {
+						if((tipodocumentoTO.getId()!=null && tipodocumentoTO.getId().longValue()!=0) && tipodocumentoTO2.getId().longValue()!=tipodocumentoTO.getId().longValue() && tipodocumentoTO2.getCodigo().equals(tipodocumentoTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -706,7 +708,7 @@ public class AdministracionController {
 				if(tipoproductoTOs.size()>0){
 					for(TipoproductoTO tipoproductoTO2:tipoproductoTOs) {
 						//tipoproductoTO2=(TipoproductoTO)tipoproductoTOs.iterator().next();
-						if((tipoproductoTO.getId()!=null && tipoproductoTO.getId().longValue()!=0) && tipoproductoTO2.getId().longValue()!=tipoproductoTO.getId().longValue()) {
+						if((tipoproductoTO.getId()!=null && tipoproductoTO.getId().longValue()!=0) && tipoproductoTO2.getId().longValue()!=tipoproductoTO.getId().longValue() && tipoproductoTO2.getNombre().equals(tipoproductoTO.getNombre())) {
 							grabar=false;
 							break;
 						}
@@ -739,7 +741,7 @@ public class AdministracionController {
 				if(tiporegimenTOs.size()>0){
 					//tiporegimenTO2=(TiporegimenTO)tiporegimenTOs.iterator().next();
 					for(TiporegimenTO tiporegimenTO2:tiporegimenTOs) {
-						if((tiporegimenTO.getId()!=null && tiporegimenTO.getId().longValue()!=0) && tiporegimenTO2.getId().longValue()!=tiporegimenTO.getId().longValue()) {
+						if((tiporegimenTO.getId()!=null && tiporegimenTO.getId().longValue()!=0) && tiporegimenTO2.getId().longValue()!=tiporegimenTO.getId().longValue() && tiporegimenTO2.getNombre().equals(tiporegimenTO.getNombre())) {
 							grabar=false;
 							break;
 						}
@@ -774,7 +776,7 @@ public class AdministracionController {
 				if(procedimientoTOs.size()>0){
 					for(ProcedimientoTO procedimientoTO2:procedimientoTOs) {
 							//procedimientoTO2=(ProcedimientoTO)procedimientoTOs.iterator().next();
-							if((procedimientoTO.getId()!=null && procedimientoTO.getId().longValue()!=0) && procedimientoTO2.getId().longValue()!=procedimientoTO.getId().longValue()) {
+							if((procedimientoTO.getId()!=null && procedimientoTO.getId().longValue()!=0) && procedimientoTO2.getId().longValue()!=procedimientoTO.getId().longValue() && procedimientoTO2.getNombre().equals(procedimientoTO.getNombre())) {
 								grabar=false;
 								break;
 							}
@@ -808,7 +810,7 @@ public class AdministracionController {
 				if(grupoTOs.size()>0){
 					for(GrupoTO grupoTO2:grupoTOs) {
 						//grupoTO2=(GrupoTO)grupoTOs.iterator().next();
-						if((grupoTO.getId()!=null && grupoTO.getId().longValue()!=0) && grupoTO2.getId().longValue()!=grupoTO.getId().longValue()) {
+						if((grupoTO.getId()!=null && grupoTO.getId().longValue()!=0) && grupoTO2.getId().longValue()!=grupoTO.getId().longValue() && grupoTO2.getCodigo().equals(grupoTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -825,7 +827,7 @@ public class AdministracionController {
 					if(grupoTO1s.size()>0){
 						for(GrupoTO grupoTO3:grupoTO1s) {
 							//grupoTO3=(GrupoTO)grupoTO1s.iterator().next();
-							if((grupoTO.getId()!=null && grupoTO.getId().longValue()!=0) && grupoTO3.getId().longValue()!=grupoTO.getId().longValue()) {
+							if((grupoTO.getId()!=null && grupoTO.getId().longValue()!=0) && grupoTO3.getId().longValue()!=grupoTO.getId().longValue() && grupoTO3.getNombre().equals(grupoTO.getNombre())) {
 								grabar=false;
 								break;
 							}
@@ -859,7 +861,7 @@ public class AdministracionController {
 				if(gradoTOs.size()>0){
 					for(GradoTO gradoTO2:gradoTOs) {
 						//gradoTO2=(GradoTO)gradoTOs.iterator().next();
-						if((gradoTO.getId()!=null && gradoTO.getId().longValue()!=0) && gradoTO2.getId().longValue()!=gradoTO.getId().longValue()) {
+						if((gradoTO.getId()!=null && gradoTO.getId().longValue()!=0) && gradoTO2.getId().longValue()!=gradoTO.getId().longValue() && gradoTO2.getCodigo().equals(gradoTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -877,7 +879,7 @@ public class AdministracionController {
 					if(gradoTOs2.size()>0){
 						for(GradoTO gradoTO3:gradoTOs2) {
 							//gradoTO3=(GradoTO)gradoTOs2.iterator().next();
-							if((gradoTO.getId()!=null && gradoTO.getId().longValue()!=0) && gradoTO3.getId().longValue()!=gradoTO.getId().longValue()) {
+							if((gradoTO.getId()!=null && gradoTO.getId().longValue()!=0) && gradoTO3.getId().longValue()!=gradoTO.getId().longValue() && gradoTO3.getNombre().equals(gradoTO.getNombre())) {
 								grabar=false;
 								break;
 							}
@@ -911,7 +913,7 @@ public class AdministracionController {
 				if(clasificacionTOs.size()>0){
 					for(ClasificacionTO clasificacionTO2:clasificacionTOs) {
 						//clasificacionTO2=(ClasificacionTO)clasificacionTOs.iterator().next();
-						if((clasificacionTO.getId()!=null && clasificacionTO.getId().longValue()!=0) && clasificacionTO2.getId().longValue()!=clasificacionTO.getId().longValue()) {
+						if((clasificacionTO.getId()!=null && clasificacionTO.getId().longValue()!=0) && clasificacionTO2.getId().longValue()!=clasificacionTO.getId().longValue() && clasificacionTO2.getCodigo().equals(clasificacionTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -944,7 +946,7 @@ public class AdministracionController {
 				if(fuerzaTOs.size()>0){
 					for(FuerzaTO fuerzaTO2:fuerzaTOs) {
 						//fuerzaTO2=(FuerzaTO)fuerzaTOs.iterator().next();
-						if((fuerzaTO.getId()!=null && fuerzaTO.getId().longValue()!=0) && fuerzaTO2.getId().longValue()!=fuerzaTO.getId().longValue()) {
+						if((fuerzaTO.getId()!=null && fuerzaTO.getId().longValue()!=0) && fuerzaTO2.getId().longValue()!=fuerzaTO.getId().longValue() && fuerzaTO2.getCodigo().equals(fuerzaTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -962,7 +964,7 @@ public class AdministracionController {
 					if(fuerzaTOs2.size()>0){
 						for(FuerzaTO fuerzaTO3:fuerzaTOs2) {
 							//fuerzaTO3=(FuerzaTO)fuerzaTOs2.iterator().next();
-							if((fuerzaTO.getId()!=null && fuerzaTO.getId().longValue()!=0) && fuerzaTO3.getId().longValue()!=fuerzaTO.getId().longValue()) {
+							if((fuerzaTO.getId()!=null && fuerzaTO.getId().longValue()!=0) && fuerzaTO3.getId().longValue()!=fuerzaTO.getId().longValue() && fuerzaTO3.getNombre().equals(fuerzaTO.getNombre())) {
 								grabar=false;
 								break;
 							}
@@ -1005,7 +1007,7 @@ public class AdministracionController {
 					if(gradoescalaTOs.size()>0){
 						for(GradoescalaTO gradoescalaTO2:gradoescalaTOs) {
 							//gradoescalaTO2=(GradoescalaTO)escalarmuTOs.iterator().next();
-							if((gradofuerzaTO.getId()!=null && gradofuerzaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue()) {
+							if((gradofuerzaTO.getId()!=null && gradofuerzaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradofuerzaTO.getId().longValue() && gradoescalaTO2.getCodigo().equals(gradofuerzaTO.getCodigo())) {
 								grabar=false;
 								break;
 							}
@@ -1068,7 +1070,7 @@ public class AdministracionController {
 				if(especialidadTOs.size()>0){
 					for(EspecialidadTO especialidadTO2:especialidadTOs) {
 						//especialidadTO2=(EspecialidadTO)especialidadTOs.iterator().next();
-						if((especialidadTO.getId()!=null && especialidadTO.getId().longValue()!=0) && especialidadTO2.getId().longValue()!=especialidadTO.getId().longValue()) {
+						if((especialidadTO.getId()!=null && especialidadTO.getId().longValue()!=0) && especialidadTO2.getId().longValue()!=especialidadTO.getId().longValue() && especialidadTO2.getCodigo().equals(especialidadTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -1101,7 +1103,7 @@ public class AdministracionController {
 				if(cargoTOs.size()>0){
 					for(CargoTO cargoTO2:cargoTOs) {
 						//cargoTO2=(CargoTO)cargoTOs.iterator().next();
-						if((cargoTO.getId()!=null && cargoTO.getId().longValue()!=0) && cargoTO2.getId().longValue()!=cargoTO.getId().longValue()) {
+						if((cargoTO.getId()!=null && cargoTO.getId().longValue()!=0) && cargoTO2.getId().longValue()!=cargoTO.getId().longValue() && cargoTO2.getCodigo().equals(cargoTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -1118,7 +1120,7 @@ public class AdministracionController {
 					if(cargoTOs2.size()>0){
 						for(CargoTO cargoTO3:cargoTOs2) {
 							//cargoTO3=(CargoTO)cargoTOs2.iterator().next();
-							if((cargoTO.getId()!=null && cargoTO.getId().longValue()!=0) && cargoTO3.getId().longValue()!=cargoTO.getId().longValue()) {
+							if((cargoTO.getId()!=null && cargoTO.getId().longValue()!=0) && cargoTO3.getId().longValue()!=cargoTO.getId().longValue() && cargoTO3.getNombre().equals(cargoTO.getNombre())) {
 								grabar=false;
 								break;
 							}
@@ -1153,7 +1155,7 @@ public class AdministracionController {
 				if(escalarmuTOs.size()>0){
 					for(EscalarmuTO escalarmuTO2:escalarmuTOs) {
 						//escalarmuTO2=(EscalarmuTO)escalarmuTOs.iterator().next();
-						if((escalarmuTO.getId()!=null && escalarmuTO.getId().longValue()!=0) && escalarmuTO2.getId().longValue()!=escalarmuTO.getId().longValue()) {
+						if((escalarmuTO.getId()!=null && escalarmuTO.getId().longValue()!=0) && escalarmuTO2.getId().longValue()!=escalarmuTO.getId().longValue() && escalarmuTO2.getCodigo().equals(escalarmuTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -1191,7 +1193,7 @@ public class AdministracionController {
 					if(escalarmuTOs.size()>0){
 						for(GradoescalaTO gradoescalaTO2:escalarmuTOs) {
 							//gradoescalaTO2=(GradoescalaTO)escalarmuTOs.iterator().next();
-							if((gradoescalaTO.getId()!=null && gradoescalaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradoescalaTO.getId().longValue()) {
+							if((gradoescalaTO.getId()!=null && gradoescalaTO.getId().longValue()!=0) && gradoescalaTO2.getId().longValue()!=gradoescalaTO.getId().longValue() && gradoescalaTO2.getCodigo().equals(gradoescalaTO.getCodigo())) {
 								grabar=false;
 								break;
 							}
@@ -1228,7 +1230,7 @@ public class AdministracionController {
 				if(cargoescalaTOs.size()>0){
 					for(CargoescalaTO cargoescalaTO2:cargoescalaTOs) {
 						//cargoescalaTO2=(CargoescalaTO)cargoescalaTOs.iterator().next();
-						if((cargoescalaTO.getId()!=null && cargoescalaTO.getId().longValue()!=0) && cargoescalaTO2.getId().longValue()!=cargoescalaTO.getId().longValue()) {
+						if((cargoescalaTO.getId()!=null && cargoescalaTO.getId().longValue()!=0) && cargoescalaTO2.getId().longValue()!=cargoescalaTO.getId().longValue() && cargoescalaTO2.getCodigo().equals(cargoescalaTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -1260,7 +1262,7 @@ public class AdministracionController {
 				if(nivelorganicoTOs.size()>0){
 					for(NivelorganicoTO nivelorganicoTO2:nivelorganicoTOs) {
 						//nivelorganicoTO2=(NivelorganicoTO)nivelorganicoTOs.iterator().next();
-						if((nivelorganicoTO.getId()!=null && nivelorganicoTO.getId().longValue()!=0) && nivelorganicoTO2.getId().longValue()!=nivelorganicoTO.getId().longValue()) {
+						if((nivelorganicoTO.getId()!=null && nivelorganicoTO.getId().longValue()!=0) && nivelorganicoTO2.getId().longValue()!=nivelorganicoTO.getId().longValue() && nivelorganicoTO2.getCodigo().equals(nivelorganicoTO.getCodigo())) {
 							grabar=false;
 							break;
 						}
@@ -1277,7 +1279,7 @@ public class AdministracionController {
 					if(nivelorganicoTO1s.size()>0){
 						for(NivelorganicoTO nivelorganicoTO3:nivelorganicoTO1s) {
 							//nivelorganicoTO3=(NivelorganicoTO)nivelorganicoTO1s.iterator().next();
-							if((nivelorganicoTO.getId()!=null && nivelorganicoTO.getId().longValue()!=0) && nivelorganicoTO3.getId().longValue()!=nivelorganicoTO.getId().longValue()) {
+							if((nivelorganicoTO.getId()!=null && nivelorganicoTO.getId().longValue()!=0) && nivelorganicoTO3.getId().longValue()!=nivelorganicoTO.getId().longValue() && nivelorganicoTO3.getNombre().equals(nivelorganicoTO.getNombre())) {
 								grabar=false;
 								break;
 							}
