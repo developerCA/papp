@@ -4,12 +4,8 @@ app.factory("empleadosFactory", [ "Restangular", function(Restangular) {
 	var service = Restangular.service("/administrar");
 
 	return {
-		
-		
 		traerEmpleados : function(pagina) {
-			  
 			  return Restangular.allUrl("administrar/consultar/empleado/pagina="+pagina).getList();
-			  
 		},
 		
 		traerEmpleadosFiltro : function(pagina,codigo,nombre,tipo,estado) {

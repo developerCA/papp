@@ -28,6 +28,16 @@ app.controller('ModalTipoIdentificacionController', ["$scope", "$uibModalInstanc
 
     };
 
+    $scope.consultarTipo = function () {
+        $scope.data = [];
+
+        tipoIdentificacionFactory.traerTiposTipo(pagina, $scope.nombre).then(function (resp) {
+        	console.log(resp);
+            if (resp.meta)
+                $scope.data = resp;
+        });
+    };
+
     $scope.$watch('data', function () {
 
         $scope.tableParams = new ngTableParams({

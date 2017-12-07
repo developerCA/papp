@@ -5,9 +5,7 @@ app.factory("TipoIdentificacionFactory", ["Restangular", function (Restangular) 
     return {
 
         traerTipos: function (pagina) {
-
             return Restangular.allUrl("administrar/consultar/tipoidentificacion/pagina=" + pagina).getList();
-
         },
 
         traerTiposFiltro: function (pagina, nombre) {
@@ -15,9 +13,15 @@ app.factory("TipoIdentificacionFactory", ["Restangular", function (Restangular) 
             var url = "administrar/consultar/tipoidentificacion/pagina=" + pagina;
 
             if (nombre != null && nombre != "") url += "&nombre=" + nombre.toUpperCase();
-            console.log(url);
             return Restangular.allUrl(url).getList();
 
+        },
+
+        traerTiposTipo: function(pagina, nombre) {
+            var url = "administrar/consultar/tipoidentificaciontipo/pagina=" + pagina;
+
+            if (nombre != null && nombre != "") url += "&nombre=" + nombre.toUpperCase();
+            return Restangular.allUrl(url).getList();
         },
 
         traerTipo: function (id) {
