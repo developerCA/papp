@@ -7,11 +7,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-
-import org.hibernate.tools.commons.to.SearchResultTO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,6 +62,9 @@ import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.metodos.Log;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 /**
  * @autor: jcalderon
@@ -616,7 +614,8 @@ public class AdministracionController {
 				if(claseregistroclasemodificacionTOs.size()>0){
 					for(ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO2:claseregistroclasemodificacionTOs) {
 						//claseregistroclasemodificacionTO2=(ClaseregistroclasemodificacionTO)claseregistroclasemodificacionTOs.iterator().next();
-						log.println("id.... " + claseregistroclasemodificacionTO.getId() + " - " + claseregistroclasemodificacionTO2.getId());
+						log.println("id.... " + claseregistroclasemodificacionTO.getId().getRegistroid() + " - " + claseregistroclasemodificacionTO2.getId().getRegistroid());
+						log.println("id1.... " + claseregistroclasemodificacionTO.getId().getRegistrocmid()+ " - " + claseregistroclasemodificacionTO2.getId().getRegistrocmid());
 						if((claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO.getId().getRegistrocmid()!=null && claseregistroclasemodificacionTO.getId().getRegistroid()!=null) && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue() && claseregistroclasemodificacionTO.getCodigo()!=null && claseregistroclasemodificacionTO2.getCodigo().equals(claseregistroclasemodificacionTO.getCodigo())) {
 							grabar=false;
 							break;
