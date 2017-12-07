@@ -412,7 +412,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
+			console.log(obj);
 			$scope.objetoPlazaDetail[index].unidadarbolplazagfid = obj.id;
 			$scope.objetoPlazaDetail[index].npgradonombre = obj.npnombregrado;
 			$scope.objetoPlazaDetail[index].npfuerzanombre = obj.npnombrefuerza;
