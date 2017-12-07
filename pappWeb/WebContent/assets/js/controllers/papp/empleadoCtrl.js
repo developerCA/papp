@@ -3,8 +3,9 @@
 app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","empleadosFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, empleadosFactory) {
 
-	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
+	$scope.nombreFiltro=null;
+	$scope.typoFiltro=null;
 	$scope.estadoFiltro=null;
 
 	$scope.edicion=false;
@@ -52,17 +53,24 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	$scope.filtrar=function(){
 		$scope.data=[];
 
-		empleadosFactory.traerEmpleadosFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro,$scope.estadoFiltro).then(function(resp){
+		empleadosFactory.traerEmpleadosFiltro(
+				pagina,
+				$scope.codigoFiltro,
+				$scope.nombreFiltro,
+				$scope.tipoFiltro,
+				$scope.estadoFiltro
+		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
 	
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.ordenFiltro=null;
 		$scope.codigoFiltro=null;
-		
+		$scope.nombreFiltro=null;
+		$scope.tipoFiltro=null;
+		$scope.estadoFiltro=null;
+
 		$scope.consultar();
 		
 	};
@@ -88,6 +96,7 @@ console.log(resp.json);
 			if (resp.estado) {
 				$scope.objeto=resp.json.empleado;
 
+/*
 				//Tipo de identificacion = socionegociotipoidentid
 				empleadosFactory.traerTipoIdentidicacionEditar($scope.objeto.socionegociotipoidentid).then(function(resp){
 					console.log("Tipo Identificacion");
@@ -96,7 +105,7 @@ console.log(resp.json);
 					   $scope.objetoTipoIdentidicacion=resp.json.tipoidentificacion;
 					}
 				})
-/*
+
 				//Tipo de identificacion tipo = socionegociotipoidenttipoid
 				empleadosFactory.traerGradoEscalaEditar($scope.objeto.socionegociotipoidenttipoid).then(function(resp){
 					console.log("");
@@ -105,7 +114,7 @@ console.log(resp.json);
 					   $scope.objeto=resp.json.empleado;
 					}
 				})
-*/
+
 				//Grado escala = sn emp grado escala id
 				empleadosFactory.traerGradoEscalaEditar($scope.objeto.snempgradoescalaid).then(function(resp){
 					console.log("Grado Escala:");
@@ -114,7 +123,7 @@ console.log(resp.json);
 					   $scope.objetoGradoEscala = resp.json.gradoescala;
 					}
 				})
-/*
+
 				//Cargo escala = 
 				empleadosFactory.traerGradoEscalaEditar($scope.objeto.socionegociotipoidenttipoid).then(function(resp){
 					console.log("");
@@ -123,7 +132,7 @@ console.log(resp.json);
 					   $scope.objeto=resp.json.empleado;
 					}
 				})
-*/
+
 				//Especialidad = socionegocioempespid
 				empleadosFactory.traerEspecialidadesEditar($scope.objeto.socionegocioempespid).then(function(resp){
 					console.log("Especialidad");
@@ -141,6 +150,7 @@ console.log(resp.json);
 					   $scope.objetoClasificacion=resp.json.clasificacion;
 					}
 				})
+*/
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;

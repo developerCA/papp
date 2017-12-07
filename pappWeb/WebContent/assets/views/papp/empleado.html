@@ -32,13 +32,40 @@
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label> C&oacute;digo </label>
-											<input type="text" class="form-control" ng-model="codigoFiltro">
+											<input type="text" class="form-control"
+												ng-model="codigoFiltro" placeholder="Ingrese un c&oacute;digo">
 										</div>
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label> Socio Negocio Nombre Mostrado </label>
-											<input type="text" class="form-control" ng-model="nombreFiltro">
+											<input type="text" class="form-control"
+												ng-model="nombreFiltro" placeholder="Ingrese un nombre">
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> Tipo Empleado </label>
+											<select class="form-control" name="tipoFiltro"
+												ng-model="tipoFiltro">
+												<option value="" ng-selected="selected">Seleccione un tipo</option>
+												<option value="M">Militar</option>
+												<option value="C">Civil</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> Socio Negocio Estado </label>
+											<select class="form-control" name="estado"
+												ng-model="estadoFiltro">
+												<option value="" ng-selected="selected">Seleccione un estado</option>
+												<option value="A">Activo</option>
+												<option value="I">Inactivo</option>
+											</select>
 										</div>
 									</div>
 								</div>
@@ -403,8 +430,8 @@
 										Cargo nombre
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder="NO ENCONTRADO"
-										class="form-control" name="cargonombre" ng-model="objetoGradoEscala.no"
+									<input type="text" placeholder="Seleccione un grado escala"
+										class="form-control" name="npncargoombre" ng-model="objetoGradoEscala.npncargoombre"
 										required ng-disabled="true">
 									<span class="error text-small block"
 										ng-if="Form.cargonombre.$dirty && Form.cargonombre.$invalid">

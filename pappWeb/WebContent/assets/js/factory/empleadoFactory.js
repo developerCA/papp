@@ -12,16 +12,15 @@ app.factory("empleadosFactory", [ "Restangular", function(Restangular) {
 			  
 		},
 		
-		traerEmpleadosFiltro : function(pagina,codigo,nombre,estado) {
-			  
+		traerEmpleadosFiltro : function(pagina,codigo,nombre,tipo,estado) {
 			var url = "administrar/consultar/empleado/pagina="+pagina;
 
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;
 			if(nombre!=null && nombre != "") url += "&nombremostrado=" + nombre;
+			if(tipo!=null && tipo != "") url += "&emptipo=" + tipo;
 			if(estado!=null && estado != "") url += "&estado=" + estado;
-			 
+
 			return Restangular.allUrl(url).getList();
-			  
 		},
 		
 		traerEmpleadosEditar : function(id) {
