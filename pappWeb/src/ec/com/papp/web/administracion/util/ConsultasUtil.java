@@ -890,6 +890,7 @@ public class ConsultasUtil {
 	public static JSONObject consultaItemPaginado(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
 		String campo="";
 		ItemTO itemTO=new ItemTO();
+		ItemTO padre=new ItemTO();
 		try{
 			int pagina=1;
 			if(parameters.get("pagina")!=null)		
@@ -919,14 +920,18 @@ public class ConsultasUtil {
 				itemTO.setTipo(parameters.get("tipo"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				itemTO.setItemejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-			if(parameters.get("codigopadre")!=null && !parameters.get("codigopadre").equals(""))
-				itemTO.setItempadreid(Long.valueOf(parameters.get("codigopadre")));
-			itemTO.setItem(new ItemTO());
+			log.println("nombrepadre: " + parameters.get("nombrepadre"));
+			if(parameters.get("nombrepadre")!=null && !parameters.get("nombrepadre").equals("")) {
+				padre.setNombre(parameters.get("nombrepadre"));
+			}
+			itemTO.setItem(padre);
 			SearchResultTO<ItemTO> resultado=UtilSession.adminsitracionServicio.transObtenerItemPaginado(itemTO);
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
+			log.println("totalresultado: " + resultado.getResults().size());
+			for(ItemTO itemTO2:resultado.getResults())
+				log.println("iem: " + itemTO2.getNombre());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),itemTO.getJsonConfig()));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 		}catch (Exception e) {
