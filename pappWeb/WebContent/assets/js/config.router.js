@@ -437,11 +437,23 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/planificacionestrategica",
         templateUrl: "assets/views/papp/planificacionEstrategica.html",
         resolve: loadSequence(
-        		'ngTable','PlanificacionEstrategicaCtrl','PlanificacionEstrategicaFactory'
+        		'ngTable','PlanificacionEstrategicaCtrl','PlanificacionEstrategicaFactory',
+        		'ModalInstitucionCtrl','InstitucionFactory'
 		),
-        title: 'Indicadores',
+        title: 'Planificación Estratégica',
         ncyBreadcrumb: {
-            label: 'Indicadores'
+            label: 'Planificación Estratégica'
+        }
+    }).state('app.matrizindicadores', {
+        url: "/matrizindicadores",
+        templateUrl: "assets/views/papp/matrizIndicadores.html",
+        resolve: loadSequence(
+        		'ngTable','MatrizIndicadoresCtrl','MatrizIndicadoresFactory',
+        		'ModalInstitucionCtrl','InstitucionFactory'
+		),
+        title: 'Matriz de Indicadores',
+        ncyBreadcrumb: {
+            label: 'Matriz de Indicadores'
         }
     }).state('app.indicadores', {
         url: "/indicadores",

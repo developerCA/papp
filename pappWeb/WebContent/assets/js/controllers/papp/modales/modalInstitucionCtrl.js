@@ -1,7 +1,5 @@
 'use strict';
 
-//app.controller('ModalEjerciciosFiscalesController', [ "$scope","$uibModalInstance","$location","SweetAlert","$filter", "ngTableParams","ejercicioFiscalFactory",
-//	function($scope,$uibModalInstance,$location,SweetAlert,$filter, ngTableParams,ejercicioFiscalFactory) {
 app.controller('ModalInstitucionController', [ "$scope","$uibModalInstance","$uibModal","SweetAlert","$filter", "ngTableParams","institucionFactory",
 	function($scope,$uibModalInstance,$uibModal,SweetAlert,$filter, ngTableParams, institucionFactory) {
 
@@ -17,6 +15,7 @@ app.controller('ModalInstitucionController', [ "$scope","$uibModalInstance","$ui
 		$scope.consultar=function(){
 			$scope.data=[];
 			institucionFactory.traerInstitucion(pagina).then(function(resp){
+				console.log(resp);
 				if (resp.meta)
 					$scope.data=resp;
 			})

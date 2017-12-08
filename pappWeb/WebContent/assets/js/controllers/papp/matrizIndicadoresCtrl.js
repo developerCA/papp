@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('PlanificacionEstrategicaController', [ "$scope","$rootScope","$location","$uibModal","SweetAlert","$filter", "ngTableParams","PlanificacionEstrategicaFactory",
-	function($scope,$rootScope,$location,$uibModal,SweetAlert,$filter, ngTableParams,PlanificacionEstrategicaFactory) {
+app.controller('MatrizIndicadoresController', [ "$scope","$rootScope","$location","$uibModal","SweetAlert","$filter", "ngTableParams","MatrizIndicadoresFactory",
+	function($scope,$rootScope,$location,$uibModal,SweetAlert,$filter, ngTableParams,MatrizIndicadoresFactory) {
 
 	$scope.objeto={reporte: 'PDF'};
 
@@ -42,7 +42,7 @@ app.controller('PlanificacionEstrategicaController', [ "$scope","$rootScope","$l
 
 		            } else {
 		                
-		            	PlanificacionEstrategicaFactory.guardar($scope.objeto).then(function(resp){
+		            	MatrizIndicadoresFactory.guardar($scope.objeto).then(function(resp){
 	            			console.log(resp);
 		            		if (resp.estado){
 		        				 SweetAlert.swal("Planificaci&oacute;n Estrat&eacute;gica!", "Registro registrado satisfactoriamente!", "success");

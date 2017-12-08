@@ -181,6 +181,8 @@ app.constant('JS_REQUIRES', {
         'ModalSocioNegocioCtrl':'assets/js/controllers/papp/modales/modalSocioNegocioCtrl.js',
         'PlanificacionEstrategicaCtrl':'assets/js/controllers/papp/planificacionEstrategicaCtrl.js',
         'PlanificacionEstrategicaFactory':'assets/js/factory/planificacionEstrategicaFactory.js',
+        'MatrizIndicadoresCtrl':'assets/js/controllers/papp/matrizIndicadoresCtrl.js',
+        'MatrizIndicadoresFactory':'assets/js/factory/matrizIndicadoresFactory.js',
         
     },
     //*** angularJS Modules
