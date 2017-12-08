@@ -6,7 +6,7 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.siglaFiltro=null;
-	$scope.estadoFiltro='A';
+	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
 	
@@ -58,6 +58,7 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;
+		$scope.siglaFiltro=null;
 		$scope.estadoFiltro=null;
 		$scope.consultar();
 		

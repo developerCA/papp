@@ -3,8 +3,9 @@
 app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","empleadosFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, empleadosFactory) {
 
-	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
+	$scope.nombreFiltro=null;
+	$scope.typoFiltro=null;
 	$scope.estadoFiltro=null;
 
 	$scope.edicion=false;
@@ -12,7 +13,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	$scope.nuevoar=false;
 	$scope.objeto={};
 	$scope.objetoTipoIdentidicacion={};
-	$scope.objetoGradoEscala={};
+	$scope.objeto={};
 	$scope.objetoEspecialidad={};
 	$scope.objetoClasificacion={};
 
@@ -52,17 +53,24 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	$scope.filtrar=function(){
 		$scope.data=[];
 
-		empleadosFactory.traerEmpleadosFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro,$scope.estadoFiltro).then(function(resp){
+		empleadosFactory.traerEmpleadosFiltro(
+				pagina,
+				$scope.codigoFiltro,
+				$scope.nombreFiltro,
+				$scope.tipoFiltro,
+				$scope.estadoFiltro
+		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
 	
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.ordenFiltro=null;
 		$scope.codigoFiltro=null;
-		
+		$scope.nombreFiltro=null;
+		$scope.tipoFiltro=null;
+		$scope.estadoFiltro=null;
+
 		$scope.consultar();
 		
 	};
@@ -71,9 +79,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 		$scope.objeto={id:null};
 		$scope.objetolista=[];
 		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
-//		console.log(obj);
 		$scope.objetolista.push(obj);
-//		console.log($scope.objetolista);
 
 		$scope.edicion=true;
 		$scope.guardar=true;
@@ -81,66 +87,9 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	}
 	
 	$scope.editar=function(id){
-		console.log("Editar empleado");
 		empleadosFactory.traerEmpleadosEditar(id).then(function(resp){
-//console.clear();
-console.log(resp.json);
 			if (resp.estado) {
 				$scope.objeto=resp.json.empleado;
-
-				//Tipo de identificacion = socionegociotipoidentid
-				empleadosFactory.traerTipoIdentidicacionEditar($scope.objeto.socionegociotipoidentid).then(function(resp){
-					console.log("Tipo Identificacion");
-					console.log(resp.json);
-					if (resp.estado) {
-					   $scope.objetoTipoIdentidicacion=resp.json.tipoidentificacion;
-					}
-				})
-/*
-				//Tipo de identificacion tipo = socionegociotipoidenttipoid
-				empleadosFactory.traerGradoEscalaEditar($scope.objeto.socionegociotipoidenttipoid).then(function(resp){
-					console.log("");
-					console.log(resp.json);
-					if (resp.estado) {
-					   $scope.objeto=resp.json.empleado;
-					}
-				})
-*/
-				//Grado escala = sn emp grado escala id
-				empleadosFactory.traerGradoEscalaEditar($scope.objeto.snempgradoescalaid).then(function(resp){
-					console.log("Grado Escala:");
-					console.log(resp.json);
-					if (resp.estado) {
-					   $scope.objetoGradoEscala = resp.json.gradoescala;
-					}
-				})
-/*
-				//Cargo escala = 
-				empleadosFactory.traerGradoEscalaEditar($scope.objeto.socionegociotipoidenttipoid).then(function(resp){
-					console.log("");
-					console.log(resp.json);
-					if (resp.estado) {
-					   $scope.objeto=resp.json.empleado;
-					}
-				})
-*/
-				//Especialidad = socionegocioempespid
-				empleadosFactory.traerEspecialidadesEditar($scope.objeto.socionegocioempespid).then(function(resp){
-					console.log("Especialidad");
-					console.log(resp.json);
-					if (resp.estado) {
-					   $scope.objetoEspecialidad=resp.json.especialidades;
-					}
-				})
-
-				//Clasificacion = socionegocioempclasifid
-				empleadosFactory.traerClasificacionEditar($scope.objeto.socionegocioempclasifid).then(function(resp){
-					console.log("Clasificacion");
-					console.log(resp.json);
-					if (resp.estado) {
-					   $scope.objetoClasificacion=resp.json.clasificacion;
-					}
-				})
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;
@@ -158,7 +107,6 @@ console.log(resp.json);
 	}
 
 	$scope.abrirIdentificacion = function(index) {
-		console.log("aqui");
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalTipoIdentificacion.html',
 			controller : 'ModalTipoIdentificacionController',
@@ -166,58 +114,59 @@ console.log(resp.json);
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.socionegociotipoidentid = obj.id;
-			$scope.objetoTipoIdentidicacion = obj;
+			$scope.objeto.socionegociotipoidentid = obj.id.identificacionid;
+			$scope.objeto.socionegociotipoidenttipoid = obj.id.identificaciontipoid;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
 	$scope.abrirGradoEscala = function(index) {
-		//console.log("aqui");
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalGradoEscala.html',
 			controller : 'ModalGradoEscalaController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
+			console.log(obj);
 			$scope.objeto.snempgradoescalaid = obj.id;
-			$scope.objetoGradoEscala = obj;
+			$scope.objeto.npgradoescalacodigo = obj.codigo;
+			$scope.objeto.npgradonombre = obj.npnombregrado;
+			$scope.objeto.npfuerzanombre = obj.npnombrefuerza;
+			$scope.objeto.npgrupoocupacional = obj.npgrupoocupacional;
+			$scope.objeto.rmugrupocodigo = obj.npcodigoescalarmu;
+			$scope.objeto.npremuneracion = obj.npremuneracion;
+			$scope.objeto.npcargocodigo = " ";
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
 	$scope.abrirEspecialidad = function(index) {
-		console.log("aqui");
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalEspecialidades.html',
 			controller : 'ModalEspecialidadesController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.socionegocioempespid = obj.id;
-			$scope.objetoEspecialidad = obj;
+			$scope.objeto.npespecialidadcodigo = obj.codigo;
+			$scope.objeto.npespecialidadnombre = obj.nombre;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
 	$scope.abrirClasificacion = function(index) {
-		console.log("aqui");
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalClasificacion.html',
 			controller : 'ModalClasificacionController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.socionegocioempclasifid = obj.id;
-			$scope.objetoClasificacion = obj;
+			$scope.objeto.npclasificacioncodigo = obj.codigo;
+			$scope.objeto.npclasificacionnombre = obj.nombre;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
@@ -228,12 +177,17 @@ console.log(resp.json);
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objetoGradoEscala.npcodigogradoid = obj.id;
-			$scope.objetoGradoEscala.npcodigogrado = obj.codigo;
-			$scope.objetoGradoEscala.npnombrecargo = obj.npnombrecargo;
+			//console.log(obj);
+			$scope.objeto.snempcargoescalaid = obj.id;
+			$scope.objeto.npcargocodigo = obj.codigo;
+			$scope.objeto.npncargoombre = obj.npnombrecargo;
+			$scope.objeto.npcargogrupoocupacional = obj.npgrupoocupacional;
+			$scope.objeto.npcargocodigoescalarmu = obj.npcodigoescalarmu;
+			$scope.objeto.npremuneracion = obj.npremuneracion;
+			$scope.objeto.npgradoescalacodigo = " ";
+			$scope.objeto.npespecialidadcodigo = " ";
+			$scope.objeto.npclasificacioncodigo = " ";
 		}, function() {
-			console.log("close modal");
 		});
 	};
 

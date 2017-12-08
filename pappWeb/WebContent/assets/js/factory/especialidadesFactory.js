@@ -11,7 +11,7 @@ app.factory("especialidadesFactory", [ "Restangular", function(Restangular) {
 			  
 		},
 		
-		traerEspecialidadesFiltro : function(pagina,codigo,nombre,grado,padre,estado) {
+		traerEspecialidadesFiltro : function(pagina,codigo,nombre,estado) {
 			  
 			var url = "administrar/consultar/especialidades/pagina="+pagina;
 
