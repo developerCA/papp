@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('MatrizIndicadoresController', [ "$scope","$rootScope","$location","$uibModal","SweetAlert","$filter", "ngTableParams","MatrizIndicadoresFactory",
-	function($scope,$rootScope,$location,$uibModal,SweetAlert,$filter, ngTableParams,MatrizIndicadoresFactory) {
+app.controller('RegistroMetasController', [ "$scope","$rootScope","$location","$uibModal","SweetAlert","$filter", "ngTableParams","RegistroMetasFactory",
+	function($scope,$rootScope,$location,$uibModal,SweetAlert,$filter, ngTableParams,RegistroMetasFactory) {
 
 	$scope.objeto={reporte: 'PDF'};
 
@@ -42,13 +42,13 @@ app.controller('MatrizIndicadoresController', [ "$scope","$rootScope","$location
 
 		            } else {
 		                
-		            	MatrizIndicadoresFactory.guardar($scope.objeto).then(function(resp){
+		            	RegistroMetasFactory.guardar($scope.objeto).then(function(resp){
 	            			console.log(resp);
 		            		if (resp.estado){
-		        				 SweetAlert.swal("Matriz de Indicadores!", "Registro registrado satisfactoriamente!", "success");
+		        				 SweetAlert.swal("Registro Metas!", "Registro registrado satisfactoriamente!", "success");
 		        				 $location.path("/index");
 		        			 }else{
-			 		             SweetAlert.swal("Matriz de Indicadores!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Registro Metas!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

@@ -455,6 +455,17 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Matriz de Indicadores'
         }
+    }).state('app.registrometas', {
+        url: "/registrometas",
+        templateUrl: "assets/views/papp/registroMetas.html",
+        resolve: loadSequence(
+        		'ngTable','RegistroMetasCtrl','RegistroMetasFactory',
+        		'ModalInstitucionCtrl','InstitucionFactory'
+		),
+        title: 'Registro Metas',
+        ncyBreadcrumb: {
+            label: 'Registro Metas'
+        }
     }).state('app.indicadores', {
         url: "/indicadores",
         templateUrl: "assets/views/papp/indicadores.html",

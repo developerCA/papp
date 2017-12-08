@@ -183,7 +183,9 @@ app.constant('JS_REQUIRES', {
         'PlanificacionEstrategicaFactory':'assets/js/factory/planificacionEstrategicaFactory.js',
         'MatrizIndicadoresCtrl':'assets/js/controllers/papp/matrizIndicadoresCtrl.js',
         'MatrizIndicadoresFactory':'assets/js/factory/matrizIndicadoresFactory.js',
-        
+        'RegistroMetasCtrl':'assets/js/controllers/papp/registroMetasCtrl.js',
+        'RegistroMetasFactory':'assets/js/factory/registroMetasFactory.js',
+
     },
     //*** angularJS Modules
     modules: [{
