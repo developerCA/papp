@@ -3,7 +3,16 @@
 app.controller('RegistroMetasController', [ "$scope","$rootScope","$location","$uibModal","SweetAlert","$filter", "ngTableParams","RegistroMetasFactory",
 	function($scope,$rootScope,$location,$uibModal,SweetAlert,$filter, ngTableParams,RegistroMetasFactory) {
 
-	$scope.objeto={reporte: 'PDF'};
+	$scope.objeto={
+		institucionid: null,
+		npinstitucion: null,
+		programaid: null,
+		npprograma: null,
+		mesdesde: "1",
+		meshasta: "12",
+		tipometa: "P",
+		reporte: 'PDF'
+	};
 
 	$scope.abrirInstitucion = function() {
 		var modalInstance = $uibModal.open({
@@ -12,9 +21,23 @@ app.controller('RegistroMetasController', [ "$scope","$rootScope","$location","$
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.eorganicainstitucionid = obj.id;
+			//console.log(obj);
+			$scope.objeto.institucionid = obj.id;
 			$scope.objeto.npinstitucion = obj.codigo + ' - ' + obj.nombre;
+		}, function() {
+		});
+	};
+
+	$scope.abrirPrograma = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalPrograma.html',
+			controller : 'ModalProgramaController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.programaid = obj.id;
+			$scope.objeto.npprograma = obj.codigo + ' - ' + obj.nombre;
 		}, function() {
 		});
 	};

@@ -7,7 +7,7 @@
 <!-- end: BREADCRUMB -->
 <!-- start: SIMPLE TABLE WITH PAGINATION -->
 <div class="container-fluid container-fullw"
-	ng-controller="PlanificacionEstrategicaController">
+	ng-controller="RegistroMetasController">
 
 	<div class="row">
 		<div class="col-md-12"></div>
@@ -44,22 +44,87 @@
 									</div>
 								</div>
 
-								<div class="form-group">
-									<label class="control-label"> Tipo de Reporte <span
+								<div class="form-group"
+									ng-class="{'has-error':Form.npprograma.$dirty && Form.npprograma.$invalid, 'has-success':Form.npprograma.$valid}">
+									<label class="control-label"> Programa <span
 										class="symbol required"></span>
-									</label> <select class="form-control" name="reporte"
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione un Programa"
+											class="form-control" name="npprograma"
+											ng-disabled="true" ng-model="objeto.npprograma" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirPrograma()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group has-success">
+									<label class="control-label">
+										Mes desde
+									</label>
+									<select class="form-control" name="mesdesde"
+										placeholder="Seleccione un mes" ng-model="objeto.mesdesde">
+										<option value="1">ENERO</option>
+										<option value="2">FEBRERO</option>
+										<option value="3">MARZO</option>
+										<option value="4">ABRIL</option>
+										<option value="5">MAYO</option>
+										<option value="6">JUNIO</option>
+										<option value="7">JULIO</option>
+										<option value="8">AGOSTO</option>
+										<option value="9">SEPTIEMBRE</option>
+										<option value="10">OCTUBRE</option>
+										<option value="11">NOVIEMBRE</option>
+										<option value="12">DICIEMBRE</option>
+									</select>
+								</div>
+
+								<div class="form-group has-success">
+									<label class="control-label">
+										Mes hasta
+									</label>
+									<select class="form-control" name="meshasta"
+										placeholder="Seleccione un mes" ng-model="objeto.meshasta">
+										<option value="1">ENERO</option>
+										<option value="2">FEBRERO</option>
+										<option value="3">MARZO</option>
+										<option value="4">ABRIL</option>
+										<option value="5">MAYO</option>
+										<option value="6">JUNIO</option>
+										<option value="7">JULIO</option>
+										<option value="8">AGOSTO</option>
+										<option value="9">SEPTIEMBRE</option>
+										<option value="10">OCTUBRE</option>
+										<option value="11">NOVIEMBRE</option>
+										<option value="12">DICIEMBRE</option>
+									</select>
+								</div>
+
+								<div class="form-group has-success">
+									<label class="control-label">
+										Tipo Meta
+									</label>
+									<select class="form-control" name="tipometa"
+										placeholder="Seleccione un reporte" ng-model="objeto.tipometa">
+										<option value="P">Planificado</option>
+										<option value="A">Ajustado</option>
+									</select>
+								</div>
+
+								<div class="form-group has-success">
+									<label class="control-label">
+										Tipo de Reporte
+									</label>
+									<select class="form-control" name="reporte"
 										placeholder="Seleccione un reporte" ng-model="objeto.reporte">
 										<option value="PDF">PDF</option>
 										<option value="EXCEL">Excel</option>
 									</select>
-									<span class="error text-small block"
-										ng-if="Form.reporte.$dirty && Form.reporte.$invalid">
-										Incorrecto
-									</span>
-									<span class="success text-small"
-										ng-if="Form.reporte.$valid">
-										Listo
-									</span>
 								</div>
 
 							</div>
@@ -123,6 +188,71 @@
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
 								<td data-title="'Estado'">{{obj.npestado}}</td>
+							</tr>
+						</table>
+					</div>
+
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+                            </div>
+                    </script>
+	<script type="text/ng-template" id="modalPrograma.html">
+            <div class="modal-header">
+            	<h3 class="modal-title">Programa</h3>
+            </div>
+			<div class="modal-body">
+				<div class="panel-body" ng-init="consultar();" >
+
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+												C&oacute;digo
+											</label>
+											<input type="text"
+												class="form-control" ng-model="codigo">
+										</div>
+									</div>
+
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+												Nombre
+											</label>
+											<input type="text"
+												class="form-control" ng-model="nombre">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+											class="fa fa-search"></i> Buscar</a> <a
+											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td><a class="btn btn-sm btn-primary"
+									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+										class="fa fa-check"></i></a></td>
+								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+								<td data-title="'Nombre'">{{obj.nombre}}</td>
 							</tr>
 						</table>
 					</div>

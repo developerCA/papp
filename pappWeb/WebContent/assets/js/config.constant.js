@@ -185,6 +185,8 @@ app.constant('JS_REQUIRES', {
         'MatrizIndicadoresFactory':'assets/js/factory/matrizIndicadoresFactory.js',
         'RegistroMetasCtrl':'assets/js/controllers/papp/registroMetasCtrl.js',
         'RegistroMetasFactory':'assets/js/factory/registroMetasFactory.js',
+        'ModalProgramaCtrl':'assets/js/controllers/papp/modales/modalProgramaCtrl.js',
+        'ProgramaFactory':'assets/js/factory/programaFactory.js',
 
     },
     //*** angularJS Modules

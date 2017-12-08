@@ -460,7 +460,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "assets/views/papp/registroMetas.html",
         resolve: loadSequence(
         		'ngTable','RegistroMetasCtrl','RegistroMetasFactory',
-        		'ModalInstitucionCtrl','InstitucionFactory'
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalProgramaCtrl','ProgramaFactory'
 		),
         title: 'Registro Metas',
         ncyBreadcrumb: {
