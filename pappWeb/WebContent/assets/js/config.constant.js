@@ -176,11 +176,11 @@ app.constant('JS_REQUIRES', {
         'ModalCertificacionesFondoLiquidacionManuaCtrl':'assets/js/controllers/papp/modales/modalCertificacionesFondoLiquidacionManuaCtrl.js',
         'OrdenGastoCtrl':'assets/js/controllers/papp/ordenGastoCtrl.js',
         'OrdenGastoFactory':'assets/js/factory/ordenGastoFactory.js',
-
-//**
         'ModalNivelOrganicoCtrl':'assets/js/controllers/papp/modales/modalNivelOrganicoCtrl.js',
         'ModalGradoFuerzaSuperiorCtrl':'assets/js/controllers/papp/modales/modalGradoFuerzaSuperiorCtrl.js',
         'ModalSocioNegocioCtrl':'assets/js/controllers/papp/modales/modalSocioNegocioCtrl.js',
+        'PlanificacionEstrategicaCtrl':'assets/js/controllers/papp/planificacionEstrategicaCtrl.js',
+        'PlanificacionEstrategicaFactory':'assets/js/factory/planificacionEstrategicaFactory.js',
         
     },
     //*** angularJS Modules

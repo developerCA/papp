@@ -433,6 +433,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Estructura Orgánica'
         }
+    }).state('app.planificacionestrategica', {
+        url: "/planificacionestrategica",
+        templateUrl: "assets/views/papp/planificacionEstrategica.html",
+        resolve: loadSequence(
+        		'ngTable','PlanificacionEstrategicaCtrl','PlanificacionEstrategicaFactory'
+		),
+        title: 'Indicadores',
+        ncyBreadcrumb: {
+            label: 'Indicadores'
+        }
     }).state('app.indicadores', {
         url: "/indicadores",
         templateUrl: "assets/views/papp/indicadores.html",
