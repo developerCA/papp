@@ -926,7 +926,6 @@ public class ConsultasUtil {
 			}
 			itemTO.setItem(padre);
 			SearchResultTO<ItemTO> resultado=UtilSession.adminsitracionServicio.transObtenerItemPaginado(itemTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());
 			log.println("totalresultado: " + resultado.getResults().size());

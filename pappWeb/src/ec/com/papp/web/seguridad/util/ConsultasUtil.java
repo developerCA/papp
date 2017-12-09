@@ -13,6 +13,7 @@ import org.hibernate.tools.commons.to.SearchResultTO;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
+import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.estructuraorganica.to.UnidadTO;
 import ec.com.papp.estructuraorganica.to.UsuariounidadTO;
 import ec.com.papp.seguridad.to.MenuTO;
@@ -59,8 +60,11 @@ public class ConsultasUtil {
 				menuTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("orden")!=null && !parameters.get("orden").equals(""))
 				menuTO.setOrden(Double.valueOf(parameters.get("orden")));
-//			if(parameters.get("nppadre")!=null && !parameters.get("nppadre").equals(""))
-//				menuTO.setNpnombre2(parameters.get("nppadre"));
+			if(parameters.get("nppadre")!=null && !parameters.get("nppadre").equals("")) {
+				MenuTO menu=new MenuTO();
+				menu.setNombre(parameters.get("nppadre"));
+				menuTO.setMenu(menu);
+			}
 			menuTO.setPermiso(new PermisoTO());
 			Collection<MenuTO> resultado=UtilSession.seguridadServicio.transObtenerMenu(menuTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
@@ -267,6 +271,8 @@ public class ConsultasUtil {
 	public static JSONObject consultaUsuario(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
 		String campo="";
 		UsuarioTO usuarioTO=new UsuarioTO();
+		SocionegocioTO socionegocioTO=new SocionegocioTO();
+		usuarioTO.setPerfil(new PerfilTO());
 		try{
 			int pagina=1;
 			if(parameters.get("pagina")!=null)		
@@ -288,8 +294,10 @@ public class ConsultasUtil {
 				usuarioTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("usuario")!=null && !parameters.get("usuario").equals(""))
 				usuarioTO.setUsuario(parameters.get("usuario"));
-			if(parameters.get("nombremostrado")!=null && !parameters.get("nombremostrado").equals(""))
-				usuarioTO.getSocionegocio().setNombremostrado(parameters.get("nombremostrado"));
+			if(parameters.get("nombremostrado")!=null && !parameters.get("nombremostrado").equals("")) {
+				socionegocioTO.setNombremostrado(parameters.get("nombremostrado"));
+			}
+			usuarioTO.setSocionegocio(socionegocioTO);
 			SearchResultTO<UsuarioTO> resultado=UtilSession.seguridadServicio.transObtenerusuarioPaginado(usuarioTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());

@@ -402,24 +402,28 @@ public class SeguridadController {
 						log.println("La clave es igual a la guardada en base");
 						mensajes.setMsg(MensajesWeb.getString("error.claveIgual"));
 						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						respuesta.setEstado(false);
 					}
 				}
 				else{
 					log.println("La nueva clave es diferente a la confirmacion");
 					mensajes.setMsg(MensajesWeb.getString("error.claveValidacion"));
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					respuesta.setEstado(false);
 				}
 			}
 			else{
 				log.println("La nueva clave es diferente a la confirmacion");
 				mensajes.setMsg("La clave anterior ingresada esta incorrecta");
 				mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				respuesta.setEstado(false);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al obtener para editar");
 			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 		}
 		if(mensajes.getMsg()!=null)
 			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
