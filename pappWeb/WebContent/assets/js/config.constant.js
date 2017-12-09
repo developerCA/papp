@@ -187,6 +187,12 @@ app.constant('JS_REQUIRES', {
         'RegistroMetasFactory':'assets/js/factory/registroMetasFactory.js',
         'ModalProgramaCtrl':'assets/js/controllers/papp/modales/modalProgramaCtrl.js',
         'ProgramaFactory':'assets/js/factory/programaFactory.js',
+        'MatrizProgramacionAnualPoliticaPublicaCtrl':'assets/js/controllers/papp/matrizProgramacionAnualPoliticaPublicaCtrl.js',
+        'MatrizProgramacionAnualPoliticaPublicaFactory':'assets/js/factory/matrizProgramacionAnualPoliticaPublicaFactory.js',
+        'ModalProyectoCtrl':'assets/js/controllers/papp/modales/modalProyectoCtrl.js',
+        'ProyectoFactory':'assets/js/factory/proyectoFactory.js',
+        'ModalActividadCtrl':'assets/js/controllers/papp/modales/modalActividadCtrl.js',
+        'ActividadFactory':'assets/js/factory/actividadFactory.js',
 
     },
     //*** angularJS Modules

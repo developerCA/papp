@@ -1,0 +1,564 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+	<h4 class="mainTitle no-margin">Matriz Programaci&oacute;n Anual de la Pol&iacute;tica P&uacute;blica (P-05)</h4>
+
+	<div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: SIMPLE TABLE WITH PAGINATION -->
+<div class="container-fluid container-fullw"
+	ng-controller="MatrizProgramacionAnualPoliticaPublicaController">
+
+	<div class="row">
+		<div class="col-md-12"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="panel panel-white">
+
+				<div class="panel-body" id="panel1">
+
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+						<div class="row">
+							<div class="col-md-6">
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.npinstitucion.$dirty && Form.npinstitucion.$invalid, 'has-success':Form.npinstitucion.$valid}">
+									<label class="control-label">
+										Instituci&oacute;n
+										<span class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Instituci&oacute;n"
+											class="form-control" name="npinstitucion"
+											ng-disabled="true" ng-model="objeto.npinstitucion" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirInstitucion()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.npunidad.$dirty && Form.npunidad.$invalid, 'has-success':Form.npunidad.$valid}">
+									<label class="control-label">
+										Unidad
+										<span class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Unidad"
+											class="form-control" name="npunidad"
+											ng-disabled="true" ng-model="objeto.npunidad" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirUnidad()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.npprograma.$dirty && Form.npprograma.$invalid, 'has-success':Form.npprograma.$valid}">
+									<label class="control-label"> Programa <span
+										class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione un Programa"
+											class="form-control" name="npprograma"
+											ng-disabled="true" ng-model="objeto.npprograma" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirPrograma()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.npproyecto.$dirty && Form.npproyecto.$invalid, 'has-success':Form.npproyecto.$valid}">
+									<label class="control-label">
+										Proyecto
+										<span class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione un Proyecto"
+											class="form-control" name="npproyecto"
+											ng-disabled="true" ng-model="objeto.npproyecto">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirProyecto()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.npactividad.$dirty && Form.npactividad.$invalid, 'has-success':Form.npactividad.$valid}">
+									<label class="control-label">
+										Actividad
+										<span class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Actividad"
+											class="form-control" name="npactividad"
+											ng-disabled="true" ng-model="objeto.npactividad">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirActividad()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group has-success">
+									<label class="control-label">
+										Mes desde
+									</label>
+									<select class="form-control" name="mesdesde"
+										placeholder="Seleccione un mes" ng-model="objeto.mesdesde">
+										<option value="1">ENERO</option>
+										<option value="2">FEBRERO</option>
+										<option value="3">MARZO</option>
+										<option value="4">ABRIL</option>
+										<option value="5">MAYO</option>
+										<option value="6">JUNIO</option>
+										<option value="7">JULIO</option>
+										<option value="8">AGOSTO</option>
+										<option value="9">SEPTIEMBRE</option>
+										<option value="10">OCTUBRE</option>
+										<option value="11">NOVIEMBRE</option>
+										<option value="12">DICIEMBRE</option>
+									</select>
+								</div>
+
+								<div class="form-group has-success">
+									<label class="control-label">
+										Mes hasta
+									</label>
+									<select class="form-control" name="meshasta"
+										placeholder="Seleccione un mes" ng-model="objeto.meshasta">
+										<option value="1">ENERO</option>
+										<option value="2">FEBRERO</option>
+										<option value="3">MARZO</option>
+										<option value="4">ABRIL</option>
+										<option value="5">MAYO</option>
+										<option value="6">JUNIO</option>
+										<option value="7">JULIO</option>
+										<option value="8">AGOSTO</option>
+										<option value="9">SEPTIEMBRE</option>
+										<option value="10">OCTUBRE</option>
+										<option value="11">NOVIEMBRE</option>
+										<option value="12">DICIEMBRE</option>
+									</select>
+								</div>
+
+								<div class="form-group has-success">
+									<label class="control-label">
+										Tipo Meta
+									</label>
+									<select class="form-control" name="tipometa"
+										placeholder="Seleccione un reporte" ng-model="objeto.tipometa">
+										<option value="P">Planificado</option>
+										<option value="A">Ajustado</option>
+									</select>
+								</div>
+
+								<div class="form-group has-success">
+									<label class="control-label">
+										Tipo de Reporte
+									</label>
+									<select class="form-control" name="reporte"
+										placeholder="Seleccione un reporte" ng-model="objeto.reporte">
+										<option value="PDF">PDF</option>
+										<option value="EXCEL">Excel</option>
+									</select>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">
+										Solicitar
+									</button>
+								</div>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+	<script type="text/ng-template" id="modalInstitucion.html">
+            <div class="modal-header">
+            	<h3 class="modal-title">Instituciones</h3>
+            </div>
+			<div class="modal-body">
+				<div class="panel-body" ng-init="consultar();" >
+
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="form-group">
+											<label> Nombre </label> <input type="text"
+												class="form-control" ng-model="nombre">
+										</div>
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+											class="fa fa-search"></i> Buscar</a> <a
+											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td><a class="btn btn-sm btn-primary"
+									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+										class="fa fa-check"></i></a></td>
+								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+								<td data-title="'Nombre'">{{obj.nombre}}</td>
+								<td data-title="'Estado'">{{obj.npestado}}</td>
+							</tr>
+						</table>
+					</div>
+
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+                            </div>
+                    </script>
+	<script type="text/ng-template" id="modalUnidad.html">
+            <div class="modal-header">
+            	<h3 class="modal-title">Unidades</h3>
+            </div>
+			<div class="modal-body">
+				<div class="panel-body" ng-init="consultar();" >
+
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> C&oacute;digo  Presupestario</label> <input type="text"
+												class="form-control" ng-model="codigoFiltro">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> Nombres </label> <input type="text"
+												class="form-control" ng-model="nombreFiltro">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> Estado </label> <select name="country"
+												ng-model="estadoFiltro" class="form-control">
+												<option value>Todos</option>
+												<option value="A">Activo</option>
+												<option value="I">Inactivo</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+											class="fa fa-search"></i> Buscar</a> <a
+											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td><a class="btn btn-sm btn-primary"
+									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+										class="fa fa-check"></i></a></td>
+								<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
+								<td data-title="'Nombre'">{{obj.nombre}}</td>
+								<td data-title="'Estado'">{{obj.npestado}}</td>
+								<td data-title="'ORUltimo Usado'">{{obj.orultimousado}}</td>
+							</tr>
+						</table>
+					</div>
+
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+                            </div>
+    </script>
+	<script type="text/ng-template" id="modalPrograma.html">
+            <div class="modal-header">
+            	<h3 class="modal-title">Programa</h3>
+            </div>
+			<div class="modal-body">
+				<div class="panel-body" ng-init="consultar();" >
+
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+												C&oacute;digo
+											</label>
+											<input type="text"
+												class="form-control" ng-model="codigo">
+										</div>
+									</div>
+
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+												Nombre
+											</label>
+											<input type="text"
+												class="form-control" ng-model="nombre">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+											class="fa fa-search"></i> Buscar</a> <a
+											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td><a class="btn btn-sm btn-primary"
+									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+										class="fa fa-check"></i></a></td>
+								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+								<td data-title="'Nombre'">{{obj.nombre}}</td>
+							</tr>
+						</table>
+					</div>
+
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+                            </div>
+                    </script>
+	<script type="text/ng-template" id="modalProyecto.html">
+            <div class="modal-header">
+            	<h3 class="modal-title">Proyectos</h3>
+            </div>
+			<div class="modal-body">
+				<div class="panel-body" ng-init="consultar();" >
+
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+											    Programa C&oacute;digo
+											</label>
+											<input type="text" class="form-control" ng-model="programaCodigoFiltro">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+											    Programa Nombre
+											</label>
+											<input type="text" class="form-control" ng-model="programaNombreFiltro">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+											    Proyecto C&oacute;digo
+											</label>
+											<input type="text" class="form-control" ng-model="proyectoCodigoFiltro">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+											    Proyecto Nombre
+											</label>
+											<input type="text" class="form-control" ng-model="proyectoNombreFiltro">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+											    Subprograma C&oacute;digo
+											</label>
+											<input type="text" class="form-control" ng-model="subprogramaCodigoFiltro">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+											class="fa fa-search"></i> Buscar</a> <a
+											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td><a class="btn btn-sm btn-primary"
+									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+										class="fa fa-check"></i></a></td>
+								<td data-title="'Programa C&oacute;digo'">{{obj.codigopresup}}</td>
+								<td data-title="'Programa Nombre'">{{obj.nombre}}</td>
+								<td data-title="'Subprograma C&oacute;digo'">{{obj.codigopresup}}</td>
+								<td data-title="'Proyecto C&oacute;digo'">{{obj.codigopresup}}</td>
+								<td data-title="'Proyecto Nombre'">{{obj.nombre}}</td>
+							</tr>
+						</table>
+					</div>
+
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+                            </div>
+    </script>
+	<script type="text/ng-template" id="modalActividad.html">
+            <div class="modal-header">
+            	<h3 class="modal-title">Actividad</h3>
+            </div>
+			<div class="modal-body">
+				<div class="panel-body" ng-init="consultar();" >
+
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+												C&oacute;digo
+											</label>
+											<input type="text"
+												class="form-control" ng-model="codigo">
+										</div>
+									</div>
+
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+												Nombre
+											</label>
+											<input type="text"
+												class="form-control" ng-model="nombre">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+											class="fa fa-search"></i> Buscar</a> <a
+											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td><a class="btn btn-sm btn-primary"
+									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+										class="fa fa-check"></i></a></td>
+								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+								<td data-title="'Nombre'">{{obj.nombre}}</td>
+							</tr>
+						</table>
+					</div>
+
+                            </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+                            </div>
+                    </script>
+		</div>
+	</div>
+</div>
+
+
+
+
+
