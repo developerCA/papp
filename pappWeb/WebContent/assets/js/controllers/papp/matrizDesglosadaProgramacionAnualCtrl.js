@@ -44,7 +44,6 @@ app.controller('MatrizDesglosadaProgramacionAnualController', [ "$scope","$rootS
 			$scope.objeto.entidadid = obj.institucionentid;
 			$scope.objeto.npentidad = obj.codigo + ' - ' + obj.nombre;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
@@ -97,9 +96,38 @@ app.controller('MatrizDesglosadaProgramacionAnualController', [ "$scope","$rootS
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
 			$scope.objeto.actividadid = obj.id;
 			$scope.objeto.npactividad = obj.codigo + ' - ' + obj.nombre;
+		}, function() {
+		});
+	};
+
+    $scope.abrirItem=function(){
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalItems.html',
+			controller : 'ModalItemController',
+			size : 'lg'
+		});
+
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.itemid = obj.id;
+			$scope.objeto.npitem = obj.codigo + ' - ' + obj.nombre;			
+		}, function() {
+		});
+	};
+
+    $scope.abrirFuenteFinanciamiento=function(){
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalFuenteFinanciamiento.html',
+			controller : 'ModalFuenteFinanciamientoController',
+			size : 'lg'
+		});
+
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.fuentefinanciamientoid = obj.id;
+			$scope.objeto.npfuentefinanciamiento = obj.codigo + ' - ' + obj.nombre;			
 		}, function() {
 		});
 	};

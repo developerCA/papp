@@ -504,7 +504,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalProgramaCtrl','ProgramaFactory',
         		'ModalUnidadCtrl','UnidadFactory',
         		'ModalProyectoCtrl','ProyectoFactory',
-        		'ModalActividadCtrl','ActividadFactory'
+        		'ModalActividadCtrl','ActividadFactory',
+        		'ModalItemCtrl','ItemFactory',
+        		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory'
 		),
         title: 'Matriz Programación Anual de la Política Pública',
         ncyBreadcrumb: {

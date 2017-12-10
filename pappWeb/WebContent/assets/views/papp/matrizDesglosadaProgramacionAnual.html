@@ -53,7 +53,7 @@
 									</label>
 									<div class="input-group">
 										<input type="text"
-											placeholder="Seleccione una Instituci&oacute;n"
+											placeholder="Seleccione una Entidad"
 											class="form-control" name="npentidad"
 											ng-disabled="true" ng-model="objeto.npentidad" />
 										<span class="input-group-btn">
@@ -138,6 +138,46 @@
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-primary"
 												ng-click="abrirActividad()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.npitem.$dirty && Form.npitem.$invalid, 'has-success':Form.npitem.$valid}">
+									<label class="control-label">
+										Item
+										<span class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione un Item"
+											class="form-control" name="npitem"
+											ng-disabled="true" ng-model="objeto.npitem">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirItem()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.npfuentefinanciamiento.$dirty && Form.npfuentefinanciamiento.$invalid, 'has-success':Form.npfuentefinanciamiento.$valid}">
+									<label class="control-label">
+										Fuente de Financiamiento 
+										<span class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Fuente de Financiamiento"
+											class="form-control" name="npfuentefinanciamiento"
+											ng-disabled="true" ng-model="objeto.npfuentefinanciamiento">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirFuenteFinanciamiento()">
 												<i class="fa fa-search"></i> Seleccione
 											</button>
 										</span>

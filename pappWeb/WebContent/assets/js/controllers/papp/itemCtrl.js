@@ -1,9 +1,5 @@
-/// <reference path="../../factory/itemsFactory.js" />
 'use strict';
-/**
- * controller for angular-menu
- * 
- */
+
 app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAlert", "$filter", "ngTableParams", "ItemsFactory",
 	function ($scope, $rootScope, $uibModal, SweetAlert, $filter, ngTableParams, itemsFactory) {
 
@@ -105,7 +101,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 
     $scope.buscarItem=function(){
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalItems.html',
+			templateUrl : 'assets/views/papp/modal/modalItems.html',
 			controller : 'ModalItemController',
 			size : 'lg'
 		});
@@ -120,7 +116,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 
     $scope.buscarItemFiltro=function(){
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalItems.html',
+			templateUrl : 'assets/views/papp/modal/modalItems.html',
 			controller : 'ModalItemController',
 			size : 'lg'
 		});
