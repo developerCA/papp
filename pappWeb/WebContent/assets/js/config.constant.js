@@ -193,6 +193,8 @@ app.constant('JS_REQUIRES', {
         'ProyectoFactory':'assets/js/factory/proyectoFactory.js',
         'ModalActividadCtrl':'assets/js/controllers/papp/modales/modalActividadCtrl.js',
         'ActividadFactory':'assets/js/factory/actividadFactory.js',
+        'MatrizFormulacionActividadProyectoCtrl':'assets/js/controllers/papp/matrizFormulacionActividadProyectoCtrl.js',
+        'MatrizFormulacionActividadProyectoFactory':'assets/js/factory/matrizFormulacionActividadProyectoFactory.js',
 
     },
     //*** angularJS Modules

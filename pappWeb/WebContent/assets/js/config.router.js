@@ -482,6 +482,18 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Matriz Programación Anual de la Política Pública'
         }
+    }).state('app.matrizformulacionactividadproyecto', {
+        url: "/matrizformulacionactividadproyecto",
+        templateUrl: "assets/views/papp/matrizFormulacionActividadProyecto.html",
+        resolve: loadSequence(
+        		'ngTable','MatrizFormulacionActividadProyectoCtrl','MatrizFormulacionActividadProyectoFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalActividadCtrl','ActividadFactory'
+		),
+        title: 'Matriz de Formulación de Actividad sin Proyecto',
+        ncyBreadcrumb: {
+            label: 'Matriz de Formulación de Actividad sin Proyecto'
+        }
     }).state('app.indicadores', {
         url: "/indicadores",
         templateUrl: "assets/views/papp/indicadores.html",
