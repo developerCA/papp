@@ -1,8 +1,8 @@
 'use strict';
 
-app.controller('ConsecutivoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","consecutivoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,consecutivoFactory) {
-    
-	
+app.controller('ConsecutivoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","consecutivoFactory",
+	function($scope,$rootScope,SweetAlert,$filter, ngTableParams,consecutivoFactory) {
+
 	$scope.nombreFiltro=null;
 	$scope.prefijoFiltro=null;
 	$scope.estadoFiltro=null;
@@ -70,67 +70,61 @@ app.controller('ConsecutivoController', [ "$scope","$rootScope","SweetAlert","$f
 	
 	$scope.editar=function(id){
 		consecutivoFactory.traerConsecutivo(id).then(function(resp){
-			
+			console.log(resp);
 			if (resp.estado)
 			   $scope.objeto=resp.json.consecutivo;
 			   $scope.edicion=true;
-			  
-
 		})
-		
 	};
-	
-	
-	
+
 	 $scope.form = {
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
 
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
 
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
 
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
 
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
+            } else {
+                
+            	consecutivoFactory.guardarConsecutivo($scope.objeto).then(function(resp){
+        			 if (resp.estado){
+        				 form.$setPristine(true);
+	 		             $scope.edicion=false;
+	 		             $scope.objeto={};
+	 		             $scope.limpiar();
+	 		             SweetAlert.swal("Consecutivo!", "Consecutivo registrado satisfactoriamente!", "success");
+ 
+	        			 }else{
+		 		             SweetAlert.swal("Consecutivo!", resp.mensajes.msg, "error");
+        				 
+        			 }
+        			
+        		})
+        		
+            }
 
-		            } else {
-		                
-		            	consecutivoFactory.guardarConsecutivo($scope.objeto).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Consecutivo!", "Consecutivo registrado satisfactoriamente!", "success");
-	 
-		        			 }else{
-			 		             SweetAlert.swal("Consecutivo!", resp.mensajes.msg, "error");
-		        				 
-		        			 }
-		        			
-		        		})
-		        		
-		            }
+        },
+        reset: function (form) {
 
-		        },
-		        reset: function (form) {
+            $scope.myModel = angular.copy($scope.master);
+            form.$setPristine(true);
+            $scope.edicion=false;
+            $scope.objeto={};
 
-		            $scope.myModel = angular.copy($scope.master);
-		            form.$setPristine(true);
-		            $scope.edicion=false;
-		            $scope.objeto={};
-
-		        }
+        }
     };
 } ]);
