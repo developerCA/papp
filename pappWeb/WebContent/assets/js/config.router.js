@@ -494,6 +494,22 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Matriz de Formulación de Actividad sin Proyecto'
         }
+    }).state('app.matrizdesglosadaprogramacionanual', {
+        url: "/matrizdesglosadaprogramacionanual",
+        templateUrl: "assets/views/papp/matrizDesglosadaProgramacionAnual.html",
+        resolve: loadSequence(
+        		'ngTable','MatrizDesglosadaProgramacionAnualCtrl','MatrizDesglosadaProgramacionAnualFactory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalProgramaCtrl','ProgramaFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalProyectoCtrl','ProyectoFactory',
+        		'ModalActividadCtrl','ActividadFactory'
+		),
+        title: 'Matriz Programación Anual de la Política Pública',
+        ncyBreadcrumb: {
+            label: 'Matriz Programación Anual de la Política Pública'
+        }
     }).state('app.indicadores', {
         url: "/indicadores",
         templateUrl: "assets/views/papp/indicadores.html",

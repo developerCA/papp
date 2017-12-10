@@ -144,25 +144,25 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
     };
 
 
-		$scope.abrirInstitutoEntidad = function(index) {
-			//console.log("aqui");
-			var modalInstance = $uibModal.open({
-				templateUrl : 'modalInstitutoEntidad.html',
-				controller : 'ModalInstitutoEntidadController',
-				size : 'lg'
-			});
-			modalInstance.result.then(function(obj) {
-				console.log(obj);
-				$scope.detalles[index].id.id = obj.institucionid;
-				$scope.detalles[index].unidadinstitucionid = obj.institucionid;
-				$scope.detalles[index].id.unidad = obj.institucionentid;
-				$scope.detalles[index].unidadinstitucionentid = obj.institucionentid;
-				$scope.detalles[index].npcodigoinstitucion = obj.npcodigoinstitucion;
-				$scope.detalles[index].npnombreinstitucion = obj.npnombreinstitucion;
-				$scope.detalles[index].npcodigoentidad = obj.codigo;
-				$scope.detalles[index].npnombreentidad = obj.nombre;
-			}, function() {
-				console.log("close modal");
-			});
-		};
+	$scope.abrirInstitutoEntidad = function(index) {
+		//console.log("aqui");
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalInstitutoEntidad.html',
+			controller : 'ModalInstitutoEntidadController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.detalles[index].id.id = obj.institucionid;
+			$scope.detalles[index].unidadinstitucionid = obj.institucionid;
+			$scope.detalles[index].id.unidad = obj.institucionentid;
+			$scope.detalles[index].unidadinstitucionentid = obj.institucionentid;
+			$scope.detalles[index].npcodigoinstitucion = obj.npcodigoinstitucion;
+			$scope.detalles[index].npnombreinstitucion = obj.npnombreinstitucion;
+			$scope.detalles[index].npcodigoentidad = obj.codigo;
+			$scope.detalles[index].npnombreentidad = obj.nombre;
+		}, function() {
+			console.log("close modal");
+		});
+	};
 } ]);
