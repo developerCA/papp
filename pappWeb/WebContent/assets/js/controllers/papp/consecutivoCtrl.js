@@ -70,7 +70,7 @@ app.controller('ConsecutivoController', [ "$scope","$rootScope","SweetAlert","$f
 	
 	$scope.editar=function(id){
 		consecutivoFactory.traerConsecutivo(id).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.estado)
 			   $scope.objeto=resp.json.consecutivo;
 			   $scope.edicion=true;
