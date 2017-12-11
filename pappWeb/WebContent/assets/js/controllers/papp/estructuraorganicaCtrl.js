@@ -315,21 +315,18 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
             $scope.mostrarUnidad($scope.estructuraSeleccionada);
         }
 	};
-	
+
 	$scope.cargarHijos=function(node){
 		if (!node.iscargado)
-			console.log(node);
+			//console.log(node);
 		    node.iscargado=true;
-		    
+
 		    unidadFactory.traerUnidadesArbolhijos(pagina,$scope.estructuraSeleccionada,node.id,'A').then(function(resp){
 				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 				node.nodes=nodes;
-				
-				//console.log($scope.arbol);
 			})
-			
 	}
-	
+
 	$scope.abrirInstitucion = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalInstitucion.html',

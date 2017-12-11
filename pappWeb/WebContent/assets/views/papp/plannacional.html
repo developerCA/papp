@@ -1,6 +1,6 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-	<h4 class="mainTitle no-margin">Perfiles</h4>
+	<h4 class="mainTitle no-margin">Plan Nacional</h4>
 
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
@@ -18,53 +18,49 @@
 
 			<div class="panel panel-white">
 
-
 				<div class="panel-body" ng-show="!edicion">
 
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+					<div class="row">
+						<div class="col-md-12">
+							<a  class="btn btn-sm btn-dark-azure" ng-click="nuevo(null);">
+								<i class="fa fa-plus-square"></i>
+								Agregar
+							</a>
+<!--							<a  class="btn btn-sm btn-default" ng-click="form.reset(Form);">
+								<i class="fa ti-back-left"></i>
+								Regresar
+							</a>
+-->							<br><br>
 						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>
+					</div>
 
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div ui-tree="treeOptions" id="tree-root"
+								data-nodrop-enabled="true" data-drag-enabled="true">
+								<ol ui-tree-nodes ng-model="arbol">
+									<li ng-repeat="node in arbol" ui-tree-node
+										ng-include="'nodes_renderer.html'">
+									</li>
+								</ol>
 							</div>
 						</div>
 					</div>
 
-					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"><i
-						class="fa fa-plus-square"></i> Agregar</a>
-
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
-										class="fa fa-pencil"></i></a></td>
-
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-
-							</tr>
-						</table>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-right">
+								<br>
+								<a  class="btn btn-sm btn-dark-azure" ng-click="nuevo();">
+									<i class="fa fa-plus-square"></i>
+									Agregar
+								</a>
+<!--								<a  class="btn btn-sm btn-default" ng-click="form.reset(Form);">
+									<i class="fa ti-back-left"></i>
+									Regresar
+								</a>
+-->							</div>
+						</div>
 					</div>
 				</div>
 
@@ -72,7 +68,7 @@
 				<div ng-show="edicion" class="panel-body" id="panel1">
 
 					<div class="panel-heading">
-						<h5 class="panel-title">Perfiles</h5>
+						<h5 class="panel-title">Plan Nacional</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
@@ -80,85 +76,75 @@
 						<div class="row">
 							<div class="col-md-6">
 
-								<div class="form-group"
-									ng-class="{'has-error':Form.id.$dirty && Form.id.$invalid, 'has-success':Form.id.$valid}">
-									<label class="control-label"> Id <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Id"
-										class="form-control" name="id" ng-model="objeto.id"
-										required /> <span class="error text-small block"
-										ng-if="Form.id.$dirty && Form.id.$invalid">Id
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.id.$valid">Listo</span>
-								</div>
+<div class="form-group"
+    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+    <label class="control-label">
+        C&oacute;digo
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Escriba un c&oacute;digo"
+        class="form-control" name="codigo" ng-model="objeto.codigo" ng-pattern="/^[0-9]*$/"
+        required>
+    <span class="error text-small block"
+        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.codigo.$valid">
+        Listo
+    </span>
+</div>
 
-								<div class="form-group"
-									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Nombre <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder=""
-										class="form-control" name="nombre" required
-										ng-model="objeto.nombre" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">Nombre
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
-								</div>
+<div class="form-group"
+    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
+    <label class="control-label">
+        Descripci&oacute;n
+        <span class="symbol required"></span>
+    </label>
+    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
+        class="form-control" ng-model="objeto.descripcion"
+        required>
+    </textarea>
+    <span class="error text-small block"
+        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.descripcion.$valid">
+        Listo
+    </span>
+</div>
 
+<div class="form-group has-success">
+    <label class="control-label">
+        Tipo
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" class="form-control"
+    	ng-disabled="true" ng-model="objeto.npTipo">
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+    <label class="control-label">
+        Estado
+        <span class="symbol required"></span>
+    </label>
+    <select class="form-control" name="estado"
+        ng-model="objeto.estado" required>
+        <option value="A" ng-selected="selected">Activo</option>
+        <option value="I">Inactivo</option>
+    </select>
+    <span class="error text-small block"
+        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.estado.$valid">
+        Listo
+    </span>
+</div>
 							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<a uib-tooltip="Agregar"
-											class="pull-right btn btn-sm btn-info"
-											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
-										</a>
-										<h4 class="panel-title">Permisos</h4>
-
-
-									</div>
-									<div class="panel-body no-padding panel-white">
-										<div class="col-md-12 panel-white no-padding">
-											<div>
-												<table class="table table-striped">
-													<tr>
-														<td></td>
-														<th>Nombre</th>
-													</tr>
-													<tr ng-repeat="obj in objetolista">
-														<td><!--  ng-disabled="obj.perfilpermisolectura==0" -->
-															<a uib-tooltip="Eliminar"
-																class="btn btn-sm btn-danger"
-																ng-click="removerDetalle($index)">
-																<i class="fa fa-trash"></i>
-															</a>
-														</td>
-<!-- 																required ng-model="obj.id.permisoid" -->
-														<td data-title="'Nombre'">
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione el permiso"
-											class="form-control" name="codigopadre" ng-disabled="true"
-											ng-model="obj.nppermiso" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirPerfilesPermisos($index)">
-												<i class="fa fa-search"></i> Seleccione
-											</button>
-										</span>
-									</div>
-														</td>
-													</tr>
-												</table>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-
 						</div>
 
 						<div class="row">
@@ -177,71 +163,54 @@
 
 					</form>
 
-					<script type="text/ng-template" id="modalPerfilesPermisos.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Permisos</h3>
-                            </div>
-                            <div class="modal-body">
-                               
-
-				<div class="panel-body" ng-init="consultar();" >
-
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>
-
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-
-							</tr>
-						</table>
-					</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-
-
-
-
+<script type="text/ng-template" id="nodes_renderer.html">
+<div ui-tree-handle class="tree-node tree-node-content">
+	<table width="100%">
+		<tr>
+			<td width="1%">
+				<div class="col-md-12">
+				    <a class="btn btn-default btn-xs"  data-nodrag ng-click="toggle(this);cargarHijos(node)">
+						<span class="glyphicon" ng-class="{
+					       	'glyphicon-chevron-right': collapsed,
+					       	'glyphicon-chevron-down': !collapsed
+					    }">
+						</span>
+					</a>
+				</div>
+			</td>
+			<td width="100%">
+	    		{{node.title}}
+			</td>
+			<td width="1%">
+				<table width="71px">
+					<tr>
+						<td width="34px">
+							<a uib-tooltip="Agregar" class="btn btn-info btn-sm" data-nodrag
+								ng-click="nuevo(node);">
+								<span class="glyphicon glyphicon-plus"></span>
+							</a>
+						</td>
+						<td width="3px"></td>
+						<td width="34px">
+	  						<a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag
+								ng-click="editar(node);">
+								<span class="fa fa-pencil"></span>
+							</a>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</div>
+<ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+</ol>
+</script>

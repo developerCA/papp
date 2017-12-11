@@ -1,11 +1,9 @@
 'use strict';
 
-app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","plannacionalFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, plannacionalFactory) {
-    
-	
-	$scope.nombreFiltro=null;
-	$scope.ordenFiltro=null;
-	
+app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","plannacionalFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, plannacionalFactory) {
+
+	$scope.arbol={};
 	$scope.edicion=false;
 	$scope.guardar=false;
 	$scope.objeto={};
@@ -14,20 +12,35 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		console.log('AQUIIII-111');
 		$scope.data=[];
-		plannacionalFactory.traerInstitucion(pagina).then(function(resp){
-			console.log('AQUIIII');
+		plannacionalFactory.traerPlanNacional(
+			pagina,
+			$rootScope.ejefiscal
+		).then(function(resp){
 			console.log(resp);
-			if (resp.meta)
-				$scope.data=resp;
-			    
+			if (resp.meta) {
+				$scope.data = resp;
+				$scope.arbol = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
+			}
 		})
-	
 	};
-	
+
+	$scope.cargarHijos=function(node){
+		if (!node.iscargado)
+			console.log(node);
+		    node.iscargado=true;
+
+		    plannacionalFactory.traerPlanNacionalHijos(
+	    		pagina,
+	    		$rootScope.ejefiscal,
+	    		node.id
+    		).then(function(resp){
+				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
+				node.nodes=nodes;
+			})
+	}
+
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -46,53 +59,72 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
-		plannacionalFactory.traerInstitucionFiltro(pagina,$scope.nombreFiltro).then(function(resp){
-			
+		plannacionalFactory.traerPlanNacionalFiltro(pagina,$scope.nombreFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
-	
+
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
 		$scope.ordenFiltro=null;
-		
-		
+
 		$scope.consultar();
-		
 	};
 	
-	$scope.nuevo=function(){
-		$scope.objeto={id:null};
-		$scope.objetolista=[];
-		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
-//		console.log(obj);
-		$scope.objetolista.push(obj);
-//		console.log($scope.objetolista);
+	$scope.nuevo=function(node){
+		//console.log("objeto nuevo");
+		$scope.objeto={
+			id: null,
+			tipo: null,
+			npTipo: null,
+			estado: "A",
+			plannacionalejerfiscalid: $rootScope.ejefiscal,
+			plannacionalpadreid: null
+		};
+		if (node==null) {
+			$scope.objeto.tipo = "O";
+			$scope.objeto.npTipo = "Objeto";
+		} else {
+			$scope.objeto.plannacionalpadreid = node.id;
+			switch (node.tipo) {
+				case "O":
+					$scope.objeto.tipo = "P";
+					$scope.objeto.npTipo = "Politica";
+					break;
+				default:
+					$scope.objeto.tipo = "M";
+					$scope.objeto.npTipo = "Meta";
+					break;
+			}
+			if (node.tipo=="M") {
+				plannacionalFactory.traerPlanNacionalEditar(node.id).then(function(resp){
+					if (resp.estado) {
+						$scope.objeto.plannacionalpadreid = resp.json.plannacional.plannacionalpadreid;
+					}
+					//console.log("fuente");
+					//console.log(node);
+				})
+			}
+		}
 
+		//console.log($scope.objeto);
 		$scope.edicion=true;
 		$scope.guardar=true;
 	}
 	
-	$scope.editar=function(id){
-		plannacionalFactory.traerInstitucion(id).then(function(resp){
-//console.clear();
-//console.log(resp.json);
+	$scope.editar=function(node){
+		plannacionalFactory.traerPlanNacionalEditar(node.id).then(function(resp){
+			console.log(resp.json.plannacional);
 			if (resp.estado) {
-			   $scope.objeto=resp.json.perfil;
-			   $scope.objetolista=resp.json.details;
-			   //console.log($scope.objetolista);
+			   $scope.objeto=resp.json.plannacional;
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;
-
 		})
-		
 	};
 
 	$scope.agregarDetalle=function(){

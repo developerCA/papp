@@ -322,12 +322,12 @@
 
 					<div ng-show="dUnidad" class="panel-body">
 						<div class="row">
-							<a  class="btn btn-sm btn-dark-azure"
-								ng-click="nuevaUnidad();"><i class="fa fa-plus-square"></i>
+							<a  class="btn btn-sm btn-dark-azure" ng-click="nuevaUnidad();">
+								<i class="fa fa-plus-square"></i>
 								Agregar unidad
 							</a>
-							<a  class="btn btn-sm btn-default"
-								ng-click="form.reset(Form);">
+							<a  class="btn btn-sm btn-default" ng-click="form.reset(Form);">
+								<i class="fa ti-back-left"></i>
 								Regresar
 							</a>
 						</div>
@@ -371,7 +371,10 @@
 							<div class="col-md-12">
 								<div class="pull-right">
 									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">Regresar</button>
+										ng-click="form.reset(Form)">
+										<i class="fa ti-back-left"></i>
+										Regresar
+									</button>
 								</div>
 							</div>
 						</div>
