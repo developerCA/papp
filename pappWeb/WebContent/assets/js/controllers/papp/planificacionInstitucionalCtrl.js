@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","plannacionalFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, plannacionalFactory) {
+app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","planificacionInstitucionalFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, planificacionInstitucionalFactory) {
 
 	$scope.arbol={};
 	$scope.edicion=false;
@@ -13,14 +13,15 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		plannacionalFactory.traerPlanNacional(
+		planificacionInstitucionalFactory.traerPlanificacionInstitucional(
 			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.meta) {
 				$scope.data = resp;
 				$scope.arbol = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
+				//console.log($scope.arbol);
 			}
 		})
 	};
@@ -30,7 +31,7 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 			console.log(node);
 		    node.iscargado=true;
 
-		    plannacionalFactory.traerPlanNacionalHijos(
+		    planificacionInstitucionalFactory.traerPlanificacionInstitucionalHijos(
 	    		pagina,
 	    		$rootScope.ejefiscal,
 	    		node.id
@@ -62,7 +63,7 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		plannacionalFactory.traerPlanNacionalFiltro(pagina,$scope.nombreFiltro).then(function(resp){
+		planificacionInstitucionalFactory.traerPlanificacionInstitucionalFiltro(pagina,$scope.nombreFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -82,14 +83,14 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 			tipo: null,
 			npTipo: null,
 			estado: "A",
-			plannacionalejerfiscalid: $rootScope.ejefiscal,
-			plannacionalpadreid: null
+			planificacionInstitucionalejerfiscalid: $rootScope.ejefiscal,
+			planificacionInstitucionalpadreid: null
 		};
 		if (node==null) {
 			$scope.objeto.tipo = "O";
 			$scope.objeto.npTipo = "Objeto";
 		} else {
-			$scope.objeto.plannacionalpadreid = node.id;
+			$scope.objeto.planificacionInstitucionalpadreid = node.id;
 			switch (node.tipo) {
 				case "O":
 					$scope.objeto.tipo = "P";
@@ -101,9 +102,9 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 					break;
 			}
 			if (node.tipo=="M") {
-				plannacionalFactory.traerPlanNacionalEditar(node.id).then(function(resp){
+				planificacionInstitucionalFactory.traerPlanificacionInstitucionalEditar(node.id).then(function(resp){
 					if (resp.estado) {
-						$scope.objeto.plannacionalpadreid = resp.json.plannacional.plannacionalpadreid;
+						$scope.objeto.planificacionInstitucionalpadreid = resp.json.planificacionInstitucional.planificacionInstitucionalpadreid;
 					}
 					//console.log("fuente");
 					//console.log(node);
@@ -117,10 +118,10 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 	}
 	
 	$scope.editar=function(node){
-		plannacionalFactory.traerPlanNacionalEditar(node.id).then(function(resp){
-			console.log(resp.json.plannacional);
+		planificacionInstitucionalFactory.traerPlanificacionInstitucionalEditar(node.id).then(function(resp){
+			console.log(resp.json.planificacionInstitucional);
 			if (resp.estado) {
-			   $scope.objeto=resp.json.plannacional;
+			   $scope.objeto=resp.json.planificacionInstitucional;
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;
@@ -176,16 +177,16 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 
 		            } else {
 		                
-		            	plannacionalFactory.guardar($scope.objeto).then(function(resp){
+		            	planificacionInstitucionalFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Plan Nacional!", "Registro grabado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Planificaci&oacute;n Institucional!", "Registro grabado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Plan Nacional!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Planificaci&oacute;n Institucional!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

@@ -512,6 +512,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Matriz Programación Anual de la Política Pública'
         }
+    }).state('app.planificacioninstitucional', {
+        url: "/planificacioninstitucional",
+        templateUrl: "assets/views/papp/planificacionInstitucional.html",
+        resolve: loadSequence(
+        		'ngTable','PlanificacionInstitucionalCtrl','PlanificacionInstitucionalFactory'
+		),
+        title: 'Planificación Institucional',
+        ncyBreadcrumb: {
+            label: 'Planificación Institucional'
+        }
     }).state('app.indicadores', {
         url: "/indicadores",
         templateUrl: "assets/views/papp/indicadores.html",

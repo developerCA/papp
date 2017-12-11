@@ -1,13 +1,13 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-	<h4 class="mainTitle no-margin">Plan Nacional</h4>
+	<h4 class="mainTitle no-margin">Planificaci&oacute;n Institucional</h4>
 
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <!-- end: BREADCRUMB -->
 <!-- start: SIMPLE TABLE WITH PAGINATION -->
 <div class="container-fluid container-fullw"
-	ng-controller="PlanNacionalController" ng-init="consultar()">
+	ng-controller="PlanificacionInstitucionalController" ng-init="consultar()">
 
 	<div class="row">
 		<div class="col-md-12"></div>
@@ -177,7 +177,7 @@
 				</div>
 			</td>
 			<td width="100%">
-	    		{{node.title}}
+	    		{{node.codigo}} - {{node.title}}
 			</td>
 			<td width="1%">
 				<table width="71px">
