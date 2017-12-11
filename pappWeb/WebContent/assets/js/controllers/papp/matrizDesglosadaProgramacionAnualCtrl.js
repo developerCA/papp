@@ -18,7 +18,7 @@ app.controller('MatrizDesglosadaProgramacionAnualController', [ "$scope","$rootS
 
 	$scope.abrirInstitucion = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalInstitucion.html',
+			templateUrl : 'assets/views/papp/modal/modalInstitucion.html',
 			controller : 'ModalInstitucionController',
 			size : 'lg'
 		});

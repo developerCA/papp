@@ -30,6 +30,12 @@ app.factory("planificacionInstitucionalFactory", [ "Restangular", function(Resta
 		    return Restangular.allUrl(url).customGET();
 		},
 
+		traerPlanificacionInstitucionalNuevoEstructura : function(padreid, ejerciciofiscalid, tipopadre) {
+			var url = "planificacion/nuevo/objetivo/"+padreid+"/"+ejerciciofiscalid+"/"+tipopadre;
+
+		    return Restangular.allUrl(url).customGET();
+		},
+
 		guardar:function(objeto){
 			var url = "planificacion/objetivo/";
 			return Restangular.allUrl(url).customPOST(objeto);

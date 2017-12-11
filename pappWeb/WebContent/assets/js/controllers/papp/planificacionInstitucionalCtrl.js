@@ -77,131 +77,115 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 	};
 	
 	$scope.nuevo=function(node){
-		//console.log("objeto nuevo");
-		$scope.objeto={
-			id: null,
-			tipo: null,
-			npTipo: null,
-			estado: "A",
-			planificacionInstitucionalejerfiscalid: $rootScope.ejefiscal,
-			planificacionInstitucionalpadreid: null
-		};
-		if (node==null) {
-			$scope.objeto.tipo = "O";
-			$scope.objeto.npTipo = "Objeto";
-		} else {
-			$scope.objeto.planificacionInstitucionalpadreid = node.id;
-			switch (node.tipo) {
-				case "O":
-					$scope.objeto.tipo = "P";
-					$scope.objeto.npTipo = "Politica";
-					break;
-				default:
-					$scope.objeto.tipo = "M";
-					$scope.objeto.npTipo = "Meta";
-					break;
-			}
-			if (node.tipo=="M") {
-				planificacionInstitucionalFactory.traerPlanificacionInstitucionalEditar(node.id).then(function(resp){
-					if (resp.estado) {
-						$scope.objeto.planificacionInstitucionalpadreid = resp.json.planificacionInstitucional.planificacionInstitucionalpadreid;
-					}
-					//console.log("fuente");
-					//console.log(node);
-				})
-			}
-		}
+		planificacionInstitucionalFactory.traerPlanificacionInstitucionalNuevoEstructura(
+			node.id,
+			$rootScope.ejefiscal,
+			node.tipo
+		).then(function(resp){
+			$scope.objeto=resp.json.objetivo;
 
-		//console.log($scope.objeto);
-		$scope.edicion=true;
-		$scope.guardar=true;
+			console.log($scope.objeto);
+			$scope.guardar=true;
+			switch ($scope.objeto.tipo) {
+				case "P": //Plan nacional
+					$scope.edicion=true;
+					break;
+				case "E": //Estrategico
+					$scope.edicionEstrategico=true;
+					break;
+				case "O": //Operativo
+				case "F": //Fuerzas
+				default:
+					$scope.edicionOperativo=true;
+					break;
+			}
+		})
 	}
 	
 	$scope.editar=function(node){
 		planificacionInstitucionalFactory.traerPlanificacionInstitucionalEditar(node.id).then(function(resp){
-			console.log(resp.json.planificacionInstitucional);
+			console.log(resp.json.objetivo);
 			if (resp.estado) {
-			   $scope.objeto=resp.json.planificacionInstitucional;
+			   $scope.objeto=resp.json.objetivo;
 			}
-			$scope.edicion=true;
 			$scope.guardar=true;
+			switch ($scope.objeto.tipo) {
+				case "P": //Plan nacional
+					$scope.edicion=true;
+					break;
+				case "E": //Estrategico
+					$scope.edicionEstrategico=true;
+					break;
+				case "O": //Operativo
+				case "F": //Fuerzas
+				default:
+					$scope.edicionOperativo=true;
+					break;
+			}
 		})
 	};
 
-	$scope.agregarDetalle=function(){
-		var obj={id:{perfilid:$scope.objeto,permisoid:null},nppermiso:null};
-		$scope.objetolista.push(obj);
-	}
-
-	$scope.removerDetalle=function(index){
-		$scope.objetolista.splice(index,1);
-	}
-
-	$scope.abrirPerfilesPermisos = function(index) {
-		//console.log("aqui");
+	$scope.abrirInstitucion = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalPerfilesPermisos.html',
-			controller : 'PerfilesPermisosController',
-			size : 'lg'
+			templateUrl : 'assets/views/papp/modal/modalInstitucion.html',
+			controller : 'ModalInstitucionController',
+			size : 'lg',
+			resolve : {
+				ejefiscal : function() {
+					return $rootScope.ejefiscal;
+				}
+			}
 		});
-		/* modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objetolista[index].id.permisoid = obj.id;
-			$scope.objetolista[index].nppermiso=obj.nombre;
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.objetivoinstitucionid = obj.id;
+			$scope.objeto.npCodigoInstitucion = obj.codigo;
+			$scope.objeto.npNombreInstitucion = obj.nombre;
 		}, function() {
-			console.log("close modal");
-		}); */
+		});
 	};
 
 	$scope.form = {
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
 
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
 
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
 
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
-
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
-
-		            } else {
-		                
-		            	planificacionInstitucionalFactory.guardar($scope.objeto).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Planificaci&oacute;n Institucional!", "Registro grabado satisfactoriamente!", "success");
-	 
-		        			 }else{
-			 		             SweetAlert.swal("Planificaci&oacute;n Institucional!", resp.mensajes.msg, "error");
-		        				 
-		        			 }
-		        			
-		        		})
-		        		
-		            }
-
-		        },
-		        reset: function (form) {
-
-		            $scope.myModel = angular.copy($scope.master);
-		            form.$setPristine(true);
-		            $scope.edicion=false;
-		            $scope.objeto={};
-
-		        }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+            	planificacionInstitucionalFactory.guardar($scope.objeto).then(function(resp){
+        			 if (resp.estado){
+        				 form.$setPristine(true);
+	 		             $scope.edicion=false;
+	 		             $scope.objeto={};
+	 		             $scope.limpiar();
+	 		             SweetAlert.swal("Planificaci&oacute;n Institucional!", "Registro grabado satisfactoriamente!", "success");
+        			 }else{
+	 		             SweetAlert.swal("Planificaci&oacute;n Institucional!", resp.mensajes.msg, "error");
+        			 }
+        		})
+            }
+        },
+        reset: function (form) {
+            $scope.myModel = angular.copy($scope.master);
+            form.$setPristine(true);
+            $scope.edicion=false;
+            $scope.edicionEstrategico=false;
+            $scope.edicionOperativo=false;
+            $scope.objeto={};
+        }
     };
 } ]);
