@@ -4,14 +4,17 @@ app.factory("institucionFactory", [ "Restangular", function(Restangular) {
 
 	return {
 
-		traerInstitucion : function(pagina) {
-			return Restangular.allUrl("administrar/consultar/institucion/pagina="+pagina).getList();
+		traerInstitucion : function(pagina, ejercicio) {
+			return Restangular.allUrl("administrar/consultar/institucion/pagina="+pagina+"&institucionejerciciofiscalid="+ejercicio).getList();
 		},
 
-		traerInstitucionFiltro : function(pagina,nombre) {
-			var url = "administrar/consultar/institucion/pagina="+pagina;
+		traerInstitucionFiltro : function(pagina, ejercicio, codigo, nombre, estado) {
+			var url = "administrar/consultar/institucion/pagina="+pagina+"&institucionejerciciofiscalid="+ejercicio;
 
-			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
+			if (codigo!=null && codigo != "") url += "&codigo=" + codigo;	
+			if (nombre!=null && nombre != "") url += "&nombre=" + nombre;	
+			if (estado!=null && estado != "") url += "&estado=" + estado;	
+
 			return Restangular.allUrl(url).getList();
 		},
 		

@@ -18,9 +18,7 @@
 
 			<div class="panel panel-white">
 
-
 				<div class="panel-body" ng-show="!edicion">
-
 
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
@@ -59,33 +57,24 @@
 					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"><i
 						class="fa fa-plus-square"></i> Agregar</a>
 
-
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
 								<td><a class="btn btn-sm btn-primary"
 									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
 										class="fa fa-pencil"></i></a></td>
-
 								<td><a class="btn btn-sm btn-danger" uib-tooltip="Eliminar"
 									ng-click="eliminar(obj.id)"><i class="fa fa-trash"></i></a></td>
-
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
 								<td data-title="'Orden'">{{obj.orden}}</td>
 								<td data-title="'Padre Nombre'">{{obj.nppadre}}</td>
 								<td data-title="'Nivel'">FALTA</td>
 								<td data-title="'Permiso'">FALTA</td>
 								<td data-title="'Permiso'">{{obj.nppermisodescripcion}}</td>
-
-
-
-
-
 							</tr>
 						</table>
 					</div>
 				</div>
-
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
 

@@ -3,7 +3,9 @@
 app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","institucionFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, institucionFactory) {
 
-	$scope.nombre=null;
+	$scope.codigoFiltro=null;
+	$scope.nombreFiltro=null;
+	$scope.estadoFiltro=null;
 
 	$scope.edicion=false;
 	$scope.guardar=false;
@@ -14,7 +16,7 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		institucionFactory.traerInstitucion(pagina).then(function(resp){
+		institucionFactory.traerInstitucion(pagina, $rootScope.ejefiscal).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -41,15 +43,24 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 	});
 
 	$scope.filtrar=function(){
+		console.log($scope.estadoFiltro);
 		$scope.data=[];
-		institucionFactory.traerInstitucionFiltro(pagina,$scope.nombre).then(function(resp){
+		institucionFactory.traerInstitucionFiltro(
+			pagina,
+			$rootScope.ejefiscal,
+			$scope.codigoFiltro,
+			$scope.nombreFiltro,
+			$scope.estadoFiltro
+		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
 	
 	$scope.limpiar=function(){
-		$scope.nombre=null;
+		$scope.codigoFiltro=null;
+		$scope.nombreFiltro=null;
+		$scope.estadoFiltro=null;
 
 		$scope.consultar();
 	};
@@ -183,32 +194,26 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 		                return;
 
 		            } else {
-		                
-		            	institucionFactory.guardar($scope.objeto).then(function(resp){
+		                var objEnviar = $scope.objeto;
+		                objEnviar.details = $scope.objetolista;
+		            	institucionFactory.guardar(objEnviar).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Permiso!", "Registro registrado satisfactoriamente!", "success");
-	 
-		        			 }else{
-			 		             SweetAlert.swal("Permiso!", resp.mensajes.msg, "error");
-		        				 
+			 		             SweetAlert.swal("Instituci&oacute;n!", "Registro guardado satisfactoriamente!", "success");
+ 		        			 }else{
+			 		             SweetAlert.swal("Instituci&oacute;n!", resp.mensajes.msg, "error");
 		        			 }
-		        			
 		        		})
-		        		
 		            }
-
 		        },
 		        reset: function (form) {
-
 		            $scope.myModel = angular.copy($scope.master);
 		            form.$setPristine(true);
 		            $scope.edicion=false;
 		            $scope.objeto={};
-
 		        }
     };
 } ]);
