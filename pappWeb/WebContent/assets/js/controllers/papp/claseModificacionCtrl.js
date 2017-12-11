@@ -1,8 +1,8 @@
 'use strict';
 
-app.controller('ClaseModificacionController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","claseModificacionFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,claseModificacionFactory) {
-    
-	
+app.controller('ClaseModificacionController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","claseModificacionFactory",
+	function($scope,$rootScope,SweetAlert,$filter, ngTableParams,claseModificacionFactory) {
+
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.nombreRFiltro=null;
@@ -16,19 +16,14 @@ app.controller('ClaseModificacionController', [ "$scope","$rootScope","SweetAler
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
-		
 		$scope.data=[];
 		claseModificacionFactory.traerClases(pagina,$rootScope.ejefiscal).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-			
 		})
-	
 	};
 	
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -47,16 +42,23 @@ app.controller('ClaseModificacionController', [ "$scope","$rootScope","SweetAler
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
 		claseModificacionFactory.traerClasesFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
-			
 			if (resp.meta)
 				$scope.data=resp;
 		})
+	}
+
+	$scope.blurCodigo=function(index) {
+		for (var i = 0; i < $scope.detalles.length; i++) {
+			if ((i != index) && ($scope.detalles[i].codigo == $scope.detalles[index].codigo)) {
+	             SweetAlert.swal("Organismo!", "YA EXISTE CLASE DE REGISTRO " + $scope.detalles[i].codigo + ",  CLASE MODIFICACION CODIGO", "error");
+	             $scope.detalles[index].codigo = null;
+	             return false;
+			}
+		}
 	}
 	
 	$scope.limpiar=function(){

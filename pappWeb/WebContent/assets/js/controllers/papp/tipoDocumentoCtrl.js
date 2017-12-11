@@ -1,8 +1,8 @@
 'use strict';
 
-app.controller('TipoDocumentoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","tipoDocumentoFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,tipoDocumentoFactory) {
-    
-	
+app.controller('TipoDocumentoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","tipoDocumentoFactory",
+	function($scope,$rootScope,SweetAlert,$filter, ngTableParams,tipoDocumentoFactory) {
+
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.estadoFiltro=null;
@@ -13,19 +13,14 @@ app.controller('TipoDocumentoController', [ "$scope","$rootScope","SweetAlert","
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
-		
 		$scope.data=[];
 		tipoDocumentoFactory.traerTipos(pagina,$rootScope.ejefiscal).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-			
 		})
-	
 	};
 	
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -44,13 +39,10 @@ app.controller('TipoDocumentoController', [ "$scope","$rootScope","SweetAlert","
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
 		tipoDocumentoFactory.traerTiposFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
-			
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -64,6 +56,16 @@ app.controller('TipoDocumentoController', [ "$scope","$rootScope","SweetAlert","
 		$scope.consultar();
 		
 	};
+
+	$scope.blurCodigo=function(index) {
+		for (var i = 0; i < $scope.detalles.length; i++) {
+			if ((i != index) && ($scope.detalles[i].codigo == $scope.detalles[index].codigo)) {
+	             SweetAlert.swal("Organismo!", "YA EXISTE CLASE DE REGISTRO " + $scope.detalles[i].codigo + ",  CLASE MODIFICACION CODIGO", "error");
+	             $scope.detalles[index].codigo = null;
+	             return false;
+			}
+		}
+	}
 	
 	$scope.nuevo=function(){
 		$scope.objeto={id:null,estado:'A',tipodocumentoejerfiscalid:$rootScope.ejefiscal};

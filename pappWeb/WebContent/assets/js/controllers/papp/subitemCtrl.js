@@ -13,22 +13,16 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     var pagina = 1;
     $scope.data=[];
 
-   
-
     $scope.consultar = function () {
-
         $scope.data = [];
-
         subitemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
                 console.log($scope.data);
         });
-
     };
 
     $scope.$watch('data', function () {
-
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
             count: 5, // count per page
@@ -49,9 +43,17 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     });
 
     $scope.filtrar = function () {
-
         $scope.data = [];
-        subitemsFactory.traerItemsFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado, $scope.tipo,$rootScope.ejefiscal,$scope.codigoIncop,$scope.itemNombre).then(function (resp) {
+        subitemsFactory.traerItemsFiltro(
+    		pagina,
+    		$scope.codigo,
+    		$scope.nombre,
+    		$scope.estado,
+    		$scope.tipo,
+    		$rootScope.ejefiscal,
+    		$scope.codigoIncop,
+    		$scope.itemNombre
+		).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;
         })
@@ -96,7 +98,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalItems.html',
 			controller : 'ModalItemController',
-			size : 'md',
+			size : 'lg',
 			resolve : {
 				tipo : function() {
 					return $scope.objeto.tipo;

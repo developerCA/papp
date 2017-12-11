@@ -1,8 +1,8 @@
 'use strict';
 
-app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","claseRegistroFactory",  function($scope,$rootScope,SweetAlert,$filter, ngTableParams,claseRegistroFactory) {
-    
-	
+app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","claseRegistroFactory",
+	function($scope,$rootScope,SweetAlert,$filter, ngTableParams,claseRegistroFactory) {
+
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.estadoFiltro=null;
@@ -13,15 +13,11 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
-		
 		$scope.data=[];
 		claseRegistroFactory.traerClases(pagina,$rootScope.ejefiscal).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-			
 		})
-	
 	};
 	
 	$scope.$watch('data', function() {
@@ -44,8 +40,17 @@ app.controller('ClaseRegistroController', [ "$scope","$rootScope","SweetAlert","
 			}
 		});
 	});
-	
-	
+
+	$scope.blurCodigo=function(index) {
+		for (var i = 0; i < $scope.detalles.length; i++) {
+			if ((i != index) && ($scope.detalles[i].codigo == $scope.detalles[index].codigo)) {
+	             SweetAlert.swal("Organismo!", "YA EXISTE CLASE DE REGISTRO " + $scope.detalles[i].codigo + ",  CLASE MODIFICACION CODIGO", "error");
+	             $scope.detalles[index].codigo = null;
+	             return false;
+			}
+		}
+	}
+
 	$scope.filtrar=function(){
 		
 		$scope.data=[];

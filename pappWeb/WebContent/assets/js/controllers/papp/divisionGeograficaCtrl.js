@@ -83,10 +83,24 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 	};
 	
 	$scope.buscarDivision=function(){
+		var miTipo = null;
+		switch ($scope.objeto.tipo) {
+			case "P":
+				miTipo = "A";
+				break;
+			case "C":
+				miTipo = "P";
+				break;
+			case "R":
+				miTipo = "C";
+				break;
+			default:
+				break;
+		}
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalDiviviones.html',
 			controller : 'ModalDivisionGeograficaController',
-			size : 'md',
+			size : 'lg',
 			resolve: {
 				pais: function() {
 					return null;
@@ -95,7 +109,7 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 					return null;
 				},
 				tipo : function() {
-					return $scope.objeto.tipo;
+					return miTipo;
 				}
 			}
 		});

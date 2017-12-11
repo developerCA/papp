@@ -47,9 +47,14 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
 	$scope.filtrar=function(){
 		$scope.data=[];
 		itemsFactory.traerItemsFiltro(
-			pagina, $rootScope.ejefiscal, $scope.codigoFiltro,
-			$scope.nombreFiltro, $scope.estadoFiltro,
-			$scope.tipoFiltro, $scope.codigopadreFiltro
+			pagina,
+			$rootScope.ejefiscal,
+			$scope.codigoFiltro,
+			$scope.nombreFiltro,
+			$scope.estadoFiltro,
+			$scope.tipoFiltro,
+			$scope.codigopadreFiltro,
+			$scope.padreFiltro
 		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;

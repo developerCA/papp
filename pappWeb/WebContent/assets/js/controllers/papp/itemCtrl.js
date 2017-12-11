@@ -57,7 +57,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
         itemsFactory.traerItemsFiltro(
         		pagina, $rootScope.ejefiscal, $scope.codigo,
         		$scope.nombre, $scope.estado,
-        		$scope.tipo, $scope.codigopadre
+        		$scope.tipo, $scope.codigopadre, null
 		).then(function (resp) {
             if (resp.meta)
                 $scope.data = resp;

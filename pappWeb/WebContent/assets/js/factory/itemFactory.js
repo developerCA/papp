@@ -8,7 +8,7 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
         	return Restangular.allUrl("administrar/consultar/item/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio).getList();
         },
 
-        traerItemsFiltro: function (pagina, ejercicio, codigo, nombre, estado, tipo, codigopadre) {
+        traerItemsFiltro: function (pagina, ejercicio, codigo, nombre, estado, tipo, codigopadre, nombrepadre) {
 
             var url = "administrar/consultar/item/pagina=" + pagina+ "&ejerciciofiscalid=" + ejercicio;
             if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();
@@ -16,7 +16,8 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
             if (tipo != null && tipo != "") url += "&tipo=" + tipo;
             if (estado != null && estado != "") url += "&estado=" + estado;
             if (codigopadre != null && codigopadre != "") url += "&codigopadre=" + codigopadre;
-            console.log("FILTRAR: " + url);
+            if (nombrepadre != null && nombrepadre != "") url += "&nombrepadre=" + nombrepadre;
+            //console.log("FILTRAR: " + url);
             return Restangular.allUrl(url).getList();
 
         },
