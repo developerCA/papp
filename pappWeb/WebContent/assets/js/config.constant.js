@@ -134,8 +134,6 @@ app.constant('JS_REQUIRES', {
         'EspecialidadesFactory':'assets/js/factory/especialidadesFactory.js',
         'EstructuraOrganicaCtrl':'assets/js/controllers/papp/estructuraorganicaCtrl.js',
         'EstructuraOrganicaFactory':'assets/js/factory/estructuraorganicaFactory.js',
-        'IndicadoresCtrl':'assets/js/controllers/papp/indicadoresCtrl.js',
-        'IndicadoresFactory':'assets/js/factory/indicadoresFactory.js',
         'ModalUnidadMedidaCtrl':'assets/js/controllers/papp/modales/modalUnidadMedidaCtrl.js',   
         'ModalClasificacionCtrl':'assets/js/controllers/papp/modales/modalClasificacionCtrl.js',
         'ModalItemCtrl':'assets/js/controllers/papp/modales/modalItemCtrl.js',
@@ -205,6 +203,8 @@ app.constant('JS_REQUIRES', {
         'MetasFactory':'assets/js/factory/metasFactory.js',
         'FormulacionEstrategicaCtrl':'assets/js/controllers/papp/formulacionEstrategicaCtrl.js',
         'FormulacionEstrategicaFactory':'assets/js/factory/formulacionEstrategicaFactory.js',
+        'MantenerIndicadoresCtrl':'assets/js/controllers/papp/mantenerIndicadoresCtrl.js',
+        'MantenerIndicadoresFactory':'assets/js/factory/mantenerIndicadoresFactory.js',
 
     },
     //*** angularJS Modules

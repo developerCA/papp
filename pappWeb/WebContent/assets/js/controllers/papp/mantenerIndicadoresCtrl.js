@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","formulacionEstrategicaFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, formulacionEstrategicaFactory) {
+app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","mantenerIndicadoresFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, mantenerIndicadoresFactory) {
 
 	$scope.arbol={};
 	$scope.edicion=false;
@@ -13,7 +13,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		formulacionEstrategicaFactory.traerFormulacionEstrategica(
+		mantenerIndicadoresFactory.traerMantenerIndicadores(
 			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
@@ -31,7 +31,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			//console.log(node);
 		    node.iscargado=true;
 
-		    formulacionEstrategicaFactory.traerFormulacionEstrategicaHijos(
+		    mantenerIndicadoresFactory.traerMantenerIndicadoresHijos(
 	    		pagina,
 	    		$rootScope.ejefiscal,
 	    		node.id
@@ -63,7 +63,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		formulacionEstrategicaFactory.traerFormulacionEstrategicaFiltro(pagina,$scope.nombreFiltro).then(function(resp){
+		mantenerIndicadoresFactory.traerMantenerIndicadoresFiltro(pagina,$scope.nombreFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -77,7 +77,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	};
 	
 	$scope.nuevo=function(node){
-		formulacionEstrategicaFactory.traerFormulacionEstrategicaNuevoEstructura(
+		mantenerIndicadoresFactory.traerMantenerIndicadoresNuevoEstructura(
 			node.id,
 			$rootScope.ejefiscal,
 			node.tipo
@@ -103,7 +103,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	}
 	
 	$scope.editar=function(node){
-		formulacionEstrategicaFactory.traerFormulacionEstrategicaEditar(node.id).then(function(resp){
+		mantenerIndicadoresFactory.traerMantenerIndicadoresEditar(node.id).then(function(resp){
 			console.log(resp.json.objetivo);
 			if (resp.estado) {
 			   $scope.objeto=resp.json.objetivo;
@@ -188,7 +188,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	formulacionEstrategicaFactory.guardar($scope.objeto).then(function(resp){
+            	mantenerIndicadoresFactory.guardar($scope.objeto).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;

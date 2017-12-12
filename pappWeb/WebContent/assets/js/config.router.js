@@ -524,6 +524,18 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Formulación Estratégica'
         }
+    }).state('app.mantenerindicadores', {
+        url: "/mantenerindicadores",
+        templateUrl: "assets/views/papp/mantenerIndicadores.html",
+        resolve: loadSequence(
+        		'ngTable','MantenerIndicadoresCtrl','MantenerIndicadoresFactory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalMetasCtrl','MetasFactory'
+		),
+        title: 'Mantener Indicadores',
+        ncyBreadcrumb: {
+            label: 'Mantener Indicadores'
+        }
     }).state('app.planificacioninstitucional', {
         url: "/planificacioninstitucional",
         templateUrl: "assets/views/papp/planificacionInstitucional.html",
@@ -535,14 +547,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         title: 'Planificación Institucional',
         ncyBreadcrumb: {
             label: 'Planificación Institucional'
-        }
-    }).state('app.indicadores', {
-        url: "/indicadores",
-        templateUrl: "assets/views/papp/indicadores.html",
-        resolve: loadSequence('ngTable','IndicadoresCtrl','ModalUnidadMedidaCtrl','IndicadoresFactory','UnidadesMedidaFactory'),
-        title: 'Indicadores',
-        ncyBreadcrumb: {
-            label: 'Indicadores'
         }
     }).state('app.copiarcontenidoejerciciofiscal', {
         url: "/copiarcontenidoejerciciofiscal",
