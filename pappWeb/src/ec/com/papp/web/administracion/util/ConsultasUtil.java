@@ -23,6 +23,7 @@ import ec.com.papp.administracion.to.EscalarmuTO;
 import ec.com.papp.administracion.to.EspecialidadTO;
 import ec.com.papp.administracion.to.FuentefinanciamientoTO;
 import ec.com.papp.administracion.to.FuerzaTO;
+import ec.com.papp.administracion.to.FuerzaclasificacionTO;
 import ec.com.papp.administracion.to.GradoTO;
 import ec.com.papp.administracion.to.GradoescalaTO;
 import ec.com.papp.administracion.to.GradofuerzaTO;
@@ -911,7 +912,7 @@ public class ConsultasUtil {
 			else
 				itemTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
-				itemTO.setCodigo(parameters.get("codigo"));
+				itemTO.setCodigo(parameters.get("codigo")+"%");
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				itemTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
@@ -1853,6 +1854,12 @@ public class ConsultasUtil {
 				especialidadTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				especialidadTO.setEstado(parameters.get("estado"));
+			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
+				especialidadTO.setSigla(parameters.get("sigla"));
+			if(parameters.get("tipo")!=null && !parameters.get("tipo").equals(""))
+				especialidadTO.setTipo(parameters.get("tipo"));
+			if(parameters.get("fuerza")!=null && !parameters.get("fuerza").equals(""))
+				especialidadTO.setEspecialidadfuerzaid(Long.valueOf(parameters.get("fuerza")));
 			especialidadTO.setFuerza(new FuerzaTO());
 //			SearchResultTO<EspecialidadTO> resultado=UtilSession.adminsitracionServicio.transObtenerEspecialidadPaginado(especialidadTO);
 			Collection<EspecialidadTO> resultado=UtilSession.adminsitracionServicio.transObtenerEspecialidad(especialidadTO);
@@ -1977,6 +1984,53 @@ public class ConsultasUtil {
 		}
 		return jsonObject;
 	}
+	
+	
+	/** Metodo que consulta los escalarmu paginados y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaFuerzaclasificacionPaginado(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+		String campo="";
+		FuerzaclasificacionTO fuerzaclasificacionTO=new FuerzaclasificacionTO();
+		try{
+//			int pagina=1;
+//			if(parameters.get("pagina")!=null)		
+//				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+//			int filas=20;
+//			if(parameters.get("filas")!=null)
+//				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+//			int primero=(pagina*filas)-filas;
+			campo="codigo";
+			String[] columnas={campo};
+			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
+				campo=parameters.get("sidx");
+//			escalarmuTO.setFirstResult(primero);
+//			escalarmuTO.setMaxResults(filas);
+			String[] orderBy = columnas;
+			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
+				fuerzaclasificacionTO.setOrderByField(OrderBy.orderDesc(orderBy));
+			else
+				fuerzaclasificacionTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			if(parameters.get("fuerza")!=null && !parameters.get("fuerza").equals(""))
+				fuerzaclasificacionTO.getId().setFuerzaid(Long.valueOf(parameters.get("fuerza")));
+			fuerzaclasificacionTO.setClasificacionTO(new ClasificacionTO());
+			Collection<FuerzaclasificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerzaclasificacion(fuerzaclasificacionTO);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,fuerzaclasificacionTO.getJsonConfig()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+	
 	
 	/**
 	* Metodo que consulta los gradoescala paginados y arma el json para mostrarlos en la grilla

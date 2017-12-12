@@ -998,7 +998,13 @@ public class AdministracionController {
 				if(grados.size()>0)
 					gradoesfuerza=(GradofuerzaTO)grados.iterator().next();
 				log.println("escalarmu encontrados: " + grados.size());
-				if(grados.size()==0 || (grados.size()>0 && gradoesfuerza.getId().longValue()==gradofuerzaTO.getId().longValue())){
+				log.println("grado: " + gradoesfuerza.getGradofuerzafuerzaid() + "-" + gradoesfuerza.getGradofuerzafuerzaid());
+				log.println("fuerza: " + gradoesfuerza.getGradofuerzagradoid() + "-" + gradofuerzaTO.getGradofuerzagradoid());
+				if(grados.size()>0 && (gradofuerzaTO.getId()==null && (gradoesfuerza.getGradofuerzafuerzaid().longValue()==gradofuerzaTO.getGradofuerzafuerzaid().longValue() || gradoesfuerza.getGradofuerzagradoid().longValue()==gradofuerzaTO.getGradofuerzagradoid().longValue()))){
+					mensajes.setMsg("Ya existe un registro creado para el grado seleccionado");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else {
 					log.println("entro a grabar");
 					//pregunto si ya existe el codigo en el nivel actual
 					GradoescalaTO gradoescalaTO3=new GradoescalaTO();
@@ -1027,10 +1033,6 @@ public class AdministracionController {
 						id=gradofuerzaTO.getNpid().toString();
 //						jsonObject.put("gradoescala", (JSONObject)JSONSerializer.toJSON(gradofuerzaTO,gradofuerzaTO.getJsonConfig()));
 					}
-				}
-				else{
-					mensajes.setMsg("Ya existe un registro creado para el grado seleccionado");
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				
 				
@@ -2029,6 +2031,11 @@ public class AdministracionController {
 			//Escalarmu
 			else if(clase.equals("escalarmu")){
 				jsonObject=ConsultasUtil.consultaEscalarmuPaginado(parameters, jsonObject);
+			}
+			
+			//Fuerzaclasificacion
+			else if(clase.equals("fuerzaclasificacion")){
+				jsonObject=ConsultasUtil.consultaFuerzaclasificacionPaginado(parameters, jsonObject);
 			}
 
 			//Gradoescala
