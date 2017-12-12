@@ -271,7 +271,7 @@
 								            ng-model="objeto.npCodigoMeta">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
-								                ng-click="abrirMetaCodigo()">
+								                ng-click="abrirMetas()">
 								                <i class="fa fa-search"></i>
 								                Seleccione
 								            </button>
@@ -287,8 +287,7 @@
 								    </span>
 								</div>
 								
-								<div class="form-group"
-								    ng-class="{'has-error':Form.npDescripcionMeta.$dirty && Form.npDescripcionMeta.$invalid, 'has-success':Form.npDescripcionMeta.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        Meta Descripci&oacute;n
 								        <span class="symbol required"></span>
@@ -296,14 +295,6 @@
 								    <input type="text" placeholder="Seleccione una Meta"
 								        class="form-control" name="npDescripcionMeta" ng-model="objeto.npDescripcionMeta"
 								        required ng-disabled="true">
-								    <span class="error text-small block"
-								        ng-if="Form.npDescripcionMeta.$dirty && Form.npDescripcionMeta.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.npDescripcionMeta.$valid">
-								        Listo
-								    </span>
 								</div>
 								
 								<div class="form-group"

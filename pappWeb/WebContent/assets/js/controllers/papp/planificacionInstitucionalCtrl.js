@@ -145,6 +145,26 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 		});
 	};
 
+	$scope.abrirMetas = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalMetas.html',
+			controller : 'ModalMetasController',
+			size : 'lg',
+			resolve : {
+				ejefiscal : function() {
+					return $rootScope.ejefiscal;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.objetivometaid = obj.id;
+			$scope.objeto.npCodigoMeta = obj.codigo;
+			$scope.objeto.npDescripcionMeta = obj.nombre;
+		}, function() {
+		});
+	};
+
 	$scope.form = {
         submit: function (form) {
             var firstError = null;

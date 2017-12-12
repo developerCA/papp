@@ -517,7 +517,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "assets/views/papp/planificacionInstitucional.html",
         resolve: loadSequence(
         		'ngTable','PlanificacionInstitucionalCtrl','PlanificacionInstitucionalFactory',
-        		'ModalInstitucionCtrl','InstitucionFactory'
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalMetasCtrl','MetasFactory'
 		),
         title: 'Planificación Institucional',
         ncyBreadcrumb: {

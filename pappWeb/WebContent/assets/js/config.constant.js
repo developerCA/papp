@@ -201,6 +201,8 @@ app.constant('JS_REQUIRES', {
         'FuenteFinanciamientoFactory':'assets/js/factory/fuenteFinanciamientoFactory.js',
         'PlanificacionInstitucionalCtrl':'assets/js/controllers/papp/planificacionInstitucionalCtrl.js',
         'PlanificacionInstitucionalFactory':'assets/js/factory/planificacionInstitucionalFactory.js',
+        'ModalMetasCtrl':'assets/js/controllers/papp/modales/modalMetasCtrl.js',
+        'MetasFactory':'assets/js/factory/metasFactory.js',
 
     },
     //*** angularJS Modules
