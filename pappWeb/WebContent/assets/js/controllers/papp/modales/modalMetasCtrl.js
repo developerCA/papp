@@ -4,8 +4,9 @@ app.controller('ModalMetasController', [ "$scope","$uibModalInstance","ejefiscal
 	function($scope,$uibModalInstance,ejefiscal,$uibModal,SweetAlert,$filter, ngTableParams, MetasFactory) {
 
 	$scope.codigoFiltro=null;
-	$scope.nombreFiltro=null;
-	$scope.estadoFiltro=null;
+	$scope.descripcionFiltro=null;
+	$scope.codigoPFiltro=null;
+	$scope.descripcionPFiltro=null;
 
 	$scope.edicion=false;
 	$scope.guardar=false;
@@ -53,8 +54,9 @@ app.controller('ModalMetasController', [ "$scope","$uibModalInstance","ejefiscal
 			pagina,
 			ejefiscal,
 			$scope.codigoFiltro,
-			$scope.nombreFiltro,
-			$scope.estadoFiltro
+			$scope.descripcionFiltro,
+			$scope.codigoPFiltro,
+			$scope.descripcionPFiltro
 		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
@@ -63,8 +65,9 @@ app.controller('ModalMetasController', [ "$scope","$uibModalInstance","ejefiscal
 
 	$scope.limpiar=function(){
 		$scope.codigoFiltro=null;
-		$scope.nombreFiltro=null;
-		$scope.estadoFiltro=null;
+		$scope.descripcionFiltro=null;
+		$scope.codigoPFiltro=null;
+		$scope.descripcionPFiltro=null;
 
 		$scope.consultar();
 	};

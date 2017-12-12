@@ -160,7 +160,9 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 			//console.log(obj);
 			$scope.objeto.objetivometaid = obj.id;
 			$scope.objeto.npCodigoMeta = obj.codigo;
-			$scope.objeto.npDescripcionMeta = obj.nombre;
+			$scope.objeto.npDescripcionMeta = obj.descripcion;
+			$scope.objeto.npCodigoPolitica = obj.codigopadre;
+			$scope.objeto.npDescripcionPolitica = obj.nombrepadre;
 		}, function() {
 		});
 	};
@@ -190,6 +192,8 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
         			 if (resp.estado){
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;
+	 		             $scope.edicionEstrategico=false;
+	 		             $scope.edicionOperativo=false;
 	 		             $scope.objeto={};
 	 		             $scope.limpiar();
 	 		             SweetAlert.swal("Planificaci&oacute;n Institucional!", "Registro grabado satisfactoriamente!", "success");

@@ -8,12 +8,13 @@ app.factory("MetasFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl("planificacion/consultar/metas/pagina="+pagina+"&plannacionalejerfiscalid="+ejercicio).getList();
 		},
 
-		traerMetasFiltro : function(pagina, ejercicio, codigo, nombre, estado) {
+		traerMetasFiltro : function(pagina, ejercicio, codigo, descripcion, codigop, descripcionp) {
 			var url = "planificacion/consultar/metas/pagina="+pagina+"&plannacionalejerfiscalid="+ejercicio;
 
 			if (codigo!=null && codigo != "") url += "&codigo=" + codigo;
-			if (nombre!=null && nombre != "") url += "&descripcion=" + nombre;
-			if (estado!=null && estado != "") url += "&estado=" + estado;
+			if (descripcion!=null && descripcion != "") url += "&descripcion=" + descripcion;
+			if (codigop!=null && codigop != "") url += "&codigopadre=" + codigop;
+			if (descripcionp!=null && descripcionp != "") url += "&nombrepadre=" + descripcionp;
 
 			return Restangular.allUrl(url).getList();
 		},

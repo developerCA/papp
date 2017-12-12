@@ -19,7 +19,7 @@
 			<div class="panel panel-white">
 
 				<div class="panel-body" ng-show="!edicion && !edicionEstrategico && !edicionOperativo">
-
+<!--
 					<div class="row">
 						<div class="col-md-12">
 							<a  class="btn btn-sm btn-dark-azure" ng-click="nuevo(null);">
@@ -29,7 +29,7 @@
 							<br><br>
 						</div>
 					</div>
-
+-->
 					<div class="row">
 						<div class="col-md-12">
 							<div ui-tree="treeOptions" id="tree-root"
@@ -42,7 +42,7 @@
 							</div>
 						</div>
 					</div>
-
+<!--
 					<div class="row">
 						<div class="col-md-12">
 							<div class="pull-right">
@@ -54,6 +54,7 @@
 							</div>
 						</div>
 					</div>
+-->
 				</div>
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
@@ -297,8 +298,7 @@
 								        required ng-disabled="true">
 								</div>
 								
-								<div class="form-group"
-								    ng-class="{'has-error':Form.npCodigoPolitica.$dirty && Form.npCodigoPolitica.$invalid, 'has-success':Form.npCodigoPolitica.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        Pol&iacute;tica C&oacute;digo
 								        <span class="symbol required"></span>
@@ -306,18 +306,9 @@
 								    <input type="text" placeholder="Seleccione una Meta"
 								        class="form-control" name="npCodigoPolitica" ng-model="objeto.npCodigoPolitica"
 								        required ng-disabled="true">
-								    <span class="error text-small block"
-								        ng-if="Form.npCodigoPolitica.$dirty && Form.npCodigoPolitica.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.npCodigoPolitica.$valid">
-								        Listo
-								    </span>
 								</div>
 								
-								<div class="form-group"
-								    ng-class="{'has-error':Form.npDescripcionPolitica.$dirty && Form.npDescripcionPolitica.$invalid, 'has-success':Form.npDescripcionPolitica.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        Pol&iacute;tica Descripci&oacute;n
 								        <span class="symbol required"></span>
@@ -325,14 +316,6 @@
 								    <input type="text" placeholder="Seleccione una Meta"
 								        class="form-control" name="npDescripcionPolitica" ng-model="objeto.npDescripcionPolitica"
 								        required ng-disabled="true">
-								    <span class="error text-small block"
-								        ng-if="Form.npDescripcionPolitica.$dirty && Form.npDescripcionPolitica.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.npDescripcionPolitica.$valid">
-								        Listo
-								    </span>
 								</div>
 
 								<div class="form-group"
