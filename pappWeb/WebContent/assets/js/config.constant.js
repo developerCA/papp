@@ -203,6 +203,8 @@ app.constant('JS_REQUIRES', {
         'PlanificacionInstitucionalFactory':'assets/js/factory/planificacionInstitucionalFactory.js',
         'ModalMetasCtrl':'assets/js/controllers/papp/modales/modalMetasCtrl.js',
         'MetasFactory':'assets/js/factory/metasFactory.js',
+        'FormulacionEstrategicaCtrl':'assets/js/controllers/papp/formulacionEstrategicaCtrl.js',
+        'FormulacionEstrategicaFactory':'assets/js/factory/formulacionEstrategicaFactory.js',
 
     },
     //*** angularJS Modules

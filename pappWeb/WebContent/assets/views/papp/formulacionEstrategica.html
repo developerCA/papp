@@ -1,0 +1,510 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+	<h4 class="mainTitle no-margin">Formulaci&oacute;n Estrat&eacute;gica</h4>
+FormulacionEstrategica
+	<div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: SIMPLE TABLE WITH PAGINATION -->
+<div class="container-fluid container-fullw"
+	ng-controller="FormulacionEstrategicaController" ng-init="consultar()">
+
+	<div class="row">
+		<div class="col-md-12"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="panel panel-white">
+
+				<div class="panel-body" ng-show="!edicion && !edicionEstrategico && !edicionOperativo">
+<!--
+					<div class="row">
+						<div class="col-md-12">
+							<a  class="btn btn-sm btn-dark-azure" ng-click="nuevo(null);">
+								<i class="fa fa-plus-square"></i>
+								Agregar
+							</a>
+							<br><br>
+						</div>
+					</div>
+-->
+					<div class="row">
+						<div class="col-md-12">
+							<div ui-tree="treeOptions" id="tree-root"
+								data-nodrop-enabled="true" data-drag-enabled="true">
+								<ol ui-tree-nodes ng-model="arbol">
+									<li ng-repeat="node in arbol" ui-tree-node
+										ng-include="'nodes_renderer.html'">
+									</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+<!--
+					<div class="row">
+						<div class="col-md-12">
+							<div class="pull-right">
+								<br>
+								<a  class="btn btn-sm btn-dark-azure" ng-click="nuevo();">
+									<i class="fa fa-plus-square"></i>
+									Agregar
+								</a>
+							</div>
+						</div>
+					</div>
+-->
+				</div>
+
+				<div ng-show="edicion" class="panel-body" id="panel1">
+
+					<div class="panel-heading">
+						<h5 class="panel-title">Plan Nacional</h5>
+					</div>
+
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+						<div class="row">
+							<div class="col-md-6">
+
+<div class="form-group"
+    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+    <label class="control-label">
+        C&oacute;digo
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Escriba un c&oacute;digo"
+        class="form-control" name="codigo" ng-model="objeto.codigo" ng-pattern="/^[0-9]*$/"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.codigo.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
+    <label class="control-label">
+        Descripci&oacute;n
+        <span class="symbol required"></span>
+    </label>
+    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
+        class="form-control" ng-model="objeto.descripcion"
+        required ng-disabled="true">
+    </textarea>
+    <span class="error text-small block"
+        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.descripcion.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group has-success">
+    <label class="control-label">
+        Tipo
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" class="form-control"
+    	ng-disabled="true" ng-model="objeto.npTipo">
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+    <label class="control-label">
+        Estado
+        <span class="symbol required"></span>
+    </label>
+    <select class="form-control" name="estado"
+        ng-model="objeto.estado" required ng-disabled="true">
+        <option value="A" ng-selected="selected">Activo</option>
+        <option value="I">Inactivo</option>
+    </select>
+    <span class="error text-small block"
+        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.estado.$valid">
+        Listo
+    </span>
+</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">
+										Regresar
+									</button>
+								</div>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+
+				<div ng-show="edicionEstrategico" class="panel-body" id="panel1">
+
+					<div class="panel-heading">
+						<h5 class="panel-title">Estrategico</h5>
+					</div>
+
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+						<div class="row">
+							<div class="col-md-6">
+
+								<div class="form-group"
+								    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+								    <label class="control-label">
+								        C&oacute;digo
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Escriba un c&oacute;digo"
+								        class="form-control" name="codigo" ng-model="objeto.codigo" ng-pattern="/^[0-9]*$/"
+								        required>
+								    <span class="error text-small block"
+								        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.codigo.$valid">
+								        Listo
+								    </span>
+								</div>
+
+								<div class="form-group"
+								    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
+								    <label class="control-label">
+								        Descripci&oacute;n
+								        <span class="symbol required"></span>
+								    </label>
+								    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
+								        class="form-control" ng-model="objeto.descripcion"
+								        required>
+								    </textarea>
+								    <span class="error text-small block"
+								        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.descripcion.$valid">
+								        Listo
+								    </span>
+								</div>
+
+								<div class="form-group has-success">
+								    <label class="control-label">
+								        Tipo
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" class="form-control"
+								    	ng-disabled="true" ng-model="objeto.npTipo">
+								</div>
+
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npCodigoInstitucion.$dirty && Form.npCodigoInstitucion.$invalid, 'has-success':Form.npCodigoInstitucion.$valid}">
+								    <label class="control-label">
+								        Instituci&oacute;n C&oacute;digo
+								        <span class="symbol required"></span>
+								    </label>
+								    <div class="input-group">
+								        <input type="text" placeholder="Escriba un instituci&oacute;n c&oacute;digo"
+								            class="form-control" name="npCodigoInstitucion" ng-disabled="true"
+								            ng-model="objeto.npCodigoInstitucion">
+								        <span class="input-group-btn">
+								            <button type="button" class="btn btn-primary"
+								                ng-click="abrirInstitucion()">
+								                <i class="fa fa-search"></i>
+								                Seleccione
+								            </button>
+								        </span>
+								    </div>
+								    <span class="error text-small block"
+								        ng-if="Form.npCodigoInstitucion.$dirty && Form.npCodigoInstitucion.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npCodigoInstitucion.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npNombreInstitucion.$dirty && Form.npNombreInstitucion.$invalid, 'has-success':Form.npNombreInstitucion.$valid}">
+								    <label class="control-label">
+								        Instituci&oacute;n Nombre
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione una Instituci&oacute;n"
+								        class="form-control" name="npNombreInstitucion" ng-model="objeto.npNombreInstitucion"
+								        required ng-disabled="true">
+								    <span class="error text-small block"
+								        ng-if="Form.npNombreInstitucion.$dirty && Form.npNombreInstitucion.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npNombreInstitucion.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npCodigoMeta.$dirty && Form.npCodigoMeta.$invalid, 'has-success':Form.npCodigoMeta.$valid}">
+								    <label class="control-label">
+								        Meta C&oacute;digo
+								        <span class="symbol required"></span>
+								    </label>
+								    <div class="input-group">
+								        <input type="text" placeholder="Escriba un meta c&oacute;digo"
+								            class="form-control" name="npCodigoMeta" ng-disabled="true"
+								            ng-model="objeto.npCodigoMeta">
+								        <span class="input-group-btn">
+								            <button type="button" class="btn btn-primary"
+								                ng-click="abrirMetas()">
+								                <i class="fa fa-search"></i>
+								                Seleccione
+								            </button>
+								        </span>
+								    </div>
+								    <span class="error text-small block"
+								        ng-if="Form.npCodigoMeta.$dirty && Form.npCodigoMeta.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npCodigoMeta.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group has-success">
+								    <label class="control-label">
+								        Meta Descripci&oacute;n
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione una Meta"
+								        class="form-control" name="npDescripcionMeta" ng-model="objeto.npDescripcionMeta"
+								        required ng-disabled="true">
+								</div>
+								
+								<div class="form-group has-success">
+								    <label class="control-label">
+								        Pol&iacute;tica C&oacute;digo
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione una Meta"
+								        class="form-control" name="npCodigoPolitica" ng-model="objeto.npCodigoPolitica"
+								        required ng-disabled="true">
+								</div>
+								
+								<div class="form-group has-success">
+								    <label class="control-label">
+								        Pol&iacute;tica Descripci&oacute;n
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione una Meta"
+								        class="form-control" name="npDescripcionPolitica" ng-model="objeto.npDescripcionPolitica"
+								        required ng-disabled="true">
+								</div>
+
+								<div class="form-group"
+								    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+								    <label class="control-label">
+								        Estado
+								        <span class="symbol required"></span>
+								    </label>
+								    <select class="form-control" name="estado"
+								        ng-model="objeto.estado" required>
+								        <option value="A" ng-selected="selected">Activo</option>
+								        <option value="I">Inactivo</option>
+								    </select>
+								    <span class="error text-small block"
+								        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.estado.$valid">
+								        Listo
+								    </span>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<span ng-if="guardar">
+										<button type="submit" class="btn btn-primary">Guardar
+										</button>
+									</span>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">Cancelar</button>
+								</div>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+
+				<div ng-show="edicionOperativo" class="panel-body" id="panel1">
+
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							{{ objeto.npTipo }}
+						</h5>
+					</div>
+
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+						<div class="row">
+							<div class="col-md-6">
+
+								<div class="form-group"
+								    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+								    <label class="control-label">
+								        C&oacute;digo
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Escriba un c&oacute;digo"
+								        class="form-control" name="codigo" ng-model="objeto.codigo" ng-pattern="/^[0-9]*$/"
+								        required>
+								    <span class="error text-small block"
+								        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.codigo.$valid">
+								        Listo
+								    </span>
+								</div>
+
+								<div class="form-group"
+								    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
+								    <label class="control-label">
+								        Descripci&oacute;n
+								        <span class="symbol required"></span>
+								    </label>
+								    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
+								        class="form-control" ng-model="objeto.descripcion"
+								        required>
+								    </textarea>
+								    <span class="error text-small block"
+								        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.descripcion.$valid">
+								        Listo
+								    </span>
+								</div>
+
+								<div class="form-group has-success">
+								    <label class="control-label">
+								        Tipo
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" class="form-control"
+								    	ng-disabled="true" ng-model="objeto.npTipo">
+								</div>
+
+								<div class="form-group"
+								    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+								    <label class="control-label">
+								        Estado
+								        <span class="symbol required"></span>
+								    </label>
+								    <select class="form-control" name="estado"
+								        ng-model="objeto.estado" required>
+								        <option value="A" ng-selected="selected">Activo</option>
+								        <option value="I">Inactivo</option>
+								    </select>
+								    <span class="error text-small block"
+								        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.estado.$valid">
+								        Listo
+								    </span>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<span ng-if="guardar">
+										<button type="submit" class="btn btn-primary">Guardar
+										</button>
+									</span>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">Cancelar</button>
+								</div>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/ng-template" id="nodes_renderer.html">
+<div ui-tree-handle class="tree-node tree-node-content">
+	<table width="100%">
+		<tr>
+			<td width="1%">
+				<div class="col-md-12">
+				    <a class="btn btn-default btn-xs"  data-nodrag ng-click="toggle(this);cargarHijos(node)">
+						<span class="glyphicon" ng-class="{
+					       	'glyphicon-chevron-right': collapsed,
+					       	'glyphicon-chevron-down': !collapsed
+					    }">
+						</span>
+					</a>
+				</div>
+			</td>
+			<td width="100%">
+	    		{{node.codigo}} - {{node.title}}
+			</td>
+			<td width="1%">
+				<table width="71px">
+					<tr>
+						<td width="34px">
+							<a ng-show="node.tipo!='F'" uib-tooltip="Agregar" class="btn btn-info btn-sm" data-nodrag
+								ng-click="nuevo(node);">
+								<span class="glyphicon glyphicon-plus"></span>
+							</a>
+						</td>
+						<td width="3px"></td>
+						<td width="34px">
+	  						<a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag
+								ng-click="editar(node);">
+								<span class="fa fa-pencil"></span>
+							</a>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</div>
+<ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+</ol>
+</script>
