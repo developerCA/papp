@@ -529,8 +529,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "assets/views/papp/mantenerIndicadores.html",
         resolve: loadSequence(
         		'ngTable','MantenerIndicadoresCtrl','MantenerIndicadoresFactory',
-        		'ModalInstitucionCtrl','InstitucionFactory',
-        		'ModalMetasCtrl','MetasFactory'
+        		'ModalUnidadMedidaCtrl','UnidadesMedidaFactory'
 		),
         title: 'Mantener Indicadores',
         ncyBreadcrumb: {

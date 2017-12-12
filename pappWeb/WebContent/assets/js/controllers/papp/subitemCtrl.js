@@ -117,10 +117,10 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 		});
 
 	};
-	
+
 	$scope.buscarUnidadMedida = function(){
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalUnidades.html',
+			templateUrl : 'assets/views/papp/modal/modalUnidades.html',
 			controller : 'ModalUnidadMedidaController',
 			size : 'lg'
 		});
@@ -128,12 +128,8 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 			console.log(obj);
 			$scope.objeto.subitemunidadmedidaid = obj.id;
 			$scope.objeto.npunidadnombre = obj.nombre;		
-			
-			
 		}, function() {
-			
 		});
-
 	};
 
     $scope.form = {

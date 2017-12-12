@@ -30,12 +30,6 @@ app.factory("mantenerIndicadoresFactory", [ "Restangular", function(Restangular)
 		    return Restangular.allUrl(url).customGET();
 		},
 
-		traerMantenerIndicadoresNuevoEstructura : function(padreid, ejerciciofiscalid, tipopadre) {
-			var url = "planificacion/nuevo/indicador/"+padreid+"/"+ejerciciofiscalid+"/"+tipopadre;
-
-		    return Restangular.allUrl(url).customGET();
-		},
-
 		guardar:function(objeto){
 			var url = "planificacion/indicador/";
 			return Restangular.allUrl(url).customPOST(objeto);

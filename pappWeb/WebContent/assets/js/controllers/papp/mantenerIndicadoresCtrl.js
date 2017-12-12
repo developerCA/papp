@@ -6,6 +6,8 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	$scope.arbol={};
 	$scope.edicion=false;
 	$scope.guardar=false;
+	$scope.nuevoar=false;
+	$scope.padreid=0;
 	$scope.objeto={};
 	$scope.objetolista={};
 	
@@ -37,7 +39,10 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	    		node.id
     		).then(function(resp){
 				var nodes=JSON.parse(JSON.stringify(resp).split('"nombre":').join('"title":'));
-				node.nodes=nodes;
+				for (var i = 0; i < nodes.length; i++) {
+					nodes[i].indicadorpadreid = node.id;
+				}
+    			node.nodes=nodes;
 			})
 	}
 
@@ -77,92 +82,75 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	};
 	
 	$scope.nuevo=function(node){
-		mantenerIndicadoresFactory.traerMantenerIndicadoresNuevoEstructura(
-			node.id,
-			$rootScope.ejefiscal,
-			node.tipo
-		).then(function(resp){
-			$scope.objeto=resp.json.objetivo;
-
-			console.log($scope.objeto);
-			$scope.guardar=true;
-			switch ($scope.objeto.tipo) {
-				case "P": //Plan nacional
-					$scope.edicion=true;
-					break;
-				case "E": //Estrategico
-					$scope.edicionEstrategico=true;
-					break;
-				case "O": //Operativo
-				case "F": //Fuerzas
-				default:
-					$scope.edicionOperativo=true;
-					break;
+		$scope.padreid = 0;
+		if (node != null) {
+			if (node.indicadorpadreid == undefined) {
+				$scope.padreid = node.id;
+			} else {
+				$scope.padreid = node.indicadorpadreid;
 			}
-		})
+		}
+		//console.log($scope.padreid);
+		//console.log(node);
+		$scope.objeto = {
+			id: null,
+			indicadorejerciciofiscalid: $rootScope.ejefiscal,
+			indicadorpadreid: $scope.padreid,
+			indicadorpadreid: null,
+			eriodicidad: null,
+			estado: "A"
+		};
+		$scope.objeto.indicadorpadreid = $scope.padreid;
+		//console.log($scope.objeto);
+		$scope.objetolista = [];
+		$scope.agregarDetalle();
+
+		$scope.guardar=true;
+		$scope.edicion=true;
+		$scope.nuevoar=true;
 	}
-	
+
+	$scope.agregarDetalle=function(){
+		var obj = {
+			id: {
+				id: null,
+				metodoid: null
+			},
+			estado: null
+		};
+		$scope.objetolista.push(obj);
+	}
+
+	$scope.removerDetalle=function(index){
+		$scope.objetolista.splice(index,1);
+	}
+
 	$scope.editar=function(node){
 		mantenerIndicadoresFactory.traerMantenerIndicadoresEditar(node.id).then(function(resp){
-			console.log(resp.json.objetivo);
+			console.log(resp.json);
 			if (resp.estado) {
-			   $scope.objeto=resp.json.objetivo;
+			   $scope.objeto=resp.json.indicador;
+			   $scope.objetolista=resp.json.indicadormetodo;
 			}
 			$scope.guardar=true;
-			switch ($scope.objeto.tipo) {
-				case "P": //Plan nacional
-					$scope.edicion=true;
-					break;
-				case "E": //Estrategico
-					$scope.edicionEstrategico=true;
-					break;
-				case "O": //Operativo
-				case "F": //Fuerzas
-				default:
-					$scope.edicionOperativo=true;
-					break;
-			}
+			$scope.edicion=true;
+			$scope.nuevoar=false;
 		})
 	};
 
-	$scope.abrirInstitucion = function() {
+	$scope.abrirUnidadMedida = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalInstitucion.html',
-			controller : 'ModalInstitucionController',
-			size : 'lg',
-			resolve : {
-				ejefiscal : function() {
-					return $rootScope.ejefiscal;
-				}
-			}
+			templateUrl : 'assets/views/papp/modal/modalUnidades.html',
+			controller : 'ModalUnidadMedidaController',
+			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.objetivoinstitucionid = obj.id;
-			$scope.objeto.npCodigoInstitucion = obj.codigo;
-			$scope.objeto.npNombreInstitucion = obj.nombre;
-		}, function() {
-		});
-	};
-
-	$scope.abrirMetas = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalMetas.html',
-			controller : 'ModalMetasController',
-			size : 'lg',
-			resolve : {
-				ejefiscal : function() {
-					return $rootScope.ejefiscal;
-				}
-			}
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			$scope.objeto.objetivometaid = obj.id;
-			$scope.objeto.npCodigoMeta = obj.codigo;
-			$scope.objeto.npDescripcionMeta = obj.descripcion;
-			$scope.objeto.npCodigoPolitica = obj.codigopadre;
-			$scope.objeto.npDescripcionPolitica = obj.nombrepadre;
+			$scope.objeto.indicadorunidadmedidaid = obj.id;
+			$scope.objeto.npCodigounidad = obj.codigo;
+			$scope.objeto.npNombreunidad = obj.nombre;
+			$scope.objeto.npCodigogrupo = obj.npCodigogrupo;
+			$scope.objeto.npNombregrupo = obj.npNombregrupo;
 		}, function() {
 		});
 	};
@@ -188,17 +176,17 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	mantenerIndicadoresFactory.guardar($scope.objeto).then(function(resp){
+            	$scope.obj = $scope.objeto;
+            	$scope.obj.indicadormetodo = $scope.objetolista;
+            	mantenerIndicadoresFactory.guardar($scope.obj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;
-	 		             $scope.edicionEstrategico=false;
-	 		             $scope.edicionOperativo=false;
 	 		             $scope.objeto={};
 	 		             $scope.limpiar();
-	 		             SweetAlert.swal("Formulaci&oacute;n Estrat&eacute;gica!", "Registro grabado satisfactoriamente!", "success");
+	 		             SweetAlert.swal("Formulacion Estrategica!", "Registro grabado satisfactoriamente!", "success");
         			 }else{
-	 		             SweetAlert.swal("Formulaci&oacute;n Estrat&eacute;gica!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal("Formulacion Estrategica!", resp.mensajes.msg, "error");
         			 }
         		})
             }
@@ -207,8 +195,6 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
             $scope.myModel = angular.copy($scope.master);
             form.$setPristine(true);
             $scope.edicion=false;
-            $scope.edicionEstrategico=false;
-            $scope.edicionOperativo=false;
             $scope.objeto={};
         }
     };
