@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","especialidadesFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, especialidadesFactory) {
+app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","especialidadesFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, especialidadesFactory) {
 
 	$scope.codigo=null;
 	$scope.nombre=null;
@@ -87,7 +88,7 @@ app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","
 	$scope.abrirFuerza = function(index) {
 		//console.log("aqui");
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalFuerza.html',
+			templateUrl : 'assets/views/papp/modal/modalFuerza.html',
 			controller : 'ModalFuerzaController',
 			size : 'lg'
 		});

@@ -517,8 +517,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "assets/views/papp/formulacionEstrategica.html",
         resolve: loadSequence(
         		'ngTable','FormulacionEstrategicaCtrl','FormulacionEstrategicaFactory',
-        		'ModalInstitucionCtrl','InstitucionFactory',
-        		'ModalMetasCtrl','MetasFactory'
+        		'ModalObjetivosCtrl','ObjetivosFactory',
+        		'ModalFuerzaCtrl','FuerzaFactory',
+        		'ModalSocioNegocioCtrl','SociosNegocioFactory',
+        		'ModalIndicadoresCtrl','IndicadoresFactory'
 		),
         title: 'Formulación Estratégica',
         ncyBreadcrumb: {

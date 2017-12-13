@@ -102,12 +102,12 @@ app.controller('GradoFuerzaController', [ "$scope","$rootScope","$uibModal","Swe
 
 	$scope.abrirFuerza = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalFuerza.html',
+			templateUrl : 'assets/views/papp/modal/modalFuerza.html',
 			controller : 'ModalFuerzaController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.gradofuerzafuerzaid = obj.id;
 			$scope.objeto.npcodigofuerza = obj.codigo;
 			$scope.objeto.npnombrefuerza = obj.nombre;
