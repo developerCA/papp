@@ -14,7 +14,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
     $scope.objeto = null;
     $scope.idpadreFiltro
     $scope.data=[];
-    var pagina = 1;
+    $scope.pagina = 1;
 
   
 
@@ -22,45 +22,45 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 
         $scope.data = [];
 
-        itemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
-            if (resp.meta)
-                $scope.data = resp;
-            console.log($scope.data);
+               	
+        
+        itemsFactory.traerItemsCustom($scope.pagina, $rootScope.ejefiscal).then(function (resp) {
+        	console.log(resp);
+            $scope.dataset = resp.json.result;
+            $scope.total=resp.json.total.valor;
+            console.log($scope.total);
+            
         });
 
     };
 
-    $scope.$watch('data', function () {
-
-    	
-        $scope.tableParams = new ngTableParams({
-            page: 1, // show first page
-            count: 5, // count per page
-            filter: {}
-        }, {
-            total: $scope.data.length, // length of data
-            getData: function ($defer, params) {
-                var orderedData = params.filter() ? $filter('filter')(
-						$scope.data, params.filter()) : $scope.data;
-                $scope.gruposMedida = orderedData.slice(
-						(params.page() - 1) * params.count(), params
-								.page()
-								* params.count());
-                params.total(orderedData.length);
-                $defer.resolve($scope.gruposMedida);
-            }
-        });
-    });
+    $scope.pageChanged = function() {
+        console.log($scope.pagina);
+        if ($scope.aplicafiltro){
+        	$scope.filtrar();
+        }else{
+        	$scope.consultar();	
+        }
+        
+      };       
+ 
+    $scope.filtrarUnico=function(){
+    	$scope.pagina=1;
+    	$scope.filtrar();
+    }  
 
     $scope.filtrar = function () {
-        $scope.data = [];
-        itemsFactory.traerItemsFiltro(
-        		pagina, $rootScope.ejefiscal, $scope.codigo,
+        $scope.dataset = [];
+        $scope.aplicafiltro=true;
+        itemsFactory.traerItemsFiltroCustom(
+        		$scope.pagina, $rootScope.ejefiscal, $scope.codigo,
         		$scope.nombre, $scope.estado,
         		$scope.tipo, $scope.codigopadre, null
 		).then(function (resp) {
-            if (resp.meta)
-                $scope.data = resp;
+           
+			$scope.dataset = resp.json.result;
+            $scope.total=resp.json.total.valor;
+            
         })
     }
 
@@ -78,6 +78,8 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
         $scope.estado = null;
         $scope.codigopadre = null;
         $scope.idpadreFiltro=null;
+        $scope.aplicafiltro=false;
+        $scope.pagina=1;
         $scope.consultar();
     };
 

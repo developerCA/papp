@@ -83,6 +83,7 @@ app.config(["RestangularProvider", function(RestangularProvider) {
 	      // .. to look for getList operations
 	      if (operation === "getList") {
 	      
+	    	  //console.log(data);
 	    	if (data.json.result==null){
 	    		 extractedData = data.json;
 	    	}else{

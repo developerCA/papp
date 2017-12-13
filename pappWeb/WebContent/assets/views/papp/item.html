@@ -1,168 +1,178 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-    <h4 class="mainTitle no-margin">Items</h4>
+	<h4 class="mainTitle no-margin">Items</h4>
 
-    <div ncy-breadcrumb class="pull-right"></div>
+	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <!-- end: BREADCRUMB -->
 <!-- start: SIMPLE TABLE WITH PAGINATION -->
 <div class="container-fluid container-fullw"
-     ng-controller="ItemsController" ng-init="consultar()">
+	ng-controller="ItemsController" ng-init="consultar()">
 
-    <div class="row">
-        <div class="col-md-12"></div>
-    </div>
+	<div class="row">
+		<div class="col-md-12"></div>
+	</div>
 
-    <div class="row">
-        <div class="col-md-12">
+	<div class="row">
+		<div class="col-md-12">
 
-            <div class="panel panel-white">
+			<div class="panel panel-white">
 
-                <div class="panel-body" ng-show="!edicion">
-                    <div class="panel panel-white" id="panel1">
-                        <div class="panel-heading">
-                            <h4 class="panel-title text-primary">Filtros</h4>
-                            <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-                        </div>
-                        <div uib-collapse="panel1" ng-init="panel1=true"
-                             class="panel-wrapper">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>C&oacute;digo</label> <input type="text"
-                                                                                class="form-control" ng-model="codigo">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label> C&oacute;digo Padre</label>
-                                <div class="input-group">
-										<input type="text" placeholder="Seleccione el codigo padre"
-											class="form-control" name="codigopadre"
-											ng-model="codigopadre" ng-disabled="true" /> <span
-											class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="buscarItemFiltro()">
-												<i class="fa fa-search"></i>
-											</button>
-										</span>
+				<div class="panel-body" ng-show="!edicion">
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>C&oacute;digo</label> <input type="text"
+												class="form-control" ng-model="codigo">
+										</div>
 									</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Nombre</label> <input type="text"
-                                                                         class="form-control" ng-model="nombre">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label> Tipo </label>
-                                            <select name="tipo" ng-model="tipo" class="form-control">
-                                                <option value="" selected="selected">(Todos)</option>
-                                                <option value="I">Ingresos</option>
-                                                <option value="E">Egresos</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label> Estado </label> <select name="estado" ng-model="estado" class="form-control">
-                                                <option value>Todos</option>
-                                                <option value="A">Activo</option>
-                                                <option value="I">Inactivo</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <a class="btn btn-wide btn-dark-azure" ng-click="filtrar()">
-                                            <i class="fa fa-search"></i> Buscar
-                                        </a> <a class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> C&oacute;digo Padre</label>
+											<div class="input-group">
+												<input type="text" placeholder="Seleccione el codigo padre"
+													class="form-control" name="codigopadre"
+													ng-model="codigopadre" ng-disabled="true" /> <span
+													class="input-group-btn">
+													<button type="button" class="btn btn-primary"
+														ng-click="buscarItemFiltro()">
+														<i class="fa fa-search"></i>
+													</button>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Nombre</label> <input type="text" class="form-control"
+												ng-model="nombre">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> Tipo </label> <select name="tipo" ng-model="tipo"
+												class="form-control">
+												<option value="" selected="selected">(Todos)</option>
+												<option value="I">Ingresos</option>
+												<option value="E">Egresos</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> Estado </label> <select name="estado"
+												ng-model="estado" class="form-control">
+												<option value>Todos</option>
+												<option value="A">Activo</option>
+												<option value="I">Inactivo</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrarUnico()">
+											<i class="fa fa-search"></i> Buscar
+										</a> <a class="btn btn-wide btn-o btn-default"
+											ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-                    <a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();">
-                        <i class="fa fa-plus-square"></i> Agregar
-                    </a>
+					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();">
+						<i class="fa fa-plus-square"></i> Agregar
+					</a>
 
 
-                    <div>
-                        <table ng-table="tableParams" class="table table-striped">
-                            <tr ng-repeat="data in $data">
-                                <td>
-                                    <a class="btn btn-sm btn-primary"
-                                       ng-click="editar(data.id)"><i class="fa fa-pencil"></i></a>
-                                </td>
-                                <td data-title="'A&nacute;o'">{{data.npanio}}</td>
-                                <td data-title="'Codigo'">{{data.codigo}}</td>
-                                <td data-title="'Nombre'">{{data.nombre}}</td>
-                                <td data-title="'Tipo'">
-                                    <span ng-if="data.tipo=='I'">INGRESO</span>
-                                    <span ng-if="data.tipo=='E'">EGRESO</span>
-                                </td>
-                                <td data-title="'Estado'">
-                                    <span ng-if="data.estado=='I'">INACTIVO</span>
-                                    <span ng-if="data.estado=='A'">ACTIVO</span>
-                                </td>
-                                <td data-title="'Tipo Bien'">
-                                    <span>{{data.nptipobien}}</span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+					<div>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th></th>
+									<th>A&nacute;o</th>
+									<th>C&oacute;digo</th>
+									<th>Nombre</th>
+									<th>Tipo</th>
+									<th>Estado</th>
+									<th>Tipo Bien</th>
+							</thead>
 
-                <div ng-show="edicion" class="panel-body" id="panel1">
+							</tr>
+							<tr ng-repeat="data in dataset">
+								<td><a class="btn btn-sm btn-primary"
+									ng-click="editar(data.id)"><i class="fa fa-pencil"></i></a></td>
+								<td data-title="'A&nacute;o'">{{data.npanio}}</td>
+								<td data-title="'Codigo'">{{data.codigo}}</td>
+								<td data-title="'Nombre'">{{data.nombre}}</td>
+								<td data-title="'Tipo'"><span ng-if="data.tipo=='I'">INGRESO</span>
+									<span ng-if="data.tipo=='E'">EGRESO</span></td>
+								<td data-title="'Estado'"><span ng-if="data.estado=='I'">INACTIVO</span>
+									<span ng-if="data.estado=='A'">ACTIVO</span></td>
+								<td data-title="'Tipo Bien'"><span>{{data.nptipobien}}</span>
+								</td>
+							</tr>
+						</table>
 
-                    <div class="panel-heading">
-                        <h5 class="panel-title">Items</h5>
-                    </div>
+						<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente" previous-text="Atras"  uib-pagination total-items="total" ng-change="pageChanged()" items-per-page="20" ng-model="pagina" max-size="10" class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
 
-                    <form name="Form" id="form1" novalidate
-                          ng-submit="form.submit(Form)">
-                        <div class="row">
-                            <div class="col-md-6">
+					</div>
+				</div>
 
-                                <div class="form-group" ng-class="{'has-error': Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
-                                    <label class="control-label">
-                                        C&oacute;digo
-                                        <span class="symbol required"></span>
-                                    </label>
-                                    <input type="text" placeholder="Ingrese el c&oacute;digo"
-                                           class="form-control" name="codigo"
-                                           ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null"
-                                           required ng-model="objeto.codigo" ng-minlength="2" ng-maxlength="10"/>
-                                    <span class="error text-small block" ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo incorrecto</span>
-                                    <span class="success text-small" ng-if="Form.codigo.$valid">Listo</span>
-                                </div>
+				<div ng-show="edicion" class="panel-body" id="panel1">
 
-                                <div class="form-group"
-                                     ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-                                    <label class="control-label">
-                                        Nombre
-                                        <span class="symbol required"></span>
-                                    </label> <input type="text" placeholder="Ingrese el nombre"
-                                                    class="form-control" name="nombre" required
-                                                    ng-model="objeto.nombre" /> <span class="error text-small block"
-                                                                                      ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
-                                        Nombre incorrecto
-                                    </span> <span class="success text-small"
-                                                  ng-if="Form.anio.$valid">Listo</span>
-                                </div>
+					<div class="panel-heading">
+						<h5 class="panel-title">Items</h5>
+					</div>
 
-                            <div class="form-group">
-                                <label> Padre C&oacute;digo</label>
-                                <div class="input-group">
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+						<div class="row">
+							<div class="col-md-6">
+
+								<div class="form-group"
+									ng-class="{'has-error': Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									<label class="control-label"> C&oacute;digo <span
+										class="symbol required"></span>
+									</label> <input type="text" placeholder="Ingrese el c&oacute;digo"
+										class="form-control" name="codigo" ng-pattern="/^[0-9]*$/"
+										ng-disabled="objeto.id !=null" required
+										ng-model="objeto.codigo" ng-minlength="2" ng-maxlength="10" />
+									<span class="error text-small block"
+										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo
+										incorrecto</span> <span class="success text-small"
+										ng-if="Form.codigo.$valid">Listo</span>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
+									<label class="control-label"> Nombre <span
+										class="symbol required"></span>
+									</label> <input type="text" placeholder="Ingrese el nombre"
+										class="form-control" name="nombre" required
+										ng-model="objeto.nombre" /> <span
+										class="error text-small block"
+										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
+										Nombre incorrecto </span> <span class="success text-small"
+										ng-if="Form.anio.$valid">Listo</span>
+								</div>
+
+								<div class="form-group">
+									<label> Padre C&oacute;digo</label>
+									<div class="input-group">
 										<input type="text" placeholder="Seleccione el codigo padre"
 											class="form-control" name="npcodigopadre"
 											ng-model="objeto.npcodigopadre" ng-disabled="true" /> <span
@@ -173,79 +183,77 @@
 											</button>
 										</span>
 									</div>
-							</div>
-								
+								</div>
+
 								<div class="form-group">
 									<label class="control-label"> Padre Nombre </label> <input
 										type="text" class="form-control" name="nombrepadre"
 										ng-disabled="true" ng-model="objeto.npnombrepadre" />
-								</div>	
+								</div>
 
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Aplica IVA</label>
-                                            <input type="checkbox" ng-model="objeto.aplicaiva" ng-true-value="1" ng-false-value="0" />
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Aplica IVA</label> <input type="checkbox"
+												ng-model="objeto.aplicaiva" ng-true-value="1"
+												ng-false-value="0" />
+										</div>
+									</div>
+								</div>
 
-                                <div class="form-group"
-                                     ng-class="{'has-error':Form.tipo.$dirty && Form.tipo.$invalid, 'has-success':Form.tipo.$valid}">
-                                    <label for="form-field-select-1">
-                                        Tipo<span class="symbol required"></span>
-                                    </label> <select class="form-control" name="tipo"
-                                                     ng-model="objeto.tipo" required>
-                                        <option value="I">Ingreso</option>
-                                        <option value="E">Egreso</option>
-                                    </select>
-                                </div>
+								<div class="form-group"
+									ng-class="{'has-error':Form.tipo.$dirty && Form.tipo.$invalid, 'has-success':Form.tipo.$valid}">
+									<label for="form-field-select-1"> Tipo<span
+										class="symbol required"></span>
+									</label> <select class="form-control" name="tipo"
+										ng-model="objeto.tipo" required>
+										<option value="I">Ingreso</option>
+										<option value="E">Egreso</option>
+									</select>
+								</div>
 
-                                <div class="form-group"
-                                     ng-class="{'has-error':Form.tipobien.$dirty && Form.tipobien.$invalid, 'has-success':Form.tipobien.$valid}">
-                                    <label for="form-field-select-1">
-                                        Tipo Bien <span class="symbol required"></span>
-                                    </label> <select class="form-control" name="tipobien"
-                                                     ng-model="objeto.tipobien" required>
-                                        <option value="T" selected="selected">Sin Tipo</option>
-                                        <option value="B">Bien</option>
-                                        <option value="S">Servicio</option>
-                                        <option value="O">Obra</option>
-                                        <option value="C">Consultor&iacute;a</option>
-                                    </select>
-                                </div>
+								<div class="form-group"
+									ng-class="{'has-error':Form.tipobien.$dirty && Form.tipobien.$invalid, 'has-success':Form.tipobien.$valid}">
+									<label for="form-field-select-1"> Tipo Bien <span
+										class="symbol required"></span>
+									</label> <select class="form-control" name="tipobien"
+										ng-model="objeto.tipobien" required>
+										<option value="T" selected="selected">Sin Tipo</option>
+										<option value="B">Bien</option>
+										<option value="S">Servicio</option>
+										<option value="O">Obra</option>
+										<option value="C">Consultor&iacute;a</option>
+									</select>
+								</div>
 
-                                <div class="form-group"
-                                     ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-                                    <label for="form-field-select-1">
-                                        Estado <span class="symbol required"></span>
-                                    </label> <select class="form-control" name="estado"
-                                                     ng-model="objeto.estado" required>
-                                        <option value="A">Activo</option>
-                                        <option value="I">Inactivo</option>
-                                    </select>
-                                </div>
+								<div class="form-group"
+									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+									<label for="form-field-select-1"> Estado <span
+										class="symbol required"></span>
+									</label> <select class="form-control" name="estado"
+										ng-model="objeto.estado" required>
+										<option value="A">Activo</option>
+										<option value="I">Inactivo</option>
+									</select>
+								</div>
 
-                            </div>
-                        </div>
+							</div>
+						</div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="pull-right">
-                                    <button type="submit" class="btn btn-primary">
-                                        Guardar
-                                    </button>
-                                    <button type="reset" class="btn btn-default btn-o"
-                                            ng-click="form.reset(Form)">
-                                        Cancelar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">Guardar
+									</button>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">Cancelar</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
 
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </div>
