@@ -3,6 +3,11 @@
 app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","estructuraorganicaFactory","unidadFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, estructuraorganicaFactory,unidadFactory) {
 
+	$scope.dateOptions = {
+	    changeYear: true,
+	    changeMonth: true,
+	    yearRange: '2000:-0',    
+    };
 	$scope.codigo=null;
 	$scope.fuerza=null;
 	$scope.grado=null;
@@ -448,12 +453,12 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 	$scope.abrirEmpleadoSocioNegocio = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalSocioNegocio.html',
+			templateUrl : 'assets/views/papp/modal/modalSocioNegocio.html',
 			controller : 'ModalSocioNegocioController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objetoPlazaDetail[index].unidadarbolplaempempid = obj.id;
 			$scope.objetoPlazaDetail[index].npsocionegocioid = obj.codigo;
 			$scope.objetoPlazaDetail[index].npsocionegocio = obj.nombremostrado;
