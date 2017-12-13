@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 
 import ec.com.papp.administracion.to.ObraTO;
 import ec.com.papp.administracion.to.OrganismoTO;
+import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.estructuraorganica.to.UnidadTO;
 import ec.com.papp.planificacion.id.ActividadunidadID;
 import ec.com.papp.planificacion.id.CronogramalineaID;
@@ -104,9 +105,19 @@ public class PlanificacionController {
 				log.println("objetivos encontrados: " + objetivoTOs.size());
 				boolean grabar=true;
 				if(objetivoTOs.size()>0){
-					objetivoTO2=(ObjetivoTO)objetivoTOs.iterator().next();
-					if(objetivoTO.getId()!=null && objetivoTO2.getId().longValue()!=objetivoTO.getId().longValue())
-						grabar=false;
+					for(ObjetivoTO objetivoTO3:objetivoTOs) {
+						if((objetivoTO.getId()!=null && objetivoTO.getId().longValue()!=0) && objetivoTO3.getId().longValue()!=objetivoTO.getId().longValue() && objetivoTO3.getCodigo().equals(objetivoTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+						else if((objetivoTO.getId()==null || (objetivoTO.getId()!=null && objetivoTO3.getId().longValue()!=objetivoTO.getId().longValue())) && objetivoTO.getCodigo()!=null && objetivoTO3.getCodigo().equals(objetivoTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
+//					objetivoTO2=(ObjetivoTO)objetivoTOs.iterator().next();
+//					if(objetivoTO.getId()!=null && objetivoTO2.getId().longValue()!=objetivoTO.getId().longValue())
+//						grabar=false;
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -137,16 +148,23 @@ public class PlanificacionController {
 				log.println("plannacionalTOs: " + plannacionalTOs.size());
 				boolean grabar=true;
 				if(plannacionalTOs.size()>0){
-					plannacionalTO2=(PlannacionalTO)plannacionalTOs.iterator().next();
-					if(plannacionalTO.getId()!=null && plannacionalTO2.getId().longValue()!=plannacionalTO.getId().longValue())
-						grabar=false;
+					for(PlannacionalTO plannacionalTO3:plannacionalTOs) {
+						if((plannacionalTO.getId()!=null && plannacionalTO.getId().longValue()!=0) && plannacionalTO3.getId().longValue()!=plannacionalTO.getId().longValue() && plannacionalTO3.getCodigo().equals(plannacionalTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+						else if((plannacionalTO.getId()==null || (plannacionalTO.getId()!=null && plannacionalTO3.getId().longValue()!=plannacionalTO.getId().longValue())) && plannacionalTO.getCodigo()!=null && plannacionalTO3.getCodigo().equals(plannacionalTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
+
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
-					log.println("va a grabar: " + plannacionalTO.getId());
 					UtilSession.planificacionServicio.transCrearModificarPlannacional(plannacionalTO);
 					id=plannacionalTO.getId().toString();
 					jsonObject.put("plannacional", (JSONObject)JSONSerializer.toJSON(plannacionalTO,plannacionalTO.getJsonConfig()));
@@ -163,12 +181,22 @@ public class PlanificacionController {
 				indicadorTO2.setCodigo(indicadorTO.getCodigo());
 				indicadorTO2.setEstado(indicadorTO.getEstado());
 				indicadorTO2.setIndicadorpadreid(indicadorTO.getIndicadorpadreid());
-				Collection<IndicadorTO> plannacionalTOs=UtilSession.planificacionServicio.transObtenerIndicadorArbol(indicadorTO2);
+				Collection<IndicadorTO> indicadorTOs=UtilSession.planificacionServicio.transObtenerIndicadorArbol(indicadorTO2);
 				boolean grabar=true;
-				if(plannacionalTOs.size()>0){
-					indicadorTO2=(IndicadorTO)plannacionalTOs.iterator().next();
-					if(indicadorTO.getId()!=null && indicadorTO2.getId().longValue()!=indicadorTO.getId().longValue())
-						grabar=false;
+				if(indicadorTOs.size()>0){
+					for(IndicadorTO indicadorTO3:indicadorTOs) {
+						if((indicadorTO.getId()!=null && indicadorTO.getId().longValue()!=0) && indicadorTO3.getId().longValue()!=indicadorTO.getId().longValue() && indicadorTO3.getCodigo().equals(indicadorTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+						else if((indicadorTO.getId()==null || (indicadorTO.getId()!=null && indicadorTO3.getId().longValue()!=indicadorTO.getId().longValue())) && indicadorTO.getCodigo()!=null && indicadorTO3.getCodigo().equals(indicadorTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
+//					indicadorTO2=(IndicadorTO)plannacionalTOs.iterator().next();
+//					if(indicadorTO.getId()!=null && indicadorTO2.getId().longValue()!=indicadorTO.getId().longValue())
+//						grabar=false;
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -193,9 +221,19 @@ public class PlanificacionController {
 				log.println("encontro el codigo: " + plannacionalTOs.size());
 				boolean grabar=true;
 				if(plannacionalTOs.size()>0){
-					programaTO2=(ProgramaTO)plannacionalTOs.iterator().next();
-					if(programaTO.getId()!=null && programaTO2.getId().longValue()!=programaTO.getId().longValue())
-						grabar=false;
+					for(ProgramaTO programaTO3:plannacionalTOs) {
+						if((programaTO.getId()!=null && programaTO.getId().longValue()!=0) && programaTO3.getId().longValue()!=programaTO.getId().longValue() && programaTO3.getCodigo().equals(programaTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+						else if((programaTO.getId()==null || (programaTO.getId()!=null && programaTO3.getId().longValue()!=programaTO.getId().longValue())) && programaTO.getCodigo()!=null && programaTO3.getCodigo().equals(programaTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
+//					programaTO2=(ProgramaTO)plannacionalTOs.iterator().next();
+//					if(programaTO.getId()!=null && programaTO2.getId().longValue()!=programaTO.getId().longValue())
+//						grabar=false;
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));

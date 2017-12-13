@@ -1613,6 +1613,9 @@ public class AdministracionController {
 				//Consulto la coleccion de institucion entidad
 				InstitucionentidadTO institucionentidadTO=new InstitucionentidadTO();
 				institucionentidadTO.getId().setId(institucionTO.getId());
+				institucionentidadTO.setDivisiongeografica1(new DivisiongeograficaTO());
+				institucionentidadTO.setDivisiongeografica2(new DivisiongeograficaTO());
+				institucionentidadTO.setDivisiongeografica3(new DivisiongeograficaTO());
 				Collection<InstitucionentidadTO> institucionentidadTOs=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidad(institucionentidadTO);
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(institucionentidadTOs,institucionentidadTO.getJsonConfig()));
 			}
