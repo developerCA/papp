@@ -38,6 +38,7 @@ import ec.com.papp.administracion.to.ProcedimientoTO;
 import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.administracion.to.SubitemTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
+import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
 import ec.com.papp.administracion.to.TipoidentificacionTO;
 import ec.com.papp.administracion.to.TipoidentificaciontipoTO;
 import ec.com.papp.administracion.to.TipoproductoTO;
@@ -2280,6 +2281,54 @@ public class ConsultasUtil {
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(claseregistrocmcgastoTOs,claseregistrocmcgastoTO.getJsonConfigListaClaseg()));
 			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
 			totalMap.put("valor", claseregistrocmcgastoTOs.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+	
+	
+	/**
+	* Metodo que consulta las Tipo clase documento para ejecucion y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaTipoclasedocumento(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+		log.println("entra a consultar institucion");
+		String campo="";
+		TipodocumentoclasedocumentoTO tipodocumentoclasedocumentoTO=new TipodocumentoclasedocumentoTO();
+		TipodocumentoTO tipodocumentoTO=new TipodocumentoTO();
+		try{
+			campo="tipodocumento.codigo";
+			String[] columnas={campo};
+			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
+				campo=parameters.get("sidx");
+			String[] orderBy = columnas;
+			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
+				tipodocumentoclasedocumentoTO.setOrderByField(OrderBy.orderDesc(orderBy));
+			else
+				tipodocumentoclasedocumentoTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
+				tipodocumentoclasedocumentoTO.setCodigo(parameters.get("codigo"));
+			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
+				tipodocumentoclasedocumentoTO.setNombre(parameters.get("nombre"));
+			if(parameters.get("tipocodigo")!=null && !parameters.get("tipocodigo").equals(""))
+				tipodocumentoTO.setCodigo(parameters.get("tipocodigo"));
+			if(parameters.get("tiponombre")!=null && !parameters.get("tiponombre").equals(""))
+				tipodocumentoTO.setNombre(parameters.get("tiponombre"));
+			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+				tipodocumentoclasedocumentoTO.setTipodocumentoclasedocefid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+			tipodocumentoclasedocumentoTO.setTipodocumento(tipodocumentoTO);
+			Collection<TipodocumentoclasedocumentoTO> tipodocumentoclasedocumentoTOs=UtilSession.adminsitracionServicio.transObtenerTipodocumentoclasedocumento(tipodocumentoclasedocumentoTO);	
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(tipodocumentoclasedocumentoTOs,tipodocumentoclasedocumentoTO.getJsonConfigLista()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", tipodocumentoclasedocumentoTOs.size());
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 
 		}catch (Exception e) {
