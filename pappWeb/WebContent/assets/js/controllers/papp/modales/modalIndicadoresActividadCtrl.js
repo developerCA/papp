@@ -1,12 +1,10 @@
 'use strict';
 
-app.controller('ModalUnidadController', [ "$scope","$rootScope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","unidadFactory",
-	function($scope,$rootScope,$uibModalInstance,SweetAlert,$filter, ngTableParams,unidadFactory) {
-    
-	
-	$scope.nombreFiltro=null;
+app.controller('ModalIndicadoresActividadController', [ "$scope","$rootScope","ejefiscal","$uibModalInstance","SweetAlert","$filter", "ngTableParams","indicadoresActividadFactory",
+	function($scope,$rootScope,ejefiscal,$uibModalInstance,SweetAlert,$filter, ngTableParams,indicadoresActividadFactory) {
+
 	$scope.codigoFiltro=null;
-	$scope.estadoFiltro=null;
+	$scope.descripcionFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
 	$scope.detalles=[];
@@ -15,7 +13,10 @@ app.controller('ModalUnidadController', [ "$scope","$rootScope","$uibModalInstan
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		unidadFactory.traerUnidades(pagina).then(function(resp){
+		indicadoresActividadFactory.traerIndicadoresActividad(
+			pagina,
+			ejefiscal
+		).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
@@ -45,10 +46,12 @@ app.controller('ModalUnidadController', [ "$scope","$rootScope","$uibModalInstan
 	
 	
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
-		unidadFactory.traerUnidadesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
-			
+		indicadoresActividadFactory.traerIndicadoresActividadFiltro(
+			pagina,
+			ejefiscal,
+			$scope.codigoFiltro
+		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})

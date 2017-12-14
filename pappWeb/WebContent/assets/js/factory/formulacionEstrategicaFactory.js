@@ -32,7 +32,7 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 			npNivelid,
 			ejercicio
 		) {
-			var url = "planificacion/consultar/proyecto/" +
+			var url = "planificacion/consultar/actividad/" +
 				"padre=" + npNivelid  +
 				"&actividadeejerciciofiscalid =" + ejercicio;
 			return Restangular.allUrl(url).getList();
@@ -60,6 +60,12 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 
 		traerProyectoEditar : function(id) {
 			var url = "planificacion/proyecto/"+id+"/0";
+
+		    return Restangular.allUrl(url).customGET();
+		},
+
+		traerActividadEditar : function(id) {
+			var url = "planificacion/actividad/"+id+"/0";
 
 		    return Restangular.allUrl(url).customGET();
 		},

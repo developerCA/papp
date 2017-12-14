@@ -120,7 +120,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 
 	$scope.buscarUnidadMedida = function(){
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalUnidades.html',
+			templateUrl : 'assets/views/papp/modal/modalUnidadMedida.html',
 			controller : 'ModalUnidadMedidaController',
 			size : 'lg'
 		});

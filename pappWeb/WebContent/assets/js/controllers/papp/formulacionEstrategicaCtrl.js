@@ -75,11 +75,11 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	    		node.npNivelid,
 	    		$rootScope.ejefiscal
 			).then(function(resp){
-				//console.log(resp);
+				console.log(resp);
 				for (var i = 0; i < resp.length; i++) {
 					resp[i].nodeTipo = "AC";
 				}
-				var nodes=JSON.parse(JSON.stringify(resp).split('"nombre":').join('"title":'));
+				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 				node.nodes=nodes;
 			});
 		}
@@ -179,6 +179,23 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				$scope.edicionProyecto=true;
 			});
 		}
+		if (node.nodeTipo == "AC") { // Actividad
+			formulacionEstrategicaFactory.traerActividadEditar(node.id).then(function(resp){
+				console.log("Respuesta:");
+				console.log(resp.json);
+				if (resp.estado) {
+					$scope.objeto=resp.json.actividad;
+					$scope.editarId=$scope.objeto.id;
+					$scope.objetolista=resp.json.nivelactividad;
+					if ($scope.objetolista == []) {
+						$scope.agregarDetalle();
+					}
+					$scope.objeto.nodeTipo="AC";
+				}
+				$scope.guardar=true;
+				$scope.edicionActividad=true;
+			});
+		}
 	};
 
 	function toDate(fuente) {
@@ -273,6 +290,49 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		});
 	};
 
+	$scope.abrirIndicadorActividad = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalIndicadoresActividad.html',
+			controller : 'ModalIndicadoresActividadController',
+			size : 'lg',
+			resolve : {
+				ejefiscal : function() {
+					return $rootScope.ejefiscal;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.proyectoindicadorid = obj.id;
+			$scope.objeto.npIndicadorcodigo = obj.npIndicadorcodigo;
+			$scope.objeto.npIndicadornombre = obj.npIndicadornombre;
+			$scope.objeto.npIndicadordescripcion = "NO SE OBTIENE";
+			$scope.objeto.npIndicadormetcodigo = obj.codigo;
+			$scope.objeto.npIndicadormetdescripcion = obj.descripcion;
+			$scope.objeto.npIndicadormetadescriopcion = "NO SE OBTIENE";
+			$scope.objeto.npUnidadmedidacodigo = obj.npCodigounidad;
+			$scope.objeto.npUnidadmedidanombre = obj.npNombreunidad;
+			$scope.objeto.npGrupomedidacodigo = obj.npCodigogrupo;
+			$scope.objeto.npGrupomedidanombre = obj.npNombregrupo;
+		}, function() {
+		});
+	};
+
+	$scope.abrirUnidades = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalUnidades.html',
+			controller : 'ModalUnidadController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.proyectoindicadorid = obj.id;
+			$scope.objeto.npIndicadorcodigo = obj.codigo;
+			$scope.objeto.npIndicadornombre = obj.nombre;
+		}, function() {
+		});
+	};
+
 	$scope.form = {
         submit: function (form) {
             var firstError = null;
@@ -305,6 +365,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	 		             $scope.edicion=false;
 	 		             $scope.edicionSubPrograma=false;
 	 		             $scope.edicionProyecto=false;
+	 		            $scope.edicionActividad=false;
 	 		             $scope.objeto={};
 	 		             SweetAlert.swal("Formulaci&oacute;n Estrat&eacute;gica!", "Registro grabado satisfactoriamente!", "success");
         			 }else{
@@ -319,6 +380,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
             $scope.edicion=false;
             $scope.edicionSubPrograma=false;
             $scope.edicionProyecto=false;
+            $scope.edicionActividad=false;
             $scope.objeto={};
         }
     };

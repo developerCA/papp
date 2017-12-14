@@ -520,7 +520,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalObjetivosCtrl','ObjetivosFactory',
         		'ModalFuerzaCtrl','FuerzaFactory',
         		'ModalSocioNegocioCtrl','SociosNegocioFactory',
-        		'ModalIndicadoresCtrl','IndicadoresFactory'
+        		'ModalIndicadoresCtrl','IndicadoresFactory',
+        		'ModalIndicadoresActividadCtrl','IndicadoresActividadFactory',
+        		'ModalUnidadCtrl','UnidadFactory'
 		),
         title: 'Formulación Estratégica',
         ncyBreadcrumb: {

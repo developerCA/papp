@@ -209,6 +209,8 @@ app.constant('JS_REQUIRES', {
         'ObjetivosFactory':'assets/js/factory/objetivosFactory.js',
         'ModalIndicadoresCtrl':'assets/js/controllers/papp/modales/modalIndicadoresCtrl.js',
         'IndicadoresFactory':'assets/js/factory/indicadoresFactory.js',
+        'ModalIndicadoresActividadCtrl':'assets/js/controllers/papp/modales/modalIndicadoresActividadCtrl.js',
+        'IndicadoresActividadFactory':'assets/js/factory/indicadoresActividadFactory.js',
 
     },
     //*** angularJS Modules

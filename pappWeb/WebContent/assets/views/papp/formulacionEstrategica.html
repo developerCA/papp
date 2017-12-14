@@ -851,6 +851,284 @@
 						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-6">
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+								    <label class="control-label">
+								        C&oacute;digo
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Escriba un c&oacute;digo"
+								        class="form-control" name="codigo" ng-model="objeto.codigo" ng-pattern="/^[0-9]*$/"
+								        required>
+								    <span class="error text-small block"
+								        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.codigo.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
+								    <label class="control-label">
+								        Descripci&oacute;n
+								        <span class="symbol required"></span>
+								    </label>
+								    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
+								        class="form-control" ng-model="objeto.descripcion"
+								        required>
+								    </textarea>
+								    <span class="error text-small block"
+								        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.descripcion.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npIndicadorcodigo.$dirty && Form.npIndicadorcodigo.$invalid, 'has-success':Form.npIndicadorcodigo.$valid}">
+								    <label class="control-label">
+								        Indicador C&oacute;digo
+								        <span class="symbol required"></span>
+								    </label>
+								    <div class="input-group">
+								        <input type="text" placeholder="Escriba un indicador c&oacute;digo"
+								            class="form-control" name="npIndicadorcodigo" ng-disabled="true"
+								            ng-model="objeto.npIndicadorcodigo">
+								        <span class="input-group-btn">
+								            <button type="button" class="btn btn-primary"
+								                ng-click="abrirIndicadorActividad()">
+								                <i class="fa fa-search"></i>
+								                Seleccione
+								            </button>
+								        </span>
+								    </div>
+								    <span class="error text-small block"
+								        ng-if="Form.npIndicadorcodigo.$dirty && Form.npIndicadorcodigo.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npIndicadorcodigo.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npIndicadornombre.$dirty && Form.npIndicadornombre.$invalid, 'has-success':Form.npIndicadornombre.$valid}">
+								    <label class="control-label">
+								        Indicador Nombre
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione un Indicador"
+								        class="form-control" name="npIndicadornombre" ng-model="objeto.npIndicadornombre"
+								        required ng-disabled="true">
+								    <span class="error text-small block"
+								        ng-if="Form.npIndicadornombre.$dirty && Form.npIndicadornombre.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npIndicadornombre.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npIndicadordescripcion.$dirty && Form.npIndicadordescripcion.$invalid, 'has-success':Form.npIndicadordescripcion.$valid}">
+								    <label class="control-label">
+								        Indicador Descripci&oacute;n
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione un Indicador"
+								        class="form-control" name="npIndicadordescripcion" ng-model="objeto.npIndicadordescripcion"
+								        required ng-disabled="true">
+								    <span class="error text-small block"
+								        ng-if="Form.npIndicadordescripcion.$dirty && Form.npIndicadordescripcion.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npIndicadordescripcion.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npIndicadormetcodigo.$dirty && Form.npIndicadormetcodigo.$invalid, 'has-success':Form.npIndicadormetcodigo.$valid}">
+								    <label class="control-label">
+								        Indicador M&eacute;todo C&oacute;digo
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione un Indicador"
+								        class="form-control" name="npIndicadormetcodigo" ng-model="objeto.npIndicadormetcodigo"
+								        required ng-disabled="true">
+								    <span class="error text-small block"
+								        ng-if="Form.npIndicadormetcodigo.$dirty && Form.npIndicadormetcodigo.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npIndicadormetcodigo.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npIndicadormetdescripcion.$dirty && Form.npIndicadormetdescripcion.$invalid, 'has-success':Form.npIndicadormetdescripcion.$valid}">
+								    <label class="control-label">
+								        Indicador M&eacute;todo Descripci&oacute;n
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione un Indicador"
+								        class="form-control" name="npIndicadormetdescripcion" ng-model="objeto.npIndicadormetdescripcion"
+								        required ng-disabled="true">
+								    <span class="error text-small block"
+								        ng-if="Form.npIndicadormetdescripcion.$dirty && Form.npIndicadormetdescripcion.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npIndicadormetdescripcion.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npIndicadormetadescriopcion.$dirty && Form.npIndicadormetadescriopcion.$invalid, 'has-success':Form.npIndicadormetadescriopcion.$valid}">
+								    <label class="control-label">
+								        Indicador Meta Descripci&oacute;n
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione un Indicador"
+								        class="form-control" name="npIndicadormetadescriopcion" ng-model="objeto.npIndicadormetadescriopcion"
+								        required ng-disabled="true">
+								    <span class="error text-small block"
+								        ng-if="Form.npIndicadormetadescriopcion.$dirty && Form.npIndicadormetadescriopcion.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npIndicadormetadescriopcion.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npUnidadmedidacodigo.$dirty && Form.npUnidadmedidacodigo.$invalid, 'has-success':Form.npUnidadmedidacodigo.$valid}">
+								    <label class="control-label">
+								        Unidad Medida C&oacute;digo
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione un Indicador"
+								        class="form-control" name="npUnidadmedidacodigo" ng-model="objeto.npUnidadmedidacodigo"
+								        required ng-disabled="true">
+								    <span class="error text-small block"
+								        ng-if="Form.npUnidadmedidacodigo.$dirty && Form.npUnidadmedidacodigo.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npUnidadmedidacodigo.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npUnidadmedidanombre.$dirty && Form.npUnidadmedidanombre.$invalid, 'has-success':Form.npUnidadmedidanombre.$valid}">
+								    <label class="control-label">
+								        Unidad Medida Nombre
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione un Indicador"
+								        class="form-control" name="npUnidadmedidanombre" ng-model="objeto.npUnidadmedidanombre"
+								        required ng-disabled="true">
+								    <span class="error text-small block"
+								        ng-if="Form.npUnidadmedidanombre.$dirty && Form.npUnidadmedidanombre.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npUnidadmedidanombre.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npGrupomedidacodigo.$dirty && Form.npGrupomedidacodigo.$invalid, 'has-success':Form.npGrupomedidacodigo.$valid}">
+								    <label class="control-label">
+								        Grupo Medida C&oacute;digo
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione un Indicador"
+								        class="form-control" name="npGrupomedidacodigo" ng-model="objeto.npGrupomedidacodigo"
+								        required ng-disabled="true">
+								    <span class="error text-small block"
+								        ng-if="Form.npGrupomedidacodigo.$dirty && Form.npGrupomedidacodigo.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npGrupomedidacodigo.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.npGrupomedidanombre.$dirty && Form.npGrupomedidanombre.$invalid, 'has-success':Form.npGrupomedidanombre.$valid}">
+								    <label class="control-label">
+								        Grupo Medida Nombre
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Seleccione un Indicador"
+								        class="form-control" name="npGrupomedidanombre" ng-model="objeto.npGrupomedidanombre"
+								        required ng-disabled="true">
+								    <span class="error text-small block"
+								        ng-if="Form.npGrupomedidanombre.$dirty && Form.npGrupomedidanombre.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.npGrupomedidanombre.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.ponderacion.$dirty && Form.ponderacion.$invalid, 'has-success':Form.ponderacion.$valid}">
+								    <label class="control-label">
+								        Ponderaci&oacute;n
+								        <span class="symbol required"></span>
+								    </label>
+								    <input type="text" placeholder="Escriba un ponderaci&oacute;n"
+								        class="form-control" name="ponderacion" ng-model="objeto.ponderacion" ng-pattern="/^[0-9]*$/"
+								        required>
+								    <span class="error text-small block"
+								        ng-if="Form.ponderacion.$dirty && Form.ponderacion.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.ponderacion.$valid">
+								        Listo
+								    </span>
+								</div>
+								
+								<div class="form-group"
+								    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+								    <label class="control-label">
+								        Estado
+								        <span class="symbol required"></span>
+								    </label>
+								    <select class="form-control" name="estado"
+								        ng-model="objeto.estado" required>
+								        <option value="A" ng-selected="selected">Activo</option>
+								        <option value="I">Inactivo</option>
+								    </select>
+								    <span class="error text-small block"
+								        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+								        Incorrecto
+								    </span>
+								    <span class="success text-small"
+								        ng-if="Form.estado.$valid">
+								        Listo
+								    </span>
+								</div>
 							</div>
 						</div>
 
@@ -860,10 +1138,10 @@
 									<div class="panel-heading">
 										<a uib-tooltip="Agregar"
 											class="pull-right btn btn-sm btn-info"
-											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
+											ng-click="abrirUnidades();"><i class="fa fa-plus-square"></i>
 										</a>
 										<h4 class="panel-title">
-											Meta
+											Unidades
 										</h4>
 									</div>
 									<div class="panel-body no-padding panel-white">
@@ -872,8 +1150,8 @@
 												<table class="table table-striped">
 													<tr>
 														<th></th>
-														<th>A&ntilde;o</th>
-														<th>Descripci&oacute;n</th>
+														<th>Unidad C&oacute;digo</th>
+														<th>Unidad Nombre</th>
 													</tr>
 													<tr ng-repeat="obj in objetolista">
 														<td>
@@ -884,18 +1162,10 @@
 															</a>
 														</td>
 														<td>
-															<div class="input-group col-md-12">
-																<input type="text" placeholder="Escriba un a&ntilde;o"
-																	class="form-control" name="npano"
-																	ng-model="obj.npano" />
-															</div>
+															{{ obj.npCodigounidad }}
 														</td>
 														<td>
-															<div class="input-group col-md-12">
-																<input type="text" placeholder="Escriba un Descripci&oacute;n"
-																	class="form-control" name="npdescripcion"
-																	ng-model="obj.npdescripcion" />
-															</div>
+															{{ obj.npNombreunidad }}
 														</td>
 													</tr>
 												</table>
