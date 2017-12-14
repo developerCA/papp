@@ -90,7 +90,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 
 	$scope.editar=function(id){
 		empleadosFactory.traerEmpleadosEditar(id).then(function(resp){
-			//console.log(resp.json);
+			console.log(resp.json);
 			if (resp.estado) {
 				$scope.objeto=resp.json.empleado;
 				$scope.fuerza=null;
