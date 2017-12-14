@@ -16,31 +16,24 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
     $scope.data=[];
     $scope.pagina = 1;
 
-  
-
     $scope.consultar = function () {
-
         $scope.dataset = [];
         
         itemsFactory.traerItemsCustom($scope.pagina, $rootScope.ejefiscal).then(function (resp) {
-        	
             $scope.dataset = resp.json.result;
             $scope.total=resp.json.total.valor;
             console.log($scope.total);
-            
         });
-
     };
 
     $scope.pageChanged = function() {
-        console.log($scope.pagina);
+        //console.log($scope.pagina);
         if ($scope.aplicafiltro){
         	$scope.filtrar();
-        }else{
+        } else {
         	$scope.consultar();	
         }
-        
-      };       
+    };       
  
     $scope.filtrarUnico=function(){
     	$scope.pagina=1;
@@ -63,9 +56,7 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
     }
 
     $scope.mayusculas = function () {
-
         $scope.nombre = $scope.nombre.toUpperCase();
-
     }
 
     $scope.limpiar = function () {

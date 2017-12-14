@@ -94,7 +94,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     
     $scope.buscarItem=function(){
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalItems.html',
+			templateUrl : 'assets/views/papp/modal/modalItems.html',
 			controller : 'ModalItemController',
 			size : 'lg',
 			resolve : {
