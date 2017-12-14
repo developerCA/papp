@@ -177,7 +177,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
                 return;
             } else {
             	$scope.obj = $scope.objeto;
-            	$scope.obj.indicadormetodo = $scope.objetolista;
+            	$scope.obj.indicadormetodosTOs = $scope.objetolista;
             	mantenerIndicadoresFactory.guardar($scope.obj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
