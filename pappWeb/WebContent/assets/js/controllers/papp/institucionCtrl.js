@@ -202,9 +202,9 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Instituci&oacute;n!", "Registro guardado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Institucion!", "Registro guardado satisfactoriamente!", "success");
  		        			 }else{
-			 		             SweetAlert.swal("Instituci&oacute;n!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Institucion!", resp.mensajes.msg, "error");
 		        			 }
 		        		})
 		            }

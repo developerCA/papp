@@ -11,6 +11,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	$scope.arbol={};
 	$scope.edicion=false;
 	$scope.guardar=false;
+	$scope.nuevoar=false;
 	$scope.objeto={};
 	$scope.objetolista={};
 	$scope.editarId=null;
@@ -83,6 +84,20 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				node.nodes=nodes;
 			});
 		}
+
+		if (node.nodeTipo == "AC") { // Carga Actividad
+		    formulacionEstrategicaFactory.traerSubActividad(
+	    		node.npNivelid,
+	    		$rootScope.ejefiscal
+			).then(function(resp){
+				console.log(resp);
+				for (var i = 0; i < resp.length; i++) {
+					resp[i].nodeTipo = "SA";
+				}
+				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
+				node.nodes=nodes;
+			});
+		}
 	}
 
 	$scope.$watch('data', function() {
@@ -107,29 +122,38 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	
 	$scope.nuevo=function(node){
 		$scope.editarId=null;
-		formulacionEstrategicaFactory.traerFormulacionEstrategicaNuevoEstructura(
+/*		formulacionEstrategicaFactory.traerFormulacionEstrategicaNuevoEstructura(
 			node.id,
 			$rootScope.ejefiscal,
 			node.tipo
 		).then(function(resp){
 			$scope.objeto=resp.json.objetivo;
-
-			console.log($scope.objeto);
 			$scope.guardar=true;
-			switch ($scope.objeto.tipo) {
-				case "P": //Plan nacional
-					$scope.edicion=true;
-					break;
-				case "E": //Estrategico
-					$scope.edicionEstrategico=true;
-					break;
-				case "O": //Operativo
-				case "F": //Fuerzas
-				default:
-					$scope.edicionOperativo=true;
-					break;
-			}
 		})
+*/		if (node == null) {
+			node = {
+				nodeTipo: "PR",
+				id: 0
+			}
+		}
+		console.log(node);
+		$scope.nuevoar=true;
+		if (node.nodeTipo == "PR") { // Programa
+			formulacionEstrategicaFactory.traerProgramaNuevo(
+				node.id,
+				$rootScope.ejefiscal
+			).then(function(resp){
+				console.log("Nuevo:");
+				console.log(resp.json);
+				if (resp.estado) {
+					$scope.objeto=resp.json.programa;
+					$scope.editarId=$scope.objeto.id;
+					$scope.objeto.nodeTipo="PR";
+				}
+				$scope.guardar=true;
+				$scope.edicion=true;
+			});
+		}
 	}
 	
 	$scope.editar=function(node){
@@ -141,6 +165,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				//console.log(resp.json);
 				if (resp.estado) {
 					$scope.objeto=resp.json.programa;
+					$scope.editarId=$scope.objeto.id;
 					$scope.objeto.nodeTipo="PR";
 				}
 				$scope.guardar=true;
@@ -153,6 +178,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				//console.log(resp.json);
 				if (resp.estado) {
 					$scope.objeto=resp.json.subprograma;
+					$scope.editarId=$scope.objeto.id;
 					$scope.objeto.nodeTipo="SP";
 				}
 				$scope.guardar=true;
@@ -191,6 +217,19 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 						$scope.agregarDetalle();
 					}
 					$scope.objeto.nodeTipo="AC";
+				}
+				$scope.guardar=true;
+				$scope.edicionActividad=true;
+			});
+		}
+		if (node.nodeTipo == "SA") { // SubActividad
+			formulacionEstrategicaFactory.traerSubActividadEditar(node.id).then(function(resp){
+				console.log("Respuesta:");
+				console.log(resp.json);
+				if (resp.estado) {
+					$scope.objeto=resp.json.subactividad;
+					$scope.editarId=$scope.objeto.id;
+					$scope.objeto.nodeTipo="SA";
 				}
 				$scope.guardar=true;
 				$scope.edicionActividad=true;
@@ -340,9 +379,10 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 
 	$scope.form = {
         submit: function (form) {
+        	console.log("GUARDAR===");
             var firstError = null;
+        	console.log(form);
             if (form.$invalid) {
-
                 var field = null, firstError = null;
                 for (field in form) {
                     if (field[0] != '$') {
@@ -359,6 +399,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
+            	console.log("GUARDAndo-----------");
             	$scope.newobj = $scope.objeto;
             	if ($scope.newobj.nodeTipo == "PY") {
             		$scope.newobj.proyectometaTOs = $scope.objetolista;
@@ -375,6 +416,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	 		             $scope.edicionSubPrograma=false;
 	 		             $scope.edicionProyecto=false;
 	 		             $scope.edicionActividad=false;
+	 		             $scope.edicionSubActividad=false;
 	 		             $scope.objeto={};
 	 		             SweetAlert.swal("Formulacion Estrategica!", "Registro grabado satisfactoriamente!", "success");
         			 }else{
@@ -390,6 +432,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
             $scope.edicionSubPrograma=false;
             $scope.edicionProyecto=false;
             $scope.edicionActividad=false;
+            $scope.edicionSubActividad=false;
             $scope.objeto={};
         }
     };
