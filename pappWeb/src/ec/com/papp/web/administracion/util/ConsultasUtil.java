@@ -38,12 +38,14 @@ import ec.com.papp.administracion.to.ProcedimientoTO;
 import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.administracion.to.SubitemTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
+import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
 import ec.com.papp.administracion.to.TipoidentificacionTO;
 import ec.com.papp.administracion.to.TipoidentificaciontipoTO;
 import ec.com.papp.administracion.to.TipoproductoTO;
 import ec.com.papp.administracion.to.TiporegimenTO;
 import ec.com.papp.administracion.to.UnidadmedidaTO;
 import ec.com.papp.estructuraorganica.to.InstitucionTO;
+import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.NivelorganicoTO;
 import ec.com.papp.planificacion.to.OrganismoprestamoTO;
 import ec.com.papp.resource.MensajesAplicacion;
@@ -164,6 +166,8 @@ public class ConsultasUtil {
 		}
 		return jsonObject;
 	}
+	
+	
 	/**
 	* Metodo que consulta las Divisiones geograficas y arma el json para mostrarlos en la grilla
 	*
@@ -2233,5 +2237,105 @@ public class ConsultasUtil {
 		return jsonObject;
 	}
 
+	/**
+	* Metodo que consulta las Clases de gasto para ejecucion y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
 
+	public static JSONObject consultaClasegasto(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+		log.println("entra a consultar institucion");
+		String campo="";
+		ClaseregistrocmcgastoTO claseregistrocmcgastoTO=new ClaseregistrocmcgastoTO();
+		ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO=new ClaseregistroclasemodificacionTO();
+		ClaseregistroTO claseregistroTO=new ClaseregistroTO();
+		try{
+			campo="claseregistroclasemodificacion.claseregistro.codigo";
+			String[] columnas={campo};
+			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
+				campo=parameters.get("sidx");
+			String[] orderBy = columnas;
+			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
+				claseregistrocmcgastoTO.setOrderByField(OrderBy.orderDesc(orderBy));
+			else
+				claseregistrocmcgastoTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			if(parameters.get("registrocodigo")!=null && !parameters.get("registrocodigo").equals(""))
+				claseregistroTO.setCodigo(parameters.get("registrocodigo"));
+			if(parameters.get("registronombre")!=null && !parameters.get("registronombre").equals(""))
+				claseregistroTO.setNombre(parameters.get("registronombre"));
+			if(parameters.get("modificacioncodigo")!=null && !parameters.get("modificacioncodigo").equals(""))
+				claseregistroclasemodificacionTO.setCodigo(parameters.get("modificacioncodigo"));
+			if(parameters.get("modificacionnombre")!=null && !parameters.get("modificacionnombre").equals(""))
+				claseregistroclasemodificacionTO.setNombre(parameters.get("modificacionnombre"));
+			if(parameters.get("gastocodigo")!=null && !parameters.get("gastocodigo").equals(""))
+				claseregistrocmcgastoTO.setNombre(parameters.get("gastocodigo"));
+			if(parameters.get("gastonombre")!=null && !parameters.get("gastonombre").equals(""))
+				claseregistrocmcgastoTO.setCodigo(parameters.get("gastonombre"));
+			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+				claseregistrocmcgastoTO.setClaseregistrocmcgastoefid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+			claseregistroclasemodificacionTO.setClaseregistro(claseregistroTO);
+			claseregistrocmcgastoTO.setClaseregistroclasemodificacion(claseregistroclasemodificacionTO);
+			Collection<ClaseregistrocmcgastoTO> claseregistrocmcgastoTOs=UtilSession.planificacionServicio.transObtenerClaseregistrocmcgasto(claseregistrocmcgastoTO);	
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(claseregistrocmcgastoTOs,claseregistrocmcgastoTO.getJsonConfigListaClaseg()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", claseregistrocmcgastoTOs.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+	
+	
+	/**
+	* Metodo que consulta las Tipo clase documento para ejecucion y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaTipoclasedocumento(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+		log.println("entra a consultar institucion");
+		String campo="";
+		TipodocumentoclasedocumentoTO tipodocumentoclasedocumentoTO=new TipodocumentoclasedocumentoTO();
+		TipodocumentoTO tipodocumentoTO=new TipodocumentoTO();
+		try{
+			campo="tipodocumento.codigo";
+			String[] columnas={campo};
+			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
+				campo=parameters.get("sidx");
+			String[] orderBy = columnas;
+			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
+				tipodocumentoclasedocumentoTO.setOrderByField(OrderBy.orderDesc(orderBy));
+			else
+				tipodocumentoclasedocumentoTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
+				tipodocumentoclasedocumentoTO.setCodigo(parameters.get("codigo"));
+			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
+				tipodocumentoclasedocumentoTO.setNombre(parameters.get("nombre"));
+			if(parameters.get("tipocodigo")!=null && !parameters.get("tipocodigo").equals(""))
+				tipodocumentoTO.setCodigo(parameters.get("tipocodigo"));
+			if(parameters.get("tiponombre")!=null && !parameters.get("tiponombre").equals(""))
+				tipodocumentoTO.setNombre(parameters.get("tiponombre"));
+			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+				tipodocumentoclasedocumentoTO.setTipodocumentoclasedocefid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+			tipodocumentoclasedocumentoTO.setTipodocumento(tipodocumentoTO);
+			Collection<TipodocumentoclasedocumentoTO> tipodocumentoclasedocumentoTOs=UtilSession.adminsitracionServicio.transObtenerTipodocumentoclasedocumento(tipodocumentoclasedocumentoTO);	
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(tipodocumentoclasedocumentoTOs,tipodocumentoclasedocumentoTO.getJsonConfigLista()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", tipodocumentoclasedocumentoTOs.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+	
 }

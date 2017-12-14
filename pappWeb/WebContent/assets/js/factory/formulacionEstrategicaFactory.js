@@ -38,6 +38,16 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 			return Restangular.allUrl(url).getList();
 		},
 
+		traerSubActividad : function(
+			npNivelid,
+			ejercicio
+		) {
+			var url = "planificacion/consultar/subactividad/" +
+				"padre=" + npNivelid  +
+				"&subactividadejerfiscalid=" + ejercicio;
+			return Restangular.allUrl(url).getList();
+		},
+
 		traerFormulacionEstrategicaFiltro : function(pagina,nombre) {
 			var url = "planificacion/consultar/programa/pagina="+pagina;
 
@@ -70,9 +80,15 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 		    return Restangular.allUrl(url).customGET();
 		},
 
-		traerFormulacionEstrategicaNuevoEstructura : function(padreid, ejerciciofiscalid, tipopadre) {
-			var url = "planificacion/nuevo/programa/"+padreid+"/"+ejerciciofiscalid+"/"+tipopadre;
+		traerSubActividadEditar : function(id) {
+			var url = "planificacion/subactividad/"+id+"/0";
 
+		    return Restangular.allUrl(url).customGET();
+		},
+
+		traerProgramaNuevo : function(padreid, ejerciciofiscalid) {
+			var url = "planificacion/nuevo/programa/"+padreid+"/"+ejerciciofiscalid+"/0";
+			//console.log(url);
 		    return Restangular.allUrl(url).customGET();
 		},
 
