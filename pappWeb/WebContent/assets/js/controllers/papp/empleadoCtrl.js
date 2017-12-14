@@ -16,6 +16,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	$scope.objeto={};
 	$scope.objetoEspecialidad={};
 	$scope.objetoClasificacion={};
+	$scope.fuerza=null;
 
 	var pagina = 1;
 
@@ -80,22 +81,42 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 		$scope.objetolista=[];
 		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
 		$scope.objetolista.push(obj);
+		$scope.fuerza=null;
 
 		$scope.edicion=true;
 		$scope.guardar=true;
 		$scope.nuevoar=true;
-	}
-	
+	};
+
 	$scope.editar=function(id){
 		empleadosFactory.traerEmpleadosEditar(id).then(function(resp){
+			//console.log(resp.json);
 			if (resp.estado) {
 				$scope.objeto=resp.json.empleado;
+				$scope.fuerza=null;
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;
 			$scope.nuevoar=false;
 		})
 	};
+
+	$scope.nombreMostrado = function() {
+		$scope.objeto.nombremostrado = "";
+		if ($scope.objeto.primernombre != null && $scope.objeto.primernombre.trim() != "") {
+			$scope.objeto.nombremostrado += $scope.objeto.primernombre;
+		}
+		if ($scope.objeto.segundonombre != null && $scope.objeto.segundonombre.trim() != "") {
+			$scope.objeto.nombremostrado += " " + $scope.objeto.segundonombre;
+		}
+		if ($scope.objeto.primerapellido != null && $scope.objeto.primerapellido.trim() != "") {
+			$scope.objeto.nombremostrado += " " + $scope.objeto.primerapellido;
+		}
+		if ($scope.objeto.segundoapellido != null && $scope.objeto.segundoapellido.trim() != "") {
+			$scope.objeto.nombremostrado += " " + $scope.objeto.segundoapellido;
+		}
+		$scope.objeto.nombremostrado = $scope.objeto.nombremostrado.trim();
+	}
 
 	$scope.agregarDetalle=function(){
 		var obj={id:{perfilid:$scope.objeto,permisoid:null},nppermiso:null};
@@ -136,15 +157,22 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			$scope.objeto.rmugrupocodigo = obj.npcodigoescalarmu;
 			$scope.objeto.npremuneracion = obj.npremuneracion;
 			$scope.objeto.npcargocodigo = " ";
+			$scope.fuerza = obj.gegradofuerzaid
 		}, function() {
 		});
 	};
 
 	$scope.abrirEspecialidad = function(index) {
+		console.log($scope.fuerza);
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalEspecialidades.html',
 			controller : 'ModalEspecialidadesController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				fuerza : function() {
+					return $scope.fuerza;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
@@ -159,7 +187,12 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalClasificacion.html',
 			controller : 'ModalClasificacionController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				fuerza : function() {
+					return $scope.fuerza;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);

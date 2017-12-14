@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalEspecialidadesController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","especialidadesFactory",
-	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams, especialidadesFactory) {
+app.controller('ModalEspecialidadesController', [ "$scope","$uibModalInstance","fuerza","SweetAlert","$filter", "ngTableParams","especialidadesFactory",
+	function($scope,$uibModalInstance,fuerza,SweetAlert,$filter, ngTableParams, especialidadesFactory) {
 
 	$scope.codigo=null;
 	$scope.nombre=null;
@@ -16,8 +16,9 @@ app.controller('ModalEspecialidadesController', [ "$scope","$uibModalInstance","
 	
 	$scope.consultar=function(){
 		$scope.data=[];
+		especialidadesFactory.setFuerza(fuerza);
 		especialidadesFactory.traerEspecialidades(pagina).then(function(resp){
-			//console.log(resp);
+			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -45,7 +46,12 @@ app.controller('ModalEspecialidadesController', [ "$scope","$uibModalInstance","
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		especialidadesFactory.traerEspecialidadesFiltro(pagina,$scope.codigo,$scope.nombre,$scope.estado).then(function(resp){
+		especialidadesFactory.traerEspecialidadesFiltro(
+			pagina,
+			$scope.codigo,
+			$scope.nombre,
+			$scope.estado
+		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})

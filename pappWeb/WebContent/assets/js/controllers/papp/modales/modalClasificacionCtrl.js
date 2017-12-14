@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","clasificacionFactory",
-	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,clasificacionFactory) {
+app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","fuerza","SweetAlert","$filter", "ngTableParams","clasificacionFactory",
+	function($scope,$uibModalInstance,fuerza,SweetAlert,$filter, ngTableParams,clasificacionFactory) {
     	
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
@@ -13,18 +13,16 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
 		$scope.data=[];
-		clasificacionFactory.traerClasificacionesActivos(pagina,'A').then(function(resp){
+		clasificacionFactory.setFuerza(fuerza);
+		clasificacionFactory.traerClasificacionesFuerzaFiltro(pagina, null, null, null, 'A').then(function(resp){
 			console.log(resp);
 			if (resp.meta)
-				$scope.data=resp;				
+				$scope.data=resp;
 		})
-	
 	};
 	
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 10, // count per page
@@ -46,10 +44,8 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","S
 	
 	
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
-		clasificacionFactory.traerClasificacionesFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, $scope.estadoFiltro).then(function(resp){
-			
+		clasificacionFactory.traerClasificacionesFuerzaFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, $scope.estadoFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})

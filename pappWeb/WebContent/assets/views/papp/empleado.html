@@ -177,7 +177,7 @@
 									</label>
 									<input type="text" placeholder="Ingrese el primer nombre"
 										class="form-control" name="primernombre" required
-										ng-model="objeto.primernombre" ng-minlength="1">
+										ng-model="objeto.primernombre" ng-minlength="1" ng-change="nombreMostrado();">
 									<span class="error text-small block"
 										ng-if="Form.primernombre.$dirty && Form.primernombre.$invalid">
 										Incorrecto</span>
@@ -195,7 +195,7 @@
 									</label>
 									<input type="text" placeholder="Ingrese el primer segundo nombre"
 										class="form-control" name="segundonombre" required
-										ng-model="objeto.segundonombre" ng-minlength="1">
+										ng-model="objeto.segundonombre" ng-minlength="1" ng-change="nombreMostrado();">
 									<span class="error text-small block"
 										ng-if="Form.segundonombre.$dirty && Form.segundonombre.$invalid">
 										Incorrecto</span>
@@ -213,7 +213,7 @@
 									</label>
 									<input type="text" placeholder="Ingrese el primer primer apellido"
 										class="form-control" name="primerapellido" required
-										ng-model="objeto.primerapellido" ng-minlength="1">
+										ng-model="objeto.primerapellido" ng-minlength="1" ng-change="nombreMostrado();">
 									<span class="error text-small block"
 										ng-if="Form.primerapellido.$dirty && Form.primerapellido.$invalid">
 										Incorrecto</span>
@@ -231,7 +231,7 @@
 									</label>
 									<input type="text" placeholder="Ingrese el primer segundo apellido"
 										class="form-control" name="segundoapellido" required
-										ng-model="objeto.segundoapellido" ng-minlength="1">
+										ng-model="objeto.segundoapellido" ng-minlength="1" ng-change="nombreMostrado();">
 									<span class="error text-small block"
 										ng-if="Form.segundoapellido.$dirty && Form.segundoapellido.$invalid">
 										Incorrecto</span>

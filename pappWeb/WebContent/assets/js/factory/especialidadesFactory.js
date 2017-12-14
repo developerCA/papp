@@ -1,14 +1,21 @@
 app.factory("especialidadesFactory", [ "Restangular", function(Restangular) {
 
 	var service = Restangular.service("/administrar");
+	var fuerza = null;
 
 	return {
-		
+		setFuerza : function(newfuerza) {
+			fuerza = newfuerza;
+		},
 		
 		traerEspecialidades : function(pagina) {
-			  
-			  return Restangular.allUrl("administrar/consultar/especialidades/pagina="+pagina).getList();
-			  
+			var url = "administrar/consultar/especialidades/pagina="+pagina;
+			if (fuerza != null) {
+				url += "&fuerza=" + fuerza;
+			}
+			console.log(fuerza);
+			console.log(url);
+			return Restangular.allUrl(url).getList();
 		},
 		
 		traerEspecialidadesFiltro : function(pagina,codigo,nombre,estado) {
