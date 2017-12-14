@@ -364,7 +364,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 	$scope.abrirCodigoPresupuestario = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalUnidad.html',
+			templateUrl : 'assets/views/papp/modal/modalUnidad.html',
 			controller : 'ModalUnidadController',
 			size : 'lg'
 		});

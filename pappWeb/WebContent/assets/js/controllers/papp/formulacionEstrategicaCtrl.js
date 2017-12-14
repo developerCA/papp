@@ -205,17 +205,6 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		return new Date(parts[2],parts[0]-1,parts[1]); 
 	}
 
-	$scope.agregarDetalle=function(){
-		var obj={
-			proyectoid: $scope.editarId,
-			id: {
-				id: null,
-				metaejerciciofiscalid: $rootScope.ejefiscal
-			}
-		};
-		$scope.objetolista.push(obj);
-	}
-
 	$scope.removerDetalle=function(index){
 		$scope.objetolista.splice(index,1);
 	}
@@ -320,15 +309,31 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 
 	$scope.abrirUnidades = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalUnidades.html',
+			templateUrl : 'assets/views/papp/modal/modalUnidad.html',
 			controller : 'ModalUnidadController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.proyectoindicadorid = obj.id;
-			$scope.objeto.npIndicadorcodigo = obj.codigo;
-			$scope.objeto.npIndicadornombre = obj.nombre;
+			//console.log(obj);
+			for (var i = 0; i < $scope.objetolista.length; i++) {
+				if ($scope.objetolista[i].nivelactividadunidadid == obj.id) {
+					SweetAlert.swal(
+						"Formulacion Estrategica!",
+						"La unidad ya esta en la lista!",
+						"error"
+					);
+					return;
+				}
+			}
+			var obj={
+				id: null,
+				tablarelacionid: $scope.editarId,
+				nivelactividadejerfiscalid: $rootScope.ejefiscal,
+				nivelactividadunidadid: obj.id,
+				npCodigounidad: obj.codigopresup,
+				npNombreunidad: obj.nombre
+			};
+			$scope.objetolista.push(obj);
 		}, function() {
 		});
 	};
@@ -359,17 +364,21 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
             		$scope.newobj.proyectometaTOs = $scope.objetolista;
             		console.log($scope.newobj);
             	}
+            	if ($scope.newobj.nodeTipo == "AC") {
+            		$scope.newobj.nivelactividadTOs = $scope.objetolista;
+            		console.log($scope.newobj);
+            	}
             	formulacionEstrategicaFactory.guardar($scope.newobj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;
 	 		             $scope.edicionSubPrograma=false;
 	 		             $scope.edicionProyecto=false;
-	 		            $scope.edicionActividad=false;
+	 		             $scope.edicionActividad=false;
 	 		             $scope.objeto={};
-	 		             SweetAlert.swal("Formulaci&oacute;n Estrat&eacute;gica!", "Registro grabado satisfactoriamente!", "success");
+	 		             SweetAlert.swal("Formulacion Estrategica!", "Registro grabado satisfactoriamente!", "success");
         			 }else{
-	 		             SweetAlert.swal("Formulaci&oacute;n Estrat&eacute;gica!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal("Formulacion Estrategica!", resp.mensajes.msg, "error");
         			 }
         		})
             }
