@@ -96,8 +96,8 @@ public class ConsultasUtil {
 					certificacionTO.setEstado(parameters.get("estado"));
 				if(parameters.get("numprecompromiso")!=null && !parameters.get("numprecompromiso").equals(""))
 					certificacionTO.setNumprecompromiso(parameters.get("numprecompromiso"));
-				if(parameters.get("certificacionejerfiscalid")!=null && !parameters.get("certificacionejerfiscalid").equals(""))
-					certificacionTO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("certificacionejerfiscalid")));
+				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+					certificacionTO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 				log.println("certificacion: " + certificacionTO.getCertificacionejerfiscalid());
 				SearchResultTO<CertificacionTO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionPaginado(certificacionTO);
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -210,8 +210,8 @@ public class ConsultasUtil {
 					ordengastoTO.setEstado(parameters.get("estado"));
 				if(parameters.get("compromiso")!=null && !parameters.get("compromiso").equals(""))
 					ordengastoTO.setNumerocompromiso(parameters.get("compromiso"));
-				if(parameters.get("ordengastoejerfiscalid")!=null && !parameters.get("ordengastoejerfiscalid").equals(""))
-					ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ordengastoejerfiscalid")));
+				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+					ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 				if(parameters.get("certificacion")!=null && !parameters.get("certificacion").equals("")){
 					certificacionTO.setCodigo(parameters.get("certificacion"));
 				}
@@ -281,8 +281,8 @@ public class ConsultasUtil {
 					ordendevengoTO.setCodigo(parameters.get("codigo"));
 				if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 					ordendevengoTO.setEstado(parameters.get("estado"));
-				if(parameters.get("ordendevengoejerfiscalid")!=null && !parameters.get("ordendevengoejerfiscalid").equals(""))
-					ordendevengoTO.setOrdendevengoejerfiscalid(Long.valueOf(parameters.get("ordendevengoejerfiscalid")));
+				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+					ordendevengoTO.setOrdendevengoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 				if(parameters.get("ordengasto")!=null && !parameters.get("ordengasto").equals("")){
 					ordengastoTO.setCodigo(parameters.get("ordengasto"));
 				}
@@ -340,8 +340,8 @@ public class ConsultasUtil {
 				certificacionTO.setDescripcion(parameters.get("descripcion"));
 			if(parameters.get("unidadid")!=null && !parameters.get("unidadid").equals(""))
 				certificacionTO.setCertificacionunidadid(Long.valueOf(parameters.get("unidadid")));
-			if(parameters.get("certificacionejerfiscalid")!=null && !parameters.get("certificacionejerfiscalid").equals(""))
-				certificacionTO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("certificacionejerfiscalid")));
+			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+				certificacionTO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			SearchResultTO<CertificacionTO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionPaginado(certificacionTO);
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
@@ -393,14 +393,14 @@ public class ConsultasUtil {
 				ordengastoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
 				ordengastoTO.setDescripcion(parameters.get("descripcion"));
-			if(parameters.get("ordengastoejerfiscalid")!=null && !parameters.get("ordengastoejerfiscalid").equals(""))
-				ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ordengastoejerfiscalid")));
+			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+				ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			if(parameters.get("unidad")!=null && !parameters.get("unidad").equals("")){
 				unidadTO.setNombre(parameters.get("unidad"));
 			}
 			ordengastoTO.setUnidad(unidadTO);
-			if(parameters.get("ordengastoejerfiscalid")!=null && !parameters.get("ordengastoejerfiscalid").equals(""))
-				ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ordengastoejerfiscalid")));
+			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+				ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			SearchResultTO<OrdengastoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastoPaginado(ordengastoTO);
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
