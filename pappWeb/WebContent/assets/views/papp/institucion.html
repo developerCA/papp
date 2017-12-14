@@ -236,19 +236,18 @@
 														<td>Estado</td>
 													</tr>
 													<tr ng-repeat="obj in objetolista">
-														<td><!--  ng-disabled="obj.perfilpermisolectura==0" -->
+														<td>
 															<a uib-tooltip="Eliminar"
 																class="btn btn-sm btn-danger"
 																ng-click="removerDetalle($index)">
 																<i class="fa fa-trash"></i>
 															</a>
 														</td>
-<!-- 																required ng-model="obj.id.permisoid" -->
 														<td>
 															<div class="form-group has-success">
 															    <div class="input-group">
 																	<input type="text" placeholder="Escriba un c&otilde;digo"
-																		class="form-control" name="codigo" ng-disabled="true"
+																		class="form-control" name="codigo"
 																		ng-model="obj.codigo" />
 																</div>
 															</div>
@@ -257,7 +256,7 @@
 															<div class="form-group has-success">
 															    <div class="input-group">
 																	<input type="text" placeholder="Escriba el nombre"
-																		class="form-control" name="nombre" ng-disabled="true"
+																		class="form-control" name="nombre"
 																		ng-model="obj.nombre" />
 																</div>
 															</div>

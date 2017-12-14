@@ -383,9 +383,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     		'ngTable','InstitucionCtrl','InstitucionFactory',
     		'ModalDivisionGeograficaCtrl','DivisionGeograficaFactory'
 		),
-        title: 'Instituci&otilde;n',
+        title: 'Institución',
         ncyBreadcrumb: {
-            label: 'InstituciÃ³n'
+            label: 'Institución'
         }
     }).state('app.plannacional', {
         url: "/plannacional",
