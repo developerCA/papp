@@ -1996,6 +1996,7 @@ public class ConsultasUtil {
 	public static JSONObject consultaFuerzaclasificacionPaginado(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
 		String campo="";
 		FuerzaclasificacionTO fuerzaclasificacionTO=new FuerzaclasificacionTO();
+		ClasificacionTO clasificacionTO=new ClasificacionTO();
 		try{
 //			int pagina=1;
 //			if(parameters.get("pagina")!=null)		
@@ -2004,7 +2005,7 @@ public class ConsultasUtil {
 //			if(parameters.get("filas")!=null)
 //				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 //			int primero=(pagina*filas)-filas;
-			campo="codigo";
+			campo="clasificacionTO.codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
@@ -2017,7 +2018,15 @@ public class ConsultasUtil {
 				fuerzaclasificacionTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("fuerza")!=null && !parameters.get("fuerza").equals(""))
 				fuerzaclasificacionTO.getId().setFuerzaid(Long.valueOf(parameters.get("fuerza")));
-			fuerzaclasificacionTO.setClasificacionTO(new ClasificacionTO());
+			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
+				clasificacionTO.setCodigo(parameters.get("codigo"));
+			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
+				clasificacionTO.setNombre(parameters.get("nombre"));
+			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
+				clasificacionTO.setEstado(parameters.get("estado"));
+			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
+				clasificacionTO.setSigla(parameters.get("sigla"));
+			fuerzaclasificacionTO.setClasificacionTO(clasificacionTO);
 			Collection<FuerzaclasificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerzaclasificacion(fuerzaclasificacionTO);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,fuerzaclasificacionTO.getJsonConfig()));
 			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
