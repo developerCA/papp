@@ -20,12 +20,10 @@ app.controller('ItemsController', ["$scope", "$rootScope", "$uibModal", "SweetAl
 
     $scope.consultar = function () {
 
-        $scope.data = [];
-
-               	
+        $scope.dataset = [];
         
         itemsFactory.traerItemsCustom($scope.pagina, $rootScope.ejefiscal).then(function (resp) {
-        	console.log(resp);
+        	
             $scope.dataset = resp.json.result;
             $scope.total=resp.json.total.valor;
             console.log($scope.total);

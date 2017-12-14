@@ -10,42 +10,38 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     $scope.url = "";
     $scope.objeto = null;
 
-    var pagina = 1;
+    $scope.pagina = 1;
     $scope.data=[];
 
     $scope.consultar = function () {
         $scope.data = [];
-        subitemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
-            if (resp.meta)
-                $scope.data = resp;
-                console.log($scope.data);
+        subitemsFactory.traerItemsCustom($scope.pagina, $rootScope.ejefiscal).then(function (resp) {
+        	 $scope.dataset = resp.json.result;
+             $scope.total = resp.json.total.valor;
+             console.log($scope.total);
         });
     };
 
-    $scope.$watch('data', function () {
-        $scope.tableParams = new ngTableParams({
-            page: 1, // show first page
-            count: 5, // count per page
-            filter: {}
-        }, {
-            total: $scope.data.length, // length of data
-            getData: function ($defer, params) {
-                var orderedData = params.filter() ? $filter('filter')(
-						$scope.data, params.filter()) : $scope.data;
-                $scope.gruposMedida = orderedData.slice(
-						(params.page() - 1) * params.count(), params
-								.page()
-								* params.count());
-                params.total(orderedData.length);
-                $defer.resolve($scope.gruposMedida);
-            }
-        });
-    });
-
+   
+    $scope.pageChanged = function() {
+      
+        if ($scope.aplicafiltro){
+        	$scope.filtrar();
+        }else{
+        	$scope.consultar();	
+        }
+        
+    };  
+    
+    $scope.filtrarUnico=function(){
+    	$scope.pagina=1;
+    	$scope.filtrar();
+    }  
+      
     $scope.filtrar = function () {
         $scope.data = [];
-        subitemsFactory.traerItemsFiltro(
-    		pagina,
+        subitemsFactory.traerItemsFiltroCustom(
+    		$scope.pagina,
     		$scope.codigo,
     		$scope.nombre,
     		$scope.estado,
@@ -54,8 +50,8 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     		$scope.codigoIncop,
     		$scope.itemNombre
 		).then(function (resp) {
-            if (resp.meta)
-                $scope.data = resp;
+			$scope.dataset = resp.json.result;
+            $scope.total=resp.json.total.valor;
         })
 
     };
@@ -74,6 +70,8 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
         $scope.estado = null;
         $scope.codigoIncop=null;
         $scope.itemNombre=null;
+        $scope.aplicafiltro=false;
+        $scope.pagina=1;
         $scope.consultar();
     };
 
