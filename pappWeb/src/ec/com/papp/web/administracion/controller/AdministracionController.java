@@ -2066,6 +2066,11 @@ public class AdministracionController {
 			else if(clase.equals("claseregistrocmcgasto")){
 				jsonObject=ConsultasUtil.consultaClasegasto(parameters, jsonObject);
 			}
+			
+			//Tipo clase documento
+			else if(clase.equals("tipodocumentoclasedocumento")){
+				jsonObject=ConsultasUtil.consultaTipoclasedocumento(parameters, jsonObject);
+			}
 			log.println("json retornado de consulta: " + jsonObject.toString()); 
 		}catch (Exception e) {
 			e.printStackTrace();
