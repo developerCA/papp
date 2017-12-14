@@ -80,9 +80,16 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 				$scope.objeto=resp.json.cargoescala;
 				$scope.edicion=true;
 				console.log($scope.objeto);
+				$scope.objeto.npremuneracion=$scope.convertirDecimal($scope.objeto.npremuneracion);
+				
 			}
 		})
 		
+	};
+	
+	$scope.convertirDecimal=function (dato) {
+		
+	    return  parseFloat(dato).toFixed(5);
 	};
 	
 	$scope.buscarEscala=function(){
