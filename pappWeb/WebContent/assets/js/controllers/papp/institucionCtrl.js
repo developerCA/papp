@@ -72,8 +72,7 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 			estado: "A"
 		};
 		$scope.objetolista=[];
-		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
-		$scope.objetolista.push(obj);
+		$scope.agregarDetalle();
 		$scope.edicion=true;
 		$scope.guardar=true;
 	}
@@ -99,6 +98,9 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 			estado: "A"
 		};
 		$scope.objetolista.push(obj);
+		console.log(obj);
+		console.log($scope.objeto);
+		console.log($scope.objetolista);
 	}
 
 	$scope.removerDetalle=function(index){
@@ -115,7 +117,7 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 					"El codigo ya existe, ingrece uno nuevo",
 					"error"
 				);
-				$scope.objetolista[index] = "";
+				$scope.objetolista[index].codigo = "";
 				return;
 			}
 		}
@@ -139,7 +141,8 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 			}
 		});
 		console.log('lista antes');
-		console.log($scope.objetolista[index]);
+		console.log(index);
+		console.log($scope.objetolista);
 		modalInstance.result.then(function(obj) {
 			$scope.objetolista[index].institucionentpaisid = obj.id;
 			$scope.objetolista[index].npnombrepais = obj.nombre;
@@ -215,6 +218,10 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
             } else {
                 var objEnviar = $scope.objeto;
                 objEnviar.details = $scope.objetolista;
+                console.log(objEnviar.details);
+                for (var i = 0; i < objEnviar.details.length; i++) {
+                	objEnviar.details[i].id.entid = i + 1;
+				}
                 console.log(objEnviar);
             	institucionFactory.guardar(objEnviar).then(function(resp){
         			 if (resp.estado){

@@ -154,7 +154,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			$scope.objeto.npgradonombre = obj.npnombregrado;
 			$scope.objeto.npfuerzanombre = obj.npnombrefuerza;
 			$scope.objeto.npgrupoocupacional = obj.npgrupoocupacional;
-			$scope.objeto.rmugrupocodigo = obj.npcodigoescalarmu;
+			$scope.objeto.npcodigoescalarmu = obj.npcodigoescalarmu;
 			$scope.objeto.npremuneracion = obj.npremuneracion;
 			$scope.objeto.npcargocodigo = " ";
 			$scope.fuerza = obj.gegradofuerzaid
@@ -195,8 +195,8 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			$scope.objeto.socionegocioempclasifid = obj.id;
+			console.log(obj);
+			$scope.objeto.socionegocioempclasifid = obj.id.fuerzaclasificacionid;
 			$scope.objeto.npclasificacioncodigo = obj.codigo;
 			$scope.objeto.npclasificacionnombre = obj.nombre;
 		}, function() {
