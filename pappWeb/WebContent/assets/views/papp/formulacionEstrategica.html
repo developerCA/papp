@@ -232,7 +232,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
 								        class="form-control" name="codigo" ng-model="objetoSp.codigo" ng-pattern="/^[0-9]*$/"
-								        required ng-disabled="true">
+								        required ng-disabled="!nuevoar">
 								    <span class="error text-small block"
 								        ng-if="FormSubprograma.codigo.$dirty && FormSubprograma.codigo.$invalid">
 								        Incorrecto
@@ -771,7 +771,7 @@
 									<div class="panel-heading">
 										<a uib-tooltip="Agregar"
 											class="pull-right btn btn-sm btn-info"
-											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
+											ng-click="agregarDetallePy();"><i class="fa fa-plus-square"></i>
 										</a>
 										<h4 class="panel-title">
 											Meta
@@ -786,7 +786,7 @@
 														<th>A&ntilde;o</th>
 														<th>Descripci&oacute;n</th>
 													</tr>
-													<tr ng-repeat="obj in objetolista">
+													<tr ng-repeat="obj in objetolistaPy">
 														<td>
 															<a uib-tooltip="Eliminar"
 																class="btn btn-sm btn-danger"
@@ -860,7 +860,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
 								        class="form-control" name="codigo" ng-model="objetoAc.codigo" ng-pattern="/^[0-9]*$/"
-								        required>
+								        required ng-disabled="!nuevoar">
 								    <span class="error text-small block"
 								        ng-if="FormActividad.codigo.$dirty && FormActividad.codigo.$invalid">
 								        Incorrecto
@@ -1219,7 +1219,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
 								        class="form-control" name="codigo" ng-model="objetoSa.codigo" ng-pattern="/^[0-9]*$/"
-								        required>
+								        required ng-disabled="!nuevoar">
 								    <span class="error text-small block"
 								        ng-if="FormSubactividad.codigo.$dirty && FormSubactividad.codigo.$invalid">
 								        Incorrecto

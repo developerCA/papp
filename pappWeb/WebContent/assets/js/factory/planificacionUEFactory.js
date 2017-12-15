@@ -11,8 +11,6 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
         traerPlanificacionUECustom: function (pagina, ejercicio) {
         	 var url = "planificacion/consultar/planificacion/pagina=" + pagina + "&ejerciciofiscal=" + ejercicio;
              return Restangular.allUrl(url).customGET();
-             
-            
         },
         
         traerPlanificacionUEFiltro: function (pagina, ejercicio, codigo, nombre) {
