@@ -2,8 +2,7 @@
 
 app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","unidadFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,unidadFactory) {
-    
-	
+
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.estadoFiltro=null;

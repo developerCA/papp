@@ -122,19 +122,12 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	
 	$scope.nuevo=function(node){
 		$scope.editarId=null;
-/*		formulacionEstrategicaFactory.traerFormulacionEstrategicaNuevoEstructura(
-			node.id,
-			$rootScope.ejefiscal,
-			node.tipo
-		).then(function(resp){
-			$scope.objeto=resp.json.objetivo;
-			$scope.guardar=true;
-		})
-*/		console.log(node);
+		console.log(node);
 		$scope.nuevoar = true;
 		$scope.guardar = true;
 		if (node == null) { // Programa
-			formulacionEstrategicaFactory.traerProgramaNuevo(
+			formulacionEstrategicaFactory.traerNuevo(
+				"PR",
 				0,
 				$rootScope.ejefiscal
 			).then(function(resp){
@@ -149,7 +142,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			});
 		}
 		if (node.nodeTipo == "PR") { // SubPrograma
-			formulacionEstrategicaFactory.traerSubProgramaNuevo(
+			formulacionEstrategicaFactory.traerNuevo(
+				"SP",
 				node.id,
 				$rootScope.ejefiscal
 			).then(function(resp){
@@ -164,7 +158,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			});
 		}
 		if (node.nodeTipo == "SP") { // Proyecto
-			formulacionEstrategicaFactory.traerProyectoNuevo(
+			formulacionEstrategicaFactory.traerNuevo(
+				"PY",
 				node.id,
 				$rootScope.ejefiscal
 			).then(function(resp){
@@ -179,7 +174,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			});
 		}
 		if (node.nodeTipo == "PY") { // Actividad
-			formulacionEstrategicaFactory.traerActividadNuevo(
+			formulacionEstrategicaFactory.traerNuevo(
+				"AC",
 				node.id,
 				$rootScope.ejefiscal
 			).then(function(resp){
@@ -194,7 +190,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			});
 		}
 		if (node.nodeTipo == "AC" || node.nodeTipo == "SA") { // SubActividad
-			formulacionEstrategicaFactory.traerSubActividadNuevo(
+			formulacionEstrategicaFactory.traerNuevo(
+				"SA",
 				node.id,
 				$rootScope.ejefiscal
 			).then(function(resp){
@@ -249,9 +246,9 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 					$scope.objetoPy.npFechafin = toDate($scope.objeto.npFechafin);
 
 					$scope.editarId=$scope.objeto.id;
-					$scope.objetolista=resp.json.proyectometa;
+					$scope.objetolistaPy=resp.json.proyectometa;
 					if ($scope.objetolista == []) {
-						$scope.agregarDetalle();
+						$scope.agregarDetallePy();
 					}
 					$scope.nodeTipo="PY";
 				}
@@ -267,9 +264,9 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 					$scope.objetoAc=resp.json.actividad;
 					$scope.editarId=$scope.objeto.id;
 					$scope.objetolista=resp.json.nivelactividad;
-					if ($scope.objetolista == []) {
+					/* if ($scope.objetolista == []) {
 						$scope.agregarDetalle();
-					}
+					} */
 					$scope.nodeTipo="AC";
 				}
 				$scope.guardar=true;
@@ -300,6 +297,19 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			return new Date();
 		}
 		return new Date(parts[2],parts[0]-1,parts[1]); 
+	}
+
+	$scope.agregarDetallePy=function(){
+		var obj={
+			id: {
+				id: null,
+				metaejerciciofiscalid: $rootScope.ejefiscal
+			},
+			proyectoid: $scope.editarId,
+			ano: null,
+			descripcion: null
+		};
+		$scope.objetolistaPy.push(obj);
 	}
 
 	$scope.removerDetalle=function(index){
@@ -477,7 +487,6 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
                         }
                     }
                 }
-
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
