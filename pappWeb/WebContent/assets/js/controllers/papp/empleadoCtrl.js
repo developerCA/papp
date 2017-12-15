@@ -254,10 +254,10 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Permiso!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Empleado!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Permiso!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Empleado", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			
