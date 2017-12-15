@@ -176,48 +176,44 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 	};
 
 	$scope.form = {
-
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
-
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
-
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
-
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
-
-		            } else {
-		                var objEnviar = $scope.objeto;
-		                objEnviar.details = $scope.objetolista;
-		            	institucionFactory.guardar(objEnviar).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Institucion!", "Registro guardado satisfactoriamente!", "success");
- 		        			 }else{
-			 		             SweetAlert.swal("Institucion!", resp.mensajes.msg, "error");
-		        			 }
-		        		})
-		            }
-		        },
-		        reset: function (form) {
-		            $scope.myModel = angular.copy($scope.master);
-		            form.$setPristine(true);
-		            $scope.edicion=false;
-		            $scope.objeto={};
-		        }
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+                var objEnviar = $scope.objeto;
+                objEnviar.details = $scope.objetolista;
+                console.log(objEnviar);
+            	institucionFactory.guardar(objEnviar).then(function(resp){
+        			 if (resp.estado){
+        				 form.$setPristine(true);
+	 		             $scope.edicion=false;
+	 		             $scope.objeto={};
+	 		             $scope.limpiar();
+	 		             SweetAlert.swal("Institucion!", "Registro guardado satisfactoriamente!", "success");
+        			 }else{
+	 		             SweetAlert.swal("Institucion!", resp.mensajes.msg, "error");
+        			 }
+        		})
+            }
+        },
+        reset: function (form) {
+            $scope.myModel = angular.copy($scope.master);
+            form.$setPristine(true);
+            $scope.edicion=false;
+            $scope.objeto={};
+        }
     };
 } ]);
