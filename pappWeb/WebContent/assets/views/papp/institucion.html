@@ -141,8 +141,7 @@
 									</label>
 									<textarea placeholder="Especifique la base legal"
 										class="form-control" name="baselegal" required
-										ng-model="objeto.baselegal" rows="5">
-									</textarea>
+										ng-model="objeto.baselegal" rows="5"></textarea>
 									<span class="error text-small block"
 										ng-if="Form.baselegal.$dirty && Form.baselegal.$invalid">
 										Incorrecto
@@ -161,8 +160,7 @@
 									</label>
 									<textarea placeholder="Especifique la base legal"
 										class="form-control" name="mision" required
-										ng-model="objeto.mision" rows="5">
-									</textarea>
+										ng-model="objeto.mision" rows="5"></textarea>
 									<span class="error text-small block"
 										ng-if="Form.mision.$dirty && Form.mision.$invalid">
 										Incorrecto
@@ -181,8 +179,7 @@
 									</label>
 									<textarea placeholder="Especifique la base legal"
 										class="form-control" name="vision" required
-										ng-model="objeto.vision" rows="5">
-									</textarea>
+										ng-model="objeto.vision" rows="5"></textarea>
 									<span class="error text-small block"
 										ng-if="Form.vision.$dirty && Form.vision.$invalid">
 										Incorrecto
@@ -249,8 +246,9 @@
 															<div class="form-group has-success">
 															    <div class="input-group">
 																	<input type="text" placeholder="Escriba un c&oacute;digo"
-																		class="form-control" name="codigo"
-																		ng-model="obj.codigo" />
+																		class="form-control" name="codigo_{{$index}}" ng-model="obj.codigo"
+																		ng-minlength="4" ng-maxlength="4" ng-pattern="/^[0-9]*$/"
+																		ng-blur="chequiarCodigo($index);">
 																</div>
 															</div>
 														</td>
@@ -258,69 +256,68 @@
 															<div class="form-group has-success">
 															    <div class="input-group">
 																	<input type="text" placeholder="Escriba el nombre"
-																		class="form-control" name="nombre"
+																		class="form-control" name="nombre_{{$index}}"
 																		ng-model="obj.nombre" />
 																</div>
 															</div>
 														</td>
 														<td>
-<div class="form-group"
-    ng-class="{'has-error':Form.npnombrepais.$dirty && Form.npnombrepais.$invalid, 'has-success':Form.npnombrepais.$valid}">
-    <div class="input-group">
-        <input type="text" placeholder="Seleccione el pais"
-            class="form-control" name="npnombrepais" ng-disabled="true"
-            ng-model="obj.npnombrepais">
-        <span class="input-group-btn">
-            <button type="button" class="btn btn-primary"
-                ng-click="abrirNombrePais($index)">
-                <i class="fa fa-search"></i>
-            </button>
-        </span>
-    </div>
-</div>
+															<div class="form-group"
+															    ng-class="{'has-error':Form.npnombrepais.$dirty && Form.npnombrepais.$invalid, 'has-success':Form.npnombrepais.$valid}">
+															    <div class="input-group">
+															        <input type="text" placeholder="Seleccione el pais"
+															            class="form-control" name="npnombrepais_{{$index}}" ng-disabled="true"
+															            ng-model="obj.npnombrepais">
+															        <span class="input-group-btn">
+															            <button type="button" class="btn btn-primary"
+															                ng-click="abrirNombrePais($index)">
+															                <i class="fa fa-search"></i>
+															            </button>
+															        </span>
+															    </div>
+															</div>
 														</td>
 														<td>
-<div class="form-group"
-    ng-class="{'has-error':Form.npnombreprovincia.$dirty && Form.npnombreprovincia.$invalid, 'has-success':Form.npnombreprovincia.$valid}">
-    <div class="input-group">
-        <input type="text" placeholder="Seleccione una provincia"
-            class="form-control" name="npnombreprovincia" ng-disabled="true"
-            ng-model="obj.npnombreprovincia">
-        <span class="input-group-btn">
-            <button type="button" class="btn btn-primary"
-                ng-click="abrirNombreProvincia($index)">
-                <i class="fa fa-search"></i>
-            </button>
-        </span>
-    </div>
-</div>
+															<div class="form-group"
+															    ng-class="{'has-error':Form.npnombreprovincia.$dirty && Form.npnombreprovincia.$invalid, 'has-success':Form.npnombreprovincia.$valid}">
+															    <div class="input-group">
+															        <input type="text" placeholder="Seleccione una provincia"
+															            class="form-control" name="npnombreprovincia_{{$index}}" ng-disabled="true"
+															            ng-model="obj.npnombreprovincia">
+															        <span class="input-group-btn">
+															            <button type="button" class="btn btn-primary"
+															                ng-click="abrirNombreProvincia($index)">
+															                <i class="fa fa-search"></i>
+															            </button>
+															        </span>
+															    </div>
+															</div>
 														</td>
 														<td>
-<div class="form-group"
-    ng-class="{'has-error':Form.npnombrecanton.$dirty && Form.npnombrecanton.$invalid, 'has-success':Form.npnombrecanton.$valid}">
-    <div class="input-group">
-        <input type="text" placeholder="Seleccione un cant&oacute;n"
-            class="form-control" name="npnombrecanton" ng-disabled="true"
-            ng-model="obj.npnombrecanton">
-        <span class="input-group-btn">
-            <button type="button" class="btn btn-primary"
-                ng-click="abrirNombreCanton($index)">
-                <i class="fa fa-search"></i>
-            </button>
-        </span>
-    </div>
-</div>
+															<div class="form-group"
+															    ng-class="{'has-error':Form.npnombrecanton.$dirty && Form.npnombrecanton.$invalid, 'has-success':Form.npnombrecanton.$valid}">
+															    <div class="input-group">
+															        <input type="text" placeholder="Seleccione un cant&oacute;n"
+															            class="form-control" name="npnombrecanton_{{$index}}" ng-disabled="true"
+															            ng-model="obj.npnombrecanton">
+															        <span class="input-group-btn">
+															            <button type="button" class="btn btn-primary"
+															                ng-click="abrirNombreCanton($index)">
+															                <i class="fa fa-search"></i>
+															            </button>
+															        </span>
+															    </div>
+															</div>
 														</td>
 														<td>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-    <select class="form-control" name="estado"
-        ng-model="obj.estado" required>
-        <option value="A" ng-selected="selected">Activo</option>
-        <option value="I">Inactivo</option>
-    </select>
-</div>
+															<div class="form-group"
+															    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+															    <select class="form-control" name="estado_{{$index}}"
+															        ng-model="obj.estado" required>
+															        <option value="A" ng-selected="selected">Activo</option>
+															        <option value="I">Inactivo</option>
+															    </select>
+															</div>
 														</td>
 													</tr>
 												</table>
