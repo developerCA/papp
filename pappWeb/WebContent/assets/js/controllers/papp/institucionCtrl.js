@@ -68,8 +68,8 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 	$scope.nuevo=function(){
 		$scope.objeto={
 			id: null,
-			codigo: null,
-			nombre: null
+			institucionejerciciofiscalid: $rootScope.ejefiscal,
+			estado: "A"
 		};
 		$scope.objetolista=[];
 		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
@@ -87,18 +87,38 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;
-
 		})
-		
 	};
 
 	$scope.agregarDetalle=function(){
-		var obj={id:{perfilid:$scope.objeto,permisoid:null},nppermiso:null};
+		var obj={
+			id: {
+				entid: null, // este es un ID del orde de la lista
+				id: $scope.objeto.id
+			},
+			estado: "A"
+		};
 		$scope.objetolista.push(obj);
 	}
 
 	$scope.removerDetalle=function(index){
 		$scope.objetolista.splice(index,1);
+	}
+
+	$scope.chequiarCodigo=function(index) {
+		console.log(index);
+		for (var i = 0; i < $scope.objetolista.length; i++) {
+			if (index == i) continue;
+			if ($scope.objetolista[index].codigo == $scope.objetolista[i].codigo) {
+				SweetAlert.swal(
+					"Institucion!",
+					"El codigo ya existe, ingrece uno nuevo",
+					"error"
+				);
+				$scope.objetolista[index] = "";
+				return;
+			}
+		}
 	}
 
 	$scope.abrirNombrePais = function(index) {
