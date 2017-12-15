@@ -1,0 +1,169 @@
+<div class="breadcrumb-wrapper">
+	<h4 class="mainTitle no-margin">
+		Planificaci&oacute;n UE
+	</h4>
+
+	<div ncy-breadcrumb class="pull-right"></div>
+</div>
+<div class="container-fluid container-fullw"
+	ng-controller="PlanificacionUEController" ng-init="consultar()">
+
+	<div class="row">
+		<div class="col-md-12"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+
+			<div class="panel panel-white">
+
+				<div class="panel-body" ng-show="!edicion">
+					<div class="panel panel-white" id="panel1">
+						<div class="panel-heading">
+							<h4 class="panel-title text-primary">Filtros</h4>
+							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+						</div>
+						<div uib-collapse="panel1" ng-init="panel1=true"
+							class="panel-wrapper">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+												C&oacute;digo Presupuestario
+											</label>
+											<input type="text" class="form-control" ng-model="codigoFiltro">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>
+												Unidad Nombre
+											</label>
+											<input type="text" class="form-control" ng-model="nombreFiltro">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> Estado </label> <select name="estado"
+												ng-model="estado" class="form-control">
+												<option value>Todos</option>
+												<option value="A">Activo</option>
+												<option value="I">Inactivo</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrarUnico()">
+											<i class="fa fa-search"></i> Buscar
+										</a> <a class="btn btn-wide btn-o btn-default"
+											ng-click="limpiar()">Limpiar</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();">
+						<i class="fa fa-plus-square"></i> Agregar
+					</a>
+
+					<div>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th>C&oacute;digo Presupuestario</th>
+									<th>Nombre</th>
+									<th>Estado</th>
+									<th>Estado Presu.</th>
+								</tr>
+							</thead>
+							<tr ng-repeat="data in dataset">
+								<td>
+									<a class="btn btn-sm btn-primary" ng-click="editar(data.id)">
+										<i class="fa fa-pencil"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary" ng-click="editar(data.id)">
+										<i class="fa fa-pencil"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary" ng-click="editar(data.id)">
+										<i class="fa fa-pencil"></i>
+									</a>
+								</td>
+								<td>
+									{{data.codigo}}
+								</td>
+								<td>
+									{{data.nombre}}
+								</td>
+								<td>
+									<span ng-if="data.estado=='I'">
+										INACTIVO
+									</span>
+									<span ng-if="data.estado=='A'">
+										ACTIVO
+									</span>
+								</td>
+								<td>
+									<span ng-if="data.estado=='I'">
+										INACTIVO
+									</span>
+									<span ng-if="data.estado=='A'">
+										ACTIVO
+									</span>
+								</td>
+							</tr>
+						</table>
+
+						<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+							previous-text="Atras"  uib-pagination total-items="total"
+							ng-change="pageChanged()" items-per-page="20" ng-model="pagina"
+							max-size="10" class="pagination-sm" boundary-links="true"
+							force-ellipses="true">
+						</ul>
+
+					</div>
+				</div>
+
+				<div ng-show="edicion" class="panel-body" id="panel1">
+
+					<div class="panel-heading">
+						<h5 class="panel-title">Items</h5>
+					</div>
+
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+						<div class="row">
+							<div class="col-md-6">
+
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">Guardar
+									</button>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">Cancelar</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

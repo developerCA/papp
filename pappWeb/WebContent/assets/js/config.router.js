@@ -528,6 +528,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Formulación Estratégica'
         }
+    }).state('app.planificacionue', {
+        url: "/planificacionue",
+        templateUrl: "assets/views/papp/planificacionUE.html",
+        resolve: loadSequence(
+        		'ngTable', 'PlanificacionUECtrl', 'PlanificacionUEFactory'
+		),
+        title: 'Planificación UE',
+        ncyBreadcrumb: {
+            label: 'Planificación UE'
+        }
     }).state('app.mantenerindicadores', {
         url: "/mantenerindicadores",
         templateUrl: "assets/views/papp/mantenerIndicadores.html",

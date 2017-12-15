@@ -18,16 +18,16 @@ app.factory("especialidadesFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).getList();
 		},
 		
-		traerEspecialidadesFiltro : function(pagina,codigo,nombre,estado) {
-			  
+		traerEspecialidadesFiltro : function(pagina,codigo,nombre,sigla,tipo,estado) {
 			var url = "administrar/consultar/especialidades/pagina="+pagina;
 
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
-			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
+			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;
+			if(sigla!=null && sigla != "") url += "&sigla=" + sigla;
+			if(tipo!=null && tipo != "") url += "&tipo=" + tipo;
 			if(estado!=null && estado != "") url += "&estado=" + estado;	
-			 
+
 			return Restangular.allUrl(url).getList();
-			  
 		},
 		
 		traerEspecialidadesEditar : function(id) {

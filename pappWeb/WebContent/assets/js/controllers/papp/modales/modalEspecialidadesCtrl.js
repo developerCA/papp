@@ -5,6 +5,8 @@ app.controller('ModalEspecialidadesController', [ "$scope","$uibModalInstance","
 
 	$scope.codigo=null;
 	$scope.nombre=null;
+	$scope.sigla=null;
+	$scope.tipo=null;
 	$scope.estado=null;
 
 	$scope.edicion=false;
@@ -50,6 +52,8 @@ app.controller('ModalEspecialidadesController', [ "$scope","$uibModalInstance","
 			pagina,
 			$scope.codigo,
 			$scope.nombre,
+			$scope.sigla,
+			$scope.tipo,
 			$scope.estado
 		).then(function(resp){
 			if (resp.meta)
@@ -60,6 +64,8 @@ app.controller('ModalEspecialidadesController', [ "$scope","$uibModalInstance","
 	$scope.limpiar=function(){
 		$scope.codigo=null;
 		$scope.nombre=null;
+		$scope.sigla=null;
+		$scope.tipo=null;
 		$scope.estado=null;
 
 		$scope.consultar();

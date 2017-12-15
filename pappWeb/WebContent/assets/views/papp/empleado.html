@@ -650,17 +650,6 @@
 							<div class="col-md-6">
 								<div class="form-group" class="has-success">
 									<label class="control-label">
-										Nombre
-									</label>
-									<input type="text" placeholder="Ingrese un nombre"
-										class="form-control" name="nombre"
-										ng-model="nombre" />
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="form-group" class="has-success">
-									<label class="control-label">
 										C&oacute;digo
 									</label>
 									<input type="text" placeholder="Ingrese un c&oacute;digo"
@@ -668,8 +657,44 @@
 										ng-model="codigo" />
 								</div>
 							</div>
+							<div class="col-md-6">
+								<div class="form-group" class="has-success">
+									<label class="control-label">
+										Nombre
+									</label>
+									<input type="text" placeholder="Ingrese un nombre"
+										class="form-control" name="nombre"
+										ng-model="nombre" />
+								</div>
+							</div>
 						</div>
-
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group" class="has-success">
+									<label class="control-label">
+										Sigla
+									</label>
+									<input type="text" placeholder="Ingrese una Sigla"
+										class="form-control" name="sigla"
+										ng-model="sigla" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group" class="has-success">
+									<label class="control-label">
+										Tipo
+									</label>
+									<select class="form-control" name="tipo" ng-model="tipo">
+									  <option value="" selected="selected">Selecione un Tipo</option>
+									  <option value="S">Servicios</option>
+									  <option value="A">Armas</option>
+									  <option value="E">Especialista</option>
+									  <option value="T">T&eacute;cnico</option>
+									  <option value="N">No Tiene Informaci&oacute;n</option>
+									</select>
+								</div>
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -736,14 +761,14 @@
 							class="panel-wrapper">
 							<div class="panel-body">
 								<div class="row">
-									<div class="col-sm-4">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label> C&oacute;digo </label> <input type="text"
 												class="form-control" ng-model="codigoFiltro">
 										</div>
 									</div>
 									
-									<div class="col-sm-4">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label> Nombre </label> <input type="text"
 												class="form-control" ng-model="nombreFiltro">
@@ -751,14 +776,7 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Sigla </label> <input type="text"
-												class="form-control" ng-model="siglaFiltro">
-										</div>
-									</div>
-								
-									<div class="col-sm-4">
+									<div class="col-sm-6">
 										<div class="form-group">
 											<label> Estado </label> <select name="country"
 												ng-model="estadoFiltro" class="form-control">

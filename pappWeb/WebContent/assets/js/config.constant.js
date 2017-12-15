@@ -211,6 +211,8 @@ app.constant('JS_REQUIRES', {
         'IndicadoresFactory':'assets/js/factory/indicadoresFactory.js',
         'ModalIndicadoresActividadCtrl':'assets/js/controllers/papp/modales/modalIndicadoresActividadCtrl.js',
         'IndicadoresActividadFactory':'assets/js/factory/indicadoresActividadFactory.js',
+        'PlanificacionUECtrl':'assets/js/controllers/papp/planificacionUECtrl.js',
+        'PlanificacionUEFactory':'assets/js/factory/planificacionUEFactory.js',
 
     },
     //*** angularJS Modules

@@ -66,7 +66,11 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={
+			id: null,
+			codigo: null,
+			nombre: null
+		};
 		$scope.objetolista=[];
 		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
 		$scope.objetolista.push(obj);

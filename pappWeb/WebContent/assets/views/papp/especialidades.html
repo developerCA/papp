@@ -29,45 +29,69 @@
 						<div uib-collapse="panel1" ng-init="panel1=true"
 							class="panel-wrapper">
 							<div class="panel-body">
-
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group" class="has-success">
-									<label class="control-label">
-										Nombre
-									</label>
-									<input type="text" placeholder="Ingrese un nombre"
-										class="form-control" name="nombre"
-										ng-model="nombre" />
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group" class="has-success">
+											<label class="control-label">
+												C&oacute;digo
+											</label>
+											<input type="text" placeholder="Ingrese un c&oacute;digo"
+												class="form-control" name="codigo"
+												ng-model="codigo" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group" class="has-success">
+											<label class="control-label">
+												Nombre
+											</label>
+											<input type="text" placeholder="Ingrese un nombre"
+												class="form-control" name="nombre"
+												ng-model="nombre" />
+										</div>
+									</div>
 								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="form-group" class="has-success">
-									<label class="control-label">
-										C&oacute;digo
-									</label>
-									<input type="text" placeholder="Ingrese un c&oacute;digo"
-										class="form-control" name="codigo"
-										ng-model="codigo" />
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group" class="has-success">
+											<label class="control-label">
+												Sigla
+											</label>
+											<input type="text" placeholder="Ingrese una Sigla"
+												class="form-control" name="sigla"
+												ng-model="sigla" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group" class="has-success">
+											<label class="control-label">
+												Tipo
+											</label>
+											<select class="form-control" name="tipo" ng-model="tipo">
+											  <option value="" selected="selected">Selecione un Tipo</option>
+											  <option value="S">Servicios</option>
+											  <option value="A">Armas</option>
+											  <option value="E">Especialista</option>
+											  <option value="T">T&eacute;cnico</option>
+											  <option value="N">No Tiene Informaci&oacute;n</option>
+											</select>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="control-label">
-										Estado
-									</label>
-									<select class="form-control" name="estado" ng-model="estado">
-									  <option value="">Selecione un estado</option>
-									  <option value="A">Activo</option>
-									  <option value="I">Inactivo</option>
-									</select>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">
+												Estado
+											</label>
+											<select class="form-control" name="estado" ng-model="estado">
+											  <option value="">Selecione un estado</option>
+											  <option value="A">Activo</option>
+											  <option value="I">Inactivo</option>
+											</select>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
 								<div class="row">
 									<div class="col-sm-12">
 										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i

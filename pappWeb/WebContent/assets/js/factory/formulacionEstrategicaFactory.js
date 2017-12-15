@@ -92,6 +92,30 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 		    return Restangular.allUrl(url).customGET();
 		},
 
+		traerSubProgramaNuevo : function(padreid, ejerciciofiscalid) {
+			var url = "planificacion/nuevo/subprograma/"+padreid+"/"+ejerciciofiscalid+"/0";
+			//console.log(url);
+		    return Restangular.allUrl(url).customGET();
+		},
+
+		traerProyectoNuevo : function(padreid, ejerciciofiscalid) {
+			var url = "planificacion/nuevo/proyecto/"+padreid+"/"+ejerciciofiscalid+"/0";
+			//console.log(url);
+		    return Restangular.allUrl(url).customGET();
+		},
+
+		traerActividadNuevo : function(padreid, ejerciciofiscalid) {
+			var url = "planificacion/nuevo/actividad/"+padreid+"/"+ejerciciofiscalid+"/0";
+			//console.log(url);
+		    return Restangular.allUrl(url).customGET();
+		},
+
+		traerSubActividadNuevo : function(padreid, ejerciciofiscalid) {
+			var url = "planificacion/nuevo/subactividad/"+padreid+"/"+ejerciciofiscalid+"/0";
+			//console.log(url);
+		    return Restangular.allUrl(url).customGET();
+		},
+
 		guardar:function(objeto){
 			var url = "planificacion/programa/";
 			return Restangular.allUrl(url).customPOST(objeto);

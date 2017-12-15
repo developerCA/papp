@@ -5,6 +5,8 @@ app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.codigo=null;
 	$scope.nombre=null;
+	$scope.sigla=null;
+	$scope.tipo=null;
 	$scope.estado=null;
 
 	$scope.edicion=false;
@@ -45,7 +47,14 @@ app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		especialidadesFactory.traerEspecialidadesFiltro(pagina,$scope.codigo,$scope.nombre,$scope.estado).then(function(resp){
+		especialidadesFactory.traerEspecialidadesFiltro(
+			pagina,
+			$scope.codigo,
+			$scope.nombre,
+			$scope.sigla,
+			$scope.tipo,
+			$scope.estado
+		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -54,6 +63,8 @@ app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","
 	$scope.limpiar=function(){
 		$scope.codigo=null;
 		$scope.nombre=null;
+		$scope.sigla=null;
+		$scope.tipo=null;
 		$scope.estado=null;
 
 		$scope.consultar();
