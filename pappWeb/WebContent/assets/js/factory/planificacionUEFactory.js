@@ -8,6 +8,13 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
         	return Restangular.allUrl("planificacion/consultar/planificacion/pagina=" + pagina + "&ejerciciofiscal=" + ejercicio).getList();
         },
 
+        traerPlanificacionAnual: function (id, ejercicio) {
+        	return Restangular.allUrl("planificacion/consultar/nivelactividad/" +
+    			"tipo=AC" +
+    			"&nivelactividadunidadid=" + id +
+    			"&nivelactividadejerfiscalid=" + ejercicio).getList();
+        },
+
         traerPlanificacionUECustom: function (pagina, ejercicio) {
         	 var url = "planificacion/consultar/planificacion/pagina=" + pagina + "&ejerciciofiscal=" + ejercicio;
              return Restangular.allUrl(url).customGET();

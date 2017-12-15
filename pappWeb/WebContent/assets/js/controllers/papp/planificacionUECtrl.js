@@ -8,7 +8,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
+	$scope.objetoPA={};
 	$scope.detalles=[];
+	$scope.divPlanificacionAnual=false;
 
 	var pagina = 1;
 
@@ -79,6 +81,21 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			  console.log(resp.json);
 		})
 	};
+
+	$scope.editarPlanificacionAnual=function(id){
+		console.log(id);
+		$scope.data=[];
+		$scope.divPlanificacionAnual=true;
+		PlanificacionUEFactory.traerPlanificacionAnual(
+			id,
+			$rootScope.ejefiscal
+		).then(function(resp){
+			console.log(resp)
+			if (resp.meta)
+				$scope.dataPA=resp;
+			$scope.divPlanificacionAnual=true;
+		})
+	}
 
 	$scope.agregarDetalle=function(){
 		var obj={id: {id: null}, codigo: null, estado: "A", nombre: null};
