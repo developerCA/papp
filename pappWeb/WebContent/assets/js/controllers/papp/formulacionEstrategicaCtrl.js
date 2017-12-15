@@ -501,10 +501,9 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		            	$scope.newobj = $scope.objetoSa;
 						break;
 					default:
-						break;
 				}
         		console.log($scope.newobj);
-            	formulacionEstrategicaFactory.guardar($scope.newobj).then(function(resp){
+            	formulacionEstrategicaFactory.guardar($scope.nodeTipo, $scope.newobj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;

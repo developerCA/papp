@@ -116,9 +116,25 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 		    return Restangular.allUrl(url).customGET();
 		},
 
-		guardar:function(objeto){
-			var url = "planificacion/programa/";
+		guardar:function(tipo, objeto){
+			var url = "planificacion/" + this.obtenerTipo(tipo) + "/";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
+		
+		obtenerTipo: function(tipo) {
+        	switch (tipo) {
+				case "PR":
+		        	return "programa";
+				case "SP":
+		        	return "subprograma";
+				case "PY":
+		        	return "proyectometa";
+				case "AC":
+		        	return "actividad";
+				case "SA":
+		        	return "subactividad";
+				default:
+			}
+		}
 	}
 } ]);
