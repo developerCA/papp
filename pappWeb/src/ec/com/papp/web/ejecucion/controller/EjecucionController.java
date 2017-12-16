@@ -593,6 +593,11 @@ public class EjecucionController {
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(Long.valueOf(parameters.get("nivelactividad")), jsonObject, mensajes);
 			}
 			
+			//Subtareainfo
+			if(clase.equals("subitareainfo")){
+				jsonObject=ConsultasUtil.consultaInformacionsubtarea(Long.valueOf(parameters.get("nivelactividad")), jsonObject, mensajes);
+			}
+
 			//Orden de gasto
 			if(clase.equals("ordengasto")){
 				jsonObject=ConsultasUtil.consultaOrdengastoPaginado(parameters, jsonObject, mensajes);

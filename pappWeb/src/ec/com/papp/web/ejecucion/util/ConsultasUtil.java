@@ -159,6 +159,26 @@ public class ConsultasUtil {
 	}
 	
 	/**
+	* Metodo que consulta el arbol de informacion del subtarea
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar el arbol
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaInformacionsubtarea(Long nivelactividad,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+		MatrizDetalle matrizDetalle=new MatrizDetalle();
+		try{
+			MatrizDetalle resultado=UtilSession.planificacionServicio.transObtienedetallesubtarea(nivelactividad);
+			jsonObject.put("subtareainfo", (JSONObject)JSONSerializer.toJSON(resultado,matrizDetalle.getJsonConfigsubitemarbol()));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
+	/**
 	* Metodo que consulta las orden de gasto paginadas y arma el json para mostrarlos en la grilla
 	*
 	* @param request 
