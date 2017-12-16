@@ -115,6 +115,48 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		})
 	};
 
+	$scope.solicitar=function(id) {
+		certificacionesFondosFactory.solicitar(id).then(function(resp){
+	        SweetAlert.swal("Certificaciones de Fondos!", "Solicitud enviada", "success");
+		});
+	}
+
+	$scope.liquidarManualMente = function(id) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalLiquidacionManua.html',
+			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+/*			certificacionesFondosFactory.liquidarManualMente(id, obj).then(function(resp){
+		        SweetAlert.swal("Certificaciones de Fondos!", "Solicitud enviada", "success");
+			});
+*/		}, function() {
+		});
+	};
+
+	$scope.eliminar = function(id) {
+		SweetAlert.swal({
+			title: "Certificaciones de Fondos?",
+			text: "Seguro que desea eliminar la orden?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (isConfirm) {
+				certificacionesFondosFactory.eliminar(id).then(function(resp){
+					SweetAlert.swal("Certificaciones de Fondos!", "Se solicito la eliminacion", "success");
+				});
+			}
+		});
+	}
+
 	$scope.agregarDetalles=function(){
 		$scope.objetodetalles={id: null};
 	};
@@ -157,115 +199,58 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 
 	$scope.abrirTipoDocumentoCodigo = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalTipoDocumento.html',
-			controller : 'ModalTipoDocumentoController',
+			templateUrl : 'assets/views/papp/modal/modalClaseDocumento.html',
+			controller : 'ModalClaseDocumentoController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.certificaciontipodocid = obj.id;
+			//console.log(obj);
+			$scope.objeto.certificaciontipodocid = obj.id.id;
+			$scope.objeto.certificaciontpclasedocid = obj.id.clasedocid;
 			$scope.objeto.npcodigotipodocumento = obj.codigo;
 			$scope.objeto.npnombretipodocumento = obj.nombre;
+			$scope.objeto.npcodigodocumento = obj.npcodigodocumento;
+			$scope.objeto.npnombredocumento = obj.npnombredocumento;
 		}, function() {
 		});
 	};
-
-	$scope.liquidarManualMente = function(id) {
-		console.log("ok");
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			console.log(obj);
-/*
-			$scope.objeto.certificaciontipodocid = obj.id;
-			$scope.objeto.npcodigotipodocumento = obj.codigo;
-			$scope.objeto.npnombretipodocumento = obj.nombre;
-*/
-		}, function() {
-		});
-	};
-
-	$scope.eliminar = function(id) {
-/*
-		SweetAlert.swal({
-			title: "ok",
-			text: "Seguro que desea eliminar la orden?",
-			buttons: {
-				cancel: true,
-				confirm: "No",
-			    roll: {
-			        text: "Si",
-			        value: "roll",
-			    }
-			}
-		});
-*/
-        SweetAlert.swal("Certificaciones de Fondos!", "No se pudo eliminar porque falta REST para eliminar", "error");
-/*
-		ordenGastoFactory.eliminar(id).then(function(resp){
-			if (resp.estado){
-	             $scope.objeto={};
-	             $scope.limpiar();
-	             SweetAlert.swal("Orden de Gastos!", "Registro eliminado satisfactoriamente!", "success");
-			}else{
-	             SweetAlert.swal("Orden de Gastos!", resp.mensajes.msg, "error");
-			}
-		});
-*/
-	}
 
 	$scope.form = {
-
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
-
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
-
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
-
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
-
-		            } else {
-		                
-		            	certificacionesFondosFactory.guardar($scope.objeto).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Certificaciones de Fondos!", "Registro registrado satisfactoriamente!", "success");
-	 
-		        			 }else{
-			 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
-		        				 
-		        			 }
-		        			
-		        		})
-		        		
-		            }
-
-		        },
-		        reset: function (form) {
-
-		            $scope.myModel = angular.copy($scope.master);
-		            form.$setPristine(true);
-		            $scope.edicion=false;
-		            $scope.objeto={};
-
-		        }
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+            	certificacionesFondosFactory.guardar($scope.objeto).then(function(resp){
+        			 if (resp.estado){
+        				 form.$setPristine(true);
+	 		             $scope.edicion=false;
+	 		             $scope.objeto={};
+	 		             $scope.limpiar();
+	 		             SweetAlert.swal("Certificaciones de Fondos!", "Registro registrado satisfactoriamente!", "success");
+        			 }else{
+	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
+        			 }
+        		})
+            }
+        },
+        reset: function (form) {
+            $scope.myModel = angular.copy($scope.master);
+            form.$setPristine(true);
+            $scope.edicion=false;
+            $scope.objeto={};
+        }
     };
 } ]);

@@ -61,5 +61,27 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			var url = "ejecucion/certificacion/";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
+
+		solicitar:function(
+			id
+		){
+			var url = "ejecucion/flujo/" + id + "/SO";
+			return Restangular.allUrl(url).customGET();
+		},
+
+		liquidarManualMente:function(
+			id,
+			motivo
+		){
+			var url = "ejecucion/flujo/" + id + "/SO";
+			return Restangular.allUrl(url).customGET();
+		},
+
+		eliminar:function(
+			id
+		){
+			var url = "ejecucion/flujo/" + id + "/EL";
+			return Restangular.allUrl(url).customGET();
+		},
 	}
 } ]);

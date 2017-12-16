@@ -216,6 +216,8 @@ app.constant('JS_REQUIRES', {
         'ModalUnidadCortoCtrl':'assets/js/controllers/papp/modales/modalUnidadCortoCtrl.js',
         'ModalClaseGastoCtrl':'assets/js/controllers/papp/modales/modalClaseGastoCtrl.js',
         'ClaseGastoFactory':'assets/js/factory/claseGastoFactory.js',
+        'ModalClaseDocumentoCtrl':'assets/js/controllers/papp/modales/modalClaseDocumentoCtrl.js',
+        'ClaseDocumentoFactory':'assets/js/factory/claseDocumentoFactory.js',
 
     },
     //*** angularJS Modules

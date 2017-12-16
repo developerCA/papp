@@ -610,6 +610,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','CertificacionesFondosCtrl','CertificacionesFondosFactory',
         		'ModalUnidadCortoCtrl','UnidadFactory',
         		'ModalClaseGastoCtrl','ClaseGastoFactory',
+        		'ModalClaseDocumentoCtrl','ClaseDocumentoFactory',
         		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
         		'ModalCertificacionesFondoLiquidacionManuaCtrl'
 		),
