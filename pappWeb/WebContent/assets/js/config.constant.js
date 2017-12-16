@@ -213,6 +213,9 @@ app.constant('JS_REQUIRES', {
         'IndicadoresActividadFactory':'assets/js/factory/indicadoresActividadFactory.js',
         'PlanificacionUECtrl':'assets/js/controllers/papp/planificacionUECtrl.js',
         'PlanificacionUEFactory':'assets/js/factory/planificacionUEFactory.js',
+        'ModalUnidadCortoCtrl':'assets/js/controllers/papp/modales/modalUnidadCortoCtrl.js',
+        'ModalClaseGastoCtrl':'assets/js/controllers/papp/modales/modalClaseGastoCtrl.js',
+        'ClaseGastoFactory':'assets/js/factory/claseGastoFactory.js',
 
     },
     //*** angularJS Modules

@@ -608,8 +608,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "assets/views/papp/certificacionesfondos.html",
         resolve: loadSequence(
         		'ngTable','CertificacionesFondosCtrl','CertificacionesFondosFactory',
-        		'ModalUnidadCtrl','UnidadFactory',
-        		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
+        		'ModalUnidadCortoCtrl','UnidadFactory',
+        		'ModalClaseGastoCtrl','ClaseGastoFactory',
         		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
         		'ModalCertificacionesFondoLiquidacionManuaCtrl'
 		),

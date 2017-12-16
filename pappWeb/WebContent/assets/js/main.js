@@ -83,14 +83,22 @@ app.config(["RestangularProvider", function(RestangularProvider) {
 	      // .. to look for getList operations
 	      if (operation === "getList") {
 	      
-	    	  //console.log(data);
-	    	if (data.json.result==null){
-	    		 extractedData = data.json;
-	    	}else{
-	    		extractedData = data.json.result;
+	    	//console.log(data);
+	    	if (data.json === undefined) {
+	    		// Agregado por IVAN FIGUEROA, porque en los servicios “comun” no están aplicando la respuesta estándar en los servicios
+	    		extractedData = [{
+	    			data
+	    		}];
+		        extractedData.meta = true;
+		        //console.log(extractedData);
+	    	} else {
+		    	if (data.json.result==null){
+		    		 extractedData = data.json;
+		    	}else{
+		    		extractedData = data.json.result;
+		    	}
+		        extractedData.meta = data.estado;
 	    	}
-	        
-	        extractedData.meta = data.estado;
 	      } else {
 	        extractedData = data;
 	      }

@@ -3,13 +3,13 @@
 app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, certificacionesFondosFactory) {
 
-	$scope.codigo=null;
-	$scope.precompromiso=null;
-	$scope.valorinicial=null;
-	$scope.valorfinal=null;
-	$scope.fechainicial=null;
-	$scope.fechafinal=null;
-	$scope.estado=null;
+	$scope.codigoFiltro=null;
+	$scope.precompromisoFiltro=null;
+	$scope.valorinicialFiltro=null;
+	$scope.valorfinalFiltro=null;
+	$scope.fechainicialFiltro=null;
+	$scope.fechafinalFiltro=null;
+	$scope.estadoFiltro=null;
 
 	$scope.edicion=false;
 	$scope.nuevoar=false;
@@ -20,14 +20,38 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	var pagina = 1;
 	
 	$scope.consultar=function(){
+		//console.log($rootScope.ejefiscal);
+		//console.log($rootScope);
 		$scope.data=[];
-		//console.log('aqi');
-		certificacionesFondosFactory.traerCertificacionesFondos(pagina).then(function(resp){
-			console.log(resp);
+		certificacionesFondosFactory.traerCertificacionesFondos(
+			pagina,
+			$rootScope.ejefiscal
+		).then(function(resp){
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	};
+
+	$scope.filtrar=function(){
+		//console.log($rootScope.ejefiscal);
+		//console.log($rootScope);
+		$scope.data=[];
+		certificacionesFondosFactory.traerCertificacionesFondosFiltro(
+			pagina,
+			$rootScope.ejefiscal,
+			$scope.codigoFiltro,
+			$scope.precompromisoFiltro,
+			$scope.valorinicialFiltro,
+			$scope.valorfinalFiltro,
+			$scope.fechainicialFiltro,
+			$scope.fechafinalFiltro,
+			$scope.estadoFiltro
+		).then(function(resp){
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
 	
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
@@ -48,33 +72,36 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			}
 		});
 	});
-
-	$scope.filtrar=function(){
-		$scope.data=[];
-		certificacionesFondosFactory.traerCertificacionesFondosFiltro(pagina,$scope.codigo,$scope.fuerza,$scope.grado,$scope.padre,$scope.estado).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
 	
 	$scope.limpiar=function(){
-		$scope.codigo=null;
-		$scope.fuerza=null;
-		$scope.grado=null;
-		$scope.padre=null;
-		$scope.estado=null;
+		$scope.codigoFiltro=null;
+		$scope.precompromisoFiltro=null;
+		$scope.valorinicialFiltro=null;
+		$scope.valorfinalFiltro=null;
+		$scope.fechainicialFiltro=null;
+		$scope.fechafinalFiltro=null;
+		$scope.estadoFiltro=null;
 
 		$scope.consultar();
-		
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null,estado:null};
-		$scope.edicion=true;
-		$scope.nuevoar=true;
-		$scope.guardar=true;
+		//console.log($rootScope.ejefiscal);
+		//console.log($rootScope);
+		certificacionesFondosFactory.traerCertificacionesFondosNuevo(
+			$rootScope.ejefiscal
+		).then(function(resp){
+			//console.log(resp);
+			if (!resp.estado) return;
+			$scope.objeto=resp.json.certificacion;
+			$scope.objetodetalles={};
+			$scope.agregarDetalles();
+			$scope.edicion=true;
+			$scope.nuevoar=true;
+			$scope.guardar=true;
+		})
 	}
-	
+
 	$scope.editar=function(id){
 		certificacionesFondosFactory.traerCertificacionesFondosEditar(id).then(function(resp){
 			console.log(resp.json);
@@ -88,10 +115,14 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		})
 	};
 
-	$scope.abrirUnidadCodigo = function() {
+	$scope.agregarDetalles=function(){
+		$scope.objetodetalles={id: null};
+	};
+
+	$scope.abrirUnidad = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalUnidades.html',
-			controller : 'ModalUnidadController',
+			templateUrl : 'assets/views/papp/modal/modalUnidadCorto.html',
+			controller : 'ModalUnidadCortoController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
@@ -100,23 +131,27 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
 	$scope.abrirClaseRegistroCodigo = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalClaseRegistro.html',
-			controller : 'ModalClaseRegistroController',
+			templateUrl : 'assets/views/papp/modal/modalClaseGasto.html',
+			controller : 'ModalClaseGastoController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.certificacionclaseregid = obj.id;
-			$scope.objeto.npcodigoregistro = obj.codigo;
-			$scope.objeto.npnombreregistro = obj.nombre;
+			$scope.objeto.certificacionclaseregid = obj.id.id;
+			$scope.objeto.certificacionclasemoid = obj.id.cmid;
+			$scope.objeto.certificaciongastoid = obj.id.cmcgastoid;
+			$scope.objeto.npcodigoregcmcgasto = obj.codigo;
+			$scope.objeto.npnombreregcmcgasto = obj.nombre;
+			$scope.objeto.npcodigoregistro = obj.npcodigoregistro;
+			$scope.objeto.npnombreregistro = obj.npnombreregistro;
+			$scope.objeto.npcodigomodificacion = obj.npcodigomodificacion;
+			$scope.objeto.npnombremodificacion = obj.npnombremodificacion;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
@@ -132,7 +167,6 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			$scope.objeto.npcodigotipodocumento = obj.codigo;
 			$scope.objeto.npnombretipodocumento = obj.nombre;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
@@ -151,7 +185,6 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			$scope.objeto.npnombretipodocumento = obj.nombre;
 */
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
