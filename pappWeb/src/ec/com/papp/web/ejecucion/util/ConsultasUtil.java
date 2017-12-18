@@ -15,7 +15,9 @@ import org.hibernate.tools.commons.to.SearchResultTO;
 
 import ec.com.papp.estructuraorganica.to.UnidadTO;
 import ec.com.papp.planificacion.dao.OrdendevengoDAO;
+import ec.com.papp.planificacion.to.CertificacionOrdenVO;
 import ec.com.papp.planificacion.to.CertificacionTO;
+import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
@@ -435,6 +437,35 @@ public class ConsultasUtil {
 		return jsonObject;
 	}
 
+	/**
+	* Metodo que consulta certificacionbusqueda y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject certificacionbusqueda(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+		CertificacionOrdenVO certificacionOrdenVO=new CertificacionOrdenVO();
+		try{
+			if(parameters.get("ejerciciofiscal")!=null && !parameters.get("ejerciciofiscal").equals(""))
+				certificacionOrdenVO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscal")));
+			if(parameters.get("unidad")!=null && !parameters.get("unidad").equals(""))
+				certificacionOrdenVO.setCertificacionunidadid(Long.valueOf(parameters.get("unidad")));
+			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
+				certificacionOrdenVO.setEstado(parameters.get("tipo"));
+			Collection<CertificacionOrdenVO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionOrden(certificacionOrdenVO);
+			HashMap<String, String>  totalMap=new HashMap<String, String>();
+			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,certificacionOrdenVO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+	
 	//	/**
 //	* Metodo que consulta las registro paginadas y arma el json para mostrarlos en la grilla
 //	*
