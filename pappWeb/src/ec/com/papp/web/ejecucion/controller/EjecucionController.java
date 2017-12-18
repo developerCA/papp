@@ -610,13 +610,28 @@ public class EjecucionController {
 			
 			//Certificacion busqueda
 			if(clase.equals("certificacionbusqueda")){
-				jsonObject=ConsultasUtil.consultaCertificacionBusquedaPaginado(parameters, jsonObject, mensajes);
+				//jsonObject=ConsultasUtil.consultaCertificacionBusquedaPaginado(parameters, jsonObject, mensajes);
+				jsonObject=ConsultasUtil.certificacionbusqueda(parameters, jsonObject);
 			}
 			
 			//Ordengasto busqueda
 			if(clase.equals("ordengastobusqueda")){
 				jsonObject=ConsultasUtil.consultaOrdengastoBusquedaPaginado(parameters, jsonObject, mensajes);
 			}
+			
+			//subitemcertificado
+			if(clase.equals("subitemcertificado")){
+				CertificacionlineaTO certificacionlineaTO=new CertificacionlineaTO();
+				Collection<CertificacionlineaTO> resultado=UtilSession.planificacionServicio.transObtienesubitemporcertificacion(Long.valueOf(parameters.get("certificacionid")));
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,certificacionlineaTO.getJsonConfigbusqueda()));
+				HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+				totalMap.put("valor", resultado.size());
+				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			}
+			
+			
+			
+		
 			log.println("json retornado: " + jsonObject.toString()); 
 		}catch (Exception e) {
 			e.printStackTrace();
