@@ -680,6 +680,8 @@ public class ConsultasUtil {
 				nivelactividadTO.setTipo(parameters.get("tipo"));
 			if(parameters.get("nivelactividadpadreid")!=null && !parameters.get("nivelactividadpadreid").equals(""))
 				nivelactividadTO.setNivelactividadpadreid(Long.valueOf(parameters.get("nivelactividadpadreid")));
+			if(parameters.get("nodo")!=null && !parameters.get("nodo").equals(""))
+				nivelactividadTO.setNphoja(Integer.valueOf(parameters.get("nodo")));
 			nivelactividadTO.setEstado(MensajesWeb.getString("estado.activo"));
 			nivelactividadTO.setUnidad(new UnidadTO());
 			log.println("nivel actividad asignada: " + nivelactividadTO.getNivelactividadunidadid());

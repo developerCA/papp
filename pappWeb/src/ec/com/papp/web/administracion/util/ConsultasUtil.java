@@ -1470,7 +1470,7 @@ public class ConsultasUtil {
 			if(parameters.get("filas")!=null)
 				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 			int primero=(pagina*filas)-filas;
-			campo="codigo";
+			campo="nombremostrado";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
@@ -1485,7 +1485,10 @@ public class ConsultasUtil {
 				socionegocioTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				socionegocioTO.setNombrecomercial(parameters.get("nombre"));
-//			if(parameters.get("primernombre")!=null && !parameters.get("primernombre").equals(""))
+			if(parameters.get("razonsocial")!=null && !parameters.get("razonsocial").equals(""))
+				socionegocioTO.setRazonsocial(parameters.get("razonsocial"));
+
+			//			if(parameters.get("primernombre")!=null && !parameters.get("primernombre").equals(""))
 //				socionegocioTO.setPrimernombre(parameters.get("primernombre"));
 //			if(parameters.get("primerapellido")!=null && !parameters.get("primerapellido").equals(""))
 //				socionegocioTO.setPrimerapellido(parameters.get("primerapellido"));
@@ -1497,6 +1500,9 @@ public class ConsultasUtil {
 				socionegocioTO.setEmptipo(parameters.get("emptipo"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				socionegocioTO.setEstado(parameters.get("estado"));
+			if(parameters.get("proveedor")!=null && !parameters.get("proveedor").equals(""))
+				socionegocioTO.setEsproveedor(Integer.valueOf(parameters.get("proveedor")));
+
 			if(tipo.equals("busquedasocionegocio"))
 				socionegocioTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 			if(tipo.equals("empleado"))
