@@ -184,9 +184,9 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
 	 		             $scope.limpiar();
-	 		             SweetAlert.swal("Formulacion Estrategica!", "Registro grabado satisfactoriamente!", "success");
+	 		             SweetAlert.swal("Mantener Indicadores!", "Registro grabado satisfactoriamente!", "success");
         			 }else{
-	 		             SweetAlert.swal("Formulacion Estrategica!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal("Mantener Indicadores!", resp.mensajes.msg, "error");
         			 }
         		})
             }

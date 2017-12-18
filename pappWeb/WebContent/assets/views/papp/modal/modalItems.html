@@ -78,11 +78,11 @@
 				<thead>
 					<tr>
 						<th></th>
-						<th>A&nacute;o</th>
 						<th>C&oacute;digo</th>
 						<th>Nombre</th>
-						<th>Tipo</th>
+						<th>Nombre Padre</th>
 						<th>Aplica Iva</th>
+						<th>Tipo</th>
 					</tr>
 				</thead>
 				<tr ng-repeat="obj in dataset">
@@ -101,20 +101,20 @@
 					<td data-title="'Nombre Padre'">
 						{{obj.npnombrepadre}}
 					</td>
-				 	<td data-title="'Tipo'">
-	                    <span ng-if="obj.tipo=='I'">
-	                    	INGRESO
-	                    </span>
-	                    <span ng-if="obj.tipo=='E'">
-	                    	EGRESO
-	                    </span>
-	                </td>
 					<td data-title="'Aplica Iva'">
 	                    <span ng-if="obj.aplicaiva==1">
 	                    	Si
 	                    </span>
 	                    <span ng-if="obj.aplicaiva==0">
 	                    	No
+	                    </span>
+	                </td>
+				 	<td data-title="'Tipo'">
+	                    <span ng-if="obj.tipo=='I'">
+	                    	INGRESO
+	                    </span>
+	                    <span ng-if="obj.tipo=='E'">
+	                    	EGRESO
 	                    </span>
 	                </td>
 				</tr>
