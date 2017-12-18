@@ -5,14 +5,28 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
     return {
 
         traerPlanificacionUE: function (pagina, ejercicio) {
-        	return Restangular.allUrl("planificacion/consultar/planificacion/pagina=" + pagina + "&ejerciciofiscal=" + ejercicio).getList();
+        	return Restangular.allUrl(
+    			"planificacion/consultar/planificacion/" +
+    			"pagina=" + pagina +
+    			"&ejerciciofiscal=" + ejercicio
+			).getList();
         },
 
-        traerPlanificacionAnual: function (id, ejercicio) {
+        traerPAactividad: function (id, ejercicio) {
         	return Restangular.allUrl("planificacion/consultar/nivelactividad/" +
     			"tipo=AC" +
     			"&nivelactividadunidadid=" + id +
-    			"&nivelactividadejerfiscalid=" + ejercicio).getList();
+    			"&nivelactividadejerfiscalid=" + ejercicio
+			).getList();
+        },
+
+        traerPAhijos: function (tipo, id, unidad, ejercicio) {
+        	var url = "planificacion/consultar/nivelactividad/" +
+    			"tipo=" + tipo +
+    			"&nivelactividadpadreid=" + id +
+    			"&nivelactividadejerfiscalid=" + ejercicio +
+    			"&nivelactividadunidadid=" + unidad
+			return Restangular.allUrl(url).getList();
         },
 
         traerPlanificacionUECustom: function (pagina, ejercicio) {
