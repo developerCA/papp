@@ -83,18 +83,68 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	};
 
 	$scope.editarPlanificacionAnual=function(id){
-		console.log(id);
-		$scope.data=[];
+		//console.log(id);
+		$scope.dataPA=[];
 		$scope.divPlanificacionAnual=true;
-		PlanificacionUEFactory.traerPlanificacionAnual(
+		PlanificacionUEFactory.traerPAactividad(
 			id,
 			$rootScope.ejefiscal
 		).then(function(resp){
-			console.log(resp)
+			//console.log(resp)
 			if (resp.meta)
 				$scope.dataPA=resp;
+			for (var i = 0; i < $scope.dataPA.length; i++) {
+				$scope.dataPA[i].nodeTipo = "AC";
+			}
+			$scope.arbol = JSON.parse(JSON.stringify($scope.dataPA).split('"descripcionexten":').join('"title":'));
+			//console.log($scope.arbol)
 			$scope.divPlanificacionAnual=true;
 		})
+	}
+
+	$scope.cargarHijos=function(node){
+		console.log(node);
+		if (!node.iscargado)
+		    node.iscargado=true;
+		else
+			return;
+
+		var tipo = "";
+		console.log(node.nodeTipo);
+		switch (node.nodeTipo) {
+			case "AC":
+				tipo = "SA";
+				break;
+			case "SA":
+				tipo = "TA";
+				break;
+			case "TA":
+				tipo = "ST";
+				break;
+			case "ST":
+				tipo = "IT";
+				break;
+			case "IT":
+				tipo = "SI";
+				break;
+			default:
+				return;
+				break;
+		}
+		console.log(tipo);
+	    PlanificacionUEFactory.traerPAhijos(
+    		tipo,
+    		node.id,
+    		node.npIdunidad,
+    		$rootScope.ejefiscal
+		).then(function(resp){
+			console.log(resp);
+			for (var i = 0; i < resp.length; i++) {
+				resp[i].nodeTipo = tipo;
+			}
+			var nodes=JSON.parse(JSON.stringify(resp).split('"descripcionexten":').join('"title":'));
+			node.nodes=nodes;
+		});
 	}
 
 	$scope.agregarDetalle=function(){
