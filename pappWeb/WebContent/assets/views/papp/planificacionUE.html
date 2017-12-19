@@ -104,7 +104,7 @@
 							Planificaci&oacute;n Anual
 						</h5>
 					</div>
-
+<!--
 					<div class="row">
 						<div class="col-md-12">
 							<a  class="btn btn-sm btn-dark-azure" ng-click="nuevo(null);">
@@ -114,9 +114,9 @@
 							<br><br>
 						</div>
 					</div>
-
+-->
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<div ui-tree="treeOptions" id="tree-root"
 								data-nodrop-enabled="true" data-drag-enabled="true">
 								<ol ui-tree-nodes ng-model="arbol">
@@ -126,8 +126,27 @@
 								</ol>
 							</div>
 						</div>
-					</div>
 
+						<div class="col-md-6">
+							<div class="row">
+								<span>
+									<a  class="btn btn-sm btn-dark-azure" ng-click=";">
+										<i class="fa fa-plus-square"></i>
+										Meta: Distribuci&oacute;n Planificada
+									</a>
+								</span>
+								<span>
+									<a  class="btn btn-sm btn-dark-azure" ng-click=";">
+										<i class="fa fa-plus-square"></i>
+										Meta: Distribuci&oacute;n Ajustada
+									</a>
+								</span>
+							</div>
+
+ok
+						</div>
+					</div>
+<!--
 					<div class="row">
 						<div class="col-md-12">
 							<div class="pull-right">
@@ -139,7 +158,7 @@
 							</div>
 						</div>
 					</div>
-
+-->
 				</div>
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
