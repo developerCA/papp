@@ -80,6 +80,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 		$scope.objeto={
 			id:null,
 			esempleado: 1,
+			esproveedor: 0,
 			razonsocial: "RAZON SOCIAL",
 			representantelegal: "REPRESENTANTE LEGAL"
 		};
@@ -121,6 +122,9 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			$scope.objeto.nombremostrado += " " + $scope.objeto.segundoapellido;
 		}
 		$scope.objeto.nombremostrado = $scope.objeto.nombremostrado.trim();
+		if ($scope.nuevoar) {
+			$scope.objeto.nombrecomercial = $scope.objeto.nombremostrado;
+		}
 	}
 
 	$scope.agregarDetalle=function(){
@@ -230,11 +234,9 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	};
 
 	$scope.form = {
-
 		        submit: function (form) {
 		            var firstError = null;
 		            if (form.$invalid) {
-
 		                var field = null, firstError = null;
 		                for (field in form) {
 		                    if (field[0] != '$') {

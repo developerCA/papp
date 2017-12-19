@@ -140,6 +140,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				}
 				$scope.edicion=true;
 			});
+			return;
 		}
 		if (node.nodeTipo == "PR") { // SubPrograma
 			formulacionEstrategicaFactory.traerNuevo(
@@ -335,7 +336,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objetoPr.programaobjetivofuersasid = obj.id;
+			$scope.objetoPr.programaobjetivofuersasid = obj.id4;
 			$scope.objetoPr.npObjetivocodigo = obj.codigo4;
 			$scope.objetoPr.npObjetivodescripcion = obj.descripcion;
 		}, function() {
