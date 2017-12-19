@@ -104,7 +104,7 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 				case "SP":
 		        	return "subprograma";
 				case "PY":
-		        	return "proyectometa";
+		        	return "proyecto";
 				case "AC":
 		        	return "actividad";
 				case "SA":

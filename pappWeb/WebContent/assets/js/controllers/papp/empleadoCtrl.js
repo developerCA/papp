@@ -77,10 +77,10 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
-		$scope.objetolista=[];
-		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
-		$scope.objetolista.push(obj);
+		$scope.objeto={id:null,esempleado: 1};
+		//$scope.objetolista=[];
+		//var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
+		//$scope.objetolista.push(obj);
 		$scope.fuerza=null;
 
 		$scope.edicion=true;

@@ -300,9 +300,14 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	}
 
 	$scope.agregarDetallePy=function(){
+		//documento pagina 15
+		if ($scope.objetolistaPy == undefined) {
+			$scope.objetolistaPy = [];
+		}
+		console.log($scope.objetolistaPy);
 		var obj={
 			id: {
-				id: null,
+				id: $scope.editarId,
 				metaejerciciofiscalid: $rootScope.ejefiscal
 			},
 			proyectoid: $scope.editarId,
@@ -310,6 +315,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			descripcion: null
 		};
 		$scope.objetolistaPy.push(obj);
+		console.log($scope.objetolistaPy);
 	}
 
 	$scope.removerDetalle=function(index){
