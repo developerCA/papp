@@ -835,7 +835,7 @@ public class PlanificacionController {
 			else if(clase.equals("subactividad")){
 				SubactividadTO subactividadTO = UtilSession.planificacionServicio.transObtenerSubactividadTO(id);
 				subactividadTO.setEstado(MensajesWeb.getString("estado.activo"));
-				jsonObject.put("subactividad", (JSONObject)JSONSerializer.toJSON(subactividadTO,subactividadTO.getJsonConfig()));
+				jsonObject.put("subactividad", (JSONObject)JSONSerializer.toJSON(subactividadTO,subactividadTO.getJsonConfigedicion()));
 			}
 			
 			//Actividad unidad en la planificacion se carga al poner editar actividad
