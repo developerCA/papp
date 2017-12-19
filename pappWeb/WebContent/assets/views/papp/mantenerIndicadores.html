@@ -78,10 +78,10 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
 								        class="form-control" name="codigo" ng-model="objeto.codigo" ng-pattern="/^[0-9]*$/"
-								        required ng-disabled="!nuevoar">
+								        required ng-disabled="!nuevoar"  ng-minlength="3"  ng-maxlength="3">
 								    <span class="error text-small block"
 								        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
-								        Incorrecto
+								        Incorrecto, es de 3 d&iacute;gitos
 								    </span>
 								    <span class="success text-small"
 								        ng-if="Form.codigo.$valid">
@@ -311,24 +311,32 @@
 															</a>
 														</td>
 														<td>
-														    <input type="text" placeholder="Escriba un c&oacute;digo"
-														        class="form-control" ng-model="obj.codigo" ng-pattern="/^[0-9]*$/"
-														        required>
+															<div class="form-group"
+															    ng-class="{'has-error':Form.codigo_{{$index}}.$dirty && Form.codigo_{{$index}}.$invalid, 'has-success':Form.codigo_{{$index}}.$valid}">
+															    <input type="text" placeholder="Escriba un c&oacute;digo"
+															        class="form-control" ng-model="obj.codigo" ng-pattern="/^[0-9]*$/"
+															        name="codigo_{{$index}}"
+															        required ng-disabled="!nuevoar"  ng-minlength="3"  ng-maxlength="3">
+															    <span class="error text-small block"
+															        ng-if="Form['codigo_'+$index].$dirty && Form['codigo_'+$index].$invalid">
+															        Incorrecto, es de 3 d&iacute;gitos
+															    </span>
+														    </div>
 														</td>
 														<td>
-														    <textarea name="descripcion" rows="3" style="width: 100%"
+														    <textarea name="descripcion_{{$index}}" rows="3" style="width: 100%"
 														    	placeholder="Escriba una descripci&oacute;n"
 														        class="form-control" ng-model="obj.descripcion"
 														        required></textarea>
 														</td>
 														<td>
-														    <textarea name="descripcion" rows="3" style="width: 100%"
+														    <textarea name="medverificacion_{{$index}}" rows="3" style="width: 100%"
 														    	placeholder="Escriba una verificaci&oacute;n"
 														        class="form-control" ng-model="obj.medverificacion"
 														        required></textarea>
 														</td>
 														<td>
-														    <select class="form-control"
+														    <select class="form-control" name="estado_{{$index}}"
 														        ng-model="obj.estado" required>
 														        <option value="">Selecione un estado</option>
 														        <option value="A">Activo</option>

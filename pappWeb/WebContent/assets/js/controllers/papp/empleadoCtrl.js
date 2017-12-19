@@ -77,7 +77,12 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null,esempleado: 1};
+		$scope.objeto={
+			id:null,
+			esempleado: 1,
+			razonsocial: "RAZON SOCIAL",
+			representantelegal: "REPRESENTANTE LEGAL"
+		};
 		//$scope.objetolista=[];
 		//var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
 		//$scope.objetolista.push(obj);

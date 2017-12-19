@@ -33,7 +33,7 @@ app.factory("divisionGeograficaFactory", [ "Restangular", function(Restangular) 
 
 		traerDivisionesFullFiltro : function(pagina,tipo,nombrepadre) {
 			  
-			var url = "administrar/consultar/divisiongeografica/pagina="+pagina;
+			var url = "administrar/consultar/divisiongeografica/pagina="+pagina+"&estado=A";
 
 			if(tipo!=null && tipo != "") url += "&tipo=" + tipo;	
 			if(nombrepadre!=null && nombrepadre != "" ) url += "&nombrepadre=" + nombrepadre;
