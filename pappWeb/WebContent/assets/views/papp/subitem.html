@@ -138,7 +138,7 @@
 									</label> <input type="text"
 										placeholder="Ingrese el c&oacute;digo INCOP"
 										ng-disabled="objeto.id !=null" class="form-control"
-										name="codigointerno" required ng-model="objeto.codigointerno"
+										name="codigo" required ng-model="objeto.codigo"
 										ng-minlength="2" /> <span class="error text-small block"
 										ng-if="Form.codigointerno.$dirty && Form.codigointerno.$invalid">C&oacute;digo
 										incorrecto</span> <span class="success text-small"
@@ -146,17 +146,17 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error': Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									ng-class="{'has-error': Form.codigointerno.$dirty && Form.codigointerno.$invalid, 'has-success':Form.codigointerno.$valid}">
 									<label class="control-label"> C&oacute;digo Interno <span
 										class="symbol required"></span>
 									</label> <input type="text"
 										placeholder="Ingrese el c&oacute;digo Interno"
 										ng-disabled="objeto.id !=null" class="form-control"
-										name="codigo" required ng-model="objeto.codigo"
+										name="codigointerno" required ng-model="objeto.codigointerno"
 										ng-minlength="2" /> <span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo
+										ng-if="Form.codigointerno.$dirty && Form.codigointerno.$invalid">C&oacute;digo
 										incorrecto</span> <span class="success text-small"
-										ng-if="Form.codigo.$valid">Listo</span>
+										ng-if="Form.codigointerno.$valid">Listo</span>
 								</div>
 
 								<div class="form-group"

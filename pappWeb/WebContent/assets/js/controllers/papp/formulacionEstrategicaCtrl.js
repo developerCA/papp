@@ -307,6 +307,19 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		return new Date(parts[2],parts[0]-1,parts[1]); 
 	}
 
+	function toStringDate(fuente) {
+		try {
+			var parts = fuente.toISOString();
+			parts = parts.split('T');
+			parts = parts[0].split('-');
+			//please put attention to the month (parts[0]), Javascript counts months from 0:
+			// January - 0, February - 1, etc
+		} catch (err) {
+			return null;
+		}
+		return parts[2] + "/" + parts[1] + "/" + parts[0]; 
+	}
+
 	$scope.agregarDetallePy=function(){
 		//documento pagina 15
 		if ($scope.objetolistaPy == undefined) {
@@ -485,10 +498,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 
 	$scope.form = {
         submit: function (form) {
-        	console.log("GUARDAR===");
-            var firstError = null;
-        	console.log(form);
-            if (form.$invalid) {
+        	var firstError = null;
+        	if (form.$invalid) {
                 var field = null, firstError = null;
                 for (field in form) {
                     if (field[0] != '$') {
@@ -504,7 +515,6 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	console.log("GUARDAndo-----------");
             	switch ($scope.nodeTipo) {
 					case "PR":
 		            	$scope.newobj = $scope.objetoPr;
@@ -513,11 +523,14 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		            	$scope.newobj = $scope.objetoSp;
 						break;
 					case "PY":
-		            	$scope.newobj = $scope.objetoPy;
+		            	console.log($scope.objetoPy); 
+		            	$scope.newobj = Object.assign({}, $scope.objetoPy);
+		        		$scope.newobj.npFechainicio = toStringDate($scope.newobj.npFechainicio);
+						$scope.newobj.npFechafin = toStringDate($scope.newobj.npFechafin);
 	            		$scope.newobj.proyectometaTOs = $scope.objetolista;
 						break;
 					case "AC":
-		            	$scope.newobj = $scope.objetoAc;
+		            	$scope.newobj = JSON.parse(JSON.stringify($scope.objetoAc));
 	            		$scope.newobj.nivelactividadTOs = $scope.objetolista;
 						break;
 					case "SA":
