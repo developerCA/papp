@@ -14,9 +14,12 @@ import org.hibernate.tools.commons.to.RangeValueTO;
 import org.hibernate.tools.commons.to.SearchResultTO;
 
 import ec.com.papp.estructuraorganica.to.UnidadTO;
+import ec.com.papp.planificacion.dao.GastoDevengoDAO;
 import ec.com.papp.planificacion.dao.OrdendevengoDAO;
+import ec.com.papp.planificacion.dao.OrdengastoDAO;
 import ec.com.papp.planificacion.to.CertificacionOrdenVO;
 import ec.com.papp.planificacion.to.CertificacionTO;
+import ec.com.papp.planificacion.to.GastoDevengoVO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
@@ -465,6 +468,28 @@ public class ConsultasUtil {
 		}
 		return jsonObject;
 	}
+	
+	public static JSONObject ordenesgastobusqueda(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+		GastoDevengoVO gastoDevengoVO=new GastoDevengoVO();
+		try{
+			if(parameters.get("ejerciciofiscal")!=null && !parameters.get("ejerciciofiscal").equals(""))
+				gastoDevengoVO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscal")));
+			if(parameters.get("unidad")!=null && !parameters.get("unidad").equals(""))
+				gastoDevengoVO.setOrdengastounidadid(Long.valueOf(parameters.get("unidad")));
+			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
+				gastoDevengoVO.setEstado(parameters.get("tipo"));
+			Collection<GastoDevengoVO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastodevengo(gastoDevengoVO);
+			HashMap<String, String>  totalMap=new HashMap<String, String>();
+			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,gastoDevengoVO.getJsonConfig()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
 	
 	//	/**
 //	* Metodo que consulta las registro paginadas y arma el json para mostrarlos en la grilla

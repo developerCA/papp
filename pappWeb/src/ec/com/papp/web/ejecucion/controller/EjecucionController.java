@@ -616,7 +616,8 @@ public class EjecucionController {
 			
 			//Ordengasto busqueda
 			if(clase.equals("ordengastobusqueda")){
-				jsonObject=ConsultasUtil.consultaOrdengastoBusquedaPaginado(parameters, jsonObject, mensajes);
+				//jsonObject=ConsultasUtil.consultaOrdengastoBusquedaPaginado(parameters, jsonObject, mensajes);
+				jsonObject=ConsultasUtil.ordenesgastobusqueda(parameters, jsonObject);
 			}
 			
 			//subitemcertificado
@@ -629,7 +630,15 @@ public class EjecucionController {
 				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 			}
 			
-			
+			//subitemordengasto
+			if(clase.equals("subitemordengasto")){
+				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
+				Collection<OrdengastolineaTO> resultado=UtilSession.planificacionServicio.transObtienesubitemporordengasto(Long.valueOf(parameters.get("ordengastoid")));
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,ordengastolineaTO.getJsonConfigbusqueda()));
+				HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+				totalMap.put("valor", resultado.size());
+				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			}
 			
 		
 			log.println("json retornado: " + jsonObject.toString()); 
