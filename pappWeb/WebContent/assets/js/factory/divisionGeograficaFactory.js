@@ -35,8 +35,9 @@ app.factory("divisionGeograficaFactory", [ "Restangular", function(Restangular) 
 			  
 			var url = "administrar/consultar/divisiongeografica/pagina="+pagina+"&estado=A";
 
-			if(tipo!=null && tipo != "") url += "&tipo=" + tipo;	
-			if(nombrepadre!=null && nombrepadre != "" ) url += "&nombrepadre=" + nombrepadre;
+			if(tipo!=null && tipo != "") url += "&tipo=" + tipo;
+//			if(nombrepadre!=null && nombrepadre != "" ) url += "&nombrepadre=" + nombrepadre;
+			if(nombrepadre!=null && nombrepadre != "" ) url += "&padre=" + nombrepadre;
 			 
 			return Restangular.allUrl(url).getList();
 			  

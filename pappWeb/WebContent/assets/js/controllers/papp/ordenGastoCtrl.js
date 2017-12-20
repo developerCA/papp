@@ -86,18 +86,24 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null,estado:null};
-		$scope.edicion=true;
-		$scope.nuevoar=true;
-		$scope.guardar=true;
+		ordenGastoFactory.nuevo(
+			$rootScope.ejefiscal
+		).then(function(resp){
+			console.log(resp);
+			if (resp.estado) {
+			    $scope.objeto=resp.json.ordengasto;
+			}
+			$scope.edicion=true;
+			$scope.nuevoar=true;
+			$scope.guardar=true;
+		})
 	}
 	
 	$scope.editar=function(id){
-		ordenGastoFactory.traerEditar(id).then(function(resp){
+		ordenGastoFactory.editar(id).then(function(resp){
 			console.log(resp);
 			if (resp.estado) {
-			    $scope.objeto=resp.json.certificacion;
-			    $scope.objetodetalles=resp.json.certificacionlineas;
+			    $scope.objeto=resp.json.ordengasto;
 			}
 			$scope.edicion=true;
 			$scope.nuevoar=false;

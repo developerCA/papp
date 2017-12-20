@@ -43,9 +43,15 @@ function(Restangular) {
 			//console.log(url);
 			return Restangular.allUrl(url).getList();
 		},
-		
-		traerEditar : function(id) {
-			var url = "ejecucion/ordengasto/"+id+"/-1";
+
+		nuevo : function(ejefisca) {
+			var url = "ejecucion/nuevo/ordengasto/" + ejefisca;
+
+		    return Restangular.allUrl(url).customGET();
+		},
+
+		editar : function(id) {
+			var url = "ejecucion/ordengasto/"+id+"/0";
 
 		    return Restangular.allUrl(url).customGET();
 		},

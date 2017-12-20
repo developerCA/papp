@@ -130,10 +130,10 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 			size : 'lg',
 			resolve: {
 				pais: function() {
-					return $scope.objetolista[index].npnombrepais;
+					return null;
 				},
 				provincia: function() {
-					return $scope.objetolista[index].npnombreprovincia;
+					return null;
 				},
 				tipo : function() {
 					return null;
@@ -152,10 +152,7 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 	};
 
 	$scope.abrirNombreProvincia = function(index) {
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalProvincias.html',
-			controller : 'ModalDivisionGeograficaController',
-			size : 'lg',
+/*
 			resolve: {
 				pais: function() {
 					return $scope.objetolista[index].npnombrepais;
@@ -167,7 +164,24 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 					return null;
 				}
 			}
+*/
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalProvincias.html',
+			controller : 'ModalDivisionGeograficaController',
+			size : 'lg',
+			resolve: {
+				pais: function() {
+					return $scope.objetolista[index].institucionentpaisid;
+				},
+				provincia: function() {
+					return $scope.objetolista[index].institucionentprovinciaid;
+				},
+				tipo : function() {
+					return null;
+				}
+			}
 		});
+		console.log($scope.objetolista[index]);
 		console.log('pais:');
 		console.log($scope.objetolista[index].npnombrepais);
 		console.log('provincia:');
@@ -186,10 +200,10 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 			size : 'lg',
 			resolve: {
 				pais: function() {
-					return $scope.objetolista[index].npnombrepais;
+					return $scope.objetolista[index].institucionentpaisid;
 				},
 				provincia: function() {
-					return $scope.objetolista[index].npnombreprovincia;
+					return $scope.objetolista[index].institucionentprovinciaid;
 				},
 				tipo : function() {
 					return null;
