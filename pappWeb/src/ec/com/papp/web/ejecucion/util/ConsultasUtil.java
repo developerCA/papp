@@ -98,8 +98,8 @@ public class ConsultasUtil {
 					certificacionTO.setEstado(parameters.get("estado"));
 				if(parameters.get("numprecompromiso")!=null && !parameters.get("numprecompromiso").equals(""))
 					certificacionTO.setNumprecompromiso(parameters.get("numprecompromiso"));
-				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
-					certificacionTO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+				if(parameters.get("certificacionejerfiscalid")!=null && !parameters.get("certificacionejerfiscalid").equals(""))
+					certificacionTO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("certificacionejerfiscalid")));
 				log.println("certificacion: " + certificacionTO.getCertificacionejerfiscalid());
 				SearchResultTO<CertificacionTO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionPaginado(certificacionTO);
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
