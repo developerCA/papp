@@ -16,7 +16,7 @@ app.factory("clasificacionFactory", [ "Restangular", function(Restangular) {
 		traerClasificacionesFuerza : function(pagina) {
 			var url = "administrar/consultar/fuerzaclasificacion/pagina="+pagina;
 			if (fuerza != null) {
-				url += "&fuerza=" + fuerza;
+				url += "&npfuerzaid=" + fuerza;
 			}
 			console.log(fuerza);
 			console.log(url);

@@ -80,7 +80,7 @@
 									</a>
 								</td>
 								<td>
-									<a class="btn btn-sm btn-primary" ng-click="editarPlanificacionAnual(obj.id)">
+									<a class="btn btn-sm btn-primary" ng-click="editarPlanificacionAnual(obj)">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
@@ -212,8 +212,16 @@ ok
 	    		{{node.title}}
 			</td>
 			<td width="1%">
-				<table width="71px">
+				<table width="108px">
 					<tr>
+						<td width="34px">
+							<a ng-show="node.tipo!='F'" uib-tooltip="Ver info."
+								class="btn btn-info btn-sm" data-nodrag
+								ng-click="vista(node);">
+								<span class="fa fa-eye"></span>
+							</a>
+						</td>
+						<td width="3px"></td>
 						<td width="34px">
 							<a ng-show="node.tipo!='F'" uib-tooltip="Agregar"
 								class="btn btn-info btn-sm" data-nodrag

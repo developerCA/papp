@@ -29,6 +29,14 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
 			return Restangular.allUrl(url).getList();
         },
 
+        traerPAverActividad: function (id, unidad, ejercicio) {
+        	return Restangular.allUrl("planificacion/actividadplanificacion/" +
+    			id + "/" +
+    			"&unidadid=" + unidad +
+    			"&ejerciciofiscalid=" + ejercicio
+			).getList();
+        },
+
         traerPlanificacionUECustom: function (pagina, ejercicio) {
         	 var url = "planificacion/consultar/planificacion/pagina=" + pagina + "&ejerciciofiscal=" + ejercicio;
              return Restangular.allUrl(url).customGET();
