@@ -618,6 +618,21 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Certificado de Fondos'
         }
+    }).state('app.aprobarcertificacionesfondos', {
+        url: "/aprobarcertificacionesfondos",
+        templateUrl: "assets/views/papp/aprobarCertificacionesFondos.html",
+        resolve: loadSequence(
+        		'ngTable','AprobarCertificacionesFondosCtrl','AprobarCertificacionesFondosFactory',
+        		'ModalUnidadCortoCtrl','UnidadFactory',
+        		'ModalClaseGastoCtrl','ClaseGastoFactory',
+        		'ModalClaseDocumentoCtrl','ClaseDocumentoFactory',
+        		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl'
+		),
+        title: 'Aprobación Certificado de Fondos',
+        ncyBreadcrumb: {
+            label: 'Aprobación Certificado de Fondos'
+        }
     }).state('app.ordengasto', {
         url: "/ordengasto",
         templateUrl: "assets/views/papp/ordenGasto.html",

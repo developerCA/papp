@@ -218,6 +218,8 @@ app.constant('JS_REQUIRES', {
         'ClaseGastoFactory':'assets/js/factory/claseGastoFactory.js',
         'ModalClaseDocumentoCtrl':'assets/js/controllers/papp/modales/modalClaseDocumentoCtrl.js',
         'ClaseDocumentoFactory':'assets/js/factory/claseDocumentoFactory.js',
+        'AprobarCertificacionesFondosCtrl':'assets/js/controllers/papp/aprobarCertificacionesFondosCtrl.js',
+        'AprobarCertificacionesFondosFactory':'assets/js/factory/aprobarCertificacionesFondosFactory.js',
 
     },
     //*** angularJS Modules

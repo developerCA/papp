@@ -4,27 +4,49 @@ function(Restangular) {
 	var service = Restangular.service("/ejecucion");
 
 	return {
-		traerOrdenGasto : function(pagina) {
-			  return Restangular.allUrl("ejecucion/consultar/ordengasto/pagina="+pagina).getList();
+		traer : function(
+			pagina,
+			ejefisca
+		) {
+			var url = "ejecucion/consultar/ordengasto/" +
+				"pagina=" + pagina +
+				"&ordengastoejerfiscalid=" + ejefisca;
+
+			return Restangular.allUrl(url).getList();
 		},
 		
-		traerOrdenGastoFiltro : function(pagina,codigo,precompromiso,valorinicial,valorfinal,fechainicial,fechafinal,estado) {
-			var url = "ejecucion/consultar/ordengasto/pagina="+pagina;
+		traerFiltro : function(
+			pagina,
+			ejefisca,
+			codigo,
+			compromiso,
+			certificacion,
+			valorinicial,
+			valorfinal,
+			fechainicial,
+			fechafinal,
+			estado
+		) {
+			var url = "ejecucion/consultar/ordengasto/" +
+				"pagina=" + pagina +
+				"&ordengastoejerfiscalid=" + ejefisca;
 
 			if(codigo != null && codigo != "") url += "&codigo=" + codigo;	
-			if(precompromiso != null && precompromiso != "") url += "&numprecompromiso=" + precompromiso;	
+			if(compromiso != null && compromiso != "") url += "&compromiso=" + compromiso;	
+			if(certificacion != null && certificacion != "") url += "&certificacion=" + certificacion;	
 			if(valorinicial!= null && valorinicial != "") url += "&valorinicial=" + valorinicial;	
 			if(valorfinal != null && valorfinal != "") url += "&valorfinal=" + valorfinal;	
 			if(fechainicial != null && fechainicial != "") url += "&fechainicial=" + fechainicial;	
 			if(fechafinal != null && fechafinal != "") url += "&fechafinal=" + fechafinal;	
 			if(estado != null && estado != "") url += "&estado=" + estado;	
-			 
+
+			//console.log(url);
 			return Restangular.allUrl(url).getList();
 		},
 		
-		traerOrdenGastoEditar : function(id) {
+		traerEditar : function(id) {
 			var url = "ejecucion/ordengasto/"+id+"/-1";
-		   
+
 		    return Restangular.allUrl(url).customGET();
 		},
 		

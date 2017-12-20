@@ -3,13 +3,14 @@
 app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","ordenGastoFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, ordenGastoFactory) {
 
-	$scope.codigo=null;
-	$scope.precompromiso=null;
-	$scope.valorinicial=null;
-	$scope.valorfinal=null;
-	$scope.fechainicial=null;
-	$scope.fechafinal=null;
-	$scope.estado=null;
+	$scope.codigoFiltro = null;
+	$scope.compromisoFiltro = null;
+	$scope.certificacionFiltro = null;
+	$scope.valorinicialFiltro = null;
+	$scope.valorfinalFiltro = null;
+	$scope.fechainicialFiltro = null;
+	$scope.fechafinalFiltro = null;
+	$scope.estadoFiltro = null;
 
 	$scope.edicion=false;
 	$scope.nuevoar=false;
@@ -22,13 +23,35 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	$scope.consultar=function(){
 		$scope.data=[];
 		//console.log('aqi');
-		ordenGastoFactory.traerOrdenGasto(pagina).then(function(resp){
-			console.log(resp);
+		ordenGastoFactory.traer(
+			pagina,
+			$rootScope.ejefiscal
+		).then(function(resp){
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	};
-	
+
+	$scope.filtrar=function(){
+		$scope.data=[];
+		ordenGastoFactory.traerFiltro(
+			pagina,
+			$rootScope.ejefiscal,
+			$scope.codigoFiltro,
+			$scope.compromisoFiltro,
+			$scope.certificacionFiltro,
+			$scope.valorinicialFiltro,
+			$scope.valorfinalFiltro,
+			$scope.fechainicialFiltro,
+			$scope.fechafinalFiltro,
+			$scope.estadoFiltro
+		).then(function(resp){
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
+
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
@@ -48,24 +71,18 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			}
 		});
 	});
-
-	$scope.filtrar=function(){
-		$scope.data=[];
-		ordenGastoFactory.traerOrdenGastoFiltro(pagina,$scope.codigo,$scope.fuerza,$scope.grado,$scope.padre,$scope.estado).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
 	
 	$scope.limpiar=function(){
-		$scope.codigo=null;
-		$scope.fuerza=null;
-		$scope.grado=null;
-		$scope.padre=null;
-		$scope.estado=null;
+		$scope.codigoFiltro = null;
+		$scope.compromisoFiltro = null;
+		$scope.certificacionFiltro = null;
+		$scope.valorinicialFiltro = null;
+		$scope.valorfinalFiltro = null;
+		$scope.fechainicialFiltro = null;
+		$scope.fechafinalFiltro = null;
+		$scope.estadoFiltro = null;
 
 		$scope.consultar();
-		
 	};
 	
 	$scope.nuevo=function(){
@@ -76,7 +93,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	}
 	
 	$scope.editar=function(id){
-		ordenGastoFactory.traerOrdenGastoEditar(id).then(function(resp){
+		ordenGastoFactory.traerEditar(id).then(function(resp){
 			console.log(resp);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.certificacion;
