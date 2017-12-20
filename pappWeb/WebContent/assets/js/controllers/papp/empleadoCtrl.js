@@ -99,7 +99,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			console.log(resp.json);
 			if (resp.estado) {
 				$scope.objeto=resp.json.empleado;
-				$scope.fuerza=null;
+				$scope.fuerza=$scope.objeto.npfuerzaid;
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;
