@@ -8,6 +8,7 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
+	$scope.tipo=null;
 	
 	var pagina = 1;
 	
@@ -23,8 +24,8 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	};
 
 	$scope.consultarPaises=function(){
-		
 		$scope.data=[];
+		$scope.tipo=null;
 		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'A',null).then(function(resp){
 			
 			if (resp.meta)
@@ -34,6 +35,7 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 
 	$scope.consultarProvincias=function(){
 		$scope.data=[];
+		$scope.tipo="P";
 		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'P',pais).then(function(resp){
 			
 			if (resp.meta)
@@ -43,7 +45,18 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 
 	$scope.consultarCantones=function(){
 		$scope.data=[];
+		$scope.tipo="C";
 		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'C',provincia).then(function(resp){
+			
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
+
+	$scope.filtrar=function(){
+		//console.log("tipo:'"+tipo+"'");
+		$scope.data=[];
+		divisionGeograficaFactory.traerDivisionesFiltro(pagina,$scope.nombreFiltro,null,"A",$scope.tipo).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
@@ -70,17 +83,6 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 			}
 		});
 	});
-	
-	
-	$scope.filtrar=function(){
-		//console.log("tipo:'"+tipo+"'");
-		$scope.data=[];
-		divisionGeograficaFactory.traerDivisionesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro,tipo).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
 	
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
