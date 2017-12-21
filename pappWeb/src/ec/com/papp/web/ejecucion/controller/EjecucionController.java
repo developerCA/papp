@@ -473,13 +473,21 @@ public class EjecucionController {
 		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
 		try {
-			CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
-			certificacionTO.setEstado(tipo);
-			UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
-			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
-			mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
-			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
-//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
+				CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
+				certificacionTO.setEstado(tipo);
+				UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+			}
+			else if(tipo.equals("LI")) {
+				
+			}
+			else if(tipo.equals("LP")) {
+				
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al eliminar");
