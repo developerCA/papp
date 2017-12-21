@@ -10,6 +10,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	$scope.padreid=0;
 	$scope.objeto={};
 	$scope.objetolista={};
+	$scope.nodeActivo=null;
 	
 	var pagina = 1;
 	
@@ -30,7 +31,8 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 
 	$scope.cargarHijos=function(node){
 		if (!node.iscargado)
-			//console.log(node);
+			console.log(node);
+			console.log(node.id);
 		    node.iscargado=true;
 
 		    mantenerIndicadoresFactory.traerMantenerIndicadoresHijos(
@@ -83,12 +85,14 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	
 	$scope.nuevo=function(node){
 		$scope.padreid = 0;
+		$scope.nodeActivo = node;
 		if (node != null) {
-			if (node.indicadorpadreid == undefined) {
+			$scope.padreid = node.id;
+			/*if (node.indicadorpadreid == undefined) {
 				$scope.padreid = node.id;
 			} else {
 				$scope.padreid = node.indicadorpadreid;
-			}
+			}*/
 		}
 		//console.log($scope.padreid);
 		//console.log(node);
@@ -126,6 +130,8 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	}
 
 	$scope.editar=function(node){
+		console.log(node);
+		$scope.nodeActivo = node;
 		mantenerIndicadoresFactory.traerMantenerIndicadoresEditar(node.id).then(function(resp){
 			console.log(resp.json);
 			if (resp.estado) {
@@ -180,10 +186,11 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
             	$scope.obj.indicadormetodosTOs = $scope.objetolista;
             	mantenerIndicadoresFactory.guardar($scope.obj).then(function(resp){
         			 if (resp.estado){
+        				 $scope.nodeActivo.iscargado = false;
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
-	 		             $scope.limpiar();
+	 		             //$scope.limpiar();
 	 		             SweetAlert.swal("Mantener Indicadores!", "Registro grabado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Mantener Indicadores!", resp.mensajes.msg, "error");

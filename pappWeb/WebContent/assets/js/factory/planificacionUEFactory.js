@@ -32,8 +32,8 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
         traerPAverActividad: function (id, unidad, ejercicio) {
         	return Restangular.allUrl("planificacion/actividadplanificacion/" +
     			id + "/" +
-    			"&unidadid=" + unidad +
-    			"&ejerciciofiscalid=" + ejercicio
+    			"unidadid=" + unidad +
+    			"&ejerciciofiscal=" + ejercicio
 			).getList();
         },
 

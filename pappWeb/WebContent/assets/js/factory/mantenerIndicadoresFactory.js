@@ -10,9 +10,10 @@ app.factory("mantenerIndicadoresFactory", [ "Restangular", function(Restangular)
 
 		traerMantenerIndicadoresHijos : function(pagina, ejercicio, padre) {
 			var url = "planificacion/consultar/indicador/" +
-					"pagina=" + pagina +
-					"&indicadorejerciciofiscalid=" + ejercicio +
-					"&id=" + padre;
+				"pagina=" + pagina +
+				"&indicadorejerciciofiscalid=" + ejercicio +
+				"&id=" + padre;
+//			var url = "planificacion/indicador/" + padre + "/0/0";
 			return Restangular.allUrl(url).getList();
 		},
 
