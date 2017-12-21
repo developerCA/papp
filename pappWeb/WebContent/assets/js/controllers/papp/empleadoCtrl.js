@@ -166,7 +166,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			$scope.objeto.npcodigoescalarmu = obj.npcodigoescalarmu;
 			$scope.objeto.npremuneracion = obj.npremuneracion;
 			$scope.objeto.npcargocodigo = " ";
-			$scope.fuerza = obj.gegradofuerzaid
+			$scope.fuerza = obj.npfuerzaid;
 		}, function() {
 		});
 	};
