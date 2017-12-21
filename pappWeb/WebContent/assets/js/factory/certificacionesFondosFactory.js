@@ -3,19 +3,19 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 	var service = Restangular.service("/ejecucion");
 
 	return {
-		traerCertificacionesFondos: function(
+		traer: function(
 			pagina,
 			ejefiscal
 		) {
 			var url = "ejecucion/consultar/certificacion/" +
-				"pagina=" + pagina +
+				"filas=10" +
+				"&pagina=" + pagina +
 				"&certificacionejerfiscalid=" + ejefiscal;
-			//console.log(ejefiscal);
 			//console.log(url);
-			return Restangular.allUrl(url).getList();
+			return Restangular.allUrl(url).customGET();
 		},
 
-		traerCertificacionesFondosFiltro: function(
+		traerFiltro: function(
 			pagina,
 			ejefiscal,
 			codigo,
@@ -27,7 +27,8 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			estado
 		) {
 			var url = "ejecucion/consultar/certificacion/" +
-				"pagina=" + pagina +
+				"filas=10" +
+				"&pagina=" + pagina +
 				"&certificacionejerfiscalid=" + ejefiscal;
 
 			if(codigo != null && codigo != "") url += "&codigo=" + codigo;	
@@ -38,7 +39,7 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			if(fechafinal != null && fechafinal != "") url += "&fechafinal=" + fechafinal;	
 			if(estado != null && estado != "") url += "&estado=" + estado;	
 
-			return Restangular.allUrl(url).getList();
+			return Restangular.allUrl(url).customGET();
 		},
 
 		traerCertificacionesFondosNuevo: function(

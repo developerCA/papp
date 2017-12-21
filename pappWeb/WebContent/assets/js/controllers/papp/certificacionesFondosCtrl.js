@@ -11,34 +11,46 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	$scope.fechafinalFiltro=null;
 	$scope.estadoFiltro=null;
 
+	$scope.data=[];
 	$scope.edicion=false;
 	$scope.nuevoar=false;
 	$scope.guardar=false;
 	$scope.objeto={estado:null};
 	$scope.objetodetalles={};
 	
-	var pagina = 1;
+    $scope.pagina = 1;
 	
 	$scope.consultar=function(){
-		//console.log($rootScope.ejefiscal);
-		//console.log($rootScope);
-		$scope.data=[];
-		certificacionesFondosFactory.traerCertificacionesFondos(
-			pagina,
+		certificacionesFondosFactory.traer(
+			$scope.pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
 			//console.log(resp);
-			if (resp.meta)
-				$scope.data=resp;
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
+			console.log($scope.data);
 		})
 	};
+
+    $scope.pageChanged = function() {
+        if ($scope.aplicafiltro){
+        	$scope.filtrar();
+        }else{
+        	$scope.consultar();	
+        }
+    };  
+    
+    $scope.filtrarUnico=function(){
+    	$scope.pagina=1;
+    	$scope.filtrar();
+    }  
 
 	$scope.filtrar=function(){
 		//console.log($rootScope.ejefiscal);
 		//console.log($rootScope);
 		$scope.data=[];
-		certificacionesFondosFactory.traerCertificacionesFondosFiltro(
-			pagina,
+		certificacionesFondosFactory.traerFiltro(
+			$scope.pagina,
 			$rootScope.ejefiscal,
 			$scope.codigoFiltro,
 			$scope.precompromisoFiltro,
@@ -48,11 +60,11 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			$scope.fechafinalFiltro,
 			$scope.estadoFiltro
 		).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
 		})
 	}
-	
+/*
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
@@ -72,7 +84,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			}
 		});
 	});
-	
+*/
 	$scope.limpiar=function(){
 		$scope.codigoFiltro=null;
 		$scope.precompromisoFiltro=null;

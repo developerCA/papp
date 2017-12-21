@@ -15,22 +15,22 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 
     $scope.consultar = function () {
         $scope.data = [];
-        subitemsFactory.traerItemsCustom($scope.pagina, $rootScope.ejefiscal).then(function (resp) {
-        	 $scope.dataset = resp.json.result;
-             $scope.total = resp.json.total.valor;
-             console.log($scope.total);
+        subitemsFactory.traerItemsCustom(
+    		$scope.pagina,
+    		$rootScope.ejefiscal
+		).then(function (resp) {
+        	$scope.dataset = resp.json.result;
+            $scope.total = resp.json.total.valor;
+            console.log(resp);
         });
     };
 
-   
     $scope.pageChanged = function() {
-      
         if ($scope.aplicafiltro){
         	$scope.filtrar();
         }else{
         	$scope.consultar();	
         }
-        
     };  
     
     $scope.filtrarUnico=function(){
@@ -39,7 +39,6 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     }  
       
     $scope.filtrar = function () {
-        $scope.data = [];
         subitemsFactory.traerItemsFiltroCustom(
     		$scope.pagina,
     		$scope.codigo,

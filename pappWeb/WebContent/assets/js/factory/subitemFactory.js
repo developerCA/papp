@@ -5,7 +5,8 @@ app.factory("SubItemsFactory", ["Restangular", function (Restangular) {
     return {
 
         traerItems: function (pagina, ejercicio) {
-        	return Restangular.allUrl("administrar/consultar/subitem/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio).getList();
+        	var url = "administrar/consultar/subitem/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio;
+        	return Restangular.allUrl(url).getList();
         },
         
         traerItemsCustom: function (pagina, ejercicio) {

@@ -90,11 +90,8 @@
 									<th>Nivel</th>
 									<th>Unidad Medida Nombre</th>
 									<th>Item Tipo</th>
-									
-									
 								</tr>
 							</thead>
-
 							<tr ng-repeat="data in dataset">
 								<td><a class="btn btn-sm btn-primary"
 									ng-click="editar(data.id)"><i class="fa fa-pencil"></i></a></td>
@@ -115,8 +112,8 @@
 							previous-text="Atras" uib-pagination total-items="total"
 							ng-change="pageChanged()" items-per-page="20" ng-model="pagina"
 							max-size="10" class="pagination-sm" boundary-links="true"
-							force-ellipses="true"></ul>
-
+							force-ellipses="true">
+						</ul>
 					</div>
 				</div>
 
