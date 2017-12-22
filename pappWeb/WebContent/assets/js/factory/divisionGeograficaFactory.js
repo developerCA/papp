@@ -31,13 +31,12 @@ app.factory("divisionGeograficaFactory", [ "Restangular", function(Restangular) 
 			  
 		},
 
-		traerDivisionesFullFiltro : function(pagina,tipo,nombrepadre) {
+		traerDivisionesFullFiltro : function(pagina,tipo,padreid) {
 			  
 			var url = "administrar/consultar/divisiongeografica/pagina="+pagina+"&estado=A";
 
 			if(tipo!=null && tipo != "") url += "&tipo=" + tipo;
-//			if(nombrepadre!=null && nombrepadre != "" ) url += "&nombrepadre=" + nombrepadre;
-			if(nombrepadre!=null && nombrepadre != "" ) url += "&padre=" + nombrepadre;
+			if(padreid!=null && padreid != "" ) url += "&padreid=" + padreid;
 			 
 			return Restangular.allUrl(url).getList();
 			  

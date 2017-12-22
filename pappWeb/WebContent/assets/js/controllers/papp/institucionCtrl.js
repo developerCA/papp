@@ -226,7 +226,7 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-                var objEnviar = $scope.objeto;
+                var objEnviar = Object.assign({}, $scope.objeto);
                 objEnviar.details = $scope.objetolista;
                 console.log(objEnviar.details);
                 for (var i = 0; i < objEnviar.details.length; i++) {

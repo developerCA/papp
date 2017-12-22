@@ -107,7 +107,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 		$scope.objeto.indicadorpadreid = $scope.padreid;
 		//console.log($scope.objeto);
 		$scope.objetolista = [];
-		$scope.agregarDetalle();
+		//$scope.agregarDetalle();
 
 		$scope.guardar=true;
 		$scope.edicion=true;
@@ -120,7 +120,8 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 				id: null,
 				metodoid: null
 			},
-			estado: null
+			estado: null,
+			editarcodigo: true
 		};
 		$scope.objetolista.push(obj);
 	}
@@ -182,9 +183,14 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	$scope.obj = $scope.objeto;
-            	$scope.obj.indicadormetodosTOs = $scope.objetolista;
-            	mantenerIndicadoresFactory.guardar($scope.obj).then(function(resp){
+            	$scope.newobj = Object.assign({}, $scope.objeto);
+            	$scope.newobj.indicadormetodosTOs = Array.from($scope.objetolista);
+            	for (var i = 0; i < $scope.newobj.indicadormetodosTOs.length; i++) {
+					delete $scope.newobj.indicadormetodosTOs[i].editarcodigo;
+					$scope.newobj.indicadormetodosTOs[i].id.metodoid = i + 1;
+				}
+            	console.log($scope.newobj);
+            	mantenerIndicadoresFactory.guardar($scope.newobj).then(function(resp){
         			 if (resp.estado){
         				 $scope.nodeActivo.iscargado = false;
         				 form.$setPristine(true);
@@ -196,6 +202,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	 		             SweetAlert.swal("Mantener Indicadores!", resp.mensajes.msg, "error");
         			 }
         		})
+        		$scope.newobj = {};
             }
         },
         reset: function (form) {

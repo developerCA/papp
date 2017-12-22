@@ -108,15 +108,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.vista=function(node){
 		console.log(node);
 		PlanificacionUEFactory.traerPAverActividad(
-			node.id,
-			$scope.unidadid,
+			node.tablarelacionid,
+			node.npIdunidad,
 			$rootScope.ejefiscal
 		).then(function(resp){
-			if (resp.estado)
-			   $scope.objeto=resp.json.planificacionUE;
-			   $scope.detalles=resp.json.details;
-			   $scope.edicion=true;
-			  console.log(resp.json);
+			console.log(resp.json);
+			if (resp.estado) {
+				$scope.objeto=resp.json.actividadplanificacion;
+				$scope.edicion=true;
+			}
 		})
 	};
 

@@ -37,7 +37,7 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
     			id + "/" +
     			"unidadid=" + unidad +
     			"&ejerciciofiscal=" + ejercicio
-			).getList();
+			).customGET();
         },
 
         traerCustom: function (pagina, ejercicio) {
