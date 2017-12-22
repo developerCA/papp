@@ -3,8 +3,11 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 	var service = Restangular.service("/planificacion");
 
 	return {
-		traerFormulacionEstrategica : function(pagina, ejercicio) {
-			var url = "planificacion/consultar/programa/pagina=" + pagina + "&programaejerciciofiscalid=" + ejercicio;
+		traer : function(pagina, ejercicio) {
+			var url = "planificacion/consultar/programa/" +
+				"pagina=" + pagina +
+				"&programaejerciciofiscalid=" + ejercicio +
+				"&estado=A";
 			return Restangular.allUrl(url).getList();
 		},
 
@@ -14,7 +17,8 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 		) {
 			var url = "planificacion/consultar/subprograma/" +
 				"padre=" + npNivelid  +
-				"&subprogramaejerciciofiscalid=" + ejercicio;
+				"&subprogramaejerciciofiscalid=" + ejercicio +
+				"&estado=A";
 			return Restangular.allUrl(url).getList();
 		},
 
@@ -24,7 +28,8 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 		) {
 			var url = "planificacion/consultar/proyecto/" +
 				"padre=" + npNivelid  +
-				"&proyectoejerciciofiscalid =" + ejercicio;
+				"&proyectoejerciciofiscalid=" + ejercicio +
+				"&estado=A";
 			return Restangular.allUrl(url).getList();
 		},
 
@@ -34,7 +39,8 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 		) {
 			var url = "planificacion/consultar/actividad/" +
 				"padre=" + npNivelid  +
-				"&actividadeejerciciofiscalid =" + ejercicio;
+				"&actividadeejerciciofiscalid=" + ejercicio +
+				"&estado=A";
 			return Restangular.allUrl(url).getList();
 		},
 
@@ -44,11 +50,12 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 		) {
 			var url = "planificacion/consultar/subactividad/" +
 				"padre=" + npNivelid  +
-				"&subactividadejerfiscalid=" + ejercicio;
+				"&subactividadejerfiscalid=" + ejercicio +
+				"&estado=A";
 			return Restangular.allUrl(url).getList();
 		},
 
-		traerFormulacionEstrategicaFiltro : function(pagina,nombre) {
+		traerFiltro : function(pagina,nombre) {
 			var url = "planificacion/consultar/programa/pagina="+pagina;
 
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	

@@ -13,7 +13,7 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		plannacionalFactory.traerPlanNacional(
+		plannacionalFactory.traer(
 			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
@@ -30,7 +30,7 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 			console.log(node);
 		    node.iscargado=true;
 
-		    plannacionalFactory.traerPlanNacionalHijos(
+		    plannacionalFactory.traerHijos(
 	    		pagina,
 	    		$rootScope.ejefiscal,
 	    		node.id
@@ -62,7 +62,7 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		plannacionalFactory.traerPlanNacionalFiltro(pagina,$scope.nombreFiltro).then(function(resp){
+		plannacionalFactory.traerFiltro(pagina,$scope.nombreFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -101,7 +101,7 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 					break;
 			}
 			if (node.tipo=="M") {
-				plannacionalFactory.traerPlanNacionalEditar(node.id).then(function(resp){
+				plannacionalFactory.traerEditar(node.id).then(function(resp){
 					if (resp.estado) {
 						$scope.objeto.plannacionalpadreid = resp.json.plannacional.plannacionalpadreid;
 					}
@@ -117,7 +117,7 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 	}
 	
 	$scope.editar=function(node){
-		plannacionalFactory.traerPlanNacionalEditar(node.id).then(function(resp){
+		plannacionalFactory.traerEditar(node.id).then(function(resp){
 			console.log(resp.json.plannacional);
 			if (resp.estado) {
 			   $scope.objeto=resp.json.plannacional;

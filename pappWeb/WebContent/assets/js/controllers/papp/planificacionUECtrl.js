@@ -17,7 +17,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.consultar=function(){
 		$scope.data=[];
-		PlanificacionUEFactory.traerPlanificacionUE(
+		PlanificacionUEFactory.traer(
 			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
@@ -48,7 +48,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		PlanificacionUEFactory.traerPlanificacionUEFiltro(
+		PlanificacionUEFactory.traerFiltro(
 			pagina,
 			$rootScope.ejefiscal,
 			$scope.nombreFiltro,
@@ -74,7 +74,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.editar=function(id){
-		PlanificacionUEFactory.traerPlanificacionUE(id).then(function(resp){
+		PlanificacionUEFactory.traer(id).then(function(resp){
 			if (resp.estado)
 			   $scope.objeto=resp.json.planificacionUE;
 			   $scope.detalles=resp.json.details;

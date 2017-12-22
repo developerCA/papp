@@ -20,7 +20,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		formulacionEstrategicaFactory.traerFormulacionEstrategica(
+		formulacionEstrategicaFactory.traer(
 			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){

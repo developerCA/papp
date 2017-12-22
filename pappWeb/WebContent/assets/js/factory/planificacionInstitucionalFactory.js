@@ -3,20 +3,24 @@ app.factory("planificacionInstitucionalFactory", [ "Restangular", function(Resta
 	var service = Restangular.service("/planificacion");
 
 	return {
-		traerPlanificacionInstitucional : function(pagina, ejercicio) {
-			var url = "planificacion/consultar/objetivo/pagina=" + pagina + "&objetivoejerciciofiscalid=" + ejercicio;
-			return Restangular.allUrl(url).getList();
-		},
-
-		traerPlanificacionInstitucionalHijos : function(pagina, ejercicio, padre) {
+		traer : function(pagina, ejercicio) {
 			var url = "planificacion/consultar/objetivo/" +
-					"pagina=" + pagina +
-					"&objetivoejerciciofiscalid=" + ejercicio +
-					"&id=" + padre;
+				"pagina=" + pagina +
+				"&objetivoejerciciofiscalid=" + ejercicio +
+				"&estado=A";
 			return Restangular.allUrl(url).getList();
 		},
 
-		traerPlanificacionInstitucionalFiltro : function(pagina,nombre) {
+		traerHijos : function(pagina, ejercicio, padre) {
+			var url = "planificacion/consultar/objetivo/" +
+				"pagina=" + pagina +
+				"&objetivoejerciciofiscalid=" + ejercicio +
+				"&id=" + padre +
+				"&estado=A";
+			return Restangular.allUrl(url).getList();
+		},
+
+		traerFiltro : function(pagina,nombre) {
 			var url = "planificacion/consultar/objetivo/pagina="+pagina;
 
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
@@ -24,13 +28,13 @@ app.factory("planificacionInstitucionalFactory", [ "Restangular", function(Resta
 			return Restangular.allUrl(url).getList();
 		},
 
-		traerPlanificacionInstitucionalEditar : function(id) {
+		traerEditar : function(id) {
 			var url = "planificacion/objetivo/"+id+"/0";
 
 		    return Restangular.allUrl(url).customGET();
 		},
 
-		traerPlanificacionInstitucionalNuevoEstructura : function(padreid, ejerciciofiscalid, tipopadre) {
+		traerNuevoEstructura : function(padreid, ejerciciofiscalid, tipopadre) {
 			var url = "planificacion/nuevo/objetivo/"+padreid+"/"+ejerciciofiscalid+"/"+tipopadre;
 
 		    return Restangular.allUrl(url).customGET();
