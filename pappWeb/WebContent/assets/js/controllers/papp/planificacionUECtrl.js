@@ -112,10 +112,18 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			node.npIdunidad,
 			$rootScope.ejefiscal
 		).then(function(resp){
-			console.log(resp.json);
+			console.log(node.nodeTipo);
 			if (resp.estado) {
+				$scope.divMenuActividad = false;
+				$scope.divMenuSubitems = false;
 				$scope.objeto=resp.json.actividadplanificacion;
-				$scope.edicion=true;
+				$scope.divPlanificacionAnualVista=true;
+				if (node.nodeTipo == "AC") {
+					$scope.divMenuActividad = true;
+				}
+				if (node.nodeTipo == "SI") {
+					$scope.divMenuSubitems = true;
+				}
 			}
 		})
 	};
@@ -201,9 +209,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	 		             $scope.objeto={};
 	 		             $scope.detalles=[];
 	 		             $scope.limpiar();
-	 		             SweetAlert.swal("Clase de Registro!", "Registro registrado satisfactoriamente!", "success");
+	 		             SweetAlert.swal("Planificacion UE!", "Registro registrado satisfactoriamente!", "success");
         			 }else{
-	 		             SweetAlert.swal("Clase de Registro!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal("Planificacion UE!", resp.mensajes.msg, "error");
         			 }
         		})
             }

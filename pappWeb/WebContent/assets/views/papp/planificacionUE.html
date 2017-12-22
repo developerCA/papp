@@ -128,297 +128,319 @@
 						</div>
 
 						<div class="col-md-6">
-							<div class="row">
+							<div class="row" ng-show="divMenuActividad">
 								<span>
-									<a  class="btn btn-sm btn-dark-azure" ng-click=";">
+									<a class="btn btn-sm btn-dark-azure" ng-click=";">
 										<i class="fa fa-plus-square"></i>
 										Meta: Distribuci&oacute;n Planificada
 									</a>
 								</span>
 								<span>
-									<a  class="btn btn-sm btn-dark-azure" ng-click=";">
+									<a class="btn btn-sm btn-dark-azure" ng-click=";">
 										<i class="fa fa-plus-square"></i>
 										Meta: Distribuci&oacute;n Ajustada
 									</a>
 								</span>
 							</div>
-
-							<div class="row">
-								<div class="col-sm-12">
-<div class="form-group"
-    ng-class="{'has-error':Form.npPlannacional.$dirty && Form.npPlannacional.$invalid, 'has-success':Form.npPlannacional.$valid}">
-    <label class="control-label">
-        Objetivo Plan Nacional
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <textarea name="npPlannacional" rows="5" style="width: 100%" placeholder="Escriba un objetivo plan nacional"
-            class="form-control" ng-model="objeto.npPlannacional"
-            required ng-disabled="true"></textarea>
-    </div>
-            <span class="error text-small block"
-        ng-if="Form.npPlannacional.$dirty && Form.npPlannacional.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npPlannacional.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npObjetivoestrategico.$dirty && Form.npObjetivoestrategico.$invalid, 'has-success':Form.npObjetivoestrategico.$valid}">
-    <label class="control-label">
-        Objetivo MIDENA
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="text" placeholder="Escriba un objetivo midena"
-            class="form-control" name="npObjetivoestrategico" ng-model="objeto.npObjetivoestrategico"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npObjetivoestrategico.$dirty && Form.npObjetivoestrategico.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npObjetivoestrategico.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npObjetivooperativo.$dirty && Form.npObjetivooperativo.$invalid, 'has-success':Form.npObjetivooperativo.$valid}">
-    <label class="control-label">
-        Objetivo FF.AA.
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="text" placeholder="Escriba un objetivo ff.aa."
-            class="form-control" name="npObjetivooperativo" ng-model="objeto.npObjetivooperativo"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npObjetivooperativo.$dirty && Form.npObjetivooperativo.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npObjetivooperativo.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npObjetivofuerza.$dirty && Form.npObjetivofuerza.$invalid, 'has-success':Form.npObjetivofuerza.$valid}">
-    <label class="control-label">
-        Objetivo de Fuerza
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="text" placeholder="Escriba un objetivo de fuerza"
-            class="form-control" name="npObjetivofuerza" ng-model="objeto.npObjetivofuerza"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npObjetivofuerza.$dirty && Form.npObjetivofuerza.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npObjetivofuerza.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npInstitucion.$dirty && Form.npInstitucion.$invalid, 'has-success':Form.npInstitucion.$valid}">
-    <label class="control-label">
-        Instituci&oacute;n (UDAF)
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="text" placeholder="Escriba un instituci&oacute;n (udaf)"
-            class="form-control" name="npInstitucion" ng-model="objeto.npInstitucion"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npInstitucion.$dirty && Form.npInstitucion.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npInstitucion.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npentidad.$dirty && Form.npentidad.$invalid, 'has-success':Form.npentidad.$valid}">
-    <label class="control-label">
-        Entidad (EOD)
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="text" placeholder="Escriba un entidad (eod)"
-            class="form-control" name="npentidad" ng-model="objeto.npentidad"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npentidad.$dirty && Form.npentidad.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npentidad.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npPrograma.$dirty && Form.npPrograma.$invalid, 'has-success':Form.npPrograma.$valid}">
-    <label class="control-label">
-        Programa
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="text" placeholder="Escriba un programa"
-            class="form-control" name="npPrograma" ng-model="objeto.npPrograma"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npPrograma.$dirty && Form.npPrograma.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npPrograma.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npSubprograma.$dirty && Form.npSubprograma.$invalid, 'has-success':Form.npSubprograma.$valid}">
-    <label class="control-label">
-        Subprograma
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="text" placeholder="Escriba un subprograma"
-            class="form-control" name="npSubprograma" ng-model="objeto.npSubprograma"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npSubprograma.$dirty && Form.npSubprograma.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npSubprograma.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npProyecto.$dirty && Form.npProyecto.$invalid, 'has-success':Form.npProyecto.$valid}">
-    <label class="control-label">
-        Proyecto
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="text" placeholder="Escriba un proyecto"
-            class="form-control" name="npProyecto" ng-model="objeto.npProyecto"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npProyecto.$dirty && Form.npProyecto.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npProyecto.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npacumuladoplanificado.$dirty && Form.npacumuladoplanificado.$invalid, 'has-success':Form.npacumuladoplanificado.$valid}">
-    <label class="control-label">
-        P. Acumulado Planificado
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="number" style="text-align:right;" aria-label="amount" placeholder="Escriba un p. acumulado planificado"
-            class="form-control" name="npacumuladoplanificado" ng-model="objeto.npacumuladoplanificado" ng-pattern="/^[0-9]*$/"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npacumuladoplanificado.$dirty && Form.npacumuladoplanificado.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npacumuladoplanificado.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npacumuladoajustado.$dirty && Form.npacumuladoajustado.$invalid, 'has-success':Form.npacumuladoajustado.$valid}">
-    <label class="control-label">
-        P. Acumulado Ajustado
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="number" style="text-align:right;" aria-label="amount" placeholder="Escriba un p. acumulado ajustado"
-            class="form-control" name="npacumuladoajustado" ng-model="objeto.npacumuladoajustado" ng-pattern="/^[0-9]*$/"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npacumuladoajustado.$dirty && Form.npacumuladoajustado.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npacumuladoajustado.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.ponderacion.$dirty && Form.ponderacion.$invalid, 'has-success':Form.ponderacion.$valid}">
-    <label class="control-label">
-        Ponderaci&oacute;n
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="number" style="text-align:right;" aria-label="amount" placeholder="Escriba un ponderaci&oacute;n"
-            class="form-control" name="ponderacion" ng-model="objeto.ponderacion" ng-pattern="/^[0-9]*$/"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.ponderacion.$dirty && Form.ponderacion.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.ponderacion.$valid">
-        Listo
-    </span>
-</div>
-
-<div class="form-group"
-    ng-class="{'has-error':Form.npponderacionacumulado.$dirty && Form.npponderacionacumulado.$invalid, 'has-success':Form.npponderacionacumulado.$valid}">
-    <label class="control-label">
-        Ponderaci&oacute;n Acumulada
-        <span class="symbol required"></span>
-    </label>
-    <div class="input-group">
-        <input type="number" style="text-align:right;" aria-label="amount" placeholder="Escriba un ponderaci&oacute;n acumulada"
-            class="form-control" name="npponderacionacumulado" ng-model="objeto.npponderacionacumulado" ng-pattern="/^[0-9]*$/"
-            required ng-disabled="true">
-    </div>
-    <span class="error text-small block"
-        ng-if="Form.npponderacionacumulado.$dirty && Form.npponderacionacumulado.$invalid">
-        Incorrecto
-    </span>
-    <span class="success text-small"
-        ng-if="Form.npponderacionacumulado.$valid">
-        Listo
-    </span>
-</div>
-								</div>
+							<div class="row" ng-show="divMenuSubitems">
+								<span>
+									<a class="btn btn-sm btn-dark-azure" ng-click=";">
+										<i class="fa fa-plus-square"></i>
+										Presupuesto: Distribución Planificada Compromiso
+									</a>
+								</span>
+								<span>
+									<a class="btn btn-sm btn-dark-azure" ng-click=";">
+										<i class="fa fa-plus-square"></i>
+										Presupuesto: Distribución Ajustada Compromiso
+									</a>
+								</span>
+								<span>
+									<a class="btn btn-sm btn-dark-azure" ng-click=";">
+										<i class="fa fa-plus-square"></i>
+										Presupuesto: Distribución Ajustada Devengo
+									</a>
+								</span>
 							</div>
+<br>
+							<form name="Form" id="form1" novalidate ng-submit="form.submit(Form)" ng-show="divPlanificacionAnualVista">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npPlannacional.$dirty && Form.npPlannacional.$invalid, 'has-success':Form.npPlannacional.$valid}">
+										    <label class="control-label">
+										        Objetivo Plan Nacional
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <textarea name="npPlannacional" rows="5" style="width: 100%" placeholder="Escriba un objetivo plan nacional"
+										            class="form-control" ng-model="objeto.npPlannacional"
+										            required ng-disabled="true"></textarea>
+										    </div>
+										            <span class="error text-small block"
+										        ng-if="Form.npPlannacional.$dirty && Form.npPlannacional.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npPlannacional.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npObjetivoestrategico.$dirty && Form.npObjetivoestrategico.$invalid, 'has-success':Form.npObjetivoestrategico.$valid}">
+										    <label class="control-label">
+										        Objetivo MIDENA
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" placeholder="Escriba un objetivo midena"
+										            class="form-control" name="npObjetivoestrategico" ng-model="objeto.npObjetivoestrategico"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npObjetivoestrategico.$dirty && Form.npObjetivoestrategico.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npObjetivoestrategico.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npObjetivooperativo.$dirty && Form.npObjetivooperativo.$invalid, 'has-success':Form.npObjetivooperativo.$valid}">
+										    <label class="control-label">
+										        Objetivo FF.AA.
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" placeholder="Escriba un objetivo ff.aa."
+										            class="form-control" name="npObjetivooperativo" ng-model="objeto.npObjetivooperativo"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npObjetivooperativo.$dirty && Form.npObjetivooperativo.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npObjetivooperativo.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npObjetivofuerza.$dirty && Form.npObjetivofuerza.$invalid, 'has-success':Form.npObjetivofuerza.$valid}">
+										    <label class="control-label">
+										        Objetivo de Fuerza
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" placeholder="Escriba un objetivo de fuerza"
+										            class="form-control" name="npObjetivofuerza" ng-model="objeto.npObjetivofuerza"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npObjetivofuerza.$dirty && Form.npObjetivofuerza.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npObjetivofuerza.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npInstitucion.$dirty && Form.npInstitucion.$invalid, 'has-success':Form.npInstitucion.$valid}">
+										    <label class="control-label">
+										        Instituci&oacute;n (UDAF)
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" placeholder="Escriba un instituci&oacute;n (udaf)"
+										            class="form-control" name="npInstitucion" ng-model="objeto.npInstitucion"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npInstitucion.$dirty && Form.npInstitucion.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npInstitucion.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npentidad.$dirty && Form.npentidad.$invalid, 'has-success':Form.npentidad.$valid}">
+										    <label class="control-label">
+										        Entidad (EOD)
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" placeholder="Escriba un entidad (eod)"
+										            class="form-control" name="npentidad" ng-model="objeto.npentidad"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npentidad.$dirty && Form.npentidad.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npentidad.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npPrograma.$dirty && Form.npPrograma.$invalid, 'has-success':Form.npPrograma.$valid}">
+										    <label class="control-label">
+										        Programa
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" placeholder="Escriba un programa"
+										            class="form-control" name="npPrograma" ng-model="objeto.npPrograma"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npPrograma.$dirty && Form.npPrograma.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npPrograma.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npSubprograma.$dirty && Form.npSubprograma.$invalid, 'has-success':Form.npSubprograma.$valid}">
+										    <label class="control-label">
+										        Subprograma
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" placeholder="Escriba un subprograma"
+										            class="form-control" name="npSubprograma" ng-model="objeto.npSubprograma"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npSubprograma.$dirty && Form.npSubprograma.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npSubprograma.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npProyecto.$dirty && Form.npProyecto.$invalid, 'has-success':Form.npProyecto.$valid}">
+										    <label class="control-label">
+										        Proyecto
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" placeholder="Escriba un proyecto"
+										            class="form-control" name="npProyecto" ng-model="objeto.npProyecto"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npProyecto.$dirty && Form.npProyecto.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npProyecto.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npacumuladoplanificado.$dirty && Form.npacumuladoplanificado.$invalid, 'has-success':Form.npacumuladoplanificado.$valid}">
+										    <label class="control-label">
+										        P. Acumulado Planificado
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" numericOnly style="text-align:right;" format="currency" placeholder="Escriba un p. acumulado planificado"
+										            class="form-control" name="npacumuladoplanificado" ng-model="objeto.npacumuladoplanificado" ng-pattern="/^[0-9]*$/"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npacumuladoplanificado.$dirty && Form.npacumuladoplanificado.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npacumuladoplanificado.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npacumuladoajustado.$dirty && Form.npacumuladoajustado.$invalid, 'has-success':Form.npacumuladoajustado.$valid}">
+										    <label class="control-label">
+										        P. Acumulado Ajustado
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" numericOnly style="text-align:right;" format="currency" placeholder="Escriba un p. acumulado ajustado"
+										            class="form-control" name="npacumuladoajustado" ng-model="objeto.npacumuladoajustado" ng-pattern="/^[0-9]*$/"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npacumuladoajustado.$dirty && Form.npacumuladoajustado.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npacumuladoajustado.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.ponderacion.$dirty && Form.ponderacion.$invalid, 'has-success':Form.ponderacion.$valid}">
+										    <label class="control-label">
+										        Ponderaci&oacute;n
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" numericOnly style="text-align:right;" format="currency" placeholder="Escriba un ponderaci&oacute;n"
+										            class="form-control" name="ponderacion" ng-model="objeto.ponderacion" ng-pattern="/^[0-9]*$/"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.ponderacion.$dirty && Form.ponderacion.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.ponderacion.$valid">
+										        Listo
+										    </span>
+										</div>
+										
+										<div class="form-group"
+										    ng-class="{'has-error':Form.npponderacionacumulado.$dirty && Form.npponderacionacumulado.$invalid, 'has-success':Form.npponderacionacumulado.$valid}">
+										    <label class="control-label">
+										        Ponderaci&oacute;n Acumulada
+										        <span class="symbol required"></span>
+										    </label>
+										    <div class="input-group col-md-12">
+										        <input type="text" numericOnly style="text-align:right;" format="currency" placeholder="Escriba un ponderaci&oacute;n acumulada"
+										            class="form-control" name="npponderacionacumulado" ng-model="objeto.npponderacionacumulado" ng-pattern="/^[0-9]*$/"
+										            required ng-disabled="true">
+										    </div>
+										    <span class="error text-small block"
+										        ng-if="Form.npponderacionacumulado.$dirty && Form.npponderacionacumulado.$invalid">
+										        Incorrecto
+										    </span>
+										    <span class="success text-small"
+										        ng-if="Form.npponderacionacumulado.$valid">
+										        Listo
+										    </span>
+										</div>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
 <!--
@@ -483,8 +505,10 @@
 					</a>
 				</div>
 			</td>
-			<td width="100%">
-	    		{{node.title}}
+			<td width="100%" ng-click="vista(node);">
+				<a style="display:block;text-decoration:none;" ng-click="vista(node);">
+	    			{{node.title}}
+				</a>
 			</td>
 			<td width="1%">
 				<table width="108px">

@@ -1068,3 +1068,49 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         };
     }
 }]);
+
+app.directive('format', ['$filter', function ($filter) {
+    return {
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+
+            ctrl.$formatters.unshift(function (a) {
+                return $filter(attrs.format)(ctrl.$modelValue)
+            });
+
+            elem.bind('blur', function(event) {
+                var plainNumber = elem.val().replace(/[^\d|\-+|\.+]/g, '');
+                elem.val($filter(attrs.format)(plainNumber));
+            });
+        }
+    };
+}]);
+
+app.directive('numericOnly', function(){
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attrs, modelCtrl) {
+
+            var regex = /^[1-9]\d*(((.\d{3}){1})?(\,\d{0,2})?)$/;
+            modelCtrl.$parsers.push(function (inputValue) {
+
+                var transformedInput = inputValue;
+                if (regex.test(transformedInput)) {
+
+                    console.log('passed the expression...');
+                    modelCtrl.$setViewValue(transformedInput);
+                    modelCtrl.$render();
+                    return transformedInput;
+                } else {
+
+                    console.log('did not pass the expression...');
+                    transformedInput = transformedInput.substr(0, transformedInput.length-1);
+                    modelCtrl.$setViewValue(transformedInput);
+                    modelCtrl.$render();
+                    return transformedInput;
+                }
+            });
+        }
+    };
+});
