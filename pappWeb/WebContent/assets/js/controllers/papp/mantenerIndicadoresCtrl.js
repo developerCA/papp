@@ -84,6 +84,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	};
 	
 	$scope.nuevo=function(node){
+		console.log(node);
 		$scope.padreid = 0;
 		$scope.nodeActivo = node;
 		if (node != null) {
@@ -165,8 +166,8 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	$scope.form = {
         submit: function (form) {
             var firstError = null;
+            console.log(form.$invalid);
             if (form.$invalid) {
-
                 var field = null, firstError = null;
                 for (field in form) {
                     if (field[0] != '$') {
@@ -187,16 +188,21 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
             	$scope.newobj.indicadormetodosTOs = Array.from($scope.objetolista);
             	for (var i = 0; i < $scope.newobj.indicadormetodosTOs.length; i++) {
 					delete $scope.newobj.indicadormetodosTOs[i].editarcodigo;
-					$scope.newobj.indicadormetodosTOs[i].id.metodoid = i + 1;
 				}
             	console.log($scope.newobj);
             	mantenerIndicadoresFactory.guardar($scope.newobj).then(function(resp){
         			 if (resp.estado){
-        				 $scope.nodeActivo.iscargado = false;
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
-	 		             //$scope.limpiar();
+	 		             if ($scope.nodeActivo == null) {
+	 		            	 $scope.consultar();
+	 		             } else {
+	        				 if ($scope.nodeActivo.iscargado) {
+	        					 $scope.nodeActivo.iscargado = false;
+	        				 }
+	        				 $scope.cargarHijos($scope.nodeActivo);
+	 		             }
 	 		             SweetAlert.swal("Mantener Indicadores!", "Registro grabado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Mantener Indicadores!", resp.mensajes.msg, "error");

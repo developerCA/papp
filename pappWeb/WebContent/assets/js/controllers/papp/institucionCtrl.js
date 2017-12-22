@@ -228,10 +228,6 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
             } else {
                 var objEnviar = Object.assign({}, $scope.objeto);
                 objEnviar.details = $scope.objetolista;
-                console.log(objEnviar.details);
-                for (var i = 0; i < objEnviar.details.length; i++) {
-                	objEnviar.details[i].id.entid = i + 1;
-				}
                 console.log(objEnviar);
             	institucionFactory.guardar(objEnviar).then(function(resp){
         			 if (resp.estado){
