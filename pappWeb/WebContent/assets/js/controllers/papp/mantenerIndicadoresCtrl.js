@@ -16,7 +16,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		mantenerIndicadoresFactory.traerMantenerIndicadores(
+		mantenerIndicadoresFactory.traer(
 			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
@@ -35,7 +35,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 			console.log(node.id);
 		    node.iscargado=true;
 
-		    mantenerIndicadoresFactory.traerMantenerIndicadoresHijos(
+		    mantenerIndicadoresFactory.traerHijos(
 	    		pagina,
 	    		$rootScope.ejefiscal,
 	    		node.id
@@ -70,7 +70,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		mantenerIndicadoresFactory.traerMantenerIndicadoresFiltro(pagina,$scope.nombreFiltro).then(function(resp){
+		mantenerIndicadoresFactory.traerFiltro(pagina,$scope.nombreFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -132,7 +132,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	$scope.editar=function(node){
 		console.log(node);
 		$scope.nodeActivo = node;
-		mantenerIndicadoresFactory.traerMantenerIndicadoresEditar(node.id).then(function(resp){
+		mantenerIndicadoresFactory.traerEditar(node.id).then(function(resp){
 			console.log(resp.json);
 			if (resp.estado) {
 			   $scope.objeto=resp.json.indicador;

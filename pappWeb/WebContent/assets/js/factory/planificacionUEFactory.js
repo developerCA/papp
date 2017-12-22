@@ -4,11 +4,12 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
 
     return {
 
-        traerPlanificacionUE: function (pagina, ejercicio) {
+        traer: function (pagina, ejercicio) {
         	return Restangular.allUrl(
     			"planificacion/consultar/planificacion/" +
     			"pagina=" + pagina +
-    			"&ejerciciofiscal=" + ejercicio
+    			"&ejerciciofiscal=" + ejercicio +
+				"&estado=A"
 			).getList();
         },
 
@@ -16,7 +17,8 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
         	return Restangular.allUrl("planificacion/consultar/nivelactividad/" +
     			"tipo=AC" +
     			"&nivelactividadunidadid=" + id +
-    			"&nivelactividadejerfiscalid=" + ejercicio
+    			"&nivelactividadejerfiscalid=" + ejercicio +
+				"&estado=A"
 			).getList();
         },
 
@@ -25,7 +27,8 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
     			"tipo=" + tipo +
     			"&nivelactividadpadreid=" + id +
     			"&nivelactividadejerfiscalid=" + ejercicio +
-    			"&nivelactividadunidadid=" + unidad
+    			"&nivelactividadunidadid=" + unidad +
+				"&estado=A"
 			return Restangular.allUrl(url).getList();
         },
 
@@ -37,12 +40,12 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
 			).getList();
         },
 
-        traerPlanificacionUECustom: function (pagina, ejercicio) {
+        traerCustom: function (pagina, ejercicio) {
         	 var url = "planificacion/consultar/planificacion/pagina=" + pagina + "&ejerciciofiscal=" + ejercicio;
              return Restangular.allUrl(url).customGET();
         },
         
-        traerPlanificacionUEFiltro: function (pagina, ejercicio, codigo, nombre) {
+        traerFiltro: function (pagina, ejercicio, codigo, nombre) {
             var url = "planificacion/consultar/planificacion/pagina=" + pagina+ "&ejerciciofiscal=" + ejercicio;
 
             if (codigo != null && codigo != "") url += "&codigopresup=" + codigo.toUpperCase();
@@ -51,7 +54,7 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             return Restangular.allUrl(url).getList();
         },
 
-        traerPlanificacionUEFiltroCustom: function (pagina, ejercicio, codigo, nombre) {
+        traerFiltroCustom: function (pagina, ejercicio, codigo, nombre) {
             var url = "planificacion/consultar/planificacion/pagina=" + pagina+ "&ejerciciofiscal=" + ejercicio;
 
             if (codigo != null && codigo != "") url += "&codigopresup=" + codigo.toUpperCase();

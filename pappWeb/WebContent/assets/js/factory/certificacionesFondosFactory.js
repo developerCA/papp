@@ -35,8 +35,8 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			if(precompromiso != null && precompromiso != "") url += "&numprecompromiso=" + precompromiso;	
 			if(valorinicial!= null && valorinicial != "") url += "&valorinicial=" + valorinicial;	
 			if(valorfinal != null && valorfinal != "") url += "&valorfinal=" + valorfinal;	
-			if(fechainicial != null && fechainicial != "") url += "&fechainicial=" + fechainicial;	
-			if(fechafinal != null && fechafinal != "") url += "&fechafinal=" + fechafinal;	
+			if(fechainicial != null && fechainicial != "") url += "&fechainicial=" + encodeURIComponent(fechainicial);	
+			if(fechafinal != null && fechafinal != "") url += "&fechafinal=" + encodeURIComponent(fechafinal);	
 			if(estado != null && estado != "") url += "&estado=" + estado;	
 
 			return Restangular.allUrl(url).customGET();

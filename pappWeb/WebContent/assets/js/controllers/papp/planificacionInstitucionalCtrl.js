@@ -13,7 +13,7 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		planificacionInstitucionalFactory.traerPlanificacionInstitucional(
+		planificacionInstitucionalFactory.traer(
 			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
@@ -31,7 +31,7 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 			console.log(node);
 		    node.iscargado=true;
 
-		    planificacionInstitucionalFactory.traerPlanificacionInstitucionalHijos(
+		    planificacionInstitucionalFactory.traerHijos(
 	    		pagina,
 	    		$rootScope.ejefiscal,
 	    		node.id
@@ -63,7 +63,7 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		planificacionInstitucionalFactory.traerPlanificacionInstitucionalFiltro(pagina,$scope.nombreFiltro).then(function(resp){
+		planificacionInstitucionalFactory.traerFiltro(pagina,$scope.nombreFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -77,7 +77,7 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 	};
 	
 	$scope.nuevo=function(node){
-		planificacionInstitucionalFactory.traerPlanificacionInstitucionalNuevoEstructura(
+		planificacionInstitucionalFactory.traerNuevoEstructura(
 			node.id,
 			$rootScope.ejefiscal,
 			node.tipo
@@ -103,7 +103,7 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 	}
 	
 	$scope.editar=function(node){
-		planificacionInstitucionalFactory.traerPlanificacionInstitucionalEditar(node.id).then(function(resp){
+		planificacionInstitucionalFactory.traerEditar(node.id).then(function(resp){
 			console.log(resp.json.objetivo);
 			if (resp.estado) {
 			   $scope.objeto=resp.json.objetivo;

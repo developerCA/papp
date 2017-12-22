@@ -72,7 +72,7 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 			estado: "A"
 		};
 		$scope.objetolista=[];
-		$scope.agregarDetalle();
+		//$scope.agregarDetalle();
 		$scope.edicion=true;
 		$scope.guardar=true;
 	}
@@ -93,7 +93,7 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 		var obj={
 			id: {
 				entid: null, // este es un ID del orde de la lista
-				id: $scope.objeto.id
+				id: null
 			},
 			estado: "A"
 		};
@@ -152,19 +152,6 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 	};
 
 	$scope.abrirNombreProvincia = function(index) {
-/*
-			resolve: {
-				pais: function() {
-					return $scope.objetolista[index].npnombrepais;
-				},
-				provincia: function() {
-					return $scope.objetolista[index].npnombreprovincia;
-				},
-				tipo : function() {
-					return null;
-				}
-			}
-*/
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalProvincias.html',
 			controller : 'ModalDivisionGeograficaController',

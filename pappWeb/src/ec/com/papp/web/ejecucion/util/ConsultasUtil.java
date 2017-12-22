@@ -23,6 +23,7 @@ import ec.com.papp.planificacion.to.GastoDevengoVO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
+import ec.com.papp.planificacion.to.OrdenreversionTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.UtilSession;
@@ -235,8 +236,8 @@ public class ConsultasUtil {
 					ordengastoTO.setEstado(parameters.get("estado"));
 				if(parameters.get("compromiso")!=null && !parameters.get("compromiso").equals(""))
 					ordengastoTO.setNumerocompromiso(parameters.get("compromiso"));
-				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
-					ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+				if(parameters.get("ordengastoejerfiscalid")!=null && !parameters.get("ordengastoejerfiscalid").equals(""))
+					ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ordengastoejerfiscalid")));
 				if(parameters.get("certificacion")!=null && !parameters.get("certificacion").equals("")){
 					certificacionTO.setCodigo(parameters.get("certificacion"));
 				}
@@ -327,6 +328,77 @@ public class ConsultasUtil {
 		return jsonObject;
 	}
 	
+	/**
+	* Metodo que consulta las orden de reversion paginadas y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaOrdenreversionPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+		String campo="";
+		OrdenreversionTO ordenreversionTO=new OrdenreversionTO();
+		OrdengastoTO ordengastoTO=new OrdengastoTO();
+		try{
+			int pagina=1;
+			if(parameters.get("pagina")!=null)		
+				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+			int filas=20;
+			if(parameters.get("filas")!=null)
+				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+			int primero=(pagina*filas)-filas;
+			campo="fechacreacion";
+			String[] columnas={campo};
+			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
+				campo=parameters.get("sidx");
+			ordenreversionTO.setFirstResult(primero);
+			ordenreversionTO.setMaxResults(filas);
+			String[] orderBy = columnas;
+			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
+				ordenreversionTO.setOrderByField(OrderBy.orderDesc(orderBy));
+			else
+				ordenreversionTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			Date fechaInicial=null;
+			Date fechaFinal=null;
+			if(parameters.get("fechainicial")!=null)
+				fechaInicial=UtilGeneral.parseStringToDate(parameters.get("fechainicial"));
+			if(parameters.get("fechafinal")!=null)
+				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal"));
+			if(parameters.get("fechainicial")!=null && parameters.get("fechafinal")==null)
+				fechaFinal=(new Date());
+			if(parameters.get("fechafinal")!=null && parameters.get("fechainicial")==null){
+				mensajes.setMsg(MensajesWeb.getString("error.fechaDesde"));
+				mensajes.setType(MensajesWeb.getString("mensaje.advertencia"));
+			}
+			if(mensajes.getMsg()==null){
+				if(fechaInicial!=null)
+					ordenreversionTO.setRangoFechacreacion(new RangeValueTO<Date>(fechaInicial,fechaFinal));
+				if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
+					ordenreversionTO.setCodigo(parameters.get("codigo"));
+				if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
+					ordenreversionTO.setEstado(parameters.get("estado"));
+				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+					ordenreversionTO.setOrdenreversionejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+				if(parameters.get("ordengasto")!=null && !parameters.get("ordengasto").equals("")){
+					ordenreversionTO.setCodigo(parameters.get("ordengasto"));
+				}
+				ordenreversionTO.setOrdengasto(ordengastoTO);
+				SearchResultTO<OrdenreversionTO> resultado=UtilSession.planificacionServicio.transObtenerOrdenreversionPaginado(ordenreversionTO);
+				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+				HashMap<String, String>  totalMap=new HashMap<String, String>();
+				totalMap.put("valor", resultado.getCountResults().toString());
+				log.println("totalresultado: " + totalRegistrosPagina);
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),ordenreversionTO.getJsonConfigconsulta()));
+				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
 	/**
 	* Metodo que consulta las certificaciones busqueda paginadas y arma el json para mostrarlos en la grilla
 	*

@@ -82,9 +82,18 @@
 											<label class="control-label">
 												Fecha inicial
 											</label>
-											<input type="text" placeholder="Ingrese un de fecha inicial"
-												class="form-control" id="fechainicialFiltro" name="fechainicialFiltro"
-												ng-model="fechainicial" />
+									        <div class="input-group">
+									            <input type="text" class="form-control" placeholder="Ingrese un de fecha inicial"
+									                uib-datepicker-popup="dd/MM/yyyy" 
+									                name="fechainicialFiltro" ng-model="fechainicialFiltro"
+									                is-open="popupnpFechainicio.opened" datepicker-options="dateOptions"
+									                ng-required="true" close-text="Close">
+									            <span class="input-group-btn">
+									                <button type="button" class="btn btn-primary" ng-click="opennpFechainicio()">
+									                    <i class="glyphicon glyphicon-calendar"></i>
+									                </button>
+									            </span>
+									        </div>
 										</div>
 									</div>
 		
@@ -93,9 +102,18 @@
 											<label class="control-label">
 												Fecha final
 											</label>
-											<input type="text" placeholder="Ingrese un fecha final"
-												class="form-control" id="fechafinalFiltro" name="fechafinalFiltro"
-												ng-model="fechafinal" />
+									        <div class="input-group">
+									            <input type="text" class="form-control" placeholder="Ingrese un de fecha final"
+									                uib-datepicker-popup="dd/MM/yyyy" 
+									                name="fechafinalFiltro" ng-model="fechafinalFiltro"
+									                is-open="popupnpFechafin.opened" datepicker-options="dateOptions"
+									                ng-required="true" close-text="Close">
+									            <span class="input-group-btn">
+									                <button type="button" class="btn btn-primary" ng-click="opennpFechafin()">
+									                    <i class="glyphicon glyphicon-calendar"></i>
+									                </button>
+									            </span>
+									        </div>
 										</div>
 									</div>
 								</div>

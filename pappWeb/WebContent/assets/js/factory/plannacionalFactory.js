@@ -3,20 +3,24 @@ app.factory("plannacionalFactory", [ "Restangular", function(Restangular) {
 	var service = Restangular.service("/planificacion");
 
 	return {
-		traerPlanNacional : function(pagina, ejercicio) {
-			var url = "planificacion/consultar/plannacional/pagina=" + pagina + "&plannacionalejerciciofiscalid=" + ejercicio;
-			return Restangular.allUrl(url).getList();
-		},
-
-		traerPlanNacionalHijos : function(pagina, ejercicio, padre) {
+		traer : function(pagina, ejercicio) {
 			var url = "planificacion/consultar/plannacional/" +
-					"pagina=" + pagina +
-					"&plannacionalejerciciofiscalid=" + ejercicio +
-					"&id=" + padre;
+				"pagina=" + pagina +
+				"&plannacionalejerciciofiscalid=" + ejercicio +
+				"&estado=A";
 			return Restangular.allUrl(url).getList();
 		},
 
-		traerPlanNacionalFiltro : function(pagina,nombre) {
+		traerHijos : function(pagina, ejercicio, padre) {
+			var url = "planificacion/consultar/plannacional/" +
+				"pagina=" + pagina +
+				"&plannacionalejerciciofiscalid=" + ejercicio +
+				"&id=" + padre +
+				"&estado=A";
+			return Restangular.allUrl(url).getList();
+		},
+
+		traerFiltro : function(pagina,nombre) {
 			var url = "planificacion/consultar/plannacional/pagina="+pagina;
 
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
@@ -24,7 +28,7 @@ app.factory("plannacionalFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).getList();
 		},
 
-		traerPlanNacionalEditar : function(id) {
+		traerEditar : function(id) {
 			var url = "planificacion/plannacional/"+id+"/0";
 
 		    return Restangular.allUrl(url).customGET();

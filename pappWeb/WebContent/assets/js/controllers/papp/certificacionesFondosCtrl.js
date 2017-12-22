@@ -3,6 +3,11 @@
 app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, certificacionesFondosFactory) {
 
+	$scope.dateOptions = {
+	    changeYear: true,
+	    changeMonth: true,
+	    yearRange: '2000:-0',    
+    };
 	$scope.codigoFiltro=null;
 	$scope.precompromisoFiltro=null;
 	$scope.valorinicialFiltro=null;
@@ -56,8 +61,8 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			$scope.precompromisoFiltro,
 			$scope.valorinicialFiltro,
 			$scope.valorfinalFiltro,
-			$scope.fechainicialFiltro,
-			$scope.fechafinalFiltro,
+			toStringDate($scope.fechainicialFiltro),
+			toStringDate($scope.fechafinalFiltro),
 			$scope.estadoFiltro
 		).then(function(resp){
         	$scope.data = resp.json.result;
@@ -265,4 +270,33 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
             $scope.objeto={};
         }
     };
+
+	function toStringDate(fuente) {
+		if (fuente == null) {
+			return null;
+		}
+		try {
+			var parts = fuente.toISOString();
+			parts = parts.split('T');
+			parts = parts[0].split('-');
+			//please put attention to the month (parts[0]), Javascript counts months from 0:
+			// January - 0, February - 1, etc
+		} catch (err) {
+			return null;
+		}
+		return parts[2] + "/" + parts[1] + "/" + parts[0]; 
+	}
+
+	$scope.popupnpFechainicio = {
+	    opened: false
+	};
+	$scope.opennpFechainicio = function() {
+	    $scope.popupnpFechainicio.opened = true;
+	}
+	$scope.popupnpFechafin = {
+	    opened: false
+	};
+	$scope.opennpFechafin = function() {
+	    $scope.popupnpFechafin.opened = true;
+	}
 } ]);
