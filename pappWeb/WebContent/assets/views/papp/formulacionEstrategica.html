@@ -1153,7 +1153,7 @@
 														<th>Unidad C&oacute;digo</th>
 														<th>Unidad Nombre</th>
 													</tr>
-													<tr ng-repeat="obj in objetolista">
+													<tr ng-repeat="obj in objetolistaAc">
 														<td>
 															<a uib-tooltip="Eliminar"
 																class="btn btn-sm btn-danger"
@@ -1416,8 +1416,11 @@
 					</a>
 				</div>
 			</td>
+			<td width="1%">
+				<letter-icon data="{{node.nodeTipo}}" color="{{devuelveColorNode(node.nodeTipo);}}" size="sm" char-count="2"></letter-icon>
+			</td>
 			<td width="100%">
-	    		{{node.codigo}} - {{node.title}}
+	    		&nbsp;{{node.codigo}} - {{node.title}}
 			</td>
 			<td width="1%">
 				<table width="71px">

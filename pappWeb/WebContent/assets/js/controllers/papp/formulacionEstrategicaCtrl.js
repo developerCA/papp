@@ -13,7 +13,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	$scope.guardar=false;
 	$scope.nuevoar=false;
 	$scope.objeto={};
-	$scope.objetolista={};
+	$scope.objetolistaPy=[];
+	$scope.objetolistaAc=[];
 	$scope.editarId=null;
 	
 	var pagina = 1;
@@ -121,6 +122,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	});
 	
 	$scope.nuevo=function(node){
+		$scope.nodeActivo=node;
 		$scope.editarId=null;
 		console.log(node);
 		$scope.nuevoar = true;
@@ -173,6 +175,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				if (resp.estado) {
 					$scope.objetoPy=resp.json.proyecto;
 					$scope.objetoPy.padre=node.npNivelid;
+					$scope.objetolistaPy=[];
 					$scope.editarId=$scope.objeto.id;
 					$scope.nodeTipo = "PY";
 				}
@@ -190,6 +193,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				if (resp.estado) {
 					$scope.objetoAc=resp.json.actividad;
 					$scope.objetoAc.padre=node.npNivelid;
+					$scope.objetolistaAc=[];
 					$scope.editarId=$scope.objeto.id;
 					$scope.nodeTipo = "AC";
 				}
@@ -216,6 +220,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	}
 
 	$scope.editar=function(node){
+		$scope.nodeActivo=node;
 		console.log("Fuente:");
 		console.log(node);
 		if (node.nodeTipo == "PR") { // Programa
@@ -255,9 +260,6 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 
 					$scope.editarId=$scope.objeto.id;
 					$scope.objetolistaPy=resp.json.proyectometa;
-					if ($scope.objetolista == []) {
-						$scope.agregarDetallePy();
-					}
 					$scope.nodeTipo="PY";
 				}
 				$scope.guardar=true;
@@ -271,10 +273,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				if (resp.estado) {
 					$scope.objetoAc=resp.json.actividad;
 					$scope.editarId=$scope.objeto.id;
-					$scope.objetolista=resp.json.nivelactividad;
-					/* if ($scope.objetolista == []) {
-						$scope.agregarDetalle();
-					} */
+					$scope.objetolistaAc=resp.json.nivelactividad;
 					$scope.nodeTipo="AC";
 				}
 				$scope.guardar=true;
@@ -339,8 +338,12 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		console.log($scope.objetolistaPy);
 	}
 
-	$scope.removerDetalle=function(index){
-		$scope.objetolista.splice(index,1);
+	$scope.removerDetallePy=function(index){
+		$scope.objetolistaPy.splice(index,1);
+	}
+
+	$scope.removerDetalleAc=function(index){
+		$scope.objetolistaAc.splice(index,1);
 	}
 
 	$scope.abrirObjetivoFuerzas = function() {
@@ -406,7 +409,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objetoPy.proyectoindicadorid = obj.id;
+			$scope.objetoPy.subactividadindicadorid = obj.id.id;
+			$scope.objetoPy.subactividadindicadormetodoid = obj.id.metodoid;
 			$scope.objetoPy.npIndicadorcodigo = obj.codigo;
 			$scope.objetoPy.npIndicadornombre = obj.nombre;
 		}, function() {
@@ -473,8 +477,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			for (var i = 0; i < $scope.objetolista.length; i++) {
-				if ($scope.objetolista[i].nivelactividadunidadid == obj.id) {
+			for (var i = 0; i < $scope.objetolistaAc.length; i++) {
+				if ($scope.objetolistaAc[i].nivelactividadunidadid == obj.id) {
 					SweetAlert.swal(
 						"Formulacion Estrategica!",
 						"La unidad ya esta en la lista!",
@@ -491,7 +495,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				npCodigounidad: obj.codigopresup,
 				npNombreunidad: obj.nombre
 			};
-			$scope.objetolista.push(obj);
+			$scope.objetolistaAc.push(obj);
 		}, function() {
 		});
 	};
@@ -527,11 +531,11 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		            	$scope.newobj = Object.assign({}, $scope.objetoPy);
 		        		$scope.newobj.npFechainicio = toStringDate($scope.newobj.npFechainicio);
 						$scope.newobj.npFechafin = toStringDate($scope.newobj.npFechafin);
-	            		$scope.newobj.proyectometaTOs = $scope.objetolista;
+	            		$scope.newobj.proyectometaTOs = Array.from($scope.objetolistaPy);
 						break;
 					case "AC":
-		            	$scope.newobj = JSON.parse(JSON.stringify($scope.objetoAc));
-	            		$scope.newobj.nivelactividadTOs = $scope.objetolista;
+		            	$scope.newobj = Object.assign({}, $scope.objetoAc);
+	            		$scope.newobj.nivelactividadTOs = Array.from($scope.objetolistaAc);
 						break;
 					case "SA":
 		            	$scope.newobj = $scope.objetoSa;
@@ -547,7 +551,14 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	 		             $scope.edicionProyecto=false;
 	 		             $scope.edicionActividad=false;
 	 		             $scope.edicionSubActividad=false;
-	 		             $scope.objeto={};
+	 		             if ($scope.nodeActivo == null) {
+	 		            	 $scope.consultar();
+	 		             } else {
+	        				 if ($scope.nodeActivo.iscargado) {
+	        					 $scope.nodeActivo.iscargado = false;
+	        				 }
+	        				 $scope.cargarHijos($scope.nodeActivo);
+	 		             }
 	 		             SweetAlert.swal("Formulacion Estrategica!", "Registro grabado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Formulacion Estrategica!", resp.mensajes.msg, "error");
@@ -578,5 +589,21 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	};
 	$scope.opennpFechafin = function() {
 	    $scope.popupnpFechafin.opened = true;
+	}
+	$scope.devuelveColorNode = function(tipo) {
+    	switch (tipo) {
+			case "PR":
+	        	return "#3333ff";
+			case "SP":
+	        	return "#5cd65c";
+			case "PY":
+	        	return "#ffd633";
+			case "AC":
+	        	return "#ff4d4d";
+			case "SA":
+	        	return "#00b3b3";
+			default:
+	        	return "auto";
+		}
 	}
 } ]);
