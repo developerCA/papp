@@ -27,6 +27,7 @@ import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
 import ec.com.papp.planificacion.id.CertificacionlineaID;
 import ec.com.papp.planificacion.id.OrdendevengolineaID;
 import ec.com.papp.planificacion.id.OrdengastolineaID;
+import ec.com.papp.planificacion.id.OrdenreversionlineaID;
 import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
@@ -34,6 +35,8 @@ import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdendevengolineaTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.to.OrdengastolineaTO;
+import ec.com.papp.planificacion.to.OrdenreversionTO;
+import ec.com.papp.planificacion.to.OrdenreversionlineaTO;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
@@ -198,6 +201,50 @@ public class EjecucionController {
 				}
 			}
 
+			//ordenreversion
+			if(clase.equals("ordenreversion")){
+				OrdenreversionTO ordenreversionTO = gson.fromJson(new StringReader(objeto), OrdenreversionTO.class);
+				if(ordenreversionTO.getNpfechaaprobacion()!=null)
+					ordenreversionTO.setFechaaprobacion(UtilGeneral.parseStringToDate(ordenreversionTO.getNpfechaaprobacion()));
+				if(ordenreversionTO.getNpfechacreacion()!=null)
+					ordenreversionTO.setFechacreacion(UtilGeneral.parseStringToDate(ordenreversionTO.getNpfechacreacion()));
+				if(ordenreversionTO.getNpfechaeliminacion()!=null)
+					ordenreversionTO.setFechaeliminacion(UtilGeneral.parseStringToDate(ordenreversionTO.getNpfechaeliminacion()));
+				if(ordenreversionTO.getNpfechaanulacion()!=null)
+					ordenreversionTO.setFechaanulacion(UtilGeneral.parseStringToDate(ordenreversionTO.getNpfechaanulacion()));
+				if(ordenreversionTO.getNpfechanegacion()!=null)
+					ordenreversionTO.setFechanegacion(UtilGeneral.parseStringToDate(ordenreversionTO.getNpfechanegacion()));
+				if(ordenreversionTO.getNpfechasolicitud()!=null)
+					ordenreversionTO.setFechasolicitud(UtilGeneral.parseStringToDate(ordenreversionTO.getNpfechasolicitud()));
+				accion = (ordenreversionTO.getId()==null)?"crear":"actualizar";
+				UtilSession.planificacionServicio.transCrearModificarOrdenreversion(ordenreversionTO, null);
+				id=ordenreversionTO.getId().toString();
+				jsonObject.put("ordenreversion", (JSONObject)JSONSerializer.toJSON(ordenreversionTO,ordenreversionTO.getJsonConfig()));
+			}
+			//ordenreversion linea
+			else if(clase.equals("ordenreversionlinea")){
+				OrdenreversionlineaTO ordenreversionlineaTO = gson.fromJson(new StringReader(objeto), OrdenreversionlineaTO.class);
+				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
+				OrdenreversionlineaTO ordenreversionlineaTO2=new OrdenreversionlineaTO();
+				ordenreversionlineaTO2.setNivelactid(ordenreversionlineaTO.getNivelactid());
+				ordenreversionlineaTO2.getId().setId(ordenreversionlineaTO.getId().getId());
+				Collection<OrdenreversionlineaTO> ordenreversionlineaTOs=UtilSession.planificacionServicio.transObtenerOrdenreversionlinea(ordenreversionlineaTO2);
+				if(ordenreversionlineaTOs.size()==0){
+					accion = (ordenreversionlineaTO.getId()==null)?"crear":"actualizar";
+					UtilSession.planificacionServicio.transCrearModificarOrdenreversionlinea(ordenreversionlineaTO);
+					id=ordenreversionlineaTO.getId().toString();
+					//Traigo la lista de ordenreversionlinea
+					OrdenreversionlineaTO ordenreversionlineaTO3=new OrdenreversionlineaTO();
+					ordenreversionlineaTO3.getId().setId(ordenreversionlineaTO.getId().getId());
+					Collection<OrdenreversionlineaTO> ordendevengolineaTOs2=UtilSession.planificacionServicio.transObtenerOrdenreversionlinea(ordenreversionlineaTO3);
+					jsonObject.put("ordenreversionlinea", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs2,ordenreversionlineaTO.getJsonConfig()));
+				}
+				else{
+					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+			}
+
 			//Registro la auditoria
 //			if(mensajes.getMsg()==null)
 //				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
@@ -316,6 +363,21 @@ public class EjecucionController {
 				ordengastolineaTO.getId().setId(id);
 				jsonObject.put("ordendevengolinea", (JSONObject)JSONSerializer.toJSON(ordengastolineaTO,ordengastolineaTO.getJsonConfig()));
 			}
+			//Ordendreversion
+			if(clase.equals("ordenreversion")){
+				OrdenreversionTO ordenreversionTO=new OrdenreversionTO();
+				ordenreversionTO.setOrdenreversionejerfiscalid(id);
+				ordenreversionTO.setNpfechacreacion(UtilGeneral.parseDateToString(new Date()));
+				ordenreversionTO.setEstado(MensajesAplicacion.getString("certificacion.estado.registrado"));
+				jsonObject.put("ordenreversion", (JSONObject)JSONSerializer.toJSON(ordenreversionTO,ordenreversionTO.getJsonConfignuevo()));
+			}
+			//Ordendevengolinea
+			if(clase.equals("ordenreversionlinea")){
+				OrdenreversionlineaTO ordenreversionlineaTO=new OrdenreversionlineaTO();
+				ordenreversionlineaTO.getId().setId(id);
+				jsonObject.put("ordenreversionlinea", (JSONObject)JSONSerializer.toJSON(ordenreversionlineaTO,ordenreversionlineaTO.getJsonConfig()));
+			}
+
 			log.println("json retornado: " + jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -450,6 +512,36 @@ public class EjecucionController {
 				jsonObject.put("ordendevengolinea", (JSONObject)JSONSerializer.toJSON(ordendevengolineaTO,ordendevengolineaTO.getJsonConfig()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordendevengolineaTO.getNivelactid(), jsonObject, mensajes);
 			}
+			//Ordenreversion
+			if(clase.equals("ordenreversion")){
+				OrdenreversionTO ordenreversionTO=new OrdenreversionTO();
+				ordenreversionTO = UtilSession.planificacionServicio.transObtenerOrdenreversionTO(id);
+				if(ordenreversionTO.getOrdenrversionogastoid()!=null){
+					ordenreversionTO.setNpordengastoedit(ordenreversionTO.getOrdengasto().getCodigo());
+					ordenreversionTO.setNpordengastovalor(ordenreversionTO.getOrdengasto().getValortotal());
+				}
+				//asigno las fechas
+				ordenreversionTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechaaprobacion()));
+				ordenreversionTO.setNpfechacreacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechacreacion()));
+				ordenreversionTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechaeliminacion()));
+				ordenreversionTO.setNpfechaanulacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechaanulacion()));
+				ordenreversionTO.setNpfechanegacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechanegacion()));
+				ordenreversionTO.setNpfechasolicitud(UtilGeneral.parseDateToString(ordenreversionTO.getFechasolicitud()));
+				//traigo las ordeneslineas las traigo
+				OrdenreversionlineaTO ordenreversionlineaTO=new OrdenreversionlineaTO();
+				ordenreversionlineaTO.getId().setId(ordenreversionTO.getId());
+				Collection<OrdenreversionlineaTO> ordendevengolineaTOs=UtilSession.planificacionServicio.transObtenerOrdenreversionlinea(ordenreversionlineaTO);
+				jsonObject.put("ordenreversionlineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordenreversionTO.getJsonConfig()));
+				jsonObject.put("ordenreversion", (JSONObject)JSONSerializer.toJSON(ordenreversionTO,ordenreversionTO.getJsonConfig()));
+			}
+			//Ordenreversionlinea
+			else if(clase.equals("ordenreversionlinea")){
+				OrdenreversionlineaTO ordenreversionlineaTO = UtilSession.planificacionServicio.transObtenerOrdenreversionlineaTO(new OrdenreversionlineaID(id, id2));
+				ordenreversionlineaTO.setNpvalor(ordenreversionlineaTO.getValor());
+				jsonObject.put("ordenreversionlinea", (JSONObject)JSONSerializer.toJSON(ordenreversionlineaTO,ordenreversionlineaTO.getJsonConfig()));
+				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordenreversionlineaTO.getNivelactid(), jsonObject, mensajes);
+			}
+
 			log.println("json retornado: " + jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -570,6 +662,36 @@ public class EjecucionController {
 		return respuesta;	
 	}
 	
+	@RequestMapping(value = "/flujoreversion/{id}/{tipo}", method = RequestMethod.GET)
+	public Respuesta flujoreversion(@PathVariable Long id,@PathVariable String tipo,HttpServletRequest request){
+		log.println("entra al metodo flujo");
+		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
+		JSONObject jsonObject=new JSONObject();
+		try {
+			OrdenreversionTO ordenreversionTO=UtilSession.planificacionServicio.transObtenerOrdenreversionTO(id);
+			ordenreversionTO.setEstado(tipo);
+			UtilSession.planificacionServicio.transCrearModificarOrdenreversion(ordenreversionTO, tipo);
+			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+			mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.println("error al eliminar");
+			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
+			//throw new MyException(e);
+		}
+		if(mensajes.getMsg()!=null){
+			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+			log.println("existen mensajes");
+		}
+		log.println("devuelve**** " + jsonObject.toString());
+		return respuesta;	
+	}
+
 	@RequestMapping(value = "/consultar/{clase}/{parametro}", method = RequestMethod.GET)
 	public Respuesta consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
 		log.println("ingresa a consultar: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
@@ -616,6 +738,11 @@ public class EjecucionController {
 				jsonObject=ConsultasUtil.consultaOrdendevengoPaginado(parameters, jsonObject, mensajes);
 			}
 			
+			//Orden de reversion
+			if(clase.equals("ordenreversion")){
+				jsonObject=ConsultasUtil.consultaOrdenreversionPaginado(parameters, jsonObject, mensajes);
+			}
+
 			//Certificacion busqueda
 			if(clase.equals("certificacionbusqueda")){
 				//jsonObject=ConsultasUtil.consultaCertificacionBusquedaPaginado(parameters, jsonObject, mensajes);
