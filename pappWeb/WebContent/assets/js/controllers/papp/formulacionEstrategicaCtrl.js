@@ -409,8 +409,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objetoPy.subactividadindicadorid = obj.id.id;
-			$scope.objetoPy.subactividadindicadormetodoid = obj.id.metodoid;
+			$scope.objetoPy.proyectoindicadorid = obj.id;
 			$scope.objetoPy.npIndicadorcodigo = obj.codigo;
 			$scope.objetoPy.npIndicadornombre = obj.nombre;
 		}, function() {
@@ -457,8 +456,11 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objetoSa.proyectoindicadorid = obj.id;
+			//console.log(obj);
+			//console.log($scope.objetoSa);
+			$scope.objetoSa.subactividadindicadorid = obj.id.id;
+			$scope.objetoSa.subactividadindicadormetodoid = obj.id.metodoid;
+//			$scope.objetoSa.proyectoindicadorid = obj.id;
 			$scope.objetoSa.npIndicadorcodigo = obj.npIndicadorcodigo;
 			$scope.objetoSa.npIndicadornombre = obj.npIndicadornombre;
 			$scope.objetoSa.npIndicadordescripcion = "NO SE OBTIENE";
