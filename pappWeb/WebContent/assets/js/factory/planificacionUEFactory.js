@@ -63,8 +63,11 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             return Restangular.allUrl(url).customGET();
         },
 
-        traerItem: function (id) {
-            var url = "planificacion/planificacion/" + id + "/-1";
+        editar: function(tipo, id, unidad) {
+            var url = "planificacion/" +
+        		this.toTipo(tipo) +"/" +
+        		id + "/" +
+				unidad;
             return Restangular.allUrl(url).customGET();
         },
 
@@ -72,5 +75,14 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             var url = "planificacion/planificacion/";
             return Restangular.allUrl(url).customPOST(objeto);
         },
+        
+        toTipo: function(tipo) {
+        	switch (tipo) {
+        		case "AC":
+        			return "actividadunidad";
+        		default:
+        			return "";
+			}
+        }
     }
 }]);

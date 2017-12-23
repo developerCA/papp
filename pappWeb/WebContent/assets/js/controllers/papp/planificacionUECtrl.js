@@ -73,14 +73,22 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.edicion=true;
 	}
 
-	$scope.editar=function(id){
-		PlanificacionUEFactory.traer(id).then(function(resp){
-			if (resp.estado)
-			   $scope.objeto=resp.json.planificacionUE;
-			   $scope.detalles=resp.json.details;
-			   $scope.edicion=true;
-			  console.log(resp.json);
-		})
+	$scope.editar=function(node){
+		console.log(node);
+		if (node.nodeTipo == "AC") {
+			PlanificacionUEFactory.editar(
+				node.nodeTipo,
+				node.id,
+				node.npIdunidad
+			).then(function(resp){
+				console.log(resp);
+				if (!resp.estado) return;
+				$scope.objeto=resp.json.planificacionUE;
+				$scope.detalles=resp.json.details;
+				$scope.edicion=true;
+				console.log(resp.json);
+			});
+		}
 	};
 
 	$scope.editarPlanificacionAnual=function(obj){
@@ -107,25 +115,36 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.vista=function(node){
 		console.log(node);
-		PlanificacionUEFactory.traerPAverActividad(
-			node.tablarelacionid,
-			node.npIdunidad,
-			$rootScope.ejefiscal
-		).then(function(resp){
-			console.log(node.nodeTipo);
-			if (resp.estado) {
-				$scope.divMenuActividad = false;
-				$scope.divMenuSubitems = false;
-				$scope.objeto=resp.json.actividadplanificacion;
-				$scope.divPlanificacionAnualVista=true;
-				if (node.nodeTipo == "AC") {
+		$scope.divMenuActividad = false;
+		$scope.divMenuSubitems = false;
+		if (node.nodeTipo == "AC") {
+			PlanificacionUEFactory.traerPAverActividad(
+				node.tablarelacionid,
+				node.npIdunidad,
+				$rootScope.ejefiscal
+			).then(function(resp){
+				console.log(node.nodeTipo);
+				if (resp.estado) {
+					$scope.objeto=resp.json.actividadplanificacion;
+					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
 				}
-				if (node.nodeTipo == "SI") {
+			})
+		}
+		if (node.nodeTipo == "SI") {
+			PlanificacionUEFactory.traerPAverSubitem(
+				node.tablarelacionid,
+				node.npIdunidad,
+				$rootScope.ejefiscal
+			).then(function(resp){
+				console.log(node.nodeTipo);
+				if (resp.estado) {
+					$scope.objeto=resp.json.actividadplanificacion;
+					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuSubitems = true;
 				}
-			}
-		})
+			})
+		}
 	};
 
 	$scope.cargarHijos=function(node){

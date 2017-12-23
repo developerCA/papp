@@ -429,7 +429,9 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objetoAc.proyectoindicadorid = obj.id;
+//			$scope.objetoAc.proyectoindicadorid = obj.id;
+			$scope.objetoAc.actividadindicadorid = obj.id.id;
+			$scope.objetoAc.actividadindicadormetodoid = obj.id.metodoid;
 			$scope.objetoAc.npIndicadorcodigo = obj.npIndicadorcodigo;
 			$scope.objetoAc.npIndicadornombre = obj.npIndicadornombre;
 			$scope.objetoAc.npIndicadordescripcion = "NO SE OBTIENE";
@@ -592,6 +594,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	$scope.opennpFechafin = function() {
 	    $scope.popupnpFechafin.opened = true;
 	}
+
 	$scope.devuelveColorNode = function(tipo) {
     	switch (tipo) {
 			case "PR":
