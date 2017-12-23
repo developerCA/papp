@@ -259,6 +259,7 @@ public class PlanificacionController {
 			//Proyecto
 			else if(clase.equals("proyecto")){
 				ProyectoTO proyectoTO = gson.fromJson(new StringReader(objeto), ProyectoTO.class);
+				log.println("metas " + proyectoTO.getProyectometaTOs().size());
 				accion = (proyectoTO.getId()==null)?"crear":"actualizar";
 				if(proyectoTO.getNpFechainicio()!=null)
 					proyectoTO.setFechainicio(UtilGeneral.parseStringToDate(proyectoTO.getNpFechainicio()));

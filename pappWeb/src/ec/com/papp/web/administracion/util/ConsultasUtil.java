@@ -1259,16 +1259,6 @@ public class ConsultasUtil {
 //				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 //			int primero=(pagina*filas)-filas;
 			campo="tipoidentificacion.nombre";
-			String[] columnas={campo};
-			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
-				campo=parameters.get("sidx");
-//			tipoidentificaciontipoTO.setFirstResult(primero);
-//			tipoidentificaciontipoTO.setMaxResults(filas);
-			String[] orderBy = columnas;
-			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
-				tipoidentificaciontipoTO.setOrderByField(OrderBy.orderDesc(orderBy));
-			else
-				tipoidentificaciontipoTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				tipoidentificacionTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("identificacionid")!=null && !parameters.get("identificacionid").equals(""))
