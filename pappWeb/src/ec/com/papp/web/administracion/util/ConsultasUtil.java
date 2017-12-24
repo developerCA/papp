@@ -1263,6 +1263,8 @@ public class ConsultasUtil {
 				tipoidentificacionTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("identificacionid")!=null && !parameters.get("identificacionid").equals(""))
 				tipoidentificaciontipoTO.getId().setIdentificacionid(Long.valueOf(parameters.get("identificacionid")));
+			if(parameters.get("tipo")!=null && !parameters.get("tipo").equals(""))
+				tipoidentificaciontipoTO.setTipo(parameters.get("tipo"));
 			tipoidentificaciontipoTO.setTipoidentificacion(tipoidentificacionTO);
 //			SearchResultTO<TipoidentificaciontipoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificaciontipoPaginado(tipoidentificaciontipoTO);
 			Collection<TipoidentificaciontipoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificaciontipo(tipoidentificaciontipoTO);
@@ -1492,13 +1494,36 @@ public class ConsultasUtil {
 				socionegocioTO.setEstado(parameters.get("estado"));
 			if(parameters.get("proveedor")!=null && !parameters.get("proveedor").equals(""))
 				socionegocioTO.setEsproveedor(Integer.valueOf(parameters.get("proveedor")));
-
+			if(parameters.get("primernombre")!=null && !parameters.get("primernombre").equals(""))
+				socionegocioTO.setPrimernombre(parameters.get("primernombre"));
+			if(parameters.get("primerapellido")!=null && !parameters.get("primerapellido").equals(""))
+				socionegocioTO.setPrimerapellido(parameters.get("primerapellido"));
+			if(parameters.get("nombrecomercial")!=null && !parameters.get("nombrecomercial").equals(""))
+				socionegocioTO.setNombrecomercial(parameters.get("nombrecomercial"));
+			if(parameters.get("representantelegal")!=null && !parameters.get("representantelegal").equals(""))
+				socionegocioTO.setRepresentantelegal(parameters.get("representantelegal"));
+			
 			if(tipo.equals("busquedasocionegocio"))
 				socionegocioTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 			if(tipo.equals("empleado"))
 				socionegocioTO.setEsempleado(1);
+			if(tipo.equals("empleadoproveedor")){
+				socionegocioTO.setEsempleado(1);
+				socionegocioTO.setEsproveedor(1);
+				TipoidentificaciontipoTO tipoidentificaciontipoTO=new TipoidentificaciontipoTO();
+				tipoidentificaciontipoTO.setTipoidentificacion(new TipoidentificacionTO());
+				socionegocioTO.setTipoidentificaciontipo(tipoidentificaciontipoTO);
+			}
 			if(tipo.equals("socionegocio"))
 				socionegocioTO.setEsempleado(null);
+			if(tipo.equals("proveedorruc")){
+				socionegocioTO.setEsempleado(0);
+				socionegocioTO.setEsproveedor(1);
+				TipoidentificaciontipoTO tipoidentificaciontipoTO=new TipoidentificaciontipoTO();
+				tipoidentificaciontipoTO.setTipoidentificacion(new TipoidentificacionTO());
+				socionegocioTO.setTipoidentificaciontipo(tipoidentificaciontipoTO);
+			}
+			
 			SearchResultTO<SocionegocioTO> resultado=UtilSession.adminsitracionServicio.transObtenerSocionegocioPaginado(socionegocioTO);	
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
@@ -1508,6 +1533,10 @@ public class ConsultasUtil {
 				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),socionegocioTO.getJsonConfig()));
 			else if(tipo.equals("empleado"))
 				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),socionegocioTO.getJsonConfigEmpleado()));
+			else if(tipo.equals("empleadoproveedor"))
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),socionegocioTO.getJsonConfigProveedorEmpleado()));
+			else if(tipo.equals("proveedorruc"))
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),socionegocioTO.getJsonConfigProveedorRuc()));
 			else
 				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),socionegocioTO.getJsonConfigBusqueda()));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));

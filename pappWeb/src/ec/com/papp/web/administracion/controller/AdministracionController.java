@@ -209,6 +209,101 @@ public class AdministracionController {
 					jsonObject.put("socionegocio", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfig()));
 				}
 			}
+			
+			//Empleadoproveedor
+			else if(clase.equals("empleadoproveedor")){
+				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
+				accion = (socionegocioTO.getId()==null)?"crear":"actualizar";
+				//pregunto si ya existe el codigo en el nivel actual
+				SocionegocioTO socionegocioTO2=new SocionegocioTO();
+				socionegocioTO2.setCodigo(socionegocioTO.getCodigo());
+				Collection<SocionegocioTO> socionegocioTOs=UtilSession.adminsitracionServicio.transObtenerSocionegocio(socionegocioTO2);
+				boolean grabar=true;
+				if(socionegocioTOs.size()>0){
+					for(SocionegocioTO socionegocioTO3:socionegocioTOs) {
+						//socionegocioTO2=(SocionegocioTO)socionegocioTOs.iterator().next();
+						if((socionegocioTO.getId()!=null && socionegocioTO.getId().longValue()!=0) && socionegocioTO3.getId().longValue()!=socionegocioTO.getId().longValue() && socionegocioTO3.getCodigo().equals(socionegocioTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+						else if((socionegocioTO.getId()==null || (socionegocioTO.getId()!=null && socionegocioTO3.getId().longValue()!=socionegocioTO.getId().longValue())) && socionegocioTO.getCodigo()!=null && socionegocioTO3.getCodigo().equals(socionegocioTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
+
+				}
+				if(!grabar){
+					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else{
+					//Si es nuevo
+					if(socionegocioTO.getId()==null) {
+						socionegocioTO.setEstado("A");
+						socionegocioTO.setEsempleado(0);
+						socionegocioTO.setEmptipo(" ");
+						socionegocioTO.setEmpsituacion(" ");
+						socionegocioTO.setEmpfinanciamiento(" ");
+						socionegocioTO.setRazonsocial(" ");
+						socionegocioTO.setEsproveedor(1);
+						socionegocioTO.setRepresentantelegal(" ");
+						socionegocioTO.setNombrecomercial(" ");
+						socionegocioTO.setPersonaid(0.0);
+					}
+					UtilSession.adminsitracionServicio.transCrearModificarSocionegocio(socionegocioTO);
+					id=socionegocioTO.getNpid().toString();
+					jsonObject.put("socionegocio", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfig()));
+				}
+			}
+
+			//Proveedorruc
+			else if(clase.equals("proveedorruc")){
+				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
+				accion = (socionegocioTO.getId()==null)?"crear":"actualizar";
+				//pregunto si ya existe el codigo en el nivel actual
+				SocionegocioTO socionegocioTO2=new SocionegocioTO();
+				socionegocioTO2.setCodigo(socionegocioTO.getCodigo());
+				Collection<SocionegocioTO> socionegocioTOs=UtilSession.adminsitracionServicio.transObtenerSocionegocio(socionegocioTO2);
+				boolean grabar=true;
+				if(socionegocioTOs.size()>0){
+					for(SocionegocioTO socionegocioTO3:socionegocioTOs) {
+						//socionegocioTO2=(SocionegocioTO)socionegocioTOs.iterator().next();
+						if((socionegocioTO.getId()!=null && socionegocioTO.getId().longValue()!=0) && socionegocioTO3.getId().longValue()!=socionegocioTO.getId().longValue() && socionegocioTO3.getCodigo().equals(socionegocioTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+						else if((socionegocioTO.getId()==null || (socionegocioTO.getId()!=null && socionegocioTO3.getId().longValue()!=socionegocioTO.getId().longValue())) && socionegocioTO.getCodigo()!=null && socionegocioTO3.getCodigo().equals(socionegocioTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
+
+				}
+				if(!grabar){
+					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else{
+					//Si es nuevo
+					if(socionegocioTO.getId()==null) {
+						socionegocioTO.setEstado("A");
+						socionegocioTO.setPrimernombre(" ");
+						socionegocioTO.setPrimerapellido(" ");
+						socionegocioTO.setSegundonombre(" ");
+						socionegocioTO.setSegundoapellido(" ");
+						socionegocioTO.setEsempleado(0);
+						socionegocioTO.setEmptipo(" ");
+						socionegocioTO.setEmpsituacion(" ");
+						socionegocioTO.setEmpfinanciamiento(" ");
+						socionegocioTO.setEsproveedor(1);
+						socionegocioTO.setPersonaid(0.0);
+					}
+					UtilSession.adminsitracionServicio.transCrearModificarSocionegocio(socionegocioTO);
+					id=socionegocioTO.getNpid().toString();
+					jsonObject.put("socionegocio", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfig()));
+				}
+			}
 			//Empleado
 			//			else if(clase.equals("empleado")){
 			//				EmpleadoTO empleadoTO = gson.fromJson(new StringReader(objeto), EmpleadoTO.class);
@@ -1505,6 +1600,18 @@ public class AdministracionController {
 				jsonObject.put("empleado", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfigEmpleadoedit()));
 			}
 
+			//Empleadoproveedor
+			else if(clase.equals("empleadoproveedor")){
+				SocionegocioTO socionegocioTO = UtilSession.adminsitracionServicio.transObtenerSocionegocioTO(id);
+				jsonObject.put("empleadoproveedor", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfigEmpleadoedit()));
+			}
+
+			//Proveedorruc
+			else if(clase.equals("proveedorruc")){
+				SocionegocioTO socionegocioTO = UtilSession.adminsitracionServicio.transObtenerSocionegocioTO(id);
+				jsonObject.put("empleadoproveedor", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfigEmpleadoedit()));
+			}
+
 			//Parametroindicador
 			else if(clase.equals("parametroindicador")){
 				ParametroindicadorTO parametroindicadorTO = UtilSession.adminsitracionServicio.transObtenerParametroindicadorTO(id);
@@ -1851,7 +1958,7 @@ public class AdministracionController {
 
 	@RequestMapping(value = "/consultar/{clase}/{parametro}", method = RequestMethod.GET)
 	public Respuesta consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
-		log.println("ingresa a consultar: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
+		log.println("ingresa a consultar**: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
@@ -1959,7 +2066,15 @@ public class AdministracionController {
 			else if(clase.equals("empleado")){
 				jsonObject=ConsultasUtil.consultaSocionegocioPaginado(parameters, jsonObject,"empleado");
 			}
+			//Empleadoproveedor
+			else if(clase.equals("empleadoproveedor")){
+				jsonObject=ConsultasUtil.consultaSocionegocioPaginado(parameters, jsonObject,"empleadoproveedor");
+			}
 
+			//Proveedorruc
+			else if(clase.equals("proveedorruc")){
+				jsonObject=ConsultasUtil.consultaSocionegocioPaginado(parameters, jsonObject,"proveedorruc");
+			}
 
 			//Busqueda Socionegocio
 			else if(clase.equals("busquedasocionegocio")){
