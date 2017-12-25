@@ -5,12 +5,12 @@ app.factory("TipoIdentificacionFactory", ["Restangular", function (Restangular) 
     return {
 
         traerTipos: function (pagina) {
-            return Restangular.allUrl("administrar/consultar/tipoidentificacion/pagina=" + pagina).getList();
+            return Restangular.allUrl("administrar/consultar/tipoidentificacion/pagina=" + pagina + "&tipo=N").getList();
         },
 
         traerTiposFiltro: function (pagina, nombre) {
 
-            var url = "administrar/consultar/tipoidentificacion/pagina=" + pagina;
+            var url = "administrar/consultar/tipoidentificacion/pagina=" + pagina + "&tipo=N";
 
             if (nombre != null && nombre != "") url += "&nombre=" + nombre.toUpperCase();
             return Restangular.allUrl(url).getList();
