@@ -70,9 +70,9 @@ public class ConsultasUtil {
 			Date fechaInicial=null;
 			Date fechaFinal=null;
 			if(parameters.get("fechainicial")!=null)
-				fechaInicial=UtilGeneral.parseStringToDate(parameters.get("fechainicial"));
+				fechaInicial=UtilGeneral.parseStringToDate(parameters.get("fechainicial").replaceAll("%2F", "/"));
 			if(parameters.get("fechafinal")!=null)
-				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal"));
+				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal").replaceAll("%2F", "/"));
 			if(parameters.get("fechainicial")!=null && parameters.get("fechafinal")==null)
 				fechaFinal=(new Date());
 			if(parameters.get("fechafinal")!=null && parameters.get("fechainicial")==null){
