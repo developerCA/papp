@@ -20,7 +20,12 @@ app.controller('MatrizDesglosadaProgramacionAnualController', [ "$scope","$rootS
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalInstitucion.html',
 			controller : 'ModalInstitucionController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				ejefiscal : function() {
+					return $rootScope.ejefiscal;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);

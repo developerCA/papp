@@ -102,6 +102,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		estructuraorganicaFactory.traerEstructuraOrganicaEditar($scope.estructuraSeleccionada).then(function(resp){
 			if (resp.estado) {
 			    $scope.objeto=resp.json.estructuraorganica;
+			    $scope.objeto.npfecviginicio=toDate($scope.objeto.npfecviginicio);
+			    $scope.objeto.npfecvigfin=toDate($scope.objeto.npfecvigfin);
 			}
 			$scope.edicion=true;
 			$scope.nuevoar=false;
@@ -334,9 +336,34 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 	$scope.abrirInstitucion = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalInstitucion.html',
+			templateUrl : 'assets/views/papp/modal/modalInstitucion.html',
 			controller : 'ModalInstitucionController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				ejefiscal : function() {
+					return $rootScope.ejefiscal;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.eorganicainstitucionid = obj.id;
+			$scope.objeto.npcodigoinstitucion = obj.codigo;
+			$scope.objeto.npnombreinstitucion = obj.nombre;
+		}, function() {
+		});
+	};
+
+	$scope.abrirEntidad = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalInstitutoEntidad.html',
+			controller : 'ModalInstitutoEntidadController',
+			size : 'lg',
+			resolve : {
+				ejefiscal : function() {
+					return $rootScope.ejefiscal;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
@@ -543,4 +570,25 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		            $scope.limpiar();
 		        }
     };
+
+	function toDate(fuente) {
+		try {
+			var parts = fuente.split('/');
+		} catch (err) {
+			return new Date();
+		}
+		//console.log(parts, parts[2]*1,parts[1]-1,parts[0]*1);
+		return new Date(parts[2]*1,parts[1]-1,parts[0]*1, 0, 0, 0, 0); 
+	}
+
+	function toStringDate(fuente) {
+		try {
+			var parts = fuente.toISOString();
+			parts = parts.split('T');
+			parts = parts[0].split('-');
+		} catch (err) {
+			return null;
+		}
+		return parts[2] + "/" + parts[1] + "/" + parts[0]; 
+	}
 } ]);

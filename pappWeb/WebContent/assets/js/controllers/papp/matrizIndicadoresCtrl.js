@@ -7,9 +7,14 @@ app.controller('MatrizIndicadoresController', [ "$scope","$rootScope","$location
 
 	$scope.abrirInstitucion = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalInstitucion.html',
+			templateUrl : 'assets/views/papp/modal/modalInstitucion.html',
 			controller : 'ModalInstitucionController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				ejefiscal : function() {
+					return $rootScope.ejefiscal;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);

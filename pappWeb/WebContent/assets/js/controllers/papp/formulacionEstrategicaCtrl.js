@@ -295,30 +295,6 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		}
 	};
 
-	function toDate(fuente) {
-		try {
-			var parts = fuente.split('/');
-			//please put attention to the month (parts[0]), Javascript counts months from 0:
-			// January - 0, February - 1, etc
-		} catch (err) {
-			return new Date();
-		}
-		return new Date(parts[2],parts[0]-1,parts[1]); 
-	}
-
-	function toStringDate(fuente) {
-		try {
-			var parts = fuente.toISOString();
-			parts = parts.split('T');
-			parts = parts[0].split('-');
-			//please put attention to the month (parts[0]), Javascript counts months from 0:
-			// January - 0, February - 1, etc
-		} catch (err) {
-			return null;
-		}
-		return parts[2] + "/" + parts[1] + "/" + parts[0]; 
-	}
-
 	$scope.agregarDetallePy=function(){
 		//documento pagina 15
 		if ($scope.objetolistaPy == undefined) {
@@ -610,5 +586,26 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			default:
 	        	return "auto";
 		}
+	}
+
+	function toDate(fuente) {
+		try {
+			var parts = fuente.split('/');
+		} catch (err) {
+			return new Date();
+		}
+		//console.log(parts, parts[2]*1,parts[1]-1,parts[0]*1);
+		return new Date(parts[2]*1,parts[1]-1,parts[0]*1, 0, 0, 0, 0); 
+	}
+
+	function toStringDate(fuente) {
+		try {
+			var parts = fuente.toISOString();
+			parts = parts.split('T');
+			parts = parts[0].split('-');
+		} catch (err) {
+			return null;
+		}
+		return parts[2] + "/" + parts[1] + "/" + parts[0]; 
 	}
 } ]);

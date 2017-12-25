@@ -170,12 +170,23 @@
 									ng-class="{'has-error':Form.npfecviginicio.$dirty && Form.npfecviginicio.$invalid, 'has-success':Form.npfecviginicio.$valid}">
 									<label class="control-label"> Fecha vigencia inicio <span
 										class="symbol required"></span>
-									</label> <input type="text" placeholder="Indique una fecha"
-										class="form-control" name="npfecviginicio" required
-										ng-model="objeto.npfecviginicio" ng-minlength="1" /> <span
-										class="error text-small block"
+									</label>
+							        <div class="input-group">
+							            <input type="text" class="form-control" placeholder="Escriba una fecha inicio"
+							                uib-datepicker-popup="dd/MM/yyyy" 
+							                name="npfecviginicio" ng-model="objeto.npfecviginicio"
+							                is-open="popupFechaInicio.opened" datepicker-options="dateOptions"
+							                ng-required="true" close-text="Close">
+							            <span class="input-group-btn">
+							                <button type="button" class="btn btn-primary" ng-click="openFechaInicio()">
+							                    <i class="glyphicon glyphicon-calendar"></i>
+							                </button>
+							            </span>
+							        </div>
+									<span class="error text-small block"
 										ng-if="Form.npfecviginicio.$dirty && Form.npfecviginicio.$invalid">
-										Incorrecto</span> <span class="success text-small"
+										Incorrecto</span>
+									<span class="success text-small"
 										ng-if="Form.npfecviginicio.$valid"> Listo</span>
 								</div>
 
@@ -183,12 +194,23 @@
 									ng-class="{'has-error':Form.npfecvigfin.$dirty && Form.npfecvigfin.$invalid, 'has-success':Form.npfecvigfin.$valid}">
 									<label class="control-label"> Fecha vigencia fin <span
 										class="symbol required"></span>
-									</label> <input type="text" placeholder="Indique una fecha"
-										class="form-control" name="npfecvigfin" required
-										ng-model="objeto.npfecvigfin" ng-minlength="1" /> <span
-										class="error text-small block"
+									</label>
+							        <div class="input-group">
+							            <input type="text" class="form-control" placeholder="Escriba una fecha final"
+							                uib-datepicker-popup="dd/MM/yyyy" 
+							                name="npfecvigfin" ng-model="objeto.npfecvigfin"
+							                is-open="popupFechaFin.opened" datepicker-options="dateOptions"
+							                ng-required="true" close-text="Close">
+							            <span class="input-group-btn">
+							                <button type="button" class="btn btn-primary" ng-click="openFechaFin()">
+							                    <i class="glyphicon glyphicon-calendar"></i>
+							                </button>
+							            </span>
+							        </div>
+									<span class="error text-small block"
 										ng-if="Form.npfecvigfin.$dirty && Form.npfecvigfin.$invalid">
-										Incorrecto</span> <span class="success text-small"
+										Incorrecto</span>
+									<span class="success text-small"
 										ng-if="Form.npfecvigfin.$valid"> Listo</span>
 								</div>
 
@@ -251,7 +273,7 @@
 											ng-model="objeto.eorganicainstitucionentid" /> <span
 											class="input-group-btn">
 											<button type="button" class="btn btn-primary"
-												ng-click="abrirFuerza($index)">
+												ng-click="abrirEntidad($index)">
 												<i class="fa fa-search"></i> Seleccione
 											</button>
 										</span>
@@ -1080,60 +1102,6 @@
 		</div>
 	</div>
 
-	<script type="text/ng-template" id="modalInstitucion.html">
-            <div class="modal-header">
-            	<h3 class="modal-title">Instituciones</h3>
-            </div>
-			<div class="modal-body">
-				<div class="panel-body" ng-init="consultar();" >
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombre">
-										</div>
-									</div>
-
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
-							</tr>
-						</table>
-					</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
 	<script type="text/ng-template" id="modalNivelOrganico.html">
             <div class="modal-header">
             	<h3 class="modal-title">Niveles Org&aacute;nicos</h3>
@@ -1557,8 +1525,3 @@
                     </script>
 </div>
 </div>
-
-
-
-
-

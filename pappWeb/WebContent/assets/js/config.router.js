@@ -421,6 +421,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence(
         		'ngTable','EstructuraOrganicaCtrl','EstructuraOrganicaFactory',
         		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
         		'ModalUnidadCtrl','UnidadFactory',
         		'ModalNivelOrganicoCtrl','NivelOrganicoFactory',
         		'ModalCargoCtrl','CargoFactory',
