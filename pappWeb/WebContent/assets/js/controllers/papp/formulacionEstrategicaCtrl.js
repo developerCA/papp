@@ -138,7 +138,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				if (resp.estado) {
 					$scope.objetoPr=resp.json.programa;
 					$scope.objetoPr.padre=0;
-					$scope.editarId=$scope.objeto.id;
+					$scope.editarId=$scope.objetoPr.id;
 					$scope.nodeTipo = "PR";
 				}
 				//console.log($scope.nuevoar);
@@ -158,7 +158,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				if (resp.estado) {
 					$scope.objetoSp=resp.json.subprograma;
 					$scope.objetoSp.padre=node.npNivelid;
-					$scope.editarId=$scope.objeto.id;
+					$scope.editarId=$scope.objetoSp.id;
 					$scope.nodeTipo = "SP";
 				}
 				$scope.edicionSubPrograma=true;
@@ -176,7 +176,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 					$scope.objetoPy=resp.json.proyecto;
 					$scope.objetoPy.padre=node.npNivelid;
 					$scope.objetolistaPy=[];
-					$scope.editarId=$scope.objeto.id;
+					$scope.editarId=$scope.objetoPy.id;
 					$scope.nodeTipo = "PY";
 				}
 				$scope.edicionProyecto=true;
@@ -194,7 +194,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 					$scope.objetoAc=resp.json.actividad;
 					$scope.objetoAc.padre=node.npNivelid;
 					$scope.objetolistaAc=[];
-					$scope.editarId=$scope.objeto.id;
+					$scope.editarId=$scope.objetoAc.id;
 					$scope.nodeTipo = "AC";
 				}
 				$scope.edicionActividad=true;
@@ -211,7 +211,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				if (resp.estado) {
 					$scope.objetoSa=resp.json.subactividad;
 					$scope.objetoSa.padre=node.npNivelid;
-					$scope.editarId=$scope.objeto.id;
+					$scope.editarId=$scope.objetoSa.id;
 					$scope.nodeTipo = "SA";
 				}
 				$scope.edicionSubActividad=true;
@@ -434,10 +434,10 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			$scope.objetoAc.actividadindicadormetodoid = obj.id.metodoid;
 			$scope.objetoAc.npIndicadorcodigo = obj.npIndicadorcodigo;
 			$scope.objetoAc.npIndicadornombre = obj.npIndicadornombre;
-			$scope.objetoAc.npIndicadordescripcion = "NO SE OBTIENE";
+			$scope.objetoAc.npIndicadordescripcion = obj.npIndicadordescripcion;
 			$scope.objetoAc.npIndicadormetcodigo = obj.codigo;
 			$scope.objetoAc.npIndicadormetdescripcion = obj.descripcion;
-			$scope.objetoAc.npIndicadormetadescriopcion = "NO SE OBTIENE";
+			$scope.objetoAc.npIndicadormetadescriopcion = obj.npIndicadormetadescriopcion;
 			$scope.objetoAc.npUnidadmedidacodigo = obj.npCodigounidad;
 			$scope.objetoAc.npUnidadmedidanombre = obj.npNombreunidad;
 			$scope.objetoAc.npGrupomedidacodigo = obj.npCodigogrupo;
@@ -465,10 +465,10 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 //			$scope.objetoSa.proyectoindicadorid = obj.id;
 			$scope.objetoSa.npIndicadorcodigo = obj.npIndicadorcodigo;
 			$scope.objetoSa.npIndicadornombre = obj.npIndicadornombre;
-			$scope.objetoSa.npIndicadordescripcion = "NO SE OBTIENE";
+			$scope.objetoSa.npIndicadordescripcion = obj.npIndicadordescripcion;
 			$scope.objetoSa.npIndicadormetcodigo = obj.codigo;
 			$scope.objetoSa.npIndicadormetdescripcion = obj.descripcion;
-			$scope.objetoSa.npIndicadormetadescriopcion = "NO SE OBTIENE";
+			$scope.objetoSa.npIndicadormetadescriopcion = obj.npIndicadormetadescriopcion;
 		}, function() {
 		});
 	};

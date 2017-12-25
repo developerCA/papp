@@ -481,7 +481,12 @@
 				<letter-icon data="{{node.tipo}}" color="auto" size="sm"></letter-icon>
 			</td>
 			<td width="100%">
-	    		&nbsp;{{node.codigo}} - {{node.title}}
+				<span ng-if="node.tipo != 'E'">
+	    			&nbsp;{{node.codigo}}&nbsp;-&nbsp;{{node.title}}
+				</span>
+				<span ng-if="node.tipo == 'E'">
+	    			&nbsp;{{node.codigo}}&nbsp;-&nbsp;{{node.npdescripcion}}
+				</span>
 			</td>
 			<td width="1%">
 				<table width="71px">
