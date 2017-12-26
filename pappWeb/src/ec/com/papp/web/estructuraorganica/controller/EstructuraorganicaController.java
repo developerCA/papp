@@ -195,9 +195,9 @@ public class EstructuraorganicaController {
 				log.println("plaza id: " + unidadarbolplazaTO.getId().getPlazaid());
 				log.println("codigo" + unidadarbolplazaTO.getCodigo());
 				for(UnidadarbolplazaempleadoTO unidadarbolplazaempleadoTO:unidadarbolplazaTO.getDetails()) {
-					if(unidadarbolplazaempleadoTO.getNpfechafin()!=null)
+					if(unidadarbolplazaempleadoTO.getNpfechafinc()!=null)
 						unidadarbolplazaempleadoTO.setFechafin(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechafinc()));
-					if(unidadarbolplazaempleadoTO.getNpfechainicio()!=null)
+					if(unidadarbolplazaempleadoTO.getNpfechainicioc()!=null)
 					unidadarbolplazaempleadoTO.setFechainicio(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechainicioc()));
 				}
 				//accion = (unidadarbolplazaempleadoTO.getId()==null)?"crear":"actualizar";
