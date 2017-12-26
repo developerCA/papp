@@ -189,7 +189,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 //** Mantener Empleado
 	$scope.agregarMantenerPlazaDetalle=function(){
-		var obj={id:null,responsable:0,aprueba:0,revisa:0};
+		var obj={id: {id: null, plaempid: null, plazaid: null},responsable:0,aprueba:0,revisa:0};
 		$scope.objetoPlazaDetail.push(obj);
 	}
 
