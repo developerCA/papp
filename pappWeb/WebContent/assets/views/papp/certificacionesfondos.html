@@ -534,42 +534,24 @@
 								    </span>
 								</div>
 								
-								<div class="form-group"
-								    ng-class="{'has-error':Form.numerodocumento.$dirty && Form.numerodocumento.$invalid, 'has-success':Form.numerodocumento.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        N&uacute;mero documento
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un n&uacute;mero documento"
 								        class="form-control" name="numerodocumento" ng-model="objeto.numerodocumento"
-								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar">
-								    <span class="error text-small block"
-								        ng-if="Form.numerodocumento.$dirty && Form.numerodocumento.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.numerodocumento.$valid">
-								        Listo
-								    </span>
+								        ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar">
 								</div>
 								
-								<div class="form-group"
-								    ng-class="{'has-error':Form.numerooficio.$dirty && Form.numerooficio.$invalid, 'has-success':Form.numerooficio.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        N&uacute;mero oficio
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
 								        class="form-control" name="numerooficio" ng-model="objeto.numerooficio"
-								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar">
-								    <span class="error text-small block"
-								        ng-if="Form.numerooficio.$dirty && Form.numerooficio.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.numerooficio.$valid">
-								        Listo
-								    </span>
+								        ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar">
 								</div>
 								
 								<div class="form-group"
@@ -598,7 +580,7 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <select class="form-control" name="estado"
-								        ng-model="objeto.estado" required>
+								        ng-model="objeto.estado" required ng-disabled="true">
 								        <option value="RE" ng-selected="selected">Registrado</option>
 								        <option value="EL">Eliminado</option>
 								        <option value="SO">Solicitado</option>

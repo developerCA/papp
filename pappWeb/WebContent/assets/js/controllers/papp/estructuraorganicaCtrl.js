@@ -355,6 +355,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	}
 
 	$scope.abrirInstitucion = function() {
+		console.log($rootScope.ejefiscal);
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalInstitucion.html',
 			controller : 'ModalInstitucionController',

@@ -18,9 +18,9 @@ app.controller('ModalClaseGastoController', [ "$scope","$rootScope","$uibModalIn
 		claseGastoFactory.traerClases(
 			$rootScope.ejefiscal
 		).then(function(resp){
-			//console.log(resp["0"].data.claseregistrocmcgasto);
+			console.log(resp);
 			if (resp.meta)
-				$scope.data=resp["0"].data.claseregistrocmcgasto;
+				$scope.data=resp;
 		})
 	};
 	
