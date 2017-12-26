@@ -62,8 +62,8 @@
 							<div class="col-md-12">
 								<select class="col-md-12  margin-top-15"
 									ng-model="ejercicioSistema" ng-change="cambiarEjercicio()"
-									ng-options="ejercicioFiscal.id as ejercicioFiscal.anio for ejercicioFiscal in ejerciciosFiscales"
-									class="form-control" required>
+									ng-options="item.anio for item in ejerciciosFiscales track by item.id"
+									class="form-control" >
 								</select>
 
 							</div>

@@ -25,12 +25,22 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 	$scope.iniciaAplicacion=function(){
 		$scope.data=[];
 		$scope.ejerciciosFiscales=[];
-		ejercicioFiscalFactory.traerEjercicios(pagina).then(function(resp){
+		ejercicioFiscalFactory.traerEjerciciosActivos(pagina,'A').then(function(resp){
 			if (resp.meta)
 				$scope.ejerciciosFiscales=resp;
-			    $rootScope.ejefiscal=$scope.ejerciciosFiscales[0].id;
-			    $scope.ejercicioSistema= $rootScope.ejefiscal;
-				    
+			        
+				var fecha = new Date();
+				var ano = fecha.getFullYear();
+			
+			    for (var i=0;i<$scope.ejerciciosFiscales.length;i++){
+			    	
+			    	if (ano==$scope.ejerciciosFiscales[i].anio){
+			    		$rootScope.ejefiscal=$scope.ejerciciosFiscales[i];
+			    		$scope.ejercicioSistema= $rootScope.ejefiscal;
+			    	}
+			    }
+			  
+			  
 		});
 	
 	};
@@ -38,22 +48,28 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 	$scope.cambiarEjercicio=function(){
 		
 		 SweetAlert.swal({
-	            title: "Ejericio Fiscal",
-	            text: "Esta seguro de cambiar el ejercicio fiscal del sistema?",
+	            title: "Ejercicio Fiscal",
+	            text: "Esta seguro de cambiar el ejercicio fiscal del sistema ?",
 	            type: "warning",
 	            showCancelButton: true,
 	            confirmButtonColor: "#DD6B55",
-	            confirmButtonText: "Si!"
-	        }, function () {
-	        	$rootScope.ejefiscal=$scope.ejercicioSistema;
-	        	
-	            SweetAlert.swal({
-	                title: "Ejercicio Fiscal se ha cambiado",
-	                confirmButtonColor: "#007AFF"
-	            });
-	            
-	            $location.path( "/index" );
-	        });
+	            confirmButtonText: "SI",
+	            cancelButtonText: "NO",
+	            closeOnConfirm: true,
+				closeOnCancel: true
+	       
+		 
+		 },function(isConfirm) {
+				if (isConfirm) {
+					 $rootScope.ejefiscal=$scope.ejercicioSistema;
+					 $location.path( "/index" );
+				}else{
+					$scope.ejercicioSistema= $rootScope.ejefiscal;
+				}
+		});
+		 
+		 
+		
 		 
 		
 		

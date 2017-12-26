@@ -23,6 +23,16 @@ app.factory("ejercicioFiscalFactory", [ "Restangular", function(Restangular) {
 			  
 		},
 		
+		traerEjerciciosActivos : function(pagina,estado) {
+			  
+			var url = "administrar/consultar/ejerciciofiscal/pagina="+pagina;
+
+			if(estado!=null && estado != "" ) url += "&estado=" + estado;
+			 
+			return Restangular.allUrl(url).getList();
+			  
+		},
+		
 		traerEjercicio : function(id) {
 			  
 			var url = "administrar/ejerciciofiscal/"+id+"/-1";
