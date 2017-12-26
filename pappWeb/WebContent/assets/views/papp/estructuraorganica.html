@@ -354,23 +354,24 @@
 							</a>
 						</div>
 <br>
-						<script type="text/ng-template" id="nodes_renderer.html">
+<script type="text/ng-template" id="nodes_renderer.html">
   <div ui-tree-handle class="tree-node tree-node-content">
     <a class="btn btn-default btn-xs"  data-nodrag ng-click="toggle(this);cargarHijos(node)"><span
         class="glyphicon"
         ng-class="{
           'glyphicon-chevron-right': collapsed,
           'glyphicon-chevron-down': !collapsed
-        }"></span></a>
-    {{node.title}}
-<div class="pull-right ">
-  <a uib-tooltip="Agregar" class="btn btn-info btn-sm" data-nodrag ng-click="agregarUnidadHija(node);"><span
+        }"></span>
+	</a>
+    {{node.codigoorganico}} - {{node.title}}
+    <div class="pull-right ">
+      <a uib-tooltip="Agregar" class="btn btn-info btn-sm" data-nodrag ng-click="agregarUnidadHija(node);"><span
         class="glyphicon glyphicon-plus"></span></a>  
-  <a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag ng-click="modificarUnidad(node)"><span
+      <a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag ng-click="modificarUnidad(node)"><span
         class="fa fa-pencil"></span></a>
-    <a uib-tooltip="Mantener Plaza" class="btn btn-info btn-sm" data-nodrag ng-click="mantenerPlaza(node)"><span
+      <a uib-tooltip="Mantener Plaza" class="btn btn-info btn-sm" data-nodrag ng-click="mantenerPlaza(node)"><span
         class="fa fa-building-o"></span></a>
-</div>
+    </div>
   </div>
   <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
     <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
@@ -778,7 +779,7 @@
 																<div class="input-group form-group has-success">
 																	<input type="text" placeholder="Seleccione una Especialidad"
 																		class="form-control" name="npespecialidadcodigo" ng-disabled="true"
-																		ng-model="obj.npespecialidadcodigo" />
+																		ng-model="obj.npespecialidadcodigo">
 																	<span class="input-group-btn">
 																		<button type="button" class="btn btn-primary"
 																			ng-click="abrirEspecialidad($index)">
@@ -790,7 +791,8 @@
 															<td>
 																<div class="form-group has-success">
 																    <input type="text" placeholder="Seleccione una Especialidad"
-																        class="form-control" name="npespecialdidadnombre" ng-model="obj.npespecialdidadnombre" ng-disabled="true">
+																        class="form-control" name="npespecialdidadnombre"
+																        ng-model="obj.npespecialdidadnombre" ng-disabled="true">
 																</div>
 															</td>
 															<td>
