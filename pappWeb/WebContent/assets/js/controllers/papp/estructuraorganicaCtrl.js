@@ -493,7 +493,12 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalClasificacion.html',
 			controller : 'ModalClasificacionController',
-			size : 'lg'
+			size : 'lg'/*,
+			resolve : {
+				fuerza : function() {
+					return $scope.fuerza;
+				}
+			}*/
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
@@ -584,15 +589,18 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
 		                return;
 		            } else {
-		            	estructuraorganicaFactory.guardar($scope.objeto).then(function(resp){
+		            	let tObj = Object.assign({}, $scope.objeto);
+		            	tObj.npfecviginicio = toStringDate(tObj.npfecviginicio); 
+		            	tObj.npfecvigfin = toStringDate(tObj.npfecvigfin);
+		            	estructuraorganicaFactory.guardar(tObj).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Grado - Fuerza!", "Registro guardado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Estructura Organica!", "Registro guardado satisfactoriamente!", "success");
 		        			 }else{
-			 		             SweetAlert.swal("Grado - Fuerza!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Estructura Organica!", resp.mensajes.msg, "error");
 		        			 }
 		        		})
 		            }
