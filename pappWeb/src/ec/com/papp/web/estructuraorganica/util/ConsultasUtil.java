@@ -11,6 +11,7 @@ import net.sf.json.JSONSerializer;
 import org.hibernate.tools.commons.to.OrderBy;
 import org.hibernate.tools.commons.to.SearchResultTO;
 
+import ec.com.papp.administracion.to.DivisiongeograficaTO;
 import ec.com.papp.administracion.to.EjerciciofiscalTO;
 import ec.com.papp.administracion.to.EmpleadoTO;
 import ec.com.papp.administracion.to.SocionegocioTO;
@@ -148,6 +149,9 @@ public class ConsultasUtil {
 				institucionTO.setEjerciciofiscal(ejerciciofiscalTO);
 			}
 			institucionentidadTO.setInstitucion(institucionTO);
+			institucionentidadTO.setDivisiongeografica1(new DivisiongeograficaTO());
+			institucionentidadTO.setDivisiongeografica2(new DivisiongeograficaTO());
+			institucionentidadTO.setDivisiongeografica3(new DivisiongeograficaTO());
 			SearchResultTO<InstitucionentidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidadPaginado(institucionentidadTO);
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
@@ -259,6 +263,9 @@ public class ConsultasUtil {
 				UnidadarbolTO unidadarbolTO=new UnidadarbolTO();
 				unidadarbolTO.setUnidadarbolerganicaid(Long.valueOf(parameters.get("unidadarbolerganicaid")));
 				unidadarbolplazaTO.setUnidadarbol(unidadarbolTO);
+			}
+			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals("")) {
+				unidadarbolplazaTO.setCodigo(parameters.get("codigo"));
 			}
 //			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 //				unidadarbolplazaTO.setEstado(parameters.get("estado"));
