@@ -36,7 +36,8 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 			    	
 			    	if (ano==$scope.ejerciciosFiscales[i].anio){
 			    		$rootScope.ejefiscal=$scope.ejerciciosFiscales[i].id;
-			    		$scope.ejercicioSistema= $rootScope.ejefiscal;
+			    		$rootScope.ejefiscalobj=$scope.ejerciciosFiscales[i];
+			    		$scope.ejercicioSistema= $rootScope.ejefiscalobj;
 			    	}
 			    }
 			  
@@ -62,9 +63,10 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 		 },function(isConfirm) {
 				if (isConfirm) {
 					 $rootScope.ejefiscal=$scope.ejercicioSistema.id;
+					 $rootScope.ejefiscalobj=$scope.ejercicioSistema;
 					 $location.path( "/index" );
 				}else{
-					$scope.ejercicioSistema= $rootScope.ejefiscal;
+					$scope.ejercicioSistema= $rootScope.ejefiscalobj;
 				}
 		});
 		 
