@@ -195,6 +195,9 @@ public class EstructuraorganicaController {
 				log.println("plaza id: " + unidadarbolplazaTO.getId().getPlazaid());
 				log.println("codigo" + unidadarbolplazaTO.getCodigo());
 				for(UnidadarbolplazaempleadoTO unidadarbolplazaempleadoTO:unidadarbolplazaTO.getDetails()) {
+					log.println("fechafinc: " + unidadarbolplazaempleadoTO.getNpfechafinc());
+					log.println("fechainicio: " + unidadarbolplazaempleadoTO.getNpfechainicioc());
+					log.println("npsocionegocioid " + unidadarbolplazaempleadoTO.getNpsocionegocioid());
 					if(unidadarbolplazaempleadoTO.getNpfechafinc()!=null)
 						unidadarbolplazaempleadoTO.setFechafin(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechafinc()));
 					if(unidadarbolplazaempleadoTO.getNpfechainicioc()!=null)
@@ -315,6 +318,12 @@ public class EstructuraorganicaController {
 				unidadarbolplazaempleadoTO.getId().setPlazaid(id2);
 				unidadarbolplazaempleadoTO.setSocionegocio(new SocionegocioTO());
 				Collection<UnidadarbolplazaempleadoTO> unidadarbolplazaempleadoTOs=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplazaempleado(unidadarbolplazaempleadoTO);
+				for(UnidadarbolplazaempleadoTO unidadarbolplazaempleadoTO2:unidadarbolplazaempleadoTOs) {
+					if(unidadarbolplazaempleadoTO2.getFechainicio()!=null)
+						unidadarbolplazaempleadoTO2.setNpfechainicioc(UtilGeneral.parseDateToString(unidadarbolplazaempleadoTO2.getFechainicio()));
+					if(unidadarbolplazaempleadoTO2.getFechafin()!=null)
+						unidadarbolplazaempleadoTO2.setNpfechafinc(UtilGeneral.parseDateToString(unidadarbolplazaempleadoTO2.getFechafin()));
+				}
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(unidadarbolplazaempleadoTOs,unidadarbolplazaempleadoTO.getJsonConfig()));
 			}
 
