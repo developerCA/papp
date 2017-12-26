@@ -216,16 +216,18 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	            angular.element('.ng-invalid[name=' + firstError + ']').focus();
 	            return;
 	        } else {
-	        	unidadFactory.guardarArbol($scope.objetoUnidad).then(function(resp){
+	        	let tObj = Object.assign({}, $scope.objetoPlaza);
+	        	tObj.details = Array.from($scope.objetoPlazaDetail);
+	        	unidadFactory.guardarArbol(tObj).then(function(resp){
 	        		if (resp.estado){
 	        			formUnidadPlaza.$setPristine(true);
 						$scope.dUnidad=true;
 						$scope.dUnidadPlazaEditar=false;
 	 		            $scope.objetUnidado={};
 	 		            $scope.objetoPlazaDetail={};
-	 		            SweetAlert.swal("Unidad - Mantener Plazas!", "Registro guardado satisfactoriamente!", "success");
+	 		            SweetAlert.swal("Unidad Arboll Plazas!", "Registro guardado satisfactoriamente!", "success");
 	    			}else{
-	 		            SweetAlert.swal("Unidad - Mantener Plazas!", resp.mensajes.msg, "error");
+	 		            SweetAlert.swal("Unidad Arbol Plazas!", resp.mensajes.msg, "error");
 	    			}
 	    		})
 	        }
