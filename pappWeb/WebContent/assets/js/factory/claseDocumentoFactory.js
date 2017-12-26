@@ -1,20 +1,35 @@
-app.factory("claseDocumentoFactory", [ "Restangular", function(Restangular) {
+app.factory("claseGastoFactory", [ "Restangular", function(Restangular) {
 
-	var service = Restangular.service("/comun");
+	var service = Restangular.service("/administrar");
 
 	return {
-		traerClases : function(ejercicio) {
-			var url = "comun/tipodocumentoclasedocumento@" + ejercicio;
+		traerClases: function(
+			pagina,
+			ejercicio
+		) {
+			var url = "administrar/consultar/tipodocumentoclasedocumento/" +
+				"pagina=" + pagina +"&" +
+				"ejerciciofiscalid=" + ejercicio;
 
 			return Restangular.allUrl(url).getList();
 		},
 
-		traerClasesFiltro : function(pagina,ejercicio,nombre,codigo,estado) {
-			var url = "comun/tipodocumentoclasedocumento@" + ejercicio;
+		traerClasesFiltro: function(
+			pagina,
+			ejercicio,
+			codigo,
+			nombre,
+			tipocodigo,
+			tiponombre
+		) {
+			var url = "administrar/consultar/tipodocumentoclasedocumento/" +
+				"pagina=" + pagina +"&" +
+				"ejerciciofiscalid=" + ejercicio;
 
-			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
-			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
-			if(estado!=null && estado != "" ) url += "&estado=" + estado;
+			if (codigo!=null && codigo != "") url += "&codigo=" + codigo;	
+			if (nombre!=null && nombre != "") url += "&nombre=" + nombre;	
+			if (tipocodigo!=null && tipocodigo != "") url += "&tipocodigo=" + tipocodigo;	
+			if (tiponombre!=null && tiponombre != "" ) url += "&tiponombre=" + tiponombre;
 
 			return Restangular.allUrl(url).getList();
 		}

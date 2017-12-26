@@ -3,12 +3,16 @@
 app.controller('ModalClaseGastoController', [ "$scope","$rootScope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","claseGastoFactory",
 	function($scope,$rootScope,$uibModalInstance,SweetAlert,$filter, ngTableParams,claseGastoFactory) {
 
-	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
-	$scope.estadoFiltro=null;
+	$scope.nombreFiltro=null;
+	$scope.codigoClaseRegistroFiltro=null;
+	$scope.nombreClaseRegistroFiltro=null;
+	$scope.codigoClaseModificacionFiltro=null;
+	$scope.nombreClaseModificacionFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
 	$scope.detalles=[];
+	$scope.pagina=1;
 	
 	var pagina = 1;
 	
@@ -16,6 +20,7 @@ app.controller('ModalClaseGastoController', [ "$scope","$rootScope","$uibModalIn
 		$scope.data=[];
 		//console.log("Eje.Fis.:"+$rootScope.ejefiscal);
 		claseGastoFactory.traerClases(
+			$scope.pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
 			console.log(resp);
@@ -23,7 +28,24 @@ app.controller('ModalClaseGastoController', [ "$scope","$rootScope","$uibModalIn
 				$scope.data=resp;
 		})
 	};
-	
+
+	$scope.filtrar=function(){
+		$scope.data=[];
+		claseGastoFactory.traerClasesFiltro(
+			$scope.pagina,
+			$rootScope.ejefiscal,
+			$scope.codigoFiltro,
+			$scope.nombreFiltro,
+			$scope.codigoClaseRegistroFiltro,
+			$scope.nombreClaseRegistroFiltro,
+			$scope.codigoClaseModificacionFiltro,
+			$scope.nombreClaseModificacionFiltro
+		).then(function(resp){
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
+
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
@@ -43,22 +65,14 @@ app.controller('ModalClaseGastoController', [ "$scope","$rootScope","$uibModalIn
 			}
 		});
 	});
-	
-	
-	$scope.filtrar=function(){
-		
-		$scope.data=[];
-		claseGastoFactory.traerClasesFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-	
+
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;
-		$scope.estadoFiltro=null;
+		$scope.nombreFiltro=null;
+		$scope.codigoClaseRegistroFiltro=null;
+		$scope.nombreClaseRegistroFiltro=null;
+		$scope.codigoClaseModificacionFiltro=null;
+		$scope.nombreClaseModificacionFiltro=null;
 		
 		$scope.consultar();
 		

@@ -1,13 +1,13 @@
 app.factory("claseGastoFactory", [ "Restangular", function(Restangular) {
 
-	var service = Restangular.service("/administracion");
+	var service = Restangular.service("/administrar");
 
 	return {
 		traerClases: function(
 			pagina,
 			ejercicio
 		) {
-			var url = "administracion/consultar/claseregistrocmcgasto/" +
+			var url = "administrar/consultar/claseregistrocmcgasto/" +
 				"pagina=" + pagina +"&" +
 				"ejerciciofiscalid=" + ejercicio;
 
@@ -17,14 +17,14 @@ app.factory("claseGastoFactory", [ "Restangular", function(Restangular) {
 		traerClasesFiltro: function(
 			pagina,
 			ejercicio,
+			gastocodigo,
+			gastonombre,
 			registrocodigo,
 			registronombre,
 			modificacioncodigo,
-			modificacionnombre,
-			gastocodigo,
-			gastonombre
+			modificacionnombre
 		) {
-			var url = "administracion/consultar/claseregistrocmcgasto/" +
+			var url = "administrar/consultar/claseregistrocmcgasto/" +
 				"pagina=" + pagina +"&" +
 				"ejerciciofiscalid=" + ejercicio;
 
