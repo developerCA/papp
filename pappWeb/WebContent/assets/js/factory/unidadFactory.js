@@ -29,12 +29,15 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 		},
 		
 //** Plaza Empleo
-		traerUnidadesArbolPlazaEmpleado : function(pagina,estructuraorganica,estado) {
-			  return Restangular.allUrl(
-					  "estructuraorganica/consultar/unidadarbolplaza/pagina="+pagina
-					  +"&unidadarbolerganicaid="+estructuraorganica
-					  +"&estado="+estado
-			  ).getList();
+		traerUnidadesArbolPlazaEmpleado : function(pagina,estructuraorganica,estado,codigo) {
+			var url = "estructuraorganica/consultar/unidadarbolplaza/pagina="+pagina
+				+"&unidadarbolerganicaid="+estructuraorganica
+				+"&estado="+estado;
+			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
+
+			return Restangular.allUrl(
+				url
+			).getList();
 		},
 		
 		traerPlazaEmpleadosEditar : function(id, plazaid) {

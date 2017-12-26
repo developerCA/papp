@@ -13,6 +13,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.grado=null;
 	$scope.padre=null;
 	$scope.estado=null;
+	$scope.codigoPEFiltro = null;
 
 	$scope.edicion=false;
 	$scope.nuevoar=false;
@@ -88,6 +89,25 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.estado=null;
 
 		$scope.consultar();
+	};
+
+	$scope.filtro={};
+	$scope.filtro.codigoPEFiltro=null;
+	$scope.filtrarPEmpleados=function(){
+		$scope.data=[];
+		//console.log($scope.filtro.codigoPEFiltro);
+		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionada,'A',$scope.filtro.codigoPEFiltro).then(function(resp){
+			$scope.data = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
+		})
+	}
+	
+	$scope.limpiarPEmpleados=function(){
+		$scope.data=[];
+		$scope.filtro.codigoPEFiltro = null;
+
+		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionada,'A',null).then(function(resp){
+			$scope.data = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
+		})
 	};
 
 	$scope.nuevo=function(){
@@ -244,8 +264,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			    $scope.objetoPlaza=resp.json.unidadarbolplaza;
 			    $scope.objetoPlazaDetail=resp.json.details;
 				for (let obj of $scope.objetoPlazaDetail) {
-					obj.npfechainicioc = Date.parse(obj.npfechainicioc);
-					obj.npfechafinc = Date.parse(obj.npfechafinc);
+					obj.npfechainicioc = toDate(obj.npfechainicioc);
+					obj.npfechafinc = toDate(obj.npfechafinc);
 				}
 			}
 			$scope.estructuraSeleccionada=id;
@@ -453,7 +473,12 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalEspecialidades.html',
 			controller : 'ModalEspecialidadesController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				fuerza : function() {
+					return null;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
@@ -498,9 +523,19 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	    //$scope.objetoPlazaDetail=resp.json.details;
         submit: function (formEmpleadosPlaza) {
             var firstError = null;
-    		let obj = $scope.objetoPlaza;
-    		obj.details = $scope.objetoPlazaDetail;
-        	unidadFactory.guardarEmpleadosPlaza(obj).then(function(resp){
+    		let obj = Object.assign({}, $scope.objetoPlaza);
+    		//obj.details = $scope.objetoPlazaDetail.slice();
+    		obj.details = [];
+    		for (var i = 0; i < $scope.objetoPlazaDetail.length; i++) {
+    			obj.details[i] = Object.assign({}, $scope.objetoPlazaDetail[i]);
+    			obj.details[i].npfechainicioc = toStringDate(obj.details[i].npfechainicioc);
+    			//console.log("npfechainicioc:", i, obj.details[i].npfechainicioc);
+    			obj.details[i].npfechafinc = toStringDate(obj.details[i].npfechafinc);
+			}
+    		//return;
+    		console.log("DETALLES FUENTE:", $scope.objetoPlazaDetail);
+    		console.log("DETALLES DESTINO:", obj.details);
+    		unidadFactory.guardarEmpleadosPlaza(obj).then(function(resp){
         		console.log(resp);
     			 if (resp.estado){
     				 formEmpleadosPlaza.$setPristine(true);
