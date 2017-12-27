@@ -195,7 +195,7 @@ public class ConsultasUtil {
 	public static JSONObject consultaOrdengastoPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
 		String campo="";
 		OrdengastoTO ordengastoTO=new OrdengastoTO();
-		CertificacionTO certificacionTO=new CertificacionTO();
+		//CertificacionTO certificacionTO=new CertificacionTO();
 		try{
 			int pagina=1;
 			if(parameters.get("pagina")!=null)		
@@ -227,9 +227,22 @@ public class ConsultasUtil {
 				mensajes.setMsg(MensajesWeb.getString("error.fechaDesde"));
 				mensajes.setType(MensajesWeb.getString("mensaje.advertencia"));
 			}
+			Double valorInicial=null;
+			Double valorFinal=null;
+			if(parameters.get("valorinicial")!=null)
+				valorInicial=Double.valueOf(parameters.get("valorinicial"));
+			if(parameters.get("valorfinal")!=null)
+				valorFinal=Double.valueOf(parameters.get("valorfinal"));
+			if(parameters.get("valorinicial")!=null && parameters.get("valorfinal")==null)
+				valorFinal=(1000000.0);
+			if(parameters.get("valorfinal")!=null && parameters.get("valorinicial")==null){
+				valorInicial=(0.0);
+			}
 			if(mensajes.getMsg()==null){
 				if(fechaInicial!=null)
 					ordengastoTO.setRangoFechacreacion(new RangeValueTO<Date>(fechaInicial,fechaFinal));
+				if(valorInicial!=null && valorFinal!=null && (valorInicial>0 || valorFinal>0))
+					ordengastoTO.setRangoValortotal(new RangeValueTO<Double>(valorInicial,valorFinal));
 				if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 					ordengastoTO.setCodigo(parameters.get("codigo"));
 				if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
@@ -239,9 +252,9 @@ public class ConsultasUtil {
 				if(parameters.get("ordengastoejerfiscalid")!=null && !parameters.get("ordengastoejerfiscalid").equals(""))
 					ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ordengastoejerfiscalid")));
 				if(parameters.get("certificacion")!=null && !parameters.get("certificacion").equals("")){
-					certificacionTO.setCodigo(parameters.get("certificacion"));
+					ordengastoTO.setNpcertificacion(parameters.get("certificacion"));
 				}
-				ordengastoTO.setCertificacion(certificacionTO);
+				//ordengastoTO.setCertificacion(certificacionTO);
 				SearchResultTO<OrdengastoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastoPaginado(ordengastoTO);
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 				HashMap<String, String>  totalMap=new HashMap<String, String>();
