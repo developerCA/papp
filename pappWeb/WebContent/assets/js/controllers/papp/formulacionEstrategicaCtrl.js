@@ -263,6 +263,9 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 					$scope.objetoPy.tipo="AN";
 					$scope.editarId=$scope.objetoPy.id;
 					$scope.objetolistaPy=resp.json.proyectometa;
+					for (var i = 0; i < $scope.objetolistaPy.length; i++) {
+						$scope.objetolistaPy[i].id.metaejerciciofiscalid = $scope.objetolistaPy[i].id.metaejerciciofiscalid.toString();
+					}
 					$scope.nodeTipo="PY";
 				}
 				$scope.guardar=true;
