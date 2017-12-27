@@ -784,7 +784,7 @@ public class PlanificacionController {
 			//Proyecto
 			else if(clase.equals("proyecto")){
 				ProyectoTO proyectoTO = UtilSession.planificacionServicio.transObtenerProyectoTO(id);
-				log.println("fecha inicio: " + proyectoTO.getFechainicio());
+				log.println("fecha inicio@@@@: " + proyectoTO.getFechainicio());
 				log.println("fecha fin: " + proyectoTO.getFechafin());
 				if(proyectoTO.getFechainicio()!=null)
 					proyectoTO.setNpFechainicio(UtilGeneral.parseDateToString(proyectoTO.getFechainicio()));
@@ -798,7 +798,7 @@ public class PlanificacionController {
 				ProyectometaTO proyectometaTO=new ProyectometaTO();
 				ProyectometaID proyectometaID=new ProyectometaID();
 				proyectometaID.setId(proyectoTO.getId());
-				proyectometaID.setMetaejerciciofiscalid(proyectoTO.getProyectoejerciciofiscalid());
+				//proyectometaID.setMetaejerciciofiscalid(proyectoTO.getProyectoejerciciofiscalid());
 				proyectometaTO.setId(proyectometaID);
 				Collection<ProyectometaTO> proyectometaTOs=UtilSession.planificacionServicio.transObtenerProyectometa(proyectometaTO);
 				jsonObject.put("proyectometa", (JSONArray)JSONSerializer.toJSON(proyectometaTOs,proyectometaTO.getJsonConfig()));

@@ -97,7 +97,7 @@ public class ConsultasUtil {
 				if(valorInicial!=null && valorFinal!=null && (valorInicial>0 || valorFinal>0))
 					certificacionTO.setRangoValortotal(new RangeValueTO<Double>(valorInicial,valorFinal));
 				if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
-					certificacionTO.setCodigo(parameters.get("codigo"));
+					certificacionTO.setCodigo(parameters.get("codigo").replaceAll("$", "%"));
 				if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 					certificacionTO.setEstado(parameters.get("estado"));
 				if(parameters.get("numprecompromiso")!=null && !parameters.get("numprecompromiso").equals(""))
