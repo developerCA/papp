@@ -81,7 +81,7 @@ public class PlanificacionController {
 	
 	@RequestMapping(value = "/{clase}", method = RequestMethod.POST)
 	public Respuesta grabar(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
-		log.println("entra al metodo grabar**: " + clase + " - " + objeto);
+		log.println("entra al metodo grabar*****8: " + clase + " - " + objeto);
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
 		Gson gson = new Gson();
@@ -278,6 +278,11 @@ public class PlanificacionController {
 			else if(clase.equals("actividad")){
 				ActividadTO actividadTO = gson.fromJson(new StringReader(objeto), ActividadTO.class);
 				accion = (actividadTO.getId()==null)?"crear":"actualizar";
+				log.println("va a grabar actividad");
+				for(NivelactividadTO nivel: actividadTO.getNivelactividadTOs()) {
+					log.println("unidad " + nivel.getNpNombreunidad());
+					log.println("bandera " + nivel.getNpbandera());
+				}
 				UtilSession.planificacionServicio.transCrearModificarActividad(actividadTO);
 				id=actividadTO.getId().toString();
 				jsonObject.put("actividad", (JSONObject)JSONSerializer.toJSON(actividadTO,actividadTO.getJsonConfig()));
