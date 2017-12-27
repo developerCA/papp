@@ -18,7 +18,7 @@ app.factory("ejercicioFiscalFactory", [ "Restangular", function(Restangular) {
 
 			if(anio!=null && anio != "") url += "&anio=" + anio;			
 			if(estado!=null && estado != "" ) url += "&estado=" + estado;
-			console.log(url);
+			//console.log(url);
 			return Restangular.allUrl(url).getList();
 			  
 		},

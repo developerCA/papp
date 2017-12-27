@@ -556,11 +556,11 @@
 								<div class="form-group"
 								    ng-class="{'has-error':FormProyecto.tipo.$dirty && FormProyecto.tipo.$invalid, 'has-success':FormProyecto.tipo.$valid}">
 								    <label class="control-label">
-								        Tipo (NO RETORNADO DEL SERVICIO)
+								        Tipo
 								        <span class="symbol required"></span>
 								    </label>
 								    <select class="form-control" name="tipo"
-								        ng-model="objetoPy.tipo">
+								        ng-model="objetoPy.tipo" ng-disabled="true">
 								        <option value="ME">Mensual</option>
 								        <option value="BI">Bimensual</option>
 								        <option value="TM">Trimestral</option>
@@ -736,7 +736,7 @@
 								    </label>
 								    <input type="text" placeholder="Seleccione una Indicador"
 								        class="form-control" name="npIndicadornombre" ng-model="objetoPy.npIndicadornombre"
-								        required ng-disabled="true">
+								        ng-disabled="true">
 								</div>
 								
 								<div class="form-group"
@@ -787,14 +787,14 @@
 														<td>
 															<a uib-tooltip="Eliminar"
 																class="btn btn-sm btn-danger"
-																ng-click="removerDetalle($index)">
+																ng-click="removerDetallePy($index)">
 																<i class="fa fa-trash"></i>
 															</a>
 														</td>
 														<td>
 															<div class="input-group col-md-12">
-															    <select class="form-control" name="anio"
-															        ng-model="obj.anio">
+															    <select class="form-control" name="metaejerciciofiscalid"
+															        ng-model="obj.id.metaejerciciofiscalid">
 															        <option value="">Seleccione el periodo fiscal</option>
 															        <option ng-repeat="ef in ejerciosFiscales" value="{{ef.id}}">{{ef.anio}}</option>
 															    </select>

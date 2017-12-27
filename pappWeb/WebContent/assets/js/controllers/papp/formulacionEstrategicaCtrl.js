@@ -177,6 +177,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				if (resp.estado) {
 					$scope.objetoPy=resp.json.proyecto;
 					$scope.objetoPy.padre=node.npNivelid;
+					$scope.objetoPy.tipo="AN";
 					$scope.objetolistaPy=[];
 					$scope.editarId=$scope.objetoPy.id;
 					$scope.nodeTipo = "PY";
@@ -231,7 +232,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				//console.log(resp.json);
 				if (resp.estado) {
 					$scope.objetoPr=resp.json.programa;
-					$scope.editarId=$scope.objeto.id;
+					$scope.editarId=$scope.objetoPr.id;
 					$scope.nodeTipo="PR";
 				}
 				$scope.guardar=true;
@@ -244,7 +245,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				//console.log(resp.json);
 				if (resp.estado) {
 					$scope.objetoSp=resp.json.subprograma;
-					$scope.editarId=$scope.objeto.id;
+					$scope.editarId=$scope.objetoSp.id;
 					$scope.nodeTipo="SP";
 				}
 				$scope.guardar=true;
@@ -259,8 +260,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 					$scope.objetoPy=resp.json.proyecto;
 					$scope.objetoPy.npFechainicio = toDate($scope.objeto.npFechainicio);
 					$scope.objetoPy.npFechafin = toDate($scope.objeto.npFechafin);
-
-					$scope.editarId=$scope.objeto.id;
+					$scope.objetoPy.tipo="AN";
+					$scope.editarId=$scope.objetoPy.id;
 					$scope.objetolistaPy=resp.json.proyectometa;
 					$scope.nodeTipo="PY";
 				}
@@ -274,7 +275,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				console.log(resp.json);
 				if (resp.estado) {
 					$scope.objetoAc=resp.json.actividad;
-					$scope.editarId=$scope.objeto.id;
+					$scope.editarId=$scope.objetoAc.id;
 					$scope.objetolistaAc=resp.json.nivelactividad;
 					$scope.nodeTipo="AC";
 				}
@@ -288,7 +289,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				console.log(resp.json);
 				if (resp.estado) {
 					$scope.objetoSa=resp.json.subactividad;
-					$scope.editarId=$scope.objeto.id;
+					$scope.editarId=$scope.objetoSa.id;
 					$scope.nodeTipo="SA";
 				}
 				$scope.guardar=true;
@@ -302,14 +303,13 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		if ($scope.objetolistaPy == undefined) {
 			$scope.objetolistaPy = [];
 		}
-		console.log($scope.objetolistaPy);
+		console.log($scope.editarId);
 		var obj={
 			id: {
-				id: $scope.editarId,
-				metaejerciciofiscalid: $rootScope.ejefiscal
+				id: null, //$scope.editarId,
+				metaejerciciofiscalid: null
 			},
 			proyectoid: $scope.editarId,
-			ano: null,
 			descripcion: null
 		};
 		$scope.objetolistaPy.push(obj);
@@ -594,7 +594,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		if ($scope.ejerciosFiscales.length != 0) return;
 		ejercicioFiscalFactory.traerEjerciciosFiltro(pagina, null, "A")
 		.then(function(resp) {
-			console.log(resp);
+			//console.log(resp);
 			$scope.ejerciosFiscales=resp;
 		});
 	}
