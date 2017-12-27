@@ -528,7 +528,11 @@ public class ConsultasUtil {
 			if(parameters.get("unidad")!=null && !parameters.get("unidad").equals(""))
 				certificacionOrdenVO.setCertificacionunidadid(Long.valueOf(parameters.get("unidad")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
-				certificacionOrdenVO.setEstado(parameters.get("tipo"));
+				certificacionOrdenVO.setEstado(parameters.get("estado"));
+			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
+				certificacionOrdenVO.setCodigo(parameters.get("codigo"));
+			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
+				certificacionOrdenVO.setDescripcion(parameters.get("descripcion"));
 			Collection<CertificacionOrdenVO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionOrden(certificacionOrdenVO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
@@ -549,7 +553,12 @@ public class ConsultasUtil {
 			if(parameters.get("unidad")!=null && !parameters.get("unidad").equals(""))
 				gastoDevengoVO.setOrdengastounidadid(Long.valueOf(parameters.get("unidad")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
-				gastoDevengoVO.setEstado(parameters.get("tipo"));
+				gastoDevengoVO.setEstado(parameters.get("estado"));
+			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
+				gastoDevengoVO.setCodigo(parameters.get("codigo"));
+			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
+				gastoDevengoVO.setDescripcion(parameters.get("descripcion"));
+
 			Collection<GastoDevengoVO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastodevengo(gastoDevengoVO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());

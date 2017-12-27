@@ -711,43 +711,20 @@ public class EjecucionController {
 		log.println("devuelve**** " + jsonObject.toString());
 		return respuesta;	
 	}
-
-	@RequestMapping(value = "/consultar/{clase}/{parametro}", method = RequestMethod.GET)
-	public Respuesta consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
-		log.println("ingresa a consultar: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
-		JSONObject jsonObject=new JSONObject();
+	
+	@RequestMapping(value = "/consultar/{clase}", method = RequestMethod.POST)
+	public String consultarpost(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
+		log.println("entra al metodo grabar: " + objeto);
 		Mensajes mensajes=new Mensajes();
-		Respuesta respuesta=new Respuesta();
-		try{
-			String[] pares = parametro.split("&");
-			Map<String, String> parameters = new HashMap<String, String>();
-			for(String pare : pares) {
-			    String[] nameAndValue = pare.split("=");
-			    parameters.put(nameAndValue[0], nameAndValue[1]);
-			}
-			log.println("pagina** " + parameters.get("pagina"));
-			log.println("filas: " + parameters.get("filas"));
-			
+		Gson gson = new Gson();
+		JSONObject jsonObject=new JSONObject();
+		try {
+			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			//Certificacion
 			if(clase.equals("certificacion")){
 				jsonObject=ConsultasUtil.consultaCertificacionPaginado(parameters, jsonObject, mensajes);
 			}
 			
-			//Subitemunidad
-			if(clase.equals("subitemunidad")){
-				jsonObject=ConsultasUtil.consultaListasubitemunidad(parameters, jsonObject, mensajes);
-			}
-
-			//Sibiteminfo
-			if(clase.equals("subitemunidadinfo")){
-				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(Long.valueOf(parameters.get("nivelactividad")), jsonObject, mensajes);
-			}
-			
-			//Subtareainfo
-			if(clase.equals("subitareainfo")){
-				jsonObject=ConsultasUtil.consultaInformacionsubtarea(Long.valueOf(parameters.get("nivelactividad")), jsonObject, mensajes);
-			}
-
 			//Orden de gasto
 			if(clase.equals("ordengasto")){
 				jsonObject=ConsultasUtil.consultaOrdengastoPaginado(parameters, jsonObject, mensajes);
@@ -774,7 +751,52 @@ public class EjecucionController {
 				//jsonObject=ConsultasUtil.consultaOrdengastoBusquedaPaginado(parameters, jsonObject, mensajes);
 				jsonObject=ConsultasUtil.ordenesgastobusqueda(parameters, jsonObject);
 			}
+	} catch (Exception e) {
+			e.printStackTrace();
+			log.println("error grabar");
+			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			//throw new MyException(e);
+		}
+		log.println("existe mensaje: " + mensajes.getMsg());
+		if(mensajes.getMsg()!=null)
+			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		log.println("json retornado: " + jsonObject.toString());
+		return jsonObject.toString();	
+	}
+
+
+	@RequestMapping(value = "/consultar/{clase}/{parametro}", method = RequestMethod.GET)
+	public Respuesta consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro) {
+		log.println("ingresa a consultar: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
+		JSONObject jsonObject=new JSONObject();
+		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
+		try{
+			String[] pares = parametro.split("&");
+			Map<String, String> parameters = new HashMap<String, String>();
+			for(String pare : pares) {
+			    String[] nameAndValue = pare.split("=");
+			    parameters.put(nameAndValue[0], nameAndValue[1]);
+			}
+			log.println("pagina** " + parameters.get("pagina"));
+			log.println("filas: " + parameters.get("filas"));
 			
+			//Subitemunidad
+			if(clase.equals("subitemunidad")){
+				jsonObject=ConsultasUtil.consultaListasubitemunidad(parameters, jsonObject, mensajes);
+			}
+
+			//Sibiteminfo
+			if(clase.equals("subitemunidadinfo")){
+				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(Long.valueOf(parameters.get("nivelactividad")), jsonObject, mensajes);
+			}
+			
+			//Subtareainfo
+			if(clase.equals("subitareainfo")){
+				jsonObject=ConsultasUtil.consultaInformacionsubtarea(Long.valueOf(parameters.get("nivelactividad")), jsonObject, mensajes);
+			}
+
 			//subitemcertificado
 			if(clase.equals("subitemcertificado")){
 				CertificacionlineaTO certificacionlineaTO=new CertificacionlineaTO();
