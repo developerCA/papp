@@ -793,9 +793,11 @@
 														</td>
 														<td>
 															<div class="input-group col-md-12">
-																<input type="text" placeholder="Escriba un a&ntilde;o"
-																	class="form-control" name="ano"
-																	ng-model="obj.ano" />
+															    <select class="form-control" name="anio"
+															        ng-model="obj.anio">
+															        <option value="">Seleccione el periodo fiscal</option>
+															        <option ng-repeat="ef in ejerciosFiscales" value="{{ef.id}}">{{ef.anio}}</option>
+															    </select>
 															</div>
 														</td>
 														<td>
@@ -1009,7 +1011,7 @@
 								        Listo
 								    </span>
 								</div>
-								
+<!--
 								<div class="form-group"
 								    ng-class="{'has-error':FormActividad.npUnidadmedidacodigo.$dirty && FormActividad.npUnidadmedidacodigo.$invalid, 'has-success':FormActividad.npUnidadmedidacodigo.$valid}">
 								    <label class="control-label">
@@ -1125,6 +1127,7 @@
 								        Listo
 								    </span>
 								</div>
+-->
 							</div>
 						</div>
 

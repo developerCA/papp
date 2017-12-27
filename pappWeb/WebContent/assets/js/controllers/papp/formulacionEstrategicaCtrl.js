@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","formulacionEstrategicaFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, formulacionEstrategicaFactory) {
+app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","formulacionEstrategicaFactory","ejercicioFiscalFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, formulacionEstrategicaFactory,ejercicioFiscalFactory) {
 
 	$scope.dateOptions = {
 	    changeYear: true,
@@ -12,6 +12,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	$scope.edicion=false;
 	$scope.guardar=false;
 	$scope.nuevoar=false;
+	$scope.ejerciosFiscales=[];
 	$scope.objeto={};
 	$scope.objetolistaPy=[];
 	$scope.objetolistaAc=[];
@@ -25,7 +26,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
-			//console.log(resp);
+			console.log(resp);
 			if (resp.meta) {
 				$scope.data = resp;
 				for (var i = 0; i < $scope.data.length; i++) {
@@ -35,6 +36,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				
 			}
 		})
+		cargarEF();
 	};
 
 	$scope.cargarHijos=function(node){
@@ -586,6 +588,15 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			default:
 	        	return "auto";
 		}
+	}
+
+	function cargarEF() {
+		if ($scope.ejerciosFiscales.length != 0) return;
+		ejercicioFiscalFactory.traerEjerciciosFiltro(pagina, null, "A")
+		.then(function(resp) {
+			console.log(resp);
+			$scope.ejerciosFiscales=resp;
+		});
 	}
 
 	function toDate(fuente) {
