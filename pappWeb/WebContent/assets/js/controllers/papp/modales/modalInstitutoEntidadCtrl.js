@@ -1,7 +1,7 @@
 'use strict';
  
-app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","institutoEntidadFactory",
-	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,institutoEntidadFactory) {
+app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance","ejefiscal","SweetAlert","$filter", "ngTableParams","institutoEntidadFactory",
+	function($scope,$uibModalInstance,ejefiscal,SweetAlert,$filter, ngTableParams,institutoEntidadFactory) {
 
 		$scope.codigoInstitucionFiltro=null;
 		$scope.nombreInstitucionFiltro=null;
@@ -18,13 +18,13 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 		$scope.filtrar=function(){
 			$scope.data=[];
 			institutoEntidadFactory.traerInstitutoEntidadFiltro(
-					pagina,
-					$scope.codigoInstitucionFiltro,
-					$scope.nombreInstitucionFiltro,
-					$scope.codigoEntidadFiltro,
-					$scope.nombreEntidadFiltro,
-					$scope.ejercicioFiscalFiltro,
-					$scope.estadoFiltro
+				pagina,
+				$scope.codigoInstitucionFiltro,
+				$scope.nombreInstitucionFiltro,
+				$scope.codigoEntidadFiltro,
+				$scope.nombreEntidadFiltro,
+				($scope.ejercicioFiscalFiltro==null? ejefiscal: $scope.ejercicioFiscalFiltro),
+				$scope.estadoFiltro
 			).then(function(resp){
 				console.log(resp);
 				if (resp.meta)
@@ -52,7 +52,10 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 
 		$scope.consultar=function(){
 			$scope.data=[];
-			institutoEntidadFactory.traerInstitutoEntidad(pagina).then(function(resp){
+			institutoEntidadFactory.traerInstitutoEntidad(
+				pagina,
+				ejefiscal
+			).then(function(resp){
 				if (resp.meta)
 					console.log(resp);
 					$scope.data=resp;				

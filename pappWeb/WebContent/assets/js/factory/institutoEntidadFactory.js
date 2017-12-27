@@ -4,8 +4,13 @@ app.factory("institutoEntidadFactory", [ "Restangular", function(Restangular) {
 
 	return {
 
-		traerInstitutoEntidad : function(pagina) {
-			  return Restangular.allUrl("estructuraorganica/consultar/institutoentidad/pagina="+pagina+"&estado=A&filas=25").getList();
+		traerInstitutoEntidad : function(pagina,ejercicoFiscal) {
+			return Restangular.allUrl("estructuraorganica/consultar/institutoentidad/" +
+				"pagina=" + pagina +
+				"&estado=A" +
+				"&filas=25" +
+				"&ejerciciofiscalid=" + ejercicoFiscal
+			).getList();
 		},
 		
 		traerInstitutoEntidadFiltro : function(pagina,codigoInstitucion,nombreInstitucion,codigoEntidad,nombreEntidad,ejercicoFiscal,estado) {
@@ -15,7 +20,7 @@ app.factory("institutoEntidadFactory", [ "Restangular", function(Restangular) {
 			if(nombreInstitucion!=null && nombreInstitucion != "") url += "&nombreInstitucion=" + nombreInstitucion;	
 			if(codigoEntidad!=null && codigoEntidad != "") url += "&codigo=" + codigoEntidad;	
 			if(nombreEntidad!=null && nombreEntidad != "") url += "&nombre=" + nombreEntidad;	
-			if(ejercicoFiscal!=null && ejercicoFiscal != "") url += "&ejercicoFiscal=" + ejercicoFiscal;	
+			if(ejercicoFiscal!=null && ejercicoFiscal != "") url += "&ejerciciofiscalid=" + ejercicoFiscal;	
 			if(estado!=null && estado != "") url += "&estado=" + estado;
 
 			console.log("FILTRO: "+url);
