@@ -552,14 +552,18 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
             }
         },
         reset: function (form) {
-            $scope.myModel = angular.copy($scope.master);
-            form.$setPristine(true);
+            //$scope.myModel = angular.copy($scope.master);
+            //form.$setPristine(true);
             $scope.edicion=false;
             $scope.edicionSubPrograma=false;
             $scope.edicionProyecto=false;
             $scope.edicionActividad=false;
             $scope.edicionSubActividad=false;
-            $scope.objeto={};
+			$scope.objetoPr={};
+			$scope.objetoSp={};
+			$scope.objetoPy={};
+			$scope.objetoAc={};
+			$scope.objetoPy={};
         }
     };
 

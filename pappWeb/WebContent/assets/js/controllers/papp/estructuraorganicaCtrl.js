@@ -555,6 +555,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     		});
         },
         reset: function (formEmpleadosPlaza) {
+        	$scope.objetoPlaza={};
+        	$scope.objetoPlazaDetail=[];
         	$scope.limpiarEmpleadosPlaza();
         }
     };
