@@ -258,8 +258,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				console.log(resp.json);
 				if (resp.estado) {
 					$scope.objetoPy=resp.json.proyecto;
-					$scope.objetoPy.npFechainicio = toDate($scope.objeto.npFechainicio);
-					$scope.objetoPy.npFechafin = toDate($scope.objeto.npFechafin);
+					$scope.objetoPy.npFechainicio = toDate($scope.objetoPy.npFechainicio);
+					$scope.objetoPy.npFechafin = toDate($scope.objetoPy.npFechafin);
 					$scope.objetoPy.tipo="AN";
 					$scope.editarId=$scope.objetoPy.id;
 					$scope.objetolistaPy=resp.json.proyectometa;
@@ -603,7 +603,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		try {
 			var parts = fuente.split('/');
 		} catch (err) {
-			return new Date();
+			return null;
 		}
 		//console.log(parts, parts[2]*1,parts[1]-1,parts[0]*1);
 		return new Date(parts[2]*1,parts[1]-1,parts[0]*1, 0, 0, 0, 0); 
