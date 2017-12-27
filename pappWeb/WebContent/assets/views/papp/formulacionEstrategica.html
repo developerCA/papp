@@ -561,11 +561,6 @@
 								    </label>
 								    <select class="form-control" name="tipo"
 								        ng-model="objetoPy.tipo" ng-disabled="true">
-								        <option value="ME">Mensual</option>
-								        <option value="BI">Bimensual</option>
-								        <option value="TM">Trimestral</option>
-								        <option value="CM">Cuatrimestral</option>
-								        <option value="SE">Semestral</option>
 								        <option value="AN" ng-selected="selected">Anual</option>
 								    </select>
 								    <span class="error text-small block"
@@ -585,8 +580,8 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un presupuesto total"
-								        class="form-control" name="presupuestototal" ng-model="objetoPy.presupuestototal" ng-pattern="/^[0-9]*$/"
-								        required>
+								        class="form-control" name="presupuestototal" ng-model="objetoPy.presupuestototal"
+								        required numericOnly style="text-align:right;" format="currency">
 								    <span class="error text-small block"
 								        ng-if="FormProyecto.presupuestototal.$dirty && FormProyecto.presupuestototal.$invalid">
 								        Incorrecto
@@ -604,8 +599,8 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un presupuesto inicial"
-								        class="form-control" name="presupuestoinicial" ng-model="objetoPy.presupuestoinicial" ng-pattern="/^[0-9]*$/"
-								        required>
+								        class="form-control" name="presupuestoinicial" ng-model="objetoPy.presupuestoinicial"
+								        required numericOnly style="text-align:right;" format="currency">
 								    <span class="error text-small block"
 								        ng-if="FormProyecto.presupuestoinicial.$dirty && FormProyecto.presupuestoinicial.$invalid">
 								        Incorrecto
@@ -623,8 +618,8 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un presupuesto planificado"
-								        class="form-control" name="presupuestoplanificado" ng-model="objetoPy.presupuestoplanificado" ng-pattern="/^[0-9]*$/"
-								        required>
+								        class="form-control" name="presupuestoplanificado" ng-model="objetoPy.presupuestoplanificado"
+								        required numericOnly style="text-align:right;" format="currency">
 								    <span class="error text-small block"
 								        ng-if="FormProyecto.presupuestoplanificado.$dirty && FormProyecto.presupuestoplanificado.$invalid">
 								        Incorrecto
@@ -784,14 +779,14 @@
 														<th>Descripci&oacute;n</th>
 													</tr>
 													<tr ng-repeat="obj in objetolistaPy">
-														<td>
+														<td width="1%">
 															<a uib-tooltip="Eliminar"
 																class="btn btn-sm btn-danger"
 																ng-click="removerDetallePy($index)">
 																<i class="fa fa-trash"></i>
 															</a>
 														</td>
-														<td>
+														<td width="20%">
 															<div class="input-group col-md-12">
 															    <select class="form-control" name="metaejerciciofiscalid"
 															        ng-model="obj.id.metaejerciciofiscalid">
@@ -799,7 +794,7 @@
 															        <option ng-repeat="ef in ejerciosFiscales" value="{{ef.id}}">{{ef.anio}}</option>
 															    </select>
 															</div>
-														</td>
+														</td width="79%">
 														<td>
 															<div class="input-group col-md-12">
 																<input type="text" placeholder="Escriba un Descripci&oacute;n"

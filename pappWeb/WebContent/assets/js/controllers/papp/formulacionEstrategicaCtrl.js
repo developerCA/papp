@@ -258,11 +258,14 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				console.log(resp.json);
 				if (resp.estado) {
 					$scope.objetoPy=resp.json.proyecto;
-					$scope.objetoPy.npFechainicio = toDate($scope.objeto.npFechainicio);
-					$scope.objetoPy.npFechafin = toDate($scope.objeto.npFechafin);
+					$scope.objetoPy.npFechainicio = toDate($scope.objetoPy.npFechainicio);
+					$scope.objetoPy.npFechafin = toDate($scope.objetoPy.npFechafin);
 					$scope.objetoPy.tipo="AN";
 					$scope.editarId=$scope.objetoPy.id;
 					$scope.objetolistaPy=resp.json.proyectometa;
+					for (var i = 0; i < $scope.objetolistaPy.length; i++) {
+						$scope.objetolistaPy[i].id.metaejerciciofiscalid = $scope.objetolistaPy[i].id.metaejerciciofiscalid.toString();
+					}
 					$scope.nodeTipo="PY";
 				}
 				$scope.guardar=true;
@@ -549,14 +552,18 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
             }
         },
         reset: function (form) {
-            $scope.myModel = angular.copy($scope.master);
-            form.$setPristine(true);
+            //$scope.myModel = angular.copy($scope.master);
+            //form.$setPristine(true);
             $scope.edicion=false;
             $scope.edicionSubPrograma=false;
             $scope.edicionProyecto=false;
             $scope.edicionActividad=false;
             $scope.edicionSubActividad=false;
-            $scope.objeto={};
+			$scope.objetoPr={};
+			$scope.objetoSp={};
+			$scope.objetoPy={};
+			$scope.objetoAc={};
+			$scope.objetoPy={};
         }
     };
 
@@ -603,7 +610,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		try {
 			var parts = fuente.split('/');
 		} catch (err) {
-			return new Date();
+			return null;
 		}
 		//console.log(parts, parts[2]*1,parts[1]-1,parts[0]*1);
 		return new Date(parts[2]*1,parts[1]-1,parts[0]*1, 0, 0, 0, 0); 
