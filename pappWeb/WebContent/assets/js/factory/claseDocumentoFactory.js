@@ -1,5 +1,4 @@
-app.factory("claseGastoFactory", [ "Restangular", function(Restangular) {
-
+app.factory("claseDocumentoFactory", [ "Restangular", function(Restangular) {
 	var service = Restangular.service("/administrar");
 
 	return {

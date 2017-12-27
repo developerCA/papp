@@ -3,9 +3,11 @@
 app.controller('ModalClaseDocumentoController', [ "$scope","$rootScope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","claseDocumentoFactory",
 	function($scope,$rootScope,$uibModalInstance,SweetAlert,$filter, ngTableParams,claseDocumentoFactory) {
 
-	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
-	$scope.estadoFiltro=null;
+	$scope.nombreFiltro=null;
+	$scope.codigoTipoFiltro=null;
+	$scope.nombreTipoFiltro=null;
+
 	$scope.edicion=false;
 	$scope.objeto={};
 	$scope.detalles=[];
@@ -16,15 +18,31 @@ app.controller('ModalClaseDocumentoController', [ "$scope","$rootScope","$uibMod
 		$scope.data=[];
 		//console.log("Eje.Fis.:"+$rootScope.ejefiscal);
 		claseDocumentoFactory.traerClases(
+			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
-			//console.log(resp["0"].data);
+			console.log(resp);
 			//console.log(resp["0"].data.claseregistrocmcdocumento);
 			if (resp.meta)
-				$scope.data=resp["0"].data.tipodocumentoclasedocumento;
+				$scope.data=resp;
 		})
 	};
-	
+
+	$scope.filtrar=function(){
+		$scope.data=[];
+		claseDocumentoFactory.traerClasesFiltro(
+			pagina,
+			$rootScope.ejefiscal,
+			$scope.codigoFiltro,
+			$scope.nombreFiltro,
+			$scope.codigoTipoFiltro,
+			$scope.nombreTipoFiltro
+		).then(function(resp){
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
+
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
@@ -45,24 +63,13 @@ app.controller('ModalClaseDocumentoController', [ "$scope","$rootScope","$uibMod
 		});
 	});
 	
-	
-	$scope.filtrar=function(){
-		
-		$scope.data=[];
-		claseDocumentoFactory.traerClasesFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-	
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;
-		$scope.estadoFiltro=null;
-		
+		$scope.nombreFiltro=null;
+		$scope.codigoTipoFiltro=null;
+		$scope.nombreTipoFiltro=null;
+
 		$scope.consultar();
-		
 	};
 
 	$scope.seleccionar=function(obj){
