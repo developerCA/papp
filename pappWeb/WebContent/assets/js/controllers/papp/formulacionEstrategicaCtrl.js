@@ -324,7 +324,11 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	}
 
 	$scope.removerDetalleAc=function(index){
-		$scope.objetolistaAc.splice(index,1);
+		formulacionEstrategicaFactory.eliminarActividadUnidad(
+			$scope.objetolistaAc[index].id
+		).then(function(resp){
+			$scope.objetolistaAc.splice(index,1);
+		});
 	}
 
 	$scope.abrirObjetivoFuerzas = function() {

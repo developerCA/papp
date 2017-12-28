@@ -684,8 +684,7 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un indicador general"
-								        class="form-control" name="indicadorgeneral" ng-model="objetoPy.indicadorgeneral"
-								        required>
+								        class="form-control" name="indicadorgeneral" ng-model="objetoPy.indicadorgeneral">
 								    <span class="error text-small block"
 								        ng-if="FormProyecto.indicadorgeneral.$dirty && FormProyecto.indicadorgeneral.$invalid">
 								        Incorrecto
@@ -1151,7 +1150,7 @@
 														<td>
 															<a uib-tooltip="Eliminar"
 																class="btn btn-sm btn-danger"
-																ng-click="removerDetalle($index)">
+																ng-click="removerDetalleAc($index)">
 																<i class="fa fa-trash"></i>
 															</a>
 														</td>
