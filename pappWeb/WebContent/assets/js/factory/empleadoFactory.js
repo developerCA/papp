@@ -5,18 +5,18 @@ app.factory("empleadosFactory", [ "Restangular", function(Restangular) {
 
 	return {
 		traerEmpleados : function(pagina) {
-			  return Restangular.allUrl("administrar/consultar/empleado/pagina="+pagina).getList();
+			  return Restangular.allUrl("administrar/consultar/empleado/pagina="+pagina+"&filas=10").customGET();
 		},
 		
 		traerEmpleadosFiltro : function(pagina,codigo,nombre,tipo,estado) {
-			var url = "administrar/consultar/empleado/pagina="+pagina;
+			var url = "administrar/consultar/empleado/pagina="+pagina+"&filas=10";
 
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;
 			if(nombre!=null && nombre != "") url += "&nombremostrado=" + nombre;
 			if(tipo!=null && tipo != "") url += "&emptipo=" + tipo;
 			if(estado!=null && estado != "") url += "&estado=" + estado;
 
-			return Restangular.allUrl(url).getList();
+			return Restangular.allUrl(url).customGET();
 		},
 		
 		traerEmpleadosEditar : function(id) {

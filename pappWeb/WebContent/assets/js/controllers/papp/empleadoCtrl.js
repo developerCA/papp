@@ -17,20 +17,60 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	$scope.objetoEspecialidad={};
 	$scope.objetoClasificacion={};
 	$scope.fuerza=null;
+	$scope.data=[];
 
-	var pagina = 1;
+    $scope.pagina = 1;
+    $scope.aplicafiltro=false;
 
 	$scope.consultar=function(){
-		$scope.data=[];
-		empleadosFactory.traerEmpleados(pagina).then(function(resp){
-			console.log(resp);
-			if (resp.meta)
-				$scope.data=resp;
+		empleadosFactory.traerEmpleados(
+			$scope.pagina
+		).then(function(resp){
+//			console.log(resp);
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
+//			console.log($scope.data);
 		})
 	};
+
+    $scope.pageChanged = function() {
+        if ($scope.aplicafiltro){
+        	$scope.filtrarUnico();
+        }else{
+        	$scope.consultar();	
+        }
+    };  
+    
+    $scope.filtrar=function(){
+    	$scope.pagina=1;
+    	$scope.aplicafiltro=true;
+    	$scope.filtrarUnico();
+    }  
+
+	$scope.filtrarUnico=function(){
+		empleadosFactory.traerEmpleadosFiltro(
+			$scope.pagina,
+			$scope.codigoFiltro,
+			$scope.nombreFiltro,
+			$scope.tipoFiltro,
+			$scope.estadoFiltro
+		).then(function(resp){
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
+		})
+	}
 	
+	$scope.limpiar=function(){
+		$scope.codigoFiltro=null;
+		$scope.nombreFiltro=null;
+		$scope.tipoFiltro=null;
+		$scope.estadoFiltro=null;
+		$scope.aplicafiltro=false;
+
+		$scope.consultar();
+	};
+
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -49,32 +89,6 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			}
 		});
 	});
-	
-	
-	$scope.filtrar=function(){
-		$scope.data=[];
-
-		empleadosFactory.traerEmpleadosFiltro(
-				pagina,
-				$scope.codigoFiltro,
-				$scope.nombreFiltro,
-				$scope.tipoFiltro,
-				$scope.estadoFiltro
-		).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-	
-	$scope.limpiar=function(){
-		$scope.codigoFiltro=null;
-		$scope.nombreFiltro=null;
-		$scope.tipoFiltro=null;
-		$scope.estadoFiltro=null;
-
-		$scope.consultar();
-		
-	};
 	
 	$scope.nuevo=function(){
 		$scope.objeto={

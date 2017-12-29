@@ -5,20 +5,18 @@ app.factory("sociosNegocioFactory", ["Restangular", function (Restangular) {
     return {
 
         traer: function (pagina, ejercicio) {
-
-            return Restangular.allUrl("administrar/consultar/socionegocio/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio).getList();
-
+            return Restangular.allUrl("administrar/consultar/socionegocio/pagina=" + pagina + "&filas=10&ejerciciofiscalid=" + ejercicio).customGET();
         },
 
         traerFiltro: function (pagina, codigo, nombre, estado) {
 
-            var url = "administrar/consultar/socionegocio/pagina=" + pagina;
+            var url = "administrar/consultar/socionegocio/pagina=" + pagina + "&filas=10";
 
             if (nombre != null && nombre != "") url += "&nombre=" + nombre.toUpperCase();
             if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();
             if (estado != null && estado != "") url += "&estado=" + estado;
 
-            return Restangular.allUrl(url).getList();
+            return Restangular.allUrl(url).customGET();
 
         },
 

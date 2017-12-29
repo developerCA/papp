@@ -78,13 +78,16 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
-				node.id,
-				node.npIdunidad
+				node.tablarelacionid,
+				"unidadid=" + node.npIdunidad
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
-				$scope.objeto=resp.json.planificacionUE;
-				$scope.detalles=resp.json.details;
+				$scope.objeto=Object.assign({}, resp.json.actividad, resp.json.actividadunidad);
+			    $scope.objeto.npFechainicio=toDate($scope.objeto.npFechainicio);
+			    $scope.objeto.npFechafin=toDate($scope.objeto.npFechafin);
+				$scope.detalles=resp.json.actividadunidadacumulador;
+				$scope.divPlanificacionAnual=false;
 				$scope.edicion=true;
 				console.log(resp.json);
 			});
@@ -224,6 +227,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
             	PlanificacionUEFactory.guardar($scope.objeto).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
+    					 $scope.divPlanificacionAnual=true;
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
 	 		             $scope.detalles=[];
@@ -239,8 +243,45 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
         reset: function (form) {
             $scope.myModel = angular.copy($scope.master);
             form.$setPristine(true);
+			$scope.divPlanificacionAnual=true;
             $scope.edicion=false;
             $scope.objeto={};
         }
     };
+
+	$scope.popupnpFechainicio = {
+	    opened: false
+	};
+	$scope.opennpFechainicio = function() {
+	    $scope.npFechainicio.opened = true;
+	}
+	$scope.popupnpFechafin = {
+	    opened: false
+	};
+	$scope.opennpFechafin = function() {
+	    $scope.npFechafin.opened = true;
+	}
+
+	function toDate(fuente) {
+		try {
+			var parts = fuente.split('/');
+		} catch (err) {
+			return new Date();
+		}
+		return new Date(parts[2]*1,parts[1]-1,parts[0]*1, 0, 0, 0, 0); 
+	}
+
+	function toStringDate(fuente) {
+		if (fuente == null) {
+			return null;
+		}
+		try {
+			var parts = fuente.toISOString();
+			parts = parts.split('T');
+			parts = parts[0].split('-');
+		} catch (err) {
+			return null;
+		}
+		return parts[2] + "/" + parts[1] + "/" + parts[0]; 
+	}
 } ]);

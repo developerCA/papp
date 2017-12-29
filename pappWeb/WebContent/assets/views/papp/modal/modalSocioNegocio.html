@@ -47,31 +47,47 @@
            </div>
 
 		<div>
-			<table ng-table="tableParams" class="table table-striped">
-				<tr ng-repeat="obj in $data">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>C&oacute;digo</th>
+						<th>Nombre mostrado</th>
+						<th>Proveedor</th>
+						<th>Empleado</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="obj in data">
 					<td><a class="btn btn-sm btn-primary"
 						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
 							class="fa fa-check"></i></a></td>
-                             <td data-title="'Codigo'">{{obj.codigo}}</td>
-                             <td data-title="'Nombre'">{{obj.nombremostrado}}</td>
-                             <td data-title="'Es Proveedor'">
-                                 <span ng-if="obj.esproveedor=='1'">Si</span>
-                                 <span ng-if="obj.esproveedor=='0'">No</span>
-                             </td>
-                             <td data-title="'Es Empleado'">
-                                 <span ng-if="obj.esempleado=='1'">Si</span>
-                                 <span ng-if="obj.esempleado=='0'">No</span>
-                             </td>
-                             <td data-title="'Estado'">
-                                 <span ng-if="obj.estado=='I'">INACTIVO</span>
-                                 <span ng-if="obj.estado=='A'">ACTIVO</span>
-                             </td>
+                    <td>{{obj.codigo}}</td>
+                    <td>{{obj.nombremostrado}}</td>
+                    <td>
+                        <span ng-if="obj.esproveedor=='1'">Si</span>
+                        <span ng-if="obj.esproveedor=='0'">No</span>
+                    </td>
+                    <td>
+                        <span ng-if="obj.esempleado=='1'">Si</span>
+                        <span ng-if="obj.esempleado=='0'">No</span>
+                    </td>
+                    <td>
+                        <span ng-if="obj.estado=='I'">INACTIVO</span>
+                        <span ng-if="obj.estado=='A'">ACTIVO</span>
+                    </td>
 				</tr>
 			</table>
-		</div>
 
-                         </div>
-                         <div class="modal-footer">
-                             <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                         </div>
+			<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+				previous-text="Atras" uib-pagination total-items="total"
+				ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
+				max-size="10" class="pagination-sm" boundary-links="true"
+				force-ellipses="true">
+			</ul>
+		</div>
+	</div>
+	<div class="modal-footer">
+	    <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+	</div>
 </div>

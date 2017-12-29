@@ -10,22 +10,58 @@ app.controller('ModalSocioNegocioController', ["$scope", "$rootScope", "$uibModa
     $scope.objeto = {};
     $scope.data = [];
 
-    var pagina = 1;
+    $scope.pagina = 1;
+    $scope.aplicafiltro=false;
 
     $scope.consultar = function () {
-
-        $scope.data = [];
-
-        sociosNegocioFactory.traer(pagina, $rootScope.ejefiscal).then(function (resp) {
-            if (resp.meta)
-                $scope.data = resp;
-               //console.log($scope.data);
+        sociosNegocioFactory.traer(
+    		$scope.pagina,
+    		$rootScope.ejefiscal
+		).then(function (resp) {
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
         })
+    };
 
+    $scope.pageChanged = function() {
+        if ($scope.aplicafiltro){
+        	$scope.filtrarUnico();
+        }else{
+        	$scope.consultar();	
+        }
+    };  
+    
+    $scope.filtrar=function(){
+    	$scope.pagina=1;
+    	$scope.aplicafiltro=true;
+    	$scope.filtrarUnico();
+    }  
+
+	$scope.filtrarUnico=function(){
+        sociosNegocioFactory.traerFiltro(
+    		$scope.pagina,
+    		$scope.codigo,
+    		$scope.nombre,
+    		$scope.estado
+		).then(function (resp) {
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
+        })
+    };
+
+    $scope.mayusculas = function () {
+        $scope.nombre = $scope.nombre.toUpperCase();
+    };
+
+    $scope.limpiar = function () {
+        $scope.nombre = null;
+        $scope.codigo = null;
+        $scope.estado = null;
+        $scope.aplicafiltro=false;
+        $scope.consultar();
     };
 
     $scope.$watch('data', function () {
-
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page
             count: 5, // count per page
@@ -44,31 +80,6 @@ app.controller('ModalSocioNegocioController', ["$scope", "$rootScope", "$uibModa
             }
         });
     });
-
-    $scope.filtrar = function () {
-
-        $scope.data = [];
-        sociosNegocioFactory.traerFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado).then(function (resp) {
-
-            if (resp.meta)
-
-                $scope.data = resp;
-        })
-
-    };
-
-    $scope.mayusculas = function () {
-
-        $scope.nombre = $scope.nombre.toUpperCase();
-
-    };
-
-    $scope.limpiar = function () {
-        $scope.nombre = null;
-        $scope.codigo = null;
-        $scope.estado = null;
-        $scope.consultar();
-    };
 
 	$scope.seleccionar=function(obj){
 		$uibModalInstance.close(obj);		

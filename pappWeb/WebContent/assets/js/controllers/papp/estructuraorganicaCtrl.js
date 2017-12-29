@@ -470,6 +470,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.objetoPlazaDetail[index].unidadarbolplazagfid = obj.id;
 			$scope.objetoPlazaDetail[index].npgradonombre = obj.npnombregrado;
 			$scope.objetoPlazaDetail[index].npfuerzanombre = obj.npnombrefuerza;
+			$scope.objetoPlazaDetail[index].npfuerzaid = obj.gradofuerzafuerzaid;
 		}, function() {
 		});
 	};
@@ -481,7 +482,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			size : 'lg',
 			resolve : {
 				fuerza : function() {
-					return null;
+					return $scope.objetoPlazaDetail[index].npfuerzaid;
 				}
 			}
 		});
@@ -498,12 +499,12 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalClasificacion.html',
 			controller : 'ModalClasificacionController',
-			size : 'lg'/*,
+			size : 'lg',
 			resolve : {
 				fuerza : function() {
-					return $scope.fuerza;
+					return $scope.objetoPlazaDetail[index].npfuerzaid;
 				}
-			}*/
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
@@ -632,6 +633,9 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	}
 
 	function toStringDate(fuente) {
+		if (fuente == null) {
+			return null;
+		}
 		try {
 			var parts = fuente.toISOString();
 			parts = parts.split('T');

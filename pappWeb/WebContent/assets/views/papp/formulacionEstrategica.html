@@ -581,7 +581,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un presupuesto total"
 								        class="form-control" name="presupuestototal" ng-model="objetoPy.presupuestototal"
-								        required numericOnly style="text-align:right;" format="currency">
+								        required numericOnly style="text-align:right;" decimal="2">
 								    <span class="error text-small block"
 								        ng-if="FormProyecto.presupuestototal.$dirty && FormProyecto.presupuestototal.$invalid">
 								        Incorrecto
@@ -600,7 +600,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un presupuesto inicial"
 								        class="form-control" name="presupuestoinicial" ng-model="objetoPy.presupuestoinicial"
-								        required numericOnly style="text-align:right;" format="currency">
+								        required numericOnly style="text-align:right;" decimal="2">
 								    <span class="error text-small block"
 								        ng-if="FormProyecto.presupuestoinicial.$dirty && FormProyecto.presupuestoinicial.$invalid">
 								        Incorrecto
@@ -619,7 +619,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un presupuesto planificado"
 								        class="form-control" name="presupuestoplanificado" ng-model="objetoPy.presupuestoplanificado"
-								        required numericOnly style="text-align:right;" format="currency">
+								        required numericOnly style="text-align:right;" decimal="2">
 								    <span class="error text-small block"
 								        ng-if="FormProyecto.presupuestoplanificado.$dirty && FormProyecto.presupuestoplanificado.$invalid">
 								        Incorrecto

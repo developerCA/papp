@@ -85,16 +85,33 @@
 						class="fa fa-plus-square"></i> Agregar</a>
 
 					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
-										class="fa fa-pencil"></i></a></td>
-
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Nombre mostrado'">{{obj.nombremostrado}}</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
-								<td data-title="'Tipo identificaci&oacute;n'">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th></th>
+									<th>C&oacute;digo</th>
+									<th>Nombre mostrado</th>
+									<th>Estado</th>
+									<th>Tipo identificaci&oacute;n</th>
+									<th>Tipo</th>
+								</tr>
+							</thead>
+							<tr ng-repeat="obj in data">
+								<td>
+									<a class="btn btn-sm btn-primary" uib-tooltip="Modificar" ng-click="editar(obj.id)">
+										<i class="fa fa-pencil"></i>
+									</a>
+								</td>
+								<td>
+									{{obj.codigo}}
+								</td>
+								<td>
+									{{obj.nombremostrado}}
+								</td>
+								<td>
+									{{obj.npestado}}
+								</td>
+								<td>
 									<span ng-if="obj.emptipo=='C'">
 										CIVIL
 									</span>
@@ -102,9 +119,18 @@
 										MILITAR
 									</span>
 								</td>
-								<td data-title="'Tipo'">{{obj.socionegociotipoidenttipoid}}</td>
+								<td>
+									{{obj.socionegociotipoidenttipoid}}
+								</td>
 							</tr>
 						</table>
+
+						<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+							previous-text="Atras" uib-pagination total-items="total"
+							ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
+							max-size="10" class="pagination-sm" boundary-links="true"
+							force-ellipses="true">
+						</ul>
 					</div>
 				</div>
 
@@ -326,7 +352,7 @@
 									</label>
 									<input type="text" placeholder="Seleccione un grado escala"
 										class="form-control" name="npcargoremuneracion" ng-model="objeto.npcargoremuneracion"
-										ng-disabled="true" numericOnly style="text-align:right;" format="currency">
+										ng-disabled="true" numericOnly style="text-align:right;" decimal="2">
 								</div>
 </div>
 
@@ -392,7 +418,7 @@
 									</label>
 									<input type="text" placeholder="Seleccione un grado escala"
 										class="form-control" name="npcargoremuneracion" ng-model="objeto.npcargoremuneracion"
-										ng-disabled="true" numericOnly style="text-align:right;" format="currency">
+										ng-disabled="true" numericOnly style="text-align:right;" decimal="2">
 								</div>
 </div>
 

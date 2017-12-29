@@ -11,7 +11,6 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 				"filas=10" +
 				"&pagina=" + pagina +
 				"&certificacionejerfiscalid=" + ejefiscal;
-			//console.log(url);
 			return Restangular.allUrl(url).customGET();
 		},
 

@@ -1070,6 +1070,43 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }
 }]);
 
+String.prototype.extractNumber = function () {
+    return Number(this.replace(/(?!-)[^0-9.]/g, ""));
+};
+
+app.directive('decimal', [function () {
+    return {
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+
+            ctrl.$formatters.unshift(function (a) {
+            	if (undefined === a) {
+            		return "";
+            	}
+            	var plainNumber;
+            	try {
+            		plainNumber = Number(a.replace(/(?!-)[^0-9.]/g, ""));
+            	} catch (e) {
+            		return "ERROR";
+            	}
+                return plainNumber.toFixed(attrs.decimal);
+            });
+
+            elem.bind('blur', function(event) {
+            	var plainNumber;
+            	try {
+            		plainNumber = Number(elem.val().replace(/(?!-)[^0-9.]/g, ""));
+            	} catch (e) {
+            		elem.value = "ERROR";
+            		return;
+            	}
+            	elem.val(plainNumber.toFixed(attrs.decimal));
+            });
+        }
+    };
+}]);
+
 app.directive('format', ['$filter', function ($filter) {
     return {
         require: '?ngModel',

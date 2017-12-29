@@ -24,6 +24,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	$scope.objetodetalles={};
 	
     $scope.pagina = 1;
+    $scope.aplicafiltro=false;
 	
 	$scope.consultar=function(){
 		certificacionesFondosFactory.traer(
@@ -47,6 +48,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
     
     $scope.filtrarUnico=function(){
     	$scope.pagina=1;
+    	$scope.aplicafiltro=true;
     	$scope.filtrar();
     }  
 
@@ -98,6 +100,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		$scope.fechainicialFiltro=null;
 		$scope.fechafinalFiltro=null;
 		$scope.estadoFiltro=null;
+		$scope.aplicafiltro=false;
 
 		$scope.consultar();
 	};
@@ -279,8 +282,6 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			var parts = fuente.toISOString();
 			parts = parts.split('T');
 			parts = parts[0].split('-');
-			//please put attention to the month (parts[0]), Javascript counts months from 0:
-			// January - 0, February - 1, etc
 		} catch (err) {
 			return null;
 		}

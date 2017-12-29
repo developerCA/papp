@@ -621,6 +621,9 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	}
 
 	function toStringDate(fuente) {
+		if (fuente == null) {
+			return null;
+		}
 		try {
 			var parts = fuente.toISOString();
 			parts = parts.split('T');
