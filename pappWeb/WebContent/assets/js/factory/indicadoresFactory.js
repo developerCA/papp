@@ -4,12 +4,12 @@ app.factory("indicadoresFactory", [ "Restangular", function(Restangular) {
 
 	return {
 		traerIndicadores : function(pagina, ejercicio) {
-			var url = "planificacion/consultar/consultaBusquedaIndicador/pagina=" + pagina + "&consultaBusquedaIndicador=" + ejercicio;
+			var url = "planificacion/consultar/consultaBusquedaIndicador/pagina=" + pagina + "&indicadorejerciciofiscalid=" + ejercicio;
 			return Restangular.allUrl(url).getList();
 		},
 
 		traerIndicadoresFiltro : function(pagina, ejercicio, codigo) {
-			var url = "planificacion/consultar/consultaBusquedaIndicador/pagina="+pagina + "&consultaBusquedaIndicador=" + ejercicio;
+			var url = "planificacion/consultar/consultaBusquedaIndicador/pagina="+pagina + "&indicadorejerciciofiscalid=" + ejercicio;
 
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
 

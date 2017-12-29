@@ -168,6 +168,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 	$scope.mantenerPlaza=function(node){
 		//console.log(node.id);
+		$scope.objetoPlaza={};
+		$scope.objetoPlazaDetail=[];
 		unidadFactory.traerUnidadArbolDetail(
 				node.id
 			).then(function(resp){

@@ -99,6 +99,11 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 		    return Restangular.allUrl(url).customGET();
 		},
 
+		eliminarActividadUnidad: function(id){
+			var url = "planificacion/nivelactividad/" + id + "/0";
+			return Restangular.allUrl(url).customDELETE();
+		},
+
 		guardar:function(tipo, objeto){
 			var url = "planificacion/" + this.obtenerTipo(tipo) + "/";
 			return Restangular.allUrl(url).customPOST(objeto);
