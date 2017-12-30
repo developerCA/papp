@@ -441,7 +441,7 @@ public class ConsultasUtil {
 			int pagina=1;
 			if(parameters.get("pagina")!=null)		
 				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
-			int filas=20;
+			int filas=100;
 			if(parameters.get("filas")!=null)
 				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 			int primero=(pagina*filas)-filas;
@@ -461,6 +461,13 @@ public class ConsultasUtil {
 			if(parameters.get("indicadorejerciciofiscalid")!=null && !parameters.get("indicadorejerciciofiscalid").equals(""))
 				indicadorTO.setIndicadorejerciciofiscalid(Long.valueOf(parameters.get("indicadorejerciciofiscalid")));
 			SearchResultTO<IndicadorTO> resultado=UtilSession.planificacionServicio.transObtenerIndicadorPaginado(indicadorTO);
+			
+//			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,tipoidentificacionTO.getJsonConfig()));
+//			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+//			totalMap.put("valor", resultado.size());
+//			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
+			
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),indicadorTO.getJsonConfigArbol()));

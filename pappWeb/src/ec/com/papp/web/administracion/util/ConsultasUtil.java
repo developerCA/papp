@@ -130,7 +130,7 @@ public class ConsultasUtil {
 //			if(parameters.get("filas")!=null)
 //				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 //			int primero=(pagina*filas)-filas;
-			campo="codigo";
+			campo="nombre";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
