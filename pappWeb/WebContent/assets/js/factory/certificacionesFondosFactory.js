@@ -7,11 +7,13 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			pagina,
 			ejefiscal
 		) {
-			var url = "ejecucion/consultar/certificacion/" +
-				"filas=10" +
-				"&pagina=" + pagina +
-				"&certificacionejerfiscalid=" + ejefiscal;
-			return Restangular.allUrl(url).customGET();
+			var url = "ejecucion/consultar/certificacion";
+			var tObj = {
+				filas: "10",
+				pagina: pagina.toString(),
+				certificacionejerfiscalid: ejefiscal.toString()
+			}
+			return Restangular.allUrl(url).customPOST(tObj);
 		},
 
 		traerFiltro: function(
@@ -25,20 +27,22 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			fechafinal,
 			estado
 		) {
-			var url = "ejecucion/consultar/certificacion/" +
-				"filas=10" +
-				"&pagina=" + pagina +
-				"&certificacionejerfiscalid=" + ejefiscal;
+			var url = "ejecucion/consultar/certificacion";
+			var tObj = {
+				filas: "10",
+				pagina: pagina.toString(),
+				certificacionejerfiscalid: ejefiscal.toString()
+			}
 
-			if(codigo != null && codigo != "") url += "&codigo=" + codigo;	
-			if(precompromiso != null && precompromiso != "") url += "&numprecompromiso=" + precompromiso;	
-			if(valorinicial!= null && valorinicial != "") url += "&valorinicial=" + valorinicial;	
-			if(valorfinal != null && valorfinal != "") url += "&valorfinal=" + valorfinal;	
-			if(fechainicial != null && fechainicial != "") url += "&fechainicial=" + encodeURIComponent(fechainicial);	
-			if(fechafinal != null && fechafinal != "") url += "&fechafinal=" + encodeURIComponent(fechafinal);	
-			if(estado != null && estado != "") url += "&estado=" + estado;	
+			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
+			if(precompromiso != null && precompromiso != "") tObj.numprecompromiso= "" + precompromiso;	
+			if(valorinicial!= null && valorinicial != "") tObj.valorinicial= "" + valorinicial;	
+			if(valorfinal != null && valorfinal != "") tObj.valorfinal= "" + valorfinal;	
+			if(fechainicial != null && fechainicial != "") tObj.fechainicial= "" + encodeURIComponent(fechainicial);	
+			if(fechafinal != null && fechafinal != "") tObj.fechafinal= "" + encodeURIComponent(fechafinal);	
+			if(estado != null && estado != "") tObj.estado= "" + estado;	
 
-			return Restangular.allUrl(url).customGET();
+			return Restangular.allUrl(url).customPOST(tObj);
 		},
 
 		traerCertificacionesFondosNuevo: function(

@@ -32,8 +32,8 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			$rootScope.ejefiscal
 		).then(function(resp){
 			//console.log(resp);
-        	$scope.data = resp.json.result;
-            $scope.total = resp.json.total.valor;
+        	$scope.data = resp.result;
+            $scope.total = resp.total.valor;
 			console.log($scope.data);
 		})
 	};
@@ -55,7 +55,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	$scope.filtrar=function(){
 		//console.log($rootScope.ejefiscal);
 		//console.log($rootScope);
-		$scope.data=[];
+		//$scope.data=[];
 		certificacionesFondosFactory.traerFiltro(
 			$scope.pagina,
 			$rootScope.ejefiscal,
@@ -67,8 +67,8 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			toStringDate($scope.fechafinalFiltro),
 			$scope.estadoFiltro
 		).then(function(resp){
-        	$scope.data = resp.json.result;
-            $scope.total = resp.json.total.valor;
+        	$scope.data = resp.result;
+            $scope.total = resp.total.valor;
 		})
 	}
 /*
