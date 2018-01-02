@@ -136,7 +136,7 @@
 
 								<div class="row">
 									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrarUnico()"><i
 											class="fa fa-search"></i> Buscar</a> <a
 											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
 									</div>
@@ -150,7 +150,23 @@
 
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th>C&oacute;digo</th>
+									<th>Valor<br>total</th>
+									<th>Creado</th>
+									<th>N&uacute;mero<br>precompromiso</th>
+									<th>Certificaci&oacute;n<br>C&oacute;digo</th>
+									<th>Estado</th>
+								</tr>
+							</thead>
+							<tr ng-repeat="obj in data">
 								<td>
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Modificar" ng-click="editar(obj.id)">
@@ -187,18 +203,25 @@
 										<i class="fa fa-trash-o"></i>
 									</a>
 								</td>
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Valor total'" style="text-align: right;">
+								<td>{{obj.codigo}}</td>
+								<td style="text-align: right;">
 									<span>
 										{{obj.valortotal | number:2}}
 									</span>
 								</td>
-								<td data-title="'Creado'">{{obj.npfecha}}</td>
-								<td data-title="'N&uacute;mero compromiso'">{{obj.numerocompromiso}}</td>
-								<td data-title="'Certificaci&oacute;n C&oacute;digo'">{{obj.npcertificacioncodigo}}</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
+								<td>{{obj.npfecha}}</td>
+								<td>{{obj.numerocompromiso}}</td>
+								<td>{{obj.npcertificacioncodigo}}</td>
+								<td>{{obj.npestado}}</td>
 							</tr>
 						</table>
+
+						<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+							previous-text="Atras" uib-pagination total-items="total"
+							ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
+							max-size="10" class="pagination-sm" boundary-links="true"
+							force-ellipses="true">
+						</ul>
 					</div>
 				</div>
 

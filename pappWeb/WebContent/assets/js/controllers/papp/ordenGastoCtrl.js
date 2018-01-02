@@ -18,25 +18,37 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	$scope.objeto={estado:null};
 	$scope.objetodetalles={};
 	
-	var pagina = 1;
+    $scope.pagina = 1;
+    $scope.aplicafiltro=false;
 	
 	$scope.consultar=function(){
-		$scope.data=[];
-		//console.log('aqi');
 		ordenGastoFactory.traer(
-			pagina,
+			$scope.pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
 			//console.log(resp);
-			if (resp.meta)
-				$scope.data=resp;
+        	$scope.data = resp.result;
+            $scope.total = resp.total.valor;
 		})
 	};
 
+    $scope.pageChanged = function() {
+        if ($scope.aplicafiltro){
+        	$scope.filtrar();
+        }else{
+        	$scope.consultar();	
+        }
+    };  
+    
+    $scope.filtrarUnico=function(){
+    	$scope.pagina=1;
+    	$scope.aplicafiltro=true;
+    	$scope.filtrar();
+    }  
+
 	$scope.filtrar=function(){
-		$scope.data=[];
 		ordenGastoFactory.traerFiltro(
-			pagina,
+			$scope.pagina,
 			$rootScope.ejefiscal,
 			$scope.codigoFiltro,
 			$scope.compromisoFiltro,
@@ -47,31 +59,11 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			$scope.fechafinalFiltro,
 			$scope.estadoFiltro
 		).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
+        	$scope.data = resp.result;
+            $scope.total = resp.total.valor;
 		})
 	}
 
-	$scope.$watch('data', function() {
-		$scope.tableParams = new ngTableParams({
-			page : 1, // show first page
-			count : 5, // count per page
-			filter: {} 	
-		}, {
-			total : $scope.data.length, // length of data
-			getData : function($defer, params) {
-				var orderedData = params.filter() ? $filter('filter')(
-						$scope.data, params.filter()) : $scope.data;
-				$scope.lista = orderedData.slice(
-						(params.page() - 1) * params.count(), params
-								.page()
-								* params.count());
-				params.total(orderedData.length);
-				$defer.resolve($scope.lista);
-			}
-		});
-	});
-	
 	$scope.limpiar=function(){
 		$scope.codigoFiltro = null;
 		$scope.compromisoFiltro = null;
