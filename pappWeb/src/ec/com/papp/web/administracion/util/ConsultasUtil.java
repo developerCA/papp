@@ -1944,13 +1944,19 @@ public class ConsultasUtil {
 				cargoTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				cargoTO.setEstado(parameters.get("estado"));
-			SearchResultTO<CargoTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargoPaginado(cargoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+			Collection<CargoTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargo(cargoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  totalMap=new HashMap<String, String>();
+//			totalMap.put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+//			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),cargoTO.getJsonConfig()));
+//			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			Integer totalRegistrosPagina=resultado.size();
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),cargoTO.getJsonConfig()));
+			totalMap.put("valor", totalRegistrosPagina.toString());
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,cargoTO.getJsonConfig()));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
