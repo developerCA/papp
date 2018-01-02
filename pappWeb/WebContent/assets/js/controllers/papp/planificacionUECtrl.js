@@ -12,6 +12,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.detalles=[];
 	$scope.divPlanificacionAnual=false;
 	$scope.unidadid=null;
+	$scope.planificacionAnualActiva=null;
 
 	var pagina = 1;
 
@@ -70,7 +71,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.nuevo=function(){
 		$scope.objeto={id:null,estado:'A'};
 		$scope.detalles=[];
-		$scope.edicion=true;
+		$scope.divItems=true;
 	}
 
 	$scope.editar=function(node){
@@ -88,7 +89,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			    $scope.objeto.npFechafin=toDate($scope.objeto.npFechafin);
 				$scope.detalles=resp.json.actividadunidadacumulador;
 				$scope.divPlanificacionAnual=false;
-				$scope.edicion=true;
+				$scope.divItems=true;
 				console.log(resp.json);
 			});
 		}
@@ -97,6 +98,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.editarPlanificacionAnual=function(obj){
 		console.log(obj);
 		var id = obj.id;
+		$scope.edicion=true;
+		$scope.planificacionUE=obj;
 		$scope.unidadid = obj.npacitividadunidad;
 		$scope.dataPA=[];
 		$scope.divPlanificacionAnual=true;
@@ -118,6 +121,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.vista=function(node){
 		console.log(node);
+		$scope.planificacionAnualActiva = node;
 		$scope.divMenuActividad = false;
 		$scope.divMenuSubitems = false;
 		if (node.nodeTipo == "AC") {
@@ -204,6 +208,28 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.detalles.splice(index,1);
 	}
 
+	$scope.metaDistribucionPlanificada = function() {
+		//$scope.planificacionAnualActiva
+		$scope.divMetaDistribucionPlanificada=true;
+		$scope.divPlanificacionAnual=false;
+	}
+
+	$scope.metaDistribucionPlanificadaCancelar = function() {
+		$scope.divMetaDistribucionPlanificada=false;
+		$scope.divPlanificacionAnual=true;
+	}
+
+	$scope.metaDistribucionAjustada = function() {
+		//$scope.planificacionAnualActiva
+		$scope.divMetaDistribucionAjustada=true;
+		$scope.divPlanificacionAnual=false;
+	}
+
+	$scope.metaDistribucionAjustadaCancelar = function() {
+		$scope.divMetaDistribucionAjustada=false;
+		$scope.divPlanificacionAnual=true;
+	}
+
 	$scope.form = {
         submit: function (form) {
             var firstError = null;
@@ -228,7 +254,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
         			 if (resp.estado){
         				 form.$setPristine(true);
     					 $scope.divPlanificacionAnual=true;
-	 		             $scope.edicion=false;
+	 		             $scope.divItems=false;
 	 		             $scope.objeto={};
 	 		             $scope.detalles=[];
 	 		             $scope.limpiar();
@@ -244,7 +270,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
             $scope.myModel = angular.copy($scope.master);
             form.$setPristine(true);
 			$scope.divPlanificacionAnual=true;
-            $scope.edicion=false;
+            $scope.divItems=false;
             $scope.objeto={};
         }
     };

@@ -220,7 +220,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	        } else {
 	        	let tObj = Object.assign({}, $scope.objetoPlaza);
 	        	tObj.details = Array.from($scope.objetoPlazaDetail);
-	        	unidadFactory.guardarArbol(tObj).then(function(resp){
+	        	unidadFactory.guardarArbolPlaza(tObj).then(function(resp){
 	        		if (resp.estado){
 	        			formUnidadPlaza.$setPristine(true);
 						$scope.dUnidad=true;

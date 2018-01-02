@@ -16,7 +16,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body" ng-show="!edicion && !divPlanificacionAnual">
+				<div class="panel-body" ng-show="!edicion">
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -119,13 +119,13 @@
 						<div class="col-md-8">
 							<div class="row" ng-show="divMenuActividad">
 								<span>
-									<a class="btn btn-sm btn-dark-azure" ng-click=";">
+									<a class="btn btn-sm btn-dark-azure" ng-click="metaDistribucionPlanificada();">
 										<i class="fa fa-plus-square"></i>
 										Meta: Distribuci&oacute;n Planificada
 									</a>
 								</span>
 								<span>
-									<a class="btn btn-sm btn-dark-azure" ng-click=";">
+									<a class="btn btn-sm btn-dark-azure" ng-click="metaDistribucionAjustada();">
 										<i class="fa fa-plus-square"></i>
 										Meta: Distribuci&oacute;n Ajustada
 									</a>
@@ -434,7 +434,7 @@
 					</div>
 				</div>
 
-				<div ng-show="edicion" class="panel-body" id="panel1">
+				<div ng-show="divItems" class="panel-body" id="panel1">
 
 					<div class="panel-heading">
 						<h5 class="panel-title">Items</h5>
@@ -918,10 +918,77 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<!-- <button type="submit" class="btn btn-primary">Guardar
-									</button> -->
-									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">Cancelar</button>
+									<button type="submit" class="btn btn-primary">
+										Guardar
+									</button>
+									<button type="reset" class="btn btn-default btn-o" ng-click="form.reset(Form)">
+										Cancelar
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div ng-show="divMetaDistribucionPlanificada" class="panel-body" id="panel1">
+
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Meta Distribucion Planificada
+						</h5>
+					</div>
+
+					<form name="Form" id="formMetaDistribucionPlanificada" novalidate
+						ng-submit="form.submit(formMetaDistribucionPlanificada)">
+
+						<div class="row">
+							<div class="col-md-16">
+							
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">
+										Guardar
+									</button>
+									<button type="reset" class="btn btn-default btn-o" ng-click="metaDistribucionPlanificadaCancelar();">
+										Cancelar
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+
+				<div ng-show="divMetaDistribucionAjustada" class="panel-body" id="panel1">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Meta Distribucion Ajustada
+						</h5>
+					</div>
+
+					<form name="Form" id="formMetaDistribucionAjustada" novalidate
+						ng-submit="form.submit(formMetaDistribucionAjustada)">
+
+						<div class="row">
+							<div class="col-md-16">
+							
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">
+										Guardar
+									</button>
+									<button type="reset" class="btn btn-default btn-o" ng-click="metaDistribucionAjustadaCancelar();">
+										Cancelar
+									</button>
 								</div>
 							</div>
 						</div>

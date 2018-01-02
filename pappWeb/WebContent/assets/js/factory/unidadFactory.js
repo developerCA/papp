@@ -71,6 +71,11 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 
+		guardarArbolPlaza:function(objeto){
+			var url = "estructuraorganica/unidadarbolplaza/";
+			return Restangular.allUrl(url).customPOST(objeto);
+		},
+
 		guardarEmpleadosPlaza:function(objeto){
 			var url = "estructuraorganica/unidadarbolplazaempleado/";
 			return Restangular.allUrl(url).customPOST(objeto);
