@@ -1064,9 +1064,11 @@ public class PlanificacionController {
 				//traigo los datos de actividadunidadacumulador
 				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 				subitemunidadacumuladorTO.getId().setId(id);
+				subitemunidadacumuladorTO.setTipo("A");
 				subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
 				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
-
+				if(subitemunidadacumuladorTOs.size()>0)
+					subitemunidadacumuladorTO=()
 			}
 			//-----------------Las cabeceras cuando se da click en la descripcion de los niveles del arbol
 			//ActividadPlanificacion
