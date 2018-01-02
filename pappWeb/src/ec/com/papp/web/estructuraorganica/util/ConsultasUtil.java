@@ -73,13 +73,18 @@ public class ConsultasUtil {
 			InstitucionentidadTO institucionentidadTO=new InstitucionentidadTO();
 			institucionentidadTO.setInstitucion(new InstitucionTO());
 			estructuraorganicaTO.setInstitucionentidad(institucionentidadTO);
-			SearchResultTO<EstructuraorganicaTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerEstructuraorganicaPaginado(estructuraorganicaTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),estructuraorganicaTO.getJsonConfig()));
+			Collection<EstructuraorganicaTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerEstructuraorganica(estructuraorganicaTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  totalMap=new HashMap<String, String>();
+//			totalMap.put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+//			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),estructuraorganicaTO.getJsonConfig()));
+//			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,estructuraorganicaTO.getJsonConfig()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -152,13 +157,18 @@ public class ConsultasUtil {
 			institucionentidadTO.setDivisiongeografica1(new DivisiongeograficaTO());
 			institucionentidadTO.setDivisiongeografica2(new DivisiongeograficaTO());
 			institucionentidadTO.setDivisiongeografica3(new DivisiongeograficaTO());
-			SearchResultTO<InstitucionentidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidadPaginado(institucionentidadTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),institucionentidadTO.getJsonConfigConsulta()));
+			Collection<InstitucionentidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidad(institucionentidadTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  totalMap=new HashMap<String, String>();
+//			totalMap.put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+//			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),institucionentidadTO.getJsonConfigConsulta()));
+//			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,institucionentidadTO.getJsonConfig()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -215,13 +225,18 @@ public class ConsultasUtil {
 			}
 			institucionTO.setEstado("A");
 			institucionentidadTO.setInstitucion(institucionTO);
-			SearchResultTO<InstitucionentidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidadPaginado(institucionentidadTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),institucionentidadTO.getJsonConfigComun()));
+			Collection<InstitucionentidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidad(institucionentidadTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  totalMap=new HashMap<String, String>();
+//			totalMap.put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+//			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),institucionentidadTO.getJsonConfigComun()));
+//			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,institucionentidadTO.getJsonConfigComun()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -269,13 +284,18 @@ public class ConsultasUtil {
 			}
 //			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 //				unidadarbolplazaTO.setEstado(parameters.get("estado"));
-			SearchResultTO<UnidadarbolplazaTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplazaPaginado(unidadarbolplazaTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadarbolplazaTO.getJsonConfigconsulta()));
+			Collection<UnidadarbolplazaTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplaza(unidadarbolplazaTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  totalMap=new HashMap<String, String>();
+//			totalMap.put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+//			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadarbolplazaTO.getJsonConfigconsulta()));
+//			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,unidadarbolplazaTO.getJsonConfigconsulta()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -326,13 +346,18 @@ public class ConsultasUtil {
 			}
 			unidadarbolplazaempleadoTO.setSocionegocio(new SocionegocioTO());
 			unidadarbolplazaempleadoTO.setUnidadarbolplaza(new UnidadarbolplazaTO());
-			SearchResultTO<UnidadarbolplazaempleadoTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplazaempleadoPaginado(unidadarbolplazaempleadoTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadarbolplazaempleadoTO.getJsonConfig()));
+			Collection<UnidadarbolplazaempleadoTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplazaempleado(unidadarbolplazaempleadoTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  totalMap=new HashMap<String, String>();
+//			totalMap.put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+//			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadarbolplazaempleadoTO.getJsonConfig()));
+//			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,unidadarbolplazaempleadoTO.getJsonConfig()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -495,13 +520,18 @@ public class ConsultasUtil {
 			InstitucionentidadTO institucionentidadTO=new InstitucionentidadTO();
 			institucionentidadTO.setInstitucion(new InstitucionTO());
 			unidadinstTO.setInstitucionentidad(institucionentidadTO);
-			SearchResultTO<UnidadinstTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadinstPaginado(unidadinstTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadinstTO.getJsonConfig()));
+			Collection<UnidadinstTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadinst(unidadinstTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  totalMap=new HashMap<String, String>();
+//			totalMap.put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+//			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadinstTO.getJsonConfig()));
+//			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,unidadinstTO.getJsonConfig()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
@@ -547,18 +577,19 @@ public class ConsultasUtil {
 				unidadTO.setCodigopresup(parameters.get("codigopresup"));
 			unidadTO.setInstitucion(new InstitucionTO());
 			unidadTO.setInstitucionentidad(new InstitucionentidadTO());
-			SearchResultTO<UnidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadPaginado(unidadTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
+			Collection<UnidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidad(unidadTO);
+			
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 			if(tipo.equals("unidad")){
 				log.println("entra por config");
-				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadTO.getJsonConfig()));
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,unidadTO.getJsonConfig()));
 			}
 			else{
 				log.println("entra por configbusqueda");
-				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadTO.getJsonConfigBusqueda()));
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,unidadTO.getJsonConfigBusqueda()));
 			}
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 		}catch (Exception e) {
@@ -604,14 +635,20 @@ public class ConsultasUtil {
 				unidadTO.setEstado(parameters.get("estado"));
 			if(parameters.get("codigopresup")!=null && !parameters.get("codigopresup").equals(""))
 				unidadTO.setCodigopresup(parameters.get("codigopresup"));
-			SearchResultTO<UnidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadPaginado(unidadTO);
-			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			log.println("totalresultado: " + totalRegistrosPagina);
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadTO.getJsonConfigReporte()));
+			Collection<UnidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidad(unidadTO);
+//			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+//			HashMap<String, String>  totalMap=new HashMap<String, String>();
+//			totalMap.put("valor", resultado.getCountResults().toString());
+//			log.println("totalresultado: " + totalRegistrosPagina);
+//			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),unidadTO.getJsonConfigReporte()));
+//			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,unidadTO.getJsonConfig()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
 		}catch (Exception e) {
+			
 			e.printStackTrace();
 			throw new MyException(e);
 		}
