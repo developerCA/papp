@@ -71,6 +71,24 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             return Restangular.allUrl(url).customGET();
         },
 
+        editarMDP: function(
+    		actividad,
+    		actividadunidadacumulador,
+    		unidad,
+    		tipo,
+    		tipometa,
+    		afiscal
+		) {
+            var url = "planificacion/cronograma/" +
+        		actividad +"/" +
+        		actividadunidadacumulador + "/" +
+				unidad + "/" +
+				tipo + "/" +
+				tipometa + "/" +
+				afiscal;
+            return Restangular.allUrl(url).customGET();
+        },
+
         guardar: function (objeto) {
             var url = "planificacion/planificacion/";
             return Restangular.allUrl(url).customPOST(objeto);

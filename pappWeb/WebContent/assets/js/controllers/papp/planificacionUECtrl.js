@@ -7,12 +7,13 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.codigoFiltro=null;
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
+	$scope.editar=false;
 	$scope.objeto={};
 	$scope.objetoPA={};
 	$scope.detalles=[];
 	$scope.divPlanificacionAnual=false;
 	$scope.unidadid=null;
-	$scope.planificacionAnualActiva=null;
+	$scope.node=null;
 
 	var pagina = 1;
 
@@ -74,7 +75,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.divItems=true;
 	}
 
-	$scope.editar=function(node){
+	$scope.editarPlanificacionAnual=function(node){
 		console.log(node);
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
@@ -84,10 +85,23 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
+				if ($scope.planificacionUE.npestadopresupuesto == "Planificado") {
+					$scope.editar=true;
+				} else {
+					$scope.editar=false;
+				}
 				$scope.objeto=Object.assign({}, resp.json.actividad, resp.json.actividadunidad);
 			    $scope.objeto.npFechainicio=toDate($scope.objeto.npFechainicio);
 			    $scope.objeto.npFechafin=toDate($scope.objeto.npFechafin);
 				$scope.detalles=resp.json.actividadunidadacumulador;
+				for (var i = 0; i < $scope.detalles.length; i++) {
+					if ($scope.detalles[i].tipo == "P") {
+						$scope.mPlanificadaID = i;
+					}
+					if ($scope.detalles[i].tipo == "A") {
+						$scope.mAjustadaID = i;
+					}
+				}
 				$scope.divPlanificacionAnual=false;
 				$scope.divItems=true;
 				console.log(resp.json);
@@ -95,7 +109,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		}
 	};
 
-	$scope.editarPlanificacionAnual=function(obj){
+	$scope.regresarPUE=function(obj) {
+		$scope.edicion = false;
+		$scope.arbol = [];
+		$scope.objeto = {};
+		$scope.details = [];
+	}
+
+	$scope.cargarPlanificacionAnual=function(obj) {
 		console.log(obj);
 		var id = obj.id;
 		$scope.edicion=true;
@@ -114,6 +135,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.dataPA[i].nodeTipo = "AC";
 			}
 			$scope.arbol = JSON.parse(JSON.stringify($scope.dataPA).split('"descripcionexten":').join('"title":'));
+			$scope.dataPA = [];
 			//console.log($scope.arbol)
 			$scope.divPlanificacionAnual=true;
 		})
@@ -121,7 +143,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.vista=function(node){
 		console.log(node);
-		$scope.planificacionAnualActiva = node;
+		$scope.node = node;
 		$scope.divMenuActividad = false;
 		$scope.divMenuSubitems = false;
 		if (node.nodeTipo == "AC") {
@@ -208,19 +230,42 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.detalles.splice(index,1);
 	}
 
-	$scope.metaDistribucionPlanificada = function() {
-		//$scope.planificacionAnualActiva
-		$scope.divMetaDistribucionPlanificada=true;
-		$scope.divPlanificacionAnual=false;
+	$scope.metaDistribucion = function(
+		tipometa
+	) {
+		console.log($scope.planificacionUE);
+		console.log($scope.node);
+		console.log($rootScope);
+		PlanificacionUEFactory.editarMDP(
+			$scope.node.tablarelacionid,
+			$scope.planificacionUE.npacitividadunidad,
+			$scope.node.npIdunidad,
+			"AC",
+			tipometa,
+			$rootScope.ejefiscalobj.anio
+		).then(function(resp) {
+			console.log(resp);
+			if (!resp.estado) return;
+			$scope.objeto=resp.json.cronograma;
+			$scope.detalles=resp.json.cronogramalinea;
+			if (tipometa == "P") {
+				$scope.divMetaDistribucionPlanificada=true;
+			}
+			if (tipometa == "A") {
+				$scope.divMetaDistribucionAjustada=true;
+			}
+			$scope.divPlanificacionAnual=false;
+		});
 	}
 
-	$scope.metaDistribucionPlanificadaCancelar = function() {
+	$scope.metaDistribucionCancelar = function() {
 		$scope.divMetaDistribucionPlanificada=false;
-		$scope.divPlanificacionAnual=true;
+		$scope.divMetaDistribucionAjustada=false;
+	$scope.divPlanificacionAnual=true;
 	}
-
+/*
 	$scope.metaDistribucionAjustada = function() {
-		//$scope.planificacionAnualActiva
+		//$scope.node
 		$scope.divMetaDistribucionAjustada=true;
 		$scope.divPlanificacionAnual=false;
 	}
@@ -229,7 +274,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.divMetaDistribucionAjustada=false;
 		$scope.divPlanificacionAnual=true;
 	}
-
+*/
 	$scope.form = {
         submit: function (form) {
             var firstError = null;

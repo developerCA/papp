@@ -80,7 +80,7 @@
 									</a>
 								</td>
 								<td>
-									<a class="btn btn-sm btn-primary" ng-click="editarPlanificacionAnual(obj)">
+									<a class="btn btn-sm btn-primary" ng-click="cargarPlanificacionAnual(obj);">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
@@ -98,6 +98,7 @@
 					</div>
 				</div>
 
+<div ng-show="edicion">
 				<div ng-show="divPlanificacionAnual" class="panel-body">
 					<div class="panel-heading">
 						<h5 class="panel-title">
@@ -106,6 +107,10 @@
 					</div>
 					<div class="row">
 						<div class="col-md-4">
+							<a  class="btn btn-sm btn-default" ng-click="regresarPUE();">
+								<i class="fa ti-back-left"></i>
+								Regresar
+							</a>
 							<div ui-tree="treeOptions" id="tree-root"
 								data-nodrop-enabled="true" data-drag-enabled="true">
 								<ol ui-tree-nodes ng-model="arbol">
@@ -119,13 +124,13 @@
 						<div class="col-md-8">
 							<div class="row" ng-show="divMenuActividad">
 								<span>
-									<a class="btn btn-sm btn-dark-azure" ng-click="metaDistribucionPlanificada();">
+									<a class="btn btn-sm btn-dark-azure" ng-click="metaDistribucion('P');">
 										<i class="fa fa-plus-square"></i>
 										Meta: Distribuci&oacute;n Planificada
 									</a>
 								</span>
 								<span>
-									<a class="btn btn-sm btn-dark-azure" ng-click="metaDistribucionAjustada();">
+									<a class="btn btn-sm btn-dark-azure" ng-click="metaDistribucion('A');">
 										<i class="fa fa-plus-square"></i>
 										Meta: Distribuci&oacute;n Ajustada
 									</a>
@@ -429,6 +434,12 @@
 										</div>
 									</div>
 								</div>
+								<div style="text-align:right;">
+									<a  class="btn btn-sm btn-default" ng-click="regresarPUE();">
+										<i class="fa ti-back-left"></i>
+										Regresar
+									</a>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -494,7 +505,7 @@
 								            uib-datepicker-popup="dd/MM/yyyy" 
 								            name="npFechainicio" ng-model="objeto.npFechainicio"
 								            is-open="popupnpFechainicio.opened" datepicker-options="dateOptions"
-								            ng-required="true" close-text="Close" ng-disabled="true">
+								            ng-required="true" close-text="Close" ng-disabled="!editar">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary" ng-click="opennpFechainicio()">
 								                <i class="glyphicon glyphicon-calendar"></i>
@@ -522,7 +533,7 @@
 								            uib-datepicker-popup="dd/MM/yyyy" 
 								            name="npFechafin" ng-model="objeto.npFechafin"
 								            is-open="popupnpFechafin.opened" datepicker-options="dateOptions"
-								            ng-required="true" close-text="Close" ng-disabled="true">
+								            ng-required="true" close-text="Close" ng-disabled="!editar">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary" ng-click="opennpFechafin()">
 								                <i class="glyphicon glyphicon-calendar"></i>
@@ -547,7 +558,7 @@
 								    </label>
 								    <textarea name="lineabase" rows="5" style="width: 100%" placeholder="Escriba un l&iacute;nea base"
 								        class="form-control" ng-model="objeto.lineabase"
-								        required ng-disabled="true"></textarea>
+								        required ng-disabled="!editar"></textarea>
 								    <span class="error text-small block"
 								        ng-if="Form.lineabase.$dirty && Form.lineabase.$invalid">
 								        Incorrecto
@@ -566,7 +577,7 @@
 								    </label>
 								    <textarea name="justificacion" rows="5" style="width: 100%" placeholder="Escriba un justificaci&oacute;n"
 								        class="form-control" ng-model="objeto.justificacion"
-								        required ng-disabled="true"></textarea>
+								        required ng-disabled="!editar"></textarea>
 								    <span class="error text-small block"
 								        ng-if="Form.justificacion.$dirty && Form.justificacion.$invalid">
 								        Incorrecto
@@ -585,7 +596,7 @@
 								    </label>
 								    <textarea name="objetivogeneral" rows="5" style="width: 100%" placeholder="Escriba un objetivo general"
 								        class="form-control" ng-model="objeto.objetivogeneral"
-								        required ng-disabled="true"></textarea>
+								        required ng-disabled="!editar"></textarea>
 								    <span class="error text-small block"
 								        ng-if="Form.objetivogeneral.$dirty && Form.objetivogeneral.$invalid">
 								        Incorrecto
@@ -604,7 +615,7 @@
 								    </label>
 								    <textarea name="objetivoespec" rows="5" style="width: 100%" placeholder="Escriba un objetivo especifico"
 								        class="form-control" ng-model="objeto.objetivoespec"
-								        required ng-disabled="true"></textarea>
+								        required ng-disabled="!editar"></textarea>
 								    <span class="error text-small block"
 								        ng-if="Form.objetivoespec.$dirty && Form.objetivoespec.$invalid">
 								        Incorrecto
@@ -635,6 +646,7 @@
 								        Listo
 								    </span>
 								</div>
+
 								<div class="panel-heading">
 									<h5 class="panel-title">
 										Presupuesto
@@ -649,7 +661,7 @@
 								    </label>
 								    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un presupuesto planificado"
 								        class="form-control" name="presupplanif" ng-model="objeto.presupplanif"
-								        required ng-disabled="true">
+								        required ng-disabled="!editar">
 								    <span class="error text-small block"
 								        ng-if="Form.presupplanif.$dirty && Form.presupplanif.$invalid">
 								        Incorrecto
@@ -668,7 +680,7 @@
 								    </label>
 								    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un presupuesto ajustado"
 								        class="form-control" name="presupajust" ng-model="objeto.presupajust"
-								        required ng-disabled="true">
+								        required ng-disabled="!editar">
 								    <span class="error text-small block"
 								        ng-if="Form.presupajust.$dirty && Form.presupajust.$invalid">
 								        Incorrecto
@@ -839,12 +851,12 @@
 								<div class="form-group"
 								    ng-class="{'has-error':Form.npMetaPlanificada.$dirty && Form.npMetaPlanificada.$invalid, 'has-success':Form.npMetaPlanificada.$valid}">
 								    <label class="control-label">
-								        Meta Planificada (NO LLEGA EN EL SERVICIO)
+								        Meta Planificada
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un meta planificada (no llega en el servicio)"
-								        class="form-control" name="npMetaPlanificada" ng-model="objeto.npMetaPlanificada"
-								        required ng-disabled="true">
+								        class="form-control" name="npMetaPlanificada" ng-model="detalles[mPlanificadaID].metavalor"
+								        required ng-disabled="!editar">
 								    <span class="error text-small block"
 								        ng-if="Form.npMetaPlanificada.$dirty && Form.npMetaPlanificada.$invalid">
 								        Incorrecto
@@ -858,12 +870,12 @@
 								<div class="form-group"
 								    ng-class="{'has-error':Form.npMetaPlanificadaDescripcion.$dirty && Form.npMetaPlanificadaDescripcion.$invalid, 'has-success':Form.npMetaPlanificadaDescripcion.$valid}">
 								    <label class="control-label">
-								        Meta Planificada Descripci&oacute;n (NO LLEGA EN EL SERVICIO)
+								        Meta Planificada Descripci&oacute;n
 								        <span class="symbol required"></span>
 								    </label>
 								    <textarea name="npMetaPlanificadaDescripcion" rows="5" style="width: 100%" placeholder="Escriba un meta planificada descripci&oacute;n (no llega en el servicio)"
-								        class="form-control" ng-model="objeto.npMetaPlanificadaDescripcion"
-								        required ng-disabled="true"></textarea>
+								        class="form-control" ng-model="detalles[mPlanificadaID].acummetadesc"
+								        required ng-disabled="!editar"></textarea>
 								    <span class="error text-small block"
 								        ng-if="Form.npMetaPlanificadaDescripcion.$dirty && Form.npMetaPlanificadaDescripcion.$invalid">
 								        Incorrecto
@@ -877,12 +889,12 @@
 								<div class="form-group"
 								    ng-class="{'has-error':Form.npMetaAjustada.$dirty && Form.npMetaAjustada.$invalid, 'has-success':Form.npMetaAjustada.$valid}">
 								    <label class="control-label">
-								        Meta Ajustada (NO LLEGA EN EL SERVICIO)
+								        Meta Ajustada
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un meta ajustada (no llega en el servicio)"
-								        class="form-control" name="npMetaAjustada" ng-model="objeto.npMetaAjustada"
-								        required ng-disabled="true">
+								        class="form-control" name="npMetaAjustada" ng-model="detalles[mAjustadaID].metavalor"
+								        required ng-disabled="!editar">
 								    <span class="error text-small block"
 								        ng-if="Form.npMetaAjustada.$dirty && Form.npMetaAjustada.$invalid">
 								        Incorrecto
@@ -896,12 +908,12 @@
 								<div class="form-group"
 								    ng-class="{'has-error':Form.npMetaAjustadaDescripcion.$dirty && Form.npMetaAjustadaDescripcion.$invalid, 'has-success':Form.npMetaAjustadaDescripcion.$valid}">
 								    <label class="control-label">
-								        Meta Ajustada Descripci&oacute;n (NO LLEGA EN EL SERVICIO)
+								        Meta Ajustada Descripci&oacute;n
 								        <span class="symbol required"></span>
 								    </label>
 								    <textarea name="npMetaAjustadaDescripcion" rows="5" style="width: 100%" placeholder="Escriba un meta ajustada descripci&oacute;n (no llega en el servicio)"
-								        class="form-control" ng-model="objeto.npMetaAjustadaDescripcion"
-								        required ng-disabled="true"></textarea>
+								        class="form-control" ng-model="detalles[mAjustadaID].acummetadesc"
+								        required ng-disabled="!editar"></textarea>
 								    <span class="error text-small block"
 								        ng-if="Form.npMetaAjustadaDescripcion.$dirty && Form.npMetaAjustadaDescripcion.$invalid">
 								        Incorrecto
@@ -918,8 +930,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<button type="submit" class="btn btn-primary">
-										Guardar
+									<button type="submit" class="btn btn-primary" ng-show="editar">
+										Confirmar
 									</button>
 									<button type="reset" class="btn btn-default btn-o" ng-click="form.reset(Form)">
 										Cancelar
@@ -931,7 +943,6 @@
 				</div>
 
 				<div ng-show="divMetaDistribucionPlanificada" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
 						<h5 class="panel-title">
 							Meta Distribucion Planificada
@@ -943,7 +954,7 @@
 
 						<div class="row">
 							<div class="col-md-16">
-							
+
 							</div>
 						</div>
 
@@ -995,6 +1006,37 @@
 					</form>
 				</div>
 
+				<div ng-show="divMetaDistribucionAjustada1" class="panel-body" id="panel1">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Meta Distribucion Ajustada
+						</h5>
+					</div>
+
+					<form name="Form" id="formMetaDistribucionAjustada" novalidate
+						ng-submit="form.submit(formMetaDistribucionAjustada)">
+
+						<div class="row">
+							<div class="col-md-16">
+							
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">
+										Guardar
+									</button>
+									<button type="reset" class="btn btn-default btn-o" ng-click="metaDistribucionAjustadaCancelar();">
+										Cancelar
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+</div>
 			</div>
 		</div>
 	</div>
@@ -1024,7 +1066,7 @@
 				<table width="108px">
 					<tr>
 						<td width="34px">
-							<a ng-show="node.tipo!='F'" uib-tooltip="Ver info."
+							<a ng-show="node.nodeTipo!='AC'" uib-tooltip="Ver info."
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="vista(node);">
 								<span class="fa fa-eye"></span>
@@ -1032,16 +1074,21 @@
 						</td>
 						<td width="3px"></td>
 						<td width="34px">
-							<a ng-show="node.tipo!='F'" uib-tooltip="Agregar"
+							<a ng-show="node.nodeTipo!='AC'" uib-tooltip="Agregar"
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="nuevo(node);">
 								<span class="glyphicon glyphicon-plus"></span>
+							</a>
+							<a ng-show="node.nodeTipo=='AC'" uib-tooltip="Ver info."
+								class="btn btn-info btn-sm" data-nodrag
+								ng-click="vista(node);">
+								<span class="fa fa-eye"></span>
 							</a>
 						</td>
 						<td width="3px"></td>
 						<td width="34px">
 	  						<a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag
-								ng-click="editar(node);">
+								ng-click="editarPlanificacionAnual(node);">
 								<span class="fa fa-pencil"></span>
 							</a>
 						</td>

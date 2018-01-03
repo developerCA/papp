@@ -508,7 +508,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objetoPlazaDetail[index].unidadarbolplazafclasifid = obj.id;
+			$scope.objetoPlazaDetail[index].unidadarbolplazafclasifid = obj.id.fuerzaclasificacionid;
 			$scope.objetoPlazaDetail[index].npclasificacionnombre = obj.nombre;
 		}, function() {
 		});
