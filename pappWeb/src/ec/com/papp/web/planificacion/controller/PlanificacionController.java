@@ -1068,7 +1068,10 @@ public class PlanificacionController {
 				subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
 				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
 				if(subitemunidadacumuladorTOs.size()>0)
-					subitemunidadacumuladorTO=()
+					subitemunidadacumuladorTO=(SubitemunidadacumuladorTO)subitemunidadacumuladorTOs.iterator().next();
+				else
+					subitemunidadacumuladorTO.setValor(0.0);
+				jsonObject.put("valorajustado", (JSONObject)JSONSerializer.toJSON(subitemunidadacumuladorTO,subitemunidadacumuladorTO.getJsonConfig()));
 			}
 			//-----------------Las cabeceras cuando se da click en la descripcion de los niveles del arbol
 			//ActividadPlanificacion
