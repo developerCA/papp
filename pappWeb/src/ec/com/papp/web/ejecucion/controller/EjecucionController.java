@@ -582,10 +582,35 @@ public class EjecucionController {
 			}
 			//Verifico que no tenga atada una orden de gasto
 			else if(tipo.equals("LT")) {
-				
+				OrdengastoTO ordengastoTO=new OrdengastoTO();
+				ordengastoTO.setOrdengastocertificacionid(id);
+				Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
+				if(ordengastoTOs.size()>0) {
+					mensajes.setMsg("No se puede liquidar totalmente a una Certificación que esté asociada a una Orden de gasto");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
 			}
 			else if(tipo.equals("LP")) {
-				
+				OrdengastoTO ordengastoTO=new OrdengastoTO();
+				ordengastoTO.setOrdengastocertificacionid(id);
+				Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
+				if(ordengastoTOs.size()==0) {
+					mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else {
+					boolean aprobada=false;
+					for(OrdengastoTO ordengastoTO2:ordengastoTOs) {
+						if(ordengastoTO2.getEstado().equals("AP")) {
+							aprobada=true;
+							break;
+						}
+					}
+					if(!aprobada) {
+						mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto aprobada");
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
