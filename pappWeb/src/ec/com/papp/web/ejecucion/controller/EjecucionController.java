@@ -12,6 +12,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 
+import org.hibernate.tools.commons.to.OrderBy;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import antlr.Utils;
 import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
@@ -51,6 +53,7 @@ import ec.com.papp.planificacion.to.ProyectoTO;
 import ec.com.papp.planificacion.to.ProyectometaTO;
 import ec.com.papp.planificacion.to.ReformalineaTO;
 import ec.com.papp.planificacion.to.SubactividadTO;
+import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.to.SubprogramaTO;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.comun.util.Mensajes;
@@ -561,6 +564,22 @@ public class EjecucionController {
 				jsonObject.put("ordenreversionlinea", (JSONObject)JSONSerializer.toJSON(ordenreversionlineaTO,ordenreversionlineaTO.getJsonConfig()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordenreversionlineaTO.getNivelactid(), jsonObject, mensajes);
 			}
+			//subitemacumulador: Recibo el id del subitem y traigo el valor ajustado eso es para Certificacion de fondos
+			if(clase.equals("valordisponiblesi")) {
+				//1. traigo el total disponible del subitem
+				double total=ConsultasUtil.obtenertotalsubitem(id);
+				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
+				double valorcertificacion=0.0;
+				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificacionesnoeliminadas(id);
+				for(CertificacionlineaTO certificacionlineaTO:certificacionlineaTOs)
+					valorcertificacion=valorcertificacion+certificacionlineaTO.getValor().doubleValue();
+				//3. resto el total disponible menos las certificaciones ya creadas
+				double saldo=total-valorcertificacion;
+				Map<String, Double> saldodisponible=new HashMap<>();
+				saldodisponible.put("saldo", saldo);
+				jsonObject.put("valordisponiblesi", (JSONObject)JSONSerializer.toJSON(saldodisponible));
+			}
+
 
 			log.println("json retornado: " + jsonObject.toString());
 		} catch (Exception e) {

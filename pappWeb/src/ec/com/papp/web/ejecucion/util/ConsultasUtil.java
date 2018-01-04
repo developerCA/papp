@@ -24,6 +24,7 @@ import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.to.OrdenreversionTO;
+import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.UtilSession;
@@ -648,5 +649,40 @@ public class ConsultasUtil {
 //		}
 //		return jsonObject;
 //	}
-//	
+//
+	
+	/**
+	* Metodo que obtiene el total disponible de un subitem
+	*
+	* @param request 
+	* @return total
+	* @throws MyException
+	*/
+
+	public static Double obtenertotalsubitem(Long idsubitem) throws MyException {
+		double total=0.0;
+		try{
+			//traigo los datos de actividadunidadacumulador
+			SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
+			subitemunidadacumuladorTO.getId().setId(idsubitem);
+			//subitemunidadacumuladorTO.setTipo("A");
+			subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
+			Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
+			boolean ajustado=false;//uso una bandera para solo tomar un valor ajustado de la coleccion
+			for(SubitemunidadacumuladorTO subitemunidadacumuladorTO2:subitemunidadacumuladorTOs) {
+				if(subitemunidadacumuladorTO2.getTipo().equals("A") && !ajustado) {
+					ajustado=true;
+					total=total+subitemunidadacumuladorTO2.getValor().doubleValue();
+				}
+				else if(subitemunidadacumuladorTO2.getTipo().equals("R"))
+					total=total+subitemunidadacumuladorTO2.getTotal().doubleValue();
+			}
+			return total;
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+	}
+
 }

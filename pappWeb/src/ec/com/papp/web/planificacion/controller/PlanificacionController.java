@@ -1059,20 +1059,6 @@ public class PlanificacionController {
 				
 			}
 			
-			//subitemacumulador: Recibo el id del subitem y traigo el valor ajustado eso es para Certificacion de fondos
-			if(clase.equals("valorajustadosi")) {
-				//traigo los datos de actividadunidadacumulador
-				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
-				subitemunidadacumuladorTO.getId().setId(id);
-				subitemunidadacumuladorTO.setTipo("A");
-				subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
-				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
-				if(subitemunidadacumuladorTOs.size()>0)
-					subitemunidadacumuladorTO=(SubitemunidadacumuladorTO)subitemunidadacumuladorTOs.iterator().next();
-				else
-					subitemunidadacumuladorTO.setValor(0.0);
-				jsonObject.put("valorajustado", (JSONObject)JSONSerializer.toJSON(subitemunidadacumuladorTO,subitemunidadacumuladorTO.getJsonConfig()));
-			}
 			//-----------------Las cabeceras cuando se da click en la descripcion de los niveles del arbol
 			//ActividadPlanificacion
 			if(clase.equals("actividadplanificacion")){
