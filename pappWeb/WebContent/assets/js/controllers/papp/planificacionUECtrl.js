@@ -90,12 +90,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.consultar();
 	};
 
-	$scope.nuevo=function(){
-		$scope.objeto={id:null,estado:'A'};
-		$scope.detalles=[];
-		$scope.divActividad=true;
-	}
-
 	$scope.editarDistribucionPlanificado=function(){
 		$scope.divEditarDistribucion=true;
 		$scope.metaDistribucion('P');
@@ -151,6 +145,26 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		});
 	}
 
+	$scope.nuevo=function(node){
+		console.log(node);
+		$scope.objeto=null;
+		if (node.nodeTipo == "SA") {// Tarea
+			PlanificacionUEFactory.nuevo(
+				"TA",
+				node.id,
+				$rootScope.ejefiscal
+			).then(function(resp){
+				console.log(resp);
+				if (!resp.estado) return;
+				$scope.editar=true;
+				$scope.objeto=Object.assign({}, resp.json.tareaunidad);
+				$scope.divPlanificacionAnual=false;
+				$scope.divTarea=true;
+				console.log("NUEVO OBJETO tarea:", $scope.objeto);
+			});
+		}
+	}
+
 	$scope.editarPlanificacionAnual=function(node){
 		console.log(node);
 		$scope.objeto=null;
@@ -181,6 +195,91 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				}
 				$scope.divPlanificacionAnual=false;
 				$scope.divActividad=true;
+				console.log("OBJETO:", $scope.objeto);
+			});
+		}
+		if (node.nodeTipo == "SA") {
+			PlanificacionUEFactory.editar(
+				node.nodeTipo,
+				node.tablarelacionid,
+				"unidadid=" + node.npIdunidad +
+				"&nivelactividadid=" + node.padreID
+			).then(function(resp){
+				console.log(resp);
+				if (!resp.estado) return;
+				if ($scope.planificacionUE.npestadopresupuesto == "Planificado") {
+					$scope.editar=true;
+				} else {
+					$scope.editar=false;
+				}
+				$scope.objeto=Object.assign({}, resp.json.subactividadunidad);
+			    //$scope.detalles=resp.json.actividadunidadacumulador;
+				/* for (var i = 0; i < $scope.detalles.length; i++) {
+					if ($scope.detalles[i].tipo == "P") {
+						$scope.mPlanificadaID = i;
+					}
+					if ($scope.detalles[i].tipo == "A") {
+						$scope.mAjustadaID = i;
+					}
+				} */
+				$scope.divPlanificacionAnual=false;
+				$scope.divSubActividad=true;
+				console.log("OBJETO:", $scope.objeto);
+			});
+		}
+		if (node.nodeTipo == "TA") {
+			PlanificacionUEFactory.editar(
+				node.nodeTipo,
+				node.tablarelacionid,
+				"nivelactividad=" + node.padreID
+			).then(function(resp){
+				console.log(resp);
+				if (!resp.estado) return;
+				if ($scope.planificacionUE.npestadopresupuesto == "Planificado") {
+					$scope.editar=true;
+				} else {
+					$scope.editar=false;
+				}
+				$scope.objeto=Object.assign({}, resp.json.tareaunidad);
+			    //$scope.detalles=resp.json.actividadunidadacumulador;
+				/* for (var i = 0; i < $scope.detalles.length; i++) {
+					if ($scope.detalles[i].tipo == "P") {
+						$scope.mPlanificadaID = i;
+					}
+					if ($scope.detalles[i].tipo == "A") {
+						$scope.mAjustadaID = i;
+					}
+				} */
+				$scope.divPlanificacionAnual=false;
+				$scope.divTarea=true;
+				console.log("OBJETO:", $scope.objeto);
+			});
+		}
+		if (node.nodeTipo == "ST") {
+			PlanificacionUEFactory.editar(
+				node.nodeTipo,
+				node.tablarelacionid,
+				"nivelactividad=" + node.padreID
+			).then(function(resp){
+				console.log(resp);
+				if (!resp.estado) return;
+				if ($scope.planificacionUE.npestadopresupuesto == "Planificado") {
+					$scope.editar=true;
+				} else {
+					$scope.editar=false;
+				}
+				$scope.objeto=Object.assign({}, resp.json.tareaunidad);
+			    //$scope.detalles=resp.json.actividadunidadacumulador;
+				/* for (var i = 0; i < $scope.detalles.length; i++) {
+					if ($scope.detalles[i].tipo == "P") {
+						$scope.mPlanificadaID = i;
+					}
+					if ($scope.detalles[i].tipo == "A") {
+						$scope.mAjustadaID = i;
+					}
+				} */
+				$scope.divPlanificacionAnual=false;
+				$scope.divSubTarea=true;
 				console.log("OBJETO:", $scope.objeto);
 			});
 		}
@@ -293,6 +392,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			console.log(resp);
 			for (var i = 0; i < resp.length; i++) {
 				resp[i].nodeTipo = tipo;
+				resp[i].padreID = node.id;
 			}
 			var nodes=JSON.parse(JSON.stringify(resp).split('"descripcionexten":').join('"title":'));
 			node.nodes=nodes;
@@ -330,7 +430,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.submitformActividad = function(form) {
     	var tObj=$scope.objeto;
     	tObj.actividadunidadacumulador=$scope.detalles;
-    	PlanificacionUEFactory.guardarActividad(tObj).then(function(resp){
+    	PlanificacionUEFactory.guardarActividades("AC",tObj).then(function(resp){
 			if (resp.estado) {
 				form.$setPristine(true);
 				$scope.limpiarEdicion();
@@ -380,6 +480,69 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.resetformMetaDistribucionAjustada = function(form) {
+        form.$setPristine(true);
+        $scope.limpiarEdicion();
+	}
+
+	$scope.submitformSubActividad = function(form) {
+    	var tObj=$scope.objeto;
+    	//tObj.actividadunidadacumulador=$scope.detalles;
+    	PlanificacionUEFactory.guardarActividades("SA",tObj).then(function(resp){
+			if (resp.estado) {
+				form.$setPristine(true);
+				$scope.limpiarEdicion();
+	            //$scope.limpiar();
+	            SweetAlert.swal("Planificacion UE! - Subactividad", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Subactividad", resp.mensajes.msg, "error");
+			}
+		})
+	}
+
+	$scope.resetformSubActividad = function(form) {
+        //$scope.myModel = angular.copy($scope.master);
+        form.$setPristine(true);
+        $scope.limpiarEdicion();
+	}
+
+	$scope.submitformTarea = function(form) {
+    	var tObj=$scope.objeto;
+    	//tObj.actividadunidadacumulador=$scope.detalles;
+    	PlanificacionUEFactory.guardarActividades("TA",tObj).then(function(resp){
+			if (resp.estado) {
+				form.$setPristine(true);
+				$scope.limpiarEdicion();
+	            //$scope.limpiar();
+	            SweetAlert.swal("Planificacion UE! - Tarea", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Tarea", resp.mensajes.msg, "error");
+			}
+		})
+	}
+
+	$scope.resetformTarea = function(form) {
+        //$scope.myModel = angular.copy($scope.master);
+        form.$setPristine(true);
+        $scope.limpiarEdicion();
+	}
+
+	$scope.submitformSubTarea = function(form) {
+    	var tObj=$scope.objeto;
+    	//tObj.actividadunidadacumulador=$scope.detalles;
+    	PlanificacionUEFactory.guardarActividades("ST",tObj).then(function(resp){
+			if (resp.estado) {
+				form.$setPristine(true);
+				$scope.limpiarEdicion();
+	            //$scope.limpiar();
+	            SweetAlert.swal("Planificacion UE! - Subtarea", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Subtarea", resp.mensajes.msg, "error");
+			}
+		})
+	}
+
+	$scope.resetformSubTarea = function(form) {
+        //$scope.myModel = angular.copy($scope.master);
         form.$setPristine(true);
         $scope.limpiarEdicion();
 	}

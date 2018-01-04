@@ -63,6 +63,14 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             return Restangular.allUrl(url).customGET();
         },
 
+        nuevo: function(tipo, id, ejerciciofiscal) {
+            var url = "planificacion/nuevo/" +
+        		this.toTipo(tipo) +"/" +
+        		id + "/" +
+        		ejerciciofiscal;
+            return Restangular.allUrl(url).customGET();
+        },
+
         editar: function(tipo, id, unidad) {
             var url = "planificacion/" +
         		this.toTipo(tipo) +"/" +
@@ -89,8 +97,8 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             return Restangular.allUrl(url).customGET();
         },
 
-        guardarActividad: function(objeto) {
-            var url = "planificacion/actividadunidad/";
+        guardarActividades: function(tipo, objeto) {
+            var url = "planificacion/" + this.toTipo(tipo) + "/";
             return Restangular.allUrl(url).customPOST(objeto);
         },
 
@@ -103,11 +111,19 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             var url = "planificacion/planificacion/";
             return Restangular.allUrl(url).customPOST(objeto);
         },
-        
+
         toTipo: function(tipo) {
         	switch (tipo) {
         		case "AC":
         			return "actividadunidad";
+        		case "SA":
+        			return "subactividadunidad";
+        		case "TA":
+        			return "tareaunidad";
+        		case "ST":
+        			return "subtareaunidad";
+        		case "":
+        			return "";
         		default:
         			return "";
 			}
