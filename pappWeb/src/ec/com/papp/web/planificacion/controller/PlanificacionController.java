@@ -1389,9 +1389,12 @@ public class PlanificacionController {
 					cronogramalineaTO.getId().setId(cronogramaTO.getId());
 					cronogramalineaTOs=UtilSession.planificacionServicio.transObtenerCronogramalinea(cronogramalineaTO);
 					log.println("detalle cronograma: " + cronogramalineaTOs.size()); 
+					for(CronogramalineaTO cronogramalineaTO2:cronogramalineaTOs)
+						cronogramalineaTO2.setNpfechainicio(UtilGeneral.parseDateToString(cronogramalineaTO2.getFechainicio()));
 				}
 				else{
 					log.println("no existe el cronograma");
+					
 					//obtengo el ejerciciofiscal
 					cronogramaTO.setCronogramaunidadid(unidad);
 					cronogramaTO.setTiporelacion(tipo);
@@ -1405,10 +1408,11 @@ public class PlanificacionController {
 						cronogramalineaTO.setMes(Long.valueOf(i));
 						cronogramalineaTO.getId().setLineaid(Long.valueOf(contador));
 						if(i<10)
-							fecha=ejerciciofiscal+"-0"+i+"-01";
+							fecha="01"+"/0"+i+"/"+ejerciciofiscal;
 						else
-							fecha=ejerciciofiscal+"-"+i+"-01";
+							fecha="01"+"/"+i+"/"+ejerciciofiscal;
 						cronogramalineaTO.setFechainicio(UtilGeneral.parseStringToDate(fecha));
+						cronogramalineaTO.setNpfechainicio(fecha);
 						cronogramalineaTOs.add(cronogramalineaTO);
 					}
 				}

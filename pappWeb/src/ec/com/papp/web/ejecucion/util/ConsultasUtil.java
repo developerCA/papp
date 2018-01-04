@@ -19,6 +19,7 @@ import ec.com.papp.planificacion.dao.OrdendevengoDAO;
 import ec.com.papp.planificacion.dao.OrdengastoDAO;
 import ec.com.papp.planificacion.to.CertificacionOrdenVO;
 import ec.com.papp.planificacion.to.CertificacionTO;
+import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.GastoDevengoVO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
@@ -683,6 +684,56 @@ public class ConsultasUtil {
 			e.printStackTrace();
 			throw new MyException(e);
 		}
+	}
+
+	/**
+	* Metodo que consulta el detalle de una certificacion y sus lineas
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject obtenercertificacion(Long id,JSONObject jsonObject) throws MyException {
+		CertificacionTO certificacionTO=new CertificacionTO();
+		try{
+			certificacionTO = UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
+			if(certificacionTO.getCertificacionclasemoid()!=null){
+				certificacionTO.setNpcodigoregcmcgasto(certificacionTO.getClaseregistrocmcgasto().getCodigo());
+				certificacionTO.setNpcodigoregistro(certificacionTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getCodigo());
+				certificacionTO.setNpcodigomodificacion(certificacionTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getCodigo());
+				certificacionTO.setNpnombreregcmcgasto(certificacionTO.getClaseregistrocmcgasto().getNombre());
+				certificacionTO.setNpnombreregistro(certificacionTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getNombre());
+				certificacionTO.setNpnombremodificacion(certificacionTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getNombre());
+			}
+			if(certificacionTO.getCertificaciontipodocid()!=null){
+				certificacionTO.setNpcodigodocumento(certificacionTO.getTipodocumentoclasedocumento().getTipodocumento().getCodigo());
+				certificacionTO.setNpcodigotipodocumento(certificacionTO.getTipodocumentoclasedocumento().getCodigo());
+				certificacionTO.setNpnombredocumento(certificacionTO.getTipodocumentoclasedocumento().getTipodocumento().getNombre());
+				certificacionTO.setNpnombretipodocumento(certificacionTO.getTipodocumentoclasedocumento().getNombre());
+				certificacionTO.setCertificaciontipodocid(certificacionTO.getTipodocumentoclasedocumento().getId().getId());
+				certificacionTO.setCertificaciontpclasedocid(certificacionTO.getTipodocumentoclasedocumento().getId().getClasedocid());
+			}
+			//asigno las fechas
+			certificacionTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(certificacionTO.getFechaaprobacion()));
+			certificacionTO.setNpfechacreacion(UtilGeneral.parseDateToString(certificacionTO.getFechacreacion()));
+			certificacionTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(certificacionTO.getFechaeliminacion()));
+			certificacionTO.setNpfechaliquidacion(UtilGeneral.parseDateToString(certificacionTO.getFechaliquidacion()));
+			certificacionTO.setNpfechanegacion(UtilGeneral.parseDateToString(certificacionTO.getFechanegacion()));
+			certificacionTO.setNpfechasolicitud(UtilGeneral.parseDateToString(certificacionTO.getFechasolicitud()));
+			certificacionTO.setNpunidadcodigo(certificacionTO.getUnidad().getCodigopresup());
+			//traigo las certificacionlinea las traigo
+			CertificacionlineaTO certificacionlineaTO=new CertificacionlineaTO();
+			certificacionlineaTO.getId().setId(certificacionTO.getId());
+			//Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtenerCertificacionlinea(certificacionlineaTO);
+			Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificadoslinea(certificacionTO.getId());
+			jsonObject.put("certificacionlineas", (JSONArray)JSONSerializer.toJSON(certificacionlineaTOs,certificacionlineaTO.getJsonConfig()));
+			jsonObject.put("certificacion", (JSONObject)JSONSerializer.toJSON(certificacionTO,certificacionTO.getJsonConfig()));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
 	}
 
 }

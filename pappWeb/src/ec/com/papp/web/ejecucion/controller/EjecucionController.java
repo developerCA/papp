@@ -121,10 +121,7 @@ public class EjecucionController {
 					UtilSession.planificacionServicio.transCrearModificarCertificacionlinea(certificacionlineaTO);
 					id=certificacionlineaTO.getId().getId().toString() + certificacionlineaTO.getId().getLineaid();
 					//Traiga la lista de cetificacionlinea
-					CertificacionlineaTO certificacionlineaTO3=new CertificacionlineaTO();
-					certificacionlineaTO3.getId().setId(certificacionlineaTO.getId().getId());
-					Collection<CertificacionlineaTO> certificacionlineaTOs2=UtilSession.planificacionServicio.transObtenerCertificacionlinea(certificacionlineaTO3);
-					jsonObject.put("certificacionlineas", (JSONArray)JSONSerializer.toJSON(certificacionlineaTOs2,certificacionlineaTO.getJsonConfig()));
+					ConsultasUtil.obtenercertificacion(certificacionlineaTO.getId().getId(), jsonObject);
 				}
 				else{
 					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
@@ -425,38 +422,7 @@ public class EjecucionController {
 		try {
 			//Certificacion
 			if(clase.equals("certificacion")){
-				CertificacionTO certificacionTO=new CertificacionTO();
-				certificacionTO = UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
-				if(certificacionTO.getCertificacionclasemoid()!=null){
-					certificacionTO.setNpcodigoregcmcgasto(certificacionTO.getClaseregistrocmcgasto().getCodigo());
-					certificacionTO.setNpcodigoregistro(certificacionTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getCodigo());
-					certificacionTO.setNpcodigomodificacion(certificacionTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getCodigo());
-					certificacionTO.setNpnombreregcmcgasto(certificacionTO.getClaseregistrocmcgasto().getNombre());
-					certificacionTO.setNpnombreregistro(certificacionTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getNombre());
-					certificacionTO.setNpnombremodificacion(certificacionTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getNombre());
-				}
-				if(certificacionTO.getCertificaciontipodocid()!=null){
-					certificacionTO.setNpcodigodocumento(certificacionTO.getTipodocumentoclasedocumento().getTipodocumento().getCodigo());
-					certificacionTO.setNpcodigotipodocumento(certificacionTO.getTipodocumentoclasedocumento().getCodigo());
-					certificacionTO.setNpnombredocumento(certificacionTO.getTipodocumentoclasedocumento().getTipodocumento().getNombre());
-					certificacionTO.setNpnombretipodocumento(certificacionTO.getTipodocumentoclasedocumento().getNombre());
-					certificacionTO.setCertificaciontipodocid(certificacionTO.getTipodocumentoclasedocumento().getId().getId());
-					certificacionTO.setCertificaciontpclasedocid(certificacionTO.getTipodocumentoclasedocumento().getId().getClasedocid());
-				}
-				//asigno las fechas
-				certificacionTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(certificacionTO.getFechaaprobacion()));
-				certificacionTO.setNpfechacreacion(UtilGeneral.parseDateToString(certificacionTO.getFechacreacion()));
-				certificacionTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(certificacionTO.getFechaeliminacion()));
-				certificacionTO.setNpfechaliquidacion(UtilGeneral.parseDateToString(certificacionTO.getFechaliquidacion()));
-				certificacionTO.setNpfechanegacion(UtilGeneral.parseDateToString(certificacionTO.getFechanegacion()));
-				certificacionTO.setNpfechasolicitud(UtilGeneral.parseDateToString(certificacionTO.getFechasolicitud()));
-				//traigo las certificacionlinea las traigo
-				CertificacionlineaTO certificacionlineaTO=new CertificacionlineaTO();
-				certificacionlineaTO.getId().setId(certificacionTO.getId());
-				//Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtenerCertificacionlinea(certificacionlineaTO);
-				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificadoslinea(certificacionTO.getId());
-				jsonObject.put("certificacionlineas", (JSONArray)JSONSerializer.toJSON(certificacionlineaTOs,certificacionlineaTO.getJsonConfig()));
-				jsonObject.put("certificacion", (JSONObject)JSONSerializer.toJSON(certificacionTO,certificacionTO.getJsonConfig()));
+				ConsultasUtil.obtenercertificacion(id, jsonObject);
 			}
 			//Certificacionlinea
 			else if(clase.equals("certificacionlinea")){
@@ -604,6 +570,7 @@ public class EjecucionController {
 		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
 		try {
+			
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
 				CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
 				certificacionTO.setEstado(tipo);
@@ -613,7 +580,8 @@ public class EjecucionController {
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 			}
-			else if(tipo.equals("LI")) {
+			//Verifico que no tenga atada una orden de gasto
+			else if(tipo.equals("LT")) {
 				
 			}
 			else if(tipo.equals("LP")) {

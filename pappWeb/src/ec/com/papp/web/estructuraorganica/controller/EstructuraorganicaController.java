@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
+import ec.com.papp.administracion.to.CargoTO;
 import ec.com.papp.administracion.to.ClasificacionTO;
 import ec.com.papp.administracion.to.EmpleadoTO;
 import ec.com.papp.administracion.to.EspecialidadTO;
@@ -302,6 +303,7 @@ public class EstructuraorganicaController {
 				gradofuerzaTO.setGrado(new GradoTO());
 				gradofuerzaTO.setFuerza(new FuerzaTO());
 				unidadarbolplazaTO.setGradofuerza(gradofuerzaTO);
+				unidadarbolplazaTO.setCargo(new CargoTO());
 				Collection<UnidadarbolplazaTO> unidadarbolplazaTOs=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplaza(unidadarbolplazaTO);
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(unidadarbolplazaTOs,unidadarbolplazaTO.getJsonConfig()));
 				jsonObject.put("unidadarbol", (JSONObject)JSONSerializer.toJSON(unidadarbolTO,unidadarbolTO.getJsonConfigedit()));

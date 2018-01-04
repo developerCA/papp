@@ -11,6 +11,7 @@ import net.sf.json.JSONSerializer;
 import org.hibernate.tools.commons.to.OrderBy;
 import org.hibernate.tools.commons.to.SearchResultTO;
 
+import ec.com.papp.administracion.to.CargoTO;
 import ec.com.papp.administracion.to.DivisiongeograficaTO;
 import ec.com.papp.administracion.to.EjerciciofiscalTO;
 import ec.com.papp.administracion.to.EmpleadoTO;
@@ -284,6 +285,7 @@ public class ConsultasUtil {
 			}
 //			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 //				unidadarbolplazaTO.setEstado(parameters.get("estado"));
+			unidadarbolplazaTO.setCargo(new CargoTO());
 			Collection<UnidadarbolplazaTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplaza(unidadarbolplazaTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 //			HashMap<String, String>  totalMap=new HashMap<String, String>();
