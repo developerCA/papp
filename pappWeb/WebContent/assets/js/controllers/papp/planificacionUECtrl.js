@@ -440,7 +440,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
     };
 
 	$scope.submitformActividad = function(form) {
-    	var tObj=$scope.objeto;
+    	var tObj={};
+    	tObj=Object.assign(tObj, $scope.objeto);
+    	tObj.npFechainicio=toStringDate(tObj.npFechainicio);
+    	tObj.npFechafin=toStringDate(tObj.npFechafin);
     	tObj.actividadunidadacumulador=$scope.detalles;
     	PlanificacionUEFactory.guardarActividades("AC",tObj).then(function(resp){
 			if (resp.estado) {
@@ -461,7 +464,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformMetaDistribucionPlanificada = function(form) {
-    	var tObj=$scope.objetoPlanificada;
+    	var tObj={};
+    	tObj=Object.assign(tObj, $scope.objetoPlanificada);
     	tObj.cronogramalineaTOs=$scope.detallesPlanificada;
     	PlanificacionUEFactory.guardarMetaDistribucionPlanificada(tObj).then(function(resp){
 			if (resp.estado) {
@@ -574,6 +578,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	function toDate(fuente) {
+		if (fuente === null || fuente === "") {
+			return null;
+		}
 		try {
 			var parts = fuente.split('/');
 		} catch (err) {
@@ -583,8 +590,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	function toStringDate(fuente) {
-		if (fuente == null) {
-			return null;
+		if (fuente === null || fuente === "") {
+			return "";
 		}
 		try {
 			var parts = fuente.toISOString();

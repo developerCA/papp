@@ -912,7 +912,7 @@
 
 								<div ng-show="divMetaDistribucionPlanificada" class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionPlanificada"
-										novalidate ng-submit="form.submit(formMetaDistribucionPlanificada,'formMetaDistribucionPlanificada')">
+										novalidate ng-submit="form.submit(Form,'formMetaDistribucionPlanificada')">
 										<span>
 											&nbsp;Distribuci&oacute;n:
 											<a class="btn btn-sm btn-primary">
@@ -941,17 +941,17 @@
 																{{obj.npMes}}
 															</td>
 															<td>
-														        <input type="text" placeholder="Escriba una cantida para el mes"
+														        <input type="number" placeholder="Escriba una cantida para el mes"
 														            class="form-control" name="{{'pmetacantidad_'+$index}}" ng-model="obj.metacantidad"
 														            numericOnly style="text-align:right;" format="number" required>
 															</td>
 															<td>
-														        <input type="text" placeholder="Escriba una cantida para el mes"
+														        <input type="number" placeholder="Escriba una cantida para el mes"
 														            class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
 														            numericOnly style="text-align:right;" format="number" required>
 															</td>
 															<td>
-														        <input type="text" placeholder="Escriba una cantida para el mes"
+														        <input type="number" placeholder="Escriba una cantida para el mes"
 														            class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 														            numericOnly style="text-align:right;" format="number" required>
 															</td>
@@ -974,7 +974,7 @@
 
 								<div ng-show="divMetaDistribucionAjustada" class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionAjustada"
-										novalidate ng-submit="form.submit(formMetaDistribucionAjustada,'formMetaDistribucionAjustada')">
+										novalidate ng-submit="form.submit(formMetaDistribucionAjustadaForm,'formMetaDistribucionAjustada')">
 										<span>
 											&nbsp;Distribuci&oacute;n:
 											<a class="btn btn-sm btn-default" ng-click="editarDistribucionPlanificado();">
@@ -1003,17 +1003,17 @@
 																{{obj.npMes}}
 															</td>
 															<td>
-														        <input type="text" placeholder="Escriba una cantida para el mes"
+														        <input type="number" placeholder="Escriba una cantida para el mes"
 														            class="form-control" name="{{'ametacantidad_'+$index}}" ng-model="obj.metacantidad"
 														            numericOnly style="text-align:right;" format="number" required>
 															</td>
 															<td>
-														        <input type="text" placeholder="Escriba una cantida para el mes"
+														        <input type="number" placeholder="Escriba una cantida para el mes"
 														            class="form-control" name="{{'aporcentaje_'+$index}}" ng-model="obj.porcentaje"
 														            numericOnly style="text-align:right;" format="number" required>
 															</td>
 															<td>
-														        <input type="text" placeholder="Escriba una cantida para el mes"
+														        <input type="number" placeholder="Escriba una cantida para el mes"
 														            class="form-control" name="{{'avalor_'+$index}}" ng-model="obj.valor"
 														            numericOnly style="text-align:right;" format="number" required>
 															</td>
