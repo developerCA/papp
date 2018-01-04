@@ -16,12 +16,16 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.limpiarEdicion = function() {
 		$scope.divEditarDistribucion=false;
 		$scope.divPlanificacionAnual=true;
-		$scope.divActividad=false;
 		$scope.divEditarDistribucion=false;
 		$scope.mPlanificadaID=0;
 		$scope.mAjustadaID=0;
 		$scope.divMetaDistribucionPlanificada=false;
 		$scope.divMetaDistribucionAjustada=false;
+		$scope.divActividad=false;
+		$scope.divSubActividad=false;
+		$scope.divTarea=false;
+		$scope.divSubTarea=false;
+		//$scope.=false;
 
 		$scope.objeto=null;
 		$scope.detalles=null;
@@ -394,7 +398,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				resp[i].nodeTipo = tipo;
 				resp[i].padreID = node.id;
 			}
-			var nodes=JSON.parse(JSON.stringify(resp).split('"descripcionexten":').join('"title":'));
+			var nodes;
+			if (tipo == "AC" || tipo == "SA") {
+				nodes=JSON.parse(JSON.stringify(resp).split('"descripcionexten":').join('"title":'));
+			} else {
+				nodes=JSON.parse(JSON.stringify(resp).split('"npdescripcion":').join('"title":'));
+				for (var i = 0; i < nodes.length; i++) {
+					nodes[i].title = nodes[i].npcodigo + " - " + nodes[i].title;
+				}
+			}
 			node.nodes=nodes;
 		});
 	}
@@ -487,6 +499,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.submitformSubActividad = function(form) {
     	var tObj=$scope.objeto;
     	//tObj.actividadunidadacumulador=$scope.detalles;
+    	tObj.ponderacion = Number.parseInt(tObj.ponderacion);
     	PlanificacionUEFactory.guardarActividades("SA",tObj).then(function(resp){
 			if (resp.estado) {
 				form.$setPristine(true);
