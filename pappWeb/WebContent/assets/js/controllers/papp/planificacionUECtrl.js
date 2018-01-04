@@ -8,17 +8,38 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.editar=false;
-	$scope.objeto={};
-	$scope.objetoPA={};
-	$scope.detalles=[];
 	$scope.divPlanificacionAnual=false;
 	$scope.unidadid=null;
 	$scope.node=null;
+	$scope.data=[];
+
+	$scope.limpiarEdicion = function() {
+		$scope.divEditarDistribucion=false;
+		$scope.divPlanificacionAnual=true;
+		$scope.divActividad=false;
+		$scope.divEditarDistribucion=false;
+		$scope.mPlanificadaID=0;
+		$scope.mAjustadaID=0;
+		$scope.divMetaDistribucionPlanificada=false;
+		$scope.divMetaDistribucionAjustada=false;
+
+		$scope.objeto=null;
+		$scope.detalles=null;
+		$scope.objetoPA=null;
+		$scope.objetoPlanificada=null;
+		$scope.detallesPlanificada=null;
+		$scope.objetoAjustada=null;
+		$scope.detallesAjustada=null;
+	}
 
 	var pagina = 1;
 
-	$scope.consultar=function(){
-		$scope.data=[];
+	$scope.init=function() {
+		$scope.limpiarEdicion();
+		$scope.consultar();
+	}
+
+	$scope.consultar=function() {
 		PlanificacionUEFactory.traer(
 			pagina,
 			$rootScope.ejefiscal
@@ -72,11 +93,67 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.nuevo=function(){
 		$scope.objeto={id:null,estado:'A'};
 		$scope.detalles=[];
-		$scope.divItems=true;
+		$scope.divActividad=true;
+	}
+
+	$scope.editarDistribucionPlanificado=function(){
+		$scope.divEditarDistribucion=true;
+		$scope.metaDistribucion('P');
+	}
+
+	$scope.editarDistribucionAjustado=function(){
+		$scope.divEditarDistribucion=true;
+		$scope.metaDistribucion('A');
+	}
+
+	$scope.metaDistribucion = function(
+		tipometa
+	) {
+		var id;
+		if (tipometa == "P") {
+			if ($scope.detallesPlanificada != null) {
+				$scope.divMetaDistribucionPlanificada=true;
+				$scope.divMetaDistribucionAjustada=false;
+				return;
+			}
+			id = $scope.mPlanificadaID;
+		}
+		if (tipometa == "A") {
+			if ($scope.detallesAjustada != null) {
+				$scope.divMetaDistribucionPlanificada=false;
+				$scope.divMetaDistribucionAjustada=true;
+				return;
+			}
+			id = $scope.mAjustadaID;
+		}
+		PlanificacionUEFactory.editarMDP(
+			$scope.detalles[id].id.id,
+			$scope.detalles[id].id.acumid,
+			$scope.detalles[id].id.unidadid,
+			"AC",
+			tipometa,
+			$rootScope.ejefiscalobj.anio
+		).then(function(resp) {
+			console.log(resp);
+			if (!resp.estado) return;
+			if (tipometa == "P") {
+				$scope.objetoPlanificada=resp.json.cronograma;
+				$scope.detallesPlanificada=resp.json.cronogramalinea;
+				$scope.divMetaDistribucionPlanificada=true;
+				$scope.divMetaDistribucionAjustada=false;
+			}
+			if (tipometa == "A") {
+				$scope.objetoAjustada=resp.json.cronograma;
+				$scope.detallesAjustada=resp.json.cronogramalinea;
+				$scope.divMetaDistribucionPlanificada=false;
+				$scope.divMetaDistribucionAjustada=true;
+			}
+		});
 	}
 
 	$scope.editarPlanificacionAnual=function(node){
 		console.log(node);
+		$scope.objeto=null;
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
@@ -103,8 +180,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					}
 				}
 				$scope.divPlanificacionAnual=false;
-				$scope.divItems=true;
-				console.log(resp.json);
+				$scope.divActividad=true;
+				console.log("OBJETO:", $scope.objeto);
 			});
 		}
 	};
@@ -146,6 +223,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.node = node;
 		$scope.divMenuActividad = false;
 		$scope.divMenuSubitems = false;
+		$scope.objetoVista = null;
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.traerPAverActividad(
 				node.tablarelacionid,
@@ -154,7 +232,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			).then(function(resp){
 				console.log(node.nodeTipo);
 				if (resp.estado) {
-					$scope.objeto=resp.json.actividadplanificacion;
+					$scope.objetoVista=resp.json.actividadplanificacion;
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
 				}
@@ -168,7 +246,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			).then(function(resp){
 				console.log(node.nodeTipo);
 				if (resp.estado) {
-					$scope.objeto=resp.json.actividadplanificacion;
+					$scope.objetoVista=resp.json.actividadplanificacion;
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuSubitems = true;
 				}
@@ -221,62 +299,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		});
 	}
 
-	$scope.agregarDetalle=function(){
-		var obj={id: {id: null}, codigo: null, estado: "A", nombre: null};
-		$scope.detalles.push(obj);
-	}
-
-	$scope.removerDetalle=function(index){
-		$scope.detalles.splice(index,1);
-	}
-
-	$scope.metaDistribucion = function(
-		tipometa
-	) {
-		console.log($scope.planificacionUE);
-		console.log($scope.node);
-		console.log($rootScope);
-		PlanificacionUEFactory.editarMDP(
-			$scope.node.tablarelacionid,
-			$scope.planificacionUE.npacitividadunidad,
-			$scope.node.npIdunidad,
-			"AC",
-			tipometa,
-			$rootScope.ejefiscalobj.anio
-		).then(function(resp) {
-			console.log(resp);
-			if (!resp.estado) return;
-			$scope.objeto=resp.json.cronograma;
-			$scope.detalles=resp.json.cronogramalinea;
-			if (tipometa == "P") {
-				$scope.divMetaDistribucionPlanificada=true;
-			}
-			if (tipometa == "A") {
-				$scope.divMetaDistribucionAjustada=true;
-			}
-			$scope.divPlanificacionAnual=false;
-		});
-	}
-
-	$scope.metaDistribucionCancelar = function() {
-		$scope.divMetaDistribucionPlanificada=false;
-		$scope.divMetaDistribucionAjustada=false;
-	$scope.divPlanificacionAnual=true;
-	}
-/*
-	$scope.metaDistribucionAjustada = function() {
-		//$scope.node
-		$scope.divMetaDistribucionAjustada=true;
-		$scope.divPlanificacionAnual=false;
-	}
-
-	$scope.metaDistribucionAjustadaCancelar = function() {
-		$scope.divMetaDistribucionAjustada=false;
-		$scope.divPlanificacionAnual=true;
-	}
-*/
 	$scope.form = {
-        submit: function (form) {
+        submit: function(form,name) {
             var firstError = null;
             if (form.$invalid) {
                 var field = null, firstError = null;
@@ -294,43 +318,83 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	$scope.objeto.details=$scope.detalles;
-            	PlanificacionUEFactory.guardar($scope.objeto).then(function(resp){
-        			 if (resp.estado){
-        				 form.$setPristine(true);
-    					 $scope.divPlanificacionAnual=true;
-	 		             $scope.divItems=false;
-	 		             $scope.objeto={};
-	 		             $scope.detalles=[];
-	 		             $scope.limpiar();
-	 		             SweetAlert.swal("Planificacion UE!", "Registro registrado satisfactoriamente!", "success");
-        			 }else{
-	 		             SweetAlert.swal("Planificacion UE!", resp.mensajes.msg, "error");
-        			 }
-        		})
+            	eval("$scope.submit" + name + "(form);");
             }
-
         },
-        reset: function (form) {
-            $scope.myModel = angular.copy($scope.master);
+        reset: function(form) {
             form.$setPristine(true);
-			$scope.divPlanificacionAnual=true;
-            $scope.divItems=false;
-            $scope.objeto={};
+            $scope.limpiarEdicion();
         }
     };
+
+	$scope.submitformActividad = function(form) {
+    	var tObj=$scope.objeto;
+    	tObj.actividadunidadacumulador=$scope.detalles;
+    	PlanificacionUEFactory.guardarActividad(tObj).then(function(resp){
+			if (resp.estado) {
+				form.$setPristine(true);
+				$scope.limpiarEdicion();
+	            //$scope.limpiar();
+	            SweetAlert.swal("Planificacion UE! - Actividad", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Actividad", resp.mensajes.msg, "error");
+			}
+		})
+	}
+
+	$scope.resetformActividad = function(form) {
+        //$scope.myModel = angular.copy($scope.master);
+        form.$setPristine(true);
+        $scope.limpiarEdicion();
+	}
+
+	$scope.submitformMetaDistribucionPlanificada = function(form) {
+    	var tObj=$scope.objetoPlanificada;
+    	tObj.cronogramalineaTOs=$scope.detallesPlanificada;
+    	PlanificacionUEFactory.guardarMetaDistribucionPlanificada(tObj).then(function(resp){
+			if (resp.estado) {
+				form.$setPristine(true);
+	            SweetAlert.swal("Planificacion UE! - Distribucion Planificada", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Distribucion Planificada", resp.mensajes.msg, "error");
+			}
+		})
+	}
+
+	$scope.resetformMetaDistribucionPlanificada = function(form) {
+        form.$setPristine(true);
+        $scope.limpiarEdicion();
+	}
+
+	$scope.submitformMetaDistribucionAjustada = function(form) {
+    	var tObj=$scope.objetoAjustada;
+    	tObj.cronogramalineaTOs=$scope.detallesAjustada;
+    	PlanificacionUEFactory.guardarMetaDistribucionAjustada(tObj).then(function(resp){
+			if (resp.estado) {
+				form.$setPristine(true);
+	            SweetAlert.swal("Planificacion UE! - Distribucion Ajustada", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Distribucion Ajustada", resp.mensajes.msg, "error");
+			}
+		})
+	}
+
+	$scope.resetformMetaDistribucionAjustada = function(form) {
+        form.$setPristine(true);
+        $scope.limpiarEdicion();
+	}
 
 	$scope.popupnpFechainicio = {
 	    opened: false
 	};
 	$scope.opennpFechainicio = function() {
-	    $scope.npFechainicio.opened = true;
+	    $scope.popupnpFechainicio.opened = true;
 	}
 	$scope.popupnpFechafin = {
 	    opened: false
 	};
 	$scope.opennpFechafin = function() {
-	    $scope.npFechafin.opened = true;
+	    $scope.popupnpFechafin.opened = true;
 	}
 
 	function toDate(fuente) {

@@ -6,7 +6,7 @@
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <div class="container-fluid container-fullw"
-	ng-controller="PlanificacionUEController" ng-init="consultar()">
+	ng-controller="PlanificacionUEController" ng-init="init()">
 
 	<div class="row">
 		<div class="col-md-12"></div>
@@ -122,42 +122,8 @@
 						</div>
 
 						<div class="col-md-8">
-							<div class="row" ng-show="divMenuActividad">
-								<span>
-									<a class="btn btn-sm btn-dark-azure" ng-click="metaDistribucion('P');">
-										<i class="fa fa-plus-square"></i>
-										Meta: Distribuci&oacute;n Planificada
-									</a>
-								</span>
-								<span>
-									<a class="btn btn-sm btn-dark-azure" ng-click="metaDistribucion('A');">
-										<i class="fa fa-plus-square"></i>
-										Meta: Distribuci&oacute;n Ajustada
-									</a>
-								</span>
-							</div>
-							<div class="row" ng-show="divMenuSubitems">
-								<span>
-									<a class="btn btn-sm btn-dark-azure" ng-click=";">
-										<i class="fa fa-plus-square"></i>
-										Presupuesto: Distribución Planificada Compromiso
-									</a>
-								</span>
-								<span>
-									<a class="btn btn-sm btn-dark-azure" ng-click=";">
-										<i class="fa fa-plus-square"></i>
-										Presupuesto: Distribución Ajustada Compromiso
-									</a>
-								</span>
-								<span>
-									<a class="btn btn-sm btn-dark-azure" ng-click=";">
-										<i class="fa fa-plus-square"></i>
-										Presupuesto: Distribución Ajustada Devengo
-									</a>
-								</span>
-							</div>
-<br>
-							<form name="Form" id="form1" novalidate ng-submit="form.submit(Form)" ng-show="divPlanificacionAnualVista">
+							<form name="formPlanificacionAnualVista" id="formPlanificacionAnualVista" novalidate
+								ng-submit="form.submit(formPlanificacionAnualVista)" ng-show="divPlanificacionAnualVista">
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group"
@@ -168,7 +134,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <textarea name="npPlannacional" rows="5" style="width: 100%" placeholder="Escriba un objetivo plan nacional"
-										            class="form-control" ng-model="objeto.npPlannacional"
+										            class="form-control" ng-model="objetoVista.npPlannacional"
 										            required ng-disabled="true"></textarea>
 										    </div>
 										            <span class="error text-small block"
@@ -189,7 +155,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" placeholder="Escriba un objetivo midena"
-										            class="form-control" name="npObjetivoestrategico" ng-model="objeto.npObjetivoestrategico"
+										            class="form-control" name="npObjetivoestrategico" ng-model="objetoVista.npObjetivoestrategico"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -210,7 +176,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" placeholder="Escriba un objetivo ff.aa."
-										            class="form-control" name="npObjetivooperativo" ng-model="objeto.npObjetivooperativo"
+										            class="form-control" name="npObjetivooperativo" ng-model="objetoVista.npObjetivooperativo"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -231,7 +197,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" placeholder="Escriba un objetivo de fuerza"
-										            class="form-control" name="npObjetivofuerza" ng-model="objeto.npObjetivofuerza"
+										            class="form-control" name="npObjetivofuerza" ng-model="objetoVista.npObjetivofuerza"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -252,7 +218,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" placeholder="Escriba un instituci&oacute;n (udaf)"
-										            class="form-control" name="npInstitucion" ng-model="objeto.npInstitucion"
+										            class="form-control" name="npInstitucion" ng-model="objetoVista.npInstitucion"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -273,7 +239,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" placeholder="Escriba un entidad (eod)"
-										            class="form-control" name="npentidad" ng-model="objeto.npentidad"
+										            class="form-control" name="npentidad" ng-model="objetoVista.npentidad"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -294,7 +260,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" placeholder="Escriba un programa"
-										            class="form-control" name="npPrograma" ng-model="objeto.npPrograma"
+										            class="form-control" name="npPrograma" ng-model="objetoVista.npPrograma"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -315,7 +281,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" placeholder="Escriba un subprograma"
-										            class="form-control" name="npSubprograma" ng-model="objeto.npSubprograma"
+										            class="form-control" name="npSubprograma" ng-model="objetoVista.npSubprograma"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -336,7 +302,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" placeholder="Escriba un proyecto"
-										            class="form-control" name="npProyecto" ng-model="objeto.npProyecto"
+										            class="form-control" name="npProyecto" ng-model="objetoVista.npProyecto"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -357,7 +323,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un p. acumulado planificado"
-										            class="form-control" name="npacumuladoplanificado" ng-model="objeto.npacumuladoplanificado" ng-pattern="/^[0-9]*$/"
+										            class="form-control" name="npacumuladoplanificado" ng-model="objetoVista.npacumuladoplanificado" ng-pattern="/^[0-9]*$/"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -378,7 +344,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un p. acumulado ajustado"
-										            class="form-control" name="npacumuladoajustado" ng-model="objeto.npacumuladoajustado" ng-pattern="/^[0-9]*$/"
+										            class="form-control" name="npacumuladoajustado" ng-model="objetoVista.npacumuladoajustado" ng-pattern="/^[0-9]*$/"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -399,7 +365,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un ponderaci&oacute;n"
-										            class="form-control" name="ponderacion" ng-model="objeto.ponderacion" ng-pattern="/^[0-9]*$/"
+										            class="form-control" name="ponderacion" ng-model="objetoVista.ponderacion" ng-pattern="/^[0-9]*$/"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -420,7 +386,7 @@
 										    </label>
 										    <div class="input-group col-md-12">
 										        <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un ponderaci&oacute;n acumulada"
-										            class="form-control" name="npponderacionacumulado" ng-model="objeto.npponderacionacumulado" ng-pattern="/^[0-9]*$/"
+										            class="form-control" name="npponderacionacumulado" ng-model="objetoVista.npponderacionacumulado" ng-pattern="/^[0-9]*$/"
 										            required ng-disabled="true">
 										    </div>
 										    <span class="error text-small block"
@@ -445,17 +411,15 @@
 					</div>
 				</div>
 
-				<div ng-show="divItems" class="panel-body" id="panel1">
+				<div ng-show="divActividad" class="panel-body" id="panel1">
 
 					<div class="panel-heading">
-						<h5 class="panel-title">Items</h5>
+						<h5 class="panel-title">Actividad</h5>
 					</div>
 
-					<form name="Form" id="form1" novalidate
-						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-6">
-
+					<form name="Form" id="formActividad" novalidate ng-submit="form.submit(Form,'formActividad')">
 								<div class="form-group"
 								    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
 								    <label class="control-label">
@@ -463,7 +427,7 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
-								        class="form-control" name="codigo" ng-model="objeto.codigo" numericOnly style="text-align:right;"
+								        class="form-control" name="codigo" ng-model="objeto.codigo" numericOnly
 								        required ng-disabled="true">
 								    <span class="error text-small block"
 								        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
@@ -549,7 +513,7 @@
 								        Listo
 								    </span>
 								</div>
-								
+
 								<div class="form-group"
 								    ng-class="{'has-error':Form.lineabase.$dirty && Form.lineabase.$invalid, 'has-success':Form.lineabase.$valid}">
 								    <label class="control-label">
@@ -924,117 +888,153 @@
 								    </span>
 								</div>
 
-							</div>
-						</div>
 
-						<div class="row">
-							<div class="col-md-12">
-								<div class="pull-right">
-									<button type="submit" class="btn btn-primary" ng-show="editar">
-										Confirmar
-									</button>
-									<button type="reset" class="btn btn-default btn-o" ng-click="form.reset(Form)">
-										Cancelar
-									</button>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<button type="submit" class="btn btn-primary" ng-show="editar">
+													Confirmar
+												</button>
+												<a class="btn btn-sm btn-default" ng-click="resetformActividad(Form);">
+													Cancelar
+												</a>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-md-6">
+								<span ng-show="!divEditarDistribucion">
+									<a class="btn btn-sm btn-primary" ng-click="editarDistribucionPlanificado();">
+										Editar distribuci&oacute;n
+									</a>
+								</span>
+
+								<div ng-show="divMetaDistribucionPlanificada" class="panel panel-primary">
+									<form name="formMetaDistribucionPlanificada" id="formMetaDistribucionPlanificada"
+										novalidate ng-submit="form.submit(formMetaDistribucionPlanificada)">
+										<span>
+											&nbsp;Distribuci&oacute;n:
+											<a class="btn btn-sm btn-primary">
+												Planificado
+											</a>
+											<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
+												Ajustado
+											</a>
+											&nbsp;Unidad Tipo:
+											<select ng-disabled="true">
+												<option value="">MENSUAL</option>
+											</select>
+										</span>
+										<div class="panel-body no-padding panel-white">
+											<div class="col-md-12 panel-white no-padding">
+												<div>
+													<table class="table table-striped">
+														<tr>
+															<th>Mes</th>
+															<th>Cantidad</th>
+															<th>Porcentaje</th>
+															<th>Validaci&oacute;n</th>
+														</tr>
+														<tr ng-repeat="obj in detallesPlanificada">
+															<td>
+																{{obj.npMes}}
+															</td>
+															<td>
+														        <input type="text" placeholder="Escriba una cantida para el mes"
+														            class="form-control" name="{{'pmetacantidad_'+$index}}" ng-model="obj.metacantidad"
+														            numericOnly style="text-align:right;" format="number" required>
+															</td>
+															<td>
+														        <input type="text" placeholder="Escriba una cantida para el mes"
+														            class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
+														            numericOnly style="text-align:right;" format="number" required>
+															</td>
+															<td>
+														        <input type="text" placeholder="Escriba una cantida para el mes"
+														            class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
+														            numericOnly style="text-align:right;" format="number" required>
+															</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="pull-right">
+													<button type="submit" class="btn btn-primary" ng-show="editar">
+														Guardar
+													</button>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+
+								<div ng-show="divMetaDistribucionAjustada" class="panel panel-primary">
+									<form name="formMetaDistribucionAjustada" id="formMetaDistribucionAjustada"
+										novalidate ng-submit="form.submit(formMetaDistribucionAjustada)">
+										<span>
+											&nbsp;Distribuci&oacute;n:
+											<a class="btn btn-sm btn-default" ng-click="editarDistribucionPlanificado();">
+												Planificado
+											</a>
+											<a class="btn btn-sm btn-primary">
+												Ajustado
+											</a>
+											&nbsp;Unidad Tipo:
+											<select ng-disabled="true">
+												<option value="">MENSUAL</option>
+											</select>
+										</span>
+										<div class="panel-body no-padding panel-white">
+											<div class="col-md-12 panel-white no-padding">
+												<div>
+													<table class="table table-striped">
+														<tr>
+															<th>Mes</th>
+															<th>Cantidad</th>
+															<th>Porcentaje</th>
+															<th>Validaci&oacute;n</th>
+														</tr>
+														<tr ng-repeat="obj in detallesAjustada">
+															<td>
+																{{obj.npMes}}
+															</td>
+															<td>
+														        <input type="text" placeholder="Escriba una cantida para el mes"
+														            class="form-control" name="{{'ametacantidad_'+$index}}" ng-model="obj.metacantidad"
+														            numericOnly style="text-align:right;" format="number" required>
+															</td>
+															<td>
+														        <input type="text" placeholder="Escriba una cantida para el mes"
+														            class="form-control" name="{{'aporcentaje_'+$index}}" ng-model="obj.porcentaje"
+														            numericOnly style="text-align:right;" format="number" required>
+															</td>
+															<td>
+														        <input type="text" placeholder="Escriba una cantida para el mes"
+														            class="form-control" name="{{'avalor_'+$index}}" ng-model="obj.valor"
+														            numericOnly style="text-align:right;" format="number" required>
+															</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="pull-right">
+													<button type="submit" class="btn btn-primary" ng-show="editar">
+														Guardar
+													</button>
+												</div>
+											</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
-					</form>
-				</div>
-
-				<div ng-show="divMetaDistribucionPlanificada" class="panel-body" id="panel1">
-					<div class="panel-heading">
-						<h5 class="panel-title">
-							Meta Distribucion Planificada
-						</h5>
-					</div>
-
-					<form name="Form" id="formMetaDistribucionPlanificada" novalidate
-						ng-submit="form.submit(formMetaDistribucionPlanificada)">
-
-						<div class="row">
-							<div class="col-md-16">
-
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-12">
-								<div class="pull-right">
-									<button type="submit" class="btn btn-primary">
-										Guardar
-									</button>
-									<button type="reset" class="btn btn-default btn-o" ng-click="metaDistribucionPlanificadaCancelar();">
-										Cancelar
-									</button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-
-			</div>
-
-				<div ng-show="divMetaDistribucionAjustada" class="panel-body" id="panel1">
-					<div class="panel-heading">
-						<h5 class="panel-title">
-							Meta Distribucion Ajustada
-						</h5>
-					</div>
-
-					<form name="Form" id="formMetaDistribucionAjustada" novalidate
-						ng-submit="form.submit(formMetaDistribucionAjustada)">
-
-						<div class="row">
-							<div class="col-md-16">
-							
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-12">
-								<div class="pull-right">
-									<button type="submit" class="btn btn-primary">
-										Guardar
-									</button>
-									<button type="reset" class="btn btn-default btn-o" ng-click="metaDistribucionAjustadaCancelar();">
-										Cancelar
-									</button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-
-				<div ng-show="divMetaDistribucionAjustada1" class="panel-body" id="panel1">
-					<div class="panel-heading">
-						<h5 class="panel-title">
-							Meta Distribucion Ajustada
-						</h5>
-					</div>
-
-					<form name="Form" id="formMetaDistribucionAjustada" novalidate
-						ng-submit="form.submit(formMetaDistribucionAjustada)">
-
-						<div class="row">
-							<div class="col-md-16">
-							
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-12">
-								<div class="pull-right">
-									<button type="submit" class="btn btn-primary">
-										Guardar
-									</button>
-									<button type="reset" class="btn btn-default btn-o" ng-click="metaDistribucionAjustadaCancelar();">
-										Cancelar
-									</button>
-								</div>
-							</div>
-						</div>
-					</form>
 				</div>
 </div>
 			</div>
@@ -1045,7 +1045,7 @@
 <script type="text/ng-template" id="nodes_renderer.html">
 <div ui-tree-handle class="tree-node tree-node-content">
 	<table width="100%">
-		<tr>
+		<tr ng-click="vista(node);">
 			<td width="1%">
 				<div class="col-md-12">
 				    <a class="btn btn-default btn-xs"  data-nodrag ng-click="toggle(this);cargarHijos(node)">
@@ -1058,7 +1058,7 @@
 				</div>
 			</td>
 			<td width="100%" ng-click="vista(node);">
-				<a style="display:block;text-decoration:none;" ng-click="vista(node);">
+				<a style="display:block;text-decoration:none;">
 	    			{{node.title}}
 				</a>
 			</td>

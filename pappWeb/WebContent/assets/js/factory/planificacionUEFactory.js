@@ -89,7 +89,17 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             return Restangular.allUrl(url).customGET();
         },
 
-        guardar: function (objeto) {
+        guardarActividad: function(objeto) {
+            var url = "planificacion/actividadunidad/";
+            return Restangular.allUrl(url).customPOST(objeto);
+        },
+
+        guardarMetaDistribucionPlanificada: function(objeto) {
+            var url = "planificacion/cronograma/";
+            return Restangular.allUrl(url).customPOST(objeto);
+        },
+
+        guardarMetaDistribucionAjustada: function(objeto) {
             var url = "planificacion/planificacion/";
             return Restangular.allUrl(url).customPOST(objeto);
         },
