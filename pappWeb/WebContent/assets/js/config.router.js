@@ -613,7 +613,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalClaseGastoCtrl','ClaseGastoFactory',
         		'ModalClaseDocumentoCtrl','ClaseDocumentoFactory',
         		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
-        		'ModalCertificacionesFondoLiquidacionManuaCtrl'
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl',
+        		'ModalCertificacionesFondosLineasCtrl'
 		),
         title: 'Certificado de Fondos',
         ncyBreadcrumb: {

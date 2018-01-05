@@ -220,6 +220,7 @@ app.constant('JS_REQUIRES', {
         'ClaseDocumentoFactory':'assets/js/factory/claseDocumentoFactory.js',
         'AprobarCertificacionesFondosCtrl':'assets/js/controllers/papp/aprobarCertificacionesFondosCtrl.js',
         'AprobarCertificacionesFondosFactory':'assets/js/factory/aprobarCertificacionesFondosFactory.js',
+        'ModalCertificacionesFondosLineasCtrl':'assets/js/controllers/papp/modales/modalCertificacionesFondosLineasCtrl.js',
 
     },
     //*** angularJS Modules

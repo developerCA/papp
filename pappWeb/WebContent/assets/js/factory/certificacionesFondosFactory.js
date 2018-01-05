@@ -87,5 +87,60 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			var url = "ejecucion/flujo/" + id + "/EL";
 			return Restangular.allUrl(url).customGET();
 		},
+
+		nuevoLinea:function(
+			id
+		){
+			var url = "ejecucion/nuevo/certificacionlinea/" + id ;
+			return Restangular.allUrl(url).customGET();
+		},
+
+		listarSubtareas:function(
+			ejerciciofiscal,
+			unidad
+		){
+			var url = "planificacion/consultar/nivelactividad/" +
+				"nivelactividadejerfiscalid=" + ejerciciofiscal +
+				"&nivelactividadunidadid=" + unidad +
+				"&tipo=ST";
+			return Restangular.allUrl(url).customGET();
+		},
+
+		listarItems:function(
+			ejerciciofiscal,
+			unidad
+		){
+			var url = "planificacion/consultar/nivelactividad/" +
+				"nivelactividadejerfiscalid=" + ejerciciofiscal +
+				"&nivelactividadpadreid=" + unidad +
+				"&tipo=IT";
+			return Restangular.allUrl(url).customGET();
+		},
+
+		listarSubItems:function(
+			ejerciciofiscal,
+			unidad
+		){
+			var url = "planificacion/consultar/nivelactividad/" +
+				"nivelactividadejerfiscalid=" + ejerciciofiscal +
+				"&nivelactividadpadreid=" + unidad +
+				"&tipo=SI";
+			return Restangular.allUrl(url).customGET();
+		},
+
+		obtenerDetalles:function(
+			id
+		){
+			var url = "ejecucion/consultar/subitareainfo/" +
+				"nivelactividad=" + id;
+			return Restangular.allUrl(url).customGET();
+		},
+
+		guardarLinea:function(
+			objeto
+		){
+			var url = "ejecucion/certificacionlinea";
+			return Restangular.allUrl(url).customPOST(objeto);
+		},
 	}
 } ]);

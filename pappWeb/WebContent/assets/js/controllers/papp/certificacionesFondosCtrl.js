@@ -181,6 +181,26 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		$scope.objetodetalles={id: null};
 	};
 
+	$scope.agregarLinea = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalCertificacionesFondosLineas.html',
+			controller : 'ModalCertificacionesFondosLineasController',
+			size : 'lg',
+			resolve : {
+				certificacionID : function() {
+					return $scope.objeto.id;
+				},
+				unidadID : function() {
+					return $scope.objeto.certificacionunidadid;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+		}, function() {
+		});
+	};
+
 	$scope.abrirUnidad = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalUnidadCorto.html',
