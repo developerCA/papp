@@ -235,7 +235,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
-				"nivelactividad=" + node.padreID
+				"nivelactividad=" + node.id
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
