@@ -934,7 +934,8 @@ public class PlanificacionController {
 			else if(clase.equals("tareaunidad")){
 				TareaunidadTO tareaunidadTO = UtilSession.planificacionServicio.transObtenerTareaunidadTO(id);
 				tareaunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
-				tareaunidadTO.setPadre(Long.valueOf(parameters.get("nivelactividadid")));
+				log.println("nivelactividadid: " + parameters.get("nivelactividad"));
+				tareaunidadTO.setPadre(Long.valueOf(parameters.get("nivelactividad")));
 				tareaunidadTO.setNpponderacion(tareaunidadTO.getPonderacion());
 				jsonObject.put("tareaunidad", (JSONObject)JSONSerializer.toJSON(tareaunidadTO,tareaunidadTO.getJsonConfig()));
 			}
@@ -943,7 +944,7 @@ public class PlanificacionController {
 			else if(clase.equals("subtareaunidad")){
 				SubtareaunidadTO subtareaunidadTO = UtilSession.planificacionServicio.transObtenerSubtareaunidadTO(id);
 				subtareaunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
-				subtareaunidadTO.setPadre(Long.valueOf(parameters.get("nivelactividadid")));
+				subtareaunidadTO.setPadre(Long.valueOf(parameters.get("nivelactividad")));
 				subtareaunidadTO.setNpponderacion(subtareaunidadTO.getPonderacion());
 				jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfigcrear()));
 				//NOTA INDICAR EN DONDE SE GUARDA LA UNIDAD MEDIDA
