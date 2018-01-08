@@ -181,10 +181,10 @@ app.controller('TipoIdentificacionController', ["$scope", "$rootScope", "SweetAl
                         $scope.edicion = false;
                         $scope.objeto = {};
                         $scope.limpiar();
-                        SweetAlert.swal("Tipo de Identificaci�n", "Registro guardado satisfactoriamente!", "success");
+                        SweetAlert.swal("Tipo de Identificacion", "Registro guardado satisfactoriamente!", "success");
 
                     } else {
-                        SweetAlert.swal("Tipo de Identificaci�n", resp.mensajes.msg, "error");
+                        SweetAlert.swal("Tipo de Identificacion", resp.mensajes.msg, "error");
 
                     }
 

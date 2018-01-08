@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","fuerzaFactory",  function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,fuerzaFactory) {
+app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","fuerzaFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,fuerzaFactory) {
     	
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
@@ -101,7 +102,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalClasificacion.html',
 			controller : 'ModalClasificacionController',
-			size : 'md',
+			size : 'lg',
 			resolve : {
 				tipo : function() {
 					
