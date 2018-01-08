@@ -18,7 +18,7 @@ app.factory("especialidadesFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).getList();
 		},
 		
-		traerEspecialidadesFiltro : function(pagina,codigo,nombre,sigla,tipo,estado) {
+		traerEspecialidadesFiltro : function(pagina,codigo,nombre,sigla,tipo,estado,fuerza) {
 			var url = "administrar/consultar/especialidades/pagina="+pagina;
 
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
@@ -26,6 +26,7 @@ app.factory("especialidadesFactory", [ "Restangular", function(Restangular) {
 			if(sigla!=null && sigla != "") url += "&sigla=" + sigla;
 			if(tipo!=null && tipo != "") url += "&tipo=" + tipo;
 			if(estado!=null && estado != "") url += "&estado=" + estado;	
+			if(fuerza!=null && fuerza != "") url += "&fuerza=" + fuerza;	
 
 			return Restangular.allUrl(url).getList();
 		},

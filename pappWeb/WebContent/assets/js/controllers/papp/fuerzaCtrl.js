@@ -104,7 +104,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 			controller : 'ModalClasificacionController',
 			size : 'lg',
 			resolve : {
-				tipo : function() {
+				fuerza : function() {
 					
 					return $scope.objeto.tipo;
 				}
