@@ -195,7 +195,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
-	 		             if ($scope.nodeActivo == null) {
+	 		             if ($scope.nodeActivo.indicadorpadreid === undefined) {
 	 		            	 $scope.consultar();
 	 		             } else {
 	        				 if ($scope.nodeActivo.iscargado) {

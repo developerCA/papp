@@ -25,6 +25,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.divSubActividad=false;
 		$scope.divTarea=false;
 		$scope.divSubTarea=false;
+		$scope.divItem=false;
+		$scope.dibSubItem=false;
+		$scope.editar=false;
+		$scope.divPlanificacionAnualVista=false;
 		//$scope.=false;
 
 		$scope.objeto=null;
@@ -156,7 +160,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			PlanificacionUEFactory.nuevo(
 				"TA",
 				node.id,
-				$rootScope.ejefiscal
+				$rootScope.ejefiscal + "/unidadid=" + node.npIdunidad
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
@@ -165,6 +169,22 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.divPlanificacionAnual=false;
 				$scope.divTarea=true;
 				console.log("NUEVO OBJETO tarea:", $scope.objeto);
+			});
+		}
+		if (node.nodeTipo == "TA") {// Tarea
+			PlanificacionUEFactory.nuevo(
+				"ST",
+				node.id,
+				$rootScope.ejefiscal + "/unidadid=" + node.npIdunidad
+			).then(function(resp){
+				console.log(resp);
+				if (!resp.estado) return;
+				$scope.editar=true;
+				$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
+				$scope.detalles=resp.json.subtareaunidadacumulador;
+				$scope.divPlanificacionAnual=false;
+				$scope.divSubTarea=true;
+				console.log("NUEVO OBJETO subtarea:", $scope.objeto);
 			});
 		}
 	}
@@ -272,16 +292,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				} else {
 					$scope.editar=false;
 				}
-				$scope.objeto=Object.assign({}, resp.json.tareaunidad);
-			    //$scope.detalles=resp.json.actividadunidadacumulador;
-				/* for (var i = 0; i < $scope.detalles.length; i++) {
-					if ($scope.detalles[i].tipo == "P") {
-						$scope.mPlanificadaID = i;
-					}
-					if ($scope.detalles[i].tipo == "A") {
-						$scope.mAjustadaID = i;
-					}
-				} */
+				$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
+				$scope.detalles=resp.json.subtareaunidadacumulador;
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubTarea=true;
 				console.log("OBJETO:", $scope.objeto);

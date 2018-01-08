@@ -124,6 +124,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 			$scope.objeto.subitemunidadmedidaid = obj.id;
+			$scope.objeto.npunidadcodigo = obj.codigo;		
 			$scope.objeto.npunidadnombre = obj.nombre;		
 		}, function() {
 		});

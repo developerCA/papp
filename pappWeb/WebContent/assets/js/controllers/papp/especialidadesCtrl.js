@@ -1,11 +1,12 @@
 'use strict';
 
-app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","especialidadesFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, especialidadesFactory) {
+app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","especialidadesFactory","fuerzaFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, especialidadesFactory,fuerzaFactory) {
 
 	$scope.codigo=null;
 	$scope.nombre=null;
 	$scope.sigla=null;
+	$scope.fuerza=null;
 	$scope.tipo=null;
 	$scope.estado=null;
 
@@ -18,6 +19,11 @@ app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","
 	
 	$scope.consultar=function(){
 		$scope.data=[];
+		fuerzaFactory.traerFuerzas(1).then(function(resp){
+			//console.log("Fuerzas:",resp);
+			if (resp.meta)
+				$scope.listaFuerzas=resp;
+		})
 		especialidadesFactory.traerEspecialidades(pagina).then(function(resp){
 			//console.log(resp);
 			if (resp.meta)
@@ -53,7 +59,8 @@ app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","
 			$scope.nombre,
 			$scope.sigla,
 			$scope.tipo,
-			$scope.estado
+			$scope.estado,
+			$scope.fuerza
 		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;

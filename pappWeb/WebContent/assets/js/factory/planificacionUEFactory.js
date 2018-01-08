@@ -122,8 +122,10 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
         			return "tareaunidad";
         		case "ST":
         			return "subtareaunidad";
-        		case "":
-        			return "";
+        		case "IT":
+        			return "itemunidad";
+        		case "SI":
+        			return "subitemunidad";
         		default:
         			return "";
 			}

@@ -2,7 +2,6 @@
 	<h4 class="mainTitle no-margin">
 		Planificaci&oacute;n UE
 	</h4>
-
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <div class="container-fluid container-fullw"
@@ -1140,9 +1139,6 @@
 						</div>
 					</div>
 				</div>
-</div>
-			</div>
-		</div>
 
 				<div ng-show="divTarea" class="panel-body" id="panelTarea">
 					<div class="panel-heading">
@@ -1159,7 +1155,7 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
-								        class="form-control" name="npcodigo" ng-model="objeto.npcodigo"
+								        class="form-control" name="npcodigo" ng-model="objeto.codigo"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
 								        ng-if="Form.npcodigo.$dirty && Form.npcodigo.$invalid">
@@ -1178,7 +1174,7 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un descripci&oacute;n"
-								        class="form-control" name="npdescripcion" ng-model="objeto.npdescripcion"
+								        class="form-control" name="npdescripcion" ng-model="objeto.descripcion"
 								        required>
 								    <span class="error text-small block"
 								        ng-if="Form.npdescripcion.$dirty && Form.npdescripcion.$invalid">
@@ -1249,7 +1245,7 @@
 
 				<div ng-show="divSubTarea" class="panel-body" id="panelSubTarea">
 					<div class="panel-heading">
-						<h5 class="panel-title">Tarea</h5>
+						<h5 class="panel-title">SubTarea</h5>
 					</div>
 
 					<div class="row">
@@ -1257,11 +1253,347 @@
 							<form name="Form" id="formSubTarea" novalidate ng-submit="form.submit(Form,'formSubTarea')">
 								<div class="row">
 									<div class="col-md-12">
+										<div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+    <label class="control-label">
+        C&oacute;digo
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Escriba un c&oacute;digo"
+        class="form-control" name="codigo" ng-model="objeto.codigo"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.codigo.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
+    <label class="control-label">
+        Descripci&oacute;n
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Escriba un descripci&oacute;n"
+        class="form-control" name="descripcion" ng-model="objeto.descripcion"
+        required>
+    <span class="error text-small block"
+        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.descripcion.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.ponderacion.$dirty && Form.ponderacion.$invalid, 'has-success':Form.ponderacion.$valid}">
+    <label class="control-label">
+        Ponderaci&oacute;n
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Escriba un ponderaci&oacute;n"
+        class="form-control" name="ponderacion" ng-model="objeto.ponderacion" numericOnly style="text-align:right;"
+        required format="number">
+    <span class="error text-small block"
+        ng-if="Form.ponderacion.$dirty && Form.ponderacion.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.ponderacion.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+    <label class="control-label">
+        Estado
+        <span class="symbol required"></span>
+    </label>
+    <select class="form-control" name="estado"
+        ng-model="objeto.estado" required>
+        <option value="A">Activo</option>
+        <option value="I">Inactivo</option>
+    </select>
+    <span class="error text-small block"
+        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.estado.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npUnidadMedidaCodigo.$dirty && Form.npUnidadMedidaCodigo.$invalid, 'has-success':Form.npUnidadMedidaCodigo.$valid}">
+    <label class="control-label">
+        Unidad Medida C&oacute;digo
+        <span class="symbol required"></span>
+    </label>
+    <div class="input-group">
+        <input type="text" placeholder="Escriba un unidad medida c&oacute;digo"
+            class="form-control" name="npUnidadMedidaCodigo" ng-disabled="true"
+            ng-model="objeto.npUnidadMedidaCodigo">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-primary"
+                ng-click="abrirUnidadMedidaCodigo()">
+                <i class="fa fa-search"></i>
+                Seleccione
+            </button>
+        </span>
+    </div>
+    <span class="error text-small block"
+        ng-if="Form.npUnidadMedidaCodigo.$dirty && Form.npUnidadMedidaCodigo.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npUnidadMedidaCodigo.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npUnidadMedidaNombre.$dirty && Form.npUnidadMedidaNombre.$invalid, 'has-success':Form.npUnidadMedidaNombre.$valid}">
+    <label class="control-label">
+        Unidad Medida Nombre
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Seleccione una Unidad Medida"
+        class="form-control" name="npUnidadMedidaNombre" ng-model="objeto.npUnidadMedidaNombre"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.npUnidadMedidaNombre.$dirty && Form.npUnidadMedidaNombre.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npUnidadMedidaNombre.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npGrupoMedidaCodigo.$dirty && Form.npGrupoMedidaCodigo.$invalid, 'has-success':Form.npGrupoMedidaCodigo.$valid}">
+    <label class="control-label">
+        Grupo Medida C&oacute;digo
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Seleccione una Unidad Medida"
+        class="form-control" name="npGrupoMedidaCodigo" ng-model="objeto.npGrupoMedidaCodigo"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.npGrupoMedidaCodigo.$dirty && Form.npGrupoMedidaCodigo.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npGrupoMedidaCodigo.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npGrupoMedidaNombre.$dirty && Form.npGrupoMedidaNombre.$invalid, 'has-success':Form.npGrupoMedidaNombre.$valid}">
+    <label class="control-label">
+        Grupo Medida Nombre
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Seleccione una Unidad Medida"
+        class="form-control" name="npGrupoMedidaNombre" ng-model="objeto.npGrupoMedidaNombre"
+        required ng-disabled="true">
+    <span class="error text-small block"
+        ng-if="Form.npGrupoMedidaNombre.$dirty && Form.npGrupoMedidaNombre.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npGrupoMedidaNombre.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npMetaPlanificadaPorcentaje.$dirty && Form.npMetaPlanificadaPorcentaje.$invalid, 'has-success':Form.npMetaPlanificadaPorcentaje.$valid}">
+    <label class="control-label">
+        Meta Planificada Porcentaje
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Escriba un meta planificada porcentaje"
+        class="form-control" name="npMetaPlanificadaPorcentaje" ng-model="objeto.npMetaPlanificadaPorcentaje" numericOnly style="text-align:right;"
+        required ng-disabled="true" format="number">
+    <span class="error text-small block"
+        ng-if="Form.npMetaPlanificadaPorcentaje.$dirty && Form.npMetaPlanificadaPorcentaje.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npMetaPlanificadaPorcentaje.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npMetaPlanificadaCantidad.$dirty && Form.npMetaPlanificadaCantidad.$invalid, 'has-success':Form.npMetaPlanificadaCantidad.$valid}">
+    <label class="control-label">
+        Meta Planificada Cantidad
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Escriba un meta planificada cantidad"
+        class="form-control" name="npMetaPlanificadaCantidad" ng-model="objeto.npMetaPlanificadaCantidad" numericOnly style="text-align:right;"
+        required format="number">
+    <span class="error text-small block"
+        ng-if="Form.npMetaPlanificadaCantidad.$dirty && Form.npMetaPlanificadaCantidad.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npMetaPlanificadaCantidad.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npMetaPlanificadaDescripcion.$dirty && Form.npMetaPlanificadaDescripcion.$invalid, 'has-success':Form.npMetaPlanificadaDescripcion.$valid}">
+    <label class="control-label">
+        Meta Planificada Descripci&oacute;n
+        <span class="symbol required"></span>
+    </label>
+    <textarea name="npMetaPlanificadaDescripcion" rows="5" style="width: 100%" placeholder="Escriba un meta planificada descripci&oacute;n"
+        class="form-control" ng-model="objeto.npMetaPlanificadaDescripcion"
+        required></textarea>
+    <span class="error text-small block"
+        ng-if="Form.npMetaPlanificadaDescripcion.$dirty && Form.npMetaPlanificadaDescripcion.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npMetaPlanificadaDescripcion.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npMetaAjustadaPorcentaje.$dirty && Form.npMetaAjustadaPorcentaje.$invalid, 'has-success':Form.npMetaAjustadaPorcentaje.$valid}">
+    <label class="control-label">
+        Meta Ajustada Porcentaje
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Escriba un meta ajustada porcentaje"
+        class="form-control" name="npMetaAjustadaPorcentaje" ng-model="objeto.npMetaAjustadaPorcentaje" numericOnly style="text-align:right;"
+        required ng-disabled="true" format="number">
+    <span class="error text-small block"
+        ng-if="Form.npMetaAjustadaPorcentaje.$dirty && Form.npMetaAjustadaPorcentaje.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npMetaAjustadaPorcentaje.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npMetaAjustadaCantidad.$dirty && Form.npMetaAjustadaCantidad.$invalid, 'has-success':Form.npMetaAjustadaCantidad.$valid}">
+    <label class="control-label">
+        Meta Ajustada Cantidad
+        <span class="symbol required"></span>
+    </label>
+    <input type="text" placeholder="Escriba un meta ajustada cantidad"
+        class="form-control" name="npMetaAjustadaCantidad" ng-model="objeto.npMetaAjustadaCantidad" numericOnly style="text-align:right;"
+        required format="number">
+    <span class="error text-small block"
+        ng-if="Form.npMetaAjustadaCantidad.$dirty && Form.npMetaAjustadaCantidad.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npMetaAjustadaCantidad.$valid">
+        Listo
+    </span>
+</div>
+
+<div class="form-group"
+    ng-class="{'has-error':Form.npMetaAjustadaDescripcion.$dirty && Form.npMetaAjustadaDescripcion.$invalid, 'has-success':Form.npMetaAjustadaDescripcion.$valid}">
+    <label class="control-label">
+        Meta Ajustada Descripci&oacute;n
+        <span class="symbol required"></span>
+    </label>
+    <textarea name="npMetaAjustadaDescripcion" rows="5" style="width: 100%" placeholder="Escriba un meta ajustada descripci&oacute;n"
+        class="form-control" ng-model="objeto.npMetaAjustadaDescripcion"
+        required></textarea>
+    <span class="error text-small block"
+        ng-if="Form.npMetaAjustadaDescripcion.$dirty && Form.npMetaAjustadaDescripcion.$invalid">
+        Incorrecto
+    </span>
+    <span class="success text-small"
+        ng-if="Form.npMetaAjustadaDescripcion.$valid">
+        Listo
+    </span>
+</div>
+
+										</div>
 										<div class="pull-right">
 											<button type="submit" class="btn btn-primary" ng-show="editar">
 												Confirmar
 											</button>
 											<a class="btn btn-sm btn-default" ng-click="resetformSubTarea(Form);">
+												Cancelar
+											</a>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div ng-show="divItem" class="panel-body" id="panelItem">
+					<div class="panel-heading">
+						<h5 class="panel-title">Item</h5>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<form name="Form" id="formItem" novalidate ng-submit="form.submit(Form,'formItem')">
+								<div class="row">
+									<div class="col-md-12">
+										<div>
+
+										</div>
+										<div class="pull-right">
+											<button type="submit" class="btn btn-primary" ng-show="editar">
+												Confirmar
+											</button>
+											<a class="btn btn-sm btn-default" ng-click="resetformItem(Form);">
+												Cancelar
+											</a>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div ng-show="divSubItem" class="panel-body" id="panelSubItem">
+					<div class="panel-heading">
+						<h5 class="panel-title">SubItem</h5>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<form name="Form" id="formSubItem" novalidate ng-submit="form.submit(Form,'formSubItem')">
+								<div class="row">
+									<div class="col-md-12">
+										<div>
+
+										</div>
+										<div class="pull-right">
+											<button type="submit" class="btn btn-primary" ng-show="editar">
+												Confirmar
+											</button>
+											<a class="btn btn-sm btn-default" ng-click="resetformSubItem(Form);">
 												Cancelar
 											</a>
 										</div>

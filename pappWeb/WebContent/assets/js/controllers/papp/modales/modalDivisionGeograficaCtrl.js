@@ -13,21 +13,17 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
 		$scope.data=[];
 		divisionGeograficaFactory.traerDivisiones(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-			
 		})
-	
 	};
 
 	$scope.consultarPaises=function(){
 		$scope.data=[];
 		$scope.tipo=null;
 		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'A',null).then(function(resp){
-			
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -56,8 +52,13 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	$scope.filtrar=function(){
 		//console.log("tipo:'"+tipo+"'");
 		$scope.data=[];
-		divisionGeograficaFactory.traerDivisionesFiltro(pagina,$scope.nombreFiltro,null,"A",$scope.tipo).then(function(resp){
-			
+		divisionGeograficaFactory.traerDivisionesFiltro(
+			pagina,
+			$scope.nombreFiltro,
+			null,
+			estadoFiltro,
+			($scope.tipo != null? $scope.tipo: tipo) 
+		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})

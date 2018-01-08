@@ -21,7 +21,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	$scope.nuevoar=false;
 	$scope.guardar=false;
 	$scope.objeto={estado:null};
-	$scope.objetodetalles={};
+	$scope.detalles={};
 	
     $scope.pagina = 1;
     $scope.aplicafiltro=false;
@@ -114,7 +114,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.objeto=resp.json.certificacion;
-			$scope.objetodetalles={};
+			$scope.detalles={};
 			$scope.agregarDetalles();
 			$scope.edicion=true;
 			$scope.nuevoar=true;
@@ -127,7 +127,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.certificacion;
-			    $scope.objetodetalles=resp.json.certificacionlineas;
+			    $scope.detalles=resp.json.certificacionlineas;
 			}
 			$scope.edicion=true;
 			$scope.nuevoar=false;
@@ -178,7 +178,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	}
 
 	$scope.agregarDetalles=function(){
-		$scope.objetodetalles={id: null};
+		$scope.detalles={id: null};
 	};
 
 	$scope.agregarLinea = function() {
@@ -196,7 +196,9 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			console.log(obj);//130
+		    $scope.detalles=obj;
+            SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro registrado satisfactoriamente!", "success");
 		}, function() {
 		});
 	};
