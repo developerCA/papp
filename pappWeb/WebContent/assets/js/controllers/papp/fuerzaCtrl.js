@@ -98,32 +98,23 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 	};
 	
 	$scope.buscarClasificacion=function(obj){
-
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalClasificacion.html',
 			controller : 'ModalClasificacionController',
 			size : 'lg',
 			resolve : {
 				fuerza : function() {
-					
 					return $scope.objeto.tipo;
 				}
 			}
 		});
-
 		modalInstance.result.then(function(seleccion) {
-			
 			console.log(seleccion);
 			obj.codigo	 = seleccion.codigo;
 			obj.nombre = seleccion.nombre;
 			obj.id.fuerzaclasificacionid=seleccion.id;
-			//$scope.obj.nptipopadrenombre = obj.nptipopadrenombre;
-			console.log(obj);
-			
 		}, function() {
-			
 		});
-
 	};
 	
 	 $scope.form = {

@@ -148,7 +148,12 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalInstitutoEntidad.html',
 			controller : 'ModalInstitutoEntidadController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				ejefiscal : function() {
+					return $rootScope.ejefiscal;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);

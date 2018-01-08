@@ -9,6 +9,7 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","f
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
+	$scope.data=[];
 	
 	var pagina = 1;
 	
@@ -22,6 +23,15 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","f
 		})
 	};
 	
+	$scope.consultarSinFuerza=function(){
+		$scope.data=[];
+		clasificacionFactory.traerClasificacionesFiltro(pagina, null, null, null, 'A').then(function(resp){
+			console.log(resp);
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	};
+
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
@@ -41,11 +51,18 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","f
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
 		$scope.data=[];
 		clasificacionFactory.traerClasificacionesFuerzaFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, $scope.estadoFiltro).then(function(resp){
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
+
+	$scope.filtrarSinFuerza=function(){
+		$scope.data=[];
+		clasificacionFactory.traerClasificacionesFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, $scope.estadoFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
