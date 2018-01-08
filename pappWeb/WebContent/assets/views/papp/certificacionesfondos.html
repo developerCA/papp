@@ -628,30 +628,14 @@
 														<td>
 															{{obj.npSubitem}}
 														</td>
-														<td>
-															{{obj.npcodigoinstitucion}}
+														<td style="text-align:right;">
+															{{ obj.npvalorinicial | currency }}
+														</td>
+														<td style="text-align:right;">
+															{{ obj.npvalor | currency }}
 														</td>
 														<td>
-															{{obj.npnombreinstitucion}}
-														</td>
-														<td>
-															<div class="input-group">
-																<input type="text" placeholder="Seleccione uno"
-																	class="form-control" name="npnombreinstitucion" ng-disabled="true"
-																	ng-model="obj.unidadinstitucionentid" />
-																<span class="input-group-btn">
-																	<button type="button" class="btn btn-primary"
-																		ng-click="abrirInstitutoEntidad($index)">
-																		<i class="fa fa-search"></i>
-																	</button>
-																</span>
-															</div>
-														</td>
-														<td>
-															{{obj.npcodigoentidad}}
-														</td>
-														<td>
-															{{obj.npnombreentidad}}
+															{{obj.npfuentefinanciamiento}}
 														</td>
 													</tr>
 												</table>

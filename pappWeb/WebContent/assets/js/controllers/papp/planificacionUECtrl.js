@@ -156,7 +156,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			PlanificacionUEFactory.nuevo(
 				"TA",
 				node.id,
-				$rootScope.ejefiscal
+				$rootScope.ejefiscal + "/unidadid=" + node.npIdunidad
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
