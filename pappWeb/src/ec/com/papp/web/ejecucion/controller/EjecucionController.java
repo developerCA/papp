@@ -487,7 +487,7 @@ public class EjecucionController {
 				}
 				if(ordengastoTO.getOrdengastoproveedorid()!=null) {
 					ordengastoTO.setNpproveedorcodigo(ordengastoTO.getSocionegocio3().getCodigo());
-					ordengastoTO.setNpproveedornomre(ordengastoTO.getSocionegocio3().getNombremostrado());
+					ordengastoTO.setNpproveedornombre(ordengastoTO.getSocionegocio3().getNombremostrado());
 				}
 				//asigno las fechas
 				ordengastoTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(ordengastoTO.getFechaaprobacion()));
@@ -709,7 +709,7 @@ public class EjecucionController {
 		JSONObject jsonObject=new JSONObject();
 		try {
 			OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
-			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
+			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
 				ordengastoTO.setEstado(tipo);
 				if(!cur.equals("0"))
 					ordengastoTO.setCur(cur);
@@ -718,38 +718,6 @@ public class EjecucionController {
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
-			}
-			//Verifico que no tenga atada una orden de gasto
-			else if(tipo.equals("LT")) {
-				OrdengastoTO ordengastoTO=new OrdengastoTO();
-				ordengastoTO.setOrdengastocertificacionid(id);
-				Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
-				if(ordengastoTOs.size()>0) {
-					mensajes.setMsg("No se puede liquidar totalmente a una Certificación que esté asociada a una Orden de gasto");
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-				}
-			}
-			else if(tipo.equals("LP")) {
-				OrdengastoTO ordengastoTO=new OrdengastoTO();
-				ordengastoTO.setOrdengastocertificacionid(id);
-				Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
-				if(ordengastoTOs.size()==0) {
-					mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto");
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-				}
-				else {
-					boolean aprobada=false;
-					for(OrdengastoTO ordengastoTO2:ordengastoTOs) {
-						if(ordengastoTO2.getEstado().equals("AP")) {
-							aprobada=true;
-							break;
-						}
-					}
-					if(!aprobada) {
-						mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto aprobada");
-						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-					}
-				}
 			}
 			UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO,tipo);
 			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
