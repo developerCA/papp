@@ -299,6 +299,46 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				console.log("OBJETO:", $scope.objeto);
 			});
 		}
+		if (node.nodeTipo == "IT") {
+			PlanificacionUEFactory.editar(
+				node.nodeTipo,
+				node.tablarelacionid,
+				"nivelactividad=" + node.padreID
+			).then(function(resp){
+				console.log(resp);
+				if (!resp.estado) return;
+				if ($scope.planificacionUE.npestadopresupuesto == "Planificado") {
+					$scope.editar=true;
+				} else {
+					$scope.editar=false;
+				}
+				$scope.objeto=Object.assign({}, resp.json.itemunidad);
+				//$scope.detalles=resp.json.subtareaunidadacumulador;
+				$scope.divPlanificacionAnual=false;
+				$scope.divItem=true;
+				console.log("Editar OBJETO:", $scope.objeto);
+			});
+		}
+		if (node.nodeTipo == "SI") {
+			PlanificacionUEFactory.editar(
+				node.nodeTipo,
+				node.tablarelacionid,
+				"nivelactividad=" + node.padreID
+			).then(function(resp){
+				console.log(resp);
+				if (!resp.estado) return;
+				if ($scope.planificacionUE.npestadopresupuesto == "Planificado") {
+					$scope.editar=true;
+				} else {
+					$scope.editar=false;
+				}
+				$scope.objeto=Object.assign({}, resp.json.subitemunidad);
+				//$scope.detalles=resp.json.subtareaunidadacumulador;
+				$scope.divPlanificacionAnual=false;
+				$scope.divSubItem=true;
+				console.log("Editar OBJETO:", $scope.objeto);
+			});
+		}
 	};
 
 	$scope.regresarPUE=function(obj) {
@@ -422,6 +462,57 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			node.nodes=nodes;
 		});
 	}
+
+	$scope.abrirItemCodigo = function(index) {
+		//console.log("aqui:", $scope.objeto);
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalItems.html',
+			controller : 'ModalItemController',
+			size : 'lg',
+			resolve : {
+				tipo : function() {
+					return $scope.objeto.tipo;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.itemunidaditemid = obj.id;
+			$scope.objeto.npcodigoitem = obj.codigo;
+			$scope.objeto.npnombreitem = obj.nombre;		
+		}, function() {
+		});
+	};
+
+	$scope.abrirObraCodigo = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalObra.html',
+			controller : 'ModalObraController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.itemunidadobraid = obj.id;
+			$scope.objeto.npcodigoobra = obj.codigo;
+			$scope.objeto.npnombreobra = obj.nombre;		
+		}, function() {
+		});
+	};
+
+	$scope.abrirFuenteFinanciamientoCodigo = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalFuenteFinanciamiento.html',
+			controller : 'ModalFuenteFinanciamientoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.itemunidadfuentefinanid = obj.id;
+			$scope.objeto.npcodigofuente = obj.codigo;
+			$scope.objeto.npnombrefuente = obj.nombre;		
+		}, function() {
+		});
+	};
 
 	$scope.form = {
         submit: function(form,name) {
@@ -571,6 +662,48 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.resetformSubTarea = function(form) {
+        //$scope.myModel = angular.copy($scope.master);
+        form.$setPristine(true);
+        $scope.limpiarEdicion();
+	}
+
+	$scope.submitformItem = function(form) {
+    	var tObj=$scope.objeto;
+    	//tObj.actividadunidadacumulador=$scope.detalles;
+    	PlanificacionUEFactory.guardarActividades("IT",tObj).then(function(resp){
+			if (resp.estado) {
+				form.$setPristine(true);
+				$scope.limpiarEdicion();
+	            //$scope.limpiar();
+	            SweetAlert.swal("Planificacion UE! - Item", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Item", resp.mensajes.msg, "error");
+			}
+		})
+	}
+
+	$scope.resetformItem = function(form) {
+        //$scope.myModel = angular.copy($scope.master);
+        form.$setPristine(true);
+        $scope.limpiarEdicion();
+	}
+
+	$scope.submitformSubItem = function(form) {
+    	var tObj=$scope.objeto;
+    	//tObj.actividadunidadacumulador=$scope.detalles;
+    	PlanificacionUEFactory.guardarActividades("SI",tObj).then(function(resp){
+			if (resp.estado) {
+				form.$setPristine(true);
+				$scope.limpiarEdicion();
+	            //$scope.limpiar();
+	            SweetAlert.swal("Planificacion UE! - Subitem", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+			}
+		})
+	}
+
+	$scope.resetformSubItem = function(form) {
         //$scope.myModel = angular.copy($scope.master);
         form.$setPristine(true);
         $scope.limpiarEdicion();

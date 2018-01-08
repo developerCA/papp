@@ -195,8 +195,8 @@ app.constant('JS_REQUIRES', {
         'MatrizFormulacionActividadProyectoFactory':'assets/js/factory/matrizFormulacionActividadProyectoFactory.js',
         'MatrizDesglosadaProgramacionAnualCtrl':'assets/js/controllers/papp/matrizDesglosadaProgramacionAnualCtrl.js',
         'MatrizDesglosadaProgramacionAnualFactory':'assets/js/factory/matrizDesglosadaProgramacionAnualFactory.js',
-        'ModalFuenteFinanciamientoCtrl':'assets/js/controllers/papp/modales/modalActividadCtrl.js',
-        'FuenteFinanciamientoFactory':'assets/js/factory/fuenteFinanciamientoFactory.js',
+        'ModalFuenteFinanciamientoCtrl':'assets/js/controllers/papp/modales/modalFuenteFinanciamientoCtrl.js',
+        //'FuenteFinanciamientoFactory':'assets/js/factory/fuenteFinanciamientoFactory.js',
         'PlanificacionInstitucionalCtrl':'assets/js/controllers/papp/planificacionInstitucionalCtrl.js',
         'PlanificacionInstitucionalFactory':'assets/js/factory/planificacionInstitucionalFactory.js',
         'ModalMetasCtrl':'assets/js/controllers/papp/modales/modalMetasCtrl.js',
@@ -221,7 +221,7 @@ app.constant('JS_REQUIRES', {
         'AprobarCertificacionesFondosCtrl':'assets/js/controllers/papp/aprobarCertificacionesFondosCtrl.js',
         'AprobarCertificacionesFondosFactory':'assets/js/factory/aprobarCertificacionesFondosFactory.js',
         'ModalCertificacionesFondosLineasCtrl':'assets/js/controllers/papp/modales/modalCertificacionesFondosLineasCtrl.js',
-
+        'ModalObraCtrl':'assets/js/controllers/papp/modales/modalObraCtrl.js',
     },
     //*** angularJS Modules
     modules: [{

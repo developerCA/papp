@@ -533,7 +533,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/planificacionue",
         templateUrl: "assets/views/papp/planificacionUE.html",
         resolve: loadSequence(
-        		'ngTable', 'PlanificacionUECtrl', 'PlanificacionUEFactory'
+        		'ngTable', 'PlanificacionUECtrl', 'PlanificacionUEFactory',
+        		'ModalItemCtrl', 'ItemFactory',
+        		'ModalObraCtrl', 'ObrasFactory',
+        		'ModalFuenteFinanciamientoCtrl', 'FuenteFactory'
 		),
         title: 'Planificación UE',
         ncyBreadcrumb: {

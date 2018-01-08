@@ -75,14 +75,9 @@
 						ng-click="seleccionar(obj)"><i class="fa fa-check"></i></a></td>
 					<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
 					<td data-title="'Nombre'">{{obj.nombre}}</td>
-					<td data-title="'Nombre Padre'">{{obj.npnombrepadre}}</td>
-				 	<td data-title="'Tipo'">
-	                    <span ng-if="obj.tipo=='I'">INGRESO</span>
-	                    <span ng-if="obj.tipo=='E'">EGRESO</span>
-	                </td>
-					<td data-title="'Aplica Iva'">
-	                    <span ng-if="obj.aplicaiva==1">Si</span>
-	                    <span ng-if="obj.aplicaiva==0">No</span>
+				 	<td data-title="'Estado'">
+	                    <span ng-if="obj.estado=='A'">ACTIVO</span>
+	                    <span ng-if="obj.estado=='I'">INACTIVO</span>
 	                </td>
 				</tr>
 			</table>

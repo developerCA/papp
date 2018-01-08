@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalFuenteFinanciamientoController', [ "$scope","$rootScope","$uibModalInstance","$filter", "ngTableParams","FuenteFinanciamientoFactory",
-	function($scope,$rootScope,$uibModalInstance,$filter, ngTableParams,FuenteFinanciamientoFactory) {
+app.controller('ModalFuenteFinanciamientoController', [ "$scope","$rootScope","$uibModalInstance","$filter", "ngTableParams","fuenteFinanciamientoFactory",
+	function($scope,$rootScope,$uibModalInstance,$filter, ngTableParams,fuenteFinanciamientoFactory) {
 
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
@@ -14,7 +14,7 @@ app.controller('ModalFuenteFinanciamientoController', [ "$scope","$rootScope","$
 	$scope.consultar=function(){
 		
 		$scope.data=[];
-		FuenteFinanciamientoFactory.traerFuentes(pagina,$rootScope.ejefiscal).then(function(resp){
+		fuenteFinanciamientoFactory.traerFuentes(pagina,$rootScope.ejefiscal).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -46,7 +46,7 @@ app.controller('ModalFuenteFinanciamientoController', [ "$scope","$rootScope","$
 	$scope.filtrar=function(){
 		
 		$scope.data=[];
-		FuenteFinanciamientoFactory.traerFuentesFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
+		fuenteFinanciamientoFactory.traerFuentesFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
 			
 			if (resp.meta)
 				$scope.data=resp;
