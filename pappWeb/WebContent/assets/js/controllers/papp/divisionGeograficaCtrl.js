@@ -95,6 +95,7 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 				miTipo = "C";
 				break;
 			default:
+				return;
 				break;
 		}
 		var modalInstance = $uibModal.open({

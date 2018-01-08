@@ -56,7 +56,7 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 			pagina,
 			$scope.nombreFiltro,
 			null,
-			estadoFiltro,
+			$scope.estadoFiltro,
 			($scope.tipo != null? $scope.tipo: tipo) 
 		).then(function(resp){
 			if (resp.meta)
