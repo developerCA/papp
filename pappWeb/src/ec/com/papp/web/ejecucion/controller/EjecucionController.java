@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import antlr.Utils;
 import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
+import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
 import ec.com.papp.planificacion.id.ActividadunidadID;
@@ -38,6 +39,7 @@ import ec.com.papp.planificacion.to.ActividadunidadTO;
 import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
+import ec.com.papp.planificacion.to.ContratoTO;
 import ec.com.papp.planificacion.to.IndicadorTO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.ObjetivoTO;
@@ -113,9 +115,11 @@ public class EjecucionController {
 				CertificacionlineaTO certificacionlineaTO = gson.fromJson(new StringReader(objeto), CertificacionlineaTO.class);
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				CertificacionlineaTO certificacionlineaTO2=new CertificacionlineaTO();
+				log.println("consulta lineas: " + certificacionlineaTO.getNivelactid() + certificacionlineaTO.getId().getId());
 				certificacionlineaTO2.setNivelactid(certificacionlineaTO.getNivelactid());
 				certificacionlineaTO2.getId().setId(certificacionlineaTO.getId().getId());
 				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtenerCertificacionlinea(certificacionlineaTO2);
+				log.println("certificaciones: " + certificacionlineaTOs.size());
 				if(certificacionlineaTOs.size()==0){
 					accion = (certificacionlineaTO.getId()==null)?"crear":"actualizar";
 					UtilSession.planificacionServicio.transCrearModificarCertificacionlinea(certificacionlineaTO);
@@ -264,8 +268,38 @@ public class EjecucionController {
 				}
 			}
 
+			//Ver Contrato
+			else if(clase.equals("vercontrato")){
+				OrdengastoTO ordengastoTO = gson.fromJson(new StringReader(objeto), OrdengastoTO.class);
+				//Valido que sea un tipo de documento contrato para que permita ingresar contratos
+		        if(ordengastoTO.getNpnombredocumento().indexOf("CONTRATO")!=-1 || ordengastoTO.getNpnombredocumento().indexOf("contrato")!=-1 ||ordengastoTO.getNpnombredocumento().indexOf("Contrato")!=-1) {
+					ContratoTO contratoTO=new ContratoTO();
+					if(ordengastoTO.getOrdengastocontratoid()!=null) {
+						contratoTO=UtilSession.planificacionServicio.transObtenerContratoTO(ordengastoTO.getOrdengastocontratoid());
+						contratoTO.setSocionegocio(new SocionegocioTO());
+						if(contratoTO!=null && contratoTO.getId()!=null) {
+							if(contratoTO.getNpfechainicio()!=null)
+								contratoTO.setFechainicio(UtilGeneral.parseStringToDate(contratoTO.getNpfechainicio()));
+						}
+						else {
+							contratoTO=new ContratoTO();
+							contratoTO.setContratoproveedorid(ordengastoTO.getOrdengastoproveedorid());
+						}
+					}
+					else {
+						contratoTO=new ContratoTO();
+						contratoTO.setContratoproveedorid(ordengastoTO.getOrdengastoproveedorid());
+					}
+					jsonObject.put("contrato", (JSONObject)JSONSerializer.toJSON(contratoTO,contratoTO.getJsonConfigedicion()));
+		        }
+		        else {
+					mensajes.setMsg("Para acceder a la opcion de contrato la clase de documento debe ser Contrato");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+		        }
+			}
+
 			//Registro la auditoria
-//			if(mensajes.getMsg()==null)
+//			if(mensajes.getMsg()==null && !clase.equals("vercontrato"))
 //				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
 			if(mensajes.getMsg()==null){
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
@@ -401,7 +435,7 @@ public class EjecucionController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al obtener para editar");
-			mensajes.setMsg(MensajesWeb.getString("error.obtener"));
+			mensajes.setMsg("Error al intentar crear un nuevo registro");
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
 			respuesta.setEstado(false);
 			//throw new MyException(e);
@@ -450,6 +484,10 @@ public class EjecucionController {
 					ordengastoTO.setNpnombretipodocumento(ordengastoTO.getTipodocumentoclasedocumento().getNombre());
 					ordengastoTO.setOrdengastotipodocid(ordengastoTO.getTipodocumentoclasedocumento().getId().getId());
 					ordengastoTO.setOrdengastoclasemodid(ordengastoTO.getTipodocumentoclasedocumento().getId().getClasedocid());
+				}
+				if(ordengastoTO.getOrdengastoproveedorid()!=null) {
+					ordengastoTO.setNpproveedorcodigo(ordengastoTO.getSocionegocio3().getCodigo());
+					ordengastoTO.setNpproveedornomre(ordengastoTO.getSocionegocio3().getNombremostrado());
 				}
 				//asigno las fechas
 				ordengastoTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(ordengastoTO.getFechaaprobacion()));
@@ -530,8 +568,23 @@ public class EjecucionController {
 				jsonObject.put("ordenreversionlinea", (JSONObject)JSONSerializer.toJSON(ordenreversionlineaTO,ordenreversionlineaTO.getJsonConfig()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordenreversionlineaTO.getNivelactid(), jsonObject, mensajes);
 			}
-			//subitemacumulador: Recibo el id del subitem y traigo el valor ajustado eso es para Certificacion de fondos
-			if(clase.equals("valordisponiblesi")) {
+			//subitemacumulador: Recibo el id del subitem y traigo el valor disponible eso es para Certificacion de fondos
+			else if(clase.equals("valordisponiblesi")) {
+				//1. traigo el total disponible del subitem
+				double total=ConsultasUtil.obtenertotalsubitem(id);
+				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
+				double valorcertificacion=0.0;
+				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificacionesnoeliminadas(id);
+				for(CertificacionlineaTO certificacionlineaTO:certificacionlineaTOs)
+					valorcertificacion=valorcertificacion+certificacionlineaTO.getValor().doubleValue();
+				//3. resto el total disponible menos las certificaciones ya creadas
+				double saldo=total-valorcertificacion;
+				Map<String, Double> saldodisponible=new HashMap<>();
+				saldodisponible.put("saldo", saldo);
+				jsonObject.put("valordisponiblesi", (JSONObject)JSONSerializer.toJSON(saldodisponible));
+			}
+			//disponiblecertificacion: Recibo el id del subitem y traigo el valor disponible eso es para Certificacion de fondos
+			else if(clase.equals("valordisponiblesi")) {
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(id);
 				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
@@ -563,18 +616,104 @@ public class EjecucionController {
 		return respuesta;	
 	}
 	
-	@RequestMapping(value = "/flujo/{id}/{tipo}", method = RequestMethod.GET)
-	public Respuesta flujo(@PathVariable Long id,@PathVariable String tipo,HttpServletRequest request){
+	@RequestMapping(value = "/flujo/{id}/{tipo}/{cur}", method = RequestMethod.GET)
+	public Respuesta flujo(@PathVariable Long id,@PathVariable String tipo,@PathVariable String cur,HttpServletRequest request){
 		log.println("entra al metodo flujo");
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
 		try {
-			
+			CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
-				CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
 				certificacionTO.setEstado(tipo);
+				if(!cur.equals("0"))
+					certificacionTO.setCur(cur);
 				UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+			}
+			//Verifico que no tenga atada una orden de gasto
+			else if(tipo.equals("LT")) {
+				OrdengastoTO ordengastoTO=new OrdengastoTO();
+				ordengastoTO.setOrdengastocertificacionid(id);
+				Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
+				if(ordengastoTOs.size()>0) {
+					boolean existeorden=false;
+					for(OrdengastoTO ordengastoTO2:ordengastoTOs) {
+						if(ordengastoTO2.getEstado().equals("AP") || ordengastoTO2.getEstado().equals("SO") || ordengastoTO2.getEstado().equals("RE")) {
+							existeorden=true;
+						}
+					}
+					if(existeorden) {
+						mensajes.setMsg("No se puede liquidar totalmente a una Certificación que esté asociada a una Orden de gasto");
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+					else
+						UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+				}
+				else
+					UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+			}
+			else if(tipo.equals("LP")) {
+				OrdengastoTO ordengastoTO=new OrdengastoTO();
+				ordengastoTO.setOrdengastocertificacionid(id);
+				Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
+				if(ordengastoTOs.size()==0) {
+					mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else {
+					double valorordenes=0.0;
+					boolean aprobada=false;
+					for(OrdengastoTO ordengastoTO2:ordengastoTOs) {
+						if(ordengastoTO2.getEstado().equals("AP")) {
+							valorordenes=valorordenes+ordengastoTO2.getValortotal();
+							aprobada=true;
+						}
+					}
+					if(!aprobada) {
+						mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto aprobada");
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+					else {
+						certificacionTO.setNptotalordenes(valorordenes);
+						UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.println("error al eliminar");
+			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
+			//throw new MyException(e);
+		}
+//		if(mensajes.getMsg()!=null){
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+//			log.println("existen mensajes");
+//		}
+		log.println("devuelve**** " + jsonObject.toString());
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
+	}
+	
+	@RequestMapping(value = "/flujoordenes/{id}/{tipo}/{cur}", method = RequestMethod.GET)
+	public Respuesta flujoordenes(@PathVariable Long id,@PathVariable String tipo,@PathVariable String cur,HttpServletRequest request){
+		log.println("entra al metodo flujo");
+		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
+		JSONObject jsonObject=new JSONObject();
+		try {
+			OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
+			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
+				ordengastoTO.setEstado(tipo);
+				if(!cur.equals("0"))
+					ordengastoTO.setCur(cur);
+				UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO, tipo);
 				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
@@ -612,35 +751,6 @@ public class EjecucionController {
 					}
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			log.println("error al eliminar");
-			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
-			mensajes.setType(MensajesWeb.getString("mensaje.error"));
-			respuesta.setEstado(false);
-			//throw new MyException(e);
-		}
-//		if(mensajes.getMsg()!=null){
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-//			log.println("existen mensajes");
-//		}
-		log.println("devuelve**** " + jsonObject.toString());
-		respuesta.setJson(jsonObject);
-		respuesta.setMensajes(mensajes);
-		return respuesta;	
-	}
-	
-	@RequestMapping(value = "/flujoordenes/{id}/{tipo}/{cur}", method = RequestMethod.GET)
-	public Respuesta flujoordenes(@PathVariable Long id,@PathVariable String tipo,@PathVariable String cur,HttpServletRequest request){
-		log.println("entra al metodo flujo");
-		Mensajes mensajes=new Mensajes();
-		Respuesta respuesta=new Respuesta();
-		JSONObject jsonObject=new JSONObject();
-		try {
-			OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
-			ordengastoTO.setEstado(tipo);
-			if(!cur.equals("0"))
-				ordengastoTO.setCur(cur);
 			UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO,tipo);
 			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
@@ -726,7 +836,7 @@ public class EjecucionController {
 	
 	@RequestMapping(value = "/consultar/{clase}", method = RequestMethod.POST)
 	public String consultarpost(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
-		log.println("entra al metodo grabar: " + objeto);
+		log.println("entra al metodo consultar: " + objeto);
 		Mensajes mensajes=new Mensajes();
 		Gson gson = new Gson();
 		JSONObject jsonObject=new JSONObject();
@@ -738,22 +848,22 @@ public class EjecucionController {
 			}
 			
 			//Orden de gasto
-			if(clase.equals("ordengasto")){
+			else if(clase.equals("ordengasto")){
 				jsonObject=ConsultasUtil.consultaOrdengastoPaginado(parameters, jsonObject, mensajes);
 			}
 			
 			//Orden de devengo
-			if(clase.equals("ordendevengo")){
+			else if(clase.equals("ordendevengo")){
 				jsonObject=ConsultasUtil.consultaOrdendevengoPaginado(parameters, jsonObject, mensajes);
 			}
 			
 			//Orden de reversion
-			if(clase.equals("ordenreversion")){
+			else if(clase.equals("ordenreversion")){
 				jsonObject=ConsultasUtil.consultaOrdenreversionPaginado(parameters, jsonObject, mensajes);
 			}
 
 			//Certificacion busqueda
-			if(clase.equals("certificacionbusqueda")){
+			else if(clase.equals("certificacionbusqueda")){
 				//jsonObject=ConsultasUtil.consultaCertificacionBusquedaPaginado(parameters, jsonObject, mensajes);
 				jsonObject=ConsultasUtil.certificacionbusqueda(parameters, jsonObject);
 			}
@@ -800,17 +910,17 @@ public class EjecucionController {
 			}
 
 			//Sibiteminfo
-			if(clase.equals("subitemunidadinfo")){
+			else if(clase.equals("subitemunidadinfo")){
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(Long.valueOf(parameters.get("nivelactividad")), jsonObject, mensajes);
 			}
 			
 			//Subtareainfo
-			if(clase.equals("subitareainfo")){
+			else if(clase.equals("subitareainfo")){
 				jsonObject=ConsultasUtil.consultaInformacionsubtarea(Long.valueOf(parameters.get("nivelactividad")), jsonObject, mensajes);
 			}
 
 			//subitemcertificado
-			if(clase.equals("subitemcertificado")){
+			else if(clase.equals("subitemcertificado")){
 				CertificacionlineaTO certificacionlineaTO=new CertificacionlineaTO();
 				Collection<CertificacionlineaTO> resultado=UtilSession.planificacionServicio.transObtienesubitemporcertificacion(Long.valueOf(parameters.get("certificacionid")));
 				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,certificacionlineaTO.getJsonConfigbusqueda()));
@@ -820,7 +930,7 @@ public class EjecucionController {
 			}
 			
 			//subitemordengasto
-			if(clase.equals("subitemordengasto")){
+			else if(clase.equals("subitemordengasto")){
 				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
 				Collection<OrdengastolineaTO> resultado=UtilSession.planificacionServicio.transObtienesubitemporordengasto(Long.valueOf(parameters.get("ordengastoid")));
 				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,ordengastolineaTO.getJsonConfigbusqueda()));
@@ -829,6 +939,11 @@ public class EjecucionController {
 				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 			}
 			
+			//Certificacion busqueda
+//			else if(clase.equals("certificacionbusqueda")){
+//				//jsonObject=ConsultasUtil.consultaCertificacionBusquedaPaginado(parameters, jsonObject, mensajes);
+//				jsonObject=ConsultasUtil.certificacionbusqueda(parameters, jsonObject);
+//			}
 		
 			log.println("json retornado: " + jsonObject.toString()); 
 		}catch (Exception e) {

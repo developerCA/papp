@@ -2,6 +2,7 @@ package ec.com.papp.web.administracion.controller;
 
 import java.io.StringReader;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,15 +54,25 @@ import ec.com.papp.administracion.to.id.TipodocumentoclasedocumentoID;
 import ec.com.papp.administracion.to.id.TipoidentificaciontipoID;
 import ec.com.papp.estructuraorganica.to.InstitucionTO;
 import ec.com.papp.estructuraorganica.to.InstitucionentidadTO;
+import ec.com.papp.planificacion.to.CertificacionTO;
+import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
+import ec.com.papp.planificacion.to.ContratoTO;
 import ec.com.papp.planificacion.to.NivelorganicoTO;
+import ec.com.papp.planificacion.to.OrdendevengoTO;
+import ec.com.papp.planificacion.to.OrdengastoTO;
+import ec.com.papp.planificacion.to.OrdengastolineaTO;
+import ec.com.papp.planificacion.to.OrdenreversionTO;
+import ec.com.papp.planificacion.to.OrdenreversionlineaTO;
 import ec.com.papp.planificacion.to.OrganismoprestamoTO;
+import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.administracion.util.ConsultasUtil;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.metodos.Log;
+import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
@@ -78,7 +89,7 @@ import net.sf.json.JSONSerializer;
 @RequestMapping("/rest/administrar")
 public class AdministracionController {
 	private Log log = new Log(AdministracionController.class);
-
+	
 	@RequestMapping(value = "/{clase}", method = RequestMethod.POST)
 	public Respuesta grabar(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo grabar: " + clase + " - " + objeto);
@@ -1430,6 +1441,19 @@ public class AdministracionController {
 				}
 			}
 
+			//Contrato
+			else if(clase.equals("contrato")){
+				ContratoTO contratoTO = gson.fromJson(new StringReader(objeto), ContratoTO.class);
+				accion = (contratoTO.getId()==null)?"crear":"actualizar";
+				if(contratoTO.getNpfechainicio()!=null)
+					contratoTO.setFechainicio(UtilGeneral.parseStringToDate(contratoTO.getNpfechainicio()));
+				contratoTO.setSocionegocio(new SocionegocioTO());
+				UtilSession.planificacionServicio.transCrearModificarContrato(contratoTO);
+				id=contratoTO.getNpid().toString();
+				contratoTO.setId(contratoTO.getNpid());
+				jsonObject.put("contrato", (JSONObject)JSONSerializer.toJSON(contratoTO,contratoTO.getJsonConfigedicion()));
+			}
+
 			//Registro la auditoria
 			//			if(mensajes.getMsg()==null)
 			//				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
@@ -1726,6 +1750,14 @@ public class AdministracionController {
 				Collection<InstitucionentidadTO> institucionentidadTOs=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidad(institucionentidadTO);
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(institucionentidadTOs,institucionentidadTO.getJsonConfig()));
 			}
+			//Contrato
+			else if(clase.equals("contrato")){
+				ContratoTO contratoTO = UtilSession.planificacionServicio.transObtenerContratoTO(id);
+				contratoTO.setSocionegocio(new SocionegocioTO());
+				if(contratoTO.getNpfechainicio()!=null)
+					contratoTO.setFechainicio(UtilGeneral.parseStringToDate(contratoTO.getNpfechainicio()));
+				jsonObject.put("contrato", (JSONObject)JSONSerializer.toJSON(contratoTO,contratoTO.getJsonConfigedicion()));
+			}
 
 			log.println("json retornado: " + jsonObject.toString());
 		} catch (Exception e) {
@@ -1920,6 +1952,11 @@ public class AdministracionController {
 			else if(clase.equals("institucion")){
 				UtilSession.estructuraorganicaServicio.transEliminarInstitucion(new InstitucionTO(id));
 			}
+			//Contrato
+			else if(clase.equals("contrato")){
+				UtilSession.planificacionServicio.transEliminarContrato(new ContratoTO(id));
+			}
+
 			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
 			if(mensajes.getMsg()==null){
 				mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
@@ -2186,6 +2223,12 @@ public class AdministracionController {
 			else if(clase.equals("tipodocumentoclasedocumento")){
 				jsonObject=ConsultasUtil.consultaTipoclasedocumento(parameters, jsonObject);
 			}
+			
+			//Tipo clase documento
+			else if(clase.equals("contrato")){
+				jsonObject=ConsultasUtil.consultaContrato(parameters, jsonObject);
+			}
+
 			log.println("json retornado de consulta: " + jsonObject.toString()); 
 		}catch (Exception e) {
 			e.printStackTrace();

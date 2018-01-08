@@ -5,23 +5,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-
 import org.hibernate.tools.commons.to.OrderBy;
 import org.hibernate.tools.commons.to.RangeValueTO;
 import org.hibernate.tools.commons.to.SearchResultTO;
 
+import ec.com.papp.administracion.to.ClaseregistroTO;
+import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
+import ec.com.papp.administracion.to.TipodocumentoTO;
+import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
 import ec.com.papp.estructuraorganica.to.UnidadTO;
-import ec.com.papp.planificacion.dao.GastoDevengoDAO;
-import ec.com.papp.planificacion.dao.OrdendevengoDAO;
-import ec.com.papp.planificacion.dao.OrdengastoDAO;
 import ec.com.papp.planificacion.to.CertificacionOrdenVO;
 import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
+import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.GastoDevengoVO;
-import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.to.OrdenreversionTO;
@@ -33,6 +30,9 @@ import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.exception.MyException;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 public class ConsultasUtil {
 
@@ -257,6 +257,17 @@ public class ConsultasUtil {
 					ordengastoTO.setNpcertificacion(parameters.get("certificacion"));
 				}
 				//ordengastoTO.setCertificacion(certificacionTO);
+				ClaseregistrocmcgastoTO claseregistrocmcgastoTO=new ClaseregistrocmcgastoTO();
+				ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO=new ClaseregistroclasemodificacionTO();
+				ClaseregistroTO claseregistroTO=new ClaseregistroTO();
+				claseregistroclasemodificacionTO.setClaseregistro(claseregistroTO);
+				claseregistrocmcgastoTO.setClaseregistroclasemodificacion(claseregistroclasemodificacionTO);
+				ordengastoTO.setClaseregistrocmcgasto(claseregistrocmcgastoTO);
+				
+				TipodocumentoclasedocumentoTO tipodocumentoclasedocumentoTO=new TipodocumentoclasedocumentoTO();
+				TipodocumentoTO tipodocumentoTO=new TipodocumentoTO();
+				tipodocumentoclasedocumentoTO.setTipodocumento(tipodocumentoTO);
+				ordengastoTO.setTipodocumentoclasedocumento(tipodocumentoclasedocumentoTO);
 				SearchResultTO<OrdengastoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastoPaginado(ordengastoTO);
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 				HashMap<String, String>  totalMap=new HashMap<String, String>();
@@ -549,6 +560,7 @@ public class ConsultasUtil {
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
 				certificacionOrdenVO.setDescripcion(parameters.get("descripcion"));
 			Collection<CertificacionOrdenVO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionOrden(certificacionOrdenVO);
+			log.println("certificaciones: " + resultado.size());
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,certificacionOrdenVO.getJsonConfig()));

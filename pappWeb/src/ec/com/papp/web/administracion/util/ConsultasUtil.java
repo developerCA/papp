@@ -46,12 +46,14 @@ import ec.com.papp.administracion.to.TiporegimenTO;
 import ec.com.papp.administracion.to.UnidadmedidaTO;
 import ec.com.papp.estructuraorganica.to.InstitucionTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
+import ec.com.papp.planificacion.to.ContratoTO;
 import ec.com.papp.planificacion.to.NivelorganicoTO;
 import ec.com.papp.planificacion.to.OrganismoprestamoTO;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.xcelsa.utilitario.exception.MyException;
 import ec.com.xcelsa.utilitario.metodos.Log;
+import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
 
 public class ConsultasUtil {
 
@@ -2368,5 +2370,50 @@ public class ConsultasUtil {
 		}
 		return jsonObject;
 	}
-	
+
+	/**
+	* Metodo que consulta los contratos para ordenes de gasto y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaContrato(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+		log.println("entra a consultar contrato");
+		String campo="";
+		ContratoTO contratoTO=new ContratoTO();
+		SocionegocioTO socionegocioTO=new SocionegocioTO();
+		try{
+			campo="socionegocio.codigo";
+			String[] columnas={campo};
+			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
+				campo=parameters.get("sidx");
+			String[] orderBy = columnas;
+			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
+				contratoTO.setOrderByField(OrderBy.orderDesc(orderBy));
+			else
+				contratoTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
+				socionegocioTO.setCodigo(parameters.get("codigo"));
+			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
+				socionegocioTO.setNombremostrado(parameters.get("nombre"));
+			if(parameters.get("fecha")!=null && !parameters.get("fecha").equals(""))
+				contratoTO.setFechainicio(UtilGeneral.parseStringToDate(parameters.get("fecha")));
+			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
+				contratoTO.setEstado(parameters.get("estado"));
+			contratoTO.setSocionegocio(socionegocioTO);
+			Collection<ContratoTO> contratoTOs=UtilSession.planificacionServicio.transObtenerContrato(contratoTO);	
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(contratoTOs,contratoTO.getJsonConfig()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", contratoTOs.size());
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
 }
