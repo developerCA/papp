@@ -71,19 +71,8 @@
 					</a>
 
 					<div>
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th>C&oacute;digo Presupestario</th>
-									<th>Nombre</th>
-									<th>Estado</th>
-									<th>Estado Presu.</th>
-								</tr>
-							</thead>
-                            <tr ng-repeat="obj in data">
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
 								<td>
 									<a class="btn btn-sm btn-primary">
 										<i class="fa fa-pencil"></i>
@@ -99,19 +88,12 @@
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
-								<td>{{obj.codigopresup}}</td>
-								<td>{{obj.nombre}}</td>
-								<td>{{obj.npestado}}</td>
-								<td>{{obj.npestadopresupuesto}}</td>
+								<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
+								<td data-title="'Nombre'">{{obj.nombre}}</td>
+								<td data-title="'Estado'">{{obj.npestado}}</td>
+								<td data-title="'Estado Presu.'">{{obj.npestadopresupuesto}}</td>
 							</tr>
 						</table>
-
-						<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
-							previous-text="Atras" uib-pagination total-items="total"
-							ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
-							max-size="10" class="pagination-sm" boundary-links="true"
-							force-ellipses="true">
-						</ul>
 					</div>
 				</div>
 

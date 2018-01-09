@@ -9,8 +9,8 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
     			"planificacion/consultar/planificacion/" +
     			"pagina=" + pagina +
     			"&ejerciciofiscal=" + ejercicio +
-				"&filas=10"
-			).customGET();
+				"&estado=A"
+			).getList();
         },
 
         traerPAactividad: function (id, ejercicio) {
@@ -54,15 +54,12 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
         },
         
         traerFiltro: function (pagina, ejercicio, codigo, nombre) {
-            var url = "planificacion/consultar/planificacion/" +
-				"pagina=" + pagina +
-				"&ejerciciofiscal=" + ejercicio +
-				"&filas=10";
+            var url = "planificacion/consultar/planificacion/pagina=" + pagina+ "&ejerciciofiscal=" + ejercicio;
 
             if (codigo != null && codigo != "") url += "&codigopresup=" + codigo.toUpperCase();
             if (nombre != null && nombre != "") url += "&nombre=" + nombre;
 
-            return Restangular.allUrl(url).customGET();
+            return Restangular.allUrl(url).getList();
         },
 
         traerFiltroCustom: function (pagina, ejercicio, codigo, nombre) {

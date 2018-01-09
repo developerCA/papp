@@ -15,10 +15,12 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		divisionGeograficaFactory.traerDivisiones(pagina).then(function(resp){
+		$scope.estadoFiltro="A";
+		$scope.filtrar();
+/*		divisionGeograficaFactory.traerDivisiones(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-		})
+		}) */
 	};
 
 	$scope.consultarPaises=function(){
@@ -53,10 +55,11 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	$scope.filtrar=function(){
 		//console.log("tipo:'"+tipo+"'");
 		$scope.data=[];
+		//traerDivisionesFiltro: (pagina,nombre,codigo,estado,tipo) {
 		divisionGeograficaFactory.traerDivisionesFiltro(
 			pagina,
 			$scope.nombreFiltro,
-			null,
+			$scope.codigoFiltro,
 			$scope.estadoFiltro,
 			($scope.tipo != null? $scope.tipo: tipo) 
 		).then(function(resp){
