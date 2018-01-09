@@ -71,8 +71,19 @@
 					</a>
 
 					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th>C&oacute;digo Presupestario</th>
+									<th>Nombre</th>
+									<th>Estado</th>
+									<th>Estado Presu.</th>
+								</tr>
+							</thead>
+                            <tr ng-repeat="obj in data">
 								<td>
 									<a class="btn btn-sm btn-primary">
 										<i class="fa fa-pencil"></i>
@@ -88,12 +99,19 @@
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
-								<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
-								<td data-title="'Estado Presu.'">{{obj.npestadopresupuesto}}</td>
+								<td>{{obj.codigopresup}}</td>
+								<td>{{obj.nombre}}</td>
+								<td>{{obj.npestado}}</td>
+								<td>{{obj.npestadopresupuesto}}</td>
 							</tr>
 						</table>
+
+						<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+							previous-text="Atras" uib-pagination total-items="total"
+							ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
+							max-size="10" class="pagination-sm" boundary-links="true"
+							force-ellipses="true">
+						</ul>
 					</div>
 				</div>
 
@@ -1927,8 +1945,9 @@
 	<table width="100%">
 		<tr>
 			<td width="1%">
-				<div class="col-md-12">
-				    <a class="btn btn-default btn-xs"  data-nodrag ng-click="toggle(this);cargarHijos(node)">
+				<div class="col-md-12" ng-show="!node.nphoja">
+				    <a class="btn btn-default btn-xs"
+						data-nodrag ng-click="toggle(this);cargarHijos(node)">
 						<span class="glyphicon" ng-class="{
 					       	'glyphicon-chevron-right': collapsed,
 					       	'glyphicon-chevron-down': !collapsed
@@ -1938,10 +1957,14 @@
 				</div>
 			</td>
 			<td width="1%">
-				<letter-icon data="{{node.nodeTipo}}" color="{{devuelveColorNode(node.nodeTipo);}}" size="sm" char-count="2"></letter-icon>
+				<div class="col-md-12">
+					<letter-icon data="{{node.nodeTipo}}" color="{{devuelveColorNode(node.nodeTipo);}}"
+						size="sm" char-count="2">
+					</letter-icon>
+				</div>
 			</td>
 			<td width="100%" ng-click="vista(node);">
-				&nbsp;{{node.title}}
+				{{node.title}}
 			</td>
 			<td width="1%">
 				<table width="108px">

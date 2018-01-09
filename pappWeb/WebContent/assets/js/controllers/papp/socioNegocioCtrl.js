@@ -51,6 +51,8 @@ app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", 
         $scope.nombre = null;
         $scope.codigo = null;
         $scope.estado = null;
+    	$scope.pagina=1;
+    	$scope.aplicafiltro=false;
         $scope.consultar();
     };
 
