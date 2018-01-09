@@ -694,6 +694,12 @@ public class ConsultasUtil {
 			log.println("nivel actividad asignada: " + nivelactividadTO.getNivelactividadunidadid());
 			//Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
 			Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
+			//Siempre que me llege la variable nivelactividad yo le asigno en una variable temporal
+			if(parameters.get("actividadid")!=null) {
+				for(NivelactividadTO nivel:resultado) {
+					nivel.setNpactividadid(Long.valueOf(parameters.get("actividadid")));
+				}
+			}
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,nivelactividadTO.getJsonConfigActividadPlanifiacion()));
