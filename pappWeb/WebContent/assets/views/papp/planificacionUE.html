@@ -105,7 +105,7 @@
 						</h5>
 					</div>
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<a  class="btn btn-sm btn-default" ng-click="regresarPUE();">
 								<i class="fa ti-back-left"></i>
 								Regresar
@@ -120,7 +120,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<form name="formPlanificacionAnualVista" id="formPlanificacionAnualVista" novalidate
 								ng-submit="form.submit(formPlanificacionAnualVista)" ng-show="divPlanificacionAnualVista">
 								<div class="row">
@@ -1921,10 +1921,11 @@
 	</div>
 </div>
 
+<!-- ng-click="vista(node);" -->
 <script type="text/ng-template" id="nodes_renderer.html">
 <div ui-tree-handle class="tree-node tree-node-content">
 	<table width="100%">
-		<tr ng-click="vista(node);">
+		<tr>
 			<td width="1%">
 				<div class="col-md-12">
 				    <a class="btn btn-default btn-xs"  data-nodrag ng-click="toggle(this);cargarHijos(node)">
@@ -1936,10 +1937,11 @@
 					</a>
 				</div>
 			</td>
+			<td width="1%">
+				<letter-icon data="{{node.nodeTipo}}" color="{{devuelveColorNode(node.nodeTipo);}}" size="sm" char-count="2"></letter-icon>
+			</td>
 			<td width="100%" ng-click="vista(node);">
-				<a style="display:block;text-decoration:none;">
-	    			{{node.title}}
-				</a>
+				&nbsp;{{node.title}}
 			</td>
 			<td width="1%">
 				<table width="108px">

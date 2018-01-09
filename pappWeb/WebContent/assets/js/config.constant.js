@@ -222,6 +222,8 @@ app.constant('JS_REQUIRES', {
         'AprobarCertificacionesFondosFactory':'assets/js/factory/aprobarCertificacionesFondosFactory.js',
         'ModalCertificacionesFondosLineasCtrl':'assets/js/controllers/papp/modales/modalCertificacionesFondosLineasCtrl.js',
         'ModalObraCtrl':'assets/js/controllers/papp/modales/modalObraCtrl.js',
+        'ModalOrganismoCtrl':'assets/js/controllers/papp/modales/modalOrganismoCtrl.js',
+
     },
     //*** angularJS Modules
     modules: [{

@@ -1,43 +1,31 @@
 app.factory("organismoFactory", [ "Restangular", function(Restangular) {
 
-		
 	var service = Restangular.service("/administrar");
 
 	return {
-		
-		
-		traerOrganismos : function(pagina,ejercicio) {
-			  
-			  return Restangular.allUrl("administrar/consultar/organismo/pagina="+pagina+ "&ejerciciofiscalid=" + ejercicio).getList();
-			  
+		traer : function(pagina,ejercicio) {
+			  return Restangular.allUrl("administrar/consultar/organismo/pagina="+pagina+ "&filas=10&ejerciciofiscalid=" + ejercicio).customGET();
 		},
 		
-		traerOrganismosFiltro : function(pagina,ejercicio,nombre,codigo,estado) {
-			  
-			var url = "administrar/consultar/organismo/pagina="+pagina+ "&ejerciciofiscalid=" + ejercicio;
+		traerFiltro : function(pagina,ejercicio,codigo,nombre,estado) {
+			var url = "administrar/consultar/organismo/pagina="+pagina+ "&filas=10&ejerciciofiscalid=" + ejercicio;
 
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
 			if(estado!=null && estado != "" ) url += "&estado=" + estado;
-			 
-			return Restangular.allUrl(url).getList();
-			  
+
+			return Restangular.allUrl(url).customGET();
 		},
-		
-		traerOrganismo : function(id) {
-			  
+
+		editar : function(id) {
 			var url = "administrar/organismo/"+id+"/-1";
-		   
+
 		    return Restangular.allUrl(url).customGET();
-			  
 		},
-		
+
 		guardar:function(objeto){
 			var url = "administrar/organismo/";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
-		
-		
-	
 	}
 } ]);

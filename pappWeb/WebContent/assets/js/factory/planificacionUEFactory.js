@@ -39,7 +39,15 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
     			"&ejerciciofiscal=" + ejercicio
 			).customGET();
         },
-
+/*
+        traerPAverSubitem: function (id, unidad, ejercicio) {
+        	return Restangular.allUrl("planificacion/actividadplanificacion/" +
+    			id + "/" +
+    			"unidadid=" + unidad +
+    			"&ejerciciofiscal=" + ejercicio
+			).customGET();
+        },
+*/
         traerCustom: function (pagina, ejercicio) {
         	 var url = "planificacion/consultar/planificacion/pagina=" + pagina + "&ejerciciofiscal=" + ejercicio;
              return Restangular.allUrl(url).customGET();

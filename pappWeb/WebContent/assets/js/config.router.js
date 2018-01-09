@@ -536,7 +536,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable', 'PlanificacionUECtrl', 'PlanificacionUEFactory',
         		'ModalItemCtrl', 'ItemFactory',
         		'ModalObraCtrl', 'ObrasFactory',
-        		'ModalFuenteFinanciamientoCtrl', 'FuenteFactory'
+        		'ModalFuenteFinanciamientoCtrl', 'FuenteFactory',
+        		'ModalOrganismoCtrl', 'OrganismoFactory',
+        		'ModalDivisionGeograficaCtrl', 'DivisionGeograficaFactory'
 		),
         title: 'Planificación UE',
         ncyBreadcrumb: {

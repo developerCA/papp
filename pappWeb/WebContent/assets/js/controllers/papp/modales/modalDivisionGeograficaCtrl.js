@@ -9,6 +9,7 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	$scope.edicion=false;
 	$scope.objeto={};
 	$scope.tipo=null;
+	$scope.data=[];
 	
 	var pagina = 1;
 	

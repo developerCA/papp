@@ -99,7 +99,7 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 				break;
 		}
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalDiviviones.html',
+			templateUrl : 'assets/views/papp/modal/modalDiviviones.html',
 			controller : 'ModalDivisionGeograficaController',
 			size : 'lg',
 			resolve: {
@@ -114,24 +114,17 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 				}
 			}
 		});
-
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 			$scope.objeto.npcodigopadre = obj.codigo;
 			$scope.objeto.npnombrepadre = obj.nombre;
 			$scope.objeto.nptipopadrenombre = obj.nptipopadrenombre;
 			$scope.objeto.divisiongeograficapadreid=obj.id;
-			
 		}, function() {
-			
 		});
-
 	};
-	
-	
-	
-	 $scope.form = {
 
+	 $scope.form = {
 		        submit: function (form) {
 		            var firstError = null;
 		            if (form.$invalid) {

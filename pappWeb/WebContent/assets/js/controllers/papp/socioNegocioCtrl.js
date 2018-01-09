@@ -8,58 +8,43 @@ app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", 
     $scope.estado = null;
     $scope.edicion = false;
     $scope.objeto = {};
+	$scope.data=[];
 
-    var pagina = 1;
+    $scope.pagina = 1;
+    $scope.aplicafiltro=false;
 
-    $scope.consultar = function () {
+	$scope.consultar=function(){
+		sociosNegocioFactory.traer(
+			$scope.pagina
+		).then(function(resp){
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
+		})
+	};
 
-        $scope.data = [];
+    $scope.pageChanged = function() {
+        if ($scope.aplicafiltro){
+        	$scope.filtrarUnico();
+        }else{
+        	$scope.consultar();	
+        }
+    };  
+    
+    $scope.filtrar=function(){
+    	$scope.pagina=1;
+    	$scope.aplicafiltro=true;
+    	$scope.filtrarUnico();
+    }  
 
-        sociosNegocioFactory.traer(pagina, $rootScope.ejefiscal).then(function (resp) {
-            if (resp.meta)
-                $scope.data = resp;
-               console.log($scope.data);
-        })
-
-    };
-
-    $scope.$watch('data', function () {
-
-        $scope.tableParams = new ngTableParams({
-            page: 1, // show first page
-            count: 5, // count per page
-            filter: {}
-        }, {
-            total: $scope.data.length, // length of data
-            getData: function ($defer, params) {
-                var orderedData = params.filter() ? $filter('filter')(
-						$scope.data, params.filter()) : $scope.data;
-                $scope.gruposMedida = orderedData.slice(
-						(params.page() - 1) * params.count(), params
-								.page()
-								* params.count());
-                params.total(orderedData.length);
-                $defer.resolve($scope.gruposMedida);
-            }
-        });
-    });
-
-    $scope.filtrar = function () {
-
-        $scope.data = [];
+	$scope.filtrarUnico=function(){
         sociosNegocioFactory.traerFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado).then(function (resp) {
-
-            if (resp.meta)
-
-                $scope.data = resp;
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
         })
-
     };
 
     $scope.mayusculas = function () {
-
         $scope.nombre = $scope.nombre.toUpperCase();
-
     };
 
     $scope.limpiar = function () {

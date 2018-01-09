@@ -3,26 +3,63 @@
 app.controller('OrganismoController', [ "$scope","$rootScope","SweetAlert","$filter", "ngTableParams","organismoFactory",
 	function($scope,$rootScope,SweetAlert,$filter, ngTableParams,organismoFactory) {
 
-	$scope.nombreFiltro=null;
-	$scope.codigoFiltro=null;
-	$scope.estadoFiltro=null;
-	$scope.edicion=false;
-	$scope.objeto={};
-	$scope.detalles=[];
-	
-	var pagina = 1;
-	
-	$scope.consultar=function(){
-		$scope.data=[];
-		organismoFactory.traerOrganismos(
-			pagina,
-			$rootScope.ejefiscal
-		).then(function(resp){
-			console.log(resp);
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	};
+	$scope.nombreFiltro = null;
+	$scope.codigoFiltro = null;
+	$scope.estadoFiltro = null;
+    $scope.edicion = false;
+    $scope.objeto = {};
+    $scope.data = [];
+
+    $scope.pagina = 1;
+    $scope.aplicafiltro=false;
+
+    $scope.consultar = function () {
+        organismoFactory.traer(
+    		$scope.pagina,
+    		$rootScope.ejefiscal
+		).then(function (resp) {
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
+        })
+    };
+
+    $scope.pageChanged = function() {
+        if ($scope.aplicafiltro){
+        	$scope.filtrarUnico();
+        }else{
+        	$scope.consultar();	
+        }
+    };  
+    
+    $scope.filtrar=function(){
+    	$scope.pagina=1;
+    	$scope.aplicafiltro=true;
+    	$scope.filtrarUnico();
+    }  
+
+	$scope.filtrarUnico=function(){
+        organismoFactory.traerFiltro(
+    		$scope.pagina,
+    		$rootScope.ejefiscal,
+    		$scope.codigoFiltro,
+    		$scope.nombreFiltro,
+    		$scope.estadoFiltro
+		).then(function (resp) {
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
+        })
+    };
+
+    $scope.mayusculas = function () {
+        $scope.nombre = $scope.nombre.toUpperCase();
+    };
+
+    $scope.limpiar = function () {
+    	$scope.nombreFiltro = null;
+    	$scope.codigoFiltro = null;
+    	$scope.estadoFiltro = null;
+        $scope.consultar();
+    };
 
 	$scope.blurCodigo=function(index) {
 		for (var i = 0; i < $scope.detalles.length; i++) {
@@ -33,7 +70,7 @@ app.controller('OrganismoController', [ "$scope","$rootScope","SweetAlert","$fil
 			}
 		}
 	}
-	
+/*
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
@@ -53,26 +90,7 @@ app.controller('OrganismoController', [ "$scope","$rootScope","SweetAlert","$fil
 			}
 		});
 	});
-	
-	
-	$scope.filtrar=function(){
-		
-		$scope.data=[];
-		organismoFactory.traerOrganismosFiltro(pagina,$rootScope.ejefiscal,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-	
-	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.codigoFiltro=null;
-		$scope.estadoFiltro=null;
-		
-		$scope.consultar();
-		
-	};
+*/
 	
 	$scope.nuevo=function(){
 		$scope.objeto={id:null,estado:'A',organismoejerciciofiscalid:$rootScope.ejefiscal};
@@ -81,7 +99,7 @@ app.controller('OrganismoController', [ "$scope","$rootScope","SweetAlert","$fil
 	}
 	
 	$scope.editar=function(id){
-		organismoFactory.traerOrganismo(id).then(function(resp){
+		organismoFactory.editar(id).then(function(resp){
 			if (resp.estado)
 				$scope.objeto=resp.json.organismo;
 				//console.log($scope.objeto);

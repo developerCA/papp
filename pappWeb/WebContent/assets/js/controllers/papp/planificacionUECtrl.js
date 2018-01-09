@@ -320,10 +320,13 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			});
 		}
 		if (node.nodeTipo == "SI") {
+			//unidadid={unidadid}&ejerciciofiscal={ejerciciofiscal}&actividadid={tablarealacionid}
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
-				"nivelactividad=" + node.padreID
+				"unidadid=" + node.npIdunidad +
+				"&ejerciciofiscal=" + $rootScope.ejefiscal +
+				"&actividadid=" + node.tablarelacionid
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
@@ -393,7 +396,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				}
 			})
 		}
-		if (node.nodeTipo == "SI") {
+/*		if (node.nodeTipo == "SI") {
 			PlanificacionUEFactory.traerPAverSubitem(
 				node.tablarelacionid,
 				node.npIdunidad,
@@ -406,7 +409,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divMenuSubitems = true;
 				}
 			})
-		}
+		}*/
 	};
 
 	$scope.cargarHijos=function(node){
@@ -513,6 +516,49 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		}, function() {
 		});
 	};
+
+	$scope.abrirOrganismoCodigo = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalOrganismo.html',
+			controller : 'ModalOrganismoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.itemunidadorganismoid = obj.id;
+			$scope.objeto.npcodigoorganismo = obj.codigo;
+			$scope.objeto.npnombreorganismo = obj.nombre;		
+			$scope.objeto.npcodigoorgpres = "NO SE OBTIENE";
+			$scope.objeto.npnombreorgpres = "NO SE OBTIENE";		
+		}, function() {
+		});
+	};
+
+	$scope.abrirCantonCodigo = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalDiviviones.html',
+			controller : 'ModalDivisionGeograficaController',
+			size : 'lg',
+			resolve: {
+				pais: function() {
+					return null;
+				},
+				provincia: function() {
+					return null;
+				},
+				tipo : function() {
+					return "C";
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			$scope.objeto.itemunidadcantonid = obj.id;
+			$scope.objeto.npcodigocanton = obj.codigo;
+			$scope.objeto.npnombrecanton = obj.nombre;
+		}, function() {
+		});
+	}
 
 	$scope.form = {
         submit: function(form,name) {
@@ -746,5 +792,22 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			return null;
 		}
 		return parts[2] + "/" + parts[1] + "/" + parts[0]; 
+	}
+
+	$scope.devuelveColorNode = function(tipo) {
+    	switch (tipo) {
+			case "AC":
+	        	return "#3333ff";
+			case "SA":
+	        	return "#5cd65c";
+			case "TA":
+	        	return "#ffd633";
+			case "ST":
+	        	return "#ff4d4d";
+			case "IT":
+	        	return "#00b3b3";
+			default:
+	        	return "auto";
+		}
 	}
 } ]);
