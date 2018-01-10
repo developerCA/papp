@@ -601,10 +601,23 @@
 						</div>
 
 						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<span ng-if="guardar && !noeditar">
+										<button type="submit" class="btn btn-primary">Guardar
+										</button>
+									</span>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">Cancelar</button>
+								</div>
+							</div>
+						</div>
+<br>
+						<div class="row">
 							<div class="col-sm-12">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<a uib-tooltip="Agregar" ng-show="!noeditar"
+										<a uib-tooltip="Agregar" ng-show="!noeditar && !nuevoar"
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarLinea();">
 											<i class="fa fa-plus-square"></i>
@@ -646,20 +659,6 @@
 							</div>
 
 						</div>
-
-						<div class="row">
-							<div class="col-md-12">
-								<div class="pull-right">
-									<span ng-if="guardar && !noeditar">
-										<button type="submit" class="btn btn-primary">Guardar
-										</button>
-									</span>
-									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">Cancelar</button>
-								</div>
-							</div>
-						</div>
-
 					</form>
 
 				</div>

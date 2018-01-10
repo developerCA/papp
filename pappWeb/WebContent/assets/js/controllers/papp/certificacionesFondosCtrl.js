@@ -119,6 +119,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			$scope.edicion=true;
 			$scope.nuevoar=true;
 			$scope.guardar=true;
+			$scope.noeditar=false;
 		})
 	}
 
@@ -279,11 +280,12 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
             } else {
             	certificacionesFondosFactory.guardar($scope.objeto).then(function(resp){
         			 if (resp.estado){
-        				 form.$setPristine(true);
-	 		             $scope.edicion=false;
-	 		             $scope.objeto={};
-	 		             $scope.limpiar();
-	 		             SweetAlert.swal("Certificaciones de Fondos!", "Registro guardado satisfactoriamente!", "success");
+        				 if ($scope.nuevoar) {
+	      					 $scope.noeditar = false;
+	      					 $scope.nuevoar=false;
+        				 }
+      				     $scope.objeto=resp.json.certificacion;
+      					 SweetAlert.swal("Certificaciones de Fondos!", "Registro guardado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
         			 }
