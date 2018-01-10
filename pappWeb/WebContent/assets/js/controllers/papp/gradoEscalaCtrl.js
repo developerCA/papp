@@ -102,7 +102,7 @@ app.controller('GradoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
 			$scope.escala = obj;
-			$scope.objeto.npgrupoocupacional=obj.grupoocupacional;
+			$scope.objeto.npcodigoescalarmu=obj.grupoocupacional;
 			$scope.objeto.geescalarmuid = obj.id;
 			$scope.objeto.npremuneracion=obj.remuneracion;
 			$scope.objeto.npcodigoescalarmu = obj.id;			

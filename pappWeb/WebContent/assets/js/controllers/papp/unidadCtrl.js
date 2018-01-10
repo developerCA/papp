@@ -145,7 +145,7 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 			size : 'lg',
 			resolve : {
 				ejefiscal : function() {
-					return $rootScope.ejefiscal;
+					return null;
 				}
 			}
 		});

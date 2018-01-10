@@ -113,7 +113,7 @@
 			        <span class="symbol required"></span>
 			    </label>
 			    <select class="form-control" name="subitem"
-			        ng-model="objeto.subitem" required>
+			        ng-model="objeto.subitem" required ng-change="obtenerTotal();">
 					<option 
 					    ng-repeat="operator in listarSubItems" 
 					    value="{{operator.id}}"
@@ -161,7 +161,7 @@
 			    <div class="input-group col-md-12">
 			        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor"
 			            class="form-control" name="valor" ng-model="objeto.valor"
-			            required>
+			            required ng-blur="compararValor();">
 			    </div>
 			    <span class="error text-small block"
 			        ng-if="Form.valor.$dirty && Form.valor.$invalid">

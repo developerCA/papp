@@ -109,8 +109,8 @@
 									ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
 									<label class="control-label"> C&oacute;digo <span
 										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Codigo"
-										class="form-control" name="codigo" ng-model="objeto.codigo"
+									</label> <input type="text" placeholder="Ingrese el Codigo"  ng-maxlength="10"
+										class="form-control" name="codigo" ng-model="objeto.codigo" ng-minlength="1"
 										ng-pattern="/^[0-9]*$/" ng-disabled="objeto.id !=null" required /> <span class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo
 										es incorrecto</span> <span class="success text-small"

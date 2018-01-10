@@ -42,7 +42,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
         		id: "",
         		descripcionexten: "Selecione un item"
         	}].concat(resp.json.result);
-			console.log($scope.listarItems);
+			//console.log($scope.listarItems);
 		})
 	}
 
@@ -51,12 +51,35 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 			$rootScope.ejefiscal,
 			$scope.objeto.item
 		).then(function(resp){
+			$scope.si = resp.json.result;
         	$scope.listarSubItems = [{
         		id: "",
         		descripcionexten: "Selecione un subitem"
         	}].concat(resp.json.result);
-			console.log($scope.listarItems);
+			//console.log($scope.listarItems);
 		})
+	}
+
+	$scope.obtenerTotal=function(){
+		var i;
+		for (i = 0; i < $scope.si.length; i++) {
+			if ($scope.si[i].id == $scope.objeto.subitem)
+				break;
+		}
+		if (i == $scope.si.length)
+			return;
+		certificacionesFondosFactory.obtenerTotal(
+			$scope.si[i].tablarelacionid
+		).then(function(resp){
+			//console.log(resp);
+        	$scope.objeto.npvalor = resp.json.valordisponiblesi.saldo;
+		})
+	}
+
+	$scope.compararValor=function(){
+		if ($scope.objeto.npvalor < $scope.objeto.valor) {
+			$scope.objeto.valor = $scope.objeto.npvalor;
+		}
 	}
 
 	$scope.form = {

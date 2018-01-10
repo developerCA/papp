@@ -9,7 +9,7 @@ app.factory("institutoEntidadFactory", [ "Restangular", function(Restangular) {
 				"pagina=" + pagina +
 				"&estado=A" +
 				"&filas=25" +
-				"&ejerciciofiscalid=" + ejercicoFiscal
+				(ejercicoFiscal != null? "&ejerciciofiscalid=" + ejercicoFiscal: "")
 			).getList();
 		},
 		

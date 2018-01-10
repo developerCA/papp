@@ -326,7 +326,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				node.tablarelacionid,
 				"unidadid=" + node.npIdunidad +
 				"&ejerciciofiscal=" + $rootScope.ejefiscal +
-				"&actividadid=" + $scope.planificacionUE.tablarelacionid//IVAN
+				"&actividadid=" + node.npactividadid
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
@@ -446,7 +446,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
     		tipo,
     		node.id,
     		node.npIdunidad,
-    		$rootScope.ejefiscal
+    		$rootScope.ejefiscal,
+    		(node.npactividadid==0? node.tablarelacionid: node.npactividadid)
 		).then(function(resp){
 			console.log(resp);
 			for (var i = 0; i < resp.length; i++) {

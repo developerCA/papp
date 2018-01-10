@@ -95,6 +95,13 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			return Restangular.allUrl(url).customGET();
 		},
 
+		obtenerTotal:function(
+			tablarelacionid
+		){
+			var url = "ejecucion/valordisponiblesi/" + tablarelacionid + "/0";
+			return Restangular.allUrl(url).customGET();
+		},
+
 		listarSubtareas:function(
 			ejerciciofiscal,
 			unidad

@@ -93,8 +93,8 @@
 								<td data-title="'Nombre Fuerza'">{{obj.npnombrefuerza}}</td>
 								<td data-title="'Sigla Fuerza'">{{obj.npsiglafuerza}}</td>
 								<td data-title="'Grupo Ocupacional'">{{obj.npgrupoocupacional}}</td>
-								<td data-title="'Grado Remuneraci&oacute;n'">{{obj.npnombregrado}}</td>
-								<td data-title="'Remuneraci&oacute;n'">{{obj.npremuneracion}}</td>
+								<td data-title="'Grado Remuneraci&oacute;n'">{{obj.npcodigoescalarmu}}</td>
+								<td data-title="'Remuneraci&oacute;n'" style="text-align:right;">{{obj.npremuneracion | number : 2}}</td>
 								<td data-title="'R&eacute;gimen Laboral'">
 									<span ng-if="obj.regimenlaboraltipo=='L'">LOSEP</span>
 									<span ng-if="obj.regimenlaboraltipo!='L'">C&oacute;digo de Trabajo</span>
@@ -189,15 +189,15 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label"> Grupo Remuneraci&oacute;n
+									<label class="control-label"> Grado Remuneraci&oacute;n
 									</label> <input type="text"
-										class="form-control" name="gruporemuneracion" ng-model="objeto.geescalarmuid"
+										class="form-control" name="gruporemuneracion" ng-model="objeto.npcodigoescalarmu"
 										required readonly="true"/>
 								</div>
 								
 								<div class="form-group">
 									<label class="control-label"> Remuneraci&oacute;n
-									</label> <input type="text"
+									</label> <input type="text" numericOnly style="text-align:right;" decimal="2"
 										class="form-control" name="remuneracion" ng-model="objeto.npremuneracion"
 										required readonly="true"/>
 								</div>													

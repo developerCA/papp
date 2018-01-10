@@ -174,7 +174,7 @@
 							<tr ng-repeat="obj in data">
 								<td>
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Modificar" ng-click="editar(obj.id)">
+										uib-tooltip="Modificar" ng-click="editar($index)">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
@@ -239,7 +239,6 @@
 						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-6">
-								
 								<div class="form-group"
 								    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
 								    <label class="control-label">
@@ -267,7 +266,7 @@
 								    </label>
 								    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
 								        class="form-control" ng-model="objeto.descripcion"
-								        required>
+								        required ng-disabled="noeditar">
 								    </textarea>
 								    <span class="error text-small block"
 								        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
@@ -291,7 +290,7 @@
 								            ng-model="objeto.npunidadcodigo">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
-								                ng-click="abrirUnidad()">
+								                ng-click="abrirUnidad()" ng-disabled="noeditar">
 								                <i class="fa fa-search"></i>
 								                Seleccione
 								            </button>
@@ -338,7 +337,7 @@
 								            ng-model="objeto.npcodigoregistro">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
-								                ng-click="abrirClaseRegistroCodigo()">
+								                ng-click="abrirClaseRegistroCodigo()" ng-disabled="noeditar">
 								                <i class="fa fa-search"></i>
 								                Seleccione
 								            </button>
@@ -391,7 +390,7 @@
 								        Listo
 								    </span>
 								</div>
-								
+
 								<div class="form-group"
 								    ng-class="{'has-error':Form.npnombremodificacion.$dirty && Form.npnombremodificacion.$invalid, 'has-success':Form.npnombremodificacion.$valid}">
 								    <label class="control-label">
@@ -461,7 +460,7 @@
 								            ng-model="objeto.npcodigotipodocumento">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
-								                ng-click="abrirTipoDocumentoCodigo()">
+								                ng-click="abrirTipoDocumentoCodigo()" ng-disabled="noeditar">
 								                <i class="fa fa-search"></i>
 								                Seleccione
 								            </button>
@@ -541,7 +540,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un n&uacute;mero documento"
 								        class="form-control" name="numerodocumento" ng-model="objeto.numerodocumento"
-								        ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar">
+								        ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar && noeditar">
 								</div>
 								
 								<div class="form-group has-success">
@@ -551,7 +550,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
 								        class="form-control" name="numerooficio" ng-model="objeto.numerooficio"
-								        ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar">
+								        ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar && noeditar">
 								</div>
 								
 								<div class="form-group"
@@ -560,7 +559,7 @@
 								        Valor total
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" placeholder="0.00"
+								    <input type="number" placeholder="0.00"
 								        class="form-control" name="valortotal" ng-model="objeto.valortotal"
 								        ng-disabled="true">
 								    <span class="error text-small block"
@@ -605,7 +604,7 @@
 							<div class="col-sm-12">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<a uib-tooltip="Agregar"
+										<a uib-tooltip="Agregar" ng-show="!noeditar"
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarLinea();">
 											<i class="fa fa-plus-square"></i>
@@ -651,7 +650,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<span ng-if="guardar">
+									<span ng-if="guardar && !noeditar">
 										<button type="submit" class="btn btn-primary">Guardar
 										</button>
 									</span>

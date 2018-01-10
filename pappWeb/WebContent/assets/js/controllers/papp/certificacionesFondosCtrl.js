@@ -122,8 +122,10 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		})
 	}
 
-	$scope.editar=function(id){
-		certificacionesFondosFactory.traerCertificacionesFondosEditar(id).then(function(resp){
+	$scope.editar=function(index){
+		//console.log($scope.data[index]);
+		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
+		certificacionesFondosFactory.traerCertificacionesFondosEditar($scope.data[index].id).then(function(resp){
 			console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.certificacion;
@@ -198,7 +200,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		modalInstance.result.then(function(obj) {
 			console.log(obj);//130
 		    $scope.detalles=obj;
-            SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro registrado satisfactoriamente!", "success");
+            SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
 		});
 	};
@@ -281,7 +283,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
 	 		             $scope.limpiar();
-	 		             SweetAlert.swal("Certificaciones de Fondos!", "Registro registrado satisfactoriamente!", "success");
+	 		             SweetAlert.swal("Certificaciones de Fondos!", "Registro guardado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
         			 }

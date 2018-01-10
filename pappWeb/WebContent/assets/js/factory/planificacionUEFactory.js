@@ -22,13 +22,14 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
 			).getList();
         },
 
-        traerPAhijos: function (tipo, id, unidad, ejercicio) {
+        traerPAhijos: function (tipo, id, unidad, ejercicio, actividadid) {
         	var url = "planificacion/consultar/nivelactividad/" +
     			"tipo=" + tipo +
     			"&nivelactividadpadreid=" + id +
     			"&nivelactividadejerfiscalid=" + ejercicio +
     			"&nivelactividadunidadid=" + unidad +
-				"&estado=A"
+				"&estado=A" +
+				"&actividadid=" + actividadid
 			return Restangular.allUrl(url).getList();
         },
 

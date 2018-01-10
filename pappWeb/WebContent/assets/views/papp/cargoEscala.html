@@ -85,7 +85,7 @@
 								<td data-title="'Nombre Cargo'">{{obj.npnombrecargo}}</td>
 								<td data-title="'Grupo Ocupacional'">{{obj.npgrupoocupacional}}</td>
 								<td data-title="'Grado Remuneraci&oacute;n'">{{obj.npcodigoescalarmu}}</td>
-								<td data-title="'Escala Remuneraci&oacute;n'">{{convertirDecimal(obj.npremuneracion)}}</td>
+								<td data-title="'Escala Remuneraci&oacute;n'" style="text-align:right;">{{obj.npremuneracion | number : 2}}</td>
 								<td data-title="'R&eacute;gimen Laboral'">
 									<span ng-if="obj.laboraltipo=='L'">LOSEP</span>
 									<span ng-if="obj.laboraltipo=='C'">C&oacute;digo de Trabajo</span>
@@ -194,13 +194,13 @@
 								
 								<div class="form-group">
 									<label class="control-label"> Grado Remuneraci&oacute;n
-									</label> <input type="text"
+									</label> <input type="text" numericOnly style="text-align:right;" decimal="2"
 										class="form-control" name="siglafuerza" ng-model="objeto.ceescalarmuid"
 										required readonly="true"/>
 								</div>	
 								<div class="form-group">
 									<label class="control-label"> Escala Remuneraci&oacute;n
-									</label> <input type="text"
+									</label> <input type="text" numericOnly style="text-align:right;" decimal="2"
 										class="form-control" name="escalaremuneracion" ng-model="objeto.npremuneracion"
 										required readonly="true"/>
 								</div>															
