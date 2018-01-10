@@ -400,7 +400,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		if (node.nodeTipo == "SA") {
 			PlanificacionUEFactory.traerPAverSubActividad(
 				node.tablarelacionid,
-				$scope.unidadid
+				node.npIdunidad,
+				$rootScope.ejefiscal
 			).then(function(resp){
 				console.log(resp);
 				if (resp.estado) {
