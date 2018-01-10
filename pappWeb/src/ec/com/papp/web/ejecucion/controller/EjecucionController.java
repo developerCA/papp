@@ -55,6 +55,7 @@ import ec.com.papp.planificacion.to.ProyectoTO;
 import ec.com.papp.planificacion.to.ProyectometaTO;
 import ec.com.papp.planificacion.to.ReformalineaTO;
 import ec.com.papp.planificacion.to.SubactividadTO;
+import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.to.SubprogramaTO;
 import ec.com.papp.resource.MensajesAplicacion;
@@ -529,7 +530,7 @@ public class EjecucionController {
 				OrdendevengolineaTO ordendevengolineaTO=new OrdendevengolineaTO();
 				ordendevengolineaTO.getId().setId(ordendevengoTO.getId());
 				Collection<OrdendevengolineaTO> ordendevengolineaTOs=UtilSession.planificacionServicio.transObtenerOrdendevengolinea(ordendevengolineaTO);
-				jsonObject.put("ordendevengolineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordendevengoTO.getJsonConfig()));
+				jsonObject.put("ordendevengolineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordendevengolineaTO.getJsonConfig()));
 				jsonObject.put("ordendevengo", (JSONObject)JSONSerializer.toJSON(ordendevengoTO,ordendevengoTO.getJsonConfig()));
 			}
 			//Ordendevengolinea
@@ -572,33 +573,36 @@ public class EjecucionController {
 			else if(clase.equals("valordisponiblesi")) {
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(id);
-				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
-				double valorcertificacion=0.0;
-				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificacionesnoeliminadas(id);
-				for(CertificacionlineaTO certificacionlineaTO:certificacionlineaTOs)
-					valorcertificacion=valorcertificacion+certificacionlineaTO.getValor().doubleValue();
-				//3. resto el total disponible menos las certificaciones ya creadas
-				double saldo=total-valorcertificacion;
+				//2. Obtengo el detalle del subitem
+//				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, id);
+//				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
+//				double valorcertificacion=0.0;
+//				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificacionesnoeliminadas(id);
+//				for(CertificacionlineaTO certificacionlineaTO:certificacionlineaTOs)
+//					valorcertificacion=valorcertificacion+certificacionlineaTO.getValor().doubleValue();
+//				//3. resto el total disponible menos las certificaciones ya creadas
+//				double saldo=total-valorcertificacion;
 				Map<String, Double> saldodisponible=new HashMap<>();
 				saldodisponible.put("saldo", saldo);
 				jsonObject.put("valordisponiblesi", (JSONObject)JSONSerializer.toJSON(saldodisponible));
 			}
-			//disponiblecertificacion: Recibo el id del subitem y traigo el valor disponible eso es para Certificacion de fondos
-			else if(clase.equals("valordisponiblesi")) {
+			//datoslineaordend: Obtiene el saldo disponible de la certificacion y el valor de las ordenes no aprobadas
+			else if(clase.equals("datoslineaordend")) {
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(id);
-				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
-				double valorcertificacion=0.0;
-				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificacionesnoeliminadas(id);
-				for(CertificacionlineaTO certificacionlineaTO:certificacionlineaTOs)
-					valorcertificacion=valorcertificacion+certificacionlineaTO.getValor().doubleValue();
-				//3. resto el total disponible menos las certificaciones ya creadas
-				double saldo=total-valorcertificacion;
+				//2. Obtengo el detalle del subitem
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, id);
+				//3. Consulto las ordenes de devengo no aprobadas
+				Collection<OrdendevengoTO> ordendevengoTOs=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2);
+				double ordenesnoaprob=0.0;
+				for(OrdendevengoTO ordendevengoTO:ordendevengoTOs)
+					ordenesnoaprob=ordenesnoaprob+ordendevengoTO.getValortotal();
 				Map<String, Double> saldodisponible=new HashMap<>();
 				saldodisponible.put("saldo", saldo);
-				jsonObject.put("valordisponiblesi", (JSONObject)JSONSerializer.toJSON(saldodisponible));
+				saldodisponible.put("noaprobadas", ordenesnoaprob);
+				jsonObject.put("datoslineaordend", (JSONObject)JSONSerializer.toJSON(saldodisponible));
 			}
-
 
 			log.println("json retornado: " + jsonObject.toString());
 		} catch (Exception e) {

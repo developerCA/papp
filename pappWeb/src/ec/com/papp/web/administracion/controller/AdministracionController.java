@@ -708,39 +708,39 @@ public class AdministracionController {
 				ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO = gson.fromJson(new StringReader(objeto), ClaseregistroclasemodificacionTO.class);
 				if(claseregistroclasemodificacionTO.getId()==null)
 					claseregistroclasemodificacionTO.setId(new ClaseregistroclasemodificacionID());
-				log.println("ejercicio fiscal::: " + claseregistroclasemodificacionTO.getClaseregistrocmejerfiscalid());
+				log.println("ejercicio fiscal::# " + claseregistroclasemodificacionTO.getClaseregistrocmejerfiscalid());
 				accion = (claseregistroclasemodificacionTO.getId()==null)?"crear":"actualizar";
 				//pregunto si ya existe el codigo en el nivel actual
-				ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO3=new ClaseregistroclasemodificacionTO();
-				claseregistroclasemodificacionTO3.setCodigo(claseregistroclasemodificacionTO.getCodigo());
-				claseregistroclasemodificacionTO3.setClaseregistrocmejerfiscalid(claseregistroclasemodificacionTO.getClaseregistrocmejerfiscalid());
-				Collection<ClaseregistroclasemodificacionTO> claseregistroclasemodificacionTOs=UtilSession.adminsitracionServicio.transObtenerClaseregistroclasemodificacion(claseregistroclasemodificacionTO3);
-				log.println("clases encontradas: " + claseregistroclasemodificacionTOs.size());
-				boolean grabar=true;
-				if(claseregistroclasemodificacionTOs.size()>0){
-					for(ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO2:claseregistroclasemodificacionTOs) {
-						//claseregistroclasemodificacionTO2=(ClaseregistroclasemodificacionTO)claseregistroclasemodificacionTOs.iterator().next();
-						log.println("id.... " + claseregistroclasemodificacionTO.getId().getRegistroid() + " - " + claseregistroclasemodificacionTO2.getId().getRegistroid());
-						log.println("id1.... " + claseregistroclasemodificacionTO.getId().getRegistrocmid()+ " - " + claseregistroclasemodificacionTO2.getId().getRegistrocmid());
-						if((claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO.getId().getRegistrocmid()!=null && claseregistroclasemodificacionTO.getId().getRegistroid()!=null) && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue() && claseregistroclasemodificacionTO.getCodigo()!=null && claseregistroclasemodificacionTO2.getCodigo().equals(claseregistroclasemodificacionTO.getCodigo())) {
-							grabar=false;
-							break;
-						}
-						else if((claseregistroclasemodificacionTO.getId()==null || (claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue())) && claseregistroclasemodificacionTO.getCodigo()!=null && claseregistroclasemodificacionTO2.getCodigo().equals(claseregistroclasemodificacionTO.getCodigo())) {
-							grabar=false;
-							break;
-						}
-					}
-				}
-				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-				}
-				else{
+//				ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO3=new ClaseregistroclasemodificacionTO();
+//				claseregistroclasemodificacionTO3.setCodigo(claseregistroclasemodificacionTO.getCodigo());
+//				claseregistroclasemodificacionTO3.setClaseregistrocmejerfiscalid(claseregistroclasemodificacionTO.getClaseregistrocmejerfiscalid());
+//				Collection<ClaseregistroclasemodificacionTO> claseregistroclasemodificacionTOs=UtilSession.adminsitracionServicio.transObtenerClaseregistroclasemodificacion(claseregistroclasemodificacionTO3);
+//				log.println("clases encontradas: " + claseregistroclasemodificacionTOs.size());
+//				boolean grabar=true;
+//				if(claseregistroclasemodificacionTOs.size()>0){
+//					for(ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO2:claseregistroclasemodificacionTOs) {
+//						//claseregistroclasemodificacionTO2=(ClaseregistroclasemodificacionTO)claseregistroclasemodificacionTOs.iterator().next();
+//						log.println("id.... " + claseregistroclasemodificacionTO.getId().getRegistroid() + " - " + claseregistroclasemodificacionTO2.getId().getRegistroid());
+//						log.println("id1.... " + claseregistroclasemodificacionTO.getId().getRegistrocmid()+ " - " + claseregistroclasemodificacionTO2.getId().getRegistrocmid());
+//						if((claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO.getId().getRegistrocmid()!=null && claseregistroclasemodificacionTO.getId().getRegistroid()!=null) && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue() && claseregistroclasemodificacionTO.getCodigo()!=null && claseregistroclasemodificacionTO2.getCodigo().equals(claseregistroclasemodificacionTO.getCodigo())) {
+//							grabar=false;
+//							break;
+//						}
+//						else if((claseregistroclasemodificacionTO.getId()==null || (claseregistroclasemodificacionTO.getId()!=null && claseregistroclasemodificacionTO2.getId().getRegistrocmid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistrocmid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue() && claseregistroclasemodificacionTO2.getId().getRegistroid().longValue()!=claseregistroclasemodificacionTO.getId().getRegistroid().longValue())) && claseregistroclasemodificacionTO.getCodigo()!=null && claseregistroclasemodificacionTO2.getCodigo().equals(claseregistroclasemodificacionTO.getCodigo())) {
+//							grabar=false;
+//							break;
+//						}
+//					}
+//				}
+//				if(!grabar){
+//					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+//					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+//				}
+//				else{
 					UtilSession.adminsitracionServicio.transCrearModificarClaseregistroclasemodificacion(claseregistroclasemodificacionTO);
 					id=claseregistroclasemodificacionTO.getId().getRegistrocmid().toString();
 					jsonObject.put("clasemodificacion", (JSONObject)JSONSerializer.toJSON(claseregistroclasemodificacionTO,claseregistroclasemodificacionTO.getJsonConfig()));
-				}
+//				}
 			}
 
 			//Tipodocumento

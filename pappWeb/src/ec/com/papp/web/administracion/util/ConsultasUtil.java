@@ -1504,6 +1504,9 @@ public class ConsultasUtil {
 				socionegocioTO.setNombrecomercial(parameters.get("nombrecomercial"));
 			if(parameters.get("representantelegal")!=null && !parameters.get("representantelegal").equals(""))
 				socionegocioTO.setRepresentantelegal(parameters.get("representantelegal"));
+			if(parameters.get("esempleado")!=null && !parameters.get("esempleado").equals("")) {
+				socionegocioTO.setEsempleado(1);
+			}
 			
 			if(tipo.equals("busquedasocionegocio"))
 				socionegocioTO.setEstado(MensajesAplicacion.getString("estado.activo"));

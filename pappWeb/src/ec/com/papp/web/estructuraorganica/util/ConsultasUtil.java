@@ -52,7 +52,7 @@ public class ConsultasUtil {
 			if(parameters.get("filas")!=null)
 				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 			int primero=(pagina*filas)-filas;
-			campo="codigo";
+			campo="estado";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
@@ -60,9 +60,9 @@ public class ConsultasUtil {
 			estructuraorganicaTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
-				estructuraorganicaTO.setOrderByField(OrderBy.orderDesc(orderBy));
-			else
 				estructuraorganicaTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			else
+				estructuraorganicaTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				estructuraorganicaTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))

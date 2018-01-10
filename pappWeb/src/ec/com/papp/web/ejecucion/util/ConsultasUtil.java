@@ -22,6 +22,7 @@ import ec.com.papp.planificacion.to.GastoDevengoVO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.to.OrdenreversionTO;
+import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.web.comun.util.Mensajes;
@@ -691,6 +692,26 @@ public class ConsultasUtil {
 					total=total+subitemunidadacumuladorTO2.getTotal().doubleValue();
 			}
 			return total;
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+	}
+
+	/**
+	* Metodo que obtiene el saldo disponible de un subitem
+	*
+	* @param request 
+	* @return total
+	* @throws MyException
+	*/
+
+	public static Double obtenersaldodisponible(Double total,Long idsubitem) throws MyException {
+		try{
+			SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(idsubitem);
+			double saldo=total-subitemunidadTO.getValprecompromiso().doubleValue()-subitemunidadTO.getValxcomprometer().doubleValue()-subitemunidadTO.getValcompromiso().doubleValue();
+			return saldo;
 
 		}catch (Exception e) {
 			e.printStackTrace();
