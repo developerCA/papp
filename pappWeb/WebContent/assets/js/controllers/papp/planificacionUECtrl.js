@@ -357,6 +357,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.edicion=true;
 		$scope.planificacionUE=obj;
 		$scope.unidadid = obj.npacitividadunidad;
+		//$scope.nivelactividadunidadid = obj.nivelactividadunidadid;**
 		$scope.dataPA=[];
 		$scope.divPlanificacionAnual=true;
 		PlanificacionUEFactory.traerPAactividad(
@@ -396,20 +397,71 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				}
 			})
 		}
-/*		if (node.nodeTipo == "SI") {
-			PlanificacionUEFactory.traerPAverSubitem(
+		if (node.nodeTipo == "SA") {
+			PlanificacionUEFactory.traerPAverSubActividad(
 				node.tablarelacionid,
-				node.npIdunidad,
-				$rootScope.ejefiscal
+				$scope.unidadid
 			).then(function(resp){
-				console.log(node.nodeTipo);
+				console.log(resp);
 				if (resp.estado) {
-					$scope.objetoVista=resp.json.actividadplanificacion;
+					$scope.objetoVista=resp.json.subactividadplanificacion;
 					$scope.divPlanificacionAnualVista=true;
-					$scope.divMenuSubitems = true;
+					$scope.divMenuActividad = true;
 				}
 			})
-		}*/
+		}
+		if (node.nodeTipo == "TA") {
+			PlanificacionUEFactory.traerPAverTarea(
+				node.tablarelacionid,
+				$scope.unidadid
+			).then(function(resp){
+				console.log(resp);
+				if (resp.estado) {
+					$scope.objetoVista=resp.json.tareaplanificacion;
+					$scope.divPlanificacionAnualVista=true;
+					$scope.divMenuActividad = true;
+				}
+			})
+		}
+		if (node.nodeTipo == "ST") {
+			PlanificacionUEFactory.traerPAverSubTarea(
+				node.tablarelacionid,
+				$scope.unidadid
+			).then(function(resp){
+				console.log(resp);
+				if (resp.estado) {
+					$scope.objetoVista=resp.json.subtareaplanificacion;
+					$scope.divPlanificacionAnualVista=true;
+					$scope.divMenuActividad = true;
+				}
+			})
+		}
+		if (node.nodeTipo == "IT") {
+			PlanificacionUEFactory.traerPAverItem(
+				node.tablarelacionid,
+				$scope.unidadid
+			).then(function(resp){
+				console.log(resp);
+				if (resp.estado) {
+					$scope.objetoVista=resp.json.itemplanificacion;
+					$scope.divPlanificacionAnualVista=true;
+					$scope.divMenuActividad = true;
+				}
+			})
+		}
+		if (node.nodeTipo == "SI") {
+			PlanificacionUEFactory.traerPAverSubItem(
+				node.tablarelacionid,
+				$scope.unidadid
+			).then(function(resp){
+				console.log(resp);
+				if (resp.estado) {
+					$scope.objetoVista=resp.json.subitemplanificacion;
+					$scope.divPlanificacionAnualVista=true;
+					$scope.divMenuActividad = true;
+				}
+			})
+		}
 	};
 
 	$scope.cargarHijos=function(node){

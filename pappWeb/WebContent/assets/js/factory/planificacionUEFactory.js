@@ -40,15 +40,42 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
     			"&ejerciciofiscal=" + ejercicio
 			).customGET();
         },
-/*
-        traerPAverSubitem: function (id, unidad, ejercicio) {
-        	return Restangular.allUrl("planificacion/actividadplanificacion/" +
-    			id + "/" +
-    			"unidadid=" + unidad +
-    			"&ejerciciofiscal=" + ejercicio
+
+        traerPAverSubActividad: function (tablarelacionid, nivelactividadunidadid) {
+        	return Restangular.allUrl("planificacion/subactividadplanificacion/" +
+    			tablarelacionid + "/" +
+    			nivelactividadunidadid
 			).customGET();
         },
-*/
+
+        traerPAverTarea: function (tablarelacionid, nivelactividadunidadid) {
+        	return Restangular.allUrl("planificacion/tareaplanificacion/" +
+    			tablarelacionid + "/" +
+    			nivelactividadunidadid
+			).customGET();
+        },
+
+        traerPAverSubTarea: function (tablarelacionid, nivelactividadunidadid) {
+        	return Restangular.allUrl("planificacion/subtareaplanificacion/" +
+    			tablarelacionid + "/" +
+    			nivelactividadunidadid
+			).customGET();
+        },
+
+        traerPAverItem: function (tablarelacionid, nivelactividadunidadid) {
+        	return Restangular.allUrl("planificacion/itemplanificacion/" +
+    			tablarelacionid + "/" +
+    			nivelactividadunidadid
+			).customGET();
+        },
+
+        traerPAverSubItem: function (tablarelacionid, nivelactividadunidadid) {
+        	return Restangular.allUrl("planificacion/subitemplanificacion/" +
+    			tablarelacionid + "/" +
+    			nivelactividadunidadid
+			).customGET();
+        },
+
         traerCustom: function (pagina, ejercicio) {
         	 var url = "planificacion/consultar/planificacion/pagina=" + pagina + "&ejerciciofiscal=" + ejercicio;
              return Restangular.allUrl(url).customGET();
