@@ -41,38 +41,43 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
 			).customGET();
         },
 
-        traerPAverSubActividad: function (tablarelacionid, nivelactividadunidadid) {
+/*        traerPAverSubActividad: function (tablarelacionid, nivelactividadunidadid) {
         	return Restangular.allUrl("planificacion/subactividadplanificacion/" +
     			tablarelacionid + "/" +
-    			nivelactividadunidadid
+    			"0"//nivelactividadunidadid
+*/        traerPAverSubActividad: function (id, unidad, ejercicio) {
+        	return Restangular.allUrl("planificacion/subactividadplanificacion/" +
+    			id + "/" +
+    			"unidadid=" + unidad +
+    			"&ejerciciofiscal=" + ejercicio
 			).customGET();
         },
 
         traerPAverTarea: function (tablarelacionid, nivelactividadunidadid) {
         	return Restangular.allUrl("planificacion/tareaplanificacion/" +
     			tablarelacionid + "/" +
-    			nivelactividadunidadid
+    			"0"//nivelactividadunidadid
 			).customGET();
         },
 
         traerPAverSubTarea: function (tablarelacionid, nivelactividadunidadid) {
         	return Restangular.allUrl("planificacion/subtareaplanificacion/" +
     			tablarelacionid + "/" +
-    			nivelactividadunidadid
+    			"0"//nivelactividadunidadid
 			).customGET();
         },
 
         traerPAverItem: function (tablarelacionid, nivelactividadunidadid) {
         	return Restangular.allUrl("planificacion/itemplanificacion/" +
     			tablarelacionid + "/" +
-    			nivelactividadunidadid
+    			"0"//nivelactividadunidadid
 			).customGET();
         },
 
         traerPAverSubItem: function (tablarelacionid, nivelactividadunidadid) {
         	return Restangular.allUrl("planificacion/subitemplanificacion/" +
     			tablarelacionid + "/" +
-    			nivelactividadunidadid
+    			"0"//nivelactividadunidadid
 			).customGET();
         },
 
