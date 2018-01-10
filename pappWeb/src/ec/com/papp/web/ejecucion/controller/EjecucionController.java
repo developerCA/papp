@@ -754,11 +754,14 @@ public class EjecucionController {
 		JSONObject jsonObject=new JSONObject();
 		try {
 			OrdendevengoTO ordendevengoTO=UtilSession.planificacionServicio.transObtenerOrdendevengoTO(id);
-			ordendevengoTO.setEstado(tipo);
-			UtilSession.planificacionServicio.transCrearModificarOrdendevengo(ordendevengoTO, tipo);
-			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
-			mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
-			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
+				ordendevengoTO.setEstado(tipo);
+				UtilSession.planificacionServicio.transCrearModificarOrdendevengo(ordendevengoTO, tipo);
+				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+			}
 //			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 		} catch (Exception e) {
 			e.printStackTrace();
