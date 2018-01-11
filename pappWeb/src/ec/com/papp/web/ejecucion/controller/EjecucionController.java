@@ -650,6 +650,7 @@ public class EjecucionController {
 			}
 			//Verifico que no tenga atada una orden de gasto
 			else if(tipo.equals("LT")) {
+				certificacionTO.setEstado(tipo);
 				OrdengastoTO ordengastoTO=new OrdengastoTO();
 				ordengastoTO.setOrdengastocertificacionid(id);
 				Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
@@ -663,6 +664,7 @@ public class EjecucionController {
 					if(existeorden) {
 						mensajes.setMsg("No se puede liquidar totalmente a una Certificación que esté asociada a una Orden de gasto");
 						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						respuesta.setEstado(false);
 					}
 					else {
 						if(parameters.get("observacion")!=null)
@@ -677,12 +679,14 @@ public class EjecucionController {
 				}
 			}
 			else if(tipo.equals("LP")) {
+				certificacionTO.setEstado(tipo);
 				OrdengastoTO ordengastoTO=new OrdengastoTO();
 				ordengastoTO.setOrdengastocertificacionid(id);
 				Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
 				if(ordengastoTOs.size()==0) {
 					mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					respuesta.setEstado(false);
 				}
 				else {
 					double valorordenes=0.0;
@@ -696,6 +700,7 @@ public class EjecucionController {
 					if(!aprobada) {
 						mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto aprobada");
 						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						respuesta.setEstado(false);
 					}
 					else {
 						certificacionTO.setNptotalordenes(valorordenes);
@@ -755,10 +760,6 @@ public class EjecucionController {
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 			}
-			UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO,tipo);
-			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
-			mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
-			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 //			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 		} catch (Exception e) {
 			e.printStackTrace();
