@@ -538,7 +538,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalObraCtrl', 'ObrasFactory',
         		'ModalFuenteFinanciamientoCtrl', 'FuenteFactory',
         		'ModalOrganismoCtrl', 'OrganismoFactory',
-        		'ModalDivisionGeograficaCtrl', 'DivisionGeograficaFactory'
+        		'ModalDivisionGeograficaCtrl', 'DivisionGeograficaFactory',
+        		'ModalSubItemCtrl', 'SubItemsFactory'
 		),
         title: 'Planificación UE',
         ncyBreadcrumb: {

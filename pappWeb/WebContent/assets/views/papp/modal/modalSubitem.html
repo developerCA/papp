@@ -1,0 +1,111 @@
+<div class="modal-header">
+	<h3 class="modal-title">
+		Subitem
+	</h3>
+</div>
+<div class="modal-body">
+	<div class="panel-body" ng-init="consultar();" >
+		<div class="panel panel-white" id="panel1">
+			<div class="panel-heading">
+				<h4 class="panel-title text-primary">Filtros</h4>
+				<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+			</div>
+			<div uib-collapse="panel1" ng-init="panel1=true"
+				class="panel-wrapper">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>C&oacute;digo INCOP</label> <input type="text"
+									class="form-control" ng-model="codigoIncop">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Nombre</label> <input type="text" class="form-control"
+									ng-model="nombre">
+							</div>
+						</div>
+					</div>
+<!--					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label> Item Nombre</label> <input type="text"
+									class="form-control" ng-model="itemNombre">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label> Estado </label> <select name="estado"
+									ng-model="estado" class="form-control">
+									<option value>Todos</option>
+									<option value="A">Activo</option>
+									<option value="I">Inactivo</option>
+								</select>
+							</div>
+						</div>
+					</div>
+-->					<div class="row">
+						<div class="col-sm-12">
+							<a class="btn btn-wide btn-dark-azure" ng-click="filtrarUnico()">
+								<i class="fa fa-search"></i> Buscar
+							</a> <a class="btn btn-wide btn-o btn-default"
+								ng-click="limpiar()">Limpiar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();">
+			<i class="fa fa-plus-square"></i> Agregar
+		</a>
+
+		<div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+<!--						<th>Item Nombre</th> -->
+						<th>C&oacute;digo INCOP</th>
+						<th>Nombre</th>
+<!--						<th>Precio</th>
+						<th>Estado</th>
+						<th>C&oacute;digo interno</th>
+						<th>Nivel</th>
+						<th>Unidad Medida Nombre</th>
+						<th>Item Tipo</th> -->
+					</tr>
+				</thead>
+				<tr ng-repeat="data in dataset">
+					<td>
+						<a class="btn btn-sm btn-primary"
+							uib-tooltip="Seleccionar" ng-click="seleccionar(data)">
+							<i class="fa fa-check"></i>
+						</a>
+					</td>
+<!--					<td data-title="'Item Nombre'" style="max-width: 100px">{{data.npitemnombre}}</td> -->
+					<td data-title="'C&oacute;digo INCOP'">{{data.codigo}}</td>
+					<td data-title="'Nombre'">{{data.nombre}}</td>
+<!--					<td data-title="'Precio'">{{data.precio}}</td>
+					<td data-title="'Estado'"><span ng-if="data.estado=='I'">INACTIVO</span>
+						<span ng-if="data.estado=='A'">ACTIVO</span></td>
+					<td data-title="'C&oacute;digo interno'">{{data.codigointerno}}</td>
+					<td data-title="'Nivel'">{{data.nivel}}</td>
+					<td data-title="'Unidad Medida Nombre'">{{data.npunidadnombre}}</td>
+					<td data-title="'Item Tipo'">{{data.nptipobien}}</td> -->
+				</tr>
+			</table>
+
+			<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+				previous-text="Atras" uib-pagination total-items="total"
+				ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
+				max-size="10" class="pagination-sm" boundary-links="true"
+				force-ellipses="true">
+			</ul>
+		</div>
+	</div>
+	<div class="modal-footer">
+	    <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+	</div>
+</div>

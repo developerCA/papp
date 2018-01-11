@@ -54,7 +54,7 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","f
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		clasificacionFactory.traerClasificacionesFuerzaFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, $scope.estadoFiltro).then(function(resp){
+		clasificacionFactory.traerClasificacionesFuerzaFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, "A").then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -62,7 +62,7 @@ app.controller('ModalClasificacionController', [ "$scope","$uibModalInstance","f
 
 	$scope.filtrarSinFuerza=function(){
 		$scope.data=[];
-		clasificacionFactory.traerClasificacionesFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, $scope.estadoFiltro).then(function(resp){
+		clasificacionFactory.traerClasificacionesFiltro(pagina,$scope.codigoFiltro,$scope.nombreFiltro, $scope.siglaFiltro, "A").then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})

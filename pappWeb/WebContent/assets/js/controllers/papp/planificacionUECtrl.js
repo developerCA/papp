@@ -12,6 +12,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.unidadid=null;
 	$scope.node=null;
 	$scope.data=[];
+	$scope.novista = true;;
 
 	$scope.limpiarEdicion = function() {
 		$scope.divEditarDistribucion=false;
@@ -26,7 +27,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.divTarea=false;
 		$scope.divSubTarea=false;
 		$scope.divItem=false;
-		$scope.dibSubItem=false;
+		$scope.divSubItem=false;
 		$scope.editar=false;
 		$scope.divPlanificacionAnualVista=false;
 		//$scope.=false;
@@ -336,7 +337,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.editar=false;
 				}
 				$scope.objeto=Object.assign({}, resp.json.subitemunidad);
-				//$scope.detalles=resp.json.subtareaunidadacumulador;
+				$scope.detalles=resp.json.subitemunidadacumulador;
+				for (var i = 0; i < $scope.detalles.length; i++) {
+					if ($scope.detalles[i].tipo == "P") {
+						$scope.mPlanificadaID = i;
+					}
+					if ($scope.detalles[i].tipo == "A") {
+						$scope.mAjustadaID = i;
+					}
+				}
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubItem=true;
 				console.log("Editar OBJETO:", $scope.objeto);
@@ -394,6 +403,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.objetoVista=resp.json.actividadplanificacion;
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
+					$scope.novista = false;
 				}
 			})
 		}
@@ -408,6 +418,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.objetoVista=resp.json.subactividadplanificacion;
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
+					$scope.novista = false;
 				}
 			})
 		}
@@ -421,6 +432,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.objetoVista=resp.json.tareaplanificacion;
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
+					$scope.novista = false;
 				}
 			})
 		}
@@ -434,6 +446,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.objetoVista=resp.json.subtareaplanificacion;
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
+					$scope.novista = false;
 				}
 			})
 		}
@@ -447,6 +460,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.objetoVista=resp.json.itemplanificacion;
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
+					$scope.novista = false;
 				}
 			})
 		}
@@ -460,10 +474,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.objetoVista=resp.json.subitemplanificacion;
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
+					$scope.novista = false;
 				}
 			})
 		}
 	};
+
+	$scope.regresarVista=function() {
+		$scope.novista = true;
+	}
 
 	$scope.cargarHijos=function(node){
 		console.log(node);
@@ -613,6 +632,22 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		}, function() {
 		});
 	}
+
+	$scope.abrirCodigoINCOP = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalSubitem.html',
+			controller : 'ModalSubItemController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.subitemunidadsubitemid = obj.id;
+			$scope.objeto.npcodigosubitem = obj.codigo;
+			$scope.objeto.npnombresubitem = obj.nombre;	
+			$scope.objeto.npprecio = obj.precio;	
+		}, function() {
+		});
+	};
 
 	$scope.form = {
         submit: function(form,name) {
@@ -790,7 +825,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.submitformSubItem = function(form) {
     	var tObj=$scope.objeto;
-    	//tObj.actividadunidadacumulador=$scope.detalles;
+    	tObj.subitemunidadacumulador=$scope.detalles;
     	PlanificacionUEFactory.guardarActividades("SI",tObj).then(function(resp){
 			if (resp.estado) {
 				form.$setPristine(true);

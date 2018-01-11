@@ -1,74 +1,77 @@
 'use strict';
 
-app.controller('ModalSubItemController', ["$scope", "$rootScope", "$uibModalInstance","$filter", "ngTableParams","SubItemFactory",
-	function($scope, $rootScope, $uibModalInstance,$filter, ngTableParams,subitemFactory) {
+app.controller('ModalSubItemController', ["$scope", "$rootScope", "$uibModalInstance","$filter", "ngTableParams","SubItemsFactory",
+	function($scope, $rootScope, $uibModalInstance,$filter, ngTableParams,subitemsFactory) {
 	
-	$scope.codigoFiltro=null;
-	$scope.nombreFiltro=null;
-	$scope.padreFiltro=null;
-	$scope.estadoFiltro=null;
-	$scope.tipoFiltro=null;
-	$scope.ivaFiltro=null;
-		
-	var pagina = 1;
-	
-	$scope.consultar=function(){
-		
-		$scope.data=[];
-		subitemsFactory.traerItems(pagina, $rootScope.ejefiscal).then(function (resp) {
-            if (resp.meta)
-                $scope.data = resp;
+    $scope.nombre = null;
+    $scope.codigo = null;
+    $scope.padre = null;
+    $scope.tipo = null;
+    $scope.estado = null;
+    $scope.edicion = false;
+    $scope.url = "";
+    $scope.objeto = null;
+
+    $scope.pagina = 1;
+    $scope.data=[];
+
+    $scope.consultar = function () {
+        subitemsFactory.traerItemsCustom(
+    		$scope.pagina,
+    		$rootScope.ejefiscal
+		).then(function (resp) {
+        	$scope.dataset = resp.json.result;
+            $scope.total = resp.json.total.valor;
+            console.log(resp);
         });
-	
-	};
-	
-	$scope.$watch('data', function() {
-		
-		$scope.tableParams = new ngTableParams({
-			page : 1, // show first page
-			count : 5, // count per page
-			filter: {} 	
-		}, {
-			total : $scope.data.length, // length of data
-			getData : function($defer, params) {
-				var orderedData = params.filter() ? $filter('filter')(
-						$scope.data, params.filter()) : $scope.data;
-				$scope.lista = orderedData.slice(
-						(params.page() - 1) * params.count(), params
-								.page()
-								* params.count());
-				params.total(orderedData.length);
-				$defer.resolve($scope.lista);
-			}
-		});
-	});
-	
-	
-	$scope.filtrar=function(){
-		
-		console.log($scope.codigoFiltro + "-" +$scope.nombreFiltro + "-" +$scope.estadoFiltro + "-" + $scope.tipoFiltro);
-		
-		$scope.data=[];
-		itemsFactory.traerItemsFiltro(pagina,$scope.codigoFiltro, $scope.nombreFiltro, $scope.estadoFiltro, $scope.tipoFiltro).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-	
-	$scope.limpiar=function(){
-		
-		$scope.codigoFiltro=null;
-		$scope.nombreFiltro=null;
-		$scope.padreFiltro=null;
-		$scope.estadoFiltro=null;
-		$scope.tipoFiltro=null;
-		$scope.ivaFiltro=null;
-		
-		$scope.consultar();
-		
-	};
-	
+    };
+
+    $scope.pageChanged = function() {
+        if ($scope.aplicafiltro){
+        	$scope.filtrar();
+        }else{
+        	$scope.consultar();	
+        }
+    };  
+    
+    $scope.filtrarUnico=function(){
+    	$scope.pagina=1;
+    	$scope.filtrar();
+    }  
+      
+    $scope.filtrar = function () {
+        subitemsFactory.traerItemsFiltroCustom(
+    		$scope.pagina,
+    		$scope.codigo,
+    		$scope.nombre,
+    		$scope.estado,
+    		$scope.tipo,
+    		$rootScope.ejefiscal,
+    		$scope.codigoIncop,
+    		$scope.itemNombre
+		).then(function (resp) {
+			$scope.dataset = resp.json.result;
+            $scope.total=resp.json.total.valor;
+        })
+
+    };
+
+    $scope.mayusculas = function () {
+        $scope.nombre = $scope.nombre.toUpperCase();
+    };
+
+    $scope.limpiar = function () {
+        $scope.nombre = null;
+        $scope.codigo = null;
+        $scope.padre = null;
+        $scope.tipo = null;
+        $scope.estado = null;
+        $scope.codigoIncop=null;
+        $scope.itemNombre=null;
+        $scope.aplicafiltro=false;
+        $scope.pagina=1;
+        $scope.consultar();
+    };
 		
 	$scope.seleccionar=function(obj){
 		$uibModalInstance.close(obj);
