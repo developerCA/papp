@@ -1159,79 +1159,79 @@
 						<div class="col-md-6">
 							<form name="Form" id="formTarea" novalidate ng-submit="form.submit(Form,'formTarea')">
 								<div class="form-group"
-								    ng-class="{'has-error':Form.npcodigo.$dirty && Form.npcodigo.$invalid, 'has-success':Form.npcodigo.$valid}">
+								    ng-class="{'has-error':Form.TAnpcodigo.$dirty && Form.TAnpcodigo.$invalid, 'has-success':Form.TAnpcodigo.$valid}">
 								    <label class="control-label">
 								        C&oacute;digo
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
-								        class="form-control" name="npcodigo" ng-model="objeto.codigo"
+								        class="form-control" name="TAnpcodigo" ng-model="objeto.codigo"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
-								        ng-if="Form.npcodigo.$dirty && Form.npcodigo.$invalid">
+								        ng-if="Form.TAnpcodigo.$dirty && Form.TAnpcodigo.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.npcodigo.$valid">
+								        ng-if="Form.TAnpcodigo.$valid">
 								        Listo
 								    </span>
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.npdescripcion.$dirty && Form.npdescripcion.$invalid, 'has-success':Form.npdescripcion.$valid}">
+								    ng-class="{'has-error':Form.TAnpdescripcion.$dirty && Form.TAnpdescripcion.$invalid, 'has-success':Form.TAnpdescripcion.$valid}">
 								    <label class="control-label">
 								        Descripci&oacute;n
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un descripci&oacute;n"
-								        class="form-control" name="npdescripcion" ng-model="objeto.descripcion"
+								        class="form-control" name="TAnpdescripcion" ng-model="objeto.descripcion"
 								        required>
 								    <span class="error text-small block"
-								        ng-if="Form.npdescripcion.$dirty && Form.npdescripcion.$invalid">
+								        ng-if="Form.TAnpdescripcion.$dirty && Form.TAnpdescripcion.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.npdescripcion.$valid">
+								        ng-if="Form.TAnpdescripcion.$valid">
 								        Listo
 								    </span>
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.ponderacion.$dirty && Form.ponderacion.$invalid, 'has-success':Form.ponderacion.$valid}">
+								    ng-class="{'has-error':Form.STponderacion.$dirty && Form.STponderacion.$invalid, 'has-success':Form.STponderacion.$valid}">
 								    <label class="control-label">
 								        Ponderaci&oacute;n
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un ponderaci&oacute;n"
-								        class="form-control" name="ponderacion" ng-model="objeto.ponderacion" numericOnly style="text-align:right;"
+								        class="form-control" name="STponderacion" ng-model="objeto.ponderacion" numericOnly style="text-align:right;"
 								        required format="number">
 								    <span class="error text-small block"
-								        ng-if="Form.ponderacion.$dirty && Form.ponderacion.$invalid">
+								        ng-if="Form.STponderacion.$dirty && Form.STponderacion.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.ponderacion.$valid">
+								        ng-if="Form.STponderacion.$valid">
 								        Listo
 								    </span>
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+								    ng-class="{'has-error':Form.STestado.$dirty && Form.STestado.$invalid, 'has-success':Form.STestado.$valid}">
 								    <label class="control-label">
 								        Estado
 								        <span class="symbol required"></span>
 								    </label>
-								    <select class="form-control" name="estado"
+								    <select class="form-control" name="STestado"
 								        ng-model="objeto.estado" required>
 								        <option value="A">Activo</option>
 								        <option value="I">Inactivo</option>
 								    </select>
 								    <span class="error text-small block"
-								        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+								        ng-if="Form.STestado.$dirty && Form.STestado.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.estado.$valid">
+								        ng-if="Form.STestado.$valid">
 								        Listo
 								    </span>
 								</div>
@@ -2247,6 +2247,199 @@
 									</div>
 								</div>
 							</form>
+						</div>
+						<div class="col-md-6">
+							<span ng-show="!divEditarDistribucion">
+								<a class="btn btn-sm btn-primary" ng-click="editarDistribucionPlanificadoSI();">
+									Editar distribuci&oacute;n
+								</a>
+							</span>
+
+							<div ng-show="divMetaDistribucionPlanificada" class="panel panel-primary">
+								<form name="Form" id="formMetaDistribucionPlanificada"
+									novalidate ng-submit="form.submit(Form,'formMetaDistribucionPlanificada')">
+									<span>
+										&nbsp;Distribuci&oacute;n:
+										<a class="btn btn-sm btn-primary">
+											Planificado
+										</a>
+										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
+											Ajustado
+										</a>
+										&nbsp;Unidad Tipo:
+										<select ng-disabled="true">
+											<option value="">MENSUAL</option>
+										</select>
+									</span>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<th>Mes</th>
+														<th>Cantidad</th>
+														<th>Porcentaje</th>
+														<th>Validaci&oacute;n</th>
+													</tr>
+													<tr ng-repeat="obj in detallesPlanificada">
+														<td>
+															{{obj.npMes}}
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													            class="form-control" name="{{'pmetacantidad_'+$index}}" ng-model="obj.metacantidad"
+													            numericOnly style="text-align:right;" format="number" required>
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													            class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
+													            numericOnly style="text-align:right;" format="number" required>
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													            class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
+													            numericOnly style="text-align:right;" format="number" required>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<button type="submit" class="btn btn-primary" ng-show="editar">
+													Guardar
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div ng-show="divMetaDistribucionAjustada" class="panel panel-primary">
+								<form name="Form" id="formMetaDistribucionAjustada"
+									novalidate ng-submit="form.submit(Form,'formMetaDistribucionAjustada')">
+									<span>
+										&nbsp;Distribuci&oacute;n:
+										<a class="btn btn-sm btn-default" ng-click="editarDistribucionPlanificado();">
+											Planificado
+										</a>
+										<a class="btn btn-sm btn-primary">
+											Ajustado
+										</a>
+										&nbsp;Unidad Tipo:
+										<select ng-disabled="true">
+											<option value="">MENSUAL</option>
+										</select>
+									</span>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<th>Mes</th>
+														<th>Cantidad</th>
+														<th>Porcentaje</th>
+														<th>Validaci&oacute;n</th>
+													</tr>
+													<tr ng-repeat="obj in detallesAjustada">
+														<td>
+															{{obj.npMes}}
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													            class="form-control" name="{{'ametacantidad_'+$index}}" ng-model="obj.metacantidad"
+													            numericOnly style="text-align:right;" format="number" required>
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													            class="form-control" name="{{'aporcentaje_'+$index}}" ng-model="obj.porcentaje"
+													            numericOnly style="text-align:right;" format="number" required>
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													            class="form-control" name="{{'avalor_'+$index}}" ng-model="obj.valor"
+													            numericOnly style="text-align:right;" format="number" required>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<button type="submit" class="btn btn-primary" ng-show="editar">
+													Guardar
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div ng-show="divMetaDistribucionAjustada" class="panel panel-primary">
+								<form name="Form" id="formMetaDistribucionAjustada"
+									novalidate ng-submit="form.submit(Form,'formMetaDistribucionAjustada')">
+									<span>
+										&nbsp;Distribuci&oacute;n:
+										<a class="btn btn-sm btn-default" ng-click="editarDistribucionPlanificado();">
+											Planificado
+										</a>
+										<a class="btn btn-sm btn-primary">
+											Ajustado
+										</a>
+										&nbsp;Unidad Tipo:
+										<select ng-disabled="true">
+											<option value="">MENSUAL</option>
+										</select>
+									</span>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<th>Mes</th>
+														<th>Cantidad</th>
+														<th>Porcentaje</th>
+														<th>Validaci&oacute;n</th>
+													</tr>
+													<tr ng-repeat="obj in detallesAjustada">
+														<td>
+															{{obj.npMes}}
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													            class="form-control" name="{{'ametacantidad_'+$index}}" ng-model="obj.metacantidad"
+													            numericOnly style="text-align:right;" format="number" required>
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													            class="form-control" name="{{'aporcentaje_'+$index}}" ng-model="obj.porcentaje"
+													            numericOnly style="text-align:right;" format="number" required>
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													            class="form-control" name="{{'avalor_'+$index}}" ng-model="obj.valor"
+													            numericOnly style="text-align:right;" format="number" required>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<button type="submit" class="btn btn-primary" ng-show="editar">
+													Guardar
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
