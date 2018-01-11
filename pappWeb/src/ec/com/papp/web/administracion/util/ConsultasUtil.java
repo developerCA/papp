@@ -1504,7 +1504,9 @@ public class ConsultasUtil {
 				socionegocioTO.setNombrecomercial(parameters.get("nombrecomercial"));
 			if(parameters.get("representantelegal")!=null && !parameters.get("representantelegal").equals(""))
 				socionegocioTO.setRepresentantelegal(parameters.get("representantelegal"));
+			log.println("es empleado "+ parameters.get("esempleado"));
 			if(parameters.get("esempleado")!=null && !parameters.get("esempleado").equals("")) {
+				log.println("va a consultar solo empleados");
 				socionegocioTO.setEsempleado(1);
 			}
 			
@@ -1519,7 +1521,7 @@ public class ConsultasUtil {
 				tipoidentificaciontipoTO.setTipoidentificacion(new TipoidentificacionTO());
 				socionegocioTO.setTipoidentificaciontipo(tipoidentificaciontipoTO);
 			}
-			if(tipo.equals("socionegocio"))
+			if(tipo.equals("socionegocio") && parameters.get("esempleado")==null)
 				socionegocioTO.setEsempleado(null);
 			if(tipo.equals("proveedorruc")){
 				socionegocioTO.setEsempleado(0);

@@ -1747,6 +1747,9 @@ public class AdministracionController {
 				institucionentidadTO.setDivisiongeografica1(new DivisiongeograficaTO());
 				institucionentidadTO.setDivisiongeografica2(new DivisiongeograficaTO());
 				institucionentidadTO.setDivisiongeografica3(new DivisiongeograficaTO());
+				InstitucionTO institucionTO2=new InstitucionTO();
+				institucionTO2.setEjerciciofiscal(new EjerciciofiscalTO());
+				institucionentidadTO.setInstitucion(institucionTO2);
 				Collection<InstitucionentidadTO> institucionentidadTOs=UtilSession.estructuraorganicaServicio.transObtenerInstitucionentidad(institucionentidadTO);
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(institucionentidadTOs,institucionentidadTO.getJsonConfig()));
 			}

@@ -333,12 +333,13 @@ public class PlanificacionController {
 				accion = (tareaunidadTO.getId()==null)?"crear":"actualizar";
 				//verifico que no se pase del 100% de la ponderacion
 				Double ponderacion=UtilSession.planificacionServicio.transObtienePoneracionTareas(tareaunidadTO.getPadre(),tareaunidadTO.getTareaunidadunidadid());
+				log.println("ponderacion: " + ponderacion);
 				if(ponderacion==null)
 					ponderacion=0.0;
 				//Si la ponderacion guardada mas la ingresada suma menos o igual a 100 la graba
 				if((ponderacion.doubleValue()+tareaunidadTO.getPonderacion().doubleValue()-tareaunidadTO.getNpponderacion())<=100){
 					UtilSession.planificacionServicio.transCrearModificarTareaunidad(tareaunidadTO);
-					id=tareaunidadTO.getId().toString();
+					id=tareaunidadTO.getNpid().toString();
 					jsonObject.put("tareaunidad", (JSONObject)JSONSerializer.toJSON(tareaunidadTO,tareaunidadTO.getJsonConfig()));
 				}
 				else{
@@ -946,7 +947,7 @@ public class PlanificacionController {
 				subtareaunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
 				subtareaunidadTO.setPadre(Long.valueOf(parameters.get("nivelactividad")));
 				subtareaunidadTO.setNpponderacion(subtareaunidadTO.getPonderacion());
-				jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfigcrear()));
+				jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfigeditar()));
 				//NOTA INDICAR EN DONDE SE GUARDA LA UNIDAD MEDIDA
 				//traigo los datos de subtareaunidadacumulador
 				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
