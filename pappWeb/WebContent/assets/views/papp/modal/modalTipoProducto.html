@@ -1,0 +1,30 @@
+<div class="modal-header">
+	<h3 class="modal-title">
+		Tipo Producto
+	</h3>
+</div>
+<div class="modal-body">
+	<div class="panel-body" ng-init="consultar();" >
+		<div>
+			<table ng-table="tableParams" class="table table-striped">
+				<tr ng-repeat="obj in $data">
+					<td>
+						<a class="btn btn-sm btn-primary"
+							uib-tooltip="Seleccionar" ng-click="seleccionar(obj);">
+							<i class="fa fa-check"></i>
+						</a>
+					</td>
+					<td data-title="'Nombre'">{{obj.nombre}}</td>
+					<td data-title="'Descripci&oacute;n'">{{obj.descripcion}}</td>
+					<td data-title="'Estado'">
+						<span ng-if="obj.npestado">ACTIVO</span>
+						<span ng-if="!obj.npestado">INACTIVO</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="modal-footer">
+	    <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+	</div>
+</div>

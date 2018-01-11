@@ -225,6 +225,13 @@ app.constant('JS_REQUIRES', {
         'ModalOrganismoCtrl':'assets/js/controllers/papp/modales/modalOrganismoCtrl.js',
         'ModalUnidadActivasCtrl':'assets/js/controllers/papp/modales/modalUnidadActivosCtrl.js',
         'ModalSocioNegocioEmpleadosCtrl':'assets/js/controllers/papp/modales/modalSocioNegocioEmpleadosCtrl.js',
+        'ModalTipoProductoCtrl':'assets/js/controllers/papp/modales/modalTipoProductoCtrl.js',        
+        'TipoProductoFactory': 'assets/js/factory/tipoProductoFactory.js',
+        'ModalProcedimientoCtrl':'assets/js/controllers/papp/modales/modalProcedimientoCtrl.js',        
+        'ProcedimientoFactory': 'assets/js/factory/tipoProcedimientoFactory.js',
+        'ModalTipoRegimenCtrl':'assets/js/controllers/papp/modales/modalTipoRegimenCtrl.js',        
+        'ComunTipoRegimenFactory': 'assets/js/factory/comunTipoRegimenFactory.js',
+
 
     },
     //*** angularJS Modules

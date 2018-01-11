@@ -649,6 +649,48 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		});
 	};
 
+	$scope.abrirTipoProducto = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalTipoProducto.html',
+			controller : 'ModalTipoProductoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.subitemunidadtipoproductoid = obj.id;
+			$scope.objeto.nptipoprodnombre = obj.nombre;	
+		}, function() {
+		});
+	};
+
+	$scope.abrirProcedimiento = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalProcedimiento.html',
+			controller : 'ModalProcedimientoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.subitemunidadprocedimientoid = obj.id;
+			$scope.objeto.npprocedimientonombre = obj.nombre;	
+		}, function() {
+		});
+	};
+
+	$scope.abrirTipoRegimen = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalTipoRegimen.html',
+			controller : 'ModalTipoRegimenController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.subitemunidadtiporegimenid = obj.id;
+			$scope.objeto.nptiporegnombre = obj.nombre;	
+		}, function() {
+		});
+	};
+
 	$scope.form = {
         submit: function(form,name) {
             var firstError = null;
