@@ -2250,7 +2250,7 @@
 						</div>
 						<div class="col-md-6">
 							<span ng-show="!divEditarDistribucion">
-								<a class="btn btn-sm btn-primary" ng-click="editarDistribucionPlanificadoSI();">
+								<a class="btn btn-sm btn-primary" ng-click="editarDistribucionPlanificado();">
 									Editar distribuci&oacute;n
 								</a>
 							</span>
@@ -2265,6 +2265,9 @@
 										</a>
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
 											Ajustado
+										</a>
+										<a class="btn btn-sm btn-default" ng-click="editarDistribucionDevengo();">
+											Devengo
 										</a>
 										&nbsp;Unidad Tipo:
 										<select ng-disabled="true">
@@ -2328,6 +2331,9 @@
 										<a class="btn btn-sm btn-primary">
 											Ajustado
 										</a>
+										<a class="btn btn-sm btn-default" ng-click="editarDistribucionDevengo();">
+											Devengo
+										</a>
 										&nbsp;Unidad Tipo:
 										<select ng-disabled="true">
 											<option value="">MENSUAL</option>
@@ -2379,16 +2385,19 @@
 								</form>
 							</div>
 
-							<div ng-show="divMetaDistribucionAjustada" class="panel panel-primary">
-								<form name="Form" id="formMetaDistribucionAjustada"
-									novalidate ng-submit="form.submit(Form,'formMetaDistribucionAjustada')">
+							<div ng-show="divMetaDistribucionDevengo" class="panel panel-primary">
+								<form name="Form" id="formMetaDistribucionDevengo"
+									novalidate ng-submit="form.submit(Form,'formMetaDistribucionDevengo')">
 									<span>
 										&nbsp;Distribuci&oacute;n:
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionPlanificado();">
 											Planificado
 										</a>
-										<a class="btn btn-sm btn-primary">
+										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
 											Ajustado
+										</a>
+										<a class="btn btn-sm btn-primary">
+											Devengo
 										</a>
 										&nbsp;Unidad Tipo:
 										<select ng-disabled="true">
@@ -2405,7 +2414,7 @@
 														<th>Porcentaje</th>
 														<th>Validaci&oacute;n</th>
 													</tr>
-													<tr ng-repeat="obj in detallesAjustada">
+													<tr ng-repeat="obj in detallesDevengo">
 														<td>
 															{{obj.npMes}}
 														</td>

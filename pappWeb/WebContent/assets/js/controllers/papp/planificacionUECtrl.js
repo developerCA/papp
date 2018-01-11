@@ -13,6 +13,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.node=null;
 	$scope.data=[];
 	$scope.novista = true;;
+	$scope.objUnidad = 0;
 
 	$scope.limpiarEdicion = function() {
 		$scope.divEditarDistribucion=false;
@@ -109,6 +110,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.metaDistribucion('A');
 	}
 
+	$scope.editarDistribucionDevengo=function(){
+		$scope.divEditarDistribucion=true;
+		$scope.metaDistribucion('D');
+	}
+
 	$scope.metaDistribucion = function(
 		tipometa
 	) {
@@ -117,6 +123,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			if ($scope.detallesPlanificada != null) {
 				$scope.divMetaDistribucionPlanificada=true;
 				$scope.divMetaDistribucionAjustada=false;
+				$scope.divMetaDistribucionDevengo=false;
 				return;
 			}
 			id = $scope.mPlanificadaID;
@@ -125,6 +132,16 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			if ($scope.detallesAjustada != null) {
 				$scope.divMetaDistribucionPlanificada=false;
 				$scope.divMetaDistribucionAjustada=true;
+				$scope.divMetaDistribucionDevengo=false;
+				return;
+			}
+			id = $scope.mAjustadaID;
+		}
+		if (tipometa == "D") {
+			if ($scope.detallesDevengo != null) {
+				$scope.divMetaDistribucionPlanificada=false;
+				$scope.divMetaDistribucionAjustada=false;
+				$scope.divMetaDistribucionDevengo=true;
 				return;
 			}
 			id = $scope.mAjustadaID;
@@ -132,8 +149,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		PlanificacionUEFactory.editarMDP(
 			$scope.detalles[id].id.id,
 			$scope.detalles[id].id.acumid,
-			$scope.detalles[id].id.unidadid,
-			"AC",
+			($scope.detalles[id].id.unidadid !== undefined? $scope.detalles[id].id.unidadid: $scope.objUnidad),
+			($scope.divSubItem? "ST": "AC"),
 			tipometa,
 			$rootScope.ejefiscalobj.anio
 		).then(function(resp) {
@@ -144,12 +161,21 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.detallesPlanificada=resp.json.cronogramalinea;
 				$scope.divMetaDistribucionPlanificada=true;
 				$scope.divMetaDistribucionAjustada=false;
+				$scope.divMetaDistribucionDevengo=false;
 			}
 			if (tipometa == "A") {
 				$scope.objetoAjustada=resp.json.cronograma;
 				$scope.detallesAjustada=resp.json.cronogramalinea;
 				$scope.divMetaDistribucionPlanificada=false;
 				$scope.divMetaDistribucionAjustada=true;
+				$scope.divMetaDistribucionDevengo=false;
+			}
+			if (tipometa == "D") {
+				$scope.objetoDevengo=resp.json.cronograma;
+				$scope.detallesDevengo=resp.json.cronogramalinea;
+				$scope.divMetaDistribucionPlanificada=false;
+				$scope.divMetaDistribucionAjustada=false;
+				$scope.divMetaDistribucionDevengo=true;
 			}
 		});
 	}
@@ -336,6 +362,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				} else {
 					$scope.editar=false;
 				}
+				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
 				$scope.objeto=Object.assign({}, resp.json.subitemunidad);
 				$scope.detalles=resp.json.subitemunidadacumulador;
 				for (var i = 0; i < $scope.detalles.length; i++) {
