@@ -69,10 +69,18 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 		solicitar:function(
 			id,
 			tipo,
-			cur
+			cur,
+			observacion
 		){
-			var url = "ejecucion/flujo/" + id + "/" + tipo + "/" + cur;
-			return Restangular.allUrl(url).customGET();
+			var url = "ejecucion/flujo/" + id + "/" + tipo;
+			var tObj = {};
+			if (cur != null) {
+				tObj.cur = cur;
+			};
+			if (observacion != null) {
+				tObj.observacion = observacion;
+			};
+			return Restangular.allUrl(url).customPOST(tObj);
 		},
 
 		liquidarManualMente:function(

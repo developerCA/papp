@@ -80,12 +80,12 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 	$scope.editar=function(id){
 		institucionFactory.traerInstitucionEditar(id).then(function(resp){
 			console.log(resp.json);
-			if (resp.estado) {
-			   $scope.objeto=resp.json.institucion;
-			   $scope.objetolista=resp.json.details;
-			}
 			$scope.edicion=true;
 			$scope.guardar=true;
+			//if (resp.estado) {
+			   $scope.objeto=resp.json.institucion;
+			   $scope.objetolista=resp.json.details;
+			//}
 		})
 	};
 

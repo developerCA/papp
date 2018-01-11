@@ -10,7 +10,7 @@ app.factory("SubItemsFactory", ["Restangular", function (Restangular) {
         },
         
         traerItemsCustom: function (pagina, ejercicio) {
-        	 var url = "administrar/consultar/subitem/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio;
+        	 var url = "administrar/consultar/subitem/pagina=" + pagina + "&filas=10&ejerciciofiscalid=" + ejercicio;
              return Restangular.allUrl(url).customGET();
         	
         },
@@ -31,7 +31,7 @@ app.factory("SubItemsFactory", ["Restangular", function (Restangular) {
         },
 
         traerItemsFiltroCustom: function (pagina, codigo, nombre, estado, tipo, ejercicio,incop,itemnombre) {
-            var url = "administrar/consultar/subitem/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio;
+            var url = "administrar/consultar/subitem/pagina=" + pagina + "&filas=10&ejerciciofiscalid=" + ejercicio;
 
             if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();
             if (nombre != null && nombre != "") url += "&nombre=" + nombre;

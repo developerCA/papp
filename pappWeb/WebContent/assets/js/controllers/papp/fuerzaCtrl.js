@@ -104,7 +104,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 			size : 'lg',
 			resolve : {
 				fuerza : function() {
-					return $scope.objeto.tipo;
+					return $scope.objeto.id;
 				}
 			}
 		});

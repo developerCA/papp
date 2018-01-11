@@ -14,7 +14,6 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     $scope.data=[];
 
     $scope.consultar = function () {
-        $scope.data = [];
         subitemsFactory.traerItemsCustom(
     		$scope.pagina,
     		$rootScope.ejefiscal
@@ -56,9 +55,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     };
 
     $scope.mayusculas = function () {
-
         $scope.nombre = $scope.nombre.toUpperCase();
-
     };
 
     $scope.limpiar = function () {
