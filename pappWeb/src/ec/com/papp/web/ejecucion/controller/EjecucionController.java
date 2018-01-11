@@ -620,18 +620,28 @@ public class EjecucionController {
 		return respuesta;	
 	}
 	
-	@RequestMapping(value = "/flujo/{id}/{tipo}/{cur}", method = RequestMethod.GET)
-	public Respuesta flujo(@PathVariable Long id,@PathVariable String tipo,@PathVariable String cur,HttpServletRequest request){
+	@RequestMapping(value = "/flujo/{id}/{tipo}", method = RequestMethod.POST)
+	public Respuesta flujo(@PathVariable Long id,@PathVariable String tipo,@RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo flujo");
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
+		Gson gson = new Gson();
 		try {
+			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
 				certificacionTO.setEstado(tipo);
-				if(!cur.equals("0"))
-					certificacionTO.setCur(cur);
+				if(parameters.get("cur")!=null)
+					certificacionTO.setCur(parameters.get("cur"));
+				if(tipo.equals("EL")) {
+					if(parameters.get("observacion")!=null)
+						certificacionTO.setMotivoeliminacion(parameters.get("observacion"));
+				}
+				else if(tipo.equals("NE")) {
+					if(parameters.get("observacion")!=null)
+						certificacionTO.setMotivonegacion(parameters.get("observacion"));
+				}
 				UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
 				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
@@ -654,11 +664,17 @@ public class EjecucionController {
 						mensajes.setMsg("No se puede liquidar totalmente a una Certificación que esté asociada a una Orden de gasto");
 						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 					}
-					else
+					else {
+						if(parameters.get("observacion")!=null)
+							certificacionTO.setMotivoliquidacion(parameters.get("observacion"));
 						UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+					}
 				}
-				else
+				else {
+					if(parameters.get("observacion")!=null)
+						certificacionTO.setMotivoliquidacion(parameters.get("observacion"));
 					UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+				}
 			}
 			else if(tipo.equals("LP")) {
 				OrdengastoTO ordengastoTO=new OrdengastoTO();
@@ -683,6 +699,8 @@ public class EjecucionController {
 					}
 					else {
 						certificacionTO.setNptotalordenes(valorordenes);
+						if(parameters.get("observacion")!=null)
+							certificacionTO.setMotivoliquidacion(parameters.get("observacion"));
 						UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
 					}
 				}
@@ -705,18 +723,32 @@ public class EjecucionController {
 		return respuesta;	
 	}
 	
-	@RequestMapping(value = "/flujoordenes/{id}/{tipo}/{cur}", method = RequestMethod.GET)
-	public Respuesta flujoordenes(@PathVariable Long id,@PathVariable String tipo,@PathVariable String cur,HttpServletRequest request){
+	@RequestMapping(value = "/flujoordenes/{id}/{tipo}", method = RequestMethod.POST)
+	public Respuesta flujoordenes(@PathVariable Long id,@PathVariable String tipo,@RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo flujo");
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
+		Gson gson = new Gson();
 		try {
+			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
 				ordengastoTO.setEstado(tipo);
-				if(!cur.equals("0"))
-					ordengastoTO.setCur(cur);
+				if(parameters.get("cur")!=null)
+					ordengastoTO.setCur(parameters.get("cur"));
+				if(tipo.equals("EL")) {
+					if(parameters.get("observacion")!=null)
+						ordengastoTO.setMotivoeliminacion(parameters.get("observacion"));
+				}
+				else if(tipo.equals("NE")) {
+					if(parameters.get("observacion")!=null)
+						ordengastoTO.setMotivonegacion(parameters.get("observacion"));
+				}
+				else if(tipo.equals("AN")) {
+					if(parameters.get("observacion")!=null)
+						ordengastoTO.setMotivoanulacion(parameters.get("observacion"));
+				}
 				UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO, tipo);
 				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
@@ -746,16 +778,30 @@ public class EjecucionController {
 		return respuesta;	
 	}
 	
-	@RequestMapping(value = "/flujodevengo/{id}/{tipo}", method = RequestMethod.GET)
-	public Respuesta flujoordenes(@PathVariable Long id,@PathVariable String tipo,HttpServletRequest request){
+	@RequestMapping(value = "/flujodevengo/{id}/{tipo}", method = RequestMethod.POST)
+	public Respuesta flujoordendevengo(@PathVariable Long id,@PathVariable String tipo,@RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo flujo");
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
+		Gson gson = new Gson();
 		try {
+			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			OrdendevengoTO ordendevengoTO=UtilSession.planificacionServicio.transObtenerOrdendevengoTO(id);
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
 				ordendevengoTO.setEstado(tipo);
+				if(tipo.equals("EL")) {
+					if(parameters.get("observacion")!=null)
+						ordendevengoTO.setMotivoeliminacion(parameters.get("observacion"));
+				}
+				else if(tipo.equals("NE")) {
+					if(parameters.get("observacion")!=null)
+						ordendevengoTO.setMotivonegacion(parameters.get("observacion"));
+				}
+				else if(tipo.equals("AN")) {
+					if(parameters.get("observacion")!=null)
+						ordendevengoTO.setMotivoanulacion(parameters.get("observacion"));
+				}
 				UtilSession.planificacionServicio.transCrearModificarOrdendevengo(ordendevengoTO, tipo);
 				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
@@ -779,15 +825,25 @@ public class EjecucionController {
 		return respuesta;	
 	}
 	
-	@RequestMapping(value = "/flujoreversion/{id}/{tipo}", method = RequestMethod.GET)
-	public Respuesta flujoreversion(@PathVariable Long id,@PathVariable String tipo,HttpServletRequest request){
+	@RequestMapping(value = "/flujoreversion/{id}/{tipo}", method = RequestMethod.POST)
+	public Respuesta flujoreversion(@PathVariable Long id,@PathVariable String tipo,@RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo flujo");
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
+		Gson gson = new Gson();
 		try {
+			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			OrdenreversionTO ordenreversionTO=UtilSession.planificacionServicio.transObtenerOrdenreversionTO(id);
 			ordenreversionTO.setEstado(tipo);
+			if(tipo.equals("EL")) {
+				if(parameters.get("observacion")!=null)
+					ordenreversionTO.setMotivoeliminacion(parameters.get("observacion"));
+			}
+			else if(tipo.equals("NE")) {
+				if(parameters.get("observacion")!=null)
+					ordenreversionTO.setMotivonegacion(parameters.get("observacion"));
+			}
 			UtilSession.planificacionServicio.transCrearModificarOrdenreversion(ordenreversionTO, tipo);
 			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
