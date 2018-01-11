@@ -417,7 +417,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.abrirCodigoPresupuestario = function(index) {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalUnidad.html',
-			controller : 'ModalUnidadController',
+			controller : 'ModalUnidadActivasController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
@@ -517,7 +517,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.abrirEmpleadoSocioNegocio = function(index) {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalSocioNegocio.html',
-			controller : 'ModalSocioNegocioController',
+			controller : 'ModalSocioNegocioEmpleadosController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {

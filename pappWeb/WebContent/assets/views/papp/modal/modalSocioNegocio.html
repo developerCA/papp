@@ -1,5 +1,10 @@
 <div class="modal-header">
-	<h3 class="modal-title">Socio Negocio</h3>
+	<h3 class="modal-title" ng-show="!soloEmpleados">
+		Socio Negocio
+	</h3>
+	<h3 class="modal-title" ng-show="soloEmpleados">
+		Empleados
+	</h3>
 </div>
 <div class="modal-body">
 	<div class="panel-body" ng-init="consultar();" >

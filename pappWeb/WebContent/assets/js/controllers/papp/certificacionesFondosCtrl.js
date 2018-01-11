@@ -138,28 +138,58 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		})
 	};
 
-	$scope.solicitar=function(id) {
-		certificacionesFondosFactory.solicitar(id).then(function(resp){
-	        SweetAlert.swal("Certificaciones de Fondos!", "Solicitud enviada", "success");
+	$scope.solicitar=function(index) {
+		//console.log($scope.data[index]);
+		var cur = 0;
+		if ($scope.data[index].estado == "AP") {
+			cur = $scope.data[index].cur;
+		}
+		$scope.data[index].npestado = "Solicitando";
+		certificacionesFondosFactory.solicitar(
+			$scope.data[index].id,
+			"SO",
+			cur
+		).then(function(resp){
+			//console.log(resp);
+			$scope.pageChanged();
+			SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.type);
 		});
 	}
 
-	$scope.liquidarManualMente = function(id) {
+	$scope.liquidarManualMente = function(index) {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalLiquidacionManua.html',
 			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-/*			certificacionesFondosFactory.liquidarManualMente(id, obj).then(function(resp){
-		        SweetAlert.swal("Certificaciones de Fondos!", "Solicitud enviada", "success");
+			//console.log(obj);
+			if (obj === undefined) {
+				obj = "";
+			}
+			var cur = 0;
+			if ($scope.data[index].estado == "AP") {
+				cur = $scope.data[index].cur;
+			}
+			$scope.data[index].npestado = "Solicitando";
+			certificacionesFondosFactory.solicitar(
+				$scope.data[index].id,
+				"",
+				cur
+			).then(function(resp){
+				//console.log(resp);
+				$scope.pageChanged();
+				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.type);
 			});
-*/		}, function() {
+		}, function() {
 		});
 	};
 
-	$scope.eliminar = function(id) {
+	$scope.eliminar = function(index) {
+		if ($scope.data[index].estado != "RE") {
+			SweetAlert.swal("Certificaciones de Fondos!", "No se permite eliminar este articulo.", "error");
+			return;
+		}
 		SweetAlert.swal({
 			title: "Certificaciones de Fondos?",
 			text: "Seguro que desea eliminar la orden?",
@@ -172,12 +202,40 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			closeOnCancel: true
 		},
 		function(isConfirm) {
-			if (isConfirm) {
-				certificacionesFondosFactory.eliminar(id).then(function(resp){
-					SweetAlert.swal("Certificaciones de Fondos!", "Se solicito la eliminacion", "success");
-				});
+			if (!isConfirm) {
+				return;
 			}
-		});
+/*			certificacionesFondosFactory.eliminar(id).then(function(resp){
+				SweetAlert.swal("Certificaciones de Fondos!", "Se solicito la eliminacion", "success");
+			});
+*/
+/*			var modalInstance = $uibModal.open({
+				templateUrl : 'modalLiquidacionManua.html',
+				controller : 'ModalCertificacionesFondoLiquidacionManuaController',
+				size : 'lg'
+			});
+			modalInstance.result.then(function(obj) {
+				//console.log(obj);
+				if (obj === undefined) {
+					obj = "";
+				}
+*/				var cur = 0;
+				if ($scope.data[index].estado == "AP") {
+					cur = $scope.data[index].cur;
+				}
+				$scope.data[index].npestado = "Eliminando";
+				certificacionesFondosFactory.solicitar(
+					$scope.data[index].id,
+					"EL",
+					cur
+				).then(function(resp){
+					//console.log(resp);
+					$scope.pageChanged();
+					SweetAlert.swal("Certificaciones de Fondos!", "Se elimino satisfactoriamente.", "success");
+				});
+/*			}, function() {
+			});
+*/		});
 	}
 
 	$scope.agregarDetalles=function(){

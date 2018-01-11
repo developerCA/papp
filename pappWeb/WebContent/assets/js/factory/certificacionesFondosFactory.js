@@ -67,9 +67,11 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 		},
 
 		solicitar:function(
-			id
+			id,
+			tipo,
+			cur
 		){
-			var url = "ejecucion/flujo/" + id + "/SO";
+			var url = "ejecucion/flujo/" + id + "/" + tipo + "/" + cur;
 			return Restangular.allUrl(url).customGET();
 		},
 

@@ -422,13 +422,13 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','EstructuraOrganicaCtrl','EstructuraOrganicaFactory',
         		'ModalInstitucionCtrl','InstitucionFactory',
         		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
-        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalUnidadActivasCtrl','UnidadFactory',
         		'ModalNivelOrganicoCtrl','NivelOrganicoFactory',
         		'ModalCargoCtrl','CargoFactory',
         		'ModalGradoFuerzaCtrl','GradoFuerzaFactory',
         		'ModalEspecialidadesCtrl','EspecialidadesFactory',
         		'ModalClasificacionCtrl','ClasificacionFactory',
-        		'ModalSocioNegocioCtrl','SociosNegocioFactory'
+        		'ModalSocioNegocioEmpleadosCtrl','SociosNegocioFactory'
 		),
         title: 'Estructura Orgánica',
         ncyBreadcrumb: {

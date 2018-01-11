@@ -223,6 +223,8 @@ app.constant('JS_REQUIRES', {
         'ModalCertificacionesFondosLineasCtrl':'assets/js/controllers/papp/modales/modalCertificacionesFondosLineasCtrl.js',
         'ModalObraCtrl':'assets/js/controllers/papp/modales/modalObraCtrl.js',
         'ModalOrganismoCtrl':'assets/js/controllers/papp/modales/modalOrganismoCtrl.js',
+        'ModalUnidadActivasCtrl':'assets/js/controllers/papp/modales/modalUnidadActivosCtrl.js',
+        'ModalSocioNegocioEmpleadosCtrl':'assets/js/controllers/papp/modales/modalSocioNegocioEmpleadosCtrl.js',
 
     },
     //*** angularJS Modules

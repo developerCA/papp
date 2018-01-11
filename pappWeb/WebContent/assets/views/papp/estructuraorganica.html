@@ -112,8 +112,8 @@
 				</div>
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
-					<uib-tabset class="tabbable" active="tabactivo"> <uib-tab
-						heading="Estructura Org&aacute;nica">
+					<uib-tabset class="tabbable" active="tabactivo">
+					<uib-tab heading="Estructura Org&aacute;nica">
 
 					<form name="Form" id="form1" novalidate
 						ng-submit="form.submit(Form)">
@@ -340,7 +340,8 @@
 						</div>
 					</form>
 
-					</uib-tab> <uib-tab heading="Mantener Unidad">
+					</uib-tab>
+					<uib-tab heading="Mantener Unidad">
 
 					<div ng-show="dUnidad" class="panel-body">
 						<div class="row">
@@ -615,182 +616,207 @@
 										</div>
 										<div class="panel-body no-padding panel-white">
 											<div class="col-md-12 panel-white no-padding">
-												<div class="table-responsive">
-													<table
-														class="table table-bordered table-hover table-striped">
-														<tr>
-
-															<th></th>
-															<th width="230px">C&oacute;digo</th>
-															<th>No. Partida Presup.</th>
-															<th>Cargo C&oacute;digo</th>
-															<th>Cargo Nombre</th>
-															<th>Dotaci&oacute;n</th>
-															<th>Grado Fuerza Id</th>
-															<th>Grado Nombre</th>
-															<th>Fuerza Nombre</th>
-															<th>Especialidad C&oacute;digo</th>
-															<th>Especialidad Nombre</th>
-															<th>Clasificaci&oacute;n Nombre</th>
-															<th>Responsable</th>
-															<th>Aprueba</th>
-															<th>Revisa</th>
-														</tr>
-														<tr ng-repeat-start="obj in objetoPlazaDetail">
-
-															<td><a uib-tooltip="Eliminar"
-																class="btn btn-sm btn-danger"
-																ng-click="removerMantenerPlazaDetalle($index)"> <i
-																	class="fa fa-trash"></i>
-															</a></td>
-															<td><input type="text"
-																placeholder="Escriba un c&oacute;digo"
-																class="form-control" name="codigo" ng-model="obj.codigo"
-																ng-pattern="/^[0-9]*$/"></td>
+												<div class="table-responsive"><!-- table-bordered table-hover  class="table-responsive" -->
+													<table class="table table-bordered  ">
+														<tr ng-class="{'active': $index % 2 === 0}" ng-repeat="obj in objetoPlazaDetail">
+														<td><a uib-tooltip="Eliminar"
+																				class="btn btn-sm btn-danger"
+																				ng-click="removerMantenerPlazaDetalle($index)"> <i
+																				class="fa fa-trash"></i>
+																			</a></td>
 															<td>
-																<div class="form-group has-success">
-																	<input type="text"
-																		placeholder="Escriba un no. partida presup."
-																		class="form-control" name="numpartpres"
-																		ng-model="obj.numpartpres">
+																<div class="row">
+																	<div class="col-md-2">
+																		<label class="control-label">
+																			C&oacute;digo
+																		</label>
+																		<div class="form-group has-success">
+																			<input type="text"
+																				placeholder="Escriba un c&oacute;digo"
+																				class="form-control" name="codigo" ng-model="obj.codigo"
+																				ng-pattern="/^[0-9]*$/">
+																		</div>
+																	</div>
+																	<div class="col-md-3">
+																		<label class="control-label">
+																			No. Partida Presup.
+																		</label>
+																		<div class="form-group has-success">
+																			<input type="text"
+																				placeholder="Escriba un no. partida presup."
+																				class="form-control" name="numpartpres"
+																				ng-model="obj.numpartpres">
+																		</div>
+																	</div>
+																	<div class="col-md-3">
+																		<label class="control-label">
+																			Cargo C&oacute;digo
+																		</label>
+																		<div class="input-group form-group has-success">
+																			<input type="text" placeholder="Seleccione un cargo"
+																				class="form-control" name="npcargocodigo"
+																				ng-disabled="true" ng-model="obj.npcargocodigo" /> <span
+																				class="input-group-btn">
+																				<button type="button" class="btn btn-primary"
+																					ng-click="abrirCargoCodigo($index)">
+																					<i class="fa fa-search"></i>
+																				</button>
+																			</span>
+																		</div>
+																	</div>
+																	<div class="col-md-3">
+																		<label class="control-label">
+																			Cargo Nombre
+																		</label>
+																		<div class="form-group has-success">
+																			<input type="text"
+																				placeholder="Escriba un cargo nombre"
+																				class="form-control" name="npcargonombre"
+																				ng-model="obj.npcargonombre" ng-disabled="true">
+																		</div>
+																	</div>
+																	<div class="col-md-1">
+																		<label class="control-label">
+																			Dotaci&oacute;n
+																		</label>
+																		<div class="form-group has-success">
+																			<input type="text" placeholder="Escriba un dotacion"
+																				class="form-control" name="dotacion"
+																				ng-model="obj.dotacion">
+																		</div>
+																	</div>
 																</div>
-															</td>
-															<td>
-																<div class="input-group form-group has-success">
-																	<input type="text" placeholder="Seleccione un cargo"
-																		class="form-control" name="npcargocodigo"
-																		ng-disabled="true" ng-model="obj.npcargocodigo" /> <span
-																		class="input-group-btn">
-																		<button type="button" class="btn btn-primary"
-																			ng-click="abrirCargoCodigo($index)">
-																			<i class="fa fa-search"></i>
-																		</button>
-																	</span>
+																<div class="row">
+																	<div class="col-md-2">
+																		<label class="control-label">
+																			Grado ID
+																		</label>
+																		<div class="input-group form-group has-success">
+																			<input type="text"
+																				placeholder="Seleccione un Grado Fuerza"
+																				class="form-control" name="unidadarbolplazagfid"
+																				ng-disabled="true" ng-model="obj.unidadarbolplazagfid" />
+																			<span class="input-group-btn">
+																				<button type="button" class="btn btn-primary"
+																					ng-click="abrirGradoFuerza($index)">
+																					<i class="fa fa-search"></i>
+																				</button>
+																			</span>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<label class="control-label">
+																			Grado Nombre
+																		</label>
+																		<div class="form-group has-success">
+																			<input type="text"
+																				placeholder="Seleccione un Grado Fuerza"
+																				class="form-control" name="npgradonombre"
+																				ng-model="obj.npgradonombre" ng-disabled="true">
+																		</div>
+																	</div>
+																	<div class="col-md-3">
+																		<label class="control-label">
+																			Fuerza Nombre
+																		</label>
+																		<div class="form-group has-success">
+																			<input type="text"
+																				placeholder="Escriba un Grado Nombre"
+																				class="form-control" name="npfuerzanombre"
+																				ng-model="obj.npfuerzanombre" ng-disabled="true">
+																		</div>
+																	</div>
+																	<div class="col-md-1">
+																		<label class="control-label">
+																			Responsable
+																		</label>
+																		<div class="form-group has-success">
+																			<select class="form-control" name="responsable"
+																				ng-model="obj.responsable" required>
+																				<option value="1">Si</option>
+																				<option value="0">No</option>
+																			</select>
+																		</div>
+																	</div>
+																	<div class="col-md-1">
+																		<label class="control-label">
+																			Aprueba
+																		</label>
+																		<div class="form-group has-success">
+																			<select class="form-control" name="aprueba"
+																				ng-model="obj.aprueba" required>
+																				<option value="1">Si</option>
+																				<option value="0">No</option>
+																			</select>
+																		</div>
+																	</div>
+																	<div class="col-md-1">
+																		<label class="control-label">
+																			Revisa
+																		</label>
+																		<div class="form-group has-success">
+																			<select class="form-control" name="revisa"
+																				ng-model="obj.revisa" required>
+																				<option value="1">Si</option>
+																				<option value="0">No</option>
+																			</select>
+																		</div>
+																	</div>
 																</div>
-															</td>
-															<td>
-																<div class="form-group has-success">
-																	<input type="text"
-																		placeholder="Escriba un cargo nombre"
-																		class="form-control" name="npcargonombre"
-																		ng-model="obj.npcargonombre" ng-disabled="true">
+																<div class="row">
+																	<div class="col-md-2">
+																		<label class="control-label">
+																			Especialidad C&oacute;digo
+																		</label>
+																		<div class="input-group form-group has-success">
+																			<input type="text"
+																				placeholder="Seleccione una Especialidad"
+																				class="form-control" name="npespecialidadcodigo"
+																				ng-disabled="true" ng-model="obj.npespecialidadcodigo">
+																			<span class="input-group-btn">
+																				<button type="button" class="btn btn-primary"
+																					ng-click="abrirEspecialidad($index)">
+																					<i class="fa fa-search"></i>
+																				</button>
+																			</span>
+																		</div>
+																	</div>
+																	<div class="col-md-6">
+																		<label class="control-label">
+																			Especialidad Nombre
+																		</label>
+																		<div class="form-group has-success">
+																			<input type="text"
+																				placeholder="Seleccione una Especialidad"
+																				class="form-control" name="npespecialdidadnombre"
+																				ng-model="obj.npespecialdidadnombre"
+																				ng-disabled="true">
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<label class="control-label">
+																			Clasificaci&oacute;n Nombre
+																		</label>
+																		<div class="input-group form-group has-success">
+																			<input type="text"
+																				placeholder="Seleccione una Clasificaci&oacute;n"
+																				class="form-control" name="npclasificacionnombre"
+																				ng-disabled="true"
+																				ng-model="obj.npclasificacionnombre" /> <span
+																				class="input-group-btn">
+																				<button type="button" class="btn btn-primary"
+																					ng-click="abrirClasificacion($index)">
+																					<i class="fa fa-search"></i>
+																				</button>
+																			</span>
+																		</div>
+																	</div>
 																</div>
-															</td>
-															<td>
-																<div class="form-group has-success">
-																	<input type="text" placeholder="Escriba un dotacion"
-																		class="form-control" name="dotacion"
-																		ng-model="obj.dotacion">
-																</div>
-															</td>
-															<td>
-																<div class="input-group form-group has-success">
-																	<input type="text"
-																		placeholder="Seleccione un Grado Fuerza"
-																		class="form-control" name="unidadarbolplazagfid"
-																		ng-disabled="true" ng-model="obj.unidadarbolplazagfid" />
-																	<span class="input-group-btn">
-																		<button type="button" class="btn btn-primary"
-																			ng-click="abrirGradoFuerza($index)">
-																			<i class="fa fa-search"></i>
-																		</button>
-																	</span>
-																</div>
-															</td>
-															<td>
-																<div class="form-group has-success">
-																	<input type="text"
-																		placeholder="Seleccione un Grado Fuerza"
-																		class="form-control" name="npgradonombre"
-																		ng-model="obj.npgradonombre" ng-disabled="true">
-																</div>
-															</td>
-															<td>
-																<div class="form-group has-success">
-																	<input type="text"
-																		placeholder="Escriba un Grado Nombre"
-																		class="form-control" name="npfuerzanombre"
-																		ng-model="obj.npfuerzanombre" ng-disabled="true">
-																</div>
-															</td>
-															<td>
-																<div class="input-group form-group has-success">
-																	<input type="text"
-																		placeholder="Seleccione una Especialidad"
-																		class="form-control" name="npespecialidadcodigo"
-																		ng-disabled="true" ng-model="obj.npespecialidadcodigo">
-																	<span class="input-group-btn">
-																		<button type="button" class="btn btn-primary"
-																			ng-click="abrirEspecialidad($index)">
-																			<i class="fa fa-search"></i>
-																		</button>
-																	</span>
-																</div>
-															</td>
-															<td>
-																<div class="form-group has-success">
-																	<input type="text"
-																		placeholder="Seleccione una Especialidad"
-																		class="form-control" name="npespecialdidadnombre"
-																		ng-model="obj.npespecialdidadnombre"
-																		ng-disabled="true">
-																</div>
-															</td>
-															<td>
-																<div class="input-group form-group has-success">
-																	<input type="text"
-																		placeholder="Seleccione una Clasificaci&oacute;n"
-																		class="form-control" name="npclasificacionnombre"
-																		ng-disabled="true"
-																		ng-model="obj.npclasificacionnombre" /> <span
-																		class="input-group-btn">
-																		<button type="button" class="btn btn-primary"
-																			ng-click="abrirClasificacion($index)">
-																			<i class="fa fa-search"></i>
-																		</button>
-																	</span>
-																</div>
-															</td>
-															<td>
-																<div class="form-group has-success">
-																	<select class="form-control" name="responsable"
-																		ng-model="obj.responsable" required>
-																		<option value="1">Si</option>
-																		<option value="0">No</option>
-																	</select>
-																</div>
-															</td>
-															<td>
-																<div class="form-group has-success">
-																	<select class="form-control" name="aprueba"
-																		ng-model="obj.aprueba" required>
-																		<option value="1">Si</option>
-																		<option value="0">No</option>
-																	</select>
-																</div>
-															</td>
-															<td>
-																<div class="form-group has-success">
-																	<select class="form-control" name="revisa"
-																		ng-model="obj.revisa" required>
-																		<option value="1">Si</option>
-																		<option value="0">No</option>
-																	</select>
-																</div>
-															</td>
-
-
-														</tr>
-
-														<tr ng-if="obj.expanded" ng-repeat-end="">
-															<td colspan="3">
-																<div role="form" class="form-inline"></div>
 															</td>
 														</tr>
 													</table>
 												</div>
 											</div>
-
 										</div>
 									</div>
 								</div>
@@ -809,7 +835,8 @@
 							</div>
 						</form>
 					</div>
-					</uib-tab> <uib-tab heading="Mantener empleados">
+					</uib-tab>
+					<uib-tab heading="Mantener empleados">
 
 					<div ng-show="dEmpleados" class="panel-body">
 
