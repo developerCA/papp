@@ -282,7 +282,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
-				"nivelactividad=" + node.id
+				"nivelactividad=" + node.nodePadre.id
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
@@ -310,7 +310,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
-				"nivelactividad=" + node.padreID
+				"nivelactividad=" + node.nodePadre.nodePadre.id
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
@@ -556,10 +556,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			var nodes;
 			if (tipo == "AC" || tipo == "SA") {
 				nodes=JSON.parse(JSON.stringify(resp).split('"descripcionexten":').join('"title":'));
+				for (var i = 0; i < nodes.length; i++) {
+					nodes[i].nodePadre = node;
+				}
 			} else {
 				nodes=JSON.parse(JSON.stringify(resp).split('"npdescripcion":').join('"title":'));
 				for (var i = 0; i < nodes.length; i++) {
 					nodes[i].title = nodes[i].npcodigo + " - " + nodes[i].title;
+					nodes[i].nodePadre = node;
 				}
 			}
 			node.nodes=nodes;
