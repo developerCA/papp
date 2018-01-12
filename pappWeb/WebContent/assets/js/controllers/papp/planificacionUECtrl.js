@@ -80,12 +80,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	});
 
 	$scope.filtrar=function(){
-		$scope.data=[];
+//		$scope.data=[];
 		PlanificacionUEFactory.traerFiltro(
 			pagina,
 			$rootScope.ejefiscal,
-			$scope.nombreFiltro,
 			$scope.codigoFiltro,
+			$scope.nombreFiltro,
 			$scope.estadoFiltro
 		).then(function(resp){
 			if (resp.meta) $scope.data=resp;
@@ -229,10 +229,22 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				//console.log("NUEVO OBJETO subtarea:", $scope.objeto);
 			});
 		} else {// SubItem
+/*
+			PlanificacionUEFactory.editar(
+				node.nodeTipo,
+				node.tablarelacionid,
+				"unidadid=" + node.npIdunidad +
+				"&ejerciciofiscal=" + $rootScope.ejefiscal +
+				"&actividadid=" + node.npactividadid
+			).then(function(resp){
+
+ */
 			PlanificacionUEFactory.nuevo(
 				"SI",
-				node.id,
-				$rootScope.ejefiscal + "/unidadid=" + node.npIdunidad
+				(node.nodeTipo == "SI"? node.nodePadre.id: node.id),
+				$rootScope.ejefiscal +
+				"/unidadid=" + node.npIdunidad +
+				"&actividadid=" + node.npactividadid
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
@@ -365,7 +377,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				console.log(resp);
 				if (!resp.estado) return;
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
-				$scope.objeto=Object.assign({}, resp.json.subitemunidad);
+				$scope.objeto=Object.assign({}, resp.json.subitemunidad, resp.json.totales);
 				$scope.detalles=resp.json.subitemunidadacumulador;
 				for (var i = 0; i < $scope.detalles.length; i++) {
 					if ($scope.detalles[i].tipo == "P") {

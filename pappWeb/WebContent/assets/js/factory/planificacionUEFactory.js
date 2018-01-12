@@ -86,11 +86,12 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
              return Restangular.allUrl(url).customGET();
         },
         
-        traerFiltro: function (pagina, ejercicio, codigo, nombre) {
+        traerFiltro: function (pagina, ejercicio, codigo, nombre, estado) {
             var url = "planificacion/consultar/planificacion/pagina=" + pagina+ "&ejerciciofiscal=" + ejercicio;
 
             if (codigo != null && codigo != "") url += "&codigopresup=" + codigo.toUpperCase();
             if (nombre != null && nombre != "") url += "&nombre=" + nombre;
+            if (estado != null && estado != "") url += "&estado=" + estado;
 
             return Restangular.allUrl(url).getList();
         },
@@ -152,6 +153,11 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             var url = "planificacion/planificacion/";
             return Restangular.allUrl(url).customPOST(objeto);
         },
+        
+        guardarActividades: function(tipo, objeto) {
+            var url = "planificacion/" + this.toTipo(tipo) + "/";
+	         return Restangular.allUrl(url).customPOST(objeto);
+	     },
 
         toTipo: function(tipo) {
         	switch (tipo) {
