@@ -1343,6 +1343,12 @@
     </span>
 </div>
 
+<div class="panel-heading">
+	<h5 class="panel-title">
+		Meta
+	</h5>
+</div>
+
 <div class="form-group"
     ng-class="{'has-error':Form.npUnidadMedidaCodigo.$dirty && Form.npUnidadMedidaCodigo.$invalid, 'has-success':Form.npUnidadMedidaCodigo.$valid}">
     <label class="control-label">
@@ -1352,7 +1358,7 @@
     <div class="input-group">
         <input type="text" placeholder="Escriba un unidad medida c&oacute;digo"
             class="form-control" name="npUnidadMedidaCodigo" ng-disabled="true"
-            ng-model="objeto.npUnidadMedidaCodigo">
+            ng-model="objeto.npcodigounidad">
         <span class="input-group-btn">
             <button type="button" class="btn btn-primary"
                 ng-click="abrirUnidadMedidaCodigo()">
@@ -1378,7 +1384,7 @@
         <span class="symbol required"></span>
     </label>
     <input type="text" placeholder="Seleccione una Unidad Medida"
-        class="form-control" name="npUnidadMedidaNombre" ng-model="objeto.npUnidadMedidaNombre"
+        class="form-control" name="npUnidadMedidaNombre" ng-model="objeto.npnombreunidad"
         required ng-disabled="true">
     <span class="error text-small block"
         ng-if="Form.npUnidadMedidaNombre.$dirty && Form.npUnidadMedidaNombre.$invalid">
@@ -1397,7 +1403,7 @@
         <span class="symbol required"></span>
     </label>
     <input type="text" placeholder="Seleccione una Unidad Medida"
-        class="form-control" name="npGrupoMedidaCodigo" ng-model="objeto.npGrupoMedidaCodigo"
+        class="form-control" name="npGrupoMedidaCodigo" ng-model="objeto.npcodigogrupo"
         required ng-disabled="true">
     <span class="error text-small block"
         ng-if="Form.npGrupoMedidaCodigo.$dirty && Form.npGrupoMedidaCodigo.$invalid">
@@ -1416,7 +1422,7 @@
         <span class="symbol required"></span>
     </label>
     <input type="text" placeholder="Seleccione una Unidad Medida"
-        class="form-control" name="npGrupoMedidaNombre" ng-model="objeto.npGrupoMedidaNombre"
+        class="form-control" name="npGrupoMedidaNombre" ng-model="objeto.npnombregrupo"
         required ng-disabled="true">
     <span class="error text-small block"
         ng-if="Form.npGrupoMedidaNombre.$dirty && Form.npGrupoMedidaNombre.$invalid">
@@ -1454,7 +1460,7 @@
         <span class="symbol required"></span>
     </label>
     <input type="text" placeholder="Escriba un meta planificada cantidad"
-        class="form-control" name="npMetaPlanificadaCantidad" ng-model="objeto.npMetaPlanificadaCantidad" numericOnly style="text-align:right;"
+        class="form-control" name="npMetaPlanificadaCantidad" ng-model="detalles[mPlanificadaID].cantidad" numericOnly style="text-align:right;"
         required format="number">
     <span class="error text-small block"
         ng-if="Form.npMetaPlanificadaCantidad.$dirty && Form.npMetaPlanificadaCantidad.$invalid">
