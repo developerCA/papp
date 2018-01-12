@@ -1,25 +1,37 @@
 'use strict';
 
-app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootScope","certificacionID","unidadID","$uibModalInstance","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
-	function($scope,$rootScope,certificacionID,unidadID,$uibModalInstance,SweetAlert,$filter, ngTableParams,certificacionesFondosFactory) {
+app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootScope","certificacionID","unidadID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
+	function($scope,$rootScope,certificacionID,unidadID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,certificacionesFondosFactory) {
 
 	$scope.init=function(){
-		certificacionesFondosFactory.nuevoLinea(
-			certificacionID
-		).then(function(resp){
-			console.log(resp.json.certificacionlinea);
-        	$scope.objeto = resp.json.certificacionlinea;
-    		certificacionesFondosFactory.listarSubtareas(
-				$rootScope.ejefiscal,
-				unidadID
+		if (editar == null) {
+			//nuevo
+			certificacionesFondosFactory.nuevoLinea(
+				certificacionID
 			).then(function(resp){
-	        	$scope.listarSubtareas = [{
-	        		id: "",
-	        		descripcionexten: "Selecione una subtarea"
-	        	}].concat(resp.json.result);
-				//console.log($scope.listarSubtareas);
+				console.log(resp.json.certificacionlinea);
+	        	$scope.objeto = resp.json.certificacionlinea;
+	    		certificacionesFondosFactory.listarSubtareas(
+					$rootScope.ejefiscal,
+					unidadID
+				).then(function(resp){
+		        	$scope.listarSubtareas = [{
+		        		id: "",
+		        		descripcionexten: "Selecione una subtarea"
+		        	}].concat(resp.json.result);
+					//console.log($scope.listarSubtareas);
+				})
 			})
-		})
+		} else {
+			//editar
+			certificacionesFondosFactory.editarLinea(
+					editar
+				).then(function(resp){
+					//console.log(resp);
+		        	$scope.objeto = resp.json.certificacionlinea;
+		        	$scope.objetoDetalles = resp.json.subiteminfo;
+				})
+		}
 	}
 
 	$scope.cambioItems=function(){
@@ -74,12 +86,6 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 			//console.log(resp);
         	$scope.objeto.npvalor = resp.json.valordisponiblesi.saldo;
 		})
-	}
-
-	$scope.compararValor=function(){
-		if ($scope.objeto.npvalor < $scope.objeto.valor) {
-			$scope.objeto.valor = $scope.objeto.npvalor;
-		}
 	}
 
 	$scope.form = {

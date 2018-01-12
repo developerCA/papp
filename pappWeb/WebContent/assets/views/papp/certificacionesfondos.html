@@ -658,12 +658,19 @@
 											<div>
 												<table class="table table-striped">
 													<tr>
+														<td></td>
 														<th>Descripci&oacute;n</th>
 														<th>Valor Inicial</th>
 														<th>Valor Certificaci&oacute;n</th>
 														<th>Fuente Financiamiento</th>
 													</tr>
 													<tr ng-repeat="obj in detalles">
+														<td>
+															<a class="btn btn-sm btn-primary"
+																uib-tooltip="Modificar" ng-click="editarLinea($index)">
+																<i class="fa fa-pencil"></i>
+															</a>
+														</td>
 														<td>
 															{{obj.npSubitem}}
 														</td>
