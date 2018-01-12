@@ -140,10 +140,10 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 
 	$scope.solicitar=function(index) {
 		//console.log($scope.data[index]);
-/*		var cur = 0;
-		if ($scope.data[index].estado == "AP") {
-			cur = $scope.data[index].cur;
-		}*/
+		if ($scope.data[index].estado != "RE") {
+			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede solicitar si esta en estado registrar.", "error");
+			return;
+		}
 		$scope.data[index].npestado = "Solicitando";
 		certificacionesFondosFactory.solicitar(
 			$scope.data[index].id,
@@ -158,10 +158,10 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	}
 
 	$scope.aprobar = function(index) {
-/*		if ($scope.data[index].estado != "SO") {
+		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
-		}*/
+		}
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalLiquidacionManua.html',
 			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
@@ -366,6 +366,34 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 				},
 				unidadID : function() {
 					return $scope.objeto.certificacionunidadid;
+				},
+				editar : function() {
+					return null;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);//130
+		    $scope.detalles=obj;
+            SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
+		}, function() {
+		});
+	};
+
+	$scope.editarLinea = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalCertificacionesFondosLineas.html',
+			controller : 'ModalCertificacionesFondosLineasController',
+			size : 'lg',
+			resolve : {
+				certificacionID : function() {
+					return $scope.objeto.id;
+				},
+				unidadID : function() {
+					return $scope.objeto.certificacionunidadid;
+				},
+				editar : function() {
+					return $scope.detalles[index].id
 				}
 			}
 		});

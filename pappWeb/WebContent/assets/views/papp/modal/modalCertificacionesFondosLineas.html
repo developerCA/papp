@@ -62,7 +62,9 @@
 			        Subtarea
 			        <span class="symbol required"></span>
 			    </label>
-			    <select class="form-control" name="subtarea"
+			    <input ng-show="editar!=null" type="text" ng-disabled="true"
+			        class="form-control" name="subtareanombre" ng-model="objetoDetalles.subtareanombre">
+			    <select ng-show="editar==null" class="form-control" name="subtarea"
 			        ng-model="objeto.subtarea" required ng-change="cambioItems();">
 					<option 
 					    ng-repeat="operator in listarSubtareas" 
@@ -161,7 +163,7 @@
 			    <div class="input-group col-md-12">
 			        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor"
 			            class="form-control" name="valor" ng-model="objeto.valor"
-			            required ng-blur="compararValor();">
+			            required ng-max="objeto.npvalor">
 			    </div>
 			    <span class="error text-small block"
 			        ng-if="Form.valor.$dirty && Form.valor.$invalid">

@@ -105,6 +105,13 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			return Restangular.allUrl(url).customGET();
 		},
 
+		editarLinea:function(
+			id
+		){
+			var url = "ejecucion/certificacionlinea/" + id.id + "/" + id.lineaid;
+			return Restangular.allUrl(url).customGET();
+		},
+
 		obtenerTotal:function(
 			tablarelacionid
 		){
