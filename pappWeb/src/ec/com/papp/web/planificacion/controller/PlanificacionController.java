@@ -332,6 +332,8 @@ public class PlanificacionController {
 				TareaunidadTO tareaunidadTO = gson.fromJson(new StringReader(objeto), TareaunidadTO.class);
 				accion = (tareaunidadTO.getId()==null)?"crear":"actualizar";
 				//verifico que no se pase del 100% de la ponderacion
+				log.println("padre: " + tareaunidadTO.getPadre());
+				log.println("unidad: " + tareaunidadTO.getTareaunidadunidadid());
 				Double ponderacion=UtilSession.planificacionServicio.transObtienePoneracionTareas(tareaunidadTO.getPadre(),tareaunidadTO.getTareaunidadunidadid());
 				log.println("ponderacion: " + ponderacion);
 				if(ponderacion==null)
@@ -396,7 +398,7 @@ public class PlanificacionController {
 				}
 				if(!existesubiten){
 					UtilSession.planificacionServicio.transCrearModificarSubitemunidad(subitemunidadTO);
-					id=subitemunidadTO.getId().toString();
+					id=subitemunidadTO.getNpid().toString();
 					jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				}
 				else{
@@ -1003,7 +1005,7 @@ public class PlanificacionController {
 			
 			//Subitem unidad en la planificacion se carga al poner editar subitem
 			else if(clase.equals("subitemunidad")){
-				log.println("va a deditar el subitem unidad");
+				log.println("va a editar el subitem unidad");
 				SubitemunidadTO subitemunidadTO = UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
 				subitemunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
 				jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
@@ -1047,6 +1049,9 @@ public class PlanificacionController {
 				jsonObject.put("subitemunidadacumulador", (JSONArray)JSONSerializer.toJSON(subitemunidadacumuladorTOs,subitemunidadacumuladorTO.getJsonConfig()));
 				//Saldo para los valores planificados y acumulados
 				//1. traigo el valor presupuestado y aprobado de la actividad
+				log.println("actividadid: " + parameters.get("actividadid"));
+				log.println("unidad: " + parameters.get("unidadid"));
+				log.println("ejercicio: " + parameters.get("ejerciciofiscal"));
 				ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("actividadid")), Long.valueOf(parameters.get("unidadid"))));
 				//2. traigo los valores ya reservados para restar y mostrar solo lo disponible
 				//Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
@@ -1058,6 +1063,7 @@ public class PlanificacionController {
 				log.println("total planificado: " + actividadunidadTO.getPresupplanif());
 				log.println("toal presupuestado: " + actividadunidadTO.getPresupajust());
 				jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfigSubitem()));
+				jsonObject.put("totales", (JSONObject)JSONSerializer.toJSON(totales));
 				
 			}
 			
