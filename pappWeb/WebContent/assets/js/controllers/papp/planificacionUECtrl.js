@@ -321,9 +321,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				}
 				$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
 				$scope.detalles=resp.json.subtareaunidadacumulador;
+				for (var i = 0; i < $scope.detalles.length; i++) {
+					if ($scope.detalles[i].tipo == "P") {
+						$scope.mPlanificadaID = i;
+					}
+					if ($scope.detalles[i].tipo == "A") {
+						$scope.mAjustadaID = i;
+					}
+				}
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubTarea=true;
-				console.log("OBJETO:", $scope.objeto);
+				//console.log("OBJETO:", $scope.objeto);
 			});
 		}
 		if (node.nodeTipo == "IT") {
@@ -602,6 +610,23 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			$scope.objeto.itemunidadobraid = obj.id;
 			$scope.objeto.npcodigoobra = obj.codigo;
 			$scope.objeto.npnombreobra = obj.nombre;		
+		}, function() {
+		});
+	};
+
+	$scope.abrirUnidadMedidaCodigo = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalUnidadMedida.html',
+			controller : 'ModalUnidadMedidaController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.indicadorunidadmedidaid = obj.id;
+			$scope.objeto.npcodigounidad = obj.codigo;
+			$scope.objeto.npnombreunidad = obj.nombre;
+			$scope.objeto.npcodigogrupo = obj.npCodigogrupo;
+			$scope.objeto.npnombregrupo = obj.npNombregrupo;
 		}, function() {
 		});
 	};
