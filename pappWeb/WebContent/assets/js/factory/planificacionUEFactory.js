@@ -138,7 +138,7 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             return Restangular.allUrl(url).customGET();
         },
 
-        guardarActividades: function(tipo, objeto) {
+        3: function(tipo, objeto) {
             var url = "planificacion/" + this.toTipo(tipo) + "/";
             return Restangular.allUrl(url).customPOST(objeto);
         },
