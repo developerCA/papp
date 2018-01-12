@@ -53,31 +53,35 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
 			).customGET();
         },
 
-        traerPAverTarea: function (tablarelacionid, nivelactividadunidadid) {
+        traerPAverTarea: function (id, unidad, ejercicio) {
         	return Restangular.allUrl("planificacion/tareaplanificacion/" +
-    			tablarelacionid + "/" +
-    			"0"//nivelactividadunidadid
+    			id + "/" +
+    			"unidadid=" + unidad +
+    			"&ejerciciofiscal=" + ejercicio
 			).customGET();
         },
 
-        traerPAverSubTarea: function (tablarelacionid, nivelactividadunidadid) {
+        traerPAverSubTarea: function (id, unidad, ejercicio) {
         	return Restangular.allUrl("planificacion/subtareaplanificacion/" +
-    			tablarelacionid + "/" +
-    			"0"//nivelactividadunidadid
+    			id + "/" +
+    			"unidadid=" + unidad +
+    			"&ejerciciofiscal=" + ejercicio
 			).customGET();
         },
 
-        traerPAverItem: function (tablarelacionid, nivelactividadunidadid) {
+        traerPAverItem: function (id, unidad, ejercicio) {
         	return Restangular.allUrl("planificacion/itemplanificacion/" +
-    			tablarelacionid + "/" +
-    			"0"//nivelactividadunidadid
+    			id + "/" +
+    			"unidadid=" + unidad +
+    			"&ejerciciofiscal=" + ejercicio
 			).customGET();
         },
 
-        traerPAverSubItem: function (tablarelacionid, nivelactividadunidadid) {
+        traerPAverSubItem: function (id, unidad, ejercicio) {
         	return Restangular.allUrl("planificacion/subitemplanificacion/" +
-    			tablarelacionid + "/" +
-    			"0"//nivelactividadunidadid
+    			id + "/" +
+    			"unidadid=" + unidad +
+    			"&ejerciciofiscal=" + ejercicio
 			).customGET();
         },
 

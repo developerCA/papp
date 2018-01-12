@@ -209,6 +209,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.editar=true;
 				$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
 				$scope.detalles=resp.json.subtareaunidadacumulador;
+				for (var i = 0; i < $scope.detalles.length; i++) {
+					if ($scope.detalles[i].tipo == "P") {
+						$scope.mPlanificadaID = i;
+					}
+					if ($scope.detalles[i].tipo == "A") {
+						$scope.mAjustadaID = i;
+					}
+				}
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubTarea=true;
 				//console.log("NUEVO OBJETO subtarea:", $scope.objeto);
@@ -466,7 +474,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		if (node.nodeTipo == "TA") {
 			PlanificacionUEFactory.traerPAverTarea(
 				node.tablarelacionid,
-				$scope.unidadid
+				node.npIdunidad,
+				$rootScope.ejefiscal
 			).then(function(resp){
 				console.log(resp);
 				if (resp.estado) {
@@ -480,7 +489,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		if (node.nodeTipo == "ST") {
 			PlanificacionUEFactory.traerPAverSubTarea(
 				node.tablarelacionid,
-				$scope.unidadid
+				node.npIdunidad,
+				$rootScope.ejefiscal
 			).then(function(resp){
 				console.log(resp);
 				if (resp.estado) {
@@ -494,7 +504,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		if (node.nodeTipo == "IT") {
 			PlanificacionUEFactory.traerPAverItem(
 				node.tablarelacionid,
-				$scope.unidadid
+				node.npIdunidad,
+				$rootScope.ejefiscal
 			).then(function(resp){
 				console.log(resp);
 				if (resp.estado) {
@@ -508,7 +519,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		if (node.nodeTipo == "SI") {
 			PlanificacionUEFactory.traerPAverSubItem(
 				node.tablarelacionid,
-				$scope.unidadid
+				node.npIdunidad,
+				$rootScope.ejefiscal
 			).then(function(resp){
 				console.log(resp);
 				if (resp.estado) {
