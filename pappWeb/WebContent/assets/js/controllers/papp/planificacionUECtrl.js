@@ -235,9 +235,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$rootScope.ejefiscal + "/unidadid=" + node.npIdunidad
 			).then(function(resp){
 				console.log(resp);
-				//if (!resp.estado) return;
+				if (!resp.estado) return;
 				$scope.editar=true;
-				$scope.objUnidad=undefined;//resp.json.actividadunidad.id.unidadid;
+				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
 				$scope.objeto=Object.assign({}, resp.json.subitemunidad);
 				$scope.detalles=resp.json.subitemunidadacumulador;
 				for (var i = 0; i < $scope.detalles.length; i++) {
