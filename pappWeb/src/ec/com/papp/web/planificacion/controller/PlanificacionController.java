@@ -1289,6 +1289,13 @@ public class PlanificacionController {
 			//NivelActividad
 			else if(clase.equals("nivelactividad")){
 				jsonObject=ConsultasUtil.consultaNivelactividad(parameters, jsonObject);
+				//si el tipo es AC enviar el nombre de la unidad
+				if(parameters.get("tipo").equals("AC") &&parameters.get("nivelactividadunidadid")!=null && !parameters.get("nivelactividadunidadid").equals("")) {
+					UnidadTO unidadTO=UtilSession.estructuraorganicaServicio.transObtenerUnidadTO(Long.valueOf(parameters.get("nivelactividadunidadid")));
+					Map<String, String> unidad=new HashMap<String, String>();
+					unidad.put("nombre", unidadTO.getNombre());
+					jsonObject.put("unidad", (JSONObject)JSONSerializer.toJSON(unidad));
+				}
 			}
 			
 			//Aprobar unidad
