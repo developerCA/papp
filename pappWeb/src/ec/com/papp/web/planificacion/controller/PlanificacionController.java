@@ -589,6 +589,7 @@ public class PlanificacionController {
 				subtareaunidadacumuladorTO.getId().setId(id);
 				subtareaunidadacumuladorTO.setTotal(0.0);
 				subtareaunidadacumuladorTO.setNpValor(0.0);
+				subtareaunidadacumuladorTO.setValor(100.0);
 				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
 				subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);
 				
@@ -597,6 +598,7 @@ public class PlanificacionController {
 				subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
 				subtareaunidadacumuladorTO.setNpValor(0.0);
 				subtareaunidadacumuladorTO.setTotal(0.0);
+				subtareaunidadacumuladorTO.setValor(100.0);
 				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 				subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);
 				jsonObject.put("subtareaunidadacumulador", (JSONArray)JSONSerializer.toJSON(subtareaunidadacumuladorTOs,subtareaunidadacumuladorTO.getJsonConfig()));
