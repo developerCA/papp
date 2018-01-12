@@ -43,18 +43,6 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> Estado </label> <select name="estado"
-												ng-model="estado" class="form-control">
-												<option value>Todos</option>
-												<option value="A">Activo</option>
-												<option value="I">Inactivo</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
 									<div class="col-sm-12">
 										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()">
 											<i class="fa fa-search"></i> Buscar
@@ -74,18 +62,18 @@
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
 								<td>
-									<a class="btn btn-sm btn-primary">
+									<a class="btn btn-sm btn-primary" uib-tooltip="Modificar">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
 								<td>
-									<a class="btn btn-sm btn-primary" ng-click="cargarPlanificacionAnual(obj);">
-										<i class="fa fa-pencil"></i>
+									<a class="btn btn-sm btn-primary" uib-tooltip="Planificacion" ng-click="cargarPlanificacionAnual(obj);">
+										<i class="fa fa-clipboard"></i>
 									</a>
 								</td>
 								<td>
-									<a class="btn btn-sm btn-primary">
-										<i class="fa fa-pencil"></i>
+									<a class="btn btn-sm btn-primary" uib-tooltip="">
+										<i class="fa fa-list-alt"></i>
 									</a>
 								</td>
 								<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
