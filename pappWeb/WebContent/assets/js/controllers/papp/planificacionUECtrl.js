@@ -644,7 +644,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalOrganismo.html',
 			controller : 'ModalOrganismoController',
-			size : 'lg'
+			size : 'lg',
+			resolve: {
+				prestamo: function() {
+					return true;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
