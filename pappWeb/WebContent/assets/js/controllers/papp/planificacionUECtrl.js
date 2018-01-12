@@ -183,6 +183,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.nuevo=function(node){
 		console.log(node);
 		$scope.objeto=null;
+		$scope.nodeActivo=node;
 		if (node.nodeTipo == "SA") {// Tarea
 			PlanificacionUEFactory.nuevo(
 				"TA",
@@ -237,16 +238,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				//console.log("NUEVO OBJETO subtarea:", $scope.objeto);
 			});
 		} else {// SubItem
-/*
-			PlanificacionUEFactory.editar(
-				node.nodeTipo,
-				node.tablarelacionid,
-				"unidadid=" + node.npIdunidad +
-				"&ejerciciofiscal=" + $rootScope.ejefiscal +
-				"&actividadid=" + node.npactividadid
-			).then(function(resp){
-
- */
 			PlanificacionUEFactory.nuevo(
 				"SI",
 				(node.nodeTipo == "SI"? node.nodePadre.id: node.id),
@@ -278,6 +269,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		console.log(node);
 		$scope.objeto=null;
 		$scope.editar=($scope.planificacionUE.npestadopresupuesto == "Planificado"? true: false);
+		$scope.nodeActivo=node;
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
@@ -410,7 +402,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.cargarPlanificacionAnual=function(obj) {
-		console.log(obj);
+		//console.log(obj);
 		var id = obj.id;
 		$scope.edicion=true;
 		$scope.planificacionUE=obj;
@@ -427,6 +419,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.dataPA=resp;
 			for (var i = 0; i < $scope.dataPA.length; i++) {
 				$scope.dataPA[i].nodeTipo = "AC";
+				$scope.dataPA[i].iscargado = false;
 			}
 			$scope.arbol = JSON.parse(JSON.stringify($scope.dataPA).split('"descripcionexten":').join('"title":'));
 			$scope.dataPA = [];
@@ -676,12 +669,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.itemunidadorganismoid = obj.id;
+			//console.log(obj);
+			$scope.objeto.itemunidadorganismoid = obj.id.id;
 			$scope.objeto.npcodigoorganismo = obj.codigo;
 			$scope.objeto.npnombreorganismo = obj.nombre;		
-			$scope.objeto.npcodigoorgpres = "NO SE OBTIENE";
-			$scope.objeto.npnombreorgpres = "NO SE OBTIENE";		
+			$scope.objeto.npcodigoorgpres = obj.npcodigoorganismo;
+			$scope.objeto.npnombreorgpres = obj.npnombreorganismo;		
 		}, function() {
 		});
 	};
@@ -789,6 +782,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
+        		if ($scope.nodeActivo.nodePadre == undefined) {
+        			//primero
+        			$scope.cargarPlanificacionAnual($scope.planificacionUE);
+        		} else {
+        			//el resto
+        			$scope.nodeActivo.nodePadre.iscargado = false;
+        			$scope.cargarHijos($scope.nodeActivo.nodePadre);
+        		}
             	eval("$scope.submit" + name + "(form);");
             }
         },
