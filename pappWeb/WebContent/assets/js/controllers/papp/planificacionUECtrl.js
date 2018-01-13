@@ -146,6 +146,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			}
 			id = $scope.mAjustadaID;
 		}
+
 		PlanificacionUEFactory.editarMDP(
 			$scope.detalles[id].id.id,
 			$scope.detalles[id].id.acumid,
@@ -159,6 +160,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			if (tipometa == "P") {
 				$scope.objetoPlanificada=resp.json.cronograma;
 				$scope.detallesPlanificada=resp.json.cronogramalinea;
+				if ($scope.objetoPlanificada.unidadtiempo === undefined) {
+					$scope.objetoPlanificada.unidadtiempo = "ME";
+					$scope.distribucionValores("P");
+				}
 				$scope.divMetaDistribucionPlanificada=true;
 				$scope.divMetaDistribucionAjustada=false;
 				$scope.divMetaDistribucionDevengo=false;
@@ -166,6 +171,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			if (tipometa == "A") {
 				$scope.objetoAjustada=resp.json.cronograma;
 				$scope.detallesAjustada=resp.json.cronogramalinea;
+				if ($scope.objetoAjustada.unidadtiempo === undefined) {
+					$scope.objetoAjustada.unidadtiempo = "ME";
+					$scope.distribucionValores("A");
+				}
 				$scope.divMetaDistribucionPlanificada=false;
 				$scope.divMetaDistribucionAjustada=true;
 				$scope.divMetaDistribucionDevengo=false;
@@ -173,11 +182,70 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			if (tipometa == "D") {
 				$scope.objetoDevengo=resp.json.cronograma;
 				$scope.detallesDevengo=resp.json.cronogramalinea;
+				if ($scope.objetoDevengo.unidadtiempo === undefined) {
+					$scope.objetoDevengo.unidadtiempo = "ME";
+					$scope.distribucionValores("D");
+				}
 				$scope.divMetaDistribucionPlanificada=false;
 				$scope.divMetaDistribucionAjustada=false;
 				$scope.divMetaDistribucionDevengo=true;
 			}
 		});
+	}
+
+	$scope.distribucionValores = function(estado) {
+		if (!$scope.editar) return;
+		switch (estado) {
+			case "P": //Planificado
+				distribuirValor(
+					$scope.objetoPlanificada,
+					$scope.detallesPlanificada,
+					$scope.detalles[$scope.mPlanificadaID].metavalor
+				);
+				$scope.totalPlanificada = $scope.objeto.presupplanif; 
+				break;
+			case "A": //Ajustada
+				distribuirValor(
+					$scope.objetoAjustada,
+					$scope.detallesAjustada,
+					$scope.detalles[$scope.mAjustadaID].metavalor
+				);
+				$scope.totalAjustada = $scope.objeto.presupajust;
+				break;
+			case "D": //Devengo
+				distribuirValor(
+					$scope.objetoDevengo,
+					$scope.detallesDevengo,
+					100
+				);
+				$scope.totalDevengo = 100;
+				break;
+			default:
+				break;
+		}
+	}
+
+	$scope.distribucionCalcularTotales = function(estado) {
+		if (!$scope.editar) return;
+		switch (estado) {
+			case "P": //Planificado
+				$scope.totalPlanificada = distribucionCalcularTotal(
+					$scope.detallesPlanificada
+				);
+				break;
+			case "A": //Ajustada
+				$scope.totalAjustada = distribucionCalcularTotal(
+					$scope.detallesAjustada
+				);
+				break;
+			case "D": //Devengo
+				$scope.totalDevengo = distribucionCalcularTotal(
+					$scope.detallesDevengo
+				);
+				break;
+			default:
+				break;
+		}
 	}
 
 	$scope.nuevo=function(node){
@@ -404,8 +472,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.cargarPlanificacionAnual=function(obj) {
 		//console.log(obj);
 		var id = obj.id;
-		$scope.edicion=true;
-		$scope.planificacionUE=obj;
+		$scope.edicion = true;
+		$scope.planificacionUE = obj;
 		$scope.unidadid = obj.npacitividadunidad;
 		//$scope.nivelactividadunidadid = obj.nivelactividadunidadid;**
 		$scope.dataPA=[];
@@ -1022,3 +1090,87 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		}
 	}
 } ]);
+
+function distribuirValor(
+	fuente,
+	detalles,
+	total
+) {
+	var presupuesto = total;
+	var nPeriodo = 0;
+	var intervalo = 0;
+
+	for (var i = 0; i < 12; i++) {
+		detalles[i].valor = 0;
+		detalles[i].porcentaje = 0;
+	}
+
+	switch (fuente.unidadtiempo) {
+		case "ME": // Mensual
+			nPeriodo = 12;
+			intervalo = 1;
+			break;
+		case "BI": // Bimensual
+			nPeriodo = 6;
+			intervalo = 2;
+			break;
+		case "TM": // Trimestral
+			nPeriodo = 4;
+			intervalo = 3;
+			break;
+		case "CM": // Cuatrimestral
+			nPeriodo = 3;
+			intervalo = 4;
+			break;
+		case "SE": // Semestral
+			nPeriodo = 2;
+			intervalo = 6;
+			break;
+		case "AN": // Anual
+			nPeriodo = 1;
+			intervalo = 12;
+			break;
+		case "PE": // Personalizado
+			return;
+			break;
+		default:
+			break;
+	}
+
+	var valor = Number(
+		presupuesto / nPeriodo
+	);
+	var valorResto = valor - valor.toFixed(2);
+	var suma = 0;
+	var resto = 0;
+	for (var i = (intervalo - 1); i < 12; i = i + intervalo) {
+		if (i == 11) {
+			detalles[11].valor = Number((presupuesto - suma).toFixed(2));
+		} else {
+			detalles[i].valor = Number(valor.toFixed(2));
+			resto = resto + valorResto;
+			if (resto >= 0.01) {
+				detalles[i].valor = Number(detalles[i].valor + Number(resto.toFixed(2)));
+				resto = resto - resto.toFixed(2);
+			}
+			suma = suma + detalles[i].valor;
+		}
+		detalles[i].porcentaje = Number(
+			(
+				(detalles[i].valor * 100)
+				/ presupuesto
+			).toFixed(2)
+		);
+	}
+	//console.log("Detalles:", detalles);
+}
+
+function distribucionCalcularTotal(
+	detalles
+) {
+	var total = 0;
+	for (var i = 0; i < 12; i++) {
+		total = total + detalles[i].valor;
+	}
+	return total;
+}
