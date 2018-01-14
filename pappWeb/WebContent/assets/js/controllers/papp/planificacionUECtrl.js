@@ -18,11 +18,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.limpiarEdicion = function() {
 		$scope.divEditarDistribucion=false;
 		$scope.divPlanificacionAnual=true;
-		$scope.divEditarDistribucion=false;
 		$scope.mPlanificadaID=0;
 		$scope.mAjustadaID=0;
 		$scope.divMetaDistribucionPlanificada=false;
 		$scope.divMetaDistribucionAjustada=false;
+		$scope.divMetaDistribucionDevengo=false;
 		$scope.divActividad=false;
 		$scope.divSubActividad=false;
 		$scope.divTarea=false;
@@ -31,7 +31,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.divSubItem=false;
 		$scope.editar=false;
 		$scope.divPlanificacionAnualVista=false;
-		//$scope.=false;
 
 		$scope.objeto=null;
 		$scope.detalles=null;
@@ -160,7 +159,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			if (tipometa == "P") {
 				$scope.objetoPlanificada=resp.json.cronograma;
 				$scope.detallesPlanificada=resp.json.cronogramalinea;
-				if ($scope.objetoPlanificada.unidadtiempo === undefined) {
+				if ($scope.objetoPlanificada.unidadtiempo == "") {
 					$scope.objetoPlanificada.unidadtiempo = "ME";
 					$scope.distribucionValores("P");
 				}
@@ -171,7 +170,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			if (tipometa == "A") {
 				$scope.objetoAjustada=resp.json.cronograma;
 				$scope.detallesAjustada=resp.json.cronogramalinea;
-				if ($scope.objetoAjustada.unidadtiempo === undefined) {
+				if ($scope.objetoAjustada.unidadtiempo == "") {
 					$scope.objetoAjustada.unidadtiempo = "ME";
 					$scope.distribucionValores("A");
 				}
@@ -182,7 +181,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			if (tipometa == "D") {
 				$scope.objetoDevengo=resp.json.cronograma;
 				$scope.detallesDevengo=resp.json.cronogramalinea;
-				if ($scope.objetoDevengo.unidadtiempo === undefined) {
+				if ($scope.objetoDevengo.unidadtiempo == "") {
 					$scope.objetoDevengo.unidadtiempo = "ME";
 					$scope.distribucionValores("D");
 				}
@@ -200,7 +199,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				distribuirValor(
 					$scope.objetoPlanificada,
 					$scope.detallesPlanificada,
-					$scope.detalles[$scope.mPlanificadaID].metavalor
+					($scope.detalles[$scope.mPlanificadaID].metavalor === undefined
+						? $scope.detalles[$scope.mPlanificadaID].total
+						: $scope.detalles[$scope.mPlanificadaID].metavalor
+					)
 				);
 				$scope.totalPlanificada = $scope.objeto.presupplanif; 
 				break;
@@ -208,7 +210,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				distribuirValor(
 					$scope.objetoAjustada,
 					$scope.detallesAjustada,
-					$scope.detalles[$scope.mAjustadaID].metavalor
+					($scope.detalles[$scope.mAjustadaID].metavalor === undefined
+						? $scope.detalles[$scope.mAjustadaID].total
+						: $scope.detalles[$scope.mAjustadaID].metavalor
+					)
 				);
 				$scope.totalAjustada = $scope.objeto.presupajust;
 				break;
@@ -216,9 +221,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				distribuirValor(
 					$scope.objetoDevengo,
 					$scope.detallesDevengo,
-					100
+					$scope.detalles[$scope.mDevengoID].total
 				);
-				$scope.totalDevengo = 100;
+				$scope.totalDevengo = $scope.detalles[$scope.mDevengoID].total;
 				break;
 			default:
 				break;
@@ -325,6 +330,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					}
 					if ($scope.detalles[i].tipo == "A") {
 						$scope.mAjustadaID = i;
+					}
+					if ($scope.detalles[i].tipo == "D") {
+						$scope.mDevengoID = i;
 					}
 				}
 				$scope.divPlanificacionAnual=false;
@@ -453,6 +461,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					}
 					if ($scope.detalles[i].tipo == "A") {
 						$scope.mAjustadaID = i;
+					}
+					if ($scope.detalles[i].tipo == "D") {
+						$scope.mDevengoID = i;
 					}
 				}
 				$scope.divPlanificacionAnual=false;
@@ -891,7 +902,24 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
         $scope.limpiarEdicion();
 	}
 
+	$scope.calcularPorcientoP = function(index) {
+		$scope.detallesPlanificada[index].porcentaje = Number(
+			(
+				($scope.detallesPlanificada[index].valor * 100)
+				/ $scope.detalles[$scope.mPlanificadaID].metavalor
+			).toFixed(2)
+		);
+	}
+
 	$scope.submitformMetaDistribucionPlanificada = function(form) {
+		if ($scope.totalPlanificada != $scope.objeto.presupplanif) {
+            SweetAlert.swal(
+        		"Planificacion UE! - Distribucion Planificada",
+        		"La suma de los valores es diferente de la Meta Planificada",
+        		"error"
+    		);
+			return;
+		}
     	var tObj={};
     	tObj=Object.assign(tObj, $scope.objetoPlanificada);
     	tObj.cronogramalineaTOs=$scope.detallesPlanificada;
@@ -910,7 +938,25 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
         $scope.limpiarEdicion();
 	}
 
+
+	$scope.calcularPorcientoA = function(index) {
+		$scope.detallesAjustada[index].porcentaje = Number(
+			(
+				($scope.detallesAjustada[index].valor * 100)
+				/ $scope.detalles[$scope.mAjustadaID].metavalor
+			).toFixed(2)
+		);
+	}
+
 	$scope.submitformMetaDistribucionAjustada = function(form) {
+		if ($scope.totalAjustada != $scope.objeto.presupplanif) {
+            SweetAlert.swal(
+        		"Planificacion UE! - Distribucion Ajustada",
+        		"La suma de los valores es diferente de la Meta Ajustada",
+        		"error"
+    		);
+			return;
+		}
     	var tObj=$scope.objetoAjustada;
     	tObj.cronogramalineaTOs=$scope.detallesAjustada;
     	PlanificacionUEFactory.guardarMetaDistribucionAjustada(tObj).then(function(resp){

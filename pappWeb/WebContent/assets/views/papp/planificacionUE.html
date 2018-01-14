@@ -956,13 +956,14 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
-														</td><!-- !editar ||  -->
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
+													            ng-change="calcularPorcientoP($index);">
+														</td>
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
+													            ng-disabled="true">
 														</td>
 														<td>
 														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
@@ -1040,13 +1041,14 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'">
-														</td><!-- !editar ||  -->
+													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
+													            ng-change="calcularPorcientoA($index);">
+														</td>
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'">
+													            ng-disabled="true">
 														</td>
 														<td>
 														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
@@ -2306,15 +2308,24 @@
 										<a class="btn btn-sm btn-primary">
 											Planificado
 										</a>
+										&nbsp;
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
 											Ajustado
 										</a>
+										&nbsp;
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionDevengo();">
 											Devengo
 										</a>
 										&nbsp;Unidad Tipo:
-										<select ng-disabled="true">
-											<option value="">MENSUAL</option>
+									    <select name="periodoPlanificado" ng-disabled="!editar"
+									        ng-model="objetoPlanificada.unidadtiempo" ng-change="distribucionValores('P');">
+											<option value="ME">Mensual</option>
+											<option value="BI">Bimensual</option>
+											<option value="TM">Trimestral</option>
+											<option value="CM">Cuatrimestral</option>
+											<option value="SE">Semestral</option>
+											<option value="AN">Anual</option>
+											<option value="PE">Personalizado</option>
 										</select>
 									</span>
 									<div class="panel-body no-padding panel-white">
@@ -2323,9 +2334,7 @@
 												<table class="table table-striped">
 													<tr>
 														<th>Mes</th>
-														<th>Cantidad</th>
-														<th>Porcentaje</th>
-														<th>Validaci&oacute;n</th>
+														<th>Valor</th>
 													</tr>
 													<tr ng-repeat="obj in detallesPlanificada">
 														<td>
@@ -2333,18 +2342,9 @@
 														</td>
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'pmetacantidad_'+$index}}" ng-model="obj.metacantidad"
-													            numericOnly style="text-align:right;" format="number" required>
-														</td>
-														<td>
-													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
-													            numericOnly style="text-align:right;" format="number" required>
-														</td>
-														<td>
-													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
-													            numericOnly style="text-align:right;" format="number" required>
+													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
 														</td>
 													</tr>
 												</table>
@@ -2371,15 +2371,24 @@
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionPlanificado();">
 											Planificado
 										</a>
+										&nbsp;
 										<a class="btn btn-sm btn-primary">
 											Ajustado
 										</a>
+										&nbsp;
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionDevengo();">
 											Devengo
 										</a>
 										&nbsp;Unidad Tipo:
-										<select ng-disabled="true">
-											<option value="">MENSUAL</option>
+									    <select name="periodoPlanificado" ng-disabled="!editar"
+									        ng-model="objetoAjustada.unidadtiempo" ng-change="distribucionValores('A');">
+											<option value="ME">Mensual</option>
+											<option value="BI">Bimensual</option>
+											<option value="TM">Trimestral</option>
+											<option value="CM">Cuatrimestral</option>
+											<option value="SE">Semestral</option>
+											<option value="AN">Anual</option>
+											<option value="PE">Personalizado</option>
 										</select>
 									</span>
 									<div class="panel-body no-padding panel-white">
@@ -2388,9 +2397,7 @@
 												<table class="table table-striped">
 													<tr>
 														<th>Mes</th>
-														<th>Cantidad</th>
-														<th>Porcentaje</th>
-														<th>Validaci&oacute;n</th>
+														<th>Valor</th>
 													</tr>
 													<tr ng-repeat="obj in detallesAjustada">
 														<td>
@@ -2398,18 +2405,9 @@
 														</td>
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'ametacantidad_'+$index}}" ng-model="obj.metacantidad"
-													            numericOnly style="text-align:right;" format="number" required>
-														</td>
-														<td>
-													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'aporcentaje_'+$index}}" ng-model="obj.porcentaje"
-													            numericOnly style="text-align:right;" format="number" required>
-														</td>
-														<td>
-													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'avalor_'+$index}}" ng-model="obj.valor"
-													            numericOnly style="text-align:right;" format="number" required>
+													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'">
 														</td>
 													</tr>
 												</table>
@@ -2436,15 +2434,24 @@
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionPlanificado();">
 											Planificado
 										</a>
+										&nbsp;
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
 											Ajustado
 										</a>
+										&nbsp;
 										<a class="btn btn-sm btn-primary">
 											Devengo
 										</a>
 										&nbsp;Unidad Tipo:
-										<select ng-disabled="true">
-											<option value="">MENSUAL</option>
+									    <select name="periodoPlanificado" ng-disabled="!editar"
+									        ng-model="objetoDevengo.unidadtiempo" ng-change="distribucionValores('D');">
+											<option value="ME">Mensual</option>
+											<option value="BI">Bimensual</option>
+											<option value="TM">Trimestral</option>
+											<option value="CM">Cuatrimestral</option>
+											<option value="SE">Semestral</option>
+											<option value="AN">Anual</option>
+											<option value="PE">Personalizado</option>
 										</select>
 									</span>
 									<div class="panel-body no-padding panel-white">
@@ -2453,9 +2460,7 @@
 												<table class="table table-striped">
 													<tr>
 														<th>Mes</th>
-														<th>Cantidad</th>
-														<th>Porcentaje</th>
-														<th>Validaci&oacute;n</th>
+														<th>Valor</th>
 													</tr>
 													<tr ng-repeat="obj in detallesDevengo">
 														<td>
@@ -2463,18 +2468,9 @@
 														</td>
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'ametacantidad_'+$index}}" ng-model="obj.metacantidad"
-													            numericOnly style="text-align:right;" format="number" required>
-														</td>
-														<td>
-													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'aporcentaje_'+$index}}" ng-model="obj.porcentaje"
-													            numericOnly style="text-align:right;" format="number" required>
-														</td>
-														<td>
-													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'avalor_'+$index}}" ng-model="obj.valor"
-													            numericOnly style="text-align:right;" format="number" required>
+													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="!editar || objetoDevengo.unidadtiempo!='PE'">
 														</td>
 													</tr>
 												</table>
