@@ -499,7 +499,7 @@ public class EjecucionController {
 				ordengastoTO.setNpfechasolicitud(UtilGeneral.parseDateToString(ordengastoTO.getFechasolicitud()));
 				//traigo las ordeneslineas las traigo
 				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
-				ordengastolineaTO.getId().setId(ordengastoTO.getId());
+				ordengastolineaTO.setOrdengasto(ordengastoTO);
 				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO);
 				jsonObject.put("ordengastolineas", (JSONArray)JSONSerializer.toJSON(ordengastolineaTOs,ordengastolineaTO.getJsonConfig()));
 				jsonObject.put("ordengasto", (JSONObject)JSONSerializer.toJSON(ordengastoTO,ordengastoTO.getJsonConfig()));
