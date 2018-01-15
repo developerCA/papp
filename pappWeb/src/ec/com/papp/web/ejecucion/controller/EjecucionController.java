@@ -901,7 +901,7 @@ public class EjecucionController {
 			}
 			
 			//Ordengasto busqueda
-			if(clase.equals("ordengastobusqueda")){
+			else if(clase.equals("ordengastobusqueda")){
 				//jsonObject=ConsultasUtil.consultaOrdengastoBusquedaPaginado(parameters, jsonObject, mensajes);
 				jsonObject=ConsultasUtil.ordenesgastobusqueda(parameters, jsonObject);
 			}
@@ -935,6 +935,7 @@ public class EjecucionController {
 			}
 			log.println("pagina** " + parameters.get("pagina"));
 			log.println("filas: " + parameters.get("filas"));
+
 			
 			//Subitemunidad
 			if(clase.equals("subitemunidad")){
