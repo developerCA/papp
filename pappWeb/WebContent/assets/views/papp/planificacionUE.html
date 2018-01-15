@@ -15,7 +15,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body" ng-show="!edicion">
+				<div class="panel-body" ng-show="!edicion || !edicionMatrizPresupuesto || !edicionMatrizMetas">
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -62,7 +62,7 @@
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
 								<td>
-									<a class="btn btn-sm btn-primary" uib-tooltip="Modificar">
+									<a class="btn btn-sm btn-primary" uib-tooltip="Matriz de Presupuesto" ng-click="editarMatrizPresupuesto($index);">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
@@ -72,7 +72,7 @@
 									</a>
 								</td>
 								<td>
-									<a class="btn btn-sm btn-primary" uib-tooltip="">
+									<a class="btn btn-sm btn-primary" uib-tooltip="Matriz de Metas" ng-click="editarMatrizMetas($index);">
 										<i class="fa fa-list-alt"></i>
 									</a>
 								</td>
@@ -2496,6 +2496,42 @@
 					</div>
 				</div>
 </div>
+
+				<div ng-show="edicionMatrizPresupuesto">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							Matriz de Presupuesto
+						</h4>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="panel panel-white" id="panel1">
+								<div class="panel-heading">
+									<h4 class="panel-title">Unidd</h4>
+								</div>
+								<div class="panel-body">
+
+								</div>
+								<div class="panel-footer">
+									Panel Footer
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div ng-show="edicionMatrizMetas">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Matriz de Presupuesto
+						</h5>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -3,20 +3,18 @@
 app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","AprobacionPlanificacionFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,AprobacionPlanificacionFactory) {
 
-	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
+	$scope.nombreFiltro=null;
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
+	$scope.data=[];
 	$scope.objeto={};
-	$scope.objetoPA={};
 	$scope.detalles=[];
-	$scope.divPlanificacionAnual=false;
 
 	var pagina = 1;
 
 	$scope.consultar=function(){
-		$scope.data=[];
-		AprobacionPlanificacionFactory.traerAprobacionPlanificacion(
+		AprobacionPlanificacionFactory.traer(
 			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
@@ -46,13 +44,11 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 	});
 
 	$scope.filtrar=function(){
-		$scope.data=[];
-		AprobacionPlanificacionFactory.traerAprobacionPlanificacionFiltro(
+		AprobacionPlanificacionFactory.traerFiltro(
 			pagina,
 			$rootScope.ejefiscal,
 			$scope.nombreFiltro,
-			$scope.codigoFiltro,
-			$scope.estadoFiltro
+			$scope.codigoFiltro
 		).then(function(resp){
 			if (resp.meta) $scope.data=resp;
 		})
@@ -72,39 +68,36 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 		$scope.edicion=true;
 	}
 
-	$scope.editar=function(id){
-		AprobacionPlanificacionFactory.traerAprobacionPlanificacion(id).then(function(resp){
-			if (resp.estado)
-			   $scope.objeto=resp.json.aprobacionPlanificacion;
-			   $scope.detalles=resp.json.details;
-			   $scope.edicion=true;
-			  console.log(resp.json);
+	$scope.editarAprobarPlanificacion=function(index){
+		console.log($scope.data[index]);
+		AprobacionPlanificacionFactory.traer(id).then(function(resp){
+		    console.log(resp.json);
+			if (!resp.estado) return;
+		    $scope.objeto=resp.json.aprobacionPlanificacion;
+		    $scope.edicionAprobarPlanificacion=true;
+		    $scope.edicion=true;
 		})
 	};
 
-	$scope.editarPlanificacionAnual=function(id){
-		console.log(id);
-		$scope.data=[];
-		$scope.divPlanificacionAnual=true;
-		AprobacionPlanificacionFactory.traerPlanificacionAnual(
-			id,
-			$rootScope.ejefiscal
-		).then(function(resp){
-			console.log(resp)
-			if (resp.meta)
-				$scope.dataPA=resp;
-			$scope.divPlanificacionAnual=true;
+	$scope.editarMatrizMetas=function(index){
+		AprobacionPlanificacionFactory.traer(id).then(function(resp){
+			if (resp.estado)
+			   $scope.objeto=resp.json.aprobacionPlanificacion;
+		   $scope.detalles=resp.json.details;
+		   $scope.edicion=true;
+		   console.log(resp.json);
 		})
-	}
+	};
 
-	$scope.agregarDetalle=function(){
-		var obj={id: {id: null}, codigo: null, estado: "A", nombre: null};
-		$scope.detalles.push(obj);
-	}
-
-	$scope.removerDetalle=function(index){
-		$scope.detalles.splice(index,1);
-	}
+	$scope.editaMatrizPresupuestos=function(index){
+		AprobacionPlanificacionFactory.traer(id).then(function(resp){
+			if (resp.estado)
+			   $scope.objeto=resp.json.aprobacionPlanificacion;
+		   $scope.detalles=resp.json.details;
+		   $scope.edicion=true;
+		   console.log(resp.json);
+		})
+	};
 
 	$scope.form = {
         submit: function (form) {

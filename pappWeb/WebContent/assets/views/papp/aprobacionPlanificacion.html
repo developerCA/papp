@@ -2,7 +2,6 @@
 	<h4 class="mainTitle no-margin">
 		Aprobaci&oacute;n Planificaci&oacute;n
 	</h4>
-AprobacionPlanificacion
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <div class="container-fluid container-fullw"
@@ -16,7 +15,7 @@ AprobacionPlanificacion
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body" ng-show="!edicion && !divPlanificacionAnual">
+				<div class="panel-body" ng-show="!edicion">
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -37,27 +36,15 @@ AprobacionPlanificacion
 									<div class="col-sm-6">
 										<div class="form-group">
 											<label>
-												Unidad Nombre
+												Nombre
 											</label>
 											<input type="text" class="form-control" ng-model="nombreFiltro">
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> Estado </label> <select name="estado"
-												ng-model="estado" class="form-control">
-												<option value>Todos</option>
-												<option value="A">Activo</option>
-												<option value="I">Inactivo</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
 									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrarUnico()">
+										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()">
 											<i class="fa fa-search"></i> Buscar
 										</a> <a class="btn btn-wide btn-o btn-default"
 											ng-click="limpiar()">Limpiar</a>
@@ -75,148 +62,119 @@ AprobacionPlanificacion
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
 								<td>
-									<a class="btn btn-sm btn-primary">
-										<i class="fa fa-pencil"></i>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Aprobar Planificaci&oacute;n"
+										ng-click="editarAprobarPlanificacion($index);">
+										<i class="fa ti-marker-alt"></i>
 									</a>
 								</td>
 								<td>
-									<a class="btn btn-sm btn-primary" ng-click="editarPlanificacionAnual(obj.id)">
-										<i class="fa fa-pencil"></i>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Matriz Metas"
+										ng-click="editarMatrizMetas($index);">
+										<i class="fa ti-pencil-alt"></i>
 									</a>
 								</td>
 								<td>
-									<a class="btn btn-sm btn-primary">
-										<i class="fa fa-pencil"></i>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Matriz Presupuestos"
+										ng-click="editaMatrizPresupuestos($index);">
+										<i class="fa ti-layers-alt"></i>
 									</a>
 								</td>
 								<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
 								<td data-title="'Estado'">{{obj.npestado}}</td>
+								<td data-title="'Estado Presu. Ajus.'">{{obj.npestadopresupajus}}</td>
 								<td data-title="'Estado Presu.'">{{obj.npestadopresupuesto}}</td>
 							</tr>
 						</table>
 					</div>
 				</div>
 
-				<div ng-show="divPlanificacionAnual" class="panel-body">
-					<div class="panel-heading">
-						<h5 class="panel-title">
-							Planificaci&oacute;n Anual
-						</h5>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12">
-							<a  class="btn btn-sm btn-dark-azure" ng-click="nuevo(null);">
-								<i class="fa fa-plus-square"></i>
-								Agregar
-							</a>
-							<br><br>
+				<div ng-show="edicion">
+					<div ng-show="edicionAprobarPlanificacion" class="panel-body" id="panel1">
+	
+						<div class="panel-heading">
+							<h5 class="panel-title">Items</h5>
 						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12">
-							<div ui-tree="treeOptions" id="tree-root"
-								data-nodrop-enabled="true" data-drag-enabled="true">
-								<ol ui-tree-nodes ng-model="arbol">
-									<li ng-repeat="node in arbol" ui-tree-node
-										ng-include="'nodes_renderer.html'">
-									</li>
-								</ol>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12">
-							<div class="pull-right">
-								<br>
-								<a  class="btn btn-sm btn-dark-azure" ng-click="nuevo();">
-									<i class="fa fa-plus-square"></i>
-									Agregar
-								</a>
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-				<div ng-show="edicion" class="panel-body" id="panel1">
-
-					<div class="panel-heading">
-						<h5 class="panel-title">Items</h5>
-					</div>
-
-					<form name="Form" id="form1" novalidate
-						ng-submit="form.submit(Form)">
-						<div class="row">
-							<div class="col-md-6">
-
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-12">
-								<div class="pull-right">
-									<button type="submit" class="btn btn-primary">Guardar
-									</button>
-									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">Cancelar</button>
+	
+						<form name="Form" id="form1" novalidate
+							ng-submit="form.submit(Form)">
+							<div class="row">
+								<div class="col-md-6">
+	
 								</div>
 							</div>
+	
+							<div class="row">
+								<div class="col-md-12">
+									<div class="pull-right">
+										<button type="submit" class="btn btn-primary">Guardar
+										</button>
+										<button type="reset" class="btn btn-default btn-o"
+											ng-click="form.reset(Form)">Cancelar</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+	
+					<div ng-show="edicion" class="panel-body" id="panel1">
+	
+						<div class="panel-heading">
+							<h5 class="panel-title">Items</h5>
 						</div>
-					</form>
+	
+						<form name="Form" id="form1" novalidate
+							ng-submit="form.submit(Form)">
+							<div class="row">
+								<div class="col-md-6">
+	
+								</div>
+							</div>
+	
+							<div class="row">
+								<div class="col-md-12">
+									<div class="pull-right">
+										<button type="submit" class="btn btn-primary">Guardar
+										</button>
+										<button type="reset" class="btn btn-default btn-o"
+											ng-click="form.reset(Form)">Cancelar</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+	
+					<div ng-show="edicion" class="panel-body" id="panel1">
+	
+						<div class="panel-heading">
+							<h5 class="panel-title">Items</h5>
+						</div>
+	
+						<form name="Form" id="form1" novalidate
+							ng-submit="form.submit(Form)">
+							<div class="row">
+								<div class="col-md-6">
+	
+								</div>
+							</div>
+	
+							<div class="row">
+								<div class="col-md-12">
+									<div class="pull-right">
+										<button type="submit" class="btn btn-primary">Guardar
+										</button>
+										<button type="reset" class="btn btn-default btn-o"
+											ng-click="form.reset(Form)">Cancelar</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
 </div>
-
-<script type="text/ng-template" id="nodes_renderer.html">
-<div ui-tree-handle class="tree-node tree-node-content">
-	<table width="100%">
-		<tr>
-			<td width="1%">
-				<div class="col-md-12">
-				    <a class="btn btn-default btn-xs"  data-nodrag ng-click="toggle(this);cargarHijos(node)">
-						<span class="glyphicon" ng-class="{
-					       	'glyphicon-chevron-right': collapsed,
-					       	'glyphicon-chevron-down': !collapsed
-					    }">
-						</span>
-					</a>
-				</div>
-			</td>
-			<td width="100%">
-	    		{{node.codigo}} - {{node.title}}
-			</td>
-			<td width="1%">
-				<table width="71px">
-					<tr>
-						<td width="34px">
-							<a ng-show="node.tipo!='F'" uib-tooltip="Agregar"
-								class="btn btn-info btn-sm" data-nodrag
-								ng-click="nuevo(node);">
-								<span class="glyphicon glyphicon-plus"></span>
-							</a>
-						</td>
-						<td width="3px"></td>
-						<td width="34px">
-	  						<a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag
-								ng-click="editar(node);">
-								<span class="fa fa-pencil"></span>
-							</a>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-</div>
-<ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
-    </li>
-</ol>
-</script>

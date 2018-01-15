@@ -125,6 +125,14 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
             return Restangular.allUrl(url).customGET();
         },
 
+        cargarMatrizPresupuesto: function(unidad, ejerciciofiscal, tipoplanificacion) {
+            var url = "planificacion/consultar/matrizpresupuestos/" +
+        		"unidad=" + unidad +
+        		"&ejerciciofiscal=" + ejerciciofiscal+
+				"&tipoplanificacion=" + tipoplanificacion;
+            return Restangular.allUrl(url).customGET();
+        },
+
         editarMDP: function(
     		actividad,
     		actividadunidadacumulador,

@@ -3,8 +3,8 @@
 app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","PlanificacionUEFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,PlanificacionUEFactory) {
 
-	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
+	$scope.nombreFiltro=null;
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.editar=false;
@@ -1142,6 +1142,21 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.calcularTotalAjustado = function() {
 		$scope.objeto.tacumulado = $scope.detalles[$scope.mAjustadaID].valor * $scope.detalles[$scope.mAjustadaID].cantidad;
+	}
+
+	$scope.editarMatrizPresupuesto = function(index) {
+		PlanificacionUEFactory.cargarMatrizPresupuesto(
+			$scope.data[index].npacitividadunidad,
+			$rootScope.ejefiscal,
+			"P"
+		).then(function(resp){
+			console.log(resp);
+			$scope.edicionMatrizPresupuesto = true;
+		});
+	}
+
+	$scope.editarMatrizMetas = function() {
+		$scope.edicionMatrizMetas = true;
 	}
 } ]);
 

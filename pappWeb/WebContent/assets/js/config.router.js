@@ -549,6 +549,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Planificación UE'
         }
+    }).state('app.aprobacionplanificacion', {
+        url: "/aprobacionplanificacion",
+        templateUrl: "assets/views/papp/aprobacionPlanificacion.html",
+        resolve: loadSequence(
+        		'ngTable', 'AprobacionPlanificacionCtrl', 'AprobacionPlanificacionFactory'
+		),
+        title: 'Aprobacion Planificacion',
+        ncyBreadcrumb: {
+            label: 'Aprobacion Planificacion'
+        }
     }).state('app.mantenerindicadores', {
         url: "/mantenerindicadores",
         templateUrl: "assets/views/papp/mantenerIndicadores.html",
