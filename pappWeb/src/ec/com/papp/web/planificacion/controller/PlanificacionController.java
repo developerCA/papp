@@ -1304,18 +1304,18 @@ public class PlanificacionController {
 			else if(clase.equals("aprobar")){
 				//debe llegar id y npacitividadunidad
 				log.println("nivelactividadunidad: " + parameters.get("nivelactividadunidadid"));
-				log.println("ejercicio fiscal: " + parameters.get("ejerfiscalid"));
-				log.println("tipo aprobacion: " + parameters.get("tipoaprobacion"));
-				log.println("id: " + parameters.get("id"));
-				Boolean mensaje=ConsultasUtil.aprobacionplanificacion(Long.valueOf(parameters.get("id")), Long.valueOf(parameters.get("ejerfiscalid")), parameters.get("tipoaprobacion"), jsonObject);
+				log.println("ejercicio fiscal: " + parameters.get("nivelactividadejerfiscalid"));
+				log.println("tipo aprobacion: " + parameters.get("tipo"));
+				log.println("id: " + parameters.get("unidad"));
+				Boolean mensaje=ConsultasUtil.aprobacionplanificacion(Long.valueOf(parameters.get("unidad")), Long.valueOf(parameters.get("nivelactividadejerfiscalid")), parameters.get("tipo"), jsonObject);
 				if(mensaje){
 					mensajes.setMsg("No se puede aprobar existen observaciones");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
 					//va aprobar la actividadunidad
-					ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("nivelactividadunidadid")),Long.valueOf(parameters.get("id"))));
-					if(parameters.get("tipoaprobacion").equals("P"))
+					ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("nivelactividadunidadid")),Long.valueOf(parameters.get("unidad"))));
+					if(parameters.get("tipo").equals("P"))
 						actividadunidadTO.setPresupaprobado(1.0);
 					else
 						actividadunidadTO.setPresupajust(1.0);
