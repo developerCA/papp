@@ -1135,6 +1135,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	        	return "auto";
 		}
 	}
+
+	$scope.calcularTotalPlanificado = function() {
+		$scope.objeto.tplanificado = $scope.detalles[$scope.mPlanificadaID].valor * $scope.detalles[$scope.mPlanificadaID].cantidad;
+	}
+
+	$scope.calcularTotalAjustado = function() {
+		$scope.objeto.tacumulado = $scope.detalles[$scope.mAjustadaID].valor * $scope.detalles[$scope.mAjustadaID].cantidad;
+	}
 } ]);
 
 function distribuirValor(

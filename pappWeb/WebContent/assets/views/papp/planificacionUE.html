@@ -2154,9 +2154,10 @@
 											        Cantidad Planificada
 											        <span class="symbol required"></span>
 											    </label>
-											    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un cantidad planificada"
+											    <input type="text" numericOnly style="text-align:right;" decimal="2"
+											    	placeholder="Escriba un cantidad planificada" required
 											        class="form-control" name="npCantidadPlanificada" ng-model="detalles[mPlanificadaID].cantidad"
-											        required>
+											        ng-change="calcularTotalPlanificado();">
 											    <span class="error text-small block"
 											        ng-if="Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid">
 											        Incorrecto
@@ -2173,9 +2174,10 @@
 											        Valor Planificado
 											        <span class="symbol required"></span>
 											    </label>
-											    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor planificado"
+											    <input type="text" numericOnly style="text-align:right;" decimal="2"
+											    	placeholder="Escriba un valor planificado" required
 											        class="form-control" name="npValorPlanificado" ng-model="detalles[mPlanificadaID].valor"
-											        required>
+											        ng-change="calcularTotalPlanificado();">
 											    <span class="error text-small block"
 											        ng-if="Form.npValorPlanificado.$dirty && Form.npValorPlanificado.$invalid">
 											        Incorrecto
@@ -2227,12 +2229,13 @@
 											<div class="form-group"
 											    ng-class="{'has-error':Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid, 'has-success':Form.npCantidadPlanificada.$valid}">
 											    <label class="control-label">
-											        Cantidad Planificada
+											        Cantidad Ajustado
 											        <span class="symbol required"></span>
 											    </label>
-											    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un cantidad planificada"
+											    <input type="text" numericOnly style="text-align:right;" decimal="2"
+											    	placeholder="Escriba un cantidad planificada" required
 											        class="form-control" name="npCantidadPlanificada" ng-model="detalles[mAjustadaID].cantidad"
-											        required>
+											        ng-change="calcularTotalAjustado();">
 											    <span class="error text-small block"
 											        ng-if="Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid">
 											        Incorrecto
@@ -2249,9 +2252,10 @@
 											        Valor Ajustado
 											        <span class="symbol required"></span>
 											    </label>
-											    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor ajustado"
+											    <input type="text" numericOnly style="text-align:right;" decimal="2"
+											    	placeholder="Escriba un valor ajustado" required
 											        class="form-control" name="npValorAjustado" ng-model="detalles[mAjustadaID].valor"
-											        required>
+											        ng-change="calcularTotalAjustado();">
 											    <span class="error text-small block"
 											        ng-if="Form.npValorAjustado.$dirty && Form.npValorAjustado.$invalid">
 											        Incorrecto
