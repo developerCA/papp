@@ -412,7 +412,7 @@ public class PlanificacionController {
 				CronogramaTO cronogramaTO = gson.fromJson(new StringReader(objeto), CronogramaTO.class);
 				accion = (cronogramaTO.getId()==null)?"crear":"actualizar";
 				UtilSession.planificacionServicio.transCrearModificarCronograma(cronogramaTO);
-				id=cronogramaTO.getId().toString();
+				id=cronogramaTO.getNpid().toString();
 				//jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 			}
 			
