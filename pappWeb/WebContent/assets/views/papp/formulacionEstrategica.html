@@ -60,7 +60,6 @@
 				</div>
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
 						<h5 class="panel-title">
 							Programa
@@ -80,7 +79,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
 								        class="form-control" name="codigopr" ng-model="objetoPr.codigo" ng-pattern="/^[0-9]*$/"
-								        required ng-disabled="!nuevoar">
+								        required ng-disabled="!nuevoar" ng-maxlength="10">
 								    <span class="error text-small block"
 								        ng-if="FormPrograma.codigopr.$dirty && FormPrograma.codigopr.$invalid">
 								        Incorrecto
@@ -231,7 +230,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
 								        class="form-control" name="codigo" ng-model="objetoSp.codigo" ng-pattern="/^[0-9]*$/"
-								        required ng-disabled="!nuevoar">
+								        required ng-disabled="!nuevoar" ng-maxlength="10">
 								    <span class="error text-small block"
 								        ng-if="FormSubprograma.codigo.$dirty && FormSubprograma.codigo.$invalid">
 								        Incorrecto
@@ -344,7 +343,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
 								        class="form-control" name="codigo" ng-model="objetoPy.codigo" ng-pattern="/^[0-9]*$/"
-								        required ng-disabled="!nuevoar">
+								        required ng-disabled="!nuevoar" ng-maxlength="10">
 								    <span class="error text-small block"
 								        ng-if="FormProyecto.codigo.$dirty && FormProyecto.codigo.$invalid">
 								        Incorrecto
@@ -833,7 +832,6 @@
 				</div>
 
 				<div ng-show="edicionActividad" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
 						<h5 class="panel-title">
 							Actividad
@@ -853,7 +851,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
 								        class="form-control" name="codigo" ng-model="objetoAc.codigo" ng-pattern="/^[0-9]*$/"
-								        required ng-disabled="!nuevoar">
+								        required ng-disabled="!nuevoar" ng-maxlength="10">
 								    <span class="error text-small block"
 								        ng-if="FormActividad.codigo.$dirty && FormActividad.codigo.$invalid">
 								        Incorrecto
@@ -1192,7 +1190,6 @@
 				</div>
 
 				<div ng-show="edicionSubActividad" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
 						<h5 class="panel-title">
 							Subactividad
@@ -1212,7 +1209,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
 								        class="form-control" name="codigo" ng-model="objetoSa.codigo" ng-pattern="/^[0-9]*$/"
-								        required ng-disabled="!nuevoar">
+								        required ng-disabled="!nuevoar" ng-maxlength="10">
 								    <span class="error text-small block"
 								        ng-if="FormSubactividad.codigo.$dirty && FormSubactividad.codigo.$invalid">
 								        Incorrecto

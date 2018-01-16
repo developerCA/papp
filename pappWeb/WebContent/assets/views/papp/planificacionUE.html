@@ -429,7 +429,7 @@
 											    </label>
 											    <input type="text" placeholder="Escriba un c&oacute;digo"
 											        class="form-control" name="codigo" ng-model="objeto.codigo" numericOnly
-											        required ng-disabled="true">
+											        required ng-disabled="true" ng-maxlength="10">
 											    <span class="error text-small block"
 											        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
 											        Incorrecto
@@ -1106,7 +1106,7 @@
 											    </label>
 										        <input type="text" placeholder="Escriba un c&oacute;digo"
 										            class="form-control" name="npcodigo" ng-model="objeto.npcodigo"
-										            required ng-disabled="true">
+										            required ng-disabled="true" ng-maxlength="10">
 											    <span class="error text-small block"
 											        ng-if="Form.npcodigo.$dirty && Form.npcodigo.$invalid">
 											        Incorrecto
@@ -1215,7 +1215,7 @@
 											    </label>
 											    <input type="text" placeholder="Escriba un c&oacute;digo"
 											        class="form-control" name="TAnpcodigo" ng-model="objeto.codigo"
-											        required ng-disabled="true">
+											        required ng-disabled="true" ng-maxlength="10">
 											    <span class="error text-small block"
 											        ng-if="Form.TAnpcodigo.$dirty && Form.TAnpcodigo.$invalid">
 											        Incorrecto
@@ -1324,7 +1324,7 @@
 											    </label>
 											    <input type="text" placeholder="Escriba un c&oacute;digo"
 											        class="form-control" name="codigo" ng-model="objeto.codigo"
-											        required ng-disabled="true">
+											        required ng-disabled="true" ng-maxlength="10">
 											    <span class="error text-small block"
 											        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
 											        Incorrecto
@@ -1639,7 +1639,7 @@
 										    <div class="input-group">
 										        <input type="text" placeholder="Escriba un item c&oacute;digo"
 										            class="form-control" name="npcodigoitem" ng-disabled="true"
-										            ng-model="objeto.npcodigoitem">
+										            ng-model="objeto.npcodigoitem" ng-maxlength="10">
 										        <span class="input-group-btn">
 										            <button type="button" class="btn btn-primary"
 										                ng-click="abrirItemCodigo()">
@@ -1984,7 +1984,7 @@
 											    <div class="input-group">
 											        <input type="text" placeholder="Escriba un c&oacute;digo incop"
 											            class="form-control" name="npcodigosubitem" ng-disabled="true"
-											            ng-model="objeto.npcodigosubitem">
+											            ng-model="objeto.npcodigosubitem" ng-maxlength="10">
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
 											                ng-click="abrirCodigoINCOP()">
