@@ -21,6 +21,27 @@ app.factory("AprobacionPlanificacionFactory", ["Restangular", function (Restangu
             return Restangular.allUrl(url).getList();
         },
 
+        editarAprobarPlanificacion: function(id) {
+			var url = "planificacion/consultar/aprobar/"+id+"/0";
+
+		    return Restangular.allUrl(url).customGET();
+		},
+/*
+        editarAprobarPlanificacion: function(
+        		unidad,
+        		ejerfiscalid,
+        		nivelactividadunidadid,
+        		tipo
+    		) {
+    			var url = "planificacion/consultar/aprobar/" +
+    				"unidad=" + unidad +
+    				"&nivelactividadejerfiscalid=" + ejerfiscalid +
+    				"&nivelactividadunidadid=" + nivelactividadunidadid + 
+    				"&tipo=" + tipo;
+
+    		    return Restangular.allUrl(url).customGET();
+    		},
+*/
         guardar: function (objeto) {
             var url = "planificacion/planificacion/";
             return Restangular.allUrl(url).customPOST(objeto);

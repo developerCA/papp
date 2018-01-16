@@ -15,7 +15,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body" ng-show="!edicion || !edicionMatrizPresupuesto || !edicionMatrizMetas">
+				<div class="panel-body" ng-show="!edicion && !edicionMatrizPresupuesto && !edicionMatrizMetas">
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -2497,25 +2497,128 @@
 				</div>
 </div>
 
-				<div ng-show="edicionMatrizPresupuesto">
+				<div class="panel-body" ng-show="edicionMatrizPresupuesto">
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							Matriz de Presupuesto
 						</h4>
 					</div>
 					<div class="row">
-						<div class="col-md-6">
-							<div class="panel panel-white" id="panel1">
+						<div class="col-md-12">
+							<div class="panel panel-white">
 								<div class="panel-heading">
-									<h4 class="panel-title">Unidd</h4>
+									<h4 class="panel-title">Unidad</h4>
 								</div>
 								<div class="panel-body">
-
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Instituci&oacute;n
+									    </label>
+									    <input type="text" placeholder="Escriba un instituci&oacute;n"
+									        class="form-control" name="nombreinstitucion" ng-model="nombreinstitucion"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Entidad Operativa Desconcentrada
+									    </label>
+									    <input type="text" placeholder="Escriba un entidad operativa desconcentrada"
+									        class="form-control" name="nombreinstentidad" ng-model="nombreinstentidad"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Unidad Desceoncentrada
+									    </label>
+									    <input type="text" placeholder="Escriba un unidad desceoncentrada"
+									        class="form-control" name="nombreunidad" ng-model="nombreunidad"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Tipo
+									    </label>
+									    <select class="form-control" name="tipo"
+									        ng-model="tipo" required ng-change="cargarMatrizPresupuestoTipo();">
+									        <option value="P">Planificada</option>
+									        <option value="A">Ajustado</option>
+									    </select>
+									</div>
 								</div>
-								<div class="panel-footer">
-									Panel Footer
+								<div class="panel-footer pull-right">
+									<a class="btn btn-sm btn-primary" ng-click="renovar();">
+										Renovar
+									</a>
+									<a class="btn btn-sm btn-default" ng-click="volver();">
+										Volver
+									</a>
 								</div>
 							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="panel panel-white" id="panel1">
+								<div class="panel-heading">
+									<h4 class="panel-title">SubActividad</h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Programa
+									    </label>
+									    <input type="text" class="form-control" name="programa"
+									    	ng-model="programa" required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Proyecto
+									    </label>
+									    <input type="text" class="form-control" name="proyecto"
+									    	ng-model="proyecto" required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Actividad
+									    </label>
+									    <input type="text" class="form-control" name="actividad"
+									    	ng-model="actividad" required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        SubActividad
+									    </label>
+									    <input type="text" class="form-control" name="subactividad"
+									    	ng-model="subactividad" required ng-disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<table class="table table-bordered">
+								<tr>
+									<td>Tarea</td>
+									<td>Subtarea</td>
+									<td>Item C&oacute;digo</td>
+									<td>Subitem C&oacute;digo</td>
+									<td>Descripci&oacute;n</td>
+									<td>Presupuesto</td>
+									<td>Observaci&oacute;n</td>
+								</tr>
+								<tr ng-repeat="obj in detalle" class="table-stylish">
+									<td>{{ obj.tareanombre }}</td>
+									<td>{{ obj.subtareanombre }}</td>
+									<td>{{ obj.itemcodigo }}</td>
+									<td>{{ obj.subitemcodigo }}</td>
+									<td>{{ obj.descripcion }}</td>
+									<td style="text-align:right;">{{ obj.presupuesto | number : 2 }}</td>
+									<td>{{ obj.observacion }}</td>
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>

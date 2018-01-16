@@ -69,8 +69,18 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 	}
 
 	$scope.editarAprobarPlanificacion=function(index){
-		console.log($scope.data[index]);
-		AprobacionPlanificacionFactory.traer(id).then(function(resp){
+		//console.log($scope.data[index]);
+/*
+		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			$scope.data[index].unidad,
+			$scope.data[index].ejerfiscalid,
+			$scope.data[index].nivelactividadunidadid,
+			$scope.data[index].tipo
+
+ */
+		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+				$scope.data[index].id
+		).then(function(resp){
 		    console.log(resp.json);
 			if (!resp.estado) return;
 		    $scope.objeto=resp.json.aprobacionPlanificacion;

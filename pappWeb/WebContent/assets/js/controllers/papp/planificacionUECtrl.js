@@ -1144,15 +1144,56 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.objeto.tacumulado = $scope.detalles[$scope.mAjustadaID].valor * $scope.detalles[$scope.mAjustadaID].cantidad;
 	}
 
-	$scope.editarMatrizPresupuesto = function(index) {
+	$scope.cargarMatrizPresupuestoTipo = function() {
 		PlanificacionUEFactory.cargarMatrizPresupuesto(
-			$scope.data[index].npacitividadunidad,
+			$scope.data[$scope.index].id,
 			$rootScope.ejefiscal,
-			"P"
+			$scope.tipo
 		).then(function(resp){
 			console.log(resp);
+			if (!resp.estado) return;
+			$scope.unidad = resp.json.unidad;
+			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
+			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
+			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
+			$scope.cabecera = resp.json.cabecera[0];
+			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			$scope.detalle = resp.json.detalle;
+			for (var i = 0; i < $scope.detalle.length; i++) {
+				$scope.detalle[i].tareanombre = $scope.detalle[i].tareacodigo + " " + $scope.detalle[i].tareanombre;
+				$scope.detalle[i].subtareanombre = $scope.detalle[i].subtareacodigo + " " + $scope.detalle[i].subtareanombre;
+			}
 			$scope.edicionMatrizPresupuesto = true;
 		});
+	}
+
+	$scope.editarMatrizPresupuesto = function(index) {
+		$scope.tipo = "P";
+		$scope.index = index;
+		$scope.cargarMatrizPresupuestoTipo();
+	}
+
+	$scope.renovar = function() {
+		var tObj = Object.assign($scope.unidad, $scope.cabecera);
+		tObj.detalle = $scope.detalle;
+		PlanificacionUEFactory.cargarMatrizPresupuesto(
+			tObj
+		).then(function(resp){
+			console.log(resp);
+			if (resp.estado) {
+	            SweetAlert.swal("Planificacion UE! - Subitem", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+			}
+		});
+	}
+
+	$scope.volver = function() {
+		$scope.edicionMatrizPresupuesto = false;
+		$scope.edicionMatrizMetas = false;
 	}
 
 	$scope.editarMatrizMetas = function() {

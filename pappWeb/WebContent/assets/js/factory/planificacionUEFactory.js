@@ -171,6 +171,11 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
 	         return Restangular.allUrl(url).customPOST(objeto);
 	     },
 
+        guardarMatrizPresupuesto: function(objeto) {
+            var url = "planificacion/matrizpresupuesto/";
+            return Restangular.allUrl(url).customPOST(objeto);
+        },
+
         toTipo: function(tipo) {
         	switch (tipo) {
         		case "AC":
