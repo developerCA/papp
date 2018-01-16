@@ -727,12 +727,19 @@ public class PlanificacionController {
 				log.println("actividad id: " + actividadunidadTO.getId().getId());
 				log.println("unidad: " + parameters.get("unidadid"));
 				log.println("ejercicio: " + ejercicio);
-				Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(actividadunidadTO.getId().getId(), null, Long.valueOf(parameters.get("unidadid")), ejercicio);
-				log.println("valores planificados: " + actividadunidadTO.getPresupplanif() + " - " + totales.get("tplanificado"));
-				log.println("valores ajustados: " + actividadunidadTO.getPresupajust() + " - " +totales.get("tacumulado"));
-				actividadunidadTO.setPresupplanif(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue());
-				actividadunidadTO.setPresupajust(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue());
 				jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfigSubitem()));
+				
+				//2. traigo los valores ya reservados para restar y mostrar solo lo disponible
+				//Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
+				Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), ejercicio);
+				log.println("valores planificados: " + actividadunidadTO.getPresupplanif() + " - " + totales.get("tplanificado"));
+				log.println("valores ajustados: " + actividadunidadTO.getPresupajust().doubleValue() + " - " +totales.get("tacumulado"));
+				actividadunidadTO.setPresupplanif(UtilGeneral.redondear(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue(),2));
+				actividadunidadTO.setPresupajust(UtilGeneral.redondear(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue(),2));
+				log.println("total planificado: " + actividadunidadTO.getPresupplanif());
+				log.println("toal presupuestado: " + actividadunidadTO.getPresupajust());
+				jsonObject.put("totales", (JSONObject)JSONSerializer.toJSON(totales));
+
 			}
 			//Indicador
 			else if(clase.equals("indicador")){
