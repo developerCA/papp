@@ -322,7 +322,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				if (!resp.estado) return;
 				$scope.editar=true;
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
-				$scope.objeto=Object.assign({}, resp.json.subitemunidad);
+				$scope.objeto=Object.assign({}, resp.json.subitemunidad, resp.json.totales);
 				$scope.detalles=resp.json.subitemunidadacumulador;
 				for (var i = 0; i < $scope.detalles.length; i++) {
 					if ($scope.detalles[i].tipo == "P") {
