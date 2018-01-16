@@ -150,7 +150,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			$scope.detalles[id].id.id,
 			$scope.detalles[id].id.acumid,
 			($scope.detalles[id].id.unidadid !== undefined? $scope.detalles[id].id.unidadid: $scope.objUnidad),
-			($scope.divSubItem? "ST": "AC"),
+			($scope.divSubItem? "SI": "AC"),
 			tipometa,
 			$rootScope.ejefiscalobj.anio
 		).then(function(resp) {
@@ -221,9 +221,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				distribuirValor(
 					$scope.objetoDevengo,
 					$scope.detallesDevengo,
-					$scope.detalles[$scope.mDevengoID].total
+					$scope.objeto.presupajust
 				);
-				$scope.totalDevengo = $scope.detalles[$scope.mDevengoID].total;
+				$scope.totalDevengo = $scope.objeto.presupajust;
 				break;
 			default:
 				break;
@@ -468,6 +468,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				}
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubItem=true;
+				$scope.calcularTotalPlanificado();
+				$scope.calcularTotalAjustado();
 				//console.log("Editar OBJETO:", $scope.objeto);
 			});
 		}
@@ -512,7 +514,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.node = node;
 		$scope.divMenuActividad = false;
 		$scope.divMenuSubitems = false;
-		$scope.objetoVista = null;
+		//$scope.objetoVista = null;
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.traerPAverActividad(
 				node.tablarelacionid,
@@ -750,6 +752,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
 			$scope.objeto.itemunidadorganismoid = obj.id.id;
+			$scope.objeto.itemunidadorgprestamoid = obj.id.prestamoid;
 			$scope.objeto.npcodigoorganismo = obj.codigo;
 			$scope.objeto.npnombreorganismo = obj.nombre;		
 			$scope.objeto.npcodigoorgpres = obj.npcodigoorganismo;
@@ -926,7 +929,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
     	PlanificacionUEFactory.guardarMetaDistribucionPlanificada(tObj).then(function(resp){
 			if (resp.estado) {
 				form.$setPristine(true);
+				$scope.detallesPlanificada = null;
+				$scope.metaDistribucion("P");
 	            SweetAlert.swal("Planificacion UE! - Distribucion Planificada", "Registro registrado satisfactoriamente!", "success");
+	            $scope.divPlanificacionAnual = false;
 			} else {
 				SweetAlert.swal("Planificacion UE! - Distribucion Planificada", resp.mensajes.msg, "error");
 			}
@@ -949,7 +955,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformMetaDistribucionAjustada = function(form) {
-		if ($scope.totalAjustada != $scope.objeto.presupplanif) {
+		if ($scope.totalAjustada != $scope.objeto.presupajust) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Ajustada",
         		"La suma de los valores es diferente de la Meta Ajustada",
@@ -962,7 +968,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
     	PlanificacionUEFactory.guardarMetaDistribucionAjustada(tObj).then(function(resp){
 			if (resp.estado) {
 				form.$setPristine(true);
+				$scope.detallesAjustada = null;
+				$scope.metaDistribucion("A");
 	            SweetAlert.swal("Planificacion UE! - Distribucion Ajustada", "Registro registrado satisfactoriamente!", "success");
+	            $scope.divPlanificacionAnual = false;
 			} else {
 				SweetAlert.swal("Planificacion UE! - Distribucion Ajustada", resp.mensajes.msg, "error");
 			}
@@ -970,6 +979,35 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.resetformMetaDistribucionAjustada = function(form) {
+        form.$setPristine(true);
+        $scope.limpiarEdicion();
+	}
+
+	$scope.submitformMetaDistribucionDevengo = function(form) {
+		if ($scope.totalDevengo != $scope.objeto.presupajust) {
+            SweetAlert.swal(
+        		"Planificacion UE! - Distribucion Devengo",
+        		"La suma de los valores es diferente de la Meta Devengo",
+        		"error"
+    		);
+			return;
+		}
+    	var tObj=$scope.objetoDevengo;
+    	tObj.cronogramalineaTOs=$scope.detallesDevengo;
+    	PlanificacionUEFactory.guardarMetaDistribucionDevengo(tObj).then(function(resp){
+			if (resp.estado) {
+				form.$setPristine(true);
+				$scope.detallesDevengo = null;
+				$scope.metaDistribucion("A");
+	            SweetAlert.swal("Planificacion UE! - Distribucion Devengo", "Registro registrado satisfactoriamente!", "success");
+	            $scope.divPlanificacionAnual = false;
+			} else {
+				SweetAlert.swal("Planificacion UE! - Distribucion Devengo", resp.mensajes.msg, "error");
+			}
+		})
+	}
+
+	$scope.resetformMetaDistribucionDevengo = function(form) {
         form.$setPristine(true);
         $scope.limpiarEdicion();
 	}
@@ -1136,12 +1174,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		}
 	}
 
+	$scope.npTotalPlanificado = 0;
 	$scope.calcularTotalPlanificado = function() {
-		$scope.objeto.tplanificado = $scope.detalles[$scope.mPlanificadaID].valor * $scope.detalles[$scope.mPlanificadaID].cantidad;
+		$scope.npTotalPlanificado = $scope.detalles[$scope.mPlanificadaID].valor * $scope.detalles[$scope.mPlanificadaID].cantidad;
 	}
 
+	$scope.npTotalAjustado = 0;
 	$scope.calcularTotalAjustado = function() {
-		$scope.objeto.tacumulado = $scope.detalles[$scope.mAjustadaID].valor * $scope.detalles[$scope.mAjustadaID].cantidad;
+		$scope.npTotalAjustado = $scope.detalles[$scope.mAjustadaID].valor * $scope.detalles[$scope.mAjustadaID].cantidad;
 	}
 
 	$scope.cargarMatrizPresupuestoTipo = function() {
@@ -1196,8 +1236,33 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.edicionMatrizMetas = false;
 	}
 
-	$scope.editarMatrizMetas = function() {
-		$scope.edicionMatrizMetas = true;
+	$scope.cargarMatrizPresupuestoTipo = function() {
+		PlanificacionUEFactory.cargarMatrizMetas(
+			$scope.data[$scope.index].id,
+			$rootScope.ejefiscal,
+			$scope.tipo
+		).then(function(resp){
+			console.log(resp);
+			if (!resp.estado) return;
+			$scope.unidad = resp.json.unidad;
+			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
+			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
+			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
+			$scope.cabecera = resp.json.cabecera[0];
+			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			$scope.detalle = resp.json.detalle;
+			$scope.edicionMatrizMetas = true;
+		});
+	}
+
+
+	$scope.editarMatrizMetas = function(index) {
+		$scope.tipo = "P";
+		$scope.index = index;
+		$scope.cargarMatrizPresupuestoTipo();
 	}
 } ]);
 
