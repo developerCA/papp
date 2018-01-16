@@ -93,40 +93,64 @@ public class PlanificacionController {
 			if(clase.equals("objetivo")){
 				ObjetivoTO objetivoTO = gson.fromJson(new StringReader(objeto), ObjetivoTO.class);
 				accion = (objetivoTO.getId()==null)?"crear":"actualizar";
-				//pregunto si ya existe el codigo en el nivel actual
-				ObjetivoTO objetivoTO2=new ObjetivoTO();
-				objetivoTO2.setObjetivoejerciciofiscalid(objetivoTO.getObjetivoejerciciofiscalid());
-				objetivoTO2.setCodigo(objetivoTO.getCodigo());
-				objetivoTO2.setEstado(objetivoTO.getEstado());
-				objetivoTO2.setObjetivopadreid(objetivoTO.getObjetivopadreid());
-				if(objetivoTO.getObjetivopadreid()!=null && objetivoTO.getObjetivopadreid().longValue()!=0)
+				if(!objetivoTO.getTipo().equals("E")) {
+					//pregunto si ya existe el codigo en el nivel actual
+					ObjetivoTO objetivoTO2=new ObjetivoTO();
+					objetivoTO2.setObjetivoejerciciofiscalid(objetivoTO.getObjetivoejerciciofiscalid());
+					objetivoTO2.setCodigo(objetivoTO.getCodigo());
+					objetivoTO2.setEstado(objetivoTO.getEstado());
 					objetivoTO2.setObjetivopadreid(objetivoTO.getObjetivopadreid());
-				Collection<ObjetivoTO> objetivoTOs=UtilSession.planificacionServicio.transObtenerObjetivoArbol(objetivoTO2);
-				log.println("objetivos encontrados: " + objetivoTOs.size());
-				boolean grabar=true;
-				if(objetivoTOs.size()>0){
-					for(ObjetivoTO objetivoTO3:objetivoTOs) {
-						if((objetivoTO.getId()!=null && objetivoTO.getId().longValue()!=0) && objetivoTO3.getId().longValue()!=objetivoTO.getId().longValue() && objetivoTO3.getCodigo().equals(objetivoTO.getCodigo())) {
-							grabar=false;
-							break;
+					if(objetivoTO.getObjetivopadreid()!=null && objetivoTO.getObjetivopadreid().longValue()!=0)
+						objetivoTO2.setObjetivopadreid(objetivoTO.getObjetivopadreid());
+					Collection<ObjetivoTO> objetivoTOs=UtilSession.planificacionServicio.transObtenerObjetivoArbol(objetivoTO2);
+					log.println("objetivos encontrados: " + objetivoTOs.size());
+					boolean grabar=true;
+					if(objetivoTOs.size()>0){
+						for(ObjetivoTO objetivoTO3:objetivoTOs) {
+							if((objetivoTO.getId()!=null && objetivoTO.getId().longValue()!=0) && objetivoTO3.getId().longValue()!=objetivoTO.getId().longValue() && objetivoTO3.getCodigo().equals(objetivoTO.getCodigo())) {
+								grabar=false;
+								break;
+							}
+							else if((objetivoTO.getId()==null || (objetivoTO.getId()!=null && objetivoTO3.getId().longValue()!=objetivoTO.getId().longValue())) && objetivoTO.getCodigo()!=null && objetivoTO3.getCodigo().equals(objetivoTO.getCodigo())) {
+								grabar=false;
+								break;
+							}
 						}
-						else if((objetivoTO.getId()==null || (objetivoTO.getId()!=null && objetivoTO3.getId().longValue()!=objetivoTO.getId().longValue())) && objetivoTO.getCodigo()!=null && objetivoTO3.getCodigo().equals(objetivoTO.getCodigo())) {
-							grabar=false;
-							break;
-						}
+	//					objetivoTO2=(ObjetivoTO)objetivoTOs.iterator().next();
+	//					if(objetivoTO.getId()!=null && objetivoTO2.getId().longValue()!=objetivoTO.getId().longValue())
+	//						grabar=false;
 					}
-//					objetivoTO2=(ObjetivoTO)objetivoTOs.iterator().next();
-//					if(objetivoTO.getId()!=null && objetivoTO2.getId().longValue()!=objetivoTO.getId().longValue())
-//						grabar=false;
+					if(!grabar){
+						mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+					else{
+						UtilSession.planificacionServicio.transCrearModificarObjetivo(objetivoTO);
+						id=objetivoTO.getId().toString();
+						jsonObject.put("objetivo", (JSONObject)JSONSerializer.toJSON(objetivoTO,objetivoTO.getJsonConfig()));
+					}
 				}
-				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-				}
-				else{
-					UtilSession.planificacionServicio.transCrearModificarObjetivo(objetivoTO);
-					id=objetivoTO.getId().toString();
-					jsonObject.put("objetivo", (JSONObject)JSONSerializer.toJSON(objetivoTO,objetivoTO.getJsonConfig()));
+				else if(objetivoTO.getTipo().equals("E")) {
+					//pregunto si ya existe el codigo en el nivel actual combinado con el codigo institucional
+					ObjetivoTO objetivoTO2=new ObjetivoTO();
+					objetivoTO2.setObjetivoejerciciofiscalid(objetivoTO.getObjetivoejerciciofiscalid());
+					objetivoTO2.setCodigo(objetivoTO.getCodigo());
+					objetivoTO2.setEstado(objetivoTO.getEstado());
+					objetivoTO2.setObjetivoinstitucionid(objetivoTO.getObjetivoinstitucionid());
+					objetivoTO2.setObjetivopadreid(objetivoTO.getObjetivopadreid());
+					if(objetivoTO.getObjetivopadreid()!=null && objetivoTO.getObjetivopadreid().longValue()!=0)
+						objetivoTO2.setObjetivopadreid(objetivoTO.getObjetivopadreid());
+					Collection<ObjetivoTO> objetivoTOs=UtilSession.planificacionServicio.transObtenerObjetivoArbol(objetivoTO2);
+					log.println("objetivos encontrados: " + objetivoTOs.size());
+					if(objetivoTOs.size()>0){
+						mensajes.setMsg("Ya existe un objetivo creado para esta institucion");
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+					else{
+						UtilSession.planificacionServicio.transCrearModificarObjetivo(objetivoTO);
+						id=objetivoTO.getId().toString();
+						jsonObject.put("objetivo", (JSONObject)JSONSerializer.toJSON(objetivoTO,objetivoTO.getJsonConfig()));
+					}
 				}
 			}
 			//Plan nacional
@@ -212,31 +236,32 @@ public class PlanificacionController {
 			else if(clase.equals("programa")){
 				ProgramaTO programaTO = gson.fromJson(new StringReader(objeto), ProgramaTO.class);
 				accion = (programaTO.getId()==null)?"crear":"actualizar";
-				//pregunto si ya existe el codigo en el nivel actual
+				//pregunto si ya existe el codigo en el nivel actual y combinado con el objetivo fuerza
 				ProgramaTO programaTO2=new ProgramaTO();
 				programaTO2.setProgramaejerciciofiscalid(programaTO.getProgramaejerciciofiscalid());
 				programaTO2.setCodigo(programaTO.getCodigo());
 				programaTO2.setEstado(programaTO.getEstado());
+				programaTO2.setProgramaobjetivofuersasid(programaTO.getProgramaobjetivofuersasid());
 				Collection<ProgramaTO> plannacionalTOs=UtilSession.planificacionServicio.transObtenerPrograma(programaTO2);
 				log.println("encontro el codigo: " + plannacionalTOs.size());
 				boolean grabar=true;
 				if(plannacionalTOs.size()>0){
-					for(ProgramaTO programaTO3:plannacionalTOs) {
-						if((programaTO.getId()!=null && programaTO.getId().longValue()!=0) && programaTO3.getId().longValue()!=programaTO.getId().longValue() && programaTO3.getCodigo().equals(programaTO.getCodigo())) {
-							grabar=false;
-							break;
-						}
-						else if((programaTO.getId()==null || (programaTO.getId()!=null && programaTO3.getId().longValue()!=programaTO.getId().longValue())) && programaTO.getCodigo()!=null && programaTO3.getCodigo().equals(programaTO.getCodigo())) {
-							grabar=false;
-							break;
-						}
-					}
-//					programaTO2=(ProgramaTO)plannacionalTOs.iterator().next();
-//					if(programaTO.getId()!=null && programaTO2.getId().longValue()!=programaTO.getId().longValue())
-//						grabar=false;
-				}
-				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+//					for(ProgramaTO programaTO3:plannacionalTOs) {
+//						if((programaTO.getId()!=null && programaTO.getId().longValue()!=0) && programaTO3.getId().longValue()!=programaTO.getId().longValue() && programaTO3.getCodigo().equals(programaTO.getCodigo())) {
+//							grabar=false;
+//							break;
+//						}
+//						else if((programaTO.getId()==null || (programaTO.getId()!=null && programaTO3.getId().longValue()!=programaTO.getId().longValue())) && programaTO.getCodigo()!=null && programaTO3.getCodigo().equals(programaTO.getCodigo())) {
+//							grabar=false;
+//							break;
+//						}
+//					}
+////					programaTO2=(ProgramaTO)plannacionalTOs.iterator().next();
+////					if(programaTO.getId()!=null && programaTO2.getId().longValue()!=programaTO.getId().longValue())
+////						grabar=false;
+//				}
+//				if(!grabar){
+					mensajes.setMsg("Ya existe programa en la fuerza seleccionada");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
