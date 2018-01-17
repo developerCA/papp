@@ -247,11 +247,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 						: $scope.npTotalAjustado
 					)
 				);
-				for (var i = 0; i < 12; i++) {
+/*				for (var i = 0; i < 12; i++) {
 					$scope.detallesDevengo[i].valor = $scope.detallesAjustada[i];
 				}
 				return;
-				distribuirValor(
+*/				distribuirValor(
 					$scope.objetoDevengo,
 					$scope.detallesDevengo,
 					$scope.totalDevengo
@@ -1086,6 +1086,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
     	var tObj=$scope.objeto;
     	//tObj.actividadunidadacumulador=$scope.detalles;
     	PlanificacionUEFactory.guardarActividades("TA",tObj).then(function(resp){
+    		$scope.divPlanificacionAnual = false;
 			if (resp.estado) {
 				form.$setPristine(true);
 				$scope.limpiarEdicion();
@@ -1105,7 +1106,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.submitformSubTarea = function(form) {
     	var tObj=$scope.objeto;
-    	//tObj.actividadunidadacumulador=$scope.detalles;
+    	tObj.subtareaunidadacumulador=$scope.detalles;
     	PlanificacionUEFactory.guardarActividades("ST",tObj).then(function(resp){
 			if (resp.estado) {
 				form.$setPristine(true);
