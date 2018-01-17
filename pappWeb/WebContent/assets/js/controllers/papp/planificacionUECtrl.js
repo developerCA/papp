@@ -226,12 +226,18 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				);
 				break;
 			case "D": //Devengo
+				$scope.totalDevengo = ($scope.detalles[$scope.mAjustadaID].metavalor === undefined
+					? ($scope.objeto.tacumulado === undefined
+						? $scope.detalles[$scope.mAjustadaID].total
+						: $scope.objeto.tacumulado
+					)
+					: $scope.detalles[$scope.mAjustadaID].metavalor
+				);
 				distribuirValor(
 					$scope.objetoDevengo,
 					$scope.detallesDevengo,
-					$scope.objeto.presupajust
+					$scope.totalDevengo
 				);
-				$scope.totalDevengo = $scope.objeto.presupajust;
 				break;
 			default:
 				break;
@@ -984,7 +990,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		}
     	var tObj=$scope.objetoAjustada;
     	tObj.cronogramalineaTOs=$scope.detallesAjustada;
-    	PlanificacionUEFactory.guardarMetaDistribucionAjustada(tObj).then(function(resp){
+    	PlanificacionUEFactory.guardarMetaDistribucionPlanificada(tObj).then(function(resp){
 			if (resp.estado) {
 				//form.$setPristine(true);
 				$scope.detallesAjustada = null;
@@ -1003,7 +1009,13 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformMetaDistribucionDevengo = function(form) {
-		if ($scope.totalDevengo != $scope.objeto.presupajust) {
+		if ($scope.totalDevengo != ($scope.detalles[$scope.mAjustadaID].metavalor === undefined
+			? ($scope.objeto.tacumulado === undefined
+					? $scope.detalles[$scope.mAjustadaID].total
+					: $scope.objeto.tacumulado
+				)
+				: $scope.detalles[$scope.mAjustadaID].metavalor
+			)) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Devengo",
         		"La suma de los valores es diferente de la Meta Devengo",
@@ -1013,11 +1025,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		}
     	var tObj=$scope.objetoDevengo;
     	tObj.cronogramalineaTOs=$scope.detallesDevengo;
-    	PlanificacionUEFactory.guardarMetaDistribucionDevengo(tObj).then(function(resp){
+    	PlanificacionUEFactory.guardarMetaDistribucionPlanificada(tObj).then(function(resp){
 			if (resp.estado) {
-				form.$setPristine(true);
+				//form.$setPristine(true);
 				$scope.detallesDevengo = null;
-				$scope.metaDistribucion("A");
+				$scope.metaDistribucion("D");
 	            SweetAlert.swal("Planificacion UE! - Distribucion Devengo", "Registro registrado satisfactoriamente!", "success");
 	            $scope.divPlanificacionAnual = false;
 			} else {

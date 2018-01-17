@@ -70,22 +70,28 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 
 	$scope.editarAprobarPlanificacion=function(index){
 		//console.log($scope.data[index]);
-/*
-		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
-			$scope.data[index].unidad,
-			$scope.data[index].ejerfiscalid,
-			$scope.data[index].nivelactividadunidadid,
-			$scope.data[index].tipo
-
- */
+/* $scope.data[index].tipo
 		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
 				$scope.data[index].id
+ */
+		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			$scope.data[index].id,
+			$rootScope.ejefiscal,
+			$scope.data[index].npacitividadunidad,
+			"P"
 		).then(function(resp){
-		    console.log(resp.json);
-			if (!resp.estado) return;
-		    $scope.objeto=resp.json.aprobacionPlanificacion;
-		    $scope.edicionAprobarPlanificacion=true;
-		    $scope.edicion=true;
+			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+		})
+	};
+
+	$scope.editarAprobarAjustada=function(index){
+		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			$scope.data[index].id,
+			$rootScope.ejefiscal,
+			$scope.data[index].npacitividadunidad,
+			"A"
+		).then(function(resp){
+			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
 		})
 	};
 
