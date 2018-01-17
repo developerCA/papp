@@ -87,7 +87,7 @@
 				</div>
 
 <div ng-show="edicion">
-				<div ng-show="divPlanificacionAnual" class="panel-body">
+				<div ng-show="divPlanificacionAnual && !divActividad" class="panel-body">
 					<div class="panel-heading">
 						<h5 class="panel-title">
 							Planificaci&oacute;n Anual
@@ -2215,9 +2215,10 @@
 											        Total Planificado
 											        <span class="symbol required"></span>
 											    </label>
-											    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un total planificado"
+											    <input type="text" numericOnly style="text-align:right;" decimal="2"
+											    	placeholder="Escriba un total planificado"
 											        class="form-control" name="npTotalPlanificado" ng-model="npTotalPlanificado"
-											        ng-disabled="true">
+											        ng-disabled="true" ng-max="objeto.tplanificado">
 											    <span class="error text-small block"
 											        ng-if="Form.npTotalPlanificado.$dirty && Form.npTotalPlanificado.$invalid">
 											        Incorrecto
@@ -2295,7 +2296,7 @@
 											    </label>
 											    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un total ajustado"
 											        class="form-control" name="npTotalAjustado" ng-model="npTotalAjustado"
-											        ng-disabled="true">
+											        ng-disabled="true" ng-max="objeto.tacumulado">
 											    <span class="error text-small block"
 											        ng-if="Form.npTotalAjustado.$dirty && Form.npTotalAjustado.$invalid">
 											        Incorrecto
@@ -2307,7 +2308,7 @@
 											</div>
 										</div>
 										<div class="pull-right">
-											<button type="submit" class="btn btn-primary" ng-show="editar">
+											<button type="submit" class="btn btn-primary">
 												Confirmar
 											</button>
 											<a class="btn btn-sm btn-default" ng-click="resetformSubItem(Form);">

@@ -665,7 +665,7 @@
 													</tr>
 													<tr ng-repeat="obj in detalles">
 														<td>
-															<a class="btn btn-sm btn-primary"
+															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
 																uib-tooltip="Modificar" ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>

@@ -53,9 +53,6 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
     }  
 
 	$scope.filtrar=function(){
-		//console.log($rootScope.ejefiscal);
-		//console.log($rootScope);
-		//$scope.data=[];
 		certificacionesFondosFactory.traerFiltro(
 			$scope.pagina,
 			$rootScope.ejefiscal,
@@ -71,27 +68,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
             $scope.total = resp.total.valor;
 		})
 	}
-/*
-	$scope.$watch('data', function() {
-		$scope.tableParams = new ngTableParams({
-			page : 1, // show first page
-			count : 5, // count per page
-			filter: {} 	
-		}, {
-			total : $scope.data.length, // length of data
-			getData : function($defer, params) {
-				var orderedData = params.filter() ? $filter('filter')(
-						$scope.data, params.filter()) : $scope.data;
-				$scope.lista = orderedData.slice(
-						(params.page() - 1) * params.count(), params
-								.page()
-								* params.count());
-				params.total(orderedData.length);
-				$defer.resolve($scope.lista);
-			}
-		});
-	});
-*/
+
 	$scope.limpiar=function(){
 		$scope.codigoFiltro=null;
 		$scope.precompromisoFiltro=null;
@@ -106,8 +83,6 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	};
 	
 	$scope.nuevo=function(){
-		//console.log($rootScope.ejefiscal);
-		//console.log($rootScope);
 		certificacionesFondosFactory.traerCertificacionesFondosNuevo(
 			$rootScope.ejefiscal
 		).then(function(resp){
@@ -398,7 +373,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);//130
+			console.log(obj);
 		    $scope.detalles=obj;
             SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
