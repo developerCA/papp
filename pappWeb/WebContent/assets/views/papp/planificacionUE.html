@@ -322,7 +322,7 @@
 										        <span class="symbol required"></span>
 										    </label>
 										    <div class="input-group col-md-12">
-										        <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un p. acumulado planificado"
+										        <input type="text" numericOnly decimal="2" placeholder="Escriba un p. acumulado planificado"
 										            class="form-control" name="npacumuladoplanificado" ng-model="objetoVista.npacumuladoplanificado" ng-pattern="/^[0-9]*$/"
 										            required ng-disabled="true">
 										    </div>
@@ -967,18 +967,7 @@
 													            ng-disabled="!editar"></textarea>
 														</td>
 													</tr>
-<!--													<tr>
-														<td>
-															SUMA TOTAL:
-														</td>
-														<td>
-													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'pvalor_'+$index}}" ng-model="totalPlanificada"
-													            style="text-align:right;" required decimal="2" ng-disabled="true"
-													            ng-max="objeto.presupplanif" ng-min="objeto.presupplanif">
-														</td>
-													</tr>
--->												</table>
+												</table>
 											</div>
 										</div>
 									</div>
@@ -1987,7 +1976,7 @@
 											            ng-model="objeto.npcodigosubitem" ng-maxlength="10">
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
-											                ng-click="abrirCodigoINCOP()">
+											                ng-click="abrirCodigoINCOP()" ng-disabled="!editar">
 											                <i class="fa fa-search"></i>
 											                Seleccione
 											            </button>
@@ -2053,7 +2042,7 @@
 											            ng-model="objeto.nptipoprodnombre">
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
-											                ng-click="abrirTipoProducto()">
+											                ng-click="abrirTipoProducto()" ng-disabled="!editar">
 											                <i class="fa fa-search"></i>
 											                Seleccione
 											            </button>
@@ -2081,7 +2070,7 @@
 											            ng-model="objeto.npprocedimientonombre">
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
-											                ng-click="abrirProcedimiento()">
+											                ng-click="abrirProcedimiento()" ng-disabled="!editar">
 											                <i class="fa fa-search"></i>
 											                Seleccione
 											            </button>
@@ -2109,7 +2098,7 @@
 											            ng-model="objeto.nptiporegnombre">
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
-											                ng-click="abrirTipoRegimen()">
+											                ng-click="abrirTipoRegimen()" ng-disabled="!editar">
 											                <i class="fa fa-search"></i>
 											                Seleccione
 											            </button>
@@ -2132,7 +2121,7 @@
 											        <span class="symbol required"></span>
 											    </label>
 											    <select class="form-control" name="estado"
-											        ng-model="objeto.estado" required>
+											        ng-model="objeto.estado" required ng-disabled="!editar">
 											        <option value="A">Activo</option>
 											        <option value="I">Inactivo</option>
 											    </select>
@@ -2178,7 +2167,7 @@
 											    <input type="text" numericOnly style="text-align:right;" decimal="2"
 											    	placeholder="Escriba un cantidad planificada" required
 											        class="form-control" name="npCantidadPlanificada" ng-model="detalles[mPlanificadaID].cantidad"
-											        ng-change="calcularTotalPlanificado();">
+											        ng-change="calcularTotalPlanificado();" ng-disabled="!editar">
 											    <span class="error text-small block"
 											        ng-if="Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid">
 											        Incorrecto
@@ -2198,7 +2187,7 @@
 											    <input type="text" numericOnly style="text-align:right;" decimal="2"
 											    	placeholder="Escriba un valor planificado" required
 											        class="form-control" name="npValorPlanificado" ng-model="detalles[mPlanificadaID].valor"
-											        ng-change="calcularTotalPlanificado();">
+											        ng-change="calcularTotalPlanificado();" ng-disabled="!editar">
 											    <span class="error text-small block"
 											        ng-if="Form.npValorPlanificado.$dirty && Form.npValorPlanificado.$invalid">
 											        Incorrecto
@@ -2257,7 +2246,7 @@
 											    <input type="text" numericOnly style="text-align:right;" decimal="2"
 											    	placeholder="Escriba un cantidad planificada" required
 											        class="form-control" name="npCantidadPlanificada" ng-model="detalles[mAjustadaID].cantidad"
-											        ng-change="calcularTotalAjustado();">
+											        ng-change="calcularTotalAjustado();" ng-disabled="!editar">
 											    <span class="error text-small block"
 											        ng-if="Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid">
 											        Incorrecto
@@ -2277,7 +2266,7 @@
 											    <input type="text" numericOnly style="text-align:right;" decimal="2"
 											    	placeholder="Escriba un valor ajustado" required
 											        class="form-control" name="npValorAjustado" ng-model="detalles[mAjustadaID].valor"
-											        ng-change="calcularTotalAjustado();">
+											        ng-change="calcularTotalAjustado();" ng-disabled="!editar">
 											    <span class="error text-small block"
 											        ng-if="Form.npValorAjustado.$dirty && Form.npValorAjustado.$invalid">
 											        Incorrecto
@@ -2498,9 +2487,9 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoDevengo.unidadtiempo!='PE'"
+													            ng-disabled="true"
 													            ng-change="distribucionCalcularTotales('D');">
-														</td>
+														</td><!-- ng-disabled="!editar || objetoDevengo.unidadtiempo!='PE'" -->
 													</tr>
 												</table>
 											</div>
@@ -2811,7 +2800,7 @@
 				<table width="108px">
 					<tr>
 						<td width="34px">
-							<a ng-show="node.nodeTipo!='AC'" uib-tooltip="Ver info."
+							<a ng-show="node.nodeTipo!='AC' && node.nodeTipo!='SI'" uib-tooltip="Ver info."
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="vista(node);">
 								<span class="fa fa-eye"></span>
@@ -2819,12 +2808,12 @@
 						</td>
 						<td width="3px"></td>
 						<td width="34px">
-							<a ng-show="node.nodeTipo!='AC'" uib-tooltip="Agregar"
+							<a ng-show="node.nodeTipo!='AC' && node.nodeTipo!='SI'" uib-tooltip="Agregar"
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="nuevo(node);">
 								<span class="glyphicon glyphicon-plus"></span>
 							</a>
-							<a ng-show="node.nodeTipo=='AC'" uib-tooltip="Ver info."
+							<a ng-show="node.nodeTipo=='AC' || node.nodeTipo=='SI'" uib-tooltip="Ver info."
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="vista(node);">
 								<span class="fa fa-eye"></span>

@@ -71,19 +71,28 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 
 	$scope.editarAprobarPlanificacion=function(index){
 		index = ((pagina - 1) * 5) + index;
-		//console.log($scope.data[index]);
-/* $scope.data[index].tipo
-		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
-				$scope.data[index].id
- */
-		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
-			$scope.data[index].id,
-			$rootScope.ejefiscal,
-			$scope.data[index].npacitividadunidad,
-			"P"
-		).then(function(resp){
-			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
-		})
+		if ($scope.data[index].npestadopresupuesto != "Planificado") {
+			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado", "warning");
+			return;
+		}
+		SweetAlert.swal({
+		   title: "Aprobacion Planificacion?",
+		   text: "Seguro que desea Aprobar la Planificacion indicada",
+		   type: "warning",
+		   showCancelButton: true,
+		   confirmButtonColor: "#DD6B55",
+		   closeOnConfirm: true}, 
+	   function(isConfirm){ 
+		    if (!isConfirm) return;
+	   		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			    $scope.data[index].id,
+				$rootScope.ejefiscal,
+				$scope.data[index].npacitividadunidad,
+				"P"
+			).then(function(resp){
+				SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			})
+		});
 	};
 
 	$scope.editarAprobarAjustada=function(index){

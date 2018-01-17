@@ -198,13 +198,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		if (!$scope.editar) return;
 		switch (estado) {
 			case "P": //Planificado
-				$scope.totalPlanificada = ($scope.detalles[$scope.mPlanificadaID].metavalor === undefined
+/*				$scope.totalPlanificada = ($scope.detalles[$scope.mPlanificadaID].metavalor === undefined
 					? ($scope.objeto.tplanificado === undefined
 							? $scope.detalles[$scope.mPlanificadaID].total
 							: $scope.objeto.tplanificado
 					)
 					: $scope.detalles[$scope.mPlanificadaID].metavalor
-				); 
+				);
+*/				$scope.totalPlanificada = ($scope.divActividad
+					? $scope.detalles[$scope.mPlanificadaID].metavalor
+					: $scope.npTotalPlanificado
+				)
 				distribuirValor(
 					$scope.objetoPlanificada,
 					$scope.detallesPlanificada,
@@ -212,13 +216,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				);
 				break;
 			case "A": //Ajustada
-				$scope.totalAjustada = ($scope.detalles[$scope.mAjustadaID].metavalor === undefined
+/*				$scope.totalAjustada = ($scope.detalles[$scope.mAjustadaID].metavalor === undefined
 					? ($scope.objeto.tacumulado === undefined
 							? $scope.detalles[$scope.mAjustadaID].total
 							: $scope.objeto.tacumulado
 					)
 					: $scope.detalles[$scope.mAjustadaID].metavalor
 				);
+*/				$scope.totalAjustada = ($scope.divActividad
+					? $scope.detalles[$scope.mAjustadaID].metavalor
+					: $scope.npTotalAjustado
+				)
 				distribuirValor(
 					$scope.objetoAjustada,
 					$scope.detallesAjustada,
@@ -233,6 +241,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					)
 					: $scope.detalles[$scope.mAjustadaID].metavalor
 				);
+				for (var i = 0; i < 12; i++) {
+					$scope.detallesDevengo[i].valor = $scope.detallesAjustada[i];
+				}
+				return;
 				distribuirValor(
 					$scope.objetoDevengo,
 					$scope.detallesDevengo,
@@ -878,15 +890,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-        		if ($scope.nodeActivo.nodePadre == undefined) {
+            	eval("$scope.submit" + name + "(form);");
+        		if ($scope.nodeActivo.nodePadre.nodePadre == undefined) {
         			//primero
         			$scope.cargarPlanificacionAnual($scope.planificacionUE);
         		} else {
         			//el resto
         			$scope.nodeActivo.nodePadre.iscargado = false;
-        			$scope.cargarHijos($scope.nodeActivo.nodePadre);
+        			$scope.cargarHijos($scope.nodeActivo.nodePadre.nodePadre);
         		}
-            	eval("$scope.submit" + name + "(form);");
             }
         },
         reset: function(form) {
@@ -929,12 +941,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformMetaDistribucionPlanificada = function(form) {
+/*
 		if ($scope.totalPlanificada != ($scope.detalles[$scope.mPlanificadaID].metavalor === undefined
 				? ($scope.objeto.tplanificado === undefined
 						? $scope.detalles[$scope.mPlanificadaID].total
 						: $scope.objeto.tplanificado
 					)
 					: $scope.detalles[$scope.mPlanificadaID].metavalor
+				)) {
+*/		if ($scope.totalPlanificada != ($scope.divActividad
+				? $scope.detalles[$scope.mPlanificadaID].metavalor
+				: $scope.npTotalPlanificado
 				)) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Planificada",
@@ -974,13 +991,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformMetaDistribucionAjustada = function(form) {
-		if ($scope.totalAjustada != ($scope.detalles[$scope.mAjustadaID].metavalor === undefined
-				? ($scope.objeto.tacumulado === undefined
-						? $scope.detalles[$scope.mAjustadaID].total
-						: $scope.objeto.tacumulado
-					)
-					: $scope.detalles[$scope.mAjustadaID].metavalor
-				)) {
+		if ($scope.totalAjustada != ($scope.divActividad
+				? $scope.detalles[$scope.mAjustadaID].metavalor
+				: $scope.npTotalAjustado
+			)) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Ajustada",
         		"La suma de los valores es diferente de la Meta Ajustada",
@@ -1009,12 +1023,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformMetaDistribucionDevengo = function(form) {
-		if ($scope.totalDevengo != ($scope.detalles[$scope.mAjustadaID].metavalor === undefined
-			? ($scope.objeto.tacumulado === undefined
-					? $scope.detalles[$scope.mAjustadaID].total
-					: $scope.objeto.tacumulado
-				)
-				: $scope.detalles[$scope.mAjustadaID].metavalor
+		if ($scope.totalDevengo != ($scope.divActividad
+				? $scope.detalles[$scope.mAjustadaID].metavalor
+				: $scope.npTotalAjustado
 			)) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Devengo",
@@ -1223,10 +1234,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.calcularTotalPlanificado = function() {
 		$scope.npTotalPlanificado = $scope.detalles[$scope.mPlanificadaID].valor * $scope.detalles[$scope.mPlanificadaID].cantidad;
+		$scope.detalles[$scope.mPlanificadaID].total = $scope.npTotalPlanificado;
 	}
 
 	$scope.calcularTotalAjustado = function() {
 		$scope.npTotalAjustado = $scope.detalles[$scope.mAjustadaID].valor * $scope.detalles[$scope.mAjustadaID].cantidad;
+		$scope.detalles[$scope.mAjustadaID].total = $scope.npTotalAjustado;
 	}
 
 	$scope.cargarMatrizPresupuestoTipo = function() {
