@@ -33,6 +33,7 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 			getData : function($defer, params) {
 				var orderedData = params.filter() ? $filter('filter')(
 						$scope.data, params.filter()) : $scope.data;
+				pagina = params.page();
 				$scope.lista = orderedData.slice(
 						(params.page() - 1) * params.count(), params
 								.page()
@@ -69,6 +70,7 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 	}
 
 	$scope.editarAprobarPlanificacion=function(index){
+		index = ((pagina - 1) * 5) + index;
 		//console.log($scope.data[index]);
 /* $scope.data[index].tipo
 		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
