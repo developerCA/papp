@@ -715,7 +715,7 @@ public class PlanificacionController {
 
 				subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 				subitemunidadacumuladorTO.getId().setId(id);
-				subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
+				subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+3));
 				subitemunidadacumuladorTO.setNpvalor(0.0);
 				subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.devengo"));
 				subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
