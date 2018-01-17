@@ -727,7 +727,6 @@ public class PlanificacionController {
 				log.println("actividad id: " + actividadunidadTO.getId().getId());
 				log.println("unidad: " + parameters.get("unidadid"));
 				log.println("ejercicio: " + ejercicio);
-				jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfigSubitem()));
 				
 				//2. traigo los valores ya reservados para restar y mostrar solo lo disponible
 				//Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
@@ -738,8 +737,11 @@ public class PlanificacionController {
 				actividadunidadTO.setPresupajust(UtilGeneral.redondear(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue(),2));
 				log.println("total planificado: " + actividadunidadTO.getPresupplanif());
 				log.println("toal presupuestado: " + actividadunidadTO.getPresupajust());
-				jsonObject.put("totales", (JSONObject)JSONSerializer.toJSON(totales));
-
+				Map<String, Double> saldos= new HashMap<String,Double>();
+				saldos.put("tplanificado", totales.get("tplanificado"));
+				saldos.put("tacumulado", totales.get("tacumulado"));
+				jsonObject.put("totales", (JSONObject)JSONSerializer.toJSON(saldos));
+				jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfigSubitem()));
 			}
 			//Indicador
 			else if(clase.equals("indicador")){
@@ -1096,8 +1098,11 @@ public class PlanificacionController {
 				actividadunidadTO.setPresupajust(UtilGeneral.redondear(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue(),2));
 				log.println("total planificado: " + actividadunidadTO.getPresupplanif());
 				log.println("toal presupuestado: " + actividadunidadTO.getPresupajust());
+				Map<String, Double> saldos= new HashMap<String,Double>();
+				saldos.put("tplanificado", actividadunidadTO.getPresupplanif());
+				saldos.put("tacumulado", actividadunidadTO.getPresupajust());
+				jsonObject.put("totales", (JSONObject)JSONSerializer.toJSON(saldos));
 				jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfigSubitem()));
-				jsonObject.put("totales", (JSONObject)JSONSerializer.toJSON(totales));
 				
 			}
 			
@@ -1451,11 +1456,13 @@ public class PlanificacionController {
 					String fecha="";
 					if(tipometa.equals("A"))
 						contador=13;
+					if(tipometa.equals("D"))
+						contador=25;
 					for(int i=1;i<13;i++){
 						//Creo los detalles
 						CronogramalineaTO cronogramalineaTO=new CronogramalineaTO();
 						cronogramalineaTO.setMes(Long.valueOf(i));
-						cronogramalineaTO.getId().setLineaid(Long.valueOf(contador));
+						cronogramalineaTO.getId().setLineaid(Long.valueOf(contador+i-1));
 						if(i<10)
 							fecha="01"+"/0"+i+"/"+ejerciciofiscal;
 						else
