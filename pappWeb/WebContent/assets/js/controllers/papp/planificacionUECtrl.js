@@ -152,7 +152,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			$scope.detalles[id].id.id,
 			$scope.detalles[id].id.acumid,
 			($scope.detalles[id].id.unidadid !== undefined? $scope.detalles[id].id.unidadid: $scope.objUnidad),
-			($scope.divSubItem? "SI": "AC"),
+			($scope.divSubItem? "SI": ($scope.divSubTarea? "ST": "AC")),
 			tipometa,
 			$rootScope.ejefiscalobj.anio
 		).then(function(resp) {
@@ -207,8 +207,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				);
 */				$scope.totalPlanificada = ($scope.divActividad
 					? $scope.detalles[$scope.mPlanificadaID].metavalor
-					: $scope.npTotalPlanificado
-				)
+					: ($scope.divSubTarea
+						? $scope.detalles[$scope.mPlanificadaID].cantidad
+						: $scope.npTotalPlanificado
+					)
+				);
 				distribuirValor(
 					$scope.objetoPlanificada,
 					$scope.detallesPlanificada,
@@ -225,8 +228,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				);
 */				$scope.totalAjustada = ($scope.divActividad
 					? $scope.detalles[$scope.mAjustadaID].metavalor
-					: $scope.npTotalAjustado
-				)
+					: ($scope.divSubTarea
+						? $scope.detalles[$scope.mAjustadaID].cantidad
+						: $scope.npTotalAjustado
+					)
+				);
 				distribuirValor(
 					$scope.objetoAjustada,
 					$scope.detallesAjustada,
@@ -234,12 +240,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				);
 				break;
 			case "D": //Devengo
-				$scope.totalDevengo = ($scope.detalles[$scope.mAjustadaID].metavalor === undefined
-					? ($scope.objeto.tacumulado === undefined
-						? $scope.detalles[$scope.mAjustadaID].total
-						: $scope.objeto.tacumulado
+				$scope.totalDevengo = ($scope.divActividad
+					? $scope.detalles[$scope.mAjustadaID].metavalor
+					: ($scope.divSubTarea
+						? $scope.detalles[$scope.mAjustadaID].cantidad
+						: $scope.npTotalAjustado
 					)
-					: $scope.detalles[$scope.mAjustadaID].metavalor
 				);
 				for (var i = 0; i < 12; i++) {
 					$scope.detallesDevengo[i].valor = $scope.detallesAjustada[i];
@@ -1336,6 +1342,9 @@ function distribuirValor(
 	for (var i = 0; i < 12; i++) {
 		detalles[i].valor = 0;
 		detalles[i].porcentaje = 0;
+	}
+	if (presupuesto == 0 ) {
+		return;
 	}
 
 	switch (fuente.unidadtiempo) {

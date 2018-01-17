@@ -1500,8 +1500,9 @@
 											        <span class="symbol required"></span>
 											    </label>
 											    <input type="text" placeholder="Escriba un meta planificada cantidad"
-											        class="form-control" name="npMetaPlanificadaCantidad" ng-model="detalles[mPlanificadaID].cantidad" numericOnly style="text-align:right;"
-											        required format="number">
+											        class="form-control" name="npMetaPlanificadaCantidad"
+											        ng-model="detalles[mPlanificadaID].cantidad" numericOnly style="text-align:right;"
+											        required decimal="2">
 											    <span class="error text-small block"
 											        ng-if="Form.npMetaPlanificadaCantidad.$dirty && Form.npMetaPlanificadaCantidad.$invalid">
 											        Incorrecto
@@ -1557,8 +1558,9 @@
 											        <span class="symbol required"></span>
 											    </label>
 											    <input type="text" placeholder="Escriba un meta ajustada cantidad"
-											        class="form-control" name="npMetaAjustadaCantidad" ng-model="detalles[mAjustadaID].cantidad" numericOnly style="text-align:right;"
-											        required format="number">
+											        class="form-control" name="npMetaAjustadaCantidad"
+											        ng-model="detalles[mAjustadaID].cantidad" numericOnly style="text-align:right;"
+											        required decimal="2">
 											    <span class="error text-small block"
 											        ng-if="Form.npMetaAjustadaCantidad.$dirty && Form.npMetaAjustadaCantidad.$invalid">
 											        Incorrecto
@@ -1599,6 +1601,161 @@
 									</div>
 								</div>
 							</form>
+						</div>
+						<div class="col-md-6">
+							<span ng-show="!divEditarDistribucion">
+								<a class="btn btn-sm btn-primary" ng-click="editarDistribucionPlanificado();">
+									Editar distribuci&oacute;n
+								</a>
+							</span>
+
+							<div ng-show="divMetaDistribucionPlanificada" class="panel panel-primary">
+								<form name="Form" id="formMetaDistribucionPlanificada"
+									novalidate ng-submit="form.submit(Form,'formMetaDistribucionPlanificada');">
+									<span>
+										&nbsp;Distribuci&oacute;n:
+										<a class="btn btn-sm btn-primary">
+											Planificado
+										</a>
+										&nbsp;
+										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
+											Ajustado
+										</a>
+										&nbsp;Unidad Tipo:
+									    <select name="periodoPlanificado" ng-disabled="!editar"
+									        ng-model="objetoPlanificada.unidadtiempo" ng-change="distribucionValores('P');">
+											<option value="ME">Mensual</option>
+											<option value="BI">Bimensual</option>
+											<option value="TM">Trimestral</option>
+											<option value="CM">Cuatrimestral</option>
+											<option value="SE">Semestral</option>
+											<option value="AN">Anual</option>
+											<option value="PE">Personalizado</option>
+										</select>
+									</span>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<th>Mes</th>
+														<th>Meta Cantidad</th>
+														<th>Meta Porcentaje</th>
+														<th>Descripci&oacute;n/Medio de Verificaci&oacute;n</th>
+													</tr>
+													<tr ng-repeat="obj in detallesPlanificada">
+														<td>
+															{{obj.npMes}}
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
+													            ng-change="calcularPorcientoP($index);distribucionCalcularTotales('P');">
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="true">
+														</td>
+														<td>
+														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
+														    	placeholder="Escriba un descripci&oacute;n"
+														        class="form-control" ng-model="obj.observacion" required
+													            ng-disabled="!editar"></textarea>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<button type="submit" class="btn btn-primary" ng-show="editar">
+													Guardar
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div ng-show="divMetaDistribucionAjustada" class="panel panel-primary">
+								<form name="Form" id="formMetaDistribucionAjustada"
+									novalidate ng-submit="form.submit(Form,'formMetaDistribucionAjustada')">
+									<span>
+										&nbsp;Distribuci&oacute;n:
+										<a class="btn btn-sm btn-default" ng-click="editarDistribucionPlanificado();">
+											Planificado
+										</a>
+										&nbsp;
+										<a class="btn btn-sm btn-primary">
+											Ajustado
+										</a>
+										&nbsp;Unidad Tipo:
+									    <select name="periodoPlanificado" ng-disabled="!editar"
+									        ng-model="objetoAjustada.unidadtiempo" ng-change="distribucionValores('A');">
+											<option value="ME">Mensual</option>
+											<option value="BI">Bimensual</option>
+											<option value="TM">Trimestral</option>
+											<option value="CM">Cuatrimestral</option>
+											<option value="SE">Semestral</option>
+											<option value="AN">Anual</option>
+											<option value="PE">Personalizado</option>
+										</select>
+									</span>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<th>Mes</th>
+														<th>Meta Cantidad</th>
+														<th>Meta Porcentaje</th>
+														<th>Descripci&oacute;n/Medio de Verificaci&oacute;n</th>
+													</tr>
+													<tr ng-repeat="obj in detallesAjustada">
+														<td>
+															{{obj.npMes}}
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
+													            ng-change="calcularPorcientoA($index);distribucionCalcularTotales('A');">
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="true">
+														</td>
+														<td>
+														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
+														    	placeholder="Escriba un descripci&oacute;n"
+														        class="form-control" ng-model="obj.observacion" required
+													            ng-disabled="!editar"></textarea>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<button type="submit" class="btn btn-primary" ng-show="editar">
+													Guardar
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
