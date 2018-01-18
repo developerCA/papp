@@ -1039,18 +1039,7 @@
 													            ng-disabled="!editar"></textarea>
 														</td>
 													</tr>
-<!--													<tr>
-														<td>
-															SUMA TOTAL:
-														</td>
-														<td>
-													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'pvalor_'+$index}}" ng-model="totalAjustada"
-													            style="text-align:right;" required decimal="2" ng-disabled="true"
-													            ng-max="objeto.presupplanif" ng-min="objeto.presupplanif">
-														</td>
-													</tr>
--->												</table>
+												</table>
 											</div>
 										</div>
 									</div>
@@ -2479,6 +2468,11 @@
 											Planificado
 										</a>
 										&nbsp;
+										<a class="btn btn-sm btn-default"  uib-tooltip="Copiar Planificado a Ajustado"
+											ng-click="copiarPlanificadoAjustado();">
+											<i class="fa ti-hand-point-right"></i>
+										</a>
+										&nbsp;
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
 											Ajustado
 										</a>
@@ -2543,6 +2537,11 @@
 											Planificado
 										</a>
 										&nbsp;
+										<a class="btn btn-sm btn-default"  uib-tooltip="Copiar Planificado a Ajustado"
+											ng-click="copiarPlanificadoAjustado();">
+											<i class="fa ti-hand-point-right"></i>
+										</a>
+										&nbsp;
 										<a class="btn btn-sm btn-primary">
 											Ajustado
 										</a>
@@ -2605,6 +2604,11 @@
 										&nbsp;Distribuci&oacute;n:
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionPlanificado();">
 											Planificado
+										</a>
+										&nbsp;
+										<a class="btn btn-sm btn-default"  uib-tooltip="Copiar Planificado a Ajustado"
+											ng-click="copiarPlanificadoAjustado();">
+											<i class="fa ti-hand-point-right"></i>
 										</a>
 										&nbsp;
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">

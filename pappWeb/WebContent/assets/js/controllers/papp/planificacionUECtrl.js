@@ -105,6 +105,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.editarDistribucionPlanificado=function(){
 		$scope.divEditarDistribucion=true;
 		$scope.metaDistribucion('P');
+		if ($scope.divSubItem && $scope.detallesAjustada == null) {
+			$scope.metaDistribucion('A');
+		}
 	}
 
 	$scope.editarDistribucionAjustado=function(){
@@ -756,7 +759,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.indicadorunidadmedidaid = obj.id;
+			$scope.objeto.metaumid = obj.id;
 			$scope.objeto.npcodigounidad = obj.codigo;
 			$scope.objeto.npnombreunidad = obj.nombre;
 			$scope.objeto.npcodigogrupo = obj.npCodigogrupo;
@@ -957,18 +960,24 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformMetaDistribucionPlanificada = function(form) {
-/*
-		if ($scope.totalPlanificada != ($scope.detalles[$scope.mPlanificadaID].metavalor === undefined
-				? ($scope.objeto.tplanificado === undefined
-						? $scope.detalles[$scope.mPlanificadaID].total
-						: $scope.objeto.tplanificado
-					)
-					: $scope.detalles[$scope.mPlanificadaID].metavalor
-				)) {
-*/		if ($scope.totalPlanificada != ($scope.divActividad
+		if ($scope.divActividad) {
+			var porcentaje = 0;
+			for (var i = 0; i < 11; i++) {
+				porcentaje = porcentaje + $scope.detallesPlanificada[i].porcentaje;
+			}
+			if (porcentaje != 100) {
+	            SweetAlert.swal(
+            		"Planificacion UE! - Distribucion Planificada",
+            		"La suma de los porcientos es diferente de 100%",
+            		"error"
+        		);
+    			return;
+			}
+		}
+		if ($scope.totalPlanificada != ($scope.divActividad
 				? $scope.detalles[$scope.mPlanificadaID].metavalor
 				: $scope.npTotalPlanificado
-				)) {
+			)) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Planificada",
         		"La suma de los valores es diferente de la Meta Planificada",
@@ -1359,6 +1368,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			$scope.detalle = resp.json.detalle;
 			$scope.edicionMatrizMetas = true;
 		});
+	}
+
+	$scope.copiarPlanificadoAjustado = function() {
+		$scope.metaDistribucion("A");
+		$scope.detallesAjustada = $scope.detallesPlanificada.slice(0);
 	}
 } ]);
 
