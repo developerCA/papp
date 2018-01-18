@@ -91,8 +91,11 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		})
 	}
 	
-	$scope.editar=function(id){
-		ordenGastoFactory.editar(id).then(function(resp){
+	$scope.editar=function(index) {
+		$scope.noeditar = ($scope.data[index].npestado == 'Registrado'? false: true);
+		ordenGastoFactory.editar(
+			$scope.data[index].id
+		).then(function(resp){
 			console.log(resp);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.ordengasto;

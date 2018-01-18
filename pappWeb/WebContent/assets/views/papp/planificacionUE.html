@@ -322,7 +322,7 @@
 										        <span class="symbol required"></span>
 										    </label>
 										    <div class="input-group col-md-12">
-										        <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un p. acumulado planificado"
+										        <input type="text" numericOnly decimal="2" placeholder="Escriba un p. acumulado planificado"
 										            class="form-control" name="npacumuladoplanificado" ng-model="objetoVista.npacumuladoplanificado" ng-pattern="/^[0-9]*$/"
 										            required ng-disabled="true">
 										    </div>
@@ -405,7 +405,7 @@
 					</div>
 				</div>
 
-				<div ng-show="divActividad" class="panel-body" id="panel1">
+				<div ng-show="divActividad" class="panel-body" id="panelActividad">
 					<div class="panel-heading">
 						<h5 class="panel-title">Actividad</h5>
 					</div>
@@ -821,7 +821,7 @@
 											        <span class="symbol required"></span>
 											    </label>
 											    <input type="text" placeholder="Escriba un meta planificada (no llega en el servicio)"
-											        class="form-control" name="npMetaPlanificada" ng-model="detalles[mPlanificadaID].metavalor"
+											        class="form-control" name="npMetaPlanificada" ng-model="detalles[mPlanificadaID].cantidad"
 											        required ng-disabled="!editar">
 											    <span class="error text-small block"
 											        ng-if="Form.npMetaPlanificada.$dirty && Form.npMetaPlanificada.$invalid">
@@ -859,7 +859,7 @@
 											        <span class="symbol required"></span>
 											    </label>
 											    <input type="text" placeholder="Escriba un meta ajustada (no llega en el servicio)"
-											        class="form-control" name="npMetaAjustada" ng-model="detalles[mAjustadaID].metavalor"
+											        class="form-control" name="npMetaAjustada" ng-model="detalles[mAjustadaID].cantidad"
 											        required ng-disabled="!editar">
 											    <span class="error text-small block"
 											        ng-if="Form.npMetaAjustada.$dirty && Form.npMetaAjustada.$invalid">
@@ -951,14 +951,13 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
-													            ng-change="calcularPorcientoP($index);distribucionCalcularTotales('P');">
-														</td>
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
+														</td><!-- ng-change="calcularPorcientoP($index);distribucionCalcularTotales('P');" -->
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="true">
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
 														</td>
 														<td>
 														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
@@ -967,18 +966,7 @@
 													            ng-disabled="!editar"></textarea>
 														</td>
 													</tr>
-<!--													<tr>
-														<td>
-															SUMA TOTAL:
-														</td>
-														<td>
-													        <input type="number" placeholder="Escriba una cantida para el mes"
-													            class="form-control" name="{{'pvalor_'+$index}}" ng-model="totalPlanificada"
-													            style="text-align:right;" required decimal="2" ng-disabled="true"
-													            ng-max="objeto.presupplanif" ng-min="objeto.presupplanif">
-														</td>
-													</tr>
--->												</table>
+												</table>
 											</div>
 										</div>
 									</div>
@@ -1036,14 +1024,13 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
-													            ng-change="calcularPorcientoA($index);distribucionCalcularTotales('A');">
-														</td>
+													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'">
+														</td><!-- ng-change="calcularPorcientoA($index);distribucionCalcularTotales('A');" -->
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="true">
+													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'">
 														</td>
 														<td>
 														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
@@ -1082,7 +1069,7 @@
 					</div>
 				</div>
 
-				<div ng-show="divSubActividad" class="panel-body" id="panel1">
+				<div ng-show="divSubActividad" class="panel-body" id="panelSubActividad">
 					<div class="panel-heading">
 						<h5 class="panel-title">Subactividad</h5>
 					</div>
@@ -1511,8 +1498,9 @@
 											        <span class="symbol required"></span>
 											    </label>
 											    <input type="text" placeholder="Escriba un meta planificada cantidad"
-											        class="form-control" name="npMetaPlanificadaCantidad" ng-model="detalles[mPlanificadaID].cantidad" numericOnly style="text-align:right;"
-											        required format="number">
+											        class="form-control" name="npMetaPlanificadaCantidad"
+											        ng-model="detalles[mPlanificadaID].cantidad" numericOnly style="text-align:right;"
+											        required decimal="2">
 											    <span class="error text-small block"
 											        ng-if="Form.npMetaPlanificadaCantidad.$dirty && Form.npMetaPlanificadaCantidad.$invalid">
 											        Incorrecto
@@ -1568,8 +1556,9 @@
 											        <span class="symbol required"></span>
 											    </label>
 											    <input type="text" placeholder="Escriba un meta ajustada cantidad"
-											        class="form-control" name="npMetaAjustadaCantidad" ng-model="detalles[mAjustadaID].cantidad" numericOnly style="text-align:right;"
-											        required format="number">
+											        class="form-control" name="npMetaAjustadaCantidad"
+											        ng-model="detalles[mAjustadaID].cantidad" numericOnly style="text-align:right;"
+											        required decimal="2">
 											    <span class="error text-small block"
 											        ng-if="Form.npMetaAjustadaCantidad.$dirty && Form.npMetaAjustadaCantidad.$invalid">
 											        Incorrecto
@@ -1610,6 +1599,161 @@
 									</div>
 								</div>
 							</form>
+						</div>
+						<div class="col-md-6">
+							<span ng-show="!divEditarDistribucion">
+								<a class="btn btn-sm btn-primary" ng-click="editarDistribucionPlanificado();">
+									Editar distribuci&oacute;n
+								</a>
+							</span>
+
+							<div ng-show="divMetaDistribucionPlanificada" class="panel panel-primary">
+								<form name="Form" id="formMetaDistribucionPlanificada"
+									novalidate ng-submit="form.submit(Form,'formMetaDistribucionPlanificada');">
+									<span>
+										&nbsp;Distribuci&oacute;n:
+										<a class="btn btn-sm btn-primary">
+											Planificado
+										</a>
+										&nbsp;
+										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
+											Ajustado
+										</a>
+										&nbsp;Unidad Tipo:
+									    <select name="periodoPlanificado" ng-disabled="!editar"
+									        ng-model="objetoPlanificada.unidadtiempo" ng-change="distribucionValores('P');">
+											<option value="ME">Mensual</option>
+											<option value="BI">Bimensual</option>
+											<option value="TM">Trimestral</option>
+											<option value="CM">Cuatrimestral</option>
+											<option value="SE">Semestral</option>
+											<option value="AN">Anual</option>
+											<option value="PE">Personalizado</option>
+										</select>
+									</span>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<th>Mes</th>
+														<th>Meta Cantidad</th>
+														<th>Meta Porcentaje</th>
+														<th>Descripci&oacute;n/Medio de Verificaci&oacute;n</th>
+													</tr>
+													<tr ng-repeat="obj in detallesPlanificada">
+														<td>
+															{{obj.npMes}}
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
+													            ng-change="calcularPorcientoP($index);distribucionCalcularTotales('P');">
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="true">
+														</td>
+														<td>
+														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
+														    	placeholder="Escriba un descripci&oacute;n"
+														        class="form-control" ng-model="obj.observacion" required
+													            ng-disabled="!editar"></textarea>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<button type="submit" class="btn btn-primary" ng-show="editar">
+													Guardar
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<div ng-show="divMetaDistribucionAjustada" class="panel panel-primary">
+								<form name="Form" id="formMetaDistribucionAjustada"
+									novalidate ng-submit="form.submit(Form,'formMetaDistribucionAjustada')">
+									<span>
+										&nbsp;Distribuci&oacute;n:
+										<a class="btn btn-sm btn-default" ng-click="editarDistribucionPlanificado();">
+											Planificado
+										</a>
+										&nbsp;
+										<a class="btn btn-sm btn-primary">
+											Ajustado
+										</a>
+										&nbsp;Unidad Tipo:
+									    <select name="periodoPlanificado" ng-disabled="!editar"
+									        ng-model="objetoAjustada.unidadtiempo" ng-change="distribucionValores('A');">
+											<option value="ME">Mensual</option>
+											<option value="BI">Bimensual</option>
+											<option value="TM">Trimestral</option>
+											<option value="CM">Cuatrimestral</option>
+											<option value="SE">Semestral</option>
+											<option value="AN">Anual</option>
+											<option value="PE">Personalizado</option>
+										</select>
+									</span>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<th>Mes</th>
+														<th>Meta Cantidad</th>
+														<th>Meta Porcentaje</th>
+														<th>Descripci&oacute;n/Medio de Verificaci&oacute;n</th>
+													</tr>
+													<tr ng-repeat="obj in detallesAjustada">
+														<td>
+															{{obj.npMes}}
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
+													            ng-change="calcularPorcientoA($index);distribucionCalcularTotales('A');">
+														</td>
+														<td>
+													        <input type="number" placeholder="Escriba una cantida para el mes"
+													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
+													            numericOnly style="text-align:right;" required decimal="2"
+													            ng-disabled="true">
+														</td>
+														<td>
+														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
+														    	placeholder="Escriba un descripci&oacute;n"
+														        class="form-control" ng-model="obj.observacion" required
+													            ng-disabled="!editar"></textarea>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<button type="submit" class="btn btn-primary" ng-show="editar">
+													Guardar
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -1987,7 +2131,7 @@
 											            ng-model="objeto.npcodigosubitem" ng-maxlength="10">
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
-											                ng-click="abrirCodigoINCOP()">
+											                ng-click="abrirCodigoINCOP()" ng-disabled="!editar">
 											                <i class="fa fa-search"></i>
 											                Seleccione
 											            </button>
@@ -2053,7 +2197,7 @@
 											            ng-model="objeto.nptipoprodnombre">
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
-											                ng-click="abrirTipoProducto()">
+											                ng-click="abrirTipoProducto()" ng-disabled="!editar">
 											                <i class="fa fa-search"></i>
 											                Seleccione
 											            </button>
@@ -2081,7 +2225,7 @@
 											            ng-model="objeto.npprocedimientonombre">
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
-											                ng-click="abrirProcedimiento()">
+											                ng-click="abrirProcedimiento()" ng-disabled="!editar">
 											                <i class="fa fa-search"></i>
 											                Seleccione
 											            </button>
@@ -2109,7 +2253,7 @@
 											            ng-model="objeto.nptiporegnombre">
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
-											                ng-click="abrirTipoRegimen()">
+											                ng-click="abrirTipoRegimen()" ng-disabled="!editar">
 											                <i class="fa fa-search"></i>
 											                Seleccione
 											            </button>
@@ -2132,7 +2276,7 @@
 											        <span class="symbol required"></span>
 											    </label>
 											    <select class="form-control" name="estado"
-											        ng-model="objeto.estado" required>
+											        ng-model="objeto.estado" required ng-disabled="!editar">
 											        <option value="A">Activo</option>
 											        <option value="I">Inactivo</option>
 											    </select>
@@ -2178,7 +2322,7 @@
 											    <input type="text" numericOnly style="text-align:right;" decimal="2"
 											    	placeholder="Escriba un cantidad planificada" required
 											        class="form-control" name="npCantidadPlanificada" ng-model="detalles[mPlanificadaID].cantidad"
-											        ng-change="calcularTotalPlanificado();">
+											        ng-change="calcularTotalPlanificado();" ng-disabled="!editar">
 											    <span class="error text-small block"
 											        ng-if="Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid">
 											        Incorrecto
@@ -2198,7 +2342,7 @@
 											    <input type="text" numericOnly style="text-align:right;" decimal="2"
 											    	placeholder="Escriba un valor planificado" required
 											        class="form-control" name="npValorPlanificado" ng-model="detalles[mPlanificadaID].valor"
-											        ng-change="calcularTotalPlanificado();">
+											        ng-change="calcularTotalPlanificado();" ng-disabled="!editar">
 											    <span class="error text-small block"
 											        ng-if="Form.npValorPlanificado.$dirty && Form.npValorPlanificado.$invalid">
 											        Incorrecto
@@ -2257,7 +2401,7 @@
 											    <input type="text" numericOnly style="text-align:right;" decimal="2"
 											    	placeholder="Escriba un cantidad planificada" required
 											        class="form-control" name="npCantidadPlanificada" ng-model="detalles[mAjustadaID].cantidad"
-											        ng-change="calcularTotalAjustado();">
+											        ng-change="calcularTotalAjustado();" ng-disabled="!editar">
 											    <span class="error text-small block"
 											        ng-if="Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid">
 											        Incorrecto
@@ -2277,7 +2421,7 @@
 											    <input type="text" numericOnly style="text-align:right;" decimal="2"
 											    	placeholder="Escriba un valor ajustado" required
 											        class="form-control" name="npValorAjustado" ng-model="detalles[mAjustadaID].valor"
-											        ng-change="calcularTotalAjustado();">
+											        ng-change="calcularTotalAjustado();" ng-disabled="!editar">
 											    <span class="error text-small block"
 											        ng-if="Form.npValorAjustado.$dirty && Form.npValorAjustado.$invalid">
 											        Incorrecto
@@ -2498,9 +2642,9 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoDevengo.unidadtiempo!='PE'"
+													            ng-disabled="true"
 													            ng-change="distribucionCalcularTotales('D');">
-														</td>
+														</td><!-- ng-disabled="!editar || objetoDevengo.unidadtiempo!='PE'" -->
 													</tr>
 												</table>
 											</div>
@@ -2648,7 +2792,7 @@
 					</div>
 				</div>
 
-				<div ng-show="edicionMatrizMetas">
+				<div class="panel-body" ng-show="edicionMatrizMetas">
 					<div class="panel-heading">
 						<h5 class="panel-title">
 							Matriz de Metas
@@ -2693,7 +2837,7 @@
 									        Tipo
 									    </label>
 									    <select class="form-control" name="tipo"
-									        ng-model="tipo" required ng-change="cargarMatrizPresupuestoTipo();">
+									        ng-model="tipo" required ng-change="cargarMatrizMetasTipo();">
 									        <option value="P">Planificada</option>
 									        <option value="A">Ajustado</option>
 									    </select>
@@ -2811,7 +2955,7 @@
 				<table width="108px">
 					<tr>
 						<td width="34px">
-							<a ng-show="node.nodeTipo!='AC'" uib-tooltip="Ver info."
+							<a ng-show="node.nodeTipo!='AC' && node.nodeTipo!='SI'" uib-tooltip="Ver info."
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="vista(node);">
 								<span class="fa fa-eye"></span>
@@ -2819,12 +2963,12 @@
 						</td>
 						<td width="3px"></td>
 						<td width="34px">
-							<a ng-show="node.nodeTipo!='AC'" uib-tooltip="Agregar"
+							<a ng-show="node.nodeTipo!='AC' && node.nodeTipo!='SI'" uib-tooltip="Agregar"
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="nuevo(node);">
 								<span class="glyphicon glyphicon-plus"></span>
 							</a>
-							<a ng-show="node.nodeTipo=='AC'" uib-tooltip="Ver info."
+							<a ng-show="node.nodeTipo=='AC' || node.nodeTipo=='SI'" uib-tooltip="Ver info."
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="vista(node);">
 								<span class="fa fa-eye"></span>
