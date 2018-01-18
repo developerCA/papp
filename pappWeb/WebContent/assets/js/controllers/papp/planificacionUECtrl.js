@@ -224,6 +224,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divActividad,
 					$scope.divSubItem
 				);
+				//$scope.detalles[$scope.mPlanificadaID].npValor = $scope.detalles[$scope.mPlanificadaID].cantidad;
 				break;
 			case "A": //Ajustada
 /*				$scope.totalAjustada = ($scope.detalles[$scope.mAjustadaID].metavalor === undefined
@@ -248,6 +249,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divActividad,
 					$scope.divSubItem
 				);
+				//$scope.detalles[$scope.mAjustadaID].npValor = $scope.detalles[$scope.mAjustadaID].cantidad;
 				break;
 			case "D": //Devengo
 				$scope.totalDevengo = ($scope.divActividad
@@ -930,6 +932,22 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
     };
 
 	$scope.submitformActividad = function(form) {
+		if ($scope.detalles[$scope.mPlanificadaID].cantidad != $scope.detalles[$scope.mPlanificadaID].npValor) {
+            SweetAlert.swal(
+        		"Planificacion UE! - Actividad",
+        		"No coincide la Meta Planifica y la distribuida, tiene que redistribuirla.",
+        		"error"
+    		);
+            return;
+		}
+		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
+	        SweetAlert.swal(
+	    		"Planificacion UE! - Actividad",
+	    		"No coincide la Meta Ajustada y la distribuida, tiene que redistribuirla.",
+	    		"error"
+			);
+	        return;
+		}
     	var tObj={};
     	tObj=Object.assign(tObj, $scope.objeto);
     	tObj.npFechainicio=toStringDate(tObj.npFechainicio);
@@ -1001,6 +1019,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.detallesPlanificada = null;
 				$scope.metaDistribucion("P");
 	            SweetAlert.swal("Planificacion UE! - Distribucion Planificada", "Guardado satisfactoriamente!", "success");
+	            if ($scope.divActividad || $scope.divSubTarea) {
+	            	$scope.detalles[$scope.mPlanificadaID].npValor = $scope.detalles[$scope.mPlanificadaID].cantidad;
+	            }
 	            $scope.divPlanificacionAnual = false;
 			} else {
 				SweetAlert.swal("Planificacion UE! - Distribucion Planificada", resp.mensajes.msg, "error");
@@ -1026,7 +1047,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.submitformMetaDistribucionAjustada = function(form) {
 		if ($scope.totalAjustada != ($scope.divActividad
 				? $scope.detalles[$scope.mAjustadaID].metavalor
-				: $scope.npTotalAjustado
+				: ($scope.divSubTarea
+					? $scope.detalles[$scope.mAjustadaID].cantidad
+					: $scope.npTotalAjustado
+				)
 			)) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Ajustada",
@@ -1043,6 +1067,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.detallesAjustada = null;
 				$scope.metaDistribucion("A");
 	            SweetAlert.swal("Planificacion UE! - Distribucion Ajustada", "Guardado satisfactoriamente!", "success");
+	            if ($scope.divActividad || $scope.divSubTarea) {
+	            	$scope.detalles[$scope.mAjustadaID].npValor = $scope.detalles[$scope.mAjustadaID].cantidad;
+	            }
 	            $scope.divPlanificacionAnual = false;
 			} else {
 				SweetAlert.swal("Planificacion UE! - Distribucion Ajustada", resp.mensajes.msg, "error");
@@ -1136,6 +1163,22 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformSubTarea = function(form) {
+		if ($scope.detalles[$scope.mPlanificadaID].cantidad != $scope.detalles[$scope.mPlanificadaID].npValor) {
+            SweetAlert.swal(
+        		"Planificacion UE! - Subtarea",
+        		"No coincide la Meta Planifica y la distribuida, tiene que redistribuirla.",
+        		"error"
+    		);
+            return;
+		}
+		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
+	        SweetAlert.swal(
+	    		"Planificacion UE! - Subtarea",
+	    		"No coincide la Meta Ajustada y la distribuida, tiene que redistribuirla.",
+	    		"error"
+			);
+	        return;
+		}
     	var tObj=$scope.objeto;
     	tObj.subtareaunidadacumulador=$scope.detalles;
     	PlanificacionUEFactory.guardarActividades("ST",tObj).then(function(resp){
@@ -1310,6 +1353,13 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.renovar = function() {
+		if ($scope.edicionMatrizPresupuesto) {
+			$scope.cargarMatrizPresupuestoTipo();
+		}
+		if ($scope.edicionMatrizMetas) {
+			$scope.cargarMatrizMetasTipo();
+		}
+		return;
 		var tObj = Object.assign($scope.unidad, $scope.cabecera);
 		tObj.detalle = $scope.detalle;
 		PlanificacionUEFactory.cargarMatrizPresupuesto(
@@ -1407,10 +1457,10 @@ function distribuirValor(
 		detalles[i].valor = 0;
 		detalles[i].porcentaje = 0;
 	}
-	if (presupuesto == 0 ) {
+/*	if (presupuesto == 0 ) {
 		return;
 	}
-
+*/
 	switch (fuente.unidadtiempo) {
 		case "ME": // Mensual
 			nPeriodo = 12;
@@ -1462,12 +1512,16 @@ function distribuirValor(
 			suma = suma + detalles[i].valor;
 		}
 		if (!divSubItem) {
-			detalles[i].porcentaje = Number(
-				(
-					(detalles[i].valor * 100)
-					/ presupuesto
-				).toFixed(2)
-			);
+			if (detalles[i].valor == 0 || presupuesto == 0) {
+				detalles[i].porcentaje = 0;
+			} else {
+				detalles[i].porcentaje = Number(
+					(
+						(detalles[i].valor * 100)
+						/ presupuesto
+					).toFixed(2)
+				);
+			}
 		}
 	}
 

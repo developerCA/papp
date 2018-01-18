@@ -520,6 +520,9 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		            	$scope.newobj = Object.assign({}, $scope.objetoPy);
 		        		$scope.newobj.npFechainicio = toStringDate($scope.newobj.npFechainicio);
 						$scope.newobj.npFechafin = toStringDate($scope.newobj.npFechafin);
+						$scope.newobj.presupuestototal = Number($scope.newobj.presupuestototal.replace(/[,]/g,""));
+						$scope.newobj.presupuestoinicial = Number($scope.newobj.presupuestoinicial.replace(/[,]/g,""));
+						$scope.newobj.presupuestoplanificado = Number($scope.newobj.presupuestoplanificado.replace(/[,]/g,""));
 	            		$scope.newobj.proyectometaTOs = Array.from($scope.objetolistaPy);
 						break;
 					case "AC":

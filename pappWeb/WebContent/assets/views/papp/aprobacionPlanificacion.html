@@ -144,7 +144,7 @@
 									        Tipo
 									    </label>
 									    <select class="form-control" name="tipo"
-									        ng-model="tipo" required ng-change="cargarMatrizPresupuestoTipo();">
+									        ng-model="tipo" required>
 									        <option value="P">Planificada</option>
 									        <option value="A">Ajustado</option>
 									    </select>
@@ -221,7 +221,11 @@
 									<td>{{ obj.subitemcodigo }}</td>
 									<td>{{ obj.descripcion }}</td>
 									<td style="text-align:right;">{{ obj.presupuesto | number : 2 }}</td>
-									<td>{{ obj.observacion }}</td>
+									<td>
+								        <input type="text" placeholder="Escriba una observacion"
+								        	class="form-control" name="{{'obcerv_'+$index}}"
+								        	ng-model="obj.observacion">
+									</td>
 								</tr>
 							</table>
 						</div>
@@ -273,7 +277,7 @@
 									        Tipo
 									    </label>
 									    <select class="form-control" name="tipo"
-									        ng-model="tipo" required ng-change="cargarMatrizMetasTipo();">
+									        ng-model="tipo" required>
 									        <option value="P">Planificada</option>
 									        <option value="A">Ajustado</option>
 									    </select>
@@ -352,7 +356,11 @@
 									<td>{{ obj.descripcion }}</td>
 									<td style="text-align:right;">{{ obj.meta | number : 2 }}</td>
 									<td>{{ obj.npMes }}</td>
-									<td>{{ obj.observacion }}</td>
+									<td>
+								        <input type="text" placeholder="Escriba una observacion"
+								        	class="form-control" name="{{'obcerv_'+$index}}"
+								        	ng-model="obj.observacion">
+									</td>
 								</tr>
 							</table>
 						</div>

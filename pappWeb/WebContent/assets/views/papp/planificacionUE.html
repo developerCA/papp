@@ -820,7 +820,7 @@
 											        Meta Planificada
 											        <span class="symbol required"></span>
 											    </label>
-											    <input type="text" placeholder="Escriba un meta planificada (no llega en el servicio)"
+											    <input type="text" placeholder="Escriba un meta planificada"
 											        class="form-control" name="npMetaPlanificada" ng-model="detalles[mPlanificadaID].cantidad"
 											        required ng-disabled="!editar">
 											    <span class="error text-small block"
@@ -1280,7 +1280,6 @@
 					<div class="panel-heading">
 						<h5 class="panel-title">SubTarea</h5>
 					</div>
-
 					<div class="row">
 						<div class="col-md-6">
 							<form name="Form" id="formSubTarea" novalidate ng-submit="form.submit(Form,'formSubTarea')">
@@ -2715,7 +2714,7 @@
 									        Tipo
 									    </label>
 									    <select class="form-control" name="tipo"
-									        ng-model="tipo" required ng-change="cargarMatrizPresupuestoTipo();">
+									        ng-model="tipo" required>
 									        <option value="P">Planificada</option>
 									        <option value="A">Ajustado</option>
 									    </select>
@@ -2841,7 +2840,7 @@
 									        Tipo
 									    </label>
 									    <select class="form-control" name="tipo"
-									        ng-model="tipo" required ng-change="cargarMatrizMetasTipo();">
+									        ng-model="tipo" required>
 									        <option value="P">Planificada</option>
 									        <option value="A">Ajustado</option>
 									    </select>

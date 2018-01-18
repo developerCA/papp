@@ -334,7 +334,6 @@
 						ng-submit="form.submit(FormProyecto)">
 						<div class="row">
 							<div class="col-md-6">
-
 								<div class="form-group"
 								    ng-class="{'has-error':FormProyecto.codigo.$dirty && FormProyecto.codigo.$invalid, 'has-success':FormProyecto.codigo.$valid}">
 								    <label class="control-label">
@@ -578,7 +577,7 @@
 								        Presupuesto Total
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" placeholder="Escriba un presupuesto total"
+								    <input type="text" placeholder="Escriba un presupuesto total" onfocus="this.select();"
 								        class="form-control" name="presupuestototal" ng-model="objetoPy.presupuestototal"
 								        required numericOnly style="text-align:right;" decimal="2">
 								    <span class="error text-small block"
@@ -597,7 +596,7 @@
 								        Presupuesto Inicial
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" placeholder="Escriba un presupuesto inicial"
+								    <input type="text" placeholder="Escriba un presupuesto inicial" onfocus="this.select();"
 								        class="form-control" name="presupuestoinicial" ng-model="objetoPy.presupuestoinicial"
 								        required numericOnly style="text-align:right;" decimal="2">
 								    <span class="error text-small block"
@@ -616,7 +615,7 @@
 								        Presupuesto Planificado
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" placeholder="Escriba un presupuesto planificado"
+								    <input type="text" placeholder="Escriba un presupuesto planificado" onfocus="this.select();"
 								        class="form-control" name="presupuestoplanificado" ng-model="objetoPy.presupuestoplanificado"
 								        required numericOnly style="text-align:right;" decimal="2">
 								    <span class="error text-small block"

@@ -123,6 +123,28 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 		});
 	};
 
+	$scope.renovar = function() {
+		if ($scope.edicionMatrizPresupuesto) {
+			$scope.cargarMatrizPresupuestoTipo();
+		}
+		if ($scope.edicionMatrizMetas) {
+			$scope.cargarMatrizMetasTipo();
+		}
+		return;
+		var tObj = Object.assign($scope.unidad, $scope.cabecera);
+		tObj.detalle = $scope.detalle;
+		PlanificacionUEFactory.cargarMatrizPresupuesto(
+			tObj
+		).then(function(resp){
+			console.log(resp);
+			if (resp.estado) {
+	            SweetAlert.swal("Planificacion UE! - Subitem", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+			}
+		});
+	}
+
 	$scope.editarMatrizPresupuesto = function(index) {
 		$scope.tipo = "P";
 		$scope.index = ((pagina - 1) * 5) + index;

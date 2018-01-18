@@ -25,42 +25,42 @@ app.controller('MatrizIndicadoresController', [ "$scope","$rootScope","$location
 	};
 
 	$scope.form = {
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
 
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
 
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
 
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
 
-		            } else {
-		                
-		            	MatrizIndicadoresFactory.guardar($scope.objeto).then(function(resp){
-	            			console.log(resp);
-		            		if (resp.estado){
-		        				 SweetAlert.swal("Matriz de Indicadores!", "Registro registrado satisfactoriamente!", "success");
-		        				 $location.path("/index");
-		        			 }else{
-			 		             SweetAlert.swal("Matriz de Indicadores!", resp.mensajes.msg, "error");
-		        				 
-		        			 }
-		        			
-		        		})
-		        		
-		            }
+            } else {
+                
+            	MatrizIndicadoresFactory.guardar($scope.objeto).then(function(resp){
+        			console.log(resp);
+            		if (resp.estado){
+        				 SweetAlert.swal("Matriz de Indicadores!", "Registro registrado satisfactoriamente!", "success");
+        				 $location.path("/index");
+        			 }else{
+	 		             SweetAlert.swal("Matriz de Indicadores!", resp.mensajes.msg, "error");
+        				 
+        			 }
+        			
+        		})
+        		
+            }
 
-		        }
+        }
     };
 } ]);
