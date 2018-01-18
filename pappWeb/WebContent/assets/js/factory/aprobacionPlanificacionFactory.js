@@ -20,13 +20,23 @@ app.factory("AprobacionPlanificacionFactory", ["Restangular", function (Restangu
 
             return Restangular.allUrl(url).getList();
         },
-/*
-        editarAprobarPlanificacion: function(id) {
-			var url = "planificacion/consultar/aprobar/"+id+"/0";
 
-		    return Restangular.allUrl(url).customGET();
-		},
-*/
+        cargarMatrizPresupuesto: function(unidad, ejerciciofiscal, tipoplanificacion) {
+            var url = "planificacion/consultar/matrizpresupuestos/" +
+        		"unidad=" + unidad +
+        		"&ejerciciofiscal=" + ejerciciofiscal+
+				"&tipoplanificacion=" + tipoplanificacion;
+            return Restangular.allUrl(url).customGET();
+        },
+
+        cargarMatrizMetas: function(unidad, ejerciciofiscal, tipoplanificacion) {
+            var url = "planificacion/consultar/matrizmetas/" +
+        		"unidad=" + unidad +
+        		"&ejerciciofiscal=" + ejerciciofiscal+
+				"&tipoplanificacion=" + tipoplanificacion;
+            return Restangular.allUrl(url).customGET();
+        },
+
         editarAprobarPlanificacion: function(
         		unidad,
         		ejerfiscalid,

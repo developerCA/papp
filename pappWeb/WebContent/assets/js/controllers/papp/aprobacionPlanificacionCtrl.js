@@ -10,6 +10,8 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 	$scope.data=[];
 	$scope.objeto={};
 	$scope.detalles=[];
+	$scope.edicionMatrizPresupuesto = false;
+	$scope.edicionMatrizMetas = false;
 
 	var pagina = 1;
 
@@ -82,7 +84,7 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 		   showCancelButton: true,
 		   confirmButtonColor: "#DD6B55",
 		   closeOnConfirm: true}, 
-	   function(isConfirm){ 
+	    function(isConfirm){ 
 		    if (!isConfirm) return;
 	   		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
 			    $scope.data[index].id,
@@ -96,16 +98,92 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 	};
 
 	$scope.editarAprobarAjustada=function(index){
-		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
-			$scope.data[index].id,
-			$rootScope.ejefiscal,
-			$scope.data[index].npacitividadunidad,
-			"A"
-		).then(function(resp){
-			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
-		})
+		index = ((pagina - 1) * 5) + index;
+		if ($scope.data[index].npestadopresupuesto != "Planificado") {
+			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado", "warning");
+			return;
+		}
+		SweetAlert.swal({
+		   title: "Aprobacion Planificacion?",
+		   text: "Seguro que desea Aprobar el Ajustado indicada",
+		   type: "warning",
+		   showCancelButton: true,
+		   confirmButtonColor: "#DD6B55",
+		   closeOnConfirm: true}, 
+	    function(isConfirm){ 
+		    if (!isConfirm) return;
+	   		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			    $scope.data[index].id,
+				$rootScope.ejefiscal,
+				$scope.data[index].npacitividadunidad,
+				"A"
+			).then(function(resp){
+				SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			})
+		});
 	};
 
+	$scope.editarMatrizPresupuesto = function(index) {
+		$scope.tipo = "P";
+		$scope.index = ((pagina - 1) * 5) + index;
+		$scope.cargarMatrizPresupuestoTipo();
+	}
+
+	$scope.editarMatrizMetas = function(index) {
+		$scope.tipo = "P";
+		$scope.index = ((pagina - 1) * 5) + index;
+		$scope.cargarMatrizMetasTipo();
+	}
+
+	$scope.cargarMatrizPresupuestoTipo = function() {
+		AprobacionPlanificacionFactory.cargarMatrizPresupuesto(
+			$scope.data[$scope.index].id,
+			$rootScope.ejefiscal,
+			$scope.tipo
+		).then(function(resp){
+			console.log(resp);
+			if (!resp.estado) return;
+			$scope.unidad = resp.json.unidad;
+			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
+			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
+			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
+			$scope.cabecera = resp.json.cabecera[0];
+			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			$scope.detalle = resp.json.detalle;
+			$scope.edicionMatrizPresupuesto = true;
+		});
+	}
+
+	$scope.cargarMatrizMetasTipo = function() {
+		AprobacionPlanificacionFactory.cargarMatrizMetas(
+			$scope.data[$scope.index].id,
+			$rootScope.ejefiscal,
+			$scope.tipo
+		).then(function(resp){
+			console.log(resp);
+			if (!resp.estado) return;
+			$scope.unidad = resp.json.unidad;
+			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
+			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
+			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
+			$scope.cabecera = resp.json.cabecera[0];
+			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			$scope.detalle = resp.json.detalle;
+			$scope.edicionMatrizMetas = true;
+		});
+	}
+
+	$scope.volver = function() {
+		$scope.edicionMatrizPresupuesto = false;
+		$scope.edicionMatrizMetas = false;
+	}
+/*
 	$scope.editarMatrizMetas=function(index){
 		AprobacionPlanificacionFactory.traer(id).then(function(resp){
 			if (resp.estado)
@@ -125,7 +203,7 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 		   console.log(resp.json);
 		})
 	};
-
+*/
 	$scope.form = {
         submit: function (form) {
             var firstError = null;

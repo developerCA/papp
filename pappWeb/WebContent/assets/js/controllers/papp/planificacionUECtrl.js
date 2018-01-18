@@ -70,6 +70,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			getData : function($defer, params) {
 				var orderedData = params.filter() ? $filter('filter')(
 						$scope.data, params.filter()) : $scope.data;
+				pagina = params.page();
 				$scope.lista = orderedData.slice(
 						(params.page() - 1) * params.count(), params
 								.page()
@@ -1275,12 +1276,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		});
 	}
 
-	$scope.editarMatrizPresupuesto = function(index) {
-		$scope.tipo = "P";
-		$scope.index = index;
-		$scope.cargarMatrizPresupuestoTipo();
-	}
-
 	$scope.renovar = function() {
 		var tObj = Object.assign($scope.unidad, $scope.cabecera);
 		tObj.detalle = $scope.detalle;
@@ -1301,7 +1296,41 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.edicionMatrizMetas = false;
 	}
 
+	$scope.editarMatrizPresupuesto = function(index) {
+		$scope.tipo = "P";
+		$scope.index = ((pagina - 1) * 5) + index;
+		$scope.cargarMatrizPresupuestoTipo();
+	}
+
 	$scope.cargarMatrizPresupuestoTipo = function() {
+		PlanificacionUEFactory.cargarMatrizPresupuesto(
+			$scope.data[$scope.index].id,
+			$rootScope.ejefiscal,
+			$scope.tipo
+		).then(function(resp){
+			console.log(resp);
+			if (!resp.estado) return;
+			$scope.unidad = resp.json.unidad;
+			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
+			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
+			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
+			$scope.cabecera = resp.json.cabecera[0];
+			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			$scope.detalle = resp.json.detalle;
+			$scope.edicionMatrizPresupuesto = true;
+		});
+	}
+
+	$scope.editarMatrizMetas = function(index) {
+		$scope.tipo = "P";
+		$scope.index = ((pagina - 1) * 5) + index;
+		$scope.cargarMatrizMetasTipo();
+	}
+
+	$scope.cargarMatrizMetasTipo = function() {
 		PlanificacionUEFactory.cargarMatrizMetas(
 			$scope.data[$scope.index].id,
 			$rootScope.ejefiscal,
@@ -1321,13 +1350,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			$scope.detalle = resp.json.detalle;
 			$scope.edicionMatrizMetas = true;
 		});
-	}
-
-
-	$scope.editarMatrizMetas = function(index) {
-		$scope.tipo = "P";
-		$scope.index = index;
-		$scope.cargarMatrizPresupuestoTipo();
 	}
 } ]);
 
