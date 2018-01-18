@@ -951,14 +951,13 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
-													            ng-change="calcularPorcientoP($index);distribucionCalcularTotales('P');">
-														</td>
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
+														</td><!-- ng-change="calcularPorcientoP($index);distribucionCalcularTotales('P');" -->
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="true">
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
 														</td>
 														<td>
 														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
@@ -1025,14 +1024,13 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
-													            ng-change="calcularPorcientoA($index);distribucionCalcularTotales('A');">
-														</td>
+													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'">
+														</td><!-- ng-change="calcularPorcientoA($index);distribucionCalcularTotales('A');" -->
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="true">
+													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'">
 														</td>
 														<td>
 														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
