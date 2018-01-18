@@ -47,7 +47,30 @@
            </div>
 
 		<div>
-			<table class="table table-striped">
+			<table ng-show="verOrganismo" class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Organismo C&oacute;digo</th>
+						<th>Organismo Nombre</th>
+						<th>C&oacute;digo</th>
+						<th>Nombre</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="obj in data">
+					<td><a class="btn btn-sm btn-primary"
+						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+							class="fa fa-check"></i></a></td>
+                    <td>{{obj.npcodigoorganismo}}</td>
+                    <td>{{obj.npnombreorganismo}}</td>
+                    <td>{{obj.codigo}}</td>
+                    <td>{{obj.nombre}}</td>
+                    <td>{{obj.npestado}}</td>
+				</tr>
+			</table>
+
+			<table ng-show="!verOrganismo" class="table table-striped">
 				<thead>
 					<tr>
 						<th></th>

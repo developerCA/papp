@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalOrganismoController', ["$scope", "$rootScope", "prestamo", "$uibModalInstance", "$filter", "ngTableParams", "organismoFactory",
-	function ($scope, $rootScope, prestamo, $uibModalInstance, $filter, ngTableParams, organismoFactory) {
+app.controller('ModalOrganismoController', ["$scope", "$rootScope", "prestamo", "mostrarOrganismo", "$uibModalInstance", "$filter", "ngTableParams", "organismoFactory",
+	function ($scope, $rootScope, prestamo, mostrarOrganismo, $uibModalInstance, $filter, ngTableParams, organismoFactory) {
 
 	$scope.nombreFiltro = null;
 	$scope.codigoFiltro = null;
@@ -9,11 +9,15 @@ app.controller('ModalOrganismoController', ["$scope", "$rootScope", "prestamo", 
     $scope.edicion = false;
     $scope.objeto = {};
     $scope.data = [];
+	$scope.verOrganismo = false;
 
     $scope.pagina = 1;
     $scope.aplicafiltro=false;
 
     $scope.init = function() {
+    	if (mostrarOrganismo) {
+    		$scope.verOrganismo = true;
+    	}
     	if (prestamo) {
     		organismoFactory.prestamo();
     	}

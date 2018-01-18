@@ -791,6 +791,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			resolve: {
 				prestamo: function() {
 					return true;
+				},
+				mostrarOrganismo: function() {
+					return true;
 				}
 			}
 		});
@@ -915,7 +918,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
         			$scope.cargarPlanificacionAnual($scope.planificacionUE);
         		} else {
         			//el resto
-        			$scope.nodeActivo.nodePadre.iscargado = false;
+        			$scope.nodeActivo.nodePadre.nodePadre.iscargado = false;
         			$scope.cargarHijos($scope.nodeActivo.nodePadre.nodePadre);
         		}
             }
@@ -940,6 +943,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	            SweetAlert.swal("Planificacion UE! - Actividad", "Registro registrado satisfactoriamente!", "success");
 			} else {
 				SweetAlert.swal("Planificacion UE! - Actividad", resp.mensajes.msg, "error");
+	    		$scope.divPlanificacionAnual = false;
 			}
 		})
 	}
@@ -960,9 +964,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformMetaDistribucionPlanificada = function(form) {
-		if ($scope.divActividad) {
+		if ($scope.divActividad || $scope.divSubTarea) {
 			var porcentaje = 0;
-			for (var i = 0; i < 11; i++) {
+			for (var i = 0; i < 12; i++) {
 				porcentaje = porcentaje + $scope.detallesPlanificada[i].porcentaje;
 			}
 			if (porcentaje != 100) {
@@ -976,7 +980,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		}
 		if ($scope.totalPlanificada != ($scope.divActividad
 				? $scope.detalles[$scope.mPlanificadaID].metavalor
-				: $scope.npTotalPlanificado
+				: ($scope.divSubTarea
+					? $scope.detalles[$scope.mPlanificadaID].cantidad
+					: $scope.npTotalPlanificado
+				)
 			)) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Planificada",
@@ -997,6 +1004,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	            $scope.divPlanificacionAnual = false;
 			} else {
 				SweetAlert.swal("Planificacion UE! - Distribucion Planificada", resp.mensajes.msg, "error");
+	    		$scope.divPlanificacionAnual = false;
 			}
 		})
 	}
@@ -1038,6 +1046,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	            $scope.divPlanificacionAnual = false;
 			} else {
 				SweetAlert.swal("Planificacion UE! - Distribucion Ajustada", resp.mensajes.msg, "error");
+	    		$scope.divPlanificacionAnual = false;
 			}
 		})
 	}
@@ -1070,6 +1079,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	            $scope.divPlanificacionAnual = false;
 			} else {
 				SweetAlert.swal("Planificacion UE! - Distribucion Devengo", resp.mensajes.msg, "error");
+	    		$scope.divPlanificacionAnual = false;
 			}
 		})
 	}
@@ -1091,6 +1101,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	            SweetAlert.swal("Planificacion UE! - Subactividad", "Registro registrado satisfactoriamente!", "success");
 			} else {
 				SweetAlert.swal("Planificacion UE! - Subactividad", resp.mensajes.msg, "error");
+	    		$scope.divPlanificacionAnual = false;
 			}
 		})
 	}
@@ -1113,6 +1124,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	            SweetAlert.swal("Planificacion UE! - Tarea", "Registro registrado satisfactoriamente!", "success");
 			} else {
 				SweetAlert.swal("Planificacion UE! - Tarea", resp.mensajes.msg, "error");
+	    		$scope.divPlanificacionAnual = false;
 			}
 		})
 	}
@@ -1134,6 +1146,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	            SweetAlert.swal("Planificacion UE! - Subtarea", "Registro registrado satisfactoriamente!", "success");
 			} else {
 				SweetAlert.swal("Planificacion UE! - Subtarea", resp.mensajes.msg, "error");
+	    		$scope.divPlanificacionAnual = false;
 			}
 		})
 	}
@@ -1155,6 +1168,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	            SweetAlert.swal("Planificacion UE! - Item", "Registro registrado satisfactoriamente!", "success");
 			} else {
 				SweetAlert.swal("Planificacion UE! - Item", resp.mensajes.msg, "error");
+	    		$scope.divPlanificacionAnual = false;
 			}
 		})
 	}
@@ -1192,6 +1206,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	            SweetAlert.swal("Planificacion UE! - Subitem", "Registro registrado satisfactoriamente!", "success");
 			} else {
 				SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+	    		$scope.divPlanificacionAnual = false;
 			}
 		})
 	}

@@ -87,7 +87,7 @@
 				</div>
 
 <div ng-show="edicion">
-				<div ng-show="divPlanificacionAnual && !divActividad" class="panel-body">
+				<div ng-show="divPlanificacionAnual && !divActividad && !divSubActividad && !divTarea && !divSubTarea && !divItem && !divSubItem" class="panel-body">
 					<div class="panel-heading">
 						<h5 class="panel-title">
 							Planificaci&oacute;n Anual
@@ -1645,7 +1645,7 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="true">
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
 														</td>
 														<td>
 														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
