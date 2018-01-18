@@ -146,7 +146,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 					return "Aprobar";
 				},
 				subtitulo : function() {
-					return "CUR";
+					return "Numero de CUR";
 				}
 			}
 		});

@@ -216,7 +216,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				distribuirValor(
 					$scope.objetoPlanificada,
 					$scope.detallesPlanificada,
-					$scope.totalPlanificada
+					$scope.totalPlanificada,
+					$scope.detalles[$scope.mPlanificadaID].cantidad,
+					$scope.divActividad,
+					$scope.divSubItem
 				);
 				break;
 			case "A": //Ajustada
@@ -237,7 +240,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				distribuirValor(
 					$scope.objetoAjustada,
 					$scope.detallesAjustada,
-					$scope.totalAjustada
+					$scope.totalAjustada,
+					$scope.detalles[$scope.mAjustadaID].cantidad,
+					$scope.divActividad,
+					$scope.divSubItem
 				);
 				break;
 			case "D": //Devengo
@@ -255,7 +261,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 */				distribuirValor(
 					$scope.objetoDevengo,
 					$scope.detallesDevengo,
-					$scope.totalDevengo
+					$scope.totalDevengo,
+					0,
+					$scope.divActividad,
+					$scope.divSubItem
 				);
 				break;
 			default:
@@ -1356,7 +1365,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 function distribuirValor(
 	fuente,
 	detalles,
-	total
+	total,
+	cantidad,
+	divActividad,
+	divSubItem
 ) {
 	var presupuesto = total;
 	var nPeriodo = 0;
@@ -1420,14 +1432,38 @@ function distribuirValor(
 			}
 			suma = suma + detalles[i].valor;
 		}
-		detalles[i].porcentaje = Number(
-			(
-				(detalles[i].valor * 100)
-				/ presupuesto
-			).toFixed(2)
-		);
+		if (!divSubItem) {
+			detalles[i].porcentaje = Number(
+				(
+					(detalles[i].valor * 100)
+					/ presupuesto
+				).toFixed(2)
+			);
+		}
 	}
-	//console.log("Detalles:", detalles);
+
+	if (!divActividad) {
+		return;
+	}
+	valor = Number(
+		cantidad / nPeriodo
+	);
+	valorResto = valor - valor.toFixed(2);
+	suma = 0;
+	resto = 0;
+	for (var i = (intervalo - 1); i < 12; i = i + intervalo) {
+		if (i == 11) {
+			detalles[11].valor = Number((cantidad - suma).toFixed(2));
+		} else {
+			detalles[i].valor = Number(valor.toFixed(2));
+			resto = resto + valorResto;
+			if (resto >= 0.01) {
+				detalles[i].valor = Number(detalles[i].valor + Number(resto.toFixed(2)));
+				resto = resto - resto.toFixed(2);
+			}
+			suma = suma + detalles[i].valor;
+		}
+	}
 }
 
 function distribucionCalcularTotal(

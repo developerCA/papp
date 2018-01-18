@@ -19,7 +19,6 @@
 			<div class="panel panel-white">
 
 				<div class="panel-body" ng-show="!edicion">
-
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -169,7 +168,7 @@
 							<tr ng-repeat="obj in data">
 								<td>
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Modificar" ng-click="editar(obj.id)">
+										uib-tooltip="Modificar" ng-click="editar($index)">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
@@ -226,7 +225,6 @@
 				</div>
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
 						<h5 class="panel-title">Orden de Gasto</h5>
 					</div>
@@ -235,7 +233,6 @@
 						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-6">
-								
 								<div class="form-group"
 								    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
 								    <label class="control-label">
@@ -261,10 +258,10 @@
 								        Descripci&oacute;n
 								        <span class="symbol required"></span>
 								    </label>
-								    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
+								    <textarea name="descripcion" rows="5" style="width:100%"
+								    	placeholder="Escriba un descripci&oacute;n"
 								        class="form-control" ng-model="objeto.descripcion"
-								        required>
-								    </textarea>
+								        required ng-disabled="noeditar"></textarea>
 								    <span class="error text-small block"
 								        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
 								        Incorrecto
@@ -287,7 +284,7 @@
 								            ng-model="objeto.npunidadcodigo">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
-								                ng-click="abrirUnidadCodigo()">
+								                ng-click="abrirUnidadCodigo()" ng-disabled="noeditar">
 								                <i class="fa fa-search"></i>
 								                Seleccione
 								            </button>
@@ -334,7 +331,7 @@
 								            ng-model="objeto.npproveedorcodigo">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
-								                ng-click="abrirProveedorCodigo()">
+								                ng-click="abrirProveedorCodigo()" ng-disabled="noeditar">
 								                <i class="fa fa-search"></i>
 								                Seleccione
 								            </button>
@@ -381,7 +378,7 @@
 								            ng-model="objeto.npcodigocertificacion">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
-								                ng-click="abrirCertificacionCodigo()">
+								                ng-click="abrirCertificacionCodigo()" ng-disabled="noeditar">
 								                <i class="fa fa-search"></i>
 								                Seleccione
 								            </button>
@@ -409,7 +406,7 @@
 								            ng-model="objeto.npcodigoregistro">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
-								                ng-click="abrirClaseRegistroCodigo()">
+								                ng-click="abrirClaseRegistroCodigo()" ng-disabled="noeditar">
 								                <i class="fa fa-search"></i>
 								                Seleccione
 								            </button>
@@ -532,7 +529,7 @@
 								            ng-model="objeto.npcodigotipodocumento">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
-								                ng-click="abrirTipoDocumentoCodigo()">
+								                ng-click="abrirTipoDocumentoCodigo()" ng-disabled="noeditar">
 								                <i class="fa fa-search"></i>
 								                Seleccione
 								            </button>
@@ -613,7 +610,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un n&uacute;mero documento"
 								        class="form-control" name="numerodocumento" ng-model="objeto.numerodocumento"
-								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar">
+								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar && noeditar">
 								    <span class="error text-small block"
 								        ng-if="Form.numerodocumento.$dirty && Form.numerodocumento.$invalid">
 								        Incorrecto
@@ -632,7 +629,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un contrato id"
 								        class="form-control" name="contratoid" ng-model="objeto.contratoid"
-								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar">
+								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar && noeditar">
 								    <span class="error text-small block"
 								        ng-if="Form.contratoid.$dirty && Form.contratoid.$invalid">
 								        Incorrecto
@@ -670,7 +667,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
 								        class="form-control" name="numerooficio" ng-model="objeto.numerooficio"
-								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar">
+								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar && noeditar">
 								    <span class="error text-small block"
 								        ng-if="Form.numerooficio.$dirty && Form.numerooficio.$invalid">
 								        Incorrecto
@@ -688,7 +685,7 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <select class="form-control" name="estado"
-								        ng-model="objeto.estado" required>
+								        ng-model="objeto.estado" required ng-disabled="noeditar">
 								        <option value="RE" ng-selected="selected">Registrado</option>
 								        <option value="EL">Eliminado</option>
 								        <option value="SO">Solicitado</option>
