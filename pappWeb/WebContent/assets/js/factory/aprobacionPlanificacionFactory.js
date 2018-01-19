@@ -38,22 +38,30 @@ app.factory("AprobacionPlanificacionFactory", ["Restangular", function (Restangu
         },
 
         editarAprobarPlanificacion: function(
-        		unidad,
-        		ejerfiscalid,
-        		nivelactividadunidadid,
-        		tipo
-    		) {
-    			var url = "planificacion/consultar/aprobar/" +
-    				"unidad=" + unidad +
-    				"&nivelactividadejerfiscalid=" + ejerfiscalid +
-    				"&nivelactividadunidadid=" + nivelactividadunidadid + 
-    				"&tipo=" + tipo;
+    		unidad,
+    		ejerfiscalid,
+    		nivelactividadunidadid,
+    		tipo
+		) {
+			var url = "planificacion/consultar/aprobar/" +
+				"unidad=" + unidad +
+				"&nivelactividadejerfiscalid=" + ejerfiscalid +
+				"&nivelactividadunidadid=" + nivelactividadunidadid + 
+				"&tipo=" + tipo;
 
-    		    return Restangular.allUrl(url).customGET();
-    		},
+		    return Restangular.allUrl(url).customGET();
+		},
 
-        guardar: function (objeto) {
-            var url = "planificacion/planificacion/";
+        guardar: function(
+    		tipo,
+    		objeto
+		) {
+            var url = "planificacion/";
+            if (tipo == "P") {
+            	url += "matrizpresupuesto/";
+            } else {
+            	url += "matrizmetas/";
+            }
             return Restangular.allUrl(url).customPOST(objeto);
         },
     }

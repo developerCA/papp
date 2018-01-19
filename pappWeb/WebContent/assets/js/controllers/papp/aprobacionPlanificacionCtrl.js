@@ -78,13 +78,13 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 			return;
 		}
 		SweetAlert.swal({
-		   title: "Aprobacion Planificacion?",
-		   text: "Seguro que desea Aprobar la Planificacion indicada",
-		   type: "warning",
-		   showCancelButton: true,
-		   confirmButtonColor: "#DD6B55",
-		   closeOnConfirm: true}, 
-	    function(isConfirm){ 
+			title: "Aprobacion Planificacion?",
+		    text: "Seguro que desea Aprobar la Planificacion indicada",
+		    type: "warning",
+		    showCancelButton: true,
+		    confirmButtonColor: "#DD6B55",
+		    closeOnConfirm: true
+	    }, function(isConfirm){ 
 		    if (!isConfirm) return;
 	   		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
 			    $scope.data[index].id,
@@ -205,67 +205,28 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 		$scope.edicionMatrizPresupuesto = false;
 		$scope.edicionMatrizMetas = false;
 	}
-/*
-	$scope.editarMatrizMetas=function(index){
-		AprobacionPlanificacionFactory.traer(id).then(function(resp){
-			if (resp.estado)
-			   $scope.objeto=resp.json.aprobacionPlanificacion;
-		   $scope.detalles=resp.json.details;
-		   $scope.edicion=true;
-		   console.log(resp.json);
+
+	$scope.guardar = function(tipo) {
+		var tObj =  Object.assign({}, $scope.cabecera, $scope.unidad)
+		tObj.detalle = $scope.detalle;
+		AprobacionPlanificacionFactory.guardar(
+			tipo,
+			tObj
+		).then(function(resp){
+			//console.log(resp.json);
+			if (!resp.estado) {
+				SweetAlert.swal(
+					"Aprobacion Planificacion!",
+					resp.mensajes.msg,
+					"error"
+				);
+				return;
+			}
+			SweetAlert.swal(
+				"Aprobacion Planificacion!",
+				"Se grabo correctamente.",
+				"success"
+			);
 		})
 	};
-
-	$scope.editaMatrizPresupuestos=function(index){
-		AprobacionPlanificacionFactory.traer(id).then(function(resp){
-			if (resp.estado)
-			   $scope.objeto=resp.json.aprobacionPlanificacion;
-		   $scope.detalles=resp.json.details;
-		   $scope.edicion=true;
-		   console.log(resp.json);
-		})
-	};
-*/
-	$scope.form = {
-        submit: function (form) {
-            var firstError = null;
-            if (form.$invalid) {
-                var field = null, firstError = null;
-                for (field in form) {
-                    if (field[0] != '$') {
-                        if (firstError === null && !form[field].$valid) {
-                            firstError = form[field].$name;
-                        }
-
-                        if (form[field].$pristine) {
-                            form[field].$dirty = true;
-                        }
-                    }
-                }
-                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                return;
-            } else {
-            	$scope.objeto.details=$scope.detalles;
-            	AprobacionPlanificacionFactory.guardar($scope.objeto).then(function(resp){
-        			 if (resp.estado){
-        				 form.$setPristine(true);
-	 		             $scope.edicion=false;
-	 		             $scope.objeto={};
-	 		             $scope.detalles=[];
-	 		             $scope.limpiar();
-	 		             SweetAlert.swal("Clase de Registro!", "Registro registrado satisfactoriamente!", "success");
-        			 }else{
-	 		             SweetAlert.swal("Clase de Registro!", resp.mensajes.msg, "error");
-        			 }
-        		})
-            }
-
-        },
-        reset: function (form) {
-            $scope.myModel = angular.copy($scope.master);
-            form.$setPristine(true);
-            $scope.edicion=false;
-            $scope.objeto={};
-        }
-    };
 } ]);
