@@ -126,7 +126,7 @@ public class PlanificacionController {
 					}
 					else{
 						UtilSession.planificacionServicio.transCrearModificarObjetivo(objetivoTO);
-						id=objetivoTO.getId().toString();
+						id=objetivoTO.getNpid().toString();
 						jsonObject.put("objetivo", (JSONObject)JSONSerializer.toJSON(objetivoTO,objetivoTO.getJsonConfig()));
 					}
 				}
@@ -148,7 +148,7 @@ public class PlanificacionController {
 					}
 					else{
 						UtilSession.planificacionServicio.transCrearModificarObjetivo(objetivoTO);
-						id=objetivoTO.getId().toString();
+						id=objetivoTO.getNpid().toString();
 						jsonObject.put("objetivo", (JSONObject)JSONSerializer.toJSON(objetivoTO,objetivoTO.getJsonConfig()));
 					}
 				}
@@ -190,7 +190,7 @@ public class PlanificacionController {
 				}
 				else{
 					UtilSession.planificacionServicio.transCrearModificarPlannacional(plannacionalTO);
-					id=plannacionalTO.getId().toString();
+					id=plannacionalTO.getNpid().toString();
 					jsonObject.put("plannacional", (JSONObject)JSONSerializer.toJSON(plannacionalTO,plannacionalTO.getJsonConfig()));
 				}
 			}
@@ -228,7 +228,7 @@ public class PlanificacionController {
 				}
 				else{
 					UtilSession.planificacionServicio.transCrearModificarIndicador(indicadorTO);
-					id=indicadorTO.getId().toString();
+					id=indicadorTO.getNpid().toString();
 					jsonObject.put("indicador", (JSONObject)JSONSerializer.toJSON(indicadorTO,indicadorTO.getJsonConfig()));
 				}
 			}
@@ -267,7 +267,7 @@ public class PlanificacionController {
 				else{
 					log.println("va a grabar: " + programaTO.getId());
 					UtilSession.planificacionServicio.transCrearModificarPrograma(programaTO);
-					id=programaTO.getId().toString();
+					id=programaTO.getNpid().toString();
 					jsonObject.put("programa", (JSONObject)JSONSerializer.toJSON(programaTO,programaTO.getJsonConfig()));
 				}
 			}
@@ -277,7 +277,7 @@ public class PlanificacionController {
 				log.println("programa: " + subprogramaTO.getPadre());
 				accion = (subprogramaTO.getId()==null)?"crear":"actualizar";
 				UtilSession.planificacionServicio.transCrearModificarSubprograma(subprogramaTO);
-				id=subprogramaTO.getId().toString();
+				id=subprogramaTO.getNpid().toString();
 				jsonObject.put("subprograma", (JSONObject)JSONSerializer.toJSON(subprogramaTO,subprogramaTO.getJsonConfig()));
 			}
 			
@@ -295,7 +295,7 @@ public class PlanificacionController {
 				log.println("fecha fin: " + proyectoTO.getFechafin());
 				log.println("padre: " + proyectoTO.getPadre());
 				UtilSession.planificacionServicio.transCrearModificarProyecto(proyectoTO);
-				id=proyectoTO.getId().toString();
+				id=proyectoTO.getNpid().toString();
 				jsonObject.put("proyecto", (JSONObject)JSONSerializer.toJSON(proyectoTO,proyectoTO.getJsonConfig()));
 			}
 			
@@ -309,7 +309,7 @@ public class PlanificacionController {
 					log.println("bandera " + nivel.getNpbandera());
 				}
 				UtilSession.planificacionServicio.transCrearModificarActividad(actividadTO);
-				id=actividadTO.getId().toString();
+				id=actividadTO.getNpid().toString();
 				jsonObject.put("actividad", (JSONObject)JSONSerializer.toJSON(actividadTO,actividadTO.getJsonConfig()));
 			}
 			
@@ -318,7 +318,7 @@ public class PlanificacionController {
 				SubactividadTO subactividadTO = gson.fromJson(new StringReader(objeto), SubactividadTO.class);
 				accion = (subactividadTO.getId()==null)?"crear":"actualizar";
 				UtilSession.planificacionServicio.transCrearModificarSubactividad(subactividadTO);
-				id=subactividadTO.getId().toString();
+				id=subactividadTO.getNpid().toString();
 				jsonObject.put("subactividad", (JSONObject)JSONSerializer.toJSON(subactividadTO,subactividadTO.getJsonConfig()));
 			}
 			//Actividad unidad (Planificacion anual - modificar actividad)
@@ -343,7 +343,7 @@ public class PlanificacionController {
 				//Si la ponderacion guardada mas la ingresada suma menos o igual a 100 la graba
 				if((ponderacion.doubleValue()+subactividadunidadTO.getPonderacion().doubleValue()-subactividadunidadTO.getNpponderacion())<=100){
 					UtilSession.planificacionServicio.transCrearModificarSubactividadunidad(subactividadunidadTO);
-					id=subactividadunidadTO.getId().toString();
+					id=subactividadunidadTO.getNpid().toString();
 					jsonObject.put("subactividadunidad", (JSONObject)JSONSerializer.toJSON(subactividadunidadTO,subactividadunidadTO.getJsonConfig()));
 				}
 				else{
@@ -386,8 +386,16 @@ public class PlanificacionController {
 				//Si la ponderacion guardada mas la ingresada suma menos o igual a 100 la graba
 				if((ponderacion.doubleValue()+subtareaunidadTO.getPonderacion().doubleValue()-subtareaunidadTO.getNpponderacion())<=100){
 					UtilSession.planificacionServicio.transCrearModificarSubtareaunidad(subtareaunidadTO);
-					id=subtareaunidadTO.getId().toString();
-					jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfig()));
+					subtareaunidadTO.setId(subtareaunidadTO.getNpid());
+					id=subtareaunidadTO.getNpid().toString();
+					jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfigeditar()));
+					//traigo los datos de subtareaunidadacumulador
+					SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
+					subtareaunidadacumuladorTO.getId().setId(subtareaunidadTO.getId());
+					Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
+					for(SubtareaunidadacumuladorTO subtareaunidadacumuladorTO2:subtareaunidadacumuladorTOs)
+						subtareaunidadacumuladorTO2.setNpValor(subtareaunidadacumuladorTO2.getCantidad());
+					jsonObject.put("subtareaunidadacumulador", (JSONArray)JSONSerializer.toJSON(subtareaunidadacumuladorTOs,subtareaunidadacumuladorTO.getJsonConfig()));
 				}
 				else{
 					mensajes.setMsg(MensajesWeb.getString("advertencia.ponderacion"));
@@ -400,7 +408,7 @@ public class PlanificacionController {
 				ItemunidadTO itemunidadTO = gson.fromJson(new StringReader(objeto), ItemunidadTO.class);
 				accion = (itemunidadTO.getId()==null)?"crear":"actualizar";
 				UtilSession.planificacionServicio.transCrearModificarItemunidad(itemunidadTO);
-				id=itemunidadTO.getId().toString();
+				id=itemunidadTO.getNpid().toString();
 				jsonObject.put("itemunidad", (JSONObject)JSONSerializer.toJSON(itemunidadTO,itemunidadTO.getJsonConfig()));
 			}
 
@@ -424,6 +432,7 @@ public class PlanificacionController {
 				if(!existesubiten){
 					UtilSession.planificacionServicio.transCrearModificarSubitemunidad(subitemunidadTO);
 					id=subitemunidadTO.getNpid().toString();
+					subitemunidadTO.setId(subitemunidadTO.getNpid());
 					jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				}
 				else{
@@ -986,7 +995,6 @@ public class PlanificacionController {
 				subtareaunidadTO.setPadre(Long.valueOf(parameters.get("nivelactividad")));
 				subtareaunidadTO.setNpponderacion(subtareaunidadTO.getPonderacion());
 				jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfigeditar()));
-				//NOTA INDICAR EN DONDE SE GUARDA LA UNIDAD MEDIDA
 				//traigo los datos de subtareaunidadacumulador
 				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
 				subtareaunidadacumuladorTO.getId().setId(id);
