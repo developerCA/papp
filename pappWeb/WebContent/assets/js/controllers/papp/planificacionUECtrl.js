@@ -1180,7 +1180,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	    	PlanificacionUEFactory.guardarActividades("ST",tObj).then(function(resp){
 	    		$scope.divPlanificacionAnual = false;
 				if (resp.estado) {
-					$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
+					//$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
+					$scope.objeto.id = resp.json.subtareaunidad.id;
+					for (var i = 0; i < $scope.detalles.length; i++) {
+						$scope.detalles[i].id.id = resp.json.subtareaunidad.id;
+					}
 					$scope.esnuevo = false;
 				} else {
 					SweetAlert.swal("Planificacion UE! - Subtarea", resp.mensajes.msg, "error");

@@ -96,11 +96,20 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 			})
 		});
 	};
+	
+	$scope.editadoObservacion = function(index) {
+		//index = ((pagina - 1) * 5) + index;
+		$scope.detalle[index].modificado = true;
+	}
 
 	$scope.editarAprobarAjustada=function(index){
 		index = ((pagina - 1) * 5) + index;
-		if ($scope.data[index].npestadopresupuesto != "Planificado") {
-			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado", "warning");
+		if ($scope.data[index].npestadopresupuesto != "Aprobado") {
+			SweetAlert.swal(
+				"Aprobacion Planificacion!",
+				"Solo se puede aprobar el Ajustado si el Planificado esta Aprobado",
+				"warning"
+			);
 			return;
 		}
 		SweetAlert.swal({
@@ -207,8 +216,13 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 	}
 
 	$scope.guardar = function(tipo) {
-		var tObj =  Object.assign({}, $scope.cabecera, $scope.unidad)
-		tObj.detalle = $scope.detalle;
+		var tObj =  [];
+		for (var i = 0; i < $scope.detalle.length; i++) {
+			if ($scope.detalle[i].modificado) {
+				tObj.push($scope.detalle[i].modificado);
+				$scope.detalle[i].modificado=false;
+			}
+		}
 		AprobacionPlanificacionFactory.guardar(
 			tipo,
 			tObj

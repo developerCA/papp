@@ -224,7 +224,7 @@
 									<td>
 								        <input type="text" placeholder="Escriba una observacion"
 								        	class="form-control" name="{{'obcerv_'+$index}}"
-								        	ng-model="obj.observacion">
+								        	ng-model="obj.observacion" ng-change="editadoObservacion($index);">
 									</td>
 								</tr>
 							</table>
@@ -359,7 +359,7 @@
 									<td>
 								        <input type="text" placeholder="Escriba una observacion"
 								        	class="form-control" name="{{'obcerv_'+$index}}"
-								        	ng-model="obj.observacion">
+								        	ng-model="obj.observacion" ng-change="editadoObservacion($index);">
 									</td>
 								</tr>
 							</table>

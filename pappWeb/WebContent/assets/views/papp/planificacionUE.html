@@ -917,10 +917,15 @@
 											Planificado
 										</a>
 										&nbsp;
+										<a class="btn btn-sm btn-default"  uib-tooltip="Copiar Planificado a Ajustado"
+											ng-click="copiarPlanificadoAjustado();">
+											<i class="fa ti-hand-point-right"></i>
+										</a>
+										&nbsp;
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
 											Ajustado
 										</a>
-										&nbsp;Unidad Tipo:
+										<br>Unidad Tipo:
 									    <select name="periodoPlanificado" ng-disabled="!editar"
 									        ng-model="objetoPlanificada.unidadtiempo" ng-change="distribucionValores('P');">
 											<option value="ME">Mensual</option>
@@ -1607,10 +1612,15 @@
 											Planificado
 										</a>
 										&nbsp;
+										<a class="btn btn-sm btn-default"  uib-tooltip="Copiar Planificado a Ajustado"
+											ng-click="copiarPlanificadoAjustado();">
+											<i class="fa ti-hand-point-right"></i>
+										</a>
+										&nbsp;
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionAjustado();">
 											Ajustado
 										</a>
-										&nbsp;Unidad Tipo:
+										<br>Unidad Tipo:
 									    <select name="periodoPlanificado" ng-disabled="!editar"
 									        ng-model="objetoPlanificada.unidadtiempo" ng-change="distribucionValores('P');">
 											<option value="ME">Mensual</option>
@@ -2485,7 +2495,7 @@
 										<a class="btn btn-sm btn-default" ng-click="editarDistribucionDevengo();">
 											Devengo
 										</a>
-										&nbsp;Unidad Tipo:
+										<br>Unidad Tipo:
 									    <select name="periodoPlanificado" ng-disabled="!editar"
 									        ng-model="objetoPlanificada.unidadtiempo" ng-change="distribucionValores('P');">
 											<option value="ME">Mensual</option>
