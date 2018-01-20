@@ -1,18 +1,16 @@
 package ec.com.papp.web.planificacion.controller;
 
 import java.io.StringReader;
+import java.lang.reflect.Type;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
 
 import org.hibernate.tools.commons.to.OrderBy;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,16 +20,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import ec.com.papp.administracion.to.ObraTO;
 import ec.com.papp.administracion.to.OrganismoTO;
-import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.estructuraorganica.to.UnidadTO;
 import ec.com.papp.planificacion.id.ActividadunidadID;
-import ec.com.papp.planificacion.id.CronogramalineaID;
 import ec.com.papp.planificacion.id.ProyectometaID;
 import ec.com.papp.planificacion.id.SubactividadunidadID;
-import ec.com.papp.planificacion.id.SubitemunidadacumuladorID;
 import ec.com.papp.planificacion.to.ActividadTO;
 import ec.com.papp.planificacion.to.ActividadunidadTO;
 import ec.com.papp.planificacion.to.ActividadunidadacumuladorTO;
@@ -65,6 +61,9 @@ import ec.com.papp.web.planificacion.util.ConsultasUtil;
 import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 /**
  * @autor: jcalderon
@@ -386,6 +385,7 @@ public class PlanificacionController {
 				//Si la ponderacion guardada mas la ingresada suma menos o igual a 100 la graba
 				if((ponderacion.doubleValue()+subtareaunidadTO.getPonderacion().doubleValue()-subtareaunidadTO.getNpponderacion())<=100){
 					UtilSession.planificacionServicio.transCrearModificarSubtareaunidad(subtareaunidadTO);
+					log.println("subtarea id: " + subtareaunidadTO.getId());
 					subtareaunidadTO.setId(subtareaunidadTO.getNpid());
 					id=subtareaunidadTO.getNpid().toString();
 					jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfigeditar()));
@@ -452,25 +452,21 @@ public class PlanificacionController {
 			
 			//observacion matriz presupuesto (Planificacion anual - matriz presupuesto)
 			else if(clase.equals("matrizpresupuesto")){
-				MatrizDetalle matrizDetalle = gson.fromJson(new StringReader(objeto), MatrizDetalle.class);
+				Type matriz = new TypeToken<List<MatrizDetalle>>(){}.getType();
+		    	Collection<MatrizDetalle> matrizDetalles = gson.fromJson(new StringReader(objeto), matriz);
+				//MatrizDetalle matrizDetalle = gson.fromJson(new StringReader(objeto), MatrizDetalle.class);
 				accion = "actualizar";
-				SubitemunidadacumuladorTO subitemunidadacumuladorTO=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladorTO(new SubitemunidadacumuladorID(matrizDetalle.getSubitacumid(), matrizDetalle.getSubitacumacumid()));
-				subitemunidadacumuladorTO.setObservacion(matrizDetalle.getObservacion());
-				UtilSession.planificacionServicio.transCrearModificarSubitemunidadacumulador(subitemunidadacumuladorTO);
-				id=subitemunidadacumuladorTO.getId().getId().toString();
-				//jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
+				UtilSession.planificacionServicio.transModificarMatrizpresupuesto(matrizDetalles);
 			}
 
 
 			//observacion matriz metas (Planificacion anual - matriz metas)
 			else if(clase.equals("matrizmetas")){
-				MatrizDetalle matrizDetalle = gson.fromJson(new StringReader(objeto), MatrizDetalle.class);
+				Type matriz = new TypeToken<List<MatrizDetalle>>(){}.getType();
+		    	Collection<MatrizDetalle> matrizDetalles = gson.fromJson(new StringReader(objeto), matriz);
+				//MatrizDetalle matrizDetalle = gson.fromJson(new StringReader(objeto), MatrizDetalle.class);
 				accion = "actualizar";
-				CronogramalineaTO cronogramalineaTO=UtilSession.planificacionServicio.transObtenerCronogramalineaTO(new CronogramalineaID(matrizDetalle.getCronogramaid(), matrizDetalle.getCronogramalineaid()));
-				cronogramalineaTO.setObservacion(matrizDetalle.getObservacion());
-				UtilSession.planificacionServicio.transCrearModificarCronogramalinea(cronogramalineaTO);
-				id=cronogramalineaTO.getId().getId().toString();
-				//jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
+				UtilSession.planificacionServicio.transModificarMatrizpresupuesto(matrizDetalles);
 			}
 
 			//Registro la auditoria
