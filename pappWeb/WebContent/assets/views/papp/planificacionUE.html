@@ -1597,7 +1597,7 @@
 							</form>
 						</div>
 						<div class="col-md-6">
-							<span ng-show="!divEditarDistribucion">
+							<span ng-show="!divEditarDistribucion && objeto.id != 0">
 								<a class="btn btn-sm btn-primary" ng-click="editarDistribucionPlanificado();">
 									Editar distribuci&oacute;n
 								</a>
@@ -2468,7 +2468,7 @@
 							</form>
 						</div>
 						<div class="col-md-6">
-							<span ng-show="!divEditarDistribucion">
+							<span ng-show="!divEditarDistribucion && objeto.id != 0">
 								<a class="btn btn-sm btn-primary" ng-click="editarDistribucionPlanificado();">
 									Editar distribuci&oacute;n
 								</a>

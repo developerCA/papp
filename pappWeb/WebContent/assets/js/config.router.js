@@ -669,6 +669,20 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Orden de Gasto'
         }
+    }).state('app.ordendevengo', {
+        url: "/ordendevengo",
+        templateUrl: "assets/views/papp/ordenDevengo.html",
+        resolve: loadSequence(
+        		'ngTable','OrdenDevengoCtrl','OrdenDevengoFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
+        		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl'
+		),
+        title: 'Orden de Devengo',
+        ncyBreadcrumb: {
+            label: 'Orden de Devengo'
+        }
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

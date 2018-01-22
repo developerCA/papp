@@ -219,7 +219,7 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 		var tObj =  [];
 		for (var i = 0; i < $scope.detalle.length; i++) {
 			if ($scope.detalle[i].modificado) {
-				tObj.push($scope.detalle[i].modificado);
+				tObj.push($scope.detalle[i]);
 				$scope.detalle[i].modificado=false;
 			}
 		}

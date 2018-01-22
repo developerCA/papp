@@ -233,6 +233,8 @@ app.constant('JS_REQUIRES', {
         'ComunTipoRegimenFactory': 'assets/js/factory/comunTipoRegimenFactory.js',
         'AprobacionPlanificacionCtrl':'assets/js/controllers/papp/aprobacionPlanificacionCtrl.js',        
         'AprobacionPlanificacionFactory': 'assets/js/factory/aprobacionPlanificacionFactory.js',
+        'OrdenDevengoCtrl':'assets/js/controllers/papp/ordenDevengoCtrl.js',
+        'OrdenDevengoFactory':'assets/js/factory/ordenDevengoFactory.js',
 
 
     },

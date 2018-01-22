@@ -161,7 +161,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			tipometa,
 			$rootScope.ejefiscalobj.anio
 		).then(function(resp) {
-			console.log(resp);
+			//console.log(resp);
 			if (!resp.estado) return;
 			if (tipometa == "P") {
 				$scope.objetoPlanificada=resp.json.cronograma;
@@ -666,14 +666,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.cargarHijos=function(node){
-		console.log(node);
+		//console.log(node);
 		if (!node.iscargado)
 		    node.iscargado=true;
 		else
 			return;
 
 		var tipo = "";
-		console.log(node.nodeTipo);
+		//console.log(node.nodeTipo);
 		switch (node.nodeTipo) {
 			case "AC":
 				tipo = "SA";
@@ -694,7 +694,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				return;
 				break;
 		}
-		console.log(tipo);
+		//console.log(tipo);
 	    PlanificacionUEFactory.traerPAhijos(
     		tipo,
     		node.id,
@@ -702,7 +702,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
     		$rootScope.ejefiscal,
     		(node.npactividadid==0? node.tablarelacionid: node.npactividadid)
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			for (var i = 0; i < resp.length; i++) {
 				resp[i].nodeTipo = tipo;
 				resp[i].padreID = node.id;
