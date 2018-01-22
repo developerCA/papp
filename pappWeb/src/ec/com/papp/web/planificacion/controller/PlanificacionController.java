@@ -389,7 +389,11 @@ public class PlanificacionController {
 					log.println("subtarea id: " + subtareaunidadTO.getId());
 					subtareaunidadTO.setId(subtareaunidadTO.getNpid());
 					id=subtareaunidadTO.getNpid().toString();
-					jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfigeditar()));
+					SubtareaunidadTO subtareaunidadTO1 = UtilSession.planificacionServicio.transObtenerSubtareaunidadTO(subtareaunidadTO.getNpid());
+					subtareaunidadTO1.setEstado(MensajesWeb.getString("estado.activo"));
+					subtareaunidadTO1.setPadre(subtareaunidadTO.getPadre());
+					subtareaunidadTO1.setNpponderacion(subtareaunidadTO.getPonderacion());
+					jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO1,subtareaunidadTO1.getJsonConfigeditar()));
 					//traigo los datos de subtareaunidadacumulador
 					SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
 					subtareaunidadacumuladorTO.getId().setId(subtareaunidadTO.getId());
