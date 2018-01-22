@@ -9,7 +9,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	    yearRange: '2000:-0',    
     };
 	$scope.codigoFiltro=null;
-	$scope.precompromisoFiltro=null;
+	$scope.ordenGastoCodigoFiltro=null;
 	$scope.valorinicialFiltro=null;
 	$scope.valorfinalFiltro=null;
 	$scope.fechainicialFiltro=null;
@@ -57,7 +57,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			$scope.pagina,
 			$rootScope.ejefiscal,
 			$scope.codigoFiltro,
-			$scope.precompromisoFiltro,
+			$scope.ordenGastoCodigoFiltro,
 			$scope.valorinicialFiltro,
 			$scope.valorfinalFiltro,
 			toStringDate($scope.fechainicialFiltro),
@@ -71,7 +71,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 
 	$scope.limpiar=function(){
 		$scope.codigoFiltro=null;
-		$scope.precompromisoFiltro=null;
+		$scope.ordenGastoCodigoFiltro=null;
 		$scope.valorinicialFiltro=null;
 		$scope.valorfinalFiltro=null;
 		$scope.fechainicialFiltro=null;
@@ -83,10 +83,10 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	};
 	
 	$scope.nuevo=function(){
-		ordenDevengoFactory.traerOrdenDevengoNuevo(
+		ordenDevengoFactory.traerNuevo(
 			$rootScope.ejefiscal
 		).then(function(resp){
-			//console.log(resp);
+			console.log(resp);
 			if (!resp.estado) return;
 			$scope.objeto=resp.json.certificacion;
 			$scope.detalles={};
@@ -101,7 +101,9 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	$scope.editar=function(index){
 		//console.log($scope.data[index]);
 		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
-		ordenDevengoFactory.traerOrdenDevengoEditar($scope.data[index].id).then(function(resp){
+		ordenDevengoFactory.traerEditar(
+			$scope.data[index].id
+		).then(function(resp){
 			console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.certificacion;

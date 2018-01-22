@@ -7,7 +7,7 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			pagina,
 			ejefiscal
 		) {
-			var url = "ejecucion/consultar/certificacion";
+			var url = "ejecucion/consultar/ordendevengo";
 			var tObj = {
 				filas: "10",
 				pagina: pagina.toString(),
@@ -27,7 +27,7 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			fechafinal,
 			estado
 		) {
-			var url = "ejecucion/consultar/certificacion";
+			var url = "ejecucion/consultar/ordendevengo";
 			var tObj = {
 				filas: "10",
 				pagina: pagina.toString(),
@@ -45,24 +45,24 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customPOST(tObj);
 		},
 
-		traerOrdenDevengoNuevo: function(
+		traerNuevo: function(
 			ejefiscal
 		) {
-			var url = "ejecucion/nuevo/certificacion/" + ejefiscal;
+			var url = "ejecucion/nuevo/ordendevengo/" + ejefiscal;
 		    return Restangular.allUrl(url).customGET();
 		},
 
-		traerOrdenDevengoEditar: function(
+		traerEditar: function(
 			id
 		) {
-			var url = "ejecucion/certificacion/"+id+"/-1";
+			var url = "ejecucion/ordendevengo/"+id+"/0";
 		    return Restangular.allUrl(url).customGET();
 		},
 
 		guardar:function(
 			objeto
 		){
-			var url = "ejecucion/certificacion/";
+			var url = "ejecucion/ordendevengo/";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 
@@ -101,14 +101,14 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 		nuevoLinea:function(
 			id
 		){
-			var url = "ejecucion/nuevo/certificacionlinea/" + id ;
+			var url = "ejecucion/nuevo/ordendevengolinea/" + id ;
 			return Restangular.allUrl(url).customGET();
 		},
 
 		editarLinea:function(
 			id
 		){
-			var url = "ejecucion/certificacionlinea/" + id.id + "/" + id.lineaid;
+			var url = "ejecucion/ordendevengolinea/" + id.id + "/" + id.lineaid;
 			return Restangular.allUrl(url).customGET();
 		},
 
@@ -163,7 +163,7 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 		guardarLinea:function(
 			objeto
 		){
-			var url = "ejecucion/certificacionlinea";
+			var url = "ejecucion/ordendevengolinea";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 	}

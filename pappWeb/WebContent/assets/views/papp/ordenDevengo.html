@@ -16,11 +16,9 @@
 
 	<div class="row">
 		<div class="col-md-12">
-
 			<div class="panel panel-white">
 
 				<div class="panel-body" ng-show="!edicion">
-
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -40,19 +38,18 @@
 												ng-model="codigoFiltro" />
 										</div>
 									</div>
-		
 									<div class="col-md-6">
 										<div class="form-group" class="has-success">
 											<label class="control-label">
-												N&uacute;mero precompromiso
+												Orden Gasto C&oacute;digo
 											</label>
-											<input type="text" placeholder="Ingrese un n&uacute;mero precompromiso"
-												class="form-control" name="precompromisoFiltro"
+											<input type="text" placeholder="Ingrese un c&oacute;digo"
+												class="form-control" name="ordenGastoCodigoFiltro"
 												ng-model="precompromisoFiltro" />
 										</div>
 									</div>
 								</div>
-		
+
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group" class="has-success">
@@ -76,7 +73,7 @@
 										</div>
 									</div>
 								</div>
-		
+
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -126,7 +123,7 @@
 												Estado
 											</label>
 											<select class="form-control" name="estadoFiltro" ng-model="estadoFiltro">
-												<option value="">Selecione un estado</option>
+												<option value="">Todos</option>
 												<option value="RE">Registrado</option>
 												<option value="EL">Eliminado</option>
 												<option value="SO">Solicitado</option>
