@@ -1181,7 +1181,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	    		$scope.divPlanificacionAnual = false;
 				if (resp.estado) {
 					//$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
-					$scope.objeto.id = resp.json.subtareaunidad.id;
+					$scope.objeto = resp.json.subtareaunidad;
 					for (var i = 0; i < $scope.detalles.length; i++) {
 						$scope.detalles[i].id.id = resp.json.subtareaunidad.id;
 					}
