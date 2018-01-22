@@ -87,6 +87,7 @@ public class PlanificacionController {
 		JSONObject jsonObject=new JSONObject();
 		String id="";
 		String accion="";
+		
 		try {
 			//Objetivo
 			if(clase.equals("objetivo")){
