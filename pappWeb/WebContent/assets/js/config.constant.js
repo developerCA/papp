@@ -235,6 +235,8 @@ app.constant('JS_REQUIRES', {
         'AprobacionPlanificacionFactory': 'assets/js/factory/aprobacionPlanificacionFactory.js',
         'OrdenDevengoCtrl':'assets/js/controllers/papp/ordenDevengoCtrl.js',
         'OrdenDevengoFactory':'assets/js/factory/ordenDevengoFactory.js',
+        'ModalOrdenDevengoLineasCtrl':'assets/js/controllers/papp/modales/modalOrdenDevengoLineasCtrl.js',
+        'OrdenDevengoLineasFactory':'assets/js/factory/ordenDevengoLineasFactory.js',
 
 
     },

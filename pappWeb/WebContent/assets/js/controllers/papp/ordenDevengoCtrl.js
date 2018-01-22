@@ -88,7 +88,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		).then(function(resp){
 			console.log(resp);
 			if (!resp.estado) return;
-			$scope.objeto=resp.json.certificacion;
+			$scope.objeto=resp.json.ordendevengo;
 			$scope.detalles={};
 			$scope.agregarDetalles();
 			$scope.edicion=true;
@@ -106,9 +106,10 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		).then(function(resp){
 			console.log(resp.json);
 			if (resp.estado) {
-			    $scope.objeto=resp.json.certificacion;
-			    $scope.detalles=resp.json.certificacionlineas;
+			    $scope.objeto=resp.json.ordendevengo;
+			    $scope.detalles=resp.json.ordendevengolineas;
 			}
+			console.log($scope.objeto.codigo);
 			$scope.edicion=true;
 			$scope.nuevoar=false;
 			$scope.guardar=true;
@@ -333,6 +334,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	};
 
 	$scope.agregarLinea = function() {
+		//console.log($scope.objeto);
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalOrdenDevengoLineas.html',
 			controller : 'ModalOrdenDevengoLineasController',
@@ -342,7 +344,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
-					return $scope.objeto.certificacionunidadid;
+					return $scope.objeto.id;
 				},
 				editar : function() {
 					return null;
@@ -352,7 +354,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		modalInstance.result.then(function(obj) {
 			console.log(obj);//130
 		    $scope.detalles=obj;
-            SweetAlert.swal("Orden de Devengo! - Lineas", "Registro guardado satisfactoriamente!", "success");
+            SweetAlert.swal("Orden Devengo! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
 		});
 	};
@@ -377,7 +379,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 		    $scope.detalles=obj;
-            SweetAlert.swal("Orden de Devengo! - Lineas", "Registro guardado satisfactoriamente!", "success");
+            SweetAlert.swal("Orden Devengo! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
 		});
 	};
@@ -390,7 +392,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.certificacionunidadid = obj.id;
+			$scope.objeto.ordendevengounidadid = obj.id;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;
 		}, function() {
@@ -405,9 +407,9 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.certificacionclaseregid = obj.id.id;
-			$scope.objeto.certificacionclasemoid = obj.id.cmid;
-			$scope.objeto.certificaciongastoid = obj.id.cmcgastoid;
+			$scope.objeto.ordendevengoclaseregid = obj.id.id;
+			$scope.objeto.ordendevengoclasemoid = obj.id.cmid;
+			$scope.objeto.ordendevengogastoid = obj.id.cmcgastoid;
 			$scope.objeto.npcodigoregcmcgasto = obj.codigo;
 			$scope.objeto.npnombreregcmcgasto = obj.nombre;
 			$scope.objeto.npcodigoregistro = obj.npcodigoregistro;
@@ -426,8 +428,8 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.certificaciontipodocid = obj.id.id;
-			$scope.objeto.certificaciontpclasedocid = obj.id.clasedocid;
+			$scope.objeto.ordendevengotipodocid = obj.id.id;
+			$scope.objeto.ordendevengotpclasedocid = obj.id.clasedocid;
 			$scope.objeto.npcodigotipodocumento = obj.codigo;
 			$scope.objeto.npnombretipodocumento = obj.nombre;
 			$scope.objeto.npcodigodocumento = obj.npcodigodocumento;
@@ -460,7 +462,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	      					 $scope.noeditar = false;
 	      					 $scope.nuevoar=false;
         				 }
-      				     $scope.objeto=resp.json.certificacion;
+      				     $scope.objeto=resp.json.ordendevengo;
       					 SweetAlert.swal("Orden de Devengo!", "Registro guardado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, "error");
