@@ -98,7 +98,7 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 		$scope.detalle[index].modificado = true;
 	}
 	
-	$scope.aprobarAjustado = function(index) {
+	$scope.aprobarAjustado = function(obj) {
 		$scope.index = ((pagina - 1) * 5) + index;
 		if ($scope.data[$scope.index].npestadopresupuesto != "Aprobado") {
 			SweetAlert.swal(
