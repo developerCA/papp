@@ -463,8 +463,15 @@ public class EjecucionController {
 			else if(clase.equals("certificacionlinea")){
 				CertificacionlineaTO certificacionlineaTO = UtilSession.planificacionServicio.transObtenerCertificacionlineaTO(new CertificacionlineaID(id, id2));
 				certificacionlineaTO.setNpvalor(certificacionlineaTO.getValor());
-				jsonObject.put("certificacionlinea", (JSONObject)JSONSerializer.toJSON(certificacionlineaTO,certificacionlineaTO.getJsonConfig()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(certificacionlineaTO.getNivelactid(), jsonObject, mensajes);
+				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(certificacionlineaTO.getNivelactid()));
+				//1. traigo el total disponible del subitem
+				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
+				//2. Obtengo el detalle del subitem
+//				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid());
+				certificacionlineaTO.setNpvalorinicial(saldo);
+				jsonObject.put("certificacionlinea", (JSONObject)JSONSerializer.toJSON(certificacionlineaTO,certificacionlineaTO.getJsonConfig()));
 			}
 			//Ordengasto
 			if(clase.equals("ordengasto")){

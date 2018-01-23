@@ -665,25 +665,36 @@ public class PlanificacionController {
 					itemunidadTO.setNpnombreobra(obraTO.getNombre());
 				}
 				//Obtengo el organismo de codigo 0000 para seterarlo por defecto
-				OrganismoTO organismoTO=new OrganismoTO();
-				organismoTO.setOrganismoejerciciofiscalid(ejercicio);
-				organismoTO.setCodigo(MensajesWeb.getString("codigo.cero.cuatro"));
-				Collection<OrganismoTO> organismoTOs=UtilSession.adminsitracionServicio.transObtenerOrganismo(organismoTO);
-				if(organismoTOs.size()>0){
-					log.println("npcodigoorganismo: " + itemunidadTO.getNpcodigoorganismo());
-					organismoTO=(OrganismoTO)organismoTOs.iterator().next();
-					itemunidadTO.setNpcodigoorganismo(organismoTO.getCodigo());
-					itemunidadTO.setNpnombreorganismo(organismoTO.getNombre());
-				}
+//				OrganismoTO organismoTO=new OrganismoTO();
+//				organismoTO.setOrganismoejerciciofiscalid(ejercicio);
+//				organismoTO.setCodigo(MensajesWeb.getString("codigo.cero.cuatro"));
+//				Collection<OrganismoTO> organismoTOs=UtilSession.adminsitracionServicio.transObtenerOrganismo(organismoTO);
+//				if(organismoTOs.size()>0){
+//					log.println("npcodigoorganismo: " + itemunidadTO.getNpcodigoorganismo());
+//					organismoTO=(OrganismoTO)organismoTOs.iterator().next();
+//					itemunidadTO.setItemunidadorganismoid(organismoTO.getId());
+//					itemunidadTO.setNpcodigoorganismo(organismoTO.getCodigo());
+//					itemunidadTO.setNpnombreorganismo(organismoTO.getNombre());
+//				}
 				//Obtengo el organismo prestamo de codigo 0000 para sete
 				OrganismoprestamoTO organismoprestamoTO=new OrganismoprestamoTO();
 				organismoprestamoTO.setCodigo(MensajesWeb.getString("codigo.cero.cuatro"));
-				organismoprestamoTO.getId().setId(ejercicio);
+				//organismoprestamoTO.getId().setId(ejercicio);
+				OrganismoTO organismoTO=new OrganismoTO();
+				organismoTO.setOrganismoejerciciofiscalid(ejercicio);
+				organismoTO.setCodigo(MensajesWeb.getString("codigo.cero.cuatro"));
+				organismoprestamoTO.setOrganismo(organismoTO);
 				Collection<OrganismoprestamoTO> organismoprestamoTOs=UtilSession.planificacionServicio.transObtenerOrganismoprestamo(organismoprestamoTO);
+				log.println("organismoprstamo: " + organismoprestamoTOs.size());
 				if(organismoprestamoTOs.size()>0){
+					
 					organismoprestamoTO=(OrganismoprestamoTO)organismoprestamoTOs.iterator().next();
 					itemunidadTO.setNpcodigoorgpres(organismoprestamoTO.getCodigo());
 					itemunidadTO.setNpnombreorgpres(organismoprestamoTO.getNombre());
+					itemunidadTO.setItemunidadorganismoid(organismoprestamoTO.getId().getId());
+					itemunidadTO.setNpcodigoorganismo(organismoprestamoTO.getOrganismo().getCodigo());
+					itemunidadTO.setNpnombreorganismo(organismoprestamoTO.getOrganismo().getNombre());
+					itemunidadTO.setItemunidadorgprestamoid(organismoprestamoTO.getId().getPrestamoid());
 				}
 				log.println("npcodigoorganismo***: " + itemunidadTO.getNpcodigoorganismo());
 				jsonObject.put("itemunidad", (JSONObject)JSONSerializer.toJSON(itemunidadTO,itemunidadTO.getJsonConfig()));
