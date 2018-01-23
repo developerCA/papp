@@ -15,7 +15,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body" ng-show="!edicionMatrizPresupuesto && !edicionMatrizMetas">
+				<div class="panel-body" ng-show="!edicionMatrizPresupuesto && !edicionMatrizMetas && !aprobacionPlanificacion && !aprobacionAjustado">
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -64,22 +64,15 @@
 								<td>
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar Planificaci&oacute;n"
-										ng-click="editarAprobarPlanificacion($index);">
+										ng-click="aprobarPlanificacion($index);">
 										<i class="fa ti-marker-alt"></i>
 									</a>
 								</td>
 								<td>
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar Ajustada"
-										ng-click="editarAprobarAjustada($index);">
+										ng-click="aprobarAjustado($index);">
 										<i class="fa ti-signal"></i>
-									</a>
-								</td>
-								<td>
-									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Matriz Metas"
-										ng-click="editarMatrizMetas($index);">
-										<i class="fa ti-pencil-alt"></i>
 									</a>
 								</td>
 								<td>
@@ -89,6 +82,13 @@
 										<i class="fa ti-layers-alt"></i>
 									</a>
 								</td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Matriz Metas"
+										ng-click="editarMatrizMetas($index);">
+										<i class="fa ti-pencil-alt"></i>
+									</a>
+								</td>
 								<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
 								<td data-title="'Nombre'">{{obj.nombre}}</td>
 								<td data-title="'Estado'">{{obj.npestado}}</td>
@@ -96,6 +96,156 @@
 								<td data-title="'Pres. Ajustado'">{{obj.npestadopresupajus}}</td>
 							</tr>
 						</table>
+					</div>
+				</div>
+
+				<div class="panel-body" ng-show="aprobacionPlanificacion">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Aprovacion Planificaci&oacute;n
+						</h5>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-white">
+								<div class="panel-heading">
+									<h4 class="panel-title">Presupuesto</h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        C&oacute;digo
+									    </label>
+									    <input type="text" ng-disabled="true"
+									        class="form-control" name="fCodigo" ng-model="objeto.codigopresup">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Nombre
+									    </label>
+									    <input type="text" ng-disabled="true"
+									        class="form-control" name="fNombre" ng-model="objeto.nombre">
+									</div>
+								</div>
+								<div class="panel-footer pull-right">
+									<a class="btn btn-sm btn-primary" ng-click="editarAprobarPlanificacion();">
+										Aprobar
+									</a>
+									<a class="btn btn-sm btn-default" ng-click="volver();">
+										Volver
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<table class="table table-bordered">
+								<tr>
+									<td>#</td>
+									<td>Nivel</td>
+									<td>Observaci&oacute;n</td>
+								</tr>
+								<tr ng-repeat="obj in detalle" class="table-stylish">
+									<td>{{ $index + 1 }}</td>
+									<td>
+										 <span ng-if="obj.nivel == 'AC'">
+										 	ACTIVIDAD
+										 </span>
+										 <span ng-if="obj.nivel == 'SA'">
+										 	SUBACTIVIDAD
+										 </span>
+										 <span ng-if="obj.nivel == 'TA'">
+										 	TAREA
+										 </span>
+										 <span ng-if="obj.nivel == 'ST'">
+										 	SUBTAREA
+										 </span>
+										 <span ng-if="obj.nivel == 'IT'">
+										 	ITEM
+										 </span>
+										 <span ng-if="obj.nivel == 'SI'">
+										 	SUBITEM
+										 </span>
+									</td>
+									<td>{{ obj.mensaje }}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel-body" ng-show="aprobacionAjustado">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Aprovacion Ajustado
+						</h5>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-white">
+								<div class="panel-heading">
+									<h4 class="panel-title">Ajustado</h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        C&oacute;digo
+									    </label>
+									    <input type="text" ng-disabled="true"
+									        class="form-control" name="fCodigo" ng-model="objeto.codigopresup">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Nombre
+									    </label>
+									    <input type="text" ng-disabled="true"
+									        class="form-control" name="fNombre" ng-model="objeto.nombre">
+									</div>
+								</div>
+								<div class="panel-footer pull-right">
+									<a class="btn btn-sm btn-primary" ng-click="editarAprobarAjustada();">
+										Aprobar
+									</a>
+									<a class="btn btn-sm btn-default" ng-click="volver();">
+										Volver
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<table class="table table-bordered">
+								<tr>
+									<td>#</td>
+									<td>Nivel</td>
+									<td>Observaci&oacute;n</td>
+								</tr>
+								<tr ng-repeat="obj in detalle" class="table-stylish">
+									<td>{{ $index + 1 }}</td>
+									<td>
+										 <span ng-if="obj.nivel == 'AC'">
+										 	ACTIVIDAD
+										 </span>
+										 <span ng-if="obj.nivel == 'SA'">
+										 	SUBACTIVIDAD
+										 </span>
+										 <span ng-if="obj.nivel == 'TA'">
+										 	TAREA
+										 </span>
+										 <span ng-if="obj.nivel == 'ST'">
+										 	SUBTAREA
+										 </span>
+										 <span ng-if="obj.nivel == 'IT'">
+										 	ITEM
+										 </span>
+										 <span ng-if="obj.nivel == 'SI'">
+										 	SUBITEM
+										 </span>
+									</td>
+									<td>{{ obj.mensaje }}</td>
+								</tr>
+							</table>
+						</div>
 					</div>
 				</div>
 

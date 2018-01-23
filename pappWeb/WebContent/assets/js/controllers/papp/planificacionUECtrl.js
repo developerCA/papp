@@ -1,5 +1,3 @@
-'use strict';
-
 app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","PlanificacionUEFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,PlanificacionUEFactory) {
 
@@ -105,10 +103,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.editarDistribucionPlanificado=function(){
 		$scope.divEditarDistribucion=true;
+		$scope.metaDistribucion('A');
 		$scope.metaDistribucion('P');
-		if ($scope.divSubItem && $scope.detallesAjustada == null) {
-			$scope.metaDistribucion('A');
-		}
+		$scope.divMetaDistribucionPlanificada=true;
+		$scope.divMetaDistribucionAjustada=false;
+		$scope.divMetaDistribucionDevengo=false;
 	}
 
 	$scope.editarDistribucionAjustado=function(){
@@ -363,7 +362,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		} else {// SubItem
 			PlanificacionUEFactory.nuevo(
 				"SI",
-				(node.nodeTipo == "SI"? node.nodePadre.id: node.id),
+				node.id,
 				$rootScope.ejefiscal +
 				"/unidadid=" + node.npIdunidad +
 				"&actividadid=" + node.npactividadid
@@ -922,13 +921,13 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
                 return;
             } else {
             	eval("$scope.submit" + name + "(form);");
-        		if ($scope.nodeActivo.nodePadre.nodePadre == undefined) {
+        		if ($scope.nodeActivo.nodePadre == undefined) {
         			//primero
         			$scope.cargarPlanificacionAnual($scope.planificacionUE);
         		} else {
         			//el resto
-        			$scope.nodeActivo.nodePadre.nodePadre.iscargado = false;
-        			$scope.cargarHijos($scope.nodeActivo.nodePadre.nodePadre);
+        			$scope.nodeActivo.nodePadre.iscargado = false;
+        			$scope.cargarHijos($scope.nodeActivo.nodePadre);
         		}
             }
         },
@@ -994,6 +993,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			for (var i = 0; i < 12; i++) {
 				porcentaje = porcentaje + $scope.detallesPlanificada[i].porcentaje;
 			}
+			porcentaje = Number(porcentaje.toFixed(2));
 			if (porcentaje != 100) {
 	            SweetAlert.swal(
             		"Planificacion UE! - Distribucion Planificada",
@@ -1484,8 +1484,16 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.copiarPlanificadoAjustado = function() {
-		$scope.metaDistribucion("A");
-		$scope.detallesAjustada = $scope.detallesPlanificada.slice(0);
+		//$scope.metaDistribucion("A");*
+		$scope.objetoAjustada.unidadtiempo = $scope.objetoPlanificada.unidadtiempo;
+		$scope.detallesAjustada = [];
+		for (var i = 0; i < $scope.detallesPlanificada.length; i++) {
+			$scope.detallesAjustada.push($scope.detallesPlanificada[i]);
+		}
+		$scope.totalAjustada = $scope.totalPlanificada;
+		$scope.divMetaDistribucionPlanificada=false;
+		$scope.divMetaDistribucionAjustada=true;
+		$scope.divMetaDistribucionDevengo=false;
 	}
 } ]);
 
@@ -1545,6 +1553,7 @@ function distribuirValor(
 		presupuesto / nPeriodo
 	);
 	var valorResto = valor - valor.toFixed(2);
+	var porcientoResto = 0;
 	var suma = 0;
 	var resto = 0;
 	for (var i = (intervalo - 1); i < 12; i = i + intervalo) {
@@ -1564,12 +1573,14 @@ function distribuirValor(
 				detalles[i].porcentaje = 0;
 			} else {
 				detalles[i].porcentaje = Number(
-					(
-						(detalles[i].valor * 100)
-						/ presupuesto
-					).toFixed(2)
+					(detalles[i].valor * 100)
+					/ presupuesto
 				);
-			}
+/*				porcientoResto = porcientoResto + Number(detalles[i].porcentaje.toFixed(2));
+				if (porcientoResto > 0.01) {
+					detalles[i].porcentaje
+				}
+*/			}
 		}
 	}
 
