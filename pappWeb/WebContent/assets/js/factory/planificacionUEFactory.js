@@ -41,11 +41,7 @@ app.factory("PlanificacionUEFactory", ["Restangular", function (Restangular) {
 			).customGET();
         },
 
-/*        traerPAverSubActividad: function (tablarelacionid, nivelactividadunidadid) {
-        	return Restangular.allUrl("planificacion/subactividadplanificacion/" +
-    			tablarelacionid + "/" +
-    			"0"//nivelactividadunidadid
-*/        traerPAverSubActividad: function (id, unidad, ejercicio) {
+        traerPAverSubActividad: function (id, unidad, ejercicio) {
         	return Restangular.allUrl("planificacion/subactividadplanificacion/" +
     			id + "/" +
     			"unidadid=" + unidad +

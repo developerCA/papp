@@ -202,14 +202,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		if (!$scope.editar) return;
 		switch (estado) {
 			case "P": //Planificado
-/*				$scope.totalPlanificada = ($scope.detalles[$scope.mPlanificadaID].metavalor === undefined
-					? ($scope.objeto.tplanificado === undefined
-							? $scope.detalles[$scope.mPlanificadaID].total
-							: $scope.objeto.tplanificado
-					)
-					: $scope.detalles[$scope.mPlanificadaID].metavalor
-				);
-*/				$scope.totalPlanificada = ($scope.divActividad
+				$scope.totalPlanificada = ($scope.divActividad
 					? $scope.detalles[$scope.mPlanificadaID].metavalor
 					: ($scope.divSubTarea
 						? $scope.detalles[$scope.mPlanificadaID].cantidad
@@ -227,14 +220,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				//$scope.detalles[$scope.mPlanificadaID].npValor = $scope.detalles[$scope.mPlanificadaID].cantidad;
 				break;
 			case "A": //Ajustada
-/*				$scope.totalAjustada = ($scope.detalles[$scope.mAjustadaID].metavalor === undefined
-					? ($scope.objeto.tacumulado === undefined
-							? $scope.detalles[$scope.mAjustadaID].total
-							: $scope.objeto.tacumulado
-					)
-					: $scope.detalles[$scope.mAjustadaID].metavalor
-				);
-*/				$scope.totalAjustada = ($scope.divActividad
+				$scope.totalAjustada = ($scope.divActividad
 					? $scope.detalles[$scope.mAjustadaID].metavalor
 					: ($scope.divSubTarea
 						? $scope.detalles[$scope.mAjustadaID].cantidad
@@ -1054,6 +1040,21 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformMetaDistribucionAjustada = function(form) {
+		if ($scope.divActividad || $scope.divSubTarea) {
+			var porcentaje = 0;
+			for (var i = 0; i < 12; i++) {
+				porcentaje = porcentaje + $scope.detallesAjustada[i].porcentaje;
+			}
+			porcentaje = Number(porcentaje.toFixed(2));
+			if (porcentaje != 100) {
+	            SweetAlert.swal(
+            		"Planificacion UE! - Distribucion Ajustada",
+            		"La suma de los porcientos es diferente de 100%",
+            		"error"
+        		);
+    			return;
+			}
+		}
 		if ($scope.totalAjustada != ($scope.divActividad
 				? $scope.detalles[$scope.mAjustadaID].metavalor
 				: ($scope.divSubTarea
@@ -1486,9 +1487,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.copiarPlanificadoAjustado = function() {
 		//$scope.metaDistribucion("A");*
 		$scope.objetoAjustada.unidadtiempo = $scope.objetoPlanificada.unidadtiempo;
-		$scope.detallesAjustada = [];
 		for (var i = 0; i < $scope.detallesPlanificada.length; i++) {
-			$scope.detallesAjustada.push($scope.detallesPlanificada[i]);
+			$scope.detallesAjustada[i].valor = $scope.detallesPlanificada[i].valor;
+			$scope.detallesAjustada[i].porcentaje = $scope.detallesPlanificada[i].porcentaje;
 		}
 		$scope.totalAjustada = $scope.totalPlanificada;
 		$scope.divMetaDistribucionPlanificada=false;
