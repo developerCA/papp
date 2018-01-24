@@ -541,7 +541,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalDivisionGeograficaCtrl', 'DivisionGeograficaFactory',
         		'ModalSubItemCtrl', 'SubItemsFactory',
         		'ModalTipoProductoCtrl', 'TipoProductoFactory',
-        		'ModalProcedimientoCtrl', 'ProcedimientoFactory',
+        		'ModalProcedimientoCtrl', 'TipoProcedimientoFactory',
         		'ModalTipoRegimenCtrl', 'ComunTipoRegimenFactory',
         		'ModalUnidadMedidaCtrl', 'UnidadesMedidaFactory'
 		),

@@ -228,7 +228,7 @@ app.constant('JS_REQUIRES', {
         'ModalTipoProductoCtrl':'assets/js/controllers/papp/modales/modalTipoProductoCtrl.js',        
         'TipoProductoFactory': 'assets/js/factory/tipoProductoFactory.js',
         'ModalProcedimientoCtrl':'assets/js/controllers/papp/modales/modalProcedimientoCtrl.js',        
-        'ProcedimientoFactory': 'assets/js/factory/tipoProcedimientoFactory.js',
+        'TipoProcedimientoFactory': 'assets/js/factory/tipoProcedimientoFactory.js',
         'ModalTipoRegimenCtrl':'assets/js/controllers/papp/modales/modalTipoRegimenCtrl.js',        
         'ComunTipoRegimenFactory': 'assets/js/factory/comunTipoRegimenFactory.js',
         'AprobacionPlanificacionCtrl':'assets/js/controllers/papp/aprobacionPlanificacionCtrl.js',        
