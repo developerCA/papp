@@ -27,13 +27,14 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 
 	$scope.cargarHijos=function(node){
 		if (!node.iscargado)
-			console.log(node);
+			//console.log(node);
 		    node.iscargado=true;
 
 		    plannacionalFactory.traerHijos(
 	    		pagina,
 	    		$rootScope.ejefiscal,
-	    		node.id
+	    		node.id +
+	    		(node.tipo == "P"? "&tipo=P": "")
     		).then(function(resp){
 				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 				node.nodes=nodes;

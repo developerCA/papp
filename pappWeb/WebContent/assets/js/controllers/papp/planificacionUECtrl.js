@@ -566,6 +566,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
 					$scope.novista = false;
+					$scope.cargarCodigosVista();
 				}
 			})
 		}
@@ -581,6 +582,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
 					$scope.novista = false;
+					$scope.cargarCodigosVista();
 				}
 			})
 		}
@@ -596,6 +598,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
 					$scope.novista = false;
+					$scope.cargarCodigosVista();
 				}
 			})
 		}
@@ -611,6 +614,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
 					$scope.novista = false;
+					$scope.cargarCodigosVista();
 				}
 			})
 		}
@@ -626,6 +630,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
 					$scope.novista = false;
+					$scope.cargarCodigosVista();
 				}
 			})
 		}
@@ -641,10 +646,23 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divPlanificacionAnualVista=true;
 					$scope.divMenuActividad = true;
 					$scope.novista = false;
+					$scope.cargarCodigosVista();
 				}
 			})
 		}
 	};
+
+	$scope.cargarCodigosVista=function() {
+		$scope.objetoVista.npPlannacional = $scope.objetoVista.npPlannacionalcodigo + ': ' + $scope.objetoVista.npPlannacional;
+		$scope.objetoVista.npObjetivoestrategico = $scope.objetoVista.npObjetivoestrategicocodigo + ': ' + $scope.objetoVista.npObjetivoestrategico;
+		$scope.objetoVista.npObjetivooperativo = $scope.objetoVista.npObjetivooperativocodigo + ': ' + $scope.objetoVista.npObjetivooperativo;
+		$scope.objetoVista.npObjetivofuerza = $scope.objetoVista.npObjetivofuerzacodigo + ': ' + $scope.objetoVista.npObjetivofuerza;
+		$scope.objetoVista.npInstitucion = $scope.objetoVista.npInstitucioncodigo + ': ' + $scope.objetoVista.npInstitucion;
+		$scope.objetoVista.npentidad = $scope.objetoVista.npentidadcodigo + ': ' + $scope.objetoVista.npentidad;
+		$scope.objetoVista.npPrograma = $scope.objetoVista.npProgramacodigo + ': ' + $scope.objetoVista.npPrograma;
+		$scope.objetoVista.npSubprograma = $scope.objetoVista.npSubprogramacodigo + ': ' + $scope.objetoVista.npSubprograma;
+		$scope.objetoVista.npProyecto = $scope.objetoVista.npProyectocodigo + ': ' + $scope.objetoVista.npProyecto;
+	}
 
 	$scope.regresarVista=function() {
 		$scope.novista = true;
