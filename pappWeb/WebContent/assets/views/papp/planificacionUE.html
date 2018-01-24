@@ -2646,7 +2646,7 @@
 										<a class="btn btn-sm btn-primary" style="background-color:#BF2F2F !important">
 											Devengo
 										</a>
-										&nbsp;Unidad Tipo:
+										<br>&nbsp;Unidad Tipo:
 									    <select name="periodoPlanificado" ng-disabled="!editar"
 									        ng-model="objetoDevengo.unidadtiempo" ng-change="distribucionValores('D');">
 											<option value="ME">Mensual</option>
@@ -2674,9 +2674,9 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="true"
+													            ng-disabled="!editar || objetoDevengo.unidadtiempo!='PE'"
 													            ng-change="distribucionCalcularTotales('D');">
-														</td><!-- ng-disabled="!editar || objetoDevengo.unidadtiempo!='PE'" -->
+														</td>
 													</tr>
 												</table>
 											</div>
