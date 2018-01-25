@@ -117,22 +117,36 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	};
 
 	$scope.solicitar=function(index) {
-		//console.log($scope.data[index]);
+		console.log($scope.data[index]);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal("Orden de Devengo!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
 		}
-		$scope.data[index].npestado = "Solicitando";
-		ordenDevengoFactory.solicitar(
-			$scope.data[index].id,
-			"SO",
-			null,
-			null
-		).then(function(resp){
-			//console.log(resp);
-			$scope.pageChanged();
-			SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
-		});
+		SweetAlert.swal({ 
+				title: "Orden de Devengo?",
+				text: "Seguro que desea hacer la solicitud!",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Si!",
+				cancelButtonText: "No",
+				closeOnConfirm: false,
+				closeOnCancel: false 
+			}, 
+			function(isConfirm) { 
+				if (!isConfirm) return;
+				$scope.data[index].npestado = "Solicitando";
+				ordenDevengoFactory.solicitar(
+					$scope.data[index].id,
+					"SO",
+					null,
+					null
+				).then(function(resp){
+					//console.log(resp);
+					$scope.pageChanged();
+					SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				});
+			}
+		); 
 	}
 
 	$scope.aprobar = function(index) {

@@ -140,10 +140,10 @@ app.controller('InstitucionController', [ "$scope","$rootScope","$uibModal","Swe
 				}
 			}
 		});
-		console.log('pais:');
-		console.log($scope.objetolista[index].npnombrepais);
-		console.log('provincia:');
-		console.log($scope.objetolista[index].npnombreprovincia);
+		//console.log('pais:');
+		//console.log($scope.objetolista[index].npnombrepais);
+		//console.log('provincia:');
+		//console.log($scope.objetolista[index].npnombreprovincia);
 		modalInstance.result.then(function(obj) {
 			$scope.objetolista[index].institucionentpaisid = obj.id;
 			$scope.objetolista[index].npnombrepais = obj.nombre;

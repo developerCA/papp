@@ -237,6 +237,8 @@ app.constant('JS_REQUIRES', {
         'OrdenDevengoFactory':'assets/js/factory/ordenDevengoFactory.js',
         'ModalOrdenDevengoLineasCtrl':'assets/js/controllers/papp/modales/modalOrdenDevengoLineasCtrl.js',
         'OrdenDevengoLineasFactory':'assets/js/factory/ordenDevengoLineasFactory.js',
+        'OrdenReversionCtrl':'assets/js/controllers/papp/ordenReversionCtrl.js',
+        'OrdenReversionFactory':'assets/js/factory/ordenReversionFactory.js',
 
 
     },

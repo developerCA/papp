@@ -10,7 +10,10 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	$scope.objeto={};
 	$scope.tipo=null;
 	$scope.data=[];
-	
+	$scope.cPais=false;
+	$scope.cProvincia=false;
+	$scope.cCanton=false;
+
 	var pagina = 1;
 	
 	$scope.consultar=function(){
@@ -24,6 +27,7 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	};
 
 	$scope.consultarPaises=function(){
+		$scope.cPais=true;
 		$scope.data=[];
 		$scope.tipo=null;
 		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'A',null).then(function(resp){
@@ -33,20 +37,20 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	}
 
 	$scope.consultarProvincias=function(){
+		$scope.cProvincia=true;
 		$scope.data=[];
 		$scope.tipo="P";
 		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'P',pais).then(function(resp){
-			
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
 
 	$scope.consultarCantones=function(){
+		$scope.cCanton=true;
 		$scope.data=[];
 		$scope.tipo="C";
 		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'C',provincia).then(function(resp){
-			
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -69,7 +73,6 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	}
 
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -91,11 +94,17 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
-		$scope.codigoFiltro=null;
-		$scope.estadoFiltro=null;
-		
-		$scope.consultar();
-		
+		if ($scope.cPais) {
+			$scope.consultarPaises();
+		} else if ($scope.cProvincia) {
+			$scope.consultarProvincias();
+		} else if ($scope.cCanton) {
+			$scope.consultarCantones();
+		} else {
+			$scope.codigoFiltro=null;
+			$scope.estadoFiltro=null;
+			$scope.consultar();
+		}
 	};
 	
 	$scope.nuevo=function(){

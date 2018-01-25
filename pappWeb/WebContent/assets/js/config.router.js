@@ -684,6 +684,21 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Orden de Devengo'
         }
+    }).state('app.ordenreversion', {
+        url: "/ordenreversion",
+        templateUrl: "assets/views/papp/ordenReversion.html",
+        resolve: loadSequence(
+        		'ngTable','OrdenReversionCtrl','OrdenReversionFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
+        		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl',
+        		'ModalOrdenDevengoLineasCtrl','OrdenDevengoLineasFactory'
+		),
+        title: 'Orden de Reversion',
+        ncyBreadcrumb: {
+            label: 'Orden de Reversion'
+        }
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

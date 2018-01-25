@@ -5,7 +5,12 @@ app.factory("institucionFactory", [ "Restangular", function(Restangular) {
 	return {
 
 		traerInstitucion : function(pagina, ejercicio) {
-			return Restangular.allUrl("administrar/consultar/institucion/pagina="+pagina+"&institucionejerciciofiscalid="+ejercicio).getList();
+			return Restangular.allUrl(
+				"administrar/consultar/institucion/" +
+				"pagina="+pagina+
+				"&institucionejerciciofiscalid="+ejercicio
+				//"&estado=A"
+			).getList();
 		},
 
 		traerInstitucionFiltro : function(pagina, ejercicio, codigo, nombre, estado) {
@@ -13,7 +18,8 @@ app.factory("institucionFactory", [ "Restangular", function(Restangular) {
 
 			if (codigo!=null && codigo != "") url += "&codigo=" + codigo;	
 			if (nombre!=null && nombre != "") url += "&nombre=" + nombre;	
-			if (estado!=null && estado != "") url += "&estado=" + estado;	
+			if (estado!=null && estado != "") url += "&estado=" + estado;
+			//else url += "&estado=A"
 
 			return Restangular.allUrl(url).getList();
 		},
