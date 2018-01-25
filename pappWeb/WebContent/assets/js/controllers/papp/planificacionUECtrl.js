@@ -40,6 +40,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.detallesPlanificada=null;
 		$scope.objetoAjustada=null;
 		$scope.detallesAjustada=null;
+		$scope.objetoDevengo=null;
+		$scope.detallesDevengo=null;
 	}
 
 	var pagina = 1;
@@ -149,7 +151,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.divMetaDistribucionDevengo=true;
 				return;
 			}
-			id = $scope.mAjustadaID;
+			id = $scope.mDevengoID;	
 		}
 
 		PlanificacionUEFactory.editarMDP(
@@ -217,7 +219,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divActividad,
 					$scope.divSubItem
 				);
-				//$scope.detalles[$scope.mPlanificadaID].npValor = $scope.detalles[$scope.mPlanificadaID].cantidad;
 				break;
 			case "A": //Ajustada
 				$scope.totalAjustada = ($scope.divActividad
@@ -235,21 +236,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divActividad,
 					$scope.divSubItem
 				);
-				//$scope.detalles[$scope.mAjustadaID].npValor = $scope.detalles[$scope.mAjustadaID].cantidad;
 				break;
 			case "D": //Devengo
-				$scope.totalDevengo = ($scope.divActividad
-					? $scope.detalles[$scope.mAjustadaID].metavalor
-					: ($scope.divSubTarea
-						? $scope.detalles[$scope.mAjustadaID].cantidad
-						: $scope.npTotalAjustado
-					)
-				);
-/*				for (var i = 0; i < 12; i++) {
-					$scope.detallesDevengo[i].valor = $scope.detallesAjustada[i];
-				}
-				return;
-*/				distribuirValor(
+				$scope.totalDevengo = $scope.npTotalAjustado;
+				distribuirValor(
 					$scope.objetoDevengo,
 					$scope.detallesDevengo,
 					$scope.totalDevengo,

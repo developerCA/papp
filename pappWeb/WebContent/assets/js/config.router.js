@@ -1145,13 +1145,14 @@ app.directive('decimal', [function () {
 
             elem.bind('blur', function(event) {
             	var plainNumber;
+            	var fuente = elem.val().replace(",", ".");
             	try {
-            		plainNumber = Number(elem.val().replace(/(?!-)[^0-9.]/g, ""));
+            		plainNumber = Number(fuente.replace(/(?!-)[^0-9.]/g, ""));
             	} catch (e) {
             		elem.value = "ERROR";
             		return;
             	}
-            	elem.val(plainNumber.toFixed(attrs.decimal));
+            	elem.val(plainNumber.toFixed(attrs.decimal).replace(",", "."));
             });
         }
     };
