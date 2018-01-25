@@ -5,11 +5,11 @@ app.factory("MetasFactory", [ "Restangular", function(Restangular) {
 	return {
 
 		traerMetas : function(pagina, ejercicio) {
-			return Restangular.allUrl("planificacion/consultar/metas/pagina="+pagina+"&plannacionalejerfiscalid="+ejercicio).getList();
+			return Restangular.allUrl("planificacion/consultar/metas/pagina="+pagina+"&tipo=P&plannacionalejerfiscalid="+ejercicio).getList();
 		},
 
 		traerMetasFiltro : function(pagina, ejercicio, codigo, descripcion, codigop, descripcionp) {
-			var url = "planificacion/consultar/metas/pagina="+pagina+"&plannacionalejerfiscalid="+ejercicio;
+			var url = "planificacion/consultar/metas/pagina="+pagina+"&tipo=P&plannacionalejerfiscalid="+ejercicio;
 
 			if (codigo!=null && codigo != "") url += "&codigo=" + codigo;
 			if (descripcion!=null && descripcion != "") url += "&descripcion=" + descripcion;

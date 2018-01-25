@@ -954,8 +954,9 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
-														</td><!-- ng-change="calcularPorcientoP($index);distribucionCalcularTotales('P');" -->
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
+													            ng-change="">
+														</td>
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
@@ -1032,8 +1033,9 @@
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'">
-														</td><!-- ng-change="calcularPorcientoA($index);distribucionCalcularTotales('A');" -->
+													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
+													            ng-change="">
+														</td>
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
@@ -1655,13 +1657,14 @@
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
 													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
-													            ng-change="calcularPorcientoP($index);distribucionCalcularTotales('P');">
+													            ng-change="">
 														</td>
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
+													            ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
+													            ng-change="">
 														</td>
 														<td>
 														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"
@@ -1734,13 +1737,14 @@
 													        	class="form-control" name="{{'pvalor_'+$index}}" ng-model="obj.valor"
 													            numericOnly style="text-align:right;" required decimal="2"
 													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
-													            ng-change="calcularPorcientoA($index);distribucionCalcularTotales('A');">
+													            ng-change="">
 														</td>
 														<td>
 													        <input type="number" placeholder="Escriba una cantida para el mes"
 													        	class="form-control" name="{{'pporcentaje_'+$index}}" ng-model="obj.porcentaje"
 													            numericOnly style="text-align:right;" required decimal="2"
-													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'">
+													            ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
+													            ng-change="">
 														</td>
 														<td>
 														    <textarea name="{{'descripcion_'+$index}}" rows="3" style="width:100%"

@@ -995,7 +995,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		if ($scope.divActividad || $scope.divSubTarea) {
 			var porcentaje = 0;
 			for (var i = 0; i < 12; i++) {
-				porcentaje = porcentaje + $scope.detallesPlanificada[i].porcentaje;
+				porcentaje += $scope.detallesPlanificada[i].porcentaje;
 			}
 			porcentaje = Number(porcentaje.toFixed(2));
 			if (porcentaje != 100) {
@@ -1007,12 +1007,16 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
     			return;
 			}
 		}
-		if ($scope.totalPlanificada != ($scope.divActividad
-				? $scope.detalles[$scope.mPlanificadaID].metavalor
-				: ($scope.divSubTarea
-					? $scope.detalles[$scope.mPlanificadaID].cantidad
-					: $scope.npTotalPlanificado
-				)
+		if ($scope.objetoPlanificada.unidadtiempo == "PE") {
+			$scope.totalPlanificada = 0;
+			for (var i = 0; i < 12; i++) {
+				$scope.totalPlanificada += $scope.detallesPlanificada[i].valor;
+			}
+			$scope.totalPlanificada = Number($scope.totalPlanificada.toFixed(2));
+		}
+		if ($scope.totalPlanificada != ($scope.divActividad || $scope.divSubTarea
+				? $scope.detalles[$scope.mPlanificadaID].cantidad
+				: $scope.npTotalPlanificado
 			)) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Planificada",
@@ -1073,12 +1077,16 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
     			return;
 			}
 		}
-		if ($scope.totalAjustada != ($scope.divActividad
-				? $scope.detalles[$scope.mAjustadaID].metavalor
-				: ($scope.divSubTarea
-					? $scope.detalles[$scope.mAjustadaID].cantidad
-					: $scope.npTotalAjustado
-				)
+		if ($scope.objetoAjustada.unidadtiempo == "PE") {
+			$scope.totalAjustada = 0;
+			for (var i = 0; i < 12; i++) {
+				$scope.totalAjustada += $scope.detallesAjustada[i].valor;
+			}
+			$scope.totalAjustada = Number($scope.totalAjustada.toFixed(2));
+		}
+		if ($scope.totalAjustada != ($scope.divActividad || $scope.divSubTarea
+				? $scope.detalles[$scope.mAjustadaID].cantidad
+				: $scope.npTotalAjustado
 			)) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Ajustada",
@@ -1114,10 +1122,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.submitformMetaDistribucionDevengo = function(form) {
-		if ($scope.totalDevengo != ($scope.divActividad
-				? $scope.detalles[$scope.mAjustadaID].metavalor
-				: $scope.npTotalAjustado
-			)) {
+		if ($scope.objetoDevengo.unidadtiempo == "PE") {
+			$scope.totalDevengo = 0;
+			for (var i = 0; i < 12; i++) {
+				$scope.totalDevengo += $scope.detallesDevengo[i].valor;
+			}
+			$scope.totalDevengo = Number($scope.totalDevengo.toFixed(2));
+		}
+		if ($scope.totalDevengo !=  $scope.npTotalAjustado) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Devengo",
         		"La suma de los valores es diferente de la Meta Devengo",
