@@ -22,6 +22,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	$scope.guardar=false;
 	$scope.objeto={estado:null};
 	$scope.detalles={};
+	$scope.mirar=false;
 	
     $scope.pagina = 1;
     $scope.aplicafiltro=false;
@@ -111,6 +112,24 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			}
 			console.log($scope.objeto.codigo);
 			$scope.edicion=true;
+			$scope.nuevoar=false;
+			$scope.guardar=true;
+		})
+	};
+
+	$scope.visualizar=function(index){
+		//console.log($scope.data[index]);
+		ordenDevengoFactory.traerEditar(
+			$scope.data[index].id
+		).then(function(resp){
+			//console.log(resp.json);
+			if (resp.estado) {
+			    $scope.objeto=resp.json.ordendevengo;
+			    $scope.detalles=resp.json.ordendevengolineas;
+			}
+			//console.log($scope.objeto.codigo);
+			$scope.edicion=true;
+			$scope.mirar=true;
 			$scope.nuevoar=false;
 			$scope.guardar=true;
 		})
@@ -318,7 +337,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 					return "Eliminar";
 				},
 				subtitulo : function() {
-					return "Observaci&oacute;n";
+					return "Observacion";
 				}
 			}
 		});

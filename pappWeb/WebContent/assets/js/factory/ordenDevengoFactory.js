@@ -72,7 +72,7 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			cur,
 			observacion
 		){
-			var url = "ejecucion/flujo/" + id + "/" + tipo;
+			var url = "ejecucion/flujodevengo/" + id + "/" + tipo;
 			var tObj = {};
 			if (cur != null) {
 				tObj.cur = cur;

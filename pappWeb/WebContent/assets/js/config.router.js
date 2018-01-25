@@ -677,8 +677,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalUnidadCtrl','UnidadFactory',
         		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
         		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
-        		'ModalCertificacionesFondoLiquidacionManuaCtrl',
-        		'ModalOrdenDevengoLineasCtrl','OrdenDevengoLineasFactory'
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl','CertificacionesFondosFactory'
 		),
         title: 'Orden de Devengo',
         ncyBreadcrumb: {
