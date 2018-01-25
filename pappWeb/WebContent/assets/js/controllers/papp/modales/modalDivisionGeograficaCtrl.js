@@ -29,8 +29,8 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 	$scope.consultarPaises=function(){
 		$scope.cPais=true;
 		$scope.data=[];
-		$scope.tipo=null;
-		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'A',null).then(function(resp){
+		$scope.tipo="A";
+		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'A',null,$scope.nombreFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -40,7 +40,7 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 		$scope.cProvincia=true;
 		$scope.data=[];
 		$scope.tipo="P";
-		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'P',pais).then(function(resp){
+		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'P',pais,$scope.nombreFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -50,26 +50,31 @@ app.controller('ModalDivisionGeograficaController', [ "$scope","$rootScope","$ui
 		$scope.cCanton=true;
 		$scope.data=[];
 		$scope.tipo="C";
-		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'C',provincia).then(function(resp){
+		divisionGeograficaFactory.traerDivisionesFullFiltro(pagina,'C',provincia,$scope.nombreFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
 
 	$scope.filtrar=function(){
-		//console.log("tipo:'"+tipo+"'");
-		$scope.data=[];
-		//traerDivisionesFiltro: (pagina,nombre,codigo,estado,tipo) {
-		divisionGeograficaFactory.traerDivisionesFiltro(
-			pagina,
-			$scope.nombreFiltro,
-			$scope.codigoFiltro,
-			$scope.estadoFiltro,
-			($scope.tipo != null? $scope.tipo: tipo) 
-		).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
-		})
+		if ($scope.cPais) {
+			$scope.consultarPaises();
+		} else if ($scope.cProvincia) {
+			$scope.consultarProvincias();
+		} else if ($scope.cCanton) {
+			$scope.consultarCantones();
+		} else {
+			divisionGeograficaFactory.traerDivisionesFiltro(
+				pagina,
+				$scope.nombreFiltro,
+				$scope.codigoFiltro,
+				$scope.estadoFiltro,
+				($scope.tipo != null? $scope.tipo: tipo) 
+			).then(function(resp){
+				if (resp.meta)
+					$scope.data=resp;
+			})
+		}
 	}
 
 	$scope.$watch('data', function() {
