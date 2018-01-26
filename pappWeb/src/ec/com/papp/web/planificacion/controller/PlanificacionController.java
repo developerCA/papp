@@ -142,7 +142,20 @@ public class PlanificacionController {
 						objetivoTO2.setObjetivopadreid(objetivoTO.getObjetivopadreid());
 					Collection<ObjetivoTO> objetivoTOs=UtilSession.planificacionServicio.transObtenerObjetivoArbol(objetivoTO2);
 					log.println("objetivos encontrados: " + objetivoTOs.size());
+					boolean grabar=true;
 					if(objetivoTOs.size()>0){
+						for(ObjetivoTO objetivoTO3:objetivoTOs) {
+							if((objetivoTO.getId()!=null && objetivoTO.getId().longValue()!=0) && objetivoTO3.getId().longValue()!=objetivoTO.getId().longValue() && objetivoTO3.getObjetivoinstitucionid().longValue()==objetivoTO.getObjetivoinstitucionid().longValue()) {
+								grabar=false;
+								break;
+							}
+							else if((objetivoTO.getId()==null || (objetivoTO.getId()!=null && objetivoTO3.getId().longValue()!=objetivoTO.getId().longValue())) && objetivoTO3.getObjetivoinstitucionid().longValue()==objetivoTO.getObjetivoinstitucionid().longValue()) {
+								grabar=false;
+								break;
+							}
+						}
+					}
+					if(!grabar){
 						mensajes.setMsg("Ya existe un objetivo creado para esta institucion");
 						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 					}
@@ -246,21 +259,21 @@ public class PlanificacionController {
 				log.println("encontro el codigo: " + plannacionalTOs.size());
 				boolean grabar=true;
 				if(plannacionalTOs.size()>0){
-//					for(ProgramaTO programaTO3:plannacionalTOs) {
-//						if((programaTO.getId()!=null && programaTO.getId().longValue()!=0) && programaTO3.getId().longValue()!=programaTO.getId().longValue() && programaTO3.getCodigo().equals(programaTO.getCodigo())) {
-//							grabar=false;
-//							break;
-//						}
-//						else if((programaTO.getId()==null || (programaTO.getId()!=null && programaTO3.getId().longValue()!=programaTO.getId().longValue())) && programaTO.getCodigo()!=null && programaTO3.getCodigo().equals(programaTO.getCodigo())) {
-//							grabar=false;
-//							break;
-//						}
-//					}
+					for(ProgramaTO programaTO3:plannacionalTOs) {
+						if((programaTO.getId()!=null && programaTO.getId().longValue()!=0) && programaTO3.getId().longValue()!=programaTO.getId().longValue() && programaTO3.getProgramaobjetivofuersasid().longValue()==programaTO.getProgramaobjetivofuersasid().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if((programaTO.getId()==null || (programaTO.getId()!=null && programaTO3.getId().longValue()!=programaTO.getId().longValue()))  && programaTO3.getProgramaobjetivofuersasid().longValue()==programaTO.getProgramaobjetivofuersasid().longValue()) {
+							grabar=false;
+							break;
+						}
+					}
 ////					programaTO2=(ProgramaTO)plannacionalTOs.iterator().next();
 ////					if(programaTO.getId()!=null && programaTO2.getId().longValue()!=programaTO.getId().longValue())
 ////						grabar=false;
-//				}
-//				if(!grabar){
+				}
+				if(!grabar){
 					mensajes.setMsg("Ya existe programa en la fuerza seleccionada");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}

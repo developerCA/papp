@@ -285,6 +285,8 @@ public class ConsultasUtil {
 				objetivoTO.setCodigo4(parameters.get("codigo"));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
 				objetivoTO.setDescripcion4(parameters.get("descripcion"));
+			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
+				objetivoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("objetivoejerciciofiscalid")!=null && !parameters.get("objetivoejerciciofiscalid").equals(""))
 				objetivoTO.setObjetivoejerciciofiscalid(Long.valueOf(parameters.get("objetivoejerciciofiscalid")));
 			Collection<ObjetivoTO> resultado=UtilSession.planificacionServicio.transObtieneObjetivoGrilla(objetivoTO);
