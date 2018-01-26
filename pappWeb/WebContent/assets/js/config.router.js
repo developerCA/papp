@@ -543,7 +543,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalTipoProductoCtrl', 'TipoProductoFactory',
         		'ModalProcedimientoCtrl', 'TipoProcedimientoFactory',
         		'ModalTipoRegimenCtrl', 'ComunTipoRegimenFactory',
-        		'ModalUnidadMedidaCtrl', 'UnidadesMedidaFactory'
+        		'ModalUnidadMedidaCtrl', 'UnidadesMedidaFactory',
+        		'AprobacionPlanificacionFactory'
 		),
         title: 'Planificación UE',
         ncyBreadcrumb: {

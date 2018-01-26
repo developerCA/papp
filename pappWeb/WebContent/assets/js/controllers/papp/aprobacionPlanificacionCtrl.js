@@ -71,14 +71,13 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 		$scope.edicion=true;
 	}
 	
-	$scope.aprobarPlanificacion = function(index) {
-		$scope.index = ((pagina - 1) * 5) + index;
-		if ($scope.data[$scope.index].npestadopresupuesto != "Planificado") {
+	$scope.aprobarPlanificacion = function(obj) {
+		if (obj.npestadopresupuesto != "Planificado") {
 			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado", "warning");
 			return;
 		}
 		$scope.aprobacionPlanificacion = true;
-		$scope.objeto = $scope.data[index];
+		$scope.objeto = obj;
 	}
 
 	$scope.editarAprobarPlanificacion=function(){

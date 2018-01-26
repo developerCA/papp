@@ -15,7 +15,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body" ng-show="!edicion && !edicionMatrizPresupuesto && !edicionMatrizMetas">
+				<div class="panel-body" ng-show="!edicion && !edicionMatrizPresupuesto && !edicionMatrizMetas && !aprobacionPlanificacion && !aprobacionAjustado && !edicionMatrizPresupuestoAP && !edicionMatrizMetasAP">
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -62,18 +62,50 @@
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
 								<td>
-									<a class="btn btn-sm btn-primary" uib-tooltip="Matriz de Presupuesto" ng-click="editarMatrizPresupuesto($index);">
+									<a class="btn btn-sm btn-primary" uib-tooltip="Matriz de Presupuesto"
+										ng-click="editarMatrizPresupuesto($index);">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
 								<td>
-									<a class="btn btn-sm btn-primary" uib-tooltip="Planificacion" ng-click="cargarPlanificacionAnual(obj);">
+									<a class="btn btn-sm btn-primary" uib-tooltip="Planificacion"
+										ng-click="cargarPlanificacionAnual(obj);">
 										<i class="fa fa-clipboard"></i>
 									</a>
 								</td>
 								<td>
-									<a class="btn btn-sm btn-primary" uib-tooltip="Matriz de Metas" ng-click="editarMatrizMetas($index);">
+									<a class="btn btn-sm btn-primary" uib-tooltip="Matriz de Metas"
+										ng-click="editarMatrizMetas($index);">
 										<i class="fa fa-list-alt"></i>
+									</a>
+								</td>
+
+								<td>
+									<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important"
+										uib-tooltip="Aprobar Planificaci&oacute;n"
+										ng-click="aprobarPlanificacion(obj);">
+										<i class="fa ti-marker-alt"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important"
+										uib-tooltip="Aprobar Ajustada"
+										ng-click="aprobarAjustado(obj);">
+										<i class="fa ti-signal"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important"
+										uib-tooltip="Matriz Presupuestos"
+										ng-click="editarMatrizPresupuestoAP(obj);">
+										<i class="fa ti-layers-alt"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important"
+										uib-tooltip="Matriz Metas"
+										ng-click="editarMatrizMetasAP(obj);">
+										<i class="fa ti-pencil-alt"></i>
 									</a>
 								</td>
 								<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
@@ -912,7 +944,7 @@
 									novalidate ng-submit="form.submit(Form,'formMetaDistribucionPlanificada');">
 									<span>
 										&nbsp;Distribuci&oacute;n:
-										<a class="btn btn-sm btn-primary" style="background-color:#BF2F2F !important">
+										<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important">
 											Planificado
 										</a>
 										&nbsp;
@@ -1000,7 +1032,7 @@
 											<i class="fa ti-hand-point-right"></i>
 										</a>
 										&nbsp;
-										<a class="btn btn-sm btn-primary" style="background-color:#BF2F2F !important">
+										<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important">
 											Ajustado
 										</a>
 										<br>&nbsp;Unidad Tipo:
@@ -1614,7 +1646,7 @@
 									novalidate ng-submit="form.submit(Form,'formMetaDistribucionPlanificada');">
 									<span>
 										&nbsp;Distribuci&oacute;n:
-										<a class="btn btn-sm btn-primary" style="background-color:#BF2F2F !important">
+										<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important">
 											Planificado
 										</a>
 										&nbsp;
@@ -1703,7 +1735,7 @@
 											<i class="fa ti-hand-point-right"></i>
 										</a>
 										&nbsp;
-										<a class="btn btn-sm btn-primary" style="background-color:#BF2F2F !important">
+										<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important">
 											Ajustado
 										</a>
 										<br>&nbsp;Unidad Tipo:
@@ -2501,7 +2533,7 @@
 									novalidate ng-submit="form.submit(Form,'formMetaDistribucionPlanificada')">
 									<span>
 										&nbsp;Distribuci&oacute;n:
-										<a class="btn btn-sm btn-primary" style="background-color:#BF2F2F !important">
+										<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important">
 											Planificado
 										</a>
 										&nbsp;
@@ -2579,7 +2611,7 @@
 											<i class="fa ti-hand-point-right"></i>
 										</a>
 										&nbsp;
-										<a class="btn btn-sm btn-primary" style="background-color:#BF2F2F !important">
+										<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important">
 											Ajustado
 										</a>
 										&nbsp;
@@ -2652,7 +2684,7 @@
 											Ajustado
 										</a>
 										&nbsp;
-										<a class="btn btn-sm btn-primary" style="background-color:#BF2F2F !important">
+										<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important">
 											Devengo
 										</a>
 										<br>&nbsp;Unidad Tipo:
@@ -2955,6 +2987,432 @@
 									<td style="text-align:right;">{{ obj.meta | number : 2 }}</td>
 									<td>{{ obj.npMes }}</td>
 									<td>{{ obj.observacion }}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel-body" ng-show="aprobacionPlanificacion">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Aprovacion Planificaci&oacute;n
+						</h5>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-white">
+								<div class="panel-heading">
+									<h4 class="panel-title">Presupuesto</h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        C&oacute;digo
+									    </label>
+									    <input type="text" ng-disabled="true"
+									        class="form-control" name="fCodigo" ng-model="objeto.codigopresup">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Nombre
+									    </label>
+									    <input type="text" ng-disabled="true"
+									        class="form-control" name="fNombre" ng-model="objeto.nombre">
+									</div>
+								</div>
+								<div class="panel-footer pull-right">
+									<a class="btn btn-sm btn-primary" ng-click="editarAprobarPlanificacion();">
+										Aprobar
+									</a>
+									<a class="btn btn-sm btn-default" ng-click="volver();">
+										Volver
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<table class="table table-bordered">
+								<tr>
+									<td></td>
+									<td>#</td>
+									<td>Nivel</td>
+									<td>Observaci&oacute;n</td>
+								</tr>
+								<tr ng-repeat="obj in detalle" class="table-stylish">
+									<td>
+										<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important"
+											uib-tooltip="Modificar"
+											ng-click="modificarPresupuesto(obj);">
+											<i class="fa ti-layers-alt"></i>
+										</a>
+									</td>
+									<td>{{ $index + 1 }}</td>
+									<td>
+										 <span ng-if="obj.nivel == 'AC'">
+										 	ACTIVIDAD
+										 </span>
+										 <span ng-if="obj.nivel == 'SA'">
+										 	SUBACTIVIDAD
+										 </span>
+										 <span ng-if="obj.nivel == 'TA'">
+										 	TAREA
+										 </span>
+										 <span ng-if="obj.nivel == 'ST'">
+										 	SUBTAREA
+										 </span>
+										 <span ng-if="obj.nivel == 'IT'">
+										 	ITEM
+										 </span>
+										 <span ng-if="obj.nivel == 'SI'">
+										 	SUBITEM
+										 </span>
+									</td>
+									<td>{{ obj.mensaje }}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel-body" ng-show="aprobacionAjustado">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Aprovacion Ajustado
+						</h5>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-white">
+								<div class="panel-heading">
+									<h4 class="panel-title">Ajustado</h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        C&oacute;digo
+									    </label>
+									    <input type="text" ng-disabled="true"
+									        class="form-control" name="fCodigo" ng-model="objeto.codigopresup">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Nombre
+									    </label>
+									    <input type="text" ng-disabled="true"
+									        class="form-control" name="fNombre" ng-model="objeto.nombre">
+									</div>
+								</div>
+								<div class="panel-footer pull-right">
+									<a class="btn btn-sm btn-primary" ng-click="editarAprobarAjustada();">
+										Aprobar
+									</a>
+									<a class="btn btn-sm btn-default" ng-click="volver();">
+										Volver
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<table class="table table-bordered">
+								<tr>
+									<td>#</td>
+									<td>Nivel</td>
+									<td>Observaci&oacute;n</td>
+								</tr>
+								<tr ng-repeat="obj in detalle" class="table-stylish">
+									<td>{{ $index + 1 }}</td>
+									<td>
+										 <span ng-if="obj.nivel == 'AC'">
+										 	ACTIVIDAD
+										 </span>
+										 <span ng-if="obj.nivel == 'SA'">
+										 	SUBACTIVIDAD
+										 </span>
+										 <span ng-if="obj.nivel == 'TA'">
+										 	TAREA
+										 </span>
+										 <span ng-if="obj.nivel == 'ST'">
+										 	SUBTAREA
+										 </span>
+										 <span ng-if="obj.nivel == 'IT'">
+										 	ITEM
+										 </span>
+										 <span ng-if="obj.nivel == 'SI'">
+										 	SUBITEM
+										 </span>
+									</td>
+									<td>{{ obj.mensaje }}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel-body" ng-show="edicionMatrizPresupuestoAP">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							Matriz de Presupuesto
+						</h4>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-white">
+								<div class="panel-heading">
+									<h4 class="panel-title">Unidad</h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Instituci&oacute;n
+									    </label>
+									    <input type="text" placeholder="Escriba un instituci&oacute;n"
+									        class="form-control" name="nombreinstitucion" ng-model="nombreinstitucion"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Entidad Operativa Desconcentrada
+									    </label>
+									    <input type="text" placeholder="Escriba un entidad operativa desconcentrada"
+									        class="form-control" name="nombreinstentidad" ng-model="nombreinstentidad"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Unidad Desceoncentrada
+									    </label>
+									    <input type="text" placeholder="Escriba un unidad desceoncentrada"
+									        class="form-control" name="nombreunidad" ng-model="nombreunidad"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Tipo
+									    </label>
+									    <select class="form-control" name="tipo"
+									        ng-model="tipo" required>
+									        <option value="P">Planificada</option>
+									        <option value="A">Ajustado</option>
+									    </select>
+									</div>
+								</div>
+								<div class="panel-footer pull-right">
+									<a class="btn btn-sm btn-default" ng-click="renovarAP();">
+										Renovar
+									</a>
+									<a class="btn btn-sm btn-primary" ng-click="guardar('P');">
+										Guardar
+									</a>
+									<a class="btn btn-sm btn-default" ng-click="volver();">
+										Volver
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="panel panel-white" id="panel1">
+								<div class="panel-heading">
+									<h4 class="panel-title">SubActividad</h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Programa
+									    </label>
+									    <input type="text" class="form-control" name="programa"
+									    	ng-model="programa" required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Proyecto
+									    </label>
+									    <input type="text" class="form-control" name="proyecto"
+									    	ng-model="proyecto" required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Actividad
+									    </label>
+									    <input type="text" class="form-control" name="actividad"
+									    	ng-model="actividad" required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        SubActividad
+									    </label>
+									    <input type="text" class="form-control" name="subactividad"
+									    	ng-model="subactividad" required ng-disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<table class="table table-bordered">
+								<tr>
+									<td>Tarea</td>
+									<td>Subtarea</td>
+									<td>Item C&oacute;digo</td>
+									<td>Subitem C&oacute;digo</td>
+									<td>Descripci&oacute;n</td>
+									<td>Presupuesto</td>
+									<td>Observaci&oacute;n</td>
+								</tr>
+								<tr ng-repeat="obj in detalle" class="table-stylish">
+									<td>{{ obj.tareanombre }}</td>
+									<td>{{ obj.subtareanombre }}</td>
+									<td>{{ obj.itemcodigo }}</td>
+									<td>{{ obj.subitemcodigo }}</td>
+									<td>{{ obj.descripcion }}</td>
+									<td style="text-align:right;">{{ obj.presupuesto | number : 2 }}</td>
+									<td>
+								        <input type="text" placeholder="Escriba una observacion"
+								        	class="form-control" name="{{'obcerv_'+$index}}"
+								        	ng-model="obj.observacion" ng-change="editadoObservacion($index);">
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel-body" ng-show="edicionMatrizMetasAP">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Matriz de Metas
+						</h5>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-white">
+								<div class="panel-heading">
+									<h4 class="panel-title">Unidad</h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Instituci&oacute;n
+									    </label>
+									    <input type="text" placeholder="Escriba un instituci&oacute;n"
+									        class="form-control" name="nombreinstitucion" ng-model="nombreinstitucion"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Entidad Operativa Desconcentrada
+									    </label>
+									    <input type="text" placeholder="Escriba un entidad operativa desconcentrada"
+									        class="form-control" name="nombreinstentidad" ng-model="nombreinstentidad"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Unidad Desceoncentrada
+									    </label>
+									    <input type="text" placeholder="Escriba un unidad desceoncentrada"
+									        class="form-control" name="nombreunidad" ng-model="nombreunidad"
+									        required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Tipo
+									    </label>
+									    <select class="form-control" name="tipo"
+									        ng-model="tipo" required>
+									        <option value="P">Planificada</option>
+									        <option value="A">Ajustado</option>
+									    </select>
+									</div>
+								</div>
+								<div class="panel-footer pull-right">
+									<a class="btn btn-sm btn-default" ng-click="renovarAP();">
+										Renovar
+									</a>
+									<a class="btn btn-sm btn-primary" ng-click="guardar('M');">
+										Guardar
+									</a>
+									<a class="btn btn-sm btn-default" ng-click="volver();">
+										Volver
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="panel panel-white" id="panel1">
+								<div class="panel-heading">
+									<h4 class="panel-title">SubActividad</h4>
+								</div>
+								<div class="panel-body">
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Programa
+									    </label>
+									    <input type="text" class="form-control" name="programa"
+									    	ng-model="programa" required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Proyecto
+									    </label>
+									    <input type="text" class="form-control" name="proyecto"
+									    	ng-model="proyecto" required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        Actividad
+									    </label>
+									    <input type="text" class="form-control" name="actividad"
+									    	ng-model="actividad" required ng-disabled="true">
+									</div>
+									
+									<div class="form-group has-success">
+									    <label class="control-label">
+									        SubActividad
+									    </label>
+									    <input type="text" class="form-control" name="subactividad"
+									    	ng-model="subactividad" required ng-disabled="true">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<table class="table table-bordered">
+								<tr>
+									<td>Tarea</td>
+									<td>Ponderaci&oacute;n</td>
+									<td>Subtarea</td>
+									<td>Ponderaci&oacute;n</td>
+									<td>Descripci&oacute;n<br>(NO SE RECIBE)</td>
+									<td>Meta</td>
+									<td>Mes</td>
+									<td>Observaci&oacute;n</td>
+								</tr>
+								<tr ng-repeat="obj in detalle" class="table-stylish">
+									<td>{{ obj.tareacodigo + " " + obj.tareanombre }}</td>
+									<td style="text-align:right;">{{ obj.tareaponderacion | number : 2 }}</td>
+									<td>{{ obj.subtareacodigo + " " + obj.subtareanombre }}</td>
+									<td style="text-align:right;">{{ obj.subtareaponderacion | number : 2 }}</td>
+									<td>{{ obj.descripcion }}</td>
+									<td style="text-align:right;">{{ obj.meta | number : 2 }}</td>
+									<td>{{ obj.npMes }}</td>
+									<td>
+								        <input type="text" placeholder="Escriba una observacion"
+								        	class="form-control" name="{{'obcerv_'+$index}}"
+								        	ng-model="obj.observacion" ng-change="editadoObservacion($index);">
+									</td>
 								</tr>
 							</table>
 						</div>

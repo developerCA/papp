@@ -1,5 +1,5 @@
-app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","PlanificacionUEFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,PlanificacionUEFactory) {
+app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","PlanificacionUEFactory", "AprobacionPlanificacionFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,PlanificacionUEFactory, AprobacionPlanificacionFactory) {
 
 	$scope.codigoFiltro=null;
 	$scope.nombreFiltro=null;
@@ -42,6 +42,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.detallesAjustada=null;
 		$scope.objetoDevengo=null;
 		$scope.detallesDevengo=null;
+		$scope.volver();
 	}
 
 	var pagina = 1;
@@ -1421,6 +1422,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		});
 	}
 
+	$scope.modificarPresupuesto = function() {
+		
+	}
+
 	$scope.renovar = function() {
 		if ($scope.edicionMatrizPresupuesto) {
 			$scope.cargarMatrizPresupuestoTipo();
@@ -1446,6 +1451,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.volver = function() {
 		$scope.edicionMatrizPresupuesto = false;
 		$scope.edicionMatrizMetas = false;
+		$scope.aprobacionPlanificacion = false;
+		$scope.aprobacionAjustado = false;
+		$scope.edicionMatrizPresupuestoAP = false;
+		$scope.edicionMatrizMetasAP = false;
 	}
 
 	$scope.editarMatrizPresupuesto = function(index) {
@@ -1516,6 +1525,165 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		$scope.divMetaDistribucionAjustada=true;
 		$scope.divMetaDistribucionDevengo=false;
 	}
+
+//******
+	$scope.aprobarPlanificacion = function(obj) {
+		if (obj.npestadopresupuesto != "Planificado") {
+			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado", "warning");
+			return;
+		}
+		$scope.aprobacionPlanificacion = true;
+		$scope.objeto = obj;
+	}
+
+	$scope.editarAprobarPlanificacion=function(){
+		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			$scope.objeto.id,
+			$rootScope.ejefiscal,
+			$scope.objeto.npacitividadunidad,
+			"P"
+		).then(function(resp){
+			$scope.detalle = resp.json.resultadoaprobacion;
+			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+		});
+	};
+	
+	$scope.editadoObservacion = function(index) {
+		//index = ((pagina - 1) * 5) + index;
+		$scope.detalle[index].modificado = true;
+	}
+	
+	$scope.aprobarAjustado = function(obj) {
+		if (obj.npestadopresupuesto != "Aprobado") {
+			SweetAlert.swal(
+				"Aprobacion Planificacion!",
+				"Solo se puede aprobar el Ajustado si el Planificado esta Aprobado",
+				"warning"
+			);
+			return;
+		}
+		$scope.aprobacionAjustado = true;
+		$scope.objeto = obj;
+	}
+
+	$scope.editarAprobarAjustada=function(){
+   		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			$scope.objeto.id,
+			$rootScope.ejefiscal,
+			$scope.objeto.npacitividadunidad,
+			"A"
+		).then(function(resp){
+			$scope.detalle = resp.json.resultadoaprobacion;
+			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+		})
+	};
+
+	$scope.renovarAP = function() {
+		if ($scope.edicionMatrizPresupuestoAP) {
+			$scope.cargarMatrizPresupuestoTipoAP();
+		}
+		if ($scope.edicionMatrizMetasAP) {
+			$scope.cargarMatrizMetasTipoAP();
+		}
+		return;
+		var tObj = Object.assign($scope.unidad, $scope.cabecera);
+		tObj.detalle = $scope.detalle;
+		PlanificacionUEFactory.cargarMatrizPresupuesto(
+			tObj
+		).then(function(resp){
+			console.log(resp);
+			if (resp.estado) {
+	            SweetAlert.swal("Planificacion UE! - Subitem", "Registro registrado satisfactoriamente!", "success");
+			} else {
+				SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+			}
+		});
+	}
+
+	$scope.editarMatrizPresupuestoAP = function(obj) {
+		$scope.tipo = "P";
+		$scope.objeto = obj;
+		$scope.cargarMatrizPresupuestoTipoAP();
+	}
+
+	$scope.editarMatrizMetasAP = function(obj) {
+		$scope.tipo = "M";
+		$scope.objeto = obj;
+		$scope.cargarMatrizMetasTipoAP();
+	}
+
+	$scope.cargarMatrizPresupuestoTipoAP = function() {
+		AprobacionPlanificacionFactory.cargarMatrizPresupuesto(
+			$scope.objeto.id,
+			$rootScope.ejefiscal,
+			$scope.tipo
+		).then(function(resp){
+			console.log(resp);
+			if (!resp.estado) return;
+			$scope.unidad = resp.json.unidad;
+			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
+			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
+			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
+			$scope.cabecera = resp.json.cabecera[0];
+			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			$scope.detalle = resp.json.detalle;
+			$scope.edicionMatrizPresupuestoAP = true;
+		});
+	}
+
+	$scope.cargarMatrizMetasTipoAP = function() {
+		AprobacionPlanificacionFactory.cargarMatrizMetas(
+			$scope.objeto.id,
+			$rootScope.ejefiscal,
+			$scope.tipo
+		).then(function(resp){
+			console.log(resp);
+			if (!resp.estado) return;
+			$scope.unidad = resp.json.unidad;
+			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
+			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
+			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
+			$scope.cabecera = resp.json.cabecera[0];
+			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			$scope.detalle = resp.json.detalle;
+			$scope.edicionMatrizMetasAP = true;
+		});
+	}
+
+	$scope.guardar = function(tipo) {
+		var tObj =  [];
+		for (var i = 0; i < $scope.detalle.length; i++) {
+			if ($scope.detalle[i].modificado) {
+				tObj.push($scope.detalle[i]);
+				$scope.detalle[i].modificado=false;
+			}
+		}
+		AprobacionPlanificacionFactory.guardar(
+			tipo,
+			tObj
+		).then(function(resp){
+			//console.log(resp.json);
+			if (!resp.estado) {
+				SweetAlert.swal(
+					"Aprobacion Planificacion!",
+					resp.mensajes.msg,
+					"error"
+				);
+				return;
+			}
+			SweetAlert.swal(
+				"Aprobacion Planificacion!",
+				"Se grabo correctamente.",
+				"success"
+			);
+		})
+	};
 } ]);
 
 function distribuirValor(
