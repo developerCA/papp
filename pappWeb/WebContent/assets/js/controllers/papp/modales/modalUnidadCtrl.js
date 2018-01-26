@@ -2,28 +2,61 @@
 
 app.controller('ModalUnidadController', [ "$scope","$rootScope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","unidadFactory",
 	function($scope,$rootScope,$uibModalInstance,SweetAlert,$filter, ngTableParams,unidadFactory) {
-    
-	
+
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
 	$scope.estadoFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
 	$scope.detalles=[];
-	
+	$scope.data=[];
+
 	var pagina = 1;
-	
+
 	$scope.consultar=function(){
-		$scope.data=[];
-		unidadFactory.traerUnidades(pagina).then(function(resp){
-			console.log(resp);
+		unidadFactory.traerUnidades(
+			pagina
+		).then(function(resp){
+			//console.log(resp);
+			if (resp.meta) $scope.data = resp;
+		})
+	};
+
+	$scope.consultarF=function(){
+		unidadFactory.traerFiltro(
+			pagina,
+			$rootScope.ejefiscal,
+			$scope.nombreFiltro,
+			$scope.codigoFiltro,
+			$scope.estadoFiltro
+		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
+	}
+
+	$scope.filtrar=function(){
+		unidadFactory.traerUnidadesFiltro(
+			pagina,
+			$scope.nombreFiltro,
+			$scope.codigoFiltro,
+			$scope.estadoFiltro
+		).then(function(resp){
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
+	
+	$scope.limpiar=function(){
+		$scope.nombreFiltro=null;
+		$scope.codigoFiltro=null;
+		$scope.estadoFiltro=null;
+		
+		$scope.consultar();
+		
 	};
 	
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -42,26 +75,6 @@ app.controller('ModalUnidadController', [ "$scope","$rootScope","$uibModalInstan
 			}
 		});
 	});
-	
-	
-	$scope.filtrar=function(){
-		
-		$scope.data=[];
-		unidadFactory.traerUnidadesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-	
-	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.codigoFiltro=null;
-		$scope.estadoFiltro=null;
-		
-		$scope.consultar();
-		
-	};
 
 	$scope.seleccionar=function(obj){
 		$uibModalInstance.close(obj);		

@@ -14,9 +14,14 @@ app.controller('ModalUnidadCortoController', [ "$scope","$rootScope","$uibModalI
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		$scope.data=[];
-		unidadFactory.traerUnidadesFiltro(pagina, null, null, "A").then(function(resp){
-			console.log(resp);
+		unidadFactory.traerFiltro(
+				pagina,
+				$rootScope.ejefiscal,
+				null,
+				null,
+				"A"
+		).then(function(resp){
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -24,7 +29,13 @@ app.controller('ModalUnidadCortoController', [ "$scope","$rootScope","$uibModalI
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		unidadFactory.traerUnidadesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,"A").then(function(resp){
+		unidadFactory.traerUnidadesFiltro(
+			pagina,
+			$rootScope.ejefiscal,
+			$scope.nombreFiltro,
+			$scope.codigoFiltro,
+			"A"
+		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})

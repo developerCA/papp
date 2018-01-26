@@ -3,7 +3,8 @@
 app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootScope","certificacionID","unidadID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
 	function($scope,$rootScope,certificacionID,unidadID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,certificacionesFondosFactory) {
 
-	$scope.noeditar=false;
+	$scope.noeditar = false;
+
 	$scope.init=function(){
 		if (editar == null) {
 			//nuevo
@@ -12,8 +13,9 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 			).then(function(resp){
 				console.log(resp.json.certificacionlinea);
 	        	$scope.objeto = resp.json.certificacionlinea;
-	        	$scope.noeditar=false;
-	    		certificacionesFondosFactory.listarSubtareas(
+	        	$scope.noeditar = false;
+	        	$scope.saldo = 0;
+	        	certificacionesFondosFactory.listarSubtareas(
 					$rootScope.ejefiscal,
 					unidadID
 				).then(function(resp){
@@ -32,8 +34,24 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 					//console.log(resp);
 		        	$scope.objeto = resp.json.certificacionlinea;
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
+		        	$scope.saldo = $scope.objeto.npvalor + $scope.objeto.npvalorinicial;
+		        	$scope.ponerCodigos();
 		        	$scope.noeditar=true;
 				})
+		}
+	}
+
+	$scope.ponerCodigos = function() {
+		$scope.objetoDetalles.programanombre = $scope.objetoDetalles.programacodigo + ": " + $scope.objetoDetalles.programanombre;
+		$scope.objetoDetalles.subprogramanombre = $scope.objetoDetalles.subprogramacodigo + ": " + $scope.objetoDetalles.subprogramanombre;
+		$scope.objetoDetalles.proyectonombre = $scope.objetoDetalles.proyectocodigo + ": " + $scope.objetoDetalles.proyectonombre;
+		$scope.objetoDetalles.actividadnombre = $scope.objetoDetalles.actividadcodigo + ": " + $scope.objetoDetalles.actividadnombre;
+		$scope.objetoDetalles.subactividadnombre = $scope.objetoDetalles.subactividadcodigo + ": " + $scope.objetoDetalles.subactividadnombre;
+		$scope.objetoDetalles.tareanombre = $scope.objetoDetalles.tareacodigo + ": " + $scope.objetoDetalles.tareanombre;
+		if (editar != null) {
+			$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ": " + $scope.objetoDetalles.subtareanombre;
+			$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
+			$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ": " + $scope.objetoDetalles.subitemnombre;
 		}
 	}
 
@@ -57,7 +75,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
         		id: "",
         		descripcionexten: "Selecione un item"
         	}].concat(resp.json.result);
-			//console.log($scope.listarItems);
+        	$scope.ponerCodigos();
 		})
 	}
 
@@ -87,7 +105,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 			$scope.si[i].tablarelacionid
 		).then(function(resp){
 			//console.log(resp);
-        	$scope.objeto.npvalor = resp.json.valordisponiblesi.saldo;
+        	$scope.saldo = resp.json.valordisponiblesi.saldo;
 		})
 	}
 

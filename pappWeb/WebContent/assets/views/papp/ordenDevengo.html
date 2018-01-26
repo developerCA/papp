@@ -469,7 +469,6 @@
 								<div class="form-group has-success">
 								    <label class="control-label">
 								        Tipo
-								        <span class="symbol required"></span>
 								    </label>
 								    <select class="form-control" name="tipo"
 								        ng-model="objeto.tipo" ng-disabled="false">
@@ -477,109 +476,51 @@
 								        <option value="L">Liquidaci&oacute;n</option>
 								        <option value="N">Normal</option>
 								    </select>
-								    <span class="error text-small block"
-								        ng-if="Form.tipo.$dirty && Form.tipo.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.tipo.$valid">
-								        Listo
-								    </span>
 								</div>
 								
-								<div class="form-group"
-								    ng-class="{'has-error':Form.npordengasto.$dirty && Form.npordengasto.$invalid, 'has-success':Form.npordengasto.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        Orden Gasto C&oacute;digo
-								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un orden gasto c&oacute;digo"
 								        class="form-control" name="npordengasto" ng-model="objeto.npordengasto"
 								        ng-disabled="true">
-								    <span class="error text-small block"
-								        ng-if="Form.npordengasto.$dirty && Form.npordengasto.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.npordengasto.$valid">
-								        Listo
-								    </span>
 								</div>
 								
-								<div class="form-group"
-								    ng-class="{'has-error':Form.npordengastovalor.$dirty && Form.npordengastovalor.$invalid, 'has-success':Form.npordengastovalor.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        Orden Gasto Valor (NO LLEGA EN REST)
-								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un orden gasto valor (no llega en rest)"
 								        class="form-control" name="npordengastovalor" ng-model="objeto.npordengastovalor"
 								        ng-disabled="true">
-								    <span class="error text-small block"
-								        ng-if="Form.npordengastovalor.$dirty && Form.npordengastovalor.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.npordengastovalor.$valid">
-								        Listo
-								    </span>
 								</div>
 								
-								<div class="form-group"
-								    ng-class="{'has-error':Form.valortotal.$dirty && Form.valortotal.$invalid, 'has-success':Form.valortotal.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        Valor Total
-								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor total"
 								        class="form-control" name="valortotal" ng-model="objeto.valortotal"
 								        ng-disabled="true">
-								    <span class="error text-small block"
-								        ng-if="Form.valortotal.$dirty && Form.valortotal.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.valortotal.$valid">
-								        Listo
-								    </span>
 								</div>
 								
-								<div class="form-group"
-								    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        Descripci&oacute;n
-								        <span class="symbol required"></span>
 								    </label>
 								    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
 								        class="form-control" ng-model="objeto.descripcion"
 								        ng-disabled="false"></textarea>
-								    <span class="error text-small block"
-								        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.descripcion.$valid">
-								        Listo
-								    </span>
 								</div>
 								
-								<div class="form-group"
-								    ng-class="{'has-error':Form.numerooficio.$dirty && Form.numerooficio.$invalid, 'has-success':Form.numerooficio.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        N&uacute;mero Oficio
-								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
 								        class="form-control" name="numerooficio" ng-model="objeto.numerooficio"
 								        ng-disabled="false">
-								    <span class="error text-small block"
-								        ng-if="Form.numerooficio.$dirty && Form.numerooficio.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.numerooficio.$valid">
-								        Listo
-								    </span>
 								</div>
 							</div>
 						</div>
@@ -587,13 +528,9 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<span ng-if="guardar && !noeditar">
-										<button type="submit" class="btn btn-primary">Guardar
-										</button>
-									</span>
 									<button type="reset" class="btn btn-default btn-o"
 										ng-click="form.reset(Form)">
-										Cancelar
+										Regresar
 									</button>
 								</div>
 							</div>

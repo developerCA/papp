@@ -134,7 +134,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 
 	$scope.aprobar = function(index) {
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede negar si esta en estado solicitado.", "error");
+			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede aprobar si esta en estado solicitado.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
