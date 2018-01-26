@@ -51,6 +51,20 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">
+									Estado
+								</label>
+								<select class="form-control" name="estadoFiltro" ng-model="estadoFiltro">
+									<option value="">Todos</option>
+									<option value="A">ACTIVOS</option>
+									<option value="I">INACTIVOS</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-sm-12">
 							<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
 								class="fa fa-search"></i> Buscar</a> <a

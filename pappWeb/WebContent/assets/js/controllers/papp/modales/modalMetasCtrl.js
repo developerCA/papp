@@ -7,6 +7,7 @@ app.controller('ModalMetasController', [ "$scope","$uibModalInstance","ejefiscal
 	$scope.descripcionFiltro=null;
 	$scope.codigoPFiltro=null;
 	$scope.descripcionPFiltro=null;
+	$scope.estadoFiltro=null;
 
 	$scope.edicion=false;
 	$scope.guardar=false;
@@ -56,7 +57,8 @@ app.controller('ModalMetasController', [ "$scope","$uibModalInstance","ejefiscal
 			$scope.codigoFiltro,
 			$scope.descripcionFiltro,
 			$scope.codigoPFiltro,
-			$scope.descripcionPFiltro
+			$scope.descripcionPFiltro,
+			$scope.estadoFiltro
 		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
@@ -68,6 +70,7 @@ app.controller('ModalMetasController', [ "$scope","$uibModalInstance","ejefiscal
 		$scope.descripcionFiltro=null;
 		$scope.codigoPFiltro=null;
 		$scope.descripcionPFiltro=null;
+		$scope.estadoFiltro=null;
 
 		$scope.consultar();
 	};
