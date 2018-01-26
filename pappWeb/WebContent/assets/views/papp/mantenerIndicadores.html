@@ -17,11 +17,9 @@
 
 	<div class="row">
 		<div class="col-md-12">
-
 			<div class="panel panel-white">
 
 				<div class="panel-body" ng-show="!edicion">
-
 					<div class="row">
 						<div class="col-md-12">
 							<a  class="btn btn-sm btn-dark-azure" ng-click="nuevo(null);">
@@ -60,7 +58,6 @@
 				</div>
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
 						<h5 class="panel-title">Indicador</h5>
 					</div>
@@ -69,7 +66,6 @@
 						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-6">
-								
 								<div class="form-group"
 								    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
 								    <label class="control-label">
@@ -333,7 +329,7 @@
 														    <textarea name="medverificacion_{{$index}}" rows="3" style="width: 100%"
 														    	placeholder="Escriba una verificaci&oacute;n"
 														        class="form-control" ng-model="obj.medverificacion"
-														        required></textarea>
+														        ></textarea>
 														</td>
 														<td>
 														    <select class="form-control" name="estado_{{$index}}"
