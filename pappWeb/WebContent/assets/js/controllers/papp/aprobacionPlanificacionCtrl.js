@@ -237,4 +237,24 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 			);
 		})
 	};
+
+	$scope.abrirPUE = function(obj) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/planificacionUE.html',
+			controller : 'ModalPlanificacionUEController',
+			size : 'lg',
+			resolve : {
+				objFuente : function() {
+					return obj;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.itemunidaditemid = obj.id;
+			$scope.objeto.npcodigoitem = obj.codigo;
+			$scope.objeto.npnombreitem = obj.nombre;		
+		}, function() {
+		});
+	};
 } ]);

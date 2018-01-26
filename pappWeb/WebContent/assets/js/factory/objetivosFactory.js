@@ -17,6 +17,18 @@ app.factory("objetivosFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).getList();
 		},
 
+		traerFiltroEstado: function(pagina, ejercicio, codigo, descripcion, estado) {
+			var url = "planificacion/consultar/objetivogrilla/" +
+				"pagina=" + pagina +
+				"&objetivoejerciciofiscalid=" + ejercicio;
+
+			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
+			if(descripcion!=null && descripcion != "") url += "&descripcion=" + descripcion;	
+			if(estado!=null && estado != "") url += "&estado=" + estado;	
+
+			return Restangular.allUrl(url).getList();
+		},
+
 		traerObjetivosEditar : function(id) {
 			var url = "planificacion/objetivogrilla/"+id+"/0";
 

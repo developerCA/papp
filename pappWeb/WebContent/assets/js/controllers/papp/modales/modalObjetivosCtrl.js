@@ -12,10 +12,12 @@ app.controller('ModalObjetivosController', [ "$scope","$rootScope","ejefiscal","
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		$scope.data=[];
-		objetivosFactory.traerObjetivos(
+		objetivosFactory.traerFiltroEstado(
 			pagina,
-			ejefiscal
+			ejefiscal,
+			null,
+			null,
+			"A"
 		).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
@@ -24,11 +26,12 @@ app.controller('ModalObjetivosController', [ "$scope","$rootScope","ejefiscal","
 	};
 
 	$scope.filtrar=function(){
-		$scope.data=[];
-		objetivosFactory.traerObjetivosFiltro(
+		objetivosFactory.traerFiltroEstado(
 			pagina,
+			ejefiscal,
 			$scope.codigoFiltro,
-			$scope.descripcionFiltro
+			$scope.descripcionFiltro,
+			"A"
 		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
@@ -41,7 +44,6 @@ app.controller('ModalObjetivosController', [ "$scope","$rootScope","ejefiscal","
 		$scope.estadoFiltro=null;
 		
 		$scope.consultar();
-		
 	};
 
 	$scope.$watch('data', function() {
