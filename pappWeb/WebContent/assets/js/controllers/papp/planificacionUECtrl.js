@@ -898,7 +898,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 
 	$scope.form = {
         submit: function(form,name) {
-            var firstError = null;
+            var firstError = null; //IVAN
             if (form.$invalid) {
                 var field = null, firstError = null;
                 for (field in form) {
@@ -906,7 +906,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
                         if (firstError === null && !form[field].$valid) {
                             firstError = form[field].$name;
                         }
-
                         if (form[field].$pristine) {
                             form[field].$dirty = true;
                         }
@@ -916,7 +915,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
                 return;
             } else {
             	eval("$scope.submit" + name + "(form);");
-        		if ($scope.nodeActivo.nodePadre == undefined) {
+/*        		if ($scope.nodeActivo.nodePadre == undefined) {
         			//primero
         			$scope.cargarPlanificacionAnual($scope.planificacionUE);
         		} else {
@@ -924,7 +923,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
         			$scope.nodeActivo.nodePadre.iscargado = false;
         			$scope.cargarHijos($scope.nodeActivo.nodePadre);
         		}
-            }
+*/            }
         },
         reset: function(form) {
             form.$setPristine(true);
@@ -960,6 +959,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.limpiarEdicion();
 	            //$scope.limpiar();
 	            SweetAlert.swal("Planificacion UE! - Actividad", "Registro registrado satisfactoriamente!", "success");
+    			$scope.cargarPlanificacionAnual($scope.planificacionUE);
 			} else {
 				SweetAlert.swal("Planificacion UE! - Actividad", resp.mensajes.msg, "error");
 	    		$scope.divPlanificacionAnual = false;
@@ -1159,6 +1159,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.limpiarEdicion();
 	            //$scope.limpiar();
 	            SweetAlert.swal("Planificacion UE! - Subactividad", "Registro registrado satisfactoriamente!", "success");
+    			$scope.nodeActivo.nodePadre.iscargado = false;
+    			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 			} else {
 				SweetAlert.swal("Planificacion UE! - Subactividad", resp.mensajes.msg, "error");
 	    		$scope.divPlanificacionAnual = false;
@@ -1180,8 +1182,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			if (resp.estado) {
 				form.$setPristine(true);
 				$scope.limpiarEdicion();
-	            //$scope.limpiar();
 	            SweetAlert.swal("Planificacion UE! - Tarea", "Registro registrado satisfactoriamente!", "success");
+    			$scope.nodeActivo.nodePadre.iscargado = false;
+    			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 			} else {
 				SweetAlert.swal("Planificacion UE! - Tarea", resp.mensajes.msg, "error");
 	    		$scope.divPlanificacionAnual = false;
@@ -1208,6 +1211,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 						$scope.detalles[i].id.id = resp.json.subtareaunidad.id;
 					}
 					$scope.esnuevo = false;
+	    			$scope.nodeActivo.nodePadre.iscargado = false;
+	    			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 				} else {
 					SweetAlert.swal("Planificacion UE! - Subtarea", resp.mensajes.msg, "error");
 				}
@@ -1260,6 +1265,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.limpiarEdicion();
 	            //$scope.limpiar();
 	            SweetAlert.swal("Planificacion UE! - Item", "Registro registrado satisfactoriamente!", "success");
+    			$scope.nodeActivo.nodePadre.iscargado = false;
+    			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 			} else {
 				SweetAlert.swal("Planificacion UE! - Item", resp.mensajes.msg, "error");
 	    		$scope.divPlanificacionAnual = false;
@@ -1317,6 +1324,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.limpiarEdicion();
 	            //$scope.limpiar();
 	            SweetAlert.swal("Planificacion UE! - Subitem", "Registro registrado satisfactoriamente!", "success");
+    			$scope.nodeActivo.nodePadre.iscargado = false;
+    			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 			} else {
 				SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
 	    		$scope.divPlanificacionAnual = false;
@@ -1422,9 +1431,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		});
 	}
 
-	$scope.modificarPresupuesto = function() {
-		
-	}
+	$scope.modificarPresupuesto = function(obj) {
+/****************************************
+		var node = {
+			nodeTipo: obj.nivel,
+			tablarelacionid: obj.id,
+			npIdunidad: ?,
+			padreID: ?,
+			npactividadid: ?
+		}
+		$scope.editarPlanificacionAnual(node);
+*/	}
 
 	$scope.renovar = function() {
 		if ($scope.edicionMatrizPresupuesto) {

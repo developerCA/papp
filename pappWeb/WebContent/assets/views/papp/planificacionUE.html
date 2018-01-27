@@ -442,9 +442,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<form name="Form" id="formActividad" novalidate ng-submit="form.submit(Form,'formActividad')">
+							<form name="FormActividad" id="formActividad" novalidate ng-submit="form.submit(FormActividad,'formActividad')">
 								<div class="pull-right">
-									<a class="btn btn-sm btn-default" ng-click="resetformActividad(Form);">
+									<a class="btn btn-sm btn-default" ng-click="resetformActividad(FormActividad);">
 										Cancelar
 									</a>
 								</div>
@@ -452,7 +452,7 @@
 									<div class="col-md-12">
 										<div>
 											<div class="form-group"
-											    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+											    ng-class="{'has-error':FormActividad.codigo.$dirty && FormActividad.codigo.$invalid, 'has-success':FormActividad.codigo.$valid}">
 											    <label class="control-label">
 											        C&oacute;digo
 											        <span class="symbol required"></span>
@@ -461,17 +461,17 @@
 											        class="form-control" name="codigo" ng-model="objeto.codigo" numericOnly
 											        required ng-disabled="true" ng-maxlength="10">
 											    <span class="error text-small block"
-											        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+											        ng-if="FormActividad.codigo.$dirty && FormActividad.codigo.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.codigo.$valid">
+											        ng-if="FormActividad.codigo.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
+											    ng-class="{'has-error':FormActividad.descripcion.$dirty && FormActividad.descripcion.$invalid, 'has-success':FormActividad.descripcion.$valid}">
 											    <label class="control-label">
 											        Descripci&oacute;n
 											        <span class="symbol required"></span>
@@ -480,17 +480,17 @@
 											        class="form-control" name="descripcion" ng-model="objeto.descripcion"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
+											        ng-if="FormActividad.descripcion.$dirty && FormActividad.descripcion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.descripcion.$valid">
+											        ng-if="FormActividad.descripcion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npFechainicio.$dirty && Form.npFechainicio.$invalid, 'has-success':Form.npFechainicio.$valid}">
+											    ng-class="{'has-error':FormActividad.npFechainicio.$dirty && FormActividad.npFechainicio.$invalid, 'has-success':FormActividad.npFechainicio.$valid}">
 											    <label class="control-label">
 											        Fecha Inicio
 											        <span class="symbol required"></span>
@@ -508,17 +508,17 @@
 											        </span>
 											    </div>
 											    <span class="error text-small block"
-											        ng-if="Form.npFechainicio.$dirty && Form.npFechainicio.$invalid">
+											        ng-if="FormActividad.npFechainicio.$dirty && FormActividad.npFechainicio.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npFechainicio.$valid">
+											        ng-if="FormActividad.npFechainicio.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npFechafin.$dirty && Form.npFechafin.$invalid, 'has-success':Form.npFechafin.$valid}">
+											    ng-class="{'has-error':FormActividad.npFechafin.$dirty && FormActividad.npFechafin.$invalid, 'has-success':FormActividad.npFechafin.$valid}">
 											    <label class="control-label">
 											        Fecha Fin
 											        <span class="symbol required"></span>
@@ -536,17 +536,17 @@
 											        </span>
 											    </div>
 											    <span class="error text-small block"
-											        ng-if="Form.npFechafin.$dirty && Form.npFechafin.$invalid">
+											        ng-if="FormActividad.npFechafin.$dirty && FormActividad.npFechafin.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npFechafin.$valid">
+											        ng-if="FormActividad.npFechafin.$valid">
 											        Listo
 											    </span>
 											</div>
 			
 											<div class="form-group"
-											    ng-class="{'has-error':Form.lineabase.$dirty && Form.lineabase.$invalid, 'has-success':Form.lineabase.$valid}">
+											    ng-class="{'has-error':FormActividad.lineabase.$dirty && FormActividad.lineabase.$invalid, 'has-success':FormActividad.lineabase.$valid}">
 											    <label class="control-label">
 											        L&iacute;nea Base
 											        <span class="symbol required"></span>
@@ -555,17 +555,17 @@
 											        class="form-control" ng-model="objeto.lineabase"
 											        required ng-disabled="!editar"></textarea>
 											    <span class="error text-small block"
-											        ng-if="Form.lineabase.$dirty && Form.lineabase.$invalid">
+											        ng-if="FormActividad.lineabase.$dirty && FormActividad.lineabase.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.lineabase.$valid">
+											        ng-if="FormActividad.lineabase.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.justificacion.$dirty && Form.justificacion.$invalid, 'has-success':Form.justificacion.$valid}">
+											    ng-class="{'has-error':FormActividad.justificacion.$dirty && FormActividad.justificacion.$invalid, 'has-success':FormActividad.justificacion.$valid}">
 											    <label class="control-label">
 											        Justificaci&oacute;n
 											        <span class="symbol required"></span>
@@ -574,17 +574,17 @@
 											        class="form-control" ng-model="objeto.justificacion"
 											        required ng-disabled="!editar"></textarea>
 											    <span class="error text-small block"
-											        ng-if="Form.justificacion.$dirty && Form.justificacion.$invalid">
+											        ng-if="FormActividad.justificacion.$dirty && FormActividad.justificacion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.justificacion.$valid">
+											        ng-if="FormActividad.justificacion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.objetivogeneral.$dirty && Form.objetivogeneral.$invalid, 'has-success':Form.objetivogeneral.$valid}">
+											    ng-class="{'has-error':FormActividad.objetivogeneral.$dirty && FormActividad.objetivogeneral.$invalid, 'has-success':FormActividad.objetivogeneral.$valid}">
 											    <label class="control-label">
 											        Objetivo General
 											        <span class="symbol required"></span>
@@ -593,17 +593,17 @@
 											        class="form-control" ng-model="objeto.objetivogeneral"
 											        required ng-disabled="!editar"></textarea>
 											    <span class="error text-small block"
-											        ng-if="Form.objetivogeneral.$dirty && Form.objetivogeneral.$invalid">
+											        ng-if="FormActividad.objetivogeneral.$dirty && FormActividad.objetivogeneral.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.objetivogeneral.$valid">
+											        ng-if="FormActividad.objetivogeneral.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.objetivoespec.$dirty && Form.objetivoespec.$invalid, 'has-success':Form.objetivoespec.$valid}">
+											    ng-class="{'has-error':FormActividad.objetivoespec.$dirty && FormActividad.objetivoespec.$invalid, 'has-success':FormActividad.objetivoespec.$valid}">
 											    <label class="control-label">
 											        Objetivo Especifico
 											        <span class="symbol required"></span>
@@ -612,17 +612,17 @@
 											        class="form-control" ng-model="objeto.objetivoespec"
 											        required ng-disabled="!editar"></textarea>
 											    <span class="error text-small block"
-											        ng-if="Form.objetivoespec.$dirty && Form.objetivoespec.$invalid">
+											        ng-if="FormActividad.objetivoespec.$dirty && FormActividad.objetivoespec.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.objetivoespec.$valid">
+											        ng-if="FormActividad.objetivoespec.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+											    ng-class="{'has-error':FormActividad.estado.$dirty && FormActividad.estado.$invalid, 'has-success':FormActividad.estado.$valid}">
 											    <label class="control-label">
 											        Estado
 											        <span class="symbol required"></span>
@@ -633,11 +633,11 @@
 											        <option value="I">Inactivo</option>
 											    </select>
 											    <span class="error text-small block"
-											        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+											        ng-if="FormActividad.estado.$dirty && FormActividad.estado.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.estado.$valid">
+											        ng-if="FormActividad.estado.$valid">
 											        Listo
 											    </span>
 											</div>
@@ -649,7 +649,7 @@
 											</div>
 			
 											<div class="form-group"
-											    ng-class="{'has-error':Form.presupplanif.$dirty && Form.presupplanif.$invalid, 'has-success':Form.presupplanif.$valid}">
+											    ng-class="{'has-error':FormActividad.presupplanif.$dirty && FormActividad.presupplanif.$invalid, 'has-success':FormActividad.presupplanif.$valid}">
 											    <label class="control-label">
 											        Presupuesto Planificado
 											        <span class="symbol required"></span>
@@ -658,17 +658,17 @@
 											        class="form-control" name="presupplanif" ng-model="objeto.presupplanif"
 											        required ng-disabled="!editar">
 											    <span class="error text-small block"
-											        ng-if="Form.presupplanif.$dirty && Form.presupplanif.$invalid">
+											        ng-if="FormActividad.presupplanif.$dirty && FormActividad.presupplanif.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.presupplanif.$valid">
+											        ng-if="FormActividad.presupplanif.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.presupajust.$dirty && Form.presupajust.$invalid, 'has-success':Form.presupajust.$valid}">
+											    ng-class="{'has-error':FormActividad.presupajust.$dirty && FormActividad.presupajust.$invalid, 'has-success':FormActividad.presupajust.$valid}">
 											    <label class="control-label">
 											        Presupuesto Ajustado
 											        <span class="symbol required"></span>
@@ -677,11 +677,11 @@
 											        class="form-control" name="presupajust" ng-model="objeto.presupajust"
 											        required ng-disabled="!editar">
 											    <span class="error text-small block"
-											        ng-if="Form.presupajust.$dirty && Form.presupajust.$invalid">
+											        ng-if="FormActividad.presupajust.$dirty && FormActividad.presupajust.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.presupajust.$valid">
+											        ng-if="FormActividad.presupajust.$valid">
 											        Listo
 											    </span>
 											</div>
@@ -693,7 +693,7 @@
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npIndicadornombre.$dirty && Form.npIndicadornombre.$invalid, 'has-success':Form.npIndicadornombre.$valid}">
+											    ng-class="{'has-error':FormActividad.npIndicadornombre.$dirty && FormActividad.npIndicadornombre.$invalid, 'has-success':FormActividad.npIndicadornombre.$valid}">
 											    <label class="control-label">
 											        Indicador Nombre
 											        <span class="symbol required"></span>
@@ -702,17 +702,17 @@
 											        class="form-control" name="npIndicadornombre" ng-model="objeto.npIndicadornombre"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npIndicadornombre.$dirty && Form.npIndicadornombre.$invalid">
+											        ng-if="FormActividad.npIndicadornombre.$dirty && FormActividad.npIndicadornombre.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npIndicadornombre.$valid">
+											        ng-if="FormActividad.npIndicadornombre.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npIndicadormetadescriopcion.$dirty && Form.npIndicadormetadescriopcion.$invalid, 'has-success':Form.npIndicadormetadescriopcion.$valid}">
+											    ng-class="{'has-error':FormActividad.npIndicadormetadescriopcion.$dirty && FormActividad.npIndicadormetadescriopcion.$invalid, 'has-success':FormActividad.npIndicadormetadescriopcion.$valid}">
 											    <label class="control-label">
 											        Indicador Meta Descripci&oacute;n
 											        <span class="symbol required"></span>
@@ -721,17 +721,17 @@
 											        class="form-control" name="npIndicadormetadescriopcion" ng-model="objeto.npIndicadormetadescriopcion"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npIndicadormetadescriopcion.$dirty && Form.npIndicadormetadescriopcion.$invalid">
+											        ng-if="FormActividad.npIndicadormetadescriopcion.$dirty && FormActividad.npIndicadormetadescriopcion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npIndicadormetadescriopcion.$valid">
+											        ng-if="FormActividad.npIndicadormetadescriopcion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npIndicadormetdescripcion.$dirty && Form.npIndicadormetdescripcion.$invalid, 'has-success':Form.npIndicadormetdescripcion.$valid}">
+											    ng-class="{'has-error':FormActividad.npIndicadormetdescripcion.$dirty && FormActividad.npIndicadormetdescripcion.$invalid, 'has-success':FormActividad.npIndicadormetdescripcion.$valid}">
 											    <label class="control-label">
 											        Indicador M&eacute;todo Descripci&oacute;n
 											        <span class="symbol required"></span>
@@ -740,17 +740,17 @@
 											        class="form-control" name="npIndicadormetdescripcion" ng-model="objeto.npIndicadormetdescripcion"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npIndicadormetdescripcion.$dirty && Form.npIndicadormetdescripcion.$invalid">
+											        ng-if="FormActividad.npIndicadormetdescripcion.$dirty && FormActividad.npIndicadormetdescripcion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npIndicadormetdescripcion.$valid">
+											        ng-if="FormActividad.npIndicadormetdescripcion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npIndicadormetcodigo.$dirty && Form.npIndicadormetcodigo.$invalid, 'has-success':Form.npIndicadormetcodigo.$valid}">
+											    ng-class="{'has-error':FormActividad.npIndicadormetcodigo.$dirty && FormActividad.npIndicadormetcodigo.$invalid, 'has-success':FormActividad.npIndicadormetcodigo.$valid}">
 											    <label class="control-label">
 											        Indicador M&eacute;todo Med Verificaci&oacute;n
 											        <span class="symbol required"></span>
@@ -759,17 +759,17 @@
 											        class="form-control" name="npIndicadormetcodigo" ng-model="objeto.npIndicadormetcodigo"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npIndicadormetcodigo.$dirty && Form.npIndicadormetcodigo.$invalid">
+											        ng-if="FormActividad.npIndicadormetcodigo.$dirty && FormActividad.npIndicadormetcodigo.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npIndicadormetcodigo.$valid">
+											        ng-if="FormActividad.npIndicadormetcodigo.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npUnidadmedidacodigo.$dirty && Form.npUnidadmedidacodigo.$invalid, 'has-success':Form.npUnidadmedidacodigo.$valid}">
+											    ng-class="{'has-error':FormActividad.npUnidadmedidacodigo.$dirty && FormActividad.npUnidadmedidacodigo.$invalid, 'has-success':FormActividad.npUnidadmedidacodigo.$valid}">
 											    <label class="control-label">
 											        Unidad Medida C&oacute;digo
 											        <span class="symbol required"></span>
@@ -778,17 +778,17 @@
 											        class="form-control" name="npUnidadmedidacodigo" ng-model="objeto.npUnidadmedidacodigo"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npUnidadmedidacodigo.$dirty && Form.npUnidadmedidacodigo.$invalid">
+											        ng-if="FormActividad.npUnidadmedidacodigo.$dirty && FormActividad.npUnidadmedidacodigo.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npUnidadmedidacodigo.$valid">
+											        ng-if="FormActividad.npUnidadmedidacodigo.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npUnidadmedidanombre.$dirty && Form.npUnidadmedidanombre.$invalid, 'has-success':Form.npUnidadmedidanombre.$valid}">
+											    ng-class="{'has-error':FormActividad.npUnidadmedidanombre.$dirty && FormActividad.npUnidadmedidanombre.$invalid, 'has-success':FormActividad.npUnidadmedidanombre.$valid}">
 											    <label class="control-label">
 											        Unidad Medida Nombre
 											        <span class="symbol required"></span>
@@ -797,17 +797,17 @@
 											        class="form-control" name="npUnidadmedidanombre" ng-model="objeto.npUnidadmedidanombre"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npUnidadmedidanombre.$dirty && Form.npUnidadmedidanombre.$invalid">
+											        ng-if="FormActividad.npUnidadmedidanombre.$dirty && FormActividad.npUnidadmedidanombre.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npUnidadmedidanombre.$valid">
+											        ng-if="FormActividad.npUnidadmedidanombre.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npGrupomedidacodigo.$dirty && Form.npGrupomedidacodigo.$invalid, 'has-success':Form.npGrupomedidacodigo.$valid}">
+											    ng-class="{'has-error':FormActividad.npGrupomedidacodigo.$dirty && FormActividad.npGrupomedidacodigo.$invalid, 'has-success':FormActividad.npGrupomedidacodigo.$valid}">
 											    <label class="control-label">
 											        Grupo Medida C&oacute;digo
 											        <span class="symbol required"></span>
@@ -816,17 +816,17 @@
 											        class="form-control" name="npGrupomedidacodigo" ng-model="objeto.npGrupomedidacodigo"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npGrupomedidacodigo.$dirty && Form.npGrupomedidacodigo.$invalid">
+											        ng-if="FormActividad.npGrupomedidacodigo.$dirty && FormActividad.npGrupomedidacodigo.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npGrupomedidacodigo.$valid">
+											        ng-if="FormActividad.npGrupomedidacodigo.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npGrupomedidanombre.$dirty && Form.npGrupomedidanombre.$invalid, 'has-success':Form.npGrupomedidanombre.$valid}">
+											    ng-class="{'has-error':FormActividad.npGrupomedidanombre.$dirty && FormActividad.npGrupomedidanombre.$invalid, 'has-success':FormActividad.npGrupomedidanombre.$valid}">
 											    <label class="control-label">
 											        Grupo Medida Nombre
 											        <span class="symbol required"></span>
@@ -835,17 +835,17 @@
 											        class="form-control" name="npGrupomedidanombre" ng-model="objeto.npGrupomedidanombre"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npGrupomedidanombre.$dirty && Form.npGrupomedidanombre.$invalid">
+											        ng-if="FormActividad.npGrupomedidanombre.$dirty && FormActividad.npGrupomedidanombre.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npGrupomedidanombre.$valid">
+											        ng-if="FormActividad.npGrupomedidanombre.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npMetaPlanificada.$dirty && Form.npMetaPlanificada.$invalid, 'has-success':Form.npMetaPlanificada.$valid}">
+											    ng-class="{'has-error':FormActividad.npMetaPlanificada.$dirty && FormActividad.npMetaPlanificada.$invalid, 'has-success':FormActividad.npMetaPlanificada.$valid}">
 											    <label class="control-label">
 											        Meta Planificada
 											        <span class="symbol required"></span>
@@ -854,17 +854,17 @@
 											        class="form-control" name="npMetaPlanificada" ng-model="detalles[mPlanificadaID].cantidad"
 											        required ng-disabled="!editar">
 											    <span class="error text-small block"
-											        ng-if="Form.npMetaPlanificada.$dirty && Form.npMetaPlanificada.$invalid">
+											        ng-if="FormActividad.npMetaPlanificada.$dirty && FormActividad.npMetaPlanificada.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npMetaPlanificada.$valid">
+											        ng-if="FormActividad.npMetaPlanificada.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npMetaPlanificadaDescripcion.$dirty && Form.npMetaPlanificadaDescripcion.$invalid, 'has-success':Form.npMetaPlanificadaDescripcion.$valid}">
+											    ng-class="{'has-error':FormActividad.npMetaPlanificadaDescripcion.$dirty && FormActividad.npMetaPlanificadaDescripcion.$invalid, 'has-success':FormActividad.npMetaPlanificadaDescripcion.$valid}">
 											    <label class="control-label">
 											        Meta Planificada Descripci&oacute;n
 											        <span class="symbol required"></span>
@@ -873,17 +873,17 @@
 											        class="form-control" ng-model="detalles[mPlanificadaID].acummetadesc"
 											        required ng-disabled="!editar"></textarea>
 											    <span class="error text-small block"
-											        ng-if="Form.npMetaPlanificadaDescripcion.$dirty && Form.npMetaPlanificadaDescripcion.$invalid">
+											        ng-if="FormActividad.npMetaPlanificadaDescripcion.$dirty && FormActividad.npMetaPlanificadaDescripcion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npMetaPlanificadaDescripcion.$valid">
+											        ng-if="FormActividad.npMetaPlanificadaDescripcion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npMetaAjustada.$dirty && Form.npMetaAjustada.$invalid, 'has-success':Form.npMetaAjustada.$valid}">
+											    ng-class="{'has-error':FormActividad.npMetaAjustada.$dirty && FormActividad.npMetaAjustada.$invalid, 'has-success':FormActividad.npMetaAjustada.$valid}">
 											    <label class="control-label">
 											        Meta Ajustada
 											        <span class="symbol required"></span>
@@ -892,17 +892,17 @@
 											        class="form-control" name="npMetaAjustada" ng-model="detalles[mAjustadaID].cantidad"
 											        required ng-disabled="!editar">
 											    <span class="error text-small block"
-											        ng-if="Form.npMetaAjustada.$dirty && Form.npMetaAjustada.$invalid">
+											        ng-if="FormActividad.npMetaAjustada.$dirty && FormActividad.npMetaAjustada.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npMetaAjustada.$valid">
+											        ng-if="FormActividad.npMetaAjustada.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npMetaAjustadaDescripcion.$dirty && Form.npMetaAjustadaDescripcion.$invalid, 'has-success':Form.npMetaAjustadaDescripcion.$valid}">
+											    ng-class="{'has-error':FormActividad.npMetaAjustadaDescripcion.$dirty && FormActividad.npMetaAjustadaDescripcion.$invalid, 'has-success':FormActividad.npMetaAjustadaDescripcion.$valid}">
 											    <label class="control-label">
 											        Meta Ajustada Descripci&oacute;n
 											        <span class="symbol required"></span>
@@ -911,11 +911,11 @@
 											        class="form-control" ng-model="detalles[mAjustadaID].acummetadesc"
 											        required ng-disabled="!editar"></textarea>
 											    <span class="error text-small block"
-											        ng-if="Form.npMetaAjustadaDescripcion.$dirty && Form.npMetaAjustadaDescripcion.$invalid">
+											        ng-if="FormActividad.npMetaAjustadaDescripcion.$dirty && FormActividad.npMetaAjustadaDescripcion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npMetaAjustadaDescripcion.$valid">
+											        ng-if="FormActividad.npMetaAjustadaDescripcion.$valid">
 											        Listo
 											    </span>
 											</div>
@@ -924,7 +924,7 @@
 											<button type="submit" class="btn btn-primary" ng-show="editar">
 												Confirmar
 											</button>
-											<a class="btn btn-sm btn-default" ng-click="resetformActividad(Form);">
+											<a class="btn btn-sm btn-default" ng-click="resetformActividad(FormActividad);">
 												Cancelar
 											</a>
 										</div>
@@ -1107,9 +1107,9 @@
 
 					<div class="row">
 						<div class="col-md-6">
-							<form name="Form" id="formSubActividad" novalidate ng-submit="form.submit(Form,'formSubActividad')">
+							<form name="FormSubActividad" id="formSubActividad" novalidate ng-submit="form.submit(FormSubActividad,'formSubActividad')">
 								<div class="pull-right">
-									<a class="btn btn-sm btn-default" ng-click="resetformSubActividad(Form);">
+									<a class="btn btn-sm btn-default" ng-click="resetformSubActividad(FormSubActividad);">
 										Cancelar
 									</a>
 								</div>
@@ -1117,7 +1117,7 @@
 									<div class="col-md-12">
 										<div>
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npcodigo.$dirty && Form.npcodigo.$invalid, 'has-success':Form.npcodigo.$valid}">
+											    ng-class="{'has-error':FormSubActividad.npcodigo.$dirty && FormSubActividad.npcodigo.$invalid, 'has-success':FormSubActividad.npcodigo.$valid}">
 											    <label class="control-label">
 											        C&oacute;digo
 											        <span class="symbol required"></span>
@@ -1126,17 +1126,17 @@
 										            class="form-control" name="npcodigo" ng-model="objeto.npcodigo"
 										            required ng-disabled="true" ng-maxlength="10">
 											    <span class="error text-small block"
-											        ng-if="Form.npcodigo.$dirty && Form.npcodigo.$invalid">
+											        ng-if="FormSubActividad.npcodigo.$dirty && FormSubActividad.npcodigo.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npcodigo.$valid">
+											        ng-if="FormSubActividad.npcodigo.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npdescripcion.$dirty && Form.npdescripcion.$invalid, 'has-success':Form.npdescripcion.$valid}">
+											    ng-class="{'has-error':FormSubActividad.npdescripcion.$dirty && FormSubActividad.npdescripcion.$invalid, 'has-success':FormSubActividad.npdescripcion.$valid}">
 											    <label class="control-label">
 											        Descripci&oacute;n
 											        <span class="symbol required"></span>
@@ -1145,17 +1145,17 @@
 										            class="form-control" name="npdescripcion" ng-model="objeto.npdescripcion"
 										            required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npdescripcion.$dirty && Form.npdescripcion.$invalid">
+											        ng-if="FormSubActividad.npdescripcion.$dirty && FormSubActividad.npdescripcion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npdescripcion.$valid">
+											        ng-if="FormSubActividad.npdescripcion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.ponderacion.$dirty && Form.ponderacion.$invalid, 'has-success':Form.ponderacion.$valid}">
+											    ng-class="{'has-error':FormSubActividad.ponderacion.$dirty && FormSubActividad.ponderacion.$invalid, 'has-success':FormSubActividad.ponderacion.$valid}">
 											    <label class="control-label">
 											        Ponderaci&oacute;n
 											        <span class="symbol required"></span>
@@ -1164,17 +1164,17 @@
 										            class="form-control" name="ponderacion" ng-model="objeto.ponderacion" numericOnly style="text-align:right;"
 										            required ng-disabled="!editar" format="number">
 											    <span class="error text-small block"
-											        ng-if="Form.ponderacion.$dirty && Form.ponderacion.$invalid">
+											        ng-if="FormSubActividad.ponderacion.$dirty && FormSubActividad.ponderacion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.ponderacion.$valid">
+											        ng-if="FormSubActividad.ponderacion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+											    ng-class="{'has-error':FormSubActividad.estado.$dirty && FormSubActividad.estado.$invalid, 'has-success':FormSubActividad.estado.$valid}">
 											    <label class="control-label">
 											        Estado
 											        <span class="symbol required"></span>
@@ -1185,11 +1185,11 @@
 											        <option value="I">Inactivo</option>
 										        </select>
 											    <span class="error text-small block"
-											        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+											        ng-if="FormSubActividad.estado.$dirty && FormSubActividad.estado.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.estado.$valid">
+											        ng-if="FormSubActividad.estado.$valid">
 											        Listo
 											    </span>
 											</div>
@@ -1198,7 +1198,7 @@
 											<button type="submit" class="btn btn-primary" ng-show="editar">
 												Confirmar
 											</button>
-											<a class="btn btn-sm btn-default" ng-click="resetformSubActividad(Form);">
+											<a class="btn btn-sm btn-default" ng-click="resetformSubActividad(FormSubActividad);">
 												Cancelar
 											</a>
 										</div>
@@ -1221,31 +1221,31 @@
 									Cancelar
 								</a>
 							</div>
-							<form name="Form" id="formTarea" novalidate ng-submit="form.submit(Form,'formTarea')">
+							<form name="FormTarea" id="formTarea" novalidate ng-submit="form.submit(FormTarea,'formTarea')">
 								<div class="row">
 									<div class="col-md-12">
 										<div>
 											<div class="form-group"
-											    ng-class="{'has-error':Form.TAnpcodigo.$dirty && Form.TAnpcodigo.$invalid, 'has-success':Form.TAnpcodigo.$valid}">
+											    ng-class="{'has-error':FormTarea.TAnpcodigo.$dirty && FormTarea.TAnpcodigo.$invalid, 'has-success':FormTarea.TAnpcodigo.$valid}">
 											    <label class="control-label">
 											        C&oacute;digo
 											        <span class="symbol required"></span>
 											    </label>
 											    <input type="text" placeholder="Escriba un c&oacute;digo"
 											        class="form-control" name="TAnpcodigo" ng-model="objeto.codigo"
-											        required ng-disabled="true" ng-maxlength="10">
+											        ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.TAnpcodigo.$dirty && Form.TAnpcodigo.$invalid">
+											        ng-if="FormTarea.TAnpcodigo.$dirty && FormTarea.TAnpcodigo.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.TAnpcodigo.$valid">
+											        ng-if="FormTarea.TAnpcodigo.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.TAnpdescripcion.$dirty && Form.TAnpdescripcion.$invalid, 'has-success':Form.TAnpdescripcion.$valid}">
+											    ng-class="{'has-error':FormTarea.TAnpdescripcion.$dirty && FormTarea.TAnpdescripcion.$invalid, 'has-success':FormTarea.TAnpdescripcion.$valid}">
 											    <label class="control-label">
 											        Descripci&oacute;n
 											        <span class="symbol required"></span>
@@ -1254,17 +1254,17 @@
 											        class="form-control" name="TAnpdescripcion" ng-model="objeto.descripcion"
 											        required>
 											    <span class="error text-small block"
-											        ng-if="Form.TAnpdescripcion.$dirty && Form.TAnpdescripcion.$invalid">
+											        ng-if="FormTarea.TAnpdescripcion.$dirty && FormTarea.TAnpdescripcion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.TAnpdescripcion.$valid">
+											        ng-if="FormTarea.TAnpdescripcion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.STponderacion.$dirty && Form.STponderacion.$invalid, 'has-success':Form.STponderacion.$valid}">
+											    ng-class="{'has-error':FormTarea.STponderacion.$dirty && FormTarea.STponderacion.$invalid, 'has-success':FormTarea.STponderacion.$valid}">
 											    <label class="control-label">
 											        Ponderaci&oacute;n
 											        <span class="symbol required"></span>
@@ -1273,17 +1273,17 @@
 											        class="form-control" name="STponderacion" ng-model="objeto.ponderacion" numericOnly style="text-align:right;"
 											        required format="number">
 											    <span class="error text-small block"
-											        ng-if="Form.STponderacion.$dirty && Form.STponderacion.$invalid">
+											        ng-if="FormTarea.STponderacion.$dirty && FormTarea.STponderacion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.STponderacion.$valid">
+											        ng-if="FormTarea.STponderacion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.STestado.$dirty && Form.STestado.$invalid, 'has-success':Form.STestado.$valid}">
+											    ng-class="{'has-error':FormTarea.STestado.$dirty && FormTarea.STestado.$invalid, 'has-success':FormTarea.STestado.$valid}">
 											    <label class="control-label">
 											        Estado
 											        <span class="symbol required"></span>
@@ -1294,11 +1294,11 @@
 											        <option value="I">Inactivo</option>
 											    </select>
 											    <span class="error text-small block"
-											        ng-if="Form.STestado.$dirty && Form.STestado.$invalid">
+											        ng-if="FormTarea.STestado.$dirty && FormTarea.STestado.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.STestado.$valid">
+											        ng-if="FormTarea.STestado.$valid">
 											        Listo
 											    </span>
 											</div>
@@ -1307,7 +1307,7 @@
 											<button type="submit" class="btn btn-primary" ng-show="editar">
 												Confirmar
 											</button>
-											<a class="btn btn-sm btn-default" ng-click="resetformTarea(Form);">
+											<a class="btn btn-sm btn-default" ng-click="resetformTarea(FormTarea);">
 												Cancelar
 											</a>
 										</div>
@@ -1324,9 +1324,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<form name="Form" id="formSubTarea" novalidate ng-submit="form.submit(Form,'formSubTarea')">
+							<form name="FormSubTarea" id="formSubTarea" novalidate ng-submit="form.submit(FormSubTarea,'formSubTarea')">
 								<div class="pull-right">
-									<a class="btn btn-sm btn-default" ng-click="resetformSubTarea(Form);">
+									<a class="btn btn-sm btn-default" ng-click="resetformSubTarea(FormSubTarea);">
 										Cancelar
 									</a>
 								</div>
@@ -1334,26 +1334,26 @@
 									<div class="col-md-12">
 										<div>
 											<div class="form-group"
-											    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+											    ng-class="{'has-error':FormSubTarea.codigo.$dirty && FormSubTarea.codigo.$invalid, 'has-success':FormSubTarea.codigo.$valid}">
 											    <label class="control-label">
 											        C&oacute;digo
 											        <span class="symbol required"></span>
 											    </label>
 											    <input type="text" placeholder="Escriba un c&oacute;digo"
 											        class="form-control" name="codigo" ng-model="objeto.codigo"
-											        required ng-disabled="true" ng-maxlength="10">
+											        ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+											        ng-if="FormSubTarea.codigo.$dirty && FormSubTarea.codigo.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.codigo.$valid">
+											        ng-if="FormSubTarea.codigo.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
+											    ng-class="{'has-error':FormSubTarea.descripcion.$dirty && FormSubTarea.descripcion.$invalid, 'has-success':FormSubTarea.descripcion.$valid}">
 											    <label class="control-label">
 											        Descripci&oacute;n
 											        <span class="symbol required"></span>
@@ -1362,17 +1362,17 @@
 											        class="form-control" name="descripcion" ng-model="objeto.descripcion"
 											        required>
 											    <span class="error text-small block"
-											        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
+											        ng-if="FormSubTarea.descripcion.$dirty && FormSubTarea.descripcion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.descripcion.$valid">
+											        ng-if="FormSubTarea.descripcion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.ponderacion.$dirty && Form.ponderacion.$invalid, 'has-success':Form.ponderacion.$valid}">
+											    ng-class="{'has-error':FormSubTarea.ponderacion.$dirty && FormSubTarea.ponderacion.$invalid, 'has-success':FormSubTarea.ponderacion.$valid}">
 											    <label class="control-label">
 											        Ponderaci&oacute;n
 											        <span class="symbol required"></span>
@@ -1381,17 +1381,17 @@
 											        class="form-control" name="ponderacion" ng-model="objeto.ponderacion" numericOnly style="text-align:right;"
 											        required format="number">
 											    <span class="error text-small block"
-											        ng-if="Form.ponderacion.$dirty && Form.ponderacion.$invalid">
+											        ng-if="FormSubTarea.ponderacion.$dirty && FormSubTarea.ponderacion.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.ponderacion.$valid">
+											        ng-if="FormSubTarea.ponderacion.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+											    ng-class="{'has-error':FormSubTarea.estado.$dirty && FormSubTarea.estado.$invalid, 'has-success':FormSubTarea.estado.$valid}">
 											    <label class="control-label">
 											        Estado
 											        <span class="symbol required"></span>
@@ -1402,11 +1402,11 @@
 											        <option value="I">Inactivo</option>
 											    </select>
 											    <span class="error text-small block"
-											        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+											        ng-if="FormSubTarea.estado.$dirty && FormSubTarea.estado.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.estado.$valid">
+											        ng-if="FormSubTarea.estado.$valid">
 											        Listo
 											    </span>
 											</div>
@@ -1418,7 +1418,7 @@
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npUnidadMedidaCodigo.$dirty && Form.npUnidadMedidaCodigo.$invalid, 'has-success':Form.npUnidadMedidaCodigo.$valid}">
+											    ng-class="{'has-error':FormSubTarea.npUnidadMedidaCodigo.$dirty && FormSubTarea.npUnidadMedidaCodigo.$invalid, 'has-success':FormSubTarea.npUnidadMedidaCodigo.$valid}">
 											    <label class="control-label">
 											        Unidad Medida C&oacute;digo
 											        <span class="symbol required"></span>
@@ -1426,7 +1426,7 @@
 											    <div class="input-group">
 											        <input type="text" placeholder="Escriba un unidad medida c&oacute;digo"
 											            class="form-control" name="npUnidadMedidaCodigo" ng-disabled="true"
-											            ng-model="objeto.npcodigounidad">
+											            ng-model="objeto.npcodigounidad" required>
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
 											                ng-click="abrirUnidadMedidaCodigo()">
@@ -1436,17 +1436,17 @@
 											        </span>
 											    </div>
 											    <span class="error text-small block"
-											        ng-if="Form.npUnidadMedidaCodigo.$dirty && Form.npUnidadMedidaCodigo.$invalid">
+											        ng-if="FormSubTarea.npUnidadMedidaCodigo.$dirty && FormSubTarea.npUnidadMedidaCodigo.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npUnidadMedidaCodigo.$valid">
+											        ng-if="FormSubTarea.npUnidadMedidaCodigo.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npUnidadMedidaNombre.$dirty && Form.npUnidadMedidaNombre.$invalid, 'has-success':Form.npUnidadMedidaNombre.$valid}">
+											    ng-class="{'has-error':FormSubTarea.npUnidadMedidaNombre.$dirty && FormSubTarea.npUnidadMedidaNombre.$invalid, 'has-success':FormSubTarea.npUnidadMedidaNombre.$valid}">
 											    <label class="control-label">
 											        Unidad Medida Nombre
 											        <span class="symbol required"></span>
@@ -1455,17 +1455,17 @@
 											        class="form-control" name="npUnidadMedidaNombre" ng-model="objeto.npnombreunidad"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npUnidadMedidaNombre.$dirty && Form.npUnidadMedidaNombre.$invalid">
+											        ng-if="FormSubTarea.npUnidadMedidaNombre.$dirty && FormSubTarea.npUnidadMedidaNombre.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npUnidadMedidaNombre.$valid">
+											        ng-if="FormSubTarea.npUnidadMedidaNombre.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npGrupoMedidaCodigo.$dirty && Form.npGrupoMedidaCodigo.$invalid, 'has-success':Form.npGrupoMedidaCodigo.$valid}">
+											    ng-class="{'has-error':FormSubTarea.npGrupoMedidaCodigo.$dirty && FormSubTarea.npGrupoMedidaCodigo.$invalid, 'has-success':FormSubTarea.npGrupoMedidaCodigo.$valid}">
 											    <label class="control-label">
 											        Grupo Medida C&oacute;digo
 											        <span class="symbol required"></span>
@@ -1474,17 +1474,17 @@
 											        class="form-control" name="npGrupoMedidaCodigo" ng-model="objeto.npcodigogrupo"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npGrupoMedidaCodigo.$dirty && Form.npGrupoMedidaCodigo.$invalid">
+											        ng-if="FormSubTarea.npGrupoMedidaCodigo.$dirty && FormSubTarea.npGrupoMedidaCodigo.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npGrupoMedidaCodigo.$valid">
+											        ng-if="FormSubTarea.npGrupoMedidaCodigo.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npGrupoMedidaNombre.$dirty && Form.npGrupoMedidaNombre.$invalid, 'has-success':Form.npGrupoMedidaNombre.$valid}">
+											    ng-class="{'has-error':FormSubTarea.npGrupoMedidaNombre.$dirty && FormSubTarea.npGrupoMedidaNombre.$invalid, 'has-success':FormSubTarea.npGrupoMedidaNombre.$valid}">
 											    <label class="control-label">
 											        Grupo Medida Nombre
 											        <span class="symbol required"></span>
@@ -1493,140 +1493,146 @@
 											        class="form-control" name="npGrupoMedidaNombre" ng-model="objeto.npnombregrupo"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npGrupoMedidaNombre.$dirty && Form.npGrupoMedidaNombre.$invalid">
+											        ng-if="FormSubTarea.npGrupoMedidaNombre.$dirty && FormSubTarea.npGrupoMedidaNombre.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npGrupoMedidaNombre.$valid">
+											        ng-if="FormSubTarea.npGrupoMedidaNombre.$valid">
 											        Listo
 											    </span>
 											</div>
-											
-											<div class="form-group"
-											    ng-class="{'has-error':Form.npMetaPlanificadaPorcentaje.$dirty && Form.npMetaPlanificadaPorcentaje.$invalid, 'has-success':Form.npMetaPlanificadaPorcentaje.$valid}">
-											    <label class="control-label">
-											        Meta Planificada Porcentaje
-											        <span class="symbol required"></span>
-											    </label>
-											    <input type="text" placeholder="Escriba un meta planificada porcentaje"
-											        class="form-control" name="npMetaPlanificadaPorcentaje"
-											        ng-model="detalles[mPlanificadaID].valor" numericOnly
-											        style="text-align:right;color:Green !important;font-weight:bold !important;"
-											        required ng-disabled="true" format="number">
-											    <span class="error text-small block"
-											        ng-if="Form.npMetaPlanificadaPorcentaje.$dirty && Form.npMetaPlanificadaPorcentaje.$invalid">
-											        Incorrecto
-											    </span>
-											    <span class="success text-small"
-											        ng-if="Form.npMetaPlanificadaPorcentaje.$valid">
-											        Listo
-											    </span>
-											</div>
-											
-											<div class="form-group"
-											    ng-class="{'has-error':Form.npMetaPlanificadaCantidad.$dirty && Form.npMetaPlanificadaCantidad.$invalid, 'has-success':Form.npMetaPlanificadaCantidad.$valid}">
-											    <label class="control-label">
-											        Meta Planificada Cantidad
-											        <span class="symbol required"></span>
-											    </label>
-											    <input type="text" placeholder="Escriba un meta planificada cantidad"
-											        class="form-control" name="npMetaPlanificadaCantidad"
-											        ng-model="detalles[mPlanificadaID].cantidad" numericOnly style="text-align:right;"
-											        required decimal="2" onClick="this.select();">
-											    <span class="error text-small block"
-											        ng-if="Form.npMetaPlanificadaCantidad.$dirty && Form.npMetaPlanificadaCantidad.$invalid">
-											        Incorrecto
-											    </span>
-											    <span class="success text-small"
-											        ng-if="Form.npMetaPlanificadaCantidad.$valid">
-											        Listo
-											    </span>
-											</div>
-											
-											<div class="form-group"
-											    ng-class="{'has-error':Form.npMetaPlanificadaDescripcion.$dirty && Form.npMetaPlanificadaDescripcion.$invalid, 'has-success':Form.npMetaPlanificadaDescripcion.$valid}">
-											    <label class="control-label">
-											        Meta Planificada Descripci&oacute;n
-											        <span class="symbol required"></span>
-											    </label>
-											    <textarea name="npMetaPlanificadaDescripcion" rows="5" style="width: 100%" placeholder="Escriba un meta planificada descripci&oacute;n"
-											        class="form-control" ng-model="detalles[mPlanificadaID].descripcion"
-											        required></textarea>
-											    <span class="error text-small block"
-											        ng-if="Form.npMetaPlanificadaDescripcion.$dirty && Form.npMetaPlanificadaDescripcion.$invalid">
-											        Incorrecto
-											    </span>
-											    <span class="success text-small"
-											        ng-if="Form.npMetaPlanificadaDescripcion.$valid">
-											        Listo
-											    </span>
-											</div>
-											
-											<div class="form-group"
-											    ng-class="{'has-error':Form.npMetaAjustadaPorcentaje.$dirty && Form.npMetaAjustadaPorcentaje.$invalid, 'has-success':Form.npMetaAjustadaPorcentaje.$valid}">
-											    <label class="control-label">
-											        Meta Ajustada Porcentaje
-											        <span class="symbol required"></span>
-											    </label>
-											    <input type="text" placeholder="Escriba un meta ajustada porcentaje"
-											        class="form-control" name="npMetaAjustadaPorcentaje"
-											        ng-model="detalles[mAjustadaID].valor" numericOnly
-											        style="text-align:right;color:Green !important;font-weight:bold !important;"
-											        required ng-disabled="true" format="number">
-											    <span class="error text-small block"
-											        ng-if="Form.npMetaAjustadaPorcentaje.$dirty && Form.npMetaAjustadaPorcentaje.$invalid">
-											        Incorrecto
-											    </span>
-											    <span class="success text-small"
-											        ng-if="Form.npMetaAjustadaPorcentaje.$valid">
-											        Listo
-											    </span>
-											</div>
-											
-											<div class="form-group"
-											    ng-class="{'has-error':Form.npMetaAjustadaCantidad.$dirty && Form.npMetaAjustadaCantidad.$invalid, 'has-success':Form.npMetaAjustadaCantidad.$valid}">
-											    <label class="control-label">
-											        Meta Ajustada Cantidad
-											        <span class="symbol required"></span>
-											    </label>
-											    <input type="text" placeholder="Escriba un meta ajustada cantidad"
-											        class="form-control" name="npMetaAjustadaCantidad"
-											        ng-model="detalles[mAjustadaID].cantidad" numericOnly style="text-align:right;"
-											        required decimal="2" onClick="this.select();">
-											    <span class="error text-small block"
-											        ng-if="Form.npMetaAjustadaCantidad.$dirty && Form.npMetaAjustadaCantidad.$invalid">
-											        Incorrecto
-											    </span>
-											    <span class="success text-small"
-											        ng-if="Form.npMetaAjustadaCantidad.$valid">
-											        Listo
-											    </span>
-											</div>
-											
-											<div class="form-group"
-											    ng-class="{'has-error':Form.npMetaAjustadaDescripcion.$dirty && Form.npMetaAjustadaDescripcion.$invalid, 'has-success':Form.npMetaAjustadaDescripcion.$valid}">
-											    <label class="control-label">
-											        Meta Ajustada Descripci&oacute;n
-											        <span class="symbol required"></span>
-											    </label>
-											    <textarea name="npMetaAjustadaDescripcion" rows="5" style="width: 100%" placeholder="Escriba un meta ajustada descripci&oacute;n"
-											        class="form-control" ng-model="detalles[mAjustadaID].descripcion"
-											        required></textarea>
-											    <span class="error text-small block"
-											        ng-if="Form.npMetaAjustadaDescripcion.$dirty && Form.npMetaAjustadaDescripcion.$invalid">
-											        Incorrecto
-											    </span>
-											    <span class="success text-small"
-											        ng-if="Form.npMetaAjustadaDescripcion.$valid">
-											        Listo
-											    </span>
+
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group"
+													    ng-class="{'has-error':FormSubTarea.npMetaPlanificadaPorcentaje.$dirty && FormSubTarea.npMetaPlanificadaPorcentaje.$invalid, 'has-success':FormSubTarea.npMetaPlanificadaPorcentaje.$valid}">
+													    <label class="control-label">
+													        Meta Planificada Porcentaje
+													        <span class="symbol required"></span>
+													    </label>
+													    <input type="text" placeholder="Escriba un meta planificada porcentaje"
+													        class="form-control" name="npMetaPlanificadaPorcentaje"
+													        ng-model="detalles[mPlanificadaID].valor" numericOnly
+													        style="text-align:right;color:Green !important;font-weight:bold !important;"
+													        required ng-disabled="true" format="number">
+													    <span class="error text-small block"
+													        ng-if="FormSubTarea.npMetaPlanificadaPorcentaje.$dirty && FormSubTarea.npMetaPlanificadaPorcentaje.$invalid">
+													        Incorrecto
+													    </span>
+													    <span class="success text-small"
+													        ng-if="FormSubTarea.npMetaPlanificadaPorcentaje.$valid">
+													        Listo
+													    </span>
+													</div>
+													
+													<div class="form-group"
+													    ng-class="{'has-error':FormSubTarea.npMetaPlanificadaCantidad.$dirty && FormSubTarea.npMetaPlanificadaCantidad.$invalid, 'has-success':FormSubTarea.npMetaPlanificadaCantidad.$valid}">
+													    <label class="control-label">
+													        Meta Planificada Cantidad
+													        <span class="symbol required"></span>
+													    </label>
+													    <input type="text" placeholder="Escriba un meta planificada cantidad"
+													        class="form-control" name="npMetaPlanificadaCantidad"
+													        ng-model="detalles[mPlanificadaID].cantidad" numericOnly style="text-align:right;"
+													        required decimal="2" onClick="this.select();">
+													    <span class="error text-small block"
+													        ng-if="FormSubTarea.npMetaPlanificadaCantidad.$dirty && FormSubTarea.npMetaPlanificadaCantidad.$invalid">
+													        Incorrecto
+													    </span>
+													    <span class="success text-small"
+													        ng-if="FormSubTarea.npMetaPlanificadaCantidad.$valid">
+													        Listo
+													    </span>
+													</div>
+													
+													<div class="form-group"
+													    ng-class="{'has-error':FormSubTarea.npMetaPlanificadaDescripcion.$dirty && FormSubTarea.npMetaPlanificadaDescripcion.$invalid, 'has-success':FormSubTarea.npMetaPlanificadaDescripcion.$valid}">
+													    <label class="control-label">
+													        Meta Planificada Descripci&oacute;n
+													        <span class="symbol required"></span>
+													    </label>
+													    <textarea name="npMetaPlanificadaDescripcion" rows="5" style="width: 100%" placeholder="Escriba un meta planificada descripci&oacute;n"
+													        class="form-control" ng-model="detalles[mPlanificadaID].descripcion"
+													        required></textarea>
+													    <span class="error text-small block"
+													        ng-if="FormSubTarea.npMetaPlanificadaDescripcion.$dirty && FormSubTarea.npMetaPlanificadaDescripcion.$invalid">
+													        Incorrecto
+													    </span>
+													    <span class="success text-small"
+													        ng-if="FormSubTarea.npMetaPlanificadaDescripcion.$valid">
+													        Listo
+													    </span>
+													</div>
+												</div>
+
+												<div class="col-md-6">
+													<div class="form-group"
+													    ng-class="{'has-error':FormSubTarea.npMetaAjustadaPorcentaje.$dirty && FormSubTarea.npMetaAjustadaPorcentaje.$invalid, 'has-success':FormSubTarea.npMetaAjustadaPorcentaje.$valid}">
+													    <label class="control-label">
+													        Meta Ajustada Porcentaje
+													        <span class="symbol required"></span>
+													    </label>
+													    <input type="text" placeholder="Escriba un meta ajustada porcentaje"
+													        class="form-control" name="npMetaAjustadaPorcentaje"
+													        ng-model="detalles[mAjustadaID].valor" numericOnly
+													        style="text-align:right;color:Green !important;font-weight:bold !important;"
+													        required ng-disabled="true" format="number">
+													    <span class="error text-small block"
+													        ng-if="FormSubTarea.npMetaAjustadaPorcentaje.$dirty && FormSubTarea.npMetaAjustadaPorcentaje.$invalid">
+													        Incorrecto
+													    </span>
+													    <span class="success text-small"
+													        ng-if="FormSubTarea.npMetaAjustadaPorcentaje.$valid">
+													        Listo
+													    </span>
+													</div>
+													
+													<div class="form-group"
+													    ng-class="{'has-error':FormSubTarea.npMetaAjustadaCantidad.$dirty && FormSubTarea.npMetaAjustadaCantidad.$invalid, 'has-success':FormSubTarea.npMetaAjustadaCantidad.$valid}">
+													    <label class="control-label">
+													        Meta Ajustada Cantidad
+													        <span class="symbol required"></span>
+													    </label>
+													    <input type="text" placeholder="Escriba un meta ajustada cantidad"
+													        class="form-control" name="npMetaAjustadaCantidad"
+													        ng-model="detalles[mAjustadaID].cantidad" numericOnly style="text-align:right;"
+													        required decimal="2" onClick="this.select();">
+													    <span class="error text-small block"
+													        ng-if="FormSubTarea.npMetaAjustadaCantidad.$dirty && FormSubTarea.npMetaAjustadaCantidad.$invalid">
+													        Incorrecto
+													    </span>
+													    <span class="success text-small"
+													        ng-if="FormSubTarea.npMetaAjustadaCantidad.$valid">
+													        Listo
+													    </span>
+													</div>
+													
+													<div class="form-group"
+													    ng-class="{'has-error':FormSubTarea.npMetaAjustadaDescripcion.$dirty && FormSubTarea.npMetaAjustadaDescripcion.$invalid, 'has-success':FormSubTarea.npMetaAjustadaDescripcion.$valid}">
+													    <label class="control-label">
+													        Meta Ajustada Descripci&oacute;n
+													        <span class="symbol required"></span>
+													    </label>
+													    <textarea name="npMetaAjustadaDescripcion" rows="5" style="width: 100%" placeholder="Escriba un meta ajustada descripci&oacute;n"
+													        class="form-control" ng-model="detalles[mAjustadaID].descripcion"
+													        required></textarea>
+													    <span class="error text-small block"
+													        ng-if="FormSubTarea.npMetaAjustadaDescripcion.$dirty && FormSubTarea.npMetaAjustadaDescripcion.$invalid">
+													        Incorrecto
+													    </span>
+													    <span class="success text-small"
+													        ng-if="FormSubTarea.npMetaAjustadaDescripcion.$valid">
+													        Listo
+													    </span>
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="pull-right">
 											<button type="submit" class="btn btn-primary" ng-show="editar">
 												Confirmar
 											</button>
-											<a class="btn btn-sm btn-default" ng-click="resetformSubTarea(Form);">
+											<a class="btn btn-sm btn-default" ng-click="resetformSubTarea(FormSubTarea);">
 												Cancelar
 											</a>
 										</div>
@@ -1811,334 +1817,334 @@
 
 					<div class="row">
 						<div class="col-md-6">
-							<form name="Form" id="formItem" novalidate ng-submit="form.submit(Form,'formItem')">
+							<form name="FormItem" id="formItem" novalidate ng-submit="form.submit(FormItem,'formItem');">
 								<div class="pull-right">
-									<a class="btn btn-sm btn-default" ng-click="resetformItem(Form);">
+									<a class="btn btn-sm btn-default" ng-click="resetformItem(FormItem);">
 										Cancelar
 									</a>
 								</div>
 								<div class="row">
 									<div class="col-md-12">
 										<div>
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npcodigoitem.$dirty && Form.npcodigoitem.$invalid, 'has-success':Form.npcodigoitem.$valid}">
-										    <label class="control-label">
-										        Item C&oacute;digo
-										        <span class="symbol required"></span>
-										    </label>
-										    <div class="input-group">
-										        <input type="text" placeholder="Escriba un item c&oacute;digo"
-										            class="form-control" name="npcodigoitem" ng-disabled="true"
-										            ng-model="objeto.npcodigoitem" ng-maxlength="10">
-										        <span class="input-group-btn">
-										            <button type="button" class="btn btn-primary"
-										                ng-click="abrirItemCodigo()">
-										                <i class="fa fa-search"></i>
-										                Seleccione
-										            </button>
-										        </span>
-										    </div>
-										    <span class="error text-small block"
-										        ng-if="Form.npcodigoitem.$dirty && Form.npcodigoitem.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npcodigoitem.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npnombreitem.$dirty && Form.npnombreitem.$invalid, 'has-success':Form.npnombreitem.$valid}">
-										    <label class="control-label">
-										        Item Nombre
-										        <span class="symbol required"></span>
-										    </label>
-										    <input type="text" placeholder="Escriba un item nombre"
-										        class="form-control" name="npnombreitem" ng-model="objeto.npnombreitem"
-										        required ng-disabled="true">
-										    <span class="error text-small block"
-										        ng-if="Form.npnombreitem.$dirty && Form.npnombreitem.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npnombreitem.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
-										    <label class="control-label">
-										        Descripci&oacute;n
-										        <span class="symbol required"></span>
-										    </label>
-										    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
-										        class="form-control" ng-model="objeto.descripcion"
-										        required></textarea>
-										    <span class="error text-small block"
-										        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.descripcion.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npcodigoobra.$dirty && Form.npcodigoobra.$invalid, 'has-success':Form.npcodigoobra.$valid}">
-										    <label class="control-label">
-										        Obra C&oacute;digo
-										        <span class="symbol required"></span>
-										    </label>
-										    <div class="input-group">
-										        <input type="text" placeholder="Escriba un obra c&oacute;digo"
-										            class="form-control" name="npcodigoobra" ng-disabled="true"
-										            ng-model="objeto.npcodigoobra">
-										        <span class="input-group-btn">
-										            <button type="button" class="btn btn-primary"
-										                ng-click="abrirObraCodigo()">
-										                <i class="fa fa-search"></i>
-										                Seleccione
-										            </button>
-										        </span>
-										    </div>
-										    <span class="error text-small block"
-										        ng-if="Form.npcodigoobra.$dirty && Form.npcodigoobra.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npcodigoobra.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npnombreobra.$dirty && Form.npnombreobra.$invalid, 'has-success':Form.npnombreobra.$valid}">
-										    <label class="control-label">
-										        Obra Nombre
-										        <span class="symbol required"></span>
-										    </label>
-										    <input type="text" placeholder="Escriba un obra nombre"
-										        class="form-control" name="npnombreobra" ng-model="objeto.npnombreobra"
-										        required ng-disabled="true">
-										    <span class="error text-small block"
-										        ng-if="Form.npnombreobra.$dirty && Form.npnombreobra.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npnombreobra.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npcodigofuente.$dirty && Form.npcodigofuente.$invalid, 'has-success':Form.npcodigofuente.$valid}">
-										    <label class="control-label">
-										        Fuente Financiamiento C&oacute;digo
-										        <span class="symbol required"></span>
-										    </label>
-										    <div class="input-group">
-										        <input type="text" placeholder="Escriba un fuente financiamiento c&oacute;digo"
-										            class="form-control" name="npcodigofuente" ng-disabled="true"
-										            ng-model="objeto.npcodigofuente">
-										        <span class="input-group-btn">
-										            <button type="button" class="btn btn-primary"
-										                ng-click="abrirFuenteFinanciamientoCodigo()">
-										                <i class="fa fa-search"></i>
-										                Seleccione
-										            </button>
-										        </span>
-										    </div>
-										    <span class="error text-small block"
-										        ng-if="Form.npcodigofuente.$dirty && Form.npcodigofuente.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npcodigofuente.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npnombrefuente.$dirty && Form.npnombrefuente.$invalid, 'has-success':Form.npnombrefuente.$valid}">
-										    <label class="control-label">
-										        Fuente Financiamiento Nombre
-										        <span class="symbol required"></span>
-										    </label>
-										    <input type="text" placeholder="Escriba un fuente financiamiento nombre"
-										        class="form-control" name="npnombrefuente" ng-model="objeto.npnombrefuente"
-										        required ng-disabled="true">
-										    <span class="error text-small block"
-										        ng-if="Form.npnombrefuente.$dirty && Form.npnombrefuente.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npnombrefuente.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npcodigoorganismo.$dirty && Form.npcodigoorganismo.$invalid, 'has-success':Form.npcodigoorganismo.$valid}">
-										    <label class="control-label">
-										        Organismo C&oacute;digo
-										        <span class="symbol required"></span>
-										    </label>
-										    <div class="input-group">
-										        <input type="text" placeholder="Escriba un organismo c&oacute;digo"
-										            class="form-control" name="npcodigoorganismo" ng-disabled="true"
-										            ng-model="objeto.npcodigoorganismo">
-										        <span class="input-group-btn">
-										            <button type="button" class="btn btn-primary"
-										                ng-click="abrirOrganismoCodigo();">
-										                <i class="fa fa-search"></i>
-										                Seleccione
-										            </button>
-										        </span>
-										    </div>
-										    <span class="error text-small block"
-										        ng-if="Form.npcodigoorganismo.$dirty && Form.npcodigoorganismo.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npcodigoorganismo.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npnombreorganismo.$dirty && Form.npnombreorganismo.$invalid, 'has-success':Form.npnombreorganismo.$valid}">
-										    <label class="control-label">
-										        Organismo Nombre
-										        <span class="symbol required"></span>
-										    </label>
-										    <input type="text" placeholder="Escriba un organismo nombre"
-										        class="form-control" name="npnombreorganismo" ng-model="objeto.npnombreorganismo"
-										        required ng-disabled="true">
-										    <span class="error text-small block"
-										        ng-if="Form.npnombreorganismo.$dirty && Form.npnombreorganismo.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npnombreorganismo.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npcodigoorgpres.$dirty && Form.npcodigoorgpres.$invalid, 'has-success':Form.npcodigoorgpres.$valid}">
-										    <label class="control-label">
-										        Organismo Pr&eacute;stamo C&oacute;digo
-										        <span class="symbol required"></span>
-										    </label>
-										    <input type="text" placeholder="Escriba un organismo pr&eacute;stamo c&oacute;digo"
-										        class="form-control" name="npcodigoorgpres" ng-model="objeto.npcodigoorgpres"
-										        required ng-disabled="true">
-										    <span class="error text-small block"
-										        ng-if="Form.npcodigoorgpres.$dirty && Form.npcodigoorgpres.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npcodigoorgpres.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npnombreorgpres.$dirty && Form.npnombreorgpres.$invalid, 'has-success':Form.npnombreorgpres.$valid}">
-										    <label class="control-label">
-										        Organismo Pr&eacute;stamo Nombre
-										        <span class="symbol required"></span>
-										    </label>
-										    <input type="text" placeholder="Escriba un organismo pr&eacute;stamo nombre"
-										        class="form-control" name="npnombreorgpres" ng-model="objeto.npnombreorgpres"
-										        required ng-disabled="true">
-										    <span class="error text-small block"
-										        ng-if="Form.npnombreorgpres.$dirty && Form.npnombreorgpres.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npnombreorgpres.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npcodigocanton.$dirty && Form.npcodigocanton.$invalid, 'has-success':Form.npcodigocanton.$valid}">
-										    <label class="control-label">
-										        Cant&oacute;n C&oacute;digo
-										        <span class="symbol required"></span>
-										    </label>
-										    <div class="input-group">
-										        <input type="text" placeholder="Escriba un cant&oacute;n c&oacute;digo"
-										            class="form-control" name="npcodigocanton" ng-disabled="true"
-										            ng-model="objeto.npcodigocanton">
-										        <span class="input-group-btn">
-										            <button type="button" class="btn btn-primary"
-										                ng-click="abrirCantonCodigo()">
-										                <i class="fa fa-search"></i>
-										                Seleccione
-										            </button>
-										        </span>
-										    </div>
-										    <span class="error text-small block"
-										        ng-if="Form.npcodigocanton.$dirty && Form.npcodigocanton.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npcodigocanton.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.npnombrecanton.$dirty && Form.npnombrecanton.$invalid, 'has-success':Form.npnombrecanton.$valid}">
-										    <label class="control-label">
-										        Cant&oacute;n Nombre
-										        <span class="symbol required"></span>
-										    </label>
-										    <input type="text" placeholder="Escriba un cant&oacute;n nombre"
-										        class="form-control" name="npnombrecanton" ng-model="objeto.npnombrecanton"
-										        required ng-disabled="true">
-										    <span class="error text-small block"
-										        ng-if="Form.npnombrecanton.$dirty && Form.npnombrecanton.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.npnombrecanton.$valid">
-										        Listo
-										    </span>
-										</div>
-										
-										<div class="form-group"
-										    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-										    <label class="control-label">
-										        Estado
-										        <span class="symbol required"></span>
-										    </label>
-										    <select class="form-control" name="estado"
-										        ng-model="objeto.estado" required>
-										        <option value="A">Activo</option>
-										        <option value="I">Inactivo</option>
-										    </select>
-										    <span class="error text-small block"
-										        ng-if="Form.estado.$dirty && Form.estado.$invalid">
-										        Incorrecto
-										    </span>
-										    <span class="success text-small"
-										        ng-if="Form.estado.$valid">
-										        Listo
-										    </span>
-										</div>
-
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npcodigoitem.$dirty && FormItem.npcodigoitem.$invalid, 'has-success':FormItem.npcodigoitem.$valid}">
+											    <label class="control-label">
+											        Item C&oacute;digo
+											        <span class="symbol required"></span>
+											    </label>
+											    <div class="input-group">
+											        <input type="text" placeholder="Escriba un item c&oacute;digo"
+											            class="form-control" name="npcodigoitem" ng-disabled="true"
+											            ng-model="objeto.npcodigoitem" ng-maxlength="10"
+											            required>
+											        <span class="input-group-btn">
+											            <button type="button" class="btn btn-primary"
+											                ng-click="abrirItemCodigo()">
+											                <i class="fa fa-search"></i>
+											                Seleccione
+											            </button>
+											        </span>
+											    </div>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npcodigoitem.$dirty && FormItem.npcodigoitem.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npcodigoitem.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npnombreitem.$dirty && FormItem.npnombreitem.$invalid, 'has-success':FormItem.npnombreitem.$valid}">
+											    <label class="control-label">
+											        Item Nombre
+											        <span class="symbol required"></span>
+											    </label>
+											    <input type="text" placeholder="Escriba un item nombre"
+											        class="form-control" name="npnombreitem" ng-model="objeto.npnombreitem"
+											        ng-disabled="true" required>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npnombreitem.$dirty && FormItem.npnombreitem.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npnombreitem.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.descripcion.$dirty && FormItem.descripcion.$invalid, 'has-success':FormItem.descripcion.$valid}">
+											    <label class="control-label">
+											        Descripci&oacute;n
+											        <span class="symbol required"></span>
+											    </label>
+											    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
+											        class="form-control" ng-model="objeto.descripcion"
+											        required></textarea>
+											    <span class="error text-small block"
+											        ng-if="FormItem.descripcion.$dirty && FormItem.descripcion.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.descripcion.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npcodigoobra.$dirty && FormItem.npcodigoobra.$invalid, 'has-success':FormItem.npcodigoobra.$valid}">
+											    <label class="control-label">
+											        Obra C&oacute;digo
+											        <span class="symbol required"></span>
+											    </label>
+											    <div class="input-group">
+											        <input type="text" placeholder="Escriba un obra c&oacute;digo"
+											            class="form-control" name="npcodigoobra" ng-disabled="true"
+											            ng-model="objeto.npcodigoobra" required>
+											        <span class="input-group-btn">
+											            <button type="button" class="btn btn-primary"
+											                ng-click="abrirObraCodigo()">
+											                <i class="fa fa-search"></i>
+											                Seleccione
+											            </button>
+											        </span>
+											    </div>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npcodigoobra.$dirty && FormItem.npcodigoobra.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npcodigoobra.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npnombreobra.$dirty && FormItem.npnombreobra.$invalid, 'has-success':FormItem.npnombreobra.$valid}">
+											    <label class="control-label">
+											        Obra Nombre
+											        <span class="symbol required"></span>
+											    </label>
+											    <input type="text" placeholder="Escriba un obra nombre"
+											        class="form-control" name="npnombreobra" ng-model="objeto.npnombreobra"
+											        ng-disabled="true" required>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npnombreobra.$dirty && FormItem.npnombreobra.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npnombreobra.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npcodigofuente.$dirty && FormItem.npcodigofuente.$invalid, 'has-success':FormItem.npcodigofuente.$valid}">
+											    <label class="control-label">
+											        Fuente Financiamiento C&oacute;digo
+											        <span class="symbol required"></span>
+											    </label>
+											    <div class="input-group">
+											        <input type="text" placeholder="Escriba un fuente financiamiento c&oacute;digo"
+											            class="form-control" name="npcodigofuente" ng-disabled="true"
+											            ng-model="objeto.npcodigofuente" required>
+											        <span class="input-group-btn">
+											            <button type="button" class="btn btn-primary"
+											                ng-click="abrirFuenteFinanciamientoCodigo()">
+											                <i class="fa fa-search"></i>
+											                Seleccione
+											            </button>
+											        </span>
+											    </div>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npcodigofuente.$dirty && FormItem.npcodigofuente.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npcodigofuente.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npnombrefuente.$dirty && FormItem.npnombrefuente.$invalid, 'has-success':FormItem.npnombrefuente.$valid}">
+											    <label class="control-label">
+											        Fuente Financiamiento Nombre
+											        <span class="symbol required"></span>
+											    </label>
+											    <input type="text" placeholder="Escriba un fuente financiamiento nombre"
+											        class="form-control" name="npnombrefuente" ng-model="objeto.npnombrefuente"
+											        ng-disabled="true" required>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npnombrefuente.$dirty && FormItem.npnombrefuente.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npnombrefuente.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npcodigoorganismo.$dirty && FormItem.npcodigoorganismo.$invalid, 'has-success':FormItem.npcodigoorganismo.$valid}">
+											    <label class="control-label">
+											        Organismo C&oacute;digo
+											        <span class="symbol required"></span>
+											    </label>
+											    <div class="input-group">
+											        <input type="text" placeholder="Escriba un organismo c&oacute;digo"
+											            class="form-control" name="npcodigoorganismo" ng-disabled="true"
+											            ng-model="objeto.npcodigoorganismo" required>
+											        <span class="input-group-btn">
+											            <button type="button" class="btn btn-primary"
+											                ng-click="abrirOrganismoCodigo();">
+											                <i class="fa fa-search"></i>
+											                Seleccione
+											            </button>
+											        </span>
+											    </div>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npcodigoorganismo.$dirty && FormItem.npcodigoorganismo.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npcodigoorganismo.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npnombreorganismo.$dirty && FormItem.npnombreorganismo.$invalid, 'has-success':FormItem.npnombreorganismo.$valid}">
+											    <label class="control-label">
+											        Organismo Nombre
+											        <span class="symbol required"></span>
+											    </label>
+											    <input type="text" placeholder="Escriba un organismo nombre"
+											        class="form-control" name="npnombreorganismo" ng-model="objeto.npnombreorganismo"
+											        ng-disabled="true" required>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npnombreorganismo.$dirty && FormItem.npnombreorganismo.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npnombreorganismo.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npcodigoorgpres.$dirty && FormItem.npcodigoorgpres.$invalid, 'has-success':FormItem.npcodigoorgpres.$valid}">
+											    <label class="control-label">
+											        Organismo Pr&eacute;stamo C&oacute;digo
+											        <span class="symbol required"></span>
+											    </label>
+											    <input type="text" placeholder="Escriba un organismo pr&eacute;stamo c&oacute;digo"
+											        class="form-control" name="npcodigoorgpres" ng-model="objeto.npcodigoorgpres"
+											        required ng-disabled="true">
+											    <span class="error text-small block"
+											        ng-if="FormItem.npcodigoorgpres.$dirty && FormItem.npcodigoorgpres.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npcodigoorgpres.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npnombreorgpres.$dirty && FormItem.npnombreorgpres.$invalid, 'has-success':FormItem.npnombreorgpres.$valid}">
+											    <label class="control-label">
+											        Organismo Pr&eacute;stamo Nombre
+											        <span class="symbol required"></span>
+											    </label>
+											    <input type="text" placeholder="Escriba un organismo pr&eacute;stamo nombre"
+											        class="form-control" name="npnombreorgpres" ng-model="objeto.npnombreorgpres"
+											        ng-disabled="true" required>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npnombreorgpres.$dirty && FormItem.npnombreorgpres.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npnombreorgpres.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npcodigocanton.$dirty && FormItem.npcodigocanton.$invalid, 'has-success':FormItem.npcodigocanton.$valid}">
+											    <label class="control-label">
+											        Cant&oacute;n C&oacute;digo
+											        <span class="symbol required"></span>
+											    </label>
+											    <div class="input-group">
+											        <input type="text" placeholder="Escriba un cant&oacute;n c&oacute;digo"
+											            class="form-control" name="npcodigocanton" ng-disabled="true"
+											            ng-model="objeto.npcodigocanton" required>
+											        <span class="input-group-btn">
+											            <button type="button" class="btn btn-primary"
+											                ng-click="abrirCantonCodigo()">
+											                <i class="fa fa-search"></i>
+											                Seleccione
+											            </button>
+											        </span>
+											    </div>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npcodigocanton.$dirty && FormItem.npcodigocanton.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npcodigocanton.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.npnombrecanton.$dirty && FormItem.npnombrecanton.$invalid, 'has-success':FormItem.npnombrecanton.$valid}">
+											    <label class="control-label">
+											        Cant&oacute;n Nombre
+											        <span class="symbol required"></span>
+											    </label>
+											    <input type="text" placeholder="Escriba un cant&oacute;n nombre"
+											        class="form-control" name="npnombrecanton" ng-model="objeto.npnombrecanton"
+											        ng-disabled="true" required>
+											    <span class="error text-small block"
+											        ng-if="FormItem.npnombrecanton.$dirty && FormItem.npnombrecanton.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.npnombrecanton.$valid">
+											        Listo
+											    </span>
+											</div>
+											
+											<div class="form-group"
+											    ng-class="{'has-error':FormItem.estado.$dirty && FormItem.estado.$invalid, 'has-success':FormItem.estado.$valid}">
+											    <label class="control-label">
+											        Estado
+											        <span class="symbol required"></span>
+											    </label>
+											    <select class="form-control" name="estado"
+											        ng-model="objeto.estado" required>
+											        <option value="A">Activo</option>
+											        <option value="I">Inactivo</option>
+											    </select>
+											    <span class="error text-small block"
+											        ng-if="FormItem.estado.$dirty && FormItem.estado.$invalid">
+											        Incorrecto
+											    </span>
+											    <span class="success text-small"
+											        ng-if="FormItem.estado.$valid">
+											        Listo
+											    </span>
+											</div>
 										</div>
 										<div class="pull-right">
 											<button type="submit" class="btn btn-primary" ng-show="editar">
 												Confirmar
 											</button>
-											<a class="btn btn-sm btn-default" ng-click="resetformItem(Form);">
+											<a class="btn btn-sm btn-default" ng-click="resetformItem(FormItem);">
 												Cancelar
 											</a>
 										</div>
@@ -2156,9 +2162,9 @@
 
 					<div class="row">
 						<div class="col-md-6">
-							<form name="Form" id="formSubItem" novalidate ng-submit="form.submit(Form,'formSubItem')">
+							<form name="FormSubItem" id="formSubItem" novalidate ng-submit="form.submit(FormSubItem,'formSubItem')">
 								<div class="pull-right">
-									<a class="btn btn-sm btn-default" ng-click="resetformSubItem(Form);">
+									<a class="btn btn-sm btn-default" ng-click="resetformSubItem(FormSubItem);">
 										Cancelar
 									</a>
 								</div>
@@ -2166,7 +2172,7 @@
 									<div class="col-md-12">
 										<div>
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npcodigosubitem.$dirty && Form.npcodigosubitem.$invalid, 'has-success':Form.npcodigosubitem.$valid}">
+											    ng-class="{'has-error':FormSubItem.npcodigosubitem.$dirty && FormSubItem.npcodigosubitem.$invalid, 'has-success':FormSubItem.npcodigosubitem.$valid}">
 											    <label class="control-label">
 											        C&oacute;digo INCOP
 											        <span class="symbol required"></span>
@@ -2174,7 +2180,7 @@
 											    <div class="input-group">
 											        <input type="text" placeholder="Escriba un c&oacute;digo incop"
 											            class="form-control" name="npcodigosubitem" ng-disabled="true"
-											            ng-model="objeto.npcodigosubitem" ng-maxlength="10"
+											            ng-model="objeto.npcodigosubitem"
 											            required>
 											        <span class="input-group-btn">
 											            <button type="button" class="btn btn-primary"
@@ -2185,17 +2191,17 @@
 											        </span>
 											    </div>
 											    <span class="error text-small block"
-											        ng-if="Form.npcodigosubitem.$dirty && Form.npcodigosubitem.$invalid">
+											        ng-if="FormSubItem.npcodigosubitem.$dirty && FormSubItem.npcodigosubitem.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npcodigosubitem.$valid">
+											        ng-if="FormSubItem.npcodigosubitem.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npnombresubitem.$dirty && Form.npnombresubitem.$invalid, 'has-success':Form.npnombresubitem.$valid}">
+											    ng-class="{'has-error':FormSubItem.npnombresubitem.$dirty && FormSubItem.npnombresubitem.$invalid, 'has-success':FormSubItem.npnombresubitem.$valid}">
 											    <label class="control-label">
 											        Nombre
 											        <span class="symbol required"></span>
@@ -2204,17 +2210,17 @@
 											        class="form-control" name="npnombresubitem" ng-model="objeto.npnombresubitem"
 											        required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npnombresubitem.$dirty && Form.npnombresubitem.$invalid">
+											        ng-if="FormSubItem.npnombresubitem.$dirty && FormSubItem.npnombresubitem.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npnombresubitem.$valid">
+											        ng-if="FormSubItem.npnombresubitem.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npprecio.$dirty && Form.npprecio.$invalid, 'has-success':Form.npprecio.$valid}">
+											    ng-class="{'has-error':FormSubItem.npprecio.$dirty && FormSubItem.npprecio.$invalid, 'has-success':FormSubItem.npprecio.$valid}">
 											    <label class="control-label">
 											        Precio
 											        <span class="symbol required"></span>
@@ -2223,17 +2229,17 @@
 											            class="form-control" name="npprecio" ng-model="objeto.npprecio"
 											            required ng-disabled="true">
 											    <span class="error text-small block"
-											        ng-if="Form.npprecio.$dirty && Form.npprecio.$invalid">
+											        ng-if="FormSubItem.npprecio.$dirty && FormSubItem.npprecio.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npprecio.$valid">
+											        ng-if="FormSubItem.npprecio.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.nptipoprodnombre.$dirty && Form.nptipoprodnombre.$invalid, 'has-success':Form.nptipoprodnombre.$valid}">
+											    ng-class="{'has-error':FormSubItem.nptipoprodnombre.$dirty && FormSubItem.nptipoprodnombre.$invalid, 'has-success':FormSubItem.nptipoprodnombre.$valid}">
 											    <label class="control-label">
 											        Tipo Producto
 											        <span class="symbol required"></span>
@@ -2252,17 +2258,17 @@
 											        </span>
 											    </div>
 											    <span class="error text-small block"
-											        ng-if="Form.nptipoprodnombre.$dirty && Form.nptipoprodnombre.$invalid">
+											        ng-if="FormSubItem.nptipoprodnombre.$dirty && FormSubItem.nptipoprodnombre.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.nptipoprodnombre.$valid">
+											        ng-if="FormSubItem.nptipoprodnombre.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.npprocedimientonombre.$dirty && Form.npprocedimientonombre.$invalid, 'has-success':Form.npprocedimientonombre.$valid}">
+											    ng-class="{'has-error':FormSubItem.npprocedimientonombre.$dirty && FormSubItem.npprocedimientonombre.$invalid, 'has-success':FormSubItem.npprocedimientonombre.$valid}">
 											    <label class="control-label">
 											        Procedimiento
 											        <span class="symbol required"></span>
@@ -2281,17 +2287,17 @@
 											        </span>
 											    </div>
 											    <span class="error text-small block"
-											        ng-if="Form.npprocedimientonombre.$dirty && Form.npprocedimientonombre.$invalid">
+											        ng-if="FormSubItem.npprocedimientonombre.$dirty && FormSubItem.npprocedimientonombre.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.npprocedimientonombre.$valid">
+											        ng-if="FormSubItem.npprocedimientonombre.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.nptiporegnombre.$dirty && Form.nptiporegnombre.$invalid, 'has-success':Form.nptiporegnombre.$valid}">
+											    ng-class="{'has-error':FormSubItem.nptiporegnombre.$dirty && FormSubItem.nptiporegnombre.$invalid, 'has-success':FormSubItem.nptiporegnombre.$valid}">
 											    <label class="control-label">
 											        Tipo R&eacute;gimen
 											        <span class="symbol required"></span>
@@ -2310,17 +2316,17 @@
 											        </span>
 											    </div>
 											    <span class="error text-small block"
-											        ng-if="Form.nptiporegnombre.$dirty && Form.nptiporegnombre.$invalid">
+											        ng-if="FormSubItem.nptiporegnombre.$dirty && FormSubItem.nptiporegnombre.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.nptiporegnombre.$valid">
+											        ng-if="FormSubItem.nptiporegnombre.$valid">
 											        Listo
 											    </span>
 											</div>
 											
 											<div class="form-group"
-											    ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+											    ng-class="{'has-error':FormSubItem.estado.$dirty && FormSubItem.estado.$invalid, 'has-success':FormSubItem.estado.$valid}">
 											    <label class="control-label">
 											        Estado
 											        <span class="symbol required"></span>
@@ -2331,11 +2337,11 @@
 											        <option value="I">Inactivo</option>
 											    </select>
 											    <span class="error text-small block"
-											        ng-if="Form.estado.$dirty && Form.estado.$invalid">
+											        ng-if="FormSubItem.estado.$dirty && FormSubItem.estado.$invalid">
 											        Incorrecto
 											    </span>
 											    <span class="success text-small"
-											        ng-if="Form.estado.$valid">
+											        ng-if="FormSubItem.estado.$valid">
 											        Listo
 											    </span>
 											</div>
@@ -2347,7 +2353,7 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group"
-													    ng-class="{'has-error':Form.npSaldoActividadPlanificado.$dirty && Form.npSaldoActividadPlanificado.$invalid, 'has-success':Form.npSaldoActividadPlanificado.$valid}">
+													    ng-class="{'has-error':FormSubItem.npSaldoActividadPlanificado.$dirty && FormSubItem.npSaldoActividadPlanificado.$invalid, 'has-success':FormSubItem.npSaldoActividadPlanificado.$valid}">
 													    <label class="control-label">
 													        Saldo Actividad Planificado
 													        <span class="symbol required"></span>
@@ -2357,17 +2363,17 @@
 													        class="form-control" name="npSaldoActividadPlanificado" ng-model="objeto.tplanificado"
 													        ng-disabled="true">
 													    <span class="error text-small block"
-													        ng-if="Form.npSaldoActividadPlanificado.$dirty && Form.npSaldoActividadPlanificado.$invalid">
+													        ng-if="FormSubItem.npSaldoActividadPlanificado.$dirty && FormSubItem.npSaldoActividadPlanificado.$invalid">
 													        Incorrecto
 													    </span>
 													    <span class="success text-small"
-													        ng-if="Form.npSaldoActividadPlanificado.$valid">
+													        ng-if="FormSubItem.npSaldoActividadPlanificado.$valid">
 													        Listo
 													    </span>
 													</div>
 													
 													<div class="form-group"
-													    ng-class="{'has-error':Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid, 'has-success':Form.npCantidadPlanificada.$valid}">
+													    ng-class="{'has-error':FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid, 'has-success':FormSubItem.npCantidadPlanificada.$valid}">
 													    <label class="control-label">
 													        Cantidad Planificada
 													        <span class="symbol required"></span>
@@ -2377,17 +2383,17 @@
 													        class="form-control" name="npCantidadPlanificada" ng-model="detalles[mPlanificadaID].cantidad"
 													        ng-change="calcularTotalPlanificado();" ng-disabled="!editar">
 													    <span class="error text-small block"
-													        ng-if="Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid">
+													        ng-if="FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid">
 													        Incorrecto
 													    </span>
 													    <span class="success text-small"
-													        ng-if="Form.npCantidadPlanificada.$valid">
+													        ng-if="FormSubItem.npCantidadPlanificada.$valid">
 													        Listo
 													    </span>
 													</div>
 													
 													<div class="form-group"
-													    ng-class="{'has-error':Form.npValorPlanificado.$dirty && Form.npValorPlanificado.$invalid, 'has-success':Form.npValorPlanificado.$valid}">
+													    ng-class="{'has-error':FormSubItem.npValorPlanificado.$dirty && FormSubItem.npValorPlanificado.$invalid, 'has-success':FormSubItem.npValorPlanificado.$valid}">
 													    <label class="control-label">
 													        Valor Planificado
 													        <span class="symbol required"></span>
@@ -2397,17 +2403,17 @@
 													        class="form-control" name="npValorPlanificado" ng-model="detalles[mPlanificadaID].valor"
 													        ng-change="calcularTotalPlanificado();" ng-disabled="!editar">
 													    <span class="error text-small block"
-													        ng-if="Form.npValorPlanificado.$dirty && Form.npValorPlanificado.$invalid">
+													        ng-if="FormSubItem.npValorPlanificado.$dirty && FormSubItem.npValorPlanificado.$invalid">
 													        Incorrecto
 													    </span>
 													    <span class="success text-small"
-													        ng-if="Form.npValorPlanificado.$valid">
+													        ng-if="FormSubItem.npValorPlanificado.$valid">
 													        Listo
 													    </span>
 													</div>
 													
 													<div class="form-group"
-													    ng-class="{'has-error':Form.npTotalPlanificado.$dirty && Form.npTotalPlanificado.$invalid, 'has-success':Form.npTotalPlanificado.$valid}">
+													    ng-class="{'has-error':FormSubItem.npTotalPlanificado.$dirty && FormSubItem.npTotalPlanificado.$invalid, 'has-success':FormSubItem.npTotalPlanificado.$valid}">
 													    <label class="control-label">
 													        Total Planificado
 													        <span class="symbol required"></span>
@@ -2417,18 +2423,18 @@
 													        class="form-control" name="npTotalPlanificado" ng-model="npTotalPlanificado"
 													        ng-disabled="true" ng-max="objeto.tplanificado">
 													    <span class="error text-small block"
-													        ng-if="Form.npTotalPlanificado.$dirty && Form.npTotalPlanificado.$invalid">
+													        ng-if="FormSubItem.npTotalPlanificado.$dirty && FormSubItem.npTotalPlanificado.$invalid">
 													        Incorrecto
 													    </span>
 													    <span class="success text-small"
-													        ng-if="Form.npTotalPlanificado.$valid">
+													        ng-if="FormSubItem.npTotalPlanificado.$valid">
 													        Listo
 													    </span>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group"
-													    ng-class="{'has-error':Form.npSaldoActividadAjustado.$dirty && Form.npSaldoActividadAjustado.$invalid, 'has-success':Form.npSaldoActividadAjustado.$valid}">
+													    ng-class="{'has-error':FormSubItem.npSaldoActividadAjustado.$dirty && FormSubItem.npSaldoActividadAjustado.$invalid, 'has-success':FormSubItem.npSaldoActividadAjustado.$valid}">
 													    <label class="control-label">
 													        Saldo Actividad Ajustado
 													        <span class="symbol required"></span>
@@ -2438,17 +2444,17 @@
 													        class="form-control" name="npSaldoActividadAjustado" ng-model="objeto.tacumulado"
 													        ng-disabled="true">
 													    <span class="error text-small block"
-													        ng-if="Form.npSaldoActividadAjustado.$dirty && Form.npSaldoActividadAjustado.$invalid">
+													        ng-if="FormSubItem.npSaldoActividadAjustado.$dirty && FormSubItem.npSaldoActividadAjustado.$invalid">
 													        Incorrecto
 													    </span>
 													    <span class="success text-small"
-													        ng-if="Form.npSaldoActividadAjustado.$valid">
+													        ng-if="FormSubItem.npSaldoActividadAjustado.$valid">
 													        Listo
 													    </span>
 													</div>
 													
 													<div class="form-group"
-													    ng-class="{'has-error':Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid, 'has-success':Form.npCantidadPlanificada.$valid}">
+													    ng-class="{'has-error':FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid, 'has-success':FormSubItem.npCantidadPlanificada.$valid}">
 													    <label class="control-label">
 													        Cantidad Ajustado
 													        <span class="symbol required"></span>
@@ -2458,17 +2464,17 @@
 													        class="form-control" name="npCantidadPlanificada" ng-model="detalles[mAjustadaID].cantidad"
 													        ng-change="calcularTotalAjustado();" ng-disabled="!editar">
 													    <span class="error text-small block"
-													        ng-if="Form.npCantidadPlanificada.$dirty && Form.npCantidadPlanificada.$invalid">
+													        ng-if="FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid">
 													        Incorrecto
 													    </span>
 													    <span class="success text-small"
-													        ng-if="Form.npCantidadPlanificada.$valid">
+													        ng-if="FormSubItem.npCantidadPlanificada.$valid">
 													        Listo
 													    </span>
 													</div>
 													
 													<div class="form-group"
-													    ng-class="{'has-error':Form.npValorAjustado.$dirty && Form.npValorAjustado.$invalid, 'has-success':Form.npValorAjustado.$valid}">
+													    ng-class="{'has-error':FormSubItem.npValorAjustado.$dirty && FormSubItem.npValorAjustado.$invalid, 'has-success':FormSubItem.npValorAjustado.$valid}">
 													    <label class="control-label">
 													        Valor Ajustado
 													        <span class="symbol required"></span>
@@ -2478,17 +2484,17 @@
 													        class="form-control" name="npValorAjustado" ng-model="detalles[mAjustadaID].valor"
 													        ng-change="calcularTotalAjustado();" ng-disabled="!editar">
 													    <span class="error text-small block"
-													        ng-if="Form.npValorAjustado.$dirty && Form.npValorAjustado.$invalid">
+													        ng-if="FormSubItem.npValorAjustado.$dirty && FormSubItem.npValorAjustado.$invalid">
 													        Incorrecto
 													    </span>
 													    <span class="success text-small"
-													        ng-if="Form.npValorAjustado.$valid">
+													        ng-if="FormSubItem.npValorAjustado.$valid">
 													        Listo
 													    </span>
 													</div>
 													
 													<div class="form-group"
-													    ng-class="{'has-error':Form.npTotalAjustado.$dirty && Form.npTotalAjustado.$invalid, 'has-success':Form.npTotalAjustado.$valid}">
+													    ng-class="{'has-error':FormSubItem.npTotalAjustado.$dirty && FormSubItem.npTotalAjustado.$invalid, 'has-success':FormSubItem.npTotalAjustado.$valid}">
 													    <label class="control-label">
 													        Total Ajustado
 													        <span class="symbol required"></span>
@@ -2498,11 +2504,11 @@
 													        class="form-control" name="npTotalAjustado" ng-model="npTotalAjustado"
 													        ng-disabled="true" ng-max="objeto.tacumulado">
 													    <span class="error text-small block"
-													        ng-if="Form.npTotalAjustado.$dirty && Form.npTotalAjustado.$invalid">
+													        ng-if="FormSubItem.npTotalAjustado.$dirty && FormSubItem.npTotalAjustado.$invalid">
 													        Incorrecto
 													    </span>
 													    <span class="success text-small"
-													        ng-if="Form.npTotalAjustado.$valid">
+													        ng-if="FormSubItem.npTotalAjustado.$valid">
 													        Listo
 													    </span>
 													</div>
@@ -2513,7 +2519,7 @@
 											<button type="submit" class="btn btn-primary">
 												Confirmar
 											</button>
-											<a class="btn btn-sm btn-default" ng-click="resetformSubItem(Form);">
+											<a class="btn btn-sm btn-default" ng-click="resetformSubItem(FormSubItem);">
 												Cancelar
 											</a>
 										</div>
