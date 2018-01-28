@@ -1431,18 +1431,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		});
 	}
 
-	$scope.modificarPresupuesto = function(obj) {
-/****************************************
-		var node = {
-			nodeTipo: obj.nivel,
-			tablarelacionid: obj.id,
-			npIdunidad: ?,
-			padreID: ?,
-			npactividadid: ?
-		}
-		$scope.editarPlanificacionAnual(node);
-*/	}
-
 	$scope.renovar = function() {
 		if ($scope.edicionMatrizPresupuesto) {
 			$scope.cargarMatrizPresupuestoTipo();
@@ -1544,6 +1532,24 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 //******
+
+	$scope.modificarPresupuesto = function(obj) {
+		console.log("Fuentes:", $scope.objeto, obj);
+/*
+		var node = {
+			nodeTipo: obj.nivel,
+			tablarelacionid: ?,
+			npIdunidad: obj.id,
+			padreID: ?,
+			npactividadid: ?
+		}
+		$scope.editarPlanificacionAnual(node);
+*/	}
+
+	$scope.modificarAjustado = function(obj) {
+		console.log("Fuentes:", $scope.objeto, obj);
+	}
+
 	$scope.aprobarPlanificacion = function(obj) {
 		if (obj.npestadopresupuesto != "Planificado") {
 			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado", "warning");
