@@ -464,12 +464,12 @@ public class EjecucionController {
 				CertificacionlineaTO certificacionlineaTO = UtilSession.planificacionServicio.transObtenerCertificacionlineaTO(new CertificacionlineaID(id, id2));
 				certificacionlineaTO.setNpvalor(certificacionlineaTO.getValor());
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(certificacionlineaTO.getNivelactid(), jsonObject, mensajes);
-				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(certificacionlineaTO.getNivelactid()));
+				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO());
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid());
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),certificacionlineaTO.getNivelactid());
 				certificacionlineaTO.setNpvalorinicial(saldo);
 				jsonObject.put("certificacionlinea", (JSONObject)JSONSerializer.toJSON(certificacionlineaTO,certificacionlineaTO.getJsonConfig()));
 			}
@@ -582,7 +582,7 @@ public class EjecucionController {
 				double total=ConsultasUtil.obtenertotalsubitem(id);
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, id);
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, id,id2);
 //				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
 //				double valorcertificacion=0.0;
 //				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificacionesnoeliminadas(id);
@@ -598,8 +598,14 @@ public class EjecucionController {
 			else if(clase.equals("datoslineaordend")) {
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(id);
+				//2 Obtengo el id del nivelactividad
+				NivelactividadTO nivelactividadTO=new NivelactividadTO();
+				nivelactividadTO.setTablarelacionid(id);
+				Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
+				log.println("niveles: " + nivelactividadTOs.size());
+				nivelactividadTO=(NivelactividadTO) nivelactividadTOs.iterator().next();
 				//2. Obtengo el detalle del subitem
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, id);
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, id, nivelactividadTO.getId());
 				//3. Consulto las ordenes de devengo no aprobadas
 				Collection<OrdendevengoTO> ordendevengoTOs=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2);
 				double ordenesnoaprob=0.0;

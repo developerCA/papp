@@ -22,6 +22,7 @@ import ec.com.papp.planificacion.to.GastoDevengoVO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.to.OrdenreversionTO;
+import ec.com.papp.planificacion.to.ReformaTO;
 import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
@@ -707,10 +708,15 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static Double obtenersaldodisponible(Double total,Long idsubitem) throws MyException {
+	public static Double obtenersaldodisponible(Double total,Long idsubitem,Long nivelactividadid) throws MyException {
 		try{
 			SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(idsubitem);
-			double saldo=total-subitemunidadTO.getValprecompromiso().doubleValue()-subitemunidadTO.getValxcomprometer().doubleValue()-subitemunidadTO.getValcompromiso().doubleValue();
+			//traigo las reformas asignadas al subitem
+			Collection<ReformaTO> reformaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+			double totalreforma=0.0;
+			for(ReformaTO reformaTO:reformaTOs)
+				totalreforma=totalreforma+reformaTO.getValorincremento().doubleValue()-reformaTO.getValordecremento();
+			double saldo=total+totalreforma-subitemunidadTO.getValprecompromiso().doubleValue()-subitemunidadTO.getValxcomprometer().doubleValue()-subitemunidadTO.getValcompromiso().doubleValue();
 			return saldo;
 
 		}catch (Exception e) {

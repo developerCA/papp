@@ -482,9 +482,10 @@ public class PlanificacionController {
 			else if(clase.equals("matrizmetas")){
 				Type matriz = new TypeToken<List<MatrizDetalle>>(){}.getType();
 		    	Collection<MatrizDetalle> matrizDetalles = gson.fromJson(new StringReader(objeto), matriz);
+		    	log.println("detalles: " + matrizDetalles.size());
 				//MatrizDetalle matrizDetalle = gson.fromJson(new StringReader(objeto), MatrizDetalle.class);
 				accion = "actualizar";
-				UtilSession.planificacionServicio.transModificarMatrizpresupuesto(matrizDetalles);
+				UtilSession.planificacionServicio.transModificarMatrizmetas(matrizDetalles);
 			}
 
 			//Registro la auditoria
