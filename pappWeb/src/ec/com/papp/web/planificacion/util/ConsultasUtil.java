@@ -784,13 +784,13 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static Boolean aprobacionplanificacion(Long unidad, Long ejerciciofiscal, String tipo,JSONObject jsonObject) throws MyException {
+	public static Boolean aprobacionplanificacion(Long unidad, Long ejerciciofiscal, String tipo, Long nivelactividadunidadid, Long npactividadid,JSONObject jsonObject) throws MyException {
 		Collection<Map<String, String>> resultado=new ArrayList<>();
 		try{
 			if(tipo.equals("P"))
-				resultado=UtilSession.planificacionServicio.transValidaaprobacion(unidad, ejerciciofiscal, true);
+				resultado=UtilSession.planificacionServicio.transValidaaprobacion(unidad, ejerciciofiscal, true, npactividadid);
 			else
-				resultado=UtilSession.planificacionServicio.transValidaaprobacion(unidad, ejerciciofiscal, false);
+				resultado=UtilSession.planificacionServicio.transValidaaprobacion(unidad, ejerciciofiscal,false, npactividadid);
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
