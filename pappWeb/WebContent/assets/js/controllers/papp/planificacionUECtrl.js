@@ -15,6 +15,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	$scope.esnuevo=false;
 
 	$scope.limpiarEdicion = function() {
+		if ($scope.nodeActivo != undefined && $scope.nodeActivo.siEditar != undefined) {
+			$scope.edicion = false;
+			$scope.aprobacionPlanificacion = true;
+		}
+
 		$scope.divEditarDistribucion=false;
 		$scope.divPlanificacionAnual=true;
 		$scope.mPlanificadaID=0;
@@ -367,11 +372,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		}
 	}
 
-	$scope.editarPlanificacionAnual=function(node){
+	$scope.editarPlanificacionAnual=function(node) {
 		console.log(node);
 		$scope.esnuevo=false;
 		$scope.objeto=null;
-		$scope.editar=($scope.planificacionUE.npestadopresupuesto == "Planificado"? true: false);
+		if (node.siEditar == undefined) {
+			$scope.editar=($scope.planificacionUE.npestadopresupuesto == "Planificado"? true: false);
+		} else {
+			$scope.editar=true;
+		}
 		$scope.nodeActivo=node;
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
@@ -502,6 +511,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 				$scope.calcularTotalAjustado();
 				//console.log("Editar OBJETO:", $scope.objeto);
 			});
+		}
+		if (node.siEditar != undefined) {
+			$scope.edicion = true;
+			$scope.aprobacionPlanificacion = false;
 		}
 	};
 
@@ -1534,23 +1547,24 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 //******
 
 	$scope.modificarPresupuesto = function(obj) {
-		console.log("Fuentes:", $scope.objeto, obj);
-/*
+		//console.log("Fuentes:", obj);
 		var node = {
 			nodeTipo: obj.nivel,
-			tablarelacionid: ?,
-			npIdunidad: obj.id,
-			padreID: ?,
-			npactividadid: ?
-		}
+			tablarelacionid: obj.tablarelacionid,
+			npIdunidad: obj.npIdunidad,
+			//padreID: obj.,
+			npactividadid: obj.npactividadid,
+			siEditar: true
+		};
 		$scope.editarPlanificacionAnual(node);
-*/	}
+	}
 
 	$scope.modificarAjustado = function(obj) {
 		console.log("Fuentes:", $scope.objeto, obj);
 	}
 
 	$scope.aprobarPlanificacion = function(obj) {
+		$scope.detalles = null;
 		if (obj.npestadopresupuesto != "Planificado") {
 			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado", "warning");
 			return;
@@ -1560,23 +1574,25 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.editarAprobarPlanificacion=function(){
+		$scope.detalles = null;
 		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
 			$scope.objeto.id,
 			$rootScope.ejefiscal,
 			$scope.objeto.npacitividadunidad,
 			"P"
 		).then(function(resp){
-			$scope.detalle = resp.json.resultadoaprobacion;
+			$scope.detalles = resp.json.resultadoaprobacion;
 			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
 		});
 	};
 	
 	$scope.editadoObservacion = function(index) {
 		//index = ((pagina - 1) * 5) + index;
-		$scope.detalle[index].modificado = true;
+		$scope.detalles[index].modificado = true;
 	}
 	
 	$scope.aprobarAjustado = function(obj) {
+		$scope.detalles = null;
 		if (obj.npestadopresupuesto != "Aprobado") {
 			SweetAlert.swal(
 				"Aprobacion Planificacion!",
@@ -1590,13 +1606,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 	}
 
 	$scope.editarAprobarAjustada=function(){
+		$scope.detalles = null;
    		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
 			$scope.objeto.id,
 			$rootScope.ejefiscal,
 			$scope.objeto.npacitividadunidad,
 			"A"
 		).then(function(resp){
-			$scope.detalle = resp.json.resultadoaprobacion;
+			$scope.detalles = resp.json.resultadoaprobacion;
 			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
 		})
 	};
@@ -1610,7 +1627,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		}
 		return;
 		var tObj = Object.assign($scope.unidad, $scope.cabecera);
-		tObj.detalle = $scope.detalle;
+		tObj.detalles = $scope.detalles;
 		PlanificacionUEFactory.cargarMatrizPresupuesto(
 			tObj
 		).then(function(resp){
@@ -1652,7 +1669,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
 			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
 			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
-			$scope.detalle = resp.json.detalle;
+			$scope.detalles = resp.json.detalles;
 			$scope.edicionMatrizPresupuestoAP = true;
 		});
 	}
@@ -1674,17 +1691,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
 			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
 			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
-			$scope.detalle = resp.json.detalle;
+			$scope.detalles = resp.json.detalles;
 			$scope.edicionMatrizMetasAP = true;
 		});
 	}
 
 	$scope.guardar = function(tipo) {
 		var tObj =  [];
-		for (var i = 0; i < $scope.detalle.length; i++) {
-			if ($scope.detalle[i].modificado) {
-				tObj.push($scope.detalle[i]);
-				$scope.detalle[i].modificado=false;
+		for (var i = 0; i < $scope.detalles.length; i++) {
+			if ($scope.detalles[i].modificado) {
+				tObj.push($scope.detalles[i]);
+				$scope.detalles[i].modificado=false;
 			}
 		}
 		AprobacionPlanificacionFactory.guardar(

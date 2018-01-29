@@ -3039,45 +3039,47 @@
 							</div>
 						</div>
 						<div class="col-md-12">
-							<table class="table table-bordered">
-								<tr>
-									<td></td>
-									<td>#</td>
-									<td>Nivel</td>
-									<td>Observaci&oacute;n</td>
-								</tr>
-								<tr ng-repeat="obj in detalle" class="table-stylish">
-									<td>
-										<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important"
-											uib-tooltip="Modificar"
-											ng-click="modificarPresupuesto(obj);">
-											<i class="fa ti-layers-alt"></i>
-										</a>
-									</td>
-									<td>{{ $index + 1 }}</td>
-									<td>
-										 <span ng-if="obj.nivel == 'AC'">
-										 	ACTIVIDAD
-										 </span>
-										 <span ng-if="obj.nivel == 'SA'">
-										 	SUBACTIVIDAD
-										 </span>
-										 <span ng-if="obj.nivel == 'TA'">
-										 	TAREA
-										 </span>
-										 <span ng-if="obj.nivel == 'ST'">
-										 	SUBTAREA
-										 </span>
-										 <span ng-if="obj.nivel == 'IT'">
-										 	ITEM
-										 </span>
-										 <span ng-if="obj.nivel == 'SI'">
-										 	SUBITEM
-										 </span>
-									</td>
-									<td>{{ obj.mensaje }}</td>
-								</tr>
-							</table>
+							<div ng-show="detalles != null">
+								<table class="table table-bordered">
+									<tr>
+										<td></td>
+										<td>#</td>
+										<td>Nivel</td>
+										<td>Observaci&oacute;n</td>
+									</tr>
+									<tr ng-repeat="obj in detalles" class="table-stylish">
+										<td>
+											<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important"
+												uib-tooltip="Modificar"
+												ng-click="modificarPresupuesto(obj);">
+												<i class="fa ti-layers-alt"></i>
+											</a>
+										</td>
+										<td>{{ $index + 1 }}</td>
+										<td>
+											 <span ng-if="obj.nivel == 'AC'">
+											 	ACTIVIDAD
+											 </span>
+											 <span ng-if="obj.nivel == 'SA'">
+											 	SUBACTIVIDAD
+											 </span>
+											 <span ng-if="obj.nivel == 'TA'">
+											 	TAREA
+											 </span>
+											 <span ng-if="obj.nivel == 'ST'">
+											 	SUBTAREA
+											 </span>
+											 <span ng-if="obj.nivel == 'IT'">
+											 	ITEM
+											 </span>
+											 <span ng-if="obj.nivel == 'SI'">
+											 	SUBITEM
+											 </span>
+										</td>
+										<td>{{ obj.mensaje }}</td>
+									</tr>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -3122,45 +3124,47 @@
 							</div>
 						</div>
 						<div class="col-md-12">
-							<table class="table table-bordered">
-								<tr>
-									<td></td>
-									<td>#</td>
-									<td>Nivel</td>
-									<td>Observaci&oacute;n</td>
-								</tr>
-								<tr ng-repeat="obj in detalle" class="table-stylish">
-									<td>
-										<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important"
-											uib-tooltip="Modificar"
-											ng-click="modificarAjustado(obj);">
-											<i class="fa ti-layers-alt"></i>
-										</a>
-									</td>
-									<td>{{ $index + 1 }}</td>
-									<td>
-										 <span ng-if="obj.nivel == 'AC'">
-										 	ACTIVIDAD
-										 </span>
-										 <span ng-if="obj.nivel == 'SA'">
-										 	SUBACTIVIDAD
-										 </span>
-										 <span ng-if="obj.nivel == 'TA'">
-										 	TAREA
-										 </span>
-										 <span ng-if="obj.nivel == 'ST'">
-										 	SUBTAREA
-										 </span>
-										 <span ng-if="obj.nivel == 'IT'">
-										 	ITEM
-										 </span>
-										 <span ng-if="obj.nivel == 'SI'">
-										 	SUBITEM
-										 </span>
-									</td>
-									<td>{{ obj.mensaje }}</td>
-								</tr>
-							</table>
+							<div ng-show="detalles != null">
+								<table class="table table-bordered">
+									<tr>
+										<td></td>
+										<td>#</td>
+										<td>Nivel</td>
+										<td>Observaci&oacute;n</td>
+									</tr>
+									<tr ng-repeat="obj in detalles" class="table-stylish">
+										<td>
+											<a class="btn btn-sm btn-primary" style="background-color:#00B300 !important"
+												uib-tooltip="Modificar"
+												ng-click="modificarAjustado(obj);">
+												<i class="fa ti-layers-alt"></i>
+											</a>
+										</td>
+										<td>{{ $index + 1 }}</td>
+										<td>
+											 <span ng-if="obj.nivel == 'AC'">
+											 	ACTIVIDAD
+											 </span>
+											 <span ng-if="obj.nivel == 'SA'">
+											 	SUBACTIVIDAD
+											 </span>
+											 <span ng-if="obj.nivel == 'TA'">
+											 	TAREA
+											 </span>
+											 <span ng-if="obj.nivel == 'ST'">
+											 	SUBTAREA
+											 </span>
+											 <span ng-if="obj.nivel == 'IT'">
+											 	ITEM
+											 </span>
+											 <span ng-if="obj.nivel == 'SI'">
+											 	SUBITEM
+											 </span>
+										</td>
+										<td>{{ obj.mensaje }}</td>
+									</tr>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
