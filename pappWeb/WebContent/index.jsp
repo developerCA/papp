@@ -17,6 +17,7 @@
 
     <title data-ng-bind="pageTitle()">FF.AA</title>
     <!-- Bootstrap -->
+    <link rel="stylesheet" href="bower_components/bootstrap-additions/dist/bootstrap-additions.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
@@ -58,9 +59,11 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/plugins.css">
     
+  
+    
     <!-- Tree -->
     <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.css"/>
-    
+   
     <!-- Packet Theme -->
     <link rel="stylesheet" data-ng-href="assets/css/themes/{{ app.layout.theme }}.css" />
     
@@ -116,12 +119,14 @@
 	<script src="bower_components/underscore/underscore-min.js"></script>
 	<script src="bower_components/angular-underscore-module/angular-underscore-module.js"></script>
 	
+	<!-- Angular Strap -->
+	<script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+	<script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+
     <!-- BlockUI -->
     <script src="bower_components/angular-block-ui/dist/angular-block-ui.min.js"></script>
     <!-- Aside Strap -->
-    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
-    
+       
 	<!-- oclazyload -->
     <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
     <!-- breadcrumb -->

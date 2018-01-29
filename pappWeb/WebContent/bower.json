@@ -108,6 +108,7 @@
     "bootstrap": "~3.3.2",
     "flag-icon-css": "~0.8.5",
     "bootstrap-rtl": "~3.3.1",
-    "angular-strap": "^2.3.12"
+    "angular-strap": "^2.3.12",
+    "bootstrap-additions": "^0.3.1"
   }
 }
