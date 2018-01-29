@@ -775,4 +775,73 @@ public class ConsultasUtil {
 		return jsonObject;
 	}
 
+	/**
+	* Metodo que consulta las reformas paginadas y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaReformaPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+		String campo="";
+		ReformaTO reformaTO=new ReformaTO();
+		try{
+			int pagina=1;
+			if(parameters.get("pagina")!=null)		
+				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+			int filas=20;
+			if(parameters.get("filas")!=null)
+				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+			int primero=(pagina*filas)-filas;
+			campo="fechacreacion";
+			String[] columnas={campo};
+			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
+				campo=parameters.get("sidx");
+			reformaTO.setFirstResult(primero);
+			reformaTO.setMaxResults(filas);
+			String[] orderBy = columnas;
+			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
+				reformaTO.setOrderByField(OrderBy.orderDesc(orderBy));
+			else
+				reformaTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			Date fechaInicial=null;
+			Date fechaFinal=null;
+			if(parameters.get("fechainicial")!=null)
+				fechaInicial=UtilGeneral.parseStringToDate(parameters.get("fechainicial"));
+			if(parameters.get("fechafinal")!=null)
+				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal"));
+			if(parameters.get("fechainicial")!=null && parameters.get("fechafinal")==null)
+				fechaFinal=(new Date());
+			if(parameters.get("fechafinal")!=null && parameters.get("fechainicial")==null){
+				mensajes.setMsg(MensajesWeb.getString("error.fechaDesde"));
+				mensajes.setType(MensajesWeb.getString("mensaje.advertencia"));
+			}
+			if(mensajes.getMsg()==null){
+				if(fechaInicial!=null)
+					reformaTO.setRangoFechacreacion(new RangeValueTO<Date>(fechaInicial,fechaFinal));
+				if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
+					reformaTO.setCodigo(parameters.get("codigo"));
+				if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
+					reformaTO.setEstado(parameters.get("estado"));
+				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+					reformaTO.setReformaejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+				if(parameters.get("tipo")!=null && !parameters.get("tipo").equals("")){
+					reformaTO.setTipo(parameters.get("tipo"));
+				}
+				SearchResultTO<ReformaTO> resultado=UtilSession.planificacionServicio.transObtenerReformaPaginado(reformaTO);
+				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+				HashMap<String, String>  totalMap=new HashMap<String, String>();
+				totalMap.put("valor", resultado.getCountResults().toString());
+				log.println("totalresultado: " + totalRegistrosPagina);
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),reformaTO.getJsonConfigconsulta()));
+				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
 }

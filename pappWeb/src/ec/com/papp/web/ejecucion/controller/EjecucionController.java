@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import antlr.Utils;
 import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
+import ec.com.papp.administracion.to.ItemTO;
 import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
@@ -41,6 +42,7 @@ import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.ContratoTO;
 import ec.com.papp.planificacion.to.IndicadorTO;
+import ec.com.papp.planificacion.to.ItemunidadTO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.ObjetivoTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
@@ -53,6 +55,7 @@ import ec.com.papp.planificacion.to.PlannacionalTO;
 import ec.com.papp.planificacion.to.ProgramaTO;
 import ec.com.papp.planificacion.to.ProyectoTO;
 import ec.com.papp.planificacion.to.ProyectometaTO;
+import ec.com.papp.planificacion.to.ReformaTO;
 import ec.com.papp.planificacion.to.ReformalineaTO;
 import ec.com.papp.planificacion.to.SubactividadTO;
 import ec.com.papp.planificacion.to.SubitemunidadTO;
@@ -299,6 +302,26 @@ public class EjecucionController {
 		        }
 			}
 
+			//reforma
+			if(clase.equals("reforma")){
+				ReformaTO reformaTO = gson.fromJson(new StringReader(objeto), ReformaTO.class);
+				accion = (reformaTO.getId()==null)?"crear":"actualizar";
+				if(reformaTO.getNpfechaaprobacion()!=null)
+					reformaTO.setFechaaprobacion(UtilGeneral.parseStringToDate(reformaTO.getNpfechaaprobacion()));
+				if(reformaTO.getNpfechacreacion()!=null)
+					reformaTO.setFechacreacion(UtilGeneral.parseStringToDate(reformaTO.getNpfechacreacion()));
+				if(reformaTO.getNpfechaeliminacion()!=null)
+					reformaTO.setFechaeliminacion(UtilGeneral.parseStringToDate(reformaTO.getNpfechaeliminacion()));
+				if(reformaTO.getNpfechanegacion()!=null)
+					reformaTO.setFechanegacion(UtilGeneral.parseStringToDate(reformaTO.getNpfechanegacion()));
+				if(reformaTO.getNpfechasolicitud()!=null)
+					reformaTO.setFechasolicitud(UtilGeneral.parseStringToDate(reformaTO.getNpfechasolicitud()));
+				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO);
+				id=reformaTO.getNpid().toString();
+				reformaTO.setId(reformaTO.getNpid());
+				jsonObject.put("refomra", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
+			}
+			
 			//Registro la auditoria
 //			if(mensajes.getMsg()==null && !clase.equals("vercontrato"))
 //				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
@@ -384,13 +407,13 @@ public class EjecucionController {
 				jsonObject.put("certificacion", (JSONObject)JSONSerializer.toJSON(certificacion,certificacion.getJsonConfignuevo()));
 			}
 			//Certificacionlinea
-			if(clase.equals("certificacionlinea")){
+			else if(clase.equals("certificacionlinea")){
 				CertificacionlineaTO certificacionlineaTO = new CertificacionlineaTO();
 				certificacionlineaTO.getId().setId(id);
 				jsonObject.put("certificacionlinea", (JSONObject)JSONSerializer.toJSON(certificacionlineaTO,certificacionlineaTO.getJsonConfig()));
 			}
 			//Ordengasto
-			if(clase.equals("ordengasto")){
+			else if(clase.equals("ordengasto")){
 				OrdengastoTO  ordengastoTO=new OrdengastoTO();
 				ordengastoTO.setOrdengastoejerfiscalid(id);
 				ordengastoTO.setNpfechacreacion(UtilGeneral.parseDateToString(new Date()));
@@ -398,13 +421,13 @@ public class EjecucionController {
 				jsonObject.put("ordengasto", (JSONObject)JSONSerializer.toJSON(ordengastoTO,ordengastoTO.getJsonConfignuevo()));
 			}
 			//Ordengastolinea
-			if(clase.equals("ordengastolinea")){
+			else if(clase.equals("ordengastolinea")){
 				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
 				ordengastolineaTO.getId().setId(id);
 				jsonObject.put("ordengastolinea", (JSONObject)JSONSerializer.toJSON(ordengastolineaTO,ordengastolineaTO.getJsonConfig()));
 			}
 			//Ordendevengo
-			if(clase.equals("ordendevengo")){
+			else if(clase.equals("ordendevengo")){
 				OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
 				ordendevengoTO.setOrdendevengoejerfiscalid(id);
 				ordendevengoTO.setNpfechacreacion(UtilGeneral.parseDateToString(new Date()));
@@ -412,13 +435,13 @@ public class EjecucionController {
 				jsonObject.put("ordendevengo", (JSONObject)JSONSerializer.toJSON(ordendevengoTO,ordendevengoTO.getJsonConfignuevo()));
 			}
 			//Ordendevengolinea
-			if(clase.equals("ordendevengolinea")){
+			else if(clase.equals("ordendevengolinea")){
 				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
 				ordengastolineaTO.getId().setId(id);
 				jsonObject.put("ordendevengolinea", (JSONObject)JSONSerializer.toJSON(ordengastolineaTO,ordengastolineaTO.getJsonConfig()));
 			}
 			//Ordendreversion
-			if(clase.equals("ordenreversion")){
+			else if(clase.equals("ordenreversion")){
 				OrdenreversionTO ordenreversionTO=new OrdenreversionTO();
 				ordenreversionTO.setOrdenreversionejerfiscalid(id);
 				ordenreversionTO.setNpfechacreacion(UtilGeneral.parseDateToString(new Date()));
@@ -426,10 +449,24 @@ public class EjecucionController {
 				jsonObject.put("ordenreversion", (JSONObject)JSONSerializer.toJSON(ordenreversionTO,ordenreversionTO.getJsonConfignuevo()));
 			}
 			//Ordendevengolinea
-			if(clase.equals("ordenreversionlinea")){
+			else if(clase.equals("ordenreversionlinea")){
 				OrdenreversionlineaTO ordenreversionlineaTO=new OrdenreversionlineaTO();
 				ordenreversionlineaTO.getId().setId(id);
 				jsonObject.put("ordenreversionlinea", (JSONObject)JSONSerializer.toJSON(ordenreversionlineaTO,ordenreversionlineaTO.getJsonConfig()));
+			}
+			//Reforma
+			else if(clase.equals("reforma")){
+				ReformaTO reformaTO=new ReformaTO();
+				reformaTO.setReformaejerfiscalid(id);
+				reformaTO.setNpfechacreacion(UtilGeneral.parseDateToString(new Date()));
+				reformaTO.setEstado(MensajesAplicacion.getString("certificacion.estado.registrado"));
+				jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfignuevo()));
+			}
+			//Reformalinea
+			else if(clase.equals("reformalinea")){
+				ReformalineaTO reformalineaTO=new ReformalineaTO();
+				reformalineaTO.getId().setId(id);
+				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
 			}
 
 			log.println("json retornado: " + jsonObject.toString());
@@ -464,7 +501,7 @@ public class EjecucionController {
 				CertificacionlineaTO certificacionlineaTO = UtilSession.planificacionServicio.transObtenerCertificacionlineaTO(new CertificacionlineaID(id, id2));
 				certificacionlineaTO.setNpvalor(certificacionlineaTO.getValor());
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(certificacionlineaTO.getNivelactid(), jsonObject, mensajes);
-				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO());
+				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(certificacionlineaTO.getNivelactid()));
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
 				//2. Obtengo el detalle del subitem
@@ -615,6 +652,35 @@ public class EjecucionController {
 				saldodisponible.put("saldo", saldo);
 				saldodisponible.put("noaprobadas", ordenesnoaprob);
 				jsonObject.put("datoslineaordend", (JSONObject)JSONSerializer.toJSON(saldodisponible));
+			}
+			//Reforma
+			if(clase.equals("reforma")){
+				ReformaTO reformaTO=new ReformaTO();
+				reformaTO = UtilSession.planificacionServicio.transObtenerReformaTO(id);
+				reformaTO.setNpunidadcodigo(reformaTO.getUnidad().getCodigopresup());
+				reformaTO.setNpunidadnombre(reformaTO.getUnidad().getNombre());
+				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformaTO.getId()));
+				//Consulto el item
+				ItemunidadTO itemunidadTO=new ItemunidadTO();
+				itemunidadTO.setItem(new ItemTO());
+				itemunidadTO.setId(nivelactividadTO.getTablarelacionid());
+				Collection<ItemunidadTO> itemunidadTOs=UtilSession.planificacionServicio.transObtenerItemunidad(itemunidadTO);
+				if(itemunidadTOs.size()>0) {
+					itemunidadTO=(ItemunidadTO)itemunidadTOs.iterator().next();
+					reformaTO.setNpitemcodigo(itemunidadTO.getItem().getCodigo());
+					reformaTO.setNpitemnombre(itemunidadTO.getItem().getNombre());
+				}
+				//asigno las fechas
+				reformaTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(reformaTO.getFechaaprobacion()));
+				reformaTO.setNpfechacreacion(UtilGeneral.parseDateToString(reformaTO.getFechacreacion()));
+				reformaTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(reformaTO.getFechaeliminacion()));
+				reformaTO.setNpfechanegacion(UtilGeneral.parseDateToString(reformaTO.getFechanegacion()));
+				reformaTO.setNpfechasolicitud(UtilGeneral.parseDateToString(reformaTO.getFechasolicitud()));
+				//traigo las reformaslinea las traigo
+				ReformalineaTO reformalineaTO=new ReformalineaTO();
+				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO);
+				jsonObject.put("reformalineas", (JSONArray)JSONSerializer.toJSON(reformalineaTOs,reformalineaTO.getJsonConfig()));
+				jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
 			}
 
 			log.println("json retornado: " + jsonObject.toString());
@@ -905,6 +971,11 @@ public class EjecucionController {
 			//Orden de reversion
 			else if(clase.equals("ordenreversion")){
 				jsonObject=ConsultasUtil.consultaOrdenreversionPaginado(parameters, jsonObject, mensajes);
+			}
+
+			//Reforma
+			else if(clase.equals("reforma")){
+				jsonObject=ConsultasUtil.consultaReformaPaginado(parameters, jsonObject, mensajes);
 			}
 
 			//Certificacion busqueda
