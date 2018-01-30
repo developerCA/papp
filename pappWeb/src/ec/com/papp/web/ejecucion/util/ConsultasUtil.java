@@ -23,6 +23,7 @@ import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.to.OrdenreversionTO;
 import ec.com.papp.planificacion.to.ReformaTO;
+import ec.com.papp.planificacion.to.ReformalineaTO;
 import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
@@ -718,6 +719,30 @@ public class ConsultasUtil {
 				totalreforma=totalreforma+reformaTO.getValorincremento().doubleValue()-reformaTO.getValordecremento();
 			double saldo=total+totalreforma-subitemunidadTO.getValprecompromiso().doubleValue()-subitemunidadTO.getValxcomprometer().doubleValue()-subitemunidadTO.getValcompromiso().doubleValue();
 			return saldo;
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+	}
+
+	/**
+	* Metodo que obtiene el valor total del subitem
+	*
+	* @param request 
+	* @return total
+	* @throws MyException
+	*/
+
+	public static Double obtenertotalsubitem(Double total,Long idsubitem,Long nivelactividadid,ReformalineaTO reformalineaTO) throws MyException {
+		try{
+			//traigo las reformas asignadas al subitem
+			Collection<ReformaTO> reformaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+			double totalreforma=0.0;
+			for(ReformaTO reformaTO:reformaTOs)
+				totalreforma=totalreforma+reformaTO.getValorincremento().doubleValue()-reformaTO.getValordecremento();
+			double valtotal=total+totalreforma+reformalineaTO.getValordecremento().doubleValue()-reformalineaTO.getValorincremento().doubleValue();
+			return valtotal;
 
 		}catch (Exception e) {
 			e.printStackTrace();

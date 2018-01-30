@@ -316,12 +316,38 @@ public class EjecucionController {
 					reformaTO.setFechanegacion(UtilGeneral.parseStringToDate(reformaTO.getNpfechanegacion()));
 				if(reformaTO.getNpfechasolicitud()!=null)
 					reformaTO.setFechasolicitud(UtilGeneral.parseStringToDate(reformaTO.getNpfechasolicitud()));
-				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO);
+				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO,null);
 				id=reformaTO.getNpid().toString();
 				reformaTO.setId(reformaTO.getNpid());
 				jsonObject.put("refomra", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
 			}
 			
+			//reforma linea
+			else if(clase.equals("reformalinea")){
+				ReformalineaTO reformalineaTO = gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
+				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
+				ReformalineaTO reformalineaTO2=new ReformalineaTO();
+				log.println("consulta lineas: " + reformalineaTO.getNivelactid() + reformalineaTO.getId().getId());
+				reformalineaTO2.setNivelactid(reformalineaTO.getNivelactid());
+				reformalineaTO2.getId().setId(reformalineaTO.getId().getId());
+				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO2);
+				log.println("reformas: " + reformalineaTOs.size());
+				if(reformalineaTOs.size()==0){
+					accion = (reformalineaTO.getId()==null)?"crear":"actualizar";
+					UtilSession.planificacionServicio.transCrearModificarReformalinea(reformalineaTO);
+					id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
+					//Traigo la lista de ordengastolinea
+					ReformalineaTO reformalineaTO3=new ReformalineaTO();
+					reformalineaTO3.getId().setId(reformalineaTO.getId().getId());
+					Collection<ReformalineaTO> reformalineaTOs2=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO3);
+					jsonObject.put("reformalinea", (JSONArray)JSONSerializer.toJSON(reformalineaTOs2,reformalineaTO.getJsonConfig()));
+				}
+				else{
+					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+			}
+
 			//Registro la auditoria
 //			if(mensajes.getMsg()==null && !clase.equals("vercontrato"))
 //				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
@@ -627,10 +653,22 @@ public class EjecucionController {
 //					valorcertificacion=valorcertificacion+certificacionlineaTO.getValor().doubleValue();
 //				//3. resto el total disponible menos las certificaciones ya creadas
 //				double saldo=total-valorcertificacion;
+				//Obtengo el valor ajustado del subitme
+				//traigo los datos de actividadunidadacumulador
 				Map<String, Double> saldodisponible=new HashMap<>();
+				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
+				subitemunidadacumuladorTO.getId().setId(id);
+				subitemunidadacumuladorTO.setTipo("A");
+				subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
+				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
+				if(subitemunidadacumuladorTOs.size()>0) {
+					subitemunidadacumuladorTO=(SubitemunidadacumuladorTO)subitemunidadacumuladorTOs.iterator().next();
+					saldodisponible.put("valorajustado", subitemunidadacumuladorTO.getTotal());
+				}
 				saldodisponible.put("saldo", saldo);
 				jsonObject.put("valordisponiblesi", (JSONObject)JSONSerializer.toJSON(saldodisponible));
 			}
+			
 			//datoslineaordend: Obtiene el saldo disponible de la certificacion y el valor de las ordenes no aprobadas
 			else if(clase.equals("datoslineaordend")) {
 				//1. traigo el total disponible del subitem
@@ -681,6 +719,21 @@ public class EjecucionController {
 				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO);
 				jsonObject.put("reformalineas", (JSONArray)JSONSerializer.toJSON(reformalineaTOs,reformalineaTO.getJsonConfig()));
 				jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
+			}
+			//Reformalinea
+			else if(clase.equals("reformalinea")){
+				ReformalineaTO reformalineaTO = UtilSession.planificacionServicio.transObtenerReformalineaTO(new ReformalineaID(id, id2));
+				reformalineaTO.setNpvalordecremento(reformalineaTO.getValordecremento());
+				reformalineaTO.setNpvalorincremento(reformalineaTO.getValorincremento());
+				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(reformalineaTO.getNivelactid(), jsonObject, mensajes);
+				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformalineaTO.getNivelactid()));
+				//1. traigo el total disponible del subitem
+				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
+				//2. Obtengo el detalle del subitem
+//				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
+				double valtotal=ConsultasUtil.obtenertotalsubitem(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid(),reformalineaTO);
+				reformalineaTO.setNpvalortotal(valtotal);
+				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
 			}
 
 			log.println("json retornado: " + jsonObject.toString());
@@ -944,7 +997,50 @@ public class EjecucionController {
 		log.println("devuelve**** " + jsonObject.toString());
 		return respuesta;	
 	}
-	
+
+	@RequestMapping(value = "/flujoreforma/{id}/{tipo}", method = RequestMethod.POST)
+	public Respuesta flujoreforma(@PathVariable Long id,@PathVariable String tipo,@RequestBody String objeto,HttpServletRequest request){
+		log.println("entra al metodo flujo");
+		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
+		JSONObject jsonObject=new JSONObject();
+		Gson gson = new Gson();
+		try {
+			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
+			ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(id);
+			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
+				reformaTO.setEstado(tipo);
+				if(tipo.equals("EL")) {
+					if(parameters.get("observacion")!=null)
+						reformaTO.setMotivoeliminacion(parameters.get("observacion"));
+				}
+				else if(tipo.equals("NE")) {
+					if(parameters.get("observacion")!=null)
+						reformaTO.setMotivonegacion(parameters.get("observacion"));
+				}
+				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO, tipo);
+				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+			}
+//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.println("error al eliminar");
+			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
+			//throw new MyException(e);
+		}
+		if(mensajes.getMsg()!=null){
+			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+			log.println("existen mensajes");
+		}
+		log.println("devuelve**** " + jsonObject.toString());
+		return respuesta;	
+	}
+
 	@RequestMapping(value = "/consultar/{clase}", method = RequestMethod.POST)
 	public String consultarpost(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo consultar: " + objeto);
