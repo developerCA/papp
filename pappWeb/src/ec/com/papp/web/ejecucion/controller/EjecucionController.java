@@ -8,10 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-
 import org.hibernate.tools.commons.to.OrderBy;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,46 +17,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import antlr.Utils;
 import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
 import ec.com.papp.administracion.to.ItemTO;
 import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
-import ec.com.papp.planificacion.id.ActividadunidadID;
 import ec.com.papp.planificacion.id.CertificacionlineaID;
 import ec.com.papp.planificacion.id.OrdendevengolineaID;
 import ec.com.papp.planificacion.id.OrdengastolineaID;
 import ec.com.papp.planificacion.id.OrdenreversionlineaID;
-import ec.com.papp.planificacion.id.ProyectometaID;
 import ec.com.papp.planificacion.id.ReformalineaID;
-import ec.com.papp.planificacion.to.ActividadTO;
-import ec.com.papp.planificacion.to.ActividadunidadTO;
 import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.ContratoTO;
-import ec.com.papp.planificacion.to.IndicadorTO;
 import ec.com.papp.planificacion.to.ItemunidadTO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
-import ec.com.papp.planificacion.to.ObjetivoTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdendevengolineaTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.to.OrdengastolineaTO;
 import ec.com.papp.planificacion.to.OrdenreversionTO;
 import ec.com.papp.planificacion.to.OrdenreversionlineaTO;
-import ec.com.papp.planificacion.to.PlannacionalTO;
-import ec.com.papp.planificacion.to.ProgramaTO;
-import ec.com.papp.planificacion.to.ProyectoTO;
-import ec.com.papp.planificacion.to.ProyectometaTO;
 import ec.com.papp.planificacion.to.ReformaTO;
 import ec.com.papp.planificacion.to.ReformalineaTO;
-import ec.com.papp.planificacion.to.SubactividadTO;
-import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
-import ec.com.papp.planificacion.to.SubprogramaTO;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
@@ -69,6 +51,9 @@ import ec.com.papp.web.ejecucion.util.ConsultasUtil;
 import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 /**
  * @autor: jcalderon
