@@ -239,6 +239,7 @@ app.constant('JS_REQUIRES', {
         'OrdenDevengoLineasFactory':'assets/js/factory/ordenDevengoLineasFactory.js',
         'OrdenReversionCtrl':'assets/js/controllers/papp/ordenReversionCtrl.js',
         'OrdenReversionFactory':'assets/js/factory/ordenReversionFactory.js',
+        'PUECtrl':'assets/js/controllers/papp/modales/pueCtrl.js',
 
 
     },

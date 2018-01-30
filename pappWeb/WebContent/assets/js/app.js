@@ -32,7 +32,7 @@ angular.module("packet", [
 	'FBAngular',
 	'underscore',
 	'blockUI',
-	'mgcrea.ngStrap',
 	'ui.tree',
+	'ngAside',
 	
 ]);

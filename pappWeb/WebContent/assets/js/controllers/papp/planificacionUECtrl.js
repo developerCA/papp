@@ -1,5 +1,5 @@
-app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","PlanificacionUEFactory", "AprobacionPlanificacionFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,PlanificacionUEFactory, AprobacionPlanificacionFactory) {
+app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$uibModal","SweetAlert","$filter", "ngTableParams","PlanificacionUEFactory", "AprobacionPlanificacionFactory",
+	function($scope,$rootScope,$aside,$uibModal,SweetAlert,$filter, ngTableParams,PlanificacionUEFactory, AprobacionPlanificacionFactory) {
 
 	$scope.codigoFiltro=null;
 	$scope.nombreFiltro=null;
@@ -556,6 +556,35 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 		})
 	}
 
+	$scope.abrirVentana=function(){
+		var asideInstance = $aside.open({
+		    templateUrl: 'assets/views/papp/modal/pue.html',
+		    //controller: 'AsideCtrl',
+		    placement: 'left',
+		    size: 'sm'
+		});
+	};
+    
+    $scope.openAside = function(position) {
+    	$rootScope.objetoVista=$scope.objetoVista;
+    	$scope.asideState = {
+	        open: true,
+	        position: position
+    	};
+
+    	function postClose() {
+        	$scope.asideState.open = false;
+    	}
+
+	    $aside.open({
+	        templateUrl: 'assets/views/papp/modal/pue.html',
+	        placement: position,
+	        size: 'sm',
+	        backdrop: true,
+	        controller: 'PUEController'
+	    }).result.then(postClose, postClose);
+    }
+
 	$scope.vista=function(node){
 		console.log(node);
 		$scope.node = node;
@@ -575,6 +604,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$uibModal",
 					$scope.divMenuActividad = true;
 					$scope.novista = false;
 					$scope.cargarCodigosVista();
+					$scope.openAside('left');
 				}
 			})
 		}

@@ -10,14 +10,14 @@
     <meta name="HandheldFriendly" content="true" />
     <meta name="apple-touch-fullscreen" content="yes" />
     <meta http-equiv="cache-control" content="max-age=0" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="expires" content="0" />
-<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
 
     <title data-ng-bind="pageTitle()">FF.AA</title>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="bower_components/bootstrap-additions/dist/bootstrap-additions.min.css">
+    
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
@@ -37,7 +37,10 @@
     <link rel="stylesheet" href="bower_components/angular-ui-switch/angular-ui-switch.min.css">
     <!-- Angular Toaster Css -->
     <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css">
-   
+
+	<!-- Angular Aside -->   
+    <link rel="stylesheet" href="bower_components/angular-aside/dist/css/angular-aside.min.css">
+
     <!-- Angular Notification Icons Css -->
     <link rel="stylesheet" href="bower_components/angular-notification-icons/dist/angular-notification-icons.min.css">
     <!-- V-Accordion Css -->
@@ -59,15 +62,13 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/plugins.css">
     
-  
-    
+
     <!-- Tree -->
     <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.css"/>
    
     <!-- Packet Theme -->
     <link rel="stylesheet" data-ng-href="assets/css/themes/{{ app.layout.theme }}.css" />
-    
-     
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
@@ -110,6 +111,8 @@
     <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
     <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
 	<script src="bower_components/angular-ui-utils/mask.min.js"></script>
+
+    <script src="bower_components/angular-aside/dist/js/angular-aside.min.js"></script>
         
     <!-- Restangular -->
     
@@ -119,10 +122,8 @@
 	<script src="bower_components/underscore/underscore-min.js"></script>
 	<script src="bower_components/angular-underscore-module/angular-underscore-module.js"></script>
 	
-	<!-- Angular Strap -->
-	<script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
-	<script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
-
+	
+	
     <!-- BlockUI -->
     <script src="bower_components/angular-block-ui/dist/angular-block-ui.min.js"></script>
     <!-- Aside Strap -->
