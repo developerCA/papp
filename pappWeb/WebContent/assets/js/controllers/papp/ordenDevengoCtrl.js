@@ -495,8 +495,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	      					 $scope.noeditar = false;
 	      					 $scope.nuevoar=false;
         				 }
-      				     $scope.objeto=resp.json.ordendevengo;
+      				     //$scope.objeto=resp.json.ordendevengo;
       					 SweetAlert.swal("Orden de Devengo!", "Registro guardado satisfactoriamente!", "success");
+      		             form.$setPristine(true);
+      		             $scope.edicion=false;
+      		             $scope.objeto={};
         			 }else{
 	 		             SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, "error");
         			 }
