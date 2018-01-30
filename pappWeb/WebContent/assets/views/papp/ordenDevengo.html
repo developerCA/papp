@@ -270,7 +270,7 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <select class="form-control" name="tipo"
-								        ng-model="objeto.tipo" required>
+								        ng-model="objeto.tipo" required ng-disabled="noeditar">
 								        <option value="" ng-selected="selected">(Ninguno)</option>
 								        <option value="L">Liquidaci&oacute;n</option>
 								        <option value="N">Normal</option>
@@ -349,7 +349,7 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
-								        class="form-control" ng-model="objeto.descripcion"
+								        class="form-control" ng-model="objeto.descripcion" ng-disabled="noeditar"
 								        required></textarea>
 								    <span class="error text-small block"
 								        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
@@ -369,7 +369,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
 								        class="form-control" name="numerooficio" ng-model="objeto.numerooficio"
-								        required>
+								        required ng-disabled="noeditar">
 								    <span class="error text-small block"
 								        ng-if="Form.numerooficio.$dirty && Form.numerooficio.$invalid">
 								        Incorrecto
@@ -396,7 +396,7 @@
 								</div>
 							</div>
 						</div>
-<br>
+						<br>
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="panel panel-primary">
