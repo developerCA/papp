@@ -1045,13 +1045,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     			return;
 			}
 		}
-		if ($scope.objetoPlanificada.unidadtiempo == "PE") {
-			$scope.totalPlanificada = 0;
-			for (var i = 0; i < 12; i++) {
-				$scope.totalPlanificada += $scope.detallesPlanificada[i].valor;
-			}
-			$scope.totalPlanificada = Number($scope.totalPlanificada.toFixed(2));
+		$scope.totalPlanificada = 0;
+		for (var i = 0; i < 12; i++) {
+			$scope.totalPlanificada += $scope.detallesPlanificada[i].valor;
 		}
+		$scope.totalPlanificada = Number($scope.totalPlanificada.toFixed(2));
 		if ($scope.totalPlanificada != ($scope.divActividad || $scope.divSubTarea
 				? $scope.detalles[$scope.mPlanificadaID].cantidad
 				: $scope.npTotalPlanificado
@@ -1115,13 +1113,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     			return;
 			}
 		}
-		if ($scope.objetoAjustada.unidadtiempo == "PE") {
-			$scope.totalAjustada = 0;
-			for (var i = 0; i < 12; i++) {
-				$scope.totalAjustada += $scope.detallesAjustada[i].valor;
-			}
-			$scope.totalAjustada = Number($scope.totalAjustada.toFixed(2));
+		$scope.totalAjustada = 0;
+		for (var i = 0; i < 12; i++) {
+			$scope.totalAjustada += $scope.detallesAjustada[i].valor;
 		}
+		$scope.totalAjustada = Number($scope.totalAjustada.toFixed(2));
 		if ($scope.totalAjustada != ($scope.divActividad || $scope.divSubTarea
 				? $scope.detalles[$scope.mAjustadaID].cantidad
 				: $scope.npTotalAjustado
