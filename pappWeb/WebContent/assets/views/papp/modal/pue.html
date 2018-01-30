@@ -1,133 +1,131 @@
 <div class="panel panel-white" id="panel6">
-	<div class="panel-heading">
-		<h4 class="panel-title text-primary">
-		Vista de la informaci&oacute;n
-		</h4>
-		<ct-paneltool class="panel-tools" ></ct-paneltool>
+	<div class="modal-header" style="background:#516b8c !important;border-bottom-color:#516b8c !important;">
+	    <h3 class="modal-title" style="color:#FFFFFF !important;">
+	    	Vista de la informaci&oacute;n
+	    </h3>
 	</div>
 	<div class="panel-body">
-		<div class="panel-scroll height-180" style="height:600px !important;" perfect-scrollbar
+		<div class="panel-scroll height-180" style="height:550px !important;" perfect-scrollbar
 			wheel-propagation="false" suppress-scroll-x="true">
-	<div class="modal-body" ng-init="init()">
-		<div class="form-group has-success">
-			<label class="control-label"> Objetivo Plan Nacional </label>
-			<div class="input-group col-md-12">
-				<textarea name="npPlannacional" rows="5" style="width: 100%"
-					class="form-control" ng-model="objetoVista.npPlannacional"
-					ng-disabled="true"></textarea>
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> Objetivo MIDENA </label>
-			<div class="input-group col-md-12">
-				<input type="text" class="form-control" name="npObjetivoestrategico"
-					ng-model="objetoVista.npObjetivoestrategico" ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> Objetivo FF.AA. </label>
-			<div class="input-group col-md-12">
-				<input type="text" class="form-control" name="npObjetivooperativo"
-					ng-model="objetoVista.npObjetivooperativo" required
-					ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> Objetivo de Fuerza </label>
-			<div class="input-group col-md-12">
-				<input type="text" class="form-control" name="npObjetivofuerza"
-					ng-model="objetoVista.npObjetivofuerza" required ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> Instituci&oacute;n (UDAF) </label>
-			<div class="input-group col-md-12">
-				<input type="text" class="form-control" name="npInstitucion"
-					ng-model="objetoVista.npInstitucion" required ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> Entidad (EOD) </label>
-			<div class="input-group col-md-12">
-				<input type="text" class="form-control" name="npentidad"
-					ng-model="objetoVista.npentidad" required ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> Programa </label>
-			<div class="input-group col-md-12">
-				<input type="text" class="form-control" name="npPrograma"
-					ng-model="objetoVista.npPrograma" required ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> Subprograma </label>
-			<div class="input-group col-md-12">
-				<input type="text" class="form-control" name="npSubprograma"
-					ng-model="objetoVista.npSubprograma" required ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> Proyecto </label>
-			<div class="input-group col-md-12">
-				<input type="text" class="form-control" name="npProyecto"
-					ng-model="objetoVista.npProyecto" required ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> P. Acumulado Planificado </label>
-			<div class="input-group col-md-12">
-				<input type="text" numericOnly decimal="2"
-					placeholder="Escriba un p. acumulado planificado"
-					class="form-control" name="npacumuladoplanificado"
-					ng-model="objetoVista.npacumuladoplanificado"
-					ng-pattern="/^[0-9]*$/" required ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> P. Acumulado Ajustado </label>
-			<div class="input-group col-md-12">
-				<input type="text" numericOnly decimal="2"
-					placeholder="Escriba un p. acumulado ajustado" class="form-control"
-					name="npacumuladoajustado"
-					ng-model="objetoVista.npacumuladoajustado" ng-pattern="/^[0-9]*$/"
-					required ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> Ponderaci&oacute;n </label>
-			<div class="input-group col-md-12">
-				<input type="text" numericOnly decimal="2"
-					placeholder="Escriba un ponderaci&oacute;n" class="form-control"
-					name="ponderacion" ng-model="objetoVista.ponderacion"
-					ng-pattern="/^[0-9]*$/" required ng-disabled="true">
-			</div>
-		</div>
-
-		<div class="form-group has-success">
-			<label class="control-label"> Ponderaci&oacute;n Acumulada </label>
-			<div class="input-group col-md-12">
-				<input type="text" numericOnly decimal="2"
-					placeholder="Escriba un ponderaci&oacute;n acumulada"
-					class="form-control" name="npponderacionacumulado"
-					ng-model="objetoVista.npponderacionacumulado"
-					ng-pattern="/^[0-9]*$/" required ng-disabled="true">
-			</div>
-		</div>
-
-	</div>
-
+				<div class="modal-body" ng-init="init()">
+					<div class="form-group has-success">
+						<label class="control-label"> Objetivo Plan Nacional </label>
+						<div class="input-group col-md-12">
+							<textarea name="npPlannacional" rows="5" style="width: 100%"
+								class="form-control" ng-model="objetoVista.npPlannacional"
+								ng-disabled="true"></textarea>
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> Objetivo MIDENA </label>
+						<div class="input-group col-md-12">
+							<input type="text" class="form-control" name="npObjetivoestrategico"
+								ng-model="objetoVista.npObjetivoestrategico" ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> Objetivo FF.AA. </label>
+						<div class="input-group col-md-12">
+							<input type="text" class="form-control" name="npObjetivooperativo"
+								ng-model="objetoVista.npObjetivooperativo" required
+								ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> Objetivo de Fuerza </label>
+						<div class="input-group col-md-12">
+							<input type="text" class="form-control" name="npObjetivofuerza"
+								ng-model="objetoVista.npObjetivofuerza" required ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> Instituci&oacute;n (UDAF) </label>
+						<div class="input-group col-md-12">
+							<input type="text" class="form-control" name="npInstitucion"
+								ng-model="objetoVista.npInstitucion" required ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> Entidad (EOD) </label>
+						<div class="input-group col-md-12">
+							<input type="text" class="form-control" name="npentidad"
+								ng-model="objetoVista.npentidad" required ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> Programa </label>
+						<div class="input-group col-md-12">
+							<input type="text" class="form-control" name="npPrograma"
+								ng-model="objetoVista.npPrograma" required ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> Subprograma </label>
+						<div class="input-group col-md-12">
+							<input type="text" class="form-control" name="npSubprograma"
+								ng-model="objetoVista.npSubprograma" required ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> Proyecto </label>
+						<div class="input-group col-md-12">
+							<input type="text" class="form-control" name="npProyecto"
+								ng-model="objetoVista.npProyecto" required ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> P. Acumulado Planificado </label>
+						<div class="input-group col-md-12">
+							<input type="text" numericOnly decimal="2"
+								placeholder="Escriba un p. acumulado planificado"
+								class="form-control" name="npacumuladoplanificado"
+								ng-model="objetoVista.npacumuladoplanificado"
+								ng-pattern="/^[0-9]*$/" required ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> P. Acumulado Ajustado </label>
+						<div class="input-group col-md-12">
+							<input type="text" numericOnly decimal="2"
+								placeholder="Escriba un p. acumulado ajustado" class="form-control"
+								name="npacumuladoajustado"
+								ng-model="objetoVista.npacumuladoajustado" ng-pattern="/^[0-9]*$/"
+								required ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> Ponderaci&oacute;n </label>
+						<div class="input-group col-md-12">
+							<input type="text" numericOnly decimal="2"
+								placeholder="Escriba un ponderaci&oacute;n" class="form-control"
+								name="ponderacion" ng-model="objetoVista.ponderacion"
+								ng-pattern="/^[0-9]*$/" required ng-disabled="true">
+						</div>
+					</div>
+			
+					<div class="form-group has-success">
+						<label class="control-label"> Ponderaci&oacute;n Acumulada </label>
+						<div class="input-group col-md-12">
+							<input type="text" numericOnly decimal="2"
+								placeholder="Escriba un ponderaci&oacute;n acumulada"
+								class="form-control" name="npponderacionacumulado"
+								ng-model="objetoVista.npponderacionacumulado"
+								ng-pattern="/^[0-9]*$/" required ng-disabled="true">
+						</div>
+					</div>
+			
+				</div>
 		</div>
 	</div>
 	<div class="modal-footer">

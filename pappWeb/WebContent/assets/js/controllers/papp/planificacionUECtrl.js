@@ -579,7 +579,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    $aside.open({
 	        templateUrl: 'assets/views/papp/modal/pue.html',
 	        placement: position,
-	        size: 'sm',
+	        size: 'md',
 	        backdrop: true,
 	        controller: 'PUEController'
 	    }).result.then(postClose, postClose);
@@ -604,7 +604,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					$scope.divMenuActividad = true;
 					$scope.novista = false;
 					$scope.cargarCodigosVista();
-					$scope.openAside('left');
 				}
 			})
 		}
@@ -700,6 +699,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.objetoVista.npPrograma = $scope.objetoVista.npProgramacodigo + ': ' + $scope.objetoVista.npPrograma;
 		$scope.objetoVista.npSubprograma = $scope.objetoVista.npSubprogramacodigo + ': ' + $scope.objetoVista.npSubprograma;
 		$scope.objetoVista.npProyecto = $scope.objetoVista.npProyectocodigo + ': ' + $scope.objetoVista.npProyecto;
+		$scope.openAside('left');
 	}
 
 	$scope.regresarVista=function() {
