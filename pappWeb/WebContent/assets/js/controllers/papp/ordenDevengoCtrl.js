@@ -22,7 +22,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	$scope.guardar=false;
 	$scope.objeto={estado:null};
 	$scope.detalles={};
-	$scope.mirar=false;
+	$scope.divVista=false;
 	
     $scope.pagina = 1;
     $scope.aplicafiltro=false;
@@ -119,7 +119,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 
 	$scope.visualizar=function(index){
 		//console.log($scope.data[index]);
-		return;
+		//return;
 		ordenDevengoFactory.traerEditar(
 			$scope.data[index].id
 		).then(function(resp){
@@ -129,8 +129,8 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			    $scope.detalles=resp.json.ordendevengolineas;
 			}
 			//console.log($scope.objeto.codigo);
-			$scope.edicion=true;
-			$scope.mirar=true;
+			//$scope.edicion=true;
+			$scope.divVista=true;
 			$scope.nuevoar=false;
 			$scope.guardar=true;
 		})
@@ -472,6 +472,25 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		});
 	};
 
+	$scope.abrirOrdenGasto = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalOrdenGasto.html',
+			controller : 'ModalOrdenGastoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+			return;
+			$scope.objeto.ordendevengotipodocid = obj.id.id;
+			$scope.objeto.ordendevengotpclasedocid = obj.id.clasedocid;
+			$scope.objeto.npcodigotipodocumento = obj.codigo;
+			$scope.objeto.npnombretipodocumento = obj.nombre;
+			$scope.objeto.npcodigodocumento = obj.npcodigodocumento;
+			$scope.objeto.npnombredocumento = obj.npnombredocumento;
+		}, function() {
+		});
+	};
+
 	$scope.form = {
         submit: function (form) {
             var firstError = null;
@@ -511,6 +530,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
             $scope.myModel = angular.copy($scope.master);
             form.$setPristine(true);
             $scope.edicion=false;
+			$scope.divVista=false;
             $scope.objeto={};
         }
     };

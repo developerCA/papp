@@ -45,6 +45,29 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customPOST(tObj);
 		},
 
+		modalTraerFiltro: function(
+			pagina,
+			ejefiscal,
+			codigo,
+			estado,
+			unidad,
+			descripcion
+		) {
+			var url = "ejecucion/consultar/ordengastobusqueda";
+			var tObj = {
+				filas: "10",
+				pagina: pagina.toString(),
+				ejerciciofiscal: ejefiscal.toString()
+			}
+
+			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
+			if(estado != null && estado != "") tObj.estado= "" + estado;	
+			if(unidad != null && unidad != "") tObj.unidad= "" + unidad;	
+			if(descripcion!= null && descripcion != "") tObj.descripcion= "" + descripcion;	
+
+			return Restangular.allUrl(url).customPOST(tObj);
+		},
+
 		traerNuevo: function(
 			ejefiscal
 		) {

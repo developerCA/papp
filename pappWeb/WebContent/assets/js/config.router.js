@@ -665,7 +665,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalUnidadCtrl','UnidadFactory',
         		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
         		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
-        		'ModalCertificacionesFondoLiquidacionManuaCtrl'
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl',
+        		'ModalProveedorCtrl','ProveedorFactory'
 		),
         title: 'Orden de Gasto',
         ncyBreadcrumb: {
@@ -680,7 +681,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
         		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
         		'ModalCertificacionesFondoLiquidacionManuaCtrl','CertificacionesFondosFactory',
-        		'ModalOrdenDevengoLineasCtrl','OrdenDevengoLineasFactory'
+        		'ModalOrdenDevengoLineasCtrl','OrdenDevengoLineasFactory',
+        		'ModalOrdenGastoCtrl','OrdenGastoFactory'
 		),
         title: 'Orden de Devengo',
         ncyBreadcrumb: {

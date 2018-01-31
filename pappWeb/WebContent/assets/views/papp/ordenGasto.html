@@ -90,13 +90,22 @@
 
 						<div class="row">
 							<div class="col-md-6">
-								<div class="form-group" class="has-success">
+								<div class="form-group">
 									<label class="control-label">
 										Fecha inicial
 									</label>
-									<input type="text" placeholder="Ingrese un de fecha inicial"
-										class="form-control" name="fechainicialFiltro"
-										ng-model="fechainicialFiltro">
+							        <div class="input-group">
+							            <input type="text" class="form-control" placeholder="Ingrese un de fecha inicial"
+							                uib-datepicker-popup="dd/MM/yyyy" 
+							                name="fechainicialFiltro" ng-model="fechainicialFiltro"
+							                is-open="popupnpFechainicio.opened" datepicker-options="dateOptions"
+							                ng-required="true" close-text="Close">
+							            <span class="input-group-btn">
+							                <button type="button" class="btn btn-primary" ng-click="opennpFechainicio()">
+							                    <i class="glyphicon glyphicon-calendar"></i>
+							                </button>
+							            </span>
+							        </div>
 								</div>
 							</div>
 
@@ -105,9 +114,18 @@
 									<label class="control-label">
 										Fecha final
 									</label>
-									<input type="text" placeholder="Ingrese un fecha final"
-										class="form-control" name="fechafinalFiltro"
-										ng-model="fechafinalFiltro">
+							        <div class="input-group">
+							            <input type="text" class="form-control" placeholder="Ingrese un de fecha final"
+							                uib-datepicker-popup="dd/MM/yyyy" 
+							                name="fechafinalFiltro" ng-model="fechafinalFiltro"
+							                is-open="popupnpFechafin.opened" datepicker-options="dateOptions"
+							                ng-required="true" close-text="Close">
+							            <span class="input-group-btn">
+							                <button type="button" class="btn btn-primary" ng-click="opennpFechafin()">
+							                    <i class="glyphicon glyphicon-calendar"></i>
+							                </button>
+							            </span>
+							        </div>
 								</div>
 							</div>
 						</div>
@@ -232,23 +250,14 @@
 						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-6">
-								<div class="form-group"
-								    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+								<div class="form-group has-success">
 								    <label class="control-label">
 								        C&oacute;digo
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Se genera un c&oacute;digo automatico"
 								        class="form-control" name="codigo" ng-model="objeto.codigo"
-								        required ng-disabled="true">
-								    <span class="error text-small block"
-								        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.codigo.$valid">
-								        Listo
-								    </span>
+								        ng-disabled="true">
 								</div>
 								
 								<div class="form-group"
@@ -280,7 +289,7 @@
 								    <div class="input-group">
 								        <input type="text" placeholder="Seleccione unidad c&oacute;digo"
 								            class="form-control" name="npunidadcodigo" ng-disabled="true"
-								            ng-model="objeto.npunidadcodigo">
+								            ng-model="objeto.npunidadcodigo" required>
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
 								                ng-click="abrirUnidadCodigo()" ng-disabled="noeditar">
@@ -327,7 +336,7 @@
 								    <div class="input-group">
 								        <input type="text" placeholder="Seleccione proveedor c&oacute;digo"
 								            class="form-control" name="npproveedorcodigo" ng-disabled="true"
-								            ng-model="objeto.npproveedorcodigo">
+								            ng-model="objeto.npproveedorcodigo" required>
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
 								                ng-click="abrirProveedorCodigo()" ng-disabled="noeditar">
@@ -374,7 +383,7 @@
 								    <div class="input-group">
 								        <input type="text" placeholder="Seleccione certificaci&oacute;n c&oacute;digo"
 								            class="form-control" name="npcodigocertificacion" ng-disabled="true"
-								            ng-model="objeto.npcodigocertificacion">
+								            ng-model="objeto.npcodigocertificacion" required>
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
 								                ng-click="abrirCertificacionCodigo()" ng-disabled="noeditar">
@@ -402,7 +411,7 @@
 								    <div class="input-group">
 								        <input type="text" placeholder="Seleccione clase registro c&oacute;digo"
 								            class="form-control" name="npcodigoregistro" ng-disabled="true"
-								            ng-model="objeto.npcodigoregistro">
+								            ng-model="objeto.npcodigoregistro" required>
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
 								                ng-click="abrirClaseRegistroCodigo()" ng-disabled="noeditar">
@@ -525,7 +534,7 @@
 								    <div class="input-group">
 								        <input type="text" placeholder="Seleccione tipo documento c&oacute;digo"
 								            class="form-control" name="npcodigotipodocumento" ng-disabled="true"
-								            ng-model="objeto.npcodigotipodocumento">
+								            ng-model="objeto.npcodigotipodocumento" required>
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
 								                ng-click="abrirTipoDocumentoCodigo()" ng-disabled="noeditar">

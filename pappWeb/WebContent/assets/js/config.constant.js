@@ -240,6 +240,9 @@ app.constant('JS_REQUIRES', {
         'OrdenReversionCtrl':'assets/js/controllers/papp/ordenReversionCtrl.js',
         'OrdenReversionFactory':'assets/js/factory/ordenReversionFactory.js',
         'PUECtrl':'assets/js/controllers/papp/modales/pueCtrl.js',
+        'ModalProveedorCtrl':'assets/js/controllers/papp/modales/modalProveedorCtrl.js',
+        'ProveedorFactory':'assets/js/factory/proveedorFactory.js',
+        'ModalOrdenGastoCtrl':'assets/js/controllers/papp/modales/modalOrdenGastoCtrl.js',
 
 
     },

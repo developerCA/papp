@@ -42,7 +42,7 @@ function(Restangular) {
 			if(valorinicial!= null && valorinicial != "") tObj.valorinicial= "" + valorinicial;	
 			if(valorfinal != null && valorfinal != "") tObj.valorfinal= "" + valorfinal;	
 			if(fechainicial != null && fechainicial != "") tObj.fechainicial= "" + fechainicial;	
-			if(fechafinal != null && fechafinal != "") tObj.fechafinal= "" + fechafinal;	
+			if(fechafinal != null && fechafinal != "") tObj.fechafinal= "" + fechafinal;
 			if(estado != null && estado != "") tObj.estado= "" + estado;	
 
 			return Restangular.allUrl(url).customPOST(tObj);
