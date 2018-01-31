@@ -600,7 +600,7 @@ public class EjecucionController {
 				OrdendevengolineaTO ordendevengolineaTO=new OrdendevengolineaTO();
 				ordendevengolineaTO.getId().setId(ordendevengoTO.getId());
 				Collection<OrdendevengolineaTO> ordendevengolineaTOs=UtilSession.planificacionServicio.transObtenerOrdendevengolinea(ordendevengolineaTO);
-				jsonObject.put("ordendevengolineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordendevengolineaTO.getJsonConfig()));
+				jsonObject.put("ordendevengolineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordendevengolineaTO.getJsonConfigconsulta()));
 				jsonObject.put("ordendevengo", (JSONObject)JSONSerializer.toJSON(ordendevengoTO,ordendevengoTO.getJsonConfig()));
 			}
 			//Ordendevengolinea
