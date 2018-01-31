@@ -11,7 +11,7 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			var tObj = {
 				filas: "10",
 				pagina: pagina.toString(),
-				certificacionejerfiscalid: ejefiscal.toString()
+				ejerciciofiscalid: ejefiscal.toString()
 			}
 			return Restangular.allUrl(url).customPOST(tObj);
 		},
@@ -31,7 +31,7 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			var tObj = {
 				filas: "10",
 				pagina: pagina.toString(),
-				certificacionejerfiscalid: ejefiscal.toString()
+				ejerciciofiscalid: ejefiscal.toString()
 			}
 
 			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	

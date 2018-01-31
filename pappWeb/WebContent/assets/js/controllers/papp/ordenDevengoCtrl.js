@@ -119,6 +119,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 
 	$scope.visualizar=function(index){
 		//console.log($scope.data[index]);
+		return;
 		ordenDevengoFactory.traerEditar(
 			$scope.data[index].id
 		).then(function(resp){
@@ -148,8 +149,8 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				showCancelButton: true,
 				confirmButtonText: "Si!",
 				cancelButtonText: "No",
-				closeOnConfirm: false,
-				closeOnCancel: false 
+				closeOnConfirm: true,
+				closeOnCancel: true 
 			}, 
 			function(isConfirm) { 
 				if (!isConfirm) return;
