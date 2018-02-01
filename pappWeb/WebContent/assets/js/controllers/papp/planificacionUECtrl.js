@@ -1053,7 +1053,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			for (var i = 0; i < 12; i++) {
 				porcentaje += $scope.detallesPlanificada[i].porcentaje;
 			}
-			porcentaje = Number(porcentaje.toFixed(2));
+			porcentaje = Number(porcentaje.toFixed(0));
 			if (porcentaje != 100) {
 	            SweetAlert.swal(
             		"Planificacion UE! - Distribucion Planificada",
@@ -1134,7 +1134,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			for (var i = 0; i < 12; i++) {
 				porcentaje = porcentaje + $scope.detallesAjustada[i].porcentaje;
 			}
-			porcentaje = Number(porcentaje.toFixed(2));
+			porcentaje = Number(porcentaje.toFixed(0));
 			if (porcentaje != 100) {
 	            SweetAlert.swal(
             		"Planificacion UE! - Distribucion Ajustada",
@@ -1373,21 +1373,21 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		}
 		//$scope.npTotalPlanificado;
 		//$scope.npTotalAjustado;
-		if ($scope.npTotalPlanificado > $scope.detalles[$scope.mPlanificadaID].npvalor) {
+		if ($scope.npTotalPlanificado != $scope.detalles[$scope.mPlanificadaID].npvalor) {
             SweetAlert.swal(
         		"Planificacion UE! - Subitem",
-        		"El total planificado es mayor que el saldo para la actividad planificado!",
+        		"No coincide del Presupuesto el Total Planifica y la distribuida, tiene que redistribuirla.",
         		"error"
     		);
             return;
 		}
-		if ($scope.npTotalAjustado > $scope.detalles[$scope.mAjustadaID].npvalor) {
-            SweetAlert.swal(
-        		"Planificacion UE! - Subitem",
-        		"El total ajustado es mayor que el saldo para la actividad ajustada!",
-        		"error"
-    		);
-            return;
+		if ($scope.npTotalAjustado != $scope.detalles[$scope.mAjustadaID].npvalor) {
+	        SweetAlert.swal(
+	    		"Planificacion UE! - Subitem",
+	    		"No coincide del Presupuesto el Total Ajustada y la distribuida, tiene que redistribuirla.",
+	    		"error"
+			);
+	        return;
 		}
 		if ($scope.esnuevo) {
 			return;
@@ -1862,6 +1862,9 @@ function distribuirValor(
 				if (porcientoResto >= 0.01) {
 					detalles[i].porcentaje = Number(detalles[i].porcentaje + Number(porcientoResto.toFixed(2)));
 					porcientoResto = porcientoResto - porcientoResto.toFixed(2);
+				} else if (porcientoResto <= -0.01) {
+					detalles[i].porcentaje = Number(detalles[i].porcentaje + Number(porcientoResto.toFixed(2)));
+					porcientoResto = porcientoResto - porcientoResto.toFixed(2);
 				}
 			}
 		}
@@ -1880,13 +1883,17 @@ function distribuirValor(
 		if (i == 11) {
 			detalles[11].valor = Number((cantidad - suma).toFixed(2));
 		} else {
-			detalles[i].valor = Number(valor.toFixed(2));
-			resto = resto + valorResto;
-			if (resto >= 0.01) {
-				detalles[i].valor = Number(detalles[i].valor + Number(resto.toFixed(2)));
-				resto = resto - resto.toFixed(2);
-			}
-			suma = suma + detalles[i].valor;
+			try {
+				detalles[i].valor = Number(valor.toFixed(2));
+				resto = resto + valorResto;
+				if (resto >= 0.01) {
+					detalles[i].valor = Number(detalles[i].valor + Number(resto.toFixed(2)));
+					resto = resto - resto.toFixed(2);
+				}
+				suma = suma + detalles[i].valor;
+			} catch (e) {
+				detalles[i].valor = 0;
+			} 
 		}
 	}
 }
