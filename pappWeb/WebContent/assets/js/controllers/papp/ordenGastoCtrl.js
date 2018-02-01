@@ -108,6 +108,83 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		})
 	};
 
+	$scope.aprobar = function(index) {
+		if ($scope.data[index].estado != "SO") {
+			SweetAlert.swal("Orden de Devengo!", "Solo se puede negar si esta en estado solicitado.", "error");
+			return;
+		}
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalLiquidacionManua.html',
+			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
+			size : 'lg',
+			resolve: {
+				titulo: function() {
+					return "Aprobar";
+				},
+				subtitulo : function() {
+					return "Numero de CUR";
+				}
+			}
+		});
+		modalInstance.result.then(function(cur) {
+			//console.log(obj);
+			if (cur === undefined) {
+				cur = 0;
+			}
+			$scope.data[index].npestado = "Aprobando";
+			ordenDevengoFactory.solicitar(
+				$scope.data[index].id,
+				"AP",
+				cur,
+				null
+			).then(function(resp){
+				console.log(resp);
+				$scope.pageChanged();
+				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+			});
+		}, function() {
+		});
+	}
+
+	$scope.negar = function(index) {
+		if ($scope.data[index].estado != "SO") {
+			SweetAlert.swal("Orden de Devengo!", "Solo se puede negar si esta en estado solicitado.", "error");
+			return;
+		}
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalLiquidacionManua.html',
+			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
+			size : 'lg',
+			resolve: {
+				titulo: function() {
+					return "Negar";
+				},
+				subtitulo : function() {
+					return "Observaci&oacute;n";
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			if (obj === undefined) {
+				obj = "";
+			}
+			var cur = 0;
+			$scope.data[index].npestado = "Negando";
+			ordenDevengoFactory.solicitar(
+				$scope.data[index].id,
+				"NE",
+				null,
+				obj
+			).then(function(resp){
+				console.log(resp);
+				$scope.pageChanged();
+				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+			});
+		}, function() {
+		});
+	}
+
 	$scope.abrirProveedorCodigo = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/js/controllers/papp/modales/modalProveedor.html',

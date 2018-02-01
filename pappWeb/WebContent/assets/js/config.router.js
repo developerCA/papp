@@ -665,7 +665,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalUnidadCtrl','UnidadFactory',
         		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
         		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
-        		'ModalCertificacionesFondoLiquidacionManuaCtrl',
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl','CertificacionesFondosFactory',
         		'ModalProveedorCtrl','ProveedorFactory'
 		),
         title: 'Orden de Gasto',

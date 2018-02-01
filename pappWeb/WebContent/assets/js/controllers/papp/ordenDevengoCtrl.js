@@ -381,6 +381,9 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				},
 				editar : function() {
 					return null;
+				},
+				ordengastoID : function() {
+					return $scope.objeto.ordendevengoordengastoid;
 				}
 			}
 		});

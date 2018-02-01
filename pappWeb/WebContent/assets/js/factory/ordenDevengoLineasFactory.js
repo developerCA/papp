@@ -18,9 +18,16 @@ app.factory("ordenDevengoLineasFactory", [ "Restangular", function(Restangular) 
 		},
 
 		obtenerTotal:function(
-			tablarelacionid
+			nivelactividad
 		){
-			var url = "ejecucion/valordisponiblesi/" + tablarelacionid + "/0";
+			var url = "ejecucion/consultar/subitemunidadinfo/nivelactividad=" + nivelactividad;
+			return Restangular.allUrl(url).customGET();
+		},
+
+		obtenerOtros:function(
+			idordengasto
+		){
+			var url = "ejecucion/datoslineaordend/idsubitem/" + idordengasto;
 			return Restangular.allUrl(url).customGET();
 		},
 

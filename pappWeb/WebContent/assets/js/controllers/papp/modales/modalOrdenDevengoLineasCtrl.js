@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","certificacionID","unidadID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
-	function($scope,$rootScope,certificacionID,unidadID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
+app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","certificacionID","unidadID","editar","ordengastoID","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
+	function($scope,$rootScope,certificacionID,unidadID,editar,ordengastoID,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
 
 	$scope.noeditar=false;
 	$scope.init=function(){
@@ -46,17 +46,39 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","cer
 	$scope.obtenerTotal=function(){
 		var i;
 		for (i = 0; i < $scope.si.length; i++) {
-			if ($scope.si[i].id == $scope.objeto.subitem)
+			if ($scope.si[i].nivelactid == $scope.objeto.subitem)
 				break;
 		}
 		if (i == $scope.si.length)
 			return;
-		ordenDevengoLineasFactory.obtenerTotal(
-			$scope.si[i].tablarelacionid
+		ordenDevengoLineasFactory.obtenerOtros(
+			$scope.si[i].nivelactid
 		).then(function(resp){
-			//console.log(resp);
-        	$scope.objeto.npvalor = resp.json.valordisponiblesi.saldo;
+			console.log(resp);
+        	//$scope.objeto.npvalor = resp.json.valordisponiblesi.saldo;
 		})
+		ordenDevengoLineasFactory.obtenerTotal(
+			$scope.si[i].nivelactid
+		).then(function(resp){
+			console.log(resp);
+			$scope.objetoDetalles = resp.json.subiteminfo;
+			$scope.ponerCodigos();
+        	//$scope.objeto.npvalor = resp.json.valordisponiblesi.saldo;
+		})
+	}
+
+	$scope.ponerCodigos = function() {
+		$scope.objetoDetalles.programanombre = $scope.objetoDetalles.programacodigo + ": " + $scope.objetoDetalles.programanombre;
+		$scope.objetoDetalles.subprogramanombre = $scope.objetoDetalles.subprogramacodigo + ": " + $scope.objetoDetalles.subprogramanombre;
+		$scope.objetoDetalles.proyectonombre = $scope.objetoDetalles.proyectocodigo + ": " + $scope.objetoDetalles.proyectonombre;
+		$scope.objetoDetalles.actividadnombre = $scope.objetoDetalles.actividadcodigo + ": " + $scope.objetoDetalles.actividadnombre;
+		$scope.objetoDetalles.subactividadnombre = $scope.objetoDetalles.subactividadcodigo + ": " + $scope.objetoDetalles.subactividadnombre;
+		$scope.objetoDetalles.tareanombre = $scope.objetoDetalles.tareacodigo + ": " + $scope.objetoDetalles.tareanombre;
+		$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ": " + $scope.objetoDetalles.subtareanombre;
+		$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
+		if (editar != null) {
+			$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ": " + $scope.objetoDetalles.subitemnombre;
+		}
 	}
 
 	$scope.form = {

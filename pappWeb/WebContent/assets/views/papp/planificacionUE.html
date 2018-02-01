@@ -572,7 +572,8 @@
 									<form name="Form" id="formMetaDistribucionPlanificada"
 										novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionPlanificada');">
-										<span> &nbsp;Distribuci&oacute;n: <a
+										<span> &nbsp;Distribuci&oacute;n:
+										 <a
 											class="btn btn-sm btn-primary"
 											style="background-color: #00B300 !important"> Planificado
 										</a> &nbsp; <a class="btn btn-sm btn-default red"
@@ -583,7 +584,7 @@
 											ng-click="editarDistribucionAjustado();"> Ajustado </a> <br>&nbsp;Unidad
 											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
 											ng-model="objetoPlanificada.unidadtiempo"
-											ng-change="distribucionValores('P');">
+											ng-change="vLimpio=true;distribucionValores('P');">
 												<option value="ME">Mensual</option>
 												<option value="BI">Bimensual</option>
 												<option value="TM">Trimestral</option>
@@ -611,14 +612,15 @@
 																ng-model="obj.valor" numericOnly
 																style="text-align: right;" required decimal="2"
 																ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
-																ng-change=""></td>
-															<td><input type="number"
+																ng-change="calcularPorcientoP();"></td>
+															<td>
+															<input type="number"
 																placeholder="Escriba una cantida para el mes"
 																class="form-control" name="{{'pporcentaje_'+$index}}"
 																ng-model="obj.porcentaje" numericOnly
 																style="text-align: right;" required decimal="2"
-																ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'">
-															</td>
+																ng-disabled="true">
+															</td><!-- !editar || objetoPlanificada.unidadtiempo!='PE' -->
 															<td><textarea name="{{'descripcion_'+$index}}"
 																	rows="3" style="width: 100%"
 																	placeholder="Escriba un descripci&oacute;n"
@@ -655,7 +657,7 @@
 											style="background-color: #00B300 !important"> Ajustado </a> <br>&nbsp;Unidad
 											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
 											ng-model="objetoAjustada.unidadtiempo"
-											ng-change="distribucionValores('A');">
+											ng-change="vLimpio=true;distribucionValores('A');">
 												<option value="ME">Mensual</option>
 												<option value="BI">Bimensual</option>
 												<option value="TM">Trimestral</option>
@@ -683,13 +685,13 @@
 																ng-model="obj.valor" numericOnly
 																style="text-align: right;" required decimal="2"
 																ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
-																ng-change=""></td>
+																ng-change="calcularPorcientoA();"></td>
 															<td><input type="number"
 																placeholder="Escriba una cantida para el mes"
 																class="form-control" name="{{'pporcentaje_'+$index}}"
 																ng-model="obj.porcentaje" numericOnly
 																style="text-align: right;" required decimal="2"
-																ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'">
+																ng-disabled="true">
 															</td>
 															<td><textarea name="{{'descripcion_'+$index}}"
 																	rows="3" style="width: 100%"
@@ -841,14 +843,19 @@
 													ng-class="{'has-error':FormTarea.TAnpdescripcion.$dirty && FormTarea.TAnpdescripcion.$invalid, 'has-success':FormTarea.TAnpdescripcion.$valid}">
 													<label class="control-label"> Descripci&oacute;n <span
 														class="symbol required"></span>
-													</label> <input type="text"
+													</label>
+													<textarea name="TAnpdescripcion" rows="5" style="width: 100%"
 														placeholder="Escriba un descripci&oacute;n"
-														class="form-control" name="TAnpdescripcion"
-														ng-model="objeto.descripcion" required> <span
-														class="error text-small block"
+														class="form-control" ng-model="objeto.descripcion" required
+														ng-disabled="!editar"></textarea>
+													<span class="error text-small block"
 														ng-if="FormTarea.TAnpdescripcion.$dirty && FormTarea.TAnpdescripcion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormTarea.TAnpdescripcion.$valid"> Listo </span>
+														Incorrecto
+													</span>
+													<span class="success text-small"
+														ng-if="FormTarea.TAnpdescripcion.$valid">
+														Listo
+													</span>
 												</div>
 
 												<div class="form-group"
@@ -1170,7 +1177,8 @@
 									<form name="Form" id="formMetaDistribucionPlanificada"
 										novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionPlanificada');">
-										<span> &nbsp;Distribuci&oacute;n: <a
+										<span> &nbsp;Distribuci&oacute;n:
+										 <a
 											class="btn btn-sm btn-primary"
 											style="background-color: #00B300 !important"> Planificado
 										</a> &nbsp; <a class="btn btn-sm btn-default"
@@ -1181,7 +1189,7 @@
 											ng-click="editarDistribucionAjustado();"> Ajustado </a> <br>Unidad
 											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
 											ng-model="objetoPlanificada.unidadtiempo"
-											ng-change="distribucionValores('P');">
+											ng-change="vLimpio=true;distribucionValores('P');">
 												<option value="ME">Mensual</option>
 												<option value="BI">Bimensual</option>
 												<option value="TM">Trimestral</option>
@@ -1209,13 +1217,13 @@
 																ng-model="obj.valor" numericOnly
 																style="text-align: right;" required decimal="2"
 																ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
-																ng-change=""></td>
+																ng-change="calcularPorcientoP();"></td>
 															<td><input type="number"
-																placeholder="Escriba una cantida para el mes"
+																placeholder="Escriba un porciento"
 																class="form-control" name="{{'pporcentaje_'+$index}}"
 																ng-model="obj.porcentaje" numericOnly
 																style="text-align: right;" required decimal="2"
-																ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
+																ng-disabled="true"
 																ng-change=""></td>
 															<td><textarea name="{{'descripcion_'+$index}}"
 																	rows="3" style="width: 100%"
@@ -1242,7 +1250,8 @@
 									class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionAjustada" novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionAjustada')">
-										<span> &nbsp;Distribuci&oacute;n: <a
+										<span> &nbsp;Distribuci&oacute;n:
+										 <a
 											class="btn btn-sm btn-default"
 											ng-click="editarDistribucionPlanificado();"> Planificado
 										</a> &nbsp; <a class="btn btn-sm btn-default"
@@ -1253,7 +1262,7 @@
 											style="background-color: #00B300 !important"> Ajustado </a> <br>&nbsp;Unidad
 											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
 											ng-model="objetoAjustada.unidadtiempo"
-											ng-change="distribucionValores('A');">
+											ng-change="vLimpio=true;distribucionValores('A');">
 												<option value="ME">Mensual</option>
 												<option value="BI">Bimensual</option>
 												<option value="TM">Trimestral</option>
@@ -1281,13 +1290,13 @@
 																ng-model="obj.valor" numericOnly
 																style="text-align: right;" required decimal="2"
 																ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
-																ng-change=""></td>
+																ng-change="calcularPorcientoA();"></td>
 															<td><input type="number"
 																placeholder="Escriba una cantida para el mes"
 																class="form-control" name="{{'pporcentaje_'+$index}}"
 																ng-model="obj.porcentaje" numericOnly
 																style="text-align: right;" required decimal="2"
-																ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
+																ng-disabled="true"
 																ng-change=""></td>
 															<td><textarea name="{{'descripcion_'+$index}}"
 																	rows="3" style="width: 100%"
@@ -1909,7 +1918,8 @@
 									<form name="Form" id="formMetaDistribucionPlanificada"
 										novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionPlanificada')">
-										<span> &nbsp;Distribuci&oacute;n: <a
+										<span> &nbsp;Distribuci&oacute;n:
+										 <a
 											class="btn btn-sm btn-primary"
 											style="background-color: #00B300 !important"> Planificado
 										</a> &nbsp; <a class="btn btn-sm btn-default"
@@ -1922,7 +1932,7 @@
 											ng-click="editarDistribucionDevengo();"> Devengo </a> <br>Unidad
 											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
 											ng-model="objetoPlanificada.unidadtiempo"
-											ng-change="distribucionValores('P');">
+											ng-change="vLimpio=true;distribucionValores('P');">
 												<option value="ME">Mensual</option>
 												<option value="BI">Bimensual</option>
 												<option value="TM">Trimestral</option>
@@ -1982,7 +1992,7 @@
 											ng-click="editarDistribucionDevengo();"> Devengo </a> <br>&nbsp;Unidad
 											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
 											ng-model="objetoAjustada.unidadtiempo"
-											ng-change="distribucionValores('A');">
+											ng-change="vLimpio=true;distribucionValores('A');">
 												<option value="ME">Mensual</option>
 												<option value="BI">Bimensual</option>
 												<option value="TM">Trimestral</option>
@@ -2042,7 +2052,7 @@
 											style="background-color: #00B300 !important"> Devengo </a> <br>&nbsp;Unidad
 											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
 											ng-model="objetoDevengo.unidadtiempo"
-											ng-change="distribucionValores('D');">
+											ng-change="vLimpio=true;distribucionValores('D');">
 												<option value="ME">Mensual</option>
 												<option value="BI">Bimensual</option>
 												<option value="TM">Trimestral</option>
