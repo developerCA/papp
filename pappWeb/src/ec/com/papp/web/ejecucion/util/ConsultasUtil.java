@@ -582,6 +582,8 @@ public class ConsultasUtil {
 				gastoDevengoVO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscal")));
 			if(parameters.get("unidad")!=null && !parameters.get("unidad").equals(""))
 				gastoDevengoVO.setOrdengastounidadid(Long.valueOf(parameters.get("unidad")));
+			if(parameters.get("unidadnombre")!=null && !parameters.get("unidadnombre").equals(""))
+				gastoDevengoVO.setUnidadnombre(parameters.get("unidadnombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				gastoDevengoVO.setEstado(parameters.get("estado"));
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
