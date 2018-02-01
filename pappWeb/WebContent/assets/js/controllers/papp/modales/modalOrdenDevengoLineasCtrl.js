@@ -52,10 +52,12 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","cer
 		if (i == $scope.si.length)
 			return;
 		ordenDevengoLineasFactory.obtenerOtros(
-			$scope.si[i].nivelactid
+			$scope.si[i].npSubitemunidadid, //$scope.si[i].nivelactid,
+			ordengastoID
 		).then(function(resp){
 			console.log(resp);
-        	//$scope.objeto.npvalor = resp.json.valordisponiblesi.saldo;
+        	$scope.objeto.npvalor = resp.json.datoslineaordend.noaprobadas;
+        	$scope.objeto.npvalor = resp.json.datoslineaordend.saldo;
 		})
 		ordenDevengoLineasFactory.obtenerTotal(
 			$scope.si[i].nivelactid

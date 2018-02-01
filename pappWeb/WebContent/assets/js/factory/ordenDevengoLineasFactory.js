@@ -25,9 +25,10 @@ app.factory("ordenDevengoLineasFactory", [ "Restangular", function(Restangular) 
 		},
 
 		obtenerOtros:function(
+			idsubitem,
 			idordengasto
 		){
-			var url = "ejecucion/datoslineaordend/idsubitem/" + idordengasto;
+			var url = "ejecucion/datoslineaordend/" + idsubitem + "/" + idordengasto;
 			return Restangular.allUrl(url).customGET();
 		},
 
