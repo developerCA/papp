@@ -21,8 +21,7 @@ app.controller('ModalOrdenGastoController', [ "$scope","$rootScope","$uibModalIn
 			$scope.unidadFiltro,
 			$scope.descripcionFiltro
 		).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
+			$scope.data=resp.result;
 		})
 	}
 
@@ -51,7 +50,7 @@ app.controller('ModalOrdenGastoController', [ "$scope","$rootScope","$uibModalIn
 		$scope.unidadFiltro=null;
 		$scope.descripcionFiltro=null;
 
-		$scope.consultar();
+		$scope.filtrar();
 	};
 
 	$scope.seleccionar=function(obj){

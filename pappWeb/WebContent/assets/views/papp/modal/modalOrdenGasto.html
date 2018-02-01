@@ -61,10 +61,12 @@
 							<i class="fa fa-check"></i>
 						</a>
 					</td>
-					<td data-title="'Tipo Documento C&oacute;digo'">{{obj.npcodigodocumento}}</td>
-					<td data-title="'Tipo Documento Nombre'">{{obj.npnombredocumento}}</td>
-					<td data-title="'Tipo Documento Clase C&oacute;digo'">{{obj.codigo}}</td>
-					<td data-title="'Tipo Documento Clase Nombre'">{{obj.nombre}}</td>
+					<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+					<td data-title="'Descripci&oacute;n'">{{obj.descripcion}}</td>
+					<td data-title="'Unidad Nombre'">{{obj.unidadnombre}}</td>
+					<td data-title="'Valor Total'" style="text-align:right;">{{obj.ordenvalortotal | currency}}</td>
+					<td data-title="'Orden Devengo Asociada'">{{obj.ordendevengocodigo}}</td>
+					<td data-title="'Valor Tope'" style="text-align:right;">{{obj.valortotal | currency}}</td>
 				</tr>
 			</table>
 		</div>

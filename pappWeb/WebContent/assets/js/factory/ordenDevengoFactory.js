@@ -62,7 +62,7 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 
 			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
 			if(estado != null && estado != "") tObj.estado= "" + estado;	
-			if(unidad != null && unidad != "") tObj.unidad= "" + unidad;	
+			if(unidad != null && unidad != "") tObj.unidadnombre= "" + unidad;	
 			if(descripcion!= null && descripcion != "") tObj.descripcion= "" + descripcion;	
 
 			return Restangular.allUrl(url).customPOST(tObj);

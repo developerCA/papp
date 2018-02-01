@@ -91,7 +91,6 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			if (!resp.estado) return;
 			$scope.objeto=resp.json.ordendevengo;
 			$scope.detalles={};
-			$scope.agregarDetalles();
 			$scope.edicion=true;
 			$scope.nuevoar=true;
 			$scope.guardar=true;
@@ -479,14 +478,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			return;
-			$scope.objeto.ordendevengotipodocid = obj.id.id;
-			$scope.objeto.ordendevengotpclasedocid = obj.id.clasedocid;
-			$scope.objeto.npcodigotipodocumento = obj.codigo;
-			$scope.objeto.npnombretipodocumento = obj.nombre;
-			$scope.objeto.npcodigodocumento = obj.npcodigodocumento;
-			$scope.objeto.npnombredocumento = obj.npnombredocumento;
+			//console.log(obj);
+			$scope.objeto.ordendevengoordengastoid = obj.id;
+			$scope.objeto.npordengasto = obj.codigo;
+			$scope.objeto.npordengastovalor = obj.ordenvalortotal;
+			$scope.objeto.valortotal = obj.valortotal;
 		}, function() {
 		});
 	};

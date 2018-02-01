@@ -330,10 +330,10 @@
 								<div class="form-group"
 								    ng-class="{'has-error':Form.npordengastovalor.$dirty && Form.npordengastovalor.$invalid, 'has-success':Form.npordengastovalor.$valid}">
 								    <label class="control-label">
-								        Orden Gasto Valor (NO LLEGA EN REST)
+								        Orden Gasto Valor
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un orden gasto valor (no llega en rest)"
+								    <input type="text" style="text-align:right;" decimal="2" placeholder="Escriba un orden gasto valor (no llega en rest)"
 								        class="form-control" name="npordengastovalor" ng-model="objeto.npordengastovalor"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
@@ -352,7 +352,7 @@
 								        Valor Total
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor total"
+								    <input type="text" style="text-align:right;" decimal="2" placeholder="Escriba un valor total"
 								        class="form-control" name="valortotal" ng-model="objeto.valortotal"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
@@ -424,7 +424,7 @@
 							<div class="col-sm-12">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<a uib-tooltip="Agregar" ng-show="!noeditar && !nuevoar"
+										<a uib-tooltip="Agregar" ng-show="!noeditar"
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarLinea();">
 											<i class="fa fa-plus-square"></i>
