@@ -45,6 +45,28 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			return Restangular.allUrl(url).customPOST(tObj);
 		},
 
+		modalTraerFiltro: function(
+			pagina,
+			ejefiscal,
+			unidadid,
+			codigo,
+			descripcion
+		) {
+			var url = "ejecucion/consultar/certificacionbusqueda";
+			var tObj = {
+				filas: "10",
+				pagina: pagina.toString(),
+				certificacionejerfiscalid: ejefiscal.toString(),
+				estado: "AP",
+				unidadid: unidadid.toString()
+			}
+
+			if(codigo != null && codigo != "") tObj.codigo = "" + codigo;	
+			if(descripcion != null && descripcion != "") tObj.descripcion = "" + descripcion;	
+
+			return Restangular.allUrl(url).customPOST(tObj);
+		},
+
 		traerCertificacionesFondosNuevo: function(
 			ejefiscal
 		) {

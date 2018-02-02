@@ -116,7 +116,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.editarDistribucionPlanificado=function(){
 		$scope.divEditarDistribucion=true;
 		$scope.metaDistribucion('A');
-		$scope.metaDistribucion('P');
+		//$scope.metaDistribucion('P');
 		$scope.divMetaDistribucionPlanificada=true;
 		$scope.divMetaDistribucionAjustada=false;
 		$scope.divMetaDistribucionDevengo=false;
@@ -131,6 +131,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.divEditarDistribucion=true;
 		$scope.metaDistribucion('D');
 	}
+	
 
 	$scope.metaDistribucion = function(
 		tipometa
@@ -206,6 +207,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.divMetaDistribucionPlanificada=false;
 				$scope.divMetaDistribucionAjustada=false;
 				$scope.divMetaDistribucionDevengo=true;
+			}
+			if ($scope.detallesPlanificada == null) {
+				$scope.metaDistribucion('P');
 			}
 			$scope.vLimpio=false;
 		});
@@ -332,6 +336,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				}
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubTarea=true;
+				$scope.editarDistribucionPlanificado();
 				//console.log("NUEVO OBJETO subtarea:", $scope.objeto);
 			});
 		} else
@@ -376,6 +381,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				}
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubItem=true;
+				$scope.editarDistribucionPlanificado();
 			});
 		}
 	}
@@ -396,7 +402,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.tablarelacionid,
 				"unidadid=" + node.npIdunidad
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (!resp.estado) return;
 				$scope.objeto=Object.assign({}, resp.json.actividad, resp.json.actividadunidad);
 			    $scope.objeto.npFechainicio=toDate($scope.objeto.npFechainicio);
@@ -412,7 +418,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				}
 				$scope.divPlanificacionAnual=false;
 				$scope.divActividad=true;
-				console.log("OBJETO:", $scope.objeto);
+				$scope.editarDistribucionPlanificado();
+				//console.log("OBJETO:", $scope.objeto);
 			});
 		}
 		if (node.nodeTipo == "SA") {
@@ -432,7 +439,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.objeto=Object.assign({}, resp.json.subactividadunidad);
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubActividad=true;
-				console.log("OBJETO:", $scope.objeto);
+				//console.log("OBJETO:", $scope.objeto);
 			});
 		}
 		if (node.nodeTipo == "TA") {
@@ -446,7 +453,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.objeto=Object.assign({}, resp.json.tareaunidad);
 				$scope.divPlanificacionAnual=false;
 				$scope.divTarea=true;
-				console.log("OBJETO:", $scope.objeto);
+				//console.log("OBJETO:", $scope.objeto);
 			});
 		}
 		if (node.nodeTipo == "ST") {
@@ -470,6 +477,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				}
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubTarea=true;
+				$scope.editarDistribucionPlanificado();
 				//console.log("OBJETO:", $scope.objeto);
 			});
 		}
@@ -517,6 +525,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.divSubItem=true;
 				$scope.calcularTotalPlanificado();
 				$scope.calcularTotalAjustado();
+				$scope.editarDistribucionPlanificado();
 				//console.log("Editar OBJETO:", $scope.objeto);
 			});
 		}
@@ -1079,6 +1088,19 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     		);
 			return;
 		}
+		if (!$scope.divSubItem) {
+			for (var i = 0; i < 11; i++) {
+				if ($scope.detallesPlanificada[i].valor > 0)
+					if ($scope.detallesPlanificada[i].observacion == undefined || $scope.detallesPlanificada[i].observacion.trim() == "") {
+				        SweetAlert.swal(
+				    		"Planificacion UE! - Distribucion Planificada",
+				    		"Observaciones incompletas. Todos los meses que tienen asignado valor tienen que tener una observacion.",
+				    		"error"
+						);
+				        return;
+				}
+			}
+		}
     	var tObj={};
     	tObj=Object.assign(tObj, $scope.objetoPlanificada);
     	tObj.cronogramalineaTOs=$scope.detallesPlanificada;
@@ -1159,6 +1181,19 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"error"
     		);
 			return;
+		}
+		if (!$scope.divSubItem) {
+			for (var i = 0; i < 11; i++) {
+				if ($scope.detallesAjustada[i].valor > 0)
+					if ($scope.detallesAjustada[i].observacion == undefined || $scope.detallesAjustada[i].observacion.trim() == "") {
+				        SweetAlert.swal(
+				    		"Planificacion UE! - Distribucion Ajustada",
+				    		"Observaciones incompletas. Todos los meses que tienen asignado valor tienen que tener una observacion.",
+				    		"error"
+						);
+				        return;
+				}
+			}
 		}
     	var tObj=$scope.objetoAjustada;
     	tObj.cronogramalineaTOs=$scope.detallesAjustada;
@@ -1850,6 +1885,9 @@ function distribuirValor(
 			}
 		}
 		if (!divSubItem) {
+			if (detalles[i].valor == undefined) {
+				detalles[i].valor = 0;
+			}
 			if (detalles[i].valor == 0 || presupuesto == 0) {
 				detalles[i].porcentaje = 0;
 			} else {
@@ -1857,14 +1895,18 @@ function distribuirValor(
 					(detalles[i].valor * 100)
 					/ presupuesto
 				);
-				porcientoResto = porcientoResto + (detalles[i].porcentaje - Number(detalles[i].porcentaje.toFixed(2)));
-				detalles[i].porcentaje = Number(detalles[i].porcentaje.toFixed(2));
-				if (porcientoResto >= 0.01) {
-					detalles[i].porcentaje = Number(detalles[i].porcentaje + Number(porcientoResto.toFixed(2)));
-					porcientoResto = porcientoResto - porcientoResto.toFixed(2);
-				} else if (porcientoResto <= -0.01) {
-					detalles[i].porcentaje = Number(detalles[i].porcentaje + Number(porcientoResto.toFixed(2)));
-					porcientoResto = porcientoResto - porcientoResto.toFixed(2);
+				if (detalles[i].porcentaje == NaN) {
+					detalles[i].porcentaje = 0;
+				} else {
+					porcientoResto = porcientoResto + (detalles[i].porcentaje - Number(detalles[i].porcentaje.toFixed(2)));
+					detalles[i].porcentaje = Number(detalles[i].porcentaje.toFixed(2));
+					if (porcientoResto >= 0.01) {
+						detalles[i].porcentaje = Number(detalles[i].porcentaje + Number(porcientoResto.toFixed(2)));
+						porcientoResto = porcientoResto - porcientoResto.toFixed(2);
+					} else if (porcientoResto <= -0.01) {
+						detalles[i].porcentaje = Number(detalles[i].porcentaje + Number(porcientoResto.toFixed(2)));
+						porcientoResto = porcientoResto - porcientoResto.toFixed(2);
+					}
 				}
 			}
 		}

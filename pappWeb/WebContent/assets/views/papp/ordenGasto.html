@@ -17,7 +17,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body" ng-show="!edicion">
+				<div class="panel-body" ng-show="!edicion && !divContrato">
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -395,15 +395,15 @@
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.npcodigocertificacion.$dirty && Form.npcodigocertificacion.$invalid, 'has-success':Form.npcodigocertificacion.$valid}">
+								    ng-class="{'has-error':Form.npcertificacioncodigo.$dirty && Form.npcertificacioncodigo.$invalid, 'has-success':Form.npcertificacioncodigo.$valid}">
 								    <label class="control-label">
 								        Certificaci&oacute;n c&oacute;digo
 								        <span class="symbol required"></span>
 								    </label>
 								    <div class="input-group">
 								        <input type="text" placeholder="Seleccione certificaci&oacute;n c&oacute;digo"
-								            class="form-control" name="npcodigocertificacion" ng-disabled="true"
-								            ng-model="objeto.npcodigocertificacion" required>
+								            class="form-control" name="npcertificacioncodigo" ng-disabled="true"
+								            ng-model="objeto.npcertificacioncodigo" required>
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
 								                ng-click="abrirCertificacionCodigo()" ng-disabled="noeditar">
@@ -413,11 +413,11 @@
 								        </span>
 								    </div>
 								    <span class="error text-small block"
-								        ng-if="Form.npcodigocertificacion.$dirty && Form.npcodigocertificacion.$invalid">
+								        ng-if="Form.npcertificacioncodigo.$dirty && Form.npcertificacioncodigo.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.npcodigocertificacion.$valid">
+								        ng-if="Form.npcertificacioncodigo.$valid">
 								        Listo
 								    </span>
 								</div>
@@ -429,7 +429,7 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <div class="input-group">
-								        <input type="text" placeholder="Seleccione clase registro c&oacute;digo"
+								        <input type="text" placeholder="Seleccione una clase registro c&oacute;digo"
 								            class="form-control" name="npcodigoregistro" ng-disabled="true"
 								            ng-model="objeto.npcodigoregistro" required>
 								        <span class="input-group-btn">
@@ -456,7 +456,7 @@
 								        Clase registro nombre
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" placeholder="Seleccione una unidad"
+								    <input type="text" placeholder="Seleccione una clase registro c&oacute;digo"
 								        class="form-control" name="npnombreregistro" ng-model="objeto.npnombreregistro"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
@@ -674,7 +674,7 @@
 								        Valor total
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" placeholder="0.00"
+								    <input type="text" style="text-align:right;" decimal="2"
 								        class="form-control" name="valortotal" ng-model="objeto.valortotal"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
@@ -738,7 +738,11 @@
 							<div class="col-md-12">
 								<div class="pull-right">
 									<span ng-if="guardar">
-										<button type="submit" class="btn btn-primary">Guardar
+										<button type="submit" class="btn btn-primary">
+											Guardar
+										</button>
+										<button class="btn btn-primary" ng-click="contrato();">
+											Contrato
 										</button>
 									</span>
 									<button type="reset" class="btn btn-default btn-o"
@@ -748,6 +752,11 @@
 						</div>
 
 					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 <script type="text/ng-template" id="modalUnidades.html">
 <div class="modal-header">
@@ -821,153 +830,6 @@
 </div>
 </script>
 
-<script type="text/ng-template" id="modalClaseRegistro.html">
-<div class="modal-header">
-	<h3 class="modal-title">Clases Registro</h3>
-</div>
-<div class="modal-body">
-	<div class="panel-body" ng-init="consultar();" >
-
-		<div class="panel panel-white" id="panel1">
-			<div class="panel-heading">
-				<h4 class="panel-title text-primary">Filtros</h4>
-				<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-			</div>
-			<div uib-collapse="panel1" ng-init="panel1=true"
-				class="panel-wrapper">
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label> Nombres </label> <input type="text"
-									class="form-control" ng-model="nombreFiltro">
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label> C&oacute;digo </label> <input type="text"
-									class="form-control" ng-model="codigoFiltro">
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label> Estado </label> <select name="country"
-									ng-model="estadoFiltro" class="form-control">
-									<option value>Todos</option>
-									<option value="A">Activo</option>
-									<option value="I">Inactivo</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-								class="fa fa-search"></i> Buscar</a> <a
-								class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div>
-			<table ng-table="tableParams" class="table table-striped">
-				<tr ng-repeat="obj in $data">
-					<td><a class="btn btn-sm btn-primary"
-						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-							class="fa fa-check"></i></a></td>
-					<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-					<td data-title="'Nombre'">{{obj.nombre}}</td>
-					<td data-title="'Estado'">{{obj.npestado}}</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	<div class="modal-footer">
-	    <button class="btn btn-primary btn-o" ng-click="cancelar()">
-	    	Cancelar
-	   	</button>
-	</div>
-</div>
-</script>
-
-<script type="text/ng-template" id="modalTipoDocumento.html">
-<div class="modal-header">
-	<h3 class="modal-title">Clases Registro</h3>
-</div>
-<div class="modal-body">
-	<div class="panel-body" ng-init="consultar();" >
-
-		<div class="panel panel-white" id="panel1">
-			<div class="panel-heading">
-				<h4 class="panel-title text-primary">Filtros</h4>
-				<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-			</div>
-			<div uib-collapse="panel1" ng-init="panel1=true"
-				class="panel-wrapper">
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label> Nombres </label> <input type="text"
-									class="form-control" ng-model="nombreFiltro">
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label> C&oacute;digo </label> <input type="text"
-									class="form-control" ng-model="codigoFiltro">
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label> Estado </label> <select name="country"
-									ng-model="estadoFiltro" class="form-control">
-									<option value>Todos</option>
-									<option value="A">Activo</option>
-									<option value="I">Inactivo</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-								class="fa fa-search"></i> Buscar</a> <a
-								class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div>
-			<table ng-table="tableParams" class="table table-striped">
-				<tr ng-repeat="obj in $data">
-					<td><a class="btn btn-sm btn-primary"
-						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-							class="fa fa-check"></i></a></td>
-					<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-					<td data-title="'Nombre'">{{obj.nombre}}</td>
-					<td data-title="'Estado'">{{obj.npestado}}</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	<div class="modal-footer">
-	    <button class="btn btn-primary btn-o" ng-click="cancelar()">
-	    	Cancelar
-	   	</button>
-	</div>
-</div>
-</script>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
 <script type="text/ng-template" id="modalLiquidacionManua.html">
 <div class="modal-header">
 	<h3 class="modal-title">Liquidaci&oacute;n manual</h3>
@@ -1020,8 +882,3 @@
 </div>
 </script>
 </div>
-
-
-
-
-

@@ -46,7 +46,7 @@ app.factory("proveedorFactory", [ "Restangular", function(Restangular) {
 			if(razonsocial!=null && razonsocial != "") URL += "&razonsocial=" + razonsocial;	
 			if(proveedor!=null && proveedor != "") URL += "&proveedor=" + proveedor;	
 
-			return Restangular.allUrl(URL).getList();
+			return Restangular.allUrl(URL).customGET();
 		},
 	}
 } ]);

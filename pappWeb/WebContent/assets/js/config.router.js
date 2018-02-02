@@ -663,10 +663,11 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence(
         		'ngTable','OrdenGastoCtrl','OrdenGastoFactory',
         		'ModalUnidadCtrl','UnidadFactory',
-        		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
-        		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
         		'ModalCertificacionesFondoLiquidacionManuaCtrl','CertificacionesFondosFactory',
-        		'ModalProveedorCtrl','ProveedorFactory'
+        		'ModalProveedorCtrl','ProveedorFactory',
+        		'ModalCertificacionesFondosCtrl','CertificacionesFondosFactory',
+        		'ModalClaseGastoCtrl','ClaseGastoFactory',
+        		'ModalClaseDocumentoCtrl','ClaseDocumentoFactory'
 		),
         title: 'Orden de Gasto',
         ncyBreadcrumb: {
@@ -678,7 +679,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence(
         		'ngTable','OrdenDevengoCtrl','OrdenDevengoFactory',
         		'ModalUnidadCtrl','UnidadFactory',
-        		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
         		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
         		'ModalCertificacionesFondoLiquidacionManuaCtrl','CertificacionesFondosFactory',
         		'ModalOrdenDevengoLineasCtrl','OrdenDevengoLineasFactory',
@@ -694,7 +694,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence(
         		'ngTable','OrdenReversionCtrl','OrdenReversionFactory',
         		'ModalUnidadCtrl','UnidadFactory',
-        		'ModalClaseRegistroCtrl','ClaseRegistroFactory',
         		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
         		'ModalCertificacionesFondoLiquidacionManuaCtrl',
         		'ModalOrdenDevengoLineasCtrl','OrdenDevengoLineasFactory'

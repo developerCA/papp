@@ -4,7 +4,7 @@
 	</h3>
 </div>
 <div class="modal-body">
-	<div class="panel-body" ng-init="filtrar();" >
+	<div class="panel-body" ng-init="filtrarUnico();" >
 
 		<div class="panel panel-white" id="panel1">
 			<div class="panel-heading">
@@ -59,15 +59,33 @@
 
 		<div>
 			<table ng-table="tableParams" class="table table-striped">
-				<tr ng-repeat="obj in $data">
-					<td><a class="btn btn-sm btn-primary"
-						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-							class="fa fa-check"></i></a></td>
-					<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
-					<td data-title="'Nombre'">{{obj.nombre}}</td>
-					<td data-title="'Estado'">{{obj.npestado}}</td>
+				<thead>
+					<tr>
+						<th></th>
+						<th>C&oacute;digo</th>
+						<th>Nombre Mostrado</th>
+						<th>Socio Negocio Razon Social</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="obj in data">
+					<td>
+						<a class="btn btn-sm btn-primary"
+							uib-tooltip="Seleccionar" ng-click="seleccionar(obj)">
+							<i class="fa fa-check"></i>
+						</a>
+					</td>
+					<td>{{obj.codigo}}</td>
+					<td>{{obj.nombremostrado}}</td>
+					<td>{{obj.razonsocial}}</td>
 				</tr>
 			</table>
+
+			<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+				previous-text="Atras" uib-pagination total-items="total"
+				ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
+				max-size="10" class="pagination-sm" boundary-links="true"
+				force-ellipses="true">
+			</ul>
 		</div>
 	</div>
 	<div class="modal-footer">

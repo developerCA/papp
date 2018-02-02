@@ -561,12 +561,13 @@
 								</form>
 							</div>
 							<div class="col-md-6">
+<!--
 								<span ng-show="!divEditarDistribucion"> <a
 									class="btn btn-sm btn-primary"
 									ng-click="editarDistribucionPlanificado();"> Editar
 										distribuci&oacute;n </a>
 								</span>
-
+-->
 								<div ng-show="divMetaDistribucionPlanificada"
 									class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionPlanificada"
@@ -621,11 +622,13 @@
 																style="text-align: right;" required decimal="2"
 																ng-disabled="true">
 															</td><!-- !editar || objetoPlanificada.unidadtiempo!='PE' -->
-															<td><textarea name="{{'descripcion_'+$index}}"
+															<td>
+																<textarea name="{{'descripcion_'+$index}}"
 																	rows="3" style="width: 100%"
 																	placeholder="Escriba un descripci&oacute;n"
 																	class="form-control" ng-model="obj.observacion"
-																	ng-disabled="!editar"></textarea></td>
+																	ng-disabled="!editar" ng-required="obj.valor != 0"></textarea>
+															</td>
 														</tr>
 													</table>
 												</div>
@@ -1167,12 +1170,13 @@
 								</form>
 							</div>
 							<div class="col-md-6">
+<!--
 								<span ng-show="!divEditarDistribucion && objeto.id != 0">
 									<a class="btn btn-sm btn-primary"
 									ng-click="editarDistribucionPlanificado();"> Editar
 										distribuci&oacute;n </a>
 								</span>
-
+-->
 								<div ng-show="divMetaDistribucionPlanificada"
 									class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionPlanificada"
@@ -1908,12 +1912,13 @@
 								</form>
 							</div>
 							<div class="col-md-6">
+<!--
 								<span ng-show="!divEditarDistribucion && objeto.id != 0">
 									<a class="btn btn-sm btn-primary"
 									ng-click="editarDistribucionPlanificado();"> Editar
 										distribuci&oacute;n </a>
 								</span>
-
+-->
 								<div ng-show="divMetaDistribucionPlanificada"
 									class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionPlanificada"

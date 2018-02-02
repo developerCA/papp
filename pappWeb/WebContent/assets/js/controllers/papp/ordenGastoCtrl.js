@@ -13,6 +13,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	$scope.estadoFiltro = null;
 
 	$scope.edicion=false;
+	$scope.divContrato=false;
 	$scope.nuevoar=false;
 	$scope.guardar=false;
 	$scope.objeto={estado:null};
@@ -73,6 +74,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		$scope.fechainicialFiltro = null;
 		$scope.fechafinalFiltro = null;
 		$scope.estadoFiltro = null;
+	    $scope.aplicafiltro=false;
 
 		$scope.consultar();
 	};
@@ -185,23 +187,6 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		});
 	}
 
-	$scope.abrirProveedorCodigo = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/js/controllers/papp/modales/modalProveedor.html',
-			controller : 'ModalProveedorController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			return;
-			$scope.objeto.certificacionunidadid = obj.id;
-			$scope.objeto.npunidadcodigo = obj.codigopresup;
-			$scope.objeto.npunidadnombre = obj.nombre;
-		}, function() {
-			console.log("close modal");
-		});
-	};
-
 	$scope.abrirUnidadCodigo = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalUnidades.html',
@@ -210,43 +195,93 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.certificacionunidadid = obj.id;
+			$scope.objeto.ordengastounidadid = obj.id;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;
 		}, function() {
-			console.log("close modal");
+		});
+	};
+
+	$scope.abrirProveedorCodigo = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalProveedor.html',
+			controller : 'ModalProveedorController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.ordengastoproveedorid = obj.id;
+			$scope.objeto.npproveedorcodigo = obj.codigo;
+			$scope.objeto.npproveedornombre = obj.nombremostrado;
+		}, function() {
+		});
+	};
+
+	$scope.abrirCertificacionCodigo = function() {
+		if ($scope.objeto.ordengastounidadid == 0) {
+	        SweetAlert.swal(
+        		"Orden de Gastos!",
+        		"Tiene que seleccionar primero una Unidad",
+        		"warning"
+    		);
+			return;
+		}
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalCertificacionesFondos.html',
+			controller : 'ModalCertificacionesFondosController',
+			size : 'lg',
+			resolve: {
+				unidadid: function() {
+					return $scope.objeto.ordengastounidadid;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.ordengastocertificacionid = obj.id;
+			$scope.objeto.npcertificacioncodigo = obj.codigo;
+			$scope.objeto.valortotal = obj.valortotal;
+		}, function() {
 		});
 	};
 
 	$scope.abrirClaseRegistroCodigo = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalClaseRegistro.html',
-			controller : 'ModalClaseRegistroController',
+			templateUrl : 'assets/views/papp/modal/modalClaseGasto.html',
+			controller : 'ModalClaseGastoController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.certificacionclaseregid = obj.id;
-			$scope.objeto.npcodigoregistro = obj.codigo;
-			$scope.objeto.npnombreregistro = obj.nombre;
+			$scope.objeto.ordengastoclaseregid = obj.id.id;
+			$scope.objeto.ordengastoclasemodid = obj.id.cmid;
+			$scope.objeto.ordengastocgastoid = obj.id.cmcgastoid;
+
+			$scope.objeto.npcodigoregistro = obj.npcodigoregistro;
+			$scope.objeto.npnombreregistro = obj.npnombreregistro;
+			$scope.objeto.npcodigomodificacion = obj.npcodigomodificacion;
+			$scope.objeto.npnombremodificacion = obj.npnombremodificacion;
+			$scope.objeto.npcodigoregcmcgasto = obj.codigo;
+			$scope.objeto.npnombreregcmcgasto = obj.nombre;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
 	$scope.abrirTipoDocumentoCodigo = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalTipoDocumento.html',
-			controller : 'ModalTipoDocumentoController',
+			templateUrl : 'assets/views/papp/modal/modalClaseDocumento.html',
+			controller : 'ModalClaseDocumentoController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.certificaciontipodocid = obj.id;
+			//console.log(obj);
+			$scope.objeto.ordengastotipodocid = obj.id.id;
+			$scope.objeto.ordengastotpclasedocid = obj.id.clasedocid;
 			$scope.objeto.npcodigotipodocumento = obj.codigo;
 			$scope.objeto.npnombretipodocumento = obj.nombre;
+			$scope.objeto.npcodigodocumento = obj.npcodigodocumento;
+			$scope.objeto.npnombredocumento = obj.npnombredocumento;
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
@@ -265,7 +300,6 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			$scope.objeto.npnombretipodocumento = obj.nombre;
 */
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
@@ -296,6 +330,11 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			}
 		});
 */
+	}
+
+	$scope.contrato = function() {
+		$scope.edicion = false;
+		$scope.divContrato = true;
 	}
 
 	$scope.form = {

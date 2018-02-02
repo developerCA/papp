@@ -1,0 +1,70 @@
+<div class="modal-header">
+	<h3 class="modal-title">
+		Certificaciones de Fondos
+	</h3>
+</div>
+<div class="modal-body">
+	<div class="panel-body" ng-init="filtrar();" >
+
+		<div class="panel panel-white" id="panel1">
+			<div class="panel-heading">
+				<h4 class="panel-title text-primary">Filtros</h4>
+				<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+			</div>
+			<div uib-collapse="panel1" ng-init="panel1=true"
+				class="panel-wrapper">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label> C&oacute;digo  Presupestario</label> <input type="text"
+									class="form-control" ng-model="codigoFiltro">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label> Descripci&oacute;n </label> <input type="text"
+									class="form-control" ng-model="descripcionFiltro">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+								class="fa fa-search"></i> Buscar</a> <a
+								class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div>
+			<table ng-table="tableParams" class="table table-striped">
+				<tr ng-repeat="obj in $data">
+					<td><a class="btn btn-sm btn-primary"
+						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
+							class="fa fa-check"></i></a></td>
+					<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+					<td data-title="'Descripcion'">{{obj.descripcion}}</td>
+					<td data-title="'Valor Total'" style="text-align: right;">
+						<span>
+							{{obj.valortotal | number:2}}
+						</span>
+					</td>
+					<td data-title="'Orden Gasto Asociada'">{{obj.ordengastocodigo}}</td>
+					<td data-title="'Saldo'" style="text-align: right;">
+						<span>
+							{{obj.ordenvalortotal | number:2}}
+						</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary btn-o" ng-click="cancelar()">
+			Cancelar
+		</button>
+	</div>
+</div>
