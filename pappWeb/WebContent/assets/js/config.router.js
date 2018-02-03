@@ -667,7 +667,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalProveedorCtrl','ProveedorFactory',
         		'ModalCertificacionesFondosCtrl','CertificacionesFondosFactory',
         		'ModalClaseGastoCtrl','ClaseGastoFactory',
-        		'ModalClaseDocumentoCtrl','ClaseDocumentoFactory'
+        		'ModalClaseDocumentoCtrl','ClaseDocumentoFactory',
+        		'ModalContratoCtrl','ContratoFactory'
 		),
         title: 'Orden de Gasto',
         ncyBreadcrumb: {

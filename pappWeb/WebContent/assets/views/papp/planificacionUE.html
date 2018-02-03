@@ -105,8 +105,7 @@
 				</div>
 
 				<div ng-show="edicion">
-					<div
-						ng-show="divPlanificacionAnual && !divActividad && !divSubActividad && !divTarea && !divSubTarea && !divItem && !divSubItem"
+					<div ng-show="divPlanificacionAnual && !divActividad && !divSubActividad && !divTarea && !divSubTarea && !divItem && !divSubItem"
 						class="panel-body">
 						<div class="panel-heading">
 							<h5 class="panel-title">Planificaci&oacute;n Anual</h5>
@@ -485,14 +484,17 @@
 													ng-class="{'has-error':FormActividad.npMetaPlanificada.$dirty && FormActividad.npMetaPlanificada.$invalid, 'has-success':FormActividad.npMetaPlanificada.$valid}">
 													<label class="control-label"> Meta Planificada <span
 														class="symbol required"></span>
-													</label> <input type="text"
+													</label>
+													<input type="text"
 														placeholder="Escriba un meta planificada"
 														class="form-control" name="npMetaPlanificada"
 														ng-model="detalles[mPlanificadaID].cantidad" required
-														ng-disabled="!editar"> <span
+														ng-disabled="!editar" ng-change="modificarMetaPlanificada(true);">
+													<span
 														class="error text-small block"
 														ng-if="FormActividad.npMetaPlanificada.$dirty && FormActividad.npMetaPlanificada.$invalid">
-														Incorrecto </span> <span class="success text-small"
+														Incorrecto </span>
+													<span class="success text-small"
 														ng-if="FormActividad.npMetaPlanificada.$valid">
 														Listo </span>
 												</div>
@@ -519,14 +521,17 @@
 													ng-class="{'has-error':FormActividad.npMetaAjustada.$dirty && FormActividad.npMetaAjustada.$invalid, 'has-success':FormActividad.npMetaAjustada.$valid}">
 													<label class="control-label"> Meta Ajustada <span
 														class="symbol required"></span>
-													</label> <input type="text"
+													</label>
+													<input type="text"
 														placeholder="Escriba un meta ajustada (no llega en el servicio)"
 														class="form-control" name="npMetaAjustada"
 														ng-model="detalles[mAjustadaID].cantidad" required
-														ng-disabled="!editar"> <span
+														ng-disabled="!editar" ng-change="modificarMetaAjustada(true);">
+													<span
 														class="error text-small block"
 														ng-if="FormActividad.npMetaAjustada.$dirty && FormActividad.npMetaAjustada.$invalid">
-														Incorrecto </span> <span class="success text-small"
+														Incorrecto </span>
+													<span class="success text-small"
 														ng-if="FormActividad.npMetaAjustada.$valid"> Listo
 													</span>
 												</div>
@@ -561,13 +566,6 @@
 								</form>
 							</div>
 							<div class="col-md-6">
-<!--
-								<span ng-show="!divEditarDistribucion"> <a
-									class="btn btn-sm btn-primary"
-									ng-click="editarDistribucionPlanificado();"> Editar
-										distribuci&oacute;n </a>
-								</span>
--->
 								<div ng-show="divMetaDistribucionPlanificada"
 									class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionPlanificada"
@@ -582,7 +580,8 @@
 											ng-click="copiarPlanificadoAjustado();"> <i
 												class="fa ti-hand-point-right"></i>
 										</a> &nbsp; <a class="btn btn-sm btn-default"
-											ng-click="editarDistribucionAjustado();"> Ajustado </a> <br>&nbsp;Unidad
+											ng-click="editarDistribucionAjustado();"> Ajustado </a>
+										<br>&nbsp;Unidad
 											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
 											ng-model="objetoPlanificada.unidadtiempo"
 											ng-change="vLimpio=true;distribucionValores('P');">
@@ -621,7 +620,7 @@
 																ng-model="obj.porcentaje" numericOnly
 																style="text-align: right;" required decimal="2"
 																ng-disabled="true">
-															</td><!-- !editar || objetoPlanificada.unidadtiempo!='PE' -->
+															</td>
 															<td>
 																<textarea name="{{'descripcion_'+$index}}"
 																	rows="3" style="width: 100%"
@@ -629,6 +628,20 @@
 																	class="form-control" ng-model="obj.observacion"
 																	ng-disabled="!editar" ng-required="obj.valor != 0"></textarea>
 															</td>
+														</tr>
+														<tr>
+															<td>Diferencia</td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" name="diferenciaPlanificadaV" ng-model="diferenciaPlanificadaV"
+															        ng-disabled="true">
+														    </td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" ng-model="diferenciaPlanificadaP"
+															        ng-disabled="true">
+															</td>
+															<td></td>
 														</tr>
 													</table>
 												</div>
@@ -702,6 +715,20 @@
 																	placeholder="Escriba un descripci&oacute;n"
 																	class="form-control" ng-model="obj.observacion"
 																	ng-disabled="!editar"></textarea></td>
+														</tr>
+														<tr>
+															<td>Diferencia</td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" ng-model="diferenciaAjustadaV"
+															        ng-disabled="true">
+														    </td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" ng-model="diferenciaAjustadaP"
+															        ng-disabled="true">
+															</td>
+															<td></td>
 														</tr>
 													</table>
 												</div>
@@ -1074,15 +1101,19 @@
 															ng-class="{'has-error':FormSubTarea.npMetaPlanificadaCantidad.$dirty && FormSubTarea.npMetaPlanificadaCantidad.$invalid, 'has-success':FormSubTarea.npMetaPlanificadaCantidad.$valid}">
 															<label class="control-label"> Meta Planificada
 																Cantidad <span class="symbol required"></span>
-															</label> <input type="text"
+															</label>
+															<input type="text"
 																placeholder="Escriba un meta planificada cantidad"
 																class="form-control" name="npMetaPlanificadaCantidad"
 																ng-model="detalles[mPlanificadaID].cantidad" numericOnly
 																style="text-align: right;" required decimal="2"
-																onClick="this.select();"> <span
+																onClick="this.select();"
+																ng-change="modificarMetaPlanificada(true);">
+															<span
 																class="error text-small block"
 																ng-if="FormSubTarea.npMetaPlanificadaCantidad.$dirty && FormSubTarea.npMetaPlanificadaCantidad.$invalid">
-																Incorrecto </span> <span class="success text-small"
+																Incorrecto </span>
+															<span class="success text-small"
 																ng-if="FormSubTarea.npMetaPlanificadaCantidad.$valid">
 																Listo </span>
 														</div>
@@ -1132,8 +1163,9 @@
 																class="form-control" name="npMetaAjustadaCantidad"
 																ng-model="detalles[mAjustadaID].cantidad" numericOnly
 																style="text-align: right;" required decimal="2"
-																onClick="this.select();"> <span
-																class="error text-small block"
+																onClick="this.select();"
+																ng-change="modificarMetaAjustada(true);">
+															<span class="error text-small block"
 																ng-if="FormSubTarea.npMetaAjustadaCantidad.$dirty && FormSubTarea.npMetaAjustadaCantidad.$invalid">
 																Incorrecto </span> <span class="success text-small"
 																ng-if="FormSubTarea.npMetaAjustadaCantidad.$valid">
@@ -1236,6 +1268,20 @@
 																	class="form-control" ng-model="obj.observacion"
 																	ng-disabled="!editar"></textarea></td>
 														</tr>
+														<tr>
+															<td>Diferencia</td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" name="diferenciaPlanificadaV" ng-model="diferenciaPlanificadaV"
+															        ng-disabled="true">
+														    </td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" ng-model="diferenciaPlanificadaP"
+															        ng-disabled="true">
+															</td>
+															<td></td>
+														</tr>
 													</table>
 												</div>
 											</div>
@@ -1308,6 +1354,20 @@
 																	placeholder="Escriba un descripci&oacute;n"
 																	class="form-control" ng-model="obj.observacion"
 																	ng-disabled="!editar"></textarea></td>
+														</tr>
+														<tr>
+															<td>Diferencia</td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" ng-model="diferenciaAjustadaV"
+															        ng-disabled="true">
+														    </td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" ng-model="diferenciaAjustadaP"
+															        ng-disabled="true">
+															</td>
+															<td></td>
 														</tr>
 													</table>
 												</div>
@@ -1964,7 +2024,15 @@
 																ng-model="obj.valor" numericOnly
 																style="text-align: right;" required decimal="2"
 																ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
-																ng-change="distribucionCalcularTotales('P');"></td>
+																ng-change="calcularPorcientoP();"></td>
+														</tr>
+														<tr>
+															<td>Diferencia</td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" name="diferenciaPlanificadaV" ng-model="diferenciaPlanificadaV"
+															        ng-disabled="true">
+														    </td>
 														</tr>
 													</table>
 												</div>
@@ -2025,7 +2093,15 @@
 																ng-model="obj.valor" numericOnly
 																style="text-align: right;" required decimal="2"
 																ng-disabled="!editar || objetoAjustada.unidadtiempo!='PE'"
-																ng-change="distribucionCalcularTotales('A');"></td>
+																ng-change="calcularPorcientoA();"></td>
+														</tr>
+														<tr>
+															<td>Diferencia</td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" ng-model="diferenciaAjustadaV"
+															        ng-disabled="true">
+														    </td>
 														</tr>
 													</table>
 												</div>
@@ -2086,7 +2162,7 @@
 																ng-model="obj.valor" numericOnly
 																style="text-align: right;" required decimal="2"
 																ng-disabled="!editar || objetoDevengo.unidadtiempo!='PE'"
-																ng-change="distribucionCalcularTotales('D');"></td>
+																ng-change="calcularPorcientoA();"></td>
 														</tr>
 													</table>
 												</div>

@@ -116,7 +116,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.editarDistribucionPlanificado=function(){
 		$scope.divEditarDistribucion=true;
 		$scope.metaDistribucion('A');
-		//$scope.metaDistribucion('P');
 		$scope.divMetaDistribucionPlanificada=true;
 		$scope.divMetaDistribucionAjustada=false;
 		$scope.divMetaDistribucionDevengo=false;
@@ -131,7 +130,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.divEditarDistribucion=true;
 		$scope.metaDistribucion('D');
 	}
-	
 
 	$scope.metaDistribucion = function(
 		tipometa
@@ -185,6 +183,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.divMetaDistribucionPlanificada=true;
 				$scope.divMetaDistribucionAjustada=false;
 				$scope.divMetaDistribucionDevengo=false;
+				$scope.modificarMetaPlanificada(true);
 			}
 			if (tipometa == "A") {
 				$scope.objetoAjustada=resp.json.cronograma;
@@ -196,6 +195,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.divMetaDistribucionPlanificada=false;
 				$scope.divMetaDistribucionAjustada=true;
 				$scope.divMetaDistribucionDevengo=false;
+				$scope.modificarMetaAjustada(true);
 			}
 			if (tipometa == "D") {
 				$scope.objetoDevengo=resp.json.cronograma;
@@ -215,44 +215,93 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		});
 	}
 
+	//ng-change="modificarMetaPlanificada(treu);"
+	$scope.modificarMetaPlanificada = function(sumar) {
+/*		$scope.aDistribuirP = ($scope.divActividad
+			? $scope.detalles[$scope.mPlanificadaID].metavalor
+			: ($scope.divSubTarea
+				? $scope.detalles[$scope.mPlanificadaID].cantidad
+				: $scope.npTotalPlanificado
+			)
+		);
+*/
+		$scope.aDistribuirP = Number($scope.divActividad || $scope.divSubTarea
+			? $scope.detalles[$scope.mPlanificadaID].cantidad
+			: $scope.npTotalPlanificado
+		);
+		if (sumar != undefined) {
+			$scope.sumarValoresP();
+		}
+	}
+
+	$scope.sumarValoresP = function() {
+		$scope.totalPlanificadaV = 0;
+		$scope.totalPlanificadaP = 0;
+		for (var i = 0; i < 12; i++) {
+			$scope.totalPlanificadaV += $scope.detallesPlanificada[i].valor;
+			$scope.totalPlanificadaP += $scope.detallesPlanificada[i].porcentaje;
+		}
+		$scope.diferenciaPlanificadaV = Number($scope.aDistribuirP.toFixed(2)) - Number($scope.totalPlanificadaV.toFixed(2));
+		$scope.diferenciaPlanificadaP = 100 - Number($scope.totalPlanificadaP.toFixed(2));
+	}
+
+	$scope.modificarMetaAjustada = function(sumar) {
+/*		$scope.aDistribuirA = ($scope.divActividad
+			? $scope.detalles[$scope.mAjustadaID].metavalor
+			: ($scope.divSubTarea
+				? $scope.detalles[$scope.mAjustadaID].cantidad
+				: $scope.npTotalAjustado
+			)
+		);
+*/
+		$scope.aDistribuirA = Number($scope.divActividad || $scope.divSubTarea
+			? $scope.detalles[$scope.mAjustadaID].cantidad
+			: $scope.npTotalAjustado
+		);
+		if (sumar != undefined) {
+			$scope.sumarValoresA();
+		}
+	}
+
+	$scope.sumarValoresA = function() {
+		$scope.totalAjustadaV = 0;
+		$scope.totalAjustadaP = 0;
+		for (var i = 0; i < 12; i++) {
+			$scope.totalAjustadaV += $scope.detallesAjustada[i].valor;
+			$scope.totalAjustadaP += $scope.detallesAjustada[i].porcentaje;
+		}
+		$scope.diferenciaAjustadaV = Number($scope.aDistribuirA.toFixed(2)) - Number($scope.totalAjustadaV.toFixed(2));
+		$scope.diferenciaAjustadaP = 100 - Number($scope.totalAjustadaP.toFixed(2));
+	}
+
 	$scope.distribucionValores = function(estado) {
 		if (!$scope.editar) return;
 		switch (estado) {
 			case "P": //Planificado
-				$scope.totalPlanificada = ($scope.divActividad
-					? $scope.detalles[$scope.mPlanificadaID].metavalor
-					: ($scope.divSubTarea
-						? $scope.detalles[$scope.mPlanificadaID].cantidad
-						: $scope.npTotalPlanificado
-					)
-				);
+				$scope.modificarMetaPlanificada();
 				distribuirValor(
 					$scope.objetoPlanificada,
 					$scope.detallesPlanificada,
-					$scope.totalPlanificada,
+					$scope.aDistribuirP,
 					$scope.detalles[$scope.mPlanificadaID].cantidad,
 					$scope.divActividad,
 					$scope.divSubItem,
 					$scope.vLimpio
 				);
+				$scope.sumarValoresP();
 				break;
 			case "A": //Ajustada
-				$scope.totalAjustada = ($scope.divActividad
-					? $scope.detalles[$scope.mAjustadaID].metavalor
-					: ($scope.divSubTarea
-						? $scope.detalles[$scope.mAjustadaID].cantidad
-						: $scope.npTotalAjustado
-					)
-				);
+				$scope.modificarMetaAjustada();
 				distribuirValor(
 					$scope.objetoAjustada,
 					$scope.detallesAjustada,
-					$scope.totalAjustada,
+					$scope.aDistribuirA,
 					$scope.detalles[$scope.mAjustadaID].cantidad,
 					$scope.divActividad,
 					$scope.divSubItem,
 					$scope.vLimpio
 				);
+				$scope.sumarValoresA();
 				break;
 			case "D": //Devengo
 				$scope.totalDevengo = $scope.npTotalAjustado;
@@ -275,12 +324,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if (!$scope.editar) return;
 		switch (estado) {
 			case "P": //Planificado
-				$scope.totalPlanificada = distribucionCalcularTotal(
+				$scope.aDistribuirP = distribucionCalcularTotal(
 					$scope.detallesPlanificada
 				);
 				break;
 			case "A": //Ajustada
-				$scope.totalAjustada = distribucionCalcularTotal(
+				$scope.aDistribuirA = distribucionCalcularTotal(
 					$scope.detallesAjustada
 				);
 				break;
@@ -1035,25 +1084,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.calcularPorcientoP = function(index) {
-		var x = ($scope.divActividad || $scope.divSubTarea
-			? $scope.detalles[$scope.mPlanificadaID].cantidad
-			: $scope.npTotalPlanificado
-		);
-/*		$scope.detallesPlanificada[index].porcentaje = Number(
-			(
-				($scope.detallesPlanificada[index].valor * 100) / x
-			).toFixed(2)
-		);
-*/
+		$scope.modificarMetaPlanificada();
 		distribuirValor(
 			$scope.objetoPlanificada,
 			$scope.detallesPlanificada,
-			x,
+			$scope.aDistribuirP,
 			$scope.detalles[$scope.mPlanificadaID].cantidad,
 			$scope.divActividad,
 			$scope.divSubItem,
 			false
 		);
+		$scope.sumarValoresP();
 	}
 
 	$scope.submitformMetaDistribucionPlanificada = function(form) {
@@ -1072,12 +1113,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     			return;
 			}
 		}
-		$scope.totalPlanificada = 0;
+		$scope.aDistribuirP = 0;
 		for (var i = 0; i < 12; i++) {
-			$scope.totalPlanificada += $scope.detallesPlanificada[i].valor;
+			$scope.aDistribuirP += $scope.detallesPlanificada[i].valor;
 		}
-		$scope.totalPlanificada = Number($scope.totalPlanificada.toFixed(2));
-		if ($scope.totalPlanificada != ($scope.divActividad || $scope.divSubTarea
+		$scope.aDistribuirP = Number($scope.aDistribuirP.toFixed(2));
+		if ($scope.aDistribuirP != ($scope.divActividad || $scope.divSubTarea
 				? $scope.detalles[$scope.mPlanificadaID].cantidad
 				: $scope.npTotalPlanificado
 			)) {
@@ -1129,25 +1170,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.calcularPorcientoA = function(index) {
-		var x = ($scope.divActividad || $scope.divSubTarea
-			? $scope.detalles[$scope.mAjustadaID].cantidad
-			: $scope.npTotalAjustado
-		);
-/*		$scope.detallesAjustada[index].porcentaje = Number(
-			(
-				($scope.detallesAjustada[index].valor * 100) / x
-			).toFixed(2)
-		);
-*/
+		$scope.modificarMetaAjustada();
 		distribuirValor(
 			$scope.objetoAjustada,
 			$scope.detallesAjustada,
-			x,
+			$scope.aDistribuirA,
 			$scope.detalles[$scope.mAjustadaID].cantidad,
 			$scope.divActividad,
 			$scope.divSubItem,
 			false
 		);
+		$scope.sumarValoresA();
 	}
 
 	$scope.submitformMetaDistribucionAjustada = function(form) {
@@ -1166,12 +1199,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     			return;
 			}
 		}
-		$scope.totalAjustada = 0;
+		$scope.aDistribuirA = 0;
 		for (var i = 0; i < 12; i++) {
-			$scope.totalAjustada += $scope.detallesAjustada[i].valor;
+			$scope.aDistribuirA += $scope.detallesAjustada[i].valor;
 		}
-		$scope.totalAjustada = Number($scope.totalAjustada.toFixed(2));
-		if ($scope.totalAjustada != ($scope.divActividad || $scope.divSubTarea
+		$scope.aDistribuirA = Number($scope.aDistribuirA.toFixed(2));
+		if ($scope.aDistribuirA != ($scope.divActividad || $scope.divSubTarea
 				? $scope.detalles[$scope.mAjustadaID].cantidad
 				: $scope.npTotalAjustado
 			)) {
@@ -1636,7 +1669,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.detallesAjustada[i].valor = $scope.detallesPlanificada[i].valor;
 			$scope.detallesAjustada[i].porcentaje = $scope.detallesPlanificada[i].porcentaje;
 		}
-		$scope.totalAjustada = $scope.totalPlanificada;
+		$scope.aDistribuirA = $scope.aDistribuirP;
 		$scope.divMetaDistribucionPlanificada=false;
 		$scope.divMetaDistribucionAjustada=true;
 		$scope.divMetaDistribucionDevengo=false;
@@ -1930,7 +1963,7 @@ function distribuirValor(
 				resto = resto + valorResto;
 				if (resto >= 0.01) {
 					detalles[i].valor = Number(detalles[i].valor + Number(resto.toFixed(2)));
-					resto = resto - resto.toFixed(2);
+					resto = resto - Number(resto.toFixed(2));
 				}
 				suma = suma + detalles[i].valor;
 			} catch (e) {

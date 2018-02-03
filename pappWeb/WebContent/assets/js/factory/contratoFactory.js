@@ -21,5 +21,16 @@ function(Restangular) {
 
 			return Restangular.allUrl(url).getList();
 		},
+
+		editar : function(
+			id
+		) {
+			var url = "ejecucion/vercontrato";
+			var obj = {
+				id: id
+			}
+
+		    return Restangular.allUrl(url).customPOST(obj);
+		},
 	}
 } ]);
