@@ -16,7 +16,7 @@ function(Restangular) {
 			}
 			return Restangular.allUrl(url).customPOST(tObj);
 		},
-		
+
 		traerFiltro : function(
 			pagina,
 			ejefiscal,
@@ -46,6 +46,24 @@ function(Restangular) {
 			if(estado != null && estado != "") tObj.estado= "" + estado;	
 
 			return Restangular.allUrl(url).customPOST(tObj);
+		},
+
+		traerContratoFiltro : function(
+			pagina,
+			codigo,
+			nombre,
+			fecha,
+			estado
+		) {
+			var url = "administrar/consultar/contrato/" +
+				"pagina=" + pagina;
+
+			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
+			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
+			if(fecha!=null && fecha != "") url += "&fecha=" + fecha;	
+			if(estado!=null && estado != "" ) url += "&estado=" + estado;
+
+			return Restangular.allUrl(url).getList();
 		},
 
 		nuevo : function(ejefisca) {

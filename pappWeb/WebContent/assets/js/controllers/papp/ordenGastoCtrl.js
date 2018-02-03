@@ -12,6 +12,12 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	$scope.fechafinalFiltro = null;
 	$scope.estadoFiltro = null;
 
+	$scope.cProveedorCodigoFiltro = null;
+	$scope.cProveedorNombreMostradoFiltro = null;
+	$scope.cFechainicialFiltro = null;
+	$scope.cEstadoFiltro = null;
+	$scope.tmpData=[];
+
 	$scope.edicion=false;
 	$scope.divContrato=false;
 	$scope.nuevoar=false;
@@ -333,9 +339,59 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	}
 
 	$scope.contrato = function() {
+		angular.copy($scope.data, $scope.tmpData);
+		$scope.data=[];
+		$scope.cLimpiar();
 		$scope.edicion = false;
 		$scope.divContrato = true;
 	}
+
+	var pagina = 1;
+	$scope.cFiltrar = function(){
+		ordenGastoFactory.traerContratoFiltro(
+			pagina,
+			$scope.cProveedorCodigoFiltro,
+			$scope.cProveedorNombreMostradoFiltro,
+			$scope.cFechainicialFiltro,
+			$scope.cEstadoFiltro
+		).then(function(resp){
+			console.log(resp);
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
+
+	$scope.cLimpiar = function(){
+		$scope.cProveedorCodigoFiltro = null;
+		$scope.cProveedorNombreMostradoFiltro = null;
+		$scope.cFechainicialFiltro = null;
+		$scope.cEstadoFiltro = null;
+
+		$scope.cFiltrar();
+	};
+
+	$scope.$watch('data', function() {
+		if ($scope.data == undefined || !$scope.divContrato) {
+			return;
+		}
+		$scope.tableParams = new ngTableParams({
+			page : 1, // show first page
+			count : 5, // count per page
+			filter: {} 	
+		}, {
+			total : $scope.data.length, // length of data
+			getData : function($defer, params) {
+				var orderedData = params.filter() ? $filter('filter')(
+						$scope.data, params.filter()) : $scope.data;
+				$scope.lista = orderedData.slice(
+						(params.page() - 1) * params.count(), params
+								.page()
+								* params.count());
+				params.total(orderedData.length);
+				$defer.resolve($scope.lista);
+			}
+		});
+	});
 
 	$scope.form = {
         submit: function (form) {
@@ -401,5 +457,11 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	};
 	$scope.opennpFechafin = function() {
 	    $scope.popupnpFechafin.opened = true;
+	}
+	$scope.popupnpcFechainicio = {
+	    opened: false
+	};
+	$scope.opennpcFechainicio = function() {
+	    $scope.popupnpcFechainicio.opened = true;
 	}
 } ]);

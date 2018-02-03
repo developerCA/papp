@@ -55,7 +55,7 @@ app.controller('ModalUnidadController', [ "$scope","$rootScope","$uibModalInstan
 		$scope.consultar();
 		
 	};
-	
+
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page

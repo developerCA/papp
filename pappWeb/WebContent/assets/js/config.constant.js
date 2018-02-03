@@ -244,6 +244,8 @@ app.constant('JS_REQUIRES', {
         'ProveedorFactory':'assets/js/factory/proveedorFactory.js',
         'ModalOrdenGastoCtrl':'assets/js/controllers/papp/modales/modalOrdenGastoCtrl.js',
         'ModalCertificacionesFondosCtrl':'assets/js/controllers/papp/modales/modalCertificacionesFondosCtrl.js',
+        'ContratoCtrl':'assets/js/controllers/papp/contratoCtrl.js',
+        'ContratoFactory':'assets/js/factory/contratoFactory.js',
 
 
     },
