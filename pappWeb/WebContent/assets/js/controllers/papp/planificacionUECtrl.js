@@ -1113,12 +1113,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     			return;
 			}
 		}
-		$scope.aDistribuirP = 0;
+		var t = 0;
 		for (var i = 0; i < 12; i++) {
-			$scope.aDistribuirP += $scope.detallesPlanificada[i].valor;
+			t += $scope.detallesPlanificada[i].valor;
 		}
-		$scope.aDistribuirP = Number($scope.aDistribuirP.toFixed(2));
-		if ($scope.aDistribuirP != ($scope.divActividad || $scope.divSubTarea
+		t = Number($scope.aDistribuirP.toFixed(2));
+		if (t != ($scope.divActividad || $scope.divSubTarea
 				? $scope.detalles[$scope.mPlanificadaID].cantidad
 				: $scope.npTotalPlanificado
 			)) {
@@ -1130,7 +1130,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			return;
 		}
 		if (!$scope.divSubItem) {
-			for (var i = 0; i < 11; i++) {
+			for (var i = 0; i < 12; i++) {
 				if ($scope.detallesPlanificada[i].valor > 0)
 					if ($scope.detallesPlanificada[i].observacion == undefined || $scope.detallesPlanificada[i].observacion.trim() == "") {
 				        SweetAlert.swal(
@@ -1199,12 +1199,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     			return;
 			}
 		}
-		$scope.aDistribuirA = 0;
+		var t = 0;
 		for (var i = 0; i < 12; i++) {
-			$scope.aDistribuirA += $scope.detallesAjustada[i].valor;
+			t += $scope.detallesAjustada[i].valor;
 		}
-		$scope.aDistribuirA = Number($scope.aDistribuirA.toFixed(2));
-		if ($scope.aDistribuirA != ($scope.divActividad || $scope.divSubTarea
+		t = Number($scope.aDistribuirA.toFixed(2));
+		if (t != ($scope.divActividad || $scope.divSubTarea
 				? $scope.detalles[$scope.mAjustadaID].cantidad
 				: $scope.npTotalAjustado
 			)) {
@@ -1216,7 +1216,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			return;
 		}
 		if (!$scope.divSubItem) {
-			for (var i = 0; i < 11; i++) {
+			for (var i = 0; i < 12; i++) {
 				if ($scope.detallesAjustada[i].valor > 0)
 					if ($scope.detallesAjustada[i].observacion == undefined || $scope.detallesAjustada[i].observacion.trim() == "") {
 				        SweetAlert.swal(
