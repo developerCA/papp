@@ -636,10 +636,11 @@ public class PlanificacionController {
 				boolean grabar=true;
 				if(tareaunidadTO.getCodigo()!=null && !tareaunidadTO.getCodigo().equals("") && !tareaunidadTO.getCodigo().equals(" ")) {
 					NivelactividadTO nivelactividadTO=new  NivelactividadTO();
-					nivelactividadTO.setNivelactividadpadreid(tareaunidadTO.getTareaunidadejerciciofiscalid());
 					nivelactividadTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 					nivelactividadTO.setNivelactividadpadreid(tareaunidadTO.getPadre());
 					nivelactividadTO.setTipo("TA");
+					nivelactividadTO.setNivelactividadunidadid(tareaunidadTO.getTareaunidadmetaumid());
+					nivelactividadTO.setNivelactividadejerfiscalid(tareaunidadTO.getTareaunidadejerciciofiscalid());
 					Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
 					log.println("tareaunidadTOs: " + resultado.size());
 					if(resultado.size()>0){
@@ -708,11 +709,13 @@ public class PlanificacionController {
 				boolean grabar=true;
 				if(subtareaunidadTO.getCodigo()!=null && !subtareaunidadTO.getCodigo().equals("") && !subtareaunidadTO.getCodigo().equals(" ")) {
 					//pregunto si ya existe el codigo en el nivel actual
+					log.println("va a verificar codigo");
 					NivelactividadTO nivelactividadTO=new  NivelactividadTO();
-					nivelactividadTO.setNivelactividadpadreid(subtareaunidadTO.getSubtareaunidadejerfiscalid());
 					nivelactividadTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 					nivelactividadTO.setNivelactividadpadreid(subtareaunidadTO.getPadre());
 					nivelactividadTO.setTipo("SA");
+					nivelactividadTO.setNivelactividadunidadid(subtareaunidadTO.getSubtareaunidadunidadid());
+					nivelactividadTO.setNivelactividadejerfiscalid(subtareaunidadTO.getSubtareaunidadejerfiscalid());
 					Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
 					log.println("tareaunidadTOs: " + resultado.size());
 					if(resultado.size()>0){
