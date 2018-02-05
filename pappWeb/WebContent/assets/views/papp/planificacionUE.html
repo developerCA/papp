@@ -571,28 +571,38 @@
 									<form name="Form" id="formMetaDistribucionPlanificada"
 										novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionPlanificada');">
-										<span> &nbsp;Distribuci&oacute;n:
-										 <a
-											class="btn btn-sm btn-primary"
-											style="background-color: #00B300 !important"> Planificado
-										</a> &nbsp; <a class="btn btn-sm btn-default red"
-											uib-tooltip="Copiar Planificado a Ajustado"
-											ng-click="copiarPlanificadoAjustado();"> <i
-												class="fa ti-hand-point-right"></i>
-										</a> &nbsp; <a class="btn btn-sm btn-default"
-											ng-click="editarDistribucionAjustado();"> Ajustado </a>
-										<br>&nbsp;Unidad
-											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
-											ng-model="objetoPlanificada.unidadtiempo"
-											ng-change="vLimpio=true;distribucionValores('P');">
-												<option value="ME">Mensual</option>
-												<option value="BI">Bimensual</option>
-												<option value="TM">Trimestral</option>
-												<option value="CM">Cuatrimestral</option>
-												<option value="SE">Semestral</option>
-												<option value="AN">Anual</option>
-												<option value="PE">Personalizado</option>
-										</select>
+										<span>
+											&nbsp;Distribuci&oacute;n:
+											<a class="btn btn-sm btn-primary"
+												style="background-color: #00B300 !important">
+												Planificado
+											</a>
+											<span ng-show="detalles[mAjustadaID].cantidad > 0">
+												&nbsp;
+												<a class="btn btn-sm btn-default red"
+													uib-tooltip="Copiar Planificado a Ajustado"
+													ng-click="copiarPlanificadoAjustado();">
+													<i class="fa ti-hand-point-right"></i>
+												</a>
+												&nbsp;
+												<a class="btn btn-sm btn-default"
+													ng-click="editarDistribucionAjustado();">
+													Ajustado
+												</a>
+											</span>
+											<br>
+											&nbsp;Unidad Tipo:
+											<select name="periodoPlanificado" ng-disabled="!editar"
+												ng-model="objetoPlanificada.unidadtiempo"
+												ng-change="vLimpio=true;distribucionValores('P');">
+													<option value="ME">Mensual</option>
+													<option value="BI">Bimensual</option>
+													<option value="TM">Trimestral</option>
+													<option value="CM">Cuatrimestral</option>
+													<option value="SE">Semestral</option>
+													<option value="AN">Anual</option>
+													<option value="PE">Personalizado</option>
+											</select>
 										</span>
 										<div class="panel-body no-padding panel-white">
 											<div class="col-md-12 panel-white no-padding">
@@ -965,13 +975,16 @@
 													ng-class="{'has-error':FormSubTarea.descripcion.$dirty && FormSubTarea.descripcion.$invalid, 'has-success':FormSubTarea.descripcion.$valid}">
 													<label class="control-label"> Descripci&oacute;n <span
 														class="symbol required"></span>
-													</label> <input type="text"
-														placeholder="Escriba un descripci&oacute;n"
-														class="form-control" name="descripcion"
-														ng-model="objeto.descripcion" required> <span
-														class="error text-small block"
+													</label>
+													<textarea name="descripcion" rows="5"
+														style="width: 100%"
+														placeholder="Escriba una descripci&oacute;n"
+														class="form-control"
+														ng-model="objeto.descripcion" required></textarea>
+													<span class="error text-small block"
 														ng-if="FormSubTarea.descripcion.$dirty && FormSubTarea.descripcion.$invalid">
-														Incorrecto </span> <span class="success text-small"
+														Incorrecto </span>
+													<span class="success text-small"
 														ng-if="FormSubTarea.descripcion.$valid"> Listo </span>
 												</div>
 
@@ -1210,26 +1223,36 @@
 										novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionPlanificada');">
 										<span> &nbsp;Distribuci&oacute;n:
-										 <a
-											class="btn btn-sm btn-primary"
-											style="background-color: #00B300 !important"> Planificado
-										</a> &nbsp; <a class="btn btn-sm btn-default"
-											uib-tooltip="Copiar Planificado a Ajustado"
-											ng-click="copiarPlanificadoAjustado();"> <i
-												class="fa ti-hand-point-right"></i>
-										</a> &nbsp; <a class="btn btn-sm btn-default"
-											ng-click="editarDistribucionAjustado();"> Ajustado </a> <br>Unidad
-											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
-											ng-model="objetoPlanificada.unidadtiempo"
-											ng-change="vLimpio=true;distribucionValores('P');">
-												<option value="ME">Mensual</option>
-												<option value="BI">Bimensual</option>
-												<option value="TM">Trimestral</option>
-												<option value="CM">Cuatrimestral</option>
-												<option value="SE">Semestral</option>
-												<option value="AN">Anual</option>
-												<option value="PE">Personalizado</option>
-										</select>
+											<a class="btn btn-sm btn-primary"
+												style="background-color: #00B300 !important">
+												Planificado
+											</a>
+											<span ng-show="detalles[mAjustadaID].cantidad > 0">
+												&nbsp;
+												<a class="btn btn-sm btn-default"
+													uib-tooltip="Copiar Planificado a Ajustado"
+													ng-click="copiarPlanificadoAjustado();">
+													<i class="fa ti-hand-point-right"></i>
+												</a>
+												&nbsp;
+												<a class="btn btn-sm btn-default"
+													ng-click="editarDistribucionAjustado();">
+													Ajustado
+												</a>
+											</span>
+											<br>
+											&nbsp;Unidad Tipo:
+											<select name="periodoPlanificado" ng-disabled="!editar"
+												ng-model="objetoPlanificada.unidadtiempo"
+												ng-change="vLimpio=true;distribucionValores('P');">
+													<option value="ME">Mensual</option>
+													<option value="BI">Bimensual</option>
+													<option value="TM">Trimestral</option>
+													<option value="CM">Cuatrimestral</option>
+													<option value="SE">Semestral</option>
+													<option value="AN">Anual</option>
+													<option value="PE">Personalizado</option>
+											</select>
 										</span>
 										<div class="panel-body no-padding panel-white">
 											<div class="col-md-12 panel-white no-padding">
@@ -1967,41 +1990,48 @@
 								</form>
 							</div>
 							<div class="col-md-6">
-<!--
-								<span ng-show="!divEditarDistribucion && objeto.id != 0">
-									<a class="btn btn-sm btn-primary"
-									ng-click="editarDistribucionPlanificado();"> Editar
-										distribuci&oacute;n </a>
-								</span>
--->
 								<div ng-show="divMetaDistribucionPlanificada"
 									class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionPlanificada"
 										novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionPlanificada')">
-										<span> &nbsp;Distribuci&oacute;n:
-										 <a
-											class="btn btn-sm btn-primary"
-											style="background-color: #00B300 !important"> Planificado
-										</a> &nbsp; <a class="btn btn-sm btn-default"
-											uib-tooltip="Copiar Planificado a Ajustado"
-											ng-click="copiarPlanificadoAjustado();"> <i
-												class="fa ti-hand-point-right"></i>
-										</a> &nbsp; <a class="btn btn-sm btn-default"
-											ng-click="editarDistribucionAjustado();"> Ajustado </a>
-											&nbsp; <a class="btn btn-sm btn-default"
-											ng-click="editarDistribucionDevengo();"> Devengo </a> <br>&nbsp;Unidad
-											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
-											ng-model="objetoPlanificada.unidadtiempo"
-											ng-change="vLimpio=true;distribucionValores('P');">
-												<option value="ME">Mensual</option>
-												<option value="BI">Bimensual</option>
-												<option value="TM">Trimestral</option>
-												<option value="CM">Cuatrimestral</option>
-												<option value="SE">Semestral</option>
-												<option value="AN">Anual</option>
-												<option value="PE">Personalizado</option>
-										</select>
+										<span>
+											&nbsp;Distribuci&oacute;n:
+											<a class="btn btn-sm btn-primary"
+												style="background-color: #00B300 !important">
+												Planificado
+											</a>
+											<span ng-show="npTotalAjustado > 0">
+												&nbsp;
+												<a class="btn btn-sm btn-default"
+													uib-tooltip="Copiar Planificado a Ajustado"
+													ng-click="copiarPlanificadoAjustado();">
+													<i class="fa ti-hand-point-right"></i>
+												</a>
+												&nbsp;
+												<a class="btn btn-sm btn-default"
+													ng-click="editarDistribucionAjustado();">
+													Ajustado
+												</a>
+												&nbsp;
+												<a class="btn btn-sm btn-default"
+													ng-click="editarDistribucionDevengo();">
+													Devengo
+												</a>
+											</span>
+											<br>
+											&nbsp;Unidad Tipo:
+											<select name="periodoPlanificado" ng-disabled="!editar"
+												ng-model="objetoPlanificada.unidadtiempo"
+												ng-change="vLimpio=true;distribucionValores('P');">
+													<option value="ME">Mensual</option>
+													<option value="BI">Bimensual</option>
+													<option value="TM">Trimestral</option>
+													<option value="CM">Cuatrimestral</option>
+													<option value="SE">Semestral</option>
+													<option value="AN">Anual</option>
+													<option value="PE">Personalizado</option>
+											</select>
 										</span>
 										<div class="panel-body no-padding panel-white">
 											<div class="col-md-12 panel-white no-padding">
