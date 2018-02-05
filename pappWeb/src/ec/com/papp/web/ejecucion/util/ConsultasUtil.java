@@ -1,7 +1,9 @@
 package ec.com.papp.web.ejecucion.util;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,8 +83,12 @@ public class ConsultasUtil {
 			if(parameters.get("fechainicial")!=null && parameters.get("fechafinal")==null)
 				fechaFinal=(new Date());
 			if(parameters.get("fechafinal")!=null && parameters.get("fechainicial")==null){
-				mensajes.setMsg(MensajesWeb.getString("error.fechaDesde"));
-				mensajes.setType(MensajesWeb.getString("mensaje.advertencia"));
+				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal").replaceAll("%2F", "/"));
+				Calendar fechaactual = new GregorianCalendar();
+				fechaactual.setTime(fechaFinal);
+				int anio=fechaactual.get(Calendar.YEAR);
+				Calendar fechag=new GregorianCalendar(anio, 0, 1);
+				fechaInicial=fechag.getTime();
 			}
 			
 			Double valorInicial=null;
@@ -229,8 +235,12 @@ public class ConsultasUtil {
 			if(parameters.get("fechainicial")!=null && parameters.get("fechafinal")==null)
 				fechaFinal=(new Date());
 			if(parameters.get("fechafinal")!=null && parameters.get("fechainicial")==null){
-				mensajes.setMsg(MensajesWeb.getString("error.fechaDesde"));
-				mensajes.setType(MensajesWeb.getString("mensaje.advertencia"));
+				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal").replaceAll("%2F", "/"));
+				Calendar fechaactual = new GregorianCalendar();
+				fechaactual.setTime(fechaFinal);
+				int anio=fechaactual.get(Calendar.YEAR);
+				Calendar fechag=new GregorianCalendar(anio, 0, 1);
+				fechaInicial=fechag.getTime();
 			}
 			Double valorInicial=null;
 			Double valorFinal=null;
@@ -272,6 +282,7 @@ public class ConsultasUtil {
 				tipodocumentoclasedocumentoTO.setTipodocumento(tipodocumentoTO);
 				ordengastoTO.setTipodocumentoclasedocumento(tipodocumentoclasedocumentoTO);
 				SearchResultTO<OrdengastoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastoPaginado(ordengastoTO);
+				log.println("resultado** " + resultado.getCountResults());
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 				HashMap<String, String>  totalMap=new HashMap<String, String>();
 				totalMap.put("valor", resultado.getCountResults().toString());
@@ -326,12 +337,29 @@ public class ConsultasUtil {
 			if(parameters.get("fechainicial")!=null && parameters.get("fechafinal")==null)
 				fechaFinal=(new Date());
 			if(parameters.get("fechafinal")!=null && parameters.get("fechainicial")==null){
-				mensajes.setMsg(MensajesWeb.getString("error.fechaDesde"));
-				mensajes.setType(MensajesWeb.getString("mensaje.advertencia"));
+				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal").replaceAll("%2F", "/"));
+				Calendar fechaactual = new GregorianCalendar();
+				fechaactual.setTime(fechaFinal);
+				int anio=fechaactual.get(Calendar.YEAR);
+				Calendar fechag=new GregorianCalendar(anio, 0, 1);
+				fechaInicial=fechag.getTime();
+			}
+			Double valorInicial=null;
+			Double valorFinal=null;
+			if(parameters.get("valorinicial")!=null)
+				valorInicial=Double.valueOf(parameters.get("valorinicial"));
+			if(parameters.get("valorfinal")!=null)
+				valorFinal=Double.valueOf(parameters.get("valorfinal"));
+			if(parameters.get("valorinicial")!=null && parameters.get("valorfinal")==null)
+				valorFinal=(1000000.0);
+			if(parameters.get("valorfinal")!=null && parameters.get("valorinicial")==null){
+				valorInicial=(0.0);
 			}
 			if(mensajes.getMsg()==null){
 				if(fechaInicial!=null)
 					ordendevengoTO.setRangoFechacreacion(new RangeValueTO<Date>(fechaInicial,fechaFinal));
+				if(valorInicial!=null && valorFinal!=null && (valorInicial>0 || valorFinal>0))
+					ordendevengoTO.setRangoValortotal(new RangeValueTO<Double>(valorInicial,valorFinal));
 				if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 					ordendevengoTO.setCodigo(parameters.get("codigo"));
 				if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
@@ -397,12 +425,29 @@ public class ConsultasUtil {
 			if(parameters.get("fechainicial")!=null && parameters.get("fechafinal")==null)
 				fechaFinal=(new Date());
 			if(parameters.get("fechafinal")!=null && parameters.get("fechainicial")==null){
-				mensajes.setMsg(MensajesWeb.getString("error.fechaDesde"));
-				mensajes.setType(MensajesWeb.getString("mensaje.advertencia"));
+				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal").replaceAll("%2F", "/"));
+				Calendar fechaactual = new GregorianCalendar();
+				fechaactual.setTime(fechaFinal);
+				int anio=fechaactual.get(Calendar.YEAR);
+				Calendar fechag=new GregorianCalendar(anio, 0, 1);
+				fechaInicial=fechag.getTime();
+			}
+			Double valorInicial=null;
+			Double valorFinal=null;
+			if(parameters.get("valorinicial")!=null)
+				valorInicial=Double.valueOf(parameters.get("valorinicial"));
+			if(parameters.get("valorfinal")!=null)
+				valorFinal=Double.valueOf(parameters.get("valorfinal"));
+			if(parameters.get("valorinicial")!=null && parameters.get("valorfinal")==null)
+				valorFinal=(1000000.0);
+			if(parameters.get("valorfinal")!=null && parameters.get("valorinicial")==null){
+				valorInicial=(0.0);
 			}
 			if(mensajes.getMsg()==null){
 				if(fechaInicial!=null)
 					ordenreversionTO.setRangoFechacreacion(new RangeValueTO<Date>(fechaInicial,fechaFinal));
+				if(valorInicial!=null && valorFinal!=null && (valorInicial>0 || valorFinal>0))
+					ordenreversionTO.setRangoValortotal(new RangeValueTO<Double>(valorInicial,valorFinal));
 				if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 					ordenreversionTO.setCodigo(parameters.get("codigo"));
 				if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
@@ -841,8 +886,12 @@ public class ConsultasUtil {
 			if(parameters.get("fechainicial")!=null && parameters.get("fechafinal")==null)
 				fechaFinal=(new Date());
 			if(parameters.get("fechafinal")!=null && parameters.get("fechainicial")==null){
-				mensajes.setMsg(MensajesWeb.getString("error.fechaDesde"));
-				mensajes.setType(MensajesWeb.getString("mensaje.advertencia"));
+				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal").replaceAll("%2F", "/"));
+				Calendar fechaactual = new GregorianCalendar();
+				fechaactual.setTime(fechaFinal);
+				int anio=fechaactual.get(Calendar.YEAR);
+				Calendar fechag=new GregorianCalendar(anio, 0, 1);
+				fechaInicial=fechag.getTime();
 			}
 			if(mensajes.getMsg()==null){
 				if(fechaInicial!=null)

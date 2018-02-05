@@ -235,22 +235,26 @@ public class PlanificacionController {
 				}
 				else{
 					//Si va a inactivar valido que no hayan hijos
-					if(plannacionalTO.getId()!=null && plannacionalTO.getId().longValue()!=0 && plannacionalTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
-						PlannacionalTO hijo=new PlannacionalTO();
-						hijo.setPlannacionalpadreid(plannacionalTO.getId());
-						hijo.setEstado(MensajesAplicacion.getString("estado.activo"));
-						Collection<PlannacionalTO> objetivoTOs2=UtilSession.planificacionServicio.transObtenerPlannacionalArbol(hijo);
-						if(objetivoTOs2.size()>0) {
-							grabar=false;
-							mensajes.setMsg(MensajesWeb.getString("error.hijo.existe"));
-							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-						}
-					}
-					if(grabar) {
+//					if(plannacionalTO.getId()!=null && plannacionalTO.getId().longValue()!=0 && plannacionalTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
+//						ObjetivoTO objetivoTO=new ObjetivoTO();
+//						objetivoTO.setCodigo(plannacionalTO.getCodigo());
+//						objetivoTO.setEstado(MensajesAplicacion.getString("estado.activo"));
+//						objetivoTO.setObjetivoejerciciofiscalid(plannacionalTO.getPlannacionalejerfiscalid());
+//						objetivoTO.setTipo(MensajesAplicacion.getString("planinstitucional.tipo.plannacional"));
+//						log.println("datos: " + plannacionalTO.getCodigo() + "-"+MensajesAplicacion.getString("estado.activo")+"-"+plannacionalTO.getPlannacionalejerfiscalid()+"-"+MensajesAplicacion.getString("planinstitucional.tipo.plannacional"));
+//						Collection<ObjetivoTO> objetivoTOs=UtilSession.planificacionServicio.transObtenerObjetivoArbol(objetivoTO);
+//						log.println("objetivos: " + objetivoTOs.size());
+//						if(objetivoTOs.size()>0) {
+//							grabar=false;
+//							mensajes.setMsg(MensajesWeb.getString("error.hijo.existe.plannacional"));
+//							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+//						}
+//					}
+//					if(grabar) {
 						UtilSession.planificacionServicio.transCrearModificarPlannacional(plannacionalTO);
 						id=plannacionalTO.getNpid().toString();
 						jsonObject.put("plannacional", (JSONObject)JSONSerializer.toJSON(plannacionalTO,plannacionalTO.getJsonConfig()));
-					}
+//					}
 				}
 			}
 			//Indicador
@@ -755,25 +759,27 @@ public class PlanificacionController {
 								mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 								grabar=false;
 							}
-							if(grabar) {
-								UtilSession.planificacionServicio.transCrearModificarSubtareaunidad(subtareaunidadTO);
-								log.println("subtarea id: " + subtareaunidadTO.getId());
-								subtareaunidadTO.setId(subtareaunidadTO.getNpid());
-								id=subtareaunidadTO.getNpid().toString();
-								SubtareaunidadTO subtareaunidadTO1 = UtilSession.planificacionServicio.transObtenerSubtareaunidadTO(subtareaunidadTO.getNpid());
-								subtareaunidadTO1.setEstado(MensajesWeb.getString("estado.activo"));
-								subtareaunidadTO1.setPadre(subtareaunidadTO.getPadre());
-								subtareaunidadTO1.setNpponderacion(subtareaunidadTO.getPonderacion());
-								jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO1,subtareaunidadTO1.getJsonConfigeditar()));
-								//traigo los datos de subtareaunidadacumulador
-								SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
-								subtareaunidadacumuladorTO.getId().setId(subtareaunidadTO.getId());
-								Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
-								for(SubtareaunidadacumuladorTO subtareaunidadacumuladorTO2:subtareaunidadacumuladorTOs)
-									subtareaunidadacumuladorTO2.setNpValor(subtareaunidadacumuladorTO2.getCantidad());
-								jsonObject.put("subtareaunidadacumulador", (JSONArray)JSONSerializer.toJSON(subtareaunidadacumuladorTOs,subtareaunidadacumuladorTO.getJsonConfig()));
-							}
 						}
+						if(grabar) {
+							log.println("va a grabar");
+							UtilSession.planificacionServicio.transCrearModificarSubtareaunidad(subtareaunidadTO);
+							log.println("subtarea id: " + subtareaunidadTO.getId());
+							subtareaunidadTO.setId(subtareaunidadTO.getNpid());
+							id=subtareaunidadTO.getNpid().toString();
+							SubtareaunidadTO subtareaunidadTO1 = UtilSession.planificacionServicio.transObtenerSubtareaunidadTO(subtareaunidadTO.getNpid());
+							subtareaunidadTO1.setEstado(MensajesWeb.getString("estado.activo"));
+							subtareaunidadTO1.setPadre(subtareaunidadTO.getPadre());
+							subtareaunidadTO1.setNpponderacion(subtareaunidadTO.getPonderacion());
+							jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO1,subtareaunidadTO1.getJsonConfigeditar()));
+							//traigo los datos de subtareaunidadacumulador
+							SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
+							subtareaunidadacumuladorTO.getId().setId(subtareaunidadTO.getId());
+							Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
+							for(SubtareaunidadacumuladorTO subtareaunidadacumuladorTO2:subtareaunidadacumuladorTOs)
+								subtareaunidadacumuladorTO2.setNpValor(subtareaunidadacumuladorTO2.getCantidad());
+							jsonObject.put("subtareaunidadacumulador", (JSONArray)JSONSerializer.toJSON(subtareaunidadacumuladorTOs,subtareaunidadacumuladorTO.getJsonConfig()));
+						}
+
 					}
 					else{
 						mensajes.setMsg(MensajesWeb.getString("advertencia.ponderacion"));

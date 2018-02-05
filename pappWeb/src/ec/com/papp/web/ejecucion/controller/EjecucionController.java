@@ -165,6 +165,9 @@ public class EjecucionController {
 				OrdengastolineaTO ordengastolineaTO2=new OrdengastolineaTO();
 				ordengastolineaTO2.setNivelactid(ordengastolineaTO.getNivelactid());
 				ordengastolineaTO2.getId().setId(ordengastolineaTO.getId().getId());
+				OrdengastoTO ordengastoTO=new OrdengastoTO();
+				ordengastoTO.setCertificacion(new CertificacionTO());
+				ordengastolineaTO2.setOrdengasto(ordengastoTO);
 				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO2);
 				if(ordengastolineaTOs.size()==0){
 					accion = (ordengastolineaTO.getId()==null)?"crear":"actualizar";
@@ -276,9 +279,10 @@ public class EjecucionController {
 			else if(clase.equals("vercontrato")){
 				OrdengastoTO ordengastoTO = gson.fromJson(new StringReader(objeto), OrdengastoTO.class);
 				//Valido que sea un tipo de documento contrato para que permita ingresar contratos
-		        if(ordengastoTO.getNpnombredocumento().indexOf("CONTRATO")!=-1 || ordengastoTO.getNpnombredocumento().indexOf("contrato")!=-1 ||ordengastoTO.getNpnombredocumento().indexOf("Contrato")!=-1) {
+				log.println("busca la palabra contrato: " + ordengastoTO.getNpnombretipodocumento().indexOf("CONTRATO") + "-" + ordengastoTO.getNpnombretipodocumento().indexOf("contrato")+"-"+ordengastoTO.getNpnombretipodocumento().indexOf("Contrato"));
+		        if(ordengastoTO.getNpnombretipodocumento().indexOf("CONTRATO")!=-1 || ordengastoTO.getNpnombretipodocumento().indexOf("contrato")!=-1 ||ordengastoTO.getNpnombretipodocumento().indexOf("Contrato")!=-1) {
 					ContratoTO contratoTO=new ContratoTO();
-					if(ordengastoTO.getOrdengastocontratoid()!=null) {
+					if(ordengastoTO.getOrdengastocontratoid()!=null && ordengastoTO.getOrdengastocontratoid().longValue()!=0) {
 						contratoTO=UtilSession.planificacionServicio.transObtenerContratoTO(ordengastoTO.getOrdengastocontratoid());
 						contratoTO.setSocionegocio(new SocionegocioTO());
 						if(contratoTO!=null && contratoTO.getId()!=null) {
@@ -293,11 +297,12 @@ public class EjecucionController {
 					else {
 						contratoTO=new ContratoTO();
 						contratoTO.setContratoproveedorid(ordengastoTO.getOrdengastoproveedorid());
+						contratoTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 					}
 					jsonObject.put("contrato", (JSONObject)JSONSerializer.toJSON(contratoTO,contratoTO.getJsonConfigedicion()));
 		        }
 		        else {
-					mensajes.setMsg("Para acceder a la opcion de contrato la clase de documento debe ser Contrato");
+					mensajes.setMsg("Para acceder a la opcion de contrato la clase de documento debe ser CONTRATO");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 		        }
 			}
