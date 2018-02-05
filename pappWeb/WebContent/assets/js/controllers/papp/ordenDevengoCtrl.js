@@ -135,8 +135,8 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		})
 	};
 
-	$scope.solicitar=function(index) {
-		console.log($scope.data[index]);
+	$scope.solicitar = function(index) {
+		//console.log($scope.data[index]);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal("Orden de Devengo!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;

@@ -247,6 +247,8 @@ app.constant('JS_REQUIRES', {
         'ContratoCtrl':'assets/js/controllers/papp/contratoCtrl.js',
         'ContratoFactory':'assets/js/factory/contratoFactory.js',
         'ModalContratoCtrl':'assets/js/controllers/papp/modales/modalContratoCtrl.js',
+        'ModalOrdenGastoLineasCtrl':'assets/js/controllers/papp/modales/modalOrdenGastoLineasCtrl.js',
+        'OrdenGastoLineasFactory':'assets/js/factory/ordenGastoLineasFactory.js',
 
 
     },

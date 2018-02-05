@@ -190,7 +190,7 @@
 											<td width="2px"></td>
 											<td width="32px">
 												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Solicitar" ng-click="solicitar(obj.id)">
+													uib-tooltip="Solicitar" ng-click="solicitar($index)">
 													<i class="fa fa-list-alt"></i>
 												</a>
 											</td>
@@ -750,7 +750,55 @@
 								</div>
 							</div>
 						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<a uib-tooltip="Agregar" ng-show="!noeditar && !nuevoar"
+											class="pull-right btn btn-sm btn-info"
+											ng-click="agregarLinea();">
+											<i class="fa fa-plus-square"></i>
+										</a>
+										<h4 class="panel-title">
+											L&iacute;neas
+										</h4>
+									</div>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<td></td>
+														<th>Descripci&oacute;n</th>
+														<th>Valor Inicial</th>
+														<th>Valor Orden de Gasto</th>
+													</tr>
+													<tr ng-repeat="obj in detalles">
+														<td>
+															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
+																uib-tooltip="Modificar" ng-click="editarLinea($index)">
+																<i class="fa fa-pencil"></i>
+															</a>
+														</td>
+														<td>
+															{{obj.npSubitem}}
+														</td>
+														<td style="text-align:right;">
+															{{ obj.npvalorinicial | currency }}
+														</td>
+														<td style="text-align:right;">
+															{{ obj.npvalor | currency }}
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
 
+									</div>
+								</div>
+							</div>
+						</div>
 					</form>
 				</div>
 

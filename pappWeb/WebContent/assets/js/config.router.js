@@ -666,6 +666,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalCertificacionesFondoLiquidacionManuaCtrl','CertificacionesFondosFactory',
         		'ModalProveedorCtrl','ProveedorFactory',
         		'ModalCertificacionesFondosCtrl','CertificacionesFondosFactory',
+        		'ModalOrdenGastoLineasCtrl','OrdenGastoLineasFactory',
         		'ModalClaseGastoCtrl','ClaseGastoFactory',
         		'ModalClaseDocumentoCtrl','ClaseDocumentoFactory',
         		'ModalContratoCtrl','ContratoFactory'

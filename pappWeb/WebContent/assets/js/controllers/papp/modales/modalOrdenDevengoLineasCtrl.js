@@ -18,13 +18,13 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","cer
 		} else {
 			//editar
 			ordenDevengoLineasFactory.editarLinea(
-					editar
-				).then(function(resp){
-					//console.log(resp);
-		        	$scope.objeto = resp.json.ordendevengolinea;
-		        	$scope.objetoDetalles = resp.json.subiteminfo;
-		        	$scope.noeditar=true;
-				})
+				editar
+			).then(function(resp){
+				//console.log(resp);
+	        	$scope.objeto = resp.json.ordendevengolinea;
+	        	$scope.objetoDetalles = resp.json.subiteminfo;
+	        	$scope.noeditar=true;
+			})
 		}
 	}
 

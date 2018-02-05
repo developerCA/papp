@@ -108,6 +108,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			console.log(resp);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.ordengasto;
+			    $scope.detalles=resp.json.ordengastolineas;
 			}
 			$scope.noeditar=false;
 			$scope.edicion=true;
@@ -116,9 +117,42 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		})
 	};
 
+	$scope.solicitar = function(index) {
+		//console.log($scope.data[index]);
+		if ($scope.data[index].estado != "RE") {
+			SweetAlert.swal("Orden de Gasto!", "Solo se puede solicitar si esta en estado registrar.", "error");
+			return;
+		}
+		SweetAlert.swal({ 
+				title: "Orden de Gasto?",
+				text: "Seguro que desea hacer la solicitud!",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonText: "Si!",
+				cancelButtonText: "No",
+				closeOnConfirm: true,
+				closeOnCancel: true 
+			}, 
+			function(isConfirm) { 
+				if (!isConfirm) return;
+				$scope.data[index].npestado = "Solicitando";
+				ordenGastoFactory.solicitar(
+					$scope.data[index].id,
+					"SO",
+					null,
+					null
+				).then(function(resp){
+					//console.log(resp);
+					$scope.pageChanged();
+					SweetAlert.swal("Orden de Gasto!", resp.mensajes.msg, resp.mensajes.type);
+				});
+			}
+		); 
+	}
+
 	$scope.aprobar = function(index) {
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede negar si esta en estado solicitado.", "error");
+			SweetAlert.swal("Orden de Gasto!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -140,7 +174,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				cur = 0;
 			}
 			$scope.data[index].npestado = "Aprobando";
-			ordenDevengoFactory.solicitar(
+			ordenGastoFactory.solicitar(
 				$scope.data[index].id,
 				"AP",
 				cur,
@@ -148,7 +182,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			).then(function(resp){
 				console.log(resp);
 				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal("Orden de Gasto!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
 		});
@@ -156,7 +190,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 
 	$scope.negar = function(index) {
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede negar si esta en estado solicitado.", "error");
+			SweetAlert.swal("Orden de Gasto!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -179,7 +213,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			}
 			var cur = 0;
 			$scope.data[index].npestado = "Negando";
-			ordenDevengoFactory.solicitar(
+			ordenGastoFactory.solicitar(
 				$scope.data[index].id,
 				"NE",
 				null,
@@ -187,7 +221,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			).then(function(resp){
 				console.log(resp);
 				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal("Orden de Gasto!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
 		});
@@ -354,6 +388,57 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		}, function() {
 		});
 	}
+
+	$scope.agregarLinea = function() {
+		//console.log($scope.objeto);
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalOrdenGastoLineas.html',
+			controller : 'ModalOrdenGastoLineasController',
+			size : 'lg',
+			resolve : {
+				certificacionID : function() {
+					return $scope.objeto.ordengastocertificacionid;
+				},
+				editar : function() {
+					return null;
+				},
+				ordengastoID : function() {
+					return $scope.objeto.id;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);//130
+		    $scope.detalles=obj;
+            SweetAlert.swal("Orden Gasto! - Lineas", "Registro guardado satisfactoriamente!", "success");
+		}, function() {
+		});
+	};
+
+	$scope.editarLinea = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalOrdenGastoLineas.html',
+			controller : 'ModalOrdenGastoLineasController',
+			size : 'lg',
+			resolve : {
+				certificacionID : function() {
+					return $scope.objeto.id;
+				},
+				unidadID : function() {
+					return $scope.objeto.certificacionunidadid;
+				},
+				editar : function() {
+					return $scope.detalles[index].id
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			console.log(obj);
+		    $scope.detalles=obj;
+            SweetAlert.swal("Orden Gasto! - Lineas", "Registro guardado satisfactoriamente!", "success");
+		}, function() {
+		});
+	};
 
 	$scope.form = {
         submit: function (form) {

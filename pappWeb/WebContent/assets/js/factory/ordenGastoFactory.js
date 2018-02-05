@@ -87,5 +87,23 @@ function(Restangular) {
 			//var url = "ejecucion/ordengasto/";
 			//return Restangular.allUrl(url).customPOST(objeto);
 		},
+
+		solicitar:function(
+			id,
+			tipo,
+			cur,
+			observacion
+		){
+			var url = "ejecucion/flujoordenes/" + id + "/" + tipo + "/";
+			var k = "";
+			if (cur != null) {
+				k = cur;
+			};
+			if (observacion != null) {
+				k = observacion;
+			};
+			url += k;
+			return Restangular.allUrl(url).customGET();
+		},
 	}
 } ]);

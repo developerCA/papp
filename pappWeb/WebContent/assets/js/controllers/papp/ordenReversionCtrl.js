@@ -88,7 +88,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		).then(function(resp){
 			console.log(resp);
 			if (!resp.estado) return;
-			$scope.objeto=resp.json.ordendevengo;
+			$scope.objeto=resp.json.ordenReversion;
 			$scope.detalles={};
 			$scope.agregarDetalles();
 			$scope.edicion=true;
@@ -106,8 +106,8 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		).then(function(resp){
 			console.log(resp.json);
 			if (resp.estado) {
-			    $scope.objeto=resp.json.ordendevengo;
-			    $scope.detalles=resp.json.ordendevengolineas;
+			    $scope.objeto=resp.json.ordenReversion;
+			    $scope.detalles=resp.json.ordenReversionlineas;
 			}
 			console.log($scope.objeto.codigo);
 			$scope.edicion=true;
@@ -119,11 +119,11 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	$scope.solicitar=function(index) {
 		console.log($scope.data[index]);
 		if ($scope.data[index].estado != "RE") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede solicitar si esta en estado registrar.", "error");
+			SweetAlert.swal("Orden de Reversion!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
 		}
 		SweetAlert.swal({ 
-				title: "Orden de Devengo?",
+				title: "Orden de Reversion?",
 				text: "Seguro que desea hacer la solicitud!",
 				type: "warning",
 				showCancelButton: true,
@@ -143,7 +143,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				).then(function(resp){
 					//console.log(resp);
 					$scope.pageChanged();
-					SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+					SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 				});
 			}
 		); 
@@ -151,7 +151,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.aprobar = function(index) {
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede negar si esta en estado solicitado.", "error");
+			SweetAlert.swal("Orden de Reversion!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -181,7 +181,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			).then(function(resp){
 				console.log(resp);
 				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
 		});
@@ -189,7 +189,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.negar = function(index) {
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede negar si esta en estado solicitado.", "error");
+			SweetAlert.swal("Orden de Reversion!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -220,7 +220,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			).then(function(resp){
 				console.log(resp);
 				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
 		});
@@ -228,7 +228,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.LiquidacionTotal = function(index) {
 		if ($scope.data[index].estado != "AP") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede liquidar si esta en estado aprobado.", "error");
+			SweetAlert.swal("Orden de Reversion!", "Solo se puede liquidar si esta en estado aprobado.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -259,7 +259,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			).then(function(resp){
 				//console.log(resp);
 				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
 		});
@@ -267,7 +267,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.LiquidacionParcial = function(index) {
 		if ($scope.data[index].estado != "AP") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede liquidar si esta en estado aprobado.", "error");
+			SweetAlert.swal("Orden de Reversion!", "Solo se puede liquidar si esta en estado aprobado.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -298,7 +298,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			).then(function(resp){
 				//console.log(resp);
 				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
 		});
@@ -306,7 +306,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.eliminar = function(index) {
 		if ($scope.data[index].estado != "RE") {
-			SweetAlert.swal("Orden de Devengo!", "No se permite eliminar este articulo, solo los que estan 'Registrados'.", "error");
+			SweetAlert.swal("Orden de Reversion!", "No se permite eliminar este articulo, solo los que estan 'Registrados'.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -337,7 +337,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			).then(function(resp){
 				//console.log(resp);
 				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
 		});
@@ -350,8 +350,8 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	$scope.agregarLinea = function() {
 		//console.log($scope.objeto);
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalOrdenDevengoLineas.html',
-			controller : 'ModalOrdenDevengoLineasController',
+			templateUrl : 'assets/views/papp/modal/modalOrdenReversionLineas.html',
+			controller : 'ModalOrdenReversionLineasController',
 			size : 'lg',
 			resolve : {
 				certificacionID : function() {
@@ -368,15 +368,15 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		modalInstance.result.then(function(obj) {
 			console.log(obj);//130
 		    $scope.detalles=obj;
-            SweetAlert.swal("Orden Devengo! - Lineas", "Registro guardado satisfactoriamente!", "success");
+            SweetAlert.swal("Orden Reversion! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
 		});
 	};
 
 	$scope.editarLinea = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalOrdenDevengoLineas.html',
-			controller : 'ModalOrdenDevengoLineasController',
+			templateUrl : 'assets/views/papp/modal/modalOrdenReversionLineas.html',
+			controller : 'ModalOrdenReversionLineasController',
 			size : 'lg',
 			resolve : {
 				certificacionID : function() {
@@ -393,7 +393,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 		    $scope.detalles=obj;
-            SweetAlert.swal("Orden Devengo! - Lineas", "Registro guardado satisfactoriamente!", "success");
+            SweetAlert.swal("Orden Reversion! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
 		});
 	};
@@ -406,7 +406,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.ordendevengounidadid = obj.id;
+			$scope.objeto.ordenReversionunidadid = obj.id;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;
 		}, function() {
@@ -421,9 +421,9 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.ordendevengoclaseregid = obj.id.id;
-			$scope.objeto.ordendevengoclasemoid = obj.id.cmid;
-			$scope.objeto.ordendevengogastoid = obj.id.cmcgastoid;
+			$scope.objeto.ordenReversionclaseregid = obj.id.id;
+			$scope.objeto.ordenReversionclasemoid = obj.id.cmid;
+			$scope.objeto.ordenReversiongastoid = obj.id.cmcgastoid;
 			$scope.objeto.npcodigoregcmcgasto = obj.codigo;
 			$scope.objeto.npnombreregcmcgasto = obj.nombre;
 			$scope.objeto.npcodigoregistro = obj.npcodigoregistro;
@@ -442,8 +442,8 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.ordendevengotipodocid = obj.id.id;
-			$scope.objeto.ordendevengotpclasedocid = obj.id.clasedocid;
+			$scope.objeto.ordenReversiontipodocid = obj.id.id;
+			$scope.objeto.ordenReversiontpclasedocid = obj.id.clasedocid;
 			$scope.objeto.npcodigotipodocumento = obj.codigo;
 			$scope.objeto.npnombretipodocumento = obj.nombre;
 			$scope.objeto.npcodigodocumento = obj.npcodigodocumento;
@@ -476,10 +476,10 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	      					 $scope.noeditar = false;
 	      					 $scope.nuevoar=false;
         				 }
-      				     $scope.objeto=resp.json.ordendevengo;
-      					 SweetAlert.swal("Orden de Devengo!", "Registro guardado satisfactoriamente!", "success");
+      				     $scope.objeto=resp.json.ordenReversion;
+      					 SweetAlert.swal("Orden de Reversion!", "Registro guardado satisfactoriamente!", "success");
         			 }else{
-	 		             SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, "error");
         			 }
         		})
             }
