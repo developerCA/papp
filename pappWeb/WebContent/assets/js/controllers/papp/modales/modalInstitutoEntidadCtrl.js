@@ -12,41 +12,17 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 		$scope.edicion=false;
 		$scope.objeto={};
 		$scope.grupos = [];
+		$scope.listaEjercicioFiscal = [];
 		$scope.grupo = null;
 		$scope.grupoJerarquico = null;
-
-		$scope.filtrar=function(){
-			$scope.data=[];
-			institutoEntidadFactory.traerInstitutoEntidadFiltro(
-				pagina,
-				$scope.codigoInstitucionFiltro,
-				$scope.nombreInstitucionFiltro,
-				$scope.codigoEntidadFiltro,
-				$scope.nombreEntidadFiltro,
-				($scope.ejercicioFiscalFiltro==null? ejefiscal: $scope.ejercicioFiscalFiltro),
-				$scope.estadoFiltro
-			).then(function(resp){
-				console.log(resp);
-				if (resp.meta)
-					$scope.data=resp;
-			})
-		}
-		
-		$scope.limpiar=function(){
-			$scope.codigoInstitucionFiltro=null;
-			$scope.nombreInstitucionFiltro=null;
-			$scope.codigoEntidadFiltro=null;
-			$scope.nombreEntidadFiltro=null;
-			$scope.ejercicioFiscalFiltro=null;
-			$scope.esteadoFiltro=null;
-			$scope.consultar();
-			
-		};
 		
 		var pagina = 1;
 		
 		$scope.init = function(){
-			$scope.traerGrupos();
+			institutoEntidadFactory.traerEjerciciosFiscales().then(function(resp){
+				if (resp.meta)
+					$scope.listaEjercicioFiscal=resp;
+			})
 			$scope.consultar();
 		};
 
@@ -82,6 +58,34 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 				}
 			});
 		});
+
+		$scope.filtrar=function(){
+			$scope.data=[];
+			institutoEntidadFactory.traerInstitutoEntidadFiltro(
+				pagina,
+				$scope.codigoInstitucionFiltro,
+				$scope.nombreInstitucionFiltro,
+				$scope.codigoEntidadFiltro,
+				$scope.nombreEntidadFiltro,
+				($scope.ejercicioFiscalFiltro==null? ejefiscal: $scope.ejercicioFiscalFiltro),
+				$scope.estadoFiltro
+			).then(function(resp){
+				console.log(resp);
+				if (resp.meta)
+					$scope.data=resp;
+			})
+		}
+		
+		$scope.limpiar=function(){
+			$scope.codigoInstitucionFiltro=null;
+			$scope.nombreInstitucionFiltro=null;
+			$scope.codigoEntidadFiltro=null;
+			$scope.nombreEntidadFiltro=null;
+			$scope.ejercicioFiscalFiltro=null;
+			$scope.esteadoFiltro=null;
+			$scope.consultar();
+			
+		};
 
 	$scope.seleccionar=function(obj){
 		$uibModalInstance.close(obj);

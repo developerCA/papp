@@ -1183,7 +1183,7 @@
 																style="width: 100%"
 																placeholder="Escriba un meta ajustada descripci&oacute;n"
 																class="form-control"
-																ng-model="detalles[mAjustadaID].descripcion" required></textarea>
+																ng-model="detalles[mAjustadaID].descripcion"></textarea>
 															<span class="error text-small block"
 																ng-if="FormSubTarea.npMetaAjustadaDescripcion.$dirty && FormSubTarea.npMetaAjustadaDescripcion.$invalid">
 																Incorrecto </span> <span class="success text-small"
@@ -1204,13 +1204,6 @@
 								</form>
 							</div>
 							<div class="col-md-6">
-<!--
-								<span ng-show="!divEditarDistribucion && objeto.id != 0">
-									<a class="btn btn-sm btn-primary"
-									ng-click="editarDistribucionPlanificado();"> Editar
-										distribuci&oacute;n </a>
-								</span>
--->
 								<div ng-show="divMetaDistribucionPlanificada"
 									class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionPlanificada"

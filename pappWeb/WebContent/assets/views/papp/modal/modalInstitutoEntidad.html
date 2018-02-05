@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
 
-<div class="panel-body" ng-init="consultar();" >
+<div class="panel-body" ng-init="init();" >
 	<div class="panel panel-white" id="panel1">
 		<div class="panel-heading">
 			<h4 class="panel-title text-primary">Filtros</h4>
@@ -43,13 +43,17 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label> Ejercicio Fiscal A&ntilde;o </label> <input type="text"
-								class="form-control" ng-model="ejercicioFiscalFiltro">
+							<label> Ejercicio Fiscal A&ntilde;o </label>
+							<select ng-model="ejercicioFiscalFiltro" class="form-control">
+								<option value>Todos</option>
+							    <option ng-repeat="item1 in listaEjercicioFiscal" value="{{item1.id}}">{{item1.anio}}</option>
+							</select>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label> Estado </label> <select name="country"
+							<label> Estado </label>
+							<select name="country"
 								ng-model="estadoFiltro" class="form-control">
 								<option value>Todos</option>
 								<option value="A">Activo</option>

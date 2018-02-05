@@ -1341,7 +1341,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.submitformSubTarea = function(form) {
-    	var tObj=$scope.objeto;
+    	var tObj={};
+    	angular.copy($scope.objeto, tObj);
     	tObj.subtareaunidadacumulador=$scope.detalles;
 		if ($scope.esnuevo) {
 	    	PlanificacionUEFactory.guardarActividades("ST",tObj).then(function(resp){

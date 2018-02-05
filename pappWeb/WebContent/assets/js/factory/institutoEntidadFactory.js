@@ -33,6 +33,10 @@ app.factory("institutoEntidadFactory", [ "Restangular", function(Restangular) {
 		    return Restangular.allUrl(url).customGET();
 		},
 
+		traerEjerciciosFiscales : function() {
+			  return Restangular.allUrl("administrar/consultar/ejerciciofiscal/pagina=1&estado=A").getList();
+		},
+
 		guardar:function(objeto){
 			var url = "estructuraorganica/institutoentidad/";
 

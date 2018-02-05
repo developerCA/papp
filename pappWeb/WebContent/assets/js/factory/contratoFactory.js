@@ -23,12 +23,9 @@ function(Restangular) {
 		},
 
 		editar : function(
-			id
+			obj
 		) {
 			var url = "ejecucion/vercontrato";
-			var obj = {
-				id: id
-			}
 
 		    return Restangular.allUrl(url).customPOST(obj);
 		},
