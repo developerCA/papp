@@ -1216,7 +1216,7 @@
 									</div>
 								</form>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6" ng-show="objeto.id > 0">
 								<div ng-show="divMetaDistribucionPlanificada"
 									class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionPlanificada"
@@ -1989,7 +1989,8 @@
 									</div>
 								</form>
 							</div>
-							<div class="col-md-6">
+							"<span>{{ objeto.id }}</span>"<br>
+							<div class="col-md-6" ng-show="objeto.id > 0">
 								<div ng-show="divMetaDistribucionPlanificada"
 									class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionPlanificada"

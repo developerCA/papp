@@ -114,6 +114,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	};
 
 	$scope.editarDistribucionPlanificado=function(){
+		if ($scope.objeto.id == 0) {
+			return;
+		}
 		$scope.divEditarDistribucion=true;
 		$scope.metaDistribucion('A');
 		$scope.divMetaDistribucionPlanificada=true;
@@ -1043,7 +1046,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if ($scope.detalles[$scope.mPlanificadaID].cantidad != $scope.detalles[$scope.mPlanificadaID].npValor) {
             SweetAlert.swal(
         		"Planificacion UE! - Actividad",
-        		"No coincide la Meta Planifica y la distribuida, tiene que redistribuirla.",
+        		"DEBE CREAR EL CRONOGRAMA DE META PLANIFICADO.",
         		"error"
     		);
             return;
@@ -1051,7 +1054,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
 	        SweetAlert.swal(
 	    		"Planificacion UE! - Actividad",
-	    		"No coincide la Meta Ajustada y la distribuida, tiene que redistribuirla.",
+	    		"DEBE CREAR EL CRONOGRAMA DE META AJUSTADA.",
 	    		"error"
 			);
 	        return;
@@ -1356,6 +1359,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					$scope.esnuevo = false;
 	    			$scope.nodeActivo.nodePadre.iscargado = false;
 	    			$scope.cargarHijos($scope.nodeActivo.nodePadre);
+	    			$scope.editarDistribucionPlanificado();
 				} else {
 					SweetAlert.swal("Planificacion UE! - Subtarea", resp.mensajes.msg, "error");
 				}
@@ -1364,7 +1368,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if ($scope.detalles[$scope.mPlanificadaID].cantidad != $scope.detalles[$scope.mPlanificadaID].npValor) {
             SweetAlert.swal(
         		"Planificacion UE! - Subtarea",
-        		"No coincide la Meta Planifica y la distribuida, tiene que redistribuirla.",
+        		"DEBE CREAR EL CRONOGRAMA DE META PLANIFICADO.",
         		"error"
     		);
             return;
@@ -1372,7 +1376,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
 	        SweetAlert.swal(
 	    		"Planificacion UE! - Subtarea",
-	    		"No coincide la Meta Ajustada y la distribuida, tiene que redistribuirla.",
+	    		"DEBE CREAR EL CRONOGRAMA DE META AJUSTADA.",
 	    		"error"
 			);
 	        return;
@@ -1429,12 +1433,13 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if ($scope.esnuevo) {
 	    	PlanificacionUEFactory.guardarActividades("SI",tObj).then(function(resp){
 	    		$scope.divPlanificacionAnual = false;
-				if (resp.estado) {//*subitemunidadacumulador
+				if (resp.estado) {
 					$scope.objeto.id = resp.json.subitemunidad.id;
 					for (var i = 0; i < $scope.detalles.length; i++) {
 						$scope.detalles[i].id.id = resp.json.subitemunidad.id;
 					}
 					$scope.esnuevo = false;
+	    			$scope.editarDistribucionPlanificado();
 				} else {
 					SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
 				}
