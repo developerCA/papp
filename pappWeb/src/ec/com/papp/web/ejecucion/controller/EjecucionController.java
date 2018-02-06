@@ -165,9 +165,6 @@ public class EjecucionController {
 				OrdengastolineaTO ordengastolineaTO2=new OrdengastolineaTO();
 				ordengastolineaTO2.setNivelactid(ordengastolineaTO.getNivelactid());
 				ordengastolineaTO2.getId().setId(ordengastolineaTO.getId().getId());
-				OrdengastoTO ordengastoTO=new OrdengastoTO();
-				ordengastoTO.setCertificacion(new CertificacionTO());
-				ordengastolineaTO2.setOrdengasto(ordengastoTO);
 				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO2);
 				if(ordengastolineaTOs.size()==0){
 					accion = (ordengastolineaTO.getId()==null)?"crear":"actualizar";
@@ -176,6 +173,8 @@ public class EjecucionController {
 					//Traigo la lista de ordengastolinea
 					OrdengastolineaTO ordengastolineaTO3=new OrdengastolineaTO();
 					ordengastolineaTO3.getId().setId(ordengastolineaTO.getId().getId());
+					OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(ordengastolineaTO.getId().getId());
+					ordengastolineaTO3.setOrdengasto(ordengastoTO);
 					Collection<OrdengastolineaTO> ordengastolineaTOs2=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO3);
 					jsonObject.put("ordengastolinea", (JSONArray)JSONSerializer.toJSON(ordengastolineaTOs2,ordengastolineaTO.getJsonConfig()));
 				}
@@ -575,7 +574,9 @@ public class EjecucionController {
 				//traigo las ordeneslineas las traigo
 				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
 				ordengastolineaTO.setOrdengasto(ordengastoTO);
+				ordengastolineaTO.getId().setId(ordengastoTO.getId());
 				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO);
+				log.println("lineas "+ ordengastolineaTOs.size());
 				jsonObject.put("ordengastolineas", (JSONArray)JSONSerializer.toJSON(ordengastolineaTOs,ordengastolineaTO.getJsonConfig()));
 				jsonObject.put("ordengasto", (JSONObject)JSONSerializer.toJSON(ordengastoTO,ordengastoTO.getJsonConfig()));
 			}
@@ -590,6 +591,7 @@ public class EjecucionController {
 			if(clase.equals("ordendevengo")){
 				OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
 				ordendevengoTO = UtilSession.planificacionServicio.transObtenerOrdendevengoTO(id);
+				log.println("orden de gasto atada: " + ordendevengoTO.getOrdendevengoordengastoid());
 				if(ordendevengoTO.getOrdendevengoordengastoid()!=null){
 					ordendevengoTO.setNpordengastoedit(ordendevengoTO.getOrdengasto().getCodigo());
 					ordendevengoTO.setNpordengastovalor(ordendevengoTO.getOrdengasto().getValortotal());

@@ -677,16 +677,16 @@ public class PlanificacionController {
 					if((ponderacion.doubleValue()+tareaunidadTO.getPonderacion().doubleValue()-tareaunidadTO.getNpponderacion())<=100){
 						//Si va a inactivar valido que no hayan hijos
 						if(tareaunidadTO.getId()!=null && tareaunidadTO.getId().longValue()!=0 && tareaunidadTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
-							NivelprogramaTO nivelprogramaTO=new NivelprogramaTO();
-							nivelprogramaTO.setTablarelacionid(tareaunidadTO.getId());
-							nivelprogramaTO.setNivelprogramaejerfiscalid(tareaunidadTO.getTareaunidadejerciciofiscalid());
-							nivelprogramaTO.setTipo(MensajesAplicacion.getString("forumlacion.tipo.tarea"));
-							nivelprogramaTO=UtilSession.planificacionServicio.transObtenerNivelprogramaTO(nivelprogramaTO);
-							NivelprogramaTO hijo=new NivelprogramaTO();
-							hijo.setId(nivelprogramaTO.getId());
+							NivelactividadTO nivelactividadTO=new NivelactividadTO();
+							nivelactividadTO.setTablarelacionid(tareaunidadTO.getId());
+							nivelactividadTO.setNivelactividadejerfiscalid(tareaunidadTO.getTareaunidadejerciciofiscalid());
+							nivelactividadTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.tarea"));
+							nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(nivelactividadTO);
+							NivelactividadTO hijo=new NivelactividadTO();
+							hijo.setId(nivelactividadTO.getId());
 							hijo.setEstado(MensajesAplicacion.getString("estado.activo"));
-							Collection<NivelprogramaTO> nivelprogramaTOs=UtilSession.planificacionServicio.transObtenerNivelprogramaArbol(hijo);
-							if(nivelprogramaTOs.size()>0) {
+							Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtenerNivelactividadArbol(hijo);
+							if(nivelactividadTOs.size()>0) {
 								mensajes.setMsg(MensajesWeb.getString("error.hijo.existe"));
 								mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 								grabar=false;
@@ -721,7 +721,7 @@ public class PlanificacionController {
 					nivelactividadTO.setNivelactividadunidadid(subtareaunidadTO.getSubtareaunidadunidadid());
 					nivelactividadTO.setNivelactividadejerfiscalid(subtareaunidadTO.getSubtareaunidadejerfiscalid());
 					Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
-					log.println("tareaunidadTOs: " + resultado.size());
+					log.println("resultado: " + resultado.size());
 					if(resultado.size()>0){
 						for(NivelactividadTO nivelactividadTO2:resultado) {
 							if((subtareaunidadTO.getId()!=null && subtareaunidadTO.getId().longValue()!=0) && nivelactividadTO2.getId().longValue()!=subtareaunidadTO.getId().longValue() && nivelactividadTO2.getNpcodigo().equals(subtareaunidadTO.getCodigo())) {
@@ -745,16 +745,18 @@ public class PlanificacionController {
 					if((ponderacion.doubleValue()+subtareaunidadTO.getPonderacion().doubleValue()-subtareaunidadTO.getNpponderacion())<=100){
 						//Si va a inactivar valido que no hayan hijos
 						if(subtareaunidadTO.getId()!=null && subtareaunidadTO.getId().longValue()!=0 && subtareaunidadTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
-							NivelprogramaTO nivelprogramaTO=new NivelprogramaTO();
-							nivelprogramaTO.setTablarelacionid(subtareaunidadTO.getId());
-							nivelprogramaTO.setNivelprogramaejerfiscalid(subtareaunidadTO.getSubtareaunidadejerfiscalid());
-							nivelprogramaTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.subtarea"));
-							nivelprogramaTO=UtilSession.planificacionServicio.transObtenerNivelprogramaTO(nivelprogramaTO);
-							NivelprogramaTO hijo=new NivelprogramaTO();
-							hijo.setId(nivelprogramaTO.getId());
+							NivelactividadTO nivelactividadTO=new NivelactividadTO();
+							nivelactividadTO.setTablarelacionid(subtareaunidadTO.getId());
+							nivelactividadTO.setNivelactividadejerfiscalid(subtareaunidadTO.getSubtareaunidadejerfiscalid());
+							nivelactividadTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.subtarea"));
+							nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(nivelactividadTO);
+							log.println("nivel actividad: " + nivelactividadTO.getId());
+							NivelactividadTO hijo=new NivelactividadTO();
+							hijo.setId(nivelactividadTO.getId());
 							hijo.setEstado(MensajesAplicacion.getString("estado.activo"));
-							Collection<NivelprogramaTO> nivelprogramaTOs=UtilSession.planificacionServicio.transObtenerNivelprogramaArbol(hijo);
-							if(nivelprogramaTOs.size()>0) {
+							Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtenerNivelactividadArbol(hijo);
+							log.println("hijos existentes "+ nivelactividadTOs.size());
+							if(nivelactividadTOs.size()>0) {
 								mensajes.setMsg(MensajesWeb.getString("error.hijo.existe"));
 								mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 								grabar=false;
@@ -793,25 +795,27 @@ public class PlanificacionController {
 				ItemunidadTO itemunidadTO = gson.fromJson(new StringReader(objeto), ItemunidadTO.class);
 				accion = (itemunidadTO.getId()==null)?"crear":"actualizar";
 				//Si va a inactivar valido que no hayan hijos
+				boolean grabar=true;
 				if(itemunidadTO.getId()!=null && itemunidadTO.getId().longValue()!=0 && itemunidadTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
-					NivelprogramaTO nivelprogramaTO=new NivelprogramaTO();
-					nivelprogramaTO.setTablarelacionid(itemunidadTO.getId());
-					nivelprogramaTO.setNivelprogramaejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
-					nivelprogramaTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.item"));
-					nivelprogramaTO=UtilSession.planificacionServicio.transObtenerNivelprogramaTO(nivelprogramaTO);
-					NivelprogramaTO hijo=new NivelprogramaTO();
-					hijo.setId(nivelprogramaTO.getId());
+					NivelactividadTO nivelactividadTO=new NivelactividadTO();
+					nivelactividadTO.setTablarelacionid(itemunidadTO.getId());
+					nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
+					nivelactividadTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.item"));
+					nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(nivelactividadTO);
+					NivelactividadTO hijo=new NivelactividadTO();
+					hijo.setId(nivelactividadTO.getId());
 					hijo.setEstado(MensajesAplicacion.getString("estado.activo"));
-					Collection<NivelprogramaTO> nivelprogramaTOs=UtilSession.planificacionServicio.transObtenerNivelprogramaArbol(hijo);
-					if(nivelprogramaTOs.size()>0) {
+					Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtenerNivelactividadArbol(hijo);
+					if(nivelactividadTOs.size()>0) {
 						mensajes.setMsg(MensajesWeb.getString("error.hijo.existe"));
 						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						grabar=false;
 					}
-					else {
-						UtilSession.planificacionServicio.transCrearModificarItemunidad(itemunidadTO);
-						id=itemunidadTO.getNpid().toString();
-						jsonObject.put("itemunidad", (JSONObject)JSONSerializer.toJSON(itemunidadTO,itemunidadTO.getJsonConfig()));
-					}
+				}
+				if(grabar) {
+					UtilSession.planificacionServicio.transCrearModificarItemunidad(itemunidadTO);
+					id=itemunidadTO.getNpid().toString();
+					jsonObject.put("itemunidad", (JSONObject)JSONSerializer.toJSON(itemunidadTO,itemunidadTO.getJsonConfig()));
 				}
 			}
 
@@ -823,38 +827,25 @@ public class PlanificacionController {
 				NivelactividadTO nivelactividadTO=new NivelactividadTO();
 				nivelactividadTO.setNivelactividadejerfiscalid(subitemunidadTO.getSubitemunidadejerfiscalid());
 				nivelactividadTO.setNivelactividadpadreid(subitemunidadTO.getPadre());
+				log.println("eje: "+ subitemunidadTO.getSubitemunidadejerfiscalid()+" padre " + subitemunidadTO.getPadre());
 				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
+				log.println("niveles: " + resultado.size());
 				boolean existesubiten=false;
 				for(NivelactividadTO nivelactividadTO2:resultado){
-					String [] descripcion=nivelactividadTO2.getDescripcionexten().split("-");
-					if(descripcion[0].replaceAll(" ", "").equals(subitemunidadTO.getNpcodigo())){
-						existesubiten=true;
-						break;
+					log.println("descripcion " + nivelactividadTO2.getDescripcionexten());
+					if(nivelactividadTO2.getDescripcionexten()!=null) {
+						String [] descripcion=nivelactividadTO2.getDescripcionexten().split("-");
+						if(descripcion[0].replaceAll(" ", "").equals(subitemunidadTO.getNpcodigo())){
+							existesubiten=true;
+							break;
+						}
 					}
 				}
 				if(!existesubiten){
-					//Si va a inactivar valido que no hayan hijos
-					if(subitemunidadTO.getId()!=null && subitemunidadTO.getId().longValue()!=0 && subitemunidadTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
-						NivelprogramaTO nivelprogramaTO=new NivelprogramaTO();
-						nivelprogramaTO.setTablarelacionid(subitemunidadTO.getId());
-						nivelprogramaTO.setNivelprogramaejerfiscalid(subitemunidadTO.getSubitemunidadejerfiscalid());
-						nivelprogramaTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.subitem"));
-						nivelprogramaTO=UtilSession.planificacionServicio.transObtenerNivelprogramaTO(nivelprogramaTO);
-						NivelprogramaTO hijo=new NivelprogramaTO();
-						hijo.setId(nivelprogramaTO.getId());
-						hijo.setEstado(MensajesAplicacion.getString("estado.activo"));
-						Collection<NivelprogramaTO> nivelprogramaTOs=UtilSession.planificacionServicio.transObtenerNivelprogramaArbol(hijo);
-						if(nivelprogramaTOs.size()>0) {
-							mensajes.setMsg(MensajesWeb.getString("error.hijo.existe"));
-							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-						}
-						else {
-							UtilSession.planificacionServicio.transCrearModificarSubitemunidad(subitemunidadTO);
-							id=subitemunidadTO.getNpid().toString();
-							subitemunidadTO.setId(subitemunidadTO.getNpid());
-							jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
-						}
-					}
+					UtilSession.planificacionServicio.transCrearModificarSubitemunidad(subitemunidadTO);
+					id=subitemunidadTO.getNpid().toString();
+					subitemunidadTO.setId(subitemunidadTO.getNpid());
+					jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				}
 				else{
 					mensajes.setMsg(MensajesWeb.getString("advertencia.crearsubitem"));
@@ -1038,7 +1029,7 @@ public class PlanificacionController {
 				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorExiste);
 				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
 				subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+1));
-				subtareaunidadacumuladorTO.getId().setId(id);
+				//subtareaunidadacumuladorTO.getId().setId(id);
 				subtareaunidadacumuladorTO.setTotal(0.0);
 				subtareaunidadacumuladorTO.setNpValor(0.0);
 				subtareaunidadacumuladorTO.setValor(100.0);
@@ -1046,7 +1037,7 @@ public class PlanificacionController {
 				subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);
 				
 				subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
-				subtareaunidadacumuladorTO.getId().setId(id);
+				//subtareaunidadacumuladorTO.getId().setId(id);
 				subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
 				subtareaunidadacumuladorTO.setNpValor(0.0);
 				subtareaunidadacumuladorTO.setTotal(0.0);
@@ -1139,20 +1130,20 @@ public class PlanificacionController {
 				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=new ArrayList<>();
 				subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+1));
-				subitemunidadacumuladorTO.getId().setId(id);
+				//subitemunidadacumuladorTO.getId().setId(id);
 				subitemunidadacumuladorTO.setNpvalor(0.0);
 				subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
 				subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
 				
 				subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
-				subitemunidadacumuladorTO.getId().setId(id);
+				//subitemunidadacumuladorTO.getId().setId(id);
 				subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
 				subitemunidadacumuladorTO.setNpvalor(0.0);
 				subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 				subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
 
 				subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
-				subitemunidadacumuladorTO.getId().setId(id);
+				//subitemunidadacumuladorTO.getId().setId(id);
 				subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+3));
 				subitemunidadacumuladorTO.setNpvalor(0.0);
 				subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.devengo"));
@@ -1375,14 +1366,14 @@ public class PlanificacionController {
 					actividadunidadacumuladorExiste.getId().setId(id);
 					Collection<ActividadunidadacumuladorTO> actividadunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerActividadunidadacumulador(actividadunidadacumuladorExiste);
 					actividadunidadacumuladorTO.getId().setAcumid(Long.valueOf(actividadunidadacumuladorExistentes.size()+1));
-					actividadunidadacumuladorTO.getId().setId(id);
+					//actividadunidadacumuladorTO.getId().setId(id);
 					actividadunidadacumuladorTO.getId().setUnidadid(Long.valueOf(parameters.get("unidadid")));
 					actividadunidadacumuladorTO.setNpValor(0.0);
 					actividadunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
 					actividadunidadacumuladorTOs.add(actividadunidadacumuladorTO);
 					
 					actividadunidadacumuladorTO=new ActividadunidadacumuladorTO();
-					actividadunidadacumuladorTO.getId().setId(id);
+					//actividadunidadacumuladorTO.getId().setId(id);
 					actividadunidadacumuladorTO.getId().setUnidadid(Long.valueOf(parameters.get("unidadid")));
 					actividadunidadacumuladorTO.getId().setAcumid(Long.valueOf(actividadunidadacumuladorExistentes.size()+2));
 					actividadunidadacumuladorTO.setNpValor(0.0);
@@ -1435,13 +1426,13 @@ public class PlanificacionController {
 					subtareaunidadacumuladorExiste.getId().setId(id);
 					Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorExiste);
 					subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+1));
-					subtareaunidadacumuladorTO.getId().setId(id);
+					//subtareaunidadacumuladorTO.getId().setId(id);
 					subtareaunidadacumuladorTO.setNpValor(0.0);
 					subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
 					subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);
 					
 					subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
-					subtareaunidadacumuladorTO.getId().setId(id);
+					//subtareaunidadacumuladorTO.getId().setId(id);
 					subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
 					subtareaunidadacumuladorTO.setNpValor(0.0);
 					subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
@@ -1494,20 +1485,20 @@ public class PlanificacionController {
 					subitemunidadacumuladorExiste.getId().setId(id);
 					Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorExiste);
 					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+1));
-					subitemunidadacumuladorTO.getId().setId(id);
+					//subitemunidadacumuladorTO.getId().setId(id);
 					subitemunidadacumuladorTO.setNpvalor(0.0);
 					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
 					subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
 					
 					subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
-					subitemunidadacumuladorTO.getId().setId(id);
+					//subitemunidadacumuladorTO.getId().setId(id);
 					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
 					subitemunidadacumuladorTO.setNpvalor(0.0);
 					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 					subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
 
 					subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
-					subitemunidadacumuladorTO.getId().setId(id);
+					//subitemunidadacumuladorTO.getId().setId(id);
 					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
 					subitemunidadacumuladorTO.setNpvalor(0.0);
 					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.devengo"));
