@@ -1015,77 +1015,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		});
 	};
 
-	$scope.form = {
-        submit: function(form,name) {
-            var firstError = null; //IVAN
-            if (form.$invalid) {
-                var field = null, firstError = null;
-                for (field in form) {
-                    if (field[0] != '$') {
-                        if (firstError === null && !form[field].$valid) {
-                            firstError = form[field].$name;
-                        }
-                        if (form[field].$pristine) {
-                            form[field].$dirty = true;
-                        }
-                    }
-                }
-                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                return;
-            } else {
-            	eval("$scope.submit" + name + "(form);");
-            }
-        },
-        reset: function(form) {
-            form.$setPristine(true);
-            $scope.limpiarEdicion();
-        }
-    };
-
-	$scope.submitformActividad = function(form) {
-		if ($scope.detalles[$scope.mPlanificadaID].cantidad != $scope.detalles[$scope.mPlanificadaID].npValor) {
-            SweetAlert.swal(
-        		"Planificacion UE! - Actividad",
-        		"DEBE CREAR EL CRONOGRAMA DE META PLANIFICADO.",
-        		"error"
-    		);
-            return;
-		}
-		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
-	        SweetAlert.swal(
-	    		"Planificacion UE! - Actividad",
-	    		"DEBE CREAR EL CRONOGRAMA DE META AJUSTADA.",
-	    		"error"
-			);
-	        return;
-		}
-    	var tObj={};
-    	tObj=Object.assign(tObj, $scope.objeto);
-    	tObj.npFechainicio=toStringDate(tObj.npFechainicio);
-    	tObj.npFechafin=toStringDate(tObj.npFechafin);
-    	tObj.actividadunidadacumulador=$scope.detalles;
-    	PlanificacionUEFactory.guardarActividades("AC",tObj).then(function(resp){
-			if (resp.estado) {
-				form.$setPristine(true);
-				$scope.limpiarEdicion();
-	            //$scope.limpiar();
-	            SweetAlert.swal("Planificacion UE! - Actividad", "Registro registrado satisfactoriamente!", "success");
-	            if ($scope.nodeActivo.siEditar == undefined) {
-	            	$scope.cargarPlanificacionAnual($scope.planificacionUE);
-	            }
-			} else {
-				SweetAlert.swal("Planificacion UE! - Actividad", resp.mensajes.msg, "error");
-	    		$scope.divPlanificacionAnual = false;
-			}
-		});
-	}
-
-	$scope.resetformActividad = function(form) {
-        //$scope.myModel = angular.copy($scope.master);
-        form.$setPristine(true);
-        $scope.limpiarEdicion();
-	}
-
 	$scope.calcularPorcientoP = function(index) {
 		$scope.modificarMetaPlanificada();
 		distribuirValor(
@@ -1294,6 +1223,77 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         $scope.limpiarEdicion();
 	}
 
+	$scope.form = {
+        submit: function(form,name) {
+            var firstError = null; //IVAN
+            if (form.$invalid) {
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+            	eval("$scope.submit" + name + "(form);");
+            }
+        },
+        reset: function(form) {
+            form.$setPristine(true);
+            $scope.limpiarEdicion();
+        }
+    };
+
+	$scope.submitformActividad = function(form) {
+		if ($scope.detalles[$scope.mPlanificadaID].cantidad != $scope.detalles[$scope.mPlanificadaID].npValor) {
+            SweetAlert.swal(
+        		"Planificacion UE! - Actividad",
+        		"DEBE CREAR EL CRONOGRAMA DE META PLANIFICADO.",
+        		"error"
+    		);
+            return;
+		}
+		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
+	        SweetAlert.swal(
+	    		"Planificacion UE! - Actividad",
+	    		"DEBE CREAR EL CRONOGRAMA DE META AJUSTADA.",
+	    		"error"
+			);
+	        return;
+		}
+    	var tObj={};
+    	tObj=Object.assign(tObj, $scope.objeto);
+    	tObj.npFechainicio=toStringDate(tObj.npFechainicio);
+    	tObj.npFechafin=toStringDate(tObj.npFechafin);
+    	tObj.actividadunidadacumulador=$scope.detalles;
+    	PlanificacionUEFactory.guardarActividades("AC",tObj).then(function(resp){
+			if (resp.estado) {
+				form.$setPristine(true);
+				$scope.limpiarEdicion();
+	            //$scope.limpiar();
+	            SweetAlert.swal("Planificacion UE! - Actividad", "Registro registrado satisfactoriamente!", "success");
+	            if ($scope.nodeActivo.siEditar == undefined) {
+	            	$scope.cargarPlanificacionAnual($scope.planificacionUE);
+	            }
+			} else {
+				SweetAlert.swal("Planificacion UE! - Actividad", resp.mensajes.msg, "error");
+	    		$scope.divPlanificacionAnual = false;
+			}
+		});
+	}
+
+	$scope.resetformActividad = function(form) {
+        //$scope.myModel = angular.copy($scope.master);
+        form.$setPristine(true);
+        $scope.limpiarEdicion();
+	}
+
 	$scope.submitformSubActividad = function(form) {
     	var tObj=$scope.objeto;
     	//tObj.actividadunidadacumulador=$scope.detalles;
@@ -1390,6 +1390,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.limpiarEdicion();
 	            //$scope.limpiar();
 	            SweetAlert.swal("Planificacion UE! - Subtarea", "Registro registrado satisfactoriamente!", "success");
+    			$scope.nodeActivo.nodePadre.iscargado = false;
+    			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 			} else {
 				SweetAlert.swal("Planificacion UE! - Subtarea", resp.mensajes.msg, "error");
 	    		$scope.divPlanificacionAnual = false;

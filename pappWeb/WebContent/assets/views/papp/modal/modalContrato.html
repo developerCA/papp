@@ -16,7 +16,7 @@
 					        <span class="symbol required"></span>
 					    </label>
 					    <input type="text" placeholder="Escriba un proveedor c&oacute;digo"
-					        class="form-control" name="codigo" ng-model="objeto.codigo"
+					        class="form-control" name="codigo" ng-model="objeto.npproveedorcodigo"
 					        required ng-disabled="true" format="number">
 					    <span class="error text-small block"
 					        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
@@ -145,11 +145,11 @@
 					<div class="form-group"
 					    ng-class="{'has-error':Form.fechafin.$dirty && Form.fechafin.$invalid, 'has-success':Form.fechafin.$valid}">
 					    <label class="control-label">
-					        Fecha Fin (NO LLEGA)
+					        Fecha Fin
 					        <span class="symbol required"></span>
 					    </label>
 					    <input type="text" placeholder="Escriba un fecha fin"
-					        class="form-control" name="fechafin" ng-model="objeto.fechafin"
+					        class="form-control" name="fechafin" ng-model="objeto.npfechafin"
 					        required ng-disabled="true">
 					    <span class="error text-small block"
 					        ng-if="Form.fechafin.$dirty && Form.fechafin.$invalid">
