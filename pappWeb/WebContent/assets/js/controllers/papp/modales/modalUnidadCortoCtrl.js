@@ -14,7 +14,7 @@ app.controller('ModalUnidadCortoController', [ "$scope","$rootScope","$uibModalI
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		unidadFactory.traerFiltro(
+		unidadFactory.traerPlanificacionFiltro(
 				pagina,
 				$rootScope.ejefiscal,
 				null,
@@ -29,11 +29,11 @@ app.controller('ModalUnidadCortoController', [ "$scope","$rootScope","$uibModalI
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		unidadFactory.traerUnidadesFiltro(
+		unidadFactory.traerPlanificacionFiltro(
 			pagina,
 			$rootScope.ejefiscal,
-			$scope.nombreFiltro,
 			$scope.codigoFiltro,
+			$scope.nombreFiltro,
 			"A"
 		).then(function(resp){
 			if (resp.meta)

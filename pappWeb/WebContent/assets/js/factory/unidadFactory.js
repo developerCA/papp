@@ -26,6 +26,25 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(URL).getList();
 		},
 
+		traerPlanificacionFiltro: function(
+			pagina,
+			idEjerciciofiscal,
+			codigo,
+			nombre,
+			estado
+		) {
+			var URL = "planificacion/consultar/planificacion/" +
+				"pagina=" + pagina +
+				"&filas=10" +
+				"&ejerciciofiscal=" + idEjerciciofiscal;
+
+			if(nombre!=null && nombre != "") URL += "&nombre=" + nombre;	
+			if(codigo!=null && codigo != "") URL += "&codigopresup=" + codigo;	
+			if(estado!=null && estado != "" ) URL += "&estado=" + estado;
+
+			return Restangular.allUrl(URL).getList();
+		},
+
 //** Unidades Arbol
 		traerUnidadesArbol : function(pagina,estructuraorganica,estado) {
 			  return Restangular.allUrl("estructuraorganica/consultar/unidadarbol/pagina="+pagina+"&unidadarbolerganicaid="+estructuraorganica+"&estado="+estado).getList();
