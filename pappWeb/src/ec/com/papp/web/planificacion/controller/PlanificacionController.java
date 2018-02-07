@@ -822,6 +822,7 @@ public class PlanificacionController {
 			//Subitem (Planificacion anual - modificar subitem)
 			else if(clase.equals("subitemunidad")){
 				SubitemunidadTO subitemunidadTO = gson.fromJson(new StringReader(objeto), SubitemunidadTO.class);
+				log.println("detalle**: " + subitemunidadTO.getSubitemunidadejerfiscalid()+"--"+ subitemunidadTO.getNpcodigosubitem()+" - " +subitemunidadTO.getNpnombresubitem());
 				accion = (subitemunidadTO.getId()==null)?"crear":"actualizar";
 				//Verifico que no exista ya creado otro subitem unidad del mismo subitem en este nivel
 				NivelactividadTO nivelactividadTO=new NivelactividadTO();
@@ -835,13 +836,20 @@ public class PlanificacionController {
 					log.println("descripcion " + nivelactividadTO2.getDescripcionexten());
 					if(nivelactividadTO2.getDescripcionexten()!=null) {
 						String [] descripcion=nivelactividadTO2.getDescripcionexten().split("-");
-						if(descripcion[0].replaceAll(" ", "").equals(subitemunidadTO.getNpcodigo())){
+						if((subitemunidadTO.getId()==null || subitemunidadTO.getId().longValue()==0) && (descripcion[0].equals(subitemunidadTO.getNpcodigosubitem()) && descripcion[1].equals(subitemunidadTO.getNpnombresubitem()))){
+							existesubiten=true;
+							break;
+						}
+						else if((subitemunidadTO.getId()!=null && subitemunidadTO.getId().longValue()!=0) 
+								&& (subitemunidadTO.getId().longValue()!=nivelactividadTO2.getTablarelacionid().longValue())
+								&& (descripcion[0].equals(subitemunidadTO.getNpcodigosubitem()) && descripcion[1].equals(subitemunidadTO.getNpnombresubitem()))){
 							existesubiten=true;
 							break;
 						}
 					}
 				}
 				if(!existesubiten){
+					log.println("detalle: " + subitemunidadTO.getNpcodigosubitem()+" - " +subitemunidadTO.getNpnombresubitem());
 					UtilSession.planificacionServicio.transCrearModificarSubitemunidad(subitemunidadTO);
 					id=subitemunidadTO.getNpid().toString();
 					subitemunidadTO.setId(subitemunidadTO.getNpid());
@@ -1472,6 +1480,8 @@ public class PlanificacionController {
 				log.println("va a editar el subitem unidad");
 				SubitemunidadTO subitemunidadTO = UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
 				subitemunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
+				subitemunidadTO.setNpcodigosubitem(subitemunidadTO.getSubitem().getCodigo());
+				subitemunidadTO.setNpnombresubitem(subitemunidadTO.getSubitem().getNombre());
 				jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				//traigo los datos de actividadunidadacumulador
 				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();

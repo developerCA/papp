@@ -124,16 +124,29 @@ public class EjecucionController {
 				certificacionlineaTO2.getId().setId(certificacionlineaTO.getId().getId());
 				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtenerCertificacionlinea(certificacionlineaTO2);
 				log.println("certificaciones: " + certificacionlineaTOs.size());
-				if(certificacionlineaTOs.size()==0){
+				boolean grabar=true;
+				if(certificacionlineaTOs.size()>0){
+					for(CertificacionlineaTO certificacionlineaTO3:certificacionlineaTOs) {
+						if((certificacionlineaTO.getId().getId()!=null && certificacionlineaTO.getId().getId().longValue()!=0) && certificacionlineaTO3.getId().getId().longValue()!=certificacionlineaTO.getId().getId().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if(certificacionlineaTO.getId().getClass()==null) {
+							grabar=false;
+							break;
+						}
+					}
+				}
+				if(!grabar){
+					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else{
 					accion = (certificacionlineaTO.getId()==null)?"crear":"actualizar";
 					UtilSession.planificacionServicio.transCrearModificarCertificacionlinea(certificacionlineaTO);
 					id=certificacionlineaTO.getId().getId().toString() + certificacionlineaTO.getId().getLineaid();
 					//Traiga la lista de cetificacionlinea
 					ConsultasUtil.obtenercertificacion(certificacionlineaTO.getId().getId(), jsonObject);
-				}
-				else{
-					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
 
@@ -281,21 +294,33 @@ public class EjecucionController {
 				log.println("busca la palabra contrato: " + ordengastoTO.getNpnombretipodocumento().indexOf("CONTRATO") + "-" + ordengastoTO.getNpnombretipodocumento().indexOf("contrato")+"-"+ordengastoTO.getNpnombretipodocumento().indexOf("Contrato"));
 		        if(ordengastoTO.getNpnombretipodocumento().indexOf("CONTRATO")!=-1 || ordengastoTO.getNpnombretipodocumento().indexOf("contrato")!=-1 ||ordengastoTO.getNpnombretipodocumento().indexOf("Contrato")!=-1) {
 					ContratoTO contratoTO=new ContratoTO();
+					log.println("datos proveedor " + ordengastoTO.getNpproveedornombre());
 					if(ordengastoTO.getOrdengastocontratoid()!=null && ordengastoTO.getOrdengastocontratoid().longValue()!=0) {
 						contratoTO=UtilSession.planificacionServicio.transObtenerContratoTO(ordengastoTO.getOrdengastocontratoid());
 						contratoTO.setSocionegocio(new SocionegocioTO());
-						if(contratoTO!=null && contratoTO.getId()!=null) {
+						if(contratoTO!=null && (contratoTO.getId()!=null || contratoTO.getId().longValue()!=0)) {
 							if(contratoTO.getNpfechainicio()!=null)
 								contratoTO.setFechainicio(UtilGeneral.parseStringToDate(contratoTO.getNpfechainicio()));
+							if(contratoTO.getContratoproveedorid()!=null) {
+								contratoTO.setNpproveedor(contratoTO.getSocionegocio().getNombremostrado());
+								contratoTO.setNpproveedorcodigo(contratoTO.getSocionegocio().getCodigo());
+							}
 						}
 						else {
 							contratoTO=new ContratoTO();
-							contratoTO.setContratoproveedorid(ordengastoTO.getOrdengastoproveedorid());
+							if(ordengastoTO.getOrdengastoproveedorid()!=null) {
+								contratoTO.setContratoproveedorid(ordengastoTO.getOrdengastoproveedorid());
+								contratoTO.setNpproveedor(ordengastoTO.getNpproveedornombre());
+								contratoTO.setNpproveedorcodigo(ordengastoTO.getNpproveedorcodigo());
+								contratoTO.setEstado(MensajesAplicacion.getString("estado.activo"));
+							}
 						}
 					}
 					else {
 						contratoTO=new ContratoTO();
 						contratoTO.setContratoproveedorid(ordengastoTO.getOrdengastoproveedorid());
+						contratoTO.setNpproveedor(ordengastoTO.getNpproveedornombre());
+						contratoTO.setNpproveedorcodigo(ordengastoTO.getNpproveedorcodigo());
 						contratoTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 					}
 					jsonObject.put("contrato", (JSONObject)JSONSerializer.toJSON(contratoTO,contratoTO.getJsonConfigedicion()));
@@ -594,6 +619,7 @@ public class EjecucionController {
 				log.println("orden de gasto atada: " + ordendevengoTO.getOrdendevengoordengastoid());
 				if(ordendevengoTO.getOrdendevengoordengastoid()!=null){
 					ordendevengoTO.setNpordengastoedit(ordendevengoTO.getOrdengasto().getCodigo());
+					log.println("valor del gasto " + ordendevengoTO.getOrdengasto().getValortotal());
 					ordendevengoTO.setNpordengastovalor(ordendevengoTO.getOrdengasto().getValortotal());
 				}
 				//asigno las fechas
