@@ -93,6 +93,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			if (resp.estado) {
 			    $scope.objeto=resp.json.ordengasto;
 			}
+			$scope.
 			$scope.noeditar=false;
 			$scope.edicion=true;
 			$scope.nuevoar=true;

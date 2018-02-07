@@ -649,25 +649,6 @@
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.contratoid.$dirty && Form.contratoid.$invalid, 'has-success':Form.contratoid.$valid}">
-								    <label class="control-label">
-								        Contrato id
-								        <span class="symbol required"></span>
-								    </label>
-								    <input type="text" placeholder="Escriba un contrato id"
-								        class="form-control" name="contratoid" ng-model="objeto.contratoid"
-								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar && noeditar">
-								    <span class="error text-small block"
-								        ng-if="Form.contratoid.$dirty && Form.contratoid.$invalid">
-								        Incorrecto
-								    </span>
-								    <span class="success text-small"
-								        ng-if="Form.contratoid.$valid">
-								        Listo
-								    </span>
-								</div>
-								
-								<div class="form-group"
 								    ng-class="{'has-error':Form.valortotal.$dirty && Form.valortotal.$invalid, 'has-success':Form.valortotal.$valid}">
 								    <label class="control-label">
 								        Valor total

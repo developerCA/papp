@@ -12,7 +12,7 @@
 					<div class="form-group"
 					    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
 					    <label class="control-label">
-					        Proveedor C&oacute;digo (NO ESTA LLEGANDO)
+					        Proveedor C&oacute;digo
 					        <span class="symbol required"></span>
 					    </label>
 					    <input type="text" placeholder="Escriba un proveedor c&oacute;digo"
@@ -184,11 +184,11 @@
 					<div class="form-group"
 					    ng-class="{'has-error':Form.anticipo.$dirty && Form.anticipo.$invalid, 'has-success':Form.anticipo.$valid}">
 					    <label class="control-label">
-					        Anticipo (NO SE ENCUENTRA)
+					        Anticipo
 					        <span class="symbol required"></span>
 					    </label>
 					    <select class="form-control" name="anticipo"
-					        ng-model="objeto.anticipo" required>
+					        ng-model="anticipo" required>
 					        <option value="0" ng-selected="selected">(Ninguno)</option>
 					        <option value="1">Porcentaje</option>
 					        <option value="2">Valor</option>
@@ -211,7 +211,7 @@
 					    </label>
 					    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un anticipo porcentaje"
 					        class="form-control" name="anticipoporcentaje" ng-model="objeto.anticipoporcentaje"
-					        required ng-disabled="true">
+					        required ng-disabled="anticipo!=1">
 					    <span class="error text-small block"
 					        ng-if="Form.anticipoporcentaje.$dirty && Form.anticipoporcentaje.$invalid">
 					        Incorrecto
@@ -231,7 +231,7 @@
 					    <input type="text" numericOnly style="text-align:right;" decimal="2"
 					    	placeholder="Escriba un anticipo valor"
 					        class="form-control" name="anticipovalor" ng-model="objeto.anticipovalor"
-					        required ng-disabled="true">
+					        required ng-disabled="anticipo!=2">
 					    <span class="error text-small block"
 					        ng-if="Form.anticipovalor.$dirty && Form.anticipovalor.$invalid">
 					        Incorrecto

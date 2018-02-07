@@ -2,7 +2,9 @@
 
 app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInstance","objetoFuente","SweetAlert","$filter","ngTableParams","contratoFactory",
 	function($scope,$rootScope,$uibModalInstance,objetoFuente,SweetAlert,$filter,ngTableParams,contratoFactory) {
-	
+
+	$scope.anticipo=0;
+
 	$scope.editar=function() {
 		contratoFactory.editar(
 			objetoFuente
@@ -15,6 +17,7 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
 			}
 			$scope.objeto=resp.json.contrato;
 			$scope.objeto.npfechainicio = toDate($scope.objeto.npfechainicio);
+			$scope.anticipo=0;
 			$scope.noeditar=false;
 			$scope.edicion=true;
 			$scope.nuevoar=false;
