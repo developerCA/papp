@@ -24,28 +24,36 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 			if (resp.meta) {
 				$scope.data = resp;
 				$scope.arbol = JSON.parse(JSON.stringify($scope.data).split('"nombre":').join('"title":'));
-				//console.log($scope.arbol);
+				for (var i = 0; i < $scope.arbol.length; i++) {
+					$scope.arbol[i].nodeTipoPos = 1;
+				}
 			}
 		})
 	};
 
 	$scope.cargarHijos=function(node){
-		if (!node.iscargado)
-			console.log(node);
-			console.log(node.id);
-		    node.iscargado=true;
+		if (node.iscargado != undefined && node.iscargado == true) {
+			return;
+		}
+		//console.log(node);
+		//console.log(node.id);
+	    node.iscargado=true;
 
-		    mantenerIndicadoresFactory.traerHijos(
-	    		pagina,
-	    		$rootScope.ejefiscal,
-	    		node.id
-    		).then(function(resp){
-				var nodes=JSON.parse(JSON.stringify(resp).split('"nombre":').join('"title":'));
-				for (var i = 0; i < nodes.length; i++) {
-					nodes[i].indicadorpadreid = node.id;
-				}
-    			node.nodes=nodes;
-			})
+	    mantenerIndicadoresFactory.traerHijos(
+    		pagina,
+    		$rootScope.ejefiscal,
+    		node.id
+		).then(function(resp){
+			var nodes=JSON.parse(JSON.stringify(resp).split('"nombre":').join('"title":'));
+			for (var i = 0; i < nodes.length; i++) {
+				nodes[i].indicadorpadreid = node.id;
+				nodes[i].nodeTipoPos = node.nodeTipoPos + 1;
+			}
+			node.nodes=nodes;
+			for (var i = 0; i < node.nodes.length; i++) {
+				node.nodes[i].nodePadre = node;
+			}
+		})
 	}
 
 	$scope.$watch('data', function() {
@@ -189,7 +197,7 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
             	for (var i = 0; i < $scope.newobj.indicadormetodosTOs.length; i++) {
 					delete $scope.newobj.indicadormetodosTOs[i].editarcodigo;
 				}
-            	console.log($scope.newobj);
+            	//console.log($scope.newobj);
             	mantenerIndicadoresFactory.guardar($scope.newobj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
@@ -198,10 +206,15 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
 	 		             if ($scope.nodeActivo == undefined || $scope.nodeActivo == null || $scope.nodeActivo.indicadorpadreid === undefined) {
 	 		            	 $scope.consultar();
 	 		             } else {
-	        				 if ($scope.nodeActivo.iscargado) {
-	        					 $scope.nodeActivo.iscargado = false;
-	        				 }
-	        				 $scope.cargarHijos($scope.nodeActivo);
+	 		            	 if ($scope.nodeActivo.nodeTipoPos <= 2) {
+		 		            	 $scope.consultar();
+	 		            	 } else {
+	 		            		 $scope.nodeActivo = $scope.nodeActivo.nodePadre;
+		        				 if ($scope.nodeActivo.iscargado) {
+		        					 $scope.nodeActivo.iscargado = false;
+		        				 }
+		        				 $scope.cargarHijos($scope.nodeActivo);
+	 		            	 }
 	 		             }
 	 		             SweetAlert.swal("Mantener Indicadores!", "Registro grabado satisfactoriamente!", "success");
         			 }else{

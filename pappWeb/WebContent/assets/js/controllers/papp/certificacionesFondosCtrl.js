@@ -460,6 +460,9 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
         				 }
       				     $scope.objeto=resp.json.certificacion;
       					 SweetAlert.swal("Certificaciones de Fondos!", "Registro guardado satisfactoriamente!", "success");
+      		            form.$setPristine(true);
+      		            $scope.edicion=false;
+      		            $scope.objeto={};
         			 }else{
 	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
         			 }

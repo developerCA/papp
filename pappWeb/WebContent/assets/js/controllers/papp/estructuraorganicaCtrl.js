@@ -391,8 +391,13 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.eorganicainstitucionentid = obj.id.id;
+			//console.log(obj);
+
+			$scope.objeto.eorganicainstitucionid = obj.id.id;
+			$scope.objeto.npcodigoinstitucion = obj.npcodigoinstitucion;
+			$scope.objeto.npnombreinstitucion = obj.npnombreinstitucion;
+
+			$scope.objeto.eorganicainstitucionentid = obj.id.entid;
 			$scope.objeto.npcodigoentidad = obj.codigo;
 			$scope.objeto.npnombreentidad = obj.nombre;
 		}, function() {
