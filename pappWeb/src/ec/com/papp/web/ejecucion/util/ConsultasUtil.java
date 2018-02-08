@@ -26,6 +26,7 @@ import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.to.OrdenreversionTO;
 import ec.com.papp.planificacion.to.ReformaTO;
 import ec.com.papp.planificacion.to.ReformalineaTO;
+import ec.com.papp.planificacion.to.ReformametaTO;
 import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
@@ -911,6 +912,76 @@ public class ConsultasUtil {
 				totalMap.put("valor", resultado.getCountResults().toString());
 				log.println("totalresultado: " + totalRegistrosPagina);
 				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),reformaTO.getJsonConfigconsulta()));
+				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
+	/**
+	* Metodo que consulta las reformasmetas paginadas y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaReformametaPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+		String campo="";
+		ReformametaTO reformametaTO=new ReformametaTO();
+		try{
+			int pagina=1;
+			if(parameters.get("pagina")!=null)		
+				pagina=(Integer.valueOf(parameters.get("pagina"))).intValue();
+			int filas=20;
+			if(parameters.get("filas")!=null)
+				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
+			int primero=(pagina*filas)-filas;
+			campo="fechacreacion";
+			String[] columnas={campo};
+			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
+				campo=parameters.get("sidx");
+			reformametaTO.setFirstResult(primero);
+			reformametaTO.setMaxResults(filas);
+			String[] orderBy = columnas;
+			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
+				reformametaTO.setOrderByField(OrderBy.orderDesc(orderBy));
+			else
+				reformametaTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			Date fechaInicial=null;
+			Date fechaFinal=null;
+			if(parameters.get("fechainicial")!=null)
+				fechaInicial=UtilGeneral.parseStringToDate(parameters.get("fechainicial"));
+			if(parameters.get("fechafinal")!=null)
+				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal"));
+			if(parameters.get("fechainicial")!=null && parameters.get("fechafinal")==null)
+				fechaFinal=(new Date());
+			if(parameters.get("fechafinal")!=null && parameters.get("fechainicial")==null){
+				fechaFinal=UtilGeneral.parseStringToDate(parameters.get("fechafinal").replaceAll("%2F", "/"));
+				Calendar fechaactual = new GregorianCalendar();
+				fechaactual.setTime(fechaFinal);
+				int anio=fechaactual.get(Calendar.YEAR);
+				Calendar fechag=new GregorianCalendar(anio, 0, 1);
+				fechaInicial=fechag.getTime();
+			}
+			if(mensajes.getMsg()==null){
+				if(fechaInicial!=null)
+					reformametaTO.setRangoFechacreacion(new RangeValueTO<Date>(fechaInicial,fechaFinal));
+				if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
+					reformametaTO.setCodigo(parameters.get("codigo"));
+				if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
+					reformametaTO.setEstado(parameters.get("estado"));
+				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+					reformametaTO.setEjerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+				SearchResultTO<ReformametaTO> resultado=UtilSession.planificacionServicio.transObtenerReformametaPaginado(reformametaTO);
+				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+				HashMap<String, String>  totalMap=new HashMap<String, String>();
+				totalMap.put("valor", resultado.getCountResults().toString());
+				log.println("totalresultado: " + totalRegistrosPagina);
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),reformametaTO.getJsonConfigconsulta()));
 				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 			}
 		}catch (Exception e) {

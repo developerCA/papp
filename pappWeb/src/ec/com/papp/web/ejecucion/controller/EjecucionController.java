@@ -8,10 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-
 import org.hibernate.tools.commons.to.OrderBy;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,46 +17,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
-import antlr.Utils;
 import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
 import ec.com.papp.administracion.to.ItemTO;
 import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
-import ec.com.papp.planificacion.id.ActividadunidadID;
+import ec.com.papp.administracion.to.UnidadmedidaTO;
 import ec.com.papp.planificacion.id.CertificacionlineaID;
 import ec.com.papp.planificacion.id.OrdendevengolineaID;
 import ec.com.papp.planificacion.id.OrdengastolineaID;
 import ec.com.papp.planificacion.id.OrdenreversionlineaID;
-import ec.com.papp.planificacion.id.ProyectometaID;
 import ec.com.papp.planificacion.id.ReformalineaID;
-import ec.com.papp.planificacion.to.ActividadTO;
-import ec.com.papp.planificacion.to.ActividadunidadTO;
+import ec.com.papp.planificacion.id.ReformametalineaID;
 import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.ContratoTO;
-import ec.com.papp.planificacion.to.IndicadorTO;
 import ec.com.papp.planificacion.to.ItemunidadTO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
-import ec.com.papp.planificacion.to.ObjetivoTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdendevengolineaTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
 import ec.com.papp.planificacion.to.OrdengastolineaTO;
 import ec.com.papp.planificacion.to.OrdenreversionTO;
 import ec.com.papp.planificacion.to.OrdenreversionlineaTO;
-import ec.com.papp.planificacion.to.PlannacionalTO;
-import ec.com.papp.planificacion.to.ProgramaTO;
-import ec.com.papp.planificacion.to.ProyectoTO;
-import ec.com.papp.planificacion.to.ProyectometaTO;
 import ec.com.papp.planificacion.to.ReformaTO;
 import ec.com.papp.planificacion.to.ReformalineaTO;
-import ec.com.papp.planificacion.to.SubactividadTO;
-import ec.com.papp.planificacion.to.SubitemunidadTO;
+import ec.com.papp.planificacion.to.ReformametaTO;
+import ec.com.papp.planificacion.to.ReformametalineaTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
-import ec.com.papp.planificacion.to.SubprogramaTO;
+import ec.com.papp.planificacion.to.SubtareaunidadTO;
+import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
@@ -69,6 +57,9 @@ import ec.com.papp.web.ejecucion.util.ConsultasUtil;
 import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 /**
  * @autor: jcalderon
@@ -348,7 +339,7 @@ public class EjecucionController {
 				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO,null);
 				id=reformaTO.getNpid().toString();
 				reformaTO.setId(reformaTO.getNpid());
-				jsonObject.put("refomra", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
+				jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
 			}
 			
 			//reforma linea
@@ -373,6 +364,52 @@ public class EjecucionController {
 				}
 				else{
 					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+			}
+
+			//reformameta
+			if(clase.equals("reformameta")){
+				ReformametaTO reformametaTO = gson.fromJson(new StringReader(objeto), ReformametaTO.class);
+				accion = (reformametaTO.getId()==null)?"crear":"actualizar";
+				if(reformametaTO.getNpfechaaprobacion()!=null)
+					reformametaTO.setFechaaprobacion(UtilGeneral.parseStringToDate(reformametaTO.getNpfechaaprobacion()));
+				if(reformametaTO.getNpfechacreacion()!=null)
+					reformametaTO.setFechacreacion(UtilGeneral.parseStringToDate(reformametaTO.getNpfechacreacion()));
+				if(reformametaTO.getNpfechaeliminacion()!=null)
+					reformametaTO.setFechaeliminacion(UtilGeneral.parseStringToDate(reformametaTO.getNpfechaeliminacion()));
+				if(reformametaTO.getNpfechanegacion()!=null)
+					reformametaTO.setFechanegacion(UtilGeneral.parseStringToDate(reformametaTO.getNpfechanegacion()));
+				if(reformametaTO.getNpfechasolicitud()!=null)
+					reformametaTO.setFechasolicitud(UtilGeneral.parseStringToDate(reformametaTO.getNpfechasolicitud()));
+				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO,null);
+				id=reformametaTO.getNpid().toString();
+				reformametaTO.setId(reformametaTO.getNpid());
+				jsonObject.put("reformameta", (JSONObject)JSONSerializer.toJSON(reformametaTO,reformametaTO.getJsonConfig()));
+			}
+			
+			//reforma meta linea
+			else if(clase.equals("reformametalinea")){
+				ReformametalineaTO reformametalineaTO = gson.fromJson(new StringReader(objeto), ReformametalineaTO.class);
+				//pregunto si ya tiene una linea con el mismo subtarea y no le dejo
+				ReformametalineaTO reformametalineaTO2=new ReformametalineaTO();
+				log.println("consulta lineas: " + reformametalineaTO.getNivelacid() + reformametalineaTO.getId().getId());
+				reformametalineaTO2.setNivelacid(reformametalineaTO2.getNivelacid());
+				reformametalineaTO2.getId().setId(reformametalineaTO2.getId().getId());
+				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO2);
+				log.println("reformas: " + reformametalineaTOs.size());
+				if(reformametalineaTOs.size()==0){
+					accion = (reformametalineaTO.getId()==null)?"crear":"actualizar";
+					UtilSession.planificacionServicio.transCrearModificarReformametalinea(reformametalineaTO);
+					id=reformametalineaTO.getId().getId().toString() + reformametalineaTO.getId().getLineaid();
+					//Traigo la lista de reformametalinea
+					ReformametalineaTO reformametalineaTO3=new ReformametalineaTO();
+					reformametalineaTO3.getId().setId(reformametalineaTO.getId().getId());
+					Collection<ReformametalineaTO> reformametalineaTOs2=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO3);
+					jsonObject.put("reformametalinea", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs2,reformametalineaTO.getJsonConfig()));
+				}
+				else{
+					mensajes.setMsg(MensajesWeb.getString("advertencia.subtarealinea.repetida"));
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
@@ -524,6 +561,21 @@ public class EjecucionController {
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
 			}
 
+			//Reformameta
+			else if(clase.equals("reformameta")){
+				ReformametaTO reformametaTO=new ReformametaTO();
+				reformametaTO.setEjerfiscalid(id);
+				reformametaTO.setNpfechacreacion(UtilGeneral.parseDateToString(new Date()));
+				reformametaTO.setEstado(MensajesAplicacion.getString("certificacion.estado.registrado"));
+				jsonObject.put("reformameta", (JSONObject)JSONSerializer.toJSON(reformametaTO,reformametaTO.getJsonConfignuevo()));
+			}
+			//Reformalinea
+			else if(clase.equals("reformametalinea")){
+				ReformalineaTO reformalineaTO=new ReformalineaTO();
+				reformalineaTO.getId().setId(id);
+				jsonObject.put("reformametalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
+			}
+
 			log.println("json retornado: " + jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -566,7 +618,7 @@ public class EjecucionController {
 				jsonObject.put("certificacionlinea", (JSONObject)JSONSerializer.toJSON(certificacionlineaTO,certificacionlineaTO.getJsonConfig()));
 			}
 			//Ordengasto
-			if(clase.equals("ordengasto")){
+			else if(clase.equals("ordengasto")){
 				OrdengastoTO ordengastoTO=new OrdengastoTO();
 				ordengastoTO = UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
 				if(ordengastoTO.getOrdengastoclasemodid()!=null){
@@ -613,7 +665,7 @@ public class EjecucionController {
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordengastolineaTO.getNivelactid(), jsonObject, mensajes);
 			}
 			//Ordendevengo
-			if(clase.equals("ordendevengo")){
+			else if(clase.equals("ordendevengo")){
 				OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
 				ordendevengoTO = UtilSession.planificacionServicio.transObtenerOrdendevengoTO(id);
 				log.println("orden de gasto atada: " + ordendevengoTO.getOrdendevengoordengastoid());
@@ -644,7 +696,7 @@ public class EjecucionController {
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordendevengolineaTO.getNivelactid(), jsonObject, mensajes);
 			}
 			//Ordenreversion
-			if(clase.equals("ordenreversion")){
+			else if(clase.equals("ordenreversion")){
 				OrdenreversionTO ordenreversionTO=new OrdenreversionTO();
 				ordenreversionTO = UtilSession.planificacionServicio.transObtenerOrdenreversionTO(id);
 				if(ordenreversionTO.getOrdenrversionogastoid()!=null){
@@ -725,7 +777,7 @@ public class EjecucionController {
 				jsonObject.put("datoslineaordend", (JSONObject)JSONSerializer.toJSON(saldodisponible));
 			}
 			//Reforma
-			if(clase.equals("reforma")){
+			else if(clase.equals("reforma")){
 				ReformaTO reformaTO=new ReformaTO();
 				reformaTO = UtilSession.planificacionServicio.transObtenerReformaTO(id);
 				reformaTO.setNpunidadcodigo(reformaTO.getUnidad().getCodigopresup());
@@ -767,6 +819,76 @@ public class EjecucionController {
 				double valtotal=ConsultasUtil.obtenertotalsubitem(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid(),reformalineaTO);
 				reformalineaTO.setNpvalortotal(valtotal);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
+			}
+
+			//Reformameta
+			else if(clase.equals("reformameta")){
+				ReformametaTO reformametaTO=new ReformametaTO();
+				reformametaTO = UtilSession.planificacionServicio.transObtenerReformametaTO(id);
+				reformametaTO.setNpunidadcodigo(reformametaTO.getUnidad().getCodigopresup());
+				reformametaTO.setNpunidadnombre(reformametaTO.getUnidad().getNombre());
+				//asigno las fechas
+				reformametaTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(reformametaTO.getFechaaprobacion()));
+				reformametaTO.setNpfechacreacion(UtilGeneral.parseDateToString(reformametaTO.getFechacreacion()));
+				reformametaTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(reformametaTO.getFechaeliminacion()));
+				reformametaTO.setNpfechanegacion(UtilGeneral.parseDateToString(reformametaTO.getFechanegacion()));
+				reformametaTO.setNpfechasolicitud(UtilGeneral.parseDateToString(reformametaTO.getFechasolicitud()));
+				//traigo las reformaslinea las traigo
+				ReformametalineaTO reformametalineaTO=new ReformametalineaTO();
+				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO);
+				jsonObject.put("reformametalineas", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs,reformametalineaTO.getJsonConfig()));
+				jsonObject.put("reformameta", (JSONObject)JSONSerializer.toJSON(reformametaTO,reformametaTO.getJsonConfig()));
+			}
+			//Reformametalinea
+			else if(clase.equals("reformametalinea")){
+				ReformametalineaTO reformametalineaTO = UtilSession.planificacionServicio.transObtenerReformametalineaTO(new ReformametalineaID(id, id2));
+				reformametalineaTO.setNpdecremento(reformametalineaTO.getDecremento());
+				reformametalineaTO.setNpincremento(reformametalineaTO.getIncremento());
+				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformametalineaTO.getNivelacid()));
+				//1. traigo los datos de unidad medida y meta descripcion
+				SubtareaunidadTO subtareaunidadTO=new SubtareaunidadTO();
+				subtareaunidadTO.setId(nivelactividadTO.getTablarelacionid());
+				subtareaunidadTO.setUnidadmedidaTO(new UnidadmedidaTO());
+				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
+				subtareaunidadacumuladorTO.setSubtareaunidad(subtareaunidadTO);
+				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
+				subtareaunidadacumuladorTO.setOrderByField(OrderBy.orderDesc("id.acumid"));
+				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
+				if(subtareaunidadacumuladorTOs.size()>0) {
+					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
+					reformametalineaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
+				}
+				jsonObject.put("reformametalinea", (JSONObject)JSONSerializer.toJSON(reformametalineaTO,reformametalineaTO.getJsonConfig()));
+			}
+			
+			//datossubtarea: Recibo el id de la subtareaunidad y el id del nivelactividadid para buscar la unidadmedida y la descripcion y valor actual de la meta
+			else if(clase.equals("datossubtarea")) {
+				//1. Consulto la subtareaunidadacumulador y la subtarea para traer los datos necesarios
+				SubtareaunidadTO subtareaunidadTO=new SubtareaunidadTO();
+				subtareaunidadTO.setId(id);
+				subtareaunidadTO.setUnidadmedidaTO(new UnidadmedidaTO());
+				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
+				subtareaunidadacumuladorTO.setSubtareaunidad(subtareaunidadTO);
+				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
+				subtareaunidadacumuladorTO.setOrderByField(OrderBy.orderDesc("id.acumid"));
+				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
+//				if(subtareaunidadacumuladorTOs.size()>0) {
+//					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
+//					reformametalineaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
+//				}
+//
+//				Map<String, Double> saldodisponible=new HashMap<>();
+//				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
+//				subitemunidadacumuladorTO.getId().setId(id);
+//				subitemunidadacumuladorTO.setTipo("A");
+//				subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
+//				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
+//				if(subitemunidadacumuladorTOs.size()>0) {
+//					subitemunidadacumuladorTO=(SubitemunidadacumuladorTO)subitemunidadacumuladorTOs.iterator().next();
+//					saldodisponible.put("valorajustado", subitemunidadacumuladorTO.getTotal());
+//				}
+//				saldodisponible.put("saldo", saldo);
+//				jsonObject.put("valordisponiblesi", (JSONObject)JSONSerializer.toJSON(saldodisponible));
 			}
 
 			log.println("json retornado: " + jsonObject.toString());
@@ -1105,6 +1227,11 @@ public class EjecucionController {
 			//Reforma
 			else if(clase.equals("reforma")){
 				jsonObject=ConsultasUtil.consultaReformaPaginado(parameters, jsonObject, mensajes);
+			}
+
+			//Reformameta
+			else if(clase.equals("reformameta")){
+				jsonObject=ConsultasUtil.consultaReformametaPaginado(parameters, jsonObject, mensajes);
 			}
 
 			//Certificacion busqueda
