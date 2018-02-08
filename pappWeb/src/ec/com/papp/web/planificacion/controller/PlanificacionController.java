@@ -293,7 +293,7 @@ public class PlanificacionController {
 					//Si va a inactivar valido que no hayan hijos
 					if(indicadorTO.getId()!=null && indicadorTO.getId().longValue()!=0 && indicadorTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
 						IndicadorTO hijo=new IndicadorTO();
-						hijo.setIndicadorpadreid(indicadorTO.getId());
+						hijo.setId(indicadorTO.getId());
 						hijo.setEstado(MensajesAplicacion.getString("estado.activo"));
 						Collection<IndicadorTO> indicadorTOs2=UtilSession.planificacionServicio.transObtenerIndicadorArbol(hijo);
 						if(indicadorTOs2.size()>0) {
