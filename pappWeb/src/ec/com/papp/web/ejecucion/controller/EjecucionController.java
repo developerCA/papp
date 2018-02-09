@@ -858,6 +858,7 @@ public class EjecucionController {
 					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
 					reformametalineaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
 				}
+				reformametalineaTO.setNpunidadmedida(subtareaunidadTO.getUnidadmedidaTO().getNombre());
 				jsonObject.put("reformametalinea", (JSONObject)JSONSerializer.toJSON(reformametalineaTO,reformametalineaTO.getJsonConfig()));
 			}
 			
@@ -872,23 +873,17 @@ public class EjecucionController {
 				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 				subtareaunidadacumuladorTO.setOrderByField(OrderBy.orderDesc("id.acumid"));
 				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
-//				if(subtareaunidadacumuladorTOs.size()>0) {
-//					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
-//					reformametalineaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
-//				}
-//
-//				Map<String, Double> saldodisponible=new HashMap<>();
-//				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
-//				subitemunidadacumuladorTO.getId().setId(id);
-//				subitemunidadacumuladorTO.setTipo("A");
-//				subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
-//				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
-//				if(subitemunidadacumuladorTOs.size()>0) {
-//					subitemunidadacumuladorTO=(SubitemunidadacumuladorTO)subitemunidadacumuladorTOs.iterator().next();
-//					saldodisponible.put("valorajustado", subitemunidadacumuladorTO.getTotal());
-//				}
-//				saldodisponible.put("saldo", saldo);
-//				jsonObject.put("valordisponiblesi", (JSONObject)JSONSerializer.toJSON(saldodisponible));
+				if(subtareaunidadacumuladorTOs.size()>0) {
+					Map<String, Double> valoractual=new HashMap<>();
+					Map<String, String> descripciones=new HashMap<>();
+					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
+					descripciones.put("metadescripcion", subtareaunidadacumuladorTO.getDescripcion());
+					descripciones.put("unidadmedida", subtareaunidadTO.getUnidadmedidaTO().getNombre());
+					valoractual.put("valor", subtareaunidadacumuladorTO.getCantidad());
+					jsonObject.put("descripciones", (JSONObject)JSONSerializer.toJSON(descripciones));
+					jsonObject.put("valoractual", (JSONObject)JSONSerializer.toJSON(valoractual));
+
+				}
 			}
 
 			log.println("json retornado: " + jsonObject.toString());
