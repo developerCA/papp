@@ -1157,16 +1157,68 @@ public class EjecucionController {
 		Gson gson = new Gson();
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
+			ReformametaTO reformametaTO=UtilSession.planificacionServicio.transObtenerReformametaTO(id);
+			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
+				reformametaTO.setEstado(tipo);
+				if(tipo.equals("EL")) {
+					if(parameters.get("observacion")!=null)
+						reformametaTO.setMotivoeliminar(parameters.get("observacion"));
+					reformametaTO.setFechaeliminacion(new Date());
+				}
+				else if(tipo.equals("NE")) {
+					if(parameters.get("observacion")!=null)
+						reformametaTO.setMotivonegacion(parameters.get("observacion"));
+					reformametaTO.setFechanegacion(new Date());
+				}
+				else if(tipo.equals("AN")) {
+					if(parameters.get("observacion")!=null)
+						reformametaTO.setMotivoanulacion(parameters.get("observacion"));
+					reformametaTO.setFechanegacion(new Date());
+				}
+				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO, tipo);
+				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+			}
+//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.println("error al eliminar");
+			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
+			//throw new MyException(e);
+		}
+		if(mensajes.getMsg()!=null){
+			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+			log.println("existen mensajes");
+		}
+		log.println("devuelve**** " + jsonObject.toString());
+		return respuesta;	
+	}
+
+	@RequestMapping(value = "/flujoreformameta/{id}/{tipo}", method = RequestMethod.POST)
+	public Respuesta flujoreformameta(@PathVariable Long id,@PathVariable String tipo,@RequestBody String objeto,HttpServletRequest request){
+		log.println("entra al metodo flujo");
+		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
+		JSONObject jsonObject=new JSONObject();
+		Gson gson = new Gson();
+		try {
+			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(id);
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
 				reformaTO.setEstado(tipo);
 				if(tipo.equals("EL")) {
 					if(parameters.get("observacion")!=null)
 						reformaTO.setMotivoeliminacion(parameters.get("observacion"));
+					reformaTO.setFechaeliminacion(new Date());
 				}
 				else if(tipo.equals("NE")) {
 					if(parameters.get("observacion")!=null)
 						reformaTO.setMotivonegacion(parameters.get("observacion"));
+					reformaTO.setFechanegacion(new Date());
 				}
 				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO, tipo);
 				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
