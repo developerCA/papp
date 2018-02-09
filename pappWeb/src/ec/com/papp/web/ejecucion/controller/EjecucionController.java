@@ -159,7 +159,7 @@ public class EjecucionController {
 				accion = (ordengastoTO.getId()==null)?"crear":"actualizar";
 				UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO,null);
 				id=ordengastoTO.getNpid().toString();
-				ordengastoTO.setId(ordengastoTO.getId());
+				ordengastoTO.setId(ordengastoTO.getNpid());
 				jsonObject.put("ordengasto", (JSONObject)JSONSerializer.toJSON(ordengastoTO,ordengastoTO.getJsonConfig()));
 			}
 			//ordengasto linea
