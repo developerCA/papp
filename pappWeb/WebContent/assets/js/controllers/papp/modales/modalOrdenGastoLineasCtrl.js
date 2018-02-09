@@ -1,16 +1,18 @@
 'use strict';
 
-app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","certificacionID","editar","ordengastoID","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenGastoLineasFactory",
-	function($scope,$rootScope,certificacionID,editar,ordengastoID,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenGastoLineasFactory) {
+app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","certificacionID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenGastoLineasFactory",
+	function($scope,$rootScope,certificacionID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenGastoLineasFactory) {
 
 	$scope.noeditar=false;
+	$scope.errorLimpio=false;
+
 	$scope.init=function(){
 		if (editar == null) {
 			//nuevo
 			ordenGastoLineasFactory.nuevoLinea(
 				certificacionID
 			).then(function(resp){
-				console.log(resp.json.ordengastolinea);
+				//console.log(resp.json.ordengastolinea);
 	        	$scope.objeto = resp.json.ordengastolinea;
 	        	$scope.noeditar=false;
 	        	$scope.cambioSubItems();
@@ -23,6 +25,7 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","certi
 				//console.log(resp);
 	        	$scope.objeto = resp.json.ordengastolinea;
 	        	$scope.objetoDetalles = resp.json.subiteminfo;
+				$scope.cargarListaCodigos();
 	        	$scope.noeditar=true;
 			})
 		}
@@ -34,6 +37,10 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","certi
 		ordenGastoLineasFactory.listarSubItems(
 			certificacionID // $scope.objeto.id.id
 		).then(function(resp){
+			if (resp.json.total.valor == 0) {
+				$scope.errorLimpio=true;
+				return;
+			}
 			$scope.listarSubItems = [{
         		id: "",
         		codigo: "",
@@ -62,18 +69,22 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","certi
 		).then(function(resp){
 			//console.log(resp);
 			$scope.objetoDetalles = resp.json.subiteminfo;
-			$scope.objetoDetalles.programanombre = $scope.objetoDetalles.programacodigo + ": " + $scope.objetoDetalles.programanombre;
-			$scope.objetoDetalles.subprogramanombre = $scope.objetoDetalles.subprogramacodigo + ": " + $scope.objetoDetalles.subprogramanombre;
-			$scope.objetoDetalles.proyectonombre = $scope.objetoDetalles.proyectocodigo + ": " + $scope.objetoDetalles.proyectonombre;
-			$scope.objetoDetalles.actividadnombre = $scope.objetoDetalles.actividadcodigo + ": " + $scope.objetoDetalles.actividadnombre;
-			$scope.objetoDetalles.subactividadnombre = $scope.objetoDetalles.subactividadcodigo + ": " + $scope.objetoDetalles.subactividadnombre;
-			$scope.objetoDetalles.tareanombre = $scope.objetoDetalles.tareacodigo + ": " + $scope.objetoDetalles.tareanombre;
-			$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ": " + $scope.objetoDetalles.subtareanombre;
-			$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
-			if (editar != null) {
-				$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ": " + $scope.objetoDetalles.subitemnombre;
-			}
+			$scope.cargarListaCodigos();
 		})
+	}
+
+	$scope.cargarListaCodigos = function() {
+		$scope.objetoDetalles.programanombre = $scope.objetoDetalles.programacodigo + ": " + $scope.objetoDetalles.programanombre;
+		$scope.objetoDetalles.subprogramanombre = $scope.objetoDetalles.subprogramacodigo + ": " + $scope.objetoDetalles.subprogramanombre;
+		$scope.objetoDetalles.proyectonombre = $scope.objetoDetalles.proyectocodigo + ": " + $scope.objetoDetalles.proyectonombre;
+		$scope.objetoDetalles.actividadnombre = $scope.objetoDetalles.actividadcodigo + ": " + $scope.objetoDetalles.actividadnombre;
+		$scope.objetoDetalles.subactividadnombre = $scope.objetoDetalles.subactividadcodigo + ": " + $scope.objetoDetalles.subactividadnombre;
+		$scope.objetoDetalles.tareanombre = $scope.objetoDetalles.tareacodigo + ": " + $scope.objetoDetalles.tareanombre;
+		$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ": " + $scope.objetoDetalles.subtareanombre;
+		$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
+		if (editar != null) {
+			$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ": " + $scope.objetoDetalles.subitemnombre;
+		}
 	}
 
 	$scope.form = {
@@ -107,13 +118,17 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","certi
 	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
         			 }
         		})
-        		console.log($scope.objeto);
+        		//console.log($scope.objeto);
             }
         },
         reset: function (form) {
     		$uibModalInstance.dismiss('cancel');
         }
     };
+
+	$scope.cancelar=function() {
+		$uibModalInstance.dismiss('cancel');
+	}
 
 	$scope.buscarSubtareas=function(id){
 		for (var i = 0; i < $scope.listarSubtareas.length; i++) {

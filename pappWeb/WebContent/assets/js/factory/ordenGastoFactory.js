@@ -94,16 +94,15 @@ function(Restangular) {
 			cur,
 			observacion
 		){
-			var url = "ejecucion/flujoordenes/" + id + "/" + tipo + "/";
-			var k = "";
+			var url = "ejecucion/flujoordenes/" + id + "/" + tipo;
+			var tObj = {};
 			if (cur != null) {
-				k = cur;
+				tObj.cur = cur;
 			};
 			if (observacion != null) {
-				k = observacion;
+				tObj.observacion = observacion;
 			};
-			url += k;
-			return Restangular.allUrl(url).customGET();
+			return Restangular.allUrl(url).customPOST(tObj);
 		},
 	}
 } ]);

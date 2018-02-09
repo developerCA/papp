@@ -92,8 +92,9 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			console.log(resp);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.ordengasto;
+			    $scope.detalles=[];
 			}
-			$scope.
+			//$scope.
 			$scope.noeditar=false;
 			$scope.edicion=true;
 			$scope.nuevoar=true;
@@ -398,18 +399,15 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			size : 'lg',
 			resolve : {
 				certificacionID : function() {
-					return $scope.objeto.ordengastocertificacionid;
+					return $scope.objeto.id; //ordengastocertificacionid
 				},
 				editar : function() {
 					return null;
-				},
-				ordengastoID : function() {
-					return $scope.objeto.id;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);//130
+			//console.log(obj);//130
 		    $scope.detalles=obj;
             SweetAlert.swal("Orden Gasto! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
@@ -425,16 +423,13 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				certificacionID : function() {
 					return $scope.objeto.id;
 				},
-				unidadID : function() {
-					return $scope.objeto.certificacionunidadid;
-				},
 				editar : function() {
 					return $scope.detalles[index].id
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 		    $scope.detalles=obj;
             SweetAlert.swal("Orden Gasto! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
@@ -461,10 +456,16 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
             } else {
             	ordenGastoFactory.guardar($scope.objeto).then(function(resp){
         			 if (resp.estado){
-        				 form.$setPristine(true);
-	 		             $scope.edicion=false;
-	 		             $scope.objeto={};
-	 		             $scope.limpiar();
+        				 if ($scope.nuevoar) {
+	      					 $scope.noeditar = false;
+	      					 $scope.nuevoar=false;
+	      				     $scope.objeto=resp.json.ordengasto;
+        				 } else {
+            				 form.$setPristine(true);
+    	 		             $scope.edicion=false;
+    	 		             $scope.objeto={};
+    	 		             $scope.limpiar();
+        				 }
 	 		             SweetAlert.swal("Orden de Gastos!", "Registro registrado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Orden de Gastos!", resp.mensajes.msg, "error");

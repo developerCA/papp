@@ -4,152 +4,171 @@
 	</h3>
 </div>
 <div class="modal-body">
-	<div class="panel-body" ng-init="init();" >
-		<form name="Form" id="form1" novalidate
-			ng-submit="form.submit(Form)">
-			<div>
-				<div class="form-group">
-				    <label class="control-label">
-				        Programa
-				    </label>
-				    <input type="text" ng-disabled="true"
-				        class="form-control" name="programanombre" ng-model="objetoDetalles.programanombre">
-				</div>
-			
-				<div class="form-group">
-				    <label class="control-label">
-				        Subprograma
-				    </label>
-				    <input type="text" ng-disabled="true"
-				        class="form-control" name="subprogramanombre" ng-model="objetoDetalles.subprogramanombre">
-				</div>
-			
-				<div class="form-group">
-				    <label class="control-label">
-				        Proyecto
-				    </label>
-				    <input type="text" ng-disabled="true"
-				        class="form-control" name="proyectonombre" ng-model="objetoDetalles.proyectonombre">
-				</div>
-			
-				<div class="form-group">
-				    <label class="control-label">
-				        Actividad
-				    </label>
-				    <input type="text" ng-disabled="true"
-				        class="form-control" name="actividadnombre" ng-model="objetoDetalles.actividadnombre">
-				</div>
-			
-				<div class="form-group">
-				    <label class="control-label">
-				        Subactividad
-				    </label>
-				    <input type="text" ng-disabled="true"
-				        class="form-control" name="subactividadnombre" ng-model="objetoDetalles.subactividadnombre">
-				</div>
-			
-				<div class="form-group">
-				    <label class="control-label">
-				        Tarea
-				    </label>
-				    <input type="text" ng-disabled="true"
-				        class="form-control" name="tareanombre" ng-model="objetoDetalles.tareanombre">
-				</div>
-				
-				<div class="form-group">
-				    <label class="control-label">
-				        Subtarea
-				    </label>
-				    <input type="text" ng-disabled="true"
-				        class="form-control" name="subtareanombre"
-				        ng-model="objetoDetalles.subtareanombre">
-				</div>
-				
-				<div class="form-group">
-				    <label class="control-label">
-				        Item
-				    </label>
-				    <input type="text" ng-disabled="true"
-				        class="form-control" name="itemnombre" ng-model="objetoDetalles.itemnombre">
-				</div>
-				
-				<div class="form-group"
-				    ng-class="{'has-error':Form.subitem.$dirty && Form.subitem.$invalid, 'has-success':Form.subitem.$valid}">
-				    <label class="control-label">
-				        Subitem
-				        <span class="symbol required"></span>
-				    </label>
-				    <input ng-show="noeditar" type="text" ng-disabled="true"
-				        class="form-control" name="subitemnombre" ng-model="objetoDetalles.subitemnombre">
-				    <select ng-show="!noeditar" class="form-control" name="subitem"
-				        ng-model="objeto.subitem" ng-change="obtenerTotal();">
-						<option 
-						    ng-repeat="operator in listarSubItems" 
-						    value="{{operator.nivelactid}}"
-						>
-						    {{operator.npSubitem}}
-						</option>
-				    </select>
-				    <span class="error text-small block"
-				        ng-if="Form.subitem.$dirty && Form.subitem.$invalid">
-				        Incorrecto
-				    </span>
-				    <span class="success text-small"
-				        ng-if="Form.subitem.$valid">
-				        Listo
-				    </span>
-				</div>
-
-				<div class="form-group">
-				    <label class="control-label">
-				        Valor Certificaci&oacute;n
-				    </label>
-			        <input type="text" numericOnly style="text-align:right;" decimal="2"
-			            class="form-control" name="npvalorcertificacion" ng-model="objeto.npvalorcertificacion" ng-disabled="true">
-				</div>
-
-				<div class="form-group">
-				    <label class="control-label">
-				        Saldo Certificaci&oacute;n
-				    </label>
-			        <input type="text" numericOnly style="text-align:right;" decimal="2"
-			            class="form-control" name="npsaldocertificacion" ng-model="objeto.npsaldocertificacion" ng-disabled="true">
-				</div>
-				
-				<div class="form-group"
-				    ng-class="{'has-error':Form.valor.$dirty && Form.valor.$invalid, 'has-success':Form.valor.$valid}">
-				    <label class="control-label">
-				        Valor
-				        <span class="symbol required"></span>
-				    </label>
-				    <div class="input-group col-md-12">
-				        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor"
-				            class="form-control" name="valor" ng-model="objeto.valor"
-				            required ng-max="objeto.npsaldocertificacion">
-				    </div>
-				    <span class="error text-small block"
-				        ng-if="Form.valor.$dirty && Form.valor.$invalid">
-				        Incorrecto
-				    </span>
-				    <span class="success text-small"
-				        ng-if="Form.valor.$valid">
-				        Listo
-				    </span>
-				</div>
-			</div>
+	<div class="panel-body" ng-init="init();">
+		<div ng-show="errorLimpio">
 			<div class="row">
 				<div class="col-md-12">
+					<p>
+						No se puede crear una nueva l&iacute;nea porque no existe disponibilidad.
+					</p>
+				</div>
+				<div class="col-md-12">
 					<div class="pull-right">
-						<button type="submit" class="btn btn-primary">
-							Guardar
-						</button>
-						<button type="reset" class="btn btn-default btn-o"
-							ng-click="form.reset(Form)">
-							Cancelar
+						<button type="reset" class="btn btn-primary"
+							ng-click="cancelar();">
+							Aceptar
 						</button>
 					</div>
 				</div>
 			</div>
-		</form>
+		</div>
+		<div ng-show="!errorLimpio">
+			<form name="Form" id="form1" novalidate
+				ng-submit="form.submit(Form)">
+				<div>
+					<div class="form-group">
+					    <label class="control-label">
+					        Programa
+					    </label>
+					    <input type="text" ng-disabled="true"
+					        class="form-control" name="programanombre" ng-model="objetoDetalles.programanombre">
+					</div>
+				
+					<div class="form-group">
+					    <label class="control-label">
+					        Subprograma
+					    </label>
+					    <input type="text" ng-disabled="true"
+					        class="form-control" name="subprogramanombre" ng-model="objetoDetalles.subprogramanombre">
+					</div>
+				
+					<div class="form-group">
+					    <label class="control-label">
+					        Proyecto
+					    </label>
+					    <input type="text" ng-disabled="true"
+					        class="form-control" name="proyectonombre" ng-model="objetoDetalles.proyectonombre">
+					</div>
+				
+					<div class="form-group">
+					    <label class="control-label">
+					        Actividad
+					    </label>
+					    <input type="text" ng-disabled="true"
+					        class="form-control" name="actividadnombre" ng-model="objetoDetalles.actividadnombre">
+					</div>
+				
+					<div class="form-group">
+					    <label class="control-label">
+					        Subactividad
+					    </label>
+					    <input type="text" ng-disabled="true"
+					        class="form-control" name="subactividadnombre" ng-model="objetoDetalles.subactividadnombre">
+					</div>
+				
+					<div class="form-group">
+					    <label class="control-label">
+					        Tarea
+					    </label>
+					    <input type="text" ng-disabled="true"
+					        class="form-control" name="tareanombre" ng-model="objetoDetalles.tareanombre">
+					</div>
+					
+					<div class="form-group">
+					    <label class="control-label">
+					        Subtarea
+					    </label>
+					    <input type="text" ng-disabled="true"
+					        class="form-control" name="subtareanombre"
+					        ng-model="objetoDetalles.subtareanombre">
+					</div>
+					
+					<div class="form-group">
+					    <label class="control-label">
+					        Item
+					    </label>
+					    <input type="text" ng-disabled="true"
+					        class="form-control" name="itemnombre" ng-model="objetoDetalles.itemnombre">
+					</div>
+					
+					<div class="form-group"
+					    ng-class="{'has-error':Form.subitem.$dirty && Form.subitem.$invalid, 'has-success':Form.subitem.$valid}">
+					    <label class="control-label">
+					        Subitem
+					        <span class="symbol required"></span>
+					    </label>
+					    <input ng-show="noeditar" type="text" ng-disabled="true"
+					        class="form-control" name="subitemnombre" ng-model="objetoDetalles.subitemnombre">
+					    <select ng-show="!noeditar" class="form-control" name="subitem"
+					        ng-model="objeto.subitem" ng-change="obtenerTotal();">
+							<option 
+							    ng-repeat="operator in listarSubItems" 
+							    value="{{operator.nivelactid}}"
+							>
+							    {{operator.npSubitem}}
+							</option>
+					    </select>
+					    <span class="error text-small block"
+					        ng-if="Form.subitem.$dirty && Form.subitem.$invalid">
+					        Incorrecto
+					    </span>
+					    <span class="success text-small"
+					        ng-if="Form.subitem.$valid">
+					        Listo
+					    </span>
+					</div>
+	
+					<div class="form-group">
+					    <label class="control-label">
+					        Valor Certificaci&oacute;n
+					    </label>
+				        <input type="text" numericOnly style="text-align:right;" decimal="2"
+				            class="form-control" name="npvalorcertificacion" ng-model="objeto.npvalorcertificacion" ng-disabled="true">
+					</div>
+	
+					<div class="form-group">
+					    <label class="control-label">
+					        Saldo Certificaci&oacute;n
+					    </label>
+				        <input type="text" numericOnly style="text-align:right;" decimal="2"
+				            class="form-control" name="npsaldocertificacion" ng-model="objeto.npsaldocertificacion" ng-disabled="true">
+					</div>
+					
+					<div class="form-group"
+					    ng-class="{'has-error':Form.valor.$dirty && Form.valor.$invalid, 'has-success':Form.valor.$valid}">
+					    <label class="control-label">
+					        Valor
+					        <span class="symbol required"></span>
+					    </label>
+					    <div class="input-group col-md-12">
+					        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor"
+					            class="form-control" name="valor" ng-model="objeto.valor"
+					            required ng-max="objeto.npsaldocertificacion">
+					    </div>
+					    <span class="error text-small block"
+					        ng-if="Form.valor.$dirty && Form.valor.$invalid">
+					        Incorrecto
+					    </span>
+					    <span class="success text-small"
+					        ng-if="Form.valor.$valid">
+					        Listo
+					    </span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="pull-right">
+							<button type="submit" class="btn btn-primary">
+								Guardar
+							</button>
+							<button type="reset" class="btn btn-default btn-o"
+								ng-click="form.reset(Form)">
+								Cancelar
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>

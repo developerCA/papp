@@ -637,7 +637,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un n&uacute;mero documento"
 								        class="form-control" name="numerodocumento" ng-model="objeto.numerodocumento"
-								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar && noeditar">
+								        ng-minlength="100" ng-disabled="!nuevoar && noeditar">
 								    <span class="error text-small block"
 								        ng-if="Form.numerodocumento.$dirty && Form.numerodocumento.$invalid">
 								        Incorrecto
@@ -675,7 +675,7 @@
 								    </label>
 								    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
 								        class="form-control" name="numerooficio" ng-model="objeto.numerooficio"
-								        required ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar && noeditar">
+								        ng-minlength="100" ng-disabled="!nuevoar && noeditar">
 								    <span class="error text-small block"
 								        ng-if="Form.numerooficio.$dirty && Form.numerooficio.$invalid">
 								        Incorrecto
