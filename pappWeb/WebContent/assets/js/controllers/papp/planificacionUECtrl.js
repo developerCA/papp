@@ -1049,7 +1049,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		for (var i = 0; i < 12; i++) {
 			t += $scope.detallesPlanificada[i].valor;
 		}
-		t = Number($scope.aDistribuirP.toFixed(2));
+		t = Number(t.toFixed(2));
 		if (t != ($scope.divActividad || $scope.divSubTarea
 				? $scope.detalles[$scope.mPlanificadaID].cantidad
 				: $scope.npTotalPlanificado
@@ -1135,7 +1135,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		for (var i = 0; i < 12; i++) {
 			t += $scope.detallesAjustada[i].valor;
 		}
-		t = Number($scope.aDistribuirA.toFixed(2));
+		t = Number(t.toFixed(2));
 		if (t != ($scope.divActividad || $scope.divSubTarea
 				? $scope.detalles[$scope.mAjustadaID].cantidad
 				: $scope.npTotalAjustado
@@ -1901,6 +1901,7 @@ function distribuirValor(
 		for (var i = 0; i < 12; i++) {
 			detalles[i].valor = 0;
 			detalles[i].porcentaje = 0;
+			detalles[i].observacion = null;
 		}
 	}
 
