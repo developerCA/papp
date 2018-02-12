@@ -623,7 +623,7 @@ public class PlanificacionController {
 				//Si la ponderacion guardada mas la ingresada suma menos o igual a 100 la graba
 				if((ponderacion.doubleValue()+subactividadunidadTO.getPonderacion().doubleValue()-subactividadunidadTO.getNpponderacion())<=100){
 					UtilSession.planificacionServicio.transCrearModificarSubactividadunidad(subactividadunidadTO);
-					id=subactividadunidadTO.getNpid().toString();
+					id=subactividadunidadTO.getId().toString();
 					jsonObject.put("subactividadunidad", (JSONObject)JSONSerializer.toJSON(subactividadunidadTO,subactividadunidadTO.getJsonConfig()));
 				}
 				else{

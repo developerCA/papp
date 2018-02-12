@@ -1,6 +1,7 @@
 package ec.com.papp.web.ejecucion.controller;
 
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,6 +35,8 @@ import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.ContratoTO;
+import ec.com.papp.planificacion.to.CronogramaTO;
+import ec.com.papp.planificacion.to.CronogramalineaTO;
 import ec.com.papp.planificacion.to.ItemunidadTO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
@@ -1429,6 +1432,41 @@ public class EjecucionController {
 		return respuesta;	
 	}
 
+	/**
+	 * obtienecronogramareforma retorna o graba la distribucion de metas de reformas o de reformameta
+	 * @param tipo indica si es reforma o reformameta (r/rm)
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/metareforma/{tipo}/{ejerciciofiscal}", method = RequestMethod.POST)
+	public String obtienecronogramareforma(@PathVariable String tipo,@PathVariable String ejerciciofiscal, @RequestBody String objeto,HttpServletRequest request){
+		log.println("entra al metodo: " +tipo +" "+ " - "+ objeto);
+		Mensajes mensajes=new Mensajes();
+		Gson gson = new Gson();
+		JSONObject jsonObject=new JSONObject();
+		try {
+			//tipo=r y accion=o
+			if(tipo.equals("r")){
+				ReformalineaTO reformalineaTO= gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
+				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, reformalineaTO, null);
+				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
+				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
+				jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramaTO.getCronogramalineaTOs(),new CronogramalineaTO().getJsonConfigreforma()));
+			}
+			
+	} catch (Exception e) {
+			e.printStackTrace();
+			log.println("error grabar");
+			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			//throw new MyException(e);
+		}
+		log.println("existe mensaje: " + mensajes.getMsg());
+		if(mensajes.getMsg()!=null)
+			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		log.println("json retornado: " + jsonObject.toString());
+		return jsonObject.toString();	
+	}
 
 	
 }
