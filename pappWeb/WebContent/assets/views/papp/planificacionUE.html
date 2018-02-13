@@ -1779,7 +1779,8 @@
 															ng-model="objeto.npprocedimientonombre" required>
 														<span class="input-group-btn">
 															<button type="button" class="btn btn-primary"
-																ng-click="abrirProcedimiento()" ng-disabled="!editar">
+																ng-click="abrirProcedimiento()"
+																ng-disabled="ninguno">
 																<i class="fa fa-search"></i> Seleccione
 															</button>
 														</span>
@@ -1803,7 +1804,8 @@
 															ng-disabled="true" ng-model="objeto.nptiporegnombre"
 															required> <span class="input-group-btn">
 															<button type="button" class="btn btn-primary"
-																ng-click="abrirTipoRegimen()" ng-disabled="!editar">
+																ng-click="abrirTipoRegimen()"
+																ng-disabled="ninguno">
 																<i class="fa fa-search"></i> Seleccione
 															</button>
 														</span>
@@ -2452,8 +2454,8 @@
 								</div>
 								<div class="panel-footer pull-right">
 									<a class="btn btn-sm btn-primary"
-										ng-click="editarAprobarPlanificacion();"> Aprobar </a> <a
-										class="btn btn-sm btn-default" ng-click="volver();">
+										ng-click="editarAprobarPlanificacion();"> Aprobar </a>
+									<a class="btn btn-sm btn-default" ng-click="volver();">
 										Volver </a>
 								</div>
 							</div>

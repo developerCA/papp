@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalSubItemController', ["$scope", "$rootScope", "$uibModalInstance","$filter", "ngTableParams","SubItemsFactory",
-	function($scope, $rootScope, $uibModalInstance,$filter, ngTableParams,subitemsFactory) {
+app.controller('ModalSubItemController', ["$scope", "$rootScope", "npitemid", "$uibModalInstance","$filter", "ngTableParams","SubItemsFactory",
+	function($scope, $rootScope, npitemid, $uibModalInstance,$filter, ngTableParams,subitemsFactory) {
 	
     $scope.nombre = null;
     $scope.codigo = null;
@@ -16,14 +16,21 @@ app.controller('ModalSubItemController', ["$scope", "$rootScope", "$uibModalInst
     $scope.data=[];
 
     $scope.consultar = function () {
-        subitemsFactory.traerItemsCustom(
+        console.log(npitemid);
+        subitemsFactory.traerItemsFiltroCustom(
     		$scope.pagina,
-    		$rootScope.ejefiscal
+    		null,
+    		null,
+    		null,
+    		null,
+    		$rootScope.ejefiscal,
+    		null,
+    		null,
+    		npitemid
 		).then(function (resp) {
-        	$scope.dataset = resp.json.result;
-            $scope.total = resp.json.total.valor;
-            console.log(resp);
-        });
+			$scope.dataset = resp.json.result;
+            $scope.total=resp.json.total.valor;
+        })
     };
 
     $scope.pageChanged = function() {
@@ -38,7 +45,7 @@ app.controller('ModalSubItemController', ["$scope", "$rootScope", "$uibModalInst
     	$scope.pagina=1;
     	$scope.filtrar();
     }  
-      
+
     $scope.filtrar = function () {
         subitemsFactory.traerItemsFiltroCustom(
     		$scope.pagina,
@@ -48,12 +55,12 @@ app.controller('ModalSubItemController', ["$scope", "$rootScope", "$uibModalInst
     		$scope.tipo,
     		$rootScope.ejefiscal,
     		$scope.codigoIncop,
-    		$scope.itemNombre
+    		$scope.itemNombre,
+    		npitemid
 		).then(function (resp) {
 			$scope.dataset = resp.json.result;
             $scope.total=resp.json.total.valor;
         })
-
     };
 
     $scope.mayusculas = function () {

@@ -14,8 +14,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.objUnidad = 0;
 	$scope.esnuevo=false;
 	$scope.vLimpio=false;
+	$scope.jsRegresar = null;
 
 	$scope.limpiarEdicion = function() {
+		$scope.ninguno = false;
 		$scope.divEditarDistribucion=false;
 		$scope.divPlanificacionAnual=true;
 		$scope.mPlanificadaID=0;
@@ -220,14 +222,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	//ng-change="modificarMetaPlanificada(treu);"
 	$scope.modificarMetaPlanificada = function(sumar) {
-/*		$scope.aDistribuirP = ($scope.divActividad
-			? $scope.detalles[$scope.mPlanificadaID].metavalor
-			: ($scope.divSubTarea
-				? $scope.detalles[$scope.mPlanificadaID].cantidad
-				: $scope.npTotalPlanificado
-			)
-		);
-*/
 		$scope.aDistribuirP = Number($scope.divActividad || $scope.divSubTarea
 			? $scope.detalles[$scope.mPlanificadaID].cantidad
 			: $scope.npTotalPlanificado
@@ -249,14 +243,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.modificarMetaAjustada = function(sumar) {
-/*		$scope.aDistribuirA = ($scope.divActividad
-			? $scope.detalles[$scope.mAjustadaID].metavalor
-			: ($scope.divSubTarea
-				? $scope.detalles[$scope.mAjustadaID].cantidad
-				: $scope.npTotalAjustado
-			)
-		);
-*/
 		$scope.aDistribuirA = Number($scope.divActividad || $scope.divSubTarea
 			? $scope.detalles[$scope.mAjustadaID].cantidad
 			: $scope.npTotalAjustado
@@ -347,7 +333,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.nuevo=function(node){
-		console.log(node);
+		//console.log(node);
 		$scope.esnuevo=true;
 		$scope.objeto=null;
 		$scope.nodeActivo=node;
@@ -439,7 +425,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.editarPlanificacionAnual=function(node) {
-		console.log(node);
+		//console.log(node);
 		$scope.esnuevo=false;
 		$scope.objeto=null;
 		if (node.siEditar == undefined) {
@@ -573,6 +559,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	            	$scope.detalles[i].npvalor = $scope.detalles[i].valor * $scope.detalles[i].cantidad;
             		$scope.detalles[i].total = $scope.detalles[i].npvalor;
 				}
+				$scope.ninguno = ($scope.objeto.subitemunidadtipoproductoid == 21? true: false);
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubItem=true;
 				$scope.calcularTotalPlanificado();
@@ -593,6 +580,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.arbol = [];
 		$scope.objeto = {};
 		$scope.details = [];
+		if ($scope.jsRegresar != null) {
+			eval("$scope." + $scope.jsRegresar + "();");
+			$scope.jsRegresar = null;
+		}
 	}
 
 	$scope.cargarPlanificacionAnual=function(obj) {
@@ -961,7 +952,12 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalSubitem.html',
 			controller : 'ModalSubItemController',
-			size : 'lg'
+			size : 'lg',
+			resolve: {
+				npitemid : function() {
+					return $scope.objeto.npitemid;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
@@ -982,7 +978,16 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
 			$scope.objeto.subitemunidadtipoproductoid = obj.id;
-			$scope.objeto.nptipoprodnombre = obj.nombre;	
+			$scope.objeto.nptipoprodnombre = obj.nombre;
+			$scope.ninguno = false;
+			if (obj.id == 21) {
+				// es igual a NINGUNO
+				$scope.objeto.subitemunidadprocedimientoid = obj.id;
+				$scope.objeto.npprocedimientonombre = obj.nombre;
+				$scope.objeto.subitemunidadtiporegimenid = obj.id;
+				$scope.objeto.nptiporegnombre = obj.nombre;
+				$scope.ninguno = true;
+			}
 		}, function() {
 		});
 	};
@@ -996,7 +1001,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
 			$scope.objeto.subitemunidadprocedimientoid = obj.id;
-			$scope.objeto.npprocedimientonombre = obj.nombre;	
+			$scope.objeto.npprocedimientonombre = obj.nombre;
 		}, function() {
 		});
 	};
@@ -1010,7 +1015,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
 			$scope.objeto.subitemunidadtiporegimenid = obj.id;
-			$scope.objeto.nptiporegnombre = obj.nombre;	
+			$scope.objeto.nptiporegnombre = obj.nombre;
 		}, function() {
 		});
 	};
@@ -1687,18 +1692,28 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.modificarPresupuestoAjustado = function(obj, tipo) {
 		//console.log("Fuentes:", obj);
-		var node = {
-			nodeTipo: obj.nivel,
-			tablarelacionid: obj.tablarelacionid,
-			npIdunidad: obj.npIdunidad,
-			//padreID: obj.,
-			npactividadid: obj.npactividadid,
-			siEditar: tipo
-		};
-		if (obj.nivelpadreid != undefined) {
-			node.padreID = obj.nivelpadreid;
+		if (obj.arbol == 1) {
+			$scope.jsRegresar = 'recargarPresupuestoAjustado';
+			$scope.aprobacionPlanificacion = false;
+			$scope.cargarPlanificacionAnual($scope.objetoPA);
+		} else {
+			var node = {
+				nodeTipo: obj.nivel,
+				tablarelacionid: obj.tablarelacionid,
+				npIdunidad: obj.npIdunidad,
+				//padreID: obj.,
+				npactividadid: obj.npactividadid,
+				siEditar: tipo
+			};
+			if (obj.nivelpadreid != undefined) {
+				node.padreID = obj.nivelpadreid;
+			}
+			$scope.editarPlanificacionAnual(node);
 		}
-		$scope.editarPlanificacionAnual(node);
+	}
+
+	$scope.recargarPresupuestoAjustado = function() {
+		$scope.aprobacionPlanificacion = true;
 	}
 
 	$scope.aprobarPlanificacion = function(obj) {

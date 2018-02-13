@@ -46,7 +46,8 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     		$scope.tipo,
     		$rootScope.ejefiscal,
     		$scope.codigoIncop,
-    		$scope.itemNombre
+    		$scope.itemNombre,
+    		null
 		).then(function (resp) {
 			$scope.dataset = resp.json.result;
             $scope.total=resp.json.total.valor;
