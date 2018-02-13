@@ -1131,8 +1131,10 @@ public class PlanificacionController {
 				subitemunidadTO.setSubitemunidadunidadid(Long.valueOf(parameters.get("unidadid")));
 				subitemunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
 				//Debo traer el id del item seleccionado en el itemunidad para que se pueda consultar el codigo incop
-				ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
-				subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
+				if(parameters.get("itemunidadid")!=null) {
+					ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
+					subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
+				}
 				jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				//obtengo la lista de subitemunidadacumuladorTO existente para saber que acumulador toca
 				SubitemunidadacumuladorTO subitemunidadacumuladorExiste=new SubitemunidadacumuladorTO();
@@ -1485,8 +1487,10 @@ public class PlanificacionController {
 				subitemunidadTO.setNpcodigosubitem(subitemunidadTO.getSubitem().getCodigo());
 				subitemunidadTO.setNpnombresubitem(subitemunidadTO.getSubitem().getNombre());
 				//Debo traer el id del item seleccionado en el itemunidad para que se pueda consultar el codigo incop
-				ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
-				subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
+				if(parameters.get("itemunidadid")!=null) {
+					ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
+					subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
+				}
 				jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				//traigo los datos de actividadunidadacumulador
 				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
