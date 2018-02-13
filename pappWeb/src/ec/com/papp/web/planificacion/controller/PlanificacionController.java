@@ -1130,6 +1130,9 @@ public class PlanificacionController {
 				subitemunidadTO.setSubitemunidadejerfiscalid(ejercicio);
 				subitemunidadTO.setSubitemunidadunidadid(Long.valueOf(parameters.get("unidadid")));
 				subitemunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
+				//Debo traer el id del item seleccionado en el itemunidad para que se pueda consultar el codigo incop
+				ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
+				subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
 				jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				//obtengo la lista de subitemunidadacumuladorTO existente para saber que acumulador toca
 				SubitemunidadacumuladorTO subitemunidadacumuladorExiste=new SubitemunidadacumuladorTO();
@@ -1160,7 +1163,6 @@ public class PlanificacionController {
 				//Saldo para los valores planificados y acumulados
 				//1. traigo el valor presupuestado y aprobado de la actividad
 				ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("actividadid")), Long.valueOf(parameters.get("unidadid"))));
-				//2. traigo los valores ya reservados para restar y mostrar solo lo disponible
 				log.println("actividad id: " + actividadunidadTO.getId().getId());
 				log.println("unidad: " + parameters.get("unidadid"));
 				log.println("ejercicio: " + ejercicio);
@@ -1482,6 +1484,9 @@ public class PlanificacionController {
 				subitemunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
 				subitemunidadTO.setNpcodigosubitem(subitemunidadTO.getSubitem().getCodigo());
 				subitemunidadTO.setNpnombresubitem(subitemunidadTO.getSubitem().getNombre());
+				//Debo traer el id del item seleccionado en el itemunidad para que se pueda consultar el codigo incop
+				ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
+				subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
 				jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				//traigo los datos de actividadunidadacumulador
 				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();

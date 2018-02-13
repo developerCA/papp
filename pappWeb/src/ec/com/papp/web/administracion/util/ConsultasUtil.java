@@ -991,13 +991,8 @@ public class ConsultasUtil {
 			if(parameters.get("itemnombre")!=null && !parameters.get("itemnombre").equals("")){
 				itemTO.setNombre(parameters.get("itemnombre"));
 			}	
-			if(parameters.get("itemunidadid")!=null && !parameters.get("itemunidadid").equals("")){
-				log.println("se envio el itemunidad");
-				//traigo el item
-				log.println("va a consultar el item unidad: " + parameters.get("itemunidadid"));
-				//ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
-				//log.println("item: " + itemunidadTO.getItemunidaditemid());
-				subitemTO.setSubitemitemid(Long.valueOf(parameters.get("itemunidadid")));
+			if(parameters.get("itemid")!=null && !parameters.get("itemid").equals("")){
+				subitemTO.setSubitemitemid(Long.valueOf(parameters.get("itemid")));
 			}
 			subitemTO.setUnidadmedida(new UnidadmedidaTO());
 			subitemTO.setItem(itemTO);
