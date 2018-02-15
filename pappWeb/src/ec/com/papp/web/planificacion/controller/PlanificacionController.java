@@ -832,17 +832,21 @@ public class PlanificacionController {
 				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
 				log.println("niveles: " + resultado.size());
 				boolean existesubiten=false;
+				log.println("codigo del subitem "+subitemunidadTO.getNpcodigosubitem());
 				for(NivelactividadTO nivelactividadTO2:resultado){
-					log.println("descripcion " + nivelactividadTO2.getDescripcionexten());
+//					log.println("descripcion " + nivelactividadTO2.getDescripcionexten());
+//					log.println("tablarelacion id " + nivelactividadTO2.getTablarelacionid());
+//					log.println("id del subitem " + subitemunidadTO.getId());
 					if(nivelactividadTO2.getDescripcionexten()!=null) {
 						String [] descripcion=nivelactividadTO2.getDescripcionexten().split("-");
-						if((subitemunidadTO.getId()==null || subitemunidadTO.getId().longValue()==0) && (descripcion[0].equals(subitemunidadTO.getNpcodigosubitem()) && descripcion[1].equals(subitemunidadTO.getNpnombresubitem()))){
+//						log.println("descripcion::: " + descripcion[0]);
+						if((subitemunidadTO.getId()==null || subitemunidadTO.getId().longValue()==0) && (descripcion[0].trim().equals(subitemunidadTO.getNpcodigosubitem()) && descripcion[1].trim().equals(subitemunidadTO.getNpnombresubitem()))){
 							existesubiten=true;
 							break;
 						}
 						else if((subitemunidadTO.getId()!=null && subitemunidadTO.getId().longValue()!=0) 
 								&& (subitemunidadTO.getId().longValue()!=nivelactividadTO2.getTablarelacionid().longValue())
-								&& (descripcion[0].equals(subitemunidadTO.getNpcodigosubitem()) && descripcion[1].equals(subitemunidadTO.getNpnombresubitem()))){
+								&& (descripcion[0].trim().equals(subitemunidadTO.getNpcodigosubitem()) && descripcion[1].trim().equals(subitemunidadTO.getNpnombresubitem()))){
 							existesubiten=true;
 							break;
 						}
