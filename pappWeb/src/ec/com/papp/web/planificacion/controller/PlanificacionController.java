@@ -1814,7 +1814,7 @@ public class PlanificacionController {
 						mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 					}
 				}
-				else if(parameters.get("accion").equals("AC")) {
+				else if(parameters.get("accion").equals("AP")) {
 					//va aprobar la actividadunidad
 					if(parameters.get("tipo").equals("P"))
 						actividadunidadTO.setPresupaprobado(1);
