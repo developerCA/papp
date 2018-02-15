@@ -398,7 +398,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.id,
 				$rootScope.ejefiscal +
 				"/unidadid=" + node.npIdunidad +
-				"&actividadid=" + node.npactividadid
+				"&actividadid=" + node.npactividadid +
+				"&itemunidadid=" + node.tablarelacionid
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
@@ -539,7 +540,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.tablarelacionid,
 				"unidadid=" + node.npIdunidad +
 				"&ejerciciofiscal=" + $rootScope.ejefiscal +
-				"&actividadid=" + node.npactividadid
+				"&actividadid=" + node.npactividadid +
+				"&itemunidadid=" + node.nodePadre.tablarelacionid
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
