@@ -38,7 +38,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 		$scope.objeto=null;
 		$scope.detalles=null;
-		$scope.objetoPA=null;
+		//$scope.objetoPA=null;
 		$scope.objetoPlanificada=null;
 		$scope.detallesPlanificada=null;
 		$scope.objetoAjustada=null;
@@ -499,7 +499,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
-				"nivelactividad=" + node.nodePadre.nodePadre.id
+				"nivelactividad=" + (node.nodePadre !== undefined? node.nodePadre.nodePadre.id: node.padreID)
 			).then(function(resp){
 				console.log(resp);
 				if (!resp.estado) return;
@@ -1719,7 +1719,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.aprobarPlanificacion = function(obj) {
-		$scope.detalles = null;
+		$scope.detallesPA = null;
 		if (obj.npestadopresupuesto != "Planificado") {
 			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado", "warning");
 			return;
@@ -1738,6 +1738,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		).then(function(resp){
 			$scope.detallesPA = resp.json.resultadoaprobacion;
 			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			if ($scope.detallesPA == []) {
+				$scope.objetoPA.npestadopresupuesto = "Solicitado";
+			}
 		});
 	};
 	
@@ -1770,6 +1773,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		).then(function(resp){
 			$scope.detallesPA = resp.json.resultadoaprobacion;
 			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			if ($scope.detallesPA == []) {
+				$scope.objetoPA.npestadopresupajus = "Solicitado";
+			}
 		})
 	};
 
@@ -1822,7 +1828,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$rootScope.ejefiscal,
 			$scope.tipo
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.unidad = resp.json.unidad;
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;

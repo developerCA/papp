@@ -34,6 +34,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     
     $scope.filtrarUnico=function(){
     	$scope.pagina=1;
+    	$scope.aplicafiltro=true;
     	$scope.filtrar();
     }  
       
