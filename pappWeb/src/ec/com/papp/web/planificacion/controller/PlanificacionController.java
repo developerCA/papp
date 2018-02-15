@@ -1793,21 +1793,35 @@ public class PlanificacionController {
 				log.println("ejercicio fiscal: " + parameters.get("nivelactividadejerfiscalid"));
 				log.println("tipo aprobacion: " + parameters.get("tipo"));
 				log.println("id: " + parameters.get("unidad"));
+				log.println("accion: " + parameters.get("accion"));
 				ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("nivelactividadunidadid")),Long.valueOf(parameters.get("unidad"))));
 				log.println("actividad: " + actividadunidadTO.getId().getId());
-				Boolean mensaje=ConsultasUtil.aprobacionplanificacion(Long.valueOf(parameters.get("unidad")), Long.valueOf(parameters.get("nivelactividadejerfiscalid")), parameters.get("tipo"), Long.valueOf(parameters.get("nivelactividadunidadid")), actividadunidadTO.getId().getId(), jsonObject);
-				if(mensaje){
-					mensajes.setMsg("No se puede aprobar existen observaciones");
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				//1.Si se va a solicitar
+				if(parameters.get("accion").equals("SO")) {
+					Boolean mensaje=ConsultasUtil.aprobacionplanificacion(Long.valueOf(parameters.get("unidad")), Long.valueOf(parameters.get("nivelactividadejerfiscalid")), parameters.get("tipo"), Long.valueOf(parameters.get("nivelactividadunidadid")), actividadunidadTO.getId().getId(), jsonObject);
+					if(mensaje){
+						mensajes.setMsg("No se puede solicitar existen observaciones");
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+					else{
+						//va aprobar la actividadunidad
+						if(parameters.get("tipo").equals("P"))
+							actividadunidadTO.setPresupaprobado(3);
+						else
+							actividadunidadTO.setPresupaprobado(3);
+						UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO);
+						mensajes.setMsg("La solicitud fue enviada con exito");
+						mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+					}
 				}
-				else{
+				else if(parameters.get("accion").equals("AC")) {
 					//va aprobar la actividadunidad
 					if(parameters.get("tipo").equals("P"))
-						actividadunidadTO.setPresupaprobado(1.0);
+						actividadunidadTO.setPresupaprobado(1);
 					else
-						actividadunidadTO.setPresupajust(1.0);
+						actividadunidadTO.setPresupaprobado(1);
 					UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO);
-					mensajes.setMsg("se aprobo con exito");
+					mensajes.setMsg("Se aprobo con exito");
 					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 				}
 			}
