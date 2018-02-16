@@ -561,6 +561,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	            	$scope.detalles[i].npvalor = $scope.detalles[i].valor * $scope.detalles[i].cantidad;
             		$scope.detalles[i].total = $scope.detalles[i].npvalor;
 				}
+				$scope.objeto.tplanificado += ($scope.detalles[$scope.mPlanificadaID].cantidad * $scope.detalles[$scope.mPlanificadaID].valor);
+				$scope.objeto.tacumulado += ($scope.detalles[$scope.mAjustadaID].cantidad * $scope.detalles[$scope.mAjustadaID].valor);
 				$scope.ninguno = ($scope.objeto.subitemunidadtipoproductoid == 21? true: false);
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubItem=true;
@@ -1451,6 +1453,24 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.submitformSubItem = function(form) {
     	var tObj=$scope.objeto;
 		tObj.subitemunidadacumulador=$scope.detalles;
+		if ($scope.npTotalPlanificado > $scope.objeto.tplanificado
+		|| $scope.objeto.tplanificado < 0) {
+            SweetAlert.swal(
+        		"Planificacion UE! - Subitem",
+        		"El Total Planificado supera el saldo disponible.",
+        		"error"
+    		);
+            return;
+		}
+		if ($scope.npTotalAjustado > $scope.objeto.tacumulado
+		|| $scope.objeto.tacumulado < 0) {
+            SweetAlert.swal(
+        		"Planificacion UE! - Subitem",
+        		"El Total Ajustado supera el saldo disponible.",
+        		"error"
+    		);
+            return;
+		}
 		if ($scope.esnuevo) {
 	    	PlanificacionUEFactory.guardarActividades("SI",tObj).then(function(resp){
 	    		$scope.divPlanificacionAnual = false;

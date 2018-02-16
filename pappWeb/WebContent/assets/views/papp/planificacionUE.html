@@ -1908,13 +1908,14 @@
 															ng-class="{'has-error':FormSubItem.npTotalPlanificado.$dirty && FormSubItem.npTotalPlanificado.$invalid, 'has-success':FormSubItem.npTotalPlanificado.$valid}">
 															<label class="control-label"> Total Planificado <span
 																class="symbol required"></span>
-															</label> <input type="text" numericOnly
+															</label>
+															<input type="text" numericOnly
 																style="text-align: right;" decimal="2"
 																placeholder="Escriba un total planificado"
 																class="form-control" name="npTotalPlanificado"
 																ng-model="npTotalPlanificado" ng-disabled="true"
-																ng-max="objeto.tplanificado"> <span
-																class="error text-small block"
+																ng-max="objeto.tplanificado" required>
+															<span class="error text-small block"
 																ng-if="FormSubItem.npTotalPlanificado.$dirty && FormSubItem.npTotalPlanificado.$invalid">
 																Incorrecto </span> <span class="success text-small"
 																ng-if="FormSubItem.npTotalPlanificado.$valid">
