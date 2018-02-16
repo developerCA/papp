@@ -1734,14 +1734,19 @@
 													ng-class="{'has-error':FormSubItem.npnombresubitem.$dirty && FormSubItem.npnombresubitem.$invalid, 'has-success':FormSubItem.npnombresubitem.$valid}">
 													<label class="control-label"> Nombre <span
 														class="symbol required"></span>
-													</label> <input type="text" placeholder="Escriba un nombre"
+													</label>
+													<input type="text" placeholder="Escriba un nombre"
 														class="form-control" name="npnombresubitem"
 														ng-model="objeto.npnombresubitem" required
-														ng-disabled="true"> <span
-														class="error text-small block"
+														ng-disabled="true">
+													<span class="error text-small block"
 														ng-if="FormSubItem.npnombresubitem.$dirty && FormSubItem.npnombresubitem.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubItem.npnombresubitem.$valid"> Listo </span>
+														Incorrecto
+													</span>
+													<span class="success text-small"
+														ng-if="FormSubItem.npnombresubitem.$valid">
+														Listo
+													</span>
 												</div>
 
 												<div class="form-group"

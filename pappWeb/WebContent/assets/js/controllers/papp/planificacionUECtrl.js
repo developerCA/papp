@@ -819,7 +819,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					nodes[i].nodePadre = node;
 				}
 			} else */
-			if (tipo == "AC" || tipo == "SA") {
+			if (tipo == "AC" || tipo == "SA" || tipo == "IT") {
 				nodes=JSON.parse(JSON.stringify(resp).split('"descripcionexten":').join('"title":'));
 				for (var i = 0; i < nodes.length; i++) {
 					nodes[i].nodePadre = node;
