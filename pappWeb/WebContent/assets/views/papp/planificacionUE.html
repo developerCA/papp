@@ -2323,13 +2323,20 @@
 									<td>Observaci&oacute;n</td>
 								</tr>
 								<tr ng-repeat="obj in detallePA" class="table-stylish">
-									<td>{{ obj.tareanombre }}</td>
-									<td>{{ obj.subtareanombre }}</td>
-									<td>{{ obj.itemcodigo }}</td>
+									<td>
+										{{ obj.tareacodigo }}: {{ obj.tareanombre }}
+									</td>
+									<td>
+										{{ obj.subtareacodigo }}: {{ obj.subtareanombre }}
+									</td>
+									<td>
+										{{ obj.itemcodigo }}
+									</td>
 									<td>{{ obj.subitemcodigo }}</td>
-									<td>{{ obj.descripcion }}</td>
-									<td style="text-align: right;">{{ obj.presupuesto | number
-										: 2 }}</td>
+									<td>{{ obj.subitemnombre }}</td>
+									<td style="text-align: right;">
+										{{ obj.presupuesto | number : 2 }}
+									</td>
 									<td>{{ obj.observacion }}</td>
 								</tr>
 							</table>
@@ -2425,21 +2432,29 @@
 									<td>Ponderaci&oacute;n</td>
 									<td>Subtarea</td>
 									<td>Ponderaci&oacute;n</td>
-									<td>Descripci&oacute;n<br>(NO SE RECIBE)
-									</td>
+									<td>Descripci&oacute;n</td>
 									<td>Meta</td>
 									<td>Mes</td>
 									<td>Observaci&oacute;n</td>
 								</tr>
 								<tr ng-repeat="obj in detallePA" class="table-stylish">
-									<td>{{ obj.tareacodigo + " " + obj.tareanombre }}</td>
-									<td style="text-align: right;">{{ obj.tareaponderacion |
-										number : 2 }}</td>
-									<td>{{ obj.subtareacodigo + " " + obj.subtareanombre }}</td>
-									<td style="text-align: right;">{{ obj.subtareaponderacion
-										| number : 2 }}</td>
-									<td>{{ obj.descripcion }}</td>
-									<td style="text-align: right;">{{ obj.meta | number : 2 }}</td>
+									<td>
+										{{ obj.tareacodigo }}: {{ obj.tareanombre }}
+									</td>
+									<td style="text-align: right;">
+										{{ obj.tareaponderacion | number : 2 }}
+									</td>
+									<td>
+										{{ obj.subtareacodigo }}: {{ obj.subtareanombre }}
+									</td>
+									<td style="text-align: right;">
+										{{ obj.subtareaponderacion | number : 2 }}</td>
+									<td>
+										{{ obj.descripcion }}
+									</td>
+									<td style="text-align: right;">
+										{{ obj.meta | number : 2 }}
+									</td>
 									<td>{{ obj.npMes }}</td>
 									<td>{{ obj.observacion }}</td>
 								</tr>
@@ -2669,17 +2684,26 @@
 									<td>Observaci&oacute;n</td>
 								</tr>
 								<tr ng-repeat="obj in detalles" class="table-stylish">
-									<td>{{ obj.tareanombre }}</td>
-									<td>{{ obj.subtareanombre }}</td>
-									<td>{{ obj.itemcodigo }}</td>
+									<td>
+										{{ obj.tareacodigo }}: {{ obj.tareanombre }}
+									</td>
+									<td>
+										{{ obj.subtareacodigo }}: {{ obj.subtareanombre }}
+									</td>
+									<td>
+										{{ obj.itemcodigo }}
+									</td>
 									<td>{{ obj.subitemcodigo }}</td>
-									<td>{{ obj.descripcion }}</td>
-									<td style="text-align: right;">{{ obj.presupuesto | number
-										: 2 }}</td>
-									<td><input type="text"
-										placeholder="Escriba una observacion" class="form-control"
-										name="{{'obcerv_'+$index}}" ng-model="obj.observacion"
-										ng-change="editadoObservacion($index);"></td>
+									<td>{{ obj.subitemnombre }}</td>
+									<td style="text-align: right;">
+										{{ obj.presupuesto | number : 2 }}
+									</td>
+									<td>
+										<input type="text"
+											placeholder="Escriba una observacion" class="form-control"
+											name="{{'obcerv_'+$index}}" ng-model="obj.observacion"
+											ng-change="editadoObservacion($index);">
+									</td>
 								</tr>
 							</table>
 						</div>
@@ -2776,26 +2800,36 @@
 									<td>Ponderaci&oacute;n</td>
 									<td>Subtarea</td>
 									<td>Ponderaci&oacute;n</td>
-									<td>Descripci&oacute;n<br>(NO SE RECIBE)
-									</td>
+									<td>Descripci&oacute;n</td>
 									<td>Meta</td>
 									<td>Mes</td>
 									<td>Observaci&oacute;n</td>
 								</tr>
 								<tr ng-repeat="obj in detalles" class="table-stylish">
-									<td>{{ obj.tareacodigo + " " + obj.tareanombre }}</td>
-									<td style="text-align: right;">{{ obj.tareaponderacion |
-										number : 2 }}</td>
-									<td>{{ obj.subtareacodigo + " " + obj.subtareanombre }}</td>
-									<td style="text-align: right;">{{ obj.subtareaponderacion
-										| number : 2 }}</td>
-									<td>{{ obj.descripcion }}</td>
-									<td style="text-align: right;">{{ obj.meta | number : 2 }}</td>
+									<td>
+										{{ obj.tareacodigo }}: {{ obj.tareanombre }}
+									</td>
+									<td style="text-align: right;">
+										{{ obj.tareaponderacion | number : 2 }}</td>
+									<td>
+										{{ obj.subtareacodigo }}: {{ obj.subtareanombre }}
+									</td>
+									<td style="text-align: right;">
+										{{ obj.subtareaponderacion | number : 2 }}
+									</td>
+									<td>
+										{{ obj.descripcion }}
+									</td>
+									<td style="text-align: right;">
+										{{ obj.meta | number : 2 }}
+									</td>
 									<td>{{ obj.npMes }}</td>
-									<td><input type="text"
-										placeholder="Escriba una observacion" class="form-control"
-										name="{{'obcerv_'+$index}}" ng-model="obj.observacion"
-										ng-change="editadoObservacion($index);"></td>
+									<td>
+										<input type="text"
+											placeholder="Escriba una observacion" class="form-control"
+											name="{{'obcerv_'+$index}}" ng-model="obj.observacion"
+											ng-change="editadoObservacion($index);">
+									</td>
 								</tr>
 							</table>
 						</div>
