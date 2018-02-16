@@ -74,13 +74,27 @@
 
 								<td><a class="btn btn-sm btn-primary"
 									style="background-color: #00B300 !important"
+									uib-tooltip="Solicitar Planificaci&oacute;n"
+									ng-click="solicitarPlanificacion(obj);"> <i
+										class="fa ti-layout"></i>
+								</a></td>
+								<td><a class="btn btn-sm btn-primary"
+									style="background-color: #00B300 !important"
+									uib-tooltip="Solicitar Ajustada"
+									ng-click="solicitarAjustado(obj);">
+									<i class="fa ti-pencil-alt"></i>
+								</a></td>
+
+								<td><a class="btn btn-sm btn-primary"
+									style="background-color: #00B300 !important"
 									uib-tooltip="Aprobar Planificaci&oacute;n"
 									ng-click="aprobarPlanificacion(obj);"> <i
 										class="fa ti-marker-alt"></i>
 								</a></td>
 								<td><a class="btn btn-sm btn-primary"
 									style="background-color: #00B300 !important"
-									uib-tooltip="Aprobar Ajustada" ng-click="aprobarAjustado(obj);">
+									uib-tooltip="Aprobar Ajustada"
+									ng-click="aprobarAjustado(obj);">
 										<i class="fa ti-signal"></i>
 								</a></td>
 								<td><a class="btn btn-sm btn-primary"
@@ -2302,7 +2316,7 @@
 									<td>Presupuesto</td>
 									<td>Observaci&oacute;n</td>
 								</tr>
-								<tr ng-repeat="obj in detalle" class="table-stylish">
+								<tr ng-repeat="obj in detallePA" class="table-stylish">
 									<td>{{ obj.tareanombre }}</td>
 									<td>{{ obj.subtareanombre }}</td>
 									<td>{{ obj.itemcodigo }}</td>
@@ -2411,7 +2425,7 @@
 									<td>Mes</td>
 									<td>Observaci&oacute;n</td>
 								</tr>
-								<tr ng-repeat="obj in detalle" class="table-stylish">
+								<tr ng-repeat="obj in detallePA" class="table-stylish">
 									<td>{{ obj.tareacodigo + " " + obj.tareanombre }}</td>
 									<td style="text-align: right;">{{ obj.tareaponderacion |
 										number : 2 }}</td>
@@ -2430,8 +2444,9 @@
 
 				<div class="panel-body" ng-show="aprobacionPlanificacion">
 					<div class="panel-heading">
-						<h5 class="panel-title">Aprobaci&oacute;n
-							Planificaci&oacute;n</h5>
+						<h5 class="panel-title">
+							Solicitar Planificaci&oacute;n
+						</h5>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -2493,7 +2508,7 @@
 
 				<div class="panel-body" ng-show="aprobacionAjustado">
 					<div class="panel-heading">
-						<h5 class="panel-title">Aprobaci&oacute;n Ajustado</h5>
+						<h5 class="panel-title">Solicitar Ajustado</h5>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -2647,7 +2662,7 @@
 									<td>Presupuesto</td>
 									<td>Observaci&oacute;n</td>
 								</tr>
-								<tr ng-repeat="obj in detalle" class="table-stylish">
+								<tr ng-repeat="obj in detalles" class="table-stylish">
 									<td>{{ obj.tareanombre }}</td>
 									<td>{{ obj.subtareanombre }}</td>
 									<td>{{ obj.itemcodigo }}</td>
@@ -2761,7 +2776,7 @@
 									<td>Mes</td>
 									<td>Observaci&oacute;n</td>
 								</tr>
-								<tr ng-repeat="obj in detalle" class="table-stylish">
+								<tr ng-repeat="obj in detalles" class="table-stylish">
 									<td>{{ obj.tareacodigo + " " + obj.tareanombre }}</td>
 									<td style="text-align: right;">{{ obj.tareaponderacion |
 										number : 2 }}</td>

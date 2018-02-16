@@ -808,6 +808,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				resp[i].padreID = node.id;
 			}
 			var nodes;
+			/* if (tipo == "IT") {
+				//nodes=JSON.parse(JSON.stringify(resp).split('"descripcionexten":').join('"title":'));
+				nodes=resp;
+				for (var i = 0; i < nodes.length; i++) {
+					nodes[i].title = nodes[i].descripcionexten.split(" - ")[1];
+					nodes[i].title = nodes[i].npcodigo + " - " + nodes[i].npcodigocanton + " - " + nodes[i].npcodigofuente + " - " + nodes[i].title;
+					nodes[i].nodePadre = node;
+				}
+			} else */
 			if (tipo == "AC" || tipo == "SA") {
 				nodes=JSON.parse(JSON.stringify(resp).split('"descripcionexten":').join('"title":'));
 				for (var i = 0; i < nodes.length; i++) {
@@ -825,10 +834,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 	
 	$scope.asideTM = {
-			  "title": "Title",
-			  "content": "<br><br><br><br><br><br>Hello Aside<br />This is a multiline message!"
-			};
-	
+	  "title": "Title",
+	  "content": "<br><br><br><br><br><br>Hello Aside<br />This is a multiline message!"
+	};
 
 	$scope.abrirItemCodigo = function(index) {
 		//console.log("aqui:", $scope.objeto);
@@ -1264,6 +1272,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"DEBE CREAR EL CRONOGRAMA DE META PLANIFICADO.",
         		"error"
     		);
+    		$scope.metaDistribucion('P');
             return;
 		}
 		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
@@ -1272,6 +1281,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    		"DEBE CREAR EL CRONOGRAMA DE META AJUSTADA.",
 	    		"error"
 			);
+			$scope.metaDistribucion('A');
 	        return;
 		}
     	var tObj={};
@@ -1378,6 +1388,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"DEBE CREAR EL CRONOGRAMA DE META PLANIFICADO.",
         		"error"
     		);
+    		$scope.metaDistribucion('P');
             return;
 		}
 		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
@@ -1386,6 +1397,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    		"DEBE CREAR EL CRONOGRAMA DE META AJUSTADA.",
 	    		"error"
 			);
+			$scope.metaDistribucion('A');
 	        return;
 		}
 		if ($scope.esnuevo) {
@@ -1462,6 +1474,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"No coincide del Presupuesto el Total Planifica y la distribuida, tiene que redistribuirla.",
         		"error"
     		);
+    		$scope.metaDistribucion('P');
             return;
 		}
 		if ($scope.npTotalAjustado != $scope.detalles[$scope.mAjustadaID].npvalor) {
@@ -1470,6 +1483,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    		"No coincide del Presupuesto el Total Ajustada y la distribuida, tiene que redistribuirla.",
 	    		"error"
 			);
+			$scope.metaDistribucion('A');
 	        return;
 		}
 		if ($scope.esnuevo) {
@@ -1719,6 +1733,26 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.aprobarPlanificacion = function(obj) {
+		if (obj.npestadopresupuesto != "Solicitado") {
+			SweetAlert.swal("Planificacion!", "Solo se puede aprobar si esta en estado solicitado.", "error");
+			return;
+		}
+		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			obj.id,
+			$rootScope.ejefiscal,
+			obj.npacitividadunidad,
+			"P",
+			"AP"
+		).then(function(resp){
+			//$scope.detallesPA = resp.json.resultadoaprobacion;
+			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			if (resp.estado) {
+				obj.npestadopresupuesto = "Aprobado";
+			}
+		});
+	}
+
+	$scope.solicitarPlanificacion = function(obj) {
 		$scope.detallesPA = null;
 		if (obj.npestadopresupuesto != "Planificado") {
 			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado", "warning");
@@ -1734,11 +1768,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.objetoPA.id,
 			$rootScope.ejefiscal,
 			$scope.objetoPA.npacitividadunidad,
-			"P"
+			"P",
+			"SO"
 		).then(function(resp){
-			$scope.detallesPA = resp.json.resultadoaprobacion;
 			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
-			if ($scope.detallesPA == []) {
+			if (resp.json.resultadoaprobacion.length != 0) {
+				$scope.detallesPA = resp.json.resultadoaprobacion;
+				if ($scope.detallesPA == []) {
+					$scope.objetoPA.npestadopresupuesto = "Solicitado";
+				}
+			} else {
+				$scope.detallesPA = null;
 				$scope.objetoPA.npestadopresupuesto = "Solicitado";
 			}
 		});
@@ -1748,13 +1788,33 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		//index = ((pagina - 1) * 5) + index;
 		$scope.detalles[index].modificado = true;
 	}
-	
+
 	$scope.aprobarAjustado = function(obj) {
+		if (obj.npestadopresupajus != "Solicitado") {
+			SweetAlert.swal("Planificacion!", "Solo se puede aprobar si esta en estado solicitado.", "error");
+			return;
+		}
+		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			obj.id,
+			$rootScope.ejefiscal,
+			obj.npacitividadunidad,
+			"P",
+			"AP"
+		).then(function(resp){
+			//$scope.detallesPA = resp.json.resultadoaprobacion;
+			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			if (resp.estado) {
+				obj.npestadopresupajus = "Aprobado";
+			}
+		});
+	}
+
+	$scope.solicitarAjustado = function(obj) {
 		$scope.detallesPA = null;
-		if (obj.npestadopresupuesto != "Aprobado") {
+		if (obj.npestadopresupuesto == "Planificado") {
 			SweetAlert.swal(
 				"Aprobacion Planificacion!",
-				"Solo se puede aprobar el Ajustado si el Planificado esta Aprobado",
+				"Solo se puede Solicitar el Ajustado si el Planificado esta Solicitado",
 				"warning"
 			);
 			return;
@@ -1769,11 +1829,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.objetoPA.id,
 			$rootScope.ejefiscal,
 			$scope.objetoPA.npacitividadunidad,
-			"A"
+			"A",
+			"SO"
 		).then(function(resp){
-			$scope.detallesPA = resp.json.resultadoaprobacion;
 			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
-			if ($scope.detallesPA == []) {
+			if (resp.json.resultadoaprobacion.length != 0) {
+				$scope.detallesPA = resp.json.resultadoaprobacion;
+				if ($scope.detallesPA == []) {
+					$scope.objetoPA.npestadopresupajus = "Solicitado";
+				}
+			} else {
+				$scope.detallesPA = null;
 				$scope.objetoPA.npestadopresupajus = "Solicitado";
 			}
 		})
@@ -1806,7 +1872,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$rootScope.ejefiscal,
 			$scope.tipo
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.unidad = resp.json.unidad;
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
@@ -1817,7 +1883,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
 			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
 			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
-			$scope.detalles = resp.json.detalles;
+			$scope.detalles = resp.json.detalle;
 			$scope.edicionMatrizPresupuestoAP = true;
 		});
 	}
@@ -1839,7 +1905,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
 			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
 			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
-			$scope.detalles = resp.json.detalles;
+			$scope.detalles = resp.json.detalle;
 			$scope.edicionMatrizMetasAP = true;
 		});
 	}

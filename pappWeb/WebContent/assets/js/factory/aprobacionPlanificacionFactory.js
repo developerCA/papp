@@ -41,13 +41,15 @@ app.factory("AprobacionPlanificacionFactory", ["Restangular", function (Restangu
     		unidad,
     		ejerfiscalid,
     		nivelactividadunidadid,
-    		tipo
+    		tipo,
+    		accion
 		) {
 			var url = "planificacion/consultar/aprobar/" +
 				"unidad=" + unidad +
 				"&nivelactividadejerfiscalid=" + ejerfiscalid +
 				"&nivelactividadunidadid=" + nivelactividadunidadid + 
-				"&tipo=" + tipo;
+				"&tipo=" + tipo + 
+				"&accion=" + accion;
 
 		    return Restangular.allUrl(url).customGET();
 		},

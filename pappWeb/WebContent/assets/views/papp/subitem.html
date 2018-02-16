@@ -75,12 +75,12 @@
 						<i class="fa fa-plus-square"></i> Agregar
 					</a>
 
-
 					<div>
 						<table class="table table-striped">
 							<thead>
 								<tr>
 									<th></th>
+									<th>Item C&oacute;digo</th>
 									<th>Item Nombre</th>
 									<th>C&oacute;digo INCOP</th>
 									<th>Nombre</th>
@@ -95,6 +95,7 @@
 							<tr ng-repeat="data in dataset">
 								<td><a class="btn btn-sm btn-primary"
 									ng-click="editar(data.id)"><i class="fa fa-pencil"></i></a></td>
+								<td data-title="'Item C&oacute;digo'" style="max-width: 100px">{{data.npitemcodigo}}</td>
 								<td data-title="'Item Nombre'" style="max-width: 100px">{{data.npitemnombre}}</td>
 								<td data-title="'C&oacute;digo INCOP'">{{data.codigo}}</td>
 								<td data-title="'Nombre'" style="max-width: 100px">{{data.nombre}}</td>
