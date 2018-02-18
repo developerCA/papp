@@ -31,6 +31,7 @@ import ec.com.papp.planificacion.id.OrdengastolineaID;
 import ec.com.papp.planificacion.id.OrdenreversionlineaID;
 import ec.com.papp.planificacion.id.ReformalineaID;
 import ec.com.papp.planificacion.id.ReformametalineaID;
+import ec.com.papp.planificacion.id.ReformametasubtareaID;
 import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
@@ -114,7 +115,7 @@ public class EjecucionController {
 				CertificacionlineaTO certificacionlineaTO = gson.fromJson(new StringReader(objeto), CertificacionlineaTO.class);
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				CertificacionlineaTO certificacionlineaTO2=new CertificacionlineaTO();
-				log.println("consulta lineas: " + certificacionlineaTO.getNivelactid() + certificacionlineaTO.getId().getId());
+				log.println("consulta lineas: " + certificacionlineaTO.getNivelactid() +"-"+ certificacionlineaTO.getId().getId());
 				certificacionlineaTO2.setNivelactid(certificacionlineaTO.getNivelactid());
 				certificacionlineaTO2.getId().setId(certificacionlineaTO.getId().getId());
 				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtenerCertificacionlinea(certificacionlineaTO2);
@@ -122,11 +123,11 @@ public class EjecucionController {
 				boolean grabar=true;
 				if(certificacionlineaTOs.size()>0){
 					for(CertificacionlineaTO certificacionlineaTO3:certificacionlineaTOs) {
-						if((certificacionlineaTO.getId().getId()!=null && certificacionlineaTO.getId().getId().longValue()!=0) && certificacionlineaTO3.getId().getId().longValue()!=certificacionlineaTO.getId().getId().longValue()) {
+						if((certificacionlineaTO.getId().getLineaid()!=null && certificacionlineaTO.getId().getLineaid().longValue()!=0) && certificacionlineaTO3.getId().getLineaid().longValue()!=certificacionlineaTO.getId().getLineaid().longValue()) {
 							grabar=false;
 							break;
 						}
-						else if(certificacionlineaTO.getId().getClass()==null) {
+						else if(certificacionlineaTO.getId().getLineaid()==null || certificacionlineaTO.getId().getLineaid().longValue()==0L) {
 							grabar=false;
 							break;
 						}
@@ -419,33 +420,30 @@ public class EjecucionController {
 			}
 
 			//reforma meta subtarea
-//			else if(clase.equals("reformametasubtarea")){
-//				ReformaTO reformaTO = gson.fromJson(new StringReader(objeto), ReformaTO.class);
-//				//pregunto si la tarea esta asignada a otra reforma
-//				ReformametasubtareaTO reformametasubtareaTO=new ReformametasubtareaTO();
-//				reformametasubtareaTO.set
-//				
-//				ReformametalineaTO reformametalineaTO2=new ReformametalineaTO();
-//				log.println("consulta lineas: " + reformametalineaTO.getNivelacid() + reformametalineaTO.getId().getId());
-//				reformametalineaTO2.setNivelacid(reformametalineaTO2.getNivelacid());
-//				reformametalineaTO2.getId().setId(reformametalineaTO2.getId().getId());
-//				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO2);
-//				log.println("reformas: " + reformametalineaTOs.size());
-//				if(reformametalineaTOs.size()==0){
-//					accion = (reformametalineaTO.getId()==null)?"crear":"actualizar";
-//					UtilSession.planificacionServicio.transCrearModificarReformametalinea(reformametalineaTO);
-//					id=reformametalineaTO.getId().getId().toString() + reformametalineaTO.getId().getLineaid();
-//					//Traigo la lista de reformametalinea
-//					ReformametalineaTO reformametalineaTO3=new ReformametalineaTO();
-//					reformametalineaTO3.getId().setId(reformametalineaTO.getId().getId());
-//					Collection<ReformametalineaTO> reformametalineaTOs2=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO3);
-//					jsonObject.put("reformametalinea", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs2,reformametalineaTO.getJsonConfig()));
-//				}
-//				else{
-//					mensajes.setMsg(MensajesWeb.getString("advertencia.subtarealinea.repetida"));
-//					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-//				}
-//			}
+			else if(clase.equals("obtenerreformametasubtarea")){
+				ReformaTO reformaTO = gson.fromJson(new StringReader(objeto), ReformaTO.class);
+				//debe llegar tambien las lineas
+				reformaTO=UtilSession.planificacionServicio.transObtienereformametasubtarea(reformaTO);
+				jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
+				jsonObject.put("reformametasubtarea", (JSONArray)JSONSerializer.toJSON(reformaTO.getReformametasubtareaTOs(),(new ReformametasubtareaTO()).getJsonConfig()));
+				if(!reformaTO.getMensajes().equals("")) {
+					mensajes.setMsg(reformaTO.getMensajes());
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+			}
+
+			//reforma meta subtarea
+			else if(clase.equals("reformametasubtarea")){
+				ReformametasubtareaTO reformametasubtareaTO = gson.fromJson(new StringReader(objeto), ReformametasubtareaTO.class);
+				accion = (reformametasubtareaTO.getId()==null)?"crear":"actualizar";
+				UtilSession.planificacionServicio.transCrearModificarReformametasubtarea(reformametasubtareaTO);
+				id=reformametasubtareaTO.getId().getId().toString() + reformametasubtareaTO.getId().getLineaid();
+				//Traigo la lista de reformametasubtarea
+				ReformametasubtareaTO reformametasubtareaTO2=new ReformametasubtareaTO();
+				reformametasubtareaTO2.getId().setId(reformametasubtareaTO.getId().getId());
+				Collection<ReformametasubtareaTO> reformametalineaTOs2=UtilSession.planificacionServicio.transObtenerReformametasubatera(reformametasubtareaTO2);
+				jsonObject.put("reformametasubtarea", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs2,reformametasubtareaTO.getJsonConfig()));
+			}
 
 			//Registro la auditoria
 //			if(mensajes.getMsg()==null && !clase.equals("vercontrato"))
@@ -918,6 +916,30 @@ public class EjecucionController {
 
 				}
 			}
+			
+			//Reformametasubtarea
+			else if(clase.equals("reformametasubtarea")){
+				ReformametasubtareaTO reformametasubtareaTO = UtilSession.planificacionServicio.transObtenerReformasubtareaTO(new ReformametasubtareaID(id, id2));
+				reformametasubtareaTO.setNpdecremento(reformametasubtareaTO.getDecremento());
+				reformametasubtareaTO.setNpincremento(reformametasubtareaTO.getIncremento());
+				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformametasubtareaTO.getNivelacid()));
+				//1. traigo los datos de unidad medida y meta descripcion
+				SubtareaunidadTO subtareaunidadTO=new SubtareaunidadTO();
+				subtareaunidadTO.setId(nivelactividadTO.getTablarelacionid());
+				subtareaunidadTO.setUnidadmedidaTO(new UnidadmedidaTO());
+				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
+				subtareaunidadacumuladorTO.setSubtareaunidad(subtareaunidadTO);
+				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
+				subtareaunidadacumuladorTO.setOrderByField(OrderBy.orderDesc("id.acumid"));
+				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
+				if(subtareaunidadacumuladorTOs.size()>0) {
+					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
+					reformametasubtareaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
+				}
+				reformametasubtareaTO.setNpunidadmedida(subtareaunidadTO.getUnidadmedidaTO().getNombre());
+				jsonObject.put("reformametasubtarea", (JSONObject)JSONSerializer.toJSON(reformametasubtareaTO,reformametasubtareaTO.getJsonConfig()));
+			}
+
 
 			log.println("json retornado: " + jsonObject.toString());
 		} catch (Exception e) {
@@ -1440,6 +1462,16 @@ public class EjecucionController {
 			else if(clase.equals("reformalinea")){
 				UtilSession.planificacionServicio.transEliminarReformalinea(new ReformalineaTO(new ReformalineaID(id, id2)));
 			}
+			//reformametalinea
+			else if(clase.equals("reformametalinea")){
+				UtilSession.planificacionServicio.transEliminarReformametalinea(new ReformametalineaTO(new ReformametalineaID(id, id2)));
+			}
+
+			//reformametasubtarea
+			else if(clase.equals("reformametasubtarea")){
+				UtilSession.planificacionServicio.transEliminarReformasubtarea(new ReformametasubtareaTO(new ReformametasubtareaID(id, id2)));
+			}
+
 			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
 			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
