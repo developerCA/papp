@@ -541,9 +541,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				"unidadid=" + node.npIdunidad +
 				"&ejerciciofiscal=" + $rootScope.ejefiscal +
 				"&actividadid=" + node.npactividadid +
-				"&itemunidadid=" + node.nodePadre.tablarelacionid
+				"&itemunidadid=" + (node.nodePadre !== undefined? node.nodePadre.tablarelacionid: node.tablarelacionid)
 			).then(function(resp){
-				// (node.nodePadre !== undefined? node.nodePadre.nodePadre.id: node.padreID)
 				console.log(resp);
 				if (!resp.estado) return;
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;

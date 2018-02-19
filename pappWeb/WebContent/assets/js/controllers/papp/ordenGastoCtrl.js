@@ -327,24 +327,6 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		});
 	};
 
-	$scope.liquidarManualMente = function(id) {
-		console.log("ok");
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			console.log(obj);
-/*
-			$scope.objeto.certificaciontipodocid = obj.id;
-			$scope.objeto.npcodigotipodocumento = obj.codigo;
-			$scope.objeto.npnombretipodocumento = obj.nombre;
-*/
-		}, function() {
-		});
-	};
-
 	$scope.eliminar = function(id) {
 /*
 		SweetAlert.swal({
@@ -399,7 +381,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			size : 'lg',
 			resolve : {
 				certificacionID : function() {
-					return $scope.objeto.id; //ordengastocertificacionid
+					return $scope.objeto.ordengastocertificacionid;
 				},
 				editar : function() {
 					return null;
