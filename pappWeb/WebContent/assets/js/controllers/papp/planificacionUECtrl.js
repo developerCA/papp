@@ -543,6 +543,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				"&actividadid=" + node.npactividadid +
 				"&itemunidadid=" + node.nodePadre.tablarelacionid
 			).then(function(resp){
+				// (node.nodePadre !== undefined? node.nodePadre.nodePadre.id: node.padreID)
 				console.log(resp);
 				if (!resp.estado) return;
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
@@ -1602,7 +1603,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$rootScope.ejefiscal,
 			$scope.tipo
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.unidad = resp.json.unidad;
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
@@ -1695,7 +1696,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$rootScope.ejefiscal,
 			$scope.tipo
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.unidad = resp.json.unidad;
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
@@ -1712,7 +1713,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.copiarPlanificadoAjustado = function() {
-		//$scope.metaDistribucion("A");*
 		$scope.objetoAjustada.unidadtiempo = $scope.objetoPlanificada.unidadtiempo;
 		for (var i = 0; i < $scope.detallesPlanificada.length; i++) {
 			$scope.detallesAjustada[i].valor = $scope.detallesPlanificada[i].valor;
@@ -1722,6 +1722,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.divMetaDistribucionPlanificada=false;
 		$scope.divMetaDistribucionAjustada=true;
 		$scope.divMetaDistribucionDevengo=false;
+		//console.log("aqui");
+		$scope.modificarMetaAjustada(true);
 	}
 
 //******

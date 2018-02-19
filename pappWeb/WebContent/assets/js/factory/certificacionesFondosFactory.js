@@ -174,6 +174,16 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			return Restangular.allUrl(url).customGET();
 		},
 
+		eliminarLinea:function(
+			id,
+			linea
+		){
+			var url = "ejecucion/certificacionlinea/" +
+				id + "/" +
+				linea;
+			return Restangular.allUrl(url).customGET();
+		},
+
 		obtenerDetalles:function(
 			id
 		){

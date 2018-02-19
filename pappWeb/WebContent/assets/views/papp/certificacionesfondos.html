@@ -58,8 +58,8 @@
 												Valor inicial
 											</label>
 											<input type="text" placeholder="Ingrese un valor inicial"
-												class="form-control" id="valorinicialFiltro" name="valorinicialFiltro"
-												ng-model="valorinicial" />
+												class="form-control" name="valorinicialFiltro"
+												ng-model="valorinicialFiltro" />
 										</div>
 									</div>
 		
@@ -69,8 +69,8 @@
 												Valor final
 											</label>
 											<input type="text" placeholder="Ingrese un valor final"
-												class="form-control" id="valorfinalFiltro" name="valorfinalFiltro"
-												ng-model="valorfinal" />
+												class="form-control" name="valorfinalFiltro"
+												ng-model="valorfinalFiltro" />
 										</div>
 									</div>
 								</div>
@@ -655,7 +655,7 @@
 											<div>
 												<table class="table table-striped">
 													<tr>
-														<td></td>
+														<th></th>
 														<th>Descripci&oacute;n</th>
 														<th>Valor Inicial</th>
 														<th>Valor Certificaci&oacute;n</th>
@@ -666,6 +666,10 @@
 															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
 																uib-tooltip="Modificar" ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
+															</a>
+															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
+																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
+																<i class="fa ti-trash"></i>
 															</a>
 														</td>
 														<td>

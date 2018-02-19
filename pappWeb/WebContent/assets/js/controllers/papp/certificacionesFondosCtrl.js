@@ -90,7 +90,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			if (!resp.estado) return;
 			$scope.objeto=resp.json.certificacion;
 			$scope.detalles={};
-			$scope.agregarDetalles();
+			//$scope.agregarDetalles();
 			$scope.edicion=true;
 			$scope.nuevoar=true;
 			$scope.guardar=true;
@@ -352,6 +352,35 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		    $scope.detalles=obj;
             SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
+		});
+	};
+
+	$scope.eliminarLinea = function(index) {
+		SweetAlert.swal({
+			title: "Certificaciones de Fondos?",
+			text: "Seguro que desea eliminar esta linea?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (isConfirm) {
+			certificacionesFondosFactory.eliminarLinea(
+				$scope.detalles[index].id.id,
+				$scope.detalles[index].id.lineaid
+			).then(function(resp){
+   			 if (resp.estado){
+				 SweetAlert.swal("Certificaciones de Fondos!", "Eliminado satisfactoriamente!", "success");
+				 $scope.detalles.splice(index, 1);
+   			 }else{
+	             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
+   			 }
+          	})
+		  }
 		});
 	};
 

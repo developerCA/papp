@@ -128,8 +128,8 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
                 return;
             } else {
             	var tObj = Object.assign({}, $scope.objeto);
-            	tObj.nivelactid = tObj.subitem;
-            	delete tObj.subitem;
+            	//tObj.nivelactid = tObj.subitem;
+            	//delete tObj.subitem;
             	certificacionesFondosFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
