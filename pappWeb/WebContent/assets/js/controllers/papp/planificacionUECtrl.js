@@ -264,7 +264,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.distribucionValores = function(estado) {
-		if (!$scope.editar) return;
+		//if (!$scope.editar) return;
 		switch (estado) {
 			case "P": //Planificado
 				$scope.modificarMetaPlanificada();
@@ -434,6 +434,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		} else {
 			$scope.editar=true;
 		}
+		$scope.editarA = ($scope.planificacionUE.npestadopresupajus == "Planificado"? true: false);
 		$scope.nodeActivo=node;
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
@@ -458,7 +459,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.divPlanificacionAnual=false;
 				$scope.divActividad=true;
 				$scope.editarDistribucionPlanificado();
-				//console.log("OBJETO:", $scope.objeto);
 			});
 		}
 		if (node.nodeTipo == "SA") {
@@ -468,7 +468,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				"unidadid=" + node.npIdunidad +
 				"&nivelactividadid=" + node.padreID
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (!resp.estado) return;
 				if ($scope.planificacionUE.npestadopresupuesto == "Planificado") {
 					$scope.editar=true;
@@ -487,7 +487,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.tablarelacionid,
 				"nivelactividad=" + node.nodePadre.id
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (!resp.estado) return;
 				$scope.objeto=Object.assign({}, resp.json.tareaunidad);
 				$scope.divPlanificacionAnual=false;
@@ -501,7 +501,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.tablarelacionid,
 				"nivelactividad=" + (node.nodePadre !== undefined? node.nodePadre.nodePadre.id: node.padreID)
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (!resp.estado) return;
 				$scope.objUnidad=resp.json.subtareaunidad.subtareaunidadunidadid;
 				$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
@@ -526,7 +526,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.tablarelacionid,
 				"nivelactividad=" + node.padreID
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (!resp.estado) return;
 				$scope.objeto=Object.assign({}, resp.json.itemunidad);
 				$scope.divPlanificacionAnual=false;
@@ -543,7 +543,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				"&actividadid=" + node.npactividadid +
 				"&itemunidadid=" + (node.nodePadre !== undefined? node.nodePadre.tablarelacionid: node.tablarelacionid)
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (!resp.estado) return;
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
 				$scope.objeto=Object.assign({}, resp.json.subitemunidad, resp.json.totales);
@@ -561,8 +561,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	            	$scope.detalles[i].npvalor = $scope.detalles[i].valor * $scope.detalles[i].cantidad;
             		$scope.detalles[i].total = $scope.detalles[i].npvalor;
 				}
-				$scope.objeto.tplanificado += ($scope.detalles[$scope.mPlanificadaID].cantidad * $scope.detalles[$scope.mPlanificadaID].valor);
-				$scope.objeto.tacumulado += ($scope.detalles[$scope.mAjustadaID].cantidad * $scope.detalles[$scope.mAjustadaID].valor);
+				$scope.objetoTplanificado += ($scope.detalles[$scope.mPlanificadaID].cantidad * $scope.detalles[$scope.mPlanificadaID].valor);
+				$scope.objetoTacumulado += ($scope.detalles[$scope.mAjustadaID].cantidad * $scope.detalles[$scope.mAjustadaID].valor);
 				$scope.ninguno = ($scope.objeto.subitemunidadtipoproductoid == 21? true: false);
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubItem=true;
@@ -1286,6 +1286,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.metaDistribucion('A');
 	        return;
 		}
+		if ($scope.detalles[$scope.mAjustadaID].cantidad > 0 && $scope.detalles[$scope.mAjustadaID].acummetadesc.trim() == "") {
+	        SweetAlert.swal(
+	    		"Planificacion UE! - Actividad",
+	    		"TIENE VALOR AJUSTADA Y TIENE QUE PONER UNA DESCRIPCION AJUSTADA.",
+	    		"error"
+			);
+	        return;
+		}
     	var tObj={};
     	tObj=Object.assign(tObj, $scope.objeto);
     	tObj.npFechainicio=toStringDate(tObj.npFechainicio);
@@ -1402,6 +1410,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.metaDistribucion('A');
 	        return;
 		}
+		if ($scope.detalles[$scope.mAjustadaID].cantidad > 0 && $scope.detalles[$scope.mAjustadaID].descripcion.trim() == "") {
+	        SweetAlert.swal(
+	    		"Planificacion UE! - Subtarea",
+	    		"TIENE VALOR AJUSTADA Y TIENE QUE PONER UNA DESCRIPCION AJUSTADA.",
+	    		"error"
+			);
+	        return;
+		}
 		if ($scope.esnuevo) {
 			return;
 		}
@@ -1453,8 +1469,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.submitformSubItem = function(form) {
     	var tObj=$scope.objeto;
 		tObj.subitemunidadacumulador=$scope.detalles;
-		if ($scope.npTotalPlanificado > $scope.objeto.tplanificado
-		|| $scope.objeto.tplanificado < 0) {
+		if ($scope.npTotalPlanificado > $scope.objetoTplanificado
+		|| $scope.objetoTplanificado < 0) {
             SweetAlert.swal(
         		"Planificacion UE! - Subitem",
         		"El Total Planificado supera el saldo disponible.",
@@ -1462,8 +1478,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     		);
             return;
 		}
-		if ($scope.npTotalAjustado > $scope.objeto.tacumulado
-		|| $scope.objeto.tacumulado < 0) {
+		if ($scope.npTotalAjustado > $scope.objetoTacumulado
+		|| $scope.objetoTacumulado < 0) {
             SweetAlert.swal(
         		"Planificacion UE! - Subitem",
         		"El Total Ajustado supera el saldo disponible.",
