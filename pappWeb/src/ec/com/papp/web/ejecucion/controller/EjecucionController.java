@@ -172,13 +172,33 @@ public class EjecucionController {
 				OrdengastolineaTO ordengastolineaTO = gson.fromJson(new StringReader(objeto), OrdengastolineaTO.class);
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				OrdengastolineaTO ordengastolineaTO2=new OrdengastolineaTO();
+				log.println("consulta lineas: " + ordengastolineaTO.getNivelactid() +"-"+ ordengastolineaTO.getId().getId());
 				ordengastolineaTO2.setNivelactid(ordengastolineaTO.getNivelactid());
 				ordengastolineaTO2.getId().setId(ordengastolineaTO.getId().getId());
 				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO2);
-				if(ordengastolineaTOs.size()==0){
+				log.println("ordenes: " + ordengastolineaTOs.size());
+				boolean grabar=true;
+				if(ordengastolineaTOs.size()>0){
+					for(OrdengastolineaTO ordengastolineaTO3:ordengastolineaTOs) {
+						if((ordengastolineaTO.getId().getLineaid()!=null && ordengastolineaTO.getId().getLineaid().longValue()!=0) && ordengastolineaTO3.getId().getLineaid().longValue()!=ordengastolineaTO.getId().getLineaid().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if(ordengastolineaTO.getId().getLineaid()==null || ordengastolineaTO.getId().getLineaid().longValue()==0L) {
+							grabar=false;
+							break;
+						}
+					}
+				}
+				if(!grabar){
+					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else{
 					accion = (ordengastolineaTO.getId()==null)?"crear":"actualizar";
 					UtilSession.planificacionServicio.transCrearModificarOrdengastolinea(ordengastolineaTO);
-					id=ordengastolineaTO.getId().getId().toString()+ ordengastolineaTO.getId().getLineaid();
+					id=ordengastolineaTO.getId().getId().toString() + ordengastolineaTO.getId().getLineaid();
+					//Traiga la lista de ordengastolineaTO
 					//Traigo la lista de ordengastolinea
 					OrdengastolineaTO ordengastolineaTO3=new OrdengastolineaTO();
 					ordengastolineaTO3.getId().setId(ordengastolineaTO.getId().getId());
@@ -186,10 +206,6 @@ public class EjecucionController {
 					ordengastolineaTO3.setOrdengasto(ordengastoTO);
 					Collection<OrdengastolineaTO> ordengastolineaTOs2=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO3);
 					jsonObject.put("ordengastolinea", (JSONArray)JSONSerializer.toJSON(ordengastolineaTOs2,ordengastolineaTO.getJsonConfig()));
-				}
-				else{
-					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
 			
@@ -217,12 +233,30 @@ public class EjecucionController {
 			//ordendevengo linea
 			else if(clase.equals("ordendevengolinea")){
 				OrdendevengolineaTO ordendevengolineaTO = gson.fromJson(new StringReader(objeto), OrdendevengolineaTO.class);
-				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				OrdendevengolineaTO ordendevengolineaTO2=new OrdendevengolineaTO();
+				log.println("consulta lineas: " + ordendevengolineaTO.getNivelactid() +"-"+ ordendevengolineaTO.getId().getId());
 				ordendevengolineaTO2.setNivelactid(ordendevengolineaTO.getNivelactid());
 				ordendevengolineaTO2.getId().setId(ordendevengolineaTO.getId().getId());
 				Collection<OrdendevengolineaTO> ordendevengolineaTOs=UtilSession.planificacionServicio.transObtenerOrdendevengolinea(ordendevengolineaTO2);
-				if(ordendevengolineaTOs.size()==0){
+				log.println("ordenes: " + ordendevengolineaTOs.size());
+				boolean grabar=true;
+				if(ordendevengolineaTOs.size()>0){
+					for(OrdendevengolineaTO ordendevengolineaTO3:ordendevengolineaTOs) {
+						if((ordendevengolineaTO.getId().getLineaid()!=null && ordendevengolineaTO.getId().getLineaid().longValue()!=0) && ordendevengolineaTO3.getId().getLineaid().longValue()!=ordendevengolineaTO.getId().getLineaid().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if(ordendevengolineaTO.getId().getLineaid()==null || ordendevengolineaTO.getId().getLineaid().longValue()==0L) {
+							grabar=false;
+							break;
+						}
+					}
+				}
+				if(!grabar){
+					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else{
 					accion = (ordendevengolineaTO.getId()==null)?"crear":"actualizar";
 					UtilSession.planificacionServicio.transCrearModificarOrdendevengolinea(ordendevengolineaTO);
 					id=ordendevengolineaTO.getId().getId().toString()+ordendevengolineaTO.getId().getLineaid();
@@ -231,10 +265,6 @@ public class EjecucionController {
 					ordendevengolineaTO3.getId().setId(ordendevengolineaTO.getId().getId());
 					Collection<OrdendevengolineaTO> ordendevengolineaTOs2=UtilSession.planificacionServicio.transObtenerOrdendevengolinea(ordendevengolineaTO3);
 					jsonObject.put("ordendevengolinea", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs2,ordendevengolineaTO.getJsonConfig()));
-				}
-				else{
-					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
 
@@ -264,10 +294,30 @@ public class EjecucionController {
 				OrdenreversionlineaTO ordenreversionlineaTO = gson.fromJson(new StringReader(objeto), OrdenreversionlineaTO.class);
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				OrdenreversionlineaTO ordenreversionlineaTO2=new OrdenreversionlineaTO();
+				log.println("consulta lineas: " + ordenreversionlineaTO.getNivelactid() +"-"+ ordenreversionlineaTO.getId().getId());
 				ordenreversionlineaTO2.setNivelactid(ordenreversionlineaTO.getNivelactid());
 				ordenreversionlineaTO2.getId().setId(ordenreversionlineaTO.getId().getId());
 				Collection<OrdenreversionlineaTO> ordenreversionlineaTOs=UtilSession.planificacionServicio.transObtenerOrdenreversionlinea(ordenreversionlineaTO2);
-				if(ordenreversionlineaTOs.size()==0){
+				log.println("ordenes: " + ordenreversionlineaTOs.size());
+				boolean grabar=true;
+				if(ordenreversionlineaTOs.size()>0){
+					for(OrdenreversionlineaTO ordenreversionlineaTO3:ordenreversionlineaTOs) {
+						if((ordenreversionlineaTO.getId().getLineaid()!=null && ordenreversionlineaTO.getId().getLineaid().longValue()!=0) && ordenreversionlineaTO3.getId().getLineaid().longValue()!=ordenreversionlineaTO.getId().getLineaid().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if(ordenreversionlineaTO.getId().getLineaid()==null || ordenreversionlineaTO.getId().getLineaid().longValue()==0L) {
+							grabar=false;
+							break;
+						}
+					}
+				}
+
+				if(!grabar){
+					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else{
 					accion = (ordenreversionlineaTO.getId()==null)?"crear":"actualizar";
 					UtilSession.planificacionServicio.transCrearModificarOrdenreversionlinea(ordenreversionlineaTO);
 					id=ordenreversionlineaTO.getId().getId().toString()+ordenreversionlineaTO.getId().getLineaid();
@@ -276,10 +326,6 @@ public class EjecucionController {
 					ordenreversionlineaTO3.getId().setId(ordenreversionlineaTO.getId().getId());
 					Collection<OrdenreversionlineaTO> ordendevengolineaTOs2=UtilSession.planificacionServicio.transObtenerOrdenreversionlinea(ordenreversionlineaTO3);
 					jsonObject.put("ordenreversionlinea", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs2,ordenreversionlineaTO.getJsonConfig()));
-				}
-				else{
-					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
 
@@ -352,12 +398,30 @@ public class EjecucionController {
 				ReformalineaTO reformalineaTO = gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				ReformalineaTO reformalineaTO2=new ReformalineaTO();
-				log.println("consulta lineas: " + reformalineaTO.getNivelactid() + reformalineaTO.getId().getId());
+				log.println("consulta lineas: " + reformalineaTO.getNivelactid() +"-"+ reformalineaTO.getId().getId());
 				reformalineaTO2.setNivelactid(reformalineaTO.getNivelactid());
 				reformalineaTO2.getId().setId(reformalineaTO.getId().getId());
 				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO2);
-				log.println("reformas: " + reformalineaTOs.size());
-				if(reformalineaTOs.size()==0){
+				log.println("ordenes: " + reformalineaTOs.size());
+				boolean grabar=true;
+				if(reformalineaTOs.size()>0){
+					for(ReformalineaTO reformalineaTO3:reformalineaTOs) {
+						if((reformalineaTO.getId().getLineaid()!=null && reformalineaTO.getId().getLineaid().longValue()!=0) && reformalineaTO3.getId().getLineaid().longValue()!=reformalineaTO.getId().getLineaid().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if(reformalineaTO.getId().getLineaid()==null || reformalineaTO.getId().getLineaid().longValue()==0L) {
+							grabar=false;
+							break;
+						}
+					}
+				}
+
+				if(!grabar){
+					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else{
 					accion = (reformalineaTO.getId()==null)?"crear":"actualizar";
 					UtilSession.planificacionServicio.transCrearModificarReformalinea(reformalineaTO);
 					id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
@@ -367,10 +431,7 @@ public class EjecucionController {
 					Collection<ReformalineaTO> reformalineaTOs2=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO3);
 					jsonObject.put("reformalinea", (JSONArray)JSONSerializer.toJSON(reformalineaTOs2,reformalineaTO.getJsonConfig()));
 				}
-				else{
-					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-				}
+
 			}
 
 			//reformameta
@@ -397,13 +458,31 @@ public class EjecucionController {
 			else if(clase.equals("reformametalinea")){
 				ReformametalineaTO reformametalineaTO = gson.fromJson(new StringReader(objeto), ReformametalineaTO.class);
 				//pregunto si ya tiene una linea con el mismo subtarea y no le dejo
-				ReformametalineaTO reformametalineaTO2=new ReformametalineaTO();
-				log.println("consulta lineas: " + reformametalineaTO.getNivelacid() + reformametalineaTO.getId().getId());
-				reformametalineaTO2.setNivelacid(reformametalineaTO2.getNivelacid());
-				reformametalineaTO2.getId().setId(reformametalineaTO2.getId().getId());
-				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO2);
-				log.println("reformas: " + reformametalineaTOs.size());
-				if(reformametalineaTOs.size()==0){
+				ReformametalineaTO reformalineaTO2=new ReformametalineaTO();
+				log.println("consulta lineas: " + reformametalineaTO.getNivelacid() +"-"+ reformametalineaTO.getId().getId());
+				reformalineaTO2.setNivelacid(reformametalineaTO.getNivelacid());
+				reformalineaTO2.getId().setId(reformametalineaTO.getId().getId());
+				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformalineaTO2);
+				log.println("ordenes: " + reformametalineaTOs.size());
+				boolean grabar=true;
+				if(reformametalineaTOs.size()>0){
+					for(ReformametalineaTO reformalineaTO3:reformametalineaTOs) {
+						if((reformametalineaTO.getId().getLineaid()!=null && reformametalineaTO.getId().getLineaid().longValue()!=0) && reformalineaTO3.getId().getLineaid().longValue()!=reformametalineaTO.getId().getLineaid().longValue()) {
+							grabar=false;
+							break;
+						}
+						else if(reformametalineaTO.getId().getLineaid()==null || reformametalineaTO.getId().getLineaid().longValue()==0L) {
+							grabar=false;
+							break;
+						}
+					}
+				}
+
+				if(!grabar){
+					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+				else{
 					accion = (reformametalineaTO.getId()==null)?"crear":"actualizar";
 					UtilSession.planificacionServicio.transCrearModificarReformametalinea(reformametalineaTO);
 					id=reformametalineaTO.getId().getId().toString() + reformametalineaTO.getId().getLineaid();
@@ -412,10 +491,6 @@ public class EjecucionController {
 					reformametalineaTO3.getId().setId(reformametalineaTO.getId().getId());
 					Collection<ReformametalineaTO> reformametalineaTOs2=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO3);
 					jsonObject.put("reformametalinea", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs2,reformametalineaTO.getJsonConfig()));
-				}
-				else{
-					mensajes.setMsg(MensajesWeb.getString("advertencia.subtarealinea.repetida"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
 
@@ -652,6 +727,7 @@ public class EjecucionController {
 			else if(clase.equals("ordengasto")){
 				OrdengastoTO ordengastoTO=new OrdengastoTO();
 				ordengastoTO = UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
+				ordengastoTO.setNpunidadcodigo(ordengastoTO.getUnidad().getCodigopresup());
 				if(ordengastoTO.getOrdengastoclasemodid()!=null){
 					ordengastoTO.setNpcodigoregcmcgasto(ordengastoTO.getClaseregistrocmcgasto().getCodigo());
 					ordengastoTO.setNpcodigoregistro(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getCodigo());

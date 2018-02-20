@@ -1170,7 +1170,8 @@ public class PlanificacionController {
 				//Debo traer el id del item seleccionado en el itemunidad para que se pueda consultar el codigo incop
 				if(parameters.get("itemunidadid")!=null) {
 					ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
-					subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
+					if(itemunidadTO!=null)
+						subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
 				}
 				jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				//obtengo la lista de subitemunidadacumuladorTO existente para saber que acumulador toca
@@ -1526,7 +1527,8 @@ public class PlanificacionController {
 				//Debo traer el id del item seleccionado en el itemunidad para que se pueda consultar el codigo incop
 				if(parameters.get("itemunidadid")!=null) {
 					ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
-					subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
+					if(itemunidadTO!=null)
+						subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
 				}
 				jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				//traigo los datos de actividadunidadacumulador

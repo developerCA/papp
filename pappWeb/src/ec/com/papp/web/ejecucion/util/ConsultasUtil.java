@@ -600,8 +600,8 @@ public class ConsultasUtil {
 		try{
 			if(parameters.get("ejerciciofiscal")!=null && !parameters.get("ejerciciofiscal").equals(""))
 				certificacionOrdenVO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscal")));
-			if(parameters.get("unidad")!=null && !parameters.get("unidad").equals(""))
-				certificacionOrdenVO.setCertificacionunidadid(Long.valueOf(parameters.get("unidad")));
+			if(parameters.get("unidadid")!=null && !parameters.get("unidadid").equals(""))
+				certificacionOrdenVO.setCertificacionunidadid(Long.valueOf(parameters.get("unidadid")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				certificacionOrdenVO.setEstado(parameters.get("estado"));
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
