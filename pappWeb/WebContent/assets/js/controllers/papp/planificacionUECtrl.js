@@ -561,8 +561,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	            	$scope.detalles[i].npvalor = $scope.detalles[i].valor * $scope.detalles[i].cantidad;
             		$scope.detalles[i].total = $scope.detalles[i].npvalor;
 				}
-				$scope.objetoTplanificado += ($scope.detalles[$scope.mPlanificadaID].cantidad * $scope.detalles[$scope.mPlanificadaID].valor);
-				$scope.objetoTacumulado += ($scope.detalles[$scope.mAjustadaID].cantidad * $scope.detalles[$scope.mAjustadaID].valor);
+				$scope.objetoTplanificado = ($scope.detalles[$scope.mPlanificadaID].cantidad * $scope.detalles[$scope.mPlanificadaID].valor);
+				$scope.objetoTacumulado = ($scope.detalles[$scope.mAjustadaID].cantidad * $scope.detalles[$scope.mAjustadaID].valor);
 				$scope.ninguno = ($scope.objeto.subitemunidadtipoproductoid == 21? true: false);
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubItem=true;
@@ -834,7 +834,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			node.nodes=nodes;
 		});
 	}
-	
+
 	$scope.asideTM = {
 	  "title": "Title",
 	  "content": "<br><br><br><br><br><br>Hello Aside<br />This is a multiline message!"
@@ -856,7 +856,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			//console.log(obj);
 			$scope.objeto.itemunidaditemid = obj.id;
 			$scope.objeto.npcodigoitem = obj.codigo;
-			$scope.objeto.npnombreitem = obj.nombre;		
+			$scope.objeto.npnombreitem = obj.nombre;
+			if ($scope.objeto.descripcion == undefined || $scope.objeto.descripcion.trim() == "") {
+				$scope.objeto.descripcion = obj.nombre;
+			}
 		}, function() {
 		});
 	};
@@ -1470,7 +1473,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     	var tObj=$scope.objeto;
 		tObj.subitemunidadacumulador=$scope.detalles;
 		if ($scope.npTotalPlanificado > $scope.objetoTplanificado
-		|| $scope.objetoTplanificado < 0) {
+		|| $scope.objeto.tplanificado < 0) {
             SweetAlert.swal(
         		"Planificacion UE! - Subitem",
         		"El Total Planificado supera el saldo disponible.",
@@ -1479,7 +1482,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
             return;
 		}
 		if ($scope.npTotalAjustado > $scope.objetoTacumulado
-		|| $scope.objetoTacumulado < 0) {
+		|| $scope.objeto.tacumulado < 0) {
             SweetAlert.swal(
         		"Planificacion UE! - Subitem",
         		"El Total Ajustado supera el saldo disponible.",

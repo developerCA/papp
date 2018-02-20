@@ -13,6 +13,11 @@ app.controller('OrganismoController', [ "$scope","$rootScope","SweetAlert","$fil
     $scope.pagina = 1;
     $scope.aplicafiltro=false;
 
+    $scope.iniciar = function() {
+    	organismoFactory.iniciar();
+    	$scope.consultar();
+    }
+
     $scope.consultar = function () {
         organismoFactory.traer(
     		$scope.pagina,

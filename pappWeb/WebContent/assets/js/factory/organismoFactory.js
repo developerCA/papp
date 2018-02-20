@@ -4,6 +4,10 @@ app.factory("organismoFactory", [ "Restangular", function(Restangular) {
 	var organismo = "organismo";
 
 	return {
+		iniciar: function() {
+			organismo = "organismo";
+		},
+
 		traer : function(pagina,ejercicio) {
 			  return Restangular.allUrl("administrar/consultar/" + organismo + "/pagina="+pagina+ "&filas=10&ejerciciofiscalid=" + ejercicio).customGET();
 		},
