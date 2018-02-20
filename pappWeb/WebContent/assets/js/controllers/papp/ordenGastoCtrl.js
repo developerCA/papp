@@ -231,12 +231,12 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 
 	$scope.abrirUnidadCodigo = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalUnidades.html',
-			controller : 'ModalUnidadController',
+			templateUrl : 'assets/views/papp/modal/modalUnidadCorto.html',
+			controller : 'ModalUnidadCortoController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.ordengastounidadid = obj.id;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;

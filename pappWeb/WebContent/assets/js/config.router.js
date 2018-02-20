@@ -662,7 +662,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "assets/views/papp/ordenGasto.html",
         resolve: loadSequence(
         		'ngTable','OrdenGastoCtrl','OrdenGastoFactory',
-        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalUnidadCortoCtrl','UnidadFactory',
         		'ModalCertificacionesFondoLiquidacionManuaCtrl','CertificacionesFondosFactory',
         		'ModalProveedorCtrl','ProveedorFactory',
         		'ModalCertificacionesFondosCtrl','CertificacionesFondosFactory',

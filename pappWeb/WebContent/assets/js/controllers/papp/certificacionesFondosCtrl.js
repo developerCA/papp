@@ -373,12 +373,13 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 				$scope.detalles[index].id.id,
 				$scope.detalles[index].id.lineaid
 			).then(function(resp){
-   			 if (resp.estado){
-				 SweetAlert.swal("Certificaciones de Fondos!", "Eliminado satisfactoriamente!", "success");
-				 $scope.detalles.splice(index, 1);
-   			 }else{
-	             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
-   			 }
+				if (resp.estado){
+					SweetAlert.swal("Certificaciones de Fondos!", "Eliminado satisfactoriamente!", "success");
+					$scope.objeto.valortotal += $scope.detalles[index].npvalor;
+				    $scope.detalles.splice(index, 1);
+	   			}else{
+		            SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
+	   			}
           	})
 		  }
 		});
