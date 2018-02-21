@@ -136,7 +136,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.metaDistribucion('D');
 	}
 
-	$scope.metaDistribucion = function(
+	$scope.metaDistribucion= function(
 		tipometa
 	) {
 		var id;
@@ -517,7 +517,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubTarea=true;
 				$scope.editarDistribucionPlanificado();
-				//console.log("OBJETO:", $scope.objeto);
 			});
 		}
 		if (node.nodeTipo == "IT") {
@@ -1499,6 +1498,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 						$scope.detalles[i].id.id = resp.json.subitemunidad.id;
 					}
 					$scope.esnuevo = false;
+					$scope.detallesPlanificada = null;
 	    			$scope.editarDistribucionPlanificado();
 				} else {
 					SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
