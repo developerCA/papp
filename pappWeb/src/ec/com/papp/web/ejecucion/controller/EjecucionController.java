@@ -768,6 +768,7 @@ public class EjecucionController {
 			else if(clase.equals("ordengastolinea")){
 				OrdengastolineaTO ordengastolineaTO = UtilSession.planificacionServicio.transObtenerOrdengastolineaTO(new OrdengastolineaID(id, id2));
 				ordengastolineaTO.setNpvalor(ordengastolineaTO.getValor());
+				log.println("nivelactividad id " + ordengastolineaTO.getNivelactid());
 				jsonObject.put("ordengastolinea", (JSONObject)JSONSerializer.toJSON(ordengastolineaTO,ordengastolineaTO.getJsonConfig()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordengastolineaTO.getNivelactid(), jsonObject, mensajes);
 			}
