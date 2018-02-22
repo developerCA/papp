@@ -235,8 +235,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.totalPlanificadaV = 0;
 		$scope.totalPlanificadaP = 0;
 		for (var i = 0; i < 12; i++) {
-			$scope.totalPlanificadaV += $scope.detallesPlanificada[i].valor;
-			$scope.totalPlanificadaP += $scope.detallesPlanificada[i].porcentaje;
+			$scope.totalPlanificadaV += $scope.detallesPlanificada[i].metacantidad;
+			$scope.totalPlanificadaP += $scope.detallesPlanificada[i].lineametavalor;
 		}
 		$scope.diferenciaPlanificadaV = Number($scope.aDistribuirP.toFixed(2)) - Number($scope.totalPlanificadaV.toFixed(2));
 		$scope.diferenciaPlanificadaP = 100 - Number($scope.totalPlanificadaP.toFixed(2));
@@ -256,8 +256,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.totalAjustadaV = 0;
 		$scope.totalAjustadaP = 0;
 		for (var i = 0; i < 12; i++) {
-			$scope.totalAjustadaV += $scope.detallesAjustada[i].valor;
-			$scope.totalAjustadaP += $scope.detallesAjustada[i].porcentaje;
+			$scope.totalAjustadaV += $scope.detallesAjustada[i].metacantidad;
+			$scope.totalAjustadaP += $scope.detallesAjustada[i].lineametavalor;
 		}
 		$scope.diferenciaAjustadaV = Number($scope.aDistribuirA.toFixed(2)) - Number($scope.totalAjustadaV.toFixed(2));
 		$scope.diferenciaAjustadaP = 100 - Number($scope.totalAjustadaP.toFixed(2));
@@ -1052,7 +1052,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if ($scope.divActividad || $scope.divSubTarea) {
 			var porcentaje = 0;
 			for (var i = 0; i < 12; i++) {
-				porcentaje += $scope.detallesPlanificada[i].porcentaje;
+				porcentaje += $scope.detallesPlanificada[i].lineametavalor;
 			}
 			porcentaje = Number(porcentaje.toFixed(0));
 			if (porcentaje != 100) {
@@ -1066,7 +1066,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		}
 		var t = 0;
 		for (var i = 0; i < 12; i++) {
-			t += $scope.detallesPlanificada[i].valor;
+			t += $scope.detallesPlanificada[i].metacantidad;
 		}
 		t = Number(t.toFixed(2));
 		if (t != ($scope.divActividad || $scope.divSubTarea
@@ -1082,7 +1082,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		}
 		if (!$scope.divSubItem) {
 			for (var i = 0; i < 12; i++) {
-				if ($scope.detallesPlanificada[i].valor > 0)
+				if ($scope.detallesPlanificada[i].metacantidad > 0)
 					if ($scope.detallesPlanificada[i].observacion == undefined || $scope.detallesPlanificada[i].observacion.trim() == "") {
 				        SweetAlert.swal(
 				    		"Planificacion UE! - Distribucion Planificada",
@@ -1138,7 +1138,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if ($scope.divActividad || $scope.divSubTarea) {
 			var porcentaje = 0;
 			for (var i = 0; i < 12; i++) {
-				porcentaje = porcentaje + $scope.detallesAjustada[i].porcentaje;
+				porcentaje = porcentaje + $scope.detallesAjustada[i].lineametavalor;
 			}
 			porcentaje = Number(porcentaje.toFixed(0));
 			if (porcentaje != 100) {
@@ -1152,7 +1152,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		}
 		var t = 0;
 		for (var i = 0; i < 12; i++) {
-			t += $scope.detallesAjustada[i].valor;
+			t += $scope.detallesAjustada[i].metacantidad;
 		}
 		t = Number(t.toFixed(2));
 		if (t != ($scope.divActividad || $scope.divSubTarea
@@ -1748,7 +1748,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.objetoAjustada.unidadtiempo = $scope.objetoPlanificada.unidadtiempo;
 		for (var i = 0; i < $scope.detallesPlanificada.length; i++) {
 			$scope.detallesAjustada[i].valor = $scope.detallesPlanificada[i].valor;
-			$scope.detallesAjustada[i].porcentaje = $scope.detallesPlanificada[i].porcentaje;
+			$scope.detallesAjustada[i].lineametavalor = $scope.detallesPlanificada[i].lineametavalor;
 		}
 		$scope.aDistribuirA = $scope.aDistribuirP;
 		$scope.divMetaDistribucionPlanificada=false;
@@ -2043,8 +2043,8 @@ function distribuirValor(
 
 	if (nPeriodo != 0 || vLimpio) {
 		for (var i = 0; i < 12; i++) {
-			detalles[i].valor = 0;
-			detalles[i].porcentaje = 0;
+			detalles[i].metacantidad = 0;
+			detalles[i].lineametavalor = 0;
 			detalles[i].observacion = null;
 		}
 	}
@@ -2059,38 +2059,38 @@ function distribuirValor(
 	for (var i = (intervalo - 1); i < 12; i = i + intervalo) {
 		if (nPeriodo != 0) {
 			if (i == 11) {
-				detalles[11].valor = Number((presupuesto - suma).toFixed(2));
+				detalles[11].metacantidad = Number((presupuesto - suma).toFixed(2));
 			} else {
-				detalles[i].valor = Number(valor.toFixed(2));
+				detalles[i].metacantidad = Number(valor.toFixed(2));
 				resto = resto + valorResto;
 				if (resto >= 0.01) {
-					detalles[i].valor = Number(detalles[i].valor + Number(resto.toFixed(2)));
+					detalles[i].metacantidad = Number(detalles[i].metacantidad + Number(resto.toFixed(2)));
 					resto = resto - resto.toFixed(2);
 				}
-				suma = suma + detalles[i].valor;
+				suma = suma + detalles[i].metacantidad;
 			}
 		}
 		if (!divSubItem) {
-			if (detalles[i].valor == undefined) {
-				detalles[i].valor = 0;
+			if (detalles[i].metacantidad == undefined) {
+				detalles[i].metacantidad = 0;
 			}
-			if (detalles[i].valor == 0 || presupuesto == 0) {
-				detalles[i].porcentaje = 0;
+			if (detalles[i].metacantidad == 0 || presupuesto == 0) {
+				detalles[i].lineametavalor = 0;
 			} else {
-				detalles[i].porcentaje = Number(
-					(detalles[i].valor * 100)
+				detalles[i].lineametavalor = Number(
+					(detalles[i].metacantidad * 100)
 					/ presupuesto
 				);
-				if (detalles[i].porcentaje == NaN) {
-					detalles[i].porcentaje = 0;
+				if (detalles[i].lineametavalor == NaN) {
+					detalles[i].lineametavalor = 0;
 				} else {
-					porcientoResto = porcientoResto + (detalles[i].porcentaje - Number(detalles[i].porcentaje.toFixed(2)));
-					detalles[i].porcentaje = Number(detalles[i].porcentaje.toFixed(2));
+					porcientoResto = porcientoResto + (detalles[i].lineametavalor - Number(detalles[i].lineametavalor.toFixed(2)));
+					detalles[i].lineametavalor = Number(detalles[i].lineametavalor.toFixed(2));
 					if (porcientoResto >= 0.01) {
-						detalles[i].porcentaje = Number(detalles[i].porcentaje + Number(porcientoResto.toFixed(2)));
+						detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
 						porcientoResto = porcientoResto - porcientoResto.toFixed(2);
 					} else if (porcientoResto <= -0.01) {
-						detalles[i].porcentaje = Number(detalles[i].porcentaje + Number(porcientoResto.toFixed(2)));
+						detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
 						porcientoResto = porcientoResto - porcientoResto.toFixed(2);
 					}
 				}
@@ -2109,18 +2109,18 @@ function distribuirValor(
 	resto = 0;
 	for (var i = (intervalo - 1); i < 12; i = i + intervalo) {
 		if (i == 11) {
-			detalles[11].valor = Number((cantidad - suma).toFixed(2));
+			detalles[11].metacantidad = Number((cantidad - suma).toFixed(2));
 		} else {
 			try {
-				detalles[i].valor = Number(valor.toFixed(2));
+				detalles[i].metacantidad = Number(valor.toFixed(2));
 				resto = resto + valorResto;
 				if (resto >= 0.01) {
-					detalles[i].valor = Number(detalles[i].valor + Number(resto.toFixed(2)));
+					detalles[i].metacantidad = Number(detalles[i].metacantidad + Number(resto.toFixed(2)));
 					resto = resto - Number(resto.toFixed(2));
 				}
-				suma = suma + detalles[i].valor;
+				suma = suma + detalles[i].metacantidad;
 			} catch (e) {
-				detalles[i].valor = 0;
+				detalles[i].metacantidad = 0;
 			} 
 		}
 	}
