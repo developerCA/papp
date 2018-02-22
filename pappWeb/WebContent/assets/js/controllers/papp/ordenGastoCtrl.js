@@ -204,7 +204,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 					return "Negar";
 				},
 				subtitulo : function() {
-					return "Observaci&oacute;n";
+					return "Observacion";
 				}
 			}
 		});
@@ -446,7 +446,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
             				 form.$setPristine(true);
     	 		             $scope.edicion=false;
     	 		             $scope.objeto={};
-    	 		             $scope.limpiar();
+    	 		             //$scope.limpiar();
         				 }
 	 		             SweetAlert.swal("Orden de Gastos!", "Registro registrado satisfactoriamente!", "success");
         			 }else{
