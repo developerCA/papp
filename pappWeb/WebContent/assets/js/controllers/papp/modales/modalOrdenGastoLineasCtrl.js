@@ -84,6 +84,7 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","certi
 		$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
 		if (editar != null) {
 			$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ": " + $scope.objetoDetalles.subitemnombre;
+			$scope.objeto.npsaldocertificacion += $scope.objeto.valor;
 		}
 	}
 

@@ -431,10 +431,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.objeto=null;
 		if (node.siEditar == undefined) {
 			$scope.editar=($scope.planificacionUE.npestadopresupuesto == "Planificado"? true: false);
+			$scope.editarA=($scope.planificacionUE.npestadopresupajus == "Planificado"? true: false);
 		} else {
-			$scope.editar=true;
+			$scope.editar=($scope.objetoPA.npestadopresupuesto == "Planificado"? true: false);
+			$scope.editarA=($scope.objetoPA.npestadopresupajus == "Planificado"? true: false);
 		}
-		$scope.editarA = ($scope.planificacionUE.npestadopresupajus == "Planificado"? true: false);
 		$scope.nodeActivo=node;
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
@@ -572,7 +573,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		}
 		if (node.siEditar != undefined) {
-			$scope.edicion = true;
 			$scope.aprobacionPlanificacion = false;
 			$scope.aprobacionAjustado = false;
 		}
@@ -1244,7 +1244,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.form = {
         submit: function(form,name) {
-            var firstError = null; //IVAN
+            var firstError = null;
             if (form.$invalid) {
                 var field = null, firstError = null;
                 for (field in form) {
@@ -1277,6 +1277,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"error"
     		);
     		$scope.metaDistribucion('P');
+            $scope.divMetaDistribucionPlanificada=true;
+            $scope.divMetaDistribucionAjustada=false;
             return;
 		}
 		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
@@ -1286,6 +1288,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    		"error"
 			);
 			$scope.metaDistribucion('A');
+            $scope.divMetaDistribucionPlanificada=false;
+            $scope.divMetaDistribucionAjustada=true;
 	        return;
 		}
 		if ($scope.detalles[$scope.mAjustadaID].cantidad > 0 && $scope.detalles[$scope.mAjustadaID].acummetadesc.trim() == "") {
@@ -1401,6 +1405,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"error"
     		);
     		$scope.metaDistribucion('P');
+            $scope.divMetaDistribucionPlanificada=true;
+            $scope.divMetaDistribucionAjustada=false;
             return;
 		}
 		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
@@ -1410,6 +1416,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    		"error"
 			);
 			$scope.metaDistribucion('A');
+            $scope.divMetaDistribucionPlanificada=false;
+            $scope.divMetaDistribucionAjustada=true;
 	        return;
 		}
 		if ($scope.detalles[$scope.mAjustadaID].cantidad > 0 && $scope.detalles[$scope.mAjustadaID].descripcion.trim() == "") {
@@ -1478,6 +1486,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"El Total Planificado supera el saldo disponible.",
         		"error"
     		);
+            $scope.divMetaDistribucionPlanificada=true;
+            $scope.divMetaDistribucionAjustada=false;
+            $scope.divMetaDistribucionDevengo=false;
             return;
 		}
 		if ($scope.npTotalAjustado > $scope.objetoTacumulado
@@ -1487,6 +1498,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"El Total Ajustado supera el saldo disponible.",
         		"error"
     		);
+            $scope.divMetaDistribucionPlanificada=false;
+            $scope.divMetaDistribucionAjustada=true;
+            $scope.divMetaDistribucionDevengo=false;
             return;
 		}
 		if ($scope.esnuevo) {
@@ -1748,6 +1762,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.modificarPresupuestoAjustado = function(obj, tipo) {
 		//console.log("Fuentes:", obj);
+		$scope.editarA = true;
 		if (obj.arbol == 1) {
 			$scope.jsRegresar = 'recargarPresupuestoAjustado';
 			$scope.aprobacionPlanificacion = false;

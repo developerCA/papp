@@ -280,7 +280,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.ordengastocertificacionid = obj.id;
+			$scope.objeto.ordengastocertificacionid = obj.certificacionid;
 			$scope.objeto.npcertificacioncodigo = obj.codigo;
 			$scope.objeto.valortotal = obj.valortotal;
 		}, function() {
