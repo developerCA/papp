@@ -405,8 +405,11 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			controller : 'ModalOrdenGastoLineasController',
 			size : 'lg',
 			resolve : {
+				ID : function() {
+					return $scope.objeto.id;
+				},
 				certificacionID : function() {
-					return $scope.objeto.id; //ordengastocertificacionid;
+					return $scope.objeto.ordengastocertificacionid;
 				},
 				editar : function() {
 					return null;
@@ -430,6 +433,9 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			controller : 'ModalOrdenGastoLineasController',
 			size : 'lg',
 			resolve : {
+				ID : function() {
+					return $scope.objeto.ordengastocertificacionid;
+				},
 				certificacionID : function() {
 					return $scope.objeto.id;
 				},

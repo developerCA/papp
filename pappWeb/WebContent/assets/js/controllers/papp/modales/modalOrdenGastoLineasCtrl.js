@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","certificacionID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenGastoLineasFactory",
-	function($scope,$rootScope,certificacionID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenGastoLineasFactory) {
+app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","certificacionID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenGastoLineasFactory",
+	function($scope,$rootScope,ID,certificacionID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenGastoLineasFactory) {
 
 	$scope.noeditar=false;
 	$scope.errorLimpio=false;
@@ -10,7 +10,7 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","certi
 		if (editar == null) {
 			//nuevo
 			ordenGastoLineasFactory.nuevoLinea(
-				certificacionID
+				ID
 			).then(function(resp){
 				//console.log(resp.json.ordengastolinea);
 	        	$scope.objeto = resp.json.ordengastolinea;
