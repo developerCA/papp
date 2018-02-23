@@ -344,6 +344,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.nuevo=function(node){
 		//console.log(node);
 		$scope.esnuevo=true;
+		$scope.editar=true;
+		$scope.editarA=true;
 		$scope.objeto=null;
 		$scope.nodeActivo=node;
 		if (node.nodeTipo == "SA") {// Tarea
@@ -412,7 +414,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
-				$scope.editar=true;
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
 				$scope.objeto=Object.assign({}, resp.json.subitemunidad, resp.json.totales);
 				$scope.detalles=resp.json.subitemunidadacumulador;
