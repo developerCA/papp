@@ -1812,7 +1812,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.recargarPresupuestoAjustadoA = function() {
 		$scope.aprobacionAjustado = true;
-		$scope.editarAprobarPlanificacion();
+		$scope.editarAprobarAjustada();
 	}
 
 	$scope.aprobarPlanificacion = function(obj) {
