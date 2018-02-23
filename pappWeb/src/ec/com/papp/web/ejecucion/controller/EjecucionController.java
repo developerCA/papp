@@ -108,7 +108,8 @@ public class EjecucionController {
 				UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,null);
 				id=certificacionTO.getNpid().toString();
 				certificacionTO.setId(certificacionTO.getNpid());
-				jsonObject.put("certificacion", (JSONObject)JSONSerializer.toJSON(certificacionTO,certificacionTO.getJsonConfig()));
+				ConsultasUtil.obtenercertificacion(certificacionTO.getNpid(), jsonObject);
+				//jsonObject.put("certificacion", (JSONObject)JSONSerializer.toJSON(certificacionTO,certificacionTO.getJsonConfig()));
 			}
 			//certificacion linea
 			else if(clase.equals("certificacionlinea")){
@@ -162,10 +163,12 @@ public class EjecucionController {
 				if(ordengastoTO.getNpfechasolicitud()!=null)
 					ordengastoTO.setFechasolicitud(UtilGeneral.parseStringToDate(ordengastoTO.getNpfechasolicitud()));
 				accion = (ordengastoTO.getId()==null)?"crear":"actualizar";
+				System.out.println("ordengastoclasemodid web " + ordengastoTO.getOrdengastoclasemodid());
 				UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO,null);
 				id=ordengastoTO.getNpid().toString();
 				ordengastoTO.setId(ordengastoTO.getNpid());
-				jsonObject.put("ordengasto", (JSONObject)JSONSerializer.toJSON(ordengastoTO,ordengastoTO.getJsonConfig()));
+				ConsultasUtil.obtenerordengasto(ordengastoTO.getNpid(), jsonObject);
+				//jsonObject.put("ordengasto", (JSONObject)JSONSerializer.toJSON(ordengastoTO,ordengastoTO.getJsonConfig()));
 			}
 			//ordengasto linea
 			else if(clase.equals("ordengastolinea")){
@@ -725,44 +728,7 @@ public class EjecucionController {
 			}
 			//Ordengasto
 			else if(clase.equals("ordengasto")){
-				OrdengastoTO ordengastoTO=new OrdengastoTO();
-				ordengastoTO = UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
-				ordengastoTO.setNpunidadcodigo(ordengastoTO.getUnidad().getCodigopresup());
-				if(ordengastoTO.getOrdengastoclasemodid()!=null){
-					ordengastoTO.setNpcodigoregcmcgasto(ordengastoTO.getClaseregistrocmcgasto().getCodigo());
-					ordengastoTO.setNpcodigoregistro(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getCodigo());
-					ordengastoTO.setNpcodigomodificacion(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getCodigo());
-					ordengastoTO.setNpnombreregcmcgasto(ordengastoTO.getClaseregistrocmcgasto().getNombre());
-					ordengastoTO.setNpnombreregistro(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getNombre());
-					ordengastoTO.setNpnombremodificacion(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getNombre());
-				}
-				if(ordengastoTO.getOrdengastotipodocid()!=null){
-					ordengastoTO.setNpcodigodocumento(ordengastoTO.getTipodocumentoclasedocumento().getTipodocumento().getCodigo());
-					ordengastoTO.setNpcodigotipodocumento(ordengastoTO.getTipodocumentoclasedocumento().getCodigo());
-					ordengastoTO.setNpnombredocumento(ordengastoTO.getTipodocumentoclasedocumento().getTipodocumento().getNombre());
-					ordengastoTO.setNpnombretipodocumento(ordengastoTO.getTipodocumentoclasedocumento().getNombre());
-					ordengastoTO.setOrdengastotipodocid(ordengastoTO.getTipodocumentoclasedocumento().getId().getId());
-					ordengastoTO.setOrdengastoclasemodid(ordengastoTO.getTipodocumentoclasedocumento().getId().getClasedocid());
-				}
-				if(ordengastoTO.getOrdengastoproveedorid()!=null) {
-					ordengastoTO.setNpproveedorcodigo(ordengastoTO.getSocionegocio3().getCodigo());
-					ordengastoTO.setNpproveedornombre(ordengastoTO.getSocionegocio3().getNombremostrado());
-				}
-				//asigno las fechas
-				ordengastoTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(ordengastoTO.getFechaaprobacion()));
-				ordengastoTO.setNpfechacreacion(UtilGeneral.parseDateToString(ordengastoTO.getFechacreacion()));
-				ordengastoTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(ordengastoTO.getFechaeliminacion()));
-				ordengastoTO.setNpfechaanulacion(UtilGeneral.parseDateToString(ordengastoTO.getFechaanulacion()));
-				ordengastoTO.setNpfechanegacion(UtilGeneral.parseDateToString(ordengastoTO.getFechanegacion()));
-				ordengastoTO.setNpfechasolicitud(UtilGeneral.parseDateToString(ordengastoTO.getFechasolicitud()));
-				//traigo las ordeneslineas las traigo
-				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
-				ordengastolineaTO.setOrdengasto(ordengastoTO);
-				ordengastolineaTO.getId().setId(ordengastoTO.getId());
-				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO);
-				log.println("lineas "+ ordengastolineaTOs.size());
-				jsonObject.put("ordengastolineas", (JSONArray)JSONSerializer.toJSON(ordengastolineaTOs,ordengastolineaTO.getJsonConfig()));
-				jsonObject.put("ordengasto", (JSONObject)JSONSerializer.toJSON(ordengastoTO,ordengastoTO.getJsonConfig()));
+				ConsultasUtil.obtenerordengasto(id, jsonObject);
 			}
 			//Ordengastolinea
 			else if(clase.equals("ordengastolinea")){
@@ -774,27 +740,7 @@ public class EjecucionController {
 			}
 			//Ordendevengo
 			else if(clase.equals("ordendevengo")){
-				OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
-				ordendevengoTO = UtilSession.planificacionServicio.transObtenerOrdendevengoTO(id);
-				log.println("orden de gasto atada: " + ordendevengoTO.getOrdendevengoordengastoid());
-				if(ordendevengoTO.getOrdendevengoordengastoid()!=null){
-					ordendevengoTO.setNpordengastoedit(ordendevengoTO.getOrdengasto().getCodigo());
-					log.println("valor del gasto " + ordendevengoTO.getOrdengasto().getValortotal());
-					ordendevengoTO.setNpordengastovalor(ordendevengoTO.getOrdengasto().getValortotal());
-				}
-				//asigno las fechas
-				ordendevengoTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(ordendevengoTO.getFechaaprobacion()));
-				ordendevengoTO.setNpfechacreacion(UtilGeneral.parseDateToString(ordendevengoTO.getFechacreacion()));
-				ordendevengoTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(ordendevengoTO.getFechaeliminacion()));
-				ordendevengoTO.setNpfechaanulacion(UtilGeneral.parseDateToString(ordendevengoTO.getFechaanulacion()));
-				ordendevengoTO.setNpfechanegacion(UtilGeneral.parseDateToString(ordendevengoTO.getFechanegacion()));
-				ordendevengoTO.setNpfechasolicitud(UtilGeneral.parseDateToString(ordendevengoTO.getFechasolicitud()));
-				//traigo las ordeneslineas las traigo
-				OrdendevengolineaTO ordendevengolineaTO=new OrdendevengolineaTO();
-				ordendevengolineaTO.getId().setId(ordendevengoTO.getId());
-				Collection<OrdendevengolineaTO> ordendevengolineaTOs=UtilSession.planificacionServicio.transObtenerOrdendevengolinea(ordendevengolineaTO);
-				jsonObject.put("ordendevengolineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordendevengolineaTO.getJsonConfigconsulta()));
-				jsonObject.put("ordendevengo", (JSONObject)JSONSerializer.toJSON(ordendevengoTO,ordendevengoTO.getJsonConfig()));
+				ConsultasUtil.obtenerordendevengo(id, jsonObject);
 			}
 			//Ordendevengolinea
 			else if(clase.equals("ordendevengolinea")){
@@ -805,25 +751,7 @@ public class EjecucionController {
 			}
 			//Ordenreversion
 			else if(clase.equals("ordenreversion")){
-				OrdenreversionTO ordenreversionTO=new OrdenreversionTO();
-				ordenreversionTO = UtilSession.planificacionServicio.transObtenerOrdenreversionTO(id);
-				if(ordenreversionTO.getOrdenrversionogastoid()!=null){
-					ordenreversionTO.setNpordengastoedit(ordenreversionTO.getOrdengasto().getCodigo());
-					ordenreversionTO.setNpordengastovalor(ordenreversionTO.getOrdengasto().getValortotal());
-				}
-				//asigno las fechas
-				ordenreversionTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechaaprobacion()));
-				ordenreversionTO.setNpfechacreacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechacreacion()));
-				ordenreversionTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechaeliminacion()));
-				ordenreversionTO.setNpfechaanulacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechaanulacion()));
-				ordenreversionTO.setNpfechanegacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechanegacion()));
-				ordenreversionTO.setNpfechasolicitud(UtilGeneral.parseDateToString(ordenreversionTO.getFechasolicitud()));
-				//traigo las ordeneslineas las traigo
-				OrdenreversionlineaTO ordenreversionlineaTO=new OrdenreversionlineaTO();
-				ordenreversionlineaTO.getId().setId(ordenreversionTO.getId());
-				Collection<OrdenreversionlineaTO> ordendevengolineaTOs=UtilSession.planificacionServicio.transObtenerOrdenreversionlinea(ordenreversionlineaTO);
-				jsonObject.put("ordenreversionlineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordenreversionTO.getJsonConfig()));
-				jsonObject.put("ordenreversion", (JSONObject)JSONSerializer.toJSON(ordenreversionTO,ordenreversionTO.getJsonConfig()));
+				ConsultasUtil.obtenerordenreversion(id, jsonObject);
 			}
 			//Ordenreversionlinea
 			else if(clase.equals("ordenreversionlinea")){
@@ -886,32 +814,7 @@ public class EjecucionController {
 			}
 			//Reforma
 			else if(clase.equals("reforma")){
-				ReformaTO reformaTO=new ReformaTO();
-				reformaTO = UtilSession.planificacionServicio.transObtenerReformaTO(id);
-				reformaTO.setNpunidadcodigo(reformaTO.getUnidad().getCodigopresup());
-				reformaTO.setNpunidadnombre(reformaTO.getUnidad().getNombre());
-				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformaTO.getId()));
-				//Consulto el item
-				ItemunidadTO itemunidadTO=new ItemunidadTO();
-				itemunidadTO.setItem(new ItemTO());
-				itemunidadTO.setId(nivelactividadTO.getTablarelacionid());
-				Collection<ItemunidadTO> itemunidadTOs=UtilSession.planificacionServicio.transObtenerItemunidad(itemunidadTO);
-				if(itemunidadTOs.size()>0) {
-					itemunidadTO=(ItemunidadTO)itemunidadTOs.iterator().next();
-					reformaTO.setNpitemcodigo(itemunidadTO.getItem().getCodigo());
-					reformaTO.setNpitemnombre(itemunidadTO.getItem().getNombre());
-				}
-				//asigno las fechas
-				reformaTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(reformaTO.getFechaaprobacion()));
-				reformaTO.setNpfechacreacion(UtilGeneral.parseDateToString(reformaTO.getFechacreacion()));
-				reformaTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(reformaTO.getFechaeliminacion()));
-				reformaTO.setNpfechanegacion(UtilGeneral.parseDateToString(reformaTO.getFechanegacion()));
-				reformaTO.setNpfechasolicitud(UtilGeneral.parseDateToString(reformaTO.getFechasolicitud()));
-				//traigo las reformaslinea las traigo
-				ReformalineaTO reformalineaTO=new ReformalineaTO();
-				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO);
-				jsonObject.put("reformalineas", (JSONArray)JSONSerializer.toJSON(reformalineaTOs,reformalineaTO.getJsonConfig()));
-				jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
+				ConsultasUtil.obtenerreforma(id, jsonObject);
 			}
 			//Reformalinea
 			else if(clase.equals("reformalinea")){
@@ -931,21 +834,7 @@ public class EjecucionController {
 
 			//Reformameta
 			else if(clase.equals("reformameta")){
-				ReformametaTO reformametaTO=new ReformametaTO();
-				reformametaTO = UtilSession.planificacionServicio.transObtenerReformametaTO(id);
-				reformametaTO.setNpunidadcodigo(reformametaTO.getUnidad().getCodigopresup());
-				reformametaTO.setNpunidadnombre(reformametaTO.getUnidad().getNombre());
-				//asigno las fechas
-				reformametaTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(reformametaTO.getFechaaprobacion()));
-				reformametaTO.setNpfechacreacion(UtilGeneral.parseDateToString(reformametaTO.getFechacreacion()));
-				reformametaTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(reformametaTO.getFechaeliminacion()));
-				reformametaTO.setNpfechanegacion(UtilGeneral.parseDateToString(reformametaTO.getFechanegacion()));
-				reformametaTO.setNpfechasolicitud(UtilGeneral.parseDateToString(reformametaTO.getFechasolicitud()));
-				//traigo las reformaslinea las traigo
-				ReformametalineaTO reformametalineaTO=new ReformametalineaTO();
-				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO);
-				jsonObject.put("reformametalineas", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs,reformametalineaTO.getJsonConfig()));
-				jsonObject.put("reformameta", (JSONObject)JSONSerializer.toJSON(reformametaTO,reformametaTO.getJsonConfig()));
+				ConsultasUtil.obtenerreformameta(id, jsonObject);
 			}
 			//Reformametalinea
 			else if(clase.equals("reformametalinea")){

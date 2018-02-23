@@ -13,6 +13,7 @@ import org.hibernate.tools.commons.to.SearchResultTO;
 
 import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
+import ec.com.papp.administracion.to.ItemTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
 import ec.com.papp.estructuraorganica.to.UnidadTO;
@@ -21,12 +22,18 @@ import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.GastoDevengoVO;
+import ec.com.papp.planificacion.to.ItemunidadTO;
+import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
+import ec.com.papp.planificacion.to.OrdendevengolineaTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
+import ec.com.papp.planificacion.to.OrdengastolineaTO;
 import ec.com.papp.planificacion.to.OrdenreversionTO;
+import ec.com.papp.planificacion.to.OrdenreversionlineaTO;
 import ec.com.papp.planificacion.to.ReformaTO;
 import ec.com.papp.planificacion.to.ReformalineaTO;
 import ec.com.papp.planificacion.to.ReformametaTO;
+import ec.com.papp.planificacion.to.ReformametalineaTO;
 import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
@@ -847,6 +854,212 @@ public class ConsultasUtil {
 		}
 		return jsonObject;
 	}
+
+	/**
+	* Metodo que consulta el detalle de una orden de gasto y sus lineas
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject obtenerordengasto(Long id,JSONObject jsonObject) throws MyException {
+		OrdengastoTO ordengastoTO=new OrdengastoTO();
+		try{
+			ordengastoTO = UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
+			ordengastoTO.setNpunidadcodigo(ordengastoTO.getUnidad().getCodigopresup());
+			if(ordengastoTO.getOrdengastoclasemodid()!=null){
+				ordengastoTO.setNpcodigoregcmcgasto(ordengastoTO.getClaseregistrocmcgasto().getCodigo());
+				ordengastoTO.setNpcodigoregistro(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getCodigo());
+				ordengastoTO.setNpcodigomodificacion(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getCodigo());
+				ordengastoTO.setNpnombreregcmcgasto(ordengastoTO.getClaseregistrocmcgasto().getNombre());
+				ordengastoTO.setNpnombreregistro(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getNombre());
+				ordengastoTO.setNpnombremodificacion(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getNombre());
+			}
+			if(ordengastoTO.getOrdengastotipodocid()!=null){
+				ordengastoTO.setNpcodigodocumento(ordengastoTO.getTipodocumentoclasedocumento().getTipodocumento().getCodigo());
+				ordengastoTO.setNpcodigotipodocumento(ordengastoTO.getTipodocumentoclasedocumento().getCodigo());
+				ordengastoTO.setNpnombredocumento(ordengastoTO.getTipodocumentoclasedocumento().getTipodocumento().getNombre());
+				ordengastoTO.setNpnombretipodocumento(ordengastoTO.getTipodocumentoclasedocumento().getNombre());
+				ordengastoTO.setOrdengastotipodocid(ordengastoTO.getTipodocumentoclasedocumento().getId().getId());
+				ordengastoTO.setOrdengastotpclasedocid(ordengastoTO.getTipodocumentoclasedocumento().getId().getClasedocid());
+			}
+			if(ordengastoTO.getOrdengastoproveedorid()!=null) {
+				ordengastoTO.setNpproveedorcodigo(ordengastoTO.getSocionegocio3().getCodigo());
+				ordengastoTO.setNpproveedornombre(ordengastoTO.getSocionegocio3().getNombremostrado());
+			}
+			//asigno las fechas
+			ordengastoTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(ordengastoTO.getFechaaprobacion()));
+			ordengastoTO.setNpfechacreacion(UtilGeneral.parseDateToString(ordengastoTO.getFechacreacion()));
+			ordengastoTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(ordengastoTO.getFechaeliminacion()));
+			ordengastoTO.setNpfechaanulacion(UtilGeneral.parseDateToString(ordengastoTO.getFechaanulacion()));
+			ordengastoTO.setNpfechanegacion(UtilGeneral.parseDateToString(ordengastoTO.getFechanegacion()));
+			ordengastoTO.setNpfechasolicitud(UtilGeneral.parseDateToString(ordengastoTO.getFechasolicitud()));
+			//traigo las ordeneslineas las traigo
+			OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
+			ordengastolineaTO.setOrdengasto(ordengastoTO);
+			ordengastolineaTO.getId().setId(ordengastoTO.getId());
+			Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO);
+			log.println("lineas "+ ordengastolineaTOs.size());
+			jsonObject.put("ordengastolineas", (JSONArray)JSONSerializer.toJSON(ordengastolineaTOs,ordengastolineaTO.getJsonConfig()));
+			jsonObject.put("ordengasto", (JSONObject)JSONSerializer.toJSON(ordengastoTO,ordengastoTO.getJsonConfig()));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
+	/**
+	* Metodo que consulta el detalle de una orden de devengo y sus lineas
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject obtenerordendevengo(Long id,JSONObject jsonObject) throws MyException {
+		try{
+			OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
+			ordendevengoTO = UtilSession.planificacionServicio.transObtenerOrdendevengoTO(id);
+			log.println("orden de gasto atada: " + ordendevengoTO.getOrdendevengoordengastoid());
+			if(ordendevengoTO.getOrdendevengoordengastoid()!=null){
+				ordendevengoTO.setNpordengastoedit(ordendevengoTO.getOrdengasto().getCodigo());
+				log.println("valor del gasto " + ordendevengoTO.getOrdengasto().getValortotal());
+				ordendevengoTO.setNpordengastovalor(ordendevengoTO.getOrdengasto().getValortotal());
+			}
+			//asigno las fechas
+			ordendevengoTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(ordendevengoTO.getFechaaprobacion()));
+			ordendevengoTO.setNpfechacreacion(UtilGeneral.parseDateToString(ordendevengoTO.getFechacreacion()));
+			ordendevengoTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(ordendevengoTO.getFechaeliminacion()));
+			ordendevengoTO.setNpfechaanulacion(UtilGeneral.parseDateToString(ordendevengoTO.getFechaanulacion()));
+			ordendevengoTO.setNpfechanegacion(UtilGeneral.parseDateToString(ordendevengoTO.getFechanegacion()));
+			ordendevengoTO.setNpfechasolicitud(UtilGeneral.parseDateToString(ordendevengoTO.getFechasolicitud()));
+			//traigo las ordeneslineas las traigo
+			OrdendevengolineaTO ordendevengolineaTO=new OrdendevengolineaTO();
+			ordendevengolineaTO.getId().setId(ordendevengoTO.getId());
+			Collection<OrdendevengolineaTO> ordendevengolineaTOs=UtilSession.planificacionServicio.transObtenerOrdendevengolinea(ordendevengolineaTO);
+			jsonObject.put("ordendevengolineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordendevengolineaTO.getJsonConfigconsulta()));
+			jsonObject.put("ordendevengo", (JSONObject)JSONSerializer.toJSON(ordendevengoTO,ordendevengoTO.getJsonConfig()));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
+	/**
+	* Metodo que consulta el detalle de una orden de reversion y sus lineas
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject obtenerordenreversion(Long id,JSONObject jsonObject) throws MyException {
+		try{
+			OrdenreversionTO ordenreversionTO=new OrdenreversionTO();
+			ordenreversionTO = UtilSession.planificacionServicio.transObtenerOrdenreversionTO(id);
+			if(ordenreversionTO.getOrdenrversionogastoid()!=null){
+				ordenreversionTO.setNpordengastoedit(ordenreversionTO.getOrdengasto().getCodigo());
+				ordenreversionTO.setNpordengastovalor(ordenreversionTO.getOrdengasto().getValortotal());
+			}
+			//asigno las fechas
+			ordenreversionTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechaaprobacion()));
+			ordenreversionTO.setNpfechacreacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechacreacion()));
+			ordenreversionTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechaeliminacion()));
+			ordenreversionTO.setNpfechaanulacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechaanulacion()));
+			ordenreversionTO.setNpfechanegacion(UtilGeneral.parseDateToString(ordenreversionTO.getFechanegacion()));
+			ordenreversionTO.setNpfechasolicitud(UtilGeneral.parseDateToString(ordenreversionTO.getFechasolicitud()));
+			//traigo las ordeneslineas las traigo
+			OrdenreversionlineaTO ordenreversionlineaTO=new OrdenreversionlineaTO();
+			ordenreversionlineaTO.getId().setId(ordenreversionTO.getId());
+			Collection<OrdenreversionlineaTO> ordendevengolineaTOs=UtilSession.planificacionServicio.transObtenerOrdenreversionlinea(ordenreversionlineaTO);
+			jsonObject.put("ordenreversionlineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordenreversionTO.getJsonConfig()));
+			jsonObject.put("ordenreversion", (JSONObject)JSONSerializer.toJSON(ordenreversionTO,ordenreversionTO.getJsonConfig()));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+	
+	/**
+	* Metodo que consulta el detalle de una reforma y sus lineas
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject obtenerreforma(Long id,JSONObject jsonObject) throws MyException {
+		try{
+			ReformaTO reformaTO=new ReformaTO();
+			reformaTO = UtilSession.planificacionServicio.transObtenerReformaTO(id);
+			reformaTO.setNpunidadcodigo(reformaTO.getUnidad().getCodigopresup());
+			reformaTO.setNpunidadnombre(reformaTO.getUnidad().getNombre());
+			NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformaTO.getId()));
+			//Consulto el item
+			ItemunidadTO itemunidadTO=new ItemunidadTO();
+			itemunidadTO.setItem(new ItemTO());
+			itemunidadTO.setId(nivelactividadTO.getTablarelacionid());
+			Collection<ItemunidadTO> itemunidadTOs=UtilSession.planificacionServicio.transObtenerItemunidad(itemunidadTO);
+			if(itemunidadTOs.size()>0) {
+				itemunidadTO=(ItemunidadTO)itemunidadTOs.iterator().next();
+				reformaTO.setNpitemcodigo(itemunidadTO.getItem().getCodigo());
+				reformaTO.setNpitemnombre(itemunidadTO.getItem().getNombre());
+			}
+			//asigno las fechas
+			reformaTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(reformaTO.getFechaaprobacion()));
+			reformaTO.setNpfechacreacion(UtilGeneral.parseDateToString(reformaTO.getFechacreacion()));
+			reformaTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(reformaTO.getFechaeliminacion()));
+			reformaTO.setNpfechanegacion(UtilGeneral.parseDateToString(reformaTO.getFechanegacion()));
+			reformaTO.setNpfechasolicitud(UtilGeneral.parseDateToString(reformaTO.getFechasolicitud()));
+			//traigo las reformaslinea las traigo
+			ReformalineaTO reformalineaTO=new ReformalineaTO();
+			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO);
+			jsonObject.put("reformalineas", (JSONArray)JSONSerializer.toJSON(reformalineaTOs,reformalineaTO.getJsonConfig()));
+			jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+	
+	/**
+	* Metodo que consulta el detalle de una reforma meta y sus lineas
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject obtenerreformameta(Long id,JSONObject jsonObject) throws MyException {
+		try{
+			ReformametaTO reformametaTO=new ReformametaTO();
+			reformametaTO = UtilSession.planificacionServicio.transObtenerReformametaTO(id);
+			reformametaTO.setNpunidadcodigo(reformametaTO.getUnidad().getCodigopresup());
+			reformametaTO.setNpunidadnombre(reformametaTO.getUnidad().getNombre());
+			//asigno las fechas
+			reformametaTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(reformametaTO.getFechaaprobacion()));
+			reformametaTO.setNpfechacreacion(UtilGeneral.parseDateToString(reformametaTO.getFechacreacion()));
+			reformametaTO.setNpfechaeliminacion(UtilGeneral.parseDateToString(reformametaTO.getFechaeliminacion()));
+			reformametaTO.setNpfechanegacion(UtilGeneral.parseDateToString(reformametaTO.getFechanegacion()));
+			reformametaTO.setNpfechasolicitud(UtilGeneral.parseDateToString(reformametaTO.getFechasolicitud()));
+			//traigo las reformaslinea las traigo
+			ReformametalineaTO reformametalineaTO=new ReformametalineaTO();
+			Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO);
+			jsonObject.put("reformametalineas", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs,reformametalineaTO.getJsonConfig()));
+			jsonObject.put("reformameta", (JSONObject)JSONSerializer.toJSON(reformametaTO,reformametaTO.getJsonConfig()));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
+
 
 	/**
 	* Metodo que consulta las reformas paginadas y arma el json para mostrarlos en la grilla
