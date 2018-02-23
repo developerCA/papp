@@ -791,6 +791,7 @@ public class ConsultasUtil {
 				resultado=UtilSession.planificacionServicio.transValidaaprobacion(unidad, ejerciciofiscal, true, npactividadid);
 			else
 				resultado=UtilSession.planificacionServicio.transValidaaprobacion(unidad, ejerciciofiscal,false, npactividadid);
+		log.println("resultados "+resultado.size());
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
