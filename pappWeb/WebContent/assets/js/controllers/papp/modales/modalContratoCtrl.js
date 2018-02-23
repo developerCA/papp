@@ -63,4 +63,36 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
 	$scope.cancelar = function() {
 		$uibModalInstance.dismiss('cancel');
 	};
+
+	$scope.calcuarFechaFin = function() {
+		$scope.objeto.npfechafin = $scope.toStringDate(
+			$scope.sumaDias(
+				$scope.objeto.npfechainicio,
+				$scope.objeto.duraciondias
+			)
+		);
+	};
+
+	$scope.sumaDias = function(fecha, numDias) {
+		if (numDias == undefined || numDias.toString().trim() == "") {
+			numDias = 0;
+		}
+		var nfecha = new Date(fecha);
+		nfecha.setDate(fecha.getDate() + parseInt(numDias));
+		return nfecha;
+	}
+
+	$scope.toStringDate = function(fuente) {
+		if (fuente == null) {
+			return null;
+		}
+		try {
+			var parts = fuente.toISOString();
+			parts = parts.split('T');
+			parts = parts[0].split('-');
+		} catch (err) {
+			return null;
+		}
+		return parts[2] + "/" + parts[1] + "/" + parts[0]; 
+	}
 }]);

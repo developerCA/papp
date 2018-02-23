@@ -230,7 +230,7 @@
 											<td width="2px"></td>
 											<td width="32px">
 												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Eliminar" ng-click="eliminar(obj.id)">
+													uib-tooltip="Eliminar" ng-click="eliminar($index)">
 													<i class="fa fa-trash-o"></i>
 												</a>
 											</td>
@@ -730,7 +730,7 @@
 							</div>
 						</div>
 						<br>
-						<div class="row">
+						<div class="row" ng-show="objeto.id">
 							<div class="col-sm-12">
 								<div class="panel panel-primary">
 									<div class="panel-heading">

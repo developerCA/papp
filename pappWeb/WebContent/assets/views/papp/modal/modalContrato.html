@@ -102,7 +102,7 @@
 					    </label>
 				        <div class="input-group">
 				            <input type="text" class="form-control" placeholder="Ingrese un de fecha inicial"
-				                uib-datepicker-popup="dd/MM/yyyy" 
+				                uib-datepicker-popup="dd/MM/yyyy" ng-change="calcuarFechaFin();"
 				                name="fechainicialFiltro" ng-model="objeto.npfechainicio"
 				                is-open="popupnpFechainicio.opened" datepicker-options="dateOptions"
 				                ng-required="true" close-text="Close">
@@ -128,10 +128,10 @@
 					        Duraci&oacute;n Dias
 					        <span class="symbol required"></span>
 					    </label>
-					    <input type="text" numericOnly style="text-align:right;" decimal="2"
+					    <input type="text" numericOnly
 					    	placeholder="Escriba un duraci&oacute;n dias"
 					        class="form-control" name="duraciondias" ng-model="objeto.duraciondias"
-					        required>
+					        required ng-change="calcuarFechaFin();">
 					    <span class="error text-small block"
 					        ng-if="Form.duraciondias.$dirty && Form.duraciondias.$invalid">
 					        Incorrecto

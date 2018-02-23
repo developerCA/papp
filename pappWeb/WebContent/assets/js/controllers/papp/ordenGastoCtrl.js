@@ -112,7 +112,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			    $scope.objeto=resp.json.ordengasto;
 			    $scope.detalles=resp.json.ordengastolineas;
 			}
-			$scope.noeditar=false;
+			//agregarLinea$scope.noeditar=false;
 			$scope.edicion=true;
 			$scope.nuevoar=false;
 			$scope.guardar=true;
@@ -327,33 +327,58 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		});
 	};
 
-	$scope.eliminar = function(id) {
-/*
-		SweetAlert.swal({
-			title: "ok",
-			text: "Seguro que desea eliminar la orden?",
-			buttons: {
-				cancel: true,
-				confirm: "No",
-			    roll: {
-			        text: "Si",
-			        value: "roll",
-			    }
+	$scope.eliminar = function(index) {
+		if ($scope.data[index].estado != "RE") {
+			SweetAlert.swal(
+	    		"Orden de Gastos!",
+				"No se permite eliminar este articulo, solo los que estan 'Registrados'.",
+				"error"
+			);
+			return;
+		}
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalLiquidacionManua.html',
+			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
+			size : 'lg',
+			resolve: {
+				titulo: function() {
+					return "Eliminar";
+				},
+				subtitulo : function() {
+					return "Observacion";
+				}
 			}
 		});
-*/
-        SweetAlert.swal("Orden de Gastos!", "No se pudo eliminar porque falta REST para eliminar", "error");
-/*
-		ordenGastoFactory.eliminar(id).then(function(resp){
-			if (resp.estado){
-	             $scope.objeto={};
-	             $scope.limpiar();
-	             SweetAlert.swal("Orden de Gastos!", "Registro eliminado satisfactoriamente!", "success");
-			}else{
-	             SweetAlert.swal("Orden de Gastos!", resp.mensajes.msg, "error");
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			if (obj === undefined) {
+				obj = "";
 			}
+			var cur = 0;
+			$scope.data[index].npestado = "Eliminando";
+			ordenGastoFactory.solicitar(
+				$scope.data[index].id,
+				"EL",
+				null,
+				obj
+			).then(function(resp){
+				if (resp.estado) {
+					$scope.pageChanged();
+		            SweetAlert.swal(
+	            		"Orden de Gastos!",
+	            		"Registro eliminado satisfactoriamente!",
+	            		"success"
+            		);
+				} else {
+		            SweetAlert.swal(
+	            		"Orden de Gastos!",
+	            		resp.mensajes.msg,
+	            		"error"
+            		);
+				}
+			});
+		}, function() {
 		});
-*/
 	}
 
 	$scope.contrato = function() {
