@@ -2146,16 +2146,22 @@
 									<form name="Form" id="formMetaDistribucionAjustada" novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionAjustada')">
 										<span> &nbsp;Distribuci&oacute;n:
-											<a
-												class="btn btn-sm btn-default"
+											<a class="btn btn-sm btn-default"
 												ng-click="editarDistribucionPlanificado();"> Planificado
-											</a> &nbsp; <a class="btn btn-sm btn-default"
+											</a>
+											&nbsp;
+											<a class="btn btn-sm btn-default"
 												uib-tooltip="Copiar Planificado a Ajustado"
-												ng-click="copiarPlanificadoAjustado();"> <i
-													class="fa ti-hand-point-right"></i>
-											</a> &nbsp; <a class="btn btn-sm btn-primary"
-												style="background-color: #00B300 !important"> Ajustado </a>
-												&nbsp; <a class="btn btn-sm btn-default"
+												ng-click="copiarPlanificadoAjustado();">
+												<i class="fa ti-hand-point-right"></i>
+											</a>
+											&nbsp;
+											<a class="btn btn-sm btn-primary"
+												style="background-color: #00B300 !important">
+												Ajustado
+											</a>
+											&nbsp;
+											<a class="btn btn-sm btn-default"
 												ng-click="editarDistribucionDevengo();"> Devengo </a> <br>&nbsp;Unidad
 												Tipo:
 											<select name="periodoPlanificado" ng-disabled="!editarA"
@@ -2229,7 +2235,7 @@
 											ng-click="editarDistribucionAjustado();"> Ajustado </a>
 											&nbsp; <a class="btn btn-sm btn-primary"
 											style="background-color: #00B300 !important"> Devengo </a> <br>&nbsp;Unidad
-											Tipo: <select name="periodoPlanificado" ng-disabled="!editar"
+											Tipo: <select name="periodoPlanificado" ng-disabled="!editarA"
 											ng-model="objetoDevengo.unidadtiempo"
 											ng-change="vLimpio=true;distribucionValores('D');">
 												<option value="ME">Mensual</option>
@@ -2256,7 +2262,7 @@
 																class="form-control" name="{{'pvalor_'+$index}}"
 																ng-model="obj.valor" numericOnly
 																style="text-align: right;" required decimal="2"
-																ng-disabled="!editar || objetoDevengo.unidadtiempo!='PE'"
+																ng-disabled="!editarA || objetoDevengo.unidadtiempo!='PE'"
 																ng-change="calcularPorcientoA();"></td>
 														</tr>
 													</table>
@@ -2267,7 +2273,7 @@
 											<div class="col-md-12">
 												<div class="pull-right">
 													<button type="submit" class="btn btn-primary"
-														ng-show="editar">Guardar</button>
+														ng-show="editarA">Guardar</button>
 												</div>
 											</div>
 										</div>

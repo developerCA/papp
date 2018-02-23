@@ -1550,7 +1550,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"No coincide del Presupuesto el Total Planifica y la distribuida, tiene que redistribuirla.",
         		"error"
     		);
-    		$scope.metaDistribucion('P');
+    		if (!$scope.esnuevo) {
+    			$scope.metaDistribucion('P');
+    		}
             return;
 		}
 		if ($scope.npTotalAjustado != $scope.detalles[$scope.mAjustadaID].npvalor) {
@@ -1559,7 +1561,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    		"No coincide del Presupuesto el Total Ajustada y la distribuida, tiene que redistribuirla.",
 	    		"error"
 			);
-			$scope.metaDistribucion('A');
+			if (!$scope.esnuevo) {
+				$scope.metaDistribucion('A');
+			}
 	        return;
 		}
 		if ($scope.esnuevo) {
