@@ -29,5 +29,12 @@ function(Restangular) {
 
 		    return Restangular.allUrl(url).customPOST(obj);
 		},
+
+		guardar:function(
+			objeto
+		){
+			var url = "administrar/contrato/";
+			return Restangular.allUrl(url).customPOST(objeto);
+		},
 	}
 } ]);

@@ -50,7 +50,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.edicion = false;
     		if ($scope.nodeActivo.siEditar == "P") {
     			$scope.aprobacionPlanificacion = true;
+    			$scope.aprobacionAjustado = false;
     		} else {
+    			$scope.aprobacionPlanificacion = false;
     			$scope.aprobacionAjustado = true;
     		}
 		}
@@ -1782,9 +1784,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.modificarPresupuestoAjustado = function(obj, tipo) {
 		//console.log("Fuentes:", obj);
 		$scope.edicion = true;
+		$scope.jsRegresar = 'recargarPresupuestoAjustado' + tipo;
 		if (obj.arbol == 1) {
-			$scope.jsRegresar = 'recargarPresupuestoAjustado';
-			$scope.aprobacionPlanificacion = false;
 			$scope.cargarPlanificacionAnual($scope.objetoPA);
 		} else {
 			var node = {
@@ -1800,10 +1801,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			}
 			$scope.editarPlanificacionAnual(node);
 		}
+		$scope.aprobacionPlanificacion = false;
+		$scope.aprobacionAjustado = false;
 	}
 
-	$scope.recargarPresupuestoAjustado = function() {
+	$scope.recargarPresupuestoAjustadoP = function() {
 		$scope.aprobacionPlanificacion = true;
+		$scope.editarAprobarPlanificacion();
+	}
+
+	$scope.recargarPresupuestoAjustadoA = function() {
+		$scope.aprobacionAjustado = true;
 		$scope.editarAprobarPlanificacion();
 	}
 

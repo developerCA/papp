@@ -394,6 +394,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
+			$scope.objeto.ordengastocontratoid = obj.id;
 		}, function() {
 		});
 	}

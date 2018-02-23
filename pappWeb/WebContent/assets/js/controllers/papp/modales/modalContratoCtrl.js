@@ -73,6 +73,45 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
 		);
 	};
 
+	$scope.form = {
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+            	var tObj = {};
+            	angular.copy($scope.objeto, tObj);
+            	tObj.npfechainicio = $scope.toStringDate(tObj.npfechainicio);
+            	contratoFactory.guardar(tObj).then(function(resp){
+        			 if (resp.estado){
+      					 SweetAlert.swal("Contrato!", "Registro guardado satisfactoriamente!", "success");
+      					 $uibModalInstance.close($scope.objeto);
+        			 }else{
+	 		             SweetAlert.swal("Contrato!", resp.mensajes.msg, "error");
+        			 }
+        		})
+            }
+        },
+        reset: function (form) {
+            $scope.myModel = angular.copy($scope.master);
+            form.$setPristine(true);
+            $scope.edicion=false;
+            $scope.objeto={};
+        }
+    };
+
 	$scope.sumaDias = function(fecha, numDias) {
 		if (numDias == undefined || numDias.toString().trim() == "") {
 			numDias = 0;
