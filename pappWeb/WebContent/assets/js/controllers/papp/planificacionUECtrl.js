@@ -410,7 +410,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				"&actividadid=" + node.npactividadid +
 				"&itemunidadid=" + node.tablarelacionid
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (!resp.estado) return;
 				$scope.editar=true;
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
@@ -427,6 +427,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 						$scope.mDevengoID = i;
 					}
 				}
+				$scope.objetoTplanificado = $scope.objeto.tplanificado;
+				$scope.objetoTacumulado = $scope.objeto.tacumulado;
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubItem=true;
 				$scope.editarDistribucionPlanificado();
