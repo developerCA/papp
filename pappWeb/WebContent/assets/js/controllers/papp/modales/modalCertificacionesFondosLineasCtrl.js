@@ -1,15 +1,16 @@
 'use strict';
 
-app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootScope","certificacionID","unidadID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
-	function($scope,$rootScope,certificacionID,unidadID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,certificacionesFondosFactory) {
+app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootScope","ID","unidadID","editar","npcertificacionvalor","$uibModalInstance","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
+	function($scope,$rootScope,ID,unidadID,editar,npcertificacionvalor,$uibModalInstance,SweetAlert,$filter, ngTableParams,certificacionesFondosFactory) {
 
 	$scope.noeditar = false;
 
 	$scope.init=function(){
+		$scope.npcertificacionvalor = npcertificacionvalor;
 		if (editar == null) {
 			//nuevo
 			certificacionesFondosFactory.nuevoLinea(
-				certificacionID
+				ID
 			).then(function(resp){
 				console.log(resp.json.certificacionlinea);
 	        	$scope.objeto = resp.json.certificacionlinea;

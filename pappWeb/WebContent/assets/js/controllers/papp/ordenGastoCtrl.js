@@ -154,7 +154,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 
 	$scope.aprobar = function(index) {
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Orden de Gasto!", "Solo se puede negar si esta en estado solicitado.", "error");
+			SweetAlert.swal("Orden de Gasto!", "Solo se puede aprobar si esta en estado solicitado.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -406,9 +406,12 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			size : 'lg',
 			resolve : {
 				certificacionID : function() {
-					return $scope.objeto.ordengastocertificacionid;
+					return $scope.objeto.id; //ordengastocertificacionid;
 				},
 				editar : function() {
+					return null;
+				},
+				npcertificacionvalor : function() {
 					return null;
 				}
 			}
@@ -431,7 +434,10 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 					return $scope.objeto.id;
 				},
 				editar : function() {
-					return $scope.detalles[index].id
+					return $scope.detalles[index].id;
+				},
+				npcertificacionvalor : function() {
+					return $scope.objeto.npcertificacionvalor;
 				}
 			}
 		});

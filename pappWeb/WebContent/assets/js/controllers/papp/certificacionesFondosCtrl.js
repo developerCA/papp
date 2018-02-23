@@ -336,7 +336,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			controller : 'ModalCertificacionesFondosLineasController',
 			size : 'lg',
 			resolve : {
-				certificacionID : function() {
+				ID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
@@ -391,7 +391,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			controller : 'ModalCertificacionesFondosLineasController',
 			size : 'lg',
 			resolve : {
-				certificacionID : function() {
+				ID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
