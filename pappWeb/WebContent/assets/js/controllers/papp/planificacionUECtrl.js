@@ -1762,7 +1762,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.modificarPresupuestoAjustado = function(obj, tipo) {
 		//console.log("Fuentes:", obj);
-		$scope.editarA = true;
+		$scope.edicion = true;
 		if (obj.arbol == 1) {
 			$scope.jsRegresar = 'recargarPresupuestoAjustado';
 			$scope.aprobacionPlanificacion = false;

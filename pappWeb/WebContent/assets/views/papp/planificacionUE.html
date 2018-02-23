@@ -2552,12 +2552,14 @@
 										<td>Observaci&oacute;n</td>
 									</tr>
 									<tr ng-repeat="obj in detallesPA" class="table-stylish">
-										<td><a class="btn btn-sm btn-primary"
-											style="background-color: #00B300 !important"
-											uib-tooltip="Modificar"
-											ng-click="modificarPresupuestoAjustado(obj, 'P');"> <i
-												class="fa ti-layers-alt"></i>
-										</a></td>
+										<td>
+											<a class="btn btn-sm btn-primary"
+												style="background-color: #00B300 !important"
+												uib-tooltip="Modificar"
+												ng-click="modificarPresupuestoAjustado(obj, 'P');">
+												<i class="fa ti-layers-alt"></i>
+											</a>
+										</td>
 										<td>{{ $index + 1 }}</td>
 										<td><span ng-if="obj.nivel == 'AC'"> ACTIVIDAD </span> <span
 											ng-if="obj.nivel == 'SA'"> SUBACTIVIDAD </span> <span
@@ -2619,7 +2621,7 @@
 												style="background-color: #00B300 !important"
 												uib-tooltip="Modificar"
 												ng-click="modificarPresupuestoAjustado(obj, 'A');">
-											<i class="fa ti-layers-alt"></i>
+												<i class="fa ti-layers-alt"></i>
 											</a>
 										</td>
 										<td>{{ $index + 1 }}</td>
