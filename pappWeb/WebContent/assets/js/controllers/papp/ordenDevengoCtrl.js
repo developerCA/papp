@@ -84,10 +84,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	};
 	
 	$scope.nuevo=function(){
+		$scope.dataIndex = index;
 		ordenDevengoFactory.traerNuevo(
 			$rootScope.ejefiscal
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.objeto=resp.json.ordendevengo;
 			$scope.detalles={};
@@ -101,15 +102,16 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	$scope.editar=function(index){
 		//console.log($scope.data[index]);
 		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
+		$scope.dataIndex = index;
 		ordenDevengoFactory.traerEditar(
 			$scope.data[index].id
 		).then(function(resp){
-			console.log(resp.json);
+			//console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.ordendevengo;
 			    $scope.detalles=resp.json.ordendevengolineas;
 			}
-			console.log($scope.objeto.codigo);
+			//console.log($scope.objeto.codigo);
 			$scope.edicion=true;
 			$scope.nuevoar=false;
 			$scope.guardar=true;
@@ -162,7 +164,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				).then(function(resp){
 					//console.log(resp);
 					$scope.pageChanged();
-					SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+					SweetAlert.swal(
+						"Orden de Devengo!",
+						resp.mensajes.msg,
+						resp.mensajes.type
+					);
 				});
 			}
 		); 
@@ -170,7 +176,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 
 	$scope.aprobar = function(index) {
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede negar si esta en estado solicitado.", "error");
+			SweetAlert.swal(
+				"Orden de Devengo!",
+				"Solo se puede aprobar si esta en estado solicitado.",
+				"error"
+			);
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -198,9 +208,20 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				cur,
 				null
 			).then(function(resp){
-				console.log(resp);
-				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				if (resp.estado) {
+					$scope.pageChanged();
+					SweetAlert.swal(
+						"Orden de Devengo!",
+		        		"Registro guardado satisfactoriamente!",
+		        		"success"
+					);
+				} else {
+					SweetAlert.swal(
+						"Orden de Devengo!",
+		        		"No se pudo eliminar",
+		        		"error"
+					);
+				}
 			});
 		}, function() {
 		});
@@ -220,7 +241,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 					return "Negar";
 				},
 				subtitulo : function() {
-					return "Observaci&oacute;n";
+					return "Observacion";
 				}
 			}
 		});
@@ -237,9 +258,20 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				null,
 				obj
 			).then(function(resp){
-				console.log(resp);
-				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				if (resp.estado) {
+					$scope.pageChanged();
+					SweetAlert.swal(
+						"Orden de Devengo!",
+		        		"Registro guardado satisfactoriamente!",
+		        		"success"
+					);
+				} else {
+					SweetAlert.swal(
+						"Orden de Devengo!",
+		        		"No se pudo eliminar",
+		        		"error"
+					);
+				}
 			});
 		}, function() {
 		});
@@ -325,7 +357,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 
 	$scope.eliminar = function(index) {
 		if ($scope.data[index].estado != "RE") {
-			SweetAlert.swal("Orden de Devengo!", "No se permite eliminar este articulo, solo los que estan 'Registrados'.", "error");
+			SweetAlert.swal(
+				"Orden de Devengo!",
+				"No se permite eliminar este articulo, solo los que estan 'Registrados'.",
+				"error"
+			);
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -354,9 +390,20 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				null,
 				obj
 			).then(function(resp){
-				//console.log(resp);
-				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
+				if (resp.estado) {
+					$scope.pageChanged();
+					SweetAlert.swal(
+						"Orden de Devengo!",
+		        		"Registro guardado satisfactoriamente!",
+		        		"success"
+					);
+				} else {
+					SweetAlert.swal(
+						"Orden de Devengo!",
+		        		"No se pudo eliminar",
+		        		"error"
+					);
+				}
 			});
 		}, function() {
 		});
@@ -382,7 +429,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				editar : function() {
 					return null;
 				},
-				ordengastoID : function() {
+				ordendevebgoID : function() {
 					return $scope.objeto.ordendevengoordengastoid;
 				}
 			}
@@ -390,7 +437,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		modalInstance.result.then(function(obj) {
 			console.log(obj);//130
 		    $scope.detalles=obj;
-            SweetAlert.swal("Orden Devengo! - Lineas", "Registro guardado satisfactoriamente!", "success");
+            SweetAlert.swal(
+        		"Orden Devengo! - Lineas",
+        		"Registro guardado satisfactoriamente!",
+        		"success"
+    		);
 		}, function() {
 		});
 	};
@@ -417,6 +468,36 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		    $scope.detalles=obj;
             SweetAlert.swal("Orden Devengo! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
+		});
+	};
+
+	$scope.eliminarLinea = function(index) {
+		SweetAlert.swal({
+			title: "Orden Devengo - Linea?",
+			text: "Seguro que desea eliminar esta linea?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (!isConfirm) return;
+			ordenDevengoFactory.eliminarLinea(
+				$scope.detalles[index].id.id,
+				$scope.detalles[index].id.lineaid
+			).then(function(resp){
+				if (resp.estado){
+					SweetAlert.swal("Orden Devengo!", "Eliminado satisfactoriamente!", "success");
+					$scope.objeto.valortotal -= $scope.detalles[index].valor;
+					$scope.data[$scope.dataIndex].valortotal -= $scope.detalles[index].valor;
+				    $scope.detalles.splice(index, 1);
+	   			}else{
+		            SweetAlert.swal("Orden Devengo!", resp.mensajes.msg, "error");
+	   			}
+          	});
 		});
 	};
 

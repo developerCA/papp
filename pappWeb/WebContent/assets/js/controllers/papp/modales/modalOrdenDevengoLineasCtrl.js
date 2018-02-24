@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","certificacionID","unidadID","editar","ordengastoID","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
-	function($scope,$rootScope,certificacionID,unidadID,editar,ordengastoID,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
+app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","certificacionID","unidadID","editar","ordendevebgoID","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
+	function($scope,$rootScope,certificacionID,unidadID,editar,ordendevebgoID,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
 
 	$scope.noeditar=false;
 	$scope.init=function(){
@@ -51,21 +51,22 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","cer
 		}
 		if (i == $scope.si.length)
 			return;
+		$scope.objeto.nptotalordengasto = $scope.si[i].npvalor;
+		$scope.objeto.npdevengado = $scope.si[i].npvalor;
 		ordenDevengoLineasFactory.obtenerOtros(
 			$scope.si[i].npSubitemunidadid, //$scope.si[i].nivelactid,
-			ordengastoID
+			ordendevebgoID
 		).then(function(resp){
-			console.log(resp);
-        	$scope.objeto.npvalor = resp.json.datoslineaordend.noaprobadas;
+			//console.log(resp);
         	$scope.objeto.npvalor = resp.json.datoslineaordend.saldo;
+        	$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
 		})
 		ordenDevengoLineasFactory.obtenerTotal(
 			$scope.si[i].nivelactid
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			$scope.objetoDetalles = resp.json.subiteminfo;
 			$scope.ponerCodigos();
-        	//$scope.objeto.npvalor = resp.json.valordisponiblesi.saldo;
 		})
 	}
 
@@ -111,7 +112,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","cer
 	 		             $scope.objeto={};
 	 		    		 $uibModalInstance.close(resp.json.ordendevengolineas);		
         			 }else{
-	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal("Orden Devengo!", resp.mensajes.msg, "error");
         			 }
         		})
         		console.log($scope.objeto);

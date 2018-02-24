@@ -368,7 +368,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			closeOnCancel: true
 		},
 		function(isConfirm) {
-			if (isConfirm) {
+			if (!isConfirm) return;
 			certificacionesFondosFactory.eliminarLinea(
 				$scope.detalles[index].id.id,
 				$scope.detalles[index].id.lineaid
@@ -381,7 +381,6 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		            SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
 	   			}
           	})
-		  }
 		});
 	};
 

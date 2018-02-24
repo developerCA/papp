@@ -1,5 +1,4 @@
 app.factory("ordenDevengoLineasFactory", [ "Restangular", function(Restangular) {
-
 	var service = Restangular.service("/ejecucion");
 
 	return {

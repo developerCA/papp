@@ -189,5 +189,15 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			var url = "ejecucion/ordendevengolinea";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
+
+		eliminarLinea:function(
+			id,
+			linea
+		){
+			var url = "ejecucion/ordendevengolinea/" +
+				id + "/" +
+				linea;
+			return Restangular.allUrl(url).customDELETE();
+		},
 	}
 } ]);
