@@ -46,6 +46,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.objetoDevengo=null;
 		$scope.detallesDevengo=null;
 		$scope.volver();
+		if ($scope.jsRegresar != null) {
+			eval("$scope." + $scope.jsRegresar + "();");
+			$scope.jsRegresar = null;
+		}
 		if ($scope.nodeActivo != undefined && $scope.nodeActivo.siEditar != undefined) {
 			$scope.edicion = false;
     		if ($scope.nodeActivo.siEditar == "P") {
