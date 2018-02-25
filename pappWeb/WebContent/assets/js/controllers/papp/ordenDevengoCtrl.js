@@ -84,7 +84,6 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	};
 	
 	$scope.nuevo=function(){
-		$scope.dataIndex = index;
 		ordenDevengoFactory.traerNuevo(
 			$rootScope.ejefiscal
 		).then(function(resp){
