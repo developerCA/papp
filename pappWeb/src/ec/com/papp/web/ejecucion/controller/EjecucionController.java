@@ -183,7 +183,10 @@ public class EjecucionController {
 				boolean grabar=true;
 				if(ordengastolineaTOs.size()>0){
 					for(OrdengastolineaTO ordengastolineaTO3:ordengastolineaTOs) {
-						if((ordengastolineaTO.getId().getLineaid()!=null && ordengastolineaTO.getId().getLineaid().longValue()!=0) && ordengastolineaTO3.getId().getLineaid().longValue()!=ordengastolineaTO.getId().getLineaid().longValue()) {
+						log.println("ordengastolineaTO.getId().getLineaid(): " + ordengastolineaTO.getId().getLineaid());
+						log.println("ordengastolineaTO3.getId().getLineaid(): " + ordengastolineaTO3.getId().getLineaid());
+						log.println("ordengastolineaTO3.getNplineaid): " + ordengastolineaTO3.getNpordenlineaid());
+						if((ordengastolineaTO.getId().getLineaid()!=null && ordengastolineaTO.getId().getLineaid().longValue()!=0) && ordengastolineaTO3.getNpordenlineaid().longValue()!=ordengastolineaTO.getId().getLineaid().longValue()) {
 							grabar=false;
 							break;
 						}
@@ -326,11 +329,14 @@ public class EjecucionController {
 					ContratoTO contratoTO=new ContratoTO();
 					log.println("datos proveedor " + ordengastoTO.getNpproveedornombre());
 					if(ordengastoTO.getOrdengastocontratoid()!=null && ordengastoTO.getOrdengastocontratoid().longValue()!=0) {
-						contratoTO=UtilSession.planificacionServicio.transObtenerContratoTO(ordengastoTO.getOrdengastocontratoid());
 						contratoTO.setSocionegocio(new SocionegocioTO());
+						contratoTO=UtilSession.planificacionServicio.transObtenerContratoTO(ordengastoTO.getOrdengastocontratoid());
 						if(contratoTO!=null && (contratoTO.getId()!=null || contratoTO.getId().longValue()!=0)) {
-							if(contratoTO.getNpfechainicio()!=null)
-								contratoTO.setFechainicio(UtilGeneral.parseStringToDate(contratoTO.getNpfechainicio()));
+							log.println("id del contrato: " + contratoTO.getId());
+							log.println("fecha de inicio: " + contratoTO.getFechainicio());
+							log.println("id del proveedor: " + contratoTO.getContratoproveedorid());
+							if(contratoTO.getFechainicio()!=null)
+								contratoTO.setNpfechainicio(UtilGeneral.parseDateToString(contratoTO.getFechainicio()));
 							if(contratoTO.getContratoproveedorid()!=null) {
 								contratoTO.setNpproveedor(contratoTO.getSocionegocio().getNombremostrado());
 								contratoTO.setNpproveedorcodigo(contratoTO.getSocionegocio().getCodigo());
@@ -720,6 +726,14 @@ public class EjecucionController {
 				OrdengastolineaTO ordengastolineaTO = UtilSession.planificacionServicio.transObtenerOrdengastolineaTO(new OrdengastolineaID(id, id2));
 				ordengastolineaTO.setNpvalor(ordengastolineaTO.getValor());
 				log.println("nivelactividad id " + ordengastolineaTO.getNivelactid());
+				//obtengo el saldo de la certificacion
+				Collection<CertificacionlineaTO> resultado=UtilSession.planificacionServicio.transObtienesubitemporcertificacion(ordengastolineaTO.getOrdengasto().getOrdengastocertificacionid());
+				for(CertificacionlineaTO linea:resultado) {
+					if(linea.getNivelactid().longValue()==ordengastolineaTO.getNivelactid().longValue()) {
+						ordengastolineaTO.setNpsaldocertificacion(linea.getNpdisponible()-ordengastolineaTO.getValor().doubleValue());
+						break;
+					}
+				}
 				jsonObject.put("ordengastolinea", (JSONObject)JSONSerializer.toJSON(ordengastolineaTO,ordengastolineaTO.getJsonConfig()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordengastolineaTO.getNivelactid(), jsonObject, mensajes);
 			}
