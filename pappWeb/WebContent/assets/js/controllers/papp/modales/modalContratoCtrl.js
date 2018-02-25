@@ -97,7 +97,7 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
             	contratoFactory.guardar(tObj).then(function(resp){
         			 if (resp.estado){
       					 SweetAlert.swal("Contrato!", "Registro guardado satisfactoriamente!", "success");
-      					 $uibModalInstance.close($scope.objeto);
+      					 $uibModalInstance.close(resp.json.contrato);
         			 }else{
 	 		             SweetAlert.swal("Contrato!", resp.mensajes.msg, "error");
         			 }
