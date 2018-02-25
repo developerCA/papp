@@ -759,6 +759,10 @@
 																uib-tooltip="Modificar" ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
+															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
+																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
+																<i class="fa ti-trash"></i>
+															</a>
 														</td>
 														<td>
 															{{obj.npSubitem}}

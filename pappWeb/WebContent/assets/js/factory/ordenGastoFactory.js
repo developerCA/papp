@@ -104,5 +104,15 @@ function(Restangular) {
 			};
 			return Restangular.allUrl(url).customPOST(tObj);
 		},
+
+		eliminarLinea:function(
+			id,
+			linea
+		){
+			var url = "ejecucion/ordengastolinea/" +
+				id + "/" +
+				linea;
+			return Restangular.allUrl(url).customDELETE();
+		},
 	}
 } ]);

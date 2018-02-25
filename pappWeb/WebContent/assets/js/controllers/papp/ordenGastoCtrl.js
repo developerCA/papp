@@ -395,6 +395,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
 			$scope.objeto.ordengastocontratoid = obj.id;
+			$scope.form.submit(Form);
 		}, function() {
 		});
 	}
@@ -422,7 +423,9 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);//130
-		    $scope.detalles=obj;
+		    $scope.detalles = obj.lineas;
+		    $scope.objeto.valortotal = obj.valortotal;
+			$scope.form.submit(Form);
             SweetAlert.swal("Orden Gasto! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
 		});
@@ -450,9 +453,41 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-		    $scope.detalles=obj;
+		    $scope.detalles = obj.lineas;
+		    $scope.objeto.valortotal = obj.valortotal;
+			$scope.form.submit(Form);
             SweetAlert.swal("Orden Gasto! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
+		});
+	};
+
+	$scope.eliminarLinea = function(index) {
+		SweetAlert.swal({
+			title: "Orden Gasto! - Lineas",
+			text: "Seguro que desea eliminar esta linea?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (!isConfirm) return;
+			ordenGastoFactory.eliminarLinea(
+				$scope.detalles[index].id.id,
+				$scope.detalles[index].id.lineaid
+			).then(function(resp){
+				if (resp.estado){
+					SweetAlert.swal("Orden Gasto! - Lineas!", "Eliminado satisfactoriamente!", "success");
+					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
+				    $scope.detalles.splice(index, 1);
+				    $scope.form.submit(Form);
+	   			}else{
+		            SweetAlert.swal("Orden Gasto! - Lineas!", resp.mensajes.msg, "error");
+	   			}
+          	})
 		});
 	};
 
@@ -486,6 +521,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
     	 		             $scope.objeto={};
     	 		             //$scope.limpiar();
         				 }
+        		         $scope.pageChanged();
 	 		             SweetAlert.swal("Orden de Gastos!", "Registro registrado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Orden de Gastos!", resp.mensajes.msg, "error");
@@ -498,6 +534,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
             form.$setPristine(true);
             $scope.edicion=false;
             $scope.objeto={};
+            $scope.pageChanged();
         }
     };
 

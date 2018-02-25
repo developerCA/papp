@@ -1,12 +1,13 @@
 'use strict';
 
-app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","certificacionID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenGastoLineasFactory",
-	function($scope,$rootScope,ID,certificacionID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenGastoLineasFactory) {
+app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","certificacionID","editar","npcertificacionvalor","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenGastoLineasFactory",
+	function($scope,$rootScope,ID,certificacionID,editar,npcertificacionvalor,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenGastoLineasFactory) {
 
 	$scope.noeditar=false;
 	$scope.errorLimpio=false;
 
 	$scope.init=function(){
+    	$scope.npcertificacionvalor = npcertificacionvalor;
 		if (editar == null) {
 			//nuevo
 			ordenGastoLineasFactory.nuevoLinea(
@@ -114,7 +115,11 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
-	 		    		 $uibModalInstance.close(resp.json.ordengastolineas);		
+	 		             tObj = {
+ 		            		 lineas: resp.json.ordengastolineas,
+ 		            		 valortotal: resp.json.ordengasto.valortotal
+	 		             }
+	 		    		 $uibModalInstance.close(tObj);		
         			 }else{
 	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
         			 }

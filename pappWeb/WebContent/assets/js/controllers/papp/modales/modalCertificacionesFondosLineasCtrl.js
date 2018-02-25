@@ -129,14 +129,20 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
                 return;
             } else {
             	var tObj = Object.assign({}, $scope.objeto);
-            	//tObj.nivelactid = tObj.subitem;
-            	//delete tObj.subitem;
+            	if (tObj.nivelactid == 0) {
+            	  tObj.nivelactid = tObj.subitem;
+            	  //delete tObj.subitem;
+            	}
             	certificacionesFondosFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
-	 		    		 $uibModalInstance.close(resp.json.certificacionlineas);		
+	 		             tObj = {
+ 		            		 lineas: resp.json.certificacionlineas,
+ 		            		 valortotal: resp.json.certificacion.valortotal
+	 		             }
+	 		    		 $uibModalInstance.close(tObj);		
         			 }else{
 	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
         			 }

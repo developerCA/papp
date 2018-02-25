@@ -348,8 +348,35 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);//130
-		    $scope.detalles=obj;
+		    $scope.detalles = obj.lineas;
+		    $scope.objeto.valortotal = obj.valortotal;
+		    $scope.form.submit(Form);
+            SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
+		}, function() {
+		});
+	};
+
+	$scope.editarLinea = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalCertificacionesFondosLineas.html',
+			controller : 'ModalCertificacionesFondosLineasController',
+			size : 'lg',
+			resolve : {
+				ID : function() {
+					return $scope.objeto.id;
+				},
+				unidadID : function() {
+					return $scope.objeto.certificacionunidadid;
+				},
+				editar : function() {
+					return $scope.detalles[index].id
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+		    $scope.detalles = obj.lineas;
+		    $scope.objeto.valortotal = obj.valortotal;
+		    $scope.form.submit(Form);
             SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
 		});
@@ -375,37 +402,13 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			).then(function(resp){
 				if (resp.estado){
 					SweetAlert.swal("Certificaciones de Fondos!", "Eliminado satisfactoriamente!", "success");
-					$scope.objeto.valortotal += $scope.detalles[index].npvalor;
+					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
 				    $scope.detalles.splice(index, 1);
+				    $scope.form.submit(Form);
 	   			}else{
 		            SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
 	   			}
           	})
-		});
-	};
-
-	$scope.editarLinea = function(index) {
-		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalCertificacionesFondosLineas.html',
-			controller : 'ModalCertificacionesFondosLineasController',
-			size : 'lg',
-			resolve : {
-				ID : function() {
-					return $scope.objeto.id;
-				},
-				unidadID : function() {
-					return $scope.objeto.certificacionunidadid;
-				},
-				editar : function() {
-					return $scope.detalles[index].id
-				}
-			}
-		});
-		modalInstance.result.then(function(obj) {
-			console.log(obj);
-		    $scope.detalles=obj;
-            SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
-		}, function() {
 		});
 	};
 
@@ -492,6 +495,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
           		             $scope.edicion=false;
           		             $scope.objeto={};
         				 }
+        				 $scope.pageChanged();
       					 SweetAlert.swal("Certificaciones de Fondos!", "Registro guardado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
@@ -504,6 +508,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
             form.$setPristine(true);
             $scope.edicion=false;
             $scope.objeto={};
+            $scope.pageChanged();
         }
     };
 

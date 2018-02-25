@@ -276,84 +276,6 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		});
 	}
 
-	$scope.LiquidacionTotal = function(index) {
-		if ($scope.data[index].estado != "AP") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede liquidar si esta en estado aprobado.", "error");
-			return;
-		}
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg',
-			resolve: {
-				titulo: function() {
-					return "Liquidaci&oacute;n Total";
-				},
-				subtitulo : function() {
-					return "Observaci&oacute;n";
-				}
-			}
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			if (obj === undefined) {
-				obj = "";
-			}
-			var cur = 0;
-			$scope.data[index].npestado = "Liquidando";
-			ordenDevengoFactory.solicitar(
-				$scope.data[index].id,
-				"LT",
-				null,
-				obj
-			).then(function(resp){
-				//console.log(resp);
-				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
-			});
-		}, function() {
-		});
-	}
-
-	$scope.LiquidacionParcial = function(index) {
-		if ($scope.data[index].estado != "AP") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede liquidar si esta en estado aprobado.", "error");
-			return;
-		}
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg',
-			resolve: {
-				titulo: function() {
-					return "Liquidaci&oacute;n Parcial";
-				},
-				subtitulo : function() {
-					return "Observaci&oacute;n";
-				}
-			}
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			if (obj === undefined) {
-				obj = "";
-			}
-			var cur = 0;
-			$scope.data[index].npestado = "Liquidando";
-			ordenDevengoFactory.solicitar(
-				$scope.data[index].id,
-				"LP",
-				null,
-				obj
-			).then(function(resp){
-				//console.log(resp);
-				$scope.pageChanged();
-				SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, resp.mensajes.type);
-			});
-		}, function() {
-		});
-	}
-
 	$scope.eliminar = function(index) {
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
@@ -434,7 +356,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);//130
+			//console.log(obj);//130
 		    $scope.detalles=obj;
             SweetAlert.swal(
         		"Orden Devengo! - Lineas",
