@@ -201,14 +201,7 @@ public class EjecucionController {
 					accion = (ordengastolineaTO.getId()==null)?"crear":"actualizar";
 					UtilSession.planificacionServicio.transCrearModificarOrdengastolinea(ordengastolineaTO);
 					id=ordengastolineaTO.getId().getId().toString() + ordengastolineaTO.getId().getLineaid();
-					//Traiga la lista de ordengastolineaTO
-					//Traigo la lista de ordengastolinea
-					OrdengastolineaTO ordengastolineaTO3=new OrdengastolineaTO();
-					ordengastolineaTO3.getId().setId(ordengastolineaTO.getId().getId());
-					OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(ordengastolineaTO.getId().getId());
-					ordengastolineaTO3.setOrdengasto(ordengastoTO);
-					Collection<OrdengastolineaTO> ordengastolineaTOs2=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO3);
-					jsonObject.put("ordengastolinea", (JSONArray)JSONSerializer.toJSON(ordengastolineaTOs2,ordengastolineaTO.getJsonConfig()));
+					ConsultasUtil.obtenerordengasto(ordengastolineaTO.getId().getId(), jsonObject);
 				}
 			}
 			
@@ -231,7 +224,7 @@ public class EjecucionController {
 				UtilSession.planificacionServicio.transCrearModificarOrdendevengo(ordendevengoTO, null);
 				id=ordendevengoTO.getNpid().toString();
 				ordendevengoTO.setId(ordendevengoTO.getNpid());
-				jsonObject.put("ordendevengo", (JSONObject)JSONSerializer.toJSON(ordendevengoTO,ordendevengoTO.getJsonConfig()));
+				ConsultasUtil.obtenerordendevengo(ordendevengoTO.getNpid(), jsonObject);
 			}
 			//ordendevengo linea
 			else if(clase.equals("ordendevengolinea")){
@@ -263,11 +256,7 @@ public class EjecucionController {
 					accion = (ordendevengolineaTO.getId()==null)?"crear":"actualizar";
 					UtilSession.planificacionServicio.transCrearModificarOrdendevengolinea(ordendevengolineaTO);
 					id=ordendevengolineaTO.getId().getId().toString()+ordendevengolineaTO.getId().getLineaid();
-					//Traigo la lista de ordendevenolinea
-					OrdendevengolineaTO ordendevengolineaTO3=new OrdendevengolineaTO();
-					ordendevengolineaTO3.getId().setId(ordendevengolineaTO.getId().getId());
-					Collection<OrdendevengolineaTO> ordendevengolineaTOs2=UtilSession.planificacionServicio.transObtenerOrdendevengolinea(ordendevengolineaTO3);
-					jsonObject.put("ordendevengolinea", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs2,ordendevengolineaTO.getJsonConfig()));
+					ConsultasUtil.obtenerordendevengo(ordendevengolineaTO.getId().getId(), jsonObject);
 				}
 			}
 
@@ -290,7 +279,7 @@ public class EjecucionController {
 				UtilSession.planificacionServicio.transCrearModificarOrdenreversion(ordenreversionTO, null);
 				id=ordenreversionTO.getNpid().toString();
 				ordenreversionTO.setId(ordenreversionTO.getNpid());
-				jsonObject.put("ordenreversion", (JSONObject)JSONSerializer.toJSON(ordenreversionTO,ordenreversionTO.getJsonConfig()));
+				ConsultasUtil.obtenerordenreversion(ordenreversionTO.getNpid(), jsonObject);
 			}
 			//ordenreversion linea
 			else if(clase.equals("ordenreversionlinea")){
@@ -324,11 +313,7 @@ public class EjecucionController {
 					accion = (ordenreversionlineaTO.getId()==null)?"crear":"actualizar";
 					UtilSession.planificacionServicio.transCrearModificarOrdenreversionlinea(ordenreversionlineaTO);
 					id=ordenreversionlineaTO.getId().getId().toString()+ordenreversionlineaTO.getId().getLineaid();
-					//Traigo la lista de ordenreversionlinea
-					OrdenreversionlineaTO ordenreversionlineaTO3=new OrdenreversionlineaTO();
-					ordenreversionlineaTO3.getId().setId(ordenreversionlineaTO.getId().getId());
-					Collection<OrdenreversionlineaTO> ordendevengolineaTOs2=UtilSession.planificacionServicio.transObtenerOrdenreversionlinea(ordenreversionlineaTO3);
-					jsonObject.put("ordenreversionlinea", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs2,ordenreversionlineaTO.getJsonConfig()));
+					ConsultasUtil.obtenerordenreversion(ordenreversionlineaTO.getId().getId(), jsonObject);
 				}
 			}
 
