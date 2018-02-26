@@ -1422,8 +1422,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				if (resp.estado) {
 					//$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
 					$scope.objeto = resp.json.subtareaunidad;
+					$scope.detalles = resp.json.subtareaunidadacumulador;
 					for (var i = 0; i < $scope.detalles.length; i++) {
-						$scope.detalles[i].id.id = resp.json.subtareaunidad.id;
+						$scope.detalles[i].npValor = 0;
 					}
 					$scope.esnuevo = false;
 	    			$scope.editarDistribucionPlanificado();
