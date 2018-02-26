@@ -484,7 +484,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.ordendevengoordengastoid = obj.id;
+			$scope.objeto.ordendevengoordengastoid = obj.ordengastoid;
 			$scope.objeto.npordengasto = obj.codigo;
 			$scope.objeto.npordengastovalor = obj.ordenvalortotal;
 			$scope.objeto.valortotal = obj.valortotal;
