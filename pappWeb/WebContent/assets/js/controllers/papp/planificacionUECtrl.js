@@ -22,6 +22,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.divPlanificacionAnual=true;
 		$scope.mPlanificadaID=0;
 		$scope.mAjustadaID=0;
+		$scope.mDevengoID=0;
 		$scope.divMetaDistribucionPlanificada=false;
 		$scope.divMetaDistribucionAjustada=false;
 		$scope.divMetaDistribucionDevengo=false;
@@ -1230,13 +1231,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.submitformMetaDistribucionDevengo = function(form) {
-		if ($scope.objetoDevengo.unidadtiempo == "PE") {
-			$scope.totalDevengo = 0;
-			for (var i = 0; i < 12; i++) {
-				$scope.totalDevengo += $scope.detallesDevengo[i].valor;
-			}
-			$scope.totalDevengo = Number($scope.totalDevengo.toFixed(2));
+		$scope.totalDevengo = 0;
+		for (var i = 0; i < 12; i++) {
+			$scope.totalDevengo += $scope.detallesDevengo[i].valor;
 		}
+		$scope.totalDevengo = Number($scope.totalDevengo.toFixed(2));
 		if ($scope.totalDevengo !=  $scope.npTotalAjustado) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Devengo",
@@ -1254,6 +1253,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.metaDistribucion("D");
 	            SweetAlert.swal("Planificacion UE! - Distribucion Devengo", "Registro registrado satisfactoriamente!", "success");
 	            $scope.divPlanificacionAnual = false;
+	            $scope.detalles[$scope.mDevengoID].npvalor = $scope.totalDevengo; 
 			} else {
 				SweetAlert.swal("Planificacion UE! - Distribucion Devengo", resp.mensajes.msg, "error");
 	    		$scope.divPlanificacionAnual = false;
@@ -1506,6 +1506,22 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.submitformSubItem = function(form) {
     	var tObj=$scope.objeto;
 		tObj.subitemunidadacumulador=$scope.detalles;
+		if ($scope.esnuevo) {
+	    	PlanificacionUEFactory.guardarActividades("SI",tObj).then(function(resp){
+	    		$scope.divPlanificacionAnual = false;
+				if (resp.estado) {
+					$scope.objeto.id = resp.json.subitemunidad.id;
+					for (var i = 0; i < $scope.detalles.length; i++) {
+						$scope.detalles[i].id.id = resp.json.subitemunidad.id;
+					}
+					$scope.esnuevo = false;
+					$scope.detallesPlanificada = null;
+	    			$scope.editarDistribucionPlanificado();
+				} else {
+					SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+				}
+			})
+		}
 		if ($scope.npTotalPlanificado > $scope.objetoTplanificado
 		|| $scope.objeto.tplanificado < 0) {
             SweetAlert.swal(
@@ -1530,24 +1546,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
             $scope.divMetaDistribucionDevengo=false;
             return;
 		}
-		if ($scope.esnuevo) {
-	    	PlanificacionUEFactory.guardarActividades("SI",tObj).then(function(resp){
-	    		$scope.divPlanificacionAnual = false;
-				if (resp.estado) {
-					$scope.objeto.id = resp.json.subitemunidad.id;
-					for (var i = 0; i < $scope.detalles.length; i++) {
-						$scope.detalles[i].id.id = resp.json.subitemunidad.id;
-					}
-					$scope.esnuevo = false;
-					$scope.detallesPlanificada = null;
-	    			$scope.editarDistribucionPlanificado();
-				} else {
-					SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
-				}
-			})
-		}
-		//$scope.npTotalPlanificado;
-		//$scope.npTotalAjustado;
 		if ($scope.npTotalPlanificado != $scope.detalles[$scope.mPlanificadaID].npvalor) {
             SweetAlert.swal(
         		"Planificacion UE! - Subitem",
@@ -1569,6 +1567,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.metaDistribucion('A');
 			}
 	        return;
+		}
+		if ($scope.npTotalAjustado != $scope.detalles[$scope.mDevengoID].npvalor) {
+            SweetAlert.swal(
+        		"Planificacion UE! - Subitem",
+        		"No coincide del Presupuesto el Total Devengado y la distribuida, tiene que redistribuirla.",
+        		"error"
+    		);
+    		if (!$scope.esnuevo) {
+    			$scope.metaDistribucion('D');
+    		}
+            return;
 		}
 		if ($scope.esnuevo) {
 			return;

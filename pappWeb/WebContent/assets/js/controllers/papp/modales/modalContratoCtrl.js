@@ -100,6 +100,7 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
       					 $uibModalInstance.close(resp.json.contrato);
         			 }else{
 	 		             SweetAlert.swal("Contrato!", resp.mensajes.msg, "error");
+	 		             $uibModalInstance.close(null);
         			 }
         		})
             }
@@ -109,6 +110,7 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
             form.$setPristine(true);
             $scope.edicion=false;
             $scope.objeto={};
+            $uibModalInstance.close(null);
         }
     };
 

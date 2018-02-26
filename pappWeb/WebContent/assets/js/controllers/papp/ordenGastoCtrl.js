@@ -327,6 +327,60 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		});
 	};
 
+	$scope.anular = function(index) {
+		if ($scope.data[index].estado != "AP") {
+			SweetAlert.swal(
+	    		"Orden de Gastos!",
+				"No se permite anular este articulo, solo los que estan 'Aprobado'.",
+				"error"
+			);
+			return;
+		}
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalLiquidacionManua.html',
+			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
+			size : 'lg',
+			resolve: {
+				titulo: function() {
+					return "Anular";
+				},
+				subtitulo : function() {
+					return "Observacion";
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			if (obj === undefined) {
+				obj = "";
+			}
+			var cur = 0;
+			$scope.data[index].npestado = "Anulando";
+			ordenGastoFactory.solicitar(
+				$scope.data[index].id,
+				"AN",
+				null,
+				obj
+			).then(function(resp){
+				if (resp.estado) {
+					$scope.pageChanged();
+		            SweetAlert.swal(
+	            		"Orden de Gastos!",
+	            		"Registro anulado satisfactoriamente!",
+	            		"success"
+            		);
+				} else {
+		            SweetAlert.swal(
+	            		"Orden de Gastos!",
+	            		resp.mensajes.msg,
+	            		"error"
+            		);
+				}
+			});
+		}, function() {
+		});
+	}
+
 	$scope.eliminar = function(index) {
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
@@ -394,8 +448,10 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.ordengastocontratoid = obj.id;
-			$scope.form.submit(Form);
+			if (obj != null) {
+				$scope.objeto.ordengastocontratoid = obj.id;
+				$scope.form.submit(Form);
+			}
 		}, function() {
 		});
 	}

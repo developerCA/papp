@@ -1912,38 +1912,47 @@
 														ng-class="{'has-error':FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid, 'has-success':FormSubItem.npCantidadPlanificada.$valid}">
 														<label class="control-label"> Cantidad
 															Planificada <span class="symbol required"></span>
-														</label> <input type="text" numericOnly
+														</label>
+														<input type="text" numericOnly
 															style="text-align: right;" decimal="2"
 															placeholder="Escriba un cantidad planificada" required
 															onClick="this.select();" class="form-control"
 															name="npCantidadPlanificada"
 															ng-model="detalles[mPlanificadaID].cantidad"
 															ng-change="calcularTotalPlanificado();"
-															ng-disabled="!editar"> <span
-															class="error text-small block"
+															ng-disabled="!editar">
+														<span class="error text-small block"
 															ng-if="FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid">
-															Incorrecto </span> <span class="success text-small"
+															Incorrecto
+														</span>
+														<span class="success text-small"
 															ng-if="FormSubItem.npCantidadPlanificada.$valid">
-															Listo </span>
+															Listo
+														</span>
 													</div>
 
 													<div class="form-group"
 														ng-class="{'has-error':FormSubItem.npValorPlanificado.$dirty && FormSubItem.npValorPlanificado.$invalid, 'has-success':FormSubItem.npValorPlanificado.$valid}">
-														<label class="control-label"> Valor Planificado <span
-															class="symbol required"></span>
-														</label> <input type="text" numericOnly
+														<label class="control-label">
+															Valor Planificado
+															<span class="symbol required"></span>
+														</label>
+														<input type="text" numericOnly
 															style="text-align: right;" decimal="2"
 															placeholder="Escriba un valor planificado" required
 															onClick="this.select();" class="form-control"
 															name="npValorPlanificado"
 															ng-model="detalles[mPlanificadaID].valor"
 															ng-change="calcularTotalPlanificado();"
-															ng-disabled="!editar"> <span
-															class="error text-small block"
+															ng-disabled="!editar">
+														<span class="error text-small block"
 															ng-if="FormSubItem.npValorPlanificado.$dirty && FormSubItem.npValorPlanificado.$invalid">
-															Incorrecto </span> <span class="success text-small"
+															Incorrecto
+														</span>
+														<span class="success text-small"
 															ng-if="FormSubItem.npValorPlanificado.$valid">
-															Listo </span>
+															Listo
+														</span>
 													</div>
 
 													<div class="form-group"
@@ -1967,8 +1976,9 @@
 												<div class="col-md-6">
 													<div class="form-group"
 														ng-class="{'has-error':FormSubItem.npSaldoActividadAjustado.$dirty && FormSubItem.npSaldoActividadAjustado.$invalid, 'has-success':FormSubItem.npSaldoActividadAjustado.$valid}">
-														<label class="control-label"> Saldo Actividad
-															Ajustado <span class="symbol required"></span>
+														<label class="control-label">
+															Saldo Actividad Ajustado
+															<span class="symbol required"></span>
 														</label>
 														<input type="text" numericOnly decimal="2"
 															placeholder="Escriba un saldo actividad ajustado"
@@ -1991,22 +2001,25 @@
 															style="text-align: right;" decimal="2"
 															placeholder="Escriba un cantidad planificada" required
 															onClick="this.select();" class="form-control"
-															name="npCantidadPlanificada"
+															name="npCantidadAjustado"
 															ng-model="detalles[mAjustadaID].cantidad"
 															ng-change="calcularTotalAjustado();"
 															ng-disabled="!editarA">
-														<span
-															class="error text-small block"
+														<span class="error text-small block"
 															ng-if="FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid">
-															Incorrecto </span> <span class="success text-small"
+															Incorrecto
+														</span>
+														<span class="success text-small"
 															ng-if="FormSubItem.npCantidadPlanificada.$valid">
-															Listo </span>
+															Listo
+														</span>
 													</div>
 
 													<div class="form-group"
 														ng-class="{'has-error':FormSubItem.npValorAjustado.$dirty && FormSubItem.npValorAjustado.$invalid, 'has-success':FormSubItem.npValorAjustado.$valid}">
-														<label class="control-label"> Valor Ajustado <span
-															class="symbol required"></span>
+														<label class="control-label">
+															Valor Ajustado
+															<span class="symbol required"></span>
 														</label>
 														<input type="text" numericOnly
 															style="text-align: right;" decimal="2"
@@ -2016,8 +2029,7 @@
 															ng-model="detalles[mAjustadaID].valor"
 															ng-change="calcularTotalAjustado();"
 															ng-disabled="!editarA">
-														<span
-															class="error text-small block"
+														<span class="error text-small block"
 															ng-if="FormSubItem.npValorAjustado.$dirty && FormSubItem.npValorAjustado.$invalid">
 															Incorrecto </span> <span class="success text-small"
 															ng-if="FormSubItem.npValorAjustado.$valid"> Listo
