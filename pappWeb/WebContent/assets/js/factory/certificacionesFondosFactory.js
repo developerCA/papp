@@ -56,7 +56,7 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			var tObj = {
 				filas: "10",
 				pagina: pagina.toString(),
-				certificacionejerfiscalid: ejefiscal.toString(),
+				ejerciciofiscal: ejefiscal.toString(),
 				estado: "AP",
 				unidadid: unidadid.toString()
 			}

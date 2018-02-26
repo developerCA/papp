@@ -710,22 +710,13 @@
 	<div class="panel-body" ng-init="consultar();" >
 
 		<div class="row">
-<!--			<div class="col-md-12">
-				<div class="form-group">
-				    <label class="control-label">
-				        <h4>
-							Est&aacute; seguro de liquidar la certificaci&oacute;n de fondos?
-				        </h4>
-				    </label>
-				</div>
-			</div> -->
 			<div class="col-md-12">
 				<div class="form-group"
 				    ng-class="{'has-error':Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$dirty && Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$invalid, 'has-success':Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$valid}">
 				    <label class="control-label">
 				        {{ npsubtitulo }}: 
 				    </label>
-				    <textarea name="CTLCERTIFICACIONMOTIVOLIQUIDACION" rows="5" style="width: 100%" placeholder="Escriba un motivo liquidaci&oacute;n"
+				    <textarea name="CTLCERTIFICACIONMOTIVOLIQUIDACION" rows="5" style="width: 100%" placeholder="Escriba un motivo"
 				        class="form-control" ng-model="objeto.CTLCERTIFICACIONMOTIVOLIQUIDACION"></textarea>
 				    <span class="error text-small block"
 				        ng-if="Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$dirty && Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$invalid">

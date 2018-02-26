@@ -88,7 +88,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		).then(function(resp){
 			console.log(resp);
 			if (!resp.estado) return;
-			$scope.objeto=resp.json.ordenReversion;
+			$scope.objeto=resp.json.ordenreversion;
 			$scope.detalles={};
 			$scope.agregarDetalles();
 			$scope.edicion=true;
@@ -104,12 +104,11 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		ordenReversionFactory.traerEditar(
 			$scope.data[index].id
 		).then(function(resp){
-			console.log(resp.json);
+			//console.log(resp.json);
 			if (resp.estado) {
-			    $scope.objeto=resp.json.ordenReversion;
-			    $scope.detalles=resp.json.ordenReversionlineas;
+			    $scope.objeto=resp.json.ordenreversion;
+			    $scope.detalles=resp.json.ordenreversionlineas;
 			}
-			console.log($scope.objeto.codigo);
 			$scope.edicion=true;
 			$scope.nuevoar=false;
 			$scope.guardar=true;
@@ -406,7 +405,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.ordenReversionunidadid = obj.id;
+			$scope.objeto.ordenreversionunidadid = obj.id;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;
 		}, function() {
@@ -421,9 +420,9 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.ordenReversionclaseregid = obj.id.id;
-			$scope.objeto.ordenReversionclasemoid = obj.id.cmid;
-			$scope.objeto.ordenReversiongastoid = obj.id.cmcgastoid;
+			$scope.objeto.ordenreversionclaseregid = obj.id.id;
+			$scope.objeto.ordenreversionclasemoid = obj.id.cmid;
+			$scope.objeto.ordenreversiongastoid = obj.id.cmcgastoid;
 			$scope.objeto.npcodigoregcmcgasto = obj.codigo;
 			$scope.objeto.npnombreregcmcgasto = obj.nombre;
 			$scope.objeto.npcodigoregistro = obj.npcodigoregistro;
@@ -442,8 +441,8 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objeto.ordenReversiontipodocid = obj.id.id;
-			$scope.objeto.ordenReversiontpclasedocid = obj.id.clasedocid;
+			$scope.objeto.ordenreversiontipodocid = obj.id.id;
+			$scope.objeto.ordenreversiontpclasedocid = obj.id.clasedocid;
 			$scope.objeto.npcodigotipodocumento = obj.codigo;
 			$scope.objeto.npnombretipodocumento = obj.nombre;
 			$scope.objeto.npcodigodocumento = obj.npcodigodocumento;
@@ -476,7 +475,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	      					 $scope.noeditar = false;
 	      					 $scope.nuevoar=false;
         				 }
-      				     $scope.objeto=resp.json.ordenReversion;
+      				     $scope.objeto=resp.json.ordenreversion;
       					 SweetAlert.swal("Orden de Reversion!", "Registro guardado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, "error");
