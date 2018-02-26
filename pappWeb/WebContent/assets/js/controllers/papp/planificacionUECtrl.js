@@ -204,9 +204,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					$scope.objetoAjustada.unidadtiempo = "ME";
 					$scope.distribucionValores("A");
 				}
-				$scope.divMetaDistribucionPlanificada=false;
-				$scope.divMetaDistribucionAjustada=true;
-				$scope.divMetaDistribucionDevengo=false;
+				if (detalles[mAjustadaID].cantidad > 0) {
+					$scope.divMetaDistribucionPlanificada=false;
+					$scope.divMetaDistribucionAjustada=true;
+					$scope.divMetaDistribucionDevengo=false;
+				} else {
+					$scope.divMetaDistribucionPlanificada=true;
+					$scope.divMetaDistribucionAjustada=false;
+					$scope.divMetaDistribucionDevengo=false;
+				}
 				$scope.modificarMetaAjustada(true);
 			}
 			if (tipometa == "D") {
@@ -216,9 +222,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					$scope.objetoDevengo.unidadtiempo = "ME";
 					$scope.distribucionValores("D");
 				}
-				$scope.divMetaDistribucionPlanificada=false;
-				$scope.divMetaDistribucionAjustada=false;
-				$scope.divMetaDistribucionDevengo=true;
+				if (detalles[mAjustadaID].cantidad > 0) {
+					$scope.divMetaDistribucionPlanificada=false;
+					$scope.divMetaDistribucionAjustada=false;
+					$scope.divMetaDistribucionDevengo=true;
+				} else {
+					$scope.divMetaDistribucionPlanificada=true;
+					$scope.divMetaDistribucionAjustada=false;
+					$scope.divMetaDistribucionDevengo=false;
+				}
 			}
 			if ($scope.detallesPlanificada == null) {
 				$scope.metaDistribucion('P');
@@ -406,7 +418,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.objeto=Object.assign({}, resp.json.itemunidad);
 				$scope.divPlanificacionAnual=false;
 				$scope.divItem=true;
-				//console.log("NUEVO OBJETO subtarea:", $scope.objeto);
 			});
 		} else {// SubItem
 			PlanificacionUEFactory.nuevo(
@@ -1415,9 +1426,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 						$scope.detalles[i].id.id = resp.json.subtareaunidad.id;
 					}
 					$scope.esnuevo = false;
+	    			$scope.editarDistribucionPlanificado();
 	    			$scope.nodeActivo.nodePadre.iscargado = false;
 	    			$scope.cargarHijos($scope.nodeActivo.nodePadre);
-	    			$scope.editarDistribucionPlanificado();
 				} else {
 					SweetAlert.swal("Planificacion UE! - Subtarea", resp.mensajes.msg, "error");
 				}
