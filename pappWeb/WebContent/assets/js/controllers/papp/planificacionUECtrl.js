@@ -143,7 +143,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.metaDistribucion('D');
 	}
 
-	$scope.metaDistribucion= function(
+	$scope.metaDistribucion=function(
 		tipometa
 	) {
 		var id;
@@ -175,6 +175,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			id = $scope.mDevengoID;	
 		}
 
+		if ($scope.detalles[id].id.id == 0) {
+			return;
+		}
 		PlanificacionUEFactory.editarMDP(
 			$scope.detalles[id].id.id,
 			$scope.detalles[id].id.acumid,
@@ -204,7 +207,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					$scope.objetoAjustada.unidadtiempo = "ME";
 					$scope.distribucionValores("A");
 				}
-				if (detalles[mAjustadaID].cantidad > 0) {
+				if ($scope.detallesPlanificada == null) {
+					$scope.metaDistribucion("P");
+				}
+				if ($scope.detalles[mAjustadaID].cantidad > 0) {
 					$scope.divMetaDistribucionPlanificada=false;
 					$scope.divMetaDistribucionAjustada=true;
 					$scope.divMetaDistribucionDevengo=false;
@@ -222,7 +228,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					$scope.objetoDevengo.unidadtiempo = "ME";
 					$scope.distribucionValores("D");
 				}
-				if (detalles[mAjustadaID].cantidad > 0) {
+				if ($scope.detalles[mAjustadaID].cantidad > 0) {
 					$scope.divMetaDistribucionPlanificada=false;
 					$scope.divMetaDistribucionAjustada=false;
 					$scope.divMetaDistribucionDevengo=true;
