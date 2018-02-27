@@ -259,12 +259,24 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.sumarValoresP = function() {
 		$scope.totalPlanificadaV = 0;
 		$scope.totalPlanificadaP = 0;
-		for (var i = 0; i < 12; i++) {
-			$scope.totalPlanificadaV += $scope.detallesPlanificada[i].metacantidad;
-			$scope.totalPlanificadaP += $scope.detallesPlanificada[i].lineametavalor;
+		$scope.diferenciaPlanificadaV = 0;
+		$scope.diferenciaPlanificadaP = 0;
+		if ($scope.detallesPlanificada == null) {
+			return;
 		}
-		$scope.diferenciaPlanificadaV = Number($scope.aDistribuirP.toFixed(2)) - Number($scope.totalPlanificadaV.toFixed(2));
-		$scope.diferenciaPlanificadaP = 100 - Number($scope.totalPlanificadaP.toFixed(2));
+		if ($scope.divSubItem) {
+			for (var i = 0; i < 12; i++) {
+				$scope.totalPlanificadaV += $scope.detallesPlanificada[i].valor;
+			}
+			$scope.diferenciaPlanificadaV = Number($scope.npTotalPlanificado.toFixed(2)) - Number($scope.totalPlanificadaV.toFixed(2));
+		} else {
+			for (var i = 0; i < 12; i++) {
+				$scope.totalPlanificadaV += $scope.detallesPlanificada[i].metacantidad;
+				$scope.totalPlanificadaP += $scope.detallesPlanificada[i].lineametavalor;
+			}
+			$scope.diferenciaPlanificadaV = Number($scope.aDistribuirP.toFixed(2)) - Number($scope.totalPlanificadaV.toFixed(2));
+			$scope.diferenciaPlanificadaP = 100 - Number($scope.totalPlanificadaP.toFixed(2));
+		}
 	}
 
 	$scope.modificarMetaAjustada = function(sumar) {
@@ -277,22 +289,46 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		}
 	}
 
+	$scope.modificarMetaDevengo = function(sumar) {
+		$scope.aDistribuirD = Number($scope.npTotalAjustado);
+		if (sumar != undefined) {
+			$scope.sumarValoresD();
+		}
+	}
+
 	$scope.sumarValoresA = function() {
 		$scope.totalAjustadaV = 0;
 		$scope.totalAjustadaP = 0;
+		$scope.diferenciaAjustadaV = 0;
+		$scope.diferenciaAjustadaP = 0;
+		if ($scope.detallesAjustada == null) {
+			return;
+		}
 		if ($scope.divSubItem) {
 			for (var i = 0; i < 12; i++) {
 				$scope.totalAjustadaV += $scope.detallesAjustada[i].valor;
 			}
-			$scope.totalAjustadaP = 100;
+			$scope.diferenciaAjustadaV = Number($scope.npTotalAjustado.toFixed(2)) - Number($scope.totalAjustadaV.toFixed(2));
 		} else {
 			for (var i = 0; i < 12; i++) {
 				$scope.totalAjustadaV += $scope.detallesAjustada[i].metacantidad;
 				$scope.totalAjustadaP += $scope.detallesAjustada[i].lineametavalor;
 			}
+			$scope.diferenciaAjustadaV = Number($scope.aDistribuirA.toFixed(2)) - Number($scope.totalAjustadaV.toFixed(2));
+			$scope.diferenciaAjustadaP = 100 - Number($scope.totalAjustadaP.toFixed(2));
 		}
-		$scope.diferenciaAjustadaV = Number($scope.aDistribuirA.toFixed(2)) - Number($scope.totalAjustadaV.toFixed(2));
-		$scope.diferenciaAjustadaP = 100 - Number($scope.totalAjustadaP.toFixed(2));
+	}
+
+	$scope.sumarValoresD = function() {
+		$scope.totalDevengoV = 0;
+		$scope.diferenciaDevengoV = 0;
+		if ($scope.detallesDevengo == null) {
+			return;
+		}
+		for (var i = 0; i < 12; i++) {
+			$scope.totalDevengoV += $scope.detallesDevengo[i].valor;
+		}
+		$scope.diferenciaDevengoV = Number($scope.npTotalAjustado.toFixed(2)) - Number($scope.totalDevengoV.toFixed(2));
 	}
 
 	$scope.distribucionValores = function(estado) {
@@ -1178,6 +1214,20 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.sumarValoresA();
 	}
 
+	$scope.calcularPorcientoD = function(index) {
+		$scope.modificarMetaAjustada();
+		distribuirValor(
+			$scope.objetoDevengo,
+			$scope.detallesDevengo,
+			$scope.totalDevengo,
+			0,
+			$scope.divActividad,
+			$scope.divSubItem,
+			$scope.vLimpio
+		);
+		$scope.sumarValoresD();
+	}
+
 	$scope.submitformMetaDistribucionAjustada = function(form) {
 		if ($scope.divActividad || $scope.divSubTarea) {
 			var porcentaje = 0;
@@ -1256,7 +1306,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.submitformMetaDistribucionDevengo = function(form) {
 		$scope.totalDevengo = 0;
 		for (var i = 0; i < 12; i++) {
-			$scope.totalDevengo += $scope.detallesDevengo[i].valor;
+			$scope.totalDevengo += $scope.detallesDevengo[i].lineametavalor;
 		}
 		$scope.totalDevengo = Number($scope.totalDevengo.toFixed(2));
 		if ($scope.totalDevengo !=  $scope.npTotalAjustado) {
@@ -1553,9 +1603,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"El Total Planificado supera el saldo disponible.",
         		"error"
     		);
-            $scope.divMetaDistribucionPlanificada=true;
-            $scope.divMetaDistribucionAjustada=false;
-            $scope.divMetaDistribucionDevengo=false;
             return;
 		}
 		if ($scope.npTotalAjustado > $scope.objetoTacumulado
@@ -1565,9 +1612,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         		"El Total Ajustado supera el saldo disponible.",
         		"error"
     		);
-            $scope.divMetaDistribucionPlanificada=false;
-            $scope.divMetaDistribucionAjustada=true;
-            $scope.divMetaDistribucionDevengo=false;
             return;
 		}
 		if ($scope.npTotalPlanificado != $scope.detalles[$scope.mPlanificadaID].npvalor) {
@@ -1579,6 +1623,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     		if (!$scope.esnuevo) {
     			$scope.metaDistribucion('P');
     		}
+            $scope.divMetaDistribucionPlanificada=true;
+            $scope.divMetaDistribucionAjustada=false;
+            $scope.divMetaDistribucionDevengo=false;
             return;
 		}
 		if ($scope.npTotalAjustado != $scope.detalles[$scope.mAjustadaID].npvalor) {
@@ -1590,6 +1637,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			if (!$scope.esnuevo) {
 				$scope.metaDistribucion('A');
 			}
+            $scope.divMetaDistribucionPlanificada=false;
+            $scope.divMetaDistribucionAjustada=true;
+            $scope.divMetaDistribucionDevengo=false;
 	        return;
 		}
 		if ($scope.npTotalAjustado != $scope.detalles[$scope.mDevengoID].npvalor) {
@@ -1601,6 +1651,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     		if (!$scope.esnuevo) {
     			$scope.metaDistribucion('D');
     		}
+            $scope.divMetaDistribucionPlanificada=false;
+            $scope.divMetaDistribucionAjustada=false;
+            $scope.divMetaDistribucionDevengo=true;
             return;
 		}
 		if ($scope.esnuevo) {
@@ -1687,11 +1740,13 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.calcularTotalPlanificado = function() {
 		$scope.npTotalPlanificado = $scope.detalles[$scope.mPlanificadaID].valor * $scope.detalles[$scope.mPlanificadaID].cantidad;
 		$scope.detalles[$scope.mPlanificadaID].total = $scope.npTotalPlanificado;
+		$scope.sumarValoresP();
 	}
 
 	$scope.calcularTotalAjustado = function() {
 		$scope.npTotalAjustado = $scope.detalles[$scope.mAjustadaID].valor * $scope.detalles[$scope.mAjustadaID].cantidad;
 		$scope.detalles[$scope.mAjustadaID].total = $scope.npTotalAjustado;
+		$scope.sumarValoresA();
 	}
 
 	$scope.cargarMatrizPresupuestoTipo = function() {

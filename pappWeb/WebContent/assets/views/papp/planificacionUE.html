@@ -2009,7 +2009,7 @@
 															onClick="this.select();" class="form-control"
 															name="npCantidadAjustado"
 															ng-model="detalles[mAjustadaID].cantidad"
-															ng-change="calcularTotalAjustado();"
+															ng-change="calcularTotalAjustado();sumarValoresD();"
 															ng-disabled="!editarA">
 														<span class="error text-small block"
 															ng-if="FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid">
@@ -2033,7 +2033,7 @@
 															onClick="this.select();" class="form-control"
 															name="npValorAjustado"
 															ng-model="detalles[mAjustadaID].valor"
-															ng-change="calcularTotalAjustado();"
+															ng-change="calcularTotalAjustado();sumarValoresD();"
 															ng-disabled="!editarA">
 														<span class="error text-small block"
 															ng-if="FormSubItem.npValorAjustado.$dirty && FormSubItem.npValorAjustado.$invalid">
@@ -2257,7 +2257,7 @@
 											style="background-color: #00B300 !important"> Devengo </a> <br>&nbsp;Unidad
 											Tipo: <select name="periodoPlanificado" ng-disabled="!editarA"
 											ng-model="objetoDevengo.unidadtiempo"
-											ng-change="vLimpio=true;distribucionValores('D');">
+											ng-change="vLimpio=true;distribucionValores('D');sumarValoresD();">
 												<option value="ME">Mensual</option>
 												<option value="BI">Bimensual</option>
 												<option value="TM">Trimestral</option>
@@ -2283,7 +2283,7 @@
 																ng-model="obj.valor" numericOnly
 																style="text-align: right;" required decimal="2"
 																ng-disabled="!editarA || objetoDevengo.unidadtiempo!='PE'"
-																ng-change="calcularPorcientoA();"></td>
+																ng-change="calcularPorcientoD();"></td>
 														</tr>
 														<tr>
 															<td>Diferencia</td>
