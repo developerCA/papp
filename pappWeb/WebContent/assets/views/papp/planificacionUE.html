@@ -659,12 +659,14 @@
 															<td>Diferencia</td>
 															<td>
 															    <input type="text" style="text-align:right;" decimal="2"
-															        class="form-control" name="diferenciaPlanificadaV" ng-model="diferenciaPlanificadaV"
+															        class="form-control" name="diferenciaPlanificadaV"
+															        ng-model="diferenciaPlanificadaV"
 															        ng-disabled="true">
 														    </td>
 															<td>
 															    <input type="text" style="text-align:right;" decimal="2"
-															        class="form-control" ng-model="diferenciaPlanificadaP"
+															        class="form-control" name="diferenciaPlanificadaP"
+															        ng-model="diferenciaPlanificadaP"
 															        ng-disabled="true">
 															</td>
 															<td></td>
@@ -752,12 +754,12 @@
 															<td>
 															    <input type="text" style="text-align:right;" decimal="2"
 															        class="form-control" ng-model="diferenciaAjustadaV"
-															        ng-disabled="true">
+															        ng-disabled="true" name="diferenciaAjustadaV">
 														    </td>
 															<td>
 															    <input type="text" style="text-align:right;" decimal="2"
 															        class="form-control" ng-model="diferenciaAjustadaP"
-															        ng-disabled="true">
+															        ng-disabled="true" name="diferenciaAjustadaP">
 															</td>
 															<td></td>
 														</tr>
@@ -1321,7 +1323,7 @@
 																<textarea name="{{'descripcion_'+$index}}"
 																	rows="3" style="width: 100%"
 																	placeholder="Escriba un descripci&oacute;n"
-																	class="form-control" ng-model="obj.observacion"
+																	class="form-control" ng-model="obj.descripcion"
 																	ng-disabled="!editar"></textarea>
 															</td>
 														</tr>
@@ -1329,12 +1331,14 @@
 															<td>Diferencia</td>
 															<td>
 															    <input type="text" style="text-align:right;" decimal="2"
-															        class="form-control" name="diferenciaPlanificadaV" ng-model="diferenciaPlanificadaV"
+															        class="form-control" name="diferenciaPlanificadaV"
+															        ng-model="diferenciaPlanificadaV"
 															        ng-disabled="true">
 														    </td>
 															<td>
 															    <input type="text" style="text-align:right;" decimal="2"
-															        class="form-control" ng-model="diferenciaPlanificadaP"
+															        class="form-control" name="diferenciaPlanificadaP"
+															        ng-model="diferenciaPlanificadaP"
 															        ng-disabled="true">
 															</td>
 															<td></td>
@@ -1417,7 +1421,7 @@
 																<textarea name="{{'descripcion_'+$index}}"
 																	rows="3" style="width: 100%"
 																	placeholder="Escriba un descripci&oacute;n"
-																	class="form-control" ng-model="obj.observacion"
+																	class="form-control" ng-model="obj.descripcion"
 																	ng-disabled="!editarA"></textarea>
 															</td>
 														</tr>
@@ -1425,12 +1429,14 @@
 															<td>Diferencia</td>
 															<td>
 															    <input type="text" style="text-align:right;" decimal="2"
-															        class="form-control" ng-model="diferenciaAjustadaV"
+															        class="form-control" name="diferenciaAjustadaV"
+															        ng-model="diferenciaAjustadaV"
 															        ng-disabled="true">
 														    </td>
 															<td>
 															    <input type="text" style="text-align:right;" decimal="2"
-															        class="form-control" ng-model="diferenciaAjustadaP"
+															        class="form-control" name="diferenciaAjustadaP"
+															        ng-model="diferenciaAjustadaP"
 															        ng-disabled="true">
 															</td>
 															<td></td>
@@ -2134,7 +2140,8 @@
 															<td>Diferencia</td>
 															<td>
 															    <input type="text" style="text-align:right;" decimal="2"
-															        class="form-control" name="diferenciaPlanificadaV" ng-model="diferenciaPlanificadaV"
+															        class="form-control" name="diferenciaPlanificadaV"
+															        ng-model="diferenciaPlanificadaV"
 															        ng-disabled="true">
 														    </td>
 														</tr>
@@ -2212,7 +2219,8 @@
 															<td>Diferencia</td>
 															<td>
 															    <input type="text" style="text-align:right;" decimal="2"
-															        class="form-control" ng-model="diferenciaAjustadaV"
+															        class="form-control" name="diferenciaAjustadaV"
+															        ng-model="diferenciaAjustadaV"
 															        ng-disabled="true">
 														    </td>
 														</tr>
@@ -2276,6 +2284,15 @@
 																style="text-align: right;" required decimal="2"
 																ng-disabled="!editarA || objetoDevengo.unidadtiempo!='PE'"
 																ng-change="calcularPorcientoA();"></td>
+														</tr>
+														<tr>
+															<td>Diferencia</td>
+															<td>
+															    <input type="text" style="text-align:right;" decimal="2"
+															        class="form-control" name="diferenciaDevengoV"
+															        ng-model="diferenciaDevengoV"
+															        ng-disabled="true">
+														    </td>
 														</tr>
 													</table>
 												</div>

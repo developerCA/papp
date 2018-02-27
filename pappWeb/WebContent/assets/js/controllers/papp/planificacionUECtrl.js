@@ -210,7 +210,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				if ($scope.detallesPlanificada == null) {
 					$scope.metaDistribucion("P");
 				}
-				if ($scope.detalles[mAjustadaID].cantidad > 0) {
+				if ($scope.detalles[$scope.mAjustadaID].cantidad > 0) {
 					$scope.divMetaDistribucionPlanificada=false;
 					$scope.divMetaDistribucionAjustada=true;
 					$scope.divMetaDistribucionDevengo=false;
@@ -228,7 +228,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					$scope.objetoDevengo.unidadtiempo = "ME";
 					$scope.distribucionValores("D");
 				}
-				if ($scope.detalles[mAjustadaID].cantidad > 0) {
+				if ($scope.detalles[$scope.mAjustadaID].cantidad > 0) {
 					$scope.divMetaDistribucionPlanificada=false;
 					$scope.divMetaDistribucionAjustada=false;
 					$scope.divMetaDistribucionDevengo=true;
@@ -368,7 +368,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		//console.log(node);
 		$scope.esnuevo=true;
 		$scope.editar=true;
-		$scope.editarA=true;
+		$scope.editarA=false;
 		$scope.objeto=null;
 		$scope.nodeActivo=node;
 		if (node.nodeTipo == "SA") {// Tarea
@@ -465,10 +465,16 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.objeto=null;
 		if (node.siEditar == undefined) {
 			$scope.editar=($scope.planificacionUE.npestadopresupuesto == "Planificado"? true: false);
-			$scope.editarA=($scope.planificacionUE.npestadopresupajus == "Planificado"? true: false);
+			$scope.editarA=($scope.planificacionUE.npestadopresupajus == "Planificado" 
+				? ($scope.planificacionUE.npestadopresupuesto == "Aprobado"? true: false)
+				: false
+			);
 		} else {
 			$scope.editar=($scope.objetoPA.npestadopresupuesto == "Planificado"? true: false);
-			$scope.editarA=($scope.objetoPA.npestadopresupajus == "Planificado"? true: false);
+			$scope.editarA=($scope.objetoPA.npestadopresupajus == "Planificado" 
+				? ($scope.objetoPA.npestadopresupuesto == "Aprobado"? true: false)
+				: false
+			);
 		}
 		$scope.nodeActivo=node;
 		if (node.nodeTipo == "AC") {
@@ -1121,7 +1127,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if (!$scope.divSubItem) {
 			for (var i = 0; i < 12; i++) {
 				if ($scope.detallesPlanificada[i].metacantidad > 0)
-					if ($scope.detallesPlanificada[i].observacion == undefined || $scope.detallesPlanificada[i].observacion.trim() == "") {
+					if ($scope.detallesPlanificada[i].descripcion == undefined || $scope.detallesPlanificada[i].descripcion.trim() == "") {
 				        SweetAlert.swal(
 				    		"Planificacion UE! - Distribucion Planificada",
 				    		"Observaciones incompletas. Todos los meses que tienen asignado valor tienen que tener una observacion.",
@@ -1211,7 +1217,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if (!$scope.divSubItem) {
 			for (var i = 0; i < 12; i++) {
 				if ($scope.detallesAjustada[i].metacantidad > 0)
-					if ($scope.detallesAjustada[i].observacion == undefined || $scope.detallesAjustada[i].observacion.trim() == "") {
+					if ($scope.detallesAjustada[i].descripcion == undefined || $scope.detallesAjustada[i].descripcion.trim() == "") {
 				        SweetAlert.swal(
 				    		"Planificacion UE! - Distribucion Ajustada",
 				    		"Observaciones incompletas. Todos los meses que tienen asignado valor tienen que tener una observacion.",
@@ -1806,14 +1812,18 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.copiarPlanificadoAjustado = function() {
 		$scope.objetoAjustada.unidadtiempo = $scope.objetoPlanificada.unidadtiempo;
 		for (var i = 0; i < $scope.detallesPlanificada.length; i++) {
-			$scope.detallesAjustada[i].valor = $scope.detallesPlanificada[i].valor;
-			$scope.detallesAjustada[i].lineametavalor = $scope.detallesPlanificada[i].lineametavalor;
+			if ($scope.divSubItem) {
+				$scope.detallesAjustada[i].valor = $scope.detallesPlanificada[i].valor;
+			} else {
+				$scope.detallesAjustada[i].metacantidad = $scope.detallesPlanificada[i].metacantidad;
+				$scope.detallesAjustada[i].lineametavalor = $scope.detallesPlanificada[i].lineametavalor;
+			}
+			$scope.detallesAjustada[i].descripcion = $scope.detallesPlanificada[i].descripcion;
 		}
 		$scope.aDistribuirA = $scope.aDistribuirP;
 		$scope.divMetaDistribucionPlanificada=false;
 		$scope.divMetaDistribucionAjustada=true;
 		$scope.divMetaDistribucionDevengo=false;
-		//console.log("aqui");
 		$scope.modificarMetaAjustada(true);
 	}
 
@@ -2112,7 +2122,7 @@ function distribuirValor(
 			detalles[i].valor = 0;
 			detalles[i].metacantidad = 0;
 			detalles[i].lineametavalor = 0;
-			detalles[i].observacion = null;
+			detalles[i].descripcion = null;
 		}
 	}
 
