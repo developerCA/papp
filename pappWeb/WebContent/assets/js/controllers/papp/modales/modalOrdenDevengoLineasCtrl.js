@@ -1,16 +1,16 @@
 'use strict';
 
-app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","certificacionID","unidadID","editar","ordendevebgoID","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
-	function($scope,$rootScope,certificacionID,unidadID,editar,ordendevebgoID,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
+app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ordenDevengoID","unidadID","editar","ordenGastoID","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
+	function($scope,$rootScope,ordenDevengoID,unidadID,editar,ordenGastoID,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
 
 	$scope.noeditar=false;
 	$scope.init=function(){
 		if (editar == null) {
 			//nuevo
 			ordenDevengoLineasFactory.nuevoLinea(
-				certificacionID
+				ordenDevengoID
 			).then(function(resp){
-				console.log(resp.json.ordendevengolinea);
+				//console.log(resp.json.ordendevengolinea);
 	        	$scope.objeto = resp.json.ordendevengolinea;
 	        	$scope.noeditar=false;
 	        	$scope.cambioSubItems();
@@ -55,11 +55,12 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","cer
 		$scope.objeto.npdevengado = $scope.si[i].npvalor;
 		ordenDevengoLineasFactory.obtenerOtros(
 			$scope.si[i].npSubitemunidadid, //$scope.si[i].nivelactid,
-			ordendevebgoID
+			ordenGastoID
 		).then(function(resp){
 			//console.log(resp);
         	$scope.objeto.npvalor = resp.json.datoslineaordend.saldo;
         	$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
+        	$scope.objeto.npsaldo=$scope.objeto.nptotalordengasto - $scope.objeto.npdevengado;
 		})
 		ordenDevengoLineasFactory.obtenerTotal(
 			$scope.si[i].nivelactid
@@ -110,12 +111,12 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","cer
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
-	 		    		 $uibModalInstance.close(resp.json.ordendevengolineas);		
+	 		    		 $uibModalInstance.close(resp.json);		
         			 }else{
 	 		             SweetAlert.swal("Orden Devengo!", resp.mensajes.msg, "error");
         			 }
         		})
-        		console.log($scope.objeto);
+        		//console.log($scope.objeto);
             }
         },
         reset: function (form) {

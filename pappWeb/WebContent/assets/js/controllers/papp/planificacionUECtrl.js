@@ -1306,7 +1306,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.submitformMetaDistribucionDevengo = function(form) {
 		$scope.totalDevengo = 0;
 		for (var i = 0; i < 12; i++) {
-			$scope.totalDevengo += $scope.detallesDevengo[i].lineametavalor;
+			$scope.totalDevengo += $scope.detallesDevengo[i].valor;
 		}
 		$scope.totalDevengo = Number($scope.totalDevengo.toFixed(2));
 		if ($scope.totalDevengo !=  $scope.npTotalAjustado) {

@@ -335,13 +335,12 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	};
 
 	$scope.agregarLinea = function() {
-		//console.log($scope.objeto);
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalOrdenDevengoLineas.html',
 			controller : 'ModalOrdenDevengoLineasController',
 			size : 'lg',
 			resolve : {
-				certificacionID : function() {
+				ordenDevengoID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
@@ -350,14 +349,16 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				editar : function() {
 					return null;
 				},
-				ordendevebgoID : function() {
+				ordenGastoID : function() {
 					return $scope.objeto.ordendevengoordengastoid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);//130
-		    $scope.detalles=obj;
+		    $scope.detalles = obj.ordendevengolineas;
+			$scope.objeto.valortotal = obj.ordendevengo.valortotal;
+			$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
             SweetAlert.swal(
         		"Orden Devengo! - Lineas",
         		"Registro guardado satisfactoriamente!",
@@ -373,7 +374,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			controller : 'ModalOrdenDevengoLineasController',
 			size : 'lg',
 			resolve : {
-				certificacionID : function() {
+				ordenDevengoID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
@@ -381,12 +382,16 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				},
 				editar : function() {
 					return $scope.detalles[index].id
+				},
+				ordenGastoID : function() {
+					return $scope.objeto.ordendevengoordengastoid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-		    $scope.detalles=obj;
+		    $scope.detalles = obj.ordendevengolineas;
+			$scope.objeto.valortotal = obj.ordendevengo.valortotal;
+			$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
             SweetAlert.swal("Orden Devengo! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
 		});
@@ -413,8 +418,8 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				if (resp.estado){
 					SweetAlert.swal("Orden Devengo!", "Eliminado satisfactoriamente!", "success");
 					$scope.objeto.valortotal -= $scope.detalles[index].valor;
-					$scope.data[$scope.dataIndex].valortotal -= $scope.detalles[index].valor;
 				    $scope.detalles.splice(index, 1);
+					$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
 	   			}else{
 		            SweetAlert.swal("Orden Devengo!", resp.mensajes.msg, "error");
 	   			}
@@ -486,8 +491,8 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			//console.log(obj);
 			$scope.objeto.ordendevengoordengastoid = obj.ordengastoid;
 			$scope.objeto.npordengasto = obj.codigo;
-			$scope.objeto.npordengastovalor = obj.ordenvalortotal;
-			$scope.objeto.valortotal = obj.valortotal;
+			$scope.objeto.npordengastovalor = obj.valortotal;
+			$scope.objeto.valortotal = obj.ordenvalortotal;
 		}, function() {
 		});
 	};
@@ -514,7 +519,8 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
         			 if (resp.estado){
       					 SweetAlert.swal("Orden de Devengo!", "Registro guardado satisfactoriamente!", "success");
         				 if ($scope.nuevoar) {
-	      					 $scope.noeditar = false;
+        					 $scope.objeto = resp.json.ordendevengo;
+	      					 $scope.noeditar=false;
 	      					 $scope.nuevoar=false;
 	      					 return;
         				 }

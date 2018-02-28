@@ -690,6 +690,21 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Orden de Devengo'
         }
+    }).state('app.ordenreversion', {
+        url: "/ordenreversion",
+        templateUrl: "assets/views/papp/ordenReversion.html",
+        resolve: loadSequence(
+        		'ngTable','OrdenReversionCtrl','OrdenReversionFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl',
+        		'ModalOrdenDevengoLineasCtrl','OrdenDevengoLineasFactory',
+        		'ModalOrdenGastoCtrl','OrdenGastoFactory','OrdenDevengoFactory'
+		),
+        title: 'Orden de Reversion',
+        ncyBreadcrumb: {
+            label: 'Orden de Reversion'
+        }
     }).state('app.contrato', {
         url: "/contrato",
         templateUrl: "assets/views/papp/contrato.html",
@@ -699,20 +714,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         title: 'Contrato',
         ncyBreadcrumb: {
             label: 'Contrato'
-        }
-    }).state('app.ordenreversion', {
-        url: "/ordenreversion",
-        templateUrl: "assets/views/papp/ordenReversion.html",
-        resolve: loadSequence(
-        		'ngTable','OrdenReversionCtrl','OrdenReversionFactory',
-        		'ModalUnidadCtrl','UnidadFactory',
-        		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
-        		'ModalCertificacionesFondoLiquidacionManuaCtrl',
-        		'ModalOrdenDevengoLineasCtrl','OrdenDevengoLineasFactory'
-		),
-        title: 'Orden de Reversion',
-        ncyBreadcrumb: {
-            label: 'Orden de Reversion'
         }
     }).state('app.layouts', {
         url: "/layouts",

@@ -86,11 +86,9 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		ordenReversionFactory.traerNuevo(
 			$rootScope.ejefiscal
 		).then(function(resp){
-			console.log(resp);
 			if (!resp.estado) return;
 			$scope.objeto=resp.json.ordenreversion;
 			$scope.detalles={};
-			$scope.agregarDetalles();
 			$scope.edicion=true;
 			$scope.nuevoar=true;
 			$scope.guardar=true;
@@ -99,12 +97,10 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	}
 
 	$scope.editar=function(index){
-		//console.log($scope.data[index]);
 		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 		ordenReversionFactory.traerEditar(
 			$scope.data[index].id
 		).then(function(resp){
-			//console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.ordenreversion;
 			    $scope.detalles=resp.json.ordenreversionlineas;
@@ -116,7 +112,6 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	};
 
 	$scope.solicitar=function(index) {
-		console.log($scope.data[index]);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal("Orden de Reversion!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
@@ -140,7 +135,6 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 					null,
 					null
 				).then(function(resp){
-					//console.log(resp);
 					$scope.pageChanged();
 					SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 				});
@@ -167,7 +161,6 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			}
 		});
 		modalInstance.result.then(function(cur) {
-			//console.log(obj);
 			if (cur === undefined) {
 				cur = 0;
 			}
@@ -178,7 +171,6 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				cur,
 				null
 			).then(function(resp){
-				console.log(resp);
 				$scope.pageChanged();
 				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 			});
@@ -214,84 +206,6 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			ordenReversionFactory.solicitar(
 				$scope.data[index].id,
 				"NE",
-				null,
-				obj
-			).then(function(resp){
-				console.log(resp);
-				$scope.pageChanged();
-				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
-			});
-		}, function() {
-		});
-	}
-
-	$scope.LiquidacionTotal = function(index) {
-		if ($scope.data[index].estado != "AP") {
-			SweetAlert.swal("Orden de Reversion!", "Solo se puede liquidar si esta en estado aprobado.", "error");
-			return;
-		}
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg',
-			resolve: {
-				titulo: function() {
-					return "Liquidaci&oacute;n Total";
-				},
-				subtitulo : function() {
-					return "Observaci&oacute;n";
-				}
-			}
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			if (obj === undefined) {
-				obj = "";
-			}
-			var cur = 0;
-			$scope.data[index].npestado = "Liquidando";
-			ordenReversionFactory.solicitar(
-				$scope.data[index].id,
-				"LT",
-				null,
-				obj
-			).then(function(resp){
-				//console.log(resp);
-				$scope.pageChanged();
-				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
-			});
-		}, function() {
-		});
-	}
-
-	$scope.LiquidacionParcial = function(index) {
-		if ($scope.data[index].estado != "AP") {
-			SweetAlert.swal("Orden de Reversion!", "Solo se puede liquidar si esta en estado aprobado.", "error");
-			return;
-		}
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg',
-			resolve: {
-				titulo: function() {
-					return "Liquidaci&oacute;n Parcial";
-				},
-				subtitulo : function() {
-					return "Observaci&oacute;n";
-				}
-			}
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			if (obj === undefined) {
-				obj = "";
-			}
-			var cur = 0;
-			$scope.data[index].npestado = "Liquidando";
-			ordenReversionFactory.solicitar(
-				$scope.data[index].id,
-				"LP",
 				null,
 				obj
 			).then(function(resp){
@@ -342,18 +256,13 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		});
 	}
 
-	$scope.agregarDetalles=function(){
-		$scope.detalles={id: null};
-	};
-
 	$scope.agregarLinea = function() {
-		//console.log($scope.objeto);
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalOrdenReversionLineas.html',
-			controller : 'ModalOrdenReversionLineasController',
+			templateUrl : 'assets/views/papp/modal/modalOrdenDevengoLineas.html',
+			controller : 'ModalOrdenDevengoLineasController',
 			size : 'lg',
 			resolve : {
-				certificacionID : function() {
+				ordenDevengoID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
@@ -361,24 +270,32 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				},
 				editar : function() {
 					return null;
+				},
+				ordenGastoID : function() {
+					return $scope.objeto.ordendevengoordengastoid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);//130
-		    $scope.detalles=obj;
-            SweetAlert.swal("Orden Reversion! - Lineas", "Registro guardado satisfactoriamente!", "success");
+			$scope.detalles = obj.ordendevengolineas;
+			$scope.objeto.valortotal = obj.ordendevengo.valortotal;
+			$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
+            SweetAlert.swal(
+        		"Orden Reversion! - Lineas",
+        		"Registro satisfactoriamente!",
+        		"success"
+    		);
 		}, function() {
 		});
 	};
 
 	$scope.editarLinea = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalOrdenReversionLineas.html',
-			controller : 'ModalOrdenReversionLineasController',
+			templateUrl : 'assets/views/papp/modal/modalOrdenDevengoLineas.html',
+			controller : 'ModalOrdenDevengoLineasController',
 			size : 'lg',
 			resolve : {
-				certificacionID : function() {
+				ordenDevengoID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
@@ -386,14 +303,48 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				},
 				editar : function() {
 					return $scope.detalles[index].id
+				},
+				ordenGastoID : function() {
+					return $scope.objeto.ordendevengoordengastoid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-		    $scope.detalles=obj;
+		    $scope.detalles = obj.ordendevengolineas;
+			$scope.objeto.valortotal = obj.ordendevengo.valortotal;
+			$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
             SweetAlert.swal("Orden Reversion! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
+		});
+	};
+
+	$scope.eliminarLinea = function(index) {
+		SweetAlert.swal({
+			title: "Orden Reversion - Linea?",
+			text: "Seguro que desea eliminar esta linea?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (!isConfirm) return;
+			ordenDevengoFactory.eliminarLinea(
+				$scope.detalles[index].id.id,
+				$scope.detalles[index].id.lineaid
+			).then(function(resp){
+				if (resp.estado){
+					SweetAlert.swal("Orden Reversion!", "Eliminado satisfactoriamente!", "success");
+					$scope.objeto.valortotal -= $scope.detalles[index].valor;
+				    $scope.detalles.splice(index, 1);
+					$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
+	   			}else{
+		            SweetAlert.swal("Orden Reversion!", resp.mensajes.msg, "error");
+	   			}
+          	});
 		});
 	};
 
@@ -404,7 +355,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.ordenreversionunidadid = obj.id;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;
@@ -419,7 +370,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.ordenreversionclaseregid = obj.id.id;
 			$scope.objeto.ordenreversionclasemoid = obj.id.cmid;
 			$scope.objeto.ordenreversiongastoid = obj.id.cmcgastoid;
@@ -447,6 +398,22 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			$scope.objeto.npnombretipodocumento = obj.nombre;
 			$scope.objeto.npcodigodocumento = obj.npcodigodocumento;
 			$scope.objeto.npnombredocumento = obj.npnombredocumento;
+		}, function() {
+		});
+	};
+
+	$scope.abrirOrdenGasto = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalOrdenGasto.html',
+			controller : 'ModalOrdenGastoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			$scope.objeto.ordendevengoordengastoid = obj.ordengastoid;
+			$scope.objeto.npordengasto = obj.codigo;
+			$scope.objeto.npordengastovalor = obj.valortotal;
+			$scope.objeto.valortotal = obj.ordenvalortotal;
 		}, function() {
 		});
 	};
