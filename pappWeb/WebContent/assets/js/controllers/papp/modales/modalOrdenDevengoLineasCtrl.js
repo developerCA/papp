@@ -35,11 +35,15 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 			ordenGastoID
 		).then(function(resp){
 			$scope.si = resp.json.result;
+			$scope.listarSubItems = null;
         	$scope.listarSubItems = [{
         		id: "",
         		npSubitem: "Selecione un subitem"
-        	}].concat(resp.json.result);
-			//console.log($scope.listarItems);
+        	}];//.concat(resp.json.result);
+        	for (var i = 0; i < resp.json.result.length; i++) {
+        		resp.json.result[i].npSubitem = resp.json.result[i].npSubitemcodigo + ": " + resp.json.result[i].npSubitem;
+        		$scope.listarSubItems.push(resp.json.result[i]);
+			}
 		})
 	}
 

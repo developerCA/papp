@@ -86,11 +86,15 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 			$scope.objeto.item
 		).then(function(resp){
 			$scope.si = resp.json.result;
+			$scope.listarSubItems = null;
         	$scope.listarSubItems = [{
         		id: "",
         		descripcionexten: "Selecione un subitem"
-        	}].concat(resp.json.result);
-			//console.log($scope.listarItems);
+        	}];
+        	for (var i = 0; i < resp.json.result.length; i++) {
+        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + ": " + resp.json.result[i].npdescripcion;
+        		$scope.listarSubItems.push(resp.json.result[i]);
+			}
 		})
 	}
 
