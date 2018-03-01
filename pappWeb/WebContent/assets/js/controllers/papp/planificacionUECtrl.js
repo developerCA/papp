@@ -1984,7 +1984,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			obj.id,
 			$rootScope.ejefiscal,
 			obj.npacitividadunidad,
-			"P",
+			"A",
 			"AP"
 		).then(function(resp){
 			//$scope.detallesPA = resp.json.resultadoaprobacion;
