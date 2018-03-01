@@ -32,7 +32,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 		$scope.listarSubItems = [];
 		//console.log($scope.objeto);
 		ordenDevengoLineasFactory.listarSubItems(
-			$scope.objeto.id.id
+			ordenGastoID
 		).then(function(resp){
 			$scope.si = resp.json.result;
         	$scope.listarSubItems = [{
