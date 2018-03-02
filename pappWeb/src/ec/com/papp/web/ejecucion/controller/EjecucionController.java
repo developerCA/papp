@@ -178,7 +178,7 @@ public class EjecucionController {
 				log.println("consulta lineas: " + ordengastolineaTO.getNivelactid() +"-"+ ordengastolineaTO.getId().getId());
 				ordengastolineaTO2.setNivelactid(ordengastolineaTO.getNivelactid());
 				ordengastolineaTO2.getId().setId(ordengastolineaTO.getId().getId());
-				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO2);
+				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO2,true);
 				log.println("ordenes: " + ordengastolineaTOs.size());
 				boolean grabar=true;
 				if(ordengastolineaTOs.size()>0){

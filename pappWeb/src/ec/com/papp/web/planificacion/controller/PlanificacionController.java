@@ -1416,14 +1416,14 @@ public class PlanificacionController {
 					actividadunidadacumuladorExiste.getId().setId(id);
 					Collection<ActividadunidadacumuladorTO> actividadunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerActividadunidadacumulador(actividadunidadacumuladorExiste);
 					actividadunidadacumuladorTO.getId().setAcumid(Long.valueOf(actividadunidadacumuladorExistentes.size()+1));
-					//actividadunidadacumuladorTO.getId().setId(id);
+					actividadunidadacumuladorTO.getId().setId(id);
 					actividadunidadacumuladorTO.getId().setUnidadid(Long.valueOf(parameters.get("unidadid")));
 					actividadunidadacumuladorTO.setNpValor(0.0);
 					actividadunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
 					actividadunidadacumuladorTOs.add(actividadunidadacumuladorTO);
 					
 					actividadunidadacumuladorTO=new ActividadunidadacumuladorTO();
-					//actividadunidadacumuladorTO.getId().setId(id);
+					actividadunidadacumuladorTO.getId().setId(id);
 					actividadunidadacumuladorTO.getId().setUnidadid(Long.valueOf(parameters.get("unidadid")));
 					actividadunidadacumuladorTO.getId().setAcumid(Long.valueOf(actividadunidadacumuladorExistentes.size()+2));
 					actividadunidadacumuladorTO.setNpValor(0.0);

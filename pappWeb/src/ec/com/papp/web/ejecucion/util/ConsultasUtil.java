@@ -1,5 +1,6 @@
 package ec.com.papp.web.ejecucion.util;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -899,9 +900,22 @@ public class ConsultasUtil {
 			OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
 			ordengastolineaTO.setOrdengasto(ordengastoTO);
 			ordengastolineaTO.getId().setId(ordengastoTO.getId());
-			Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO);
-			log.println("lineas "+ ordengastolineaTOs.size());
-			jsonObject.put("ordengastolineas", (JSONArray)JSONSerializer.toJSON(ordengastolineaTOs,ordengastolineaTO.getJsonConfig()));
+			//obtengo el nivelactividad
+			Collection<OrdengastolineaTO> ordengastolineaTOs1=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO,true);
+			log.println("ordenes de gasto... "+ ordengastolineaTOs1.size());
+//			if(ordengastolineaTOs1.size()>0) {
+//				ordengastolineaTO=(OrdengastolineaTO)ordengastolineaTOs1.iterator().next();
+//				OrdengastolineaTO ordenconsulta=new OrdengastolineaTO();
+//				log.println("nivel actividad " + ordengastolineaTO.getNivelactid());
+//				ordenconsulta.setNivelactid(ordengastolineaTO.getNivelactid());
+//				//ordenconsulta.setOrdengasto(ordengastoTO);
+//				log.println("id del nivel actividad " + ordengastolineaTO.getNivelactid());
+//				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordenconsulta,true);
+//				log.println("lineas "+ ordengastolineaTOs.size());
+				jsonObject.put("ordengastolineas", (JSONArray)JSONSerializer.toJSON(ordengastolineaTOs1,ordengastolineaTO.getJsonConfig()));
+//			}
+//			else
+//				jsonObject.put("ordengastolineas", (JSONArray)JSONSerializer.toJSON(new ArrayList<>(),ordengastolineaTO.getJsonConfig()));
 			jsonObject.put("ordengasto", (JSONObject)JSONSerializer.toJSON(ordengastoTO,ordengastoTO.getJsonConfig()));
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -960,7 +974,7 @@ public class ConsultasUtil {
 		try{
 			OrdenreversionTO ordenreversionTO=new OrdenreversionTO();
 			ordenreversionTO = UtilSession.planificacionServicio.transObtenerOrdenreversionTO(id);
-			if(ordenreversionTO.getOrdenrversionogastoid()!=null){
+			if(ordenreversionTO.getOrdenreversionogastoid()!=null){
 				ordenreversionTO.setNpordengastoedit(ordenreversionTO.getOrdengasto().getCodigo());
 				ordenreversionTO.setNpordengastovalor(ordenreversionTO.getOrdengasto().getValortotal());
 			}
