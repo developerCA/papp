@@ -338,7 +338,7 @@
 														placeholder="Escriba un presupuesto planificado"
 														class="form-control" name="presupplanif"
 														ng-model="objeto.presupplanif" required
-														ng-disabled="!editar"> <span
+														ng-disabled="!editarP"> <span
 														class="error text-small block"
 														ng-if="FormActividad.presupplanif.$dirty && FormActividad.presupplanif.$invalid">
 														Incorrecto </span> <span class="success text-small"
@@ -503,7 +503,7 @@
 														placeholder="Escriba un meta planificada"
 														class="form-control" name="npMetaPlanificada"
 														ng-model="detalles[mPlanificadaID].cantidad" required
-														ng-disabled="!editar" ng-change="modificarMetaPlanificada(true);">
+														ng-disabled="!editarP" ng-change="modificarMetaPlanificada(true);">
 													<span
 														class="error text-small block"
 														ng-if="FormActividad.npMetaPlanificada.$dirty && FormActividad.npMetaPlanificada.$invalid">
@@ -523,7 +523,7 @@
 														placeholder="Escriba un meta planificada descripci&oacute;n (no llega en el servicio)"
 														class="form-control"
 														ng-model="detalles[mPlanificadaID].acummetadesc" required
-														ng-disabled="!editar"></textarea>
+														ng-disabled="!editarP"></textarea>
 													<span class="error text-small block"
 														ng-if="FormActividad.npMetaPlanificadaDescripcion.$dirty && FormActividad.npMetaPlanificadaDescripcion.$invalid">
 														Incorrecto </span> <span class="success text-small"
@@ -606,7 +606,7 @@
 											</span>
 											<br>
 											&nbsp;Unidad de Tiempo:
-											<select name="periodoPlanificado" ng-disabled="!editar"
+											<select name="periodoPlanificado" ng-disabled="!editarP"
 												ng-model="objetoPlanificada.unidadtiempo"
 												ng-change="vLimpio=true;distribucionValores('P');">
 													<option value="ME">Mensual</option>
@@ -636,7 +636,7 @@
 																	class="form-control" name="{{'pvalor_'+$index}}"
 																	ng-model="obj.metacantidad" numericOnly
 																	style="text-align: right;" required decimal="2"
-																	ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
+																	ng-disabled="!editarP || objetoPlanificada.unidadtiempo!='PE'"
 																	ng-change="calcularPorcientoP();">
 															</td>
 															<td>
@@ -652,7 +652,7 @@
 																	rows="3" style="width: 100%"
 																	placeholder="Escriba un descripci&oacute;n"
 																	class="form-control" ng-model="obj.descripcion"
-																	ng-disabled="!editar" ng-required="obj.metacantidad != 0"></textarea>
+																	ng-disabled="!editarP" ng-required="obj.metacantidad != 0"></textarea>
 															</td>
 														</tr>
 														<tr>
@@ -1156,7 +1156,7 @@
 																class="form-control" name="npMetaPlanificadaCantidad"
 																ng-model="detalles[mPlanificadaID].cantidad" numericOnly
 																style="text-align: right;" required decimal="2"
-																onClick="this.select();" ng-disabled="!editar"
+																onClick="this.select();" ng-disabled="!editarP"
 																ng-change="modificarMetaPlanificada(true);">
 															<span
 																class="error text-small block"
@@ -1175,7 +1175,7 @@
 															<textarea name="npMetaPlanificadaDescripcion" rows="5"
 																style="width: 100%"
 																placeholder="Escriba un meta planificada descripci&oacute;n"
-																class="form-control" ng-disabled="!editar"
+																class="form-control" ng-disabled="!editarP"
 																ng-model="detalles[mPlanificadaID].descripcion" required></textarea>
 															<span class="error text-small block"
 																ng-if="FormSubTarea.npMetaPlanificadaDescripcion.$dirty && FormSubTarea.npMetaPlanificadaDescripcion.$invalid">
@@ -1277,7 +1277,7 @@
 											</span>
 											<br>
 											&nbsp;Unidad de Tiempo:
-											<select name="periodoPlanificado" ng-disabled="!editar"
+											<select name="periodoPlanificado" ng-disabled="!editarP"
 												ng-model="objetoPlanificada.unidadtiempo"
 												ng-change="vLimpio=true;distribucionValores('P');">
 													<option value="ME">Mensual</option>
@@ -1307,7 +1307,7 @@
 																	class="form-control" name="{{'pvalor_'+$index}}"
 																	ng-model="obj.metacantidad" numericOnly
 																	style="text-align: right;" required decimal="2"
-																	ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
+																	ng-disabled="!editarP || objetoPlanificada.unidadtiempo!='PE'"
 																	ng-change="calcularPorcientoP();">
 															</td>
 															<td>
@@ -1926,7 +1926,7 @@
 															name="npCantidadPlanificada"
 															ng-model="detalles[mPlanificadaID].cantidad"
 															ng-change="calcularTotalPlanificado();"
-															ng-disabled="!editar">
+															ng-disabled="!editarP">
 														<span class="error text-small block"
 															ng-if="FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid">
 															Incorrecto
@@ -1950,7 +1950,7 @@
 															name="npValorPlanificado"
 															ng-model="detalles[mPlanificadaID].valor"
 															ng-change="calcularTotalPlanificado();"
-															ng-disabled="!editar">
+															ng-disabled="!editarP">
 														<span class="error text-small block"
 															ng-if="FormSubItem.npValorPlanificado.$dirty && FormSubItem.npValorPlanificado.$invalid">
 															Incorrecto
@@ -2104,7 +2104,7 @@
 											</span>
 											<br>
 											&nbsp;Unidad de Tiempo:
-											<select name="periodoPlanificado" ng-disabled="!editar"
+											<select name="periodoPlanificado" ng-disabled="!editarP"
 												ng-model="objetoPlanificada.unidadtiempo"
 												ng-change="vLimpio=true;distribucionValores('P');">
 													<option value="ME">Mensual</option>
@@ -2132,7 +2132,7 @@
 																	class="form-control" name="{{'pvalor_'+$index}}"
 																	ng-model="obj.valor" numericOnly
 																	style="text-align: right;" required decimal="2"
-																	ng-disabled="!editar || objetoPlanificada.unidadtiempo!='PE'"
+																	ng-disabled="!editarP || objetoPlanificada.unidadtiempo!='PE'"
 																	ng-change="calcularPorcientoP();">
 															</td>
 														</tr>
@@ -2243,7 +2243,8 @@
 									class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionDevengo" novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionDevengo')">
-										<span> &nbsp;Distribuci&oacute;n:
+										<span>
+										&nbsp;Distribuci&oacute;n:
 										 <a
 											class="btn btn-sm btn-default"
 											ng-click="editarDistribucionPlanificado();"> Planificado
