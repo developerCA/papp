@@ -500,18 +500,19 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.esnuevo=false;
 		$scope.objeto=null;
 		if (node.siEditar == undefined) {
-			$scope.editar=($scope.planificacionUE.npestadopresupuesto == "Planificado"? true: false);
+			$scope.editarP=($scope.planificacionUE.npestadopresupuesto == "Planificado"? true: false);
 			$scope.editarA=($scope.planificacionUE.npestadopresupajus == "Planificado" 
 				? ($scope.planificacionUE.npestadopresupuesto == "Aprobado"? true: false)
 				: false
 			);
 		} else {
-			$scope.editar=($scope.objetoPA.npestadopresupuesto == "Planificado"? true: false);
+			$scope.editarP=($scope.objetoPA.npestadopresupuesto == "Planificado"? true: false);
 			$scope.editarA=($scope.objetoPA.npestadopresupajus == "Planificado" 
 				? ($scope.objetoPA.npestadopresupuesto == "Aprobado"? true: false)
 				: false
 			);
 		}
+		$scope.editar=($scope.editarP || $scope.editarA);
 		$scope.nodeActivo=node;
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
@@ -1215,7 +1216,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.calcularPorcientoD = function(index) {
-		$scope.modificarMetaAjustada();
+		$scope.modificarMetaDevengo();
 		distribuirValor(
 			$scope.objetoDevengo,
 			$scope.detallesDevengo,
@@ -1223,7 +1224,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			0,
 			$scope.divActividad,
 			$scope.divSubItem,
-			$scope.vLimpio
+			false
 		);
 		$scope.sumarValoresD();
 	}

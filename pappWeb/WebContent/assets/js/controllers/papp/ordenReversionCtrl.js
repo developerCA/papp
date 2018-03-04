@@ -391,7 +391,6 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
 			$scope.objeto.ordenreversiontipodocid = obj.id.id;
 			$scope.objeto.ordenreversiontpclasedocid = obj.id.clasedocid;
 			$scope.objeto.npcodigotipodocumento = obj.codigo;
@@ -409,11 +408,10 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			$scope.objeto.ordendevengoordengastoid = obj.ordengastoid;
+			$scope.objeto.ordenrversionogastoid = obj.ordengastoid;
 			$scope.objeto.npordengasto = obj.codigo;
 			$scope.objeto.npordengastovalor = obj.valortotal;
-			$scope.objeto.valortotal = obj.ordenvalortotal;
+			//$scope.objeto.valortotal = obj.ordenvalortotal;
 		}, function() {
 		});
 	};

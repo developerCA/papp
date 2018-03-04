@@ -377,7 +377,6 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
 			$scope.objetoPy.proyectoliderid = obj.id;
 			$scope.objetoPy.npSocionegociocodigo = obj.codigo;
 			$scope.objetoPy.npSocionegocionombre = obj.nombremostrado;
@@ -397,7 +396,6 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
 			$scope.objetoPy.proyectoindicadorid = obj.id;
 			$scope.objetoPy.npIndicadorcodigo = obj.codigo;
 			$scope.objetoPy.npIndicadornombre = obj.nombre;
@@ -417,7 +415,6 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
 			$scope.objetoAc.actividadindicadorid = obj.id.id;
 			$scope.objetoAc.actividadindicadormetodoid = obj.id.metodoid;
 			$scope.objetoAc.npIndicadorcodigo = obj.npIndicadorcodigo;
@@ -446,15 +443,13 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			//console.log($scope.objetoSa);
 			$scope.objetoSa.subactividadindicadorid = obj.id.id;
 			$scope.objetoSa.subactividadindicadormetodoid = obj.id.metodoid;
 			$scope.objetoSa.npIndicadorcodigo = obj.npIndicadorcodigo;
 			$scope.objetoSa.npIndicadornombre = obj.npIndicadornombre;
 			$scope.objetoSa.npIndicadordescripcion = obj.npIndicadordescripcion;
 			$scope.objetoSa.npIndicadormetcodigo = obj.codigo;
-			$scope.objetoSa.npIndicadormetdescripcion = obj.descripcion;
+			$scope.objetoSa.npIndicadormetdescripcion = obj.npIndicadormetadescriopcion;
 			$scope.objetoSa.npIndicadormetadescriopcion = obj.npIndicadormetadescriopcion;
 		}, function() {
 		});
