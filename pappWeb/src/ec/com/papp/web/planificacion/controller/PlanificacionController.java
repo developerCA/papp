@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.sun.deploy.uitoolkit.impl.fx.ui.UITextArea;
 
 import ec.com.papp.administracion.to.ObraTO;
 import ec.com.papp.administracion.to.OrganismoTO;
@@ -1575,8 +1576,9 @@ public class PlanificacionController {
 				log.println("unidad: " + parameters.get("unidadid"));
 				log.println("ejercicio: " + parameters.get("ejerciciofiscal"));
 				ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("actividadid")), Long.valueOf(parameters.get("unidadid"))));
+				log.println("id de actividadunidad: " + actividadunidadTO.getId().getId() + "-"+actividadunidadTO.getId().getUnidadid());
 				log.println("valores planificados: " + actividadunidadTO.getPresupplanif());
-				log.println("valores ajustados: " + actividadunidadTO.getPresupajust().doubleValue());
+				log.println("valores ajustados: " + actividadunidadTO.getPresupajust());
 				//2. traigo los valores ya reservados para restar y mostrar solo lo disponible
 				//Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
 				Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
@@ -1833,36 +1835,64 @@ public class PlanificacionController {
 				log.println("tipo aprobacion: " + parameters.get("tipo"));
 				log.println("id: " + parameters.get("unidad"));
 				log.println("accion: " + parameters.get("accion"));
-				ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("nivelactividadunidadid")),Long.valueOf(parameters.get("unidad"))));
-				log.println("actividad: " + actividadunidadTO.getId().getId());
-				//1.Si se va a solicitar
-				if(parameters.get("accion").equals("SO")) {
-					Boolean mensaje=ConsultasUtil.aprobacionplanificacion(Long.valueOf(parameters.get("unidad")), Long.valueOf(parameters.get("nivelactividadejerfiscalid")), parameters.get("tipo"), Long.valueOf(parameters.get("nivelactividadunidadid")), actividadunidadTO.getId().getId(), jsonObject);
-					if(mensaje){
-						mensajes.setMsg("No se puede solicitar existen observaciones");
-						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				//ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("nivelactividadunidadid")),Long.valueOf(parameters.get("unidad"))));
+				NivelactividadTO nivelactividadTO=new NivelactividadTO();
+				nivelactividadTO.setNivelactividadejerfiscalid(Long.valueOf(parameters.get("nivelactividadejerfiscalid")));
+				nivelactividadTO.setNivelactividadunidadid(Long.valueOf(parameters.get("unidad")));
+				nivelactividadTO.setTipo("AC");
+				nivelactividadTO.setEstado("A");
+				Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
+//				ActividadunidadTO actividadunidadTO=new ActividadunidadTO();
+//				actividadunidadTO.getId().setUnidadid(Long.valueOf(parameters.get("unidad")));
+//				ActividadTO actividadTO=new ActividadTO();
+//				actividadTO.setActividadeejerciciofiscalid(Long.valueOf(parameters.get("nivelactividadejerfiscalid")));
+//				actividadunidadTO.setActividad(actividadTO);
+//				Collection<ActividadunidadTO> actividadunidadTOs=UtilSession.planificacionServicio.transObtenerActividadunidad(actividadunidadTO);
+				log.println("actividades: " + nivelactividadTOs.size());
+				for(NivelactividadTO nivelactividadTO2:nivelactividadTOs) {
+					log.println("activiad.. "+ nivelactividadTO2.getTablarelacionid());
+					ActividadunidadTO actividadunidadTO2=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(nivelactividadTO2.getTablarelacionid(), Long.valueOf(parameters.get("unidad"))));
+					log.println("nivelactividad id " + nivelactividadTO2.getId());
+					log.println("actividad id " + actividadunidadTO2.getId().getId());
+					//1.Si se va a solicitar
+					if(parameters.get("accion").equals("SO")) {
+						Boolean mensaje=ConsultasUtil.aprobacionplanificacion(Long.valueOf(parameters.get("unidad")), Long.valueOf(parameters.get("nivelactividadejerfiscalid")), parameters.get("tipo"), nivelactividadTO2.getId(), actividadunidadTO2.getId().getId(), jsonObject);
+						if(mensaje){
+							mensajes.setMsg("No se puede solicitar existen observaciones");
+							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						}
+						else{
+							//va aprobar la actividadunidad
+							if(parameters.get("tipo").equals("P"))
+								actividadunidadTO2.setPresupaprobado(3);
+							else
+								actividadunidadTO2.setAjusaprobado(3);
+							UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO2);
+							mensajes.setMsg("La solicitud fue enviada con exito");
+							mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+						}
 					}
-					else{
+					else if(parameters.get("accion").equals("AP")) {
 						//va aprobar la actividadunidad
 						if(parameters.get("tipo").equals("P"))
-							actividadunidadTO.setPresupaprobado(3);
+							actividadunidadTO2.setPresupaprobado(1);
 						else
-							actividadunidadTO.setAjusaprobado(3);
-						UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO);
-						mensajes.setMsg("La solicitud fue enviada con exito");
+							actividadunidadTO2.setAjusaprobado(1);
+						UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO2);
+						mensajes.setMsg("Se aprobo con exito");
 						mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 					}
-				}
-				else if(parameters.get("accion").equals("AP")) {
-					//va aprobar la actividadunidad
-					if(parameters.get("tipo").equals("P"))
-						actividadunidadTO.setPresupaprobado(1);
-					else
-						actividadunidadTO.setAjusaprobado(1);
-					UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO);
-					mensajes.setMsg("Se aprobo con exito");
-					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
-				}
+					else if(parameters.get("accion").equals("DE")) {
+						//va aprobar la actividadunidad
+						if(parameters.get("tipo").equals("P"))
+							actividadunidadTO2.setPresupaprobado(0);
+						else
+							actividadunidadTO2.setAjusaprobado(0);
+						UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO2);
+						mensajes.setMsg("Se regreso la unidad para una nueva revision");
+						mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+					}
+				}	
 			}
 
 			//Matriz de presupuestos

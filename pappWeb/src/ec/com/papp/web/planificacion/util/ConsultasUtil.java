@@ -647,6 +647,9 @@ public class ConsultasUtil {
 				unidadTO.setCodigopresup(parameters.get("codigopresup"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				unidadTO.setNombre(parameters.get("nombre"));
+			if(parameters.get("estadoaprobado")!=null && !parameters.get("estadoaprobado").equals(""))
+				unidadTO.setNpajusaprobado(Integer.valueOf(parameters.get("estadoaprobado")));
+			//unidadTO.setNpajusaprobado(1);
 			Collection<UnidadTO> resultado=UtilSession.planificacionServicio.transConsultaplanificacion(unidadTO, Long.valueOf(parameters.get("ejerciciofiscal")), principal.getName());
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", (Integer.valueOf(resultado.size())).toString());
