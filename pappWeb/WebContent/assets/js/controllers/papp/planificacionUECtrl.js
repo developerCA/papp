@@ -16,7 +16,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.vLimpio=false;
 	$scope.jsRegresar = null;
 
-	$scope.limpiarEdicion = function() {
+	$scope.limpiarEdicion = function(recargar = true) {
 		$scope.ninguno = false;
 		$scope.divEditarDistribucion=false;
 		$scope.divPlanificacionAnual=true;
@@ -48,7 +48,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.detallesDevengo=null;
 		$scope.volver();
 		if ($scope.jsRegresar != null) {
-			eval("$scope." + $scope.jsRegresar + "();");
+			eval("$scope." + $scope.jsRegresar + "(recargar);");
 			$scope.jsRegresar = null;
 		}
 		if ($scope.nodeActivo != undefined && $scope.nodeActivo.siEditar != undefined) {
@@ -525,6 +525,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.objeto=Object.assign({}, resp.json.actividad, resp.json.actividadunidad);
 			    $scope.objeto.npFechainicio=toDate($scope.objeto.npFechainicio);
 			    $scope.objeto.npFechafin=toDate($scope.objeto.npFechafin);
+			    $scope.editarUnidad=($scope.objeto.npunidadmedidanombre == "PORCENTAJE"? false: true);
 				$scope.detalles=resp.json.actividadunidadacumulador;
 				for (var i = 0; i < $scope.detalles.length; i++) {
 					if ($scope.detalles[i].tipo == "P") {
@@ -1363,7 +1364,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
         },
         reset: function(form) {
             form.$setPristine(true);
-            $scope.limpiarEdicion();
+            $scope.limpiarEdicion(false);
         }
     };
 
@@ -1421,7 +1422,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.resetformActividad = function(form) {
         //$scope.myModel = angular.copy($scope.master);
         form.$setPristine(true);
-        $scope.limpiarEdicion();
+        $scope.limpiarEdicion(false);
 	}
 
 	$scope.submitformSubActividad = function(form) {
@@ -1447,7 +1448,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.resetformSubActividad = function(form) {
         //$scope.myModel = angular.copy($scope.master);
         form.$setPristine(true);
-        $scope.limpiarEdicion();
+        $scope.limpiarEdicion(false);
 	}
 
 	$scope.submitformTarea = function(form) {
@@ -1472,7 +1473,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.resetformTarea = function(form) {
         //$scope.myModel = angular.copy($scope.master);
         form.$setPristine(true);
-        $scope.limpiarEdicion();
+        $scope.limpiarEdicion(false);
 	}
 
 	$scope.submitformSubTarea = function(form) {
@@ -1550,7 +1551,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.resetformSubTarea = function(form) {
         //$scope.myModel = angular.copy($scope.master);
         form.$setPristine(true);
-        $scope.limpiarEdicion();
+        $scope.limpiarEdicion(false);
 	}
 
 	$scope.submitformItem = function(form) {
@@ -1575,7 +1576,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.resetformItem = function(form) {
         //$scope.myModel = angular.copy($scope.master);
         form.$setPristine(true);
-        $scope.limpiarEdicion();
+        $scope.limpiarEdicion(false);
 	}
 
 	$scope.submitformSubItem = function(form) {
@@ -1679,7 +1680,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.resetformSubItem = function(form) {
         //$scope.myModel = angular.copy($scope.master);
         form.$setPristine(true);
-        $scope.limpiarEdicion();
+        $scope.limpiarEdicion(false);
 	}
 
 	$scope.popupnpFechainicio = {
@@ -1909,14 +1910,18 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.aprobacionAjustado = false;
 	}
 
-	$scope.recargarPresupuestoAjustadoP = function() {
+	$scope.recargarPresupuestoAjustadoP = function(recargar = true) {
 		$scope.aprobacionPlanificacion = true;
-		$scope.editarAprobarPlanificacion();
+		if (recargar) {
+			$scope.editarAprobarPlanificacion();
+		}
 	}
 
-	$scope.recargarPresupuestoAjustadoA = function() {
+	$scope.recargarPresupuestoAjustadoA = function(recargar = true) {
 		$scope.aprobacionAjustado = true;
-		$scope.editarAprobarAjustada();
+		if (recargar) {
+			$scope.editarAprobarAjustada();
+		}
 	}
 
 	$scope.aprobarPlanificacion = function(obj) {
@@ -1935,6 +1940,25 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
 			if (resp.estado) {
 				obj.npestadopresupuesto = "Aprobado";
+			}
+		});
+	}
+
+	$scope.denegarPlanificacion = function(obj) {
+		if (obj.npestadopresupuesto != "Solicitado") {
+			SweetAlert.swal("Planificacion!", "Solo se puede denegar si esta en estado solicitado.", "error");
+			return;
+		}
+		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			obj.id,
+			$rootScope.ejefiscal,
+			obj.npacitividadunidad,
+			"P",
+			"DE"
+		).then(function(resp){
+			SweetAlert.swal("Denegar Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			if (resp.estado) {
+				obj.npestadopresupuesto = "Planificado";
 			}
 		});
 	}
@@ -1978,7 +2002,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.aprobarAjustado = function(obj) {
 		if (obj.npestadopresupajus != "Solicitado") {
-			SweetAlert.swal("Planificacion!", "Solo se puede aprobar si esta en estado solicitado.", "error");
+			SweetAlert.swal("Ajustado!", "Solo se puede aprobar si esta en estado solicitado.", "error");
 			return;
 		}
 		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
@@ -1989,9 +2013,29 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			"AP"
 		).then(function(resp){
 			//$scope.detallesPA = resp.json.resultadoaprobacion;
-			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			SweetAlert.swal("Aprobacion Ajustado!", resp.mensajes.msg, resp.mensajes.type);
 			if (resp.estado) {
 				obj.npestadopresupajus = "Aprobado";
+			}
+		});
+	}
+
+	$scope.denegarAjustado = function(obj) {
+		if (obj.npestadopresupajus != "Solicitado") {
+			SweetAlert.swal("Ajustado!", "Solo se puede aprobar si esta en estado solicitado.", "error");
+			return;
+		}
+		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
+			obj.id,
+			$rootScope.ejefiscal,
+			obj.npacitividadunidad,
+			"A",
+			"DE"
+		).then(function(resp){
+			//$scope.detallesPA = resp.json.resultadoaprobacion;
+			SweetAlert.swal("Denegar Ajustado!", resp.mensajes.msg, resp.mensajes.type);
+			if (resp.estado) {
+				obj.npestadopresupajus = "Planificado";
 			}
 		});
 	}
@@ -2019,7 +2063,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			"A",
 			"SO"
 		).then(function(resp){
-			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			SweetAlert.swal("Aprobacion Ajustada!", resp.mensajes.msg, resp.mensajes.type);
 			if (resp.json.resultadoaprobacion.length != 0) {
 				$scope.detallesPA = resp.json.resultadoaprobacion;
 				if ($scope.detallesPA == []) {

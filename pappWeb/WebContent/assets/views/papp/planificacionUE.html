@@ -98,6 +98,18 @@
 										<i class="fa ti-signal"></i>
 								</a></td>
 								<td><a class="btn btn-sm btn-primary"
+									style="background-color: #B30000 !important"
+									uib-tooltip="Dedenar Planificaci&oacute;n"
+									ng-click="denegarPlanificacion(obj);"> <i
+										class="fa ti-marker-alt"></i>
+								</a></td>
+								<td><a class="btn btn-sm btn-primary"
+									style="background-color: #B30000 !important"
+									uib-tooltip="Dedenar Ajustada"
+									ng-click="denegarAjustado(obj);">
+										<i class="fa ti-signal"></i>
+								</a></td>
+								<td><a class="btn btn-sm btn-primary"
 									style="background-color: #00B300 !important"
 									uib-tooltip="Matriz Presupuestos"
 									ng-click="editarMatrizPresupuestoAP(obj);"> <i
@@ -496,14 +508,15 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormActividad.npMetaPlanificada.$dirty && FormActividad.npMetaPlanificada.$invalid, 'has-success':FormActividad.npMetaPlanificada.$valid}">
-													<label class="control-label"> Meta Planificada <span
-														class="symbol required"></span>
+													<label class="control-label">
+														Meta Planificada
+														<span class="symbol required"></span>
 													</label>
 													<input type="text"
 														placeholder="Escriba un meta planificada"
 														class="form-control" name="npMetaPlanificada"
 														ng-model="detalles[mPlanificadaID].cantidad" required
-														ng-disabled="!editarP" ng-change="modificarMetaPlanificada(true);">
+														ng-disabled="!editarP || !editarUnidad" ng-change="modificarMetaPlanificada(true);">
 													<span
 														class="error text-small block"
 														ng-if="FormActividad.npMetaPlanificada.$dirty && FormActividad.npMetaPlanificada.$invalid">
@@ -515,8 +528,9 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormActividad.npMetaPlanificadaDescripcion.$dirty && FormActividad.npMetaPlanificadaDescripcion.$invalid, 'has-success':FormActividad.npMetaPlanificadaDescripcion.$valid}">
-													<label class="control-label"> Meta Planificada
-														Descripci&oacute;n <span class="symbol required"></span>
+													<label class="control-label">
+														Meta Planificada Descripci&oacute;n
+														<span class="symbol required"></span>
 													</label>
 													<textarea name="npMetaPlanificadaDescripcion" rows="5"
 														style="width: 100%"
@@ -533,14 +547,15 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormActividad.npMetaAjustada.$dirty && FormActividad.npMetaAjustada.$invalid, 'has-success':FormActividad.npMetaAjustada.$valid}">
-													<label class="control-label"> Meta Ajustada <span
-														class="symbol required"></span>
+													<label class="control-label">
+														Meta Ajustada
+														<span class="symbol required"></span>
 													</label>
 													<input type="text"
 														placeholder="Escriba un meta ajustada (no llega en el servicio)"
 														class="form-control" name="npMetaAjustada"
 														ng-model="detalles[mAjustadaID].cantidad"
-														ng-disabled="!editarA" ng-change="modificarMetaAjustada(true);">
+														ng-disabled="!editarA || !editarUnidad" ng-change="modificarMetaAjustada(true);">
 													<span
 														class="error text-small block"
 														ng-if="FormActividad.npMetaAjustada.$dirty && FormActividad.npMetaAjustada.$invalid">
@@ -552,8 +567,9 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormActividad.npMetaAjustadaDescripcion.$dirty && FormActividad.npMetaAjustadaDescripcion.$invalid, 'has-success':FormActividad.npMetaAjustadaDescripcion.$valid}">
-													<label class="control-label"> Meta Ajustada
-														Descripci&oacute;n <span class="symbol required"></span>
+													<label class="control-label">
+														Meta Ajustada Descripci&oacute;n
+														<span class="symbol required"></span>
 													</label>
 													<textarea name="npMetaAjustadaDescripcion" rows="5"
 														style="width: 100%"
