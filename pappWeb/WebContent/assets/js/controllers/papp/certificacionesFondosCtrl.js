@@ -419,7 +419,6 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
 			$scope.objeto.certificacionunidadid = obj.id;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;

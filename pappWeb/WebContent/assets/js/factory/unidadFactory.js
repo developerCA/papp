@@ -36,7 +36,8 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			var URL = "planificacion/consultar/planificacion/" +
 				"pagina=" + pagina +
 				"&filas=10" +
-				"&ejerciciofiscal=" + idEjerciciofiscal;
+				"&ejerciciofiscal=" + idEjerciciofiscal +
+				"&estadoaprobado=1";
 
 			if(nombre!=null && nombre != "") URL += "&nombre=" + nombre;	
 			if(codigo!=null && codigo != "") URL += "&codigopresup=" + codigo;	

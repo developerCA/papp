@@ -578,7 +578,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
-				"nivelactividad=" + (node.nodePadre !== undefined? node.nodePadre.nodePadre.id: node.padreID)
+				"nivelactividad=" + (node.nodePadre !== undefined? node.nodePadre.id: node.padreID)
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
@@ -963,7 +963,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
 			$scope.objeto.metaumid = obj.id;
 			$scope.objeto.npcodigounidad = obj.codigo;
 			$scope.objeto.npnombreunidad = obj.nombre;
