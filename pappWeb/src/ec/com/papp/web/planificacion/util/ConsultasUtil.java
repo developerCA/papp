@@ -649,7 +649,6 @@ public class ConsultasUtil {
 				unidadTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estadoaprobado")!=null && !parameters.get("estadoaprobado").equals(""))
 				unidadTO.setNpajusaprobado(Integer.valueOf(parameters.get("estadoaprobado")));
-			//unidadTO.setNpajusaprobado(1);
 			Collection<UnidadTO> resultado=UtilSession.planificacionServicio.transConsultaplanificacion(unidadTO, Long.valueOf(parameters.get("ejerciciofiscal")), principal.getName());
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", (Integer.valueOf(resultado.size())).toString());
@@ -787,22 +786,18 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static Boolean aprobacionplanificacion(Long unidad, Long ejerciciofiscal, String tipo, Long nivelactividadunidadid, Long npactividadid,JSONObject jsonObject) throws MyException {
+	public static Collection<Map<String, String>> aprobacionplanificacion(Long unidad, Long ejerciciofiscal, String tipo, Long nivelactividadunidadid, Long npactividadid,JSONObject jsonObject) throws MyException {
 		Collection<Map<String, String>> resultado=new ArrayList<>();
 		try{
 			if(tipo.equals("P"))
-				resultado=UtilSession.planificacionServicio.transValidaaprobacion(unidad, ejerciciofiscal, true, npactividadid);
+				resultado=UtilSession.planificacionServicio.transValidaaprobacion(unidad, ejerciciofiscal, true, npactividadid,nivelactividadunidadid);
 			else
-				resultado=UtilSession.planificacionServicio.transValidaaprobacion(unidad, ejerciciofiscal,false, npactividadid);
-		log.println("resultados "+resultado.size());
+				resultado=UtilSession.planificacionServicio.transValidaaprobacion(unidad, ejerciciofiscal,false, npactividadid,nivelactividadunidadid);
+		log.println("resultados%% "+resultado.size());
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
 		}
-		jsonObject.put("resultadoaprobacion", (JSONArray)JSONSerializer.toJSON(resultado));
-		if(resultado.size()==0)
-			return false;
-		else
-			return true;
+		return resultado;
 	}
 }

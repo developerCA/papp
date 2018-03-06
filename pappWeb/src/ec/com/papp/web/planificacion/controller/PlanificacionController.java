@@ -650,11 +650,14 @@ public class PlanificacionController {
 					log.println("tareaunidadTOs: " + resultado.size());
 					if(resultado.size()>0){
 						for(NivelactividadTO nivelactividadTO2:resultado) {
-							if((tareaunidadTO.getId()!=null && tareaunidadTO.getId().longValue()!=0) && nivelactividadTO2.getId().longValue()!=tareaunidadTO.getId().longValue() && nivelactividadTO2.getNpcodigo().equals(tareaunidadTO.getCodigo())) {
+							log.println("nivela actividad2 "+ nivelactividadTO2.getTablarelacionid() + " - " + tareaunidadTO.getId());
+							log.println("nivel codigo: " + nivelactividadTO2.getNpcodigo() + " - " + tareaunidadTO.getCodigo());
+							if((tareaunidadTO.getId()!=null && tareaunidadTO.getId().longValue()!=0) && nivelactividadTO2.getTablarelacionid().longValue()!=tareaunidadTO.getId().longValue() && nivelactividadTO2.getNpcodigo().equals(tareaunidadTO.getCodigo())) {
+								log.println("entro por aqui");
 								grabar=false;
 								break;
 							}
-							else if((tareaunidadTO.getId()==null || (tareaunidadTO.getId()!=null && nivelactividadTO2.getId().longValue()!=tareaunidadTO.getId().longValue())) && tareaunidadTO.getCodigo()!=null && nivelactividadTO2.getNpcodigo().equals(tareaunidadTO.getCodigo())) {
+							else if((tareaunidadTO.getId()==null || (tareaunidadTO.getId()!=null && nivelactividadTO2.getTablarelacionid().longValue()!=tareaunidadTO.getId().longValue())) && tareaunidadTO.getCodigo()!=null && nivelactividadTO2.getNpcodigo().equals(tareaunidadTO.getCodigo())) {
 								grabar=false;
 								break;
 							}
@@ -725,11 +728,13 @@ public class PlanificacionController {
 					log.println("resultado: " + resultado.size());
 					if(resultado.size()>0){
 						for(NivelactividadTO nivelactividadTO2:resultado) {
-							if((subtareaunidadTO.getId()!=null && subtareaunidadTO.getId().longValue()!=0) && nivelactividadTO2.getId().longValue()!=subtareaunidadTO.getId().longValue() && nivelactividadTO2.getNpcodigo().equals(subtareaunidadTO.getCodigo())) {
+							log.println("nivela actividad.. "+ nivelactividadTO2.getId() + " - " + subtareaunidadTO.getId());
+							log.println("nivel codigo tarea: " + nivelactividadTO2.getNpcodigo() + " - " + subtareaunidadTO.getCodigo());
+							if((subtareaunidadTO.getId()!=null && subtareaunidadTO.getId().longValue()!=0) && nivelactividadTO2.getTablarelacionid().longValue()!=subtareaunidadTO.getId().longValue() && nivelactividadTO2.getNpcodigo().equals(subtareaunidadTO.getCodigo())) {
 								grabar=false;
 								break;
 							}
-							else if((subtareaunidadTO.getId()==null || (subtareaunidadTO.getId()!=null && nivelactividadTO2.getId().longValue()!=subtareaunidadTO.getId().longValue())) && subtareaunidadTO.getCodigo()!=null && nivelactividadTO2.getNpcodigo().equals(subtareaunidadTO.getCodigo())) {
+							else if((subtareaunidadTO.getId()==null || (subtareaunidadTO.getId()!=null && nivelactividadTO2.getTablarelacionid().longValue()!=subtareaunidadTO.getId().longValue())) && subtareaunidadTO.getCodigo()!=null && nivelactividadTO2.getNpcodigo().equals(subtareaunidadTO.getCodigo())) {
 								grabar=false;
 								break;
 							}
@@ -1849,6 +1854,7 @@ public class PlanificacionController {
 //				actividadunidadTO.setActividad(actividadTO);
 //				Collection<ActividadunidadTO> actividadunidadTOs=UtilSession.planificacionServicio.transObtenerActividadunidad(actividadunidadTO);
 				log.println("actividades: " + nivelactividadTOs.size());
+				Collection<Map<String, String>> resultadofinal=new ArrayList<>();
 				for(NivelactividadTO nivelactividadTO2:nivelactividadTOs) {
 					log.println("activiad.. "+ nivelactividadTO2.getTablarelacionid());
 					ActividadunidadTO actividadunidadTO2=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(nivelactividadTO2.getTablarelacionid(), Long.valueOf(parameters.get("unidad"))));
@@ -1856,12 +1862,16 @@ public class PlanificacionController {
 					log.println("actividad id " + actividadunidadTO2.getId().getId());
 					//1.Si se va a solicitar
 					if(parameters.get("accion").equals("SO")) {
-						Boolean mensaje=ConsultasUtil.aprobacionplanificacion(Long.valueOf(parameters.get("unidad")), Long.valueOf(parameters.get("nivelactividadejerfiscalid")), parameters.get("tipo"), nivelactividadTO2.getId(), actividadunidadTO2.getId().getId(), jsonObject);
-						if(mensaje){
-							mensajes.setMsg("No se puede solicitar existen observaciones");
-							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-						}
-						else{
+						Collection<Map<String, String>> resultado=ConsultasUtil.aprobacionplanificacion(Long.valueOf(parameters.get("unidad")), Long.valueOf(parameters.get("nivelactividadejerfiscalid")), parameters.get("tipo"), nivelactividadTO2.getId(), actividadunidadTO2.getId().getId(), jsonObject);
+						if(resultado.size()>0)
+							resultadofinal.addAll(resultado);
+					}
+				}
+				if(resultadofinal.size()==0) {
+					for(NivelactividadTO nivelactividadTO2:nivelactividadTOs) {
+						ActividadunidadTO actividadunidadTO2=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(nivelactividadTO2.getTablarelacionid(), Long.valueOf(parameters.get("unidad"))));
+						//1.Si se va a solicitar
+						if(parameters.get("accion").equals("SO")) {
 							//va aprobar la actividadunidad
 							if(parameters.get("tipo").equals("P"))
 								actividadunidadTO2.setPresupaprobado(3);
@@ -1871,28 +1881,34 @@ public class PlanificacionController {
 							mensajes.setMsg("La solicitud fue enviada con exito");
 							mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 						}
+						else if(parameters.get("accion").equals("AP")) {
+							//va aprobar la actividadunidad
+							if(parameters.get("tipo").equals("P"))
+								actividadunidadTO2.setPresupaprobado(1);
+							else
+								actividadunidadTO2.setAjusaprobado(1);
+							UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO2);
+							mensajes.setMsg("Se aprobo con exito");
+							mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+						}
+						else if(parameters.get("accion").equals("DE")) {
+							//va aprobar la actividadunidad
+							if(parameters.get("tipo").equals("P"))
+								actividadunidadTO2.setPresupaprobado(0);
+							else
+								actividadunidadTO2.setAjusaprobado(0);
+							UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO2);
+							mensajes.setMsg("Se regreso la unidad para una nueva revision");
+							mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+						}
 					}
-					else if(parameters.get("accion").equals("AP")) {
-						//va aprobar la actividadunidad
-						if(parameters.get("tipo").equals("P"))
-							actividadunidadTO2.setPresupaprobado(1);
-						else
-							actividadunidadTO2.setAjusaprobado(1);
-						UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO2);
-						mensajes.setMsg("Se aprobo con exito");
-						mensajes.setType(MensajesWeb.getString("mensaje.exito"));
-					}
-					else if(parameters.get("accion").equals("DE")) {
-						//va aprobar la actividadunidad
-						if(parameters.get("tipo").equals("P"))
-							actividadunidadTO2.setPresupaprobado(0);
-						else
-							actividadunidadTO2.setAjusaprobado(0);
-						UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO2);
-						mensajes.setMsg("Se regreso la unidad para una nueva revision");
-						mensajes.setType(MensajesWeb.getString("mensaje.exito"));
-					}
-				}	
+
+				}
+				jsonObject.put("resultadoaprobacion", (JSONArray)JSONSerializer.toJSON(resultadofinal));
+				if(resultadofinal.size()>0) {
+					mensajes.setMsg("No se puede solicitar existen observaciones");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
 			}
 
 			//Matriz de presupuestos
