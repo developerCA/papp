@@ -721,7 +721,7 @@ public class PlanificacionController {
 					NivelactividadTO nivelactividadTO=new  NivelactividadTO();
 					nivelactividadTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 					nivelactividadTO.setNivelactividadpadreid(subtareaunidadTO.getPadre());
-					nivelactividadTO.setTipo("SA");
+					nivelactividadTO.setTipo("ST");
 					nivelactividadTO.setNivelactividadunidadid(subtareaunidadTO.getSubtareaunidadunidadid());
 					nivelactividadTO.setNivelactividadejerfiscalid(subtareaunidadTO.getSubtareaunidadejerfiscalid());
 					Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
@@ -801,28 +801,41 @@ public class PlanificacionController {
 				ItemunidadTO itemunidadTO = gson.fromJson(new StringReader(objeto), ItemunidadTO.class);
 				accion = (itemunidadTO.getId()==null)?"crear":"actualizar";
 				//Verifico que no exista ya creado otro subitem unidad del mismo subitem en este nivel
-				NivelactividadTO nivelactividadTO=new NivelactividadTO();
-				nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
+				NivelactividadTO nivelactividadTO=new  NivelactividadTO();
+				nivelactividadTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 				nivelactividadTO.setNivelactividadpadreid(itemunidadTO.getPadre());
-				log.println("eje: "+ itemunidadTO.getItemunidadejerciciofiscalid()+" padre " + itemunidadTO.getPadre());
-				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
+				nivelactividadTO.setTipo("IT");
+				nivelactividadTO.setNivelactividadunidadid(itemunidadTO.getItemunidadunidadid());
+				nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
+				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
+//								
+//				NivelactividadTO nivelactividadTO=new NivelactividadTO();
+//				nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
+//				nivelactividadTO.setNivelactividadpadreid(itemunidadTO.getPadre());
+//				log.println("eje: "+ itemunidadTO.getItemunidadejerciciofiscalid()+" padre " + itemunidadTO.getPadre());
+//				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
 				log.println("niveles: " + resultado.size());
 				boolean existeiten=false;
 				log.println("codigo del item "+itemunidadTO.getNpcodigoitem());
 				for(NivelactividadTO nivelactividadTO2:resultado){
-//					log.println("descripcion " + nivelactividadTO2.getDescripcionexten());
-//					log.println("tablarelacion id " + nivelactividadTO2.getTablarelacionid());
-//					log.println("id del subitem " + subitemunidadTO.getId());
+					log.println("obra " + nivelactividadTO2.getNpcodigoobra());
+					log.println("fuente " + nivelactividadTO2.getNpcodigofuente());
+					log.println("organismo " + nivelactividadTO2.getNpcodigoorganismo());
+					log.println("canto " + nivelactividadTO2.getNpcodigocanton());
 					if(nivelactividadTO2.getDescripcionexten()!=null) {
 						String [] descripcion=nivelactividadTO2.getDescripcionexten().split("-");
 //						log.println("descripcion::: " + descripcion[0]);
-						if((itemunidadTO.getId()==null || itemunidadTO.getId().longValue()==0) && (descripcion[0].trim().equals(itemunidadTO.getNpcodigoitem()))){
+						if((itemunidadTO.getId()==null || itemunidadTO.getId().longValue()==0) && (nivelactividadTO2.getNpcodigo().equals(itemunidadTO.getNpcodigoitem())
+								&& nivelactividadTO2.getNpcodigoobra().equals(itemunidadTO.getNpcodigoobra()) && nivelactividadTO2.getNpcodigofuente().equals(itemunidadTO.getNpcodigofuente())
+								&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton()))){
 							existeiten=true;
 							break;
 						}
 						else if((itemunidadTO.getId()!=null && itemunidadTO.getId().longValue()!=0) 
 								&& (itemunidadTO.getId().longValue()!=nivelactividadTO2.getTablarelacionid().longValue())
-								&& (descripcion[0].trim().equals(itemunidadTO.getNpcodigoitem()))){
+								&& (nivelactividadTO2.getNpcodigo().equals(itemunidadTO.getNpcodigoitem())
+										&& nivelactividadTO2.getNpcodigoobra().equals(itemunidadTO.getNpcodigoobra()) && nivelactividadTO2.getNpcodigofuente().equals(itemunidadTO.getNpcodigofuente())
+										&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton()))){
 							existeiten=true;
 							break;
 						}
