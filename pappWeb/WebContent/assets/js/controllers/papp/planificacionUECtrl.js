@@ -545,7 +545,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.nodeTipo,
 				node.tablarelacionid,
 				"unidadid=" + node.npIdunidad +
-				"&nivelactividadid=" + node.padreID
+				"&nivelactividadid=" + (node.nodePadre !== undefined? node.nodePadre.id: node.padreID)
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
@@ -564,7 +564,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
-				"nivelactividad=" + node.nodePadre.id
+				"nivelactividad=" + (node.nodePadre !== undefined? node.nodePadre.id: node.padreID)
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
@@ -602,7 +602,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
-				"nivelactividad=" + node.padreID
+				"nivelactividad=" + (node.nodePadre !== undefined? node.nodePadre.id: node.padreID)
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
@@ -1970,6 +1970,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		}
 		$scope.aprobacionPlanificacion = true;
 		$scope.objetoPA = obj;
+		$scope.planificacionUE = obj;
 	}
 
 	$scope.editarAprobarPlanificacion=function(){
@@ -2051,6 +2052,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		}
 		$scope.aprobacionAjustado = true;
 		$scope.objetoPA = obj;
+		$scope.planificacionUE = obj;
 	}
 
 	$scope.editarAprobarAjustada=function(){
