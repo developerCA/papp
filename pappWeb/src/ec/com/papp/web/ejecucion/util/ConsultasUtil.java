@@ -744,7 +744,7 @@ public class ConsultasUtil {
 			for(SubitemunidadacumuladorTO subitemunidadacumuladorTO2:subitemunidadacumuladorTOs) {
 				if(subitemunidadacumuladorTO2.getTipo().equals("A") && !ajustado) {
 					ajustado=true;
-					total=total+subitemunidadacumuladorTO2.getValor().doubleValue();
+					total=total+subitemunidadacumuladorTO2.getTotal().doubleValue();
 				}
 				else if(subitemunidadacumuladorTO2.getTipo().equals("R"))
 					total=total+subitemunidadacumuladorTO2.getTotal().doubleValue();

@@ -417,7 +417,7 @@ public class AdministracionController {
 				consecutivoTO3.setNombre(consecutivoTO.getNombre());
 				consecutivoTO3.setConsecutivoejerfiscalid(consecutivoTO.getConsecutivoejerfiscalid());
 				if(consecutivoTO.getId()==null)
-					consecutivoTO.setUltimousado(0.0);
+					consecutivoTO.setUltimousado(0);
 				Collection<ConsecutivoTO> consecutivoTOs=UtilSession.adminsitracionServicio.transObtenerConsecutivo(consecutivoTO3);
 				boolean grabar=true;
 				if(consecutivoTOs.size()>0){

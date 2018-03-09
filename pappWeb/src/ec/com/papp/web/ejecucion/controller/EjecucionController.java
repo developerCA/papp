@@ -806,9 +806,18 @@ public class EjecucionController {
 				double ordenesnoaprob=0.0;
 				for(OrdendevengoTO ordendevengoTO:ordendevengoTOs)
 					ordenesnoaprob=ordenesnoaprob+ordendevengoTO.getValortotal();
+				//4. Consluto las ordenes de devengo aprobada
+				OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
+				ordendevengoTO.setOrdendevengoordengastoid(id2);
+				ordendevengoTO.setEstado("AP");
+				Collection<OrdendevengoTO> aprobadas=UtilSession.planificacionServicio.transObtenerOrdendevengo(ordendevengoTO);
+				double ordenesaprobadas=0.0;
+				for(OrdendevengoTO aprobada:aprobadas)
+					ordenesaprobadas=ordenesaprobadas+aprobada.getValortotal();
 				Map<String, Double> saldodisponible=new HashMap<>();
 				saldodisponible.put("saldo", saldo);
 				saldodisponible.put("noaprobadas", ordenesnoaprob);
+				saldodisponible.put("aprobadas", ordenesaprobadas);
 				jsonObject.put("datoslineaordend", (JSONObject)JSONSerializer.toJSON(saldodisponible));
 			}
 			//Reforma
@@ -932,83 +941,103 @@ public class EjecucionController {
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
-			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
-				certificacionTO.setEstado(tipo);
-				if(parameters.get("cur")!=null)
-					certificacionTO.setCur(parameters.get("cur"));
-				if(tipo.equals("EL")) {
-					if(parameters.get("observacion")!=null)
-						certificacionTO.setMotivoeliminacion(parameters.get("observacion"));
-				}
-				else if(tipo.equals("NE")) {
-					if(parameters.get("observacion")!=null)
-						certificacionTO.setMotivonegacion(parameters.get("observacion"));
-				}
-				UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
-				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
-				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
-				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
-	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
-			}
-			//Verifico que no tenga atada una orden de gasto
-			else if(tipo.equals("LT")) {
-				certificacionTO.setEstado(tipo);
-				OrdengastoTO ordengastoTO=new OrdengastoTO();
-				ordengastoTO.setOrdengastocertificacionid(id);
-				Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
-				if(ordengastoTOs.size()>0) {
-					boolean existeorden=false;
-					for(OrdengastoTO ordengastoTO2:ordengastoTOs) {
-						if(ordengastoTO2.getEstado().equals("AP") || ordengastoTO2.getEstado().equals("SO") || ordengastoTO2.getEstado().equals("RE")) {
-							existeorden=true;
-						}
-					}
-					if(existeorden) {
-						mensajes.setMsg("No se puede liquidar totalmente a una Certificación que esté asociada a una Orden de gasto");
-						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-						respuesta.setEstado(false);
-					}
-					else {
-						if(parameters.get("observacion")!=null)
-							certificacionTO.setMotivoliquidacion(parameters.get("observacion"));
-						UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
-					}
-				}
-				else {
-					if(parameters.get("observacion")!=null)
-						certificacionTO.setMotivoliquidacion(parameters.get("observacion"));
-					UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
-				}
-			}
-			else if(tipo.equals("LP")) {
-				certificacionTO.setEstado(tipo);
-				OrdengastoTO ordengastoTO=new OrdengastoTO();
-				ordengastoTO.setOrdengastocertificacionid(id);
-				Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
-				if(ordengastoTOs.size()==0) {
-					mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto");
+			boolean continuar=true;
+			if(tipo.equals("SO")) {
+				//obtengo las lineas
+				CertificacionlineaTO certificacionlineaTO=new CertificacionlineaTO();
+				certificacionlineaTO.getId().setId(certificacionTO.getId());
+				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtenerCertificacionlinea(certificacionlineaTO);
+				if(certificacionlineaTOs.size()==0) {
+					continuar=false;
+					mensajes.setMsg("Debe existir al menos una linea creada");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-					respuesta.setEstado(false);
 				}
-				else {
-					double valorordenes=0.0;
-					boolean aprobada=false;
-					for(OrdengastoTO ordengastoTO2:ordengastoTOs) {
-						if(ordengastoTO2.getEstado().equals("AP")) {
-							valorordenes=valorordenes+ordengastoTO2.getValortotal();
-							aprobada=true;
+			}
+			if(continuar) {
+				if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
+					certificacionTO.setEstado(tipo);
+					if(parameters.get("cur")!=null)
+						certificacionTO.setCur(parameters.get("cur"));
+					if(tipo.equals("EL")) {
+						if(parameters.get("observacion")!=null)
+							certificacionTO.setMotivoeliminacion(parameters.get("observacion"));
+					}
+					else if(tipo.equals("NE")) {
+						if(parameters.get("observacion")!=null)
+							certificacionTO.setMotivonegacion(parameters.get("observacion"));
+					}
+					UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+					//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+					mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+		//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+				}
+				//Verifico que no tenga atada una orden de gasto
+				else if(tipo.equals("LT")) {
+					certificacionTO.setEstado(tipo);
+					OrdengastoTO ordengastoTO=new OrdengastoTO();
+					ordengastoTO.setOrdengastocertificacionid(id);
+					Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
+					if(ordengastoTOs.size()>0) {
+						boolean existeorden=false;
+						for(OrdengastoTO ordengastoTO2:ordengastoTOs) {
+							if(ordengastoTO2.getEstado().equals("AP") || ordengastoTO2.getEstado().equals("SO") || ordengastoTO2.getEstado().equals("RE")) {
+								existeorden=true;
+							}
+						}
+						if(existeorden) {
+							mensajes.setMsg("No se puede liquidar totalmente a una Certificación que esté asociada a una Orden de gasto");
+							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+							respuesta.setEstado(false);
+						}
+						else {
+							if(parameters.get("observacion")!=null)
+								certificacionTO.setMotivoliquidacion(parameters.get("observacion"));
+							UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+							mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+							mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 						}
 					}
-					if(!aprobada) {
-						mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto aprobada");
+					else {
+						if(parameters.get("observacion")!=null)
+							certificacionTO.setMotivoliquidacion(parameters.get("observacion"));
+						UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+						mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+						mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+					}
+				}
+				else if(tipo.equals("LP")) {
+					certificacionTO.setEstado(tipo);
+					OrdengastoTO ordengastoTO=new OrdengastoTO();
+					ordengastoTO.setOrdengastocertificacionid(id);
+					Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
+					if(ordengastoTOs.size()==0) {
+						mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto");
 						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 						respuesta.setEstado(false);
 					}
 					else {
-						certificacionTO.setNptotalordenes(valorordenes);
-						if(parameters.get("observacion")!=null)
-							certificacionTO.setMotivoliquidacion(parameters.get("observacion"));
-						UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+						double valorordenes=0.0;
+						boolean aprobada=false;
+						for(OrdengastoTO ordengastoTO2:ordengastoTOs) {
+							if(ordengastoTO2.getEstado().equals("AP")) {
+								valorordenes=valorordenes+ordengastoTO2.getValortotal();
+								aprobada=true;
+							}
+						}
+						if(!aprobada) {
+							mensajes.setMsg("No puede Liquidar manualmente una Certificacion que no este asociada a una Orden de Gasto aprobada");
+							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+							respuesta.setEstado(false);
+						}
+						else {
+							certificacionTO.setNptotalordenes(valorordenes);
+							if(parameters.get("observacion")!=null)
+								certificacionTO.setMotivoliquidacion(parameters.get("observacion"));
+							UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
+							mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+							mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+						}
 					}
 				}
 			}
