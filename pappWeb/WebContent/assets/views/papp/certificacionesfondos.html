@@ -558,10 +558,10 @@
 								
 								<div class="form-group has-success">
 								    <label class="control-label">
-								        N&uacute;mero documento
+								        Proceso SERCOP
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" placeholder="Escriba un n&uacute;mero documento"
+								    <input type="text" placeholder="Escriba un n&uacute;mero documento" required
 								        class="form-control" name="numerodocumento" ng-model="objeto.numerodocumento"
 								        ng-minlength="1" ng-minlength="100" ng-disabled="!nuevoar && noeditar">
 								</div>
@@ -656,7 +656,7 @@
 													<tr>
 														<th></th>
 														<th>Descripci&oacute;n</th>
-														<th>Valor Inicial</th>
+														<th>Saldo</th>
 														<th>Valor Certificaci&oacute;n</th>
 														<th>Fuente Financiamiento</th>
 													</tr>
@@ -672,7 +672,7 @@
 															</a>
 														</td>
 														<td>
-															{{obj.npSubitem}}
+															{{ obj.npSubtiemcodigo }}: {{ obj.npSubitem }}
 														</td>
 														<td style="text-align:right;">
 															{{ obj.npvalorinicial | currency }}

@@ -282,7 +282,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			//console.log(obj);
 			$scope.objeto.ordengastocertificacionid = obj.certificacionid;
 			$scope.objeto.npcertificacioncodigo = obj.codigo;
-			$scope.objeto.valortotal = obj.valortotal;
+			//$scope.objeto.valortotal = obj.valortotal;
 		}, function() {
 		});
 	};
