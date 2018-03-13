@@ -776,15 +776,16 @@ public class EjecucionController {
 				//Obtengo el valor ajustado del subitme
 				//traigo los datos de actividadunidadacumulador
 				Map<String, Double> saldodisponible=new HashMap<>();
-				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
-				subitemunidadacumuladorTO.getId().setId(id);
-				subitemunidadacumuladorTO.setTipo("A");
-				subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
-				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
-				if(subitemunidadacumuladorTOs.size()>0) {
-					subitemunidadacumuladorTO=(SubitemunidadacumuladorTO)subitemunidadacumuladorTOs.iterator().next();
-					saldodisponible.put("valorajustado", subitemunidadacumuladorTO.getTotal());
-				}
+//				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
+//				subitemunidadacumuladorTO.getId().setId(id);
+//				subitemunidadacumuladorTO.setTipo("A");
+//				subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
+//				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
+//				if(subitemunidadacumuladorTOs.size()>0) {
+//					subitemunidadacumuladorTO=(SubitemunidadacumuladorTO)subitemunidadacumuladorTOs.iterator().next();
+//					saldodisponible.put("valorajustado", subitemunidadacumuladorTO.getTotal());
+//				}
+				saldodisponible.put("valorajustado", total);
 				saldodisponible.put("saldo", saldo);
 				jsonObject.put("valordisponiblesi", (JSONObject)JSONSerializer.toJSON(saldodisponible));
 			}
