@@ -1345,7 +1345,7 @@ public class EjecucionController {
 	} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error grabar");
-			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+			mensajes.setMsg("Error al realizar la consulta");
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
 			//throw new MyException(e);
 		}
