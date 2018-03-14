@@ -705,6 +705,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Orden de Reversion'
         }
+    }).state('app.reformas', {
+        url: "/reformas",
+        templateUrl: "assets/views/papp/reformas.html",
+        resolve: loadSequence(
+        		'ngTable','ReformasCtrl','ReformasFactory'
+		),
+        title: 'Reformas',
+        ncyBreadcrumb: {
+            label: 'Reformas'
+        }
     }).state('app.contrato', {
         url: "/contrato",
         templateUrl: "assets/views/papp/contrato.html",
