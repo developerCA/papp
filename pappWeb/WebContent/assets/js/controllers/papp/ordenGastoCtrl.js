@@ -166,7 +166,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 					return "Aprobar";
 				},
 				subtitulo : function() {
-					return "Numero de CUR";
+					return "CUR";
 				}
 			}
 		});

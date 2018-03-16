@@ -408,7 +408,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.ordenrversionogastoid = obj.ordengastoid;
+			$scope.objeto.ordenreversionogastoid = obj.ordengastoid;
 			$scope.objeto.npordengasto = obj.codigo;
 			$scope.objeto.npordengastovalor = obj.valortotal;
 			//$scope.objeto.valortotal = obj.ordenvalortotal;
