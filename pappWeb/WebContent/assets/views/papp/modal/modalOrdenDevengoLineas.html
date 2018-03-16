@@ -128,7 +128,7 @@
 				        class="form-control" name="npdevengosnoapro" ng-model="objeto.npdevengosnoapro"
 				        ng-disabled="true">
 				</div>
-				
+<!--
 				<div class="form-group">
 				    <label class="control-label">
 				        Saldo por Devengar
@@ -158,7 +158,7 @@
 				        class="form-control" name="amortsaldo" ng-model="objeto.amortsaldo"
 				        ng-disabled="true">
 				</div>
-				
+-->
 				<div class="form-group">
 				    <label class="control-label">
 				        Saldo
@@ -176,7 +176,7 @@
 				    <div class="input-group col-md-12">
 				        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor"
 				            class="form-control" name="valor" ng-model="objeto.valor"
-				            required ng-max="objeto.npvalor">
+				            required ng-max="objeto.npvalor" ng-disabled="!editarValor">
 				    </div>
 				    <span class="error text-small block"
 				        ng-if="Form.valor.$dirty && Form.valor.$invalid">

@@ -1,10 +1,11 @@
 'use strict';
 
-app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ordenDevengoID","unidadID","editar","ordenGastoID","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
-	function($scope,$rootScope,ordenDevengoID,unidadID,editar,ordenGastoID,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
+app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ordenDevengoID","unidadID","editar","ordenGastoID","ordenGastoValor","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
+	function($scope,$rootScope,ordenDevengoID,unidadID,editar,ordenGastoID,ordenGastoValor,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
 
 	$scope.noeditar=false;
 	$scope.init=function(){
+		$scope.editarValor = (ordenGastoValor == 0? true: false);
 		if (editar == null) {
 			//nuevo
 			ordenDevengoLineasFactory.nuevoLinea(
@@ -12,6 +13,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 			).then(function(resp){
 				//console.log(resp.json.ordendevengolinea);
 	        	$scope.objeto = resp.json.ordendevengolinea;
+				$scope.objeto.valor = ordenGastoValor;
 	        	$scope.noeditar=false;
 	        	$scope.cambioSubItems();
 			})
@@ -58,8 +60,8 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 		$scope.objeto.nptotalordengasto = $scope.si[i].npvalor;
 		$scope.objeto.npdevengado = $scope.si[i].npvalor;
 		ordenDevengoLineasFactory.obtenerOtros(
-			$scope.si[i].npSubitemunidadid, //$scope.si[i].nivelactid,
-			ordenGastoID
+			$scope.si[i].npSubitemunidadid,
+			$scope.si[i].nivelactid //, ordenGastoID
 		).then(function(resp){
 			//console.log(resp);
         	$scope.objeto.npvalor = resp.json.datoslineaordend.saldo;
