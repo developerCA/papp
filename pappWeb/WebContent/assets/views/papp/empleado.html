@@ -151,7 +151,7 @@
 										C&oacute;digo
 										<span class="symbol required"></span>
 									</label>
-									<input type="text" placeholder="Ingrese un c&oacute;digo"
+									<input type="text" placeholder="Ingrese un c&oacute;digo" ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
 										class="form-control" name="codigo" ng-model="objeto.codigo"
 										ng-minlength="1" ng-maxlength="30" required ng-disabled="!nuevoar">
 									<span class="error text-small block"

@@ -34,7 +34,6 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			//console.log(resp);
         	$scope.data = resp.result;
             $scope.total = resp.total.valor;
-			console.log($scope.data);
 		})
 	};
 
@@ -57,12 +56,11 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			$scope.pagina,
 			$rootScope.ejefiscal,
 			$scope.codigoFiltro,
-			$scope.precompromisoFiltro,
-			$scope.valorinicialFiltro,
-			$scope.valorfinalFiltro,
+			$scope.tipoFiltro,
 			toStringDate($scope.fechainicialFiltro),
 			toStringDate($scope.fechafinalFiltro),
-			$scope.estadoFiltro
+			$scope.estadoFiltro,
+			null
 		).then(function(resp){
         	$scope.data = resp.result;
             $scope.total = resp.total.valor;
@@ -70,10 +68,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	}
 
 	$scope.limpiar=function(){
+    	$scope.pagina=1;
 		$scope.codigoFiltro=null;
-		$scope.precompromisoFiltro=null;
-		$scope.valorinicialFiltro=null;
-		$scope.valorfinalFiltro=null;
+		$scope.tipoFiltro=null;
 		$scope.fechainicialFiltro=null;
 		$scope.fechafinalFiltro=null;
 		$scope.estadoFiltro=null;
@@ -88,7 +85,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		).then(function(resp){
 			//console.log(resp);
 			if (!resp.estado) return;
-			$scope.objeto=resp.json.certificacion;
+			$scope.objeto=resp.json.reforma;
 			$scope.detalles={};
 			//$scope.agregarDetalles();
 			$scope.edicion=true;
@@ -104,8 +101,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		reformasFactory.traerEditar($scope.data[index].id).then(function(resp){
 			console.log(resp.json);
 			if (resp.estado) {
-			    $scope.objeto=resp.json.certificacion;
-			    $scope.detalles=resp.json.certificacionlineas;
+			    $scope.objeto=resp.json.reforma;
+			    $scope.detalles=resp.json.reformalineas;
 			}
 			$scope.edicion=true;
 			$scope.nuevoar=false;
@@ -202,84 +199,6 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 				obj
 			).then(function(resp){
 				console.log(resp);
-				$scope.pageChanged();
-				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
-			});
-		}, function() {
-		});
-	}
-
-	$scope.LiquidacionTotal = function(index) {
-		if ($scope.data[index].estado != "AP") {
-			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede liquidar si esta en estado aprobado.", "error");
-			return;
-		}
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg',
-			resolve: {
-				titulo: function() {
-					return "Liquidaci&oacute;n Total";
-				},
-				subtitulo : function() {
-					return "Observaci&oacute;n";
-				}
-			}
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			if (obj === undefined) {
-				obj = "";
-			}
-			var cur = 0;
-			$scope.data[index].npestado = "Liquidando";
-			reformasFactory.solicitar(
-				$scope.data[index].id,
-				"LT",
-				null,
-				obj
-			).then(function(resp){
-				//console.log(resp);
-				$scope.pageChanged();
-				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
-			});
-		}, function() {
-		});
-	}
-
-	$scope.LiquidacionParcial = function(index) {
-		if ($scope.data[index].estado != "AP") {
-			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede liquidar si esta en estado aprobado.", "error");
-			return;
-		}
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg',
-			resolve: {
-				titulo: function() {
-					return "Liquidaci&oacute;n Parcial";
-				},
-				subtitulo : function() {
-					return "Observaci&oacute;n";
-				}
-			}
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			if (obj === undefined) {
-				obj = "";
-			}
-			var cur = 0;
-			$scope.data[index].npestado = "Liquidando";
-			reformasFactory.solicitar(
-				$scope.data[index].id,
-				"LP",
-				null,
-				obj
-			).then(function(resp){
-				//console.log(resp);
 				$scope.pageChanged();
 				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
 			});
@@ -419,48 +338,23 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.certificacionunidadid = obj.id;
+			$scope.objeto.reformaunidadid = obj.id;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;
 		}, function() {
 		});
 	};
 
-	$scope.abrirClaseRegistroCodigo = function() {
+	$scope.abrirItem = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalClaseGasto.html',
-			controller : 'ModalClaseGastoController',
+			templateUrl : 'assets/views/papp/modal/modalItems.html',
+			controller : 'ModalItemController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.certificacionclaseregid = obj.id.id;
-			$scope.objeto.certificacionclasemoid = obj.id.cmid;
-			$scope.objeto.certificaciongastoid = obj.id.cmcgastoid;
-			$scope.objeto.npcodigoregcmcgasto = obj.codigo;
-			$scope.objeto.npnombreregcmcgasto = obj.nombre;
-			$scope.objeto.npcodigoregistro = obj.npcodigoregistro;
-			$scope.objeto.npnombreregistro = obj.npnombreregistro;
-			$scope.objeto.npcodigomodificacion = obj.npcodigomodificacion;
-			$scope.objeto.npnombremodificacion = obj.npnombremodificacion;
-		}, function() {
-		});
-	};
-
-	$scope.abrirTipoDocumentoCodigo = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalClaseDocumento.html',
-			controller : 'ModalClaseDocumentoController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			$scope.objeto.certificaciontipodocid = obj.id.id;
-			$scope.objeto.certificaciontpclasedocid = obj.id.clasedocid;
-			$scope.objeto.npcodigotipodocumento = obj.codigo;
-			$scope.objeto.npnombretipodocumento = obj.nombre;
-			$scope.objeto.npcodigodocumento = obj.npcodigodocumento;
-			$scope.objeto.npnombredocumento = obj.npnombredocumento;
+			$scope.objeto.reformaitemid = obj.id;
+			$scope.objeto.npitemcodigo = obj.codigo;			
+			$scope.objeto.npitemnombre = obj.nombre;			
 		}, function() {
 		});
 	};

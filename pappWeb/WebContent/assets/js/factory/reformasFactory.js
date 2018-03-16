@@ -19,12 +19,12 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 		traerFiltro: function(
 			pagina,
 			ejefiscal,
+			codigo,
+			tipo,
 			fechainicial,
 			fechafinal,
-			codigo,
 			estado,
-			ejerciciofiscal,
-			tipo
+			ejerciciofiscal
 		) {
 			var url = "ejecucion/consultar/reforma";
 			var tObj = {
@@ -33,12 +33,12 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 				ejerciciofiscalid: ejefiscal.toString()
 			}
 
+			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
+			if(tipo != null && tipo != "") tObj.tipo= "" + tipo;
 			if(fechainicial != null && fechainicial != "") tObj.fechainicial= "" + encodeURIComponent(fechainicial);	
 			if(fechafinal != null && fechafinal != "") tObj.fechafinal= "" + encodeURIComponent(fechafinal);	
-			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
 			if(estado != null && estado != "") tObj.estado= "" + estado;	
-			if(ejerciciofiscal!= null && ejerciciofiscal != "") tObj.ejerciciofiscal= "" + ejerciciofiscal;	
-			if(tipo != null && tipo != "") tObj.tipo= "" + tipo;
+			if(ejerciciofiscal != null && ejerciciofiscal != "") tObj.ejerciciofiscal= "" + ejerciciofiscal;	
 
 			return Restangular.allUrl(url).customPOST(tObj);
 		},

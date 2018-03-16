@@ -709,7 +709,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/reformas",
         templateUrl: "assets/views/papp/reformas.html",
         resolve: loadSequence(
-        		'ngTable','ReformasCtrl','ReformasFactory'
+        		'ngTable','ReformasCtrl','ReformasFactory',
+        		'ModalUnidadCortoCtrl','UnidadFactory',
+        		'ModalItemCtrl','ItemFactory'
 		),
         title: 'Reformas',
         ncyBreadcrumb: {

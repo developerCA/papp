@@ -270,7 +270,7 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Se genera un c&oacute;digo automatico"
-								        class="form-control" name="codigo" ng-model="objeto.codigo"
+								        class="form-control" name="codigo" ng-model="objeto.codigo" ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
 								        ng-disabled="true">
 								    <span class="error text-small block"
 								        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">

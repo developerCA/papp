@@ -124,7 +124,7 @@
 									ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
 									<label class="control-label"> C&oacute;digo <span
 										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Codigo"
+									</label> <input type="text" placeholder="Ingrese el Codigo" ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
 										class="form-control" name="codigo" ng-model="objeto.codigo"
 										ng-minlength="1" ng-maxlength="10" ng-disabled="objeto.id !=null" required /> <span class="error text-small block"
 										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo

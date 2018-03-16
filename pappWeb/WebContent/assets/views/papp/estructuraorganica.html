@@ -126,7 +126,7 @@
 									</label> <span ng-if="nuevoar"> <input type="text"
 										placeholder="Escribe un c&oacute;digo" class="form-control"
 										name="codigo" required ng-model="objeto.codigo"
-										ng-minlength="1" />
+										ng-minlength="1" ng-change="objeto.codigo=objeto.codigo.toUpperCase();"/>
 									</span> <span ng-if="!nuevoar"> <input type="text"
 										ng-disabled="true" class="form-control" name="codigo" required
 										ng-model="objeto.codigo" ng-minlength="1" />

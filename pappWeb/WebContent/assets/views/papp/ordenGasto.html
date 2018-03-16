@@ -282,6 +282,7 @@
 								    </label>
 								    <input type="text" placeholder="Se genera un c&oacute;digo automatico"
 								        class="form-control" name="codigo" ng-model="objeto.codigo"
+								        ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
 								        ng-disabled="true">
 								</div>
 								

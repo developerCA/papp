@@ -78,7 +78,9 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
-								        class="form-control" name="codigopr" ng-model="objetoPr.codigo" ng-pattern="/^[0-9]*$/"
+								        class="form-control" name="codigopr"
+								        ng-change="objetoPr.codigo=objetoPr.codigo.toUpperCase();"
+								        ng-model="objetoPr.codigo" ng-pattern="/^[0-9]*$/"
 								        required ng-disabled="!nuevoar" ng-maxlength="10">
 								    <span class="error text-small block"
 								        ng-if="FormPrograma.codigopr.$dirty && FormPrograma.codigopr.$invalid">
@@ -229,7 +231,9 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
-								        class="form-control" name="codigo" ng-model="objetoSp.codigo" ng-pattern="/^[0-9]*$/"
+								        class="form-control" name="codigo"
+								        ng-change="objetoSp.codigo=objetoSp.codigo.toUpperCase();"
+								        ng-model="objetoSp.codigo" ng-pattern="/^[0-9]*$/"
 								        required ng-disabled="!nuevoar" ng-maxlength="10">
 								    <span class="error text-small block"
 								        ng-if="FormSubprograma.codigo.$dirty && FormSubprograma.codigo.$invalid">
@@ -341,7 +345,9 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
-								        class="form-control" name="codigo" ng-model="objetoPy.codigo" ng-pattern="/^[0-9]*$/"
+								        class="form-control" name="codigo"
+								        ng-change="objetoPy.codigo=objetoPy.codigo.toUpperCase();"
+								        ng-model="objetoPy.codigo" ng-pattern="/^[0-9]*$/"
 								        required ng-disabled="!nuevoar" ng-maxlength="10">
 								    <span class="error text-small block"
 								        ng-if="FormProyecto.codigo.$dirty && FormProyecto.codigo.$invalid">
@@ -849,7 +855,9 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
-								        class="form-control" name="codigo" ng-model="objetoAc.codigo" ng-pattern="/^[0-9]*$/"
+								        class="form-control" name="codigo"
+								        ng-change="objetoAc.codigo=objetoAc.codigo.toUpperCase();"
+								        ng-model="objetoAc.codigo" ng-pattern="/^[0-9]*$/"
 								        required ng-disabled="!nuevoar" ng-maxlength="10">
 								    <span class="error text-small block"
 								        ng-if="FormActividad.codigo.$dirty && FormActividad.codigo.$invalid">
@@ -1207,7 +1215,9 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
-								        class="form-control" name="codigo" ng-model="objetoSa.codigo" ng-pattern="/^[0-9]*$/"
+								        class="form-control" name="codigo"
+								        ng-change="objetoSa.codigo=objetoSa.codigo.toUpperCase();"
+								        ng-model="objetoSa.codigo" ng-pattern="/^[0-9]*$/"
 								        required ng-disabled="!nuevoar" ng-maxlength="10">
 								    <span class="error text-small block"
 								        ng-if="FormSubactividad.codigo.$dirty && FormSubactividad.codigo.$invalid">
