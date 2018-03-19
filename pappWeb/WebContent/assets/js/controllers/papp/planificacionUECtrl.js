@@ -404,6 +404,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		//console.log(node);
 		$scope.esnuevo=true;
 		$scope.editar=true;
+		$scope.editarP=true;
 		$scope.editarA=false;
 		$scope.objeto=null;
 		$scope.nodeActivo=node;
