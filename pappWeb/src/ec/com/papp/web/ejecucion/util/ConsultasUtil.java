@@ -989,7 +989,7 @@ public class ConsultasUtil {
 			OrdenreversionlineaTO ordenreversionlineaTO=new OrdenreversionlineaTO();
 			ordenreversionlineaTO.getId().setId(ordenreversionTO.getId());
 			Collection<OrdenreversionlineaTO> ordendevengolineaTOs=UtilSession.planificacionServicio.transObtenerOrdenreversionlinea(ordenreversionlineaTO);
-			jsonObject.put("ordenreversionlineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordenreversionTO.getJsonConfig()));
+			jsonObject.put("ordenreversionlineas", (JSONArray)JSONSerializer.toJSON(ordendevengolineaTOs,ordenreversionlineaTO.getJsonConfig()));
 			jsonObject.put("ordenreversion", (JSONObject)JSONSerializer.toJSON(ordenreversionTO,ordenreversionTO.getJsonConfig()));
 		}catch (Exception e) {
 			e.printStackTrace();
