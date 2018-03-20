@@ -84,6 +84,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	};
 	
 	$scope.nuevo=function(){
+		$scope.dataIndex = 0;
 		ordenDevengoFactory.traerNuevo(
 			$rootScope.ejefiscal
 		).then(function(resp){
@@ -361,7 +362,9 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			//console.log(obj);//130
 		    $scope.detalles = obj.ordendevengolineas;
 			$scope.objeto.valortotal = obj.ordendevengo.valortotal;
-			$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
+			if ($scope.dataIndex != 0) {
+				$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
+			}
             SweetAlert.swal(
         		"Orden Devengo! - Lineas",
         		"Registro guardado satisfactoriamente!",

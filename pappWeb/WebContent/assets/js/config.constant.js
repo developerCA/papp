@@ -251,6 +251,8 @@ app.constant('JS_REQUIRES', {
         'OrdenGastoLineasFactory':'assets/js/factory/ordenGastoLineasFactory.js',
         'ReformasCtrl':'assets/js/controllers/papp/reformasCtrl.js',
         'ReformasFactory':'assets/js/factory/reformasFactory.js',
+        'ModalOrdenReversionLineasCtrl':'assets/js/controllers/papp/modales/modalOrdenReversionLineasCtrl.js',
+        'OrdenReversionLineasFactory':'assets/js/factory/ordenReversionLineasFactory.js',
 
 
     },

@@ -286,8 +286,8 @@
 								    <select class="form-control" name="tipo"
 								        ng-model="objeto.tipo" required>
 								        <option value="" ng-selected="selected">(Ninguno)</option>
-								        <option value="L">Liquidaci&oacute;n</option>
-								        <option value="N">Normal</option>
+								        <option value="A">Anticipado</option>
+								        <option value="F">Final</option>
 								    </select>
 								    <span class="error text-small block"
 								        ng-if="Form.tipo.$dirty && Form.tipo.$invalid">
@@ -390,7 +390,7 @@
 								        N&uacute;mero Oficio
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
+								    <input type="text" placeholder="Escriba un n&uacute;mero oficio" required
 								        class="form-control" name="numerooficio" ng-model="objeto.numerooficio">
 								    <span class="error text-small block"
 								        ng-if="Form.numerooficio.$dirty && Form.numerooficio.$invalid">
