@@ -113,7 +113,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.solicitar=function(index) {
 		//console.log($scope.data[index]);
 		if ($scope.data[index].estado != "RE") {
-			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede solicitar si esta en estado registrar.", "error");
+			SweetAlert.swal("Reformas!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
 		}
 		$scope.data[index].npestado = "Solicitando";
@@ -125,13 +125,13 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		).then(function(resp){
 			//console.log(resp);
 			$scope.pageChanged();
-			SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
+			SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
 		});
 	}
 
 	$scope.aprobar = function(index) {
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede aprobar si esta en estado solicitado.", "error");
+			SweetAlert.swal("Reformas!", "Solo se puede aprobar si esta en estado solicitado.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -161,7 +161,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			).then(function(resp){
 				console.log(resp);
 				$scope.pageChanged();
-				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
 		});
@@ -169,7 +169,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 
 	$scope.negar = function(index) {
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede negar si esta en estado solicitado.", "error");
+			SweetAlert.swal("Reformas!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -200,7 +200,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			).then(function(resp){
 				console.log(resp);
 				$scope.pageChanged();
-				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
 		});
@@ -208,7 +208,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 
 	$scope.eliminar = function(index) {
 		if ($scope.data[index].estado != "RE") {
-			SweetAlert.swal("Certificaciones de Fondos!", "No se permite eliminar este articulo, solo los que estan 'Registrados'.", "error");
+			SweetAlert.swal("Reformas!", "No se permite eliminar este articulo, solo los que estan 'Registrados'.", "error");
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -239,7 +239,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			).then(function(resp){
 				//console.log(resp);
 				$scope.pageChanged();
-				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
 		});
@@ -251,15 +251,15 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 
 	$scope.agregarLinea = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalCertificacionesFondosLineas.html',
-			controller : 'ModalCertificacionesFondosLineasController',
+			templateUrl : 'assets/views/papp/modal/modalReformasLineas.html',
+			controller : 'ModalReformasLineasController',
 			size : 'lg',
 			resolve : {
 				ID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
-					return $scope.objeto.certificacionunidadid;
+					return $scope.objeto.reformaunidadid;
 				},
 				editar : function() {
 					return null;
@@ -268,24 +268,24 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 		modalInstance.result.then(function(obj) {
 		    $scope.detalles = obj.lineas;
-		    $scope.objeto.valortotal = obj.valortotal;
+		    //$scope.objeto.valortotal = obj.valortotal;
 		    $scope.form.submit(Form);
-            SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
+            SweetAlert.swal("Reformas! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
 		});
 	};
 
 	$scope.editarLinea = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalCertificacionesFondosLineas.html',
-			controller : 'ModalCertificacionesFondosLineasController',
+			templateUrl : 'assets/views/papp/modal/modalReformasLineas.html',
+			controller : 'ModalReformasLineasController',
 			size : 'lg',
 			resolve : {
 				ID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
-					return $scope.objeto.certificacionunidadid;
+					return $scope.objeto.reformaunidadid;
 				},
 				editar : function() {
 					return $scope.detalles[index].id
@@ -294,16 +294,16 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 		modalInstance.result.then(function(obj) {
 		    $scope.detalles = obj.lineas;
-		    $scope.objeto.valortotal = obj.valortotal;
+		    //$scope.objeto.valortotal = obj.valortotal;
 		    $scope.form.submit(Form);
-            SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
+            SweetAlert.swal("Reformas! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
 		});
 	};
 
 	$scope.eliminarLinea = function(index) {
 		SweetAlert.swal({
-			title: "Certificaciones de Fondos?",
+			title: "Reformas?",
 			text: "Seguro que desea eliminar esta linea?",
 			type: "warning",
 			showCancelButton: true,
@@ -320,12 +320,12 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 				$scope.detalles[index].id.lineaid
 			).then(function(resp){
 				if (resp.estado){
-					SweetAlert.swal("Certificaciones de Fondos!", "Eliminado satisfactoriamente!", "success");
+					SweetAlert.swal("Reformas!", "Eliminado satisfactoriamente!", "success");
 					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
 				    $scope.detalles.splice(index, 1);
 				    $scope.form.submit(Form);
 	   			}else{
-		            SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
+		            SweetAlert.swal("Reformas!", resp.mensajes.msg, "error");
 	   			}
           	})
 		});
@@ -389,9 +389,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
           		             $scope.objeto={};
         				 }
         				 $scope.pageChanged();
-      					 SweetAlert.swal("Certificaciones de Fondos!", "Registro guardado satisfactoriamente!", "success");
+      					 SweetAlert.swal("Reformas!", "Registro guardado satisfactoriamente!", "success");
         			 }else{
-	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal("Reformas!", resp.mensajes.msg, "error");
         			 }
         		})
             }

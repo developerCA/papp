@@ -99,14 +99,14 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 		nuevoLinea:function(
 			id
 		){
-			var url = "ejecucion/nuevo/certificacionlinea/" + id ;
+			var url = "ejecucion/nuevo/reformalinea/" + id ;
 			return Restangular.allUrl(url).customGET();
 		},
 
 		editarLinea:function(
 			id
 		){
-			var url = "ejecucion/certificacionlinea/" + id.id + "/" + id.lineaid;
+			var url = "ejecucion/reformalinea/" + id.id + "/" + id.lineaid;
 			return Restangular.allUrl(url).customGET();
 		},
 
