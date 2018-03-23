@@ -1,7 +1,7 @@
 'use strict';
 
 app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","unidadID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
-	function($scope,$rootScope,ID,unidadID,,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
+	function($scope,$rootScope,ID,unidadID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
 
 	$scope.noeditar = false;
 
