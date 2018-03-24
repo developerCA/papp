@@ -694,7 +694,7 @@ public class EjecucionController {
 	
 	@RequestMapping(value = "/{clase}/{id}/{id2}", method = RequestMethod.GET)
 	public Respuesta editar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,HttpServletRequest request){
-		log.println("entra al metodo recuperar: " + id);
+		log.println("entra al metodo recuperar: "  + id + " - " + id2);
 		JSONObject jsonObject=new JSONObject();
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
@@ -726,14 +726,14 @@ public class EjecucionController {
 				OrdengastolineaTO ordengastolineaTO = UtilSession.planificacionServicio.transObtenerOrdengastolineaTO(new OrdengastolineaID(id, id2));
 				ordengastolineaTO.setNpvalor(ordengastolineaTO.getValor());
 				log.println("nivelactividad id " + ordengastolineaTO.getNivelactid());
-				//obtengo el saldo de la certificacion
-				Collection<CertificacionlineaTO> resultado=UtilSession.planificacionServicio.transObtienesubitemporcertificacion(ordengastolineaTO.getOrdengasto().getOrdengastocertificacionid());
-				for(CertificacionlineaTO linea:resultado) {
-					if(linea.getNivelactid().longValue()==ordengastolineaTO.getNivelactid().longValue()) {
-						ordengastolineaTO.setNpsaldocertificacion(linea.getNpdisponible()-ordengastolineaTO.getValor().doubleValue());
-						break;
-					}
-				}
+//				//obtengo el saldo de la certificacion
+//				Collection<CertificacionlineaTO> resultado=UtilSession.planificacionServicio.transObtienesubitemporcertificacion(ordengastolineaTO.getOrdengasto().getOrdengastocertificacionid());
+//				for(CertificacionlineaTO linea:resultado) {
+//					if(linea.getNivelactid().longValue()==ordengastolineaTO.getNivelactid().longValue()) {
+//						ordengastolineaTO.setNpsaldocertificacion(linea.getNpdisponible()-ordengastolineaTO.getValor().doubleValue());
+//						break;
+//					}
+//				}
 				jsonObject.put("ordengastolinea", (JSONObject)JSONSerializer.toJSON(ordengastolineaTO,ordengastolineaTO.getJsonConfig()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordengastolineaTO.getNivelactid(), jsonObject, mensajes);
 			}
@@ -1432,7 +1432,7 @@ public class EjecucionController {
 	@RequestMapping(value = "/{clase}/{id}/{id2}", method = RequestMethod.DELETE)
 	//@ResponseStatus(HttpStatus.NO_CONTENT)
 	public Respuesta eliminar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,HttpServletRequest request){
-		log.println("entra al metodo eliminar");
+		log.println("entra al metodo eliminar: " + id + " - " + id2);
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
