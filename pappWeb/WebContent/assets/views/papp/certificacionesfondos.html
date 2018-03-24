@@ -582,9 +582,9 @@
 								        Valor total
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="number" placeholder="0.00"
+								    <input type="text" placeholder="0.00" decimal="2"
 								        class="form-control" name="valortotal" ng-model="objeto.valortotal"
-								        ng-disabled="true">
+								        ng-disabled="true" style="text-align:right;">
 								    <span class="error text-small block"
 								        ng-if="Form.valortotal.$dirty && Form.valortotal.$invalid">
 								        Incorrecto

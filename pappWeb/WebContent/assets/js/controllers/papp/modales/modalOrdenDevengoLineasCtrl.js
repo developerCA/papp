@@ -57,8 +57,8 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 		}
 		if (i == $scope.si.length)
 			return;
-		$scope.objeto.nptotalordengasto = $scope.si[i].npvalor;
-		$scope.objeto.npdevengado = $scope.si[i].npvalor;
+		$scope.objeto.nptotalordengasto = $scope.si[i].valor;
+		$scope.objeto.npdevengado = $scope.si[i].valor;
 		ordenDevengoLineasFactory.obtenerOtros(
 			$scope.si[i].npSubitemunidadid,
 			$scope.si[i].nivelactid //, ordenGastoID
