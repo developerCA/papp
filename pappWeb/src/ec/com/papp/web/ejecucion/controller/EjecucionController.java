@@ -804,17 +804,21 @@ public class EjecucionController {
 				double saldo=ConsultasUtil.obtenersaldodisponible(total, id, nivelactividadTO.getId());
 				//3. Consulto las ordenes de devengo no aprobadas
 				Collection<OrdendevengoTO> ordendevengoTOs=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2);
+				log.println("ordenes no aprobadas " + ordendevengoTOs.size());
 				double ordenesnoaprob=0.0;
 				for(OrdendevengoTO ordendevengoTO:ordendevengoTOs)
 					ordenesnoaprob=ordenesnoaprob+ordendevengoTO.getValortotal();
-				//4. Consluto las ordenes de devengo aprobada
+				log.println("ordenesnoaprob " +ordenesnoaprob);
+				//4. Consulto las ordenes de devengo aprobada
 				OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
 				ordendevengoTO.setOrdendevengoordengastoid(id2);
 				ordendevengoTO.setEstado("AP");
 				Collection<OrdendevengoTO> aprobadas=UtilSession.planificacionServicio.transObtenerOrdendevengo(ordendevengoTO);
+				log.println("aprobadas "+ aprobadas.size());
 				double ordenesaprobadas=0.0;
 				for(OrdendevengoTO aprobada:aprobadas)
 					ordenesaprobadas=ordenesaprobadas+aprobada.getValortotal();
+				log.println("valor aprobadas " + ordenesaprobadas);
 				Map<String, Double> saldodisponible=new HashMap<>();
 				saldodisponible.put("saldo", saldo);
 				saldodisponible.put("noaprobadas", ordenesnoaprob);
