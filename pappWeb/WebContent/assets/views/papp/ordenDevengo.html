@@ -253,12 +253,12 @@
 						</h5>
 					</div>
 
-					<form name="Form" id="form1" novalidate
-						ng-submit="form.submit(Form)">
+					<form name="FormEditar" id="form" novalidate
+						ng-submit="form.submit(FormEditar)">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group"
-								    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+								    ng-class="{'has-error':FormEditar.codigo.$dirty && FormEditar.codigo.$invalid, 'has-success':FormEditar.codigo.$valid}">
 								    <label class="control-label">
 								        C&oacute;digo
 								        <span class="symbol required"></span>
@@ -266,41 +266,40 @@
 								    <input type="text" placeholder="Escriba un c&oacute;digo"
 								        class="form-control" name="codigo" ng-model="objeto.codigo"
 								        ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
-								        required ng-disabled="true">
+								        ng-disabled="true">
 								    <span class="error text-small block"
-								        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+								        ng-if="FormEditar.codigo.$dirty && FormEditar.codigo.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.codigo.$valid">
+								        ng-if="FormEditar.codigo.$valid">
 								        Listo
 								    </span>
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.tipo.$dirty && Form.tipo.$invalid, 'has-success':Form.tipo.$valid}">
+								    ng-class="{'has-error':FormEditar.tipo.$dirty && FormEditar.tipo.$invalid, 'has-success':FormEditar.tipo.$valid}">
 								    <label class="control-label">
 								        Tipo
 								        <span class="symbol required"></span>
 								    </label>
 								    <select class="form-control" name="tipo"
 								        ng-model="objeto.tipo" required ng-disabled="noeditar">
-								        <option value="" ng-selected="selected">(Ninguno)</option>
 								        <option value="L">Liquidaci&oacute;n</option>
 								        <option value="N">Normal</option>
 								    </select>
 								    <span class="error text-small block"
-								        ng-if="Form.tipo.$dirty && Form.tipo.$invalid">
+								        ng-if="FormEditar.tipo.$dirty && FormEditar.tipo.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.tipo.$valid">
+								        ng-if="FormEditar.tipo.$valid">
 								        Listo
 								    </span>
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.npordengasto.$dirty && Form.npordengasto.$invalid, 'has-success':Form.npordengasto.$valid}">
+								    ng-class="{'has-error':FormEditar.npordengasto.$dirty && FormEditar.npordengasto.$invalid, 'has-success':FormEditar.npordengasto.$valid}">
 								    <label class="control-label">
 								        Orden Gasto C&oacute;digo
 								        <span class="symbol required"></span>
@@ -318,17 +317,17 @@
 								        </span>
 								    </div>
 								    <span class="error text-small block"
-								        ng-if="Form.npordengasto.$dirty && Form.npordengasto.$invalid">
+								        ng-if="FormEditar.npordengasto.$dirty && FormEditar.npordengasto.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.npordengasto.$valid">
+								        ng-if="FormEditar.npordengasto.$valid">
 								        Listo
 								    </span>
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.npordengastovalor.$dirty && Form.npordengastovalor.$invalid, 'has-success':Form.npordengastovalor.$valid}">
+								    ng-class="{'has-error':FormEditar.npordengastovalor.$dirty && FormEditar.npordengastovalor.$invalid, 'has-success':FormEditar.npordengastovalor.$valid}">
 								    <label class="control-label">
 								        Orden Gasto Valor
 								        <span class="symbol required"></span>
@@ -337,17 +336,17 @@
 								        class="form-control" name="npordengastovalor" ng-model="objeto.npordengastovalor"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
-								        ng-if="Form.npordengastovalor.$dirty && Form.npordengastovalor.$invalid">
+								        ng-if="FormEditar.npordengastovalor.$dirty && FormEditar.npordengastovalor.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.npordengastovalor.$valid">
+								        ng-if="FormEditar.npordengastovalor.$valid">
 								        Listo
 								    </span>
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.valortotal.$dirty && Form.valortotal.$invalid, 'has-success':Form.valortotal.$valid}">
+								    ng-class="{'has-error':FormEditar.valortotal.$dirty && FormEditar.valortotal.$invalid, 'has-success':FormEditar.valortotal.$valid}">
 								    <label class="control-label">
 								        Valor Total
 								        <span class="symbol required"></span>
@@ -356,17 +355,17 @@
 								        class="form-control" name="valortotal" ng-model="objeto.valortotal"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
-								        ng-if="Form.valortotal.$dirty && Form.valortotal.$invalid">
+								        ng-if="FormEditar.valortotal.$dirty && FormEditar.valortotal.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.valortotal.$valid">
+								        ng-if="FormEditar.valortotal.$valid">
 								        Listo
 								    </span>
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
+								    ng-class="{'has-error':FormEditar.descripcion.$dirty && FormEditar.descripcion.$invalid, 'has-success':FormEditar.descripcion.$valid}">
 								    <label class="control-label">
 								        Descripci&oacute;n
 								        <span class="symbol required"></span>
@@ -375,17 +374,17 @@
 								        class="form-control" ng-model="objeto.descripcion" ng-disabled="noeditar"
 								        required></textarea>
 								    <span class="error text-small block"
-								        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
+								        ng-if="FormEditar.descripcion.$dirty && FormEditar.descripcion.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.descripcion.$valid">
+								        ng-if="FormEditar.descripcion.$valid">
 								        Listo
 								    </span>
 								</div>
 								
 								<div class="form-group"
-								    ng-class="{'has-error':Form.numerooficio.$dirty && Form.numerooficio.$invalid, 'has-success':Form.numerooficio.$valid}">
+								    ng-class="{'has-error':FormEditar.numerooficio.$dirty && FormEditar.numerooficio.$invalid, 'has-success':FormEditar.numerooficio.$valid}">
 								    <label class="control-label">
 								        N&uacute;mero Oficio
 								        <span class="symbol required"></span>
@@ -394,11 +393,11 @@
 								        class="form-control" name="numerooficio" ng-model="objeto.numerooficio"
 								        required ng-disabled="noeditar">
 								    <span class="error text-small block"
-								        ng-if="Form.numerooficio.$dirty && Form.numerooficio.$invalid">
+								        ng-if="FormEditar.numerooficio.$dirty && FormEditar.numerooficio.$invalid">
 								        Incorrecto
 								    </span>
 								    <span class="success text-small"
-								        ng-if="Form.numerooficio.$valid">
+								        ng-if="FormEditar.numerooficio.$valid">
 								        Listo
 								    </span>
 								</div>
@@ -413,7 +412,7 @@
 										</button>
 									</span>
 									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">
+										ng-click="form.reset(FormEditar)">
 										Cancelar
 									</button>
 								</div>

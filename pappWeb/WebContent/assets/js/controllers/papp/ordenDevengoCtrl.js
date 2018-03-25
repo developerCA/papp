@@ -91,6 +91,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.objeto=resp.json.ordendevengo;
+			$scope.objeto.tipo='L';
 			$scope.detalles={};
 			$scope.edicion=true;
 			$scope.nuevoar=true;
@@ -436,60 +437,6 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		});
 	};
 
-	$scope.abrirUnidad = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalUnidadCorto.html',
-			controller : 'ModalUnidadCortoController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.ordendevengounidadid = obj.id;
-			$scope.objeto.npunidadcodigo = obj.codigopresup;
-			$scope.objeto.npunidadnombre = obj.nombre;
-		}, function() {
-		});
-	};
-
-	$scope.abrirClaseRegistroCodigo = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalClaseGasto.html',
-			controller : 'ModalClaseGastoController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.ordendevengoclaseregid = obj.id.id;
-			$scope.objeto.ordendevengoclasemoid = obj.id.cmid;
-			$scope.objeto.ordendevengogastoid = obj.id.cmcgastoid;
-			$scope.objeto.npcodigoregcmcgasto = obj.codigo;
-			$scope.objeto.npnombreregcmcgasto = obj.nombre;
-			$scope.objeto.npcodigoregistro = obj.npcodigoregistro;
-			$scope.objeto.npnombreregistro = obj.npnombreregistro;
-			$scope.objeto.npcodigomodificacion = obj.npcodigomodificacion;
-			$scope.objeto.npnombremodificacion = obj.npnombremodificacion;
-		}, function() {
-		});
-	};
-
-	$scope.abrirTipoDocumentoCodigo = function() {
-		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalClaseDocumento.html',
-			controller : 'ModalClaseDocumentoController',
-			size : 'lg'
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			$scope.objeto.ordendevengotipodocid = obj.id.id;
-			$scope.objeto.ordendevengotpclasedocid = obj.id.clasedocid;
-			$scope.objeto.npcodigotipodocumento = obj.codigo;
-			$scope.objeto.npnombretipodocumento = obj.nombre;
-			$scope.objeto.npcodigodocumento = obj.npcodigodocumento;
-			$scope.objeto.npnombredocumento = obj.npnombredocumento;
-		}, function() {
-		});
-	};
-
 	$scope.abrirOrdenGasto = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalOrdenGasto.html',
@@ -501,7 +448,6 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			$scope.objeto.ordendevengoordengastoid = obj.ordengastoid;
 			$scope.objeto.npordengasto = obj.codigo;
 			$scope.objeto.npordengastovalor = obj.valortotal;
-			$scope.objeto.valortotal = obj.ordenvalortotal;
 		}, function() {
 		});
 	};
