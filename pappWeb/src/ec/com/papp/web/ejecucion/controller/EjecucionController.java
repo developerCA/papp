@@ -745,8 +745,15 @@ public class EjecucionController {
 			else if(clase.equals("ordendevengolinea")){
 				OrdendevengolineaTO ordendevengolineaTO = UtilSession.planificacionServicio.transObtenerOrdendevengolineaTO(new OrdendevengolineaID(id, id2));
 				ordendevengolineaTO.setNpvalor(ordendevengolineaTO.getValor());
+				//1. traigo el total disponible del subitem
+				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(ordendevengolineaTO.getNivelactid()));
+				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
+				//2. Obtengo el detalle del subitem
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(), ordendevengolineaTO.getNivelactid());
+				ordendevengolineaTO.setNpsaldo(saldo);
 				jsonObject.put("ordendevengolinea", (JSONObject)JSONSerializer.toJSON(ordendevengolineaTO,ordendevengolineaTO.getJsonConfig()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordendevengolineaTO.getNivelactid(), jsonObject, mensajes);
+
 			}
 			//Ordenreversion
 			else if(clase.equals("ordenreversion")){
@@ -794,30 +801,21 @@ public class EjecucionController {
 			else if(clase.equals("datoslineaordend")) {
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(id);
-				//2 Obtengo el id del nivelactividad
-				NivelactividadTO nivelactividadTO=new NivelactividadTO();
-				nivelactividadTO.setTablarelacionid(id);
-				Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
-				log.println("niveles: " + nivelactividadTOs.size());
-				nivelactividadTO=(NivelactividadTO) nivelactividadTOs.iterator().next();
 				//2. Obtengo el detalle del subitem
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, id, nivelactividadTO.getId());
-				//3. Consulto las ordenes de devengo no aprobadas
-				Collection<OrdendevengoTO> ordendevengoTOs=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2);
-				log.println("ordenes no aprobadas " + ordendevengoTOs.size());
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, id, id2);
+				//3. Obtengos las ordenes pendientes de este nivel
+				Collection<OrdendevengolineaTO> pendientes=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2);
+				log.println("ordenes no aprobadas " + pendientes.size());
 				double ordenesnoaprob=0.0;
-				for(OrdendevengoTO ordendevengoTO:ordendevengoTOs)
-					ordenesnoaprob=ordenesnoaprob+ordendevengoTO.getValortotal();
+				for(OrdendevengolineaTO ordendevengolineaTO:pendientes)
+					ordenesnoaprob=ordenesnoaprob+ordendevengolineaTO.getValor();
 				log.println("ordenesnoaprob " +ordenesnoaprob);
 				//4. Consulto las ordenes de devengo aprobada
-				OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
-				ordendevengoTO.setOrdendevengoordengastoid(id2);
-				ordendevengoTO.setEstado("AP");
-				Collection<OrdendevengoTO> aprobadas=UtilSession.planificacionServicio.transObtenerOrdendevengo(ordendevengoTO);
+				Collection<OrdendevengolineaTO> aprobadas=UtilSession.planificacionServicio.transObtieneordenesdevengoaprobadas(id2);
 				log.println("aprobadas "+ aprobadas.size());
 				double ordenesaprobadas=0.0;
-				for(OrdendevengoTO aprobada:aprobadas)
-					ordenesaprobadas=ordenesaprobadas+aprobada.getValortotal();
+				for(OrdendevengolineaTO aprobada:aprobadas)
+					ordenesaprobadas=ordenesaprobadas+aprobada.getValor();
 				log.println("valor aprobadas " + ordenesaprobadas);
 				Map<String, Double> saldodisponible=new HashMap<>();
 				saldodisponible.put("saldo", saldo);
