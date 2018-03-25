@@ -64,10 +64,11 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 			$scope.si[i].nivelactid //, ordenGastoID
 		).then(function(resp){
 			//console.log(resp);
+        	//$scope.objeto.npdevengado = resp.json.datoslineaordend.aprobadas;
         	$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
         	$scope.objeto.npsaldo=$scope.objeto.nptotalordengasto - $scope.objeto.npdevengado;
         	//$scope.objeto.npvalor = resp.json.datoslineaordend.saldo;
-        	$scope.objeto.npvalor = $scope.objeto.nptotalordengasto - $scope.objeto.npdevengado - $scope.objeto.npdevengosnoapro;
+        	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) + $scope.objeto.npdevengosnoapro;
 		})
 		ordenDevengoLineasFactory.obtenerTotal(
 			$scope.si[i].nivelactid
