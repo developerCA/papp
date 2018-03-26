@@ -804,6 +804,7 @@ public class EjecucionController {
 				//2. Obtengo el detalle del subitem
 				double saldo=ConsultasUtil.obtenersaldodisponible(total, id, id2);
 				//3. Obtengos las ordenes pendientes de este nivel
+				log.println("id para calculo de no aprobadas:  " + id2);
 				Collection<OrdendevengolineaTO> pendientes=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2);
 				log.println("ordenes no aprobadas " + pendientes.size());
 				double ordenesnoaprob=0.0;
