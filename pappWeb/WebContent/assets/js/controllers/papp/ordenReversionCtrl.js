@@ -298,21 +298,25 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.editarLinea = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalOrdenDevengoLineas.html',
-			controller : 'ModalOrdenDevengoLineasController',
+			templateUrl : 'assets/views/papp/modal/modalOrdenReversionLineas.html',
+			controller : 'ModalOrdenReversionLineasController',
 			size : 'lg',
 			resolve : {
-				ordenDevengoID : function() {
+				ordenReversionID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
-					return $scope.objeto.certificacionunidadid;
+					return $scope.objeto.id;
+					//return $scope.objeto.certificacionunidadid;
 				},
 				editar : function() {
 					return $scope.detalles[index].id
 				},
 				ordenGastoID : function() {
-					return $scope.objeto.ordendevengoordengastoid;
+					return $scope.objeto.ordenreversionogastoid;
+				},
+				ordenGastoValor : function() {
+					return 0;
 				}
 			}
 		});

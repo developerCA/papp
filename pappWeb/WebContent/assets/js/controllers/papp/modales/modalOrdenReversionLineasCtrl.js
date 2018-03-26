@@ -56,15 +56,18 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
 		}
 		if (i == $scope.si.length)
 			return;
-		$scope.objeto.nptotalordengasto = $scope.si[i].npvalor;
-		$scope.objeto.npdevengado = $scope.si[i].npvalor;
+		$scope.objeto.nptotalordengasto = $scope.si[i].valor;
+		$scope.objeto.npdevengado = 0; //$scope.si[i].valor;
 		ordenReversionLineasFactory.obtenerOtros(
 			$scope.si[i].npSubitemunidadid,
 			$scope.si[i].nivelactid //, ordenGastoID
 		).then(function(resp){
 			//console.log(resp);
-        	$scope.objeto.npsaldo = resp.json.datoslineaordend.saldo;
-        	$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
+        	$scope.objeto.npdevengado = resp.json.datoslineaordend.aprobadas;
+        	//$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
+        	//$scope.objeto.npsaldodisponible = resp.json.datoslineaordend.saldo;
+        	//$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
+        	$scope.objeto.npvalor = $scope.objeto.nptotalordengasto - $scope.objeto.npdevengado;
 		})
 		ordenReversionLineasFactory.obtenerTotal(
 			$scope.si[i].nivelactid

@@ -58,7 +58,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 		if (i == $scope.si.length)
 			return;
 		$scope.objeto.nptotalordengasto = $scope.si[i].valor;
-		$scope.objeto.npdevengado = $scope.si[i].valor;
+		$scope.objeto.npdevengado = 0; //$scope.si[i].valor;
 		ordenDevengoLineasFactory.obtenerOtros(
 			$scope.si[i].npSubitemunidadid,
 			$scope.si[i].nivelactid //, ordenGastoID
@@ -66,9 +66,8 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 			//console.log(resp);
         	$scope.objeto.npdevengado = resp.json.datoslineaordend.aprobadas;
         	$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
-        	$scope.objeto.npsaldo=$scope.objeto.nptotalordengasto - $scope.objeto.npdevengado;
-        	//$scope.objeto.npvalor = resp.json.datoslineaordend.saldo;
-        	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) + $scope.objeto.npdevengosnoapro;
+        	$scope.objeto.npsaldodisponible = resp.json.datoslineaordend.saldo;
+        	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
 		})
 		ordenDevengoLineasFactory.obtenerTotal(
 			$scope.si[i].nivelactid
