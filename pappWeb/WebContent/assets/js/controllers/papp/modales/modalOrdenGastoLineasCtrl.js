@@ -64,7 +64,7 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","
 			return;
 		$scope.objeto.nivelactid = $scope.listarSubItems[i].nivelactid;
 		$scope.objeto.npvalorcertificacion = $scope.listarSubItems[i].valor;
-    	$scope.objeto.npsaldocertificacion = $scope.listarSubItems[i].npvalorcertificacion ; //npdisponible;
+    	$scope.objeto.npsaldocertificacion = $scope.listarSubItems[i].npdisponible;
     	ordenGastoLineasFactory.obtenerTotal(
 			$scope.listarSubItems[i].nivelactid
 		).then(function(resp){

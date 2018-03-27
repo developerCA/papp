@@ -89,6 +89,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.objeto=resp.json.certificacion;
+			$scope.objeto.numerodocumento='';
 			$scope.detalles={};
 			//$scope.agregarDetalles();
 			$scope.edicion=true;
