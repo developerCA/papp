@@ -24,6 +24,7 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
 				//console.log(resp);
 	        	$scope.objeto = resp.json.ordenreversionlinea;
 	        	$scope.objetoDetalles = resp.json.subiteminfo;
+	        	$scope.objeto.npvalor = $scope.objeto.nptotalordengasto - $scope.objeto.npdevengado;
 	        	$scope.noeditar = true;
 			})
 		}

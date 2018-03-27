@@ -25,6 +25,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 				//console.log(resp);
 	        	$scope.objeto = resp.json.ordendevengolinea;
 	        	$scope.objetoDetalles = resp.json.subiteminfo;
+	        	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
 	        	$scope.noeditar=true;
 			})
 		}
