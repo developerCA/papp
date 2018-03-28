@@ -54,7 +54,7 @@ app.controller('ModalSubItemController', ["$scope", "$rootScope", "npitemid", "$
     		$scope.estado,
     		$scope.tipo,
     		$rootScope.ejefiscal,
-    		$scope.codigoIncop,
+    		$scope.codigoIncop.split('.').join('@'),
     		$scope.itemNombre,
     		npitemid
 		).then(function (resp) {

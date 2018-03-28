@@ -63,8 +63,8 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","
 		if (i == $scope.listarSubItems.length)
 			return;
 		$scope.objeto.nivelactid = $scope.listarSubItems[i].nivelactid;
-		$scope.objeto.npvalorcertificacion = $scope.listarSubItems[i].valor;
-    	$scope.objeto.npsaldocertificacion = $scope.listarSubItems[i].npdisponible;
+		$scope.objeto.npvalorcertificacion = $scope.listarSubItems[i].npvalorcertificacion; //valor;
+    	$scope.objeto.npsaldocertificacion = $scope.listarSubItems[i].npsaldocertificacion; //npdisponible;
     	ordenGastoLineasFactory.obtenerTotal(
 			$scope.listarSubItems[i].nivelactid
 		).then(function(resp){

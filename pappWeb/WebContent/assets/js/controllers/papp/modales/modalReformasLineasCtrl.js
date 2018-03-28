@@ -61,13 +61,22 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 		//$scope.objeto.subitemid = $scope.listarSubtareas[i].id;
 		$scope.objeto.npSubitemcodigo = $scope.listarSubtareas[i].npcodigo;
 		$scope.objeto.npSubitem = $scope.listarSubtareas[i].npdescripcion;
+    	$scope.listarItems = [{
+    		id: "",
+    		descripcionexten: "Cargando items"
+    	}];
+    	$scope.listarSubItems = [{
+    		id: "",
+    		descripcionexten: "Pendiente"
+    	}];
 		reformasFactory.obtenerDetalles(
 			$scope.objeto.subtarea
 		).then(function(resp){
 			//console.log("RR:",resp);
         	$scope.objetoDetalles = resp.json.subtareainfo;
 			//console.log($scope.objetoDetalles);
-		})
+        	$scope.ponerCodigos();
+		});
 		reformasFactory.listarItems(
 			$rootScope.ejefiscal,
 			$scope.objeto.subtarea
@@ -76,25 +85,27 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
         		id: "",
         		descripcionexten: "Selecione un item"
         	}].concat(resp.json.result);
-        	$scope.ponerCodigos();
-		})
+		});
 	}
 
 	$scope.cambioSubItems=function(){
+    	$scope.listarSubItems = [{
+    		id: "",
+    		descripcionexten: "Cargando subitems"
+    	}];
 		reformasFactory.listarSubItems(
 			$rootScope.ejefiscal,
 			$scope.objeto.item
 		).then(function(resp){
 			$scope.si = resp.json.result;
-			$scope.listarSubItems = null;
+        	for (var i = 0; i < resp.json.result.length; i++) {
+        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + ": " + resp.json.result[i].npdescripcion;
+        		//$scope.listarSubItems.push(resp.json.result[i]);
+			}
         	$scope.listarSubItems = [{
         		id: "",
         		descripcionexten: "Selecione un subitem"
-        	}];
-        	for (var i = 0; i < resp.json.result.length; i++) {
-        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + ": " + resp.json.result[i].npdescripcion;
-        		$scope.listarSubItems.push(resp.json.result[i]);
-			}
+        	}].concat(resp.json.result);
 		})
 	}
 

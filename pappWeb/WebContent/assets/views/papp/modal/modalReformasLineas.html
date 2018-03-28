@@ -14,18 +14,9 @@
 			        Unidad C&oacute;digo
 			        <span class="symbol required"></span>
 			    </label>
-			    <div class="input-group">
-			        <input type="text" placeholder="Escriba un unidad c&oacute;digo"
-			            class="form-control" name="npunidadcodigo" ng-disabled="true"
-			            ng-model="objeto.npunidadcodigo">
-			        <span class="input-group-btn">
-			            <button type="button" class="btn btn-primary"
-			                ng-click="abrirUnidad()" ng-disabled="noeditar">
-			                <i class="fa fa-search"></i>
-			                Seleccione
-			            </button>
-			        </span>
-			    </div>
+		        <input type="text" placeholder="Escriba un unidad c&oacute;digo"
+		            class="form-control" name="npunidadcodigo" ng-disabled="true"
+		            ng-model="objeto.npunidadcodigo">
 			    <span class="error text-small block"
 			        ng-if="Form.npunidadcodigo.$dirty && Form.npunidadcodigo.$invalid">
 			        Incorrecto
@@ -54,7 +45,7 @@
 			        Listo
 			    </span>
 			</div>
-			
+
 			<div class="form-group">
 			    <label class="control-label">
 			        Programa
@@ -200,24 +191,12 @@
 			    </span>
 			</div>
 			
-			<div class="form-group"
-			    ng-class="{'has-error':Form.npvalor.$dirty && Form.npvalor.$invalid, 'has-success':Form.npvalor.$valid}">
+			<div class="form-group has-success">
 			    <label class="control-label">
 			        Saldo
-			        <span class="symbol required"></span>
 			    </label>
-			    <div class="input-group col-md-12">
-			        <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un saldo"
-			            class="form-control" name="saldo" ng-model="saldo" ng-disabled="true">
-			    </div>
-			    <span class="error text-small block"
-			        ng-if="Form.npvalor.$dirty && Form.npvalor.$invalid">
-			        Incorrecto
-			    </span>
-			    <span class="success text-small"
-			        ng-if="Form.npvalor.$valid">
-			        Listo
-			    </span>
+		        <input type="text" style="text-align:right;" decimal="2" placeholder="0.00"
+		            class="form-control" name="saldo" ng-model="saldo" ng-disabled="true">
 			</div>
 			
 			<div class="form-group"
