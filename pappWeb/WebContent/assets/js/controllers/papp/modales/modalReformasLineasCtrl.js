@@ -1,12 +1,13 @@
 'use strict';
 
-app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","unidadID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
-	function($scope,$rootScope,ID,unidadID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
+app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","unidadID","unidadcodigo","unidadnombre","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
+	function($scope,$rootScope,ID,unidadID,unidadcodigo,unidadnombre,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
 
 	$scope.noeditar = false;
 
 	$scope.init=function(){
-		//$scope.npcertificacionvalor = npcertificacionvalor;
+		$scope.npunidadcodigo = unidadcodigo;
+		$scope.npunidadnombre = unidadnombre;
 		if (editar == null) {
 			//nuevo
 			reformasFactory.nuevoLinea(
@@ -69,6 +70,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
     		id: "",
     		descripcionexten: "Pendiente"
     	}];
+    	$scope.saldo = 0;
 		reformasFactory.obtenerDetalles(
 			$scope.objeto.subtarea
 		).then(function(resp){
@@ -93,6 +95,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
     		id: "",
     		descripcionexten: "Cargando subitems"
     	}];
+    	$scope.saldo = 0;
 		reformasFactory.listarSubItems(
 			$rootScope.ejefiscal,
 			$scope.objeto.item

@@ -261,6 +261,12 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 				unidadID : function() {
 					return $scope.objeto.reformaunidadid;
 				},
+				unidadcodigo : function() {
+					return $scope.objeto.npunidadcodigo;
+				},
+				unidadnombre : function() {
+					return $scope.objeto.npunidadnombre;
+				},
 				editar : function() {
 					return null;
 				}
@@ -382,7 +388,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         				 if ($scope.nuevoar) {
 	      					 $scope.noeditar = false;
 	      					 $scope.nuevoar=false;
-	      				     $scope.objeto=resp.json.certificacion;
+	      				     $scope.objeto=resp.json.reforma;
         				 } else {
           		             form.$setPristine(true);
           		             $scope.edicion=false;

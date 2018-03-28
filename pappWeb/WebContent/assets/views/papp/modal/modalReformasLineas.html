@@ -8,42 +8,22 @@
 		<form name="Form" id="form1" novalidate
 			ng-submit="form.submit(Form)">
 
-			<div class="form-group"
-			    ng-class="{'has-error':Form.npunidadcodigo.$dirty && Form.npunidadcodigo.$invalid, 'has-success':Form.npunidadcodigo.$valid}">
+			<div class="form-group has-success">
 			    <label class="control-label">
 			        Unidad C&oacute;digo
-			        <span class="symbol required"></span>
 			    </label>
-		        <input type="text" placeholder="Escriba un unidad c&oacute;digo"
+		        <input type="text" placeholder="Unidad c&oacute;digo"
 		            class="form-control" name="npunidadcodigo" ng-disabled="true"
-		            ng-model="objeto.npunidadcodigo">
-			    <span class="error text-small block"
-			        ng-if="Form.npunidadcodigo.$dirty && Form.npunidadcodigo.$invalid">
-			        Incorrecto
-			    </span>
-			    <span class="success text-small"
-			        ng-if="Form.npunidadcodigo.$valid">
-			        Listo
-			    </span>
+		            ng-model="npunidadcodigo">
 			</div>
 			
-			<div class="form-group"
-			    ng-class="{'has-error':Form.npunidadnombre.$dirty && Form.npunidadnombre.$invalid, 'has-success':Form.npunidadnombre.$valid}">
+			<div class="form-group has-success">
 			    <label class="control-label">
 			        Unidad Nombre
-			        <span class="symbol required"></span>
 			    </label>
 			    <input type="text" placeholder="Escriba un unidad nombre"
-			        class="form-control" name="npunidadnombre" ng-model="objeto.npunidadnombre"
-			        required ng-disabled="true">
-			    <span class="error text-small block"
-			        ng-if="Form.npunidadnombre.$dirty && Form.npunidadnombre.$invalid">
-			        Incorrecto
-			    </span>
-			    <span class="success text-small"
-			        ng-if="Form.npunidadnombre.$valid">
-			        Listo
-			    </span>
+			        class="form-control" name="npunidadnombre" ng-model="npunidadnombre"
+			        ng-disabled="true">
 			</div>
 
 			<div class="form-group">
@@ -191,31 +171,63 @@
 			    </span>
 			</div>
 			
+			<h3>
+				Presupuesto
+			</h3>
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Valor Actual
+			    </label>
+		        <input type="text" style="text-align:right;" decimal="2"
+		            class="form-control" name="npvaloractual" ng-model="objeto.npvaloractual" ng-disabled="true">
+			</div>
+			
 			<div class="form-group has-success">
 			    <label class="control-label">
 			        Saldo
 			    </label>
-		        <input type="text" style="text-align:right;" decimal="2" placeholder="0.00"
+		        <input type="text" style="text-align:right;" decimal="2"
 		            class="form-control" name="saldo" ng-model="saldo" ng-disabled="true">
 			</div>
 			
 			<div class="form-group"
-			    ng-class="{'has-error':Form.valor.$dirty && Form.valor.$invalid, 'has-success':Form.valor.$valid}">
+			    ng-class="{'has-error':Form.valorincremento.$dirty && Form.valorincremento.$invalid, 'has-success':Form.valorincremento.$valid}">
 			    <label class="control-label">
-			        Valor
+			        Valor Incremento
 			        <span class="symbol required"></span>
 			    </label>
 			    <div class="input-group col-md-12">
-			        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor"
-			            class="form-control" name="valor" ng-model="objeto.valor"
+			        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="0.00"
+			            class="form-control" name="valorincremento" ng-model="objeto.valorincremento"
 			            required ng-max="saldo">
 			    </div>
 			    <span class="error text-small block"
-			        ng-if="Form.valor.$dirty && Form.valor.$invalid">
+			        ng-if="Form.valorincremento.$dirty && Form.valorincremento.$invalid">
 			        Incorrecto, valor mayor que el saldo sidponible
 			    </span>
 			    <span class="success text-small"
-			        ng-if="Form.valor.$valid">
+			        ng-if="Form.valorincremento.$valid">
+			        Listo
+			    </span>
+			</div>
+			
+			<div class="form-group"
+			    ng-class="{'has-error':Form.valordecremento.$dirty && Form.valordecremento.$invalid, 'has-success':Form.valordecremento.$valid}">
+			    <label class="control-label">
+			        Valor Decremento
+			        <span class="symbol required"></span>
+			    </label>
+			    <div class="input-group col-md-12">
+			        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="0.00"
+			            class="form-control" name="valordecremento" ng-model="objeto.valordecremento"
+			            required ng-max="saldo">
+			    </div>
+			    <span class="error text-small block"
+			        ng-if="Form.valordecremento.$dirty && Form.valordecremento.$invalid">
+			        Incorrecto, valor mayor que el saldo sidponible
+			    </span>
+			    <span class="success text-small"
+			        ng-if="Form.valordecremento.$valid">
 			        Listo
 			    </span>
 			</div>
