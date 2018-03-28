@@ -12,12 +12,10 @@ app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "S
 	    $scope.objeto = { unidadmedidagrupomedidaid : null };
 	    $scope.nombreFiltro=null;
 	    $scope.codigoFiltro=null;
-	    
-	    
+
 	    var pagina = 1;
 
 	    $scope.init = function () {
-
 	        $scope.grupos = [];
 
 	        UnidadesMedidaFactory.traerGrupos(pagina).then(function (resp) {
@@ -30,7 +28,6 @@ app.controller('ModalUnidadMedidaController', ["$scope", "$uibModalInstance", "S
 	    };
 
 	    $scope.consultar = function () {
-
 	        $scope.data = [];
 
 	        UnidadesMedidaFactory.traerUnidades(pagina).then(function (resp) {

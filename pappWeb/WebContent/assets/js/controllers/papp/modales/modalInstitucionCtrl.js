@@ -11,7 +11,7 @@ app.controller('ModalInstitucionController', [ "$scope","$uibModalInstance","eje
 	$scope.guardar=false;
 	$scope.objeto={};
 	$scope.objetolista={};
-	
+
 	var pagina = 1;
 	
 	$scope.consultar=function(){

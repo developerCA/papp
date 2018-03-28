@@ -1,0 +1,276 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+	<h4 class="mainTitle no-margin">
+		Reporte de Seguimiento de la Ejecuci&oacute;n PAPP - S01
+	</h4>
+	<div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: SIMPLE TABLE WITH PAGINATION -->
+<div class="container-fluid container-fullw"
+	ng-controller="ReporteS01Controller" ng-init="consultar()">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-white">
+
+				<div class="panel-body" id="panel1">
+					<form name="FormEditar" id="form" novalidate
+						ng-submit="form.submit(FormEditar)">
+						<div class="row">
+							<div class="col-md-6">
+
+								<div class="form-group">
+									<label class="control-label">
+										Instituci&oacute;n
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Instituci&oacute;n"
+											class="form-control" name="npinstitucion"
+											ng-disabled="true" ng-model="npinstitucion" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirInstitucion();">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">
+										Entidad
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Entidad"
+											class="form-control" name="npentidad"
+											ng-disabled="true" ng-model="npentidad" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirEntidad()">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">
+										Unidad
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Unidad"
+											class="form-control" name="npunidad"
+											ng-disabled="true" ng-model="npunidad" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirUnidad()">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">
+										Programa
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione un Programa"
+											class="form-control" name="npprograma"
+											ng-disabled="true" ng-model="npprograma">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirPrograma();">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">
+										Proyecto (NO ESTA)
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Instituci&oacute;n"
+											class="form-control" name="npinstitucion"
+											ng-disabled="true" ng-model="npinstitucion" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirInstitucion();">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.npactividad.$dirty && Form.npactividad.$invalid, 'has-success':Form.npactividad.$valid}">
+									<label class="control-label">
+										Actividad
+										<span class="symbol required"></span>
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Actividad"
+											class="form-control" name="npactividad"
+											ng-disabled="true" ng-model="objeto.npactividad">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirActividad()">
+												<i class="fa fa-search"></i> Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">
+										SubActividad (NO ESTA)
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Instituci&oacute;n"
+											class="form-control" name="npinstitucion"
+											ng-disabled="true" ng-model="npinstitucion" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirInstitucion();">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">
+										Tarea (NO ESTA)
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Instituci&oacute;n"
+											class="form-control" name="npinstitucion"
+											ng-disabled="true" ng-model="npinstitucion" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirInstitucion();">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">
+										SubTarea (NO ESTA)
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Instituci&oacute;n"
+											class="form-control" name="npinstitucion"
+											ng-disabled="true" ng-model="npinstitucion" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirInstitucion();">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">
+										Item
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione un Item"
+											class="form-control" name="npitem"
+											ng-disabled="true" ng-model="objeto.npitem">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirItem()">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group"">
+									<label class="control-label">
+										SubItem
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione un SubItem"
+											class="form-control" name="npsubitem"
+											ng-disabled="true" ng-model="npsubitem"
+											required>
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirSubItem()">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label">
+										Fuente de Financiamiento 
+									</label>
+									<div class="input-group">
+										<input type="text"
+											placeholder="Seleccione una Fuente de Financiamiento"
+											class="form-control" name="npfuentefinanciamiento"
+											ng-disabled="true" ng-model="npfuentefinanciamiento">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-primary"
+												ng-click="abrirFuenteFinanciamiento()">
+												<i class="fa fa-search"></i>
+												Seleccione
+											</button>
+										</span>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">
+										Confirmar
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+

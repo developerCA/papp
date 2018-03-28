@@ -254,7 +254,8 @@ app.constant('JS_REQUIRES', {
         'ModalOrdenReversionLineasCtrl':'assets/js/controllers/papp/modales/modalOrdenReversionLineasCtrl.js',
         'OrdenReversionLineasFactory':'assets/js/factory/ordenReversionLineasFactory.js',
         'ModalReformasLineasCtrl':'assets/js/controllers/papp/modales/modalReformasLineasCtrl.js',
-        //'ReformasLineasFactory':'assets/js/factory/reformasLineasFactory.js',
+        'ReporteS01Ctrl':'assets/js/controllers/papp/reporteS01Ctrl.js',
+        'ReporteS01Factory':'assets/js/factory/reporteS01Factory.js',
 
 
     },

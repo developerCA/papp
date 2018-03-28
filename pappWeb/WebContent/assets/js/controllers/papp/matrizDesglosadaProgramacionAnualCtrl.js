@@ -36,7 +36,6 @@ app.controller('MatrizDesglosadaProgramacionAnualController', [ "$scope","$rootS
 	};
 
 	$scope.abrirInstitutoEntidad = function(index) {
-		//console.log("aqui");
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalInstitutoEntidad.html',
 			controller : 'ModalInstitutoEntidadController',
@@ -101,7 +100,7 @@ app.controller('MatrizDesglosadaProgramacionAnualController', [ "$scope","$rootS
 
 	$scope.abrirActividad = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalActividad.html',
+			templateUrl : 'assets/views/papp/modal/modalActividad.html',
 			controller : 'ModalActividadController',
 			size : 'lg'
 		});

@@ -729,6 +729,25 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Contrato'
         }
+    }).state('app.reporteS01', {
+        url: "/reporteS01",
+        templateUrl: "assets/views/papp/reporteS01.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteS01Ctrl','ReporteS01Factory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalProgramaCtrl','ProgramaFactory',
+        		'ModalActividadCtrl','ActividadFactory',
+        		'ModalItemCtrl','ItemFactory',
+        		'ModalSubItemCtrl', 'SubItemsFactory',
+        		'ModalProyectoCtrl','ProyectoFactory'
+        		//'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory'
+		),
+        title: 'Reporte S01',
+        ncyBreadcrumb: {
+            label: 'Reporte S01'
+        }
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",

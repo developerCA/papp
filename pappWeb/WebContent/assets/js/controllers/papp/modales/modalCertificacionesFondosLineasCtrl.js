@@ -20,11 +20,13 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 					$rootScope.ejefiscal,
 					unidadID
 				).then(function(resp){
+		        	for (var i = 0; i < resp.json.result.length; i++) {
+		        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + " - " + resp.json.result[i].npdescripcion;
+					}
 		        	$scope.listarSubtareas = [{
 		        		id: "",
 		        		descripcionexten: "Selecione una subtarea"
 		        	}].concat(resp.json.result);
-					//console.log($scope.listarSubtareas);
 				})
 			})
 		} else {
@@ -71,7 +73,10 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 		certificacionesFondosFactory.listarItems(
 			$rootScope.ejefiscal,
 			$scope.objeto.subtarea
-		).then(function(resp){
+		).then(function(resp) {
+        	for (var i = 0; i < resp.json.result.length; i++) {
+        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + " - " + resp.json.result[i].npcodigocanton + " - " + resp.json.result[i].npcodigofuente + " - " + resp.json.result[i].npdescripcion;
+			}
         	$scope.listarItems = [{
         		id: "",
         		descripcionexten: "Selecione un item"
@@ -87,14 +92,14 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 		).then(function(resp){
 			$scope.si = resp.json.result;
 			$scope.listarSubItems = null;
+        	for (var i = 0; i < resp.json.result.length; i++) {
+        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + " - " + resp.json.result[i].npdescripcion;
+        		//$scope.listarSubItems.push(resp.json.result[i]);
+			}
         	$scope.listarSubItems = [{
         		id: "",
         		descripcionexten: "Selecione un subitem"
-        	}];
-        	for (var i = 0; i < resp.json.result.length; i++) {
-        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + ": " + resp.json.result[i].npdescripcion;
-        		$scope.listarSubItems.push(resp.json.result[i]);
-			}
+        	}].concat(resp.json.result);
 		})
 	}
 
