@@ -1221,6 +1221,7 @@ public class PlanificacionController {
 				jsonObject.put("subitemunidadacumulador", (JSONArray)JSONSerializer.toJSON(subitemunidadacumuladorTOs,subitemunidadacumuladorTO.getJsonConfig()));
 				//Saldo para los valores planificados y acumulados
 				//1. traigo el valor presupuestado y aprobado de la actividad
+				log.println("actividad: " + parameters.get("actividadid") + "unidad: " + parameters.get("unidadid"));
 				ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("actividadid")), Long.valueOf(parameters.get("unidadid"))));
 				log.println("actividad id: " + actividadunidadTO.getId().getId());
 				log.println("unidad: " + parameters.get("unidadid"));

@@ -978,8 +978,10 @@ public class ConsultasUtil {
 				subitemTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			else
 				subitemTO.setOrderByField(OrderBy.orderAsc(orderBy));
-			if(parameters.get("codigoIncop")!=null && !parameters.get("codigoIncop").equals(""))
-				subitemTO.setCodigo(parameters.get("codigoIncop"));
+			if(parameters.get("codigoIncop")!=null && !parameters.get("codigoIncop").equals("")) {
+				subitemTO.setCodigo(parameters.get("codigoIncop").replaceAll("@", "."));
+				log.println("codigo incop " + subitemTO.getCodigo());
+			}
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				subitemTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
@@ -996,6 +998,7 @@ public class ConsultasUtil {
 			}
 			subitemTO.setUnidadmedida(new UnidadmedidaTO());
 			subitemTO.setItem(itemTO);
+			log.println("subitemitemid " + subitemTO.getSubitemitemid());
 			SearchResultTO<SubitemTO> resultado=UtilSession.adminsitracionServicio.transObtenerSubitemPaginado(subitemTO);
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();

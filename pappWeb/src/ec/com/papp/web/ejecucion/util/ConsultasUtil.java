@@ -471,7 +471,7 @@ public class ConsultasUtil {
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 				HashMap<String, String>  totalMap=new HashMap<String, String>();
 				totalMap.put("valor", resultado.getCountResults().toString());
-				log.println("totalresultado: " + totalRegistrosPagina);
+				log.println("totalresultado: " + resultado.getCountResults());
 				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),ordenreversionTO.getJsonConfigconsulta()));
 				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 			}
