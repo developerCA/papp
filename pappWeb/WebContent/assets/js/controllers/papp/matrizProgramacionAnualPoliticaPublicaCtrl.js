@@ -51,7 +51,7 @@ app.controller('MatrizProgramacionAnualPoliticaPublicaController', [ "$scope","$
 
 	$scope.abrirPrograma = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalPrograma.html',
+			templateUrl : 'assets/views/papp/modal/modalPrograma.html',
 			controller : 'ModalProgramaController',
 			size : 'lg'
 		});

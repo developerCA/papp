@@ -387,6 +387,9 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			resolve : {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
+				},
+				institucioncodigo : function() {
+					return false;
 				}
 			}
 		});

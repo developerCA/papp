@@ -43,6 +43,9 @@ app.controller('MatrizDesglosadaProgramacionAnualController', [ "$scope","$rootS
 			resolve : {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
+				},
+				institucioncodigo : function() {
+					return false;
 				}
 			}
 		});
@@ -72,7 +75,7 @@ app.controller('MatrizDesglosadaProgramacionAnualController', [ "$scope","$rootS
 
 	$scope.abrirPrograma = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalPrograma.html',
+			templateUrl : 'assets/views/papp/modal/modalPrograma.html',
 			controller : 'ModalProgramaController',
 			size : 'lg'
 		});
@@ -86,7 +89,7 @@ app.controller('MatrizDesglosadaProgramacionAnualController', [ "$scope","$rootS
 
 	$scope.abrirProyecto = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalProyecto.html',
+			templateUrl : 'assets/views/papp/modal/modalProyecto.html',
 			controller : 'ModalProyectoController',
 			size : 'lg'
 		});

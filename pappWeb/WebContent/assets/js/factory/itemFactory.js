@@ -9,14 +9,11 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
         },
 
         traerItemsCustom: function (pagina, ejercicio) {
-        	 var url = "administrar/consultar/item/pagina=" + pagina + "&ejerciciofiscalid=" + ejercicio;
+        	 var url = "administrar/consultar/item/pagina=" + pagina + "&filas=10&ejerciciofiscalid=" + ejercicio;
              return Restangular.allUrl(url).customGET();
-             
-            
         },
         
         traerItemsFiltro: function (pagina, ejercicio, codigo, nombre, estado, tipo, codigopadre, nombrepadre) {
-
             var url = "administrar/consultar/item/pagina=" + pagina+ "&ejerciciofiscalid=" + ejercicio;
             if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();
             if (nombre != null && nombre != "") url += "&nombre=" + nombre;
@@ -26,12 +23,10 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
             if (nombrepadre != null && nombrepadre != "") url += "&nombrepadre=" + nombrepadre;
             //console.log("FILTRAR: " + url);
             return Restangular.allUrl(url).getList();
-
         },
 
         traerItemsFiltroCustom: function (pagina, ejercicio, codigo, nombre, estado, tipo, codigopadre, nombrepadre) {
-
-            var url = "administrar/consultar/item/pagina=" + pagina+ "&ejerciciofiscalid=" + ejercicio;
+            var url = "administrar/consultar/item/pagina=" + pagina+ "&filas=10&ejerciciofiscalid=" + ejercicio;
             if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();
             if (nombre != null && nombre != "") url += "&nombre=" + nombre;
             if (tipo != null && tipo != "") url += "&tipo=" + tipo;
@@ -40,20 +35,16 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
             if (nombrepadre != null && nombrepadre != "") url += "&nombrepadre=" + nombrepadre;
             //console.log("FILTRAR: " + url);
             return Restangular.allUrl(url).customGET();
-           
-
         },
-        traerItem: function (id) {
 
+        traerItem: function (id) {
             var url = "administrar/item/" + id + "/-1";
             return Restangular.allUrl(url).customGET();
-
         },
 
         guardar: function (objeto) {
             var url = "administrar/item/";
             return Restangular.allUrl(url).customPOST(objeto);
         },
-
     }
 }]);

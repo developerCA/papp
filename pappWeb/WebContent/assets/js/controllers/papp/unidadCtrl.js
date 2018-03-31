@@ -146,6 +146,9 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 			resolve : {
 				ejefiscal : function() {
 					return null;
+				},
+				institucioncodigo : function() {
+					return false;
 				}
 			}
 		});

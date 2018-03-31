@@ -35,7 +35,7 @@ app.controller('RegistroMetasController', [ "$scope","$rootScope","$location","$
 
 	$scope.abrirPrograma = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalPrograma.html',
+			templateUrl : 'assets/views/papp/modal/modalPrograma.html',
 			controller : 'ModalProgramaController',
 			size : 'lg'
 		});

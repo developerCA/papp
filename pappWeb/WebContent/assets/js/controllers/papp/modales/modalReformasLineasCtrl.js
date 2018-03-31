@@ -83,6 +83,9 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 			$rootScope.ejefiscal,
 			$scope.objeto.subtarea
 		).then(function(resp){
+        	for (var i = 0; i < resp.json.result.length; i++) {
+        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + " - " + resp.json.result[i].npcodigocanton + " - " + resp.json.result[i].npcodigofuente + " - " + resp.json.result[i].npdescripcion;
+			}
         	$scope.listarItems = [{
         		id: "",
         		descripcionexten: "Selecione un item"
@@ -102,7 +105,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 		).then(function(resp){
 			$scope.si = resp.json.result;
         	for (var i = 0; i < resp.json.result.length; i++) {
-        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + ": " + resp.json.result[i].npdescripcion;
+        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + " - " + resp.json.result[i].npdescripcion;
         		//$scope.listarSubItems.push(resp.json.result[i]);
 			}
         	$scope.listarSubItems = [{

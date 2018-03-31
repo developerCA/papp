@@ -100,7 +100,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		}
 
 		if (node.nodeTipo == "AC") { // Carga Actividad
-		    formulacionEstrategicaFactory.traerSubActividad(
+			formulacionEstrategicaFactory.traerSubActividad(
 	    		node.npNivelid,
 	    		$rootScope.ejefiscal
 			).then(function(resp){

@@ -1,7 +1,7 @@
 'use strict';
  
-app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance","ejefiscal","SweetAlert","$filter", "ngTableParams","institutoEntidadFactory",
-	function($scope,$uibModalInstance,ejefiscal,SweetAlert,$filter, ngTableParams,institutoEntidadFactory) {
+app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance","ejefiscal","institucioncodigo","SweetAlert","$filter", "ngTableParams","institutoEntidadFactory",
+	function($scope,$uibModalInstance,ejefiscal,institucioncodigo,SweetAlert,$filter, ngTableParams,institutoEntidadFactory) {
 
 		$scope.codigoInstitucionFiltro=null;
 		$scope.nombreInstitucionFiltro=null;
@@ -19,6 +19,7 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 		var pagina = 1;
 		
 		$scope.init = function(){
+			$scope.institucioncodigo = institucioncodigo;
 			institutoEntidadFactory.traerEjerciciosFiscales().then(function(resp){
 				if (resp.meta)
 					$scope.listaEjercicioFiscal=resp;
@@ -28,9 +29,14 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 
 		$scope.consultar=function(){
 			$scope.data=[];
-			institutoEntidadFactory.traerInstitutoEntidad(
+			institutoEntidadFactory.traerInstitutoEntidadFiltro(
 				pagina,
-				ejefiscal
+				institucioncodigo,
+				null,
+				null,
+				null,
+				ejefiscal,
+				null
 			).then(function(resp){
 				if (resp.meta)
 					console.log(resp);
@@ -39,7 +45,6 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 		};
 
 		$scope.$watch('data', function() {
-			
 			$scope.tableParams = new ngTableParams({
 				page : 1, // show first page
 				count : 10, // count per page
@@ -63,7 +68,7 @@ app.controller('ModalInstitutoEntidadController', [ "$scope","$uibModalInstance"
 			$scope.data=[];
 			institutoEntidadFactory.traerInstitutoEntidadFiltro(
 				pagina,
-				$scope.codigoInstitucionFiltro,
+				(institucioncodigo == null? $scope.codigoInstitucionFiltro: institucioncodigo),
 				$scope.nombreInstitucionFiltro,
 				$scope.codigoEntidadFiltro,
 				$scope.nombreEntidadFiltro,

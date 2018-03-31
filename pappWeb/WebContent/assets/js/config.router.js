@@ -741,8 +741,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalActividadCtrl','ActividadFactory',
         		'ModalItemCtrl','ItemFactory',
         		'ModalSubItemCtrl', 'SubItemsFactory',
-        		'ModalProyectoCtrl','ProyectoFactory'
-        		//'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory'
+        		'ModalProyectoCtrl','ProyectoFactory',
+        		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory'
 		),
         title: 'Reporte S01',
         ncyBreadcrumb: {

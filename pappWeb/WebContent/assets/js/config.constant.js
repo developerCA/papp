@@ -196,7 +196,7 @@ app.constant('JS_REQUIRES', {
         'MatrizDesglosadaProgramacionAnualCtrl':'assets/js/controllers/papp/matrizDesglosadaProgramacionAnualCtrl.js',
         'MatrizDesglosadaProgramacionAnualFactory':'assets/js/factory/matrizDesglosadaProgramacionAnualFactory.js',
         'ModalFuenteFinanciamientoCtrl':'assets/js/controllers/papp/modales/modalFuenteFinanciamientoCtrl.js',
-        //'FuenteFinanciamientoFactory':'assets/js/factory/fuenteFinanciamientoFactory.js',
+        'FuenteFinanciamientoFactory':'assets/js/factory/fuentefinanciamientoFactory.js',
         'PlanificacionInstitucionalCtrl':'assets/js/controllers/papp/planificacionInstitucionalCtrl.js',
         'PlanificacionInstitucionalFactory':'assets/js/factory/planificacionInstitucionalFactory.js',
         'ModalMetasCtrl':'assets/js/controllers/papp/modales/modalMetasCtrl.js',
