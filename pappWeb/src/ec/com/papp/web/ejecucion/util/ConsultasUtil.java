@@ -734,7 +734,7 @@ public class ConsultasUtil {
 	public static Double obtenertotalsubitem(Long idsubitem) throws MyException {
 		double total=0.0;
 		try{
-			//traigo los datos de actividadunidadacumulador
+			//traigo los datos de subitemunidadacumulador
 			SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 			subitemunidadacumuladorTO.getId().setId(idsubitem);
 			//subitemunidadacumuladorTO.setTipo("A");
@@ -793,10 +793,10 @@ public class ConsultasUtil {
 	public static Double obtenertotalsubitem(Double total,Long idsubitem,Long nivelactividadid,ReformalineaTO reformalineaTO) throws MyException {
 		try{
 			//traigo las reformas asignadas al subitem
-			Collection<ReformaTO> reformaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+//			Collection<ReformaTO> reformaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
 			double totalreforma=0.0;
-			for(ReformaTO reformaTO:reformaTOs)
-				totalreforma=totalreforma+reformaTO.getValorincremento().doubleValue()-reformaTO.getValordecremento();
+//			for(ReformaTO reformaTO:reformaTOs)
+//				totalreforma=totalreforma+reformaTO.getValorincremento().doubleValue()-reformaTO.getValordecremento();
 			double valtotal=total+totalreforma+reformalineaTO.getValordecremento().doubleValue()-reformalineaTO.getValorincremento().doubleValue();
 			return valtotal;
 
