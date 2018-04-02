@@ -67,7 +67,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 			//console.log(resp);
         	$scope.objeto.npdevengado = resp.json.datoslineaordend.aprobadas;
         	$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
-        	$scope.objeto.npsaldodisponible = resp.json.datoslineaordend.saldo;
+        	$scope.objeto.npsaldo = resp.json.datoslineaordend.saldo;
         	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
 		})
 		ordenDevengoLineasFactory.obtenerTotal(
