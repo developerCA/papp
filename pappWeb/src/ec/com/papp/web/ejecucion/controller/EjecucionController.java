@@ -1073,6 +1073,7 @@ public class EjecucionController {
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
+			ordengastoTO.setNpcodigoregistro(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getCodigo());
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
 				ordengastoTO.setEstado(tipo);
 				if(parameters.get("cur")!=null)
