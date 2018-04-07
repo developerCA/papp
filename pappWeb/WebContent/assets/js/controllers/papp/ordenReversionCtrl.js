@@ -118,6 +118,10 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			SweetAlert.swal("Orden de Reversion!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
 		}
+		if ($scope.data[index].valortotal <= 0) {
+			SweetAlert.swal("Orden de Reversion!", "El valor total tiene que ser mayor que cero.", "error");
+			return;
+		}
 		SweetAlert.swal({ 
 				title: "Orden de Reversion?",
 				text: "Seguro que desea hacer la solicitud!",

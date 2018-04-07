@@ -25,6 +25,17 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
 		})
 	};
 
+	$scope.calculaValor=function() {
+		if ($scope.anticipo == 1) {
+			// porciento
+			$scope.objeto.anticipovalor = ($scope.objeto.valortotal / 100) * $scope.objeto.anticipoporcentaje;
+		}
+		if ($scope.anticipo == 2) {
+			// valor
+			$scope.objeto.anticipoporcentaje = ($scope.objeto.anticipovalor / $scope.objeto.valortotal) * 100;
+		}
+	}
+
 	function toDate(fuente) {
 		try {
 			var parts = fuente.split('/');

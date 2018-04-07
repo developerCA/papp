@@ -1348,7 +1348,7 @@
 																	rows="3" style="width: 100%"
 																	placeholder="Escriba un descripci&oacute;n"
 																	class="form-control" ng-model="obj.descripcion"
-																	ng-disabled="!editar"></textarea>
+																	ng-disabled="!editarP"></textarea>
 															</td>
 														</tr>
 														<tr>
@@ -1429,7 +1429,7 @@
 																	class="form-control" name="{{'pvalor_'+$index}}"
 																	ng-model="obj.metacantidad" numericOnly
 																	style="text-align: right;" required decimal="2"
-																	ng-disabled="objetoAjustada.unidadtiempo!='PE'"
+																	ng-disabled="!editarA || objetoAjustada.unidadtiempo!='PE'"
 																	ng-change="calcularPorcientoA();">
 															</td>
 															<td>
@@ -2098,8 +2098,7 @@
 								</form>
 							</div>
 							<div class="col-md-6" ng-show="objeto.id > 0">
-								<div ng-show="divMetaDistribucionPlanificada"
-									class="panel panel-primary">
+								<div ng-show="divMetaDistribucionPlanificada" class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionPlanificada"
 										novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionPlanificada')">
@@ -2185,8 +2184,7 @@
 									</form>
 								</div>
 
-								<div ng-show="divMetaDistribucionAjustada"
-									class="panel panel-primary">
+								<div ng-show="divMetaDistribucionAjustada" class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionAjustada" novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionAjustada')">
 										<span> &nbsp;Distribuci&oacute;n:
@@ -2264,8 +2262,7 @@
 									</form>
 								</div>
 
-								<div ng-show="divMetaDistribucionDevengo"
-									class="panel panel-primary">
+								<div ng-show="divMetaDistribucionDevengo" class="panel panel-primary">
 									<form name="Form" id="formMetaDistribucionDevengo" novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionDevengo')">
 										<span>

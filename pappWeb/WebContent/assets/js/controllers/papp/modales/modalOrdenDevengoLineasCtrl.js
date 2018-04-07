@@ -112,7 +112,9 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
                 return;
             } else {
             	var tObj = Object.assign({}, $scope.objeto);
-            	tObj.nivelactid = tObj.subitem;
+            	if (tObj.nivelactid == 0) {
+            		tObj.nivelactid = tObj.subitem;
+            	}
             	delete tObj.subitem;
             	ordenDevengoLineasFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){

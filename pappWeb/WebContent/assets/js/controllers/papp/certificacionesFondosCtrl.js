@@ -120,6 +120,10 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
 		}
+		if ($scope.data[index].valortotal <= 0) {
+			SweetAlert.swal("Certificaciones de Fondos!", "El valor total tiene que ser mayor que cero.", "error");
+			return;
+		}
 		$scope.data[index].npestado = "Solicitando";
 		certificacionesFondosFactory.solicitar(
 			$scope.data[index].id,

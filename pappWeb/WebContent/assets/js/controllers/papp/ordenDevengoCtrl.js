@@ -144,6 +144,10 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 			SweetAlert.swal("Orden de Devengo!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
 		}
+		if ($scope.data[index].valortotal <= 0) {
+			SweetAlert.swal("Orden de Devengo!", "El valor total tiene que ser mayor que cero.", "error");
+			return;
+		}
 		SweetAlert.swal({ 
 				title: "Orden de Devengo?",
 				text: "Seguro que desea hacer la solicitud!",
