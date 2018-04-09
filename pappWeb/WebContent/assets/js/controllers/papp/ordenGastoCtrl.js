@@ -33,7 +33,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			$scope.pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
-			//console.log(resp);
+			console.log(resp);
         	$scope.data = resp.result;
             $scope.total = resp.total.valor;
 		})
@@ -66,6 +66,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			toStringDate($scope.fechafinalFiltro),
 			$scope.estadoFiltro
 		).then(function(resp){
+			console.log(resp);
         	$scope.data = resp.result;
             $scope.total = resp.total.valor;
 		})

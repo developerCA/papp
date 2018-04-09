@@ -359,7 +359,8 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 					return $scope.objeto.ordendevengoordengastoid;
 				},
 				ordenGastoValor : function() {
-					return ($scope.objeto.tipo == 'L'? $scope.objeto.npordengastovalor: 0);
+					return $scope.objeto.tipo;
+					//return ($scope.objeto.tipo == 'L'? $scope.objeto.npordengastovalor: 0);
 				}
 			}
 		});

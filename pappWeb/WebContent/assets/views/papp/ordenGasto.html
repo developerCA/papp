@@ -247,9 +247,17 @@
 								</td>
 								<td>{{obj.codigo}}</td>
 								<td style="text-align: center;">
-									<span class="btn-primary">
-										<i class="fa ti-check"></i>
-									</span>
+									<div ng-show="obj.npingresarcontrato">
+										<div ng-show="obj.ordengastocontratoid != 0" style="color: Green;">
+											<b>Listo</b>
+										</div>
+										<div ng-show="obj.ordengastocontratoid == 0" style="color: Red;">
+											<b>FALTA</b>
+										</div>
+									</div>
+									<div ng-show="!obj.npingresarcontrato">
+										No
+									</div>
 								</td>
 								<td style="text-align: right;">
 									<span>

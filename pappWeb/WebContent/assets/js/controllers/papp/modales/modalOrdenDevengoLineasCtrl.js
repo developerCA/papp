@@ -5,7 +5,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 
 	$scope.noeditar=false;
 	$scope.init=function(){
-		$scope.editarValor = (ordenGastoValor == 0? true: false);
+		$scope.editarValor = (ordenGastoValor != 'L'? true: false);
 		if (editar == null) {
 			//nuevo
 			ordenDevengoLineasFactory.nuevoLinea(
@@ -13,7 +13,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 			).then(function(resp){
 				//console.log(resp.json.ordendevengolinea);
 	        	$scope.objeto = resp.json.ordendevengolinea;
-				$scope.objeto.valor = ordenGastoValor;
+				//$scope.objeto.valor = ordenGastoValor;
 	        	$scope.noeditar=false;
 	        	$scope.cambioSubItems();
 			})
@@ -69,6 +69,9 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
         	$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
         	$scope.objeto.npsaldo = resp.json.datoslineaordend.saldo;
         	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
+        	if (!$scope.editarValor) {
+        		$scope.objeto.valor = $scope.objeto.npsaldo;
+        	}
 		})
 		ordenDevengoLineasFactory.obtenerTotal(
 			$scope.si[i].nivelactid
@@ -111,6 +114,14 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
+            	if ($scope.objeto.valor == $scope.objeto.npsaldo.toFixed(2)) {
+                    SweetAlert.swal(
+                		"Orden Devengo! - Lineas",
+                		"Tiene que cambiar el tipo de la Orden de Devengo a: Liquidacion",
+                		"error"
+            		);
+            		return;
+            	}
             	var tObj = Object.assign({}, $scope.objeto);
             	if (tObj.nivelactid == 0) {
             		tObj.nivelactid = tObj.subitem;
