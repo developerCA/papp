@@ -42,6 +42,8 @@ import ec.com.papp.estructuraorganica.to.UnidadarbolTO;
 import ec.com.papp.estructuraorganica.to.UnidadarbolplazaTO;
 import ec.com.papp.estructuraorganica.to.UnidadarbolplazaempleadoTO;
 import ec.com.papp.estructuraorganica.to.UnidadinstTO;
+import ec.com.papp.web.administracion.controller.ComunController;
+import ec.com.papp.web.comun.util.ConstantesSesion;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
@@ -77,7 +79,7 @@ public class EstructuraorganicaController {
 			//Instituto entidad
 			if(clase.equals("institutoentidad")){
 				InstitucionentidadTO institucionentidadTO = gson.fromJson(new StringReader(objeto), InstitucionentidadTO.class);
-				accion = (institucionentidadTO.getId()==null)?"crear":"actualizar";
+				accion = (institucionentidadTO.getId()==null)?"I":"U";
 				UtilSession.estructuraorganicaServicio.transCrearModificarInstitucionentidad(institucionentidadTO);
 				id=institucionentidadTO.getId().toString();
 				jsonObject.put("institutoentidad", (JSONObject)JSONSerializer.toJSON(institucionentidadTO,institucionentidadTO.getJsonConfig()));
@@ -120,7 +122,7 @@ public class EstructuraorganicaController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
-					accion = (estructuraorganicaTO.getId()==null)?"crear":"actualizar";
+					accion = (estructuraorganicaTO.getId()==null)?"I":"U";
 					UtilSession.estructuraorganicaServicio.transCrearModificarEstructuraorganica(estructuraorganicaTO);
 					id=estructuraorganicaTO.getId().toString();
 					jsonObject.put("estructuraorganica", (JSONObject)JSONSerializer.toJSON(estructuraorganicaTO,estructuraorganicaTO.getJsonConfig()));
@@ -130,7 +132,7 @@ public class EstructuraorganicaController {
 			//Unidad
 			else if(clase.equals("unidad")){
 				UnidadTO unidadTO = gson.fromJson(new StringReader(objeto), UnidadTO.class);
-				accion = (unidadTO.getId()==null)?"crear":"actualizar";
+				accion = (unidadTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				UnidadTO unidadTO2=new UnidadTO();
 				unidadTO2.setCodigopresup(unidadTO.getCodigopresup());
@@ -156,7 +158,7 @@ public class EstructuraorganicaController {
 			else if(clase.equals("unidadarbol")){
 				UnidadarbolTO unidadarbolTO = gson.fromJson(new StringReader(objeto), UnidadarbolTO.class);
 				unidadarbolTO.setProceso("-");
-				accion = (unidadarbolTO.getId()==null)?"crear":"actualizar";
+				accion = (unidadarbolTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				UnidadarbolTO unidadarbolTO2=new UnidadarbolTO();
 				unidadarbolTO2.setUnidadarbolpadreid(unidadarbolTO.getUnidadarbolpadreid());
@@ -183,7 +185,7 @@ public class EstructuraorganicaController {
 			//Unidad arbol plaza
 			else if(clase.equals("unidadarbolplaza")){
 				UnidadarbolTO unidadarbolTO = gson.fromJson(new StringReader(objeto), UnidadarbolTO.class);
-				//accion = (unidadarbolTO.getId()==null)?"crear":"actualizar";
+				//accion = (unidadarbolTO.getId()==null)?"I":"U";
 				UtilSession.estructuraorganicaServicio.transCrearModificarUnidadarbolplaza(unidadarbolTO.getDetails(), unidadarbolTO.getId());
 				//id=unidadarbolTO.getId().toString();
 				//jsonObject.put("unidadarbolplaza", (JSONObject)JSONSerializer.toJSON(unidadarbolTO,unidadarbolTO.getJsonConfig()));
@@ -204,7 +206,7 @@ public class EstructuraorganicaController {
 					if(unidadarbolplazaempleadoTO.getNpfechainicioc()!=null)
 					unidadarbolplazaempleadoTO.setFechainicio(UtilGeneral.parseStringToDate(unidadarbolplazaempleadoTO.getNpfechainicioc()));
 				}
-				//accion = (unidadarbolplazaempleadoTO.getId()==null)?"crear":"actualizar";
+				//accion = (unidadarbolplazaempleadoTO.getId()==null)?"I":"U";
 				UtilSession.estructuraorganicaServicio.transCrearModificarUnidadarbolplazaempleado(unidadarbolplazaTO.getDetails(), unidadarbolplazaTO.getId().getId(), unidadarbolplazaTO.getId().getPlazaid());
 				//id=unidadarbolplazaempleadoTO.getId().toString();
 				//jsonObject.put("unidadarbolplazaempleado", (JSONObject)JSONSerializer.toJSON(unidadarbolplazaempleadoTO,unidadarbolplazaempleadoTO.getJsonConfig()));
@@ -213,7 +215,7 @@ public class EstructuraorganicaController {
 			//Unidad institucion
 			else if(clase.equals("unidadainstitucion")){
 				UnidadinstTO unidadinstTO = gson.fromJson(new StringReader(objeto), UnidadinstTO.class);
-				accion = (unidadinstTO.getId()==null)?"crear":"actualizar";
+				accion = (unidadinstTO.getId()==null)?"I":"U";
 				UtilSession.estructuraorganicaServicio.transCrearModificarUnidadinst(unidadinstTO);
 				id=unidadinstTO.getId().toString();
 				jsonObject.put("unidadarbolplaza", (JSONObject)JSONSerializer.toJSON(unidadinstTO,unidadinstTO.getJsonConfig()));
@@ -223,6 +225,7 @@ public class EstructuraorganicaController {
 //			if(mensajes.getMsg()==null)
 //				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
 			if(mensajes.getMsg()==null){
+				ComunController.crearAuditoria(request, clase, accion, objeto, id);
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}
@@ -345,6 +348,7 @@ public class EstructuraorganicaController {
 
 			
 			log.println("json retornado: " + jsonObject.toString());
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al obtener para editar");
@@ -409,7 +413,7 @@ public class EstructuraorganicaController {
 				UtilSession.estructuraorganicaServicio.transEliminarUnidadinst(new UnidadinstTO(new UnidadinstID(id, id2)));
 			}
 
-			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+			ComunController.crearAuditoria(request, clase, "E", null, id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
 			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 //			UtilSession.estructuraorganicaServicio.transCrearModificarAuditoria(auditoriaTO);

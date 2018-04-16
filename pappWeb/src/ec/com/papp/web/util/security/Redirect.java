@@ -15,7 +15,7 @@ public class Redirect {
 
 	@RequestMapping("redirect")
 	public ModelAndView redireccionar(HttpServletRequest request,HttpServletResponse response) throws Exception{
-		System.out.println("entro a redireccionar");
+		System.out.println("entro a redireccionar...");
 		return new ModelAndView(new RedirectView("login"));
 	}
 	

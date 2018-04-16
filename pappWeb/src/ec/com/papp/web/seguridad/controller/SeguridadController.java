@@ -31,7 +31,9 @@ import ec.com.papp.seguridad.to.PerfilpermisoTO;
 import ec.com.papp.seguridad.to.PermisoTO;
 import ec.com.papp.seguridad.to.PermisoobjetoTO;
 import ec.com.papp.seguridad.to.UsuarioTO;
+import ec.com.papp.web.administracion.controller.ComunController;
 import ec.com.papp.web.comun.util.CambioClave;
+import ec.com.papp.web.comun.util.ConstantesSesion;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
@@ -66,7 +68,7 @@ public class SeguridadController {
 			//Menu
 			if(clase.equals("menu")){
 				MenuTO menuTO = gson.fromJson(new StringReader(objeto), MenuTO.class);
-				accion = (menuTO.getId()==null)?"crear":"actualizar";
+				accion = (menuTO.getId()==null)?"I":"U";
 				UtilSession.seguridadServicio.transCrearModificarMenu(menuTO);
 				id=menuTO.getId().toString();
 				menuTO=UtilSession.seguridadServicio.transObtenerMenuTO(menuTO.getId());
@@ -75,7 +77,7 @@ public class SeguridadController {
 			//Perfilpermiso
 			else if(clase.equals("perfilpermiso")){
 				PerfilpermisoTO perfilpermisoTO = gson.fromJson(new StringReader(objeto), PerfilpermisoTO.class);
-				accion = (perfilpermisoTO.getId()==null)?"crear":"actualizar";
+				accion = (perfilpermisoTO.getId()==null)?"I":"U";
 				UtilSession.seguridadServicio.transCrearModificarPerfilpermiso(perfilpermisoTO);
 				id=perfilpermisoTO.getId().toString();
 				perfilpermisoTO=UtilSession.seguridadServicio.transObtenerPerfilpermisoTO(new PerfilpermisoID(perfilpermisoTO.getId().getPerfilid(), perfilpermisoTO.getId().getPermisoid()));
@@ -85,7 +87,7 @@ public class SeguridadController {
 			//Perfil
 			else if(clase.equals("perfil")){
 				PerfilTO perfilTO = gson.fromJson(new StringReader(objeto), PerfilTO.class);
-				accion = (perfilTO.getId()==null)?"crear":"actualizar";
+				accion = (perfilTO.getId()==null)?"I":"U";
 				UtilSession.seguridadServicio.transCrearModificarPerfil(perfilTO);
 				id=perfilTO.getId().toString();
 				jsonObject.put("perfil", (JSONObject)JSONSerializer.toJSON(perfilTO,perfilTO.getJsonConfig()));
@@ -94,7 +96,7 @@ public class SeguridadController {
 			//Permiso
 			else if(clase.equals("permiso")){
 				PermisoTO permisoTO = gson.fromJson(new StringReader(objeto), PermisoTO.class);
-				accion = (permisoTO.getId()==null)?"crear":"actualizar";
+				accion = (permisoTO.getId()==null)?"I":"U";
 				UtilSession.seguridadServicio.transCrearModificarPermiso(permisoTO);
 				id=permisoTO.getId().toString();
 				jsonObject.put("permiso", (JSONObject)JSONSerializer.toJSON(permisoTO,permisoTO.getJsonConfig()));
@@ -103,7 +105,7 @@ public class SeguridadController {
 			//Usuario
 			else if(clase.equals("usuario")){
 				UsuarioTO usuarioTO = gson.fromJson(new StringReader(objeto), UsuarioTO.class);
-				accion = (usuarioTO.getId()==null)?"crear":"actualizar";
+				accion = (usuarioTO.getId()==null)?"I":"U";
 				if(usuarioTO.getNpfechaactualizacionclave()!=null)
 					usuarioTO.setFechaactualizacionclave(UtilGeneral.parseStringToDate(usuarioTO.getNpfechaactualizacionclave()));
 				UtilSession.seguridadServicio.transCrearModificarusuario(usuarioTO);
@@ -114,7 +116,7 @@ public class SeguridadController {
 			//Usuariounidad
 			else if(clase.equals("usuariounidad")){
 				UsuariounidadTO usuariounidadTO = gson.fromJson(new StringReader(objeto), UsuariounidadTO.class);
-				accion = (usuariounidadTO.getId()==null)?"crear":"actualizar";
+				accion = (usuariounidadTO.getId()==null)?"I":"U";
 				UtilSession.estructuraorganicaServicio.transCrearModificarUsuariounidad(usuariounidadTO);
 				id=usuariounidadTO.getId().toString();
 				jsonObject.put("usuariounidad", (JSONObject)JSONSerializer.toJSON(usuariounidadTO,usuariounidadTO.getJsonConfig()));
@@ -124,6 +126,7 @@ public class SeguridadController {
 //			if(mensajes.getMsg()==null)
 //				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
 			if(mensajes.getMsg()==null){
+				ComunController.crearAuditoria(request, clase, accion, objeto, id);
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}
@@ -210,6 +213,7 @@ public class SeguridadController {
 			}
 			
 			log.println("json retornado: " + jsonObject.toString());
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al obtener para editar");
@@ -268,6 +272,7 @@ public class SeguridadController {
 			}
 
 			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+			ComunController.crearAuditoria(request, clase, "E", null, id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
 			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 //			UtilSession.seguridadServicio.transCrearModificarAuditoria(auditoriaTO);

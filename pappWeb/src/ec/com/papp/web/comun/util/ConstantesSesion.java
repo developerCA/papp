@@ -17,5 +17,7 @@ public interface ConstantesSesion {
 
     /*VARIABLES DE SESION*/    
     public final static String USUARIO_LOGIN					= SESSION_MANAGER  + "_usuarioLogin";
+    /*VALOR ANTIGUO PARA AUDITORIA*/    
+    public final static String VALORANTIGUO						= BASE_SESSION  + "_valorantiguo";
     
 }

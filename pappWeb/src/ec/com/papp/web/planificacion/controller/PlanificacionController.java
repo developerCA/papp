@@ -55,6 +55,8 @@ import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
 import ec.com.papp.planificacion.to.TareaunidadTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.resource.MensajesAplicacion;
+import ec.com.papp.web.administracion.controller.ComunController;
+import ec.com.papp.web.comun.util.ConstantesSesion;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
@@ -93,7 +95,7 @@ public class PlanificacionController {
 			//Objetivo
 			if(clase.equals("objetivo")){
 				ObjetivoTO objetivoTO = gson.fromJson(new StringReader(objeto), ObjetivoTO.class);
-				accion = (objetivoTO.getId()==null)?"crear":"actualizar";
+				accion = (objetivoTO.getId()==null)?"I":"U";
 				if(!objetivoTO.getTipo().equals("E")) {
 					//pregunto si ya existe el codigo en el nivel actual
 					ObjetivoTO objetivoTO2=new ObjetivoTO();
@@ -200,7 +202,7 @@ public class PlanificacionController {
 				PlannacionalTO plannacionalTO = gson.fromJson(new StringReader(objeto), PlannacionalTO.class);
 				log.println("padre id: " + plannacionalTO.getPlannacionalpadreid());
 				log.println("descripcion: " + plannacionalTO.getDescripcion());
-				accion = (plannacionalTO.getId()==null)?"crear":"actualizar";
+				accion = (plannacionalTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				PlannacionalTO plannacionalTO2=new PlannacionalTO();
 				plannacionalTO2.setPlannacionalejerfiscalid(plannacionalTO.getPlannacionalejerfiscalid());
@@ -262,7 +264,7 @@ public class PlanificacionController {
 			else if(clase.equals("indicador")){
 				IndicadorTO indicadorTO = gson.fromJson(new StringReader(objeto), IndicadorTO.class);
 				log.println("descripcion " + indicadorTO.getDescripcion());
-				accion = (indicadorTO.getId()==null)?"crear":"actualizar";
+				accion = (indicadorTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				IndicadorTO indicadorTO2=new IndicadorTO();
 				indicadorTO2.setIndicadorejerciciofiscalid(indicadorTO.getIndicadorejerciciofiscalid());
@@ -313,7 +315,7 @@ public class PlanificacionController {
 			//Programa
 			else if(clase.equals("programa")){
 				ProgramaTO programaTO = gson.fromJson(new StringReader(objeto), ProgramaTO.class);
-				accion = (programaTO.getId()==null)?"crear":"actualizar";
+				accion = (programaTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual y combinado con el objetivo fuerza
 				ProgramaTO programaTO2=new ProgramaTO();
 				programaTO2.setProgramaejerciciofiscalid(programaTO.getProgramaejerciciofiscalid());
@@ -370,7 +372,7 @@ public class PlanificacionController {
 			//Subprograma
 			else if(clase.equals("subprograma")){
 				SubprogramaTO subprogramaTO = gson.fromJson(new StringReader(objeto), SubprogramaTO.class);
-				accion = (subprogramaTO.getId()==null)?"crear":"actualizar";
+				accion = (subprogramaTO.getId()==null)?"I":"U";
 				log.println("programa: " + subprogramaTO.getPadre());
 				//pregunto si ya existe el codigo en el nivel actual
 				SubprogramaTO subprogramaTO2=new SubprogramaTO();
@@ -429,7 +431,7 @@ public class PlanificacionController {
 			else if(clase.equals("proyecto")){
 				ProyectoTO proyectoTO = gson.fromJson(new StringReader(objeto), ProyectoTO.class);
 				log.println("metas " + proyectoTO.getProyectometaTOs().size());
-				accion = (proyectoTO.getId()==null)?"crear":"actualizar";
+				accion = (proyectoTO.getId()==null)?"I":"U";
 				if(proyectoTO.getNpFechainicio()!=null)
 					proyectoTO.setFechainicio(UtilGeneral.parseStringToDate(proyectoTO.getNpFechainicio()));
 				if(proyectoTO.getNpFechafin()!=null){
@@ -493,7 +495,7 @@ public class PlanificacionController {
 			//Actividad
 			else if(clase.equals("actividad")){
 				ActividadTO actividadTO = gson.fromJson(new StringReader(objeto), ActividadTO.class);
-				accion = (actividadTO.getId()==null)?"crear":"actualizar";
+				accion = (actividadTO.getId()==null)?"I":"U";
 				log.println("va a grabar actividad");
 				//pregunto si ya existe el codigo en el nivel actual
 				ActividadTO actividadTO2=new ActividadTO();
@@ -550,7 +552,7 @@ public class PlanificacionController {
 			//Subactividad
 			else if(clase.equals("subactividad")){
 				SubactividadTO subactividadTO = gson.fromJson(new StringReader(objeto), SubactividadTO.class);
-				accion = (subactividadTO.getId()==null)?"crear":"actualizar";
+				accion = (subactividadTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				SubactividadTO subactividadTO2=new SubactividadTO();
 				subactividadTO2.setSubactividadejerfiscalid(subactividadTO.getSubactividadejerfiscalid());
@@ -605,7 +607,7 @@ public class PlanificacionController {
 			//Actividad unidad (Planificacion anual - modificar actividad)
 			else if(clase.equals("actividadunidad")){
 				ActividadunidadTO actividadunidadTO = gson.fromJson(new StringReader(objeto), ActividadunidadTO.class);
-				accion = (actividadunidadTO.getId()==null)?"crear":"actualizar";
+				accion = (actividadunidadTO.getId()==null)?"I":"U";
 				actividadunidadTO.setFechainicio(UtilGeneral.parseStringToDate(actividadunidadTO.getNpFechainicio()));
 				log.println("npfechafin: " + actividadunidadTO.getNpFechafin());
 				actividadunidadTO.setFechafin(UtilGeneral.parseStringToDate(actividadunidadTO.getNpFechafin()));
@@ -618,7 +620,7 @@ public class PlanificacionController {
 			//Subactividad unidad (Planificacion anual - modificar subactividad)
 			else if(clase.equals("subactividadunidad")){
 				SubactividadunidadTO subactividadunidadTO = gson.fromJson(new StringReader(objeto), SubactividadunidadTO.class);
-				accion = (subactividadunidadTO.getId()==null)?"crear":"actualizar";
+				accion = (subactividadunidadTO.getId()==null)?"I":"U";
 				//verifico que no se pase del 100% de la ponderacion
 				Double ponderacion=UtilSession.planificacionServicio.transObtienePoneracionSubactividades(subactividadunidadTO.getPadre(),subactividadunidadTO.getId().getUnidadid());
 				//Si la ponderacion guardada mas la ingresada suma menos o igual a 100 la graba
@@ -636,7 +638,7 @@ public class PlanificacionController {
 			//Tarea unidad (Planificacion anual - modificar subactividad)
 			else if(clase.equals("tareaunidad")){
 				TareaunidadTO tareaunidadTO = gson.fromJson(new StringReader(objeto), TareaunidadTO.class);
-				accion = (tareaunidadTO.getId()==null)?"crear":"actualizar";
+				accion = (tareaunidadTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				boolean grabar=true;
 				if(tareaunidadTO.getCodigo()!=null && !tareaunidadTO.getCodigo().equals("") && !tareaunidadTO.getCodigo().equals(" ")) {
@@ -713,7 +715,7 @@ public class PlanificacionController {
 			//Subtarea unidad (Planificacion anual - modificar actividad)
 			else if(clase.equals("subtareaunidad")){
 				SubtareaunidadTO subtareaunidadTO = gson.fromJson(new StringReader(objeto), SubtareaunidadTO.class);
-				accion = (subtareaunidadTO.getId()==null)?"crear":"actualizar";
+				accion = (subtareaunidadTO.getId()==null)?"I":"U";
 				boolean grabar=true;
 				if(subtareaunidadTO.getCodigo()!=null && !subtareaunidadTO.getCodigo().equals("") && !subtareaunidadTO.getCodigo().equals(" ")) {
 					//pregunto si ya existe el codigo en el nivel actual
@@ -799,7 +801,7 @@ public class PlanificacionController {
 			//Item (Planificacion anual - modificar subactividad)
 			else if(clase.equals("itemunidad")){
 				ItemunidadTO itemunidadTO = gson.fromJson(new StringReader(objeto), ItemunidadTO.class);
-				accion = (itemunidadTO.getId()==null)?"crear":"actualizar";
+				accion = (itemunidadTO.getId()==null)?"I":"U";
 				//Verifico que no exista ya creado otro subitem unidad del mismo subitem en este nivel
 				NivelactividadTO nivelactividadTO=new  NivelactividadTO();
 				nivelactividadTO.setEstado(MensajesAplicacion.getString("estado.activo"));
@@ -875,7 +877,7 @@ public class PlanificacionController {
 			else if(clase.equals("subitemunidad")){
 				SubitemunidadTO subitemunidadTO = gson.fromJson(new StringReader(objeto), SubitemunidadTO.class);
 				log.println("detalle**: " + subitemunidadTO.getSubitemunidadejerfiscalid()+"--"+ subitemunidadTO.getNpcodigosubitem()+" - " +subitemunidadTO.getNpnombresubitem());
-				accion = (subitemunidadTO.getId()==null)?"crear":"actualizar";
+				accion = (subitemunidadTO.getId()==null)?"I":"U";
 				//Verifico que no exista ya creado otro subitem unidad del mismo subitem en este nivel
 				NivelactividadTO nivelactividadTO=new NivelactividadTO();
 				nivelactividadTO.setNivelactividadejerfiscalid(subitemunidadTO.getSubitemunidadejerfiscalid());
@@ -920,7 +922,7 @@ public class PlanificacionController {
 			//Cronograma (Planificacion anual - metas para actividad unidad, subtareaunidad y subitemunidad)
 			else if(clase.equals("cronograma")){
 				CronogramaTO cronogramaTO = gson.fromJson(new StringReader(objeto), CronogramaTO.class);
-				accion = (cronogramaTO.getId()==null)?"crear":"actualizar";
+				accion = (cronogramaTO.getId()==null)?"I":"U";
 				UtilSession.planificacionServicio.transCrearModificarCronograma(cronogramaTO);
 				id=cronogramaTO.getNpid().toString();
 				//jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
@@ -931,7 +933,7 @@ public class PlanificacionController {
 				Type matriz = new TypeToken<List<MatrizDetalle>>(){}.getType();
 		    	Collection<MatrizDetalle> matrizDetalles = gson.fromJson(new StringReader(objeto), matriz);
 				//MatrizDetalle matrizDetalle = gson.fromJson(new StringReader(objeto), MatrizDetalle.class);
-				accion = "actualizar";
+				accion = "U";
 				UtilSession.planificacionServicio.transModificarMatrizpresupuesto(matrizDetalles);
 			}
 
@@ -942,7 +944,7 @@ public class PlanificacionController {
 		    	Collection<MatrizDetalle> matrizDetalles = gson.fromJson(new StringReader(objeto), matriz);
 		    	log.println("detalles: " + matrizDetalles.size());
 				//MatrizDetalle matrizDetalle = gson.fromJson(new StringReader(objeto), MatrizDetalle.class);
-				accion = "actualizar";
+				accion = "U";
 				UtilSession.planificacionServicio.transModificarMatrizmetas(matrizDetalles);
 			}
 
@@ -950,6 +952,7 @@ public class PlanificacionController {
 //			if(mensajes.getMsg()==null)
 //				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
 			if(mensajes.getMsg()==null){
+				ComunController.crearAuditoria(request, clase, accion, objeto, id);
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}
@@ -1249,6 +1252,7 @@ public class PlanificacionController {
 				jsonObject.put("indicador", (JSONObject)JSONSerializer.toJSON(indicadorTO,indicadorTO.getJsonConfig()));
 			}
 			log.println("json retornado: " + jsonObject.toString());
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al obtener para editar");
@@ -1723,7 +1727,7 @@ public class PlanificacionController {
 			else if(clase.equals("nivelactividad")){
 				UtilSession.planificacionServicio.transEliminarNivelactividad(new NivelactividadTO(id));
 			}
-			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+			ComunController.crearAuditoria(request, clase, "E", null, id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
 			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 //			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);

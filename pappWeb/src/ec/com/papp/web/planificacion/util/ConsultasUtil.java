@@ -70,6 +70,8 @@ public class ConsultasUtil {
 				objetivoTO.setObjetivoejerciciofiscalid(Long.valueOf(parameters.get("objetivoejerciciofiscalid")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				objetivoTO.setEstado(parameters.get("estado"));
+			if(parameters.get("tipo")!=null && !parameters.get("tipo").equals(""))
+				objetivoTO.setTipo(parameters.get("tipo"));
 			if(parameters.get("objetivometaid")!=null && !parameters.get("objetivometaid").equals(""))
 				objetivoTO.setObjetivometaid(Long.valueOf(parameters.get("objetivometaid")));
 			Collection<ObjetivoTO> resultado=UtilSession.planificacionServicio.transObtenerObjetivoArbol(objetivoTO);
@@ -210,6 +212,7 @@ public class ConsultasUtil {
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				indicadorTO.setEstado(parameters.get("estado"));
 			Collection<IndicadorTO> resultado=UtilSession.planificacionServicio.transObtenerIndicadorArbol(indicadorTO);
+			log.println("indicadores: " + resultado.size());
 			Integer totalRegistrosPagina=resultado.size();
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", totalRegistrosPagina.toString());

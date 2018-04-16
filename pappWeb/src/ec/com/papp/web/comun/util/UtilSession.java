@@ -62,7 +62,6 @@ public class UtilSession {
 	 */
 	public static UsuarioTO getUsuario(HttpServletRequest request){
 		HttpSession session = request.getSession();
-		log.println("usuariologin: " + session.getAttribute(ConstantesSesion.USUARIO_LOGIN));
 		UsuarioTO usuarioDTO =(UsuarioTO)session.getAttribute(ConstantesSesion.USUARIO_LOGIN);	
 		return usuarioDTO;
 	}

@@ -67,6 +67,7 @@ import ec.com.papp.planificacion.to.OrdenreversionlineaTO;
 import ec.com.papp.planificacion.to.OrganismoprestamoTO;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.administracion.util.ConsultasUtil;
+import ec.com.papp.web.comun.util.ConstantesSesion;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
@@ -103,7 +104,7 @@ public class AdministracionController {
 			//copiar de un ejercicio fiscal a otro
 			if(clase.equals("copiardatos")){
 				Map<String, String> copiar= gson.fromJson(new StringReader(objeto), Map.class);
-				//accion = (ejerciciofiscalTO.getId()==null)?"crear":"actualizar";
+				//accion = (ejerciciofiscalTO.getId()==null)?"I":"U";
 				//pregunto si es fuente de financiamiento o items
 				UtilSession.adminsitracionServicio.transCopiardatos(copiar);
 				mensajes.setMsg("Exito al copiar los datos de un ejercicio fiscal a otro");
@@ -112,7 +113,7 @@ public class AdministracionController {
 			//Ejerciciofiscal
 			else if(clase.equals("ejerciciofiscal")){
 				EjerciciofiscalTO ejerciciofiscalTO = gson.fromJson(new StringReader(objeto), EjerciciofiscalTO.class);
-				accion = (ejerciciofiscalTO.getId()==null)?"crear":"actualizar";
+				accion = (ejerciciofiscalTO.getId()==null)?"I":"U";
 				
 				//pregunto si ya existe el nombre en el nivel actual
 				EjerciciofiscalTO ejerciciofiscalTO3=new EjerciciofiscalTO();
@@ -146,7 +147,7 @@ public class AdministracionController {
 			//Divisiones geograficas
 			else if(clase.equals("divisiongeografica")){
 				DivisiongeograficaTO divisiongeograficaTO = gson.fromJson(new StringReader(objeto), DivisiongeograficaTO.class);
-				accion = (divisiongeograficaTO.getId()==null)?"crear":"actualizar";
+				accion = (divisiongeograficaTO.getId()==null)?"I":"U";
 				//Si el codigo empieza por el codigo del padre
 				if(divisiongeograficaTO.getCodigo().startsWith(divisiongeograficaTO.getNpcodigopadre())) {
 					//pregunto si ya existe el nombre en el nivel actual
@@ -190,7 +191,7 @@ public class AdministracionController {
 			//Empleado
 			else if(clase.equals("empleado")){
 				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
-				accion = (socionegocioTO.getId()==null)?"crear":"actualizar";
+				accion = (socionegocioTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				SocionegocioTO socionegocioTO2=new SocionegocioTO();
 				socionegocioTO2.setCodigo(socionegocioTO.getCodigo());
@@ -224,7 +225,7 @@ public class AdministracionController {
 			//Empleadoproveedor
 			else if(clase.equals("empleadoproveedor")){
 				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
-				accion = (socionegocioTO.getId()==null)?"crear":"actualizar";
+				accion = (socionegocioTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				SocionegocioTO socionegocioTO2=new SocionegocioTO();
 				socionegocioTO2.setCodigo(socionegocioTO.getCodigo());
@@ -271,7 +272,7 @@ public class AdministracionController {
 			//Proveedorruc
 			else if(clase.equals("proveedorruc")){
 				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
-				accion = (socionegocioTO.getId()==null)?"crear":"actualizar";
+				accion = (socionegocioTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				SocionegocioTO socionegocioTO2=new SocionegocioTO();
 				socionegocioTO2.setCodigo(socionegocioTO.getCodigo());
@@ -318,7 +319,7 @@ public class AdministracionController {
 			//Empleado
 			//			else if(clase.equals("empleado")){
 			//				EmpleadoTO empleadoTO = gson.fromJson(new StringReader(objeto), EmpleadoTO.class);
-			//				accion = (empleadoTO.getId()==null)?"crear":"actualizar";
+			//				accion = (empleadoTO.getId()==null)?"I":"U";
 			//				//pregunto si ya existe el codigo en el nivel actual
 			//				EmpleadoTO empleadoTO2=new EmpleadoTO();
 			//				empleadoTO2.setCodigo(empleadoTO.getCodigo());
@@ -343,7 +344,7 @@ public class AdministracionController {
 			//Unidadmedida
 			else if(clase.equals("unidadmedida")){
 				UnidadmedidaTO unidadmedidaTO = gson.fromJson(new StringReader(objeto), UnidadmedidaTO.class);
-				accion = (unidadmedidaTO.getId()==null)?"crear":"actualizar";
+				accion = (unidadmedidaTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el nombre en el nivel actual
 				UnidadmedidaTO unidadmedidaTO3=new UnidadmedidaTO();
 				unidadmedidaTO3.setCodigo(unidadmedidaTO.getCodigo());
@@ -376,9 +377,9 @@ public class AdministracionController {
 			//Parametro
 			else if(clase.equals("parametro")){
 				ParametroTO parametroTO = gson.fromJson(new StringReader(objeto), ParametroTO.class);
-				accion = (parametroTO.getId()==null)?"crear":"actualizar";
+				accion = (parametroTO.getId()==null)?"I":"U";
 				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
-				accion = (socionegocioTO.getId()==null)?"crear":"actualizar";
+				accion = (socionegocioTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el nombre en el nivel actual
 				ParametroTO parametroTO3=new ParametroTO();
 				parametroTO3.setNombre(parametroTO.getNombre());
@@ -411,7 +412,7 @@ public class AdministracionController {
 			//Consecutivo
 			else if(clase.equals("consecutivo")){
 				ConsecutivoTO consecutivoTO = gson.fromJson(new StringReader(objeto), ConsecutivoTO.class);
-				accion = (consecutivoTO.getId()==null)?"crear":"actualizar";
+				accion = (consecutivoTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				ConsecutivoTO consecutivoTO3=new ConsecutivoTO();
 				consecutivoTO3.setNombre(consecutivoTO.getNombre());
@@ -447,7 +448,7 @@ public class AdministracionController {
 			//Tipoidentificacion
 			else if(clase.equals("tipoidentificacion")){
 				TipoidentificacionTO tipoidentificacionTO = gson.fromJson(new StringReader(objeto), TipoidentificacionTO.class);
-				accion = (tipoidentificacionTO.getId()==null)?"crear":"actualizar";
+				accion = (tipoidentificacionTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				TipoidentificacionTO tipoidentificacionTO3=new TipoidentificacionTO();
 				tipoidentificacionTO3.setNombre(tipoidentificacionTO.getNombre());
@@ -480,7 +481,7 @@ public class AdministracionController {
 			//Fuentefinanciamiento
 			else if(clase.equals("fuentefinanciamiento")){
 				FuentefinanciamientoTO fuentefinanciamientoTO = gson.fromJson(new StringReader(objeto), FuentefinanciamientoTO.class);
-				accion = (fuentefinanciamientoTO.getId()==null)?"crear":"actualizar";
+				accion = (fuentefinanciamientoTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				FuentefinanciamientoTO fuentefinanciamientoTO3=new FuentefinanciamientoTO();
 				fuentefinanciamientoTO3.setCodigo(fuentefinanciamientoTO.getCodigo());
@@ -514,7 +515,7 @@ public class AdministracionController {
 			//Organismo
 			else if(clase.equals("organismo")){
 				OrganismoTO organismoTO = gson.fromJson(new StringReader(objeto), OrganismoTO.class);
-				accion = (organismoTO.getId()==null)?"crear":"actualizar";
+				accion = (organismoTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				OrganismoTO organismoTO3=new OrganismoTO();
 				organismoTO3.setCodigo(organismoTO.getCodigo());
@@ -550,7 +551,7 @@ public class AdministracionController {
 			else if(clase.equals("obra")){
 				ObraTO obraTO = gson.fromJson(new StringReader(objeto), ObraTO.class);
 				log.println("obra: " + obraTO.getObraejerciciofiscalid());
-				accion = (obraTO.getId()==null)?"crear":"actualizar";
+				accion = (obraTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				ObraTO obraTO3=new ObraTO();
 				obraTO3.setCodigo(obraTO.getCodigo());
@@ -588,7 +589,7 @@ public class AdministracionController {
 				log.println("padre: " + itemTO.getItempadreid());
 				if(itemTO.getItempadreid()!=null && itemTO.getItempadreid().longValue()==0)
 					itemTO.setItempadreid(null);
-				accion = (itemTO.getId()==null)?"crear":"actualizar";
+				accion = (itemTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				ItemTO itemTO3=new ItemTO();
 				itemTO3.setCodigo(itemTO.getCodigo());
@@ -623,7 +624,7 @@ public class AdministracionController {
 			//Subitem
 			else if(clase.equals("subitem")){
 				SubitemTO subitemTO = gson.fromJson(new StringReader(objeto), SubitemTO.class);
-				accion = (subitemTO.getId()==null)?"crear":"actualizar";
+				accion = (subitemTO.getId()==null)?"I":"U";
 				if(subitemTO.getSubitemunidadmedidaid()!=null && subitemTO.getSubitemunidadmedidaid().longValue()==0)
 					subitemTO.setSubitemunidadmedidaid(null);
 				UtilSession.adminsitracionServicio.transCrearModificarSubitem(subitemTO);
@@ -634,7 +635,7 @@ public class AdministracionController {
 			//Grupomedida
 			else if(clase.equals("grupomedida")){
 				GrupomedidaTO grupomedidaTO = gson.fromJson(new StringReader(objeto), GrupomedidaTO.class);
-				accion = (grupomedidaTO.getId()==null)?"crear":"actualizar";
+				accion = (grupomedidaTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				GrupomedidaTO grupomedidaTO3=new GrupomedidaTO();
 				grupomedidaTO3.setCodigo(grupomedidaTO.getCodigo());
@@ -670,7 +671,7 @@ public class AdministracionController {
 			//Claseregistro
 			else if(clase.equals("claseregistro")){
 				ClaseregistroTO claseregistroTO = gson.fromJson(new StringReader(objeto), ClaseregistroTO.class);
-				accion = (claseregistroTO.getId()==null)?"crear":"actualizar";
+				accion = (claseregistroTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				ClaseregistroTO claseregistroTO3=new ClaseregistroTO();
 				claseregistroTO3.setCodigo(claseregistroTO.getCodigo());
@@ -709,7 +710,7 @@ public class AdministracionController {
 				if(claseregistroclasemodificacionTO.getId()==null)
 					claseregistroclasemodificacionTO.setId(new ClaseregistroclasemodificacionID());
 				log.println("ejercicio fiscal::# " + claseregistroclasemodificacionTO.getClaseregistrocmejerfiscalid());
-				accion = (claseregistroclasemodificacionTO.getId()==null)?"crear":"actualizar";
+				accion = (claseregistroclasemodificacionTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 //				ClaseregistroclasemodificacionTO claseregistroclasemodificacionTO3=new ClaseregistroclasemodificacionTO();
 //				claseregistroclasemodificacionTO3.setCodigo(claseregistroclasemodificacionTO.getCodigo());
@@ -746,7 +747,7 @@ public class AdministracionController {
 			//Tipodocumento
 			else if(clase.equals("tipodocumento")){
 				TipodocumentoTO tipodocumentoTO = gson.fromJson(new StringReader(objeto), TipodocumentoTO.class);
-				accion = (tipodocumentoTO.getId()==null)?"crear":"actualizar";
+				accion = (tipodocumentoTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				TipodocumentoTO tipodocumentoTO3=new TipodocumentoTO();
 				tipodocumentoTO3.setCodigo(tipodocumentoTO.getCodigo());
@@ -781,7 +782,7 @@ public class AdministracionController {
 			//En este metodo solo se modifica si es empleado o proveedor
 			else if(clase.equals("socionegocio")){
 				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
-				accion = (socionegocioTO.getId()==null)?"crear":"actualizar";
+				accion = (socionegocioTO.getId()==null)?"I":"U";
 				//Obtengo el registro de socio negocio
 				SocionegocioTO socionegocioTO2=UtilSession.adminsitracionServicio.transObtenerSocionegocioTO(socionegocioTO.getId());
 				//Le asigno lo que este seleccionado en esempleado y esproveedor
@@ -793,7 +794,7 @@ public class AdministracionController {
 			//Parametroindicador
 			else if(clase.equals("parametroindicador")){
 				ParametroindicadorTO parametroindicadorTO  = gson.fromJson(new StringReader(objeto), ParametroindicadorTO.class);
-				accion = (parametroindicadorTO.getId()==null)?"crear":"actualizar";
+				accion = (parametroindicadorTO.getId()==null)?"I":"U";
 				UtilSession.adminsitracionServicio.transCrearModificarParametroindicador(new ParametroindicadorTO());
 				id=parametroindicadorTO.getNpid().toString();
 				jsonObject.put("parametroindicador", (JSONObject)JSONSerializer.toJSON(parametroindicadorTO,parametroindicadorTO.getJsonConfig()));
@@ -802,7 +803,7 @@ public class AdministracionController {
 			//Tipoproducto
 			else if(clase.equals("tipoproducto")){
 				TipoproductoTO tipoproductoTO = gson.fromJson(new StringReader(objeto), TipoproductoTO.class);
-				accion = (tipoproductoTO.getId()==null)?"crear":"actualizar";
+				accion = (tipoproductoTO.getId()==null)?"I":"U";
 				if(tipoproductoTO.getActivo()==null)
 					tipoproductoTO.setActivo(0);
 				//pregunto si ya existe el codigo en el nivel actual
@@ -837,7 +838,7 @@ public class AdministracionController {
 			//Tiporegimen
 			else if(clase.equals("tiporegimen")){
 				TiporegimenTO tiporegimenTO = gson.fromJson(new StringReader(objeto), TiporegimenTO.class);
-				accion = (tiporegimenTO.getId()==null)?"crear":"actualizar";
+				accion = (tiporegimenTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				TiporegimenTO tiporegimenT3=new TiporegimenTO();
 				tiporegimenT3.setNombre(tiporegimenTO.getNombre());
@@ -870,7 +871,7 @@ public class AdministracionController {
 			//Procedimiento
 			else if(clase.equals("procedimiento")){
 				ProcedimientoTO procedimientoTO = gson.fromJson(new StringReader(objeto), ProcedimientoTO.class);
-				accion = (procedimientoTO.getId()==null)?"crear":"actualizar";
+				accion = (procedimientoTO.getId()==null)?"I":"U";
 				if(procedimientoTO.getActivo()==null)
 					procedimientoTO.setActivo(0);
 				//pregunto si ya existe el codigo en el nivel actual
@@ -906,7 +907,7 @@ public class AdministracionController {
 			//Grupo
 			else if(clase.equals("grupo")){
 				GrupoTO grupoTO = gson.fromJson(new StringReader(objeto), GrupoTO.class);
-				accion = (grupoTO.getId()==null)?"crear":"actualizar";
+				accion = (grupoTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				GrupoTO grupoTO4=new GrupoTO();
 				grupoTO4.setCodigo(grupoTO.getCodigo());
@@ -957,7 +958,7 @@ public class AdministracionController {
 			//Grado
 			else if(clase.equals("grado")){
 				GradoTO gradoTO = gson.fromJson(new StringReader(objeto), GradoTO.class);
-				accion = (gradoTO.getId()==null)?"crear":"actualizar";
+				accion = (gradoTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				GradoTO gradoTO4=new GradoTO();
 				gradoTO4.setCodigo(gradoTO.getCodigo());
@@ -1009,7 +1010,7 @@ public class AdministracionController {
 			//Clasificacion
 			else if(clase.equals("clasificacion")){
 				ClasificacionTO clasificacionTO = gson.fromJson(new StringReader(objeto), ClasificacionTO.class);
-				accion = (clasificacionTO.getId()==null)?"crear":"actualizar";
+				accion = (clasificacionTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				ClasificacionTO clasificacionTO3=new ClasificacionTO();
 				clasificacionTO3.setCodigo(clasificacionTO.getCodigo());
@@ -1042,7 +1043,7 @@ public class AdministracionController {
 			//Fuerza
 			else if(clase.equals("fuerza")){
 				FuerzaTO fuerzaTO = gson.fromJson(new StringReader(objeto), FuerzaTO.class);
-				accion = (fuerzaTO.getId()==null)?"crear":"actualizar";
+				accion = (fuerzaTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				FuerzaTO fuerzaTO4=new FuerzaTO();
 				fuerzaTO4.setCodigo(fuerzaTO.getCodigo());
@@ -1095,7 +1096,7 @@ public class AdministracionController {
 			else if(clase.equals("gradofuerza")){
 				GradofuerzaTO gradofuerzaTO = gson.fromJson(new StringReader(objeto), GradofuerzaTO.class);
 				log.println("grado superior*** " + gradofuerzaTO.getGradofuerzapadreid());
-				accion = (gradofuerzaTO.getId()==null)?"crear":"actualizar";
+				accion = (gradofuerzaTO.getId()==null)?"I":"U";
 				//valido que no exista creado un registro para ese grado
 				GradofuerzaTO gradoesfuerza=new GradofuerzaTO();
 				gradoesfuerza.setGradofuerzagradoid(gradofuerzaTO.getGradofuerzagradoid());
@@ -1170,7 +1171,7 @@ public class AdministracionController {
 			//especialidades
 			else if(clase.equals("especialidades")){
 				EspecialidadTO especialidadTO = gson.fromJson(new StringReader(objeto), EspecialidadTO.class);
-				accion = (especialidadTO.getId()==null)?"crear":"actualizar";
+				accion = (especialidadTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				EspecialidadTO especialidadTO3=new EspecialidadTO();
 				especialidadTO3.setCodigo(especialidadTO.getCodigo());
@@ -1203,7 +1204,7 @@ public class AdministracionController {
 			//Cargo
 			else if(clase.equals("cargo")){
 				CargoTO cargoTO = gson.fromJson(new StringReader(objeto), CargoTO.class);
-				accion = (cargoTO.getId()==null)?"crear":"actualizar";
+				accion = (cargoTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				CargoTO cargoTO4=new CargoTO();
 				cargoTO4.setCodigo(cargoTO.getCodigo());
@@ -1254,7 +1255,7 @@ public class AdministracionController {
 			//Escalarmu
 			else if(clase.equals("escalarmu")){
 				EscalarmuTO escalarmuTO = gson.fromJson(new StringReader(objeto), EscalarmuTO.class);
-				accion = (escalarmuTO.getId()==null)?"crear":"actualizar";
+				accion = (escalarmuTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				EscalarmuTO escalarmuTO3=new EscalarmuTO();
 				escalarmuTO3.setCodigo(escalarmuTO.getCodigo());
@@ -1287,7 +1288,7 @@ public class AdministracionController {
 
 			else if(clase.equals("gradoescala")){
 				GradoescalaTO gradoescalaTO = gson.fromJson(new StringReader(objeto), GradoescalaTO.class);
-				accion = (gradoescalaTO.getId()==null)?"crear":"actualizar";
+				accion = (gradoescalaTO.getId()==null)?"I":"U";
 				//valido que no exista creado un registro para ese grado
 				GradoescalaTO gradoescala=new GradoescalaTO();
 				gradoescala.setGegradofuerzaid(gradoescalaTO.getGegradofuerzaid());
@@ -1332,7 +1333,7 @@ public class AdministracionController {
 
 			else if(clase.equals("cargoescala")){
 				CargoescalaTO cargoescalaTO = gson.fromJson(new StringReader(objeto), CargoescalaTO.class);
-				accion = (cargoescalaTO.getId()==null)?"crear":"actualizar";
+				accion = (cargoescalaTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				CargoescalaTO cargoescalaTO3=new CargoescalaTO();
 				cargoescalaTO3.setCodigo(cargoescalaTO.getCodigo());
@@ -1364,7 +1365,7 @@ public class AdministracionController {
 
 			else if(clase.equals("nivelorganico")){
 				NivelorganicoTO nivelorganicoTO = gson.fromJson(new StringReader(objeto), NivelorganicoTO.class);
-				accion = (nivelorganicoTO.getId()==null)?"crear":"actualizar";
+				accion = (nivelorganicoTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				NivelorganicoTO nivelorganicoTO4=new NivelorganicoTO();
 				nivelorganicoTO4.setCodigo(nivelorganicoTO.getCodigo());
@@ -1414,7 +1415,7 @@ public class AdministracionController {
 			//Institucion
 			else if(clase.equals("institucion")){
 				InstitucionTO institucionTO = gson.fromJson(new StringReader(objeto), InstitucionTO.class);
-				accion = (institucionTO.getId()==null)?"crear":"actualizar";
+				accion = (institucionTO.getId()==null)?"I":"U";
 				//pregunto si ya existe el codigo en el nivel actual
 				InstitucionTO institucionTO3=new InstitucionTO();
 				institucionTO3.setCodigo(institucionTO.getCodigo());
@@ -1444,7 +1445,7 @@ public class AdministracionController {
 			//Contrato
 			else if(clase.equals("contrato")){
 				ContratoTO contratoTO = gson.fromJson(new StringReader(objeto), ContratoTO.class);
-				accion = (contratoTO.getId()==null)?"crear":"actualizar";
+				accion = (contratoTO.getId()==null)?"I":"U";
 				if(contratoTO.getNpfechainicio()!=null)
 					contratoTO.setFechainicio(UtilGeneral.parseStringToDate(contratoTO.getNpfechainicio()));
 				contratoTO.setSocionegocio(new SocionegocioTO());
@@ -1455,9 +1456,8 @@ public class AdministracionController {
 			}
 
 			//Registro la auditoria
-			//			if(mensajes.getMsg()==null)
-			//				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
-			if(mensajes.getMsg()==null){
+			if(mensajes.getMsg()==null) {
+				ComunController.crearAuditoria(request, clase, accion, objeto, id);
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}
@@ -1763,6 +1763,7 @@ public class AdministracionController {
 			}
 
 			log.println("json retornado: " + jsonObject.toString());
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al obtener para editar");
@@ -1960,8 +1961,9 @@ public class AdministracionController {
 				UtilSession.planificacionServicio.transEliminarContrato(new ContratoTO(id));
 			}
 
-			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
-			if(mensajes.getMsg()==null){
+			//Registro la auditoria
+			if(mensajes.getMsg()==null) {
+				ComunController.crearAuditoria(request, clase, "D", null, id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}

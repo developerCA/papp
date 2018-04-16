@@ -55,6 +55,8 @@ import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.to.SubtareaunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
 import ec.com.papp.resource.MensajesAplicacion;
+import ec.com.papp.web.administracion.controller.ComunController;
+import ec.com.papp.web.comun.util.ConstantesSesion;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
@@ -92,7 +94,7 @@ public class EjecucionController {
 			//certificacion
 			if(clase.equals("certificacion")){
 				CertificacionTO certificacionTO = gson.fromJson(new StringReader(objeto), CertificacionTO.class);
-				accion = (certificacionTO.getId()==null)?"crear":"actualizar";
+				accion = (certificacionTO.getId()==null)?"I":"U";
 				if(certificacionTO.getNpfechaaprobacion()!=null)
 					certificacionTO.setFechaaprobacion(UtilGeneral.parseStringToDate(certificacionTO.getNpfechaaprobacion()));
 				if(certificacionTO.getNpfechacreacion()!=null)
@@ -139,7 +141,7 @@ public class EjecucionController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
-					accion = (certificacionlineaTO.getId()==null)?"crear":"actualizar";
+					accion = (certificacionlineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarCertificacionlinea(certificacionlineaTO);
 					id=certificacionlineaTO.getId().getId().toString() + certificacionlineaTO.getId().getLineaid();
 					//Traiga la lista de cetificacionlinea
@@ -162,7 +164,7 @@ public class EjecucionController {
 					ordengastoTO.setFechanegacion(UtilGeneral.parseStringToDate(ordengastoTO.getNpfechanegacion()));
 				if(ordengastoTO.getNpfechasolicitud()!=null)
 					ordengastoTO.setFechasolicitud(UtilGeneral.parseStringToDate(ordengastoTO.getNpfechasolicitud()));
-				accion = (ordengastoTO.getId()==null)?"crear":"actualizar";
+				accion = (ordengastoTO.getId()==null)?"I":"U";
 				System.out.println("ordengastoclasemodid web " + ordengastoTO.getOrdengastoclasemodid());
 				UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO,null);
 				id=ordengastoTO.getNpid().toString();
@@ -201,7 +203,7 @@ public class EjecucionController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
-					accion = (ordengastolineaTO.getId()==null)?"crear":"actualizar";
+					accion = (ordengastolineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarOrdengastolinea(ordengastolineaTO);
 					id=ordengastolineaTO.getId().getId().toString() + ordengastolineaTO.getId().getLineaid();
 					ConsultasUtil.obtenerordengasto(ordengastolineaTO.getId().getId(), jsonObject);
@@ -223,7 +225,7 @@ public class EjecucionController {
 					ordendevengoTO.setFechanegacion(UtilGeneral.parseStringToDate(ordendevengoTO.getNpfechanegacion()));
 				if(ordendevengoTO.getNpfechasolicitud()!=null)
 					ordendevengoTO.setFechasolicitud(UtilGeneral.parseStringToDate(ordendevengoTO.getNpfechasolicitud()));
-				accion = (ordendevengoTO.getId()==null)?"crear":"actualizar";
+				accion = (ordendevengoTO.getId()==null)?"I":"U";
 				UtilSession.planificacionServicio.transCrearModificarOrdendevengo(ordendevengoTO, null);
 				id=ordendevengoTO.getNpid().toString();
 				ordendevengoTO.setId(ordendevengoTO.getNpid());
@@ -256,7 +258,7 @@ public class EjecucionController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
-					accion = (ordendevengolineaTO.getId()==null)?"crear":"actualizar";
+					accion = (ordendevengolineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarOrdendevengolinea(ordendevengolineaTO);
 					id=ordendevengolineaTO.getId().getId().toString()+ordendevengolineaTO.getId().getLineaid();
 					ConsultasUtil.obtenerordendevengo(ordendevengolineaTO.getId().getId(), jsonObject);
@@ -278,7 +280,7 @@ public class EjecucionController {
 					ordenreversionTO.setFechanegacion(UtilGeneral.parseStringToDate(ordenreversionTO.getNpfechanegacion()));
 				if(ordenreversionTO.getNpfechasolicitud()!=null)
 					ordenreversionTO.setFechasolicitud(UtilGeneral.parseStringToDate(ordenreversionTO.getNpfechasolicitud()));
-				accion = (ordenreversionTO.getId()==null)?"crear":"actualizar";
+				accion = (ordenreversionTO.getId()==null)?"I":"U";
 				UtilSession.planificacionServicio.transCrearModificarOrdenreversion(ordenreversionTO, null);
 				id=ordenreversionTO.getNpid().toString();
 				ordenreversionTO.setId(ordenreversionTO.getNpid());
@@ -313,7 +315,7 @@ public class EjecucionController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
-					accion = (ordenreversionlineaTO.getId()==null)?"crear":"actualizar";
+					accion = (ordenreversionlineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarOrdenreversionlinea(ordenreversionlineaTO);
 					id=ordenreversionlineaTO.getId().getId().toString()+ordenreversionlineaTO.getId().getLineaid();
 					ConsultasUtil.obtenerordenreversion(ordenreversionlineaTO.getId().getId(), jsonObject);
@@ -370,7 +372,7 @@ public class EjecucionController {
 			//reforma
 			if(clase.equals("reforma")){
 				ReformaTO reformaTO = gson.fromJson(new StringReader(objeto), ReformaTO.class);
-				accion = (reformaTO.getId()==null)?"crear":"actualizar";
+				accion = (reformaTO.getId()==null)?"I":"U";
 				if(reformaTO.getNpfechaaprobacion()!=null)
 					reformaTO.setFechaaprobacion(UtilGeneral.parseStringToDate(reformaTO.getNpfechaaprobacion()));
 				if(reformaTO.getNpfechacreacion()!=null)
@@ -416,7 +418,7 @@ public class EjecucionController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
-					accion = (reformalineaTO.getId()==null)?"crear":"actualizar";
+					accion = (reformalineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarReformalinea(reformalineaTO);
 					id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
 					//Traigo la lista de ordengastolinea
@@ -431,7 +433,7 @@ public class EjecucionController {
 			//reformameta
 			if(clase.equals("reformameta")){
 				ReformametaTO reformametaTO = gson.fromJson(new StringReader(objeto), ReformametaTO.class);
-				accion = (reformametaTO.getId()==null)?"crear":"actualizar";
+				accion = (reformametaTO.getId()==null)?"I":"U";
 				if(reformametaTO.getNpfechaaprobacion()!=null)
 					reformametaTO.setFechaaprobacion(UtilGeneral.parseStringToDate(reformametaTO.getNpfechaaprobacion()));
 				if(reformametaTO.getNpfechacreacion()!=null)
@@ -477,7 +479,7 @@ public class EjecucionController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{
-					accion = (reformametalineaTO.getId()==null)?"crear":"actualizar";
+					accion = (reformametalineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarReformametalinea(reformametalineaTO);
 					id=reformametalineaTO.getId().getId().toString() + reformametalineaTO.getId().getLineaid();
 					//Traigo la lista de reformametalinea
@@ -504,7 +506,7 @@ public class EjecucionController {
 			//reforma meta subtarea
 			else if(clase.equals("reformametasubtarea")){
 				ReformametasubtareaTO reformametasubtareaTO = gson.fromJson(new StringReader(objeto), ReformametasubtareaTO.class);
-				accion = (reformametasubtareaTO.getId()==null)?"crear":"actualizar";
+				accion = (reformametasubtareaTO.getId()==null)?"I":"U";
 				UtilSession.planificacionServicio.transCrearModificarReformametasubtarea(reformametasubtareaTO);
 				id=reformametasubtareaTO.getId().getId().toString() + reformametasubtareaTO.getId().getLineaid();
 				//Traigo la lista de reformametasubtarea
@@ -514,10 +516,8 @@ public class EjecucionController {
 				jsonObject.put("reformametasubtarea", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs2,reformametasubtareaTO.getJsonConfig()));
 			}
 
-			//Registro la auditoria
-//			if(mensajes.getMsg()==null && !clase.equals("vercontrato"))
-//				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
 			if(mensajes.getMsg()==null){
+				ComunController.crearAuditoria(request, clase, accion, objeto, id);
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}
@@ -920,6 +920,7 @@ public class EjecucionController {
 
 
 			log.println("json retornado: " + jsonObject.toString());
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al obtener para editar");
@@ -945,6 +946,7 @@ public class EjecucionController {
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(id);
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			boolean continuar=true;
 			if(tipo.equals("SO")) {
 				//obtengo las lineas
@@ -972,6 +974,7 @@ public class EjecucionController {
 					}
 					UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
 					//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+					ComunController.crearAuditoria(request, "CERTIFICACION", "U", objeto, id.toString());
 					mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 		//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
@@ -1073,6 +1076,7 @@ public class EjecucionController {
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			ordengastoTO.setNpcodigoregistro(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getCodigo());
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
 				ordengastoTO.setEstado(tipo);
@@ -1091,6 +1095,7 @@ public class EjecucionController {
 						ordengastoTO.setMotivoanulacion(parameters.get("observacion"));
 				}
 				UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO, tipo);
+				ComunController.crearAuditoria(request, "ORDENGASTO", "U", objeto, id.toString());
 				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
@@ -1125,6 +1130,7 @@ public class EjecucionController {
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			OrdendevengoTO ordendevengoTO=UtilSession.planificacionServicio.transObtenerOrdendevengoTO(id);
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
 				ordendevengoTO.setEstado(tipo);
 				if(tipo.equals("EL")) {
@@ -1140,7 +1146,7 @@ public class EjecucionController {
 						ordendevengoTO.setMotivoanulacion(parameters.get("observacion"));
 				}
 				UtilSession.planificacionServicio.transCrearModificarOrdendevengo(ordendevengoTO, tipo);
-				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+				ComunController.crearAuditoria(request, "ORDENDEVENGO", "U", objeto, id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
@@ -1172,6 +1178,7 @@ public class EjecucionController {
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			OrdenreversionTO ordenreversionTO=UtilSession.planificacionServicio.transObtenerOrdenreversionTO(id);
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			ordenreversionTO.setEstado(tipo);
 			if(tipo.equals("EL")) {
 				if(parameters.get("observacion")!=null)
@@ -1182,7 +1189,7 @@ public class EjecucionController {
 					ordenreversionTO.setMotivonegacion(parameters.get("observacion"));
 			}
 			UtilSession.planificacionServicio.transCrearModificarOrdenreversion(ordenreversionTO, tipo);
-			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+			ComunController.crearAuditoria(request, "ORDENREVERSION", "U", objeto, id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 //			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
@@ -1212,6 +1219,7 @@ public class EjecucionController {
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			ReformametaTO reformametaTO=UtilSession.planificacionServicio.transObtenerReformametaTO(id);
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
 				reformametaTO.setEstado(tipo);
 				if(tipo.equals("EL")) {
@@ -1230,7 +1238,7 @@ public class EjecucionController {
 					reformametaTO.setFechanegacion(new Date());
 				}
 				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO, tipo);
-				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+				ComunController.crearAuditoria(request, "REFORMA", "U", objeto, id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
@@ -1261,21 +1269,22 @@ public class EjecucionController {
 		Gson gson = new Gson();
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
-			ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(id);
+			ReformametaTO reformametaTO=UtilSession.planificacionServicio.transObtenerReformametaTO(id);
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
-				reformaTO.setEstado(tipo);
+				reformametaTO.setEstado(tipo);
 				if(tipo.equals("EL")) {
 					if(parameters.get("observacion")!=null)
-						reformaTO.setMotivoeliminacion(parameters.get("observacion"));
-					reformaTO.setFechaeliminacion(new Date());
+						reformametaTO.setMotivoeliminar(parameters.get("observacion"));
+					reformametaTO.setFechaeliminacion(new Date());
 				}
 				else if(tipo.equals("NE")) {
 					if(parameters.get("observacion")!=null)
-						reformaTO.setMotivonegacion(parameters.get("observacion"));
-					reformaTO.setFechanegacion(new Date());
+						reformametaTO.setMotivonegacion(parameters.get("observacion"));
+					reformametaTO.setFechanegacion(new Date());
 				}
-				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO, tipo);
-				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO, tipo);
+				ComunController.crearAuditoria(request, "REFORMAMETA", "U", objeto, id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
@@ -1471,7 +1480,7 @@ public class EjecucionController {
 				UtilSession.planificacionServicio.transEliminarReformasubtarea(new ReformametasubtareaTO(new ReformametasubtareaID(id, id2)));
 			}
 
-			//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+			ComunController.crearAuditoria(request, clase, "D", "", id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
 			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 //			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);

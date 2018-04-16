@@ -1,28 +1,22 @@
 package ec.com.papp.web.administracion.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-import ec.com.papp.administracion.dao.CargoDAO;
+import ec.com.papp.administracion.to.AuditoriaTO;
 import ec.com.papp.administracion.to.CargoTO;
 import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
-import ec.com.papp.administracion.to.DivisiongeograficaTO;
 import ec.com.papp.administracion.to.EjerciciofiscalTO;
 import ec.com.papp.administracion.to.EscalarmuTO;
 import ec.com.papp.administracion.to.FuerzaTO;
@@ -43,11 +37,17 @@ import ec.com.papp.estructuraorganica.to.InstitucionentidadTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.ObjetivoTO;
 import ec.com.papp.planificacion.to.SubitemunidadTO;
+import ec.com.papp.seguridad.to.UsuarioTO;
+import ec.com.papp.web.comun.util.ConstantesSesion;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.metodos.Log;
+import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 @RestController
 @RequestMapping("/rest/comun")
@@ -267,5 +267,40 @@ public class ComunController {
 //		out.close();
 //		return new ModelAndView("index");
 		return jsonObject.toString();
+	}
+	
+	
+	/**
+	 * graba datos de la bitacora de auditoria
+	 * @param request
+	 * @param bean
+	 * @param auditoriaTO
+	 * @param catalogovalorTO
+	 * @throws Exception
+	 */
+	public static void crearAuditoria(HttpServletRequest request,String tabla,String accion, String contenido, String id) throws Exception{
+		//verifico si esta activa la auditoria
+		if(id!=null && !id.equals("")){
+			UsuarioTO usuario=UtilSession.getUsuario(request);
+			//Guardo el registro en la bitacora de auditoria
+			AuditoriaTO auditoriaTO=new AuditoriaTO();
+			auditoriaTO.setFechahora(UtilGeneral.parseDatetoTimeStamp(new Date()));
+			auditoriaTO.setUsuarioid(usuario.getId());
+			auditoriaTO.setTablanombre(tabla.toUpperCase());
+			auditoriaTO.setAccion(accion);
+			auditoriaTO.setPrimaria(id);
+			if(contenido!=null)
+				auditoriaTO.setValornuevo(contenido);
+			else
+				auditoriaTO.setValornuevo(" ");
+			if(request.getSession().getAttribute(ConstantesSesion.VALORANTIGUO)!=null) {
+				String valorantiguo=(String)request.getSession().getAttribute(ConstantesSesion.VALORANTIGUO);
+				auditoriaTO.setValorantiguo(valorantiguo);
+			}
+			else
+				auditoriaTO.setValorantiguo(" ");
+			UtilSession.adminsitracionServicio.transCrearModificarAuditoria(auditoriaTO);
+			request.getSession().removeAttribute(ConstantesSesion.VALORANTIGUO);
+		}
 	}
 }
