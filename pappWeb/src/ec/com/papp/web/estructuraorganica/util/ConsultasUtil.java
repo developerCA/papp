@@ -15,6 +15,8 @@ import ec.com.papp.administracion.to.CargoTO;
 import ec.com.papp.administracion.to.DivisiongeograficaTO;
 import ec.com.papp.administracion.to.EjerciciofiscalTO;
 import ec.com.papp.administracion.to.EmpleadoTO;
+import ec.com.papp.administracion.to.GradoTO;
+import ec.com.papp.administracion.to.GradofuerzaTO;
 import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.estructuraorganica.to.EstructuraorganicaTO;
 import ec.com.papp.estructuraorganica.to.InstitucionTO;
@@ -286,6 +288,9 @@ public class ConsultasUtil {
 //			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 //				unidadarbolplazaTO.setEstado(parameters.get("estado"));
 			unidadarbolplazaTO.setCargo(new CargoTO());
+			GradofuerzaTO gradofuerzaTO=new GradofuerzaTO();
+			gradofuerzaTO.setGrado(new GradoTO());
+//			unidadarbolplazaTO.setGradofuerza(gradofuerzaTO);
 			Collection<UnidadarbolplazaTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplaza(unidadarbolplazaTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 //			HashMap<String, String>  totalMap=new HashMap<String, String>();
