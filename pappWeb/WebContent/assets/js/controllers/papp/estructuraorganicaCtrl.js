@@ -625,6 +625,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
         		})
             }
         },
+
         reset: function (form) {
             $scope.myModel = angular.copy($scope.master);
             form.$setPristine(true);
