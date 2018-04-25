@@ -12,7 +12,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.fuerza=null;
 	$scope.grado=null;
 	$scope.padre=null;
-	$scope.estado=null;
+	$scope.estado='V';
 	$scope.codigoPEFiltro = null;
 
 	$scope.edicion=false;
@@ -44,6 +44,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	var pagina = 1;
 	
 	$scope.consultar=function(){
+		$scope.filtrar();
+/*
 		$scope.data=[];
 		//console.log('aqi');
 		estructuraorganicaFactory.traerEstructuraOrganica(pagina).then(function(resp){
@@ -51,6 +53,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			if (resp.meta)
 				$scope.data=resp;
 		})
+*/
 	};
 	
 	$scope.$watch('data', function() {
@@ -476,6 +479,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 			$scope.objetoPlazaDetail[index].unidadarbolplazagfid = obj.id;
+			$scope.objetoPlazaDetail[index].npgradocodigo = obj.codigo;
 			$scope.objetoPlazaDetail[index].npgradonombre = obj.npnombregrado;
 			$scope.objetoPlazaDetail[index].npfuerzanombre = obj.npnombrefuerza;
 			$scope.objetoPlazaDetail[index].npfuerzaid = obj.gradofuerzafuerzaid;
@@ -495,8 +499,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			$scope.objetoPlazaDetail[index].unidadarbolplazagfid = obj.id;
+			//$scope.objetoPlazaDetail[index].unidadarbolplazagfid = obj.id;
+			$scope.objetoPlazaDetail[index].unidadarbolplazaespecid = obj.id;
 			$scope.objetoPlazaDetail[index].npespecialidadcodigo = obj.codigo;
 			$scope.objetoPlazaDetail[index].npespecialdidadnombre = obj.nombre;
 		}, function() {
@@ -588,46 +592,46 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	};
 
 	$scope.form = {
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
-		            } else {
-		            	let tObj = Object.assign({}, $scope.objeto);
-		            	tObj.npfecviginicio = toStringDate(tObj.npfecviginicio); 
-		            	tObj.npfecvigfin = toStringDate(tObj.npfecvigfin);
-		            	estructuraorganicaFactory.guardar(tObj).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Estructura Organica!", "Registro guardado satisfactoriamente!", "success");
-		        			 }else{
-			 		             SweetAlert.swal("Estructura Organica!", resp.mensajes.msg, "error");
-		        			 }
-		        		})
-		            }
-		        },
-		        reset: function (form) {
-		            $scope.myModel = angular.copy($scope.master);
-		            form.$setPristine(true);
-		            $scope.edicion=false;
-		            $scope.objeto={};
-		            $scope.limpiar();
-		        }
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+            	let tObj = Object.assign({}, $scope.objeto);
+            	tObj.npfecviginicio = toStringDate(tObj.npfecviginicio); 
+            	tObj.npfecvigfin = toStringDate(tObj.npfecvigfin);
+            	estructuraorganicaFactory.guardar(tObj).then(function(resp){
+        			 if (resp.estado){
+        				 form.$setPristine(true);
+	 		             $scope.edicion=false;
+	 		             $scope.objeto={};
+	 		             $scope.limpiar();
+	 		             SweetAlert.swal("Estructura Organica!", "Registro guardado satisfactoriamente!", "success");
+        			 }else{
+	 		             SweetAlert.swal("Estructura Organica!", resp.mensajes.msg, "error");
+        			 }
+        		})
+            }
+        },
+        reset: function (form) {
+            $scope.myModel = angular.copy($scope.master);
+            form.$setPristine(true);
+            $scope.edicion=false;
+            $scope.objeto={};
+            $scope.limpiar();
+        }
     };
 
 	function toDate(fuente) {

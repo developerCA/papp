@@ -61,8 +61,9 @@
 										<div class="form-group">
 											<label class="control-label"> Estado </label> <select
 												class="form-control" name="estado" ng-model="estado">
-												<option value="">Selecione un estado</option>
+												<option value="V">Vigente</option>
 												<option value="P">En proceso</option>
+												<option value="A">Anulado</option>
 												<option value="E">Eliminado</option>
 											</select>
 										</div>
@@ -681,13 +682,13 @@
 																<div class="row">
 																	<div class="col-md-2">
 																		<label class="control-label">
-																			Grado ID
+																			Grado C&oacute;digo
 																		</label>
 																		<div class="input-group form-group has-success">
 																			<input type="text"
 																				placeholder="Seleccione un Grado Fuerza"
-																				class="form-control" name="unidadarbolplazagfid"
-																				ng-disabled="true" ng-model="obj.unidadarbolplazagfid" />
+																				class="form-control" name="npgradocodigo"
+																				ng-disabled="true" ng-model="obj.npgradocodigo" />
 																			<span class="input-group-btn">
 																				<button type="button" class="btn btn-primary"
 																					ng-click="abrirGradoFuerza($index)">
