@@ -38,9 +38,11 @@ import ec.com.papp.planificacion.to.IndicadorTO;
 import ec.com.papp.planificacion.to.IndicadormetodoTO;
 import ec.com.papp.planificacion.to.ItemunidadTO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
+import ec.com.papp.planificacion.to.NivelesplanificacionTO;
 import ec.com.papp.planificacion.to.NivelprogramaTO;
 import ec.com.papp.planificacion.to.ObjetivoTO;
 import ec.com.papp.planificacion.to.OrganismoprestamoTO;
+import ec.com.papp.planificacion.to.ParmnivelesprogramanivelTO;
 import ec.com.papp.planificacion.to.PlannacionalTO;
 import ec.com.papp.planificacion.to.ProgramaTO;
 import ec.com.papp.planificacion.to.ProyectoTO;
@@ -61,6 +63,7 @@ import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.Respuesta;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.papp.web.planificacion.util.ConsultasUtil;
+import ec.com.papp.web.planificacion.util.Partidapresupuestaria;
 import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
@@ -74,13 +77,13 @@ import net.sf.json.JSONSerializer;
  * @copyright: Xcelsa
  * @version: 1.0
  * @descripcion Clase para realizar administraciones centralizadas de planificacion
-*/
+ */
 
 @RestController
 @RequestMapping("/rest/planificacion")
 public class PlanificacionController {
 	private Log log = new Log(PlanificacionController.class);
-	
+
 	@RequestMapping(value = "/{clase}", method = RequestMethod.POST)
 	public Respuesta grabar(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo grabar*****8: " + clase + " - " + objeto);
@@ -90,7 +93,7 @@ public class PlanificacionController {
 		JSONObject jsonObject=new JSONObject();
 		String id="";
 		String accion="";
-		
+
 		try {
 			//Objetivo
 			if(clase.equals("objetivo")){
@@ -119,9 +122,9 @@ public class PlanificacionController {
 								break;
 							}
 						}
-	//					objetivoTO2=(ObjetivoTO)objetivoTOs.iterator().next();
-	//					if(objetivoTO.getId()!=null && objetivoTO2.getId().longValue()!=objetivoTO.getId().longValue())
-	//						grabar=false;
+						//					objetivoTO2=(ObjetivoTO)objetivoTOs.iterator().next();
+						//					if(objetivoTO.getId()!=null && objetivoTO2.getId().longValue()!=objetivoTO.getId().longValue())
+						//						grabar=false;
 					}
 					if(!grabar){
 						mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -238,26 +241,26 @@ public class PlanificacionController {
 				}
 				else{
 					//Si va a inactivar valido que no hayan hijos
-//					if(plannacionalTO.getId()!=null && plannacionalTO.getId().longValue()!=0 && plannacionalTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
-//						ObjetivoTO objetivoTO=new ObjetivoTO();
-//						objetivoTO.setCodigo(plannacionalTO.getCodigo());
-//						objetivoTO.setEstado(MensajesAplicacion.getString("estado.activo"));
-//						objetivoTO.setObjetivoejerciciofiscalid(plannacionalTO.getPlannacionalejerfiscalid());
-//						objetivoTO.setTipo(MensajesAplicacion.getString("planinstitucional.tipo.plannacional"));
-//						log.println("datos: " + plannacionalTO.getCodigo() + "-"+MensajesAplicacion.getString("estado.activo")+"-"+plannacionalTO.getPlannacionalejerfiscalid()+"-"+MensajesAplicacion.getString("planinstitucional.tipo.plannacional"));
-//						Collection<ObjetivoTO> objetivoTOs=UtilSession.planificacionServicio.transObtenerObjetivoArbol(objetivoTO);
-//						log.println("objetivos: " + objetivoTOs.size());
-//						if(objetivoTOs.size()>0) {
-//							grabar=false;
-//							mensajes.setMsg(MensajesWeb.getString("error.hijo.existe.plannacional"));
-//							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-//						}
-//					}
-//					if(grabar) {
-						UtilSession.planificacionServicio.transCrearModificarPlannacional(plannacionalTO);
-						id=plannacionalTO.getNpid().toString();
-						jsonObject.put("plannacional", (JSONObject)JSONSerializer.toJSON(plannacionalTO,plannacionalTO.getJsonConfig()));
-//					}
+					//					if(plannacionalTO.getId()!=null && plannacionalTO.getId().longValue()!=0 && plannacionalTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
+					//						ObjetivoTO objetivoTO=new ObjetivoTO();
+					//						objetivoTO.setCodigo(plannacionalTO.getCodigo());
+					//						objetivoTO.setEstado(MensajesAplicacion.getString("estado.activo"));
+					//						objetivoTO.setObjetivoejerciciofiscalid(plannacionalTO.getPlannacionalejerfiscalid());
+					//						objetivoTO.setTipo(MensajesAplicacion.getString("planinstitucional.tipo.plannacional"));
+					//						log.println("datos: " + plannacionalTO.getCodigo() + "-"+MensajesAplicacion.getString("estado.activo")+"-"+plannacionalTO.getPlannacionalejerfiscalid()+"-"+MensajesAplicacion.getString("planinstitucional.tipo.plannacional"));
+					//						Collection<ObjetivoTO> objetivoTOs=UtilSession.planificacionServicio.transObtenerObjetivoArbol(objetivoTO);
+					//						log.println("objetivos: " + objetivoTOs.size());
+					//						if(objetivoTOs.size()>0) {
+					//							grabar=false;
+					//							mensajes.setMsg(MensajesWeb.getString("error.hijo.existe.plannacional"));
+					//							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					//						}
+					//					}
+					//					if(grabar) {
+					UtilSession.planificacionServicio.transCrearModificarPlannacional(plannacionalTO);
+					id=plannacionalTO.getNpid().toString();
+					jsonObject.put("plannacional", (JSONObject)JSONSerializer.toJSON(plannacionalTO,plannacionalTO.getJsonConfig()));
+					//					}
 				}
 			}
 			//Indicador
@@ -284,9 +287,9 @@ public class PlanificacionController {
 							break;
 						}
 					}
-//					indicadorTO2=(IndicadorTO)plannacionalTOs.iterator().next();
-//					if(indicadorTO.getId()!=null && indicadorTO2.getId().longValue()!=indicadorTO.getId().longValue())
-//						grabar=false;
+					//					indicadorTO2=(IndicadorTO)plannacionalTOs.iterator().next();
+					//					if(indicadorTO.getId()!=null && indicadorTO2.getId().longValue()!=indicadorTO.getId().longValue())
+					//						grabar=false;
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -426,7 +429,7 @@ public class PlanificacionController {
 					}
 				}
 			}
-			
+
 			//Proyecto
 			else if(clase.equals("proyecto")){
 				ProyectoTO proyectoTO = gson.fromJson(new StringReader(objeto), ProyectoTO.class);
@@ -491,7 +494,7 @@ public class PlanificacionController {
 					}
 				}
 			}
-			
+
 			//Actividad
 			else if(clase.equals("actividad")){
 				ActividadTO actividadTO = gson.fromJson(new StringReader(objeto), ActividadTO.class);
@@ -543,12 +546,12 @@ public class PlanificacionController {
 					}
 					if(grabar) {
 						UtilSession.planificacionServicio.transCrearModificarActividad(actividadTO);
-						id=actividadTO.getNpid().toString();
+						//id=actividadTO.getNpid().toString();
 						jsonObject.put("actividad", (JSONObject)JSONSerializer.toJSON(actividadTO,actividadTO.getJsonConfig()));
 					}
 				}
 			}
-			
+
 			//Subactividad
 			else if(clase.equals("subactividad")){
 				SubactividadTO subactividadTO = gson.fromJson(new StringReader(objeto), SubactividadTO.class);
@@ -599,7 +602,7 @@ public class PlanificacionController {
 					}
 					if(grabar) {
 						UtilSession.planificacionServicio.transCrearModificarSubactividad(subactividadTO);
-						id=subactividadTO.getNpid().toString();
+						//id=subactividadTO.getNpid().toString();
 						jsonObject.put("subactividad", (JSONObject)JSONSerializer.toJSON(subactividadTO,subactividadTO.getJsonConfig()));
 					}
 				}
@@ -613,7 +616,7 @@ public class PlanificacionController {
 				actividadunidadTO.setFechafin(UtilGeneral.parseStringToDate(actividadunidadTO.getNpFechafin()));
 				log.println("fecha fin: " + actividadunidadTO.getFechafin());
 				UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO);
-				id=actividadunidadTO.getId().toString();
+				//id=actividadunidadTO.getId().toString();
 				jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfig()));
 			}
 
@@ -634,7 +637,7 @@ public class PlanificacionController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
-			
+
 			//Tarea unidad (Planificacion anual - modificar subactividad)
 			else if(clase.equals("tareaunidad")){
 				TareaunidadTO tareaunidadTO = gson.fromJson(new StringReader(objeto), TareaunidadTO.class);
@@ -664,7 +667,7 @@ public class PlanificacionController {
 								break;
 							}
 						}
-	
+
 					}
 					if(!grabar){
 						mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -711,7 +714,7 @@ public class PlanificacionController {
 					}
 				}
 			}
-			
+
 			//Subtarea unidad (Planificacion anual - modificar actividad)
 			else if(clase.equals("subtareaunidad")){
 				SubtareaunidadTO subtareaunidadTO = gson.fromJson(new StringReader(objeto), SubtareaunidadTO.class);
@@ -741,7 +744,7 @@ public class PlanificacionController {
 								break;
 							}
 						}
-	
+
 					}
 				}
 				if(grabar) {
@@ -797,7 +800,7 @@ public class PlanificacionController {
 					}
 				}
 			}
-			
+
 			//Item (Planificacion anual - modificar subactividad)
 			else if(clase.equals("itemunidad")){
 				ItemunidadTO itemunidadTO = gson.fromJson(new StringReader(objeto), ItemunidadTO.class);
@@ -810,12 +813,12 @@ public class PlanificacionController {
 				nivelactividadTO.setNivelactividadunidadid(itemunidadTO.getItemunidadunidadid());
 				nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
 				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
-//								
-//				NivelactividadTO nivelactividadTO=new NivelactividadTO();
-//				nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
-//				nivelactividadTO.setNivelactividadpadreid(itemunidadTO.getPadre());
-//				log.println("eje: "+ itemunidadTO.getItemunidadejerciciofiscalid()+" padre " + itemunidadTO.getPadre());
-//				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
+				//								
+				//				NivelactividadTO nivelactividadTO=new NivelactividadTO();
+				//				nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
+				//				nivelactividadTO.setNivelactividadpadreid(itemunidadTO.getPadre());
+				//				log.println("eje: "+ itemunidadTO.getItemunidadejerciciofiscalid()+" padre " + itemunidadTO.getPadre());
+				//				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
 				log.println("niveles: " + resultado.size());
 				boolean existeiten=false;
 				log.println("codigo del item "+itemunidadTO.getNpcodigoitem());
@@ -826,7 +829,7 @@ public class PlanificacionController {
 					log.println("canto " + nivelactividadTO2.getNpcodigocanton());
 					if(nivelactividadTO2.getDescripcionexten()!=null) {
 						String [] descripcion=nivelactividadTO2.getDescripcionexten().split("-");
-//						log.println("descripcion::: " + descripcion[0]);
+						//						log.println("descripcion::: " + descripcion[0]);
 						if((itemunidadTO.getId()==null || itemunidadTO.getId().longValue()==0) && (nivelactividadTO2.getNpcodigo().equals(itemunidadTO.getNpcodigoitem())
 								&& nivelactividadTO2.getNpcodigoobra().equals(itemunidadTO.getNpcodigoobra()) && nivelactividadTO2.getNpcodigofuente().equals(itemunidadTO.getNpcodigofuente())
 								&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton()))){
@@ -843,25 +846,25 @@ public class PlanificacionController {
 						}
 					}
 				}
-				
+
 				//Si va a inactivar valido que no hayan hijos
-//				boolean grabar=true;
-//				if(itemunidadTO.getId()!=null && itemunidadTO.getId().longValue()!=0 && itemunidadTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
-//					NivelactividadTO nivelactividadTO=new NivelactividadTO();
-//					nivelactividadTO.setTablarelacionid(itemunidadTO.getId());
-//					nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
-//					nivelactividadTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.item"));
-//					nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(nivelactividadTO);
-//					NivelactividadTO hijo=new NivelactividadTO();
-//					hijo.setId(nivelactividadTO.getId());
-//					hijo.setEstado(MensajesAplicacion.getString("estado.activo"));
-//					Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtenerNivelactividadArbol(hijo);
-//					if(nivelactividadTOs.size()>0) {
-//						mensajes.setMsg(MensajesWeb.getString("error.hijo.existe"));
-//						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-//						grabar=false;
-//					}
-//				}
+				//				boolean grabar=true;
+				//				if(itemunidadTO.getId()!=null && itemunidadTO.getId().longValue()!=0 && itemunidadTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
+				//					NivelactividadTO nivelactividadTO=new NivelactividadTO();
+				//					nivelactividadTO.setTablarelacionid(itemunidadTO.getId());
+				//					nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
+				//					nivelactividadTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.item"));
+				//					nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(nivelactividadTO);
+				//					NivelactividadTO hijo=new NivelactividadTO();
+				//					hijo.setId(nivelactividadTO.getId());
+				//					hijo.setEstado(MensajesAplicacion.getString("estado.activo"));
+				//					Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtenerNivelactividadArbol(hijo);
+				//					if(nivelactividadTOs.size()>0) {
+				//						mensajes.setMsg(MensajesWeb.getString("error.hijo.existe"));
+				//						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				//						grabar=false;
+				//					}
+				//				}
 				if(!existeiten) {
 					UtilSession.planificacionServicio.transCrearModificarItemunidad(itemunidadTO);
 					id=itemunidadTO.getNpid().toString();
@@ -888,12 +891,12 @@ public class PlanificacionController {
 				boolean existesubiten=false;
 				log.println("codigo del subitem "+subitemunidadTO.getNpcodigosubitem());
 				for(NivelactividadTO nivelactividadTO2:resultado){
-//					log.println("descripcion " + nivelactividadTO2.getDescripcionexten());
-//					log.println("tablarelacion id " + nivelactividadTO2.getTablarelacionid());
-//					log.println("id del subitem " + subitemunidadTO.getId());
+					//					log.println("descripcion " + nivelactividadTO2.getDescripcionexten());
+					//					log.println("tablarelacion id " + nivelactividadTO2.getTablarelacionid());
+					//					log.println("id del subitem " + subitemunidadTO.getId());
 					if(nivelactividadTO2.getDescripcionexten()!=null) {
 						String [] descripcion=nivelactividadTO2.getDescripcionexten().split("-");
-//						log.println("descripcion::: " + descripcion[0]);
+						//						log.println("descripcion::: " + descripcion[0]);
 						if((subitemunidadTO.getId()==null || subitemunidadTO.getId().longValue()==0) && (descripcion[0].trim().equals(subitemunidadTO.getNpcodigosubitem()) && descripcion[1].trim().equals(subitemunidadTO.getNpnombresubitem()))){
 							existesubiten=true;
 							break;
@@ -909,7 +912,7 @@ public class PlanificacionController {
 				if(!existesubiten){
 					log.println("detalle: " + subitemunidadTO.getNpcodigosubitem()+" - " +subitemunidadTO.getNpnombresubitem());
 					UtilSession.planificacionServicio.transCrearModificarSubitemunidad(subitemunidadTO);
-					id=subitemunidadTO.getNpid().toString();
+					//id=subitemunidadTO.getNpid().toString();
 					subitemunidadTO.setId(subitemunidadTO.getNpid());
 					jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				}
@@ -918,20 +921,20 @@ public class PlanificacionController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
-			
+
 			//Cronograma (Planificacion anual - metas para actividad unidad, subtareaunidad y subitemunidad)
 			else if(clase.equals("cronograma")){
 				CronogramaTO cronogramaTO = gson.fromJson(new StringReader(objeto), CronogramaTO.class);
 				accion = (cronogramaTO.getId()==null)?"I":"U";
 				UtilSession.planificacionServicio.transCrearModificarCronograma(cronogramaTO);
-				id=cronogramaTO.getNpid().toString();
+				//id=cronogramaTO.getNpid().toString();
 				//jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 			}
-			
+
 			//observacion matriz presupuesto (Planificacion anual - matriz presupuesto)
 			else if(clase.equals("matrizpresupuesto")){
 				Type matriz = new TypeToken<List<MatrizDetalle>>(){}.getType();
-		    	Collection<MatrizDetalle> matrizDetalles = gson.fromJson(new StringReader(objeto), matriz);
+				Collection<MatrizDetalle> matrizDetalles = gson.fromJson(new StringReader(objeto), matriz);
 				//MatrizDetalle matrizDetalle = gson.fromJson(new StringReader(objeto), MatrizDetalle.class);
 				accion = "U";
 				UtilSession.planificacionServicio.transModificarMatrizpresupuesto(matrizDetalles);
@@ -941,16 +944,22 @@ public class PlanificacionController {
 			//observacion matriz metas (Planificacion anual - matriz metas)
 			else if(clase.equals("matrizmetas")){
 				Type matriz = new TypeToken<List<MatrizDetalle>>(){}.getType();
-		    	Collection<MatrizDetalle> matrizDetalles = gson.fromJson(new StringReader(objeto), matriz);
-		    	log.println("detalles: " + matrizDetalles.size());
+				Collection<MatrizDetalle> matrizDetalles = gson.fromJson(new StringReader(objeto), matriz);
+				log.println("detalles: " + matrizDetalles.size());
 				//MatrizDetalle matrizDetalle = gson.fromJson(new StringReader(objeto), MatrizDetalle.class);
 				accion = "U";
 				UtilSession.planificacionServicio.transModificarMatrizmetas(matrizDetalles);
 			}
+			//partida presupuestaria
+			else if(clase.equals("partidapresupuestaria")){
+				Partidapresupuestaria partidapresupuestaria = gson.fromJson(new StringReader(objeto), Partidapresupuestaria.class);
+				UtilSession.planificacionServicio.transCrearModificarParmnivelesprogramanivel(partidapresupuestaria.getParmnivelesprogramanivelTOs(), false);
+				UtilSession.planificacionServicio.transCrearModificarNivelesplanificacion(partidapresupuestaria.getNivelesplanificacionTOs(), false);
 
+			}
 			//Registro la auditoria
-//			if(mensajes.getMsg()==null)
-//				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
+			//			if(mensajes.getMsg()==null)
+			//				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
 			if(mensajes.getMsg()==null){
 				ComunController.crearAuditoria(request, clase, accion, objeto, id);
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
@@ -967,14 +976,14 @@ public class PlanificacionController {
 			//throw new MyException(e);
 		}
 		log.println("existe mensaje: " + mensajes.getMsg());
-//		if(mensajes.getMsg()!=null)
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		//		if(mensajes.getMsg()!=null)
+		//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		log.println("resultado: " + jsonObject.toString());
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
-	
+
 	@RequestMapping(value = "/nuevo/{clase}/{id}/{ejercicio}/{tipo}", method = RequestMethod.GET)
 	public Respuesta nuevo(@PathVariable String clase,@PathVariable Long id,@PathVariable Long ejercicio,@PathVariable String tipo,HttpServletRequest request){
 		log.println("entra al metodo nuevo: " + clase + " - " + id +  " - "+ ejercicio +  " -  " + tipo);
@@ -1014,236 +1023,313 @@ public class PlanificacionController {
 			}
 			//Programa
 			else if(clase.equals("programa")){
-				ProgramaTO programaTO = new ProgramaTO();
-				programaTO.setProgramaejerciciofiscalid(ejercicio);
-				programaTO.setEstado(MensajesWeb.getString("estado.activo"));
-				jsonObject.put("programa", (JSONObject)JSONSerializer.toJSON(programaTO,programaTO.getJsonConfig()));
+				//verifico el numero de hijos
+				boolean permitir=UtilSession.planificacionServicio.transVerificarParmnivelesprogramanivelTO("PR", ejercicio, null);
+				if(permitir) {
+					ProgramaTO programaTO = new ProgramaTO();
+					programaTO.setProgramaejerciciofiscalid(ejercicio);
+					programaTO.setEstado(MensajesWeb.getString("estado.activo"));
+					jsonObject.put("programa", (JSONObject)JSONSerializer.toJSON(programaTO,programaTO.getJsonConfig()));
+				}
+				else {
+					mensajes.setMsg("Excedido el numero de programas permitidos. Verifique la partida presupuestaria");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
 			}
 			//Subprograma
 			else if(clase.equals("subprograma")){
-				SubprogramaTO subprogramaTO = new SubprogramaTO();
-				subprogramaTO.setPadre(id);//npNivelid 
-				subprogramaTO.setSubprogramaejerciciofiscalid(ejercicio);
-				subprogramaTO.setEstado(MensajesWeb.getString("estado.activo"));
-				jsonObject.put("subprograma", (JSONObject)JSONSerializer.toJSON(subprogramaTO,subprogramaTO.getJsonConfig()));
+				//verifico el numero de hijos
+				boolean permitir=UtilSession.planificacionServicio.transVerificarParmnivelesprogramanivelTO("SP", ejercicio, id);
+				if(permitir) {
+					SubprogramaTO subprogramaTO = new SubprogramaTO();
+					subprogramaTO.setPadre(id);//npNivelid 
+					subprogramaTO.setSubprogramaejerciciofiscalid(ejercicio);
+					subprogramaTO.setEstado(MensajesWeb.getString("estado.activo"));
+					jsonObject.put("subprograma", (JSONObject)JSONSerializer.toJSON(subprogramaTO,subprogramaTO.getJsonConfig()));
+				}
+				else {
+					mensajes.setMsg("Excedido el numero de programas permitidos. Verifique la partida presupuestaria");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+
 			}
 			//Proyecto
 			else if(clase.equals("proyecto")){
-				ProyectoTO proyectoTO = new ProyectoTO();
-				proyectoTO.setPadre(id);//npNivelid 
-				proyectoTO.setProyectoejerciciofiscalid(ejercicio);
-				proyectoTO.setEstado(MensajesWeb.getString("estado.activo"));
-				jsonObject.put("proyecto", (JSONObject)JSONSerializer.toJSON(proyectoTO,proyectoTO.getJsonConfig()));
+				//verifico el numero de hijos
+				boolean permitir=UtilSession.planificacionServicio.transVerificarParmnivelesprogramanivelTO("PO", ejercicio, id);
+				if(permitir) {
+					ProyectoTO proyectoTO = new ProyectoTO();
+					proyectoTO.setPadre(id);//npNivelid 
+					proyectoTO.setProyectoejerciciofiscalid(ejercicio);
+					proyectoTO.setEstado(MensajesWeb.getString("estado.activo"));
+					jsonObject.put("proyecto", (JSONObject)JSONSerializer.toJSON(proyectoTO,proyectoTO.getJsonConfig()));
+				}
+				else {
+					mensajes.setMsg("Excedido el numero de programas permitidos. Verifique la partida presupuestaria");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+
 			}
 			//Actividad
 			else if(clase.equals("actividad")){
-				ActividadTO actividadTO = new ActividadTO();
-				actividadTO.setPadre(id);//npNivelid 
-				actividadTO.setActividadeejerciciofiscalid(ejercicio);
-				actividadTO.setEstado(MensajesWeb.getString("estado.activo"));
-				jsonObject.put("actividad", (JSONObject)JSONSerializer.toJSON(actividadTO,actividadTO.getJsonConfigNuevo()));
+				//verifico el numero de hijos
+				boolean permitir=UtilSession.planificacionServicio.transVerificarParmnivelesprogramanivelTO("AC", ejercicio, id);
+				if(permitir) {
+					ActividadTO actividadTO = new ActividadTO();
+					actividadTO.setPadre(id);//npNivelid 
+					actividadTO.setActividadeejerciciofiscalid(ejercicio);
+					actividadTO.setEstado(MensajesWeb.getString("estado.activo"));
+					jsonObject.put("actividad", (JSONObject)JSONSerializer.toJSON(actividadTO,actividadTO.getJsonConfigNuevo()));
+				}
+				else {
+					mensajes.setMsg("Excedido el numero de programas permitidos. Verifique la partida presupuestaria");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+
 			}
 			//Subactividad
 			else if(clase.equals("subactividad")){
-				//Me llega el id de la atividad, debo buscar el id correspondiente en la tabla nivelprograma para enviar el padre a la subactividad
-				NivelprogramaTO nivelprogramaTO=new NivelprogramaTO();
-				nivelprogramaTO.setTablarelacionid(id);// el id de la actividad
-				nivelprogramaTO.setNivelprogramaejerfiscalid(ejercicio);
-				nivelprogramaTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.actividad"));
-				nivelprogramaTO=UtilSession.planificacionServicio.transObtenerNivelprogramaTO(nivelprogramaTO);
-				SubactividadTO subactividadTO=new SubactividadTO();
-				subactividadTO.setPadre(nivelprogramaTO.getId());
-				subactividadTO.setNpActividadid(nivelprogramaTO.getTablarelacionid());
-				subactividadTO.setSubactividadejerfiscalid(ejercicio);
-				subactividadTO.setEstado(MensajesWeb.getString("estado.activo"));
-				jsonObject.put("subactividad", (JSONObject)JSONSerializer.toJSON(subactividadTO,subactividadTO.getJsonConfig()));
+				//verifico el numero de hijos
+				boolean permitir=UtilSession.planificacionServicio.transVerificarParmnivelesprogramanivelTO("SA", ejercicio, id);
+				if(permitir) {
+					//Me llega el id de la atividad, debo buscar el id correspondiente en la tabla nivelprograma para enviar el padre a la subactividad
+					NivelprogramaTO nivelprogramaTO=new NivelprogramaTO();
+					nivelprogramaTO.setTablarelacionid(id);// el id de la actividad
+					nivelprogramaTO.setNivelprogramaejerfiscalid(ejercicio);
+					nivelprogramaTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.actividad"));
+					nivelprogramaTO=UtilSession.planificacionServicio.transObtenerNivelprogramaTO(nivelprogramaTO);
+					SubactividadTO subactividadTO=new SubactividadTO();
+					subactividadTO.setPadre(nivelprogramaTO.getId());
+					subactividadTO.setNpActividadid(nivelprogramaTO.getTablarelacionid());
+					subactividadTO.setSubactividadejerfiscalid(ejercicio);
+					subactividadTO.setEstado(MensajesWeb.getString("estado.activo"));
+					jsonObject.put("subactividad", (JSONObject)JSONSerializer.toJSON(subactividadTO,subactividadTO.getJsonConfig()));
+				}
+				else {
+					mensajes.setMsg("Excedido el numero de programas permitidos. Verifique la partida presupuestaria");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+
 			}
 			//Tarea
 			else if(clase.equals("tareaunidad")){
-				String[] pares = tipo.split("&");
-				Map<String, String> parameters = new HashMap<String, String>();
-				for(String pare : pares) {
-				    String[] nameAndValue = pare.split("=");
-				    parameters.put(nameAndValue[0], nameAndValue[1]);
+				//verifico el numero de hijos
+				boolean permitir=UtilSession.planificacionServicio.transVerificarNivelesplanificacionTO("TA", ejercicio, id);
+				if(permitir) {
+					String[] pares = tipo.split("&");
+					Map<String, String> parameters = new HashMap<String, String>();
+					for(String pare : pares) {
+						String[] nameAndValue = pare.split("=");
+						parameters.put(nameAndValue[0], nameAndValue[1]);
+					}
+					TareaunidadTO tareaunidadTO = new TareaunidadTO();
+					tareaunidadTO.setPadre(id);//id del nivelactividad
+					tareaunidadTO.setTareaunidadunidadid(Long.valueOf(parameters.get("unidadid")));
+					tareaunidadTO.setTareaunidadejerciciofiscalid(ejercicio);
+					tareaunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
+					jsonObject.put("tareaunidad", (JSONObject)JSONSerializer.toJSON(tareaunidadTO,tareaunidadTO.getJsonConfig()));
+				}else {
+					mensajes.setMsg("Excedido el numero de programas permitidos. Verifique la partida presupuestaria");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
-				TareaunidadTO tareaunidadTO = new TareaunidadTO();
-				tareaunidadTO.setPadre(id);//id del nivelactividad
-				tareaunidadTO.setTareaunidadunidadid(Long.valueOf(parameters.get("unidadid")));
-				tareaunidadTO.setTareaunidadejerciciofiscalid(ejercicio);
-				tareaunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
-				jsonObject.put("tareaunidad", (JSONObject)JSONSerializer.toJSON(tareaunidadTO,tareaunidadTO.getJsonConfig()));
 			}
 
 			//Subtarea
 			else if(clase.equals("subtareaunidad")){
-				//traigo el valor presupuestado y aprobado de la actividad
-				String[] pares = tipo.split("&");
-				Map<String, String> parameters = new HashMap<String, String>();
-				for(String pare : pares) {
-				    String[] nameAndValue = pare.split("=");
-				    parameters.put(nameAndValue[0], nameAndValue[1]);
+				//verifico el numero de hijos
+				boolean permitir=UtilSession.planificacionServicio.transVerificarNivelesplanificacionTO("ST", ejercicio, id);
+				if(permitir) {
+					//traigo el valor presupuestado y aprobado de la actividad
+					String[] pares = tipo.split("&");
+					Map<String, String> parameters = new HashMap<String, String>();
+					for(String pare : pares) {
+						String[] nameAndValue = pare.split("=");
+						parameters.put(nameAndValue[0], nameAndValue[1]);
+					}
+					SubtareaunidadTO subtareaunidadTO = new SubtareaunidadTO();
+					subtareaunidadTO.setPadre(id);//id del nivelactividad
+					subtareaunidadTO.setSubtareaunidadunidadid(Long.valueOf(parameters.get("unidadid")));
+					subtareaunidadTO.setSubtareaunidadejerfiscalid(ejercicio);
+					subtareaunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
+					jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfig()));
+					//obtengo la lista de subtareaunidadacumuladorTO existente para saber que acumulador toca
+					SubtareaunidadacumuladorTO subtareaunidadacumuladorExiste=new SubtareaunidadacumuladorTO();
+					subtareaunidadacumuladorExiste.getId().setId(id);
+					Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=new ArrayList<>();
+					Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorExiste);
+					SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
+					subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+1));
+					//subtareaunidadacumuladorTO.getId().setId(id);
+					subtareaunidadacumuladorTO.setTotal(0.0);
+					subtareaunidadacumuladorTO.setNpValor(0.0);
+					subtareaunidadacumuladorTO.setValor(100.0);
+					subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
+					subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);
+
+					subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
+					//subtareaunidadacumuladorTO.getId().setId(id);
+					subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
+					subtareaunidadacumuladorTO.setNpValor(0.0);
+					subtareaunidadacumuladorTO.setTotal(0.0);
+					subtareaunidadacumuladorTO.setValor(100.0);
+					subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
+					subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);
+					jsonObject.put("subtareaunidadacumulador", (JSONArray)JSONSerializer.toJSON(subtareaunidadacumuladorTOs,subtareaunidadacumuladorTO.getJsonConfig()));
 				}
-				SubtareaunidadTO subtareaunidadTO = new SubtareaunidadTO();
-				subtareaunidadTO.setPadre(id);//id del nivelactividad
-				subtareaunidadTO.setSubtareaunidadunidadid(Long.valueOf(parameters.get("unidadid")));
-				subtareaunidadTO.setSubtareaunidadejerfiscalid(ejercicio);
-				subtareaunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
-				jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfig()));
-				//obtengo la lista de subtareaunidadacumuladorTO existente para saber que acumulador toca
-				SubtareaunidadacumuladorTO subtareaunidadacumuladorExiste=new SubtareaunidadacumuladorTO();
-				subtareaunidadacumuladorExiste.getId().setId(id);
-				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=new ArrayList<>();
-				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorExiste);
-				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
-				subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+1));
-				//subtareaunidadacumuladorTO.getId().setId(id);
-				subtareaunidadacumuladorTO.setTotal(0.0);
-				subtareaunidadacumuladorTO.setNpValor(0.0);
-				subtareaunidadacumuladorTO.setValor(100.0);
-				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
-				subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);
-				
-				subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
-				//subtareaunidadacumuladorTO.getId().setId(id);
-				subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
-				subtareaunidadacumuladorTO.setNpValor(0.0);
-				subtareaunidadacumuladorTO.setTotal(0.0);
-				subtareaunidadacumuladorTO.setValor(100.0);
-				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
-				subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);
-				jsonObject.put("subtareaunidadacumulador", (JSONArray)JSONSerializer.toJSON(subtareaunidadacumuladorTOs,subtareaunidadacumuladorTO.getJsonConfig()));
+				else {
+					mensajes.setMsg("Excedido el numero de programas permitidos. Verifique la partida presupuestaria");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+
 			}
-			
+
 			//Item
 			else if(clase.equals("itemunidad")){
-				//traigo el valor presupuestado y aprobado de la actividad
-				String[] pares = tipo.split("&");
-				Map<String, String> parameters = new HashMap<String, String>();
-				for(String pare : pares) {
-				    String[] nameAndValue = pare.split("=");
-				    parameters.put(nameAndValue[0], nameAndValue[1]);
+				//verifico el numero de hijos
+				boolean permitir=UtilSession.planificacionServicio.transVerificarNivelesplanificacionTO("IT", ejercicio, id);
+				if(permitir) {
+					//traigo el valor presupuestado y aprobado de la actividad
+					String[] pares = tipo.split("&");
+					Map<String, String> parameters = new HashMap<String, String>();
+					for(String pare : pares) {
+						String[] nameAndValue = pare.split("=");
+						parameters.put(nameAndValue[0], nameAndValue[1]);
+					}
+					ItemunidadTO itemunidadTO = new ItemunidadTO();
+					itemunidadTO.setPadre(id);//id del nivelactividad
+					itemunidadTO.setItemunidadejerciciofiscalid(ejercicio);
+					itemunidadTO.setItemunidadunidadid(Long.valueOf(parameters.get("unidadid")));
+					itemunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
+					//Obtengo la obra de codigo 000 para setearlo por defecto
+					ObraTO obraTO=new ObraTO();
+					obraTO.setObraejerciciofiscalid(ejercicio);
+					obraTO.setCodigo(MensajesWeb.getString("codigo.cero.tres"));
+					Collection<ObraTO> obraTOs=UtilSession.adminsitracionServicio.transObtenerObra(obraTO);
+					if(obraTOs.size()>0){
+						obraTO=(ObraTO)obraTOs.iterator().next();
+						itemunidadTO.setItemunidadobraid(obraTO.getId());
+						itemunidadTO.setNpcodigoobra(obraTO.getCodigo());
+						itemunidadTO.setNpnombreobra(obraTO.getNombre());
+					}
+					//Obtengo el organismo de codigo 0000 para seterarlo por defecto
+					//				OrganismoTO organismoTO=new OrganismoTO();
+					//				organismoTO.setOrganismoejerciciofiscalid(ejercicio);
+					//				organismoTO.setCodigo(MensajesWeb.getString("codigo.cero.cuatro"));
+					//				Collection<OrganismoTO> organismoTOs=UtilSession.adminsitracionServicio.transObtenerOrganismo(organismoTO);
+					//				if(organismoTOs.size()>0){
+					//					log.println("npcodigoorganismo: " + itemunidadTO.getNpcodigoorganismo());
+					//					organismoTO=(OrganismoTO)organismoTOs.iterator().next();
+					//					itemunidadTO.setItemunidadorganismoid(organismoTO.getId());
+					//					itemunidadTO.setNpcodigoorganismo(organismoTO.getCodigo());
+					//					itemunidadTO.setNpnombreorganismo(organismoTO.getNombre());
+					//				}
+					//Obtengo el organismo prestamo de codigo 0000 para sete
+					OrganismoprestamoTO organismoprestamoTO=new OrganismoprestamoTO();
+					organismoprestamoTO.setCodigo(MensajesWeb.getString("codigo.cero.cuatro"));
+					//organismoprestamoTO.getId().setId(ejercicio);
+					OrganismoTO organismoTO=new OrganismoTO();
+					organismoTO.setOrganismoejerciciofiscalid(ejercicio);
+					organismoTO.setCodigo(MensajesWeb.getString("codigo.cero.cuatro"));
+					organismoprestamoTO.setOrganismo(organismoTO);
+					Collection<OrganismoprestamoTO> organismoprestamoTOs=UtilSession.planificacionServicio.transObtenerOrganismoprestamo(organismoprestamoTO);
+					log.println("organismoprstamo: " + organismoprestamoTOs.size());
+					if(organismoprestamoTOs.size()>0){
+
+						organismoprestamoTO=(OrganismoprestamoTO)organismoprestamoTOs.iterator().next();
+						itemunidadTO.setNpcodigoorgpres(organismoprestamoTO.getCodigo());
+						itemunidadTO.setNpnombreorgpres(organismoprestamoTO.getNombre());
+						itemunidadTO.setItemunidadorganismoid(organismoprestamoTO.getId().getId());
+						itemunidadTO.setNpcodigoorganismo(organismoprestamoTO.getOrganismo().getCodigo());
+						itemunidadTO.setNpnombreorganismo(organismoprestamoTO.getOrganismo().getNombre());
+						itemunidadTO.setItemunidadorgprestamoid(organismoprestamoTO.getId().getPrestamoid());
+					}
+					log.println("npcodigoorganismo***: " + itemunidadTO.getNpcodigoorganismo());
+					jsonObject.put("itemunidad", (JSONObject)JSONSerializer.toJSON(itemunidadTO,itemunidadTO.getJsonConfig()));
+				}else {
+					mensajes.setMsg("Excedido el numero de programas permitidos. Verifique la partida presupuestaria");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
-				ItemunidadTO itemunidadTO = new ItemunidadTO();
-				itemunidadTO.setPadre(id);//id del nivelactividad
-				itemunidadTO.setItemunidadejerciciofiscalid(ejercicio);
-				itemunidadTO.setItemunidadunidadid(Long.valueOf(parameters.get("unidadid")));
-				itemunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
-				//Obtengo la obra de codigo 000 para setearlo por defecto
-				ObraTO obraTO=new ObraTO();
-				obraTO.setObraejerciciofiscalid(ejercicio);
-				obraTO.setCodigo(MensajesWeb.getString("codigo.cero.tres"));
-				Collection<ObraTO> obraTOs=UtilSession.adminsitracionServicio.transObtenerObra(obraTO);
-				if(obraTOs.size()>0){
-					obraTO=(ObraTO)obraTOs.iterator().next();
-					itemunidadTO.setItemunidadobraid(obraTO.getId());
-					itemunidadTO.setNpcodigoobra(obraTO.getCodigo());
-					itemunidadTO.setNpnombreobra(obraTO.getNombre());
-				}
-				//Obtengo el organismo de codigo 0000 para seterarlo por defecto
-//				OrganismoTO organismoTO=new OrganismoTO();
-//				organismoTO.setOrganismoejerciciofiscalid(ejercicio);
-//				organismoTO.setCodigo(MensajesWeb.getString("codigo.cero.cuatro"));
-//				Collection<OrganismoTO> organismoTOs=UtilSession.adminsitracionServicio.transObtenerOrganismo(organismoTO);
-//				if(organismoTOs.size()>0){
-//					log.println("npcodigoorganismo: " + itemunidadTO.getNpcodigoorganismo());
-//					organismoTO=(OrganismoTO)organismoTOs.iterator().next();
-//					itemunidadTO.setItemunidadorganismoid(organismoTO.getId());
-//					itemunidadTO.setNpcodigoorganismo(organismoTO.getCodigo());
-//					itemunidadTO.setNpnombreorganismo(organismoTO.getNombre());
-//				}
-				//Obtengo el organismo prestamo de codigo 0000 para sete
-				OrganismoprestamoTO organismoprestamoTO=new OrganismoprestamoTO();
-				organismoprestamoTO.setCodigo(MensajesWeb.getString("codigo.cero.cuatro"));
-				//organismoprestamoTO.getId().setId(ejercicio);
-				OrganismoTO organismoTO=new OrganismoTO();
-				organismoTO.setOrganismoejerciciofiscalid(ejercicio);
-				organismoTO.setCodigo(MensajesWeb.getString("codigo.cero.cuatro"));
-				organismoprestamoTO.setOrganismo(organismoTO);
-				Collection<OrganismoprestamoTO> organismoprestamoTOs=UtilSession.planificacionServicio.transObtenerOrganismoprestamo(organismoprestamoTO);
-				log.println("organismoprstamo: " + organismoprestamoTOs.size());
-				if(organismoprestamoTOs.size()>0){
-					
-					organismoprestamoTO=(OrganismoprestamoTO)organismoprestamoTOs.iterator().next();
-					itemunidadTO.setNpcodigoorgpres(organismoprestamoTO.getCodigo());
-					itemunidadTO.setNpnombreorgpres(organismoprestamoTO.getNombre());
-					itemunidadTO.setItemunidadorganismoid(organismoprestamoTO.getId().getId());
-					itemunidadTO.setNpcodigoorganismo(organismoprestamoTO.getOrganismo().getCodigo());
-					itemunidadTO.setNpnombreorganismo(organismoprestamoTO.getOrganismo().getNombre());
-					itemunidadTO.setItemunidadorgprestamoid(organismoprestamoTO.getId().getPrestamoid());
-				}
-				log.println("npcodigoorganismo***: " + itemunidadTO.getNpcodigoorganismo());
-				jsonObject.put("itemunidad", (JSONObject)JSONSerializer.toJSON(itemunidadTO,itemunidadTO.getJsonConfig()));
+
 			}
-			
+
 			//Subitem
 			else if(clase.equals("subitemunidad")){
-				//traigo el valor presupuestado y aprobado de la actividad
-				String[] pares = tipo.split("&");
-				Map<String, String> parameters = new HashMap<String, String>();
-				for(String pare : pares) {
-				    String[] nameAndValue = pare.split("=");
-				    parameters.put(nameAndValue[0], nameAndValue[1]);
-				}
-				SubitemunidadTO subitemunidadTO = new SubitemunidadTO();
-				subitemunidadTO.setPadre(id);//id del nivelactividad
-				subitemunidadTO.setSubitemunidadejerfiscalid(ejercicio);
-				subitemunidadTO.setSubitemunidadunidadid(Long.valueOf(parameters.get("unidadid")));
-				subitemunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
-				//Debo traer el id del item seleccionado en el itemunidad para que se pueda consultar el codigo incop
-				if(parameters.get("itemunidadid")!=null) {
-					ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
-					if(itemunidadTO!=null)
-						subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
-				}
-				jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
-				//obtengo la lista de subitemunidadacumuladorTO existente para saber que acumulador toca
-				SubitemunidadacumuladorTO subitemunidadacumuladorExiste=new SubitemunidadacumuladorTO();
-				subitemunidadacumuladorExiste.getId().setId(id);
-				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorExiste);
-				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
-				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=new ArrayList<>();
-				subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+1));
-				//subitemunidadacumuladorTO.getId().setId(id);
-				subitemunidadacumuladorTO.setNpvalor(0.0);
-				subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
-				subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
-				
-				subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
-				//subitemunidadacumuladorTO.getId().setId(id);
-				subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
-				subitemunidadacumuladorTO.setNpvalor(0.0);
-				subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
-				subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
+				//verifico el numero de hijos
+				boolean permitir=UtilSession.planificacionServicio.transVerificarNivelesplanificacionTO("SI", ejercicio, id);
+				if(permitir) {
+					//traigo el valor presupuestado y aprobado de la actividad
+					String[] pares = tipo.split("&");
+					Map<String, String> parameters = new HashMap<String, String>();
+					for(String pare : pares) {
+						String[] nameAndValue = pare.split("=");
+						parameters.put(nameAndValue[0], nameAndValue[1]);
+					}
+					SubitemunidadTO subitemunidadTO = new SubitemunidadTO();
+					subitemunidadTO.setPadre(id);//id del nivelactividad
+					subitemunidadTO.setSubitemunidadejerfiscalid(ejercicio);
+					subitemunidadTO.setSubitemunidadunidadid(Long.valueOf(parameters.get("unidadid")));
+					subitemunidadTO.setEstado(MensajesWeb.getString("estado.activo"));
+					//Debo traer el id del item seleccionado en el itemunidad para que se pueda consultar el codigo incop
+					if(parameters.get("itemunidadid")!=null) {
+						ItemunidadTO itemunidadTO=UtilSession.planificacionServicio.transObtenerItemunidadTO(Long.valueOf(parameters.get("itemunidadid")));
+						if(itemunidadTO!=null)
+							subitemunidadTO.setNpitemid(itemunidadTO.getItemunidaditemid());
+					}
+					jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
+					//obtengo la lista de subitemunidadacumuladorTO existente para saber que acumulador toca
+					SubitemunidadacumuladorTO subitemunidadacumuladorExiste=new SubitemunidadacumuladorTO();
+					subitemunidadacumuladorExiste.getId().setId(id);
+					Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorExiste);
+					SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
+					Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=new ArrayList<>();
+					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+1));
+					//subitemunidadacumuladorTO.getId().setId(id);
+					subitemunidadacumuladorTO.setNpvalor(0.0);
+					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
+					subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
 
-				subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
-				//subitemunidadacumuladorTO.getId().setId(id);
-				subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+3));
-				subitemunidadacumuladorTO.setNpvalor(0.0);
-				subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.devengo"));
-				subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
-				jsonObject.put("subitemunidadacumulador", (JSONArray)JSONSerializer.toJSON(subitemunidadacumuladorTOs,subitemunidadacumuladorTO.getJsonConfig()));
-				//Saldo para los valores planificados y acumulados
-				//1. traigo el valor presupuestado y aprobado de la actividad
-				log.println("actividad: " + parameters.get("actividadid") + "unidad: " + parameters.get("unidadid"));
-				ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("actividadid")), Long.valueOf(parameters.get("unidadid"))));
-				log.println("actividad id: " + actividadunidadTO.getId().getId());
-				log.println("unidad: " + parameters.get("unidadid"));
-				log.println("ejercicio: " + ejercicio);
-				
-				//2. traigo los valores ya reservados para restar y mostrar solo lo disponible
-				//Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
-				Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), ejercicio);
-				log.println("valores planificados: " + actividadunidadTO.getPresupplanif() + " - " + totales.get("tplanificado"));
-				log.println("valores ajustados: " + actividadunidadTO.getPresupajust().doubleValue() + " - " +totales.get("tacumulado"));
-				actividadunidadTO.setPresupplanif(UtilGeneral.redondear(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue(),2));
-				actividadunidadTO.setPresupajust(UtilGeneral.redondear(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue(),2));
-				log.println("total planificado: " + actividadunidadTO.getPresupplanif());
-				log.println("toal presupuestado: " + actividadunidadTO.getPresupajust());
-				Map<String, Double> saldos= new HashMap<String,Double>();
-				saldos.put("tplanificado", actividadunidadTO.getPresupplanif());
-				saldos.put("tacumulado", actividadunidadTO.getPresupajust());
-				jsonObject.put("totales", (JSONObject)JSONSerializer.toJSON(saldos));
-				jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfigSubitem()));
+					subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
+					//subitemunidadacumuladorTO.getId().setId(id);
+					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
+					subitemunidadacumuladorTO.setNpvalor(0.0);
+					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
+					subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
+
+					subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
+					//subitemunidadacumuladorTO.getId().setId(id);
+					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+3));
+					subitemunidadacumuladorTO.setNpvalor(0.0);
+					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.devengo"));
+					subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
+					jsonObject.put("subitemunidadacumulador", (JSONArray)JSONSerializer.toJSON(subitemunidadacumuladorTOs,subitemunidadacumuladorTO.getJsonConfig()));
+					//Saldo para los valores planificados y acumulados
+					//1. traigo el valor presupuestado y aprobado de la actividad
+					log.println("actividad: " + parameters.get("actividadid") + "unidad: " + parameters.get("unidadid"));
+					ActividadunidadTO actividadunidadTO=UtilSession.planificacionServicio.transObtenerActividadunidadTO(new ActividadunidadID(Long.valueOf(parameters.get("actividadid")), Long.valueOf(parameters.get("unidadid"))));
+					log.println("actividad id: " + actividadunidadTO.getId().getId());
+					log.println("unidad: " + parameters.get("unidadid"));
+					log.println("ejercicio: " + ejercicio);
+
+					//2. traigo los valores ya reservados para restar y mostrar solo lo disponible
+					//Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
+					Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), ejercicio);
+					log.println("valores planificados: " + actividadunidadTO.getPresupplanif() + " - " + totales.get("tplanificado"));
+					log.println("valores ajustados: " + actividadunidadTO.getPresupajust().doubleValue() + " - " +totales.get("tacumulado"));
+					actividadunidadTO.setPresupplanif(UtilGeneral.redondear(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue(),2));
+					actividadunidadTO.setPresupajust(UtilGeneral.redondear(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue(),2));
+					log.println("total planificado: " + actividadunidadTO.getPresupplanif());
+					log.println("toal presupuestado: " + actividadunidadTO.getPresupajust());
+					Map<String, Double> saldos= new HashMap<String,Double>();
+					saldos.put("tplanificado", actividadunidadTO.getPresupplanif());
+					saldos.put("tacumulado", actividadunidadTO.getPresupajust());
+					jsonObject.put("totales", (JSONObject)JSONSerializer.toJSON(saldos));
+					jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfigSubitem()));
+				}
+				else {
+					mensajes.setMsg("Excedido el numero de programas permitidos. Verifique la partida presupuestaria");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+
 			}
 			//Indicador
 			else if(clase.equals("indicador")){
@@ -1251,8 +1337,101 @@ public class PlanificacionController {
 				indicadorTO.setIndicadorpadreid(id);// el id de la actividad
 				jsonObject.put("indicador", (JSONObject)JSONSerializer.toJSON(indicadorTO,indicadorTO.getJsonConfig()));
 			}
+			//Partidapresupuestaria
+			else if(clase.equals("partidapresupuestaria")){
+				Collection<NivelesplanificacionTO> nivelesplanificacionTOs=new ArrayList<>();
+				Collection<ParmnivelesprogramanivelTO> parmnivelesprogramanivelTOs=new ArrayList<>();
+				//Debo buscar si ya tiene la partida la traigo sino debo crear todos los niveles
+				ParmnivelesprogramanivelTO nivelesprogramanivel=new ParmnivelesprogramanivelTO();
+				nivelesprogramanivel.setEjerciciofiscalid(ejercicio);
+				parmnivelesprogramanivelTOs=UtilSession.planificacionServicio.transObtenerParmnivelesprogramanivel(nivelesprogramanivel);
+				NivelesplanificacionTO nivelplanificacionTO=new NivelesplanificacionTO();
+				nivelplanificacionTO.setEjerciciofiscalid(ejercicio);
+				nivelesplanificacionTOs=UtilSession.planificacionServicio.transObtenerNivelesplanificacion(nivelplanificacionTO);
+				ParmnivelesprogramanivelTO parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
+				if(nivelesplanificacionTOs.size()==0) {
+					//Formulacion estrategica
+					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
+					parmnivelesprogramanivelTO.getId().setId(1L);
+					parmnivelesprogramanivelTO.setTipo("PR");
+					parmnivelesprogramanivelTOs.add(parmnivelesprogramanivelTO);
+
+					parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
+					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
+					parmnivelesprogramanivelTO.getId().setId(2L);
+					parmnivelesprogramanivelTO.setTipo("SP");
+					parmnivelesprogramanivelTOs.add(parmnivelesprogramanivelTO);
+
+					parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
+					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
+					parmnivelesprogramanivelTO.getId().setId(3L);
+					parmnivelesprogramanivelTO.setTipo("PO");
+					parmnivelesprogramanivelTOs.add(parmnivelesprogramanivelTO);
+
+					parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
+					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
+					parmnivelesprogramanivelTO.getId().setId(4L);
+					parmnivelesprogramanivelTO.setTipo("AC");
+					parmnivelesprogramanivelTOs.add(parmnivelesprogramanivelTO);
+
+					parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
+					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
+					parmnivelesprogramanivelTO.getId().setId(5L);
+					parmnivelesprogramanivelTO.setTipo("SA");
+					parmnivelesprogramanivelTOs.add(parmnivelesprogramanivelTO);
+					//Mando a guardar todo
+					UtilSession.planificacionServicio.transCrearModificarParmnivelesprogramanivel(parmnivelesprogramanivelTOs, true);
+
+				}
+
+				NivelesplanificacionTO nivelesplanificacionTO=new NivelesplanificacionTO();
+				if(nivelesplanificacionTOs.size()==0) {
+					//Planificacion
+					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
+					nivelesplanificacionTO.getId().setId(1L);
+					nivelesplanificacionTO.setTipo("AC");
+					nivelesplanificacionTOs.add(nivelesplanificacionTO);
+
+					nivelesplanificacionTO=new NivelesplanificacionTO();
+					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
+					nivelesplanificacionTO.getId().setId(2L);
+					nivelesplanificacionTO.setTipo("SA");
+					nivelesplanificacionTOs.add(nivelesplanificacionTO);
+
+					nivelesplanificacionTO=new NivelesplanificacionTO();
+					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
+					nivelesplanificacionTO.getId().setId(3L);
+					nivelesplanificacionTO.setTipo("TA");
+					nivelesplanificacionTOs.add(nivelesplanificacionTO);
+
+					nivelesplanificacionTO=new NivelesplanificacionTO();
+					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
+					nivelesplanificacionTO.getId().setId(4L);
+					nivelesplanificacionTO.setTipo("ST");
+					nivelesplanificacionTOs.add(nivelesplanificacionTO);
+
+					nivelesplanificacionTO=new NivelesplanificacionTO();
+					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
+					nivelesplanificacionTO.getId().setId(5L);
+					nivelesplanificacionTO.setTipo("IT");
+					nivelesplanificacionTOs.add(nivelesplanificacionTO);
+
+					nivelesplanificacionTO=new NivelesplanificacionTO();
+					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
+					nivelesplanificacionTO.getId().setId(6L);
+					nivelesplanificacionTO.setTipo("SI");
+					nivelesplanificacionTOs.add(nivelesplanificacionTO);
+
+					UtilSession.planificacionServicio.transCrearModificarNivelesplanificacion(nivelesplanificacionTOs, true);
+				}
+
+				jsonObject.put("formulacion", (JSONObject)JSONSerializer.toJSON(parmnivelesprogramanivelTOs,parmnivelesprogramanivelTO.getJsonConfig()));
+				jsonObject.put("planificacion", (JSONObject)JSONSerializer.toJSON(nivelesplanificacionTOs,nivelesplanificacionTO.getJsonConfig()));
+			}
+
+			if(mensajes.getMsg()!=null && !mensajes.getMsg().equals(""))
+				respuesta.setEstado(false);
 			log.println("json retornado: " + jsonObject.toString());
-			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al obtener para editar");
@@ -1261,13 +1440,13 @@ public class PlanificacionController {
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-//		if(mensajes.getMsg()!=null)
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		//		if(mensajes.getMsg()!=null)
+		//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
-	
+
 	@RequestMapping(value = "/{clase}/{id}/{parametro}", method = RequestMethod.GET)
 	public Respuesta editarniveles(@PathVariable String clase,@PathVariable Long id,@PathVariable String parametro,HttpServletRequest request){
 		log.println("entra al metodo editar niveles: " + clase + " - " + id  + " - " + parametro);
@@ -1280,8 +1459,8 @@ public class PlanificacionController {
 			String[] pares = parametro.split("&");
 			Map<String, String> parameters = new HashMap<String, String>();
 			for(String pare : pares) {
-			    String[] nameAndValue = pare.split("=");
-			    parameters.put(nameAndValue[0], nameAndValue[1]);
+				String[] nameAndValue = pare.split("=");
+				parameters.put(nameAndValue[0], nameAndValue[1]);
 			}
 			//Objetivo
 			if(clase.equals("objetivo")){
@@ -1385,7 +1564,7 @@ public class PlanificacionController {
 				subactividadTO.setEstado(MensajesWeb.getString("estado.activo"));
 				jsonObject.put("subactividad", (JSONObject)JSONSerializer.toJSON(subactividadTO,subactividadTO.getJsonConfigedicion()));
 			}
-			
+
 			//Actividad unidad en la planificacion se carga al poner editar actividad
 			else if(clase.equals("actividadunidad")){
 				ActividadTO actividadTO = UtilSession.planificacionServicio.transObtenerActividad(id);
@@ -1445,7 +1624,7 @@ public class PlanificacionController {
 					actividadunidadacumuladorTO.setNpValor(0.0);
 					actividadunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
 					actividadunidadacumuladorTOs.add(actividadunidadacumuladorTO);
-					
+
 					actividadunidadacumuladorTO=new ActividadunidadacumuladorTO();
 					actividadunidadacumuladorTO.getId().setId(id);
 					actividadunidadacumuladorTO.getId().setUnidadid(Long.valueOf(parameters.get("unidadid")));
@@ -1462,7 +1641,7 @@ public class PlanificacionController {
 				}
 				jsonObject.put("actividadunidadacumulador", (JSONArray)JSONSerializer.toJSON(actividadunidadacumuladorTOs,actividadunidadacumuladorTO.getJsonConfig()));
 			}
-			
+
 			//Subactividad unidad en la planificacion se carga al poner editar subactividad
 			else if(clase.equals("subactividadunidad")){
 				SubactividadunidadTO subactividadunidadTO = UtilSession.planificacionServicio.transObtenerSubactividadunidadTO(new SubactividadunidadID(id, Long.valueOf(parameters.get("unidadid"))));
@@ -1471,7 +1650,7 @@ public class PlanificacionController {
 				subactividadunidadTO.setNpponderacion(subactividadunidadTO.getPonderacion());
 				jsonObject.put("subactividadunidad", (JSONObject)JSONSerializer.toJSON(subactividadunidadTO,subactividadunidadTO.getJsonConfig()));
 			}
-			
+
 			//Tarea unidad en la planificacion se carga al poner editar tarea
 			else if(clase.equals("tareaunidad")){
 				TareaunidadTO tareaunidadTO = UtilSession.planificacionServicio.transObtenerTareaunidadTO(id);
@@ -1481,7 +1660,7 @@ public class PlanificacionController {
 				tareaunidadTO.setNpponderacion(tareaunidadTO.getPonderacion());
 				jsonObject.put("tareaunidad", (JSONObject)JSONSerializer.toJSON(tareaunidadTO,tareaunidadTO.getJsonConfig()));
 			}
-			
+
 			//Subtarea unidad en la planificacion se carga al poner editar subtarea
 			else if(clase.equals("subtareaunidad")){
 				SubtareaunidadTO subtareaunidadTO = UtilSession.planificacionServicio.transObtenerSubtareaunidadTO(id);
@@ -1504,7 +1683,7 @@ public class PlanificacionController {
 					subtareaunidadacumuladorTO.setNpValor(0.0);
 					subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
 					subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);
-					
+
 					subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
 					//subtareaunidadacumuladorTO.getId().setId(id);
 					subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
@@ -1520,7 +1699,7 @@ public class PlanificacionController {
 				}
 				jsonObject.put("subtareaunidadacumulador", (JSONArray)JSONSerializer.toJSON(subtareaunidadacumuladorTOs,subtareaunidadacumuladorTO.getJsonConfig()));
 			}
-			
+
 			//Item unidad en la planificacion se carga al poner editar item
 			else if(clase.equals("itemunidad")){
 				ItemunidadTO itemunidadTO = UtilSession.planificacionServicio.transObtenerItemunidadTO(id);
@@ -1540,7 +1719,7 @@ public class PlanificacionController {
 				itemunidadTO.setNpnombrecanton(itemunidadTO.getDivisiongeografica().getNombre());
 				jsonObject.put("itemunidad", (JSONObject)JSONSerializer.toJSON(itemunidadTO,itemunidadTO.getJsonConfig()));
 			}
-			
+
 			//Subitem unidad en la planificacion se carga al poner editar subitem
 			else if(clase.equals("subitemunidad")){
 				log.println("va a editar el subitem unidad");
@@ -1571,7 +1750,7 @@ public class PlanificacionController {
 					subitemunidadacumuladorTO.setNpvalor(0.0);
 					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
 					subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
-					
+
 					subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 					//subitemunidadacumuladorTO.getId().setId(id);
 					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
@@ -1616,9 +1795,9 @@ public class PlanificacionController {
 				saldos.put("tacumulado", actividadunidadTO.getPresupajust());
 				jsonObject.put("totales", (JSONObject)JSONSerializer.toJSON(saldos));
 				jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfigSubitem()));
-				
+
 			}
-			
+
 			//-----------------Las cabeceras cuando se da click en la descripcion de los niveles del arbol
 			//ActividadPlanificacion
 			if(clase.equals("actividadplanificacion")){
@@ -1628,36 +1807,37 @@ public class PlanificacionController {
 				ActividadTO actividadTO1 = UtilSession.planificacionServicio.transObtieneActividadesniveles(actividadTO,Long.valueOf(parameters.get("unidadid")),Long.valueOf(parameters.get("ejerciciofiscal")));
 				jsonObject.put("actividadplanificacion", (JSONObject)JSONSerializer.toJSON(actividadTO1,actividadTO.getJsonConfigEditarPlanificacion()));
 			}
-			
+
 			//SubctividadPlanificacion
 			else if(clase.equals("subactividadplanificacion")){
 				ActividadTO actividadTO1 = UtilSession.planificacionServicio.transObtieneActividadesnivelesSuactiviad(id, Long.valueOf(parameters.get("unidadid")),Long.valueOf(parameters.get("ejerciciofiscal")));
 				jsonObject.put("subactividadplanificacion", (JSONObject)JSONSerializer.toJSON(actividadTO1,new ActividadTO().getJsonConfigEditarPlanificacion()));
 			}
-			
+
 			//TareaPlanificacion
 			else if(clase.equals("tareaplanificacion")){
 				ActividadTO actividadTO1 = UtilSession.planificacionServicio.transObtieneActividadesnivelesTarea(id, Long.valueOf(parameters.get("unidadid")),Long.valueOf(parameters.get("ejerciciofiscal")));
 				jsonObject.put("tareaplanificacion", (JSONObject)JSONSerializer.toJSON(actividadTO1,new ActividadTO().getJsonConfigEditarPlanificacion()));
 			}
-			
+
 			//SubtareaPlanificacion
 			else if(clase.equals("subtareaplanificacion")){
 				ActividadTO actividadTO1 = UtilSession.planificacionServicio.transObtieneActividadesnivelesSubtarea(id, Long.valueOf(parameters.get("unidadid")),Long.valueOf(parameters.get("ejerciciofiscal")));
 				jsonObject.put("subtareaplanificacion", (JSONObject)JSONSerializer.toJSON(actividadTO1,new ActividadTO().getJsonConfigEditarPlanificacion()));
 			}
-			
+
 			//ItemPlanificacion
 			else if(clase.equals("itemplanificacion")){
 				ActividadTO actividadTO1 = UtilSession.planificacionServicio.transObtieneActividadesnivelesItem(id, Long.valueOf(parameters.get("unidadid")),Long.valueOf(parameters.get("ejerciciofiscal")));
 				jsonObject.put("itemplanificacion", (JSONObject)JSONSerializer.toJSON(actividadTO1,new ActividadTO().getJsonConfigEditarPlanificacion()));
 			}
-			
+
 			//SubitemPlanificacion
 			else if(clase.equals("subitemplanificacion")){
 				ActividadTO actividadTO1 = UtilSession.planificacionServicio.transObtieneActividadesnivelesSubitem(id, Long.valueOf(parameters.get("unidadid")),Long.valueOf(parameters.get("ejerciciofiscal")));
 				jsonObject.put("subitemplanificacion", (JSONObject)JSONSerializer.toJSON(actividadTO1,new ActividadTO().getJsonConfigEditarPlanificacion()));
 			}
+			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 
 			log.println("json retornado: " + jsonObject.toString());
 		} catch (Exception e) {
@@ -1668,13 +1848,13 @@ public class PlanificacionController {
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-//		if(mensajes.getMsg()!=null)
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		//		if(mensajes.getMsg()!=null)
+		//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
-	
+
 	@RequestMapping(value = "/{clase}/{id}/{id2}", method = RequestMethod.DELETE)
 	//@ResponseStatus(HttpStatus.NO_CONTENT)
 	public Respuesta eliminar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,HttpServletRequest request){
@@ -1730,7 +1910,7 @@ public class PlanificacionController {
 			ComunController.crearAuditoria(request, clase, "E", null, id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
 			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
-//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+			//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al eliminar");
@@ -1739,17 +1919,17 @@ public class PlanificacionController {
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-//		if(mensajes.getMsg()!=null){
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-//			log.println("existen mensajes");
-//		}
+		//		if(mensajes.getMsg()!=null){
+		//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		//			log.println("existen mensajes");
+		//		}
 		log.println("devuelve**** " + jsonObject.toString());
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
-	
-	
+
+
 	@RequestMapping(value = "/consultar/{clase}/{parametro}", method = RequestMethod.GET)
 	public Respuesta consultar(HttpServletRequest request,@PathVariable String clase,@PathVariable String parametro, Principal principal) {
 		log.println("ingresa a consultar: " + clase + " - "  + parametro + " - " + request.getParameter("pagina"));
@@ -1760,12 +1940,12 @@ public class PlanificacionController {
 			String[] pares = parametro.split("&");
 			Map<String, String> parameters = new HashMap<String, String>();
 			for(String pare : pares) {
-			    String[] nameAndValue = pare.split("=");
-			    parameters.put(nameAndValue[0], nameAndValue[1]);
+				String[] nameAndValue = pare.split("=");
+				parameters.put(nameAndValue[0], nameAndValue[1]);
 			}
 			log.println("pagina** " + parameters.get("pagina"));
 			log.println("filas: " + parameters.get("filas"));
-			
+
 			//Objetivo
 			if(clase.equals("objetivo")){
 				jsonObject=ConsultasUtil.consultaObjetivoarbol(parameters, jsonObject);
@@ -1792,17 +1972,17 @@ public class PlanificacionController {
 				Collection<IndicadormetodoTO> indicadormetodoTOs=UtilSession.planificacionServicio.transObtenerIndicadormetodo(new IndicadormetodoTO());
 				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(indicadormetodoTOs,new IndicadormetodoTO().getJsonConfig()));
 			}
-			
+
 			//Objetivo grilla
 			else if(clase.equals("objetivogrilla")){
 				jsonObject=ConsultasUtil.consultaObjetivogrilla(parameters, jsonObject);
 			}
-			
+
 			//Subprograma
 			else if(clase.equals("subprograma")){
 				jsonObject=ConsultasUtil.consultaSubprograma(parameters, jsonObject);
 			}
-			
+
 			//Proyecto
 			else if(clase.equals("proyecto")){
 				jsonObject=ConsultasUtil.consultaProyecto(parameters, jsonObject);
@@ -1827,7 +2007,7 @@ public class PlanificacionController {
 			else if(clase.equals("subactividad")){
 				jsonObject=ConsultasUtil.consultaSubactividad(parameters, jsonObject);
 			}
-			
+
 			//Busqueda Indicador
 			else if(clase.equals("consultaBusquedaIndicadoractividad")){
 				jsonObject=ConsultasUtil.consultaBusquedaIndicadordesdeActividad(parameters, jsonObject);
@@ -1837,7 +2017,7 @@ public class PlanificacionController {
 			else if(clase.equals("planificacion")){
 				jsonObject=ConsultasUtil.consultaPlanificacion(parameters, jsonObject,request,principal);
 			}
-			
+
 			//NivelActividad
 			else if(clase.equals("nivelactividad")){
 				jsonObject=ConsultasUtil.consultaNivelactividad(parameters, jsonObject);
@@ -1849,7 +2029,7 @@ public class PlanificacionController {
 					jsonObject.put("unidad", (JSONObject)JSONSerializer.toJSON(unidad));
 				}
 			}
-			
+
 			//Aprobar unidad
 			else if(clase.equals("aprobar")){
 				//debe llegar id y npacitividadunidad
@@ -1865,12 +2045,12 @@ public class PlanificacionController {
 				nivelactividadTO.setTipo("AC");
 				nivelactividadTO.setEstado("A");
 				Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
-//				ActividadunidadTO actividadunidadTO=new ActividadunidadTO();
-//				actividadunidadTO.getId().setUnidadid(Long.valueOf(parameters.get("unidad")));
-//				ActividadTO actividadTO=new ActividadTO();
-//				actividadTO.setActividadeejerciciofiscalid(Long.valueOf(parameters.get("nivelactividadejerfiscalid")));
-//				actividadunidadTO.setActividad(actividadTO);
-//				Collection<ActividadunidadTO> actividadunidadTOs=UtilSession.planificacionServicio.transObtenerActividadunidad(actividadunidadTO);
+				//				ActividadunidadTO actividadunidadTO=new ActividadunidadTO();
+				//				actividadunidadTO.getId().setUnidadid(Long.valueOf(parameters.get("unidad")));
+				//				ActividadTO actividadTO=new ActividadTO();
+				//				actividadTO.setActividadeejerciciofiscalid(Long.valueOf(parameters.get("nivelactividadejerfiscalid")));
+				//				actividadunidadTO.setActividad(actividadTO);
+				//				Collection<ActividadunidadTO> actividadunidadTOs=UtilSession.planificacionServicio.transObtenerActividadunidad(actividadunidadTO);
 				log.println("actividades: " + nivelactividadTOs.size());
 				Collection<Map<String, String>> resultadofinal=new ArrayList<>();
 				for(NivelactividadTO nivelactividadTO2:nivelactividadTOs) {
@@ -1933,42 +2113,42 @@ public class PlanificacionController {
 			else if(clase.equals("matrizpresupuestos")){
 				jsonObject=ConsultasUtil.matrizpresupuesto(parameters, jsonObject);
 			}
-			
+
 			//Matriz de presupuestos
 			else if(clase.equals("matrizmetas")){
 				jsonObject=ConsultasUtil.matrizmetas(parameters, jsonObject);
 			}
-			
-			
-//			//Instituto entidad
-//			else if(clase.equals("institutoentidad")){
-//				jsonObject=ConsultasUtil.consultaInstitucionentidadPaginado(parameters, jsonObject);
-//			}
-//
-//			//Estructura organica
-//			else if(clase.equals("estructuraorganica")){
-//				jsonObject=ConsultasUtil.consultaEstructuraorganicaPaginado(parameters, jsonObject);
-//			}
-//
-//			//Unidad
-//			else if(clase.equals("unidad")){
-//				jsonObject=ConsultasUtil.consultaUnidadPaginado(parameters, jsonObject);
-//			}
-//
-//			//Unidad arbol
-//			else if(clase.equals("unidadarbol")){
-//				jsonObject=ConsultasUtil.consultaUnidadaarboarbol(parameters, jsonObject);
-//			}
-//
-//			//Unidad arbol plaza
-//			else if(clase.equals("unidadarbolplaza")){
-//				jsonObject=ConsultasUtil.consultaUnidadarbolplazaPaginado(parameters, jsonObject);
-//			}
-//
-//			//Unidad arbol plaza empleado
-//			else if(clase.equals("unidadarbolplazaempleado")){
-//				jsonObject=ConsultasUtil.consultaUnidadarbolplazaempleadoPaginado(parameters, jsonObject);
-//			}
+
+
+			//			//Instituto entidad
+			//			else if(clase.equals("institutoentidad")){
+			//				jsonObject=ConsultasUtil.consultaInstitucionentidadPaginado(parameters, jsonObject);
+			//			}
+			//
+			//			//Estructura organica
+			//			else if(clase.equals("estructuraorganica")){
+			//				jsonObject=ConsultasUtil.consultaEstructuraorganicaPaginado(parameters, jsonObject);
+			//			}
+			//
+			//			//Unidad
+			//			else if(clase.equals("unidad")){
+			//				jsonObject=ConsultasUtil.consultaUnidadPaginado(parameters, jsonObject);
+			//			}
+			//
+			//			//Unidad arbol
+			//			else if(clase.equals("unidadarbol")){
+			//				jsonObject=ConsultasUtil.consultaUnidadaarboarbol(parameters, jsonObject);
+			//			}
+			//
+			//			//Unidad arbol plaza
+			//			else if(clase.equals("unidadarbolplaza")){
+			//				jsonObject=ConsultasUtil.consultaUnidadarbolplazaPaginado(parameters, jsonObject);
+			//			}
+			//
+			//			//Unidad arbol plaza empleado
+			//			else if(clase.equals("unidadarbolplazaempleado")){
+			//				jsonObject=ConsultasUtil.consultaUnidadarbolplazaempleadoPaginado(parameters, jsonObject);
+			//			}
 			log.println("json retornado: " + jsonObject.toString()); 
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1976,14 +2156,14 @@ public class PlanificacionController {
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
 			respuesta.setEstado(false);
 		}
-//		if(mensajes.getMsg()!=null)
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		//		if(mensajes.getMsg()!=null)
+		//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
-	
-	
+
+
 	@RequestMapping(value = "/cronograma/{id}/{acumulador}/{unidad}/{tipo}/{tipometa}/{ejerciciofiscal}", method = RequestMethod.GET)
 	public Respuesta cronograma(@PathVariable Long id,@PathVariable Long acumulador,@PathVariable Long unidad,@PathVariable String tipo,@PathVariable String tipometa,@PathVariable String ejerciciofiscal,HttpServletRequest request){
 		log.println("entra al metodo recuperar: " + id + "- "+  acumulador + "- "+ unidad + "- "+ tipo + "- "+ tipometa + "- "+ ejerciciofiscal);
@@ -1993,56 +2173,56 @@ public class PlanificacionController {
 		try {
 			//Metas (cronograma y cronograma linea) distribucion de presupuesto
 			//..if(clase.equals("cronograma")){
-				//Obtengo las metas del que corresponda planificado o ajustado
-				CronogramaTO cronogramaTO=new CronogramaTO();
-				cronogramaTO.setTablarelacionid(id);//actividad,subtarea unidad
-				cronogramaTO.setAcumuladorid(acumulador);//es el mismo acumulador de la tabla actividadunidadacumulador
-				cronogramaTO.setTiporelacion(tipo);
+			//Obtengo las metas del que corresponda planificado o ajustado
+			CronogramaTO cronogramaTO=new CronogramaTO();
+			cronogramaTO.setTablarelacionid(id);//actividad,subtarea unidad
+			cronogramaTO.setAcumuladorid(acumulador);//es el mismo acumulador de la tabla actividadunidadacumulador
+			cronogramaTO.setTiporelacion(tipo);
+			cronogramaTO.setCronogramaunidadid(unidad);
+			Collection<CronogramaTO> cronogramaTOs=UtilSession.planificacionServicio.transObtenerCronograma(cronogramaTO);
+			log.println("numero de cronogramas encontrados: " + cronogramaTOs.size());
+			//Si existe ya creado obtengo todo los datos sino, creo la cabecera y el detalle
+			Collection<CronogramalineaTO> cronogramalineaTOs=new ArrayList<CronogramalineaTO>();
+			if(cronogramaTOs.size()>0){
+				cronogramaTO=(CronogramaTO)cronogramaTOs.iterator().next();
+				//Obtengo los detalles
+				CronogramalineaTO cronogramalineaTO=new CronogramalineaTO();
+				cronogramalineaTO.getId().setId(cronogramaTO.getId());
+				cronogramalineaTOs=UtilSession.planificacionServicio.transObtenerCronogramalinea(cronogramalineaTO);
+				log.println("detalle cronograma: " + cronogramalineaTOs.size()); 
+				for(CronogramalineaTO cronogramalineaTO2:cronogramalineaTOs)
+					cronogramalineaTO2.setNpfechainicio(UtilGeneral.parseDateToString(cronogramalineaTO2.getFechainicio()));
+			}
+			else{
+				log.println("no existe el cronograma");
+
+				//obtengo el ejerciciofiscal
 				cronogramaTO.setCronogramaunidadid(unidad);
-				Collection<CronogramaTO> cronogramaTOs=UtilSession.planificacionServicio.transObtenerCronograma(cronogramaTO);
-				log.println("numero de cronogramas encontrados: " + cronogramaTOs.size());
-				//Si existe ya creado obtengo todo los datos sino, creo la cabecera y el detalle
-				Collection<CronogramalineaTO> cronogramalineaTOs=new ArrayList<CronogramalineaTO>();
-				if(cronogramaTOs.size()>0){
-					cronogramaTO=(CronogramaTO)cronogramaTOs.iterator().next();
-					//Obtengo los detalles
+				cronogramaTO.setTiporelacion(tipo);
+				int contador=1;
+				String fecha="";
+				if(tipometa.equals("A"))
+					contador=13;
+				if(tipometa.equals("D"))
+					contador=25;
+				for(int i=1;i<13;i++){
+					//Creo los detalles
 					CronogramalineaTO cronogramalineaTO=new CronogramalineaTO();
-					cronogramalineaTO.getId().setId(cronogramaTO.getId());
-					cronogramalineaTOs=UtilSession.planificacionServicio.transObtenerCronogramalinea(cronogramalineaTO);
-					log.println("detalle cronograma: " + cronogramalineaTOs.size()); 
-					for(CronogramalineaTO cronogramalineaTO2:cronogramalineaTOs)
-						cronogramalineaTO2.setNpfechainicio(UtilGeneral.parseDateToString(cronogramalineaTO2.getFechainicio()));
+					cronogramalineaTO.setMes(Long.valueOf(i));
+					cronogramalineaTO.getId().setLineaid(Long.valueOf(contador+i-1));
+					if(i<10)
+						fecha="01"+"/0"+i+"/"+ejerciciofiscal;
+					else
+						fecha="01"+"/"+i+"/"+ejerciciofiscal;
+					cronogramalineaTO.setFechainicio(UtilGeneral.parseStringToDate(fecha));
+					cronogramalineaTO.setNpfechainicio(fecha);
+					cronogramalineaTOs.add(cronogramalineaTO);
 				}
-				else{
-					log.println("no existe el cronograma");
-					
-					//obtengo el ejerciciofiscal
-					cronogramaTO.setCronogramaunidadid(unidad);
-					cronogramaTO.setTiporelacion(tipo);
-					int contador=1;
-					String fecha="";
-					if(tipometa.equals("A"))
-						contador=13;
-					if(tipometa.equals("D"))
-						contador=25;
-					for(int i=1;i<13;i++){
-						//Creo los detalles
-						CronogramalineaTO cronogramalineaTO=new CronogramalineaTO();
-						cronogramalineaTO.setMes(Long.valueOf(i));
-						cronogramalineaTO.getId().setLineaid(Long.valueOf(contador+i-1));
-						if(i<10)
-							fecha="01"+"/0"+i+"/"+ejerciciofiscal;
-						else
-							fecha="01"+"/"+i+"/"+ejerciciofiscal;
-						cronogramalineaTO.setFechainicio(UtilGeneral.parseStringToDate(fecha));
-						cronogramalineaTO.setNpfechainicio(fecha);
-						cronogramalineaTOs.add(cronogramalineaTO);
-					}
-				}
-				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
-				jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramalineaTOs,new CronogramalineaTO().getJsonConfig()));
+			}
+			jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
+			jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramalineaTOs,new CronogramalineaTO().getJsonConfig()));
 			//..}
-		
+
 			log.println("json retornado: " + jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -2052,11 +2232,11 @@ public class PlanificacionController {
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-//		if(mensajes.getMsg()!=null)
-//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+		//		if(mensajes.getMsg()!=null)
+		//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
-	
+
 }
