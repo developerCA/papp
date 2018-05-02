@@ -142,4 +142,8 @@ app.controller('GruposMedidaController', ["$scope", "$rootScope", "SweetAlert", 
         }
     };
 
+
+    $scope.mayusculas = function () {
+        $scope.objeto.nombre = $scope.objeto.nombre.toUpperCase();
+    };
 }]);

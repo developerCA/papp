@@ -17,7 +17,7 @@ app.controller('ModalOrdenGastoController', [ "$scope","$rootScope","$uibModalIn
 			pagina,
 			$rootScope.ejefiscal,
 			$scope.codigoFiltro,
-			"A",
+			"AP",
 			$scope.unidadFiltro,
 			$scope.descripcionFiltro
 		).then(function(resp){

@@ -151,12 +151,14 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 				$rootScope.ejefiscal
 			).then(function(resp){
 				//console.log(resp.json);
-				if (resp.estado) {
-					$scope.objetoPr=resp.json.programa;
-					$scope.objetoPr.padre=0;
-					$scope.editarId=$scope.objetoPr.id;
-					$scope.nodeTipo = "PR";
+				if (!resp.estado) {
+					SweetAlert.swal("Formulacion! - Nuevo Programa", resp.mensajes.msg, "error");
+					return;
 				}
+				$scope.objetoPr=resp.json.programa;
+				$scope.objetoPr.padre=0;
+				$scope.editarId=$scope.objetoPr.id;
+				$scope.nodeTipo = "PR";
 				//console.log($scope.nuevoar);
 				$scope.edicion=true;
 			});
@@ -166,67 +168,75 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		if (node.nodeTipo == "PR") { // SubPrograma
 			formulacionEstrategicaFactory.traerNuevo(
 				"SP",
-				node.id,
+				node.npNivel,
 				$rootScope.ejefiscal
 			).then(function(resp){
 				//console.log(resp.json);
-				if (resp.estado) {
-					$scope.objetoSp=resp.json.subprograma;
-					$scope.objetoSp.padre=node.npNivelid;
-					$scope.editarId=$scope.objetoSp.id;
-					$scope.nodeTipo = "SP";
+				if (!resp.estado) {
+					SweetAlert.swal("Formulacion! - Nuevo Subprograma", resp.mensajes.msg, "error");
+					return;
 				}
+				$scope.objetoSp=resp.json.subprograma;
+				$scope.objetoSp.padre=node.npNivelid;
+				$scope.editarId=$scope.objetoSp.id;
+				$scope.nodeTipo = "SP";
 				$scope.edicionSubPrograma=true;
 			});
 		}
 		if (node.nodeTipo == "SP") { // Proyecto
 			formulacionEstrategicaFactory.traerNuevo(
 				"PY",
-				node.id,
+				node.npNivel,
 				$rootScope.ejefiscal
 			).then(function(resp){
 				//console.log(resp.json);
-				if (resp.estado) {
-					$scope.objetoPy=resp.json.proyecto;
-					$scope.objetoPy.padre=node.npNivelid;
-					$scope.objetoPy.tipo="AN";
-					$scope.objetolistaPy=[];
-					$scope.editarId=$scope.objetoPy.id;
-					$scope.nodeTipo = "PY";
+				if (!resp.estado) {
+					SweetAlert.swal("Formulacion! - Nuevo Proyecto", resp.mensajes.msg, "error");
+					return;
 				}
+				$scope.objetoPy=resp.json.proyecto;
+				$scope.objetoPy.padre=node.npNivelid;
+				$scope.objetoPy.tipo="AN";
+				$scope.objetolistaPy=[];
+				$scope.editarId=$scope.objetoPy.id;
+				$scope.nodeTipo = "PY";
 				$scope.edicionProyecto=true;
 			});
 		}
 		if (node.nodeTipo == "PY") { // Actividad
 			formulacionEstrategicaFactory.traerNuevo(
 				"AC",
-				node.id,
+				node.npNivel,
 				$rootScope.ejefiscal
 			).then(function(resp){
 				//console.log(resp.json);
-				if (resp.estado) {
-					$scope.objetoAc=resp.json.actividad;
-					$scope.objetoAc.padre=node.npNivelid;
-					$scope.objetolistaAc=[];
-					$scope.editarId=$scope.objetoAc.id;
-					$scope.nodeTipo = "AC";
+				if (!resp.estado) {
+					SweetAlert.swal("Formulacion! - Nueva Actividad", resp.mensajes.msg, "error");
+					return;
 				}
+				$scope.objetoAc=resp.json.actividad;
+				$scope.objetoAc.padre=node.npNivelid;
+				$scope.objetolistaAc=[];
+				$scope.editarId=$scope.objetoAc.id;
+				$scope.nodeTipo = "AC";
 				$scope.edicionActividad=true;
 			});
 		}
 		if (node.nodeTipo == "AC" || node.nodeTipo == "SA") { // SubActividad
 			formulacionEstrategicaFactory.traerNuevo(
 				"SA",
-				node.id,
+				node.npNivel,
 				$rootScope.ejefiscal
 			).then(function(resp){
 				//console.log(resp.json);
-				if (resp.estado) {
-					$scope.objetoSa=resp.json.subactividad;
-					$scope.objetoSa.padre=node.npNivelid;
-					$scope.editarId=$scope.objetoSa.id;
-					$scope.nodeTipo = "SA";
+				if (!resp.estado) {
+					SweetAlert.swal("Formulacion! - Nueva Subactividad", resp.mensajes.msg, "error");
+					return;
 				}
+				$scope.objetoSa=resp.json.subactividad;
+				$scope.objetoSa.padre=node.npNivelid;
+				$scope.editarId=$scope.objetoSa.id;
+				$scope.nodeTipo = "SA";
 				$scope.edicionSubActividad=true;
 			});
 		}
