@@ -149,7 +149,7 @@ public class EstructuraorganicaController {
 				}
 				else{
 					UtilSession.estructuraorganicaServicio.transCrearModificarUnidad(unidadTO);
-					id=unidadTO.getId().toString();
+					//id=unidadTO.getId().toString();
 					jsonObject.put("unidad", (JSONObject)JSONSerializer.toJSON(unidadTO,unidadTO.getJsonConfig()));
 				}
 			}
