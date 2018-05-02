@@ -398,7 +398,7 @@ public class SeguridadController {
 						log.println("paso tercera");
 						usuario.setClave(ConsultasUtil.encriptarClave(cambioClave.getClave()));
 						//usuario.setFechaClave(new Date());
-						//usuario.setCambiarclave("0");
+						usuario.setCambiarclave("0");
 						log.println("va a guardar el usuario");
 						log.println("el nombre de usuario es:"+usuario.getNombre());
 						UtilSession.seguridadServicio.transCrearModificarusuario(usuario);
