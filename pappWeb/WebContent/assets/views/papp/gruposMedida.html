@@ -107,7 +107,7 @@
                                         <span class="symbol required"></span>
                                     </label> <input type="text" placeholder="Ingrese el nombre"
                                                     class="form-control" name="nombre" required
-                                                    ng-model="objeto.nombre" /> <span class="error text-small block"
+                                                    ng-model="objeto.nombre" ng-change="mayusculas()"> <span class="error text-small block"
                                                                               ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
                                         Nombre incorrecto
                                     </span> <span class="success text-small"

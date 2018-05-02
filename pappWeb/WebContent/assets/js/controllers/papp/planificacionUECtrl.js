@@ -415,7 +415,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$rootScope.ejefiscal + "/unidadid=" + node.npIdunidad
 			).then(function(resp){
 				//console.log(resp);
-				if (!resp.estado) return;
+				if (!resp.estado) {
+					SweetAlert.swal("Planificacion UE! - Nueva Tarea", resp.mensajes.msg, "error");
+					return;
+				}
 				$scope.editar=true;
 				$scope.objeto=Object.assign({}, resp.json.tareaunidad);
 				$scope.divPlanificacionAnual=false;
@@ -430,7 +433,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$rootScope.ejefiscal + "/unidadid=" + node.npIdunidad
 			).then(function(resp){
 				//console.log(resp);
-				if (!resp.estado) return;
+				if (!resp.estado) {
+					SweetAlert.swal("Planificacion UE! - Nueva Subtarea", resp.mensajes.msg, "error");
+					return;
+				}
 				$scope.editar=true;
 				$scope.objUnidad=resp.json.subtareaunidad.subtareaunidadunidadid;
 				$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
@@ -455,8 +461,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.id,
 				$rootScope.ejefiscal + "/unidadid=" + node.npIdunidad
 			).then(function(resp){
-				console.log(resp);
-				if (!resp.estado) return;
+				//console.log(resp);
+				if (!resp.estado) {
+					SweetAlert.swal("Planificacion UE! - Nuevo Item", resp.mensajes.msg, "error");
+					return;
+				}
 				$scope.editar=true;
 				$scope.objeto=Object.assign({}, resp.json.itemunidad);
 				$scope.divPlanificacionAnual=false;
@@ -472,7 +481,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				"&itemunidadid=" + node.tablarelacionid
 			).then(function(resp){
 				//console.log(resp);
-				if (!resp.estado) return;
+				if (!resp.estado) {
+					SweetAlert.swal("Planificacion UE! - Nuevo Subitem", resp.mensajes.msg, "error");
+					return;
+				}
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
 				$scope.objeto=Object.assign({}, resp.json.subitemunidad, resp.json.totales);
 				$scope.detalles=resp.json.subitemunidadacumulador;
