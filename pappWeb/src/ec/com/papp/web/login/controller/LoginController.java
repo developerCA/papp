@@ -44,7 +44,11 @@ public class LoginController {
 			Collection<UsuarioTO> usuarioTOs=UtilSession.seguridadServicio.transObtenerusuario(usuarioTO);
 			usuarioTO=usuarioTOs.iterator().next();
 			UtilSession.setUsuario(request, usuarioTO);
-			mav= new ModelAndView("index");
+			if(UtilSession.getUsuario(request).getCambiarclave()==null || UtilSession.getUsuario(request).getCambiarclave().equals("1")){
+				mav = new ModelAndView("cambiarClaveCaducada");
+			}
+			else
+				mav= new ModelAndView("index");
 		}
 		//Usuario sin autenticar
 		else{
