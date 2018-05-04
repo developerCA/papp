@@ -290,7 +290,7 @@ public class ConsultasUtil {
 			unidadarbolplazaTO.setCargo(new CargoTO());
 			GradofuerzaTO gradofuerzaTO=new GradofuerzaTO();
 			gradofuerzaTO.setGrado(new GradoTO());
-//			unidadarbolplazaTO.setGradofuerza(gradofuerzaTO);
+			unidadarbolplazaTO.setGradofuerza(gradofuerzaTO);
 			Collection<UnidadarbolplazaTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbolplaza(unidadarbolplazaTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 //			HashMap<String, String>  totalMap=new HashMap<String, String>();
