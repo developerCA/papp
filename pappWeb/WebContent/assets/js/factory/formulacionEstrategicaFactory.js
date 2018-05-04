@@ -94,6 +94,9 @@ app.factory("formulacionEstrategicaFactory", [ "Restangular", function(Restangul
 		},
 
 		traerNuevo: function(tipo, padreid, ejerciciofiscalid) {
+			if (padreid === undefined) {
+				padreid = 0;
+			}
 			var url = "planificacion/nuevo/" + this.obtenerTipo(tipo) + "/"+padreid+"/"+ejerciciofiscalid+"/0";
 			//console.log(url);
 		    return Restangular.allUrl(url).customGET();

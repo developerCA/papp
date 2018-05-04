@@ -19,7 +19,10 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.nuevoar=false;
 	$scope.guardar=false;
 	$scope.objeto={estado:null};
-	$scope.tabactivo=0;
+	//$scope.tabactivo=0;
+	$scope.divEO=false;
+	$scope.divMU=false;
+	$scope.divME=false;
 	$scope.arbol={};
 	$scope.objetoUnidad={};
 	$scope.dUnidad=false;
@@ -89,7 +92,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.fuerza=null;
 		$scope.grado=null;
 		$scope.padre=null;
-		$scope.estado=null;
+		$scope.estado='V';
 
 		$scope.consultar();
 	};
@@ -132,7 +135,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.nuevoar=false;
 			$scope.guardar=true;
 			console.log($scope.objeto);
-			$scope.tabactivo=0;
+			//$scope.tabactivo=0;
+			$scope.divEO=true;
 		})
 	};
 
@@ -159,7 +163,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 	$scope.mostrarUnidad=function(id){
 		$scope.estructuraSeleccionada=id;
-		$scope.tabactivo=1;
+		//$scope.tabactivo=1;
+		$scope.divMU=true;
 		$scope.edicion=true;
 		$scope.dUnidad=true;
 		$scope.nuevoar=false;
@@ -251,7 +256,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 //** Plaza Empleados
 	$scope.mostrarEmpleados=function(id){
 		$scope.estructuraSeleccionada=id;
-		$scope.tabactivo=2;
+		//$scope.tabactivo=2;
+		$scope.divME=true;
 		$scope.edicion=true;
 		$scope.dEmpleados=true;
 		$scope.data=[];
@@ -281,7 +287,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.guardar=true;
 			$scope.dEmpleados=false;
 			$scope.dEmpleadosPlazaEditar=true;
-			$scope.tabactivo=2;
+			//$scope.tabactivo=2;
+			$scope.divME=true;
 		})
 
 	};
@@ -586,8 +593,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.guardar=false;
 		$scope.dEmpleados=true;
 		$scope.dEmpleadosPlazaEditar=false;
-		$scope.tabactivo=2;
-
+		//$scope.tabactivo=2;
+		$scope.divME=true;
 		//$scope.consultar();
 	};
 
@@ -631,6 +638,9 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
             form.$setPristine(true);
             $scope.edicion=false;
             $scope.objeto={};
+        	$scope.divEO=false;
+        	$scope.divMU=false;
+        	$scope.divME=false;
             $scope.limpiar();
         }
     };
