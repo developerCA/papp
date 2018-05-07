@@ -86,26 +86,27 @@ body {
 									<div class="col-sm-12 col-md-10  col-md-offset-1">
 										<div class="form-group">
 											<div class="input-group">
-												<span class="input-group-addon"> <i
-													class="glyphicon glyphicon-user"></i>
-												</span> <input type="text" name="j_username" id="j_username"
+												<span class="input-group-addon">
+													<i class="glyphicon glyphicon-user"></i>
+												</span>
+												<input type="text" name="j_username" id="j_username"
 													class="form-control" style="background: #FFF;"
-													placeholder="Usuario"
-													value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>' />
+													placeholder="Usuario" onkeyup="this.value=this.value.toUpperCase()"
+													value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>'>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="input-group">
-												<span class="input-group-addon"> <i
-													class="glyphicon glyphicon-lock"></i>
-												</span> <input type="password" name="j_password" id="j_password"
+												<span class="input-group-addon">
+													<i class="glyphicon glyphicon-lock"></i>
+												</span>
+												<input type="password" name="j_password" id="j_password"
 													class="form-control" placeholder="Contraseña" />
 											</div>
 										</div>
 
 										<c:if test="${not empty param.login_error}">
 											<div class="alert alert-danger">
-
 												<strong>Acceso negado!</strong> Usuario y contraseña
 												incorrectos..
 											</div>

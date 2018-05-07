@@ -874,10 +874,13 @@
 							<div>
 								<table ng-table="tableParams" class="table table-striped">
 									<tr ng-repeat="obj in $data">
-										<td><a class="btn btn-sm btn-primary"
-											uib-tooltip="Modificar"
-											ng-click="editarPlazaEmpleados(obj.id)"><i
-												class="fa fa-pencil"></i></a></td>
+										<td>
+											<a class="btn btn-sm btn-primary"
+												uib-tooltip="Modificar"
+												ng-click="editarPlazaEmpleados(obj.id)">
+												<i class="fa fa-pencil"></i>
+											</a>
+										</td>
 										<td data-title="'Plaza C&oacute;digo'">{{obj.codigo}}</td>
 										<td data-title="'Cargo C&oacute;digo'">{{obj.npcargocodigo}}</td>
 										<td data-title="'Cargo Nombre'">{{obj.npcargonombre}}</td>
@@ -964,10 +967,12 @@
 															<tr ng-repeat="obj in objetoPlazaDetail">
 																<td>
 																	<div class="input-group form-group has-success">
+<!--
 																		<a uib-tooltip="Eliminar" class="btn btn-sm btn-danger"
 																			ng-click="removerMantenerPlazaDetalle($index)"> <i
 																			class="fa fa-trash"></i>
 																		</a>
+-->
 																	</div>
 																</td>
 																<td>
