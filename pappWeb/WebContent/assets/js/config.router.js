@@ -1236,19 +1236,28 @@ app.directive('numericOnly', function(){
 
                 var transformedInput = inputValue;
                 if (regex.test(transformedInput)) {
-
-                    console.log('passed the expression...');
+                    //console.log('passed the expression...');
                     modelCtrl.$setViewValue(transformedInput);
                     modelCtrl.$render();
                     return transformedInput;
                 } else {
-
-                    console.log('did not pass the expression...');
+                    //console.log('did not pass the expression...');
                     transformedInput = transformedInput.substr(0, transformedInput.length-1);
                     modelCtrl.$setViewValue(transformedInput);
                     modelCtrl.$render();
                     return transformedInput;
                 }
+            });
+        }
+    };
+});
+
+app.directive('mayusculas', function(){
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attrs, modelCtrl) {
+            modelCtrl.$parsers.push(function (inputValue) {
+            	return inputValue.toUpperCase();
             });
         }
     };
