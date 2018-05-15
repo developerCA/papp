@@ -18,10 +18,7 @@
 
 			<div class="panel panel-white">
 
-
 				<div class="panel-body" ng-show="!edicion">
-
-
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -96,48 +93,52 @@
 					<form name="Form" id="form1" novalidate
 						ng-submit="form.submit(Form)">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
-									<label class="control-label"> C&oacute;digo <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Codigo"
-										class="form-control" name="codigo" ng-model="objeto.codigopresup"
-										ng-disabled="objeto.id !=null" required ng-minlength="1" ng-maxlength="10"
-										style='text-transform: uppercase' /> <span
-										class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo incorrecto
-										</span> <span
-										class="success text-small" ng-if="Form.codigo.$valid">Listo</span>
+									<div class="col-md-4">
+										<label class="control-label"> C&oacute;digo <span
+											class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese el Codigo"
+											class="form-control" name="codigo" ng-model="objeto.codigopresup"
+											ng-disabled="objeto.id !=null" required ng-minlength="1" ng-maxlength="10"
+											style='text-transform: uppercase' />
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Nombre <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Nombre"
-										class="form-control" name="nombre" required
-										ng-model="objeto.nombre" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">Nombre
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
+									<div class="col-md-4">
+										<label class="control-label"> Nombre <span
+											class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese el Nombre"
+											class="form-control" name="nombre" required
+											ng-model="objeto.nombre" ng-minlength="1" />
+									</div>
 								</div>
-
-
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-									<label for="form-field-select-1"> Estado <span
-										class="symbol required"></span>
-									</label> <select class="form-control" name="estado"
-										ng-model="objeto.estado" required>
-										<option value="A">Activo</option>
-										<option value="I">Inactivo</option>
-									</select>
+									<div class="col-md-4">
+										<label for="form-field-select-1"> Estado <span
+											class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="estado"
+											ng-model="objeto.estado" required>
+											<option value="A">Activo</option>
+											<option value="I">Inactivo</option>
+										</select>
+									</div>
 								</div>
-
 
 							</div>
 						</div>
@@ -150,9 +151,9 @@
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
 										</a>
-										<h4 class="panel-title">Instituci&oacute;n</h4>
-
-
+										<h4 class="panel-title">
+											Instituci&oacute;n
+										</h4>
 									</div>
 									<div class="panel-body no-padding panel-white">
 										<div class="col-md-12 panel-white no-padding">

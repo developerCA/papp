@@ -143,400 +143,460 @@
 					<form name="Form" id="form1" novalidate
 						ng-submit="form.submit(Form)">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
-									<label class="control-label">
-										C&oacute;digo
-										<span class="symbol required"></span>
-									</label>
-									<input type="text" placeholder="Ingrese un c&oacute;digo" ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
-										class="form-control" name="codigo" ng-model="objeto.codigo"
-										ng-minlength="1" ng-maxlength="30" required ng-disabled="!nuevoar">
-									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
-										Incorrecto
-									</span>
-									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											C&oacute;digo
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese un c&oacute;digo" ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
+											class="form-control" name="codigo" ng-model="objeto.codigo"
+											ng-minlength="1" ng-maxlength="30" required ng-disabled="!nuevoar">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.socionegociotipoidentid.$dirty && Form.socionegociotipoidentid.$invalid, 'has-success':Form.socionegociotipoidentid.$valid}">
-									<label class="control-label">
-										Tipo de identidad
-										<span class="symbol required"></span>
-									</label>
-									<input type="text" placeholder="Seleccione una identidad"
-										class="form-control" name="socionegociotipoidentid" ng-disabled="true"
-										ng-model="objeto.socionegociotipoidentid" required>
+									<div class="col-md-4">
+										<label class="control-label">
+											Tipo de identidad
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione una identidad"
+											class="form-control" name="socionegociotipoidentid" ng-disabled="true"
+											ng-model="objeto.socionegociotipoidentid" required>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.socionegociotipoidenttipoid.$dirty && Form.socionegociotipoidenttipoid.$invalid, 'has-success':Form.socionegociotipoidenttipoid.$valid}">
-									<label class="control-label">
-										Tipo
-										<span class="symbol required"></span>
-									</label>
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione una identidad"
-											class="form-control" name="socionegociotipoidenttipoid" ng-disabled="true"
-											ng-model="objeto.socionegociotipoidenttipoid">
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirIdentificacion()">
-												<i class="fa fa-search"></i>
-												Seleccione
-											</button>
-										</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Tipo
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<div class="input-group">
+											<input type="text" placeholder="Seleccione una identidad"
+												class="form-control" name="socionegociotipoidenttipoid" ng-disabled="true"
+												ng-model="objeto.socionegociotipoidenttipoid">
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-primary"
+													ng-click="abrirIdentificacion()">
+													<i class="fa fa-search"></i>
+													Seleccione
+												</button>
+											</span>
+										</div>
 									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.primernombre.$dirty && Form.primernombre.$invalid, 'has-success':Form.primernombre.$valid}">
-									<label class="control-label">
-										Primer nombre
-										<span class="symbol required"></span>
-									</label>
-									<input type="text" placeholder="Ingrese el primer nombre"
-										class="form-control" name="primernombre" required
-										ng-model="objeto.primernombre" ng-minlength="1" ng-change="nombreMostrado();">
-									<span class="error text-small block"
-										ng-if="Form.primernombre.$dirty && Form.primernombre.$invalid">
-										Incorrecto</span>
-									<span class="success text-small"
-										ng-if="Form.primernombre.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Primer nombre
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese el primer nombre"
+											class="form-control" name="primernombre" required
+											ng-model="objeto.primernombre" ng-minlength="1" ng-change="nombreMostrado();">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.segundonombre.$dirty && Form.segundonombre.$invalid, 'has-success':Form.segundonombre.$valid}">
-									<label class="control-label">
-										Segundo Nombre
-										<span class="symbol required"></span>
-									</label>
-									<input type="text" placeholder="Ingrese el primer segundo nombre"
-										class="form-control" name="segundonombre" required
-										ng-model="objeto.segundonombre" ng-minlength="1" ng-change="nombreMostrado();">
-									<span class="error text-small block"
-										ng-if="Form.segundonombre.$dirty && Form.segundonombre.$invalid">
-										Incorrecto</span>
-									<span class="success text-small"
-										ng-if="Form.segundonombre.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Segundo Nombre
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese el primer segundo nombre"
+											class="form-control" name="segundonombre" required
+											ng-model="objeto.segundonombre" ng-minlength="1" ng-change="nombreMostrado();">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.primerapellido.$dirty && Form.primerapellido.$invalid, 'has-success':Form.primerapellido.$valid}">
-									<label class="control-label">
-										Primer apellido
-										<span class="symbol required"></span>
-									</label>
-									<input type="text" placeholder="Ingrese el primer primer apellido"
-										class="form-control" name="primerapellido" required
-										ng-model="objeto.primerapellido" ng-minlength="1" ng-change="nombreMostrado();">
-									<span class="error text-small block"
-										ng-if="Form.primerapellido.$dirty && Form.primerapellido.$invalid">
-										Incorrecto</span>
-									<span class="success text-small"
-										ng-if="Form.primerapellido.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Primer apellido
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese el primer primer apellido"
+											class="form-control" name="primerapellido" required
+											ng-model="objeto.primerapellido" ng-minlength="1" ng-change="nombreMostrado();">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.segundoapellido.$dirty && Form.segundoapellido.$invalid, 'has-success':Form.segundoapellido.$valid}">
-									<label class="control-label">
-										Segundo apellido
-										<span class="symbol required"></span>
-									</label>
-									<input type="text" placeholder="Ingrese el primer segundo apellido"
-										class="form-control" name="segundoapellido" required
-										ng-model="objeto.segundoapellido" ng-minlength="1" ng-change="nombreMostrado();">
-									<span class="error text-small block"
-										ng-if="Form.segundoapellido.$dirty && Form.segundoapellido.$invalid">
-										Incorrecto</span>
-									<span class="success text-small"
-										ng-if="Form.segundoapellido.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Segundo apellido
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese el primer segundo apellido"
+											class="form-control" name="segundoapellido" required
+											ng-model="objeto.segundoapellido" ng-minlength="1" ng-change="nombreMostrado();">
+									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										Nombre mostrado
-									</label>
-									<input type="text" placeholder="Nombre mostrado completo"
-										class="form-control" name="nombremostrado" ng-disabled="true"
-										ng-model="objeto.nombremostrado">
+									<div class="col-md-4">
+										<label class="control-label">
+											Nombre mostrado
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Nombre mostrado completo"
+											class="form-control" name="nombremostrado" ng-disabled="true"
+											ng-model="objeto.nombremostrado">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.emptipo.$dirty && Form.emptipo.$invalid, 'has-success':Form.emptipo.$valid}">
-									<label for="form-field-select-1"> Tipo <span
-										class="symbol required"></span>
-									</label>
-									<select class="form-control" name="emptipo"
-										ng-model="objeto.emptipo" required>
-										<option value="" ng-selected="selected">Seleccione un tipo</option>
-										<option value="M">Militar</option>
-										<option value="C">Civil</option>
-									</select>
+									<div class="col-md-4">
+										<label for="form-field-select-1"> Tipo <span
+											class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="emptipo"
+											ng-model="objeto.emptipo" required>
+											<option value="" ng-selected="selected">Seleccione un tipo</option>
+											<option value="M">Militar</option>
+											<option value="C">Civil</option>
+										</select>
+									</div>
 								</div>
 
 <div ng-if="objeto.emptipo=='M'">
 								<div class="form-group"
 									ng-class="{'has-error':Form.npgradoescalacodigo.$dirty && Form.npgradoescalacodigo.$invalid, 'has-success':Form.npgradoescalacodigo.$valid}">
-									<label class="control-label">
-										Grado escala c&oacute;digo
-										<span class="symbol required"></span>
-									</label>
-									<div class="input-group col-md-12">
-										<input type="text" placeholder="Seleccione un grado escala"
-											class="form-control" name="npgradoescalacodigo" ng-disabled="true"
-											required ng-model="objeto.npgradoescalacodigo">
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirGradoEscala()">
-												<i class="fa fa-search"></i>
-												Seleccione
-											</button>
-										</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Grado escala c&oacute;digo
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<div class="input-group col-md-12">
+											<input type="text" placeholder="Seleccione un grado escala"
+												class="form-control" name="npgradoescalacodigo" ng-disabled="true"
+												required ng-model="objeto.npgradoescalacodigo">
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-primary"
+													ng-click="abrirGradoEscala()">
+													<i class="fa fa-search"></i>
+													Seleccione
+												</button>
+											</span>
+										</div>
 									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										Grado escala nombre
-									</label>
-									<input type="text" placeholder="Seleccione un grado escala"
-										class="form-control" name="npgradonombre" ng-model="objeto.npgradonombre"
-										ng-disabled="true">
+									<div class="col-md-4">
+										<label class="control-label">
+											Grado escala nombre
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione un grado escala"
+											class="form-control" name="npgradonombre" ng-model="objeto.npgradonombre"
+											ng-disabled="true">
+									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										Fuerza nombre
-									</label>
-									<input type="text" placeholder="Seleccione un grado escala"
-										class="form-control" name="npfuerzanombre" ng-model="objeto.npfuerzanombre"
-										ng-disabled="true">
+									<div class="col-md-4">
+										<label class="control-label">
+											Fuerza nombre
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione un grado escala"
+											class="form-control" name="npfuerzanombre" ng-model="objeto.npfuerzanombre"
+											ng-disabled="true">
+									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										RMU Grupo ocupacional
-									</label>
-									<input type="text" placeholder="Seleccione un grado escala"
-										class="form-control" name="npgrupoocupacional" ng-model="objeto.npgrupoocupacional"
-										ng-disabled="true">
+									<div class="col-md-4">
+										<label class="control-label">
+											RMU Grupo ocupacional
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione un grado escala"
+											class="form-control" name="npgrupoocupacional" ng-model="objeto.npgrupoocupacional"
+											ng-disabled="true">
+									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										RMU Grupo c&oacute;digo
-									</label>
-									<input type="text" placeholder="Seleccione un grado escala"
-										class="form-control" name="rmugrupocodigo" ng-model="objeto.npcodigoescalarmu"
-										ng-disabled="true">
+									<div class="col-md-4">
+										<label class="control-label">
+											RMU Grupo c&oacute;digo
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione un grado escala"
+											class="form-control" name="rmugrupocodigo" ng-model="objeto.npcodigoescalarmu"
+											ng-disabled="true">
+									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										RMU Remuneraci&oacute;n
-									</label>
-									<input type="text" placeholder="Seleccione un grado escala"
-										class="form-control" name="npcargoremuneracion" ng-model="objeto.npcargoremuneracion"
-										ng-disabled="true" numericOnly style="text-align:right;" decimal="2">
+									<div class="col-md-4">
+										<label class="control-label">
+											RMU Remuneraci&oacute;n
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione un grado escala"
+											class="form-control" name="npcargoremuneracion" ng-model="objeto.npcargoremuneracion"
+											ng-disabled="true" numericOnly style="text-align:right;" decimal="2">
+									</div>
 								</div>
 </div>
 
 <div ng-if="objeto.emptipo!='M'">
 								<div class="form-group"
 									ng-class="{'has-error':Form.cargoescalacodigo.$dirty && Form.cargoescalacodigo.$invalid, 'has-success':Form.cargoescalacodigo.$valid}">
-									<label class="control-label">
-										Cargo escala c&oacute;digo
-										<span class="symbol required"></span>
-									</label>
-									<div class="input-group col-md-12">
-										<input type="text" placeholder="Seleccione un grado escala"
-											class="form-control" name="npcargocodigo" ng-model="objeto.npcargocodigo"
-											required ng-disabled="true">
-										<span ng-if="objeto.emptipo=='C'" class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirCargoEscala()">
-												<i class="fa fa-search"></i>
-												Seleccione
-											</button>
-										</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Cargo escala c&oacute;digo
+											<span class="symbol required"></span>
+										</label>
 									</div>
-									<span class="error text-small block"
-										ng-if="Form.cargoescalacodigo.$dirty && Form.cargoescalacodigo.$invalid">
-										Incorrecto
-									</span>
-									<span class="success text-small"
-										ng-if="Form.cargoescalacodigo.$valid">
-										Listo
-									</span>
+									<div class="col-md-8">
+										<div class="input-group col-md-12">
+											<input type="text" placeholder="Seleccione un grado escala"
+												class="form-control" name="npcargocodigo" ng-model="objeto.npcargocodigo"
+												required ng-disabled="true">
+											<span ng-if="objeto.emptipo=='C'" class="input-group-btn">
+												<button type="button" class="btn btn-primary"
+													ng-click="abrirCargoEscala()">
+													<i class="fa fa-search"></i>
+													Seleccione
+												</button>
+											</span>
+										</div>
+									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										Cargo nombre
-									</label>
-									<input type="text" placeholder="Seleccione un cargo escala"
-										class="form-control" name="npncargoombre" ng-model="objeto.npncargoombre"
-										ng-disabled="true">
+									<div class="col-md-4">
+										<label class="control-label">
+											Cargo nombre
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione un cargo escala"
+											class="form-control" name="npncargoombre" ng-model="objeto.npncargoombre"
+											ng-disabled="true">
+									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										Escala RMU Grupo ocupacional
-									</label>
-									<input type="text" placeholder="Seleccione un cargo escala"
-										class="form-control" name="npcargogrupoocupacional" ng-model="objeto.npcargogrupoocupacional"
-										ng-disabled="true">
+									<div class="col-md-4">
+										<label class="control-label">
+											Escala RMU Grupo ocupacional
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione un cargo escala"
+											class="form-control" name="npcargogrupoocupacional" ng-model="objeto.npcargogrupoocupacional"
+											ng-disabled="true">
+									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										RMU Grado c&oacute;digo
-									</label>
-									<input type="text" placeholder="Seleccione un cargo escala"
-										class="form-control" name="npcargocodigoescalarmu" ng-model="objeto.npcargocodigoescalarmu"
-										ng-disabled="true">
+									<div class="col-md-4">
+										<label class="control-label">
+											RMU Grado c&oacute;digo
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione un cargo escala"
+											class="form-control" name="npcargocodigoescalarmu" ng-model="objeto.npcargocodigoescalarmu"
+											ng-disabled="true">
+									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										RMU Remuneraci&oacute;n
-									</label>
-									<input type="text" placeholder="Seleccione un grado escala"
-										class="form-control" name="npcargoremuneracion" ng-model="objeto.npcargoremuneracion"
-										ng-disabled="true" numericOnly style="text-align:right;" decimal="2">
+									<div class="col-md-4">
+										<label class="control-label">
+											RMU Remuneraci&oacute;n
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione un grado escala"
+											class="form-control" name="npcargoremuneracion" ng-model="objeto.npcargoremuneracion"
+											ng-disabled="true" numericOnly style="text-align:right;" decimal="2">
+									</div>
 								</div>
 </div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.especialidadcodigo.$dirty && Form.especialidadcodigo.$invalid, 'has-success':Form.especialidadcodigo.$valid}">
-									<label class="control-label">
-										Especialidad c&oacute;digo
-										<span class="symbol required"></span>
-									</label>
-									<div class="input-group col-md-12">
-										<input type="text" placeholder="Seleccione una especialidad"
-											class="form-control" name="npespecialidadcodigo" ng-disabled="true"
-											ng-model="objeto.npespecialidadcodigo">
-										<span ng-if="objeto.emptipo=='M'" class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirEspecialidad()">
-												<i class="fa fa-search"></i>
-												Seleccione
-											</button>
-										</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Especialidad c&oacute;digo
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<div class="input-group col-md-12">
+											<input type="text" placeholder="Seleccione una especialidad"
+												class="form-control" name="npespecialidadcodigo" ng-disabled="true"
+												ng-model="objeto.npespecialidadcodigo">
+											<span ng-if="objeto.emptipo=='M'" class="input-group-btn">
+												<button type="button" class="btn btn-primary"
+													ng-click="abrirEspecialidad()">
+													<i class="fa fa-search"></i>
+													Seleccione
+												</button>
+											</span>
+										</div>
 									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										Especialidad nombre
-									</label>
-									<input type="text" placeholder="Seleccione una especialidad"
-										class="form-control" name="npespecialidadnombre" ng-model="objeto.npespecialidadnombre"
-										ng-disabled="true">
+									<div class="col-md-4">
+										<label class="control-label">
+											Especialidad nombre
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione una especialidad"
+											class="form-control" name="npespecialidadnombre" ng-model="objeto.npespecialidadnombre"
+											ng-disabled="true">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.empleadoclasificacioncodigo.$dirty && Form.empleadoclasificacioncodigo.$invalid, 'has-success':Form.empleadoclasificacioncodigo.$valid}">
-									<label class="control-label">
-										Empleado clasificaci&oacute;n c&oacute;digo
-										<span class="symbol required"></span>
-									</label>
-									<div class="input-group col-md-12">
-										<input type="text" placeholder="Seleccione un empleado"
-											class="form-control" name="npclasificacioncodigo" ng-disabled="true"
-											ng-model="objeto.npclasificacioncodigo">
-										<span ng-if="objeto.emptipo=='M'" class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirClasificacion()">
-												<i class="fa fa-search"></i>
-												Seleccione
-											</button>
-										</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Empleado clasificaci&oacute;n c&oacute;digo
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<div class="input-group col-md-12">
+											<input type="text" placeholder="Seleccione un empleado"
+												class="form-control" name="npclasificacioncodigo" ng-disabled="true"
+												ng-model="objeto.npclasificacioncodigo">
+											<span ng-if="objeto.emptipo=='M'" class="input-group-btn">
+												<button type="button" class="btn btn-primary"
+													ng-click="abrirClasificacion()">
+													<i class="fa fa-search"></i>
+													Seleccione
+												</button>
+											</span>
+										</div>
 									</div>
 								</div>
 
 								<div class="form-group has-success">
-									<label class="control-label">
-										Empleado clasificaci&oacute;n nombre
-									</label>
-									<input type="text" placeholder="Seleccione un empleado"
-										class="form-control" name="npclasificacionnombre" ng-model="objeto.npclasificacionnombre"
-										ng-disabled="true">
+									<div class="col-md-4">
+										<label class="control-label">
+											Empleado clasificaci&oacute;n nombre
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Seleccione un empleado"
+											class="form-control" name="npclasificacionnombre" ng-model="objeto.npclasificacionnombre"
+											ng-disabled="true">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.empsituacion.$dirty && Form.empsituacion.$invalid, 'has-success':Form.empsituacion.$valid}">
-									<label for="form-field-select-1">
-										Situaci&oacute;n
-										<span class="symbol required"></span>
-									</label>
-									<select class="form-control" name="empsituacion"
-										ng-model="objeto.empsituacion" required>
-										<option value="N">Nombramiento</option>
-										<option value="C">Contrato</option>
-									</select>
+									<div class="col-md-4">
+										<label for="form-field-select-1">
+											Situaci&oacute;n
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="empsituacion"
+											ng-model="objeto.empsituacion" required>
+											<option value="N">Nombramiento</option>
+											<option value="C">Contrato</option>
+										</select>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.empfinanciamiento.$dirty && Form.empfinanciamiento.$invalid, 'has-success':Form.empfinanciamiento.$valid}">
-									<label for="form-field-select-1">
-										Financiamiento
-										<span class="symbol required"></span>
-									</label>
-									<select class="form-control" name="empfinanciamiento"
-										ng-model="objeto.empfinanciamiento" required>
-										<option value="F">Fondo Fiscal</option>
-										<option value="A">Auto Gesti&oacute;n</option>
-									</select>
+									<div class="col-md-4">
+										<label for="form-field-select-1">
+											Financiamiento
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="empfinanciamiento"
+											ng-model="objeto.empfinanciamiento" required>
+											<option value="F">Fondo Fiscal</option>
+											<option value="A">Auto Gesti&oacute;n</option>
+										</select>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.personaoid.$dirty && Form.personaoid.$invalid, 'has-success':Form.personaoid.$valid}">
-									<label class="control-label">
-										Persona OID
-										<span class="symbol required"></span>
-									</label>
-									<input type="text" placeholder="Ingrese un c&oacute;digo"
-										class="form-control" name="personaid" ng-model="objeto.personaid"
-										required ng-disabled="!nuevoar">
-									<span class="error text-small block"
-										ng-if="Form.personaoid.$dirty && Form.personaoid.$invalid">
-										Incorrecto
-									</span>
-									<span class="success text-small"
-										ng-if="Form.personaoid.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Persona OID
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese un c&oacute;digo"
+											class="form-control" name="personaid" ng-model="objeto.personaid"
+											required ng-disabled="!nuevoar">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-									<label for="form-field-select-1">
-										Estado
-										<span class="symbol required"></span>
-									</label>
-									<select class="form-control" name="estado"
-										ng-model="objeto.estado" required>
-										<option value="" ng-selected="selected">Seleccione un estado</option>
-										<option value="A">Activo</option>
-										<option value="I">Inactivo</option>
-									</select>
+									<div class="col-md-4">
+										<label for="form-field-select-1">
+											Estado
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="estado"
+											ng-model="objeto.estado" required>
+											<option value="" ng-selected="selected">Seleccione un estado</option>
+											<option value="A">Activo</option>
+											<option value="I">Inactivo</option>
+										</select>
+									</div>
 								</div>
 
 							</div>

@@ -54,8 +54,11 @@ app.controller('ModalSocioNegocioEmpleadosController', ["$scope", "$rootScope", 
         })
     };
 
-    $scope.mayusculas = function () {
+    $scope.mayusculas = function (buscar) {
         $scope.nombre = $scope.nombre.toUpperCase();
+        if (buscar === true) {
+        	$scope.filtrar();
+        }
     };
 
     $scope.limpiar = function () {
