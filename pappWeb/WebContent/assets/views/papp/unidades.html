@@ -36,7 +36,7 @@
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group">
-											<label> Nombres </label> <input type="text"
+											<label> Nombres </label> <input type="text" onkeyup="this.value=this.value.toUpperCase()"
 												class="form-control" ng-model="nombreFiltro">
 										</div>
 									</div>
@@ -83,9 +83,7 @@
 					</div>
 				</div>
 
-
 				<div ng-show="edicion" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
 						<h5 class="panel-title">Unidad</h5>
 					</div>
