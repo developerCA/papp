@@ -206,7 +206,6 @@
 	
 									<div class="form-group"
 										ng-class="{'has-error':Form.npfecvigfin.$dirty && Form.npfecvigfin.$invalid, 'has-success':Form.npfecvigfin.$valid}">
-										</div>
 										<div class="col-md-4">
 											<label class="control-label"> Fecha vigencia fin <span
 												class="symbol required"></span>
@@ -343,12 +342,12 @@
 											</select>
 										</div>
 									</div>
-	
 								</div>
 							</div>
-	
+
 							<div class="row">
 								<div class="col-md-12">
+									<br>
 									<div class="pull-right">
 										<span ng-if="guardar">
 											<button type="submit" class="btn btn-primary">Guardar
@@ -427,165 +426,171 @@
 						<div ng-show="dUnidadEditar" class="panel-body">
 							<form name="FormUnidad" id="FormUnidad" novalidate
 								ng-submit="formUnidad.submit(FormUnidad)">
-								<div class="col-md-12">
-									<div class="form-group"
-										ng-class="{'has-error':FormUnidad.codigoorganico.$dirty && FormUnidad.codigoorganico.$invalid, 'has-success':FormUnidad.codigoorganico.$valid}">
-										<div class="col-md-4">
-											<label class="control-label"> C&oacute;digo
-												Org&aacute;nico <span class="symbol required"></span>
-											</label>
-										</div>
-										<div class="col-md-8">
-											<input type="text"
-												placeholder="Escriba un c&oacute;digo org&aacute;nico"
-												class="form-control" name="codigoorganico"
-												ng-model="objetoUnidad.codigoorganico" ng-pattern="/^[0-9]*$/"
-												required ng-disabled="!nuevoar">
-										</div>
-									</div>
-	
-									<div class="form-group"
-										ng-class="{'has-error':FormUnidad.nombre.$dirty && FormUnidad.nombre.$invalid, 'has-success':FormUnidad.nombre.$valid}">
-										<div class="col-md-4">
-											<label class="control-label"> Nombre <span
-												class="symbol required"></span>
-											</label>
-										</div>
-										<div class="col-md-8">
-											<input type="text" placeholder="Escriba un nombre"
-												class="form-control" name="nombre"
-												ng-model="objetoUnidad.nombre" required>
-										</div>
-									</div>
-	
-									<div class="form-group"
-										ng-class="{'has-error':FormUnidad.sigla.$dirty && FormUnidad.sigla.$invalid, 'has-success':FormUnidad.sigla.$valid}">
-										<div class="col-md-4">
-											<label class="control-label"> Sigla <span
-												class="symbol required"></span>
-											</label>
-										</div>
-										<div class="col-md-8">
-											<input type="text" placeholder="Escriba un sigla"
-												class="form-control" name="sigla"
-												ng-model="objetoUnidad.sigla" required>
-										</div>
-									</div>
-	
-									<div class="form-group"
-										ng-class="{'has-error':FormUnidad.descripcion.$dirty && FormUnidad.descripcion.$invalid, 'has-success':FormUnidad.descripcion.$valid}">
-										<div class="col-md-4">
-											<label class="control-label"> Descripci&oacute;n <span
-												class="symbol required"></span>
-											</label>
-										</div>
-										<div class="col-md-8">
-											<input type="text" placeholder="Escriba un descripci&oacute;n"
-												class="form-control" name="descripcion"
-												ng-model="objetoUnidad.descripcion" required>
-										</div>
-									</div>
-	
-									<div class="form-group"
-										ng-class="{'has-error':FormUnidad.npcodigounidad.$dirty && FormUnidad.npcodigounidad.$invalid, 'has-success':FormUnidad.npcodigounidad.$valid}">
-										<div class="col-md-4">
-											<label class="control-label"> C&oacute;digo
-												Presupuestario <span class="symbol required"></span>
-											</label>
-										</div>
-										<div class="col-md-8">
-											<div class="input-group">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group"
+											ng-class="{'has-error':FormUnidad.codigoorganico.$dirty && FormUnidad.codigoorganico.$invalid, 'has-success':FormUnidad.codigoorganico.$valid}">
+											<div class="col-md-4">
+												<label class="control-label"> C&oacute;digo
+													Org&aacute;nico <span class="symbol required"></span>
+												</label>
+											</div>
+											<div class="col-md-8">
 												<input type="text"
-													placeholder="Escriba un c&oacute;digo presupuestario"
-													class="form-control" name="npcodigounidad" ng-disabled="true"
-													ng-model="objetoUnidad.npcodigounidad">
-												<span class="input-group-btn">
-													<button type="button" class="btn btn-primary"
-														ng-click="abrirCodigoPresupuestario()">
-														<i class="fa fa-search"></i> Seleccione
-													</button>
-												</span>
+													placeholder="Escriba un c&oacute;digo org&aacute;nico"
+													class="form-control" name="codigoorganico"
+													ng-model="objetoUnidad.codigoorganico" ng-pattern="/^[0-9]*$/"
+													required ng-disabled="!nuevoar">
 											</div>
 										</div>
-									</div>
-	
-									<div class="form-group"
-										ng-class="{'has-error':FormUnidad.npnombreunidad.$dirty && FormUnidad.npnombreunidad.$invalid, 'has-success':FormUnidad.npnombreunidad.$valid}">
-										<div class="col-md-4">
-											<label class="control-label"> Nombre <span
-												class="symbol required"></span>
-											</label>
-										</div>
-										<div class="col-md-8">
-											<input type="text" placeholder="Seleccione un presupuesto"
-												class="form-control" name="npnombreunidad"
-												ng-model="objetoUnidad.npnombreunidad" required
-												ng-disabled="true">
-										</div>
-									</div>
-
-									<div class="form-group"
-										ng-class="{'has-error':FormUnidad.npcodigonivel.$dirty && FormUnidad.npcodigonivel.$invalid, 'has-success':FormUnidad.npcodigonivel.$valid}">
-										<div class="col-md-4">
-											<label class="control-label"> Nivel Org&aacute;nico
-												C&oacute;digo <span class="symbol required"></span>
-											</label>
-										</div>
-										<div class="col-md-8">
-											<div class="input-group">
-												<input type="text"
-													placeholder="Escriba un nivel org&aacute;nico c&oacute;digo"
-													class="form-control" name="npcodigonivel" ng-disabled="true"
-													ng-model="objetoUnidad.npcodigonivel"> <span
-													class="input-group-btn">
-													<button type="button" class="btn btn-primary"
-														ng-click="abrirNivelOrganicoCodigo()">
-														<i class="fa fa-search"></i> Seleccione
-													</button>
-												</span>
+		
+										<div class="form-group"
+											ng-class="{'has-error':FormUnidad.nombre.$dirty && FormUnidad.nombre.$invalid, 'has-success':FormUnidad.nombre.$valid}">
+											<div class="col-md-4">
+												<label class="control-label"> Nombre <span
+													class="symbol required"></span>
+												</label>
+											</div>
+											<div class="col-md-8">
+												<input type="text" placeholder="Escriba un nombre"
+													class="form-control" name="nombre"
+													ng-model="objetoUnidad.nombre" required>
 											</div>
 										</div>
-									</div>
+		
+										<div class="form-group"
+											ng-class="{'has-error':FormUnidad.sigla.$dirty && FormUnidad.sigla.$invalid, 'has-success':FormUnidad.sigla.$valid}">
+											<div class="col-md-4">
+												<label class="control-label"> Sigla <span
+													class="symbol required"></span>
+												</label>
+											</div>
+											<div class="col-md-8">
+												<input type="text" placeholder="Escriba un sigla"
+													class="form-control" name="sigla"
+													ng-model="objetoUnidad.sigla" required>
+											</div>
+										</div>
+		
+										<div class="form-group"
+											ng-class="{'has-error':FormUnidad.descripcion.$dirty && FormUnidad.descripcion.$invalid, 'has-success':FormUnidad.descripcion.$valid}">
+											<div class="col-md-4">
+												<label class="control-label"> Descripci&oacute;n <span
+													class="symbol required"></span>
+												</label>
+											</div>
+											<div class="col-md-8">
+												<input type="text" placeholder="Escriba un descripci&oacute;n"
+													class="form-control" name="descripcion"
+													ng-model="objetoUnidad.descripcion" required>
+											</div>
+										</div>
+		
+										<div class="form-group"
+											ng-class="{'has-error':FormUnidad.npcodigounidad.$dirty && FormUnidad.npcodigounidad.$invalid, 'has-success':FormUnidad.npcodigounidad.$valid}">
+											<div class="col-md-4">
+												<label class="control-label"> C&oacute;digo
+													Presupuestario <span class="symbol required"></span>
+												</label>
+											</div>
+											<div class="col-md-8">
+												<div class="input-group">
+													<input type="text"
+														placeholder="Escriba un c&oacute;digo presupuestario"
+														class="form-control" name="npcodigounidad" ng-disabled="true"
+														ng-model="objetoUnidad.npcodigounidad">
+													<span class="input-group-btn">
+														<button type="button" class="btn btn-primary"
+															ng-click="abrirCodigoPresupuestario()">
+															<i class="fa fa-search"></i> Seleccione
+														</button>
+													</span>
+												</div>
+											</div>
+										</div>
+		
+										<div class="form-group"
+											ng-class="{'has-error':FormUnidad.npnombreunidad.$dirty && FormUnidad.npnombreunidad.$invalid, 'has-success':FormUnidad.npnombreunidad.$valid}">
+											<div class="col-md-4">
+												<label class="control-label"> Nombre <span
+													class="symbol required"></span>
+												</label>
+											</div>
+											<div class="col-md-8">
+												<input type="text" placeholder="Seleccione un presupuesto"
+													class="form-control" name="npnombreunidad"
+													ng-model="objetoUnidad.npnombreunidad" required
+													ng-disabled="true">
+											</div>
+										</div>
 	
-									<div class="form-group"
-										ng-class="{'has-error':FormUnidad.npnombrenivel.$dirty && FormUnidad.npnombrenivel.$invalid, 'has-success':FormUnidad.npnombrenivel.$valid}">
-										<div class="col-md-4">
-											<label class="control-label"> Nivel Org&aacute;nico
-												Nombre <span class="symbol required"></span>
-											</label>
+										<div class="form-group"
+											ng-class="{'has-error':FormUnidad.npcodigonivel.$dirty && FormUnidad.npcodigonivel.$invalid, 'has-success':FormUnidad.npcodigonivel.$valid}">
+											<div class="col-md-4">
+												<label class="control-label"> Nivel Org&aacute;nico
+													C&oacute;digo <span class="symbol required"></span>
+												</label>
+											</div>
+											<div class="col-md-8">
+												<div class="input-group">
+													<input type="text"
+														placeholder="Escriba un nivel org&aacute;nico c&oacute;digo"
+														class="form-control" name="npcodigonivel" ng-disabled="true"
+														ng-model="objetoUnidad.npcodigonivel"> <span
+														class="input-group-btn">
+														<button type="button" class="btn btn-primary"
+															ng-click="abrirNivelOrganicoCodigo()">
+															<i class="fa fa-search"></i> Seleccione
+														</button>
+													</span>
+												</div>
+											</div>
 										</div>
-										<div class="col-md-8">
-											<input type="text"
-												placeholder="Seleccione el nuvel org&aacute;nico"
-												class="form-control" name="npnombrenivel"
-												ng-model="objetoUnidad.npnombrenivel" required
-												ng-disabled="true">
+		
+										<div class="form-group"
+											ng-class="{'has-error':FormUnidad.npnombrenivel.$dirty && FormUnidad.npnombrenivel.$invalid, 'has-success':FormUnidad.npnombrenivel.$valid}">
+											<div class="col-md-4">
+												<label class="control-label"> Nivel Org&aacute;nico
+													Nombre <span class="symbol required"></span>
+												</label>
+											</div>
+											<div class="col-md-8">
+												<input type="text"
+													placeholder="Seleccione el nuvel org&aacute;nico"
+													class="form-control" name="npnombrenivel"
+													ng-model="objetoUnidad.npnombrenivel" required
+													ng-disabled="true">
+											</div>
 										</div>
-									</div>
-	
-									<div class="form-group"
-										ng-class="{'has-error':FormUnidad.estado.$dirty && FormUnidad.estado.$invalid, 'has-success':FormUnidad.estado.$valid}">
-										<div class="col-md-4">
-											<label class="control-label"> Estado <span
-												class="symbol required"></span>
-											</label>
-										</div>
-										<div class="col-md-8">
-											<select class="form-control" name="estado"
-												ng-model="objetoUnidad.estado" required>
-												<option value="A" ng-selected="selected">Activo</option>
-												<option value="I">Inactivo</option>
-											</select>
+		
+										<div class="form-group"
+											ng-class="{'has-error':FormUnidad.estado.$dirty && FormUnidad.estado.$invalid, 'has-success':FormUnidad.estado.$valid}">
+											<div class="col-md-4">
+												<label class="control-label"> Estado <span
+													class="symbol required"></span>
+												</label>
+											</div>
+											<div class="col-md-8">
+												<select class="form-control" name="estado"
+													ng-model="objetoUnidad.estado" required>
+													<option value="A" ng-selected="selected">Activo</option>
+													<option value="I">Inactivo</option>
+												</select>
+											</div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12">
+										<br>
 										<div class="pull-right">
 											<button type="submit" class="btn btn-primary">
-												Guardar</button>
+												Guardar
+											</button>
 											<button type="reset" class="btn btn-default btn-o"
-												ng-click="formUnidad.reset(FormUnidad)">Cancelar</button>
+												ng-click="formUnidad.reset(FormUnidad)">
+												Cancelar
+											</button>
 										</div>
 									</div>
 								</div>
@@ -873,16 +878,18 @@
 											</div>
 										</div>
 									</div>
-	
 								</div>
 								<div class="row">
 									<div class="col-md-12">
+										<br>
 										<div class="pull-right">
 											<button type="submit" class="btn btn-primary">
-												Guardar</button>
+												Guardar
+											</button>
 											<button type="reset" class="btn btn-default btn-o"
 												ng-click="formUnidadPlaza.reset(FormUnidadPlaza)">
-												Cancelar</button>
+												Cancelar
+											</button>
 										</div>
 									</div>
 								</div>
