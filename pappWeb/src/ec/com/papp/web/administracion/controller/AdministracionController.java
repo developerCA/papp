@@ -1437,7 +1437,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.estructuraorganicaServicio.transCrearModificarInstitucion(institucionTO);
-					id=institucionTO.getNpid().toString();
+					//id=institucionTO.getNpid().toString();
 					jsonObject.put("institucion", (JSONObject)JSONSerializer.toJSON(institucionTO,institucionTO.getJsonConfig()));
 				}
 			}

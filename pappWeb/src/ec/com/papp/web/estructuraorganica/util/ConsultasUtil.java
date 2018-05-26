@@ -582,8 +582,8 @@ public class ConsultasUtil {
 				unidadTO.setEstado(parameters.get("estado"));
 			if(parameters.get("codigopresup")!=null && !parameters.get("codigopresup").equals(""))
 				unidadTO.setCodigopresup(parameters.get("codigopresup"));
-			unidadTO.setInstitucion(new InstitucionTO());
-			unidadTO.setInstitucionentidad(new InstitucionentidadTO());
+//			unidadTO.setInstitucion(new InstitucionTO());
+//			unidadTO.setInstitucionentidad(new InstitucionentidadTO());
 			Collection<UnidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidad(unidadTO);
 			
 			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();

@@ -45,7 +45,7 @@ public class LoginController {
 			usuarioTO=usuarioTOs.iterator().next();
 			UtilSession.setUsuario(request, usuarioTO);
 			if(UtilSession.getUsuario(request).getCambiarclave()==null || UtilSession.getUsuario(request).getCambiarclave().equals("1")){
-				mav = new ModelAndView("cambiarcontrasena");
+				mav = new ModelAndView("cambiarcontrasenaunico");
 			}
 			else
 				mav= new ModelAndView("index");

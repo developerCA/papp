@@ -108,7 +108,7 @@ public class EjecucionController {
 				if(certificacionTO.getNpfechasolicitud()!=null)
 					certificacionTO.setFechasolicitud(UtilGeneral.parseStringToDate(certificacionTO.getNpfechasolicitud()));
 				UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,null);
-				id=certificacionTO.getNpid().toString();
+				//id=certificacionTO.getNpid().toString();
 				certificacionTO.setId(certificacionTO.getNpid());
 				ConsultasUtil.obtenercertificacion(certificacionTO.getNpid(), jsonObject);
 				//jsonObject.put("certificacion", (JSONObject)JSONSerializer.toJSON(certificacionTO,certificacionTO.getJsonConfig()));
@@ -143,7 +143,7 @@ public class EjecucionController {
 				else{
 					accion = (certificacionlineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarCertificacionlinea(certificacionlineaTO);
-					id=certificacionlineaTO.getId().getId().toString() + certificacionlineaTO.getId().getLineaid();
+					//id=certificacionlineaTO.getId().getId().toString() + certificacionlineaTO.getId().getLineaid();
 					//Traiga la lista de cetificacionlinea
 					ConsultasUtil.obtenercertificacion(certificacionlineaTO.getId().getId(), jsonObject);
 				}
@@ -167,7 +167,7 @@ public class EjecucionController {
 				accion = (ordengastoTO.getId()==null)?"I":"U";
 				System.out.println("ordengastoclasemodid web " + ordengastoTO.getOrdengastoclasemodid());
 				UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO,null);
-				id=ordengastoTO.getNpid().toString();
+				//id=ordengastoTO.getNpid().toString();
 				ordengastoTO.setId(ordengastoTO.getNpid());
 				ConsultasUtil.obtenerordengasto(ordengastoTO.getNpid(), jsonObject);
 				//jsonObject.put("ordengasto", (JSONObject)JSONSerializer.toJSON(ordengastoTO,ordengastoTO.getJsonConfig()));
@@ -205,7 +205,7 @@ public class EjecucionController {
 				else{
 					accion = (ordengastolineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarOrdengastolinea(ordengastolineaTO);
-					id=ordengastolineaTO.getId().getId().toString() + ordengastolineaTO.getId().getLineaid();
+					//id=ordengastolineaTO.getId().getId().toString() + ordengastolineaTO.getId().getLineaid();
 					ConsultasUtil.obtenerordengasto(ordengastolineaTO.getId().getId(), jsonObject);
 				}
 			}
@@ -227,7 +227,7 @@ public class EjecucionController {
 					ordendevengoTO.setFechasolicitud(UtilGeneral.parseStringToDate(ordendevengoTO.getNpfechasolicitud()));
 				accion = (ordendevengoTO.getId()==null)?"I":"U";
 				UtilSession.planificacionServicio.transCrearModificarOrdendevengo(ordendevengoTO, null);
-				id=ordendevengoTO.getNpid().toString();
+				//id=ordendevengoTO.getNpid().toString();
 				ordendevengoTO.setId(ordendevengoTO.getNpid());
 				ConsultasUtil.obtenerordendevengo(ordendevengoTO.getNpid(), jsonObject);
 			}
@@ -260,7 +260,7 @@ public class EjecucionController {
 				else{
 					accion = (ordendevengolineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarOrdendevengolinea(ordendevengolineaTO);
-					id=ordendevengolineaTO.getId().getId().toString()+ordendevengolineaTO.getId().getLineaid();
+					//id=ordendevengolineaTO.getId().getId().toString()+ordendevengolineaTO.getId().getLineaid();
 					ConsultasUtil.obtenerordendevengo(ordendevengolineaTO.getId().getId(), jsonObject);
 				}
 			}
@@ -282,7 +282,7 @@ public class EjecucionController {
 					ordenreversionTO.setFechasolicitud(UtilGeneral.parseStringToDate(ordenreversionTO.getNpfechasolicitud()));
 				accion = (ordenreversionTO.getId()==null)?"I":"U";
 				UtilSession.planificacionServicio.transCrearModificarOrdenreversion(ordenreversionTO, null);
-				id=ordenreversionTO.getNpid().toString();
+				//id=ordenreversionTO.getNpid().toString();
 				ordenreversionTO.setId(ordenreversionTO.getNpid());
 				ConsultasUtil.obtenerordenreversion(ordenreversionTO.getNpid(), jsonObject);
 			}
@@ -317,7 +317,7 @@ public class EjecucionController {
 				else{
 					accion = (ordenreversionlineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarOrdenreversionlinea(ordenreversionlineaTO);
-					id=ordenreversionlineaTO.getId().getId().toString()+ordenreversionlineaTO.getId().getLineaid();
+					//id=ordenreversionlineaTO.getId().getId().toString()+ordenreversionlineaTO.getId().getLineaid();
 					ConsultasUtil.obtenerordenreversion(ordenreversionlineaTO.getId().getId(), jsonObject);
 				}
 			}
@@ -384,7 +384,7 @@ public class EjecucionController {
 				if(reformaTO.getNpfechasolicitud()!=null)
 					reformaTO.setFechasolicitud(UtilGeneral.parseStringToDate(reformaTO.getNpfechasolicitud()));
 				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO,null);
-				id=reformaTO.getNpid().toString();
+				//id=reformaTO.getNpid().toString();
 				reformaTO.setId(reformaTO.getNpid());
 				jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
 			}
@@ -445,7 +445,7 @@ public class EjecucionController {
 				if(reformametaTO.getNpfechasolicitud()!=null)
 					reformametaTO.setFechasolicitud(UtilGeneral.parseStringToDate(reformametaTO.getNpfechasolicitud()));
 				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO,null);
-				id=reformametaTO.getNpid().toString();
+				//id=reformametaTO.getNpid().toString();
 				reformametaTO.setId(reformametaTO.getNpid());
 				jsonObject.put("reformameta", (JSONObject)JSONSerializer.toJSON(reformametaTO,reformametaTO.getJsonConfig()));
 			}
