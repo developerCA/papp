@@ -34,7 +34,8 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 		    planificacionInstitucionalFactory.traerHijos(
 	    		pagina,
 	    		$rootScope.ejefiscal,
-	    		node.id
+	    		node.id,
+	    		node.tipo
     		).then(function(resp){
 				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 				node.nodes=nodes;

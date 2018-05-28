@@ -5,7 +5,8 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 	return {
 		traer: function(
 			pagina,
-			ejefiscal
+			ejefiscal,
+			estado
 		) {
 			var url = "ejecucion/consultar/ordendevengo";
 			var tObj = {
@@ -13,6 +14,7 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 				pagina: pagina.toString(),
 				ejerciciofiscalid: ejefiscal.toString()
 			}
+			if(estado != null && estado != "") tObj.estado= "" + estado;	
 			return Restangular.allUrl(url).customPOST(tObj);
 		},
 

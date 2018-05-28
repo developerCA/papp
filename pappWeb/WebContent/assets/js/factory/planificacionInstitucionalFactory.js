@@ -7,16 +7,18 @@ app.factory("planificacionInstitucionalFactory", [ "Restangular", function(Resta
 			var url = "planificacion/consultar/objetivo/" +
 				"pagina=" + pagina +
 				"&objetivoejerciciofiscalid=" + ejercicio +
-				"&estado=A";
+				"&estado=A" +
+				"&tipo=P";
 			return Restangular.allUrl(url).getList();
 		},
 
-		traerHijos : function(pagina, ejercicio, padre) {
+		traerHijos : function(pagina, ejercicio, padre, tipo) {
 			var url = "planificacion/consultar/objetivo/" +
 				"pagina=" + pagina +
 				"&objetivoejerciciofiscalid=" + ejercicio +
 				"&id=" + padre +
-				"&estado=A";
+				"&estado=A" +
+				"&tipo=" + tipo;
 			return Restangular.allUrl(url).getList();
 		},
 

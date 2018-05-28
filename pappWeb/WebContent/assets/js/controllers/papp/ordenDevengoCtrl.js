@@ -14,7 +14,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	$scope.valorfinalFiltro=null;
 	$scope.fechainicialFiltro=null;
 	$scope.fechafinalFiltro=null;
-	$scope.estadoFiltro=null;
+	$scope.estadoFiltro="AP";
 
 	$scope.data=[];
 	$scope.edicion=false;
@@ -30,7 +30,8 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	$scope.consultar=function(){
 		ordenDevengoFactory.traer(
 			$scope.pagina,
-			$rootScope.ejefiscal
+			$rootScope.ejefiscal,
+			$scope.estadoFiltro
 		).then(function(resp){
 			//console.log(resp);
         	$scope.data = resp.result;
@@ -77,7 +78,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		$scope.valorfinalFiltro=null;
 		$scope.fechainicialFiltro=null;
 		$scope.fechafinalFiltro=null;
-		$scope.estadoFiltro=null;
+		$scope.estadoFiltro="AP";
 		$scope.aplicafiltro=false;
 
 		$scope.consultar();

@@ -6,7 +6,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.dateOptions = {
 	    changeYear: true,
 	    changeMonth: true,
-	    yearRange: '2000:-0',    
+	    yearRange: '2000:-0',
+	    showWeeks: false
     };
 	$scope.codigo=null;
 	$scope.fuerza=null;
@@ -29,6 +30,13 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.dUnidadEditar=false;
 	$scope.dEmpleados=false;
 	$scope.dEmpleadosEditar=false;
+
+	$scope.opendate = function($event,type) {
+		//console.log($scope);
+		$event.preventDefault();
+		$event.stopPropagation();
+		$scope['open'+type] = true;
+	}
 
 	$scope.popupFechaInicio = {
 		opened: false

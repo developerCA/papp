@@ -154,7 +154,7 @@
 				    <div class="input-group col-md-12">
 				        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="0.00"
 				            class="form-control" name="valor" ng-model="objeto.valor"
-				            required ng-max="objeto.npsaldo + 0.01" ng-disabled="!editarValor">
+				            required ng-max="objeto.npvalor + 0.01" ng-disabled="!editarValor">
 				    </div>
 				    <span class="error text-small block"
 				        ng-if="Form.valor.$dirty && Form.valor.$invalid">
