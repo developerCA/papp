@@ -37,6 +37,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$event.stopPropagation();
 		$scope['open'+type] = true;
 	}
+	$scope.openFechaInicio0=false;
 
 	$scope.popupFechaInicio = {
 		opened: false
