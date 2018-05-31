@@ -168,7 +168,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		if (node.nodeTipo == "PR") { // SubPrograma
 			formulacionEstrategicaFactory.traerNuevo(
 				"SP",
-				node.npNivel,
+				node.npNivelid,
 				$rootScope.ejefiscal
 			).then(function(resp){
 				//console.log(resp.json);
@@ -177,7 +177,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 					return;
 				}
 				$scope.objetoSp=resp.json.subprograma;
-				$scope.objetoSp.padre=node.npNivelid;
+				//$scope.objetoSp.padre=node.npNivelid;
 				$scope.editarId=$scope.objetoSp.id;
 				$scope.nodeTipo = "SP";
 				$scope.edicionSubPrograma=true;
@@ -186,7 +186,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		if (node.nodeTipo == "SP") { // Proyecto
 			formulacionEstrategicaFactory.traerNuevo(
 				"PY",
-				node.npNivel,
+				node.npNivelid,
 				$rootScope.ejefiscal
 			).then(function(resp){
 				//console.log(resp.json);
@@ -195,7 +195,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 					return;
 				}
 				$scope.objetoPy=resp.json.proyecto;
-				$scope.objetoPy.padre=node.npNivelid;
+				//$scope.objetoPy.padre=node.npNivelid;
 				$scope.objetoPy.tipo="AN";
 				$scope.objetolistaPy=[];
 				$scope.editarId=$scope.objetoPy.id;
@@ -206,7 +206,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		if (node.nodeTipo == "PY") { // Actividad
 			formulacionEstrategicaFactory.traerNuevo(
 				"AC",
-				node.npNivel,
+				node.npNivelid,
 				$rootScope.ejefiscal
 			).then(function(resp){
 				//console.log(resp.json);
@@ -215,7 +215,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 					return;
 				}
 				$scope.objetoAc=resp.json.actividad;
-				$scope.objetoAc.padre=node.npNivelid;
+				//$scope.objetoAc.padre=node.npNivelid;
 				$scope.objetolistaAc=[];
 				$scope.editarId=$scope.objetoAc.id;
 				$scope.nodeTipo = "AC";
@@ -225,7 +225,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		if (node.nodeTipo == "AC" || node.nodeTipo == "SA") { // SubActividad
 			formulacionEstrategicaFactory.traerNuevo(
 				"SA",
-				node.npNivel,
+				node.id,
 				$rootScope.ejefiscal
 			).then(function(resp){
 				//console.log(resp.json);
@@ -234,7 +234,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 					return;
 				}
 				$scope.objetoSa=resp.json.subactividad;
-				$scope.objetoSa.padre=node.npNivelid;
+				//$scope.objetoSa.padre=node.npNivelid;
 				$scope.editarId=$scope.objetoSa.id;
 				$scope.nodeTipo = "SA";
 				$scope.edicionSubActividad=true;
