@@ -34,7 +34,7 @@ public class LogoutController {
 		
 		StringBuffer url = new StringBuffer();
 		url.append("/");
-		url.append("pappWeb");
+		url.append("papp-Desarrollo");
 		url.append("/");
 		url.append("login.jsp?loggedout=true");
 					

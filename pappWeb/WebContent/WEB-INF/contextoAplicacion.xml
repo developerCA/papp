@@ -12,7 +12,7 @@
           http://www.springframework.org/schema/security
           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<jee:jndi-lookup id="pappDS" jndi-name="java:jboss/datasources/pappDS"/> 
+	<jee:jndi-lookup id="papp-Desarrollo" jndi-name="java:jboss/datasources/papp-Desarrollo"/> 
 
 	<beans:bean id="authenticationEntryPoint" class="ec.com.papp.web.util.security.AjaxAwareAuthenticationEntryPoint">
     	<beans:constructor-arg name="loginUrl" value="/login.jsp"/>
@@ -50,7 +50,7 @@
 	<authentication-manager alias="authenticationManager">
 	  <authentication-provider>
 		    <password-encoder hash="md5"/>
-		   <jdbc-user-service data-source-ref="pappDS"
+		   <jdbc-user-service data-source-ref="papp-Desarrollo"
 		    
 			users-by-username-query="select
 				        u.USUARIOUSUARIO ,

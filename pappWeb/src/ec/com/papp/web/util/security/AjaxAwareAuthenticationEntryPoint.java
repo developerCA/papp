@@ -23,8 +23,8 @@ public class AjaxAwareAuthenticationEntryPoint
             throws IOException, ServletException {
 
     	//System.out.println("url: " + request.getRequestURI());
-    	boolean isLogin = request.getRequestURI().startsWith("/pappWeb/login");
-        boolean isAjax = request.getRequestURI().startsWith("/pappWeb/");
+    	boolean isLogin = request.getRequestURI().startsWith("/papp-Desarrollo/login");
+        boolean isAjax = request.getRequestURI().startsWith("/papp-Desarrollo/");
 
         if (isAjax && !isLogin) {
             response.sendError(302, "Pagina no encontrada");
