@@ -376,6 +376,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Cambiar Contraseña'
         } 
+    }).state('app.cambiarcontrasenaunico', {
+        url: "/cambiarcontrasenaunico",
+        templateUrl: "assets/views/papp/cambiarContrasenaUnico.html",
+        resolve: loadSequence('ngTable','CambiarContrasenaUnicoCtrl','CambiarContrasenaUnicoFactory'),
+        title: 'Cambiar Contrase&ntilde;a',
+        ncyBreadcrumb: {
+            label: 'Cambiar Contraseña'
+        } 
     }).state('app.institucion', {
         url: "/institucion",
         templateUrl: "assets/views/papp/institucion.html",

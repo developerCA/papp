@@ -1,7 +1,8 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-	<h4 class="mainTitle no-margin">Instituciones</h4>
-
+	<h4 class="mainTitle no-margin">
+		Instituciones
+	</h4>
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <!-- end: BREADCRUMB -->
@@ -92,118 +93,97 @@
 					<form name="Form" id="form1" novalidate
 						ng-submit="form.submit(Form)">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
-									<label class="control-label"> C&oacute;odigo <span
-										class="symbol required"></span>
-									</label>
-									<input type="text" placeholder="Ingrese un c&oacute;digo"
-										class="form-control" name="codigo" ng-model="objeto.codigo"
-										required ng-disabled="objeto.id!=null"
-										ng-minlength="3" ng-maxlength="3" ng-pattern="/^[0-9]*$/" />
-									<span class="error text-small block"
-										ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
-										Ingrese tres digitos
-									</span>
-									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label"> C&oacute;odigo <span
+											class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese un c&oacute;digo"
+											class="form-control" name="codigo" ng-model="objeto.codigo"
+											required ng-disabled="objeto.id!=null"
+											ng-minlength="3" ng-maxlength="3" ng-pattern="/^[0-9]*$/" />
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Nombre <span
-										class="symbol required"></span>
-									</label> <input type="text" 
-										class="form-control" name="nombre" required
-										ng-model="objeto.nombre" ng-minlength="1" />
-									<span class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
-										Incorrecto
-									</span>
-									<span class="success text-small"
-										ng-if="Form.codigo.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label"> Nombre <span
+											class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" 
+											class="form-control" name="nombre" required
+											ng-model="objeto.nombre" ng-minlength="1" />
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.baselegal.$dirty && Form.baselegal.$invalid, 'has-success':Form.baselegal.$valid}">
-									<label class="control-label">
-										Base legal 
-										<span class="symbol required"></span>
-									</label>
-									<textarea placeholder="Especifique la base legal"
-										class="form-control" name="baselegal" required
-										ng-model="objeto.baselegal" rows="5"></textarea>
-									<span class="error text-small block"
-										ng-if="Form.baselegal.$dirty && Form.baselegal.$invalid">
-										Incorrecto
-									</span>
-									<span class="success text-small"
-										ng-if="Form.baselegal.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Base legal 
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<textarea placeholder="Especifique la base legal"
+											class="form-control" name="baselegal" required
+											ng-model="objeto.baselegal" rows="5"></textarea>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.mision.$dirty && Form.mision.$invalid, 'has-success':Form.mision.$valid}">
-									<label class="control-label">
-										Misi&oacute;n 
-										<span class="symbol required"></span>
-									</label>
-									<textarea placeholder="Especifique la base legal"
-										class="form-control" name="mision" required
-										ng-model="objeto.mision" rows="5"></textarea>
-									<span class="error text-small block"
-										ng-if="Form.mision.$dirty && Form.mision.$invalid">
-										Incorrecto
-									</span>
-									<span class="success text-small"
-										ng-if="Form.mision.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Misi&oacute;n 
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<textarea placeholder="Especifique la base legal"
+											class="form-control" name="mision" required
+											ng-model="objeto.mision" rows="5"></textarea>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.vision.$dirty && Form.vision.$invalid, 'has-success':Form.vision.$valid}">
-									<label class="control-label">
-										Visi&oacute;n 
-										<span class="symbol required"></span>
-									</label>
-									<textarea placeholder="Especifique la base legal"
-										class="form-control" name="vision" required
-										ng-model="objeto.vision" rows="5"></textarea>
-									<span class="error text-small block"
-										ng-if="Form.vision.$dirty && Form.vision.$invalid">
-										Incorrecto
-									</span>
-									<span class="success text-small"
-										ng-if="Form.vision.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Visi&oacute;n 
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<textarea placeholder="Especifique la base legal"
+											class="form-control" name="vision" required
+											ng-model="objeto.vision" rows="5"></textarea>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-									<label class="control-label">
-										Estado
-										<span class="symbol required"></span>
-									</label>
-									<select class="form-control" name="estado" ng-model="objeto.estado">
-										<option value="">Seleccione el estado</option>
-										<option value="A">Activo</option>
-										<option value="I">Inactivo</option>
-									</select>
-									<span class="error text-small block"
-										ng-if="Form.estado.$dirty && Form.estado.$invalid">
-										Incorrecto</span>
-									<span class="success text-small"
-										ng-if="Form.estado.$valid">
-										Listo</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Estado
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="estado" ng-model="objeto.estado">
+											<option value="">Seleccione el estado</option>
+											<option value="A">Activo</option>
+											<option value="I">Inactivo</option>
+										</select>
+									</div>
 								</div>
 							</div>
 						</div>

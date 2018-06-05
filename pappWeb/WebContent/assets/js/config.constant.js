@@ -256,6 +256,8 @@ app.constant('JS_REQUIRES', {
         'ModalReformasLineasCtrl':'assets/js/controllers/papp/modales/modalReformasLineasCtrl.js',
         'ReporteS01Ctrl':'assets/js/controllers/papp/reporteS01Ctrl.js',
         'ReporteS01Factory':'assets/js/factory/reporteS01Factory.js',
+        'CambiarContrasenaUnicoCtrl':'assets/js/controllers/papp/cambiarContrasenaUnicoCtrl.js',
+        'CambiarContrasenaUnicoFactory':'assets/js/factory/cambiarContrasenaUnicoFactory.js',
 
 
     },
