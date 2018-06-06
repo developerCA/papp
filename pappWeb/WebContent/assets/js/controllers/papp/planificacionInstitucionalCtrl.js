@@ -27,19 +27,38 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 	};
 
 	$scope.cargarHijos=function(node){
-		if (!node.iscargado)
-			console.log(node);
+		if (!node.iscargado) {
+			//console.log(node);
 		    node.iscargado=true;
+		    var tipo='';
 
+		    switch (node.tipo) {
+				case 'P':
+					tipo='E';
+					break;
+				case "E": //Estrategico
+					tipo='O';
+					break;
+				case "O": //Operativo
+					tipo='F';
+					break;
+				case "F": //Fuerzas
+					return;
+					break;
+				default:
+					tipo='P';
+					break;
+			}
 		    planificacionInstitucionalFactory.traerHijos(
 	    		pagina,
 	    		$rootScope.ejefiscal,
 	    		node.id,
-	    		node.tipo
+	    		tipo
     		).then(function(resp){
 				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 				node.nodes=nodes;
 			})
+		}
 	}
 
 	$scope.$watch('data', function() {
