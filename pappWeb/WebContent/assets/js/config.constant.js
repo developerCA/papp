@@ -205,6 +205,8 @@ app.constant('JS_REQUIRES', {
         'FormulacionEstrategicaFactory':'assets/js/factory/formulacionEstrategicaFactory.js',
         'MantenerIndicadoresCtrl':'assets/js/controllers/papp/mantenerIndicadoresCtrl.js',
         'MantenerIndicadoresFactory':'assets/js/factory/mantenerIndicadoresFactory.js',
+        'EstructuraPartidaPresupuestariaCtrl':'assets/js/controllers/papp/estructuraPartidaPresupuestariaCtrl.js',
+        'EstructuraPartidaPresupuestariaFactory':'assets/js/factory/estructuraPartidaPresupuestariaFactory.js',
         'ModalObjetivosCtrl':'assets/js/controllers/papp/modales/modalObjetivosCtrl.js',
         'ObjetivosFactory':'assets/js/factory/objetivosFactory.js',
         'ModalIndicadoresCtrl':'assets/js/controllers/papp/modales/modalIndicadoresCtrl.js',

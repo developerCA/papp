@@ -1,7 +1,8 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-	<h4 class="mainTitle no-margin">Ejercicios Fiscales</h4>
-
+	<h4 class="mainTitle no-margin">
+		Ejercicios Fiscales
+	</h4>
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <!-- end: BREADCRUMB -->
@@ -15,13 +16,9 @@
 
 	<div class="row">
 		<div class="col-md-12">
-
 			<div class="panel panel-white">
 
-
 				<div class="panel-body" ng-show="!edicion">
-
-
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -61,80 +58,83 @@
 
 					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"><i
 						class="fa fa-plus-square"></i> Agregar</a>
-
 	
 					<div>
-						<table ng-table="tableParams" class="table table-striped table-bordered">
+						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="eje in $data">
-								<td><a class="btn btn-sm btn-primary"
-									ng-click="editar(eje.id)"><i class="fa fa-pencil"></i></a></td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										ng-click="editar(eje.id)"><i class="fa fa-pencil"></i></a>
+								</td>
 								<td data-title="'A&ntilde;o'">{{eje.anio}}</td>
 								<td data-title="'Estado'">{{eje.npestado}}</td>
-								<td data-title="'Fiscal Cerrado'"><span
-									ng-if="eje.cerrado==0">ABIERTO</span><span
-									ng-if="eje.cerrado==1">CERRADO</span></td>
-
+								<td data-title="'Fiscal Cerrado'">
+									<span ng-if="eje.cerrado==0">ABIERTO</span>
+									<span ng-if="eje.cerrado==1">CERRADO</span>
+								</td>
 							</tr>
 						</table>
 					</div>
 				</div>
 
-
 				<div ng-show="edicion" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
-						<h5 class="panel-title">Ejercicio Fiscal</h5>
+						<h5 class="panel-title">
+							Ejercicio Fiscal
+						</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
 						ng-submit="form.submit(Form)">
 						<div class="row">
-							<div class="col-md-6">
-
-
-
+							<div class="col-md-12">
 								<div class="form-group"
 									ng-class="{'has-error':Form.anio.$dirty && Form.anio.$invalid, 'has-success':Form.anio.$valid}">
-									<label class="control-label">
-										A&ntilde;o
-										<span class="symbol required"></span>
-									</label>
-									<input type="text" placeholder="Ingrese el a&ntilde;o fiscal"
-										class="form-control" name="anio" ng-disabled="objeto.id !=null" required
-										ng-pattern="/^[0-9]*$/" ng-model="objeto.anio" ng-minlength="4"
-										ng-maxlength="4">
-									<span class="error text-small block"
-										ng-if="Form.anio.$dirty && Form.anio.$invalid">
-										A&ntilde;o es incorrecto
-									</span>
-									<span class="success text-small"
-										ng-if="Form.anio.$valid">
-										Listo
-									</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											A&ntilde;o
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese el a&ntilde;o fiscal"
+											class="form-control" name="anio" ng-disabled="objeto.id !=null" required
+											ng-pattern="/^[0-9]*$/" ng-model="objeto.anio" ng-minlength="4"
+											ng-maxlength="4">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-									<label for="form-field-select-1"> Estado <span
-										class="symbol required"></span>
-									</label> <select class="form-control" name="estado"
-										ng-model="objeto.estado" required>
-										<option value="A">Activo</option>
-										<option value="I">Inactivo</option>
-									</select>
+									<div class="col-md-4">
+										<label for="form-field-select-1"> Estado <span
+											class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="estado"
+											ng-model="objeto.estado" required>
+											<option value="A">Activo</option>
+											<option value="I">Inactivo</option>
+										</select>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.ejefis.$dirty && Form.ejefis.$invalid, 'has-success':Form.ejefis.$valid}">
-									<label for="form-field-select-1"> Ejercicio Fiscal <span
-										class="symbol required"></span>
-									</label> <select class="form-control" name="ejefis"
-										ng-model="objeto.cerrado" required>
-										<option value=0>Abierto</option>
-										<option value=1>Cerrado</option>
-									</select>
+									<div class="col-md-4">
+										<label for="form-field-select-1"> Ejercicio Fiscal <span
+											class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="ejefis"
+											ng-model="objeto.cerrado" required>
+											<option value=0>Abierto</option>
+											<option value=1>Cerrado</option>
+										</select>
+									</div>
 								</div>
-
 							</div>
 						</div>
 
@@ -156,16 +156,6 @@
 
 
 				</div>
-
-
-
-
-
-
-
-
-
-
 
 			</div>
 		</div>

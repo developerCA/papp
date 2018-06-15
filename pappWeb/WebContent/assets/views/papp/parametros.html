@@ -15,13 +15,9 @@
 
 	<div class="row">
 		<div class="col-md-12">
-
 			<div class="panel panel-white">
 
-
 				<div class="panel-body" ng-show="!edicion">
-
-
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -79,9 +75,7 @@
 					</div>
 				</div>
 
-
 				<div ng-show="edicion" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
 						<h5 class="panel-title">Par&aacute;metro</h5>
 					</div>
@@ -89,77 +83,80 @@
 					<form name="Form" id="form1" novalidate
 						ng-submit="form.submit(Form)">
 						<div class="row">
-							<div class="col-md-6">
-
-
-
+							<div class="col-md-12">
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Nombre <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Nombre"
-										class="form-control" name="nombre" ng-disabled="objeto.id !=null" required
-										ng-model="objeto.nombre"
-										ng-minlength="1"  /> <span
-										class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">Nombre
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Nombre
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese el Nombre"
+											class="form-control" name="nombre" ng-disabled="objeto.id !=null" required
+											ng-model="objeto.nombre"
+											ng-minlength="1">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
-									<label class="control-label"> Descripci&oacute;n <span
-										class="symbol required"></span>
-									</label> 
-									<textarea placeholder="Descripcion" id="form-field-22" name="descripcion" ng-model="objeto.descripcion"
-										class="form-control" row="4"></textarea>
-									<span class="error text-small block"
-										ng-if="Form.descripcion.$dirty && Form.nombre.$invalid">Descripci&oacute;n
-										es incorrecta</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
+									<div class="col-md-4">
+										<label class="control-label"> Descripci&oacute;n <span
+											class="symbol required"></span>
+										</label> 
+									</div>
+									<div class="col-md-8">
+										<textarea placeholder="Descripcion" id="form-field-22" name="descripcion" ng-model="objeto.descripcion"
+											class="form-control" row="40"></textarea>
+									</div>
 								</div>
 
-                                     
 								<div class="form-group"
 									ng-class="{'has-error':Form.valnumerico.$dirty && Form.valnumerico.$invalid, 'has-success':Form.valnumerico.$valid}">
-									<label class="control-label"> Valor num&eacute;rico </label>
-									<input type="number" name="valnumerico" placeholder="Valor numerico"
-										class="form-control" ng-model="objeto.valornumerico">
-									<span class="error text-small block"
-										ng-if="Form.valnumerico.$dirty && Form.valnumerico.$invalid">Incorrecto!</span>
-									<span class="success text-small"
-										ng-if="Form.valnumerico.$valid">Listo</span>
+									<div class="col-md-4">
+										<label class="control-label"> Valor num&eacute;rico </label>
+									</div>
+									<div class="col-md-8">
+										<input type="number" name="valnumerico" placeholder="Valor numerico"
+											class="form-control" ng-model="objeto.valornumerico">
+									</div>
 								</div>
-								
+
 								<div class="form-group"
 									ng-class="{'has-error':Form.valcaracter.$dirty && Form.valcaracter.$invalid, 'has-success':Form.valcaracter.$valid}">
-									<label class="control-label"> Valor Caracter 
-									</label> <input type="text" placeholder="Ingrese el valor caracter"
-										class="form-control" name="valcaracter" 
-										 ng-model="objeto.valorcaracter"
-										  /> <span
-										class="error text-small block"
-										ng-if="Form.valcaracter.$dirty && Form.valcaracter.$invalid">Caracter
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.valcaracter.$valid">Listo</span>
+									<div class="col-md-4">
+										<label class="control-label">
+											Valor Caracter 
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese el valor caracter"
+											class="form-control" name="valcaracter" 
+											ng-model="objeto.valorcaracter">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-									<label for="form-field-select-1"> Estado <span
-										class="symbol required"></span>
-									</label> <select class="form-control" name="estado"
-										ng-model="objeto.estado" required>
-										<option value="A">Activo</option>
-										<option value="I">Inactivo</option>
-									</select>
+									<div class="col-md-4">
+										<label for="form-field-select-1"> Estado <span
+											class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="estado"
+											ng-model="objeto.estado" required>
+											<option value="A">Activo</option>
+											<option value="I">Inactivo</option>
+										</select>
+									</div>
 								</div>
-
-								
 							</div>
 						</div>
 
+						<br>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">

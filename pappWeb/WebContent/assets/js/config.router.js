@@ -580,6 +580,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Mantener Indicadores'
         }
+    }).state('app.estructurapartidapresupuestaria', {
+        url: "/estructurapartidapresupuestaria",
+        templateUrl: "assets/views/papp/estructuraPartidaPresupuestaria.html",
+        resolve: loadSequence(
+        		'ngTable','EstructuraPartidaPresupuestariaCtrl','EstructuraPartidaPresupuestariaFactory'
+		),
+        title: 'Estructura Partida Presupuestaria',
+        ncyBreadcrumb: {
+            label: 'Estructura Partida Presupuestaria'
+        }
     }).state('app.planificacioninstitucional', {
         url: "/planificacioninstitucional",
         templateUrl: "assets/views/papp/planificacionInstitucional.html",

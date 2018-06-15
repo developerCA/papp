@@ -1,0 +1,165 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+	<h4 class="mainTitle no-margin">
+		Estructura Partida Presupuestaria
+	</h4>
+	<div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: SIMPLE TABLE WITH PAGINATION -->
+<div class="container-fluid container-fullw"
+	ng-controller="EstructuraPartidaPresupuestariaController" ng-init="editar()">
+	<div class="row">
+		<div class="col-md-12"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-white">
+
+				<div ng-show="edicion" class="panel-body" id="panel1">
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+	                    <div class="panel-heading">
+	                        <h4 class="panel-title">
+	                        	<b>Niveles
+	                        </h4>
+	                    </div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group"
+									ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+									<div class="col-md-4">
+										<label class="control-label">
+											A&nacute;o
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Escribe un c&oacute;digo" class="form-control"
+											name="codigo" required ng-model="objeto.codigo" ng-disabled="true"
+											ng-minlength="1" ng-change="objeto.codigo=objeto.codigo.toUpperCase();"/>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<br>
+	                    <div class="panel-heading">
+	                        <h4 class="panel-title">
+	                        	<b>Formulaci&oacute;n Estrategica
+	                        </h4>
+	                    </div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="panel panel-primary">
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped" style="margin-bottom:0px">
+													<tr>
+														<th>Id</th>
+														<th>Tipo</th>
+														<th>Longitud</th>
+													</tr>
+													<tr ng-repeat="obj in feLista">
+														<td>
+															{{obj.id}}
+														</td>
+														<td>
+															{{obj.tipo}}
+														</td>
+														<td>
+															<div class="input-group">
+																<input type="text" placeholder="Escriba el largo"
+																	class="form-control" name="longitud"
+																	ng-model="obj.longitud">
+															</div>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+	                    <div class="panel-heading">
+	                        <h4 class="panel-title">
+	                        	<b>Planificaci&oacute;n
+	                        </h4>
+	                    </div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="panel panel-primary">
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped" style="margin-bottom:0px">
+													<tr>
+														<th>Id</th>
+														<th>Tipo</th>
+														<th>Prefijo</th>
+														<th>Separador</th>
+														<th>Longitud</th>
+													</tr>
+													<tr ng-repeat="obj in pLista">
+														<td>
+															{{obj.id}}
+														</td>
+														<td>
+															{{obj.tipo}}
+														</td>
+														<td>
+															<div class="input-group">
+																<input type="text" placeholder="Escriba un prefijo"
+																	class="form-control" name="prefijo"
+																	ng-model="obj.prefijo">
+															</div>
+														</td>
+														<td>
+															<div class="input-group">
+																<input type="checkbox" value="" ng-model="obj.separador"
+																	ng-checked="obj.separador==1" ng-true-value="1"
+																	ng-false-value="0">
+															</div>
+														</td>
+														<td>
+															<div class="input-group">
+																<input type="text" placeholder="Escriba el largo"
+																	class="form-control" name="plongitud"
+																	ng-model="obj.longitud">
+															</div>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<br>
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">
+										Guardar
+									</button>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">
+										Cancelar
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
