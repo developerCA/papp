@@ -419,6 +419,8 @@ public class ConsultasUtil {
 				proyectoTO.setNpcodigosubprograma(parameters.get("npcodigosubprograma"));
 			if(parameters.get("npunidad")!=null && !parameters.get("npunidad").equals(""))
 				proyectoTO.setNpunidad(Long.valueOf(parameters.get("npunidad")));
+			if(parameters.get("npprogramaid")!=null && !parameters.get("npprogramaid").equals(""))
+				proyectoTO.setNpprogramaid(Long.valueOf(parameters.get("npprogramaid")));
 			Collection<ProyectoTO> resultado=UtilSession.planificacionServicio.transObtieneProyectoreporte(proyectoTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());

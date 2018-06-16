@@ -696,7 +696,7 @@ public class ConsultasUtil {
 				unidadarbolTO.setId(Long.valueOf(parameters.get("id")));
 			if(parameters.get("unidadarbolnorganid")!=null && !parameters.get("unidadarbolnorganid").equals(""))
 				unidadarbolTO.setUnidadarbolnorganid(Long.valueOf(parameters.get("unidadarbolnorganid")));
-			if(parameters.get("unidadarbolunidadid")!=null && !parameters.get("unidadarbolunidadid").equals(""))
+			if(parameters.get("unidadarbolunidadid")!=null && !parameters. get("unidadarbolunidadid").equals(""))
 				unidadarbolTO.setUnidadarbolunidadid(Long.valueOf(parameters.get("unidadarbolunidadid")));
 			if(parameters.get("unidadarbolerganicaid")!=null && !parameters.get("unidadarbolerganicaid").equals(""))
 				unidadarbolTO.setUnidadarbolerganicaid(Long.valueOf(parameters.get("unidadarbolerganicaid")));
@@ -704,6 +704,14 @@ public class ConsultasUtil {
 				unidadarbolTO.setUnidadarbolpadreid(Long.valueOf(parameters.get("unidadarbolpadreid")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				unidadarbolTO.setEstado(parameters.get("estado"));
+			if((parameters.get("institucion")!=null && !parameters.get("institucion").equals("")) || (parameters.get("institucionentidad")!=null && !parameters.get("institucionentidad").equals(""))) {
+				EstructuraorganicaTO estructuraorganicaTO=new EstructuraorganicaTO();
+				if(parameters.get("institucion")!=null && !parameters.get("institucion").equals(""))
+					estructuraorganicaTO.setEorganicainstitucionid(Long.valueOf(parameters.get("institucion")));
+				if(parameters.get("institucionentidad")!=null && !parameters.get("institucionentidad").equals(""))
+					estructuraorganicaTO.setEorganicainstitucionentid(Long.valueOf(parameters.get("institucionentidad")));
+				unidadarbolTO.setEstructuraorganica(estructuraorganicaTO);
+			}
 			Collection<UnidadarbolTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbol(unidadarbolTO);
 			Integer totalRegistrosPagina=resultado.size();
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
