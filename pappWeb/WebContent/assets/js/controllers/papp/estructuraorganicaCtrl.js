@@ -33,9 +33,10 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 	$scope.opendate = function($event,type) {
 		//console.log($scope);
+		debugger;
 		$event.preventDefault();
 		$event.stopPropagation();
-		$scope['open'+type] = true;
+		$scope[type] = true;
 	}
 	$scope.openFechaInicio0=false;
 

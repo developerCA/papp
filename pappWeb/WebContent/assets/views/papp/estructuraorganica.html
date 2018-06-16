@@ -1092,13 +1092,13 @@
 																			<input type="text" class="form-control"
 																				uib-datepicker-popup="dd/MM/yyyy"
 																				name="npfechainicioc" ng-model="obj.npfechainicioc"
-																				is-open="openFechaInicio+$index"
+																				is-open="openFechaInicio"
 																				datepicker-options="dateOptions"
 																				ng-required="true"
 																				close-text="Close">
 																			<span class="input-group-btn">
 																				<button type="button" class="btn btn-primary"
-																					ng-click="opendate($event,'FechaInicio'+$index)">
+																					ng-click="opendate($event,'openFechaInicio')">
 																					<i class="glyphicon glyphicon-calendar"></i>
 																				</button>
 																			</span>
@@ -1111,13 +1111,13 @@
 																			<input type="text" class="form-control"
 																				uib-datepicker-popup="dd/MM/yyyy" name="npfechafinc"
 																				ng-model="obj.npfechafinc"
-																				is-open="'openFechaFin'+{{$index}}"
+																				is-open="openFechaFin{{$index}}"
 																				show-button-bar="false"
 																				datepicker-options="dateOptions"
 																				close-text="Close">
 																			<span class="input-group-btn">
 																				<button type="button" class="btn btn-primary"
-																					ng-click="opendate($event,'FechaFin+{{$index}}')">
+																					ng-click="opendate($event,'FechaFin'+$index)">
 																					<i class="glyphicon glyphicon-calendar"></i>
 																				</button>
 																			</span>

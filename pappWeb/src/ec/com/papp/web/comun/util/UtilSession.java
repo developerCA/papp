@@ -9,6 +9,8 @@ import ec.com.papp.administracion.servicio.AdminsitracionServicio;
 import ec.com.papp.estructuraorganica.servicio.EstructuraorganicaServicio;
 import ec.com.papp.planificacion.servicio.PlanificacionServicio;
 import ec.com.papp.seguridad.servicio.SeguridadServicio;
+import ec.com.papp.seguridad.to.PerfilpermisoTO;
+import ec.com.papp.seguridad.to.PermisoTO;
 import ec.com.papp.seguridad.to.UsuarioTO;
 import ec.com.papp.spring.Factory;
 import ec.com.xcelsa.utilitario.metodos.Log;
@@ -49,6 +51,13 @@ public class UtilSession {
 
 		try{
 			request.getSession(true).setAttribute(ConstantesSesion.USUARIO_LOGIN,usuario);
+			//Obtengo los roles del usuario
+			PerfilpermisoTO perfilpermisoTO=new PerfilpermisoTO();
+			perfilpermisoTO.getId().setPerfilid(usuario.getPerfilid());
+			perfilpermisoTO.setPermiso(new PermisoTO());
+			Collection<PerfilpermisoTO> perfilpermisoTOs=UtilSession.seguridadServicio.transObtenerPerfilpermiso(perfilpermisoTO);
+			request.getSession(true).setAttribute(ConstantesSesion.USUARIO_PERMISOS,perfilpermisoTOs);
+			
 //				log.println("usuariologin****: " + request.getSession().getAttribute(ConstantesSesion.USUARIO_LOGIN));
 		}catch(Exception e){
 			e.printStackTrace();

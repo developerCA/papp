@@ -1425,8 +1425,8 @@ public class PlanificacionController {
 					UtilSession.planificacionServicio.transCrearModificarNivelesplanificacion(nivelesplanificacionTOs, true);
 				}
 
-				jsonObject.put("formulacion", (JSONObject)JSONSerializer.toJSON(parmnivelesprogramanivelTOs,parmnivelesprogramanivelTO.getJsonConfig()));
-				jsonObject.put("planificacion", (JSONObject)JSONSerializer.toJSON(nivelesplanificacionTOs,nivelesplanificacionTO.getJsonConfig()));
+				jsonObject.put("formulacion", (JSONArray)JSONSerializer.toJSON(parmnivelesprogramanivelTOs,parmnivelesprogramanivelTO.getJsonConfig()));
+				jsonObject.put("planificacion", (JSONArray)JSONSerializer.toJSON(nivelesplanificacionTOs,nivelesplanificacionTO.getJsonConfig()));
 			}
 
 			if(mensajes.getMsg()!=null && !mensajes.getMsg().equals(""))
