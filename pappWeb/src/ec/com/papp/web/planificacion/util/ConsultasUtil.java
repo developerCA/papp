@@ -434,6 +434,49 @@ public class ConsultasUtil {
 	}
 
 	/**
+	* Metodo que consulta la lista de actividades para reporte y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaActividadReporte(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+		String campo="";
+		ActividadTO actividadTO=new ActividadTO();
+		try{
+			campo="codigo";
+			String[] columnas={campo};
+			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
+				campo=parameters.get("sidx");
+			String[] orderBy = columnas;
+			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
+				actividadTO.setOrderByField(OrderBy.orderDesc(orderBy));
+			else
+				actividadTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
+				actividadTO.setActividadeejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
+				actividadTO.setDescripcion(parameters.get("nombre"));
+			if(parameters.get("npunidad")!=null && !parameters.get("npunidad").equals(""))
+				actividadTO.setNpunidad(Long.valueOf(parameters.get("npunidad")));
+			if(parameters.get("npprogramaid")!=null && !parameters.get("npprogramaid").equals(""))
+				actividadTO.setNpprogramaid(Long.valueOf(parameters.get("npprogramaid")));
+			if(parameters.get("npproyectoid")!=null && !parameters.get("npproyectoid").equals(""))
+				actividadTO.setNpproyectoid(Long.valueOf(parameters.get("npproyectoid")));
+			Collection<ActividadTO> resultado=UtilSession.planificacionServicio.transObtieneActividadreporte(actividadTO);
+			HashMap<String, String>  totalMap=new HashMap<String, String>();
+			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,actividadTO.getJsonConfigConsulta()));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
+	/**
 	* Metodo que consulta indicador y arma el json para mostrarlos en la grilla
 	*
 	* @param request 

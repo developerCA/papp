@@ -1993,6 +1993,11 @@ public class PlanificacionController {
 				jsonObject=ConsultasUtil.consultaProyectoReporte(parameters, jsonObject);
 			}
 
+			//Actividadreporte
+			else if(clase.equals("actividadreporte")){
+				jsonObject=ConsultasUtil.consultaActividadReporte(parameters, jsonObject);
+			}
+
 			//Busqueda Indicador
 			else if(clase.equals("consultaBusquedaIndicador")){
 				jsonObject=ConsultasUtil.consultaBusquedaIndicador(parameters, jsonObject);
