@@ -22,6 +22,7 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			$scope.objeto.institucionid = obj.id;
 			$scope.npinstitucion = obj.codigo + " - " + obj.nombre;
 			$scope.institucioncodigo = obj.codigo;
+			$scope.institucionnombre = obj.nombre;
 		}, function() {
 		});
 	};
@@ -48,10 +49,19 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 	};
 
 	$scope.abrirUnidad = function() {
+		if ($scope.institucioncodigo == null) {
+			return;
+		}
+
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalUnidad.html',
-			controller : 'ModalUnidadController',
-			size : 'lg'
+			templateUrl : 'assets/views/papp/modal/modalUnidadArbol.html',
+			controller : 'ModalUnidadArbolController',
+			size : 'lg',
+			resolve : {
+				instituicionFuente : function() {
+					return $scope.objeto.institucionid; //$scope.institucioncodigo;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.unidadid = obj.id;

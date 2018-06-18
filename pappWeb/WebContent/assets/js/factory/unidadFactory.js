@@ -48,7 +48,11 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 
 //** Unidades Arbol
 		traerUnidadesArbol : function(pagina,estructuraorganica,estado) {
-			  return Restangular.allUrl("estructuraorganica/consultar/unidadarbol/pagina="+pagina+"&unidadarbolerganicaid="+estructuraorganica+"&estado="+estado).getList();
+			return Restangular.allUrl(
+			  	"estructuraorganica/consultar/unidadarbol/pagina="+pagina+
+			  		"&unidadarbolerganicaid="+estructuraorganica+
+			  		"&estado="+estado
+	  		).getList();
 		},
 		
 		traerUnidadesArbolhijos : function(pagina,estructuraorganica,padre,estado) {
@@ -65,6 +69,25 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			var url = "estructuraorganica/unidadarboldetail/"+id+"/0/0";
 		    //console.log(url);
 		    return Restangular.allUrl(url).customGET();
+		},
+
+		traerUnidadArbolFiltro: function(
+			pagina,
+			id,
+			institucion,
+			institucionentidad,
+			estado
+		) {
+			var URL = "estructuraorganica/consultar/unidadarbol/" +
+					"pagina="+pagina +
+					"&filas=10";
+
+			if(institucion!=null && institucion != "") URL += "&institucion=" + institucion;	
+			if(id!=null && id != "") URL += "&id=" + id;	
+			if(institucionentidad!=null && institucionentidad != "") URL += "&institucionentidad=" + institucionentidad;	
+			//if(estado!=null && estado != "" ) URL += "&estado=" + estado;
+
+			return Restangular.allUrl(URL).getList();
 		},
 		
 //** Plaza Empleo

@@ -754,7 +754,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','ReporteS01Ctrl','ReporteS01Factory',
         		'ModalInstitucionCtrl','InstitucionFactory',
         		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
-        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalUnidadArbolCtrl','UnidadFactory',
         		'ModalProgramaCtrl','ProgramaFactory',
         		'ModalActividadCtrl','ActividadFactory',
         		'ModalItemCtrl','ItemFactory',

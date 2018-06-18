@@ -260,6 +260,7 @@ app.constant('JS_REQUIRES', {
         'ReporteS01Factory':'assets/js/factory/reporteS01Factory.js',
         'CambiarContrasenaUnicoCtrl':'assets/js/controllers/papp/cambiarContrasenaUnicoCtrl.js',
         'CambiarContrasenaUnicoFactory':'assets/js/factory/cambiarContrasenaUnicoFactory.js',
+        'ModalUnidadArbolCtrl':'assets/js/controllers/papp/modales/modalUnidadArbolCtrl.js',
 
 
     },
