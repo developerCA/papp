@@ -467,7 +467,7 @@ public class ConsultasUtil {
 			Collection<ActividadTO> resultado=UtilSession.planificacionServicio.transObtieneActividadreporte(actividadTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,actividadTO.getJsonConfigConsulta()));
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,actividadTO.getJsonConfigReporte()));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 		}catch (Exception e) {
 			e.printStackTrace();
