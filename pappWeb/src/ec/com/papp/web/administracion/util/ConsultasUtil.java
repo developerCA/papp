@@ -132,7 +132,7 @@ public class ConsultasUtil {
 //			if(parameters.get("filas")!=null)
 //				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 //			int primero=(pagina*filas)-filas;
-			campo="nombre";
+			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
@@ -1462,7 +1462,7 @@ public class ConsultasUtil {
 			if(parameters.get("filas")!=null)
 				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 			int primero=(pagina*filas)-filas;
-			campo="nombremostrado";
+			campo="codigo";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
@@ -1575,7 +1575,7 @@ public class ConsultasUtil {
 //			if(parameters.get("filas")!=null)
 //				filas=(Integer.valueOf(parameters.get("filas"))).intValue();
 //			int primero=(pagina*filas)-filas;
-			campo="id";
+			campo="nombre";
 			String[] columnas={campo};
 			if(parameters.get("sidx")!=null && !parameters.get("sidx").equals(""))
 				campo=parameters.get("sidx");
