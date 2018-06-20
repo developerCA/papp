@@ -1,25 +1,25 @@
 'use strict';
 
-app.controller('ModalProgramaController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","SweetAlert","$filter", "ngTableParams","programaFactory",
-	function($scope,$uibModalInstance,$uibModal,ejefiscal,SweetAlert,$filter, ngTableParams, programaFactory) {
+app.controller('ModalActividadReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","SweetAlert","$filter", "ngTableParams","actividadReporteFactory",
+	function($scope,$uibModalInstance,$uibModal,ejefiscal,SweetAlert,$filter, ngTableParams, actividadReporteFactory) {
 
-	$scope.codigo=null;
-	$scope.nombre=null;
-
-	$scope.edicion=false;
-	$scope.guardar=false;
-	$scope.objeto={};
-	$scope.objetolista={};
+	$scope.nombre,
+	$scope.npunidad,
+	$scope.npprogramaid,
+	$scope.npproyectoid
 	
 	var pagina = 1;
 	
-	$scope.consultar=function(){
+	$scope.filtrar=function(){
 		$scope.data=[];
-		programaFactory.traerPrograma(
+		actividadReporteFactory.traerActividadFiltro(
 			pagina,
-			ejefiscal
+			ejefiscal,
+			$scope.nombre,
+			$scope.npunidad,
+			$scope.npprogramaid,
+			$scope.npproyectoid
 		).then(function(resp){
-			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -45,24 +45,13 @@ app.controller('ModalProgramaController', [ "$scope","$uibModalInstance","$uibMo
 		});
 	});
 
-	$scope.filtrar=function(){
-		$scope.data=[];
-		programaFactory.traerProgramaFiltro(
-			pagina,
-			ejefiscal,
-			$scope.codigo,
-			$scope.nombre
-		).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-	
 	$scope.limpiar=function(){
-		$scope.codigo=null;
 		$scope.nombre=null;
+		$scope.npunidad=null;
+		$scope.npprogramaid=null;
+		$scope.npproyectoid=null;
 
-		$scope.consultar();
+		$scope.filtrar();
 	};
 
 	$scope.seleccionar=function(obj){

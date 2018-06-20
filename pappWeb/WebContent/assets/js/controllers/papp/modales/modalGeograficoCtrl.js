@@ -1,25 +1,23 @@
 'use strict';
 
-app.controller('ModalProgramaController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","SweetAlert","$filter", "ngTableParams","programaFactory",
-	function($scope,$uibModalInstance,$uibModal,ejefiscal,SweetAlert,$filter, ngTableParams, programaFactory) {
+app.controller('ModalGeograficoController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","SweetAlert","$filter", "ngTableParams","geograficoFactory",
+	function($scope,$uibModalInstance,$uibModal,ejefiscal,SweetAlert,$filter, ngTableParams, geograficoFactory) {
 
 	$scope.codigo=null;
 	$scope.nombre=null;
-
-	$scope.edicion=false;
-	$scope.guardar=false;
-	$scope.objeto={};
-	$scope.objetolista={};
+	$scope.estado=null;
 	
 	var pagina = 1;
 	
-	$scope.consultar=function(){
+	$scope.filtrar=function(){
 		$scope.data=[];
-		programaFactory.traerPrograma(
+		geograficoFactory.traerFiltro(
 			pagina,
-			ejefiscal
+			ejefiscal,
+			$scope.codigo,
+			$scope.nombre,
+			$scope.estado
 		).then(function(resp){
-			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -45,24 +43,12 @@ app.controller('ModalProgramaController', [ "$scope","$uibModalInstance","$uibMo
 		});
 	});
 
-	$scope.filtrar=function(){
-		$scope.data=[];
-		programaFactory.traerProgramaFiltro(
-			pagina,
-			ejefiscal,
-			$scope.codigo,
-			$scope.nombre
-		).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-	
 	$scope.limpiar=function(){
 		$scope.codigo=null;
 		$scope.nombre=null;
+		$scope.estado=null;
 
-		$scope.consultar();
+		$scope.filtrar();
 	};
 
 	$scope.seleccionar=function(obj){

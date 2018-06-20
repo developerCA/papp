@@ -1,10 +1,11 @@
 <div class="modal-header">
 	<h3 class="modal-title">
-		Unidades
+		Items
 	</h3>
 </div>
 <div class="modal-body">
-	<div class="panel-body" ng-init="consultar();" >
+	<div class="panel-body" ng-init="filtrar();" >
+
 		<div class="panel panel-white" id="panel1">
 			<div class="panel-heading">
 				<h4 class="panel-title text-primary">Filtros</h4>
@@ -16,26 +17,21 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label> C&oacute;digo  Presupestario</label> <input type="text"
-									class="form-control" ng-model="codigoFiltro">
+								<label>
+									C&oacute;digo
+								</label>
+								<input type="text"
+									class="form-control" ng-model="codigo">
 							</div>
 						</div>
+
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label> Nombres </label> <input type="text"
-									class="form-control" ng-model="nombreFiltro">
-							</div>
-						</div>
-					</div>
-					<div class="row" ng-show="!unidadesActivas">
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label> Estado </label> <select name="country"
-									ng-model="estadoFiltro" class="form-control">
-									<option value>Todos</option>
-									<option value="A">Activo</option>
-									<option value="I">Inactivo</option>
-								</select>
+								<label>
+									Nombre
+								</label>
+								<input type="text"
+									class="form-control" ng-model="nombre">
 							</div>
 						</div>
 					</div>
@@ -56,9 +52,8 @@
 					<td><a class="btn btn-sm btn-primary"
 						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
 							class="fa fa-check"></i></a></td>
-					<td data-title="'C&oacute;digo'">{{obj.codigoorganico}}</td>
+					<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
 					<td data-title="'Nombre'">{{obj.nombre}}</td>
-					<td data-title="'Estado'">{{obj.npestado}}</td>
 				</tr>
 			</table>
 		</div>

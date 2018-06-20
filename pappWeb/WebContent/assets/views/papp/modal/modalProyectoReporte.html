@@ -1,7 +1,5 @@
 <div class="modal-header">
-	<h3 class="modal-title">
-		Unidades
-	</h3>
+	<h3 class="modal-title">Proyectos</h3>
 </div>
 <div class="modal-body">
 	<div class="panel-body" ng-init="consultar();" >
@@ -16,32 +14,34 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label> C&oacute;digo  Presupestario</label> <input type="text"
-									class="form-control" ng-model="codigoFiltro">
+								<label>
+								    Proyecto C&oacute;digo
+								</label>
+								<input type="text" class="form-control" ng-model="proyectoCodigoFiltro">
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label> Nombres </label> <input type="text"
-									class="form-control" ng-model="nombreFiltro">
+								<label>
+								    Proyecto Nombre
+								</label>
+								<input type="text" class="form-control" ng-model="proyectoNombreFiltro">
 							</div>
 						</div>
 					</div>
-					<div class="row" ng-show="!unidadesActivas">
+					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label> Estado </label> <select name="country"
-									ng-model="estadoFiltro" class="form-control">
-									<option value>Todos</option>
-									<option value="A">Activo</option>
-									<option value="I">Inactivo</option>
-								</select>
+								<label>
+								    Subprograma C&oacute;digo
+								</label>
+								<input type="text" class="form-control" ng-model="subprogramaCodigoFiltro">
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
+							<a class="btn btn-wide btn-dark-azure" ng-click="consultar()"><i
 								class="fa fa-search"></i> Buscar</a> <a
 								class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
 						</div>
@@ -56,16 +56,16 @@
 					<td><a class="btn btn-sm btn-primary"
 						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
 							class="fa fa-check"></i></a></td>
-					<td data-title="'C&oacute;digo'">{{obj.codigoorganico}}</td>
-					<td data-title="'Nombre'">{{obj.nombre}}</td>
-					<td data-title="'Estado'">{{obj.npestado}}</td>
+					<td data-title="'Programa C&oacute;digo'">{{obj.codigopresup}}</td>
+					<td data-title="'Programa Nombre'">{{obj.nombre}}</td>
+					<td data-title="'Subprograma C&oacute;digo'">{{obj.codigopresup}}</td>
+					<td data-title="'Proyecto C&oacute;digo'">{{obj.codigopresup}}</td>
+					<td data-title="'Proyecto Nombre'">{{obj.nombre}}</td>
 				</tr>
 			</table>
 		</div>
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-primary btn-o" ng-click="cancelar()">
-			Cancelar
-		</button>
-	</div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
+    </div>
 </div>

@@ -37,7 +37,12 @@ app.controller('RegistroMetasController', [ "$scope","$rootScope","$location","$
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalPrograma.html',
 			controller : 'ModalProgramaController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				ejefiscal : function() {
+					return $rootScope.ejefiscal;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);

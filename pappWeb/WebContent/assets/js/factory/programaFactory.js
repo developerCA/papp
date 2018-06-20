@@ -4,13 +4,25 @@ app.factory("programaFactory", [ "Restangular", function(Restangular) {
 
 	return {
 
-		traerPrograma : function(pagina) {
-			return Restangular.allUrl("planificacion/consultar/programa/pagina="+pagina).getList();
-		},
-
-		traerProgramaFiltro : function(pagina,codigo,nombre) {
+		traerPrograma : function(
+			pagina,
+			ejefiscal
+		) {
 			var url = "planificacion/consultar/programa/pagina="+pagina;
 
+			if(ejefiscal!=null && ejefiscal != "") url += "&programaejerciciofiscalid=" + ejefiscal;	
+			return Restangular.allUrl(url).getList();
+		},
+
+		traerProgramaFiltro : function(
+			pagina,
+			ejefiscal,
+			codigo,
+			nombre
+		) {
+			var url = "planificacion/consultar/programa/pagina="+pagina;
+
+			if(ejefiscal!=null && ejefiscal != "") url += "&programaejerciciofiscalid=" + ejefiscal;	
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
 			return Restangular.allUrl(url).getList();
@@ -26,6 +38,5 @@ app.factory("programaFactory", [ "Restangular", function(Restangular) {
 			var url = "planificacion/programa/";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
-
 	}
 } ]);

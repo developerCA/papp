@@ -1,10 +1,16 @@
 'use strict';
 
-app.controller('ModalProgramaController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","SweetAlert","$filter", "ngTableParams","programaFactory",
-	function($scope,$uibModalInstance,$uibModal,ejefiscal,SweetAlert,$filter, ngTableParams, programaFactory) {
+app.controller('ModalProyectoReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","SweetAlert","$filter", "ngTableParams","ProyectoReporteFactory",
+	function($scope,$uibModalInstance,$uibModal,ejefiscal,SweetAlert,$filter, ngTableParams, ProyectoReporteFactory) {
 
 	$scope.codigo=null;
 	$scope.nombre=null;
+	$scope.npcodigoprograma=null;
+	$scope.npnombreprograma=null;
+	$scope.npcodigosubprograma=null;
+	$scope.npunidad=null;
+	$scope.npprogramaid=null;
+	$scope.padre=null;
 
 	$scope.edicion=false;
 	$scope.guardar=false;
@@ -15,9 +21,17 @@ app.controller('ModalProgramaController', [ "$scope","$uibModalInstance","$uibMo
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		programaFactory.traerPrograma(
+		ProyectoReporteFactory.traerProyectoFiltro(
 			pagina,
-			ejefiscal
+			ejefiscal,
+			$scope.codigo,
+			$scope.nombre,
+			$scope.npcodigoprograma,
+			$scope.npnombreprograma,
+			$scope.npcodigosubprograma,
+			$scope.npunidad,
+			$scope.npprogramaid,
+			$scope.padre
 		).then(function(resp){
 			//console.log(resp);
 			if (resp.meta)
@@ -44,23 +58,13 @@ app.controller('ModalProgramaController', [ "$scope","$uibModalInstance","$uibMo
 			}
 		});
 	});
-
-	$scope.filtrar=function(){
-		$scope.data=[];
-		programaFactory.traerProgramaFiltro(
-			pagina,
-			ejefiscal,
-			$scope.codigo,
-			$scope.nombre
-		).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
 	
 	$scope.limpiar=function(){
-		$scope.codigo=null;
-		$scope.nombre=null;
+		$scope.programaCodigoFiltro=null;
+		$scope.programaNombreFiltro=null;
+		$scope.proyectoCodigoFiltro=null;
+		$scope.proyectoNombreFiltro=null;
+		$scope.subprogramaCodigoFiltro=null;
 
 		$scope.consultar();
 	};

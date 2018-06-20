@@ -4,7 +4,9 @@ app.factory("proyectoFactory", [ "Restangular", function(Restangular) {
 
 	return {
 
-		traerProyecto : function(pagina) {
+		traerProyecto : function(
+			pagina
+		) {
 			return Restangular.allUrl("planificacion/consultar/proyecto/pagina="+pagina).getList();
 		},
 
