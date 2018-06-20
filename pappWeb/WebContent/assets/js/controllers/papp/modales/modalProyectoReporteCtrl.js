@@ -1,15 +1,13 @@
 'use strict';
 
-app.controller('ModalProyectoReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","SweetAlert","$filter", "ngTableParams","ProyectoReporteFactory",
-	function($scope,$uibModalInstance,$uibModal,ejefiscal,SweetAlert,$filter, ngTableParams, ProyectoReporteFactory) {
+app.controller('ModalProyectoReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","npunidad","npprogramaid","SweetAlert","$filter", "ngTableParams","ProyectoReporteFactory",
+	function($scope,$uibModalInstance,$uibModal,ejefiscal,npunidad,npprogramaid,SweetAlert,$filter, ngTableParams, ProyectoReporteFactory) {
 
 	$scope.codigo=null;
 	$scope.nombre=null;
 	$scope.npcodigoprograma=null;
 	$scope.npnombreprograma=null;
 	$scope.npcodigosubprograma=null;
-	$scope.npunidad=null;
-	$scope.npprogramaid=null;
 	$scope.padre=null;
 
 	$scope.edicion=false;
@@ -29,8 +27,8 @@ app.controller('ModalProyectoReporteController', [ "$scope","$uibModalInstance",
 			$scope.npcodigoprograma,
 			$scope.npnombreprograma,
 			$scope.npcodigosubprograma,
-			$scope.npunidad,
-			$scope.npprogramaid,
+			npunidad,
+			npprogramaid,
 			$scope.padre
 		).then(function(resp){
 			//console.log(resp);
@@ -76,5 +74,4 @@ app.controller('ModalProyectoReporteController', [ "$scope","$uibModalInstance",
 	$scope.cancelar = function() {
 		$uibModalInstance.dismiss('cancel');
 	};
-
 }]);

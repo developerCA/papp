@@ -6,8 +6,27 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 	$scope.objeto = {};
 	$scope.institucioncodigo = null;
 
+	$scope.limpiarListas = function(pos) {
+		$scope.objeto.programaid = null;
+		$scope.npprograma = '';
+		$scope.programaActivo = false;
+
+		if (pos == 3) return;
+
+		$scope.objeto.unidadid = null;
+		$scope.npunidad = '';
+		$scope.unidadActivo = false;
+
+		if (pos == 2) return;
+
+		$scope.objeto.entidadid = null;
+		$scope.npentidad = '';
+		$scope.entidadActivo = false;
+	}
+
+	$scope.institucionActivo = false;
 	$scope.abrirInstitucion = function() {
-		console.log($rootScope.ejefiscal);
+		//console.log($rootScope.ejefiscal);
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalInstitucion.html',
 			controller : 'ModalInstitucionController',
@@ -23,10 +42,13 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			$scope.npinstitucion = obj.codigo + " - " + obj.nombre;
 			$scope.institucioncodigo = obj.codigo;
 			$scope.institucionnombre = obj.nombre;
+			$scope.institucionActivo = true;
+			$scope.limpiarListas(1);
 		}, function() {
 		});
 	};
 
+	$scope.entidadActivo = false;
 	$scope.abrirEntidad = function(index) {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalInstitutoEntidad.html',
@@ -44,32 +66,37 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.entidadid = obj.institucionentid;
 			$scope.npentidad = obj.codigo + ' - ' + obj.nombre;
+			$scope.entidadActivo = true;
+			$scope.limpiarListas(2);
 		}, function() {
 		});
 	};
 
+	$scope.unidadActivo = false;
 	$scope.abrirUnidad = function() {
-		if ($scope.institucioncodigo == null) {
-			return;
-		}
-
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalUnidadArbol.html',
 			controller : 'ModalUnidadArbolController',
 			size : 'lg',
 			resolve : {
 				instituicionFuente : function() {
-					return $scope.objeto.institucionid; //$scope.institucioncodigo;
+					return null; //$scope.objeto.institucionid;
+				},
+				institucionentidad : function() {
+					return $scope.objeto.entidadid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.unidadid = obj.id;
 			$scope.npunidad = obj.codigoorganico + ' - ' + obj.nombre;
+			$scope.unidadActivo = true;
+			$scope.limpiarListas(3);
 		}, function() {
 		});
 	};
 
+	$scope.programaActivo = false;
 	$scope.abrirPrograma = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalPrograma.html',
@@ -84,10 +111,12 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.programaid = obj.id;
 			$scope.npprograma = obj.codigo + ' - ' + obj.nombre;
+			$scope.programaActivo=true;
 		}, function() {
 		});
 	};
 
+	$scope.proyectoActivo = false;
 	$scope.abrirProyecto = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalProyectoReporte.html',
@@ -96,16 +125,24 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			resolve : {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
+				},
+				npunidad : function() {
+					return $scope.objeto.unidadid;
+				},
+				npprogramaid : function() {
+					return $scope.objeto.programaid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.proyectoid = obj.id;
 			$scope.npproyecto = obj.codigo + ' - ' + obj.nombre;
+			$scope.proyectoActivo = true;
 		}, function() {
 		});
 	};
 
+	$scope.actividadActivo = false;
 	$scope.abrirActividad = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalActividadReporte.html',
@@ -114,16 +151,27 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			resolve : {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
+				},
+				npunidad : function() {
+					return $scope.objeto.unidadid;
+				},
+				npprogramaid : function() {
+					return $scope.objeto.programaid;
+				},
+				npproyectoid : function() {
+					return $scope.objeto.programaid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.actividadid = obj.id;
 			$scope.objeto.npactividad = obj.codigo + ' - ' + obj.nombre;
+			$scope.actividadActivo = true;
 		}, function() {
 		});
 	};
 
+	$scope.subactividadActivo = false;
 	$scope.abrirSubActividad = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalSubActividadReporte.html',
@@ -132,16 +180,24 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			resolve : {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
+				},
+				npunidad : function() {
+					return $scope.objeto.unidadid;
+				},
+				nivelactividadpadreid : function() {
+					return $scope.objeto.actividadid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.actividadid = obj.id;
 			$scope.objeto.npactividad = obj.codigo + ' - ' + obj.nombre;
+			$scope.subactividadActivo = true;
 		}, function() {
 		});
 	};
 
+	$scope.tareaActivo = false;
 	$scope.abrirTarea = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalTareaReporte.html',
@@ -150,16 +206,24 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			resolve : {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
+				},
+				npunidad : function() {
+					return $scope.objeto.unidadid;
+				},
+				nivelactividadpadreid : function() {
+					return $scope.objeto.actividadid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.actividadid = obj.id;
 			$scope.objeto.npactividad = obj.codigo + ' - ' + obj.nombre;
+			$scope.tareaActivo = true;
 		}, function() {
 		});
 	};
 
+	$scope.subtareaActivo = false;
 	$scope.abrirSubtarea = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalSubTareaReporte.html',
@@ -168,17 +232,25 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			resolve : {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
+				},
+				npunidad : function() {
+					return $scope.objeto.unidadid;
+				},
+				nivelactividadpadreid : function() {
+					return $scope.objeto.actividadid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.subtareaid = obj.id;
 			$scope.objeto.npsubtarea = obj.codigo + ' - ' + obj.nombre;
+			$scope.subtareaActivo = true;
 		}, function() {
 		});
 	};
 
-    $scope.abrirItem=function(){
+	$scope.itemsActivo = false;
+    $scope.abrirItems=function(){
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalItemsReporte.html',
 			controller : 'ModalItemsReporteController',
@@ -186,16 +258,24 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			resolve : {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
+				},
+				npunidad : function() {
+					return $scope.objeto.unidadid;
+				},
+				nivelactividadpadreid : function() {
+					return $scope.objeto.actividadid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.itemid = obj.id;
-			$scope.objeto.npitem = obj.codigo + ' - ' + obj.nombre;			
+			$scope.objeto.npitem = obj.codigo + ' - ' + obj.nombre;
+			$scope.itemsActivo = true;
 		}, function() {
 		});
 	};
 
+	$scope.subitemsActivo = false;
 	$scope.abrirSubItems = function(index) {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalSubItemsReporte.html',
@@ -204,15 +284,13 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			resolve: {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
-				}/*,
-				npitemid : function() {
-					return $scope.objeto.npitemid;
-				}*/
+				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.subitemid = obj.id;
 			$scope.npsubitem = obj.codigo + ' - ' + obj.nombre;
+			$scope.subitemsActivo = true;
 		}, function() {
 		});
 	};

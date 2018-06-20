@@ -1,12 +1,9 @@
 'use strict';
 
-app.controller('ModalActividadReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","SweetAlert","$filter", "ngTableParams","actividadReporteFactory",
-	function($scope,$uibModalInstance,$uibModal,ejefiscal,SweetAlert,$filter, ngTableParams, actividadReporteFactory) {
+app.controller('ModalActividadReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","npunidad","npprogramaid","npproyectoid","SweetAlert","$filter", "ngTableParams","actividadReporteFactory",
+	function($scope,$uibModalInstance,$uibModal,ejefiscal,npunidad,npprogramaid,npproyectoid,SweetAlert,$filter, ngTableParams, actividadReporteFactory) {
 
-	$scope.nombre,
-	$scope.npunidad,
-	$scope.npprogramaid,
-	$scope.npproyectoid
+	$scope.nombre=null;
 	
 	var pagina = 1;
 	
@@ -16,15 +13,15 @@ app.controller('ModalActividadReporteController', [ "$scope","$uibModalInstance"
 			pagina,
 			ejefiscal,
 			$scope.nombre,
-			$scope.npunidad,
-			$scope.npprogramaid,
-			$scope.npproyectoid
+			npunidad,
+			npprogramaid,
+			npproyectoid
 		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	};
-	
+
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
@@ -47,9 +44,6 @@ app.controller('ModalActividadReporteController', [ "$scope","$uibModalInstance"
 
 	$scope.limpiar=function(){
 		$scope.nombre=null;
-		$scope.npunidad=null;
-		$scope.npprogramaid=null;
-		$scope.npproyectoid=null;
 
 		$scope.filtrar();
 	};
@@ -61,5 +55,4 @@ app.controller('ModalActividadReporteController', [ "$scope","$uibModalInstance"
 	$scope.cancelar = function() {
 		$uibModalInstance.dismiss('cancel');
 	};
-
 }]);

@@ -1,12 +1,9 @@
 'use strict';
 
-app.controller('ModalTareaReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","SweetAlert","$filter", "ngTableParams","tareaReporteFactory",
-	function($scope,$uibModalInstance,$uibModal,ejefiscal,SweetAlert,$filter, ngTableParams, tareaReporteFactory) {
+app.controller('ModalTareaReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","npunidad","nivelactividadpadreid","SweetAlert","$filter", "ngTableParams","tareaReporteFactory",
+	function($scope,$uibModalInstance,$uibModal,ejefiscal,npunidad,nivelactividadpadreid,SweetAlert,$filter, ngTableParams, tareaReporteFactory) {
 
-	$scope.tipo=null;
-	$scope.nivelactividadpadreid=null;
-	$scope.nivelactividadunidadid=null;
-	$scope.estado=null;
+	$scope.estado="A";
 	
 	var pagina = 1;
 	
@@ -15,9 +12,8 @@ app.controller('ModalTareaReporteController', [ "$scope","$uibModalInstance","$u
 		tareaReporteFactory.traerFiltro(
 			pagina,
 			ejefiscal,
-			$scope.tipo,
-			$scope.nivelactividadpadreid,
-			$scope.nivelactividadunidadid,
+			nivelactividadpadreid,
+			npunidad,
 			$scope.estado
 		).then(function(resp){
 			if (resp.meta)

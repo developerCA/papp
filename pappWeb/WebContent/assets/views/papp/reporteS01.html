@@ -56,7 +56,8 @@
 												ng-disabled="true" ng-model="npentidad" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirEntidad()">
+													ng-click="abrirEntidad()"
+													ng-disabled="!institucionActivo">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -79,7 +80,8 @@
 												ng-disabled="true" ng-model="npunidad" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirUnidad()">
+													ng-click="abrirUnidad()"
+													ng-disabled="!entidadActivo">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -125,7 +127,8 @@
 												ng-disabled="true" ng-model="npproyecto">
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirProyecto();">
+													ng-click="abrirProyecto();"
+													ng-disabled="!unidadActivo || !programaActivo">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -148,7 +151,8 @@
 												ng-disabled="true" ng-model="objeto.npactividad">
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirActividad()">
+													ng-click="abrirActividad()"
+													ng-disabled="!proyectoActivo">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -171,7 +175,8 @@
 												ng-disabled="true" ng-model="objeto.npactividad" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirSubActividad();">
+													ng-click="abrirSubActividad();"
+													ng-disabled="!actividadActivo">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -194,7 +199,8 @@
 												ng-disabled="true" ng-model="objeto.npactividad" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirTarea();">
+													ng-click="abrirTarea();"
+													ng-disabled="!subactividadActivo">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -217,7 +223,8 @@
 												ng-disabled="true" ng-model="objeto.npsubtarea" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirSubtarea();">
+													ng-click="abrirSubtarea();"
+													ng-disabled="!tareaActivo">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -229,7 +236,7 @@
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="control-label">
-											Item
+											Items
 										</label>
 									</div>
 									<div class="col-md-8">
@@ -240,7 +247,8 @@
 												ng-disabled="true" ng-model="objeto.npitem">
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirItem()">
+													ng-click="abrirItems()"
+													ng-disabled="!subtareaActivo">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>

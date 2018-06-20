@@ -1,11 +1,10 @@
 'use strict';
 
-app.controller('ModalUnidadArbolController', [ "$scope","$rootScope","$uibModalInstance","instituicionFuente","SweetAlert","$filter", "ngTableParams","unidadFactory",
-	function($scope,$rootScope,$uibModalInstance,instituicionFuente,SweetAlert,$filter, ngTableParams,unidadFactory) {
+app.controller('ModalUnidadArbolController', [ "$scope","$rootScope","$uibModalInstance","instituicionFuente","institucionentidad","SweetAlert","$filter", "ngTableParams","unidadFactory",
+	function($scope,$rootScope,$uibModalInstance,instituicionFuente,institucionentidad,SweetAlert,$filter, ngTableParams,unidadFactory) {
 
 	$scope.id=null;
 	$scope.institucion=null;
-	$scope.institucionentidad=null;
 	$scope.estado='A';
 	$scope.data=[];
 
@@ -14,7 +13,7 @@ app.controller('ModalUnidadArbolController', [ "$scope","$rootScope","$uibModalI
 			1,
 			$scope.id,
 			instituicionFuente,
-			$scope.institucionentidad,
+			institucionentidad,
 			$scope.estado
 		).then(function(resp){
 			if (resp.meta)
@@ -25,7 +24,6 @@ app.controller('ModalUnidadArbolController', [ "$scope","$rootScope","$uibModalI
 	$scope.limpiar=function(){
 		$scope.id=null;
 		$scope.institucion=null;
-		$scope.institucionentidad=null;
 		$scope.estado=null;
 		
 		$scope.consultar();
