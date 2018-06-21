@@ -284,6 +284,12 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			resolve: {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
+				},
+				npunidad : function() {
+					return $scope.objeto.unidadid;
+				},
+				nivelactividadpadreid : function() {
+					return $scope.objeto.actividadid;
 				}
 			}
 		});

@@ -56,8 +56,7 @@
 												ng-disabled="true" ng-model="npentidad" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirEntidad()"
-													ng-disabled="!institucionActivo">
+													ng-click="abrirEntidad()">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -80,8 +79,7 @@
 												ng-disabled="true" ng-model="npunidad" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirUnidad()"
-													ng-disabled="!entidadActivo">
+													ng-click="abrirUnidad()">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -127,8 +125,7 @@
 												ng-disabled="true" ng-model="npproyecto">
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirProyecto();"
-													ng-disabled="!unidadActivo || !programaActivo">
+													ng-click="abrirProyecto();">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -272,7 +269,8 @@
 												required>
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirSubItems();">
+													ng-click="abrirSubItems();"
+													ng-disabled="!itemsActivo">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -292,7 +290,7 @@
 											<input type="text"
 												placeholder="Seleccione una Fuente de Financiamiento"
 												class="form-control" name="npfuentefinanciamiento"
-												ng-disabled="true" ng-model="objeto.npfuentefinanciamiento">
+												ng-disabled="true" ng-model="npfuentefinanciamiento">
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
 													ng-click="abrirFuenteFinanciamiento()">
