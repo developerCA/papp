@@ -130,6 +130,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.objeto={id:null,estado:null};
 		$scope.edicion=true;
 		$scope.nuevoar=true;
+		$scope.divEO=true;
 		$scope.guardar=true;
 	}
 

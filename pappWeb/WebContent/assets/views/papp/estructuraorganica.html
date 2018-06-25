@@ -238,7 +238,7 @@
 										</div>
 										<div class="col-md-8">
 											<input type="text"
-												placeholder="Seleccione una Instituci&oacute;n"
+												placeholder="Seleccione una Entidad"
 												class="form-control" name="eorganicainstitucionid"
 												ng-disabled="true" ng-model="objeto.eorganicainstitucionid" />
 										</div>
@@ -325,7 +325,8 @@
 										</div>
 									</div>
 	
-									<div class="form-group">
+									<div class="form-group"
+										ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
 										<div class="col-md-4">
 											<label class="control-label"> Estado <span
 												class="symbol required"></span>
@@ -333,8 +334,8 @@
 										</div>
 										<div class="col-md-8">
 											<select class="form-control" name="estado"
-												placeholder="Seleccione un estado" ng-model="objeto.estado">
-												<option value="">Selecione un estado</option>
+												ng-model="objeto.estado" required>
+												<option value="" ng-selected="selected">Seleccione un estado</option>
 												<option value="V">Vigente</option>
 												<option value="A">Anulado</option>
 												<option value="P">En proceso</option>
