@@ -612,6 +612,7 @@ public class ConsultasUtil {
 		return jsonObject;
 	}
 	
+
 	/**
 	* Metodo que consulta los organismoprestamo paginados y arma el json para mostrarlos en la grilla
 	*
@@ -655,6 +656,9 @@ public class ConsultasUtil {
 				organismoTO.setNombre(parameters.get("npnombreorganismo"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				organismoTO.setOrganismoejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+			if(parameters.get("organismoid")!=null && !parameters.get("organismoid").equals(""))
+				organismoprestamoTO.getId().setId(Long.valueOf(parameters.get("organismoid")));
+
 			organismoprestamoTO.setOrganismo(organismoTO);
 //			SearchResultTO<OrganismoprestamoTO> resultado=UtilSession.planificacionServicio.transObtenerOrganismoprestamoPaginado(organismoprestamoTO);
 			Collection<OrganismoprestamoTO> resultado=UtilSession.planificacionServicio.transObtenerOrganismoprestamo(organismoprestamoTO);

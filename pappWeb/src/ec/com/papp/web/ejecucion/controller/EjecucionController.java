@@ -490,7 +490,7 @@ public class EjecucionController {
 				}
 			}
 
-			//reforma meta subtarea
+			//reforma meta subtarea, se usa para consultar las metas de las reformas
 			else if(clase.equals("obtenerreformametasubtarea")){
 				ReformaTO reformaTO = gson.fromJson(new StringReader(objeto), ReformaTO.class);
 				//debe llegar tambien las lineas
@@ -503,7 +503,7 @@ public class EjecucionController {
 				}
 			}
 
-			//reforma meta subtarea
+			//reforma meta subtarea, grabar la reforma de metas dentro de las reformas
 			else if(clase.equals("reformametasubtarea")){
 				ReformametasubtareaTO reformametasubtareaTO = gson.fromJson(new StringReader(objeto), ReformametasubtareaTO.class);
 				accion = (reformametasubtareaTO.getId()==null)?"I":"U";
@@ -515,6 +515,7 @@ public class EjecucionController {
 				Collection<ReformametasubtareaTO> reformametalineaTOs2=UtilSession.planificacionServicio.transObtenerReformametasubatera(reformametasubtareaTO2);
 				jsonObject.put("reformametasubtarea", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs2,reformametasubtareaTO.getJsonConfig()));
 			}
+
 
 			if(mensajes.getMsg()==null){
 				ComunController.crearAuditoria(request, clase, accion, objeto, id);
@@ -1218,26 +1219,21 @@ public class EjecucionController {
 		Gson gson = new Gson();
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
-			ReformametaTO reformametaTO=UtilSession.planificacionServicio.transObtenerReformametaTO(id);
+			ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(id);
 			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
-				reformametaTO.setEstado(tipo);
+				reformaTO.setEstado(tipo);
 				if(tipo.equals("EL")) {
 					if(parameters.get("observacion")!=null)
-						reformametaTO.setMotivoeliminar(parameters.get("observacion"));
-					reformametaTO.setFechaeliminacion(new Date());
+						reformaTO.setMotivoeliminacion(parameters.get("observacion"));
+					reformaTO.setFechaeliminacion(new Date());
 				}
 				else if(tipo.equals("NE")) {
 					if(parameters.get("observacion")!=null)
-						reformametaTO.setMotivonegacion(parameters.get("observacion"));
-					reformametaTO.setFechanegacion(new Date());
+						reformaTO.setMotivonegacion(parameters.get("observacion"));
+					reformaTO.setFechanegacion(new Date());
 				}
-				else if(tipo.equals("AN")) {
-					if(parameters.get("observacion")!=null)
-						reformametaTO.setMotivoanulacion(parameters.get("observacion"));
-					reformametaTO.setFechanegacion(new Date());
-				}
-				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO, tipo);
+				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO, tipo);
 				ComunController.crearAuditoria(request, "REFORMA", "U", objeto, id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
@@ -1518,8 +1514,24 @@ public class EjecucionController {
 			//tipo=r y accion=o
 			if(tipo.equals("r")){
 				ReformalineaTO reformalineaTO= gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
-				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, reformalineaTO, null);
+				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, reformalineaTO, null,null);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
+				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
+				jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramaTO.getCronogramalineaTOs(),new CronogramalineaTO().getJsonConfigreforma()));
+			}
+			//tipo=rm
+			if(tipo.equals("rm")){
+				ReformametalineaTO reformametalineaTO= gson.fromJson(new StringReader(objeto), ReformametalineaTO.class);
+				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, null, reformametalineaTO,null);
+				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformametalineaTO,reformametalineaTO.getJsonConfig()));
+				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
+				jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramaTO.getCronogramalineaTOs(),new CronogramalineaTO().getJsonConfigreforma()));
+			}
+			//tipo=rmm
+			if(tipo.equals("rmm")){
+				ReformametasubtareaTO reformametasubtareaTO= gson.fromJson(new StringReader(objeto), ReformametasubtareaTO.class);
+				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, null, null ,reformametasubtareaTO);
+				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformametasubtareaTO,reformametasubtareaTO.getJsonConfig()));
 				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
 				jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramaTO.getCronogramalineaTOs(),new CronogramalineaTO().getJsonConfigreforma()));
 			}
