@@ -53,12 +53,12 @@ app.controller('CambiarContrasenaController', [ "$scope","$rootScope","$location
 		            } else {
 		                
 		            	CambiarContrasenaFactory.guardar($scope.objeto).then(function(resp){
-console.log(resp);
+							//console.log(resp);
 		            		if (resp.estado){
-		        				 SweetAlert.swal("Cambiar Contraseña!", "Registro registrado satisfactoriamente!", "success");
+		        				 SweetAlert.swal("Cambiar Contrasena!", "Registro registrado satisfactoriamente!", "success");
 		        				 $location.path("/index");
 		        			 }else{
-			 		             SweetAlert.swal("Cambiar Contraseña!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Cambiar Contrasena!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

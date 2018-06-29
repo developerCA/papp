@@ -112,10 +112,10 @@ app.controller('NivelOrganicoController', [ "$scope","$rootScope","SweetAlert","
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Nivel org�nico!", "Registro guardado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Nivel organico!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Nivel org�nico!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Nivel organico!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

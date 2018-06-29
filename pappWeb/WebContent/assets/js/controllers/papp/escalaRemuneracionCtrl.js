@@ -110,10 +110,10 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Escala Remuneración!", "Registro guardado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Escala Remuneracion!", "Registro guardado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Escala Remuneración!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Escala Remuneracion!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

@@ -50,10 +50,10 @@ app.controller('PlanificacionEstrategicaController', [ "$scope","$rootScope","$l
 		            	PlanificacionEstrategicaFactory.guardar($scope.objeto).then(function(resp){
 	            			console.log(resp);
 		            		if (resp.estado){
-		        				 SweetAlert.swal("Planificaci&oacute;n Estrat&eacute;gica!", "Registro registrado satisfactoriamente!", "success");
+		        				 SweetAlert.swal("Planificacion Estrategica!", "Registro registrado satisfactoriamente!", "success");
 		        				 $location.path("/index");
 		        			 }else{
-			 		             SweetAlert.swal("Planificaci&oacute;n Estrat&eacute;gica!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Planificacion Estrategica!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

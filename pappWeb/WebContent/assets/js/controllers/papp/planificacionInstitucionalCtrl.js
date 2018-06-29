@@ -216,9 +216,9 @@ app.controller('PlanificacionInstitucionalController', [ "$scope","$rootScope","
 	 		             $scope.edicionOperativo=false;
 	 		             $scope.objeto={};
 	 		             $scope.limpiar();
-	 		             SweetAlert.swal("Planificaci&oacute;n Institucional!", "Registro grabado satisfactoriamente!", "success");
+	 		             SweetAlert.swal("Planificacion Institucional!", "Registro grabado satisfactoriamente!", "success");
         			 }else{
-	 		             SweetAlert.swal("Planificaci&oacute;n Institucional!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal("Planificacion Institucional!", resp.mensajes.msg, "error");
         			 }
         		})
             }

@@ -122,10 +122,10 @@ app.controller('MatrizProgramacionAnualPoliticaPublicaController', [ "$scope","$
 		            	MatrizProgramacionAnualPoliticaPublicaFactory.guardar($scope.objeto).then(function(resp){
 	            			console.log(resp);
 		            		if (resp.estado){
-		        				 SweetAlert.swal("Matriz Programación Anual de la Política Pública!", "Registro registrado satisfactoriamente!", "success");
+		        				 SweetAlert.swal("Matriz Programacion Anual de la Política Publica!", "Registro registrado satisfactoriamente!", "success");
 		        				 $location.path("/index");
 		        			 }else{
-			 		             SweetAlert.swal("Matriz Programación Anual de la Política Pública!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Matriz Programacion Anual de la Política Publica!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

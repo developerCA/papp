@@ -113,10 +113,10 @@ app.controller('ClasificacionController', [ "$scope","$rootScope","SweetAlert","
 			 		             $scope.edicion=false;
 			 		             $scope.objeto={};
 			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Clasificación!", "Registro registrado satisfactoriamente!", "success");
+			 		             SweetAlert.swal("Clasificacion!", "Registro registrado satisfactoriamente!", "success");
 	 
 		        			 }else{
-			 		             SweetAlert.swal("Clasificación!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Clasificacion!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

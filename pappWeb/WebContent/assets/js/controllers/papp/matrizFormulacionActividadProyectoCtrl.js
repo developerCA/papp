@@ -70,10 +70,10 @@ app.controller('MatrizFormulacionActividadProyectoController', [ "$scope","$root
 		            	MatrizFormulacionActividadProyectoFactory.guardar($scope.objeto).then(function(resp){
 	            			console.log(resp);
 		            		if (resp.estado){
-		        				 SweetAlert.swal("Matriz de Formulaci&oacute;n de Actividad sin Proyecto!", "Registro registrado satisfactoriamente!", "success");
+		        				 SweetAlert.swal("Matriz de Formulacion de Actividad sin Proyecto!", "Registro registrado satisfactoriamente!", "success");
 		        				 $location.path("/index");
 		        			 }else{
-			 		             SweetAlert.swal("Matriz de Formulaci&oacute;n de Actividad sin Proyecto!", resp.mensajes.msg, "error");
+			 		             SweetAlert.swal("Matriz de Formulacion de Actividad sin Proyecto!", resp.mensajes.msg, "error");
 		        				 
 		        			 }
 		        			

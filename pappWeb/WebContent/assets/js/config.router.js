@@ -135,10 +135,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/param",
         templateUrl: "assets/views/papp/parametros.html",
         resolve: loadSequence('ngTable','ParametroCtrl','ParametroFactory'),
-        title: 'Parï¿½metros',
+        title: 'Parametros',
         
         ncyBreadcrumb: {
-            label: 'Parï¿½metros'
+            label: 'Parametros'
         }
     }).state('app.consecutivos', {
         url: "/consecutivos",
@@ -153,9 +153,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/tipo-identificacion",
         templateUrl: "assets/views/papp/tipoIdentificacion.html",
         resolve: loadSequence('ngTable', 'TipoIdentificacionCtrl', 'TipoIdentificacionFactory'),
-        title: 'Tipo Identificaciï¿½n',
+        title: 'Tipo Identificacion',
         ncyBreadcrumb: {
-            label: 'Tipo Identificaciï¿½n'
+            label: 'Tipo Identificacion'
         }
     }).state('app.obras', {
         url: "/obras",
@@ -372,17 +372,17 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/cambiarcontrasena",
         templateUrl: "assets/views/papp/cambiarContrasena.html",
         resolve: loadSequence('ngTable','CambiarContrasenaCtrl','CambiarContrasenaFactory'),
-        title: 'Cambiar Contrase&ntilde;a',
+        title: 'Cambiar Contrasena',
         ncyBreadcrumb: {
-            label: 'Cambiar ContraseÃ±a'
+            label: 'Cambiar Contrasena'
         } 
     }).state('app.cambiarcontrasenaunico', {
         url: "/cambiarcontrasenaunico",
         templateUrl: "assets/views/papp/cambiarContrasenaUnico.html",
         resolve: loadSequence('ngTable','CambiarContrasenaUnicoCtrl','CambiarContrasenaUnicoFactory'),
-        title: 'Cambiar Contrase&ntilde;a',
+        title: 'Cambiar Contrasena',
         ncyBreadcrumb: {
-            label: 'Cambiar ContraseÃ±a'
+            label: 'Cambiar Contrasena'
         } 
     }).state('app.institucion', {
         url: "/institucion",
@@ -487,9 +487,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalProyectoCtrl','ProyectoFactory',
         		'ModalActividadCtrl','ActividadFactory'
 		),
-        title: 'Matriz Programación Anual de la Política Pública',
+        title: 'Matriz Programacion Anual de la Politica Publica',
         ncyBreadcrumb: {
-            label: 'Matriz Programación Anual de la Política Pública'
+            label: 'Matriz Programacion Anual de la Politica Publica'
         }
     }).state('app.matrizformulacionactividadproyecto', {
         url: "/matrizformulacionactividadproyecto",
@@ -517,9 +517,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalItemCtrl','ItemFactory',
         		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory'
 		),
-        title: 'Matriz Programación Anual de la Política Pública',
+        title: 'Matriz Programación Anual de la Política Publica',
         ncyBreadcrumb: {
-            label: 'Matriz Programación Anual de la Política Pública'
+            label: 'Matriz Programación Anual de la Política Publica'
         }
     }).state('app.formulacionestrategica', {
         url: "/formulacionestrategica",
@@ -533,9 +533,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalIndicadoresActividadCtrl','IndicadoresActividadFactory',
         		'ModalUnidadCtrl','UnidadFactory'
 		),
-        title: 'Formulación Estratégica',
+        title: 'Formulacion Estrategica',
         ncyBreadcrumb: {
-            label: 'Formulación Estratégica'
+            label: 'Formulacion Estrategica'
         }
     }).state('app.planificacionue', {
         url: "/planificacionue",
