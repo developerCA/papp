@@ -1,0 +1,2211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706222054</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="participecodigo" id="9">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="anio" id="64">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">oracle.jdbc.driver.OracleDriver</property>
+            <property name="odaURL">jdbc:oracle:thin:@200.124.225.205:1522:xe</property>
+            <property name="odaUser">comaco03</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">Q29tYWNvMjAxOA==</encrypted-property>
+            <property name="odaJndiName">java:jboss/datasources/pappDS</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="P1" id="827">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">SUBITEMID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SUBITEMID</text-property>
+                    <text-property name="heading">SUBITEMID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBITEMNOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBITEMNOMBRE</text-property>
+                    <text-property name="heading">SUBITEMNOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBITEMCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBITEMCODIGO</text-property>
+                    <text-property name="heading">SUBITEMCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ITEMID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ITEMID</text-property>
+                    <text-property name="heading">ITEMID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ITEMCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ITEMCODIGO</text-property>
+                    <text-property name="heading">ITEMCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ITEMNOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ITEMNOMBRE</text-property>
+                    <text-property name="heading">ITEMNOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBTAREAUNIDADID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SUBTAREAUNIDADID</text-property>
+                    <text-property name="heading">SUBTAREAUNIDADID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBTAREADESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBTAREADESCRIPCION</text-property>
+                    <text-property name="heading">SUBTAREADESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBTAREACODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBTAREACODIGO</text-property>
+                    <text-property name="heading">SUBTAREACODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TAREAUNIDAD</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">TAREAUNIDAD</text-property>
+                    <text-property name="heading">TAREAUNIDAD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TARUEADESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">TARUEADESCRIPCION</text-property>
+                    <text-property name="heading">TARUEADESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TAREACODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">TAREACODIGO</text-property>
+                    <text-property name="heading">TAREACODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBACTIVIDADID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SUBACTIVIDADID</text-property>
+                    <text-property name="heading">SUBACTIVIDADID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBACTIVIDADCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBACTIVIDADCODIGO</text-property>
+                    <text-property name="heading">SUBACTIVIDADCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBACTIIDADDESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBACTIIDADDESCRIPCION</text-property>
+                    <text-property name="heading">SUBACTIIDADDESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ACTIVIDADID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ACTIVIDADID</text-property>
+                    <text-property name="heading">ACTIVIDADID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ACTIVIDADCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ACTIVIDADCODIGO</text-property>
+                    <text-property name="heading">ACTIVIDADCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ACTIVIDADDESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ACTIVIDADDESCRIPCION</text-property>
+                    <text-property name="heading">ACTIVIDADDESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROYECTOID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PROYECTOID</text-property>
+                    <text-property name="heading">PROYECTOID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROYECTODESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROYECTODESCRIPCION</text-property>
+                    <text-property name="heading">PROYECTODESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROYECTOCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROYECTOCODIGO</text-property>
+                    <text-property name="heading">PROYECTOCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBPROGRAMAID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SUBPROGRAMAID</text-property>
+                    <text-property name="heading">SUBPROGRAMAID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBPROGRAMACODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBPROGRAMACODIGO</text-property>
+                    <text-property name="heading">SUBPROGRAMACODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBPROGRAMADESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBPROGRAMADESCRIPCION</text-property>
+                    <text-property name="heading">SUBPROGRAMADESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROGRAMAID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PROGRAMAID</text-property>
+                    <text-property name="heading">PROGRAMAID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROGRAMACODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROGRAMACODIGO</text-property>
+                    <text-property name="heading">PROGRAMACODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROGRAMADESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROGRAMADESCRIPCION</text-property>
+                    <text-property name="heading">PROGRAMADESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PLANID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PLANID</text-property>
+                    <text-property name="heading">PLANID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PLANCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PLANCODIGO</text-property>
+                    <text-property name="heading">PLANCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ESTRATEGICOID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ESTRATEGICOID</text-property>
+                    <text-property name="heading">ESTRATEGICOID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ESTRATEGICOCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ESTRATEGICOCODIGO</text-property>
+                    <text-property name="heading">ESTRATEGICOCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">OERATIVOID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">OERATIVOID</text-property>
+                    <text-property name="heading">OERATIVOID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">OPERATIVOCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">OPERATIVOCODIGO</text-property>
+                    <text-property name="heading">OPERATIVOCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FUERZAID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">FUERZAID</text-property>
+                    <text-property name="heading">FUERZAID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FUERZACODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">FUERZACODIGO</text-property>
+                    <text-property name="heading">FUERZACODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PLANDESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PLANDESCRIPCION</text-property>
+                    <text-property name="heading">PLANDESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ESTRATEGICODESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ESTRATEGICODESCRIPCION</text-property>
+                    <text-property name="heading">ESTRATEGICODESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">OPERATIVODESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">OPERATIVODESCRIPCION</text-property>
+                    <text-property name="heading">OPERATIVODESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FUERZADESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">FUERZADESCRIPCION</text-property>
+                    <text-property name="heading">FUERZADESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONNOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONNOMBRE</text-property>
+                    <text-property name="heading">INSTITUCIONNOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">INSTITUCIONID</text-property>
+                    <text-property name="heading">INSTITUCIONID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONCODIGO</text-property>
+                    <text-property name="heading">INSTITUCIONCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BASELEGAL</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">BASELEGAL</text-property>
+                    <text-property name="heading">BASELEGAL</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MISION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">MISION</text-property>
+                    <text-property name="heading">MISION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">VISION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">VISION</text-property>
+                    <text-property name="heading">VISION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">UNIDADID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">UNIDADID</text-property>
+                    <text-property name="heading">UNIDADID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">UNIDADCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">UNIDADCODIGO</text-property>
+                    <text-property name="heading">UNIDADCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">UNIDADNOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">UNIDADNOMBRE</text-property>
+                    <text-property name="heading">UNIDADNOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FUENTEFINANCIAMIENTOID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">FUENTEFINANCIAMIENTOID</text-property>
+                    <text-property name="heading">FUENTEFINANCIAMIENTOID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FUENTECODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">FUENTECODIGO</text-property>
+                    <text-property name="heading">FUENTECODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FUENTENOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">FUENTENOMBRE</text-property>
+                    <text-property name="heading">FUENTENOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONENTID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">INSTITUCIONENTID</text-property>
+                    <text-property name="heading">INSTITUCIONENTID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DIVISIONGEOGRAFICAID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">DIVISIONGEOGRAFICAID</text-property>
+                    <text-property name="heading">DIVISIONGEOGRAFICAID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ORGANISMOID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ORGANISMOID</text-property>
+                    <text-property name="heading">ORGANISMOID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ORGANISMOPRESTAMO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ORGANISMOPRESTAMO</text-property>
+                    <text-property name="heading">ORGANISMOPRESTAMO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INDICADORACTIVIDAD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INDICADORACTIVIDAD</text-property>
+                    <text-property name="heading">INDICADORACTIVIDAD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">METADESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">METADESCRIPCION</text-property>
+                    <text-property name="heading">METADESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FORMULAACTIVIDAD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">FORMULAACTIVIDAD</text-property>
+                    <text-property name="heading">FORMULAACTIVIDAD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MONTOPLANIFICADO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MONTOPLANIFICADO</text-property>
+                    <text-property name="heading">MONTOPLANIFICADO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MONTOAJUSTADO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MONTOAJUSTADO</text-property>
+                    <text-property name="heading">MONTOAJUSTADO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">VALORP</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">VALORP</text-property>
+                    <text-property name="heading">VALORP</text-property>
+                </structure>
+            </list-property>
+            <list-property name="filter"/>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">SUBITEMID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">SUBITEMNOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">SUBITEMCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">ITEMID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">ITEMCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">ITEMNOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">SUBTAREAUNIDADID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">SUBTAREADESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">SUBTAREACODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">TAREAUNIDAD</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">TARUEADESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">TAREACODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">SUBACTIVIDADID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">SUBACTIVIDADCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">SUBACTIIDADDESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">ACTIVIDADID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">ACTIVIDADCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">ACTIVIDADDESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">PROYECTOID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">PROYECTODESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">PROYECTOCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">SUBPROGRAMAID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">SUBPROGRAMACODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">SUBPROGRAMADESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">PROGRAMAID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">PROGRAMACODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">PROGRAMADESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">PLANID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">PLANCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">ESTRATEGICOID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">ESTRATEGICOCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">OERATIVOID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">OPERATIVOCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">FUERZAID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">FUERZACODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">PLANDESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">37</property>
+                        <property name="name">ESTRATEGICODESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">38</property>
+                        <property name="name">OPERATIVODESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">39</property>
+                        <property name="name">FUERZADESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">40</property>
+                        <property name="name">INSTITUCIONNOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">41</property>
+                        <property name="name">INSTITUCIONID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">42</property>
+                        <property name="name">INSTITUCIONCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">43</property>
+                        <property name="name">BASELEGAL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">44</property>
+                        <property name="name">MISION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">45</property>
+                        <property name="name">VISION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">46</property>
+                        <property name="name">UNIDADID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">47</property>
+                        <property name="name">UNIDADCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">48</property>
+                        <property name="name">UNIDADNOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">49</property>
+                        <property name="name">FUENTEFINANCIAMIENTOID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">50</property>
+                        <property name="name">FUENTECODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">51</property>
+                        <property name="name">FUENTENOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">52</property>
+                        <property name="name">INSTITUCIONENTID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">53</property>
+                        <property name="name">DIVISIONGEOGRAFICAID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">54</property>
+                        <property name="name">ORGANISMOID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">55</property>
+                        <property name="name">ORGANISMOPRESTAMO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">56</property>
+                        <property name="name">INDICADORACTIVIDAD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">57</property>
+                        <property name="name">METADESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">58</property>
+                        <property name="name">FORMULAACTIVIDAD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">59</property>
+                        <property name="name">MONTOPLANIFICADO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">60</property>
+                        <property name="name">MONTOAJUSTADO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">61</property>
+                        <property name="name">VALORP</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">SUBITEMID</property>
+                    <property name="nativeName">SUBITEMID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">SUBITEMNOMBRE</property>
+                    <property name="nativeName">SUBITEMNOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">SUBITEMCODIGO</property>
+                    <property name="nativeName">SUBITEMCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">ITEMID</property>
+                    <property name="nativeName">ITEMID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">ITEMCODIGO</property>
+                    <property name="nativeName">ITEMCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">ITEMNOMBRE</property>
+                    <property name="nativeName">ITEMNOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">SUBTAREAUNIDADID</property>
+                    <property name="nativeName">SUBTAREAUNIDADID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">SUBTAREADESCRIPCION</property>
+                    <property name="nativeName">SUBTAREADESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">SUBTAREACODIGO</property>
+                    <property name="nativeName">SUBTAREACODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">TAREAUNIDAD</property>
+                    <property name="nativeName">TAREAUNIDAD</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">TARUEADESCRIPCION</property>
+                    <property name="nativeName">TARUEADESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">TAREACODIGO</property>
+                    <property name="nativeName">TAREACODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">SUBACTIVIDADID</property>
+                    <property name="nativeName">SUBACTIVIDADID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">SUBACTIVIDADCODIGO</property>
+                    <property name="nativeName">SUBACTIVIDADCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">SUBACTIIDADDESCRIPCION</property>
+                    <property name="nativeName">SUBACTIIDADDESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">ACTIVIDADID</property>
+                    <property name="nativeName">ACTIVIDADID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">ACTIVIDADCODIGO</property>
+                    <property name="nativeName">ACTIVIDADCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">ACTIVIDADDESCRIPCION</property>
+                    <property name="nativeName">ACTIVIDADDESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">PROYECTOID</property>
+                    <property name="nativeName">PROYECTOID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">PROYECTODESCRIPCION</property>
+                    <property name="nativeName">PROYECTODESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">PROYECTOCODIGO</property>
+                    <property name="nativeName">PROYECTOCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">SUBPROGRAMAID</property>
+                    <property name="nativeName">SUBPROGRAMAID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">SUBPROGRAMACODIGO</property>
+                    <property name="nativeName">SUBPROGRAMACODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">SUBPROGRAMADESCRIPCION</property>
+                    <property name="nativeName">SUBPROGRAMADESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">PROGRAMAID</property>
+                    <property name="nativeName">PROGRAMAID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">PROGRAMACODIGO</property>
+                    <property name="nativeName">PROGRAMACODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">PROGRAMADESCRIPCION</property>
+                    <property name="nativeName">PROGRAMADESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">PLANID</property>
+                    <property name="nativeName">PLANID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">PLANCODIGO</property>
+                    <property name="nativeName">PLANCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">ESTRATEGICOID</property>
+                    <property name="nativeName">ESTRATEGICOID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">ESTRATEGICOCODIGO</property>
+                    <property name="nativeName">ESTRATEGICOCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">OERATIVOID</property>
+                    <property name="nativeName">OERATIVOID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">33</property>
+                    <property name="name">OPERATIVOCODIGO</property>
+                    <property name="nativeName">OPERATIVOCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">34</property>
+                    <property name="name">FUERZAID</property>
+                    <property name="nativeName">FUERZAID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">35</property>
+                    <property name="name">FUERZACODIGO</property>
+                    <property name="nativeName">FUERZACODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">36</property>
+                    <property name="name">PLANDESCRIPCION</property>
+                    <property name="nativeName">PLANDESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">37</property>
+                    <property name="name">ESTRATEGICODESCRIPCION</property>
+                    <property name="nativeName">ESTRATEGICODESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">38</property>
+                    <property name="name">OPERATIVODESCRIPCION</property>
+                    <property name="nativeName">OPERATIVODESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">39</property>
+                    <property name="name">FUERZADESCRIPCION</property>
+                    <property name="nativeName">FUERZADESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">40</property>
+                    <property name="name">INSTITUCIONNOMBRE</property>
+                    <property name="nativeName">INSTITUCIONNOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">41</property>
+                    <property name="name">INSTITUCIONID</property>
+                    <property name="nativeName">INSTITUCIONID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">42</property>
+                    <property name="name">INSTITUCIONCODIGO</property>
+                    <property name="nativeName">INSTITUCIONCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">43</property>
+                    <property name="name">BASELEGAL</property>
+                    <property name="nativeName">BASELEGAL</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">44</property>
+                    <property name="name">MISION</property>
+                    <property name="nativeName">MISION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">45</property>
+                    <property name="name">VISION</property>
+                    <property name="nativeName">VISION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">46</property>
+                    <property name="name">UNIDADID</property>
+                    <property name="nativeName">UNIDADID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">47</property>
+                    <property name="name">UNIDADCODIGO</property>
+                    <property name="nativeName">UNIDADCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">48</property>
+                    <property name="name">UNIDADNOMBRE</property>
+                    <property name="nativeName">UNIDADNOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">49</property>
+                    <property name="name">FUENTEFINANCIAMIENTOID</property>
+                    <property name="nativeName">FUENTEFINANCIAMIENTOID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">50</property>
+                    <property name="name">FUENTECODIGO</property>
+                    <property name="nativeName">FUENTECODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">51</property>
+                    <property name="name">FUENTENOMBRE</property>
+                    <property name="nativeName">FUENTENOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">52</property>
+                    <property name="name">INSTITUCIONENTID</property>
+                    <property name="nativeName">INSTITUCIONENTID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">53</property>
+                    <property name="name">DIVISIONGEOGRAFICAID</property>
+                    <property name="nativeName">DIVISIONGEOGRAFICAID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">54</property>
+                    <property name="name">ORGANISMOID</property>
+                    <property name="nativeName">ORGANISMOID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">55</property>
+                    <property name="name">ORGANISMOPRESTAMO</property>
+                    <property name="nativeName">ORGANISMOPRESTAMO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">56</property>
+                    <property name="name">INDICADORACTIVIDAD</property>
+                    <property name="nativeName">INDICADORACTIVIDAD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">57</property>
+                    <property name="name">METADESCRIPCION</property>
+                    <property name="nativeName">METADESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">58</property>
+                    <property name="name">FORMULAACTIVIDAD</property>
+                    <property name="nativeName">FORMULAACTIVIDAD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">59</property>
+                    <property name="name">MONTOPLANIFICADO</property>
+                    <property name="nativeName">MONTOPLANIFICADO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">60</property>
+                    <property name="name">MONTOAJUSTADO</property>
+                    <property name="nativeName">MONTOAJUSTADO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">61</property>
+                    <property name="name">VALORP</property>
+                    <property name="nativeName">VALORP</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select sb.SUBITEMID as SUBITEMID,
+       sb.SUBITEMNOMBRE as SUBITEMNOMBRE,
+       sb.SUBITEMCODIGO as SUBITEMCODIGO,
+       it.ITEMID as ITEMID,
+       it.ITEMCODIGO as ITEMCODIGO,
+       it.ITEMNOMBRE as ITEMNOMBRE,
+       st.SUBTAREAUNIDADID as SUBTAREAUNIDADID,
+       st.SUBTAREAUNIDADDESCRIPCION as SUBTAREADESCRIPCION,
+       st.SUBTAREAUNIDADCODIGO as SUBTAREACODIGO,
+       ta.TAREAUNIDADID as TAREAUNIDAD,
+       ta.TAREAUNIDADDESCRIPCION as TARUEADESCRIPCION,
+       ta.TAREAUNIDADCODIGO as TAREACODIGO,
+       sa.SUBACTIVIDADID as SUBACTIVIDADID,
+       sa.SUBACTIVIDADCODIGO as SUBACTIVIDADCODIGO,
+       sa.SUBACTIVIDADDESCRIPCION as SUBACTIIDADDESCRIPCION,
+       ac.ACTIVIDADID as ACTIVIDADID,
+       ac.ACTIVIDADCODIGO as ACTIVIDADCODIGO,
+       ac.ACTIVIDADDESCRIPCION as ACTIVIDADDESCRIPCION,
+       py.PROYECTOID as PROYECTOID,
+       py.PROYECTODESCRIPCION as PROYECTODESCRIPCION,
+       py.PROYECTOCODIGO as PROYECTOCODIGO,
+       sp.SUBPROGRAMAID as SUBPROGRAMAID,
+       sp.SUBPROGRAMACODIGO as SUBPROGRAMACODIGO,
+       sp.SUBPROGRAMADESCRIPCION as SUBPROGRAMADESCRIPCION,
+       pr. PROGRAMAID as PROGRAMAID,
+       pr.PROGRAMACODIGO as PROGRAMACODIGO,
+       pr.PROGRAMADESCRIPCION as PROGRAMADESCRIPCION,
+       pn.OBJETIVOID as PLANID,
+       pn.OBJETIVOCODIGO as PLANCODIGO,
+       es.OBJETIVOID as ESTRATEGICOID,
+       es.OBJETIVOCODIGO as ESTRATEGICOCODIGO,
+       op.OBJETIVOID as OERATIVOID,
+       op.OBJETIVOCODIGO as OPERATIVOCODIGO,
+       fu.OBJETIVOID as FUERZAID,
+       fu.OBJETIVOCODIGO as FUERZACODIGO,
+       pn.OBJETIVODESCRIPCION as PLANDESCRIPCION,
+       es.OBJETIVODESCRIPCION as ESTRATEGICODESCRIPCION,
+       op.OBJETIVODESCRIPCION as OPERATIVODESCRIPCION,
+       fu.OBJETIVODESCRIPCION as FUERZADESCRIPCION,
+       ins.INSTITUCIONNOMBRE as INSTITUCIONNOMBRE,
+       ins.INSTITUCIONID as INSTITUCIONID,
+       ins.INSTITUCIONCODIGO as INSTITUCIONCODIGO,
+       ins.INSTITUCIONBASELEGAL as BASELEGAL,
+       ins.INSTITUCIONMISION as MISION,
+       ins.INSTITUCIONVISION as VISION,
+       u.UNIDADID as UNIDADID,
+       u.unidadcodigopresup as UNIDADCODIGO,
+       u.unidadnombre as UNIDADNOMBRE,
+       f.FUENTEFINANCIAMIENTOID as FUENTEFINANCIAMIENTOID,
+       f.fuentefinanciamientocodigo as FUENTECODIGO,
+       f.fuentefinanciamientonombre as FUENTENOMBRE,
+       ie.INSTITUCIONENTID as INSTITUCIONENTID,
+       div.DIVISIONGEOGRAFICAID as DIVISIONGEOGRAFICAID,
+       org.ORGANISMOID as ORGANISMOID,
+       orgp.ORGANISMOPRESTAMOID as ORGANISMOPRESTAMO,
+       ind.INDICADORNOMBRE as INDICADORACTIVIDAD,
+       ind.INDICADORMETADESCRIPCION as METADESCRIPCION,
+       indm.INDICADORMETODODESCRIPCION as FORMULAACTIVIDAD,
+       acu.ACTIVIDADUNIDADPRESUPPLANIF as MONTOPLANIFICADO,
+       acu.ACTIVIDADUNIDADPRESUPAJUST as MONTOAJUSTADO,
+              (
+        SELECT SUM(ACTIVIDADUNIDADACUMTOTAL)
+          FROM ACTIVIDADUNIDADACUMULADOR acua
+         WHERE ACTIVIDADID=acu.ACTIVIDADID
+		   AND acua.ACTIVIDADUNIDADUNIDADID=acu.ACTIVIDADUNIDADUNIDADID
+           AND ACTIVIDADUNIDADACUMTIPO='P'
+       ) as VALORP
+
+  from Subactividad sa,
+       Subactividadunidad sau,
+       Unidad u,
+       Actividad ac,
+       Proyecto py,
+       Subprograma sp,
+       Programa pr,
+       Objetivo pn,
+       Objetivo es,
+       Objetivo op,
+       Objetivo fu,
+       Institucion ins,
+       Nivelactividad nivelsubitem,
+       Nivelactividad na7,
+       Nivelprograma na8,
+       Nivelprograma na9,
+       Nivelprograma na10,
+       Nivelprograma na11,
+       Nivelactividad na12,
+       Nivelactividad na13,
+       Nivelactividad na14,
+       Nivelactividad na15,
+       Tareaunidad ta,
+       Subtareaunidad st,
+       Itemunidad itu,
+       Subitemunidad siu,
+       Item it,
+       Subitem sb,
+       Fuentefinanciamiento f,
+       INSTITUCIONENTIDAD ie,
+       UNIDADINST ui,
+       DIVISIONGEOGRAFICA div,
+       ORGANISMO org,
+       ORGANISMOPRESTAMO orgp,
+       INDICADOR ind,
+       INDICADORMETODO indm,
+       ACTIVIDADUNIDAD acu
+ where nivelsubitem.NIVELACTIVIDADID=62335
+   and siu.SUBITEMUNIDADID=nivelsubitem.NIVELACTIVIDADTABLARELACIONID
+   and sb.SUBITEMID=siu.SUBITEMUNIDADSUBITEMID
+   and na7.NIVELACTIVIDADID=nivelsubitem.NIVELACTIVIDADPADREID
+   and itu.ITEMUNIDADID=na7.NIVELACTIVIDADTABLARELACIONID
+   and it.ITEMID=itu.ITEMUNIDADITEMID
+   and na12.NIVELACTIVIDADID=na7.NIVELACTIVIDADPADREID
+   and st.SUBTAREAUNIDADID=na12.NIVELACTIVIDADTABLARELACIONID
+   and na13.NIVELACTIVIDADID=na12.NIVELACTIVIDADPADREID
+   and ta.TAREAUNIDADID=na13.NIVELACTIVIDADTABLARELACIONID
+   and na14.NIVELACTIVIDADID=na13.NIVELACTIVIDADPADREID
+   and sau.SUBACTIVIDADID=na14.NIVELACTIVIDADTABLARELACIONID
+   and sa.SUBACTIVIDADID=sau.SUBACTIVIDADID
+   and na15.NIVELACTIVIDADID=na14.NIVELACTIVIDADPADREID
+   and ac.ACTIVIDADID=na15.NIVELACTIVIDADTABLARELACIONID
+   and na8.NIVELPROGRAMATABLARELACIONID=ac.ACTIVIDADID
+   and nivelsubitem.nivelactividadunidadid=u.unidadid
+   and na9.NIVELPROGRAMAID=na8.NIVELPROGRAMAPADREID
+   and py.PROYECTOID=na9.NIVELPROGRAMATABLARELACIONID
+   and na10.NIVELPROGRAMAID=na9.NIVELPROGRAMAPADREID
+   and sp.SUBPROGRAMAID=na10.NIVELPROGRAMATABLARELACIONID
+   and na11.NIVELPROGRAMAID=na10.NIVELPROGRAMAPADREID
+   and pr.PROGRAMAID=na11.NIVELPROGRAMATABLARELACIONID
+   and fu.OBJETIVOID=pr.PROGRAMAOBJETIVOFUERZASID
+   and op.OBJETIVOID=fu.OBJETIVOPADREID
+   and es.OBJETIVOID=op.OBJETIVOPADREID
+   and pn.OBJETIVOID=es.OBJETIVOPADREID
+   and ins.INSTITUCIONID=es.OBJETIVOINSTITUCIONID
+   and itu.itemunidadfuentefinanid=f.fuentefinanciamientoid
+   and ins.INSTITUCIONID=ie.INSTITUCIONID
+   and ui.UNIDADINSTENTIDADID=ie.INSTITUCIONENTID
+   and ui.UNIDADINSTID=ie.INSTITUCIONID
+   and div.DIVISIONGEOGRAFICAID=itu.ITEMUNIDADCANTONID
+   and orgp.ORGANISMOID=org.ORGANISMOID
+   and orgp.ORGANISMOPRESTAMOID=itu.ITEMUNIDADORGPRESTAMOID
+   and orgp.ORGANISMOID=itu.ITEMUNIDADORGANISMOID
+   and ac.ACTIVIDADINDICADORID=indm.INDICADORID
+   and ac.ACTIVIDADINDICADORMETODOID=indm.INDICADORMETODOID
+   and ind.INDICADORID=indm.INDICADORID
+   and acu.ACTIVIDADID=ac.ACTIVIDADID
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ANTIGUEDADCODIGO</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ANTIGUEDADCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ANTIGUEDADCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PARTICIPECODIGO</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>8</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PARTICIPECODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PARTICIPECODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>FECHAINGRESO</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>FECHAINGRESO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>FECHAINGRESO</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>FECHASALIDA</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>FECHASALIDA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>FECHASALIDA</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ANTIGUEDADPUCE</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>20</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ANTIGUEDADPUCE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ANTIGUEDADPUCE</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ANTIGUEDADFISPUCE</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>20</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ANTIGUEDADFISPUCE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ANTIGUEDADFISPUCE</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>APORTES</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>11</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>APORTES</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>APORTES</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PARTICIPEAUX</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>45</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PARTICIPEAUX</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PARTICIPEAUX</design:label>
+            <design:formattingHints>
+              <design:displaySize>45</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="page" id="67">
+            <property name="backgroundColor">#FFFFFF</property>
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">11px</property>
+            <property name="color">#336699</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1px</property>
+            <property name="lineHeight">24px</property>
+            <property name="width">100%</property>
+        </style>
+        <style name="title" id="69">
+            <property name="backgroundColor">#99CC00</property>
+            <property name="fontFamily">"Verdana", "Arial", "Helvetica", sans-serif</property>
+            <property name="fontSize">24px</property>
+            <property name="fontWeight">bolder</property>
+            <property name="color">#000000</property>
+            <property name="lineHeight">40px</property>
+        </style>
+        <style name="col-title" id="70">
+            <property name="fontSize">11px</property>
+            <property name="fontWeight">bold</property>
+        </style>
+        <style name="col-hide" id="71">
+            <property name="color">#FFFFFF</property>
+        </style>
+        <style name="table-header" id="116">
+            <property name="backgroundColor">#043B76</property>
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">11px</property>
+            <property name="color">#FFFFFF</property>
+            <property name="width">100%</property>
+        </style>
+        <style name="table-detail" id="117">
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">11px</property>
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1px</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1px</property>
+            <property name="width">100%</property>
+        </style>
+        <style name="table" id="129">
+            <property name="width">100%</property>
+        </style>
+        <style name="table-footer" id="130">
+            <property name="backgroundColor">#CCFF99</property>
+            <property name="fontFamily">"Arial", "Helvetica", sans-serif</property>
+            <property name="fontSize">14px</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#333333</property>
+            <property name="lineHeight">22px</property>
+            <property name="width">100%</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">0.05in</property>
+            <property name="leftMargin">0.2in</property>
+            <property name="bottomMargin">0.2in</property>
+            <property name="rightMargin">0.45in</property>
+            <property name="borderBottomStyle">none</property>
+            <property name="borderLeftStyle">none</property>
+            <property name="borderRightStyle">none</property>
+            <property name="borderTopStyle">none</property>
+            <property name="numberAlign">right</property>
+            <property name="lineHeight">12px</property>
+            <property name="showHeaderOnFirst">false</property>
+            <property name="showFooterOnLast">false</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="683">
+            <property name="width">96%</property>
+            <column id="684">
+                <property name="width">30%</property>
+            </column>
+            <column id="1130">
+                <property name="width">5%</property>
+            </column>
+            <column id="685">
+                <property name="width">45%</property>
+            </column>
+            <row id="686">
+                <cell id="687">
+                    <property name="borderRightColor">#C0C0C0</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="1128"/>
+                <cell id="688">
+                    <text id="62">
+                        <property name="fontFamily">"Calibri"</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">20pt</property>
+                        <property name="paddingTop">1pt</property>
+                        <property name="textAlign">left</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[COMANDO CONJUNTO DE LAS FF.AA.]]></text-property>
+                    </text>
+                    <label id="1170">
+                        <property name="fontFamily">"Calibri"</property>
+                        <property name="fontSize">12px</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">ESTADO MAYOR INSTITUCIONAL</text-property>
+                    </label>
+                    <label id="1435">
+                        <property name="fontFamily">"Calibri"</property>
+                        <property name="fontSize">12px</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">PLANIFICACIÓN ESTRATÉGICA</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="690">
+                <cell id="691">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <label id="1013"/>
+                </cell>
+            </row>
+        </grid>
+        <label id="1016"/>
+        <label id="1427"/>
+        <table id="1436">
+            <property name="dataSet">P1</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ACTIVIDADID</property>
+                    <text-property name="displayName">ACTIVIDADID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ACTIVIDADID"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ACTIVIDADCODIGO</property>
+                    <text-property name="displayName">ACTIVIDADCODIGO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ACTIVIDADCODIGO"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ACTIVIDADDESCRIPCION</property>
+                    <text-property name="displayName">ACTIVIDADDESCRIPCION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ACTIVIDADDESCRIPCION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PROGRAMACODIGO</property>
+                    <text-property name="displayName">PROGRAMACODIGO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROGRAMACODIGO"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PROGRAMADESCRIPCION</property>
+                    <text-property name="displayName">PROGRAMADESCRIPCION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROGRAMADESCRIPCION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PLANDESCRIPCION</property>
+                    <text-property name="displayName">PLANDESCRIPCION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PLANDESCRIPCION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ESTRATEGICODESCRIPCION</property>
+                    <text-property name="displayName">ESTRATEGICODESCRIPCION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ESTRATEGICODESCRIPCION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OPERATIVODESCRIPCION</property>
+                    <text-property name="displayName">OPERATIVODESCRIPCION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["OPERATIVODESCRIPCION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">FUERZADESCRIPCION</property>
+                    <text-property name="displayName">FUERZADESCRIPCION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["FUERZADESCRIPCION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">INSTITUCIONNOMBRE</property>
+                    <text-property name="displayName">INSTITUCIONNOMBRE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["INSTITUCIONNOMBRE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">INSTITUCIONID</property>
+                    <text-property name="displayName">INSTITUCIONID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["INSTITUCIONID"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">INSTITUCIONCODIGO</property>
+                    <text-property name="displayName">INSTITUCIONCODIGO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["INSTITUCIONCODIGO"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BASELEGAL</property>
+                    <text-property name="displayName">BASELEGAL</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BASELEGAL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MISION</property>
+                    <text-property name="displayName">MISION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MISION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">VISION</property>
+                    <text-property name="displayName">VISION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["VISION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">UNIDADID</property>
+                    <text-property name="displayName">UNIDADID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["UNIDADID"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">UNIDADCODIGO</property>
+                    <text-property name="displayName">UNIDADCODIGO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["UNIDADCODIGO"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">UNIDADNOMBRE</property>
+                    <text-property name="displayName">UNIDADNOMBRE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["UNIDADNOMBRE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">FUENTEFINANCIAMIENTOID</property>
+                    <text-property name="displayName">FUENTEFINANCIAMIENTOID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["FUENTEFINANCIAMIENTOID"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">FUENTECODIGO</property>
+                    <text-property name="displayName">FUENTECODIGO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["FUENTECODIGO"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">FUENTENOMBRE</property>
+                    <text-property name="displayName">FUENTENOMBRE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["FUENTENOMBRE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">INSTITUCIONENTID</property>
+                    <text-property name="displayName">INSTITUCIONENTID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["INSTITUCIONENTID"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">DIVISIONGEOGRAFICAID</property>
+                    <text-property name="displayName">DIVISIONGEOGRAFICAID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["DIVISIONGEOGRAFICAID"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ORGANISMOID</property>
+                    <text-property name="displayName">ORGANISMOID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ORGANISMOID"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ORGANISMOPRESTAMO</property>
+                    <text-property name="displayName">ORGANISMOPRESTAMO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ORGANISMOPRESTAMO"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">INDICADORACTIVIDAD</property>
+                    <text-property name="displayName">INDICADORACTIVIDAD</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["INDICADORACTIVIDAD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">METADESCRIPCION</property>
+                    <text-property name="displayName">METADESCRIPCION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["METADESCRIPCION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">FORMULAACTIVIDAD</property>
+                    <text-property name="displayName">FORMULAACTIVIDAD</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["FORMULAACTIVIDAD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MONTOPLANIFICADO</property>
+                    <text-property name="displayName">MONTOPLANIFICADO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MONTOPLANIFICADO"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">MONTOAJUSTADO</property>
+                    <text-property name="displayName">MONTOAJUSTADO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MONTOAJUSTADO"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">VALORP</property>
+                    <text-property name="displayName">VALORP</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["VALORP"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <column id="1595"/>
+            <column id="1596"/>
+            <column id="1597"/>
+            <column id="1598"/>
+            <column id="1599"/>
+            <column id="1600"/>
+            <column id="1601"/>
+            <column id="1602"/>
+            <column id="1603"/>
+            <column id="1604"/>
+            <column id="1605"/>
+            <column id="1606"/>
+            <column id="1607"/>
+            <column id="1608"/>
+            <column id="1609"/>
+            <column id="1610"/>
+            <column id="1611"/>
+            <column id="1612"/>
+            <column id="1613"/>
+            <column id="1614"/>
+            <column id="1615"/>
+            <column id="1616"/>
+            <column id="1617"/>
+            <column id="1618"/>
+            <column id="1619"/>
+            <column id="1620"/>
+            <column id="1621"/>
+            <column id="1622"/>
+            <column id="1623"/>
+            <column id="1624"/>
+            <column id="1625"/>
+            <header>
+                <row id="1437">
+                    <cell id="1438">
+                        <label id="1439">
+                            <text-property name="text">ACTIVIDADID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1440">
+                        <label id="1441">
+                            <text-property name="text">ACTIVIDADCODIGO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1442">
+                        <label id="1443">
+                            <text-property name="text">ACTIVIDADDESCRIPCION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1444">
+                        <label id="1445">
+                            <text-property name="text">PROGRAMACODIGO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1446">
+                        <label id="1447">
+                            <text-property name="text">PROGRAMADESCRIPCION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1448">
+                        <label id="1449">
+                            <text-property name="text">PLANDESCRIPCION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1450">
+                        <label id="1451">
+                            <text-property name="text">ESTRATEGICODESCRIPCION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1452">
+                        <label id="1453">
+                            <text-property name="text">OPERATIVODESCRIPCION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1454">
+                        <label id="1455">
+                            <text-property name="text">FUERZADESCRIPCION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1456">
+                        <label id="1457">
+                            <text-property name="text">INSTITUCIONNOMBRE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1458">
+                        <label id="1459">
+                            <text-property name="text">INSTITUCIONID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1460">
+                        <label id="1461">
+                            <text-property name="text">INSTITUCIONCODIGO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1462">
+                        <label id="1463">
+                            <text-property name="text">BASELEGAL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1464">
+                        <label id="1465">
+                            <text-property name="text">MISION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1466">
+                        <label id="1467">
+                            <text-property name="text">VISION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1468">
+                        <label id="1469">
+                            <text-property name="text">UNIDADID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1470">
+                        <label id="1471">
+                            <text-property name="text">UNIDADCODIGO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1472">
+                        <label id="1473">
+                            <text-property name="text">UNIDADNOMBRE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1474">
+                        <label id="1475">
+                            <text-property name="text">FUENTEFINANCIAMIENTOID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1476">
+                        <label id="1477">
+                            <text-property name="text">FUENTECODIGO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1478">
+                        <label id="1479">
+                            <text-property name="text">FUENTENOMBRE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1480">
+                        <label id="1481">
+                            <text-property name="text">INSTITUCIONENTID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1482">
+                        <label id="1483">
+                            <text-property name="text">DIVISIONGEOGRAFICAID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1484">
+                        <label id="1485">
+                            <text-property name="text">ORGANISMOID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1486">
+                        <label id="1487">
+                            <text-property name="text">ORGANISMOPRESTAMO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1488">
+                        <label id="1489">
+                            <text-property name="text">INDICADORACTIVIDAD</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1490">
+                        <label id="1491">
+                            <text-property name="text">METADESCRIPCION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1492">
+                        <label id="1493">
+                            <text-property name="text">FORMULAACTIVIDAD</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1494">
+                        <label id="1495">
+                            <text-property name="text">MONTOPLANIFICADO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1496">
+                        <label id="1497">
+                            <text-property name="text">MONTOAJUSTADO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1498">
+                        <label id="1499">
+                            <text-property name="text">VALORP</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="1500">
+                    <cell id="1501">
+                        <data id="1502">
+                            <property name="resultSetColumn">ACTIVIDADID</property>
+                        </data>
+                    </cell>
+                    <cell id="1503">
+                        <data id="1504">
+                            <property name="resultSetColumn">ACTIVIDADCODIGO</property>
+                        </data>
+                    </cell>
+                    <cell id="1505">
+                        <data id="1506">
+                            <property name="resultSetColumn">ACTIVIDADDESCRIPCION</property>
+                        </data>
+                    </cell>
+                    <cell id="1507">
+                        <data id="1508">
+                            <property name="resultSetColumn">PROGRAMACODIGO</property>
+                        </data>
+                    </cell>
+                    <cell id="1509">
+                        <data id="1510">
+                            <property name="resultSetColumn">PROGRAMADESCRIPCION</property>
+                        </data>
+                    </cell>
+                    <cell id="1511">
+                        <data id="1512">
+                            <property name="resultSetColumn">PLANDESCRIPCION</property>
+                        </data>
+                    </cell>
+                    <cell id="1513">
+                        <data id="1514">
+                            <property name="resultSetColumn">ESTRATEGICODESCRIPCION</property>
+                        </data>
+                    </cell>
+                    <cell id="1515">
+                        <data id="1516">
+                            <property name="resultSetColumn">OPERATIVODESCRIPCION</property>
+                        </data>
+                    </cell>
+                    <cell id="1517">
+                        <data id="1518">
+                            <property name="resultSetColumn">FUERZADESCRIPCION</property>
+                        </data>
+                    </cell>
+                    <cell id="1519">
+                        <data id="1520">
+                            <property name="resultSetColumn">INSTITUCIONNOMBRE</property>
+                        </data>
+                    </cell>
+                    <cell id="1521">
+                        <data id="1522">
+                            <property name="resultSetColumn">INSTITUCIONID</property>
+                        </data>
+                    </cell>
+                    <cell id="1523">
+                        <data id="1524">
+                            <property name="resultSetColumn">INSTITUCIONCODIGO</property>
+                        </data>
+                    </cell>
+                    <cell id="1525">
+                        <data id="1526">
+                            <property name="resultSetColumn">BASELEGAL</property>
+                        </data>
+                    </cell>
+                    <cell id="1527">
+                        <data id="1528">
+                            <property name="resultSetColumn">MISION</property>
+                        </data>
+                    </cell>
+                    <cell id="1529">
+                        <data id="1530">
+                            <property name="resultSetColumn">VISION</property>
+                        </data>
+                    </cell>
+                    <cell id="1531">
+                        <data id="1532">
+                            <property name="resultSetColumn">UNIDADID</property>
+                        </data>
+                    </cell>
+                    <cell id="1533">
+                        <data id="1534">
+                            <property name="resultSetColumn">UNIDADCODIGO</property>
+                        </data>
+                    </cell>
+                    <cell id="1535">
+                        <data id="1536">
+                            <property name="resultSetColumn">UNIDADNOMBRE</property>
+                        </data>
+                    </cell>
+                    <cell id="1537">
+                        <data id="1538">
+                            <property name="resultSetColumn">FUENTEFINANCIAMIENTOID</property>
+                        </data>
+                    </cell>
+                    <cell id="1539">
+                        <data id="1540">
+                            <property name="resultSetColumn">FUENTECODIGO</property>
+                        </data>
+                    </cell>
+                    <cell id="1541">
+                        <data id="1542">
+                            <property name="resultSetColumn">FUENTENOMBRE</property>
+                        </data>
+                    </cell>
+                    <cell id="1543">
+                        <data id="1544">
+                            <property name="resultSetColumn">INSTITUCIONENTID</property>
+                        </data>
+                    </cell>
+                    <cell id="1545">
+                        <data id="1546">
+                            <property name="resultSetColumn">DIVISIONGEOGRAFICAID</property>
+                        </data>
+                    </cell>
+                    <cell id="1547">
+                        <data id="1548">
+                            <property name="resultSetColumn">ORGANISMOID</property>
+                        </data>
+                    </cell>
+                    <cell id="1549">
+                        <data id="1550">
+                            <property name="resultSetColumn">ORGANISMOPRESTAMO</property>
+                        </data>
+                    </cell>
+                    <cell id="1551">
+                        <data id="1552">
+                            <property name="resultSetColumn">INDICADORACTIVIDAD</property>
+                        </data>
+                    </cell>
+                    <cell id="1553">
+                        <data id="1554">
+                            <property name="resultSetColumn">METADESCRIPCION</property>
+                        </data>
+                    </cell>
+                    <cell id="1555">
+                        <data id="1556">
+                            <property name="resultSetColumn">FORMULAACTIVIDAD</property>
+                        </data>
+                    </cell>
+                    <cell id="1557">
+                        <data id="1558">
+                            <property name="resultSetColumn">MONTOPLANIFICADO</property>
+                        </data>
+                    </cell>
+                    <cell id="1559">
+                        <data id="1560">
+                            <property name="resultSetColumn">MONTOAJUSTADO</property>
+                        </data>
+                    </cell>
+                    <cell id="1561">
+                        <data id="1562">
+                            <property name="resultSetColumn">VALORP</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="1563">
+                    <cell id="1564"/>
+                    <cell id="1565"/>
+                    <cell id="1566"/>
+                    <cell id="1567"/>
+                    <cell id="1568"/>
+                    <cell id="1569"/>
+                    <cell id="1570"/>
+                    <cell id="1571"/>
+                    <cell id="1572"/>
+                    <cell id="1573"/>
+                    <cell id="1574"/>
+                    <cell id="1575"/>
+                    <cell id="1576"/>
+                    <cell id="1577"/>
+                    <cell id="1578"/>
+                    <cell id="1579"/>
+                    <cell id="1580"/>
+                    <cell id="1581"/>
+                    <cell id="1582"/>
+                    <cell id="1583"/>
+                    <cell id="1584"/>
+                    <cell id="1585"/>
+                    <cell id="1586"/>
+                    <cell id="1587"/>
+                    <cell id="1588"/>
+                    <cell id="1589"/>
+                    <cell id="1590"/>
+                    <cell id="1591"/>
+                    <cell id="1592"/>
+                    <cell id="1593"/>
+                    <cell id="1594"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>
