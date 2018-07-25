@@ -30,6 +30,7 @@ import ec.com.papp.administracion.to.FuerzaTO;
 import ec.com.papp.administracion.to.GradoTO;
 import ec.com.papp.administracion.to.GradofuerzaTO;
 import ec.com.papp.administracion.to.SocionegocioTO;
+import ec.com.papp.administracion.to.UnidadmedidaTO;
 import ec.com.papp.estructuraorganica.id.InstitucionentidadID;
 import ec.com.papp.estructuraorganica.id.UnidadarbolplazaID;
 import ec.com.papp.estructuraorganica.id.UnidadarbolplazaempleadoID;
@@ -136,12 +137,22 @@ public class EstructuraorganicaController {
 				//pregunto si ya existe el codigo en el nivel actual
 				UnidadTO unidadTO2=new UnidadTO();
 				unidadTO2.setCodigopresup(unidadTO.getCodigopresup());
-				Collection<UnidadTO> itemTOs=UtilSession.estructuraorganicaServicio.transObtenerUnidad(unidadTO2);
+				Collection<UnidadTO> unidadTOs=UtilSession.estructuraorganicaServicio.transObtenerUnidad(unidadTO2);
 				boolean grabar=true;
-				if(itemTOs.size()>0){
-					unidadTO2=(UnidadTO)itemTOs.iterator().next();
-					if(unidadTO.getId()!=null && unidadTO2.getId().longValue()!=unidadTO.getId().longValue())
-						grabar=false;
+				if(unidadTOs.size()>0){
+//					unidadTO2=(UnidadTO)unidadTOs.iterator().next();
+//					if(unidadTO.getId()!=null && unidadTO2.getId().longValue()!=unidadTO.getId().longValue())
+//						grabar=false;
+					for(UnidadTO unidadTO3:unidadTOs) {
+						if((unidadTO.getId()!=null && unidadTO.getId().longValue()!=0) && unidadTO3.getId().longValue()!=unidadTO.getId().longValue() && unidadTO3.getCodigopresup().equals(unidadTO.getCodigopresup())) {
+							grabar=false;
+							break;
+						}
+						else if((unidadTO.getId()==null || (unidadTO.getId()!=null && unidadTO3.getId().longValue()!=unidadTO.getId().longValue())) && unidadTO.getCodigopresup()!=null && unidadTO3.getCodigopresup().equals(unidadTO.getCodigopresup())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
@@ -164,12 +175,37 @@ public class EstructuraorganicaController {
 				unidadarbolTO2.setUnidadarbolpadreid(unidadarbolTO.getUnidadarbolpadreid());
 				unidadarbolTO2.setCodigoorganico(unidadarbolTO.getCodigoorganico());
 				unidadarbolTO2.setEstado(unidadarbolTO.getEstado());
+				unidadarbolTO2.setUnidadarbolerganicaid(unidadarbolTO.getUnidadarbolerganicaid());
 				Collection<UnidadarbolTO> unidadarbolTOs=UtilSession.estructuraorganicaServicio.transObtenerUnidadarbol(unidadarbolTO2);
+//				boolean grabar=true;
+//				if(unidadarbolTOs.size()>0){
+//					unidadarbolTO2=(UnidadarbolTO)unidadarbolTOs.iterator().next();
+//					if(unidadarbolTO.getId()!=null && unidadarbolTO2.getId().longValue()!=unidadarbolTO.getId().longValue())
+//						grabar=false;
+//				}
+//				if(!grabar){
+//					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+//					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+//				}
+//				else{
+//					UtilSession.estructuraorganicaServicio.transCrearModificarUnidadarbol(unidadarbolTO);
+//					id=unidadarbolTO.getId().toString();
+//					jsonObject.put("unidadarbol", (JSONObject)JSONSerializer.toJSON(unidadarbolTO,unidadarbolTO.getJsonConfig()));
+//				}
+				
+				
 				boolean grabar=true;
 				if(unidadarbolTOs.size()>0){
-					unidadarbolTO2=(UnidadarbolTO)unidadarbolTOs.iterator().next();
-					if(unidadarbolTO.getId()!=null && unidadarbolTO2.getId().longValue()!=unidadarbolTO.getId().longValue())
-						grabar=false;
+					for(UnidadarbolTO unidadarbolTO3:unidadarbolTOs) {
+						if((unidadarbolTO.getId()!=null && unidadarbolTO.getId().longValue()!=0) && unidadarbolTO3.getId().longValue()!=unidadarbolTO.getId().longValue() && unidadarbolTO3.getCodigoorganico().equals(unidadarbolTO.getCodigoorganico())) {
+							grabar=false;
+							break;
+						}
+						else if((unidadarbolTO.getId()==null || (unidadarbolTO.getId()!=null && unidadarbolTO3.getId().longValue()!=unidadarbolTO.getId().longValue())) && unidadarbolTO.getCodigoorganico()!=null && unidadarbolTO3.getCodigoorganico().equals(unidadarbolTO.getCodigoorganico())) {
+							grabar=false;
+							break;
+						}
+					}
 				}
 				if(!grabar){
 					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
