@@ -29,8 +29,7 @@
 								<div class="form-group"
 									ng-class="{'has-error':Form.orden.$dirty && Form.orden.$invalid,
 									'has-success':Form.orden.$valid}">
-									<label class="control-label"> Usuario <span
-										class="symbol required"></span>
+									<label class="control-label"> Usuario
 									</label> <input type="text" placeholder="Nombre de usuario" ng-disabled="true"
 										class="form-control" name="usuario" ng-model="objeto.usuario"
 										required /> <span class="error text-small block"
@@ -45,7 +44,7 @@
 								        Contrase&ntilde;a anterior
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" placeholder="Escriba la contrase&ntilde;a anterior"
+								    <input type="password" placeholder="Escriba la contrase&ntilde;a anterior"
 								        class="form-control" name="claveanterior" ng-model="objeto.claveanterior"
 								        required ng-minlength="1" ng-minlength="20">
 								    <span class="error text-small block"
@@ -95,8 +94,7 @@
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid,
 									'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Email <span
-										class="symbol required"></span>
+									<label class="control-label"> Email
 									</label> <input type="email" placeholder="Email"
 										class="form-control" name="Email" required
 										ng-model="objeto.email" ng-minlength="1" /> <span
