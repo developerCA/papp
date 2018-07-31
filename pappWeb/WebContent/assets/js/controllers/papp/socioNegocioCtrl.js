@@ -37,7 +37,7 @@ app.controller('SocioNegocioController', ["$scope", "$rootScope", "SweetAlert", 
     }  
 
 	$scope.filtrarUnico=function(){
-        sociosNegocioFactory.traerFiltro(pagina, $scope.codigo, $scope.nombre, $scope.estado).then(function (resp) {
+        sociosNegocioFactory.traerFiltro($scope.pagina, $scope.codigo, $scope.nombre, $scope.estado).then(function (resp) {
         	$scope.data = resp.json.result;
             $scope.total = resp.json.total.valor;
         })
