@@ -376,56 +376,58 @@
 								</a>
 							</div>
 							<br>
-							<script type="text/ng-template" id="nodes_renderer.html">
-  <div ui-tree-handle class="tree-node tree-node-content" style="padding: 3px 3px;">
-<table width="100%" border="0" cellpadding="0"><tr>
-  <td width="0%">
-<table width="30px" border="0" cellpadding="0">
-  <tr>
-	<td width="30px">
-    <a class="btn btn-default btn-xs" ng-show="!node.nphoja" data-nodrag ng-click="toggle(this);cargarHijos(node)">
-      <span class="glyphicon"
-        ng-class="{
-          'glyphicon-chevron-right': collapsed,
-          'glyphicon-chevron-down': !collapsed
-        }">
-	  </span>
-	</a>
-	</td>
-  </tr>
-</table>
-	</td><td width="100%">
-      {{node.codigoorganico}} - {{node.title}}
-	</td><td width="0%">
-<table width="108px" border="0" cellpadding="0">
-  <tr>
-	<td width="34px">
-      <a uib-tooltip="Agregar" class="btn btn-info btn-sm" data-nodrag ng-click="agregarUnidadHija(node);">
-		<span class="glyphicon glyphicon-plus"></span>
-	  </a>
-	</td>
-	<td width="3px"></td>
-	<td width="34px">
-      <a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag ng-click="modificarUnidad(node)">
-		<span class="fa fa-pencil"></span>
-	  </a>
-	</td>
-	<td width="3px"></td>
-	<td width="34px">
-      <a uib-tooltip="Mantener Plaza" class="btn btn-info btn-sm" data-nodrag ng-click="mantenerPlaza(node)">
-		<span class="fa fa-building-o"></span>
-	  </a>
-	</td>
-  </tr>
-</table>
-	</td>
+<script type="text/ng-template" id="nodes_renderer.html">
+<div ui-tree-handle class="tree-node tree-node-content" style="padding: 3px 3px;border-bottom: 1px dashed black !important;border: none;">
+	<table width="100%" border="0" cellpadding="0"><tr>
+		<td width="0%">
+			<table width="30px" border="0" cellpadding="0">
+				<tr>
+					<td width="30px">
+						<a class="btn btn-default btn-xs" ng-show="!node.nphoja" data-nodrag ng-click="toggle(this);cargarHijos(node)">
+							<span class="glyphicon"
+								ng-class="{
+									'glyphicon-chevron-right': collapsed,
+									'glyphicon-chevron-down': !collapsed
+								}">
+							</span>
+						</a>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="100%">
+			{{node.codigoorganico}} - {{node.title}}
+		</td>
+		<td width="0%">
+			<table width="108px" border="0" cellpadding="0">
+				<tr>
+					<td width="34px">
+						<a uib-tooltip="Agregar" class="btn btn-info btn-sm" data-nodrag ng-click="agregarUnidadHija(node);">
+							<span class="glyphicon glyphicon-plus"></span>
+						</a>
+					</td>
+					<td width="3px"></td>
+					<td width="34px">
+						<a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag ng-click="modificarUnidad(node)">
+							<span class="fa fa-pencil"></span>
+						</a>
+					</td>
+					<td width="3px"></td>
+					<td width="34px">
+						<a uib-tooltip="Mantener Plaza" class="btn btn-info btn-sm" data-nodrag ng-click="mantenerPlaza(node)">
+							<span class="fa fa-building-o"></span>
+						</a>
+					</td>
+				</tr>
+			</table>
+		</td>
 	</tr></table>
-  </div>
-  <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+</div>
+<ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
     <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
     </li>
-  </ol>
-	</script>
+</ol>
+</script>
 							<div class="row">
 								<div class="col-sm-12">
 									<div ui-tree="treeOptions" id="tree-root"
