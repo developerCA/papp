@@ -152,11 +152,14 @@
 </div>
 
 <script type="text/ng-template" id="nodes_renderer.html">
-<div ui-tree-handle class="tree-node tree-node-content">
+<div ui-tree-handle class="tree-node tree-node-content" style="padding: 3px 3px;">
 	<table width="100%">
 		<tr>
-			<td width="1%">
-				<div class="col-md-12" ng-show="!node.nphoja">
+			<td width="0%">
+<table width="63px" border="0" cellpadding="0">
+  <tr>
+	<td width="30px">
+				<div class="col-md-12" ng-show="!node.nphoja" style="padding: 3px 3px;">
 				    <a class="btn btn-default btn-xs" data-nodrag ng-click="toggle(this);cargarHijos(node)">
 						<span class="glyphicon" ng-class="{
 					       	'glyphicon-chevron-right': collapsed,
@@ -165,14 +168,19 @@
 						</span>
 					</a>
 				</div>
-			</td>
-			<td width="1%">
+	</td>
+			<td width="30px">
 				<letter-icon data="{{node.tipo}}" color="auto" size="sm"></letter-icon>
+			</td>
+			<td width="3px">
+			</td>
+  </tr>
+</table>
 			</td>
 			<td width="100%">
 	    		&nbsp;{{ node.codigo }} - {{ node.title }}
 			</td>
-			<td width="1%">
+			<td width="0%">
 				<table width="71px">
 					<tr>
 						<td width="34px">
