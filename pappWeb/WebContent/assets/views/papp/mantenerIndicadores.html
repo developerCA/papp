@@ -76,8 +76,7 @@
 									<div class="col-md-8">
 									    <input type="text" placeholder="Escriba un c&oacute;digo"
 									        class="form-control" name="codigo" ng-model="objeto.codigo" ng-pattern="/^[0-9]*$/"
-									        required ng-minlength="3"  ng-maxlength="3">
-								        <!-- ng-disabled="!nuevoar" -->
+									        required ng-minlength="3"  ng-maxlength="3" ng-disabled="!nuevoar">
 									</div>
 								</div>
 								
@@ -272,11 +271,16 @@
 															    ng-class="{'has-error':Form.codigo_{{$index}}.$dirty && Form.codigo_{{$index}}.$invalid, 'has-success':Form.codigo_{{$index}}.$valid}">
 															    <input type="text" placeholder="Escriba un c&oacute;digo"
 															        class="form-control" ng-model="obj.codigo" ng-pattern="/^[0-9]*$/"
-															        name="codigo_{{$index}}"
-															        required ng-disabled="!obj.editarcodigo"  ng-minlength="3"  ng-maxlength="3">
+															        name="codigo_{{$index}}" ng-change="buscar($index)"
+															        required ng-minlength="3" ng-maxlength="3">
+															    <!-- ng-disabled="!obj.editarcodigo" -->
 															    <span class="error text-small block"
 															        ng-if="Form['codigo_'+$index].$dirty && Form['codigo_'+$index].$invalid">
 															        Incorrecto, es de 3 d&iacute;gitos
+															    </span>
+															    <span class="error text-small block" style="color: #a94442 !important;"
+															        ng-if="errorDuplica[$index]">
+															        ERROR: C&oacute;digo duplicado
 															    </span>
 														    </div>
 														</td>

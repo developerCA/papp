@@ -231,4 +231,37 @@ app.controller('MantenerIndicadoresController', [ "$scope","$rootScope","$uibMod
             $scope.objeto={};
         }
     };
+
+	$scope.errorDuplica = [];
+	$scope.buscar = function(index = 0) {
+		var valor = $scope.objetolista[index].codigo;
+		$scope.errorDuplica = [];
+		if (valor == undefined) {
+			for (var e = 0; e <= index; e++) {
+				if ($scope.errorDuplica[e] == undefined) {
+					$scope.errorDuplica.push(false);
+				}
+			}
+			return;
+		}
+		for (var i = 0; i < $scope.objetolista.length; i++) {
+			if (i == index) continue;
+			if ($scope.objetolista[i].codigo == valor) {
+				if ($scope.errorDuplica[index] == undefined) {
+					for (var e = 0; e < index; e++) {
+						if ($scope.errorDuplica[e] == undefined) {
+							$scope.errorDuplica.push(false);
+						}
+					}
+				}
+				$scope.errorDuplica.push(true);
+				return;
+			}
+		}
+		for (var e = 0; e <= index; e++) {
+			if ($scope.errorDuplica[e] == undefined) {
+				$scope.errorDuplica.push(false);
+			}
+		}
+	}
 } ]);
