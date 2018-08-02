@@ -94,12 +94,13 @@
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
-									<div class="col-md-4">
-										<label class="control-label"> C&oacute;digo <span
-											class="symbol required"></span>
+									<div class="col-md-2">
+										<label class="control-label">
+											C&oacute;digo
+											<span class="symbol required"></span>
 										</label>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-10">
 										<input type="text" placeholder="Ingrese el Codigo"
 											class="form-control" name="codigo" ng-model="objeto.codigopresup"
 											ng-disabled="objeto.id !=null" required ng-minlength="1" ng-maxlength="10"
@@ -109,12 +110,12 @@
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<div class="col-md-4">
+									<div class="col-md-2">
 										<label class="control-label"> Nombre <span
 											class="symbol required"></span>
 										</label>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-10">
 										<input type="text" placeholder="Ingrese el Nombre"
 											class="form-control" name="nombre" required
 											ng-model="objeto.nombre" ng-minlength="1" />
@@ -123,12 +124,12 @@
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-									<div class="col-md-4">
+									<div class="col-md-2">
 										<label for="form-field-select-1"> Estado <span
 											class="symbol required"></span>
 										</label>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-10">
 										<select class="form-control" name="estado"
 											ng-model="objeto.estado" required>
 											<option value="A">Activo</option>

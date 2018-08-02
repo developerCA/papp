@@ -31,9 +31,9 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.dEmpleados=false;
 	$scope.dEmpleadosEditar=false;
 
-	$scope.opendate = function($event,type) {
-		//console.log($scope);
-		debugger;
+	$scope.opendate = function($event,type,index) {
+		console.log(index);
+		//debugger;
 		$event.preventDefault();
 		$event.stopPropagation();
 		$scope[type] = true;
