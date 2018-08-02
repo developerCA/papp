@@ -2086,8 +2086,10 @@ public class PlanificacionController {
 						}
 						else if(parameters.get("accion").equals("AP")) {
 							//va aprobar la actividadunidad
-							if(parameters.get("tipo").equals("P"))
+							if(parameters.get("tipo").equals("P")) {
 								actividadunidadTO2.setPresupaprobado(1);
+								actividadunidadTO2.setAjusaprobado(0);
+							}
 							else
 								actividadunidadTO2.setAjusaprobado(1);
 							UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO2);
@@ -2097,9 +2099,9 @@ public class PlanificacionController {
 						else if(parameters.get("accion").equals("DE")) {
 							//va aprobar la actividadunidad
 							if(parameters.get("tipo").equals("P"))
-								actividadunidadTO2.setPresupaprobado(0);
+								actividadunidadTO2.setPresupaprobado(2);
 							else
-								actividadunidadTO2.setAjusaprobado(0);
+								actividadunidadTO2.setAjusaprobado(2);
 							UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO2);
 							mensajes.setMsg("Se regreso la unidad para una nueva revision");
 							mensajes.setType(MensajesWeb.getString("mensaje.exito"));

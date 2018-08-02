@@ -787,7 +787,7 @@ public class AdministracionController {
 				SocionegocioTO socionegocioTO2=UtilSession.adminsitracionServicio.transObtenerSocionegocioTO(socionegocioTO.getId());
 				//Le asigno lo que este seleccionado en esempleado y esproveedor
 				socionegocioTO2.setEsempleado(socionegocioTO.getEsempleado());
-				socionegocioTO2.setEsproveedor(socionegocioTO2.getEsproveedor());
+				socionegocioTO2.setEsproveedor(socionegocioTO.getEsproveedor());
 				UtilSession.adminsitracionServicio.transCrearModificarSocionegocio(socionegocioTO2);
 			}
 
