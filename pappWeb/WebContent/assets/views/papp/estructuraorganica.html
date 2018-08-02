@@ -1121,13 +1121,13 @@
 																			<input type="text" class="form-control"
 																				uib-datepicker-popup="dd/MM/yyyy"
 																				name="npfechainicioc" ng-model="obj.npfechainicioc"
-																				is-open="openFechaInicio"
+																				is-open="PONopenFechaInicio[$index]"
 																				datepicker-options="dateOptions"
 																				ng-required="true"
-																				close-text="Close">
+																				close-text="Salir" clear-text="Ninguna" current-text="Hoy">
 																			<span class="input-group-btn">
 																				<button type="button" class="btn btn-primary"
-																					ng-click="opendate($event,'openFechaInicio',$index)">
+																					ng-click="opendate($event,'PONopenFechaInicio',$index)">
 																					<i class="glyphicon glyphicon-calendar"></i>
 																				</button>
 																			</span>
@@ -1138,15 +1138,14 @@
 																	<div class="form-group has-success">
 																		<div class="input-group">
 																			<input type="text" class="form-control"
-																				uib-datepicker-popup="dd/MM/yyyy" name="npfechafinc"
-																				ng-model="obj.npfechafinc"
-																				is-open="openFechaFin{{$index}}"
-																				show-button-bar="false"
+																				uib-datepicker-popup="dd/MM/yyyy"
+																				name="npfechafinc" ng-model="obj.npfechafinc"
+																				is-open="PONopenFechaFin[$index]"
 																				datepicker-options="dateOptions"
-																				close-text="Close">
+																				close-text="Salir" clear-text="Ninguna" current-text="Hoy">
 																			<span class="input-group-btn">
 																				<button type="button" class="btn btn-primary"
-																					ng-click="opendate($event,'FechaFin'+$index)">
+																					ng-click="opendate($event,'PONopenFechaFin',$index)">
 																					<i class="glyphicon glyphicon-calendar"></i>
 																				</button>
 																			</span>

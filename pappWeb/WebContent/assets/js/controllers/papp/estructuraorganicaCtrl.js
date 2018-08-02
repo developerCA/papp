@@ -32,13 +32,16 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.dEmpleadosEditar=false;
 
 	$scope.opendate = function($event,type,index) {
-		console.log(index);
+		//console.log(index);
 		//debugger;
 		$event.preventDefault();
 		$event.stopPropagation();
-		$scope[type] = true;
+		if (index === undefined) {
+			$scope[type] = true;
+		} else {
+			$scope[type][index] = true;
+		}
 	}
-	$scope.openFechaInicio0=false;
 
 	$scope.popupFechaInicio = {
 		opened: false
@@ -47,11 +50,23 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.popupFechaInicio.opened = true;
 	}
 
+	$scope.PONopenFechaInicio = [];
+	$scope.PONopenFechaInicio[0] = false;
+	$scope.PONopenFechaFin = [];
+	$scope.PONopenFechaFin[0] = false;
+
 	$scope.popupFechaFin = {
 		opened: false
 	};
 	$scope.openFechaFin = function() {
 		$scope.popupFechaFin.opened = true;
+	}
+	$scope.PONopenFechaFin = function(index) {
+		//console.log(index);
+		if ($scope['openFechaFin'+index] === undefined) {
+			$scope['openFechaFin'+index] = false;
+		}
+		return $scope['openFechaFin'+index];
 	}
 
 	var pagina = 1;
@@ -545,6 +560,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	};
 
 	$scope.abrirEmpleadoSocioNegocio = function(index) {
+		console.log(index);
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalSocioNegocio.html',
 			controller : 'ModalSocioNegocioEmpleadosController',
