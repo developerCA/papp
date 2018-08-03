@@ -1,5 +1,7 @@
+<%@taglib prefix="sec" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
-<html lang="en" data-ng-app="app">
+<html lang="en" data-ng-app="app"  xmlns:security="http://www.springframework.org/security/tags" xmlns:th="http://www.springframework.org/schema/mvc">
 <head>
     <meta charset="utf-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

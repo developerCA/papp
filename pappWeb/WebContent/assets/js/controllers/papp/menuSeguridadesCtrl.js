@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","menuSeguridadesFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,menuSeguridadesFactory) {
+app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_","SweetAlert","$filter", "ngTableParams","menuSeguridadesFactory",
+	function($scope,$rootScope,$uibModal,_,SweetAlert,$filter, ngTableParams,menuSeguridadesFactory) {
     
 	
 	$scope.nombreFiltro=null;
@@ -19,11 +19,19 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","S
 			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
-			
-			    
+			   
+			    $scope.menuInicial=_.filter($scope.data, function(menu){ return menu.padreid==0 && menu.nombre.trim()!="" });
+			    console.log($scope.menuInicial);
+			    $scope.consultarHijos(22);
 		})
 	
 	};
+	
+	$scope.consultarHijos=function(menuPadre){
+		
+		  var menusHijos = _.filter($scope.data, function(menu){ return menu.padreid==menuPadre && menu.nombre.trim()!="" });
+		  console.log(menusHijos);
+	}
 	
 	$scope.$watch('data', function() {
 		

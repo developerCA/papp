@@ -1,4 +1,5 @@
 <!-- start: BREADCRUMB -->
+
 <div class="breadcrumb-wrapper">
 	<h4 class="mainTitle no-margin">Menus</h4>
 
@@ -58,6 +59,10 @@
 						class="fa fa-plus-square"></i> Agregar</a>
 
 					<div>
+					
+					
+
+
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
 								<td><a class="btn btn-sm btn-primary"
@@ -69,7 +74,7 @@
 								<td data-title="'Orden'">{{obj.orden}}</td>
 								<td data-title="'Padre Nombre'">{{obj.nppadre}}</td>
 								<td data-title="'Nivel'">FALTA</td>
-								<td data-title="'Permiso'">FALTA</td>
+							<!-- 	<td data-title="'Permiso'">{{obj.nppermisonombre}}</td>  -->
 								<td data-title="'Permiso'">{{obj.nppermisodescripcion}}</td>
 							</tr>
 						</table>

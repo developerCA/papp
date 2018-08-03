@@ -18,7 +18,7 @@ app.controller('MenuController', [ "$scope","$rootScope", "seguridadFactory", fu
 			
 			if (resp.meta)
 			$scope.menu=resp;	
-			
+			//console.log($scope.menu);
 			
 			
 		})
