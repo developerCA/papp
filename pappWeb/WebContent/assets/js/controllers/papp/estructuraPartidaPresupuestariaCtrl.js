@@ -6,6 +6,7 @@ app.controller('EstructuraPartidaPresupuestariaController', [ "$scope","$rootSco
 	$scope.edicion=true;
 	$scope.guardar=false;
 	$scope.objeto={estado:null};
+
 	$scope.feLista=[
 		{id: 1, tipo: 'Programa', longitud: 2},
 		{id: 2, tipo: 'Subprograma', longitud: 2},
@@ -29,18 +30,17 @@ app.controller('EstructuraPartidaPresupuestariaController', [ "$scope","$rootSco
 	}
 
 	$scope.editar=function(){
+		$scope.aejefiscal=$rootScope.ejefiscalobj.anio;
+
+		//console.log($scope.aejefiscal);
+		//console.log($rootScope);
+
 		estructuraPartidaPresupuestariaFactory.traerPartidapresupuestaria($rootScope.ejefiscal).then(function(resp){
-			console.log(resp);
-			return;
+			console.log(resp.json);
 			if (resp.estado) {
-			    $scope.objeto=resp.json.estructuraorganica;
-			    $scope.objeto.npfecviginicio=toDate($scope.objeto.npfecviginicio);
-			    $scope.objeto.npfecvigfin=toDate($scope.objeto.npfecvigfin);
+			    $scope.feLista=resp.json.formulacion;
+			    $scope.pLista=resp.json.planificacion;
 			}
-			$scope.edicion=true;
-			$scope.nuevoar=false;
-			$scope.guardar=true;
-			console.log(resp);
 		})
 	};
 
@@ -62,18 +62,14 @@ app.controller('EstructuraPartidaPresupuestariaController', [ "$scope","$rootSco
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	let tObj = Object.assign({}, $scope.objeto);
-            	tObj.npfecviginicio = toStringDate(tObj.npfecviginicio); 
-            	tObj.npfecvigfin = toStringDate(tObj.npfecvigfin);
+            	let tObj = {};
+            	tObj.ParmnivelesprogramanivelTOs=$scope.pLista;
+            	tObj.NivelesplanificacionTOs=$scope.feLista;
             	estructuraPartidaPresupuestariaFactory.guardar(tObj).then(function(resp){
         			 if (resp.estado){
-        				 form.$setPristine(true);
-	 		             $scope.edicion=false;
-	 		             $scope.objeto={};
-	 		             $scope.limpiar();
-	 		             SweetAlert.swal("Estructura Organica!", "Registro guardado satisfactoriamente!", "success");
+        				 SweetAlert.swal("Estructura Partida Presupuestaria!", "Registro guardado satisfactoriamente!", "success");
         			 }else{
-	 		             SweetAlert.swal("Estructura Organica!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal("Estructura Partida Presupuestaria!", resp.mensajes.msg, "error");
         			 }
         		})
             }
