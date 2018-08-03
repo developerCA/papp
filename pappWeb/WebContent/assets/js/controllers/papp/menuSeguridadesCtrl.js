@@ -9,6 +9,7 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 	
 	$scope.edicion=false;
 	$scope.objeto={};
+	$scope.menuArbol={};
 	
 	var pagina = 1;
 	
@@ -16,23 +17,41 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 		
 		$scope.data=[];
 		menuSeguridadesFactory.traerMenus(pagina).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
-			   
-			    $scope.menuInicial=_.filter($scope.data, function(menu){ return menu.padreid==0 && menu.nombre.trim()!="" });
-			    console.log($scope.menuInicial);
-			    $scope.consultarHijos(22);
+			    $scope.menuArbol=_.filter($scope.data, function(menu){ return menu.padreid==0 && menu.nombre.trim()!="" });
+				for (var hijo in $scope.menuArbol) {
+					$scope.menuArbol[hijo].hijos = ($scope.cuantosHijos($scope.menuArbol[hijo])? false: true);
+				}
+			    //console.log($scope.menuArbol);
 		})
 	
 	};
-	
-	$scope.consultarHijos=function(menuPadre){
-		
-		  var menusHijos = _.filter($scope.data, function(menu){ return menu.padreid==menuPadre && menu.nombre.trim()!="" });
-		  console.log(menusHijos);
+
+	$scope.cargarHijos=function(menuPadre){
+		if (!menuPadre.iscargado) {
+			menuPadre.iscargado=true;
+
+			var menusHijos = _.filter($scope.data, function(menu){
+				return menu.padreid==menuPadre.id && menu.nombre.trim()!="";
+			});
+			for (var hijo in menusHijos) {
+				menusHijos[hijo].hijos = ($scope.cuantosHijos(menusHijos[hijo])? false: true);
+			}
+			//console.log(menusHijos);
+			var nodes=JSON.parse(JSON.stringify(menusHijos).split('"descripcion":').join('"title":'));
+			menuPadre.nodes=nodes;
+		}
 	}
-	
+
+	$scope.cuantosHijos=function(menuPadre){
+		var menusHijos = _.filter($scope.data, function(menu){
+			return menu.padreid==menuPadre.id && menu.nombre.trim()!="";
+		});
+		return menusHijos.length;
+	}
+
 	$scope.$watch('data', function() {
 		
 		$scope.tableParams = new ngTableParams({
@@ -53,29 +72,13 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 			}
 		});
 	});
-	
-	
-	$scope.filtrar=function(){
-		
-		$scope.data=[];
-		menuSeguridadesFactory.traerMenusFiltro(pagina,$scope.nombreFiltro,$scope.ordenFiltro).then(function(resp){
+
+	$scope.nuevo=function(node){
+		if (node === undefined) {
+			$scope.objeto={id:null};
+		} else {
 			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
-	
-	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
-		$scope.ordenFiltro=null;
-		
-		
-		$scope.consultar();
-		
-	};
-	
-	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		}
 		
 		$scope.edicion=true;
 	}

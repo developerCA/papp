@@ -26,7 +26,7 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 	};
 
 	$scope.cargarHijos=function(node){
-		if (!node.iscargado)
+		if (!node.iscargado) {
 			//console.log(node);
 		    node.iscargado=true;
 
@@ -39,6 +39,7 @@ app.controller('PlanNacionalController', [ "$scope","$rootScope","$uibModal","Sw
 				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 				node.nodes=nodes;
 			})
+		}
 	}
 
 	$scope.$watch('data', function() {
