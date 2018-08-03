@@ -278,6 +278,8 @@ app.constant('JS_REQUIRES', {
         'SubItemsReporteFactory':'assets/js/factory/subItemsReporteFactory.js',
         'ModalGeograficoCtrl':'assets/js/controllers/papp/modales/modalGeograficoCtrl.js',
         'GeograficoFactory':'assets/js/factory/geograficoFactory.js',
+        'ModalPerfilesPermisosCtrl':'assets/js/controllers/papp/modales/modalPerfilesPermisosCtrl.js',
+        'PerfilesPermisosFactory':'assets/js/factory/perfilesPermisosFactory.js',
 
 
     },

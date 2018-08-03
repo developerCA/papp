@@ -83,14 +83,14 @@
 						<td width="3px"></td>
 						<td width="34px">
 	  						<a uib-tooltip="Modificar" class="btn btn-info btn-sm" data-nodrag
-								ng-click="editar(node.id);">
+								ng-click="editar(node);">
 								<span class="fa fa-pencil"></span>
 							</a>
 						</td>
 						<td width="3px"></td>
 						<td width="34px">
 	  						<a uib-tooltip="Eliminar" class="btn btn-danger btn-sm" data-nodrag
-								ng-click="eliminar(node.id);">
+								ng-click="eliminar(node);">
 								<span class="fa fa-trash"></span>
 							</a>
 						</td>
@@ -168,7 +168,7 @@
 									<input type="text" class="form-control" name="nppermisonombre"
 									    ng-disabled="true" ng-model="objeto.nppermisonombre" />
 								</div>
-
+<!--
 								<div class="form-group">
 									<label class="control-label">
 										Descripci&oacute;n del permiso
@@ -176,7 +176,7 @@
 									<input type="text" class="form-control" name="nppermisodescripcion"
 									    ng-disabled="true" ng-model="objeto.nppermisodescripcion" />
 								</div>
-
+-->
 								<div class="form-group"
 									ng-class="{'has-error':Form.orden.$dirty && Form.orden.$invalid, 'has-success':Form.orden.$valid}">
 									<label class="control-label">
@@ -198,186 +198,70 @@
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.codigopadre.$dirty && Form.codigopadre.$invalid, 'has-success':Form.codigopadre.$valid}">
-									<label class="control-label"> Menu Padre <span
-										class="symbol required"></span>
+									<label class="control-label">
+										Menu Padre ID
+										<span class="symbol required"></span>
 									</label>
-
 									<div class="input-group">
 										<input type="text" placeholder="Seleccione el padre"
 											class="form-control" name="codigopadre" ng-disabled="true"
-											ng-model="objeto.padreid" /> <span class="input-group-btn">
+											ng-model="objeto.padreid" />
+										<span class="input-group-btn">
 											<button type="button" class="btn btn-primary"
 												ng-click="abrirMenuPadre()">
-												<i class="fa fa-search"></i> Seleccione
+												<i class="fa fa-search"></i>
+												Seleccione
 											</button>
 										</span>
-
-
 									</div>
-
 								</div>
 
 								<div class="form-group">
-									<label class="control-label"> Nombre Padre </label> <input
-										type="text" class="form-control" name="nombrepadre" ng-disabled="true"
-										ng-model="objeto.nombrepadre" />
+									<label class="control-label">
+										Nombre Padre
+									</label>
+									<input type="text" class="form-control" name="nppadre" ng-disabled="true"
+										ng-model="objeto.nppadre" />
 								</div>
-
+<!--
 								<div class="form-group"
 									ng-class="{'has-error':Form.orden.$dirty && Form.orden.$invalid, 'has-success':Form.orden.$valid}">
-									<label class="control-label"> Nivel <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="FALTA -- Ingrese el Orden"
+									<label class="control-label">
+										Nivel
+										<span class="symbol required"></span>
+									</label>
+									<input type="text" placeholder="FALTA -- Ingrese el Orden"
 										class="form-control" name="orden" ng-model="objeto.nose"
-										required /> <span class="error text-small block"
-										ng-if="Form.orden.$dirty && Form.orden.$invalid">Orden
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.orden.$valid">Listo</span>
+										required />
+									<span class="error text-small block"
+										ng-if="Form.orden.$dirty && Form.orden.$invalid">
+										Orden es incorrecto
+									</span>
+									<span class="success text-small"
+										ng-if="Form.orden.$valid">
+										Listo
+									</span>
 								</div>
-
+-->
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<button type="submit" class="btn btn-primary">Guardar
+									<button type="submit" class="btn btn-primary">
+										Guardar
 									</button>
 									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">Cancelar</button>
+										ng-click="form.reset(Form)">
+										Cancelar
+									</button>
 
 								</div>
 							</div>
 						</div>
 
 					</form>
-
-					<script type="text/ng-template" id="modalMenuPadre.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Menu Padre</h3>
-                            </div>
-                            <div class="modal-body">
-                               
-
-				<div class="panel-body" ng-init="consultar();" >
-
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Orden </label> <input type="text"
-												class="form-control" ng-model="ordenFiltro">
-										</div>
-									</div>
-
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-								<td data-title="'Orden'">{{obj.orden}}</td>
-								<td data-title="'Padre Nombre'"></td>
-								<td data-title="'Nivel'"></td>
-							</tr>
-						</table>
-					</div>
-				</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
-					<script type="text/ng-template" id="modalPermiso.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Permisos</h3>
-                            </div>
-                            <div class="modal-body">
-                               
-
-				<div class="panel-body" ng-init="consultar();" >
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>
-
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-
-							</tr>
-						</table>
-					</div>
-				</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
 				</div>
 			</div>
 		</div>

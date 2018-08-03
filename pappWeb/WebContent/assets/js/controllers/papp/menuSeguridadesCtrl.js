@@ -83,9 +83,9 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 		$scope.edicion=true;
 	}
 	
-	$scope.editar=function(id){
-		menuSeguridadesFactory.traerMenu(id).then(function(resp){
-			
+	$scope.editar=function(node){
+		$scope.nodeEditando = node;
+		menuSeguridadesFactory.traerMenu(node.id).then(function(resp){
 			if (resp.estado)
 			   $scope.objeto=resp.json.menu;
 			   $scope.edicion=true;
@@ -96,14 +96,14 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 	
 	$scope.abrirMenuPadre = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalMenuPadre.html',
+			templateUrl : 'assets/views/papp/modal/modalMenuPadre.html',
 			controller : 'MenuPadreController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
 			$scope.objeto.padreid = obj.id;
-			$scope.objeto.nombrepadre=obj.nombre;
+			$scope.objeto.nppadre = obj.nombre;
 		}, function() {
 			console.log("close modal");
 		});
@@ -111,86 +111,88 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 	
 	$scope.abrirPermiso = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalPermiso.html',
-			controller : 'PerfilesPermisosController',
+			templateUrl : 'assets/views/papp/modal/modalPermiso.html',
+			controller : 'ModalPerfilesPermisosController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);
-			$scope.objeto.padreid = obj.id;
-			$scope.objeto.nombrepadre=obj.nombre;
+			$scope.objeto.permisoid = obj.id;
+			$scope.objeto.nppermisonombre = obj.nombre;
+			$scope.objeto.nppermisodescripcion = obj.descripcion;
 		}, function() {
 			console.log("close modal");
 		});
 	};
 		
-	$scope.eliminar=function(id){
-		
-		menuSeguridadesFactory.eliminar(id).then(function(resp){
-			console.log(resp);
-			if (resp.estado){
-				$scope.limpiar();
-				SweetAlert.swal("Menu!", "Menu eliminado satisfactoriamente!", "success");
-			}
-			else{
-				SweetAlert.swal("Menu!", resp.mensajes.msg, "error");
-			}
-
-		})
-		
+	$scope.eliminar=function(node){
+		if (!node.hijos) {
+			SweetAlert.swal("Menu Seguridades!", "No se puede eliminar porque tiene hijos", "error");
+			return;
+		}
+		SweetAlert.swal({
+		   title: "Menu Seguridades?",
+		   text: "Esta seguro que desea eliminar opcion '"+node.nombre+"', del menu?",
+		   type: "warning",
+		   showCancelButton: true,
+		   confirmButtonColor: "#DD6B55",
+		   confirmButtonText: "Si",
+		   cancelButtonText: "No",
+		   closeOnConfirm: false}, 
+		function(isConfirm){
+		    if (!isConfirm) return;
+			menuSeguridadesFactory.eliminar(node.id).then(function(resp){
+				//console.log(resp);
+				if (resp.estado){
+					$scope.limpiar();
+					SweetAlert.swal("Menu Seguridades!", "Opcion eliminada satisfactoriamente!", "success");
+				}
+				else{
+					SweetAlert.swal("Menu Seguridades!", resp.mensajes.msg, "error");
+				}
+			})
+		});
 	};
-	
-	
-	
-	 $scope.form = {
 
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
+	$scope.form = {
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
 
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
 
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
 
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
-
-		            } else {
-		                
-		            	menuSeguridadesFactory.guardar($scope.objeto).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Menu!", "Menu registrado satisfactoriamente!", "success");
-	 
-		        			 }else{
-			 		             SweetAlert.swal("Menu!", resp.mensajes.msg, "error");
-		        				 
-		        			 }
-		        			
-		        		})
-		        		
-		            }
-
-		        },
-		        reset: function (form) {
-
-		            $scope.myModel = angular.copy($scope.master);
-		            form.$setPristine(true);
-		            $scope.edicion=false;
-		            $scope.objeto={};
-
-		        }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+            	menuSeguridadesFactory.guardar($scope.objeto).then(function(resp){
+        			if (resp.estado){
+        				form.$setPristine(true);
+	 		            $scope.edicion=false;
+	 		            $scope.objeto={};
+	 		            $scope.nodeEditando=resp.json.menu;
+	 		            SweetAlert.swal("Menu Seguridades!", "Menu registrado satisfactoriamente!", "success");
+        			}else{
+	 		            SweetAlert.swal("Menu Seguridades!", resp.mensajes.msg, "error");
+        			}
+        		})
+            }
+        },
+        reset: function (form) {
+            $scope.myModel = angular.copy($scope.master);
+            form.$setPristine(true);
+            $scope.edicion=false;
+            $scope.objeto={};
+        }
     };
 } ]);
