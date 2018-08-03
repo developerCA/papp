@@ -1,6 +1,8 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
-	<h4 class="mainTitle no-margin">Usuarios</h4>
+	<h4 class="mainTitle no-margin">
+		Usuarios
+	</h4>
 
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
@@ -15,11 +17,9 @@
 
 	<div class="row">
 		<div class="col-md-12">
-
 			<div class="panel panel-white">
 
 				<div class="panel-body" ng-show="!edicion">
-
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -54,177 +54,252 @@
 						</div>
 					</div>
 
-					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"><i
-						class="fa fa-plus-square"></i> Agregar</a>
-
+					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();">
+						<i class="fa fa-plus-square"></i>
+						Agregar
+					</a>
 
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
-										class="fa fa-pencil"></i></a></td>
-
-								<td><a class="btn btn-sm btn-danger" uib-tooltip="Eliminar"
-									ng-click="eliminar(obj.id)"><i class="fa fa-trash"></i></a></td>
-
-								<td data-title="'Usuario'">{{obj.usuario}}</td>
-								<td data-title="'C&oacute;digo'">FALTA</td>
-								<td data-title="'Nombre mostrado'">FALTA</td>
-								<td data-title="'Email'">{{obj.email}}</td>
-								<td data-title="'Perfil nombre'">FALTA</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
-								<td data-title="'Actualizaci&oacute;n clave'">{{obj.npfechaactualizacionclave}}</td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Modificar" ng-click="editar(obj.id)">
+										<i class="fa fa-pencil"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-danger" uib-tooltip="Eliminar"
+										ng-click="eliminar(obj.id)">
+										<i class="fa fa-trash"></i>
+									</a>
+								</td>
+								<td data-title="'Usuario'">
+									{{ obj.usuario }}
+								</td>
+								<td data-title="'C&oacute;digo'">
+									FALTA
+								</td>
+								<td data-title="'Nombre mostrado'">
+									{{ obj.npsocionegocio }}
+								</td>
+								<td data-title="'Email'">
+									{{ obj.email }}
+								</td>
+								<td data-title="'Perfil nombre'">
+									{{ obj.npperfil }}
+								</td>
+								<td data-title="'Estado'">
+									{{ obj.npestado }}
+								</td>
+								<td data-title="'Actualizaci&oacute;n clave'">
+									{{ obj.npfechaactualizacionclave }}
+								</td>
 							</tr>
 						</table>
 					</div>
 				</div>
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
-						<h5 class="panel-title">Usuario</h5>
+						<h5 class="panel-title">
+							Usuario
+						</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
 						ng-submit="form.submit(Form)">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.usuario.$dirty && Form.usuario.$invalid, 'has-success':Form.usuario.$valid}">
-									<label class="control-label"> Usuario </label>
-									<input type="text" ng-disabled="true" placeholder="Ingrese un usuario"
-										class="form-control" name="usuario" ng-model="objeto.usuario" />
+									<div class="col-md-2">
+										<label class="control-label">
+											Usuario
+										</label>
+									</div>
+									<div class="col-md-10">
+										<input type="text" ng-disabled="true" placeholder="Ingrese un usuario"
+											class="form-control" name="usuario" ng-model="objeto.usuario" />
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Nombre <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Nombre"
-										class="form-control" name="nombre" required
-										ng-model="objeto.nombre" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
-										Incorrecto</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
+									<div class="col-md-2">
+										<label class="control-label">
+											Nombre
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-10">
+										<input type="text" placeholder="Ingrese el Nombre"
+											class="form-control" name="nombre" required
+											ng-model="objeto.nombre" ng-minlength="1" />
+										<span class="error text-small block"
+											ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
+											Incorrecto
+										</span>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Apellido <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese el Apellido"
-										class="form-control" name="nombre" required
-										ng-model="objeto.apellido" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
-										Incorrecto</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
+									<div class="col-md-2">
+										<label class="control-label">
+											Apellido
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-10">
+										<input type="text" placeholder="Ingrese el Apellido"
+											class="form-control" name="nombre" required
+											ng-model="objeto.apellido" ng-minlength="1" />
+										<span class="error text-small block"
+											ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
+											Incorrecto
+										</span>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid,
 									'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Nueva contrase&ntilde;a <span
-										class="symbol required"></span>
-									</label> <input type="password" placeholder="Nueva contrase&ntilde;a"
-										class="form-control" name="clave" required
-										ng-model="objeto.clave" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.clave.$dirty &&
-										Form.clave.$invalid">Contrase&ntilde;a
-										incorrecto</span> <span class="success text-small"
-										ng-if="Form.clave.$valid &&
-										(Form.confirmacion.$modelValue ==
-										Form.clave.$modelValue)">Listo</span>
+									<div class="col-md-2">
+										<label class="control-label">
+											Nueva contrase&ntilde;a
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-10">
+										<input type="password" placeholder="Nueva contrase&ntilde;a"
+											class="form-control" name="clave" required
+											ng-model="objeto.clave" ng-minlength="1" />
+										<span class="error text-small block"
+											ng-if="Form.clave.$dirty &&
+											Form.clave.$invalid">
+											Contrase&ntilde;a incorrecto
+										</span>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid,
 									'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Repetir contrase&ntilde;a <span
-										class="symbol required"></span>
-									</label> <input type="password" placeholder="Repetir Contrase&ntilde;a"
-										class="form-control" name="confirmacion" required
-										ng-model="objeto.confirmacion" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.confirmacion.$dirty &&
-										Form.confirmacion.$invalid">Contrase&ntilde;a
-										incorrecto</span> <span class="success text-small"
-										ng-if="Form.confirmacion.$valid &&
-										(Form.confirmacion.$modelValue ==
-										Form.clave.$modelValue)">Listo</span>
+									<div class="col-md-2">
+										<label class="control-label">
+											Repetir contrase&ntilde;a
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-10">
+										<input type="password" placeholder="Repetir Contrase&ntilde;a"
+											class="form-control" name="confirmacion" required
+											ng-model="objeto.confirmacion" ng-minlength="1" />
+										<span class="error text-small block"
+											ng-if="Form.confirmacion.$dirty &&
+											Form.confirmacion.$invalid">
+											Contrase&ntilde;a incorrecto
+										</span>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Email <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Ingrese un email"
-										class="form-control" name="nombre" required
-										ng-model="objeto.email" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
-										Incorrecto</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
+									<div class="col-md-2">
+										<label class="control-label">
+											Email
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-10">
+										<input type="text" placeholder="Ingrese un email"
+											class="form-control" name="nombre" required
+											ng-model="objeto.email" ng-minlength="1" />
+										<span class="error text-small block"
+											ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
+											Incorrecto<
+										</span>
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.codigopadre.$dirty && Form.codigopadre.$invalid, 'has-success':Form.codigopadre.$valid}">
-									<label class="control-label"> Nombre perfil <span
-										class="symbol required"></span>
-									</label>
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione un perfil"
-											class="form-control" name="codigopadre" ng-disabled="true"
-											ng-model="objeto.npperfil" /> <span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirNombrePerfil()">
-												<i class="fa fa-search"></i> Seleccione
-											</button>
-										</span>
+									<div class="col-md-2">
+										<label class="control-label">
+											Nombre perfil
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-10">
+										<div class="input-group">
+											<input type="text" placeholder="Seleccione un perfil"
+												class="form-control" name="codigopadre" ng-disabled="true"
+												ng-model="objeto.npperfil" /> <span class="input-group-btn">
+												<button type="button" class="btn btn-primary"
+													ng-click="abrirNombrePerfil()">
+													<i class="fa fa-search"></i>
+													Seleccione
+												</button>
+											</span>
+										</div>
 									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.empleadocodigo.$dirty && Form.empleadocodigo.$invalid, 'has-success':Form.empleadocodigo.$valid}">
-									<label class="control-label"> Emplado c&oacute;digo <span
-										class="symbol required"></span>
-									</label>
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione un empleado"
-											class="form-control" name="empleadocodigo" ng-disabled="true"
-											ng-model="objeto.empleadocodigo" /> <span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirEmpleadoCodigo()">
-												<i class="fa fa-search"></i> Seleccione
-											</button>
-										</span>
+									<div class="col-md-2">
+										<label class="control-label">
+											Emplado c&oacute;digo
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-10">
+										<div class="input-group">
+											<input type="text" placeholder="Seleccione un empleado"
+												class="form-control" name="empleadocodigo" ng-disabled="true"
+												ng-model="objeto.empleadocodigo" /> <span class="input-group-btn">
+												<button type="button" class="btn btn-primary"
+													ng-click="abrirEmpleadoCodigo()">
+													<i class="fa fa-search"></i>
+													Seleccione
+												</button>
+											</span>
+										</div>
 									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.npempleadonombremostrado.$dirty && Form.npempleadonombremostrado.$invalid, 'has-success':Form.npempleadonombremostrado.$valid}">
-									<label class="control-label"> Empleado nombre </label>
-									<input type="text" ng-disabled="true" placeholder="Selecione un empleado"
-										class="form-control" name="npempleadonombremostrado"
-										ng-model="objeto.npempleadonombremostrado">
+									<div class="col-md-2">
+										<label class="control-label">
+											Empleado nombre
+										</label>
+									</div>
+									<div class="col-md-10">
+										<input type="text" ng-disabled="true" placeholder="Selecione un empleado"
+											class="form-control" name="npempleadonombremostrado"
+											ng-model="objeto.npempleadonombremostrado">
+									</div>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-									<label for="form-field-select-1"> Estado <span
-										class="symbol required"></span>
-									</label>
-									<select class="form-control" name="estado"
-										ng-model="objeto.estado" required>
-										<option value="A">Activo</option>
-										<option value="I">Inactivo</option>
-									</select>
+									<div class="col-md-2">
+										<label for="form-field-select-1">
+											Estado
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-10">
+										<select class="form-control" name="estado"
+											ng-model="objeto.estado" required>
+											<option value="A">Activo</option>
+											<option value="I">Inactivo</option>
+										</select>
+									</div>
 								</div>
-
 							</div>
 						</div>
 
@@ -236,9 +311,9 @@
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
 										</a>
-										<h4 class="panel-title">Unidades</h4>
-
-
+										<h4 class="panel-title">
+											Unidades
+										</h4>
 									</div>
 									<div class="panel-body no-padding panel-white">
 										<div class="col-md-12 panel-white no-padding">
@@ -257,17 +332,18 @@
 															</a>
 														</td>
 														<td data-title="'Unidad'">
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione la unidad"
-											class="form-control" name="codigopadre" ng-disabled="true"
-											ng-model="obj.npunidad" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirUnudad($index)">
-												<i class="fa fa-search"></i> Seleccione
-											</button>
-										</span>
-									</div>
+															<div class="input-group">
+																<input type="text" placeholder="Seleccione la unidad"
+																	class="form-control" name="codigopadre" ng-disabled="true"
+																	ng-model="obj.npunidad" />
+																<span class="input-group-btn">
+																	<button type="button" class="btn btn-primary"
+																		ng-click="abrirUnudad($index)">
+																		<i class="fa fa-search"></i>
+																		Seleccione
+																	</button>
+																</span>
+															</div>
 														</td>
 													</tr>
 												</table>
@@ -283,138 +359,17 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<button type="submit" class="btn btn-primary">Guardar
+									<button type="submit" class="btn btn-primary">
+										Guardar
 									</button>
 									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">Cancelar</button>
-
+										ng-click="form.reset(Form)">
+										Cancelar
+									</button>
 								</div>
 							</div>
 						</div>
-
 					</form>
-
-					<script type="text/ng-template" id="modalNombrePerfil.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Perfiles</h3>
-                            </div>
-                            <div class="modal-body">
-
-				<div class="panel-body" ng-init="consultar();" >
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>
-
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
-					<script type="text/ng-template" id="modalEmpleadoCodigo.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Empleados</h3>
-                            </div>
-                            <div class="modal-body">
-
-				<div class="panel-body" ng-init="consultar();" >
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> C&oacute;digo </label>
-											<input type="text" class="form-control" ng-model="codigoFiltro">
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> Socio Negocio Nombre Mostrado </label>
-											<input type="text" class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Nombre mostrado'">{{obj.nombremostrado}}</td>
-								<td data-title="'Tipo'">{{obj.tipo}}</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
-								<td data-title="'Tipo identificaci&oacute;n'">{{obj.tipoidentid}}</td>
-								<td data-title="'Tipo'">{{obj.tipo}}</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
 				</div>
 			</div>
 		</div>

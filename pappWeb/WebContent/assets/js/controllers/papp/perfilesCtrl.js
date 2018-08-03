@@ -1,33 +1,27 @@
 'use strict';
 
-app.controller('PerfilesController', [ "$scope","$rootScope","$uibModalInstance","$uibModal","SweetAlert","$filter", "ngTableParams","perfilesFactory",
-	function($scope,$rootScope,$uibModalInstance,$uibModal,SweetAlert,$filter, ngTableParams, perfilesFactory) {
-    
-	
+app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","PerfilesFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams,PerfilesFactory) {
+
+
 	$scope.nombreFiltro=null;
 	$scope.ordenFiltro=null;
-	
+
 	$scope.edicion=false;
 	$scope.guardar=false;
 	$scope.objeto={};
 	$scope.objetolista={};
 	
 	var pagina = 1;
-	
 	$scope.consultar=function(){
-		
 		$scope.data=[];
-		perfilesFactory.traerPerfiles(pagina).then(function(resp){
-
+		PerfilesFactory.traer(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
-			    
 		})
-	
 	};
 	
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -46,25 +40,20 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModalInstance"
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
-		perfilesFactory.traerPerfilesFiltro(pagina,$scope.nombreFiltro).then(function(resp){
-			
+		PerfilesFactory.traerFiltro(pagina,$scope.nombreFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
-	
+
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
 		$scope.ordenFiltro=null;
-		
-		
+
 		$scope.consultar();
-		
 	};
 	
 	$scope.nuevo=function(){
@@ -80,7 +69,7 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModalInstance"
 	}
 	
 	$scope.editar=function(id){
-		perfilesFactory.traerPermiso(id).then(function(resp){
+		PerfilesFactory.traerPermiso(id).then(function(resp){
 //console.clear();
 //console.log(resp.json);
 			if (resp.estado) {
@@ -91,8 +80,7 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModalInstance"
 			$scope.edicion=true;
 			$scope.guardar=true;
 		})
-		
-	};
+	}
 
 	$scope.agregarDetalle=function(){
 		var obj={id:{perfilid:$scope.objeto,permisoid:null},nppermiso:null};
@@ -106,8 +94,8 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModalInstance"
 	$scope.abrirPerfilesPermisos = function(index) {
 		//console.log("aqui");
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalPerfilesPermisos.html',
-			controller : 'PerfilesPermisosController',
+			templateUrl : 'assets/views/papp/modal/modalPerfilesPermisos.html',
+			controller : 'ModalPerfilesPermisosController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
@@ -120,60 +108,47 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModalInstance"
 	};
 
 	$scope.form = {
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
 
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
-
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
-
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
-
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
-
-		            } else {
-		                
-		            	perfilesFactory.guardar($scope.objeto).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Permiso!", "Registro registrado satisfactoriamente!", "success");
-	 
-		        			 }else{
-			 		             SweetAlert.swal("Permiso!", resp.mensajes.msg, "error");
-		        				 
-		        			 }
-		        			
-		        		})
-		        		
-		            }
-
-		        },
-		        reset: function (form) {
-
-		            $scope.myModel = angular.copy($scope.master);
-		            form.$setPristine(true);
-		            $scope.edicion=false;
-		            $scope.objeto={};
-
-		        }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+            	PerfilesFactory.guardar($scope.objeto).then(function(resp){
+        			 if (resp.estado){
+        				 form.$setPristine(true);
+	 		             $scope.edicion=false;
+	 		             $scope.objeto={};
+	 		             $scope.limpiar();
+	 		             SweetAlert.swal("Permiso!", "Registro registrado satisfactoriamente!", "success");
+        			 }else{
+	 		             SweetAlert.swal("Permiso!", resp.mensajes.msg, "error");
+        			 }
+        		})
+            }
+        },
+        reset: function (form) {
+            $scope.myModel = angular.copy($scope.master);
+            form.$setPristine(true);
+            $scope.edicion=false;
+            $scope.objeto={};
+        }
     };
-	
+
 	$scope.seleccionar=function(obj){
 		$uibModalInstance.close(obj);
-
 	};
 	
 	$scope.cancelar=function(){

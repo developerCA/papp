@@ -77,7 +77,9 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 		if (node === undefined) {
 			$scope.objeto={id:null};
 		} else {
-			
+			$scope.objeto={id:null};
+			$scope.objeto.padreid = node.id;
+			$scope.objeto.nppadre = node.nombre;
 		}
 		
 		$scope.edicion=true;

@@ -22,8 +22,9 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 		})
 	
 	};
-	
+
 	$scope.$watch('data', function() {
+		if (!$scope.data) return;
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -42,8 +43,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
 		$scope.data=[];
 		usuariosFactory.traerUsuariosFiltro(pagina,$scope.usuarioFiltro,$scope.nombreFiltro).then(function(resp){
@@ -88,7 +88,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	$scope.abrirNombrePerfil = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalNombrePerfil.html',
+			templateUrl : 'assets/views/papp/modal/modalNombrePerfil.html',
 			controller : 'PerfilesController',
 			size : 'lg'
 		});
@@ -103,8 +103,8 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	$scope.abrirEmpleadoCodigo = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalEmpleadoCodigo.html',
-			controller : 'EmpleadosController',
+			templateUrl : 'assets/views/papp/modal/modalEmpleadoCodigo.html',
+			controller : 'ModalSocioNegocioEmpleadosController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {

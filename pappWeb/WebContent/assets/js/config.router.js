@@ -356,7 +356,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.perfiles', {
         url: "/perfiles",
         templateUrl: "assets/views/papp/perfiles.html",
-        resolve: loadSequence('ngTable','PerfilesCtrl','PerfilesPermisosCtrl','PerfilesFactory','PermisosFactory'),
+        resolve: loadSequence('ngTable','PerfilesCtrl','PerfilesFactory',
+        		'ModalPerfilesPermisosCtrl','PerfilesPermisosFactory'),
         title: 'Perfiles',
         ncyBreadcrumb: {
             label: 'Perfiles'
@@ -364,7 +365,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.usuarios', {
         url: "/usuarios",
         templateUrl: "assets/views/papp/usuarios.html",
-        resolve: loadSequence('ngTable','UsuariosCtrl','UsuariosUnidadesCtrl','UsuariosFactory','UnidadFactory'),
+        resolve: loadSequence('ngTable','UsuariosCtrl','UsuariosFactory',
+        		'UsuariosUnidadesCtrl','UnidadFactory',
+        		'PerfilesCtrl','PerfilesFactory',
+        		'ModalSocioNegocioEmpleadosCtrl','SociosNegocioFactory'),
         title: 'Usuarios',
         ncyBreadcrumb: {
             label: 'Usuarios'

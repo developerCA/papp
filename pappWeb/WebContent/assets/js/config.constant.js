@@ -114,8 +114,6 @@ app.constant('JS_REQUIRES', {
         'MenuPadreCtrl':'assets/js/controllers/papp/modales/menuPadreCtrl.js',   
         'PermisosCtrl':'assets/js/controllers/papp/permisosCtrl.js',
         'PermisosFactory':'assets/js/factory/permisosFactory.js',
-        'PerfilesCtrl':'assets/js/controllers/papp/perfilesCtrl.js',
-        'PerfilesFactory':'assets/js/factory/perfilesFactory.js',
         'PerfilesPermisosCtrl':'assets/js/controllers/papp/modales/perfilesPermisosCtrl.js',   
         'UsuariosCtrl':'assets/js/controllers/papp/usuariosCtrl.js',
         'UsuariosFactory':'assets/js/factory/usuariosFactory.js',
@@ -128,6 +126,8 @@ app.constant('JS_REQUIRES', {
         'PlanNacionalFactory':'assets/js/factory/plannacionalFactory.js',
         'GradoFuerzaCtrl':'assets/js/controllers/papp/gradofuerzaCtrl.js',
         'GradoFuerzaFactory':'assets/js/factory/gradofuerzaFactory.js',
+        'PerfilesCtrl':'assets/js/controllers/papp/perfilesCtrl.js',
+        'PerfilesFactory':'assets/js/factory/perfilesFactory.js',
           
        
         'EspecialidadesCtrl':'assets/js/controllers/papp/especialidadesCtrl.js',
