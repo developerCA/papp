@@ -1345,11 +1345,14 @@ public class PlanificacionController {
 				ParmnivelesprogramanivelTO nivelesprogramanivel=new ParmnivelesprogramanivelTO();
 				nivelesprogramanivel.setEjerciciofiscalid(ejercicio);
 				parmnivelesprogramanivelTOs=UtilSession.planificacionServicio.transObtenerParmnivelesprogramanivel(nivelesprogramanivel);
+				log.println("parmnivelesprogramanivelTOs: " + parmnivelesprogramanivelTOs.size());
 				NivelesplanificacionTO nivelplanificacionTO=new NivelesplanificacionTO();
 				nivelplanificacionTO.setEjerciciofiscalid(ejercicio);
 				nivelesplanificacionTOs=UtilSession.planificacionServicio.transObtenerNivelesplanificacion(nivelplanificacionTO);
+				log.println("nivelesplanificacionTOs:  "+ nivelesplanificacionTOs.size());
 				ParmnivelesprogramanivelTO parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
-				if(nivelesplanificacionTOs.size()==0) {
+				if(parmnivelesprogramanivelTOs.size()==0) {
+					log.println("no existe parmnivelesprogramanivelTOs");
 					//Formulacion estrategica
 					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
 					parmnivelesprogramanivelTO.getId().setId(1L);
@@ -1386,6 +1389,7 @@ public class PlanificacionController {
 
 				NivelesplanificacionTO nivelesplanificacionTO=new NivelesplanificacionTO();
 				if(nivelesplanificacionTOs.size()==0) {
+					log.println("no existe nivelesplanificacionTOs");
 					//Planificacion
 					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
 					nivelesplanificacionTO.getId().setId(1L);

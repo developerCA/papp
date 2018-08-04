@@ -69,6 +69,11 @@ public class SeguridadController {
 			if(clase.equals("menu")){
 				MenuTO menuTO = gson.fromJson(new StringReader(objeto), MenuTO.class);
 				accion = (menuTO.getId()==null)?"I":"U";
+				//si vienen 0 en padre o permiso le asigno null
+				if(menuTO.getPadreid()!=null && menuTO.getPadreid().longValue()==0)
+					menuTO.setPadreid(null);
+				if(menuTO.getPermisoid()!=null && menuTO.getPermisoid().longValue()==0)
+					menuTO.setPermisoid(null);
 				UtilSession.seguridadServicio.transCrearModificarMenu(menuTO);
 				id=menuTO.getId().toString();
 				menuTO=UtilSession.seguridadServicio.transObtenerMenuTO(menuTO.getId());
@@ -89,7 +94,7 @@ public class SeguridadController {
 				PerfilTO perfilTO = gson.fromJson(new StringReader(objeto), PerfilTO.class);
 				accion = (perfilTO.getId()==null)?"I":"U";
 				UtilSession.seguridadServicio.transCrearModificarPerfil(perfilTO);
-				id=perfilTO.getId().toString();
+				//id=perfilTO.getId().toString();
 				jsonObject.put("perfil", (JSONObject)JSONSerializer.toJSON(perfilTO,perfilTO.getJsonConfig()));
 			}
 
@@ -239,7 +244,9 @@ public class SeguridadController {
 		try {
 			//Menu
 			if(clase.equals("menu")){
-				UtilSession.seguridadServicio.transEliminarMenu(new MenuTO(id));
+				MenuTO menuTO=new MenuTO();
+				menuTO.setId(id);
+				UtilSession.seguridadServicio.transEliminarMenu(menuTO);
 			}
 			//Perfilpermiso
 			else if(clase.equals("perfilpermiso")){

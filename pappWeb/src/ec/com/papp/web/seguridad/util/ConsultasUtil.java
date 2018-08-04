@@ -110,6 +110,8 @@ public class ConsultasUtil {
 				perfilTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				perfilTO.setNombre(parameters.get("nombre"));
+			if(parameters.get("permisoid")!=null && !parameters.get("permisoid").equals(""))
+				perfilTO.setId(Long.valueOf(parameters.get("permisoid")));
 			SearchResultTO<PerfilTO> resultado=UtilSession.seguridadServicio.transObtenerPerfilPaginado(perfilTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());
