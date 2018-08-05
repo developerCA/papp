@@ -380,6 +380,17 @@ public class SeguridadController {
 		return jsonObject.toString();
 	}
 	
+	/**
+	* Metodo para traer los perfiles de usuario
+	*/
+//	@RequestMapping(value = "/perfil/id", method = RequestMethod.GET)
+//	public String perfil(HttpServletRequest request,@RequestBody Long id){
+//		JSONObject jsonObject=new JSONObject();
+//		UsuarioTO usuarioTO=(UsuarioTO)UtilSession.getUsuario(request);
+//		jsonObject.put("ususario", (JSONObject)JSONSerializer.toJSON(usuarioTO,usuarioTO.getJsonConfig()));
+//		return jsonObject.toString();
+//	}
+	
 	@RequestMapping(value = "/cambiarClave", method = RequestMethod.POST)
 	public Respuesta cambiarClave(@RequestBody String objeto,HttpServletRequest request){
 		log.println("entra cambiar la clave: " + objeto);
