@@ -73,6 +73,14 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico" />
+<script type = "text/javascript">
+var seccion = {};
+seccion.usuario = 'NO DEFINIDO';
+</script>
+<script type = "text/javascript">
+seccion.usuario = '${sm_utilitario_usuarioLogin.usuario}';
+seccion.rols = '${sm_utilitario_permisosusuario}';
+</script>
 </head>
 <body ng-controller="AppCtrl">
     <div ui-view id="app" class="lyt-3" ng-class="{'app-mobile' : app.isMobile, 'app-navbar-fixed' : app.layout.isNavbarFixed, 'app-sidebar-fixed' : app.layout.isSidebarFixed, 'app-sidebar-closed':app.layout.isSidebarClosed, 'app-footer-fixed':app.layout.isFooterFixed}"></div>
