@@ -64,7 +64,7 @@ public class UtilSession {
 			Collection<PerfilpermisoTO> perfilpermisoTOs=UtilSession.seguridadServicio.transObtenerPerfilpermiso(perfilpermisoTO);
 			jsonObject.put("permisos", (JSONArray)JSONSerializer.toJSON(perfilpermisoTOs,perfilpermisoTO.getJsonConfig()));
 			request.getSession(true).setAttribute(ConstantesSesion.USUARIO_PERMISOS,jsonObject.toString());
-			
+			System.out.println("permisos: " + jsonObject);
 //				log.println("usuariologin****: " + request.getSession().getAttribute(ConstantesSesion.USUARIO_LOGIN));
 		}catch(Exception e){
 			e.printStackTrace();

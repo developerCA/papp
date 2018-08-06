@@ -217,7 +217,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarSocionegocio(socionegocioTO);
-					id=socionegocioTO.getNpid().toString();
+					//id=socionegocioTO.getNpid().toString();
 					jsonObject.put("socionegocio", (JSONObject)JSONSerializer.toJSON(socionegocioTO,socionegocioTO.getJsonConfig()));
 				}
 			}
