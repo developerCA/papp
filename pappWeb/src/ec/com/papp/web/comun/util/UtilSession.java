@@ -62,9 +62,12 @@ public class UtilSession {
 			perfilpermisoTO.setPermiso(new PermisoTO());
 			perfilpermisoTO.setPerfil(new PerfilTO());
 			Collection<PerfilpermisoTO> perfilpermisoTOs=UtilSession.seguridadServicio.transObtenerPerfilpermiso(perfilpermisoTO);
-			jsonObject.put("permisos", (JSONArray)JSONSerializer.toJSON(perfilpermisoTOs,perfilpermisoTO.getJsonConfig()));
-			request.getSession(true).setAttribute(ConstantesSesion.USUARIO_PERMISOS,jsonObject.toString());
-			System.out.println("permisos: " + jsonObject);
+			//jsonObject.put("permisos", (JSONArray)JSONSerializer.toJSON(perfilpermisoTOs,perfilpermisoTO.getJsonConfig()));
+			String roles="";
+			for(PerfilpermisoTO perfilpermisoTO2:perfilpermisoTOs)
+				roles=perfilpermisoTO2.getNppermiso() + ",";
+			request.getSession(true).setAttribute(ConstantesSesion.USUARIO_PERMISOS,roles);
+			System.out.println("permisos: " + roles);
 //				log.println("usuariologin****: " + request.getSession().getAttribute(ConstantesSesion.USUARIO_LOGIN));
 		}catch(Exception e){
 			e.printStackTrace();

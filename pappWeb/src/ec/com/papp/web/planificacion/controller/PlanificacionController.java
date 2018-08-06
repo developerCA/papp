@@ -1343,11 +1343,11 @@ public class PlanificacionController {
 				Collection<ParmnivelesprogramanivelTO> parmnivelesprogramanivelTOs=new ArrayList<>();
 				//Debo buscar si ya tiene la partida la traigo sino debo crear todos los niveles
 				ParmnivelesprogramanivelTO nivelesprogramanivel=new ParmnivelesprogramanivelTO();
-				nivelesprogramanivel.setEjerciciofiscalid(ejercicio);
+				nivelesprogramanivel.getId().setEjerciciofiscalid(ejercicio);
 				parmnivelesprogramanivelTOs=UtilSession.planificacionServicio.transObtenerParmnivelesprogramanivel(nivelesprogramanivel);
 				log.println("parmnivelesprogramanivelTOs: " + parmnivelesprogramanivelTOs.size());
 				NivelesplanificacionTO nivelplanificacionTO=new NivelesplanificacionTO();
-				nivelplanificacionTO.setEjerciciofiscalid(ejercicio);
+				nivelplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
 				nivelesplanificacionTOs=UtilSession.planificacionServicio.transObtenerNivelesplanificacion(nivelplanificacionTO);
 				log.println("nivelesplanificacionTOs:  "+ nivelesplanificacionTOs.size());
 				ParmnivelesprogramanivelTO parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
@@ -1357,30 +1357,35 @@ public class PlanificacionController {
 					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
 					parmnivelesprogramanivelTO.getId().setId(1L);
 					parmnivelesprogramanivelTO.setTipo("PR");
+					parmnivelesprogramanivelTO.setLongitud(0);
 					parmnivelesprogramanivelTOs.add(parmnivelesprogramanivelTO);
 
 					parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
 					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
 					parmnivelesprogramanivelTO.getId().setId(2L);
 					parmnivelesprogramanivelTO.setTipo("SP");
+					parmnivelesprogramanivelTO.setLongitud(0);
 					parmnivelesprogramanivelTOs.add(parmnivelesprogramanivelTO);
 
 					parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
 					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
 					parmnivelesprogramanivelTO.getId().setId(3L);
 					parmnivelesprogramanivelTO.setTipo("PO");
+					parmnivelesprogramanivelTO.setLongitud(0);
 					parmnivelesprogramanivelTOs.add(parmnivelesprogramanivelTO);
 
 					parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
 					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
 					parmnivelesprogramanivelTO.getId().setId(4L);
 					parmnivelesprogramanivelTO.setTipo("AC");
+					parmnivelesprogramanivelTO.setLongitud(0);
 					parmnivelesprogramanivelTOs.add(parmnivelesprogramanivelTO);
 
 					parmnivelesprogramanivelTO=new ParmnivelesprogramanivelTO();
 					parmnivelesprogramanivelTO.getId().setEjerciciofiscalid(ejercicio);
 					parmnivelesprogramanivelTO.getId().setId(5L);
 					parmnivelesprogramanivelTO.setTipo("SA");
+					parmnivelesprogramanivelTO.setLongitud(0);
 					parmnivelesprogramanivelTOs.add(parmnivelesprogramanivelTO);
 					//Mando a guardar todo
 					UtilSession.planificacionServicio.transCrearModificarParmnivelesprogramanivel(parmnivelesprogramanivelTOs, true);
@@ -1394,36 +1399,54 @@ public class PlanificacionController {
 					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
 					nivelesplanificacionTO.getId().setId(1L);
 					nivelesplanificacionTO.setTipo("AC");
+					nivelesplanificacionTO.setLongitud(0);
+					nivelesplanificacionTO.setPrefijo(" ");
+					nivelesplanificacionTO.setSeparador(" ");
 					nivelesplanificacionTOs.add(nivelesplanificacionTO);
 
 					nivelesplanificacionTO=new NivelesplanificacionTO();
 					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
 					nivelesplanificacionTO.getId().setId(2L);
 					nivelesplanificacionTO.setTipo("SA");
+					nivelesplanificacionTO.setLongitud(0);
+					nivelesplanificacionTO.setPrefijo(" ");
+					nivelesplanificacionTO.setSeparador(" ");
 					nivelesplanificacionTOs.add(nivelesplanificacionTO);
 
 					nivelesplanificacionTO=new NivelesplanificacionTO();
 					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
 					nivelesplanificacionTO.getId().setId(3L);
 					nivelesplanificacionTO.setTipo("TA");
+					nivelesplanificacionTO.setLongitud(0);
+					nivelesplanificacionTO.setPrefijo(" ");
+					nivelesplanificacionTO.setSeparador(" ");
 					nivelesplanificacionTOs.add(nivelesplanificacionTO);
 
 					nivelesplanificacionTO=new NivelesplanificacionTO();
 					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
 					nivelesplanificacionTO.getId().setId(4L);
 					nivelesplanificacionTO.setTipo("ST");
+					nivelesplanificacionTO.setLongitud(0);
+					nivelesplanificacionTO.setPrefijo(" ");
+					nivelesplanificacionTO.setSeparador(" ");
 					nivelesplanificacionTOs.add(nivelesplanificacionTO);
 
 					nivelesplanificacionTO=new NivelesplanificacionTO();
 					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
 					nivelesplanificacionTO.getId().setId(5L);
 					nivelesplanificacionTO.setTipo("IT");
+					nivelesplanificacionTO.setLongitud(0);
+					nivelesplanificacionTO.setPrefijo(" ");
+					nivelesplanificacionTO.setSeparador(" ");
 					nivelesplanificacionTOs.add(nivelesplanificacionTO);
 
 					nivelesplanificacionTO=new NivelesplanificacionTO();
 					nivelesplanificacionTO.getId().setEjerciciofiscalid(ejercicio);
 					nivelesplanificacionTO.getId().setId(6L);
 					nivelesplanificacionTO.setTipo("SI");
+					nivelesplanificacionTO.setLongitud(0);
+					nivelesplanificacionTO.setPrefijo(" ");
+					nivelesplanificacionTO.setSeparador(" ");
 					nivelesplanificacionTOs.add(nivelesplanificacionTO);
 
 					UtilSession.planificacionServicio.transCrearModificarNivelesplanificacion(nivelesplanificacionTOs, true);
