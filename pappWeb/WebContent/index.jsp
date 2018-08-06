@@ -81,6 +81,9 @@ seccion.usuario = 'NO DEFINIDO';
 seccion.usuario = '${sm_utilitario_usuarioLogin.usuario}';
 seccion.rols = '${sm_utilitario_permisosusuario}';
 </script>
+<script type="text/javascript">
+console.log(seccion);
+</script>
 </head>
 <body ng-controller="AppCtrl">
     <div ui-view id="app" class="lyt-3" ng-class="{'app-mobile' : app.isMobile, 'app-navbar-fixed' : app.layout.isNavbarFixed, 'app-sidebar-fixed' : app.layout.isSidebarFixed, 'app-sidebar-closed':app.layout.isSidebarClosed, 'app-footer-fixed':app.layout.isFooterFixed}"></div>

@@ -10,7 +10,7 @@ app.factory("estructuraPartidaPresupuestariaFactory", [ "Restangular", function(
 		},
 		
 		guardar:function(objeto){
-			var url = "planificacion/partidapresupuestaria/";
+			var url = "planificacion/partidapresupuestaria";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 	}

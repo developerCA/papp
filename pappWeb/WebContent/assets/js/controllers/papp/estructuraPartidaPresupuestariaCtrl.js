@@ -65,6 +65,7 @@ app.controller('EstructuraPartidaPresupuestariaController', [ "$scope","$rootSco
             	let tObj = {};
             	tObj.parmnivelesprogramanivelTOs=$scope.pLista;
             	tObj.nivelesplanificacionTOs=$scope.feLista;
+            	//tObj.nivelesplanificacionTOs[2].nptipo = "proyecto";
             	estructuraPartidaPresupuestariaFactory.guardar(tObj).then(function(resp){
         			 if (resp.estado){
         				 SweetAlert.swal("Estructura Partida Presupuestaria!", "Registro guardado satisfactoriamente!", "success");
