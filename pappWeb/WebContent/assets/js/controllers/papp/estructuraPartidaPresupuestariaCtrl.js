@@ -63,8 +63,8 @@ app.controller('EstructuraPartidaPresupuestariaController', [ "$scope","$rootSco
                 return;
             } else {
             	let tObj = {};
-            	tObj.parmnivelesprogramanivelTOs=$scope.pLista;
-            	tObj.nivelesplanificacionTOs=$scope.feLista;
+            	tObj.parmnivelesprogramanivelTOs=$scope.feLista;
+            	tObj.nivelesplanificacionTOs=$scope.pLista;
             	//tObj.nivelesplanificacionTOs[2].nptipo = "proyecto";
             	estructuraPartidaPresupuestariaFactory.guardar(tObj).then(function(resp){
         			 if (resp.estado){
