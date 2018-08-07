@@ -3,6 +3,11 @@ seccion.rols = JSON.parse(seccion.rols);
 seccion.rols = seccion.rols.permisos;
 //console.log(seccion.rols);
 
+//https://www.youtube.com/watch?v=Yw3xxAUJ0Ns
+//app.value('usuario', seccion.usuario);
+// https://www.oscarlijo.com/blog/servicios-en-angularjs/
+
+
 function ifRollId(id) {
 	if (!isNaN(id)) {
 		id = parseInt(id);
