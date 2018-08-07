@@ -120,8 +120,9 @@
 										</label>
 									</div>
 									<div class="col-md-10">
-										<input type="text" ng-disabled="true" placeholder="Ingrese un usuario"
-											class="form-control" name="usuario" ng-model="objeto.usuario" />
+										<input type="text" ng-disabled="objeto.id!=null" placeholder="Ingrese un usuario"
+											class="form-control" name="usuario" ng-model="objeto.usuario"
+											style="text-transform:uppercase;" />
 									</div>
 								</div>
 

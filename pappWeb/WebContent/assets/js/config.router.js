@@ -368,7 +368,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence('ngTable','UsuariosCtrl','UsuariosFactory',
         		'UsuariosUnidadesCtrl','UnidadFactory',
         		'ModalNombrePerfilCtrl','PerfilesFactory',
-        		'ModalSocioNegocioEmpleadosCtrl','SociosNegocioFactory'),
+        		'ModalSocioNegocioEmpleadosCtrl','SociosNegocioFactory',
+        		'ModalUnidadCortoCtrl','UnidadFactory'),
         title: 'Usuarios',
         ncyBreadcrumb: {
             label: 'Usuarios'
