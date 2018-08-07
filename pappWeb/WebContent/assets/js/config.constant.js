@@ -280,6 +280,7 @@ app.constant('JS_REQUIRES', {
         'GeograficoFactory':'assets/js/factory/geograficoFactory.js',
         'ModalPerfilesPermisosCtrl':'assets/js/controllers/papp/modales/modalPerfilesPermisosCtrl.js',
         'PerfilesPermisosFactory':'assets/js/factory/perfilesPermisosFactory.js',
+        'ModalNombrePerfilCtrl':'assets/js/controllers/papp/modales/modalNombrePerfilCtrl.js',
 
 
     },

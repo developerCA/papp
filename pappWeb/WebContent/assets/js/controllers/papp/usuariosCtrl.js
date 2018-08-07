@@ -89,7 +89,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.abrirNombrePerfil = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalNombrePerfil.html',
-			controller : 'PerfilesController',
+			controller : 'ModalNombrePerfilController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {

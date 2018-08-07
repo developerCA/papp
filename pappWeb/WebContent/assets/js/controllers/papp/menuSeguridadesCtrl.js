@@ -146,7 +146,6 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 			menuSeguridadesFactory.eliminar(node.id).then(function(resp){
 				//console.log(resp);
 				if (resp.estado){
-					$scope.limpiar();
 					SweetAlert.swal("Menu Seguridades!", "Opcion eliminada satisfactoriamente!", "success");
 				}
 				else{

@@ -90,13 +90,13 @@
 							<div class="col-md-12">
 								<div class="form-group"
 									ng-class="{'has-error':Form.anio.$dirty && Form.anio.$invalid, 'has-success':Form.anio.$valid}">
-									<div class="col-md-4">
+									<div class="col-md-2">
 										<label class="control-label">
 											A&ntilde;o
 											<span class="symbol required"></span>
 										</label>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-10">
 										<input type="text" placeholder="Ingrese el a&ntilde;o fiscal"
 											class="form-control" name="anio" ng-disabled="objeto.id !=null" required
 											ng-pattern="/^[0-9]*$/" ng-model="objeto.anio" ng-minlength="4"
@@ -106,12 +106,12 @@
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
-									<div class="col-md-4">
+									<div class="col-md-2">
 										<label for="form-field-select-1"> Estado <span
 											class="symbol required"></span>
 										</label>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-10">
 										<select class="form-control" name="estado"
 											ng-model="objeto.estado" required>
 											<option value="A">Activo</option>
@@ -122,12 +122,12 @@
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.ejefis.$dirty && Form.ejefis.$invalid, 'has-success':Form.ejefis.$valid}">
-									<div class="col-md-4">
+									<div class="col-md-2">
 										<label for="form-field-select-1"> Ejercicio Fiscal <span
 											class="symbol required"></span>
 										</label>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-10">
 										<select class="form-control" name="ejefis"
 											ng-model="objeto.cerrado" required>
 											<option value=0>Abierto</option>
@@ -137,6 +137,7 @@
 								</div>
 							</div>
 						</div>
+						<br>
 
 						<div class="row">
 							<div class="col-md-12">
@@ -150,18 +151,8 @@
 							</div>
 						</div>
 					</form>
-
-
-
-
-
 				</div>
-
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
-

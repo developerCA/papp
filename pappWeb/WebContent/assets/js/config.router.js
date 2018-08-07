@@ -367,7 +367,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: "assets/views/papp/usuarios.html",
         resolve: loadSequence('ngTable','UsuariosCtrl','UsuariosFactory',
         		'UsuariosUnidadesCtrl','UnidadFactory',
-        		'PerfilesCtrl','PerfilesFactory',
+        		'ModalNombrePerfilCtrl','PerfilesFactory',
         		'ModalSocioNegocioEmpleadosCtrl','SociosNegocioFactory'),
         title: 'Usuarios',
         ncyBreadcrumb: {
