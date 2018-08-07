@@ -153,7 +153,10 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 		                return;
 
 		            } else {
-		                
+		                if ($scope.objeto.clave != ($scope.objeto.confirmacion === undefined? "": $scope.objeto.confirmacion)) {
+		                	SweetAlert.swal("Usuario!", "Las claves no son iguales", "error");
+		                	return;
+		                }
 		            	usuariosFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);

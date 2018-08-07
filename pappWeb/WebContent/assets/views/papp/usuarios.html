@@ -79,7 +79,7 @@
 									{{ obj.usuario }}
 								</td>
 								<td data-title="'C&oacute;digo'">
-									FALTA
+									{{ obj.npsocionegociocodigo }}
 								</td>
 								<td data-title="'Nombre mostrado'">
 									{{ obj.npsocionegocio }}
@@ -174,8 +174,8 @@
 									</div>
 									<div class="col-md-10">
 										<input type="password" placeholder="Nueva contrase&ntilde;a"
-											class="form-control" name="clave" required
-											ng-model="objeto.clave" ng-minlength="1" />
+											class="form-control" name="clave"
+											ng-model="objeto.clave" />
 										<span class="error text-small block"
 											ng-if="Form.clave.$dirty &&
 											Form.clave.$invalid">
@@ -195,8 +195,8 @@
 									</div>
 									<div class="col-md-10">
 										<input type="password" placeholder="Repetir Contrase&ntilde;a"
-											class="form-control" name="confirmacion" required
-											ng-model="objeto.confirmacion" ng-minlength="1" />
+											class="form-control" name="confirmacion"
+											ng-model="objeto.confirmacion" />
 										<span class="error text-small block"
 											ng-if="Form.confirmacion.$dirty &&
 											Form.confirmacion.$invalid">
