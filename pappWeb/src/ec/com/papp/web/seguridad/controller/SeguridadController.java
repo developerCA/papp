@@ -8,10 +8,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +37,9 @@ import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.papp.web.seguridad.util.ConsultasUtil;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 /**
  * @autor: jcalderon
@@ -113,6 +112,23 @@ public class SeguridadController {
 				accion = (usuarioTO.getId()==null)?"I":"U";
 				if(usuarioTO.getNpfechaactualizacionclave()!=null)
 					usuarioTO.setFechaactualizacionclave(UtilGeneral.parseStringToDate(usuarioTO.getNpfechaactualizacionclave()));
+				if(usuarioTO.getId()==null) {
+					usuarioTO.setClave(MensajesWeb.getString("clave.inicial.usuario"));
+					usuarioTO.setCambiarclave("1");
+					usuarioTO.setFechaactualizacionclave(new Date());
+					usuarioTO.setEstado1("1");
+				}
+				else {
+					//Si la clave es distinta la encripto nuevamente
+					UsuarioTO usuariograbado=UtilSession.seguridadServicio.transObtenerUsuarioTO(usuarioTO.getId());
+					if(!usuarioTO.getClave().equals(usuariograbado.getClave())){
+						log.println("va a cambiar clave");
+						String clave=usuarioTO.getClave();
+						usuarioTO.setClave(ConsultasUtil.encriptarClave(clave));
+						usuarioTO.setCambiarclave("1");
+						usuarioTO.setFechaactualizacionclave(new Date());
+					}
+				}
 				UtilSession.seguridadServicio.transCrearModificarusuario(usuarioTO);
 				id=usuarioTO.getId().toString();
 				jsonObject.put("usuario", (JSONObject)JSONSerializer.toJSON(usuarioTO,usuarioTO.getJsonConfig()));
@@ -419,6 +435,7 @@ public class SeguridadController {
 						usuario.setCambiarclave("0");
 						log.println("va a guardar el usuario");
 						log.println("el nombre de usuario es:"+usuario.getNombre());
+						usuario.setFechaactualizacionclave(new Date());
 						UtilSession.seguridadServicio.transCrearModificarusuario(usuario);
 					}
 					else{
