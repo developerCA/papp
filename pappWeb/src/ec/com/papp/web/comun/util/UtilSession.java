@@ -65,7 +65,7 @@ public class UtilSession {
 			//jsonObject.put("permisos", (JSONArray)JSONSerializer.toJSON(perfilpermisoTOs,perfilpermisoTO.getJsonConfig()));
 			String roles="";
 			for(PerfilpermisoTO perfilpermisoTO2:perfilpermisoTOs)
-				roles=perfilpermisoTO2.getNppermiso() + ",";
+				roles=roles + "," + perfilpermisoTO2.getNppermiso();
 			request.getSession(true).setAttribute(ConstantesSesion.USUARIO_PERMISOS,roles);
 			System.out.println("permisos: " + roles);
 //				log.println("usuariologin****: " + request.getSession().getAttribute(ConstantesSesion.USUARIO_LOGIN));
