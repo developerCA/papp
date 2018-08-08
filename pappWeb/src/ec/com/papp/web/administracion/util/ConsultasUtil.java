@@ -94,7 +94,9 @@ public class ConsultasUtil {
 				ejerciciofiscalTO.setAnio(Long.valueOf(parameters.get("anio")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				ejerciciofiscalTO.setEstado(parameters.get("estado"));
-//			SearchResultTO<EjerciciofiscalTO> resultado=UtilSession.adminsitracionServicio.transObtenerEjerciciofiscalPaginado(ejerciciofiscalTO);
+			if(parameters.get("visible")!=null && !parameters.get("visible").equals(""))
+				ejerciciofiscalTO.setVisible(parameters.get("visible"));
+			//			SearchResultTO<EjerciciofiscalTO> resultado=UtilSession.adminsitracionServicio.transObtenerEjerciciofiscalPaginado(ejerciciofiscalTO);
 			Collection<EjerciciofiscalTO> resultado=UtilSession.adminsitracionServicio.transObtenerEjerciciofiscal(ejerciciofiscalTO);
 			//long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			//HashMap<String, String>  resultado.size()=new HashMap<String, String>();
