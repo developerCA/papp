@@ -16,7 +16,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 		
 		$scope.data=[];
 		usuariosFactory.traerUsuarios(pagina).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -76,12 +76,13 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.editar=function(id){
 		usuariosFactory.traerUsuario(id).then(function(resp){
 //console.clear();
-		console.log(resp.json);
+		//console.log(resp.json);
 		if (resp.estado)
-			   $scope.objeto=resp.json.usuario;
-		       $scope.objetoDetalles=resp.json.details;
-			   $scope.edicion=true;
-			   //console.log($scope.objeto);
+			$scope.objeto=resp.json.usuario;
+			$scope.objeto.confirmacion=$scope.objeto.clave;
+		    $scope.objetoDetalles=resp.json.details;
+			$scope.edicion=true;
+			//console.log($scope.objeto);
 		})
 		
 	};
@@ -93,7 +94,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.perfilid = obj.id;
 			$scope.objeto.npperfil=obj.nombre;
 		}, function() {
@@ -108,103 +109,91 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
-			$scope.objeto.empleadoid = obj.id;
-			$scope.objeto.empleadocodigo = obj.codigo;
-			$scope.objeto.npempleadonombremostrado = obj.nombremostrado;
+			//console.log(obj);
+			$scope.objeto.socionegocioid = obj.id;
+			$scope.objeto.npsocionegociocodigo = obj.codigo;
+			$scope.objeto.npsocionegocio = obj.nombremostrado;
 		}, function() {
 			//console.log("close modal");
 		});
 	};
 
 	$scope.eliminar=function(id){
-		
 		usuariosFactory.eliminar(id).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.estado)
 				$scope.limpiar();
-
 		})
-		
 	};
-	
-	
-	
+
 	 $scope.form = {
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
 
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
 
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
 
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
 
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
-
-		            } else {
-		                if ($scope.objeto.clave != ($scope.objeto.confirmacion === undefined? "": $scope.objeto.confirmacion)) {
-		                	SweetAlert.swal("Usuario!", "Las claves no son iguales", "error");
-		                	return;
-		                }
-		            	usuariosFactory.guardar($scope.objeto).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Usuario!", "Registro registrado satisfactoriamente!", "success");
-	 
-		        			 }else{
-			 		             SweetAlert.swal("Usuario!", resp.mensajes.msg, "error");
-		        				 
-		        			 }
-		        			
-		        		})
-		        		
-		            }
-
-		        },
-		        reset: function (form) {
-
-		            $scope.myModel = angular.copy($scope.master);
-		            form.$setPristine(true);
-		            $scope.edicion=false;
-		            $scope.objeto={};
-
-		        }
+            } else {
+                if ($scope.objeto.clave != ($scope.objeto.confirmacion === undefined? "": $scope.objeto.confirmacion)) {
+                	SweetAlert.swal("Usuario!", "Las claves no son iguales", "error");
+                	return;
+                }
+                var tObj = Object.assign({}, $scope.objeto);
+                tObj.usuariounidadTOs=$scope.objetoDetalles;
+            	usuariosFactory.guardar(tObj).then(function(resp){
+        			 if (resp.estado){
+        				 form.$setPristine(true);
+	 		             $scope.edicion=false;
+	 		             $scope.objeto={};
+	 		             $scope.limpiar();
+	 		             SweetAlert.swal("Usuario!", "Registro registrado satisfactoriamente!", "success");
+        			 }else{
+	 		             SweetAlert.swal("Usuario!", resp.mensajes.msg, "error");
+        			 }
+        		})
+            }
+        },
+        reset: function (form) {
+            $scope.myModel = angular.copy($scope.master);
+            form.$setPristine(true);
+            $scope.edicion=false;
+            $scope.objeto={};
+        }
     };
 
-		$scope.agregarDetalle=function(){
-			var obj={id:{id:$scope.objeto.id, unidad:null},npunidad:null};
-			$scope.objetoDetalles.push(obj);
-		}
+	 $scope.agregarDetalle=function(){
+		var obj={id:{id:$scope.objeto.id, unidad:null},npunidad:null};
+		$scope.objetoDetalles.push(obj);
+	}
 
-		$scope.removerDetalle=function(index){
-			$scope.objetoDetalles.splice(index,1);
-		}
+	$scope.removerDetalle=function(index){
+		$scope.objetoDetalles.splice(index,1);
+	}
 
-		$scope.abrirUnudad = function(index) {
-			var modalInstance = $uibModal.open({
-				templateUrl : 'assets/views/papp/modal/modalUnidadCorto.html',
-				controller : 'ModalUnidadCortoController',
-				size : 'lg'
-			});
-			modalInstance.result.then(function(obj) {
-				$scope.objetoDetalles[index].id.unidad = obj.id;
-				$scope.objetoDetalles[index].npunidad=obj.nombre;
-			}, function() {
-			});
-		};
-
+	$scope.abrirUnudad = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalUnidadCorto.html',
+			controller : 'ModalUnidadCortoController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			$scope.objetoDetalles[index].id.unidad = obj.id;
+			$scope.objetoDetalles[index].npunidad=obj.nombre;
+		}, function() {
+		});
+	};
 } ]);

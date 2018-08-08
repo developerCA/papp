@@ -523,7 +523,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		            	$scope.newobj = $scope.objetoSp;
 						break;
 					case "PY":
-		            	console.log($scope.objetoPy); 
+		            	//console.log($scope.objetoPy); 
 		            	$scope.newobj = Object.assign({}, $scope.objetoPy);
 		        		$scope.newobj.npFechainicio = toStringDate($scope.newobj.npFechainicio);
 						$scope.newobj.npFechafin = toStringDate($scope.newobj.npFechafin);
