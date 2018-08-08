@@ -362,8 +362,11 @@ public class EstructuraorganicaController {
 				for(UnidadarbolplazaempleadoTO unidadarbolplazaempleadoTO2:unidadarbolplazaempleadoTOs) {
 					if(unidadarbolplazaempleadoTO2.getFechainicio()!=null)
 						unidadarbolplazaempleadoTO2.setNpfechainicioc(UtilGeneral.parseDateToString(unidadarbolplazaempleadoTO2.getFechainicio()));
-					if(unidadarbolplazaempleadoTO2.getFechafin()!=null)
+					if(unidadarbolplazaempleadoTO2.getFechafin()!=null) {
+						if(!(UtilGeneral.parseDateToString(unidadarbolplazaempleadoTO2.getFechafin())).equals("01/01/0001") && 
+								!(UtilGeneral.parseDateToString(unidadarbolplazaempleadoTO2.getFechafin())).equals("01/01/1901"))
 						unidadarbolplazaempleadoTO2.setNpfechafinc(UtilGeneral.parseDateToString(unidadarbolplazaempleadoTO2.getFechafin()));
+					}
 				}
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(unidadarbolplazaempleadoTOs,unidadarbolplazaempleadoTO.getJsonConfig()));
 			}
