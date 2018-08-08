@@ -20,7 +20,7 @@
 
 				<div class="panel-body" id="panel1">
 
-					<form name="Form" id="form1" novalidate
+					<form name="Form" id="form" novalidate
 						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-6">
@@ -57,13 +57,15 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid,
-									'has-success':Form.nombre.$valid}">
+									ng-class="{'has-error':Form.clave.$dirty && Form.clave.$invalid,
+									'has-success':Form.clave.$valid}">
 									<label class="control-label"> Nueva contrase&ntilde;a <span
 										class="symbol required"></span>
-									</label> <input type="password" placeholder="Nueva contrase&ntilde;a"
+									</label>
+									<input type="password" placeholder="Nueva contrase&ntilde;a"
 										class="form-control" name="clave" required
-										ng-model="objeto.clave" ng-minlength="1" /> <span
+										ng-model="objeto.clave" ng-minlength="1" />
+									<span
 										class="error text-small block"
 										ng-if="Form.clave.$dirty &&
 										Form.clave.$invalid">Contrase&ntilde;a
@@ -74,8 +76,8 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid,
-									'has-success':Form.nombre.$valid}">
+									ng-class="{'has-error':Form.confirmacion.$dirty && Form.confirmacion.$invalid,
+									'has-success':Form.confirmacion.$valid}">
 									<label class="control-label"> Repetir contrase&ntilde;a <span
 										class="symbol required"></span>
 									</label> <input type="password" placeholder="Repetir Contrase&ntilde;a"
@@ -91,8 +93,8 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid,
-									'has-success':Form.nombre.$valid}">
+									ng-class="{'has-error':Form.Email.$dirty && Form.Email.$invalid,
+									'has-success':Form.Email.$valid}">
 									<label class="control-label"> Email
 									</label> <input type="email" placeholder="Email"
 										class="form-control" name="Email" required
