@@ -130,7 +130,7 @@ public class SeguridadController {
 					}
 				}
 				UtilSession.seguridadServicio.transCrearModificarusuario(usuarioTO);
-				id=usuarioTO.getId().toString();
+				//id=usuarioTO.getId().toString();
 				jsonObject.put("usuario", (JSONObject)JSONSerializer.toJSON(usuarioTO,usuarioTO.getJsonConfig()));
 			}
 			
