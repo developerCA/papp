@@ -24,7 +24,7 @@ app.directive('navigation', ['$compile' ,'$sce','$animate', '_' , function($comp
         	
         	  menuHtml=' <nav> <ul class="main-navigation-menu">';
         	  
-    		  if (seccion.cambiarclave) {
+    		  if (seccion.cambiarclave == '1') {
         		  menuHtml+='<li ng-class="{\'active open\':$state.includes(\''+ '' +'\')}">';
          		  //menuHtml+='<li class="">';
         		  menuHtml+=' <a ui-sref="app.cambiarcontrasena">';
@@ -33,7 +33,7 @@ app.directive('navigation', ['$compile' ,'$sce','$animate', '_' , function($comp
         		  menuHtml+='    <span><i class=" ti-line-double"></i></span>';
         		  menuHtml+='    </div>';
         		  menuHtml+='	 <div class="item-inner">';
-        		  menuHtml+='	  <span class="title" > Cambiar contrase&nacuote;a </span><i class="icon-arrow"></i>';
+        		  menuHtml+='	  <span class="title" > Cambiar contrasena </span><i class="icon-arrow"></i>';
         		  menuHtml+='    </div>';
         		  menuHtml+='   </div>';
         		  menuHtml+=' </a>';
