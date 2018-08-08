@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import ec.com.papp.seguridad.to.UsuarioTO;
+import ec.com.papp.web.comun.util.ConstantesSesion;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
@@ -44,10 +45,14 @@ public class LoginController {
 			Collection<UsuarioTO> usuarioTOs=UtilSession.seguridadServicio.transObtenerusuario(usuarioTO);
 			usuarioTO=usuarioTOs.iterator().next();
 			UtilSession.setUsuario(request, usuarioTO);
-			if(UtilSession.getUsuario(request).getCambiarclave()==null || UtilSession.getUsuario(request).getCambiarclave().equals("1")){
-				mav = new ModelAndView("cambiarcontrasenaunico");
-			}
-			else
+			if(UtilSession.getUsuario(request).getCambiarclave()==null || UtilSession.getUsuario(request).getCambiarclave().equals("1"))
+				request.getSession(true).setAttribute(ConstantesSesion.USUARIO_CAMBIARCLAVE,"1");
+			else	
+				request.getSession(true).setAttribute(ConstantesSesion.USUARIO_CAMBIARCLAVE,"0");
+//			if(UtilSession.getUsuario(request).getCambiarclave()==null || UtilSession.getUsuario(request).getCambiarclave().equals("1")){
+//				mav = new ModelAndView("cambiarcontrasenaunico");
+//			}
+//			else
 				mav= new ModelAndView("index");
 		}
 		//Usuario sin autenticar

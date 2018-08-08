@@ -21,5 +21,6 @@ public interface ConstantesSesion {
     public final static String USUARIO_PERMISOS					= SESSION_MANAGER  + "_permisosusuario";
     /*VALOR ANTIGUO PARA AUDITORIA*/    
     public final static String VALORANTIGUO						= BASE_SESSION  + "_valorantiguo";
+    public final static String USUARIO_CAMBIARCLAVE				= SESSION_MANAGER  + "_cambiarclave";
     
 }
