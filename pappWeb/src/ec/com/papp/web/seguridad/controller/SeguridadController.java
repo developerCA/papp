@@ -124,7 +124,7 @@ public class SeguridadController {
 					if(!usuarioTO.getClave().equals(usuariograbado.getClave())){
 						log.println("va a cambiar clave");
 						String clave=usuarioTO.getClave();
-						usuarioTO.setClave(ConsultasUtil.encriptarClave(clave));
+						usuarioTO.setClave(ConsultasUtil.encriptarClave(clave.toLowerCase()));
 						usuarioTO.setCambiarclave("1");
 						usuarioTO.setFechaactualizacionclave(new Date());
 					}
