@@ -93,7 +93,10 @@ document.getElementById('nombreUsuario').innerHTML = '&nbsp;'+seccion.usuario;
 
                 <ul role="menu" class="dropdown-menu dropdown-light animated fadeInUpShort ">
                     <li class="ng-scope">
-                        <a ng-click="language.set(localeId, $event)" href="javascript:void(0)" class="menu-toggler ng-binding"> Cambiar contrase&ntilde;a </a>
+                        <a ui-sref="app.cambiarcontrasena"
+                        	class="menu-toggler ng-binding">
+                        	Cambiar clave
+						</a>
                     </li>
                     <li class="ng-scope">
                         <a  href="logout" class="menu-toggler ng-binding"> Cerrar sesi&oacute;n </a>

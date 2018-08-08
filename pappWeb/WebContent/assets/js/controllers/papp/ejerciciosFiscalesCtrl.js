@@ -31,19 +31,28 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 			        
 				var fecha = new Date();
 				var ano = fecha.getFullYear();
-			
+
+				var tObj = [];
 			    for (var i=0;i<$scope.ejerciciosFiscales.length;i++){
-			    	
-			    	if (ano==$scope.ejerciciosFiscales[i].anio){
-			    		$rootScope.ejefiscal=$scope.ejerciciosFiscales[i].id;
-			    		$rootScope.ejefiscalobj=$scope.ejerciciosFiscales[i];
-			    		$scope.ejercicioSistema= $rootScope.ejefiscalobj;
+			    	if ($scope.ejerciciosFiscales[i].visible == '1') {
+			    		tObj.push($scope.ejerciciosFiscales[i]);
 			    	}
 			    }
-			  
-			  
+			    $scope.ejerciciosFiscales = tObj;
+			    $rootScope.ejefiscal = null;
+			    for (var i=0;i<$scope.ejerciciosFiscales.length;i++){
+			    	if (ano==$scope.ejerciciosFiscales[i].anio){
+			    		$rootScope.ejefiscal = $scope.ejerciciosFiscales[i].id;
+			    		$rootScope.ejefiscalobj = $scope.ejerciciosFiscales[i];
+			    		$scope.ejercicioSistema = $rootScope.ejefiscalobj;
+			    	}
+			    }
+			    if ($rootScope.ejefiscal == null) {
+		    		$rootScope.ejefiscal = $scope.ejerciciosFiscales[0].id;
+		    		$rootScope.ejefiscalobj = $scope.ejerciciosFiscales[0];
+		    		$scope.ejercicioSistema = $rootScope.ejefiscalobj;
+			    }
 		});
-	
 	};
 	
 	$scope.cambiarEjercicio=function(){

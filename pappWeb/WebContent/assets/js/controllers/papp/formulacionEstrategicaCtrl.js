@@ -246,6 +246,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		$scope.nodeActivo=node;
 		//console.log(node);
 		if (node.nodeTipo == "PR") { // Programa
+			$scope.objetoPr = {};
 			formulacionEstrategicaFactory.traerProgramaEditar(node).then(function(resp){
 				//console.log(resp.json);
 				if (resp.estado) {
@@ -258,6 +259,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			});
 		}
 		if (node.nodeTipo == "SP") { // SubPrograma
+			$scope.objetoSp = {};
 			formulacionEstrategicaFactory.traerSubProgramaEditar(node.id).then(function(resp){
 				//console.log(resp.json);
 				if (resp.estado) {
@@ -270,6 +272,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			});
 		}
 		if (node.nodeTipo == "PY") { // Proyecto
+			$scope.objetoPy = {};
 			formulacionEstrategicaFactory.traerProyectoEditar(node.id).then(function(resp){
 				//console.log(resp.json);
 				if (resp.estado) {
@@ -289,6 +292,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			});
 		}
 		if (node.nodeTipo == "AC") { // Actividad
+			$scope.objetoAc = {};
 			formulacionEstrategicaFactory.traerActividadEditar(node.id).then(function(resp){
 				//console.log(resp.json);
 				if (resp.estado) {
@@ -302,6 +306,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			});
 		}
 		if (node.nodeTipo == "SA") { // SubActividad
+			$scope.objetoSa = {};
 			formulacionEstrategicaFactory.traerSubActividadEditar(node.id).then(function(resp){
 				//console.log(resp.json);
 				if (resp.estado) {

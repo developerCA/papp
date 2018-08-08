@@ -84,7 +84,7 @@
 									ng-click="solicitarAjustado(obj);">
 									<i class="fa ti-pencil-alt"></i>
 								</a></td>
-
+<!--
 								<td><a class="btn btn-sm btn-primary"
 									style="background-color: #00B300 !important"
 									uib-tooltip="Aprobar Planificaci&oacute;n"
@@ -109,6 +109,7 @@
 									ng-click="denegarAjustado(obj);">
 										<i class="fa ti-signal"></i>
 								</a></td>
+-->
 								<td><a class="btn btn-sm btn-primary"
 									style="background-color: #00B300 !important"
 									uib-tooltip="Matriz Presupuestos"
@@ -2958,32 +2959,38 @@
 
 <!-- ng-click="vista(node);" -->
 <script type="text/ng-template" id="nodes_renderer.html">
-<div ui-tree-handle class="tree-node tree-node-content">
+<div ui-tree-handle class="tree-node tree-node-content" style="padding: 3px 3px;border-bottom: 1px dashed black !important;border: none;">
 	<table width="100%">
 		<tr>
-			<td width="1%">
-				<div class="col-md-12" ng-show="!node.nphoja">
-				    <a class="btn btn-default btn-xs"
-						data-nodrag ng-click="toggle(this);cargarHijos(node)">
-						<span class="glyphicon" ng-class="{
-					       	'glyphicon-chevron-right': collapsed,
-					       	'glyphicon-chevron-down': !collapsed
-					    }">
-						</span>
-					</a>
-				</div>
-			</td>
-			<td width="1%">
-				<div class="col-md-12">
-					<letter-icon data="{{node.nodeTipo}}" color="{{devuelveColorNode(node.nodeTipo);}}"
-						size="sm" char-count="2">
-					</letter-icon>
-				</div>
+			<td width="0%">
+				<table width="63px" border="0" cellpadding="0">
+				  <tr>
+					<td width="30px">
+						<div class="col-md-12" ng-show="!node.nphoja" style="padding: 3px 3px;">
+							<a class="btn btn-default btn-xs"
+								data-nodrag ng-click="toggle(this);cargarHijos(node)">
+								<span class="glyphicon" ng-class="{
+									'glyphicon-chevron-right': collapsed,
+									'glyphicon-chevron-down': !collapsed
+								}">
+								</span>
+							</a>
+						</div>
+					</td>
+					<td width="30px">
+						<letter-icon data="{{node.nodeTipo}}" color="{{devuelveColorNode(node.nodeTipo);}}"
+							size="sm" char-count="2">
+						</letter-icon>
+					</td>
+					<td width="3px">
+					</td>
+				  </tr>
+				</table>
 			</td>
 			<td width="100%" ng-click="vista(node);">
-				{{node.title}}
+				&nbsp;{{node.title}}
 			</td>
-			<td width="1%">
+			<td width="0%">
 				<table width="108px">
 					<tr>
 						<td width="34px">
