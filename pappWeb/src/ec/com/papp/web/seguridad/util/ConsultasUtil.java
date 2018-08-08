@@ -13,6 +13,7 @@ import org.hibernate.tools.commons.to.SearchResultTO;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
+import ec.com.papp.administracion.to.EjerciciofiscalTO;
 import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.estructuraorganica.to.UnidadTO;
 import ec.com.papp.estructuraorganica.to.UsuariounidadTO;
@@ -295,16 +296,27 @@ public class ConsultasUtil {
 			else
 				usuarioTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("usuario")!=null && !parameters.get("usuario").equals(""))
-				usuarioTO.setUsuario(parameters.get("usuario"));
+				usuarioTO.setUsuario(parameters.get("usuario").toUpperCase());
 			if(parameters.get("nombremostrado")!=null && !parameters.get("nombremostrado").equals("")) {
-				socionegocioTO.setNombremostrado(parameters.get("nombremostrado"));
+				socionegocioTO.setNombremostrado(parameters.get("nombremostrado").toUpperCase());
 			}
 			usuarioTO.setSocionegocio(socionegocioTO);
-			SearchResultTO<UsuarioTO> resultado=UtilSession.seguridadServicio.transObtenerusuarioPaginado(usuarioTO);
-			HashMap<String, String>  totalMap=new HashMap<String, String>();
-			totalMap.put("valor", resultado.getCountResults().toString());
-			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),usuarioTO.getJsonConfig()));
+			Collection<UsuarioTO> resultado=UtilSession.seguridadServicio.transObtenerusuario(usuarioTO);
+			//long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
+			//HashMap<String, String>  resultado.size()=new HashMap<String, String>();
+			//resultado.size().put("valor", resultado.getCountResults().toString());
+			//log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,usuarioTO.getJsonConfig()));
+			HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
+			totalMap.put("valor", resultado.size());
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			
+			
+//			SearchResultTO<UsuarioTO> resultado=UtilSession.seguridadServicio.transObtenerusuarioPaginado(usuarioTO);
+//			HashMap<String, String>  totalMap=new HashMap<String, String>();
+//			totalMap.put("valor", resultado.getCountResults().toString());
+//			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado.getResults(),usuarioTO.getJsonConfig()));
+//			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
