@@ -80,6 +80,7 @@ seccion.usuario = 'NO DEFINIDO';
 <script type = "text/javascript">
 seccion.usuario = '${sm_utilitario_usuarioLogin.usuario}';
 seccion.rols = '${sm_utilitario_permisosusuario}';
+seccion.cambiarclave = '${sm_utilitario_cambiarclave}';
 </script>
     <script src="assets/js/seccion.rols.js"></script>
 </head>

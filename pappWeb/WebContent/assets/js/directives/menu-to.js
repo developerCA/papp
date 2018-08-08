@@ -24,32 +24,48 @@ app.directive('navigation', ['$compile' ,'$sce','$animate', '_' , function($comp
         	
         	  menuHtml=' <nav> <ul class="main-navigation-menu">';
         	  
-        	  angular.forEach(menusPadre, function(men) {
-        		  if (!ifRollId(men.permisoid)) {
-        			  console.log("[RAIZ] NO MOSTRADO para:", men);
-        			  return;
-        		  }
+    		  if (seccion.cambiarclave) {
         		  menuHtml+='<li ng-class="{\'active open\':$state.includes(\''+ '' +'\')}">';
          		  //menuHtml+='<li class="">';
-        		  menuHtml+=' <a >';
+        		  menuHtml+=' <a ui-sref="app.cambiarcontrasena">';
         		  menuHtml+='	<div class="item-content">';
         		  menuHtml+='    <div class="item-media">';
         		  menuHtml+='    <span><i class=" ti-line-double"></i></span>';
         		  menuHtml+='    </div>';
         		  menuHtml+='	 <div class="item-inner">';
-        		  menuHtml+='	  <span class="title" > '+ men.nombre+' </span><i class="icon-arrow"></i>';
+        		  menuHtml+='	  <span class="title" > Cambiar contrase&nacuote;a </span><i class="icon-arrow"></i>';
         		  menuHtml+='    </div>';
         		  menuHtml+='   </div>';
         		  menuHtml+=' </a>';
-        		 
-        		  var menusHijos = _.filter(scope.menu, function(menu){ return menu.padreid==men.id && menu.nombre.trim()!="" });
-              	
-        		  if (menusHijos.length>0){
-        			  menuHtml+=crearMenuHijos(menusHijos);
-        		  }
-        			
         		  menuHtml+='</li>';
-        	  });
+    		  } else {
+	        	  angular.forEach(menusPadre, function(men) {
+	        		  if (!ifRollId(men.permisoid)) {
+	        			  console.log("[RAIZ] NO MOSTRADO para:", men);
+	        			  return;
+	        		  }
+	        		  menuHtml+='<li ng-class="{\'active open\':$state.includes(\''+ '' +'\')}">';
+	         		  //menuHtml+='<li class="">';
+	        		  menuHtml+=' <a >';
+	        		  menuHtml+='	<div class="item-content">';
+	        		  menuHtml+='    <div class="item-media">';
+	        		  menuHtml+='    <span><i class=" ti-line-double"></i></span>';
+	        		  menuHtml+='    </div>';
+	        		  menuHtml+='	 <div class="item-inner">';
+	        		  menuHtml+='	  <span class="title" > '+ men.nombre+' </span><i class="icon-arrow"></i>';
+	        		  menuHtml+='    </div>';
+	        		  menuHtml+='   </div>';
+	        		  menuHtml+=' </a>';
+	        		 
+	        		  var menusHijos = _.filter(scope.menu, function(menu){ return menu.padreid==men.id && menu.nombre.trim()!="" });
+	              	
+	        		  if (menusHijos.length>0){
+	        			  menuHtml+=crearMenuHijos(menusHijos);
+	        		  }
+	        			
+	        		  menuHtml+='</li>';
+	        	  });
+    		  }
         	  
         	  menuHtml+='</ul> </nav>';
 
