@@ -1313,12 +1313,18 @@ public class PlanificacionController {
 					//2. traigo los valores ya reservados para restar y mostrar solo lo disponible
 					//Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
 					Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), ejercicio);
-					log.println("valores planificados: " + actividadunidadTO.getPresupplanif() + " - " + totales.get("tplanificado"));
-					log.println("valores ajustados: " + actividadunidadTO.getPresupajust().doubleValue() + " - " +totales.get("tacumulado"));
-					actividadunidadTO.setPresupplanif(UtilGeneral.redondear(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue(),2));
-					actividadunidadTO.setPresupajust(UtilGeneral.redondear(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue(),2));
-					log.println("total planificado: " + actividadunidadTO.getPresupplanif());
-					log.println("toal presupuestado: " + actividadunidadTO.getPresupajust());
+					if(actividadunidadTO.getPresupplanif()!=null)
+						actividadunidadTO.setPresupplanif(UtilGeneral.redondear(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue(),2));
+					else {
+						mensajes.setMsg("Ingrese el presupuesto planificado en la actividad");
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+					if(actividadunidadTO.getPresupajust()!=null)
+						actividadunidadTO.setPresupajust(UtilGeneral.redondear(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue(),2));
+					else {
+						mensajes.setMsg("Ingrese el presupuesto ajustado en la actividad");
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
 					Map<String, Double> saldos= new HashMap<String,Double>();
 					saldos.put("tplanificado", actividadunidadTO.getPresupplanif());
 					saldos.put("tacumulado", actividadunidadTO.getPresupajust());

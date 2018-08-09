@@ -297,8 +297,8 @@ public class ConsultasUtil {
 				usuarioTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("usuario")!=null && !parameters.get("usuario").equals(""))
 				usuarioTO.setUsuario(parameters.get("usuario").toUpperCase());
-			if(parameters.get("nombremostrado")!=null && !parameters.get("nombremostrado").equals("")) {
-				socionegocioTO.setNombremostrado(parameters.get("nombremostrado").toUpperCase());
+			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals("")) {
+				socionegocioTO.setNombremostrado(parameters.get("nombre").toUpperCase());
 			}
 			usuarioTO.setSocionegocio(socionegocioTO);
 			Collection<UsuarioTO> resultado=UtilSession.seguridadServicio.transObtenerusuario(usuarioTO);
