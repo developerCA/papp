@@ -2,8 +2,7 @@
 
 app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_","SweetAlert","$filter", "ngTableParams","menuSeguridadesFactory",
 	function($scope,$rootScope,$uibModal,_,SweetAlert,$filter, ngTableParams,menuSeguridadesFactory) {
-    
-	
+
 	$scope.nombreFiltro=null;
 	$scope.ordenFiltro=null;
 	
@@ -14,7 +13,6 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
 		$scope.data=[];
 		menuSeguridadesFactory.traerMenus(pagina).then(function(resp){
 			//console.log(resp);
@@ -26,7 +24,6 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 				}
 			    //console.log($scope.menuArbol);
 		})
-	
 	};
 
 	$scope.cargarHijos=function(menuPadre){

@@ -106,6 +106,11 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 			var url = "estructuraorganica/unidadarbolplaza/"+id+"/"+plazaid+"/0";
 		    return Restangular.allUrl(url).customGET();
 		},
+		
+		eliminarPlazaEmpleadosEditar : function(id, plazaid) {
+			var url = "estructuraorganica/unidadarbolplaza/"+id+"/"+plazaid+"/0";
+		    return Restangular.allUrl(url).customDELETE();
+		},
 
 		traerUnidadesFiltro : function(pagina,nombre,codigo,estado) {
 			var url = "estructuraorganica/consultar/unidad/pagina="+pagina;

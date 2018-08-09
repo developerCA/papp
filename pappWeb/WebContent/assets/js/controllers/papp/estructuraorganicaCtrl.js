@@ -319,6 +319,30 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 	};
 
+	///rest/estructuraorganica/unidadarbolplaza/id/id1/0 donde id es id.id y id1 es id.plazaid de unidadarbolplaza
+	$scope.eliminarPlazaEmpleados=function(id){
+		SweetAlert.swal({
+		   title: "Plaza Empleado?",
+		   text: "Esta seguro que desea eliminar este empleado?",
+		   type: "warning",
+		   showCancelButton: true,
+		   confirmButtonColor: "#DD6B55",
+		   confirmButtonText: "Si",
+		   cancelButtonText: "No",
+		   closeOnConfirm: false}, 
+		function(isConfirm){
+		    if (!isConfirm) return;
+			unidadFactory.eliminarPlazaEmpleadosEditar(id.id, id.plazaid).then(function(resp){
+				if (resp.estado){
+					SweetAlert.swal("Plaza Empleado!", "Empleado eliminada satisfactoriamente!", "success");
+				}
+				else{
+					SweetAlert.swal("Plaza Empleado!", resp.mensajes.msg, "error");
+				}
+			})
+		});
+	};
+
 	$scope.treeOptions = {
 	    accept: function(sourceNodeScope, destNodesScope, destIndex) {
 	      return true;
@@ -590,8 +614,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     			obj.details[i].npfechafinc = toStringDate(obj.details[i].npfechafinc);
 			}
     		//return;
-    		console.log("DETALLES FUENTE:", $scope.objetoPlazaDetail);
-    		console.log("DETALLES DESTINO:", obj.details);
+    		//console.log("DETALLES FUENTE:", $scope.objetoPlazaDetail);
+    		//console.log("DETALLES DESTINO:", obj.details);
     		unidadFactory.guardarEmpleadosPlaza(obj).then(function(resp){
         		console.log(resp);
     			 if (resp.estado){

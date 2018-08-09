@@ -973,9 +973,22 @@
 												<i class="fa fa-pencil"></i>
 											</a>
 										</td>
-										<td data-title="'Plaza C&oacute;digo'">{{obj.codigo}}</td>
-										<td data-title="'Cargo C&oacute;digo'">{{obj.npcargocodigo}}</td>
-										<td data-title="'Cargo Nombre'">{{obj.npcargonombre}}</td>
+										<td>
+					  						<a uib-tooltip="Eliminar"
+					  							class="btn btn-danger btn-sm"
+												ng-click="eliminarPlazaEmpleados(obj.id)">
+												<span class="fa fa-trash"></span>
+											</a>
+										</td>
+										<td data-title="'Plaza C&oacute;digo'">
+											{{obj.codigo}}
+										</td>
+										<td data-title="'Cargo C&oacute;digo'">
+											{{obj.npcargocodigo}}
+										</td>
+										<td data-title="'Cargo Nombre'">
+											{{obj.npcargonombre}}
+										</td>
 									</tr>
 								</table>
 							</div>
