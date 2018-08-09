@@ -3,11 +3,11 @@ app.factory("perfilesPermisosFactory", [ "Restangular", function(Restangular) {
 
 	return {
 		traer : function(pagina) {
-			  return Restangular.allUrl("seguridad/consultar/perfil/pagina="+pagina).getList();
+			  return Restangular.allUrl("seguridad/consultar/perfilpermiso/pagina="+pagina+"&filas=25").getList();
 		},
 
 		traerFiltro : function(pagina,permisoid,nombre) {
-			var url = "seguridad/consultar/perfil/pagina="+pagina;
+			var url = "seguridad/consultar/perfilpermiso/pagina="+pagina+"&filas=25";
 
 			if(permisoid!=null && permisoid != "") url += "&permisoid=" + permisoid;
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;

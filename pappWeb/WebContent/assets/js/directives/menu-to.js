@@ -27,7 +27,7 @@ app.directive('navigation', ['$compile' ,'$sce','$animate', '_' , function($comp
     		  if (seccion.cambiarclave == '1') {
         		  menuHtml+='<li ng-class="{\'active open\':$state.includes(\''+ '' +'\')}">';
          		  //menuHtml+='<li class="">';
-        		  menuHtml+=' <a ui-sref="app.cambiarcontrasena">';
+        		  menuHtml+=' <a ui-sref="app.cambiarcontrasena" ui-sref-opts="{reload:true}">';
         		  menuHtml+='	<div class="item-content">';
         		  menuHtml+='    <div class="item-media">';
         		  menuHtml+='    <span><i class=" ti-line-double"></i></span>';
@@ -95,7 +95,7 @@ app.directive('navigation', ['$compile' ,'$sce','$animate', '_' , function($comp
     			 if (men.ruta==""){
     				 menuHtml+='<a><span>'+men.nombre+'</span></a>';
     			 }else{
-    				 menuHtml+='<a ui-sref="'+men.ruta+'"><span>'+men.nombre+'</span></a>';
+    				 menuHtml+='<a ui-sref="'+men.ruta+'" ui-sref-opts="{reload:true}"><span>'+men.nombre+'</span></a>';
     			 }
     			 
       			 //menuHtml+='<a ui-sref="app.pagelayouts.fixedheader"><span>'+men.nombre+'</span></a>';

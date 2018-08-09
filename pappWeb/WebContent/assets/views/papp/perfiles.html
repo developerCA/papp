@@ -18,16 +18,14 @@
 
 	<div class="row">
 		<div class="col-md-12">
-
 			<div class="panel panel-white">
 
-
 				<div class="panel-body" ng-show="!edicion">
-
-
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
+							<h4 class="panel-title text-primary">
+								Filtros
+							</h4>
 							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
 						</div>
 						<div uib-collapse="panel1" ng-init="panel1=true"
@@ -36,11 +34,11 @@
 								<div class="row">
 									<div class="col-sm-4">
 										<div class="form-group">
-											<label> Nombre </label> <input type="text"
+											<label> Nombre </label>
+											<input type="text" ng-change="nombreFiltro=nombreFiltro.toUpperCase()"
 												class="form-control" ng-model="nombreFiltro">
 										</div>
 									</div>
-
 								</div>
 								<div class="row">
 									<div class="col-sm-12">
@@ -71,9 +69,7 @@
 					</div>
 				</div>
 
-
 				<div ng-show="edicion" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
 						<h5 class="panel-title">Perfiles</h5>
 					</div>
@@ -82,7 +78,6 @@
 						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-6">
-
 								<div class="form-group"
 									ng-class="{'has-error':Form.id.$dirty && Form.id.$invalid, 'has-success':Form.id.$valid}">
 									<label class="control-label"> Id <span
@@ -107,7 +102,6 @@
 										es incorrecto</span> <span class="success text-small"
 										ng-if="Form.nombre.$valid">Listo</span>
 								</div>
-
 							</div>
 						</div>
 
@@ -120,8 +114,6 @@
 											ng-click="agregarDetalle();"><i class="fa fa-plus-square"></i>
 										</a>
 										<h4 class="panel-title">Permisos</h4>
-
-
 									</div>
 									<div class="panel-body no-padding panel-white">
 										<div class="col-md-12 panel-white no-padding">
@@ -141,17 +133,18 @@
 														</td>
 <!-- 																required ng-model="obj.id.permisoid" -->
 														<td data-title="'Nombre'">
-									<div class="input-group">
-										<input type="text" placeholder="Seleccione el permiso"
-											class="form-control" name="codigopadre" ng-disabled="true"
-											ng-model="obj.nppermiso" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-primary"
-												ng-click="abrirPerfilesPermisos($index)">
-												<i class="fa fa-search"></i> Seleccione
-											</button>
-										</span>
-									</div>
+															<div class="input-group">
+																<input type="text" placeholder="Seleccione el permiso"
+																	class="form-control" name="codigopadre" ng-disabled="true"
+																	ng-model="obj.nppermiso" />
+																<span class="input-group-btn">
+																	<button type="button" class="btn btn-primary"
+																		ng-click="abrirPerfilesPermisos($index)">
+																		<i class="fa fa-search"></i>
+																		Seleccione
+																	</button>
+																</span>
+															</div>
 														</td>
 													</tr>
 												</table>
