@@ -43,7 +43,18 @@
 										</div>
 									</div>
 								</div>
-
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label> Estado </label> <select name="country"
+												ng-model="estadoFiltro" class="form-control">
+												<option value>Todos</option>
+												<option value="A">Activo</option>
+												<option value="I">Inactivo</option>
+											</select>
+										</div>
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-sm-12">
 										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
@@ -249,7 +260,7 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':Form.empleadocodigo.$dirty && Form.empleadocodigo.$invalid, 'has-success':Form.empleadocodigo.$valid}">
+									ng-class="{'has-error':Form.npsocionegociocodigo.$dirty && Form.npsocionegociocodigo.$invalid, 'has-success':Form.npsocionegociocodigo.$valid}">
 									<div class="col-md-2">
 										<label class="control-label">
 											Emplado c&oacute;digo
@@ -272,10 +283,11 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':Form.npempleadonombremostrado.$dirty && Form.npempleadonombremostrado.$invalid, 'has-success':Form.npempleadonombremostrado.$valid}">
+									ng-class="{'has-error':Form.npsocionegocio.$dirty && Form.npsocionegocio.$invalid, 'has-success':Form.npsocionegocio.$valid}">
 									<div class="col-md-2">
 										<label class="control-label">
 											Empleado nombre
+											<span class="symbol required"></span>
 										</label>
 									</div>
 									<div class="col-md-10">
@@ -286,7 +298,7 @@
 								</div>
 
 								<div class="form-group"
-									ng-class="{'has-error':Form.estado.$dirty && Form.estado.$invalid, 'has-success':Form.estado.$valid}">
+									ng-class="{'has-error':Form.estado1.$dirty && Form.estado1.$invalid, 'has-success':Form.estado1.$valid}">
 									<div class="col-md-2">
 										<label for="form-field-select-1">
 											Estado

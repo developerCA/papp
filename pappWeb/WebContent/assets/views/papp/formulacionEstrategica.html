@@ -1209,7 +1209,8 @@
 				  <tr>
 					<td width="30px">
 						<div class="col-md-12" ng-show="!node.nphoja" style="padding: 3px 3px;">
-							<a class="btn btn-default btn-xs"  data-nodrag ng-click="toggle(this);cargarHijos(node)">
+							<a ng-if="node.nodeTipo != 'SA'"
+								class="btn btn-default btn-xs"  data-nodrag ng-click="toggle(this);cargarHijos(node)">
 								<span class="glyphicon" ng-class="{
 									'glyphicon-chevron-right': collapsed,
 									'glyphicon-chevron-down': !collapsed
@@ -1233,7 +1234,7 @@
 				<table width="71px">
 					<tr>
 						<td width="34px">
-							<a ng-show="node.tipo!='F'" uib-tooltip="Agregar"
+							<a ng-if="node.nodeTipo != 'SA'" uib-tooltip="Agregar"
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="nuevo(node);">
 								<span class="glyphicon glyphicon-plus"></span>

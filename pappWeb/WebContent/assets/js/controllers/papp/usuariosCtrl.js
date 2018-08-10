@@ -5,6 +5,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 
 	$scope.nombreFiltro=null;
 	$scope.usuarioFiltro=null;
+	$scope.estadoFiltro=null;
 	
 	$scope.edicion=false;
 	$scope.objeto={};
@@ -13,14 +14,12 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
 		$scope.data=[];
 		usuariosFactory.traerUsuarios(pagina).then(function(resp){
 			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
-	
 	};
 
 	$scope.$watch('data', function() {
@@ -46,8 +45,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		usuariosFactory.traerUsuariosFiltro(pagina,$scope.usuarioFiltro,$scope.nombreFiltro).then(function(resp){
-			
+		usuariosFactory.traerUsuariosFiltro(pagina,$scope.usuarioFiltro,$scope.nombreFiltro,$scope.estadoFiltro).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -56,9 +54,9 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
 		$scope.usuarioFiltro=null;
+		$scope.estadoFiltro=null;
 
 		$scope.consultar();
-		
 	};
 	
 	$scope.nuevo=function(){

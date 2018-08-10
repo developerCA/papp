@@ -42,7 +42,7 @@ app.controller('ModalSocioNegocioEmpleadosController', ["$scope", "$rootScope", 
     }  
 
 	$scope.filtrarUnico=function(){
-        sociosNegocioFactory.traerFiltroEmpleados2(
+        sociosNegocioFactory.traerFiltroEmpleados(
     		$scope.pagina,
     		$rootScope.ejefiscal,
     		$scope.codigo,

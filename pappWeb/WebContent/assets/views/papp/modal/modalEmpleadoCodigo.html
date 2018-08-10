@@ -40,19 +40,47 @@
 		</div>
 
 		<div>
-			<table ng-table="tableParams" class="table table-striped">
-				<tr ng-repeat="obj in $data">
-					<td><a class="btn btn-sm btn-primary"
-						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-							class="fa fa-check"></i></a></td>
-					<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-					<td data-title="'Nombre mostrado'">{{obj.nombremostrado}}</td>
-					<td data-title="'Tipo'">{{obj.tipo}}</td>
-					<td data-title="'Estado'">{{obj.npestado}}</td>
-					<td data-title="'Tipo identificaci&oacute;n'">{{obj.tipoidentid}}</td>
-					<td data-title="'Tipo'">{{obj.tipo}}</td>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>C&oacute;digo</th>
+						<th>Nombre mostrado</th>
+						<th>Tipo</th>
+						<th>Tipo identificaci&oacute;n</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+                <tr ng-repeat="obj in data">
+					<td>
+						<a class="btn btn-sm btn-primary"
+							uib-tooltip="Seleccionar" ng-click="seleccionar(obj)">
+							<i class="fa fa-check"></i>
+						</a>
+					</td>
+					<td>
+						{{obj.codigo}}
+					</td>
+					<td>
+						{{obj.nombremostrado}}
+					</td>
+					<td>
+						{{obj.emptipo}}
+					</td>
+					<td>
+						{{obj.npemptipo}}
+					</td>
+					<td>
+						{{obj.npestado}}
+					</td>
 				</tr>
 			</table>
+			<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+				previous-text="Atras" uib-pagination total-items="total"
+				ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
+				max-size="10" class="pagination-sm" boundary-links="true"
+				force-ellipses="true">
+			</ul>
 		</div>
 	</div>
 </div>
