@@ -159,6 +159,8 @@ public class ConsultasUtil {
 				perfilpermisoTO.getId().setPerfilid(Long.valueOf(parameters.get("perfilid")));
 			if(parameters.get("permisoid")!=null && !parameters.get("permisoid").equals(""))
 				perfilpermisoTO.getId().setPermisoid(Long.valueOf(parameters.get("permisoid")));
+			perfilpermisoTO.setPerfil(new PerfilTO());
+			perfilpermisoTO.setPermiso(new PermisoTO());
 			SearchResultTO<PerfilpermisoTO> resultado=UtilSession.seguridadServicio.transObtenerPerfilpermisoPaginado(perfilpermisoTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());
@@ -300,6 +302,13 @@ public class ConsultasUtil {
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals("")) {
 				socionegocioTO.setNombremostrado(parameters.get("nombre").toUpperCase());
 			}
+			if(parameters.get("estado")!=null && !parameters.get("estado").equals("")) {
+				if(parameters.get("estado").equals("A"))
+					usuarioTO.setEstado1("1");
+				else if(parameters.get("estado").equals("I"))
+					usuarioTO.setEstado1("0");
+			}
+
 			usuarioTO.setSocionegocio(socionegocioTO);
 			Collection<UsuarioTO> resultado=UtilSession.seguridadServicio.transObtenerusuario(usuarioTO);
 			//long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;

@@ -1315,20 +1315,28 @@ public class PlanificacionController {
 					Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), ejercicio);
 					if(actividadunidadTO.getPresupplanif()!=null)
 						actividadunidadTO.setPresupplanif(UtilGeneral.redondear(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue(),2));
-					else {
-						mensajes.setMsg("Ingrese el presupuesto planificado en la actividad");
-						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-					}
+//					else {
+//						mensajes.setMsg("Ingrese el presupuesto planificado en la actividad");
+//						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+//					}
 					if(actividadunidadTO.getPresupajust()!=null)
 						actividadunidadTO.setPresupajust(UtilGeneral.redondear(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue(),2));
-					else {
-						mensajes.setMsg("Ingrese el presupuesto ajustado en la actividad");
-						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+//					else {
+//						mensajes.setMsg("Ingrese el presupuesto ajustado en la actividad");
+//						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+//					}
+					Map<String, String> saldos= new HashMap<String,String>();
+					saldos.put("tplanificado", "0");
+					saldos.put("tacumulado", "0");
+
+					if(actividadunidadTO!=null) {
+						if(actividadunidadTO.getPresupplanif()!=null)
+							saldos.put("tplanificado", actividadunidadTO.getPresupplanif().toString());
+						if(actividadunidadTO.getPresupajust()!=null)
+							saldos.put("tacumulado", actividadunidadTO.getPresupajust().toString());
 					}
-					Map<String, Double> saldos= new HashMap<String,Double>();
-					saldos.put("tplanificado", actividadunidadTO.getPresupplanif());
-					saldos.put("tacumulado", actividadunidadTO.getPresupajust());
 					jsonObject.put("totales", (JSONObject)JSONSerializer.toJSON(saldos));
+					
 					jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfigSubitem()));
 				}
 				else {
@@ -1464,7 +1472,7 @@ public class PlanificacionController {
 
 			if(mensajes.getMsg()!=null && !mensajes.getMsg().equals(""))
 				respuesta.setEstado(false);
-			log.println("json retornado: " + jsonObject.toString());
+			log.println("json retornado**: " + jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al obtener para editar");
@@ -1588,6 +1596,7 @@ public class PlanificacionController {
 				nivelactividadTO.setTablarelacionid(actividadTO.getId());
 				nivelactividadTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.actividad"));
 				nivelactividadTO.setUnidad(new UnidadTO());
+				nivelactividadTO.setEstado(MensajesWeb.getString("estado.activo"));
 				Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
 				jsonObject.put("nivelactividad", (JSONArray)JSONSerializer.toJSON(nivelactividadTOs,nivelactividadTO.getJsonConfigActividad()));
 			}
@@ -1940,7 +1949,7 @@ public class PlanificacionController {
 			else if(clase.equals("nivelactividad")){
 				UtilSession.planificacionServicio.transEliminarNivelactividad(new NivelactividadTO(id));
 			}
-			ComunController.crearAuditoria(request, clase, "E", null, id.toString());
+			//ComunController.crearAuditoria(request, clase, "E", null, id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
 			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
