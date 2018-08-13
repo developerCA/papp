@@ -184,6 +184,17 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 
 	$scope.abrirUnudad = function(index) {
 		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalUnidad.html',
+			controller : 'ModalUnidadActivasController',
+			size : 'lg'
+		});
+		modalInstance.result.then(function(obj) {
+			$scope.objetoDetalles[index].id.unidad = obj.id;
+			$scope.objetoDetalles[index].npunidad=obj.nombre;
+		}, function() {
+		});
+/*
+		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalUnidadCorto.html',
 			controller : 'ModalUnidadCortoController',
 			size : 'lg'
@@ -193,5 +204,6 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 			$scope.objetoDetalles[index].npunidad=obj.nombre;
 		}, function() {
 		});
+*/
 	};
 } ]);

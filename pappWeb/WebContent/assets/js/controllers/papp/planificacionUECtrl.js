@@ -1010,7 +1010,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					return true;
 				},
 				mostrarOrganismo: function() {
-					return true;
+					return false;
 				}
 			}
 		});

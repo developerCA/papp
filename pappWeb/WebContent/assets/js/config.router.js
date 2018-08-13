@@ -369,6 +369,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'UsuariosUnidadesCtrl','UnidadFactory',
         		'ModalNombrePerfilCtrl','PerfilesFactory',
         		'ModalSocioNegocioEmpleadosCtrl','SociosNegocioFactory',
+        		'ModalUnidadActivasCtrl',
         		'ModalUnidadCortoCtrl','UnidadFactory'),
         title: 'Usuarios',
         ncyBreadcrumb: {
