@@ -34,8 +34,8 @@
 									<div class="input-group">
 										<input type="text"
 											placeholder="Seleccione una Unidad"
-											class="form-control" name="npunidad"
-											ng-disabled="true" ng-model="objeto.npunidad" />
+											class="form-control" name="unidadnombre"
+											ng-disabled="true" ng-model="unidadnombre" />
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-primary"
 												ng-click="abrirUnidad()">
@@ -54,8 +54,8 @@
 									<div class="input-group">
 										<input type="text"
 											placeholder="Seleccione una Actividad"
-											class="form-control" name="npactividad"
-											ng-disabled="true" ng-model="objeto.npactividad">
+											class="form-control" name="actividadnombre"
+											ng-disabled="true" ng-model="actividadnombre">
 										<span class="input-group-btn">
 											<button type="button" class="btn btn-primary"
 												ng-click="abrirActividad()">
@@ -69,8 +69,8 @@
 									<label class="control-label">
 										Tipo Presupuesto
 									</label>
-									<select class="form-control" name="tipometa"
-										placeholder="Seleccione un reporte" ng-model="objeto.tipometa">
+									<select class="form-control" name="tipo"
+										placeholder="Seleccione un reporte" ng-model="objeto.tipo">
 										<option value="P">Planificado</option>
 										<option value="A">Ajustado</option>
 									</select>
@@ -229,8 +229,8 @@
 								<td><a class="btn btn-sm btn-primary"
 									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
 										class="fa fa-check"></i></a></td>
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
+								<td data-title="'C&oacute;digo'">{{obj.npcodigo}}</td>
+								<td data-title="'Nombre'">{{obj.descripcionexten}}</td>
 							</tr>
 						</table>
 					</div>

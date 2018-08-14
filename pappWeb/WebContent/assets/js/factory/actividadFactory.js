@@ -15,6 +15,18 @@ app.factory("actividadFactory", [ "Restangular", function(Restangular) {
 			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
 			return Restangular.allUrl(url).getList();
 		},
+
+		traerActividadNivelFiltro : function(nivelactividadunidadid,nivelactividadejerfiscalid,codigo,nombre) {
+			var url = "planificacion/consultar/nivelactividad/" +
+					"tipo=AC&" +
+					"nivelactividadunidadid=" + nivelactividadunidadid + "&" +
+					"nivelactividadejerfiscalid=" + nivelactividadejerfiscalid + "&" +
+					"estado=A";
+
+			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
+			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
+			return Restangular.allUrl(url).getList();
+		},
 		
 		traerActividadEditar : function(id) {
 			var url = "planificacion/actividad/"+id+"/-1";

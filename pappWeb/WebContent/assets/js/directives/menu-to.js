@@ -81,7 +81,7 @@ app.directive('navigation', ['$compile' ,'$sce','$animate', '_' , function($comp
     	   menuHtml+='<ul class="sub-menu">';
     	   angular.forEach(hijos, function(men) {
      		  if (!ifRollId(men.permisoid)) {
-    			  console.log("NO MOSTRADO para:", men);
+    			  //console.log("NO MOSTRADO para:", men);
     			  return;
     		  }
     		   var menusHijos = _.filter(scope.menu, function(menu){ return menu.padreid==men.id && menu.nombre.trim()!="" });

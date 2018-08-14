@@ -504,7 +504,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence(
         		'ngTable','MatrizFormulacionActividadProyectoCtrl','MatrizFormulacionActividadProyectoFactory',
         		'ModalUnidadCtrl','UnidadFactory',
-        		'ModalActividadCtrl','ActividadFactory'
+        		'ModalActividadCtrl','ActividadFactory',
+        		'ModalUnidadCortoCtrl','UnidadFactory'
 		),
         title: 'Matriz de Formulación de Actividad sin Proyecto',
         ncyBreadcrumb: {

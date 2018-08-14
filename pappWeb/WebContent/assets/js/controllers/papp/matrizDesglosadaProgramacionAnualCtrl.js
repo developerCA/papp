@@ -110,7 +110,12 @@ app.controller('MatrizDesglosadaProgramacionAnualController', [ "$scope","$rootS
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalActividad.html',
 			controller : 'ModalActividadController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				unidadId : function() {
+					return null;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.actividadid = obj.id;

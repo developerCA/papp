@@ -86,7 +86,12 @@ app.controller('MatrizProgramacionAnualPoliticaPublicaController', [ "$scope","$
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalActividad.html',
 			controller : 'ModalActividadController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				unidadId : function() {
+					return null;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			console.log(obj);

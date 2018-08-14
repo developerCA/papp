@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalActividadController', [ "$scope","$uibModalInstance","$uibModal","SweetAlert","$filter", "ngTableParams","actividadFactory",
-	function($scope,$uibModalInstance,$uibModal,SweetAlert,$filter, ngTableParams, actividadFactory) {
+app.controller('ModalActividadController', [ "$scope","$rootScope","$uibModalInstance","$uibModal","unidadId","SweetAlert","$filter", "ngTableParams","actividadFactory",
+	function($scope,$rootScope,$uibModalInstance,$uibModal,unidadId,SweetAlert,$filter, ngTableParams, actividadFactory) {
 
 	$scope.codigoFiltro=null;
 	$scope.descripcionFiltro=null;
@@ -15,12 +15,20 @@ app.controller('ModalActividadController', [ "$scope","$uibModalInstance","$uibM
 	
 	$scope.consultar=function(){
 		$scope.data=[];
-		actividadFactory.traerActividad(pagina).then(function(resp){
+		actividadFactory.traerActividadNivelFiltro(unidadId,$rootScope.ejefiscal,null,null).then(function(resp){
 			console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	};
+
+	$scope.filtrar=function(){
+		$scope.data=[];
+		actividadFactory.traerActividadNivelFiltro(unidadId,$rootScope.ejefiscal,$scope.codigo,$scope.nombre).then(function(resp){
+			if (resp.meta)
+				$scope.data=resp;
+		})
+	}
 	
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
@@ -41,14 +49,6 @@ app.controller('ModalActividadController', [ "$scope","$uibModalInstance","$uibM
 			}
 		});
 	});
-
-	$scope.filtrar=function(){
-		$scope.data=[];
-		actividadFactory.traerActividadFiltro(pagina,$scope.codigo,$scope.nombre).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	}
 	
 	$scope.limpiar=function(){
 		$scope.codigoFiltro=null;
