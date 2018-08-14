@@ -19,11 +19,11 @@ app.controller('MatrizFormulacionActividadProyectoController', [ "$scope","$root
 	$scope.abrirUnidad = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalUnidad.html',
-			controller : 'ModalUnidadController',
+			controller : 'ModalPlanificacionUEController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
+			console.log(obj);
 			$scope.objeto.unidadid = obj.id;
 			$scope.objeto.npunidad = obj.codigopresup + ' - ' + obj.nombre;
 		}, function() {

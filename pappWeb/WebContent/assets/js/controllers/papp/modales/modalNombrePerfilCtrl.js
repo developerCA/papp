@@ -42,7 +42,7 @@ app.controller('ModalNombrePerfilController', [ "$scope","$uibModalInstance","Sw
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		PerfilesFactory.traerFiltro(pagina,$scope.idFiltro,$scope.nombreFiltro).then(function(resp){
+		PerfilesFactory.traerFiltro(pagina,$scope.nombreFiltro).then(function(resp){
 		if (resp.meta)
 			$scope.data=resp;
 		})

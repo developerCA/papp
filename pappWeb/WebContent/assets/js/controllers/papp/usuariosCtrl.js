@@ -94,7 +94,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
 			$scope.objeto.perfilid = obj.id;
-			$scope.objeto.npperfil=obj.nombre;
+			$scope.objeto.npperfil = obj.nombre;
 		}, function() {
 			//console.log("close modal");
 		});

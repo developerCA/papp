@@ -15,6 +15,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.esnuevo=false;
 	$scope.vLimpio=false;
 	$scope.jsRegresar = null;
+	$scope.noCancelar = true;
 
 	$scope.limpiarEdicion = function(recargar = true) {
 		$scope.ninguno = false;
@@ -402,6 +403,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.nuevo=function(node){
 		//console.log(node);
+		$scope.noCancelar = true;
 		$scope.esnuevo=true;
 		$scope.editar=true;
 		$scope.editarP=true;
@@ -510,6 +512,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.editarPlanificacionAnual=function(node) {
 		//console.log(node);
+		$scope.noCancelar = true;
 		$scope.esnuevo=false;
 		$scope.objeto=null;
 		if (node.siEditar == undefined) {
@@ -1605,6 +1608,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					$scope.esnuevo = false;
 					$scope.detallesPlanificada = null;
 	    			$scope.editarDistribucionPlanificado();
+	    			$scope.noCancelar = false;
 				} else {
 					SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
 				}

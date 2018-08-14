@@ -17,7 +17,8 @@
 						<div class="col-sm-4">
 							<div class="form-group">
 								<label> Nombre </label> <input type="text"
-									class="form-control" ng-model="nombreFiltro">
+									class="form-control" ng-model="nombreFiltro"
+									ng-change="nombreFiltro=nombreFiltro.toUpperCase();">
 							</div>
 						</div>
 

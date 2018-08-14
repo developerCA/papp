@@ -1759,7 +1759,9 @@
 
 					<div ng-show="divSubItem" class="panel-body" id="panelSubItem">
 						<div class="panel-heading">
-							<h5 class="panel-title">SubItem</h5>
+							<h5 class="panel-title">
+								SubItem
+							</h5>
 						</div>
 
 						<div class="row">
@@ -1767,8 +1769,10 @@
 								<form name="FormSubItem" id="formSubItem" novalidate
 									ng-submit="form.submit(FormSubItem,'formSubItem')">
 									<div class="pull-right">
-										<a class="btn btn-sm btn-default"
-											ng-click="resetformSubItem(FormSubItem);"> Cancelar </a>
+										<a ng-show="noCancelar" class="btn btn-sm btn-default"
+											ng-click="resetformSubItem(FormSubItem);">
+											Cancelar
+										</a>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
@@ -2090,9 +2094,12 @@
 											</div>
 											<div class="pull-right">
 												<button type="submit" class="btn btn-primary" ng-show="editarA || editar">
-													Confirmar</button>
-												<a class="btn btn-sm btn-default"
-													ng-click="resetformSubItem(FormSubItem);"> Cancelar </a>
+													Confirmar
+												</button>
+												<a ng-show="noCancelar" class="btn btn-sm btn-default"
+													ng-click="resetformSubItem(FormSubItem);">
+													Cancelar
+												</a>
 											</div>
 										</div>
 									</div>
