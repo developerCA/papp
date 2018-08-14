@@ -1423,6 +1423,501 @@ order by tareaun_.tareaunidadcodigo,subtareaun8_.SUBTAREAUNIDADCODIGO
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="APROBADO" id="2694">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SOCIONEGOCIONOMBREMOSTRADO</text-property>
+                    <text-property name="heading">SOCIONEGOCIONOMBREMOSTRADO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">GRADOSIGLA</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">GRADOSIGLA</text-property>
+                    <text-property name="heading">GRADOSIGLA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CARGONOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CARGONOMBRE</text-property>
+                    <text-property name="heading">CARGONOMBRE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">unidad</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">params["unidadid"].value</expression>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">GRADOSIGLA</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">CARGONOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    <property name="nativeName">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">GRADOSIGLA</property>
+                    <property name="nativeName">GRADOSIGLA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">CARGONOMBRE</property>
+                    <property name="nativeName">CARGONOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select S.SOCIONEGOCIONOMBREMOSTRADO, G.GRADOSIGLA, C.CARGONOMBRE
+from ESTRUCTURAORGANICA ES inner join UNIDADARBOL UA on ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID
+inner join UNIDADARBOLPLAZA UAP on UA.UNIDADARBOLID=UAP.UNIDADARBOLID
+inner join UNIDADARBOLPLAZAEMPLEADO UAPE on UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID 
+inner join SOCIONEGOCIO S on UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
+left join GRADOESCALA GE on S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
+left join GRADOFUERZA GF on GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
+left join GRADO G on GF.GRADOFUERZAGRADOID=G.GRADOID
+left join CARGO C on UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
+where  UAP.UNIDADARBOLPLAZAAPRUEBA=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=? and
+(UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
+and S.SOCIONEGOCIOESEMPLEADO=1
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SOCIONEGOCIONOMBREMOSTRADO</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SOCIONEGOCIONOMBREMOSTRADO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SOCIONEGOCIONOMBREMOSTRADO</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>GRADOSIGLA</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>GRADOSIGLA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>GRADOSIGLA</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CARGONOMBRE</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CARGONOMBRE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CARGONOMBRE</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ELABORADO" id="2775">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SOCIONEGOCIONOMBREMOSTRADO</text-property>
+                    <text-property name="heading">SOCIONEGOCIONOMBREMOSTRADO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">GRADOSIGLA</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">GRADOSIGLA</text-property>
+                    <text-property name="heading">GRADOSIGLA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CARGONOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CARGONOMBRE</text-property>
+                    <text-property name="heading">CARGONOMBRE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">unidad</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">params["unidadid"].value</expression>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">GRADOSIGLA</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">CARGONOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    <property name="nativeName">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">GRADOSIGLA</property>
+                    <property name="nativeName">GRADOSIGLA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">CARGONOMBRE</property>
+                    <property name="nativeName">CARGONOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select S.SOCIONEGOCIONOMBREMOSTRADO, G.GRADOSIGLA, C.CARGONOMBRE
+from ESTRUCTURAORGANICA ES inner join UNIDADARBOL UA on ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID
+inner join UNIDADARBOLPLAZA UAP on UA.UNIDADARBOLID=UAP.UNIDADARBOLID
+inner join UNIDADARBOLPLAZAEMPLEADO UAPE on UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID 
+inner join SOCIONEGOCIO S on UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
+left join GRADOESCALA GE on S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
+left join GRADOFUERZA GF on GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
+left join GRADO G on GF.GRADOFUERZAGRADOID=G.GRADOID
+left join CARGO C on UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
+where  UAP.UNIDADARBOLPLAZARESPONSABLE=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=? and
+(UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
+and S.SOCIONEGOCIOESEMPLEADO=1
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SOCIONEGOCIONOMBREMOSTRADO</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SOCIONEGOCIONOMBREMOSTRADO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SOCIONEGOCIONOMBREMOSTRADO</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>GRADOSIGLA</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>GRADOSIGLA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>GRADOSIGLA</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CARGONOMBRE</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CARGONOMBRE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CARGONOMBRE</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="REVISADO" id="2776">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SOCIONEGOCIONOMBREMOSTRADO</text-property>
+                    <text-property name="heading">SOCIONEGOCIONOMBREMOSTRADO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">GRADOSIGLA</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">GRADOSIGLA</text-property>
+                    <text-property name="heading">GRADOSIGLA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CARGONOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CARGONOMBRE</text-property>
+                    <text-property name="heading">CARGONOMBRE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">unidad</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">1</property>
+                    <expression name="defaultValue" type="javascript">params["unidadid"].value</expression>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">GRADOSIGLA</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">CARGONOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    <property name="nativeName">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">GRADOSIGLA</property>
+                    <property name="nativeName">GRADOSIGLA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">CARGONOMBRE</property>
+                    <property name="nativeName">CARGONOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select S.SOCIONEGOCIONOMBREMOSTRADO, G.GRADOSIGLA, C.CARGONOMBRE
+from ESTRUCTURAORGANICA ES inner join UNIDADARBOL UA on ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID
+inner join UNIDADARBOLPLAZA UAP on UA.UNIDADARBOLID=UAP.UNIDADARBOLID
+inner join UNIDADARBOLPLAZAEMPLEADO UAPE on UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID 
+inner join SOCIONEGOCIO S on UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
+left join GRADOESCALA GE on S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
+left join GRADOFUERZA GF on GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
+left join GRADO G on GF.GRADOFUERZAGRADOID=G.GRADOID
+left join CARGO C on UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
+where  UAP.UNIDADARBOLPLAZAREVISA=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=? and
+(UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
+and S.SOCIONEGOCIOESEMPLEADO=1
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SOCIONEGOCIONOMBREMOSTRADO</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SOCIONEGOCIONOMBREMOSTRADO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SOCIONEGOCIONOMBREMOSTRADO</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>GRADOSIGLA</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>GRADOSIGLA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>GRADOSIGLA</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CARGONOMBRE</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CARGONOMBRE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CARGONOMBRE</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="page" id="67">
@@ -1729,8 +2224,34 @@ sdf.format(new Date());</expression>
             </row>
             <row id="2487">
                 <cell id="2488"/>
-                <cell id="2489"/>
-                <cell id="2490"/>
+                <cell id="2489">
+                    <data id="2773">
+                        <property name="dataSet">APROBADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">GRADOSIGLA</property>
+                                <text-property name="displayName">GRADOSIGLA</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["GRADOSIGLA"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">GRADOSIGLA</property>
+                    </data>
+                </cell>
+                <cell id="2490">
+                    <data id="2774">
+                        <property name="dataSet">APROBADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
+                                <text-property name="displayName">SOCIONEGOCIONOMBREMOSTRADO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SOCIONEGOCIONOMBREMOSTRADO"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    </data>
+                </cell>
             </row>
             <row id="2491">
                 <cell id="2492"/>
@@ -2312,5 +2833,327 @@ sdf.format(new Date());</expression>
                 </row>
             </footer>
         </table>
+        <grid id="1431">
+            <column id="1432">
+                <property name="width">20%</property>
+            </column>
+            <column id="1461">
+                <property name="width">20%</property>
+            </column>
+            <column id="2720">
+                <property name="width">20%</property>
+            </column>
+            <column id="1470">
+                <property name="width">20%</property>
+            </column>
+            <column id="2707">
+                <property name="width">20%</property>
+            </column>
+            <row id="1479">
+                <cell id="1480">
+                    <label id="1486"/>
+                </cell>
+                <cell id="1481"/>
+                <cell id="2711"/>
+                <cell id="1482"/>
+                <cell id="2698"/>
+            </row>
+            <row id="1433">
+                <cell id="1434">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <label id="1450">
+                        <property name="fontFamily">"Calibri"</property>
+                        <property name="fontSize">13px</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">FIRMAS DE RESPONSABILIDAD</text-property>
+                    </label>
+                </cell>
+                <cell id="2712"/>
+                <cell id="1462"/>
+                <cell id="2699"/>
+            </row>
+            <row id="2642">
+                <cell id="1436">
+                    <label id="2691">
+                        <property name="fontFamily">"Calibri"</property>
+                        <property name="fontSize">13px</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">ELABORADO POR</text-property>
+                    </label>
+                    <label id="1483"/>
+                </cell>
+                <cell id="1454"/>
+                <cell id="2713"/>
+                <cell id="1463">
+                    <label id="2721">
+                        <property name="fontFamily">"Calibri"</property>
+                        <property name="fontSize">13px</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">REVISADO POR</text-property>
+                    </label>
+                    <label id="2722"/>
+                </cell>
+                <cell id="2700"/>
+            </row>
+            <row id="1437">
+                <cell id="1438">
+                    <label id="1484"/>
+                </cell>
+                <cell id="1455"/>
+                <cell id="2714"/>
+                <cell id="1464"/>
+                <cell id="2701"/>
+            </row>
+            <row id="1439">
+                <cell id="1440">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">medium</property>
+                    <label id="1485"/>
+                </cell>
+                <cell id="1456">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                </cell>
+                <cell id="2715">
+                    <property name="borderBottomStyle">none</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                </cell>
+                <cell id="1465">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                </cell>
+                <cell id="2702">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                </cell>
+            </row>
+            <row id="1441">
+                <cell id="1442">
+                    <data id="2777">
+                        <property name="dataSet">ELABORADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
+                                <text-property name="displayName">SOCIONEGOCIONOMBREMOSTRADO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SOCIONEGOCIONOMBREMOSTRADO"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    </data>
+                </cell>
+                <cell id="1457">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">1</property>
+                </cell>
+                <cell id="2716"/>
+                <cell id="2708">
+                    <data id="2780">
+                        <property name="dataSet">REVISADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
+                                <text-property name="displayName">SOCIONEGOCIONOMBREMOSTRADO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SOCIONEGOCIONOMBREMOSTRADO"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    </data>
+                </cell>
+                <cell id="2703"/>
+            </row>
+            <row id="1443">
+                <cell id="1444">
+                    <data id="2786">
+                        <property name="dataSet">ELABORADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">GRADOSIGLA</property>
+                                <text-property name="displayName">GRADOSIGLA</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["GRADOSIGLA"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">GRADOSIGLA</property>
+                    </data>
+                </cell>
+                <cell id="1458">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">1</property>
+                </cell>
+                <cell id="2717"/>
+                <cell id="2709">
+                    <data id="2781">
+                        <property name="dataSet">REVISADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">GRADOSIGLA</property>
+                                <text-property name="displayName">GRADOSIGLA</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["GRADOSIGLA"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">GRADOSIGLA</property>
+                    </data>
+                </cell>
+                <cell id="2704"/>
+            </row>
+            <row id="1445">
+                <cell id="1446">
+                    <data id="2779">
+                        <property name="dataSet">ELABORADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">CARGONOMBRE</property>
+                                <text-property name="displayName">CARGONOMBRE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["CARGONOMBRE"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">CARGONOMBRE</property>
+                    </data>
+                </cell>
+                <cell id="1459">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">1</property>
+                </cell>
+                <cell id="2718"/>
+                <cell id="2710">
+                    <data id="2782">
+                        <property name="dataSet">REVISADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">CARGONOMBRE</property>
+                                <text-property name="displayName">CARGONOMBRE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["CARGONOMBRE"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">CARGONOMBRE</property>
+                    </data>
+                </cell>
+                <cell id="2705"/>
+            </row>
+            <row id="2738">
+                <cell id="2739"/>
+                <cell id="2740"/>
+                <cell id="2741"/>
+                <cell id="2742"/>
+                <cell id="2743"/>
+            </row>
+            <row id="1447">
+                <cell id="1448"/>
+                <cell id="1460">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <property name="textAlign">center</property>
+                    <label id="2762">
+                        <property name="fontFamily">"Calibri"</property>
+                        <property name="fontSize">13px</property>
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">APROBADO POR</text-property>
+                    </label>
+                    <label id="2763"/>
+                </cell>
+                <cell id="2706"/>
+            </row>
+            <row id="2756">
+                <cell id="2757"/>
+                <cell id="2758"/>
+                <cell id="2759"/>
+                <cell id="2760"/>
+                <cell id="2761"/>
+            </row>
+            <row id="2750">
+                <cell id="2751"/>
+                <cell id="2752"/>
+                <cell id="2753"/>
+                <cell id="2754"/>
+                <cell id="2755"/>
+            </row>
+            <row id="2744">
+                <cell id="2745"/>
+                <cell id="2746"/>
+                <cell id="2747">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">medium</property>
+                </cell>
+                <cell id="2748"/>
+                <cell id="2749"/>
+            </row>
+            <row id="2732">
+                <cell id="2733"/>
+                <cell id="2734"/>
+                <cell id="2735">
+                    <data id="2783">
+                        <property name="dataSet">APROBADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
+                                <text-property name="displayName">SOCIONEGOCIONOMBREMOSTRADO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SOCIONEGOCIONOMBREMOSTRADO"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">SOCIONEGOCIONOMBREMOSTRADO</property>
+                    </data>
+                </cell>
+                <cell id="2736"/>
+                <cell id="2737"/>
+            </row>
+            <row id="2726">
+                <cell id="2727"/>
+                <cell id="2728"/>
+                <cell id="2729">
+                    <data id="2784">
+                        <property name="dataSet">APROBADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">GRADOSIGLA</property>
+                                <text-property name="displayName">GRADOSIGLA</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["GRADOSIGLA"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">GRADOSIGLA</property>
+                    </data>
+                </cell>
+                <cell id="2730"/>
+                <cell id="2731"/>
+            </row>
+            <row id="2764">
+                <cell id="2765"/>
+                <cell id="2766"/>
+                <cell id="2767">
+                    <data id="2785">
+                        <property name="dataSet">APROBADO</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">CARGONOMBRE</property>
+                                <text-property name="displayName">CARGONOMBRE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["CARGONOMBRE"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">CARGONOMBRE</property>
+                    </data>
+                </cell>
+                <cell id="2768"/>
+                <cell id="2769"/>
+            </row>
+        </grid>
     </body>
 </report>

@@ -2071,7 +2071,7 @@ public class AdministracionController {
 
 			//Organismoprestamo
 			else if(clase.equals("organismoprestamo")){
-				jsonObject=ConsultasUtil.consultaOrganismoPaginado(parameters, jsonObject); 
+				jsonObject=ConsultasUtil.consultaOrganismoprestamoPaginado(parameters, jsonObject); 
 			}
 
 			//Obra
