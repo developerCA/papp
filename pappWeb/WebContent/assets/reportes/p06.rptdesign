@@ -1432,16 +1432,16 @@ order by tareaun_.tareaunidadcodigo,subtareaun8_.SUBTAREAUNIDADCODIGO
                     <text-property name="heading">SOCIONEGOCIONOMBREMOSTRADO</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">GRADOSIGLA</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">GRADOSIGLA</text-property>
-                    <text-property name="heading">GRADOSIGLA</text-property>
-                </structure>
-                <structure>
                     <property name="columnName">CARGONOMBRE</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">CARGONOMBRE</text-property>
                     <text-property name="heading">CARGONOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">GRADOSIGLA</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">GRADOSIGLA</text-property>
+                    <text-property name="heading">GRADOSIGLA</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters">
@@ -1466,12 +1466,12 @@ order by tareaun_.tareaunidadcodigo,subtareaun8_.SUBTAREAUNIDADCODIGO
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">GRADOSIGLA</property>
+                        <property name="name">CARGONOMBRE</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">CARGONOMBRE</property>
+                        <property name="name">GRADOSIGLA</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -1487,30 +1487,32 @@ order by tareaun_.tareaunidadcodigo,subtareaun8_.SUBTAREAUNIDADCODIGO
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">GRADOSIGLA</property>
-                    <property name="nativeName">GRADOSIGLA</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
                     <property name="name">CARGONOMBRE</property>
                     <property name="nativeName">CARGONOMBRE</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">GRADOSIGLA</property>
+                    <property name="nativeName">GRADOSIGLA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select S.SOCIONEGOCIONOMBREMOSTRADO, G.GRADOSIGLA, C.CARGONOMBRE
-from ESTRUCTURAORGANICA ES inner join UNIDADARBOL UA on ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID
-inner join UNIDADARBOLPLAZA UAP on UA.UNIDADARBOLID=UAP.UNIDADARBOLID
-inner join UNIDADARBOLPLAZAEMPLEADO UAPE on UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID 
-inner join SOCIONEGOCIO S on UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
-left join GRADOESCALA GE on S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
-left join GRADOFUERZA GF on GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
-left join GRADO G on GF.GRADOFUERZAGRADOID=G.GRADOID
-left join CARGO C on UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
-where  UAP.UNIDADARBOLPLAZAAPRUEBA=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=? and
-(UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
+            <xml-property name="queryText"><![CDATA[select S.SOCIONEGOCIONOMBREMOSTRADO, C.CARGONOMBRE, G.GRADOSIGLA
+from ESTRUCTURAORGANICA ES, UNIDADARBOL UA, UNIDADARBOLPLAZA UAP, UNIDADARBOLPLAZAEMPLEADO UAPE, SOCIONEGOCIO S, CARGO C,
+GRADOESCALA GE, GRADOFUERZA GF, GRADO G
+where ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID and UA.UNIDADARBOLID=UAP.UNIDADARBOLID
+and UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID AND UAP.UNIDADARBOLPLAZAID=UAPE.UNIDADARBOLPLAZAID
+and UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
+and UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
+and S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
+and GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
+and GF.GRADOFUERZAGRADOID=G.GRADOID
+and UA.UNIDADARBOLESTADO='A'
+and UAP.UNIDADARBOLPLAZAAPRUEBA=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=?
+ and (UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
 and S.SOCIONEGOCIOESEMPLEADO=1
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -1597,16 +1599,16 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                     <text-property name="heading">SOCIONEGOCIONOMBREMOSTRADO</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">GRADOSIGLA</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">GRADOSIGLA</text-property>
-                    <text-property name="heading">GRADOSIGLA</text-property>
-                </structure>
-                <structure>
                     <property name="columnName">CARGONOMBRE</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">CARGONOMBRE</text-property>
                     <text-property name="heading">CARGONOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">GRADOSIGLA</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">GRADOSIGLA</text-property>
+                    <text-property name="heading">GRADOSIGLA</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters">
@@ -1631,12 +1633,12 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">GRADOSIGLA</property>
+                        <property name="name">CARGONOMBRE</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">CARGONOMBRE</property>
+                        <property name="name">GRADOSIGLA</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -1652,30 +1654,32 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">GRADOSIGLA</property>
-                    <property name="nativeName">GRADOSIGLA</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
                     <property name="name">CARGONOMBRE</property>
                     <property name="nativeName">CARGONOMBRE</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">GRADOSIGLA</property>
+                    <property name="nativeName">GRADOSIGLA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select S.SOCIONEGOCIONOMBREMOSTRADO, G.GRADOSIGLA, C.CARGONOMBRE
-from ESTRUCTURAORGANICA ES inner join UNIDADARBOL UA on ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID
-inner join UNIDADARBOLPLAZA UAP on UA.UNIDADARBOLID=UAP.UNIDADARBOLID
-inner join UNIDADARBOLPLAZAEMPLEADO UAPE on UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID 
-inner join SOCIONEGOCIO S on UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
-left join GRADOESCALA GE on S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
-left join GRADOFUERZA GF on GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
-left join GRADO G on GF.GRADOFUERZAGRADOID=G.GRADOID
-left join CARGO C on UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
-where  UAP.UNIDADARBOLPLAZARESPONSABLE=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=? and
-(UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
+            <xml-property name="queryText"><![CDATA[select S.SOCIONEGOCIONOMBREMOSTRADO, C.CARGONOMBRE, G.GRADOSIGLA
+from ESTRUCTURAORGANICA ES, UNIDADARBOL UA, UNIDADARBOLPLAZA UAP, UNIDADARBOLPLAZAEMPLEADO UAPE, SOCIONEGOCIO S, CARGO C,
+GRADOESCALA GE, GRADOFUERZA GF, GRADO G
+where ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID and UA.UNIDADARBOLID=UAP.UNIDADARBOLID
+and UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID AND UAP.UNIDADARBOLPLAZAID=UAPE.UNIDADARBOLPLAZAID
+and UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
+and UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
+and S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
+and GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
+and GF.GRADOFUERZAGRADOID=G.GRADOID
+and UA.UNIDADARBOLESTADO='A'
+and UAP.UNIDADARBOLPLAZARESPONSABLE=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=?
+and (UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
 and S.SOCIONEGOCIOESEMPLEADO=1
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -1762,16 +1766,16 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                     <text-property name="heading">SOCIONEGOCIONOMBREMOSTRADO</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">GRADOSIGLA</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">GRADOSIGLA</text-property>
-                    <text-property name="heading">GRADOSIGLA</text-property>
-                </structure>
-                <structure>
                     <property name="columnName">CARGONOMBRE</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">CARGONOMBRE</text-property>
                     <text-property name="heading">CARGONOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">GRADOSIGLA</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">GRADOSIGLA</text-property>
+                    <text-property name="heading">GRADOSIGLA</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters">
@@ -1796,12 +1800,12 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">GRADOSIGLA</property>
+                        <property name="name">CARGONOMBRE</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">CARGONOMBRE</property>
+                        <property name="name">GRADOSIGLA</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -1817,30 +1821,32 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">GRADOSIGLA</property>
-                    <property name="nativeName">GRADOSIGLA</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
                     <property name="name">CARGONOMBRE</property>
                     <property name="nativeName">CARGONOMBRE</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">GRADOSIGLA</property>
+                    <property name="nativeName">GRADOSIGLA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select S.SOCIONEGOCIONOMBREMOSTRADO, G.GRADOSIGLA, C.CARGONOMBRE
-from ESTRUCTURAORGANICA ES inner join UNIDADARBOL UA on ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID
-inner join UNIDADARBOLPLAZA UAP on UA.UNIDADARBOLID=UAP.UNIDADARBOLID
-inner join UNIDADARBOLPLAZAEMPLEADO UAPE on UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID 
-inner join SOCIONEGOCIO S on UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
-left join GRADOESCALA GE on S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
-left join GRADOFUERZA GF on GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
-left join GRADO G on GF.GRADOFUERZAGRADOID=G.GRADOID
-left join CARGO C on UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
-where  UAP.UNIDADARBOLPLAZAREVISA=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=? and
-(UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
+            <xml-property name="queryText"><![CDATA[select S.SOCIONEGOCIONOMBREMOSTRADO, C.CARGONOMBRE, G.GRADOSIGLA
+from ESTRUCTURAORGANICA ES, UNIDADARBOL UA, UNIDADARBOLPLAZA UAP, UNIDADARBOLPLAZAEMPLEADO UAPE, SOCIONEGOCIO S, CARGO C,
+GRADOESCALA GE, GRADOFUERZA GF, GRADO G
+where ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID and UA.UNIDADARBOLID=UAP.UNIDADARBOLID
+and UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID AND UAP.UNIDADARBOLPLAZAID=UAPE.UNIDADARBOLPLAZAID
+and UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
+and UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
+and S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
+and GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
+and GF.GRADOFUERZAGRADOID=G.GRADOID
+and UA.UNIDADARBOLESTADO='A'
+and UAP.UNIDADARBOLPLAZAREVISA=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=?
+and (UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
 and S.SOCIONEGOCIOESEMPLEADO=1
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
