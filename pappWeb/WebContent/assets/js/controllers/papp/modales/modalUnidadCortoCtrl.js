@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalUnidadCortoController', [ "$scope","$rootScope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","unidadFactory",
-	function($scope,$rootScope,$uibModalInstance,SweetAlert,$filter, ngTableParams,unidadFactory) {
+app.controller('ModalUnidadCortoController', [ "$scope","$rootScope","$uibModalInstance","estadoaprobado","SweetAlert","$filter", "ngTableParams","unidadFactory",
+	function($scope,$rootScope,$uibModalInstance,estadoaprobado,SweetAlert,$filter, ngTableParams,unidadFactory) {
 
 	$scope.nombreFiltro=null;
 	$scope.codigoFiltro=null;
@@ -14,12 +14,13 @@ app.controller('ModalUnidadCortoController', [ "$scope","$rootScope","$uibModalI
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		unidadFactory.traerPlanificacionFiltro(
+		unidadFactory.traerPlanificacionFiltroAprobado(
 				pagina,
 				$rootScope.ejefiscal,
 				null,
 				null,
-				"A"
+				"A",
+				estadoaprobado
 		).then(function(resp){
 			//console.log(resp);
 			if (resp.meta)
@@ -29,12 +30,13 @@ app.controller('ModalUnidadCortoController', [ "$scope","$rootScope","$uibModalI
 
 	$scope.filtrar=function(){
 		$scope.data=[];
-		unidadFactory.traerPlanificacionFiltro(
+		unidadFactory.traerPlanificacionFiltroAprobado(
 			pagina,
 			$rootScope.ejefiscal,
 			$scope.codigoFiltro,
 			$scope.nombreFiltro,
-			"A"
+			"A",
+			estadoaprobado
 		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;

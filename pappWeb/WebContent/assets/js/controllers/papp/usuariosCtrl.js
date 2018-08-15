@@ -197,7 +197,12 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalUnidadCorto.html',
 			controller : 'ModalUnidadCortoController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				estadoaprobado : function() {
+					return "1";
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objetoDetalles[index].id.unidad = obj.id;

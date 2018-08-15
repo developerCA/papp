@@ -367,7 +367,12 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalUnidadCorto.html',
 			controller : 'ModalUnidadCortoController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				estadoaprobado : function() {
+					return "1";
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);

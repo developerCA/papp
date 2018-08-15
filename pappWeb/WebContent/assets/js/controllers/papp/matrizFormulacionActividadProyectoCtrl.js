@@ -39,7 +39,12 @@ app.controller('MatrizFormulacionActividadProyectoController', [ "$scope","$root
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalUnidadCorto.html',
 			controller : 'ModalUnidadCortoController',
-			size : 'lg'
+			size : 'lg',
+			resolve : {
+				estadoaprobado : function() {
+					return null;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj.id);
