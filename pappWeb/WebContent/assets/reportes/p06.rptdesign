@@ -2533,6 +2533,18 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
+                    <data id="2586">
+                        <property name="dataSet">CABECERA</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">INDICADORNOMBRE</property>
+                                <text-property name="displayName">INDICADORNOMBRE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["INDICADORNOMBRE"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">INDICADORNOMBRE</property>
+                    </data>
                 </cell>
             </row>
             <row id="2853">
@@ -2563,6 +2575,18 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
+                    <data id="2585">
+                        <property name="dataSet">CABECERA</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">ACTIVIDADUNIDADLINEABASE</property>
+                                <text-property name="displayName">ACTIVIDADUNIDADLINEABASE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDADUNIDADLINEABASE"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">ACTIVIDADUNIDADLINEABASE</property>
+                    </data>
                 </cell>
             </row>
             <row id="2861">
@@ -2593,6 +2617,18 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
+                    <data id="2584">
+                        <property name="dataSet">CABECERA</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">ACTIVIDADUNIDADJUSTIFICACION</property>
+                                <text-property name="displayName">ACTIVIDADUNIDADJUSTIFICACION</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDADUNIDADJUSTIFICACION"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">ACTIVIDADUNIDADJUSTIFICACION</property>
+                    </data>
                 </cell>
             </row>
             <row id="2875">
@@ -2623,6 +2659,18 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
+                    <data id="2583">
+                        <property name="dataSet">CABECERA</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">ACTIVIDADUNIDADOBJETIVOESPEC</property>
+                                <text-property name="displayName">ACTIVIDADUNIDADOBJETIVOESPEC</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDADUNIDADOBJETIVOESPEC"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">ACTIVIDADUNIDADOBJETIVOESPEC</property>
+                    </data>
                 </cell>
             </row>
             <row id="2883">
@@ -2653,6 +2701,18 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
+                    <data id="2582">
+                        <property name="dataSet">CABECERA</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">ACTIVIDADUNIDADOBJETIVOGENERAL</property>
+                                <text-property name="displayName">ACTIVIDADUNIDADOBJETIVOGENERAL</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDADUNIDADOBJETIVOGENERAL"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">ACTIVIDADUNIDADOBJETIVOGENERAL</property>
+                    </data>
                 </cell>
             </row>
             <row id="2891">
@@ -2683,6 +2743,18 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
+                    <data id="2580">
+                        <property name="dataSet">CABECERA</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">OPERATIVODESCRIPCION</property>
+                                <text-property name="displayName">OPERATIVODESCRIPCION</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["OPERATIVODESCRIPCION"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">OPERATIVODESCRIPCION</property>
+                    </data>
                 </cell>
             </row>
             <row id="2899">
@@ -2713,6 +2785,84 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
+                    <label id="2579">
+                        <text-property name="text">OBJETIVO OPERATIVO DE FF.AA.</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="2942">
+                <property name="height">0.19166666666666668in</property>
+                <cell id="2943">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <text id="2954">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[???????:]]></text-property>
+                    </text>
+                </cell>
+                <cell id="2945">
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">medium</property>
+                </cell>
+            </row>
+            <row id="2946">
+                <property name="height">0.19166666666666668in</property>
+                <cell id="2947">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">medium</property>
+                    <data id="2578">
+                        <property name="dataSet">CABECERA</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">ESTRATEGICODESCRIPCION</property>
+                                <text-property name="displayName">ESTRATEGICODESCRIPCION</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ESTRATEGICODESCRIPCION"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">ESTRATEGICODESCRIPCION</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="2950">
+                <property name="height">0.19166666666666668in</property>
+                <cell id="2951">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <text id="2955">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[????????:]]></text-property>
+                    </text>
+                </cell>
+                <cell id="2953">
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">medium</property>
+                </cell>
+            </row>
+            <row id="2938">
+                <property name="height">0.19166666666666668in</property>
+                <cell id="2939">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">medium</property>
+                    <label id="2577">
+                        <text-property name="text">OBJETIVO ESTRATEGICO INSTITUCIONAL</text-property>
+                    </label>
                 </cell>
             </row>
             <row id="2812">
