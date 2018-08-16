@@ -30,7 +30,7 @@ app.factory("SubItemsFactory", ["Restangular", function (Restangular) {
 
         },
 
-        traerItemsFiltroCustom: function (pagina, codigo, nombre, estado, tipo, ejercicio,incop,itemnombre, itemid) {
+        traerItemsFiltroCustom: function (pagina, codigo, nombre, estado, tipo, ejercicio,incop,itemcodigo, itemid) {
             var url = "administrar/consultar/subitem/pagina=" + pagina + "&filas=10&ejerciciofiscalid=" + ejercicio;
 
             if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();
@@ -38,7 +38,7 @@ app.factory("SubItemsFactory", ["Restangular", function (Restangular) {
             if (tipo != null && tipo != "") url += "&tipo=" + tipo;
             if (estado != null && estado != "") url += "&estado=" + estado;
             if (incop != null && incop != "") url += "&codigoIncop=" + incop;
-            if (itemnombre != null && itemnombre != "") url += "&itemnombre=" + itemnombre;
+            if (itemcodigo != null && itemcodigo != "") url += "&itemcodigo=" + itemcodigo;
             if (itemid != null && itemid != "") url += "&itemid=" + itemid;
             
             return Restangular.allUrl(url).customGET();

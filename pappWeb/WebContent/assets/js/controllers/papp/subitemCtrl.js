@@ -47,7 +47,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
     		$scope.tipo,
     		$rootScope.ejefiscal,
     		$scope.codigoIncop,
-    		$scope.itemNombre,
+    		$scope.itemCodigo,
     		null
 		).then(function (resp) {
 			$scope.dataset = resp.json.result;
@@ -67,7 +67,7 @@ app.controller('SubItemController', ["$scope", "$rootScope", "$uibModal", "Sweet
         $scope.tipo = null;
         $scope.estado = null;
         $scope.codigoIncop=null;
-        $scope.itemNombre=null;
+        $scope.itemCodigo=null;
         $scope.aplicafiltro=false;
         $scope.pagina=1;
         $scope.consultar();
