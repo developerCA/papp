@@ -649,9 +649,10 @@ public class PlanificacionController {
 					nivelactividadTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 					nivelactividadTO.setNivelactividadpadreid(tareaunidadTO.getPadre());
 					nivelactividadTO.setTipo("TA");
+					nivelactividadTO.setEstado("A");
 					nivelactividadTO.setNivelactividadunidadid(tareaunidadTO.getTareaunidadmetaumid());
 					nivelactividadTO.setNivelactividadejerfiscalid(tareaunidadTO.getTareaunidadejerciciofiscalid());
-					Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
+					Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO,false);
 					log.println("tareaunidadTOs: " + resultado.size());
 					if(resultado.size()>0){
 						for(NivelactividadTO nivelactividadTO2:resultado) {
@@ -727,9 +728,10 @@ public class PlanificacionController {
 					nivelactividadTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 					nivelactividadTO.setNivelactividadpadreid(subtareaunidadTO.getPadre());
 					nivelactividadTO.setTipo("ST");
+					nivelactividadTO.setEstado("A");
 					nivelactividadTO.setNivelactividadunidadid(subtareaunidadTO.getSubtareaunidadunidadid());
 					nivelactividadTO.setNivelactividadejerfiscalid(subtareaunidadTO.getSubtareaunidadejerfiscalid());
-					Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
+					Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO,false);
 					log.println("resultado: " + resultado.size());
 					if(resultado.size()>0){
 						for(NivelactividadTO nivelactividadTO2:resultado) {
@@ -812,7 +814,7 @@ public class PlanificacionController {
 				nivelactividadTO.setTipo("IT");
 				nivelactividadTO.setNivelactividadunidadid(itemunidadTO.getItemunidadunidadid());
 				nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
-				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
+				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO,true);
 				//								
 				//				NivelactividadTO nivelactividadTO=new NivelactividadTO();
 				//				nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
@@ -885,6 +887,7 @@ public class PlanificacionController {
 				NivelactividadTO nivelactividadTO=new NivelactividadTO();
 				nivelactividadTO.setNivelactividadejerfiscalid(subitemunidadTO.getSubitemunidadejerfiscalid());
 				nivelactividadTO.setNivelactividadpadreid(subitemunidadTO.getPadre());
+				nivelactividadTO.setEstado("A");
 				log.println("eje: "+ subitemunidadTO.getSubitemunidadejerfiscalid()+" padre " + subitemunidadTO.getPadre());
 				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
 				log.println("niveles: " + resultado.size());
@@ -961,7 +964,7 @@ public class PlanificacionController {
 			//			if(mensajes.getMsg()==null)
 			//				FormularioUtil.crearAuditoria(request, clase, accion, objeto, id);
 			if(mensajes.getMsg()==null){
-				ComunController.crearAuditoria(request, clase, accion, objeto, id);
+				//ComunController.crearAuditoria(request, clase, accion, objeto, id);
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}
@@ -1312,7 +1315,7 @@ public class PlanificacionController {
 
 					//2. traigo los valores ya reservados para restar y mostrar solo lo disponible
 					//Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
-					Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), ejercicio);
+					Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumuladosporactividad(id, Long.valueOf(parameters.get("unidadid")), ejercicio, Long.valueOf(parameters.get("actividadid")));
 					if(actividadunidadTO.getPresupplanif()!=null)
 						actividadunidadTO.setPresupplanif(UtilGeneral.redondear(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue(),2));
 //					else {
@@ -1825,7 +1828,8 @@ public class PlanificacionController {
 				log.println("valores ajustados: " + actividadunidadTO.getPresupajust());
 				//2. traigo los valores ya reservados para restar y mostrar solo lo disponible
 				//Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
-				Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
+				//Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(id, null, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")));
+				Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumuladosporactividad(id, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")), Long.valueOf(parameters.get("actividadid")));
 				log.println("total planificados: " + totales.get("tplanificado"));
 				log.println("total ajustados: " + totales.get("tacumulado"));
 				actividadunidadTO.setPresupplanif(UtilGeneral.redondear(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue(),2));
@@ -2091,7 +2095,7 @@ public class PlanificacionController {
 				nivelactividadTO.setNivelactividadunidadid(Long.valueOf(parameters.get("unidad")));
 				nivelactividadTO.setTipo("AC");
 				nivelactividadTO.setEstado("A");
-				Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
+				Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO,false);
 				//				ActividadunidadTO actividadunidadTO=new ActividadunidadTO();
 				//				actividadunidadTO.getId().setUnidadid(Long.valueOf(parameters.get("unidad")));
 				//				ActividadTO actividadTO=new ActividadTO();

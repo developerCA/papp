@@ -745,7 +745,7 @@ public class ConsultasUtil {
 			nivelactividadTO.setUnidad(new UnidadTO());
 			log.println("nivel actividad asignada: " + nivelactividadTO.getNivelactividadunidadid());
 			//Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
-			Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO);
+			Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO,false);
 			//Siempre que me llege la variable nivelactividad yo le asigno en una variable temporal
 			if(parameters.get("actividadid")!=null) {
 				for(NivelactividadTO nivel:resultado) {

@@ -999,6 +999,10 @@ public class ConsultasUtil {
 			if(parameters.get("itemnombre")!=null && !parameters.get("itemnombre").equals("")){
 				itemTO.setNombre(parameters.get("itemnombre"));
 			}	
+			if(parameters.get("itemcodigo")!=null && !parameters.get("itemcodigo").equals("")){
+				itemTO.setCodigo(parameters.get("itemcodigo"));
+			}	
+
 			if(parameters.get("itemid")!=null && !parameters.get("itemid").equals("")){
 				subitemTO.setSubitemitemid(Long.valueOf(parameters.get("itemid")));
 			}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706222054</property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -2011,15 +2011,15 @@ and S.SOCIONEGOCIOESEMPLEADO=1
     </page-setup>
     <body>
         <grid id="683">
-            <property name="width">7.283333333333333in</property>
+            <property name="width">100%</property>
             <column id="684">
-                <property name="width">1.175in</property>
+                <property name="width">20%</property>
             </column>
             <column id="685">
-                <property name="width">3.908333333333333in</property>
+                <property name="width">60%</property>
             </column>
             <column id="2467">
-                <property name="width">2.2in</property>
+                <property name="width">20%</property>
             </column>
             <row id="2807">
                 <cell id="2808">
@@ -2106,7 +2106,7 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                     <property name="borderRightWidth">medium</property>
                     <property name="textAlign">right</property>
                     <label id="2470">
-                        <property name="textAlign">left</property>
+                        <property name="textAlign">right</property>
                         <text-property name="text">P06</text-property>
                     </label>
                 </cell>
@@ -2128,7 +2128,7 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                     <property name="borderRightWidth">medium</property>
                     <property name="textAlign">right</property>
                     <data id="2565">
-                        <property name="textAlign">left</property>
+                        <property name="textAlign">right</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2197,7 +2197,7 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                         <property name="paddingLeft">1pt</property>
                         <property name="paddingBottom">1pt</property>
                         <property name="paddingRight">1pt</property>
-                        <property name="textAlign">left</property>
+                        <property name="textAlign">right</property>
                         <property name="letterSpacing">normal</property>
                         <property name="lineHeight">normal</property>
                         <property name="orphans">2</property>
@@ -2221,6 +2221,7 @@ sdf.format(new Date());</expression>
             </row>
         </grid>
         <grid id="2471">
+            <property name="width">100%</property>
             <column id="2472">
                 <property name="width">2.475in</property>
             </column>
@@ -2235,6 +2236,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2837">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[EJERCICIO FISCAL:]]></text-property>
                     </text>
@@ -2264,6 +2266,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2838">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[ENTIDAD OPERATIVA DESCONCENTRADA (EOD):]]></text-property>
                     </text>
@@ -2304,6 +2307,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2839">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[ENTIDAD DESCONCENTRADA (ED):]]></text-property>
                     </text>
@@ -2344,6 +2348,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2840">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[RESPONSABLE DE LA ACTIVIDAD:]]></text-property>
                     </text>
@@ -2384,6 +2389,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2841">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[NOMBRE DEL PROGRAMA:]]></text-property>
                     </text>
@@ -2424,6 +2430,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2842">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[NOMBRE DEL PROYECTO:]]></text-property>
                     </text>
@@ -2466,6 +2473,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2843">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[NOMBRE DE LA ACTIVIDAD:]]></text-property>
                     </text>
@@ -2513,6 +2521,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2865">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[OBJETIVO ESTRATEGICO INSTITUCIONAL:]]></text-property>
                     </text>
@@ -2533,17 +2542,17 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
-                    <data id="2586">
+                    <data id="2956">
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">INDICADORNOMBRE</property>
-                                <text-property name="displayName">INDICADORNOMBRE</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["INDICADORNOMBRE"]</expression>
+                                <property name="name">ESTRATEGICODESCRIPCION</property>
+                                <text-property name="displayName">ESTRATEGICODESCRIPCION</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ESTRATEGICODESCRIPCION"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">INDICADORNOMBRE</property>
+                        <property name="resultSetColumn">ESTRATEGICODESCRIPCION</property>
                     </data>
                 </cell>
             </row>
@@ -2555,6 +2564,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2915">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[OBJETIVO OPERATIVO DE FF.AA.:]]></text-property>
                     </text>
@@ -2575,17 +2585,17 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
-                    <data id="2585">
+                    <data id="2957">
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">ACTIVIDADUNIDADLINEABASE</property>
-                                <text-property name="displayName">ACTIVIDADUNIDADLINEABASE</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDADUNIDADLINEABASE"]</expression>
+                                <property name="name">OPERATIVODESCRIPCION</property>
+                                <text-property name="displayName">OPERATIVODESCRIPCION</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["OPERATIVODESCRIPCION"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">ACTIVIDADUNIDADLINEABASE</property>
+                        <property name="resultSetColumn">OPERATIVODESCRIPCION</property>
                     </data>
                 </cell>
             </row>
@@ -2597,6 +2607,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2916">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[OBJETIVO GENERAL DE LA ACTIVIDAD:]]></text-property>
                     </text>
@@ -2617,17 +2628,17 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
-                    <data id="2584">
+                    <data id="2958">
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">ACTIVIDADUNIDADJUSTIFICACION</property>
-                                <text-property name="displayName">ACTIVIDADUNIDADJUSTIFICACION</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDADUNIDADJUSTIFICACION"]</expression>
+                                <property name="name">ACTIVIDADUNIDADOBJETIVOGENERAL</property>
+                                <text-property name="displayName">ACTIVIDADUNIDADOBJETIVOGENERAL</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDADUNIDADOBJETIVOGENERAL"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">ACTIVIDADUNIDADJUSTIFICACION</property>
+                        <property name="resultSetColumn">ACTIVIDADUNIDADOBJETIVOGENERAL</property>
                     </data>
                 </cell>
             </row>
@@ -2639,6 +2650,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2917">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[OBJETIVO ESPECIFICO DE LA ACTIVIDAD:]]></text-property>
                     </text>
@@ -2681,6 +2693,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2918">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[JUSTIFICACION ACTIVIDAD:]]></text-property>
                     </text>
@@ -2701,17 +2714,17 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
-                    <data id="2582">
+                    <data id="2959">
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">ACTIVIDADUNIDADOBJETIVOGENERAL</property>
-                                <text-property name="displayName">ACTIVIDADUNIDADOBJETIVOGENERAL</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDADUNIDADOBJETIVOGENERAL"]</expression>
+                                <property name="name">ACTIVIDADUNIDADJUSTIFICACION</property>
+                                <text-property name="displayName">ACTIVIDADUNIDADJUSTIFICACION</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDADUNIDADJUSTIFICACION"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">ACTIVIDADUNIDADOBJETIVOGENERAL</property>
+                        <property name="resultSetColumn">ACTIVIDADUNIDADJUSTIFICACION</property>
                     </data>
                 </cell>
             </row>
@@ -2723,6 +2736,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2919">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[LINEA BASE ACTIVIDAD:]]></text-property>
                     </text>
@@ -2743,17 +2757,17 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
-                    <data id="2580">
+                    <data id="2960">
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">OPERATIVODESCRIPCION</property>
-                                <text-property name="displayName">OPERATIVODESCRIPCION</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["OPERATIVODESCRIPCION"]</expression>
+                                <property name="name">ACTIVIDADUNIDADLINEABASE</property>
+                                <text-property name="displayName">ACTIVIDADUNIDADLINEABASE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDADUNIDADLINEABASE"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">OPERATIVODESCRIPCION</property>
+                        <property name="resultSetColumn">ACTIVIDADUNIDADLINEABASE</property>
                     </data>
                 </cell>
             </row>
@@ -2765,6 +2779,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2920">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[INDICADOR DE LA ACTIVIDAD:]]></text-property>
                     </text>
@@ -2785,84 +2800,18 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftWidth">medium</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">medium</property>
-                    <label id="2579">
-                        <text-property name="text">OBJETIVO OPERATIVO DE FF.AA.</text-property>
-                    </label>
-                </cell>
-            </row>
-            <row id="2942">
-                <property name="height">0.19166666666666668in</property>
-                <cell id="2943">
-                    <property name="colSpan">2</property>
-                    <property name="rowSpan">1</property>
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
-                    <text id="2954">
-                        <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[???????:]]></text-property>
-                    </text>
-                </cell>
-                <cell id="2945">
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
-                </cell>
-            </row>
-            <row id="2946">
-                <property name="height">0.19166666666666668in</property>
-                <cell id="2947">
-                    <property name="colSpan">3</property>
-                    <property name="rowSpan">1</property>
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
-                    <data id="2578">
+                    <data id="2961">
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">ESTRATEGICODESCRIPCION</property>
-                                <text-property name="displayName">ESTRATEGICODESCRIPCION</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["ESTRATEGICODESCRIPCION"]</expression>
+                                <property name="name">INDICADORNOMBRE</property>
+                                <text-property name="displayName">INDICADORNOMBRE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["INDICADORNOMBRE"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
-                        <property name="resultSetColumn">ESTRATEGICODESCRIPCION</property>
+                        <property name="resultSetColumn">INDICADORNOMBRE</property>
                     </data>
-                </cell>
-            </row>
-            <row id="2950">
-                <property name="height">0.19166666666666668in</property>
-                <cell id="2951">
-                    <property name="colSpan">2</property>
-                    <property name="rowSpan">1</property>
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
-                    <text id="2955">
-                        <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[????????:]]></text-property>
-                    </text>
-                </cell>
-                <cell id="2953">
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
-                </cell>
-            </row>
-            <row id="2938">
-                <property name="height">0.19166666666666668in</property>
-                <cell id="2939">
-                    <property name="colSpan">3</property>
-                    <property name="rowSpan">1</property>
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
-                    <label id="2577">
-                        <text-property name="text">OBJETIVO ESTRATEGICO INSTITUCIONAL</text-property>
-                    </label>
                 </cell>
             </row>
             <row id="2812">
@@ -2875,6 +2824,7 @@ sdf.format(new Date());</expression>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">medium</property>
                     <text id="2921">
+                        <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[META DEL INDICADOR ACTIVIDAD:]]></text-property>
                     </text>
@@ -2888,7 +2838,7 @@ sdf.format(new Date());</expression>
             </row>
         </grid>
         <table id="2589">
-            <property name="width">7.291666666666667in</property>
+            <property name="width">100%</property>
             <property name="dataSet">META</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -2912,6 +2862,8 @@ sdf.format(new Date());</expression>
             </column>
             <header>
                 <row id="2590">
+                    <property name="backgroundColor">#FFFFFF</property>
+                    <property name="color">black</property>
                     <cell id="2591">
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">medium</property>
@@ -3134,7 +3086,7 @@ sdf.format(new Date());</expression>
                             <property name="paddingRight">1pt</property>
                             <structure name="numberFormat">
                                 <property name="category">Currency</property>
-                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
                                 <property name="locale">es_EC</property>
                             </structure>
                             <property name="textAlign">right</property>
@@ -3159,7 +3111,7 @@ sdf.format(new Date());</expression>
             </detail>
         </table>
         <table id="2606">
-            <property name="width">7.291666666666667in</property>
+            <property name="width">100%</property>
             <property name="dataSet">DETALLE</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -3222,6 +3174,8 @@ sdf.format(new Date());</expression>
             </column>
             <header>
                 <row id="2607">
+                    <property name="backgroundColor">#FFFFFF</property>
+                    <property name="color">black</property>
                     <cell id="2608">
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">medium</property>
@@ -3241,7 +3195,7 @@ sdf.format(new Date());</expression>
                             <property name="fontWeight">bold</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
-                            <property name="color">#FFFFFF</property>
+                            <property name="color">black</property>
                             <property name="textLineThrough">none</property>
                             <property name="textOverline">none</property>
                             <property name="textUnderline">none</property>
@@ -3300,7 +3254,7 @@ sdf.format(new Date());</expression>
                             <property name="fontWeight">bold</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
-                            <property name="color">#FFFFFF</property>
+                            <property name="color">black</property>
                             <property name="textLineThrough">none</property>
                             <property name="textOverline">none</property>
                             <property name="textUnderline">none</property>
@@ -3359,7 +3313,7 @@ sdf.format(new Date());</expression>
                             <property name="fontWeight">bold</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
-                            <property name="color">#FFFFFF</property>
+                            <property name="color">black</property>
                             <property name="textLineThrough">none</property>
                             <property name="textOverline">none</property>
                             <property name="textUnderline">none</property>
@@ -3418,7 +3372,7 @@ sdf.format(new Date());</expression>
                             <property name="fontWeight">bold</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
-                            <property name="color">#FFFFFF</property>
+                            <property name="color">black</property>
                             <property name="textLineThrough">none</property>
                             <property name="textOverline">none</property>
                             <property name="textUnderline">none</property>
@@ -3477,7 +3431,7 @@ sdf.format(new Date());</expression>
                             <property name="fontWeight">bold</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
-                            <property name="color">#FFFFFF</property>
+                            <property name="color">black</property>
                             <property name="textLineThrough">none</property>
                             <property name="textOverline">none</property>
                             <property name="textUnderline">none</property>
@@ -3780,7 +3734,7 @@ sdf.format(new Date());</expression>
                             <property name="paddingRight">1pt</property>
                             <structure name="numberFormat">
                                 <property name="category">Currency</property>
-                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
                                 <property name="locale">es_EC</property>
                             </structure>
                             <property name="textAlign">right</property>
@@ -3805,6 +3759,7 @@ sdf.format(new Date());</expression>
             </detail>
             <footer>
                 <row id="2629">
+                    <property name="backgroundColor">#FFFFFF</property>
                     <cell id="2630">
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">medium</property>
@@ -3812,6 +3767,13 @@ sdf.format(new Date());</expression>
                         <property name="borderLeftWidth">medium</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">medium</property>
+                        <label id="2640">
+                            <property name="fontFamily">"Arial"</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="color">black</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">TOTAL:</text-property>
+                        </label>
                     </cell>
                     <cell id="2631">
                         <property name="borderBottomStyle">solid</property>
@@ -3830,13 +3792,6 @@ sdf.format(new Date());</expression>
                         <property name="borderBottomWidth">medium</property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">medium</property>
-                        <label id="2640">
-                            <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">10pt</property>
-                            <property name="color">black</property>
-                            <property name="textAlign">right</property>
-                            <text-property name="text">TOTAL:</text-property>
-                        </label>
                     </cell>
                     <cell id="2634">
                         <property name="borderBottomStyle">solid</property>
@@ -3883,7 +3838,7 @@ sdf.format(new Date());</expression>
                             <property name="paddingRight">1pt</property>
                             <structure name="numberFormat">
                                 <property name="category">Currency</property>
-                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
                                 <property name="locale">es_EC</property>
                             </structure>
                             <property name="textAlign">right</property>
@@ -3908,6 +3863,7 @@ sdf.format(new Date());</expression>
             </footer>
         </table>
         <grid id="1431">
+            <property name="width">100%</property>
             <column id="1432">
                 <property name="width">20%</property>
             </column>
@@ -4048,8 +4004,190 @@ sdf.format(new Date());</expression>
                     <property name="overflow">hidden</property>
                 </cell>
             </row>
+            <row id="2968">
+                <cell id="2969">
+                    <label id="2974"/>
+                </cell>
+                <cell id="2970"/>
+                <cell id="2971">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                </cell>
+                <cell id="2972">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                    <label id="2978"/>
+                </cell>
+                <cell id="2973"/>
+            </row>
+            <row id="2962">
+                <cell id="2963">
+                    <label id="2975"/>
+                </cell>
+                <cell id="2964"/>
+                <cell id="2965">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                </cell>
+                <cell id="2966">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                    <label id="2979"/>
+                </cell>
+                <cell id="2967"/>
+            </row>
             <row id="1437">
-                <cell id="2923"/>
+                <cell id="2923">
+                    <label id="2976"/>
+                </cell>
                 <cell id="2924"/>
                 <cell id="2928">
                     <property name="backgroundAttachment">scroll</property>
@@ -4132,6 +4270,7 @@ sdf.format(new Date());</expression>
                     <property name="showIfBlank">false</property>
                     <property name="canShrink">false</property>
                     <property name="overflow">hidden</property>
+                    <label id="2980"/>
                 </cell>
                 <cell id="2714"/>
             </row>
@@ -4139,6 +4278,7 @@ sdf.format(new Date());</expression>
                 <cell id="2925">
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">thin</property>
+                    <label id="2977"/>
                 </cell>
                 <cell id="2926">
                     <property name="borderBottomStyle">solid</property>
@@ -4246,6 +4386,7 @@ sdf.format(new Date());</expression>
                     <property name="showIfBlank">false</property>
                     <property name="canShrink">false</property>
                     <property name="overflow">hidden</property>
+                    <label id="2981"/>
                 </cell>
                 <cell id="2715">
                     <property name="backgroundAttachment">scroll</property>
@@ -4468,6 +4609,322 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2706"/>
             </row>
+            <row id="2988">
+                <cell id="2989"/>
+                <cell id="2990">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderLeftColor">black</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderRightColor">black</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderRightWidth">medium</property>
+                    <property name="borderTopColor">black</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="borderTopWidth">medium</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textAlign">center</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                    <label id="2994"/>
+                </cell>
+                <cell id="2991">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderLeftColor">black</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderRightColor">black</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderRightWidth">medium</property>
+                    <property name="borderTopColor">black</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="borderTopWidth">medium</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textAlign">center</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                </cell>
+                <cell id="2992">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderLeftColor">black</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderRightColor">black</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderRightWidth">medium</property>
+                    <property name="borderTopColor">black</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="borderTopWidth">medium</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textAlign">center</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                </cell>
+                <cell id="2993"/>
+            </row>
+            <row id="2982">
+                <cell id="2983"/>
+                <cell id="2984">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderLeftColor">black</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderRightColor">black</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderRightWidth">medium</property>
+                    <property name="borderTopColor">black</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="borderTopWidth">medium</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textAlign">center</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                    <label id="2995"/>
+                </cell>
+                <cell id="2985">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderLeftColor">black</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderRightColor">black</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderRightWidth">medium</property>
+                    <property name="borderTopColor">black</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="borderTopWidth">medium</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textAlign">center</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                </cell>
+                <cell id="2986">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="borderLeftColor">black</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderRightColor">black</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderRightWidth">medium</property>
+                    <property name="borderTopColor">black</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="borderTopWidth">medium</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textAlign">center</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                </cell>
+                <cell id="2987"/>
+            </row>
             <row id="2756">
                 <cell id="2757"/>
                 <cell id="2934">
@@ -4520,6 +4977,7 @@ sdf.format(new Date());</expression>
                     <property name="showIfBlank">false</property>
                     <property name="canShrink">false</property>
                     <property name="overflow">hidden</property>
+                    <label id="2996"/>
                 </cell>
                 <cell id="2935">
                     <property name="backgroundAttachment">scroll</property>
@@ -4682,6 +5140,7 @@ sdf.format(new Date());</expression>
                     <property name="showIfBlank">false</property>
                     <property name="canShrink">false</property>
                     <property name="overflow">hidden</property>
+                    <label id="2997"/>
                 </cell>
                 <cell id="2755"/>
             </row>
