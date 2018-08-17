@@ -1456,6 +1456,17 @@ order by tareaun_.tareaunidadcodigo,subtareaun8_.SUBTAREAUNIDADCODIGO
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">estadoes</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">if(params["tipo"].value='P')&#13;
+'P'&#13;
+else&#13;
+'V'</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -1511,7 +1522,7 @@ and S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
 and GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
 and GF.GRADOFUERZAGRADOID=G.GRADOID
 and UA.UNIDADARBOLESTADO='A'
-and UAP.UNIDADARBOLPLAZAAPRUEBA=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=?
+and UAP.UNIDADARBOLPLAZAAPRUEBA=1 and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=? and ES.EORGANICAESTADO=?
  and (UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
 and S.SOCIONEGOCIOESEMPLEADO=1
 ]]></xml-property>
@@ -1623,6 +1634,17 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">estadoes</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">if(params["tipo"].value='P')&#13;
+'P'&#13;
+else&#13;
+'V'</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -1678,7 +1700,7 @@ and S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
 and GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
 and GF.GRADOFUERZAGRADOID=G.GRADOID
 and UA.UNIDADARBOLESTADO='A'
-and UAP.UNIDADARBOLPLAZARESPONSABLE=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=?
+and UAP.UNIDADARBOLPLAZARESPONSABLE=1 and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=? and ES.EORGANICAESTADO=? 
 and (UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
 and S.SOCIONEGOCIOESEMPLEADO=1
 ]]></xml-property>
@@ -1790,6 +1812,17 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">estadoes</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">if(params["tipo"].value='P')&#13;
+'P'&#13;
+else&#13;
+'V'</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -1845,7 +1878,7 @@ and S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
 and GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
 and GF.GRADOFUERZAGRADOID=G.GRADOID
 and UA.UNIDADARBOLESTADO='A'
-and UAP.UNIDADARBOLPLAZAREVISA=1 and ES.EORGANICAESTADO='V' and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=?
+and UAP.UNIDADARBOLPLAZAREVISA=1 and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=?  and ES.EORGANICAESTADO=?
 and (UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
 and S.SOCIONEGOCIOESEMPLEADO=1
 ]]></xml-property>
