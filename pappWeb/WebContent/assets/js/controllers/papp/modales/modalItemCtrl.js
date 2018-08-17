@@ -16,7 +16,20 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
     $scope.data=[];
     $scope.pagina = 1;
 
+    $scope.inicio = function () {
+        if ($scope.$resolve.tipo !== undefined) {
+        	$scope.tipo = $scope.$resolve.tipo
+        }
+        if ($scope.$resolve.estado !== undefined) {
+        	$scope.estado = $scope.$resolve.estado
+        }
+        //console.log($scope.$resolve);
+        $scope.consultar();
+    }
+
     $scope.consultar = function () {
+    	$scope.filtrar();
+/*
         $scope.dataset = [];
         
         itemsFactory.traerItemsCustom($scope.pagina, $rootScope.ejefiscal).then(function (resp) {
@@ -24,6 +37,7 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
             $scope.total=resp.json.total.valor;
             console.log($scope.total);
         });
+*/
     };
 
     $scope.pageChanged = function() {
@@ -44,9 +58,14 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
         $scope.dataset = [];
         $scope.aplicafiltro=true;
         itemsFactory.traerItemsFiltroCustom(
-        		$scope.pagina, $rootScope.ejefiscal, $scope.codigo,
-        		$scope.nombre, $scope.estado,
-        		$scope.tipo, $scope.codigopadre, null
+        		$scope.pagina,
+        		$rootScope.ejefiscal,
+        		$scope.codigo,
+        		$scope.nombre,
+        		$scope.estado,
+        		$scope.tipo,
+        		$scope.codigopadre,
+        		null
 		).then(function (resp) {
            
 			$scope.dataset = resp.json.result;
@@ -69,7 +88,7 @@ app.controller('ModalItemController', ["$scope", "$rootScope", "$uibModalInstanc
         $scope.idpadreFiltro=null;
         $scope.aplicafiltro=false;
         $scope.pagina=1;
-        $scope.consultar();
+        $scope.inicio();
     };
 
     $scope.seleccionar=function(obj){

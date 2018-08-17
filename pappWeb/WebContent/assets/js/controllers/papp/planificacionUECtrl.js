@@ -902,16 +902,13 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				resp[i].nodeTipo = tipo;
 				resp[i].padreID = node.id;
 			}
-			var nodes;
-			/* if (tipo == "IT") {
-				//nodes=JSON.parse(JSON.stringify(resp).split('"descripcionexten":').join('"title":'));
-				nodes=resp;
-				for (var i = 0; i < nodes.length; i++) {
-					nodes[i].title = nodes[i].descripcionexten.split(" - ")[1];
-					nodes[i].title = nodes[i].npcodigo + " - " + nodes[i].npcodigocanton + " - " + nodes[i].npcodigofuente + " - " + nodes[i].title;
-					nodes[i].nodePadre = node;
-				}
-			} else */
+			var nodes=resp;
+			//console.log(nodes);
+			for (var i = 0; i < nodes.length; i++) {
+				nodes[i].nodePadre = node;
+			}
+			node.nodes=nodes;
+/*
 			if (tipo == "AC" || tipo == "SA" || tipo == "IT" || tipo == "SI") { //  || tipo == "IT"
 				nodes=JSON.parse(JSON.stringify(resp).split('"descripcionexten":').join('"title":'));
 				for (var i = 0; i < nodes.length; i++) {
@@ -925,6 +922,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				}
 			}
 			node.nodes=nodes;
+*/
 		});
 	}
 
@@ -942,6 +940,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			resolve : {
 				tipo : function() {
 					return $scope.objeto.tipo;
+				},
+				estado : function() {
+					return 'A';
 				}
 			}
 		});
@@ -950,9 +951,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.objeto.itemunidaditemid = obj.id;
 			$scope.objeto.npcodigoitem = obj.codigo;
 			$scope.objeto.npnombreitem = obj.nombre;
-			if ($scope.objeto.descripcion == undefined || $scope.objeto.descripcion.trim() == "") {
+			//if ($scope.objeto.descripcion == undefined || $scope.objeto.descripcion.trim() == "") {
 				$scope.objeto.descripcion = obj.nombre;
-			}
+			//}
 		}, function() {
 		});
 	};

@@ -191,6 +191,7 @@ app.controller('UsuariosController', [ "$scope","$rootScope","$uibModal","SweetA
 		modalInstance.result.then(function(obj) {
 			$scope.objetoDetalles[index].id.unidad = obj.id;
 			$scope.objetoDetalles[index].npunidad=obj.nombre;
+			$scope.objetoDetalles[index].npunidadcodigo=obj.codigopresup;
 		}, function() {
 		});
 /*
