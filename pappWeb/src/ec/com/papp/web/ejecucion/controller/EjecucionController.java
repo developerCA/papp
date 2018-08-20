@@ -165,7 +165,6 @@ public class EjecucionController {
 				if(ordengastoTO.getNpfechasolicitud()!=null)
 					ordengastoTO.setFechasolicitud(UtilGeneral.parseStringToDate(ordengastoTO.getNpfechasolicitud()));
 				accion = (ordengastoTO.getId()==null)?"I":"U";
-				System.out.println("ordengastoclasemodid web " + ordengastoTO.getOrdengastoclasemodid());
 				UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO,null);
 				//id=ordengastoTO.getNpid().toString();
 				ordengastoTO.setId(ordengastoTO.getNpid());

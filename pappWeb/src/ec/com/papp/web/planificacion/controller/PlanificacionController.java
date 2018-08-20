@@ -855,21 +855,13 @@ public class PlanificacionController {
 					//				nivelactividadTO.setNivelactividadpadreid(itemunidadTO.getPadre());
 					//				log.println("eje: "+ itemunidadTO.getItemunidadejerciciofiscalid()+" padre " + itemunidadTO.getPadre());
 					//				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
-					System.out.println("niveles item: " + resultado.size());
 					log.println("codigo del item "+itemunidadTO.getNpcodigoitem());
 					for(NivelactividadTO nivelactividadTO2:resultado){
-						System.out.println("obra " + nivelactividadTO2.getNpcodigoobra());
-						System.out.println("fuente " + nivelactividadTO2.getNpcodigofuente());
-						System.out.println("organismo " + nivelactividadTO2.getNpcodigoorganismo());
-						System.out.println("canton " + nivelactividadTO2.getNpcodigocanton());
-						System.out.println("itemunidad: " + itemunidadTO.getId());
-						System.out.println("nivel tabla rel: " +nivelactividadTO2.getTablarelacionid());
 							//						log.println("descripcion::: " + descripcion[0]);
 							if((itemunidadTO.getId()==null || itemunidadTO.getId().longValue()==0) && (nivelactividadTO2.getNpcodigo().equals(itemunidadTO.getNpcodigoitem())
 									&& nivelactividadTO2.getNpcodigoobra().equals(itemunidadTO.getNpcodigoobra()) && nivelactividadTO2.getNpcodigofuente().equals(itemunidadTO.getNpcodigofuente())
 									&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton()))){
 								grabar=false;
-								System.out.println("entro por 1 item");
 								break;
 							}
 							else if((itemunidadTO.getId()!=null && itemunidadTO.getId().longValue()!=0) 
@@ -878,7 +870,6 @@ public class PlanificacionController {
 											&& nivelactividadTO2.getNpcodigoobra().equals(itemunidadTO.getNpcodigoobra()) && nivelactividadTO2.getNpcodigofuente().equals(itemunidadTO.getNpcodigofuente())
 											&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton()))){
 								grabar=false;
-								System.out.println("entro por 2 item");
 								break;
 							}
 					}
@@ -908,7 +899,6 @@ public class PlanificacionController {
 				nivelactividadTO.setNivelactividadunidadid(subitemunidadTO.getSubitemunidadunidadid());
 				log.println("eje: "+ subitemunidadTO.getSubitemunidadejerfiscalid()+" padre " + subitemunidadTO.getPadre());
 				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividadArbol(nivelactividadTO);
-				System.out.println("niveles subitem: " + resultado.size());
 				boolean grabar=true;
 				log.println("codigo del subitem "+subitemunidadTO.getNpcodigosubitem());
 				for(NivelactividadTO nivelactividadTO2:resultado){

@@ -140,19 +140,14 @@ public class SeguridadController {
 					usuarioTO4.setEstado1("1");
 					usuarioTO4.setSocionegocioid(usuarioTO.getSocionegocioid());
 					Collection<UsuarioTO> usuarioTOs=UtilSession.seguridadServicio.transObtenerusuario(usuarioTO4);
-					System.out.println("usuarios empleado: " + usuarioTOs.size());
-					System.out.println("usuario empleado: " + usuarioTO.getSocionegocioid());
 					if(usuarioTOs.size()>0) {
 						for(UsuarioTO usuarioTO3:usuarioTOs) {
-							System.out.println("usuario comparar " + usuarioTO3.getSocionegocioid());
 							if((usuarioTO.getId()!=null && usuarioTO.getId().longValue()!=0) && usuarioTO3.getId().longValue()!=usuarioTO.getId().longValue() && usuarioTO3.getSocionegocioid().longValue()==usuarioTO.getSocionegocioid().longValue()) {
 								grabar=false;
-								System.out.println("entra 1");
 								break;
 							}
 							else if((usuarioTO.getId()==null || (usuarioTO.getId()!=null && usuarioTO3.getId().longValue()!=usuarioTO.getId().longValue()))  && usuarioTO3.getSocionegocioid().longValue()==usuarioTO.getSocionegocioid().longValue()) {
 								grabar=false;
-								System.out.println("entra 1");
 								break;
 							}
 						}
