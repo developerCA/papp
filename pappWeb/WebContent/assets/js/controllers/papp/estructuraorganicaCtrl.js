@@ -127,7 +127,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	$scope.filtrarPEmpleados=function(){
 		$scope.data=[];
 		//console.log($scope.filtro.codigoPEFiltro);
-		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionada,'A',$scope.filtro.codigoPEFiltro).then(function(resp){
+		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionadaLista,'A',$scope.filtro.codigoPEFiltro).then(function(resp){
 			$scope.data = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 		})
 	}
@@ -136,7 +136,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		$scope.data=[];
 		$scope.filtro.codigoPEFiltro = null;
 
-		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionada,'A',null).then(function(resp){
+		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionadaLista,'A',null).then(function(resp){
 			$scope.data = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 		})
 	};
@@ -282,13 +282,14 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 //** Plaza Empleados
 	$scope.mostrarEmpleados=function(id){
 		$scope.estructuraSeleccionada=id;
+		$scope.estructuraSeleccionadaLista=id;
 		//$scope.tabactivo=2;
 		$scope.divME=true;
 		$scope.edicion=true;
 		$scope.dEmpleados=true;
 		$scope.data=[];
 
-		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionada,'A').then(function(resp){
+		unidadFactory.traerUnidadesArbolPlazaEmpleado(pagina,$scope.estructuraSeleccionadaLista,'A').then(function(resp){
 			$scope.data = JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 		})
 	}
