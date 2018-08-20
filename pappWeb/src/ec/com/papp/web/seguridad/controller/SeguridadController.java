@@ -112,26 +112,78 @@ public class SeguridadController {
 				accion = (usuarioTO.getId()==null)?"I":"U";
 				if(usuarioTO.getNpfechaactualizacionclave()!=null)
 					usuarioTO.setFechaactualizacionclave(UtilGeneral.parseStringToDate(usuarioTO.getNpfechaactualizacionclave()));
-				if(usuarioTO.getId()==null) {
-					usuarioTO.setClave(MensajesWeb.getString("clave.inicial.usuario"));
-					usuarioTO.setCambiarclave("1");
-					usuarioTO.setFechaactualizacionclave(new Date());
-					usuarioTO.setEstado1("1");
-				}
-				else {
-					//Si la clave es distinta la encripto nuevamente
-					UsuarioTO usuariograbado=UtilSession.seguridadServicio.transObtenerUsuarioTO(usuarioTO.getId());
-					if(!usuarioTO.getClave().equals(usuariograbado.getClave())){
-						log.println("va a cambiar clave");
-						String clave=usuarioTO.getClave();
-						usuarioTO.setClave(ConsultasUtil.encriptarClave(clave.toLowerCase()));
-						usuarioTO.setCambiarclave("1");
-						usuarioTO.setFechaactualizacionclave(new Date());
+				//Verifico que no se repita el usuario
+				boolean grabar=true;
+				UsuarioTO usuarioTO2=new UsuarioTO();
+				usuarioTO2.setUsuario(usuarioTO.getUsuario());
+				usuarioTO2.setEstado1("1");
+				Collection<UsuarioTO> usuarios=UtilSession.seguridadServicio.transObtenerusuario(usuarioTO2);
+				if(usuarios.size()>0) {
+					for(UsuarioTO usuarioTO3:usuarios) {
+						if((usuarioTO.getId()!=null && usuarioTO.getId().longValue()!=0) && usuarioTO3.getId().longValue()!=usuarioTO.getId().longValue() && usuarioTO3.getUsuario().equals(usuarioTO.getUsuario())) {
+							grabar=false;
+							break;
+						}
+						else if((usuarioTO.getId()==null || (usuarioTO.getId()!=null && usuarioTO3.getId().longValue()!=usuarioTO.getId().longValue())) && usuarioTO.getUsuario()!=null && usuarioTO3.getUsuario().equals(usuarioTO.getUsuario())) {
+							grabar=false;
+							break;
+						}
+					}
+					if(!grabar) {
+						mensajes.setMsg("El usuario ingresado ya existe, por favor seleccione otro");
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 					}
 				}
-				UtilSession.seguridadServicio.transCrearModificarusuario(usuarioTO);
-				//id=usuarioTO.getId().toString();
-				jsonObject.put("usuario", (JSONObject)JSONSerializer.toJSON(usuarioTO,usuarioTO.getJsonConfig()));
+				if(grabar) {
+					//Verifico que no se repita el empleado
+					UsuarioTO usuarioTO4=new UsuarioTO();
+					usuarioTO4.setEstado1("1");
+					usuarioTO4.setSocionegocioid(usuarioTO.getSocionegocioid());
+					Collection<UsuarioTO> usuarioTOs=UtilSession.seguridadServicio.transObtenerusuario(usuarioTO4);
+					System.out.println("usuarios empleado: " + usuarioTOs.size());
+					System.out.println("usuario empleado: " + usuarioTO.getSocionegocioid());
+					if(usuarioTOs.size()>0) {
+						for(UsuarioTO usuarioTO3:usuarioTOs) {
+							System.out.println("usuario comparar " + usuarioTO3.getSocionegocioid());
+							if((usuarioTO.getId()!=null && usuarioTO.getId().longValue()!=0) && usuarioTO3.getId().longValue()!=usuarioTO.getId().longValue() && usuarioTO3.getSocionegocioid().longValue()==usuarioTO.getSocionegocioid().longValue()) {
+								grabar=false;
+								System.out.println("entra 1");
+								break;
+							}
+							else if((usuarioTO.getId()==null || (usuarioTO.getId()!=null && usuarioTO3.getId().longValue()!=usuarioTO.getId().longValue()))  && usuarioTO3.getSocionegocioid().longValue()==usuarioTO.getSocionegocioid().longValue()) {
+								grabar=false;
+								System.out.println("entra 1");
+								break;
+							}
+						}
+						if(!grabar) {
+							mensajes.setMsg("El empleado ya se encuentra asignado a un usuario, por favor seleccione otro");
+							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						}
+					}
+				}
+				if(grabar) {
+					if(usuarioTO.getId()==null) {
+						usuarioTO.setClave(MensajesWeb.getString("clave.inicial.usuario"));
+						usuarioTO.setCambiarclave("1");
+						usuarioTO.setFechaactualizacionclave(new Date());
+						usuarioTO.setEstado1("1");
+					}
+					else {
+						//Si la clave es distinta la encripto nuevamente
+						UsuarioTO usuariograbado=UtilSession.seguridadServicio.transObtenerUsuarioTO(usuarioTO.getId());
+						if(!usuarioTO.getClave().equals(usuariograbado.getClave())){
+							log.println("va a cambiar clave");
+							String clave=usuarioTO.getClave();
+							usuarioTO.setClave(ConsultasUtil.encriptarClave(clave.toLowerCase()));
+							usuarioTO.setCambiarclave("1");
+							usuarioTO.setFechaactualizacionclave(new Date());
+						}
+					}
+					UtilSession.seguridadServicio.transCrearModificarusuario(usuarioTO);
+					//id=usuarioTO.getId().toString();
+					jsonObject.put("usuario", (JSONObject)JSONSerializer.toJSON(usuarioTO,usuarioTO.getJsonConfig()));
+				}
 			}
 			
 			//Usuariounidad
