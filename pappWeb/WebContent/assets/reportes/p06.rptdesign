@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706222054</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -3794,6 +3794,8 @@ sdf.format(new Date());</expression>
                 <row id="2629">
                     <property name="backgroundColor">#FFFFFF</property>
                     <cell id="2630">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
                         <property name="borderBottomStyle">solid</property>
                         <property name="borderBottomWidth">medium</property>
                         <property name="borderLeftStyle">solid</property>
@@ -3804,27 +3806,9 @@ sdf.format(new Date());</expression>
                             <property name="fontFamily">"Arial"</property>
                             <property name="fontSize">10pt</property>
                             <property name="color">black</property>
-                            <property name="textAlign">left</property>
+                            <property name="textAlign">right</property>
                             <text-property name="text">TOTAL:</text-property>
                         </label>
-                    </cell>
-                    <cell id="2631">
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
-                    </cell>
-                    <cell id="2632">
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
-                    </cell>
-                    <cell id="2633">
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
-                        <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
                     </cell>
                     <cell id="2634">
                         <property name="borderBottomStyle">solid</property>

@@ -376,6 +376,27 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 
 	$scope.form = {
         submit: function (form) {
+        	if (!$scope.objeto.actividadid) {
+        		SweetAlert.swal("Reporte P1!", "Seleccione una Actividad", "error");
+        		return;
+        	}
+        	if (!$scope.objeto.institucionid) {
+        		SweetAlert.swal("Reporte P1!", "Seleccione una Institucion", "error");
+        		return;
+        	}
+        	if (!$scope.objeto.organismoid) {
+        		SweetAlert.swal("Reporte P1!", "Seleccione un Organismo", "error");
+        		return;
+        	}
+        	var url = "/birt/frameset?__report=p1.rptdesign" +
+				"&NivelActividad=" + $scope.objeto.actividadid +
+				"&InstitucionActividad=" + $scope.objeto.institucionid +
+				"&Organismo=" + $scope.objeto.organismoid +
+				"&ejerciciofiscalid=" + $rootScope.ejefiscal;
+			console.log(url);
+		    console.log($scope.objeto);
+		    window.open(url, '_blank');
+        	return;
             var firstError = null;
             if (form.$invalid) {
                 var field = null, firstError = null;
