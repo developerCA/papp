@@ -270,8 +270,14 @@ public class EstructuraorganicaController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error grabar");
-			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
-			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			if(clase.equals("unidadarbolplaza")){
+				mensajes.setMsg("Error al guardar el registro: Si elimina plazas verifique que no tengan asignados empleados" );
+				mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			}
+			else {
+				mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+				mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			}
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
