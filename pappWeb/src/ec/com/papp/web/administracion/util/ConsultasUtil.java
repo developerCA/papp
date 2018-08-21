@@ -1486,7 +1486,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				socionegocioTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				socionegocioTO.setNombrecomercial(parameters.get("nombre"));
+				socionegocioTO.setNombremostrado(parameters.get("nombre"));
 			if(parameters.get("razonsocial")!=null && !parameters.get("razonsocial").equals(""))
 				socionegocioTO.setRazonsocial(parameters.get("razonsocial"));
 
