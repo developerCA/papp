@@ -84,32 +84,43 @@
 									ng-click="solicitarAjustado(obj);">
 									<i class="fa ti-pencil-alt"></i>
 								</a></td>
-<!--
-								<td><a class="btn btn-sm btn-primary"
-									style="background-color: #00B300 !important"
-									uib-tooltip="Aprobar Planificaci&oacute;n"
-									ng-click="aprobarPlanificacion(obj);"> <i
-										class="fa ti-marker-alt"></i>
-								</a></td>
-								<td><a class="btn btn-sm btn-primary"
-									style="background-color: #00B300 !important"
-									uib-tooltip="Aprobar Ajustada"
-									ng-click="aprobarAjustado(obj);">
+
+								<td>
+									<a ng-show="rol('ROLE_GRADOESCALA');"
+										class="btn btn-sm btn-primary"
+										style="background-color: #00B300 !important"
+										uib-tooltip="Aprobar Planificaci&oacute;n"
+										ng-click="aprobarPlanificacion(obj);">
+										<i class="fa ti-marker-alt"></i>
+									</a>
+								</td>
+								<td>
+									<a ng-show="rol('ROLE_GRADOESCALA');"
+										class="btn btn-sm btn-primary"
+										style="background-color: #00B300 !important"
+										uib-tooltip="Aprobar Ajustada"
+										ng-click="aprobarAjustado(obj);">
 										<i class="fa ti-signal"></i>
-								</a></td>
-								<td><a class="btn btn-sm btn-primary"
-									style="background-color: #B30000 !important"
-									uib-tooltip="Denegar Planificaci&oacute;n"
-									ng-click="denegarPlanificacion(obj);"> <i
-										class="fa ti-marker-alt"></i>
-								</a></td>
-								<td><a class="btn btn-sm btn-primary"
-									style="background-color: #B30000 !important"
-									uib-tooltip="Denegar Ajustada"
-									ng-click="denegarAjustado(obj);">
+									</a>
+								</td>
+								<td>
+									<a ng-show="rol('ROLE_GRADOESCALA');"
+										class="btn btn-sm btn-primary"
+										style="background-color: #B30000 !important"
+										uib-tooltip="Denegar Planificaci&oacute;n"
+										ng-click="denegarPlanificacion(obj);">
+										<i class="fa ti-marker-alt"></i>
+									</a>
+								</td>
+								<td>
+									<a ng-show="rol('ROLE_GRADOESCALA');"
+										class="btn btn-sm btn-primary"
+										style="background-color: #B30000 !important"
+										uib-tooltip="Denegar Ajustada"
+										ng-click="denegarAjustado(obj);">
 										<i class="fa ti-signal"></i>
-								</a></td>
--->
+									</a>
+								</td>
 								<td><a class="btn btn-sm btn-primary"
 									style="background-color: #00B300 !important"
 									uib-tooltip="Matriz Presupuestos"
@@ -273,7 +284,7 @@
 													<textarea name="lineabase" rows="5" style="width: 100%"
 														placeholder="Escriba un l&iacute;nea base"
 														class="form-control" ng-model="objeto.lineabase" required
-														ng-disabled="!editar"></textarea>
+														ng-disabled="!editar" ng-maxlength="500"></textarea>
 													<span class="error text-small block"
 														ng-if="FormActividad.lineabase.$dirty && FormActividad.lineabase.$invalid">
 														Incorrecto </span> <span class="success text-small"
@@ -288,7 +299,7 @@
 													<textarea name="justificacion" rows="5" style="width: 100%"
 														placeholder="Escriba un justificaci&oacute;n"
 														class="form-control" ng-model="objeto.justificacion"
-														required ng-disabled="!editar"></textarea>
+														required ng-disabled="!editar" ng-maxlength="500"></textarea>
 													<span class="error text-small block"
 														ng-if="FormActividad.justificacion.$dirty && FormActividad.justificacion.$invalid">
 														Incorrecto </span> <span class="success text-small"
@@ -304,7 +315,7 @@
 														style="width: 100%"
 														placeholder="Escriba un objetivo general"
 														class="form-control" ng-model="objeto.objetivogeneral"
-														required ng-disabled="!editar"></textarea>
+														required ng-disabled="!editar" ng-maxlength="500"></textarea>
 													<span class="error text-small block"
 														ng-if="FormActividad.objetivogeneral.$dirty && FormActividad.objetivogeneral.$invalid">
 														Incorrecto </span> <span class="success text-small"
@@ -320,7 +331,7 @@
 													<textarea name="objetivoespec" rows="5" style="width: 100%"
 														placeholder="Escriba un objetivo especifico"
 														class="form-control" ng-model="objeto.objetivoespec"
-														required ng-disabled="!editar"></textarea>
+														required ng-disabled="!editar" ng-maxlength="500"></textarea>
 													<span class="error text-small block"
 														ng-if="FormActividad.objetivoespec.$dirty && FormActividad.objetivoespec.$invalid">
 														Incorrecto </span> <span class="success text-small"

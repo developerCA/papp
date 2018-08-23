@@ -1,6 +1,10 @@
 app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$uibModal","SweetAlert","$filter", "ngTableParams","PlanificacionUEFactory", "AprobacionPlanificacionFactory",
 	function($scope,$rootScope,$aside,$uibModal,SweetAlert,$filter, ngTableParams,PlanificacionUEFactory, AprobacionPlanificacionFactory) {
 
+	$scope.rol=function(nombre) {
+		return ifRollPermiso(nombre);
+	}
+
 	$scope.codigoFiltro=null;
 	$scope.nombreFiltro=null;
 	$scope.estadoFiltro=null;
