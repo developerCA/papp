@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706222054</property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -2046,74 +2046,84 @@ and S.SOCIONEGOCIOESEMPLEADO=1
         <grid id="683">
             <property name="width">100%</property>
             <column id="684">
-                <property name="width">20%</property>
+                <property name="width">25%</property>
             </column>
             <column id="685">
                 <property name="width">60%</property>
             </column>
             <column id="2467">
-                <property name="width">20%</property>
+                <property name="width">15%</property>
             </column>
             <row id="2807">
                 <cell id="2808">
                     <property name="colSpan">1</property>
-                    <property name="rowSpan">5</property>
+                    <property name="rowSpan">3</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderTopStyle">solid</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <image id="2451">
                         <property name="source">url</property>
                         <expression name="uri" type="constant">http://172.17.26.118:8081/birt/comaco.jpg</expression>
                     </image>
                 </cell>
                 <cell id="2809">
-                    <property name="colSpan">2</property>
-                    <property name="rowSpan">4</property>
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">1</property>
                     <property name="borderTopStyle">solid</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="textAlign">right</property>
                     <text id="2811">
                         <property name="fontFamily">"Arial"</property>
-                        <property name="fontSize">14pt</property>
+                        <property name="fontSize">12pt</property>
                         <property name="fontWeight">bold</property>
-                        <property name="textAlign">left</property>
+                        <property name="textAlign">center</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[COMANDO CONJUNTO DE LAS FF.AA.]]></text-property>
                     </text>
                     <label id="1170">
                         <property name="fontFamily">"Arial"</property>
-                        <property name="fontSize">12px</property>
+                        <property name="fontSize">11px</property>
                         <property name="fontWeight">bold</property>
-                        <property name="textAlign">left</property>
+                        <property name="textAlign">center</property>
                         <text-property name="text">ESTADO MAYOR INSTITUCIONAL</text-property>
                     </label>
                     <label id="1435">
                         <property name="fontFamily">"Arial"</property>
-                        <property name="fontSize">12px</property>
+                        <property name="fontSize">11px</property>
                         <property name="fontWeight">bold</property>
-                        <property name="textAlign">left</property>
+                        <property name="textAlign">center</property>
                         <text-property name="text">MATRIZ DE FORMULACIÓN DE ACTIVIDAD SIN PROYECTO</text-property>
                     </label>
                 </cell>
+                <cell id="2998">
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="textAlign">right</property>
+                </cell>
             </row>
-            <row id="2795"/>
-            <row id="2799"/>
-            <row id="2803">
-                <property name="height">0.19166666666666668in</property>
+            <row id="2795">
+                <cell id="2999">
+                    <property name="textAlign">right</property>
+                </cell>
+                <cell id="3000">
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="textAlign">right</property>
+                </cell>
             </row>
             <row id="2828">
                 <cell id="2830">
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="textAlign">right</property>
                     <text id="2832">
                         <property name="fontSize">6pt</property>
@@ -2125,42 +2135,49 @@ and S.SOCIONEGOCIOESEMPLEADO=1
             <row id="690">
                 <cell id="2825">
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                 </cell>
                 <cell id="2468">
                     <property name="textAlign">right</property>
                     <text id="2452">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">11px</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[Reporte:]]></text-property>
                     </text>
                 </cell>
                 <cell id="2469">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="textAlign">right</property>
                     <label id="2470">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">11px</property>
                         <property name="textAlign">right</property>
                         <text-property name="text">P06</text-property>
                     </label>
                 </cell>
             </row>
             <row id="2453">
-                <cell id="2826">
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
-                </cell>
+                <property name="borderBottomStyle">none</property>
+                <property name="borderLeftStyle">none</property>
+                <property name="borderRightStyle">none</property>
+                <property name="borderTopStyle">none</property>
+                <cell id="2826"/>
                 <cell id="2456">
                     <property name="textAlign">right</property>
                     <text id="2461">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">11px</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[PAPP Año:]]></text-property>
                     </text>
                 </cell>
                 <cell id="2465">
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
                     <property name="textAlign">right</property>
                     <data id="2565">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">11px</property>
                         <property name="textAlign">right</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
@@ -2178,31 +2195,33 @@ and S.SOCIONEGOCIOESEMPLEADO=1
             <row id="2457">
                 <cell id="2827">
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                 </cell>
                 <cell id="2460">
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="textAlign">right</property>
                     <label id="2462">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">11px</property>
                         <text-property name="text">Fecha:</text-property>
                     </label>
                 </cell>
                 <cell id="2466">
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="textAlign">right</property>
                     <text-data id="1326">
                         <property name="backgroundAttachment">scroll</property>
                         <property name="backgroundPositionX">0%</property>
                         <property name="backgroundPositionY">0%</property>
                         <property name="backgroundRepeat">repeat</property>
-                        <property name="fontFamily">serif</property>
-                        <property name="fontSize">10pt</property>
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">11px</property>
                         <property name="fontWeight">normal</property>
                         <property name="fontStyle">normal</property>
                         <property name="fontVariant">normal</property>
@@ -2212,16 +2231,16 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                         <property name="textUnderline">none</property>
                         <property name="borderBottomColor">black</property>
                         <property name="borderBottomStyle">none</property>
-                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderBottomWidth">thin</property>
                         <property name="borderLeftColor">black</property>
                         <property name="borderLeftStyle">none</property>
-                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderLeftWidth">thin</property>
                         <property name="borderRightColor">black</property>
                         <property name="borderRightStyle">none</property>
-                        <property name="borderRightWidth">medium</property>
+                        <property name="borderRightWidth">thin</property>
                         <property name="borderTopColor">black</property>
                         <property name="borderTopStyle">none</property>
-                        <property name="borderTopWidth">medium</property>
+                        <property name="borderTopWidth">thin</property>
                         <property name="marginTop">0pt</property>
                         <property name="marginLeft">0pt</property>
                         <property name="marginBottom">0pt</property>
@@ -2267,8 +2286,10 @@ sdf.format(new Date());</expression>
             <row id="2833">
                 <cell id="2834">
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2837">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[EJERCICIO FISCAL:]]></text-property>
@@ -2276,6 +2297,8 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2835">
                     <data id="2844">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="textAlign">left</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
@@ -2291,14 +2314,16 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2836">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                 </cell>
             </row>
             <row id="2479">
                 <cell id="2480">
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2838">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[ENTIDAD OPERATIVA DESCONCENTRADA (EOD):]]></text-property>
@@ -2306,6 +2331,8 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2481">
                     <data id="2567">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2320,8 +2347,10 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2482">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2568">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2338,8 +2367,10 @@ sdf.format(new Date());</expression>
             <row id="2483">
                 <cell id="2484">
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2839">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[ENTIDAD DESCONCENTRADA (ED):]]></text-property>
@@ -2347,6 +2378,8 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2485">
                     <data id="2569">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2361,8 +2394,10 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2486">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2570">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2379,8 +2414,10 @@ sdf.format(new Date());</expression>
             <row id="2487">
                 <cell id="2488">
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2840">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[RESPONSABLE DE LA ACTIVIDAD:]]></text-property>
@@ -2388,6 +2425,8 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2489">
                     <data id="2773">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">APROBADO</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2402,8 +2441,10 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2490">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2774">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">APROBADO</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2420,8 +2461,10 @@ sdf.format(new Date());</expression>
             <row id="2491">
                 <cell id="2492">
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2841">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[NOMBRE DEL PROGRAMA:]]></text-property>
@@ -2429,6 +2472,8 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2493">
                     <data id="2571">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2443,8 +2488,10 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2494">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2572">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2461,8 +2508,10 @@ sdf.format(new Date());</expression>
             <row id="2495">
                 <cell id="2496">
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2842">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[NOMBRE DEL PROYECTO:]]></text-property>
@@ -2470,6 +2519,8 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2497">
                     <data id="2573">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2484,8 +2535,10 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2498">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2574">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2502,10 +2555,12 @@ sdf.format(new Date());</expression>
             <row id="2499">
                 <cell id="2500">
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2843">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[NOMBRE DE LA ACTIVIDAD:]]></text-property>
@@ -2513,8 +2568,10 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2501">
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <data id="2575">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2529,10 +2586,12 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2502">
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2576">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2552,8 +2611,10 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2865">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[OBJETIVO ESTRATEGICO INSTITUCIONAL:]]></text-property>
@@ -2561,7 +2622,7 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2848">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                 </cell>
             </row>
             <row id="2849">
@@ -2570,12 +2631,14 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2956">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2595,8 +2658,10 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2915">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[OBJETIVO OPERATIVO DE FF.AA.:]]></text-property>
@@ -2604,7 +2669,7 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2856">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                 </cell>
             </row>
             <row id="2857">
@@ -2613,12 +2678,14 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2957">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2638,8 +2705,10 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2916">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[OBJETIVO GENERAL DE LA ACTIVIDAD:]]></text-property>
@@ -2647,7 +2716,7 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2864">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                 </cell>
             </row>
             <row id="2871">
@@ -2656,12 +2725,14 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2958">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2681,8 +2752,10 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2917">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[OBJETIVO ESPECIFICO DE LA ACTIVIDAD:]]></text-property>
@@ -2690,7 +2763,7 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2878">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                 </cell>
             </row>
             <row id="2879">
@@ -2699,12 +2772,14 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2583">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2724,8 +2799,10 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2918">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[JUSTIFICACION ACTIVIDAD:]]></text-property>
@@ -2733,7 +2810,7 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2886">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                 </cell>
             </row>
             <row id="2887">
@@ -2742,12 +2819,14 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2959">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2767,8 +2846,10 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2919">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[LINEA BASE ACTIVIDAD:]]></text-property>
@@ -2776,7 +2857,7 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2894">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                 </cell>
             </row>
             <row id="2895">
@@ -2785,12 +2866,14 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2960">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2810,8 +2893,10 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2920">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[INDICADOR DE LA ACTIVIDAD:]]></text-property>
@@ -2819,7 +2904,7 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2902">
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                 </cell>
             </row>
             <row id="2867">
@@ -2828,12 +2913,14 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <data id="2961">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="dataSet">CABECERA</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2853,10 +2940,12 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <text id="2921">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[META DEL INDICADOR ACTIVIDAD:]]></text-property>
@@ -2864,9 +2953,9 @@ sdf.format(new Date());</expression>
                 </cell>
                 <cell id="2815">
                     <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
+                    <property name="borderBottomWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                 </cell>
             </row>
         </grid>
@@ -2893,89 +2982,13 @@ sdf.format(new Date());</expression>
             <column id="2604">
                 <property name="width">1.8in</property>
             </column>
-            <header>
-                <row id="2590">
-                    <property name="backgroundColor">#FFFFFF</property>
-                    <property name="color">black</property>
-                    <cell id="2591">
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
-                        <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">medium</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
-                        <label id="2592">
-                            <property name="fontSize">14px</property>
-                            <property name="fontWeight">bold</property>
-                            <text-property name="text">CRONOGRAMA POR MES</text-property>
-                        </label>
-                    </cell>
-                    <cell id="2593">
-                        <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
-                        <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
-                        <label id="2594">
-                            <property name="backgroundAttachment">scroll</property>
-                            <property name="backgroundPositionX">0%</property>
-                            <property name="backgroundPositionY">0%</property>
-                            <property name="backgroundRepeat">repeat</property>
-                            <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">14px</property>
-                            <property name="fontWeight">bold</property>
-                            <property name="fontStyle">normal</property>
-                            <property name="fontVariant">normal</property>
-                            <property name="color">#FFFFFF</property>
-                            <property name="textLineThrough">none</property>
-                            <property name="textOverline">none</property>
-                            <property name="textUnderline">none</property>
-                            <property name="borderBottomColor">black</property>
-                            <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
-                            <property name="borderLeftColor">black</property>
-                            <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
-                            <property name="borderRightColor">black</property>
-                            <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
-                            <property name="borderTopColor">black</property>
-                            <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
-                            <property name="marginTop">0pt</property>
-                            <property name="marginLeft">0pt</property>
-                            <property name="marginBottom">0pt</property>
-                            <property name="marginRight">0pt</property>
-                            <property name="paddingTop">1pt</property>
-                            <property name="paddingLeft">1pt</property>
-                            <property name="paddingBottom">1pt</property>
-                            <property name="paddingRight">1pt</property>
-                            <property name="textAlign">center</property>
-                            <property name="letterSpacing">normal</property>
-                            <property name="lineHeight">normal</property>
-                            <property name="orphans">2</property>
-                            <property name="textTransform">none</property>
-                            <property name="whiteSpace">normal</property>
-                            <property name="widows">2</property>
-                            <property name="wordSpacing">normal</property>
-                            <property name="display">block</property>
-                            <property name="pageBreakAfter">auto</property>
-                            <property name="pageBreakBefore">auto</property>
-                            <property name="pageBreakInside">auto</property>
-                            <property name="showIfBlank">false</property>
-                            <property name="canShrink">false</property>
-                            <property name="overflow">hidden</property>
-                            <text-property name="text">VALOR DE LA META</text-property>
-                        </label>
-                    </cell>
-                </row>
-            </header>
             <detail>
                 <row id="2595">
                     <cell id="2596">
                         <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderLeftWidth">thin</property>
                         <data id="2597">
-                            <property name="fontSize">8pt</property>
+                            <property name="fontSize">10px</property>
                             <property name="textAlign">left</property>
                             <list-property name="mapRules">
                                 <structure>
@@ -3080,16 +3093,16 @@ sdf.format(new Date());</expression>
                     </cell>
                     <cell id="2598">
                         <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderLeftWidth">thin</property>
                         <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
+                        <property name="borderRightWidth">thin</property>
                         <data id="2599">
                             <property name="backgroundAttachment">scroll</property>
                             <property name="backgroundPositionX">0%</property>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">8pt</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">normal</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3099,16 +3112,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3211,20 +3224,20 @@ sdf.format(new Date());</expression>
                     <property name="color">black</property>
                     <cell id="2608">
                         <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderBottomWidth">thin</property>
                         <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderLeftWidth">thin</property>
                         <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
+                        <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="2615">
                             <property name="backgroundAttachment">scroll</property>
                             <property name="backgroundPositionX">0%</property>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">14px</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">bold</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3234,16 +3247,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3272,18 +3285,18 @@ sdf.format(new Date());</expression>
                     </cell>
                     <cell id="2610">
                         <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderBottomWidth">thin</property>
                         <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
+                        <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="2617">
                             <property name="backgroundAttachment">scroll</property>
                             <property name="backgroundPositionX">0%</property>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">14px</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">bold</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3293,16 +3306,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3331,18 +3344,18 @@ sdf.format(new Date());</expression>
                     </cell>
                     <cell id="2612">
                         <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderBottomWidth">thin</property>
                         <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
+                        <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="2611">
                             <property name="backgroundAttachment">scroll</property>
                             <property name="backgroundPositionX">0%</property>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">14px</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">bold</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3352,16 +3365,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3390,18 +3403,18 @@ sdf.format(new Date());</expression>
                     </cell>
                     <cell id="2614">
                         <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderBottomWidth">thin</property>
                         <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
+                        <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="2613">
                             <property name="backgroundAttachment">scroll</property>
                             <property name="backgroundPositionX">0%</property>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">14px</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">bold</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3411,16 +3424,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3449,18 +3462,18 @@ sdf.format(new Date());</expression>
                     </cell>
                     <cell id="2616">
                         <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderBottomWidth">thin</property>
                         <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
+                        <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="2609">
                             <property name="backgroundAttachment">scroll</property>
                             <property name="backgroundPositionX">0%</property>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">14px</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">bold</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3470,16 +3483,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3512,14 +3525,14 @@ sdf.format(new Date());</expression>
                 <row id="2618">
                     <cell id="2619">
                         <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderLeftWidth">thin</property>
                         <data id="2626">
                             <property name="backgroundAttachment">scroll</property>
                             <property name="backgroundPositionX">0%</property>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">8pt</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">normal</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3529,16 +3542,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3572,7 +3585,7 @@ sdf.format(new Date());</expression>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">8pt</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">normal</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3582,16 +3595,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3620,14 +3633,14 @@ sdf.format(new Date());</expression>
                     </cell>
                     <cell id="2623">
                         <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderLeftWidth">thin</property>
                         <data id="2622">
                             <property name="backgroundAttachment">scroll</property>
                             <property name="backgroundPositionX">0%</property>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">8pt</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">normal</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3637,16 +3650,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3680,7 +3693,7 @@ sdf.format(new Date());</expression>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">8pt</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">normal</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3690,16 +3703,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3728,16 +3741,16 @@ sdf.format(new Date());</expression>
                     </cell>
                     <cell id="2627">
                         <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderLeftWidth">thin</property>
                         <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
+                        <property name="borderRightWidth">thin</property>
                         <data id="2620">
                             <property name="backgroundAttachment">scroll</property>
                             <property name="backgroundPositionX">0%</property>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">8pt</property>
+                            <property name="fontSize">10px</property>
                             <property name="fontWeight">normal</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3747,16 +3760,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3797,14 +3810,14 @@ sdf.format(new Date());</expression>
                         <property name="colSpan">4</property>
                         <property name="rowSpan">1</property>
                         <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderBottomWidth">thin</property>
                         <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderLeftWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
+                        <property name="borderTopWidth">thin</property>
                         <label id="2640">
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">10pt</property>
+                            <property name="fontSize">9pt</property>
                             <property name="color">black</property>
                             <property name="textAlign">right</property>
                             <text-property name="text">TOTAL:</text-property>
@@ -3812,20 +3825,20 @@ sdf.format(new Date());</expression>
                     </cell>
                     <cell id="2634">
                         <property name="borderBottomStyle">solid</property>
-                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderBottomWidth">thin</property>
                         <property name="borderLeftStyle">solid</property>
-                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderLeftWidth">thin</property>
                         <property name="borderRightStyle">solid</property>
-                        <property name="borderRightWidth">medium</property>
+                        <property name="borderRightWidth">thin</property>
                         <property name="borderTopStyle">solid</property>
-                        <property name="borderTopWidth">medium</property>
+                        <property name="borderTopWidth">thin</property>
                         <data id="2641">
                             <property name="backgroundAttachment">scroll</property>
                             <property name="backgroundPositionX">0%</property>
                             <property name="backgroundPositionY">0%</property>
                             <property name="backgroundRepeat">repeat</property>
                             <property name="fontFamily">"Arial"</property>
-                            <property name="fontSize">10pt</property>
+                            <property name="fontSize">9pt</property>
                             <property name="fontWeight">normal</property>
                             <property name="fontStyle">normal</property>
                             <property name="fontVariant">normal</property>
@@ -3835,16 +3848,16 @@ sdf.format(new Date());</expression>
                             <property name="textUnderline">none</property>
                             <property name="borderBottomColor">black</property>
                             <property name="borderBottomStyle">none</property>
-                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftColor">black</property>
                             <property name="borderLeftStyle">none</property>
-                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightColor">black</property>
                             <property name="borderRightStyle">none</property>
-                            <property name="borderRightWidth">medium</property>
+                            <property name="borderRightWidth">thin</property>
                             <property name="borderTopColor">black</property>
                             <property name="borderTopStyle">none</property>
-                            <property name="borderTopWidth">medium</property>
+                            <property name="borderTopWidth">thin</property>
                             <property name="marginTop">0pt</property>
                             <property name="marginLeft">0pt</property>
                             <property name="marginBottom">0pt</property>
@@ -3910,8 +3923,8 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">5</property>
                     <property name="rowSpan">1</property>
                     <label id="1450">
-                        <property name="fontFamily">"Calibri"</property>
-                        <property name="fontSize">10pt</property>
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">11px</property>
                         <property name="fontWeight">bold</property>
                         <property name="textAlign">center</property>
                         <text-property name="text">FIRMAS DE RESPONSABILIDAD</text-property>
@@ -3923,8 +3936,8 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
                     <label id="2691">
-                        <property name="fontFamily">"Calibri"</property>
-                        <property name="fontSize">13px</property>
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <text-property name="text">ELABORADO POR</text-property>
                     </label>
@@ -3973,8 +3986,8 @@ sdf.format(new Date());</expression>
                     <property name="canShrink">false</property>
                     <property name="overflow">hidden</property>
                     <label id="2721">
-                        <property name="fontFamily">"Calibri"</property>
-                        <property name="fontSize">13px</property>
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <text-property name="text">REVISADO POR</text-property>
                     </label>
@@ -4320,13 +4333,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -4373,13 +4386,13 @@ sdf.format(new Date());</expression>
                     <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -4427,13 +4440,13 @@ sdf.format(new Date());</expression>
                     <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -4465,6 +4478,8 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">3</property>
                     <data id="2777">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="textAlign">center</property>
                         <property name="dataSet">ELABORADO</property>
                         <list-property name="boundDataColumns">
@@ -4478,6 +4493,8 @@ sdf.format(new Date());</expression>
                         <property name="resultSetColumn">SOCIONEGOCIONOMBREMOSTRADO</property>
                     </data>
                     <data id="2786">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="textAlign">center</property>
                         <property name="dataSet">ELABORADO</property>
                         <list-property name="boundDataColumns">
@@ -4491,6 +4508,8 @@ sdf.format(new Date());</expression>
                         <property name="resultSetColumn">GRADOSIGLA</property>
                     </data>
                     <data id="2779">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="textAlign">center</property>
                         <property name="dataSet">ELABORADO</property>
                         <list-property name="boundDataColumns">
@@ -4509,6 +4528,8 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">2</property>
                     <property name="rowSpan">3</property>
                     <data id="2780">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="textAlign">center</property>
                         <property name="dataSet">REVISADO</property>
                         <list-property name="boundDataColumns">
@@ -4522,6 +4543,8 @@ sdf.format(new Date());</expression>
                         <property name="resultSetColumn">SOCIONEGOCIONOMBREMOSTRADO</property>
                     </data>
                     <data id="2781">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="textAlign">center</property>
                         <property name="dataSet">REVISADO</property>
                         <list-property name="boundDataColumns">
@@ -4535,6 +4558,8 @@ sdf.format(new Date());</expression>
                         <property name="resultSetColumn">GRADOSIGLA</property>
                     </data>
                     <data id="2782">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="textAlign">center</property>
                         <property name="dataSet">REVISADO</property>
                         <list-property name="boundDataColumns">
@@ -4586,13 +4611,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -4618,8 +4643,8 @@ sdf.format(new Date());</expression>
                     <property name="canShrink">false</property>
                     <property name="overflow">hidden</property>
                     <label id="2762">
-                        <property name="fontFamily">"Calibri"</property>
-                        <property name="fontSize">13px</property>
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <text-property name="text">APROBADO POR</text-property>
                     </label>
@@ -4647,13 +4672,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -4699,13 +4724,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -4750,13 +4775,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -4805,13 +4830,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -4857,13 +4882,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -4908,13 +4933,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -4963,13 +4988,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -5015,13 +5040,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -5066,13 +5091,13 @@ sdf.format(new Date());</expression>
                     <property name="textUnderline">none</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -5126,13 +5151,13 @@ sdf.format(new Date());</expression>
                     <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftColor">black</property>
                     <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightColor">black</property>
                     <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
+                    <property name="borderRightWidth">thin</property>
                     <property name="borderTopColor">black</property>
                     <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
+                    <property name="borderTopWidth">thin</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -5167,6 +5192,8 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <data id="2783">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="textAlign">center</property>
                         <property name="dataSet">APROBADO</property>
                         <list-property name="boundDataColumns">
@@ -5188,6 +5215,8 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <data id="2784">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="textAlign">center</property>
                         <property name="dataSet">APROBADO</property>
                         <list-property name="boundDataColumns">
@@ -5209,6 +5238,8 @@ sdf.format(new Date());</expression>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <data id="2785">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10px</property>
                         <property name="textAlign">center</property>
                         <property name="dataSet">APROBADO</property>
                         <list-property name="boundDataColumns">
