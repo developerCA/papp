@@ -2,8 +2,7 @@
 
 app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","permisosFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, permisosFactory) {
-    
-	
+
 	$scope.nombreFiltro=null;
 	$scope.ordenFiltro=null;
 	
@@ -12,63 +11,55 @@ app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.nuevo=false;
 	$scope.objeto={};
 	
-	var pagina = 1;
+    $scope.pagina = 1;
+    $scope.aplicafiltro=false;
 	
 	$scope.consultar=function(){
-		
-		$scope.data=[];
-		permisosFactory.traerPermisos(pagina).then(function(resp){
-
-			if (resp.meta)
-				$scope.data=resp;
-			    
+		permisosFactory.traerPermisos(
+			$scope.pagina
+		).then(function(resp){
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
 		})
-	
 	};
+
+    $scope.pageChanged = function() {
+        if ($scope.aplicafiltro){
+        	$scope.filtrarUnico();
+        }else{
+        	$scope.consultar();	
+        }
+    };  
+    
+    $scope.filtrar=function(){
+    	$scope.pagina=1;
+    	$scope.aplicafiltro=true;
+    	$scope.filtrarUnico();
+    }  
 	
-	$scope.$watch('data', function() {
-		
-		$scope.tableParams = new ngTableParams({
-			page : 1, // show first page
-			count : 5, // count per page
-			filter: {} 	
-		}, {
-			total : $scope.data.length, // length of data
-			getData : function($defer, params) {
-				var orderedData = params.filter() ? $filter('filter')(
-						$scope.data, params.filter()) : $scope.data;
-				$scope.lista = orderedData.slice(
-						(params.page() - 1) * params.count(), params
-								.page()
-								* params.count());
-				params.total(orderedData.length);
-				$defer.resolve($scope.lista);
-			}
-		});
-	});
-	
-	
-	$scope.filtrar=function(){
-		
+	$scope.filtrarUnico=function(){
 		$scope.data=[];
-		permisosFactory.traerPermisosFiltro(pagina,$scope.nombreFiltro).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
+		permisosFactory.traerPermisosFiltro(
+			$scope.pagina,
+			$scope.nombreFiltro
+		).then(function(resp){
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
 		})
 	}
 	
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
 		$scope.ordenFiltro=null;
-		
-		
+
 		$scope.consultar();
-		
 	};
 	
-	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+	$scope.nuevoR=function(){
+		$scope.objeto={
+			id:null,
+			nombre:null
+		};
 		
 		$scope.edicion=true;
 		$scope.guardar=true;
@@ -77,18 +68,16 @@ app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	$scope.editar=function(id){
 		permisosFactory.traerPermiso(id).then(function(resp){
-			console.log(resp.json);
+			//console.log(resp.json);
 			if (resp.estado)
 			   $scope.objeto=resp.json.permiso;
 			$scope.edicion=true;
 			$scope.guardar=true;
 			$scope.nuevo=false;;
 		})
-		
 	};
 	
 	$scope.abrirPermisoPadre = function() {
-
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalPermisoPadre.html',
 			controller : 'PermisoPadreController',
@@ -104,54 +93,41 @@ app.controller('PermisosController', [ "$scope","$rootScope","$uibModal","SweetA
 	};
 
 	$scope.form = {
-
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
-
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
-
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
-
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
-
-		            } else {
-		                
-		            	permisosFactory.guardar($scope.objeto).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Permiso!", "Registro registrado satisfactoriamente!", "success");
-	 
-		        			 }else{
-			 		             SweetAlert.swal("Permiso!", resp.mensajes.msg, "error");
-		        				 
-		        			 }
-		        			
-		        		})
-		        		
-		            }
-
-		        },
-		        reset: function (form) {
-
-		            $scope.myModel = angular.copy($scope.master);
-		            form.$setPristine(true);
-		            $scope.edicion=false;
-		            $scope.objeto={};
-
-		        }
+        submit: function (form) {
+            var firstError = null;
+            if (form.$invalid) {
+                var field = null, firstError = null;
+                for (field in form) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !form[field].$valid) {
+                            firstError = form[field].$name;
+                        }
+                        if (form[field].$pristine) {
+                            form[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+            } else {
+            	permisosFactory.guardar($scope.objeto).then(function(resp){
+        			 if (resp.estado){
+        				 form.$setPristine(true);
+	 		             $scope.edicion=false;
+	 		             $scope.objeto={};
+	 		             //$scope.limpiar();
+	 		             SweetAlert.swal("Permiso!", "Registro registrado satisfactoriamente!", "success");
+        			 }else{
+	 		             SweetAlert.swal("Permiso!", resp.mensajes.msg, "error");
+        			 }
+        		})
+            }
+        },
+        reset: function (form) {
+            $scope.myModel = angular.copy($scope.master);
+            form.$setPristine(true);
+            $scope.edicion=false;
+    		$scope.guardar=false;
+    		$scope.nuevo=false;
+        }
     };
 } ]);

@@ -12,16 +12,11 @@
 	<div class="row">
 		<div class="col-md-12"></div>
 	</div>
-
 	<div class="row">
 		<div class="col-md-12">
-
 			<div class="panel panel-white">
 
-
 				<div class="panel-body" ng-show="!edicion">
-
-
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -50,79 +45,109 @@
 						</div>
 					</div>
 
-					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"><i
-						class="fa fa-plus-square"></i> Agregar</a>
-
+					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevoR();">
+						<i class="fa fa-plus-square"></i>
+						Agregar
+					</a>
 
 					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
-										class="fa fa-pencil"></i></a></td>
-
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th></th>
+									<th>ID</th>
+									<th>Nombre</th>
+								</tr>
+							</thead>
+							<tr ng-repeat="obj in data">
+								<td>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Modificar" ng-click="editar(obj.id)">
+										<i class="fa fa-pencil"></i>
+									</a>
+								</td>
+								<td>
+									{{obj.id}}
+								</td>
+								<td>
+									{{obj.nombre}}
+								</td>
 							</tr>
 						</table>
+
+						<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+							previous-text="Atras" uib-pagination total-items="total"
+							ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
+							max-size="10" class="pagination-sm" boundary-links="true"
+							force-ellipses="true">
+						</ul>
 					</div>
 				</div>
 
-
 				<div ng-show="edicion" class="panel-body" id="panel1">
-
 					<div class="panel-heading">
-						<h5 class="panel-title">Permisos</h5>
+						<h5 class="panel-title">
+							Permisos
+						</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
 						ng-submit="form.submit(Form)">
 						<div class="row">
-							<div class="col-md-6">
-
+							<div class="col-md-12">
 								<div class="form-group"
 									ng-class="{'has-error':Form.id.$dirty && Form.id.$invalid, 'has-success':Form.id.$valid}">
-									<label class="control-label"> Id <span
-										class="symbol required"></span>
+									<label class="control-label">
+										Id
+										<span class="symbol required"></span>
 									</label>
 									<span ng-if="nuevo">
-										<input type="text" placeholder="Ingrese el Id"
-											class="form-control" name="id" ng-model="objeto.id"
-											required>
+										<input type="text"
+											placeholder="Ingrese el Id" class="form-control" name="id"
+											ng-model="objeto.id" required>
 									</span>
 									<span ng-if="!nuevo">
-										<input type="text" placeholder="Ingrese el Id"
-											class="form-control" name="id" ng-model="objeto.id"
-											required  ng-disabled="true">
+										<input type="text"
+											placeholder="Ingrese el Id" class="form-control" name="id"
+											ng-model="objeto.id" required ng-disabled="true">
 									</span>
 									<span class="error text-small block"
-										ng-if="Form.id.$dirty && Form.id.$invalid">Id
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.id.$valid">Listo</span>
+										ng-if="Form.id.$dirty && Form.id.$invalid">
+										Id es incorrecto
+									</span>
+									<span class="success text-small"
+										ng-if="Form.id.$valid">
+										Listo
+									</span>
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Nombre <span
-										class="symbol required"></span>
+									<label class="control-label">
+										Nombre
+										<span class="symbol required"></span>
 									</label>
 									<span ng-if="nuevo">
-										<input type="text" placeholder="Ingrese el Nombre"
-											class="form-control" name="nombre" required
-											ng-model="objeto.nombre" ng-minlength="1">
+										<input type="text"
+											placeholder="Ingrese el Nombre" class="form-control"
+											name="nombre" required ng-model="objeto.nombre"
+											ng-minlength="1">
 									</span>
 									<span ng-if="!nuevo">
-										<input type="text" placeholder="Ingrese el Nombre"
-											class="form-control" name="nombre" required
-											ng-model="objeto.nombre" ng-minlength="1" ng-disabled="true">
+										<input type="text"
+											placeholder="Ingrese el Nombre" class="form-control"
+											name="nombre" required ng-model="objeto.nombre"
+											ng-minlength="1" ng-disabled="true">
 									</span>
-									<span
-										class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">Nombre
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
+									<span class="error text-small block"
+										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">
+										Nombre es incorrecto
+									</span>
+									<span class="success text-small"
+										ng-if="Form.nombre.$valid">
+										Listo
+									</span>
 								</div>
-
 							</div>
 						</div>
 
@@ -130,12 +155,14 @@
 							<div class="col-md-12">
 								<div class="pull-right">
 									<span ng-if="guardar">
-										<button type="submit" class="btn btn-primary">Guardar
+										<button type="submit" class="btn btn-primary">
+											Guardar
 										</button>
 									</span>
 									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">Cancelar</button>
-
+										ng-click="form.reset(Form)">
+										Cancelar
+									</button>
 								</div>
 							</div>
 						</div>
@@ -147,8 +174,3 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-
