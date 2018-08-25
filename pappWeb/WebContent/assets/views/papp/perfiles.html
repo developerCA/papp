@@ -58,12 +58,18 @@
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Modificar" ng-click="editar(obj.id)"><i
-										class="fa fa-pencil"></i></a></td>
-
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-
+								<td width="0%">
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Modificar" ng-click="editar(obj.id)">
+										<i class="fa fa-pencil"></i>
+									</a>
+								</td>
+								<td width="0%" data-title="'ID'">
+									{{obj.id}}
+								</td>
+								<td width="100%" data-title="'Nombre'">
+									{{obj.nombre}}
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -121,10 +127,12 @@
 												<table class="table table-striped">
 													<tr>
 														<td></td>
+														<th>ID</th>
 														<th>Nombre</th>
 													</tr>
 													<tr ng-repeat="obj in objetolista">
-														<td><!--  ng-disabled="obj.perfilpermisolectura==0" -->
+														<td width="0%">
+															<!--  ng-disabled="obj.perfilpermisolectura==0" -->
 															<a uib-tooltip="Eliminar"
 																class="btn btn-sm btn-danger"
 																ng-click="removerDetalle($index)">
@@ -132,7 +140,14 @@
 															</a>
 														</td>
 <!-- 																required ng-model="obj.id.permisoid" -->
-														<td data-title="'Nombre'">
+														<td width="10%" data-title="'Nombre'">
+															<div class="input-group">
+																<input type="text" placeholder="Seleccione el permiso"
+																	class="form-control" name="idpermisoid" ng-disabled="true"
+																	ng-model="obj.id.permisoid" />
+															</div>
+														</td>
+														<td width="90%" data-title="'Nombre'">
 															<div class="input-group">
 																<input type="text" placeholder="Seleccione el permiso"
 																	class="form-control" name="codigopadre" ng-disabled="true"
