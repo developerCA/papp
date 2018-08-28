@@ -85,36 +85,32 @@
 									<i class="fa ti-pencil-alt"></i>
 								</a></td>
 
-								<td>
-									<a ng-show="rol('ROLE_GRADOESCALA');"
-										class="btn btn-sm btn-primary"
+								<td ng-if="rol('PLANIFICACIONAPROBACION');">
+									<a class="btn btn-sm btn-primary"
 										style="background-color: #00B300 !important"
 										uib-tooltip="Aprobar Planificaci&oacute;n"
 										ng-click="aprobarPlanificacion(obj);">
 										<i class="fa ti-marker-alt"></i>
 									</a>
 								</td>
-								<td>
-									<a ng-show="rol('ROLE_GRADOESCALA');"
-										class="btn btn-sm btn-primary"
+								<td ng-if="rol('AJUSTADAAPROBACION');">
+									<a class="btn btn-sm btn-primary"
 										style="background-color: #00B300 !important"
 										uib-tooltip="Aprobar Ajustada"
 										ng-click="aprobarAjustado(obj);">
 										<i class="fa ti-signal"></i>
 									</a>
 								</td>
-								<td>
-									<a ng-show="rol('ROLE_GRADOESCALA');"
-										class="btn btn-sm btn-primary"
+								<td ng-if="rol('PLANIFICACIONDENEGAR');">
+									<a class="btn btn-sm btn-primary"
 										style="background-color: #B30000 !important"
 										uib-tooltip="Denegar Planificaci&oacute;n"
 										ng-click="denegarPlanificacion(obj);">
 										<i class="fa ti-marker-alt"></i>
 									</a>
 								</td>
-								<td>
-									<a ng-show="rol('ROLE_GRADOESCALA');"
-										class="btn btn-sm btn-primary"
+								<td ng-if="rol('AJUSTADADENEGAR');">
+									<a class="btn btn-sm btn-primary"
 										style="background-color: #B30000 !important"
 										uib-tooltip="Denegar Ajustada"
 										ng-click="denegarAjustado(obj);">
@@ -203,11 +199,6 @@
 														class="form-control" name="codigo"
 														ng-model="objeto.codigo" numericOnly required
 														ng-disabled="true" ng-maxlength="10">
-													<span class="error text-small block"
-														ng-if="FormActividad.codigo.$dirty && FormActividad.codigo.$invalid">
-														Incorrecto</span>
-													<span class="success text-small"
-														ng-if="FormActividad.codigo.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -218,10 +209,6 @@
 														placeholder="Escriba un descripci&oacute;n"
 														class="form-control" name="descripcion"
 														ng-model="objeto.descripcion" required ng-disabled="true">
-													<span class="error text-small block"
-														ng-if="FormActividad.descripcion.$dirty && FormActividad.descripcion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.descripcion.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -244,10 +231,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormActividad.npFechainicio.$dirty && FormActividad.npFechainicio.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npFechainicio.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -270,10 +253,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormActividad.npFechafin.$dirty && FormActividad.npFechafin.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npFechafin.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -285,10 +264,6 @@
 														placeholder="Escriba un l&iacute;nea base"
 														class="form-control" ng-model="objeto.lineabase" required
 														ng-disabled="!editar" ng-maxlength="500"></textarea>
-													<span class="error text-small block"
-														ng-if="FormActividad.lineabase.$dirty && FormActividad.lineabase.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.lineabase.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -300,10 +275,6 @@
 														placeholder="Escriba un justificaci&oacute;n"
 														class="form-control" ng-model="objeto.justificacion"
 														required ng-disabled="!editar" ng-maxlength="500"></textarea>
-													<span class="error text-small block"
-														ng-if="FormActividad.justificacion.$dirty && FormActividad.justificacion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.justificacion.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -316,11 +287,6 @@
 														placeholder="Escriba un objetivo general"
 														class="form-control" ng-model="objeto.objetivogeneral"
 														required ng-disabled="!editar" ng-maxlength="500"></textarea>
-													<span class="error text-small block"
-														ng-if="FormActividad.objetivogeneral.$dirty && FormActividad.objetivogeneral.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.objetivogeneral.$valid"> Listo
-													</span>
 												</div>
 
 												<div class="form-group"
@@ -332,10 +298,6 @@
 														placeholder="Escriba un objetivo especifico"
 														class="form-control" ng-model="objeto.objetivoespec"
 														required ng-disabled="!editar" ng-maxlength="500"></textarea>
-													<span class="error text-small block"
-														ng-if="FormActividad.objetivoespec.$dirty && FormActividad.objetivoespec.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.objetivoespec.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -346,10 +308,7 @@
 														ng-model="objeto.estado" required ng-disabled="true">
 														<option value="A" ng-selected="selected">Activo</option>
 														<option value="I">Inactivo</option>
-													</select> <span class="error text-small block"
-														ng-if="FormActividad.estado.$dirty && FormActividad.estado.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.estado.$valid"> Listo </span>
+													</select>
 												</div>
 
 												<div class="panel-heading">
@@ -360,16 +319,13 @@
 													ng-class="{'has-error':FormActividad.presupplanif.$dirty && FormActividad.presupplanif.$invalid, 'has-success':FormActividad.presupplanif.$valid}">
 													<label class="control-label"> Presupuesto
 														Planificado <span class="symbol required"></span>
-													</label> <input type="text" numericOnly style="text-align: right;"
+													</label>
+													<input type="text" numericOnly style="text-align: right;"
 														decimal="2"
 														placeholder="Escriba un presupuesto planificado"
 														class="form-control" name="presupplanif"
 														ng-model="objeto.presupplanif" required
-														ng-disabled="!editarP"> <span
-														class="error text-small block"
-														ng-if="FormActividad.presupplanif.$dirty && FormActividad.presupplanif.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.presupplanif.$valid"> Listo </span>
+														ng-disabled="!editarP">
 												</div>
 
 												<div class="form-group"
@@ -380,11 +336,7 @@
 														decimal="2" placeholder="Escriba un presupuesto ajustado"
 														class="form-control" name="presupajust"
 														ng-model="objeto.presupajust" required
-														ng-disabled="!editarA"> <span
-														class="error text-small block"
-														ng-if="FormActividad.presupajust.$dirty && FormActividad.presupajust.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.presupajust.$valid"> Listo </span>
+														ng-disabled="!editarA">
 												</div>
 
 												<div class="panel-heading">
@@ -399,12 +351,7 @@
 														placeholder="Escriba un indicador nombre"
 														class="form-control" name="npIndicadornombre"
 														ng-model="objeto.npIndicadornombre" required
-														ng-disabled="true"> <span
-														class="error text-small block"
-														ng-if="FormActividad.npIndicadornombre.$dirty && FormActividad.npIndicadornombre.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npIndicadornombre.$valid">
-														Listo </span>
+														ng-disabled="true">
 												</div>
 
 												<div class="form-group"
@@ -415,12 +362,7 @@
 														placeholder="Escriba un indicador meta descripci&oacute;n"
 														class="form-control" name="npIndicadormetadescriopcion"
 														ng-model="objeto.npIndicadormetadescriopcion" required
-														ng-disabled="true"> <span
-														class="error text-small block"
-														ng-if="FormActividad.npIndicadormetadescriopcion.$dirty && FormActividad.npIndicadormetadescriopcion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npIndicadormetadescriopcion.$valid">
-														Listo </span>
+														ng-disabled="true">
 												</div>
 
 												<div class="form-group"
@@ -432,12 +374,7 @@
 														placeholder="Escriba un indicador m&eacute;todo descripci&oacute;n"
 														class="form-control" name="npIndicadormetdescripcion"
 														ng-model="objeto.npIndicadormetdescripcion" required
-														ng-disabled="true"> <span
-														class="error text-small block"
-														ng-if="FormActividad.npIndicadormetdescripcion.$dirty && FormActividad.npIndicadormetdescripcion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npIndicadormetdescripcion.$valid">
-														Listo </span>
+														ng-disabled="true">
 												</div>
 
 												<div class="form-group"
@@ -449,12 +386,7 @@
 														placeholder="Escriba un indicador m&eacute;todo med verificaci&oacute;n"
 														class="form-control" name="npIndicadormetcodigo"
 														ng-model="objeto.npIndicadormetcodigo" required
-														ng-disabled="true"> <span
-														class="error text-small block"
-														ng-if="FormActividad.npIndicadormetcodigo.$dirty && FormActividad.npIndicadormetcodigo.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npIndicadormetcodigo.$valid">
-														Listo </span>
+														ng-disabled="true">
 												</div>
 
 												<div class="form-group"
@@ -465,12 +397,7 @@
 														placeholder="Escriba un unidad medida c&oacute;digo"
 														class="form-control" name="npUnidadmedidacodigo"
 														ng-model="objeto.npUnidadmedidacodigo" required
-														ng-disabled="true"> <span
-														class="error text-small block"
-														ng-if="FormActividad.npUnidadmedidacodigo.$dirty && FormActividad.npUnidadmedidacodigo.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npUnidadmedidacodigo.$valid">
-														Listo </span>
+														ng-disabled="true">
 												</div>
 
 												<div class="form-group"
@@ -481,12 +408,7 @@
 														placeholder="Escriba un unidad medida nombre"
 														class="form-control" name="npUnidadmedidanombre"
 														ng-model="objeto.npUnidadmedidanombre" required
-														ng-disabled="true"> <span
-														class="error text-small block"
-														ng-if="FormActividad.npUnidadmedidanombre.$dirty && FormActividad.npUnidadmedidanombre.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npUnidadmedidanombre.$valid">
-														Listo </span>
+														ng-disabled="true">
 												</div>
 
 												<div class="form-group"
@@ -497,12 +419,7 @@
 														placeholder="Escriba un grupo medida c&oacute;digo"
 														class="form-control" name="npGrupomedidacodigo"
 														ng-model="objeto.npGrupomedidacodigo" required
-														ng-disabled="true"> <span
-														class="error text-small block"
-														ng-if="FormActividad.npGrupomedidacodigo.$dirty && FormActividad.npGrupomedidacodigo.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npGrupomedidacodigo.$valid">
-														Listo </span>
+														ng-disabled="true">
 												</div>
 
 												<div class="form-group"
@@ -513,12 +430,7 @@
 														placeholder="Escriba un grupo medida nombre"
 														class="form-control" name="npGrupomedidanombre"
 														ng-model="objeto.npGrupomedidanombre" required
-														ng-disabled="true"> <span
-														class="error text-small block"
-														ng-if="FormActividad.npGrupomedidanombre.$dirty && FormActividad.npGrupomedidanombre.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npGrupomedidanombre.$valid">
-														Listo </span>
+														ng-disabled="true">
 												</div>
 
 												<div class="form-group"
@@ -532,13 +444,6 @@
 														class="form-control" name="npMetaPlanificada"
 														ng-model="detalles[mPlanificadaID].cantidad" required
 														ng-disabled="!editarP || !editarUnidad" ng-change="modificarMetaPlanificada(true);">
-													<span
-														class="error text-small block"
-														ng-if="FormActividad.npMetaPlanificada.$dirty && FormActividad.npMetaPlanificada.$invalid">
-														Incorrecto </span>
-													<span class="success text-small"
-														ng-if="FormActividad.npMetaPlanificada.$valid">
-														Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -553,11 +458,6 @@
 														class="form-control"
 														ng-model="detalles[mPlanificadaID].acummetadesc" required
 														ng-disabled="!editarP"></textarea>
-													<span class="error text-small block"
-														ng-if="FormActividad.npMetaPlanificadaDescripcion.$dirty && FormActividad.npMetaPlanificadaDescripcion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npMetaPlanificadaDescripcion.$valid">
-														Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -571,13 +471,6 @@
 														class="form-control" name="npMetaAjustada"
 														ng-model="detalles[mAjustadaID].cantidad"
 														ng-disabled="!editarA || !editarUnidad" ng-change="modificarMetaAjustada(true);">
-													<span
-														class="error text-small block"
-														ng-if="FormActividad.npMetaAjustada.$dirty && FormActividad.npMetaAjustada.$invalid">
-														Incorrecto </span>
-													<span class="success text-small"
-														ng-if="FormActividad.npMetaAjustada.$valid"> Listo
-													</span>
 												</div>
 
 												<div class="form-group"
@@ -592,11 +485,6 @@
 														class="form-control"
 														ng-model="detalles[mAjustadaID].acummetadesc"
 														ng-disabled="!editarA"></textarea>
-													<span class="error text-small block"
-														ng-if="FormActividad.npMetaAjustadaDescripcion.$dirty && FormActividad.npMetaAjustadaDescripcion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormActividad.npMetaAjustadaDescripcion.$valid">
-														Listo </span>
 												</div>
 											</div>
 											<div class="pull-right">
@@ -837,11 +725,7 @@
 													</label> <input type="text" placeholder="Escriba un c&oacute;digo"
 														class="form-control" name="npcodigo"
 														ng-model="objeto.npcodigo" required ng-disabled="true"
-														ng-maxlength="10"> <span
-														class="error text-small block"
-														ng-if="FormSubActividad.npcodigo.$dirty && FormSubActividad.npcodigo.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubActividad.npcodigo.$valid"> Listo </span>
+														ng-maxlength="10">
 												</div>
 
 												<div class="form-group"
@@ -852,12 +736,7 @@
 														placeholder="Escriba un descripci&oacute;n"
 														class="form-control" name="npdescripcion"
 														ng-model="objeto.npdescripcion" required
-														ng-disabled="true"> <span
-														class="error text-small block"
-														ng-if="FormSubActividad.npdescripcion.$dirty && FormSubActividad.npdescripcion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubActividad.npdescripcion.$valid">
-														Listo </span>
+														ng-disabled="true">
 												</div>
 
 												<div class="form-group"
@@ -869,12 +748,7 @@
 														class="form-control" name="ponderacion"
 														ng-model="objeto.ponderacion" numericOnly
 														style="text-align: right;" required ng-disabled="!editar"
-														format="number"> <span
-														class="error text-small block"
-														ng-if="FormSubActividad.ponderacion.$dirty && FormSubActividad.ponderacion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubActividad.ponderacion.$valid"> Listo
-													</span>
+														format="number">
 												</div>
 
 												<div class="form-group"
@@ -885,10 +759,7 @@
 														ng-model="objeto.estado" required ng-disabled="true">
 														<option value="A">Activo</option>
 														<option value="I">Inactivo</option>
-													</select> <span class="error text-small block"
-														ng-if="FormSubActividad.estado.$dirty && FormSubActividad.estado.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubActividad.estado.$valid"> Listo </span>
+													</select>
 												</div>
 											</div>
 											<div class="pull-right">
@@ -931,11 +802,6 @@
 														class="form-control" name="TAnpcodigo"
 														ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
 														ng-model="objeto.codigo" ng-disabled="!esnuevo">
-													<span class="error text-small block"
-														ng-if="FormTarea.TAnpcodigo.$dirty && FormTarea.TAnpcodigo.$invalid">
-														Incorrecto </span>
-													<span class="success text-small"
-														ng-if="FormTarea.TAnpcodigo.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -947,14 +813,6 @@
 														placeholder="Escriba un descripci&oacute;n"
 														class="form-control" ng-model="objeto.descripcion" required
 														ng-disabled="!editar"></textarea>
-													<span class="error text-small block"
-														ng-if="FormTarea.TAnpdescripcion.$dirty && FormTarea.TAnpdescripcion.$invalid">
-														Incorrecto
-													</span>
-													<span class="success text-small"
-														ng-if="FormTarea.TAnpdescripcion.$valid">
-														Listo
-													</span>
 												</div>
 
 												<div class="form-group"
@@ -966,10 +824,6 @@
 														class="form-control" name="STponderacion"
 														ng-model="objeto.ponderacion" numericOnly
 														style="text-align: right;" required format="number">
-													<span class="error text-small block"
-														ng-if="FormTarea.STponderacion.$dirty && FormTarea.STponderacion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormTarea.STponderacion.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -980,10 +834,7 @@
 														ng-model="objeto.estado" required>
 														<option value="A">Activo</option>
 														<option value="I">Inactivo</option>
-													</select> <span class="error text-small block"
-														ng-if="FormTarea.STestado.$dirty && FormTarea.STestado.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormTarea.STestado.$valid"> Listo </span>
+													</select>
 												</div>
 											</div>
 											<div class="pull-right">
@@ -1024,10 +875,6 @@
 													<input type="text" placeholder="Escriba un c&oacute;digo"
 														class="form-control" name="codigo" ng-maxlength="3"
 														ng-model="objeto.codigo" ng-disabled="!esnuevo">
-													<span class="error text-small block"
-														ng-if="FormSubTarea.codigo.$dirty && FormSubTarea.codigo.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubTarea.codigo.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1040,11 +887,6 @@
 														placeholder="Escriba una descripci&oacute;n"
 														class="form-control" ng-disabled="!editar"
 														ng-model="objeto.descripcion" required></textarea>
-													<span class="error text-small block"
-														ng-if="FormSubTarea.descripcion.$dirty && FormSubTarea.descripcion.$invalid">
-														Incorrecto </span>
-													<span class="success text-small"
-														ng-if="FormSubTarea.descripcion.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1057,10 +899,6 @@
 														class="form-control" name="ponderacion"
 														ng-model="objeto.ponderacion" numericOnly
 														style="text-align: right;" required format="number">
-													<span class="error text-small block"
-														ng-if="FormSubTarea.ponderacion.$dirty && FormSubTarea.ponderacion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubTarea.ponderacion.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1073,10 +911,7 @@
 														ng-disabled="!editar">
 														<option value="A">Activo</option>
 														<option value="I">Inactivo</option>
-													</select> <span class="error text-small block"
-														ng-if="FormSubTarea.estado.$dirty && FormSubTarea.estado.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubTarea.estado.$valid"> Listo </span>
+													</select>
 												</div>
 
 												<div class="panel-heading">
@@ -1101,11 +936,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormSubTarea.npUnidadMedidaCodigo.$dirty && FormSubTarea.npUnidadMedidaCodigo.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubTarea.npUnidadMedidaCodigo.$valid">
-														Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1118,12 +948,6 @@
 														class="form-control" name="npUnidadMedidaNombre"
 														ng-model="objeto.npnombreunidad" required
 														ng-disabled="true">
-													<span
-														class="error text-small block"
-														ng-if="FormSubTarea.npUnidadMedidaNombre.$dirty && FormSubTarea.npUnidadMedidaNombre.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubTarea.npUnidadMedidaNombre.$valid">
-														Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1136,12 +960,6 @@
 														class="form-control" name="npGrupoMedidaCodigo"
 														ng-model="objeto.npcodigogrupo" required
 														ng-disabled="true">
-													<span
-														class="error text-small block"
-														ng-if="FormSubTarea.npGrupoMedidaCodigo.$dirty && FormSubTarea.npGrupoMedidaCodigo.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubTarea.npGrupoMedidaCodigo.$valid">
-														Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1154,13 +972,6 @@
 														class="form-control" name="npGrupoMedidaNombre"
 														ng-model="objeto.npnombregrupo" required
 														ng-disabled="true">
-													<span
-														class="error text-small block"
-														ng-if="FormSubTarea.npGrupoMedidaNombre.$dirty && FormSubTarea.npGrupoMedidaNombre.$invalid">
-														Incorrecto </span>
-													<span class="success text-small"
-														ng-if="FormSubTarea.npGrupoMedidaNombre.$valid">
-														Listo </span>
 												</div>
 
 												<div class="row">
@@ -1174,12 +985,7 @@
 																class="form-control" name="npMetaPlanificadaPorcentaje"
 																ng-model="detalles[mPlanificadaID].valor" numericOnly
 																style="text-align: right; color: Green !important; font-weight: bold !important;"
-																required ng-disabled="true" format="number"> <span
-																class="error text-small block"
-																ng-if="FormSubTarea.npMetaPlanificadaPorcentaje.$dirty && FormSubTarea.npMetaPlanificadaPorcentaje.$invalid">
-																Incorrecto </span> <span class="success text-small"
-																ng-if="FormSubTarea.npMetaPlanificadaPorcentaje.$valid">
-																Listo </span>
+																required ng-disabled="true" format="number">
 														</div>
 
 														<div class="form-group"
@@ -1194,13 +1000,6 @@
 																style="text-align: right;" required decimal="2"
 																onClick="this.select();" ng-disabled="!editarP"
 																ng-change="modificarMetaPlanificada(true);">
-															<span
-																class="error text-small block"
-																ng-if="FormSubTarea.npMetaPlanificadaCantidad.$dirty && FormSubTarea.npMetaPlanificadaCantidad.$invalid">
-																Incorrecto </span>
-															<span class="success text-small"
-																ng-if="FormSubTarea.npMetaPlanificadaCantidad.$valid">
-																Listo </span>
 														</div>
 
 														<div class="form-group"
@@ -1213,11 +1012,6 @@
 																placeholder="Escriba un meta planificada descripci&oacute;n"
 																class="form-control" ng-disabled="!editarP"
 																ng-model="detalles[mPlanificadaID].descripcion" required></textarea>
-															<span class="error text-small block"
-																ng-if="FormSubTarea.npMetaPlanificadaDescripcion.$dirty && FormSubTarea.npMetaPlanificadaDescripcion.$invalid">
-																Incorrecto </span> <span class="success text-small"
-																ng-if="FormSubTarea.npMetaPlanificadaDescripcion.$valid">
-																Listo </span>
 														</div>
 													</div>
 
@@ -1231,12 +1025,7 @@
 																class="form-control" name="npMetaAjustadaPorcentaje"
 																ng-model="detalles[mAjustadaID].valor" numericOnly
 																style="text-align: right; color: Green !important; font-weight: bold !important;"
-																required ng-disabled="true" format="number"> <span
-																class="error text-small block"
-																ng-if="FormSubTarea.npMetaAjustadaPorcentaje.$dirty && FormSubTarea.npMetaAjustadaPorcentaje.$invalid">
-																Incorrecto </span> <span class="success text-small"
-																ng-if="FormSubTarea.npMetaAjustadaPorcentaje.$valid">
-																Listo </span>
+																required ng-disabled="true" format="number">
 														</div>
 
 														<div class="form-group"
@@ -1250,11 +1039,6 @@
 																style="text-align: right;" required decimal="2"
 																onClick="this.select();" ng-disabled="!editarA"
 																ng-change="modificarMetaAjustada(true);">
-															<span class="error text-small block"
-																ng-if="FormSubTarea.npMetaAjustadaCantidad.$dirty && FormSubTarea.npMetaAjustadaCantidad.$invalid">
-																Incorrecto </span> <span class="success text-small"
-																ng-if="FormSubTarea.npMetaAjustadaCantidad.$valid">
-																Listo </span>
 														</div>
 
 														<div class="form-group"
@@ -1268,11 +1052,6 @@
 																class="form-control"
 																ng-model="detalles[mAjustadaID].descripcion"
 																ng-disabled="!editarA"></textarea>
-															<span class="error text-small block"
-																ng-if="FormSubTarea.npMetaAjustadaDescripcion.$dirty && FormSubTarea.npMetaAjustadaDescripcion.$invalid">
-																Incorrecto </span> <span class="success text-small"
-																ng-if="FormSubTarea.npMetaAjustadaDescripcion.$valid">
-																Listo </span>
 														</div>
 													</div>
 												</div>
@@ -1530,10 +1309,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormItem.npcodigoitem.$dirty && FormItem.npcodigoitem.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npcodigoitem.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1543,10 +1318,6 @@
 													</label> <input type="text" placeholder="Escriba un item nombre"
 														class="form-control" name="npnombreitem"
 														ng-model="objeto.npnombreitem" ng-disabled="true" required>
-													<span class="error text-small block"
-														ng-if="FormItem.npnombreitem.$dirty && FormItem.npnombreitem.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npnombreitem.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1558,10 +1329,6 @@
 														placeholder="Escriba un descripci&oacute;n"
 														class="form-control" ng-model="objeto.descripcion"
 														required></textarea>
-													<span class="error text-small block"
-														ng-if="FormItem.descripcion.$dirty && FormItem.descripcion.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.descripcion.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1581,10 +1348,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormItem.npcodigoobra.$dirty && FormItem.npcodigoobra.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npcodigoobra.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1594,10 +1357,6 @@
 													</label> <input type="text" placeholder="Escriba un obra nombre"
 														class="form-control" name="npnombreobra"
 														ng-model="objeto.npnombreobra" ng-disabled="true" required>
-													<span class="error text-small block"
-														ng-if="FormItem.npnombreobra.$dirty && FormItem.npnombreobra.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npnombreobra.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1617,10 +1376,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormItem.npcodigofuente.$dirty && FormItem.npcodigofuente.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npcodigofuente.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1631,10 +1386,7 @@
 														placeholder="Escriba un fuente financiamiento nombre"
 														class="form-control" name="npnombrefuente"
 														ng-model="objeto.npnombrefuente" ng-disabled="true"
-														required> <span class="error text-small block"
-														ng-if="FormItem.npnombrefuente.$dirty && FormItem.npnombrefuente.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npnombrefuente.$valid"> Listo </span>
+														required>
 												</div>
 
 												<div class="form-group"
@@ -1654,10 +1406,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormItem.npcodigoorganismo.$dirty && FormItem.npcodigoorganismo.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npcodigoorganismo.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1668,10 +1416,7 @@
 														placeholder="Escriba un organismo nombre"
 														class="form-control" name="npnombreorganismo"
 														ng-model="objeto.npnombreorganismo" ng-disabled="true"
-														required> <span class="error text-small block"
-														ng-if="FormItem.npnombreorganismo.$dirty && FormItem.npnombreorganismo.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npnombreorganismo.$valid"> Listo </span>
+														required>
 												</div>
 
 												<div class="form-group"
@@ -1683,11 +1428,7 @@
 														placeholder="Escriba un organismo pr&eacute;stamo c&oacute;digo"
 														class="form-control" name="npcodigoorgpres"
 														ng-model="objeto.npcodigoorgpres" required
-														ng-disabled="true"> <span
-														class="error text-small block"
-														ng-if="FormItem.npcodigoorgpres.$dirty && FormItem.npcodigoorgpres.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npcodigoorgpres.$valid"> Listo </span>
+														ng-disabled="true">
 												</div>
 
 												<div class="form-group"
@@ -1698,10 +1439,7 @@
 														placeholder="Escriba un organismo pr&eacute;stamo nombre"
 														class="form-control" name="npnombreorgpres"
 														ng-model="objeto.npnombreorgpres" ng-disabled="true"
-														required> <span class="error text-small block"
-														ng-if="FormItem.npnombreorgpres.$dirty && FormItem.npnombreorgpres.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npnombreorgpres.$valid"> Listo </span>
+														required>
 												</div>
 
 												<div class="form-group"
@@ -1721,10 +1459,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormItem.npcodigocanton.$dirty && FormItem.npcodigocanton.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npcodigocanton.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1735,10 +1469,7 @@
 														placeholder="Escriba un cant&oacute;n nombre"
 														class="form-control" name="npnombrecanton"
 														ng-model="objeto.npnombrecanton" ng-disabled="true"
-														required> <span class="error text-small block"
-														ng-if="FormItem.npnombrecanton.$dirty && FormItem.npnombrecanton.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.npnombrecanton.$valid"> Listo </span>
+														required>
 												</div>
 
 												<div class="form-group"
@@ -1749,10 +1480,7 @@
 														ng-model="objeto.estado" required>
 														<option value="A">Activo</option>
 														<option value="I">Inactivo</option>
-													</select> <span class="error text-small block"
-														ng-if="FormItem.estado.$dirty && FormItem.estado.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormItem.estado.$valid"> Listo </span>
+													</select>
 												</div>
 											</div>
 											<div class="pull-right">
@@ -1790,8 +1518,9 @@
 											<div>
 												<div class="form-group"
 													ng-class="{'has-error':FormSubItem.npcodigosubitem.$dirty && FormSubItem.npcodigosubitem.$invalid, 'has-success':FormSubItem.npcodigosubitem.$valid}">
-													<label class="control-label"> C&oacute;digo INCOP <span
-														class="symbol required"></span>
+													<label class="control-label">
+														C&oacute;digo INCOP
+														<span class="symbol required"></span>
 													</label>
 													<div class="input-group">
 														<input type="text"
@@ -1805,29 +1534,18 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormSubItem.npcodigosubitem.$dirty && FormSubItem.npcodigosubitem.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubItem.npcodigosubitem.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
 													ng-class="{'has-error':FormSubItem.npnombresubitem.$dirty && FormSubItem.npnombresubitem.$invalid, 'has-success':FormSubItem.npnombresubitem.$valid}">
-													<label class="control-label"> Nombre <span
-														class="symbol required"></span>
+													<label class="control-label">
+														Nombre
+														<span class="symbol required"></span>
 													</label>
-													<input type="text" placeholder="Escriba un nombre"
-														class="form-control" name="npnombresubitem"
-														ng-model="objeto.npnombresubitem" required
-														ng-disabled="true">
-													<span class="error text-small block"
-														ng-if="FormSubItem.npnombresubitem.$dirty && FormSubItem.npnombresubitem.$invalid">
-														Incorrecto
-													</span>
-													<span class="success text-small"
-														ng-if="FormSubItem.npnombresubitem.$valid">
-														Listo
-													</span>
+													<textarea name="npnombresubitem" rows="5" style="width: 100%"
+														placeholder="Escriba un nombre" ng-disabled="true"
+														class="form-control" ng-model="objeto.npnombresubitem"
+														required></textarea>
 												</div>
 
 												<div class="form-group"
@@ -1838,10 +1556,6 @@
 														format="currency" placeholder="Escriba un precio"
 														class="form-control" name="npprecio"
 														ng-model="objeto.npprecio" required ng-disabled="true">
-													<span class="error text-small block"
-														ng-if="FormSubItem.npprecio.$dirty && FormSubItem.npprecio.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubItem.npprecio.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1860,11 +1574,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormSubItem.nptipoprodnombre.$dirty && FormSubItem.nptipoprodnombre.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubItem.nptipoprodnombre.$valid"> Listo
-													</span>
 												</div>
 
 												<div class="form-group"
@@ -1885,11 +1594,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormSubItem.npprocedimientonombre.$dirty && FormSubItem.npprocedimientonombre.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubItem.npprocedimientonombre.$valid">
-														Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1910,10 +1614,6 @@
 															</button>
 														</span>
 													</div>
-													<span class="error text-small block"
-														ng-if="FormSubItem.nptiporegnombre.$dirty && FormSubItem.nptiporegnombre.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubItem.nptiporegnombre.$valid"> Listo </span>
 												</div>
 
 												<div class="form-group"
@@ -1924,10 +1624,7 @@
 														ng-model="objeto.estado" required ng-disabled="!editar">
 														<option value="A">Activo</option>
 														<option value="I">Inactivo</option>
-													</select> <span class="error text-small block"
-														ng-if="FormSubItem.estado.$dirty && FormSubItem.estado.$invalid">
-														Incorrecto </span> <span class="success text-small"
-														ng-if="FormSubItem.estado.$valid"> Listo </span>
+													</select>
 												</div>
 											</div>
 
@@ -1948,11 +1645,6 @@
 															style="text-align: right; color: Green !important; font-weight: bold !important;"
 															class="form-control" name="npSaldoActividadPlanificado"
 															ng-model="objeto.tplanificado" ng-disabled="true">
-														<span class="error text-small block"
-															ng-if="FormSubItem.npSaldoActividadPlanificado.$dirty && FormSubItem.npSaldoActividadPlanificado.$invalid">
-															Incorrecto </span> <span class="success text-small"
-															ng-if="FormSubItem.npSaldoActividadPlanificado.$valid">
-															Listo </span>
 													</div>
 
 													<div class="form-group"
@@ -1968,14 +1660,6 @@
 															ng-model="detalles[mPlanificadaID].cantidad"
 															ng-change="calcularTotalPlanificado();"
 															ng-disabled="!editarP">
-														<span class="error text-small block"
-															ng-if="FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid">
-															Incorrecto
-														</span>
-														<span class="success text-small"
-															ng-if="FormSubItem.npCantidadPlanificada.$valid">
-															Listo
-														</span>
 													</div>
 
 													<div class="form-group"
@@ -1992,14 +1676,6 @@
 															ng-model="detalles[mPlanificadaID].valor"
 															ng-change="calcularTotalPlanificado();"
 															ng-disabled="!editarP">
-														<span class="error text-small block"
-															ng-if="FormSubItem.npValorPlanificado.$dirty && FormSubItem.npValorPlanificado.$invalid">
-															Incorrecto
-														</span>
-														<span class="success text-small"
-															ng-if="FormSubItem.npValorPlanificado.$valid">
-															Listo
-														</span>
 													</div>
 
 													<div class="form-group"
@@ -2013,11 +1689,6 @@
 															class="form-control" name="npTotalPlanificado"
 															ng-model="npTotalPlanificado" ng-disabled="true"
 															ng-max="objetoTplanificado" required>
-														<span class="error text-small block"
-															ng-if="FormSubItem.npTotalPlanificado.$dirty && FormSubItem.npTotalPlanificado.$invalid">
-															Incorrecto </span> <span class="success text-small"
-															ng-if="FormSubItem.npTotalPlanificado.$valid">
-															Listo </span>
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -2032,11 +1703,6 @@
 															style="text-align: right; color: Green !important; font-weight: bold !important;"
 															class="form-control" name="npSaldoActividadAjustado"
 															ng-model="objeto.tacumulado" ng-disabled="true">
-														<span class="error text-small block"
-															ng-if="FormSubItem.npSaldoActividadAjustado.$dirty && FormSubItem.npSaldoActividadAjustado.$invalid">
-															Incorrecto </span> <span class="success text-small"
-															ng-if="FormSubItem.npSaldoActividadAjustado.$valid">
-															Listo </span>
 													</div>
 
 													<div class="form-group"
@@ -2052,14 +1718,6 @@
 															ng-model="detalles[mAjustadaID].cantidad"
 															ng-change="calcularTotalAjustado();sumarValoresD();"
 															ng-disabled="!editarA">
-														<span class="error text-small block"
-															ng-if="FormSubItem.npCantidadPlanificada.$dirty && FormSubItem.npCantidadPlanificada.$invalid">
-															Incorrecto
-														</span>
-														<span class="success text-small"
-															ng-if="FormSubItem.npCantidadPlanificada.$valid">
-															Listo
-														</span>
 													</div>
 
 													<div class="form-group"
@@ -2076,11 +1734,6 @@
 															ng-model="detalles[mAjustadaID].valor"
 															ng-change="calcularTotalAjustado();sumarValoresD();"
 															ng-disabled="!editarA">
-														<span class="error text-small block"
-															ng-if="FormSubItem.npValorAjustado.$dirty && FormSubItem.npValorAjustado.$invalid">
-															Incorrecto </span> <span class="success text-small"
-															ng-if="FormSubItem.npValorAjustado.$valid"> Listo
-														</span>
 													</div>
 
 													<div class="form-group"
@@ -2094,12 +1747,6 @@
 															class="form-control" name="npTotalAjustado"
 															ng-model="npTotalAjustado" ng-disabled="true"
 															ng-max="objetoTacumulado">
-														<span
-															class="error text-small block"
-															ng-if="FormSubItem.npTotalAjustado.$dirty && FormSubItem.npTotalAjustado.$invalid">
-															Incorrecto </span> <span class="success text-small"
-															ng-if="FormSubItem.npTotalAjustado.$valid"> Listo
-														</span>
 													</div>
 												</div>
 											</div>

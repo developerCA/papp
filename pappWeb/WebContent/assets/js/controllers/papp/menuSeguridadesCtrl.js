@@ -123,7 +123,7 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 			console.log("close modal");
 		});
 	};
-		
+
 	$scope.eliminar=function(node){
 		if (!node.hijos) {
 			SweetAlert.swal("Menu Seguridades!", "No se puede eliminar porque tiene hijos", "error");

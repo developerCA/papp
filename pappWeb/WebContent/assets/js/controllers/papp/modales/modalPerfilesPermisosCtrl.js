@@ -9,46 +9,45 @@ app.controller('ModalPerfilesPermisosController', [ "$scope","$uibModalInstance"
 	$scope.edicion=false;
 	$scope.objeto={};
 	
-	var pagina = 1;
-	
-	$scope.consultar=function(){
-		$scope.data=[];
-		perfilesPermisosFactory.traer(pagina).then(function(resp){
-			
-			if (resp.meta)
-				$scope.data=resp;
-		})
-	};
+    $scope.pagina = 1;
 
-	$scope.$watch('data', function() {
-		$scope.tableParams = new ngTableParams({
-			page : 1, // show first page
-			count : 5, // count per page
-			filter: {} 	
-		}, {
-			total : $scope.data.length, // length of data
-			getData : function($defer, params) {
-				var orderedData = params.filter() ? $filter('filter')(
-						$scope.data, params.filter()) : $scope.data;
-				$scope.lista = orderedData.slice(
-						(params.page() - 1) * params.count(), params
-								.page()
-								* params.count());
-				params.total(orderedData.length);
-				$defer.resolve($scope.lista);
-			}
-		});
-	});
-
-	$scope.filtrar=function(){
+    $scope.consultar = function () {
 		$scope.data=[];
-		perfilesPermisosFactory.traerFiltro(pagina,$scope.idFiltro,$scope.nombreFiltro).then(function(resp){
-		if (resp.meta)
-			$scope.data=resp;
+		perfilesPermisosFactory.traer(
+			$scope.pagina
+		).then(function(resp){
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
 		})
-	}
-	
+    };
+
+    $scope.pageChanged = function() {
+        if ($scope.aplicafiltro){
+        	$scope.filtrarUnico();
+        }else{
+        	$scope.consultar();	
+        }
+    };  
+
+    $scope.filtrar=function(){
+    	$scope.pagina=1;
+    	$scope.aplicafiltro=true;
+    	$scope.filtrarUnico();
+    }  
+
+	$scope.filtrarUnico=function(){
+		perfilesPermisosFactory.traerFiltro(
+			$scope.pagina,
+			$scope.idFiltro,
+			$scope.nombreFiltro
+		).then(function(resp){
+        	$scope.data = resp.json.result;
+            $scope.total = resp.json.total.valor;
+        })
+    };
+
 	$scope.limpiar=function(){
+		$scope.pagina = 1;
 		$scope.nombreFiltro=null;
 		$scope.idFiltro=null;
 		$scope.consultar();

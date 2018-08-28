@@ -100,10 +100,10 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
-			$scope.objetolista[index].id.permisoid = obj.id;
-			$scope.objetolista[index].nppermiso=obj.nombre;
+			$scope.objetolista[index].id.permisoid = obj.id.permisoid;
+			$scope.objetolista[index].nppermiso=obj.nppermiso;
 		}, function() {
-			console.log("close modal");
+			//console.log("close modal");
 		});
 	};
 
