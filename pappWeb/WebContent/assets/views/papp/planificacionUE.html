@@ -205,10 +205,11 @@
 													ng-class="{'has-error':FormActividad.descripcion.$dirty && FormActividad.descripcion.$invalid, 'has-success':FormActividad.descripcion.$valid}">
 													<label class="control-label"> Descripci&oacute;n <span
 														class="symbol required"></span>
-													</label> <input type="text"
-														placeholder="Escriba un descripci&oacute;n"
-														class="form-control" name="descripcion"
-														ng-model="objeto.descripcion" required ng-disabled="true">
+													</label>
+													<textarea name="descripcion" rows="5" style="width: 100%"
+														placeholder="Selecione" required
+														class="form-control" ng-model="objeto.descripcion"
+														ng-disabled="true"></textarea>
 												</div>
 
 												<div class="form-group"
@@ -358,11 +359,11 @@
 													ng-class="{'has-error':FormActividad.npIndicadormetadescriopcion.$dirty && FormActividad.npIndicadormetadescriopcion.$invalid, 'has-success':FormActividad.npIndicadormetadescriopcion.$valid}">
 													<label class="control-label"> Indicador Meta
 														Descripci&oacute;n <span class="symbol required"></span>
-													</label> <input type="text"
-														placeholder="Escriba un indicador meta descripci&oacute;n"
-														class="form-control" name="npIndicadormetadescriopcion"
-														ng-model="objeto.npIndicadormetadescriopcion" required
-														ng-disabled="true">
+													</label>
+													<textarea name="npIndicadormetadescriopcion" rows="5" style="width: 100%"
+														placeholder="Selecione" required
+														class="form-control" ng-model="objeto.npIndicadormetadescriopcion"
+														ng-disabled="true"></textarea>
 												</div>
 
 												<div class="form-group"
@@ -370,11 +371,12 @@
 													<label class="control-label"> Indicador
 														M&eacute;todo Descripci&oacute;n <span
 														class="symbol required"></span>
-													</label> <input type="text"
-														placeholder="Escriba un indicador m&eacute;todo descripci&oacute;n"
-														class="form-control" name="npIndicadormetdescripcion"
-														ng-model="objeto.npIndicadormetdescripcion" required
-														ng-disabled="true">
+													</label>
+													-------------------------
+													<textarea name="npIndicadormetdescripcion" rows="5" style="width: 100%"
+														placeholder="Selecione" required
+														class="form-control" ng-model="objeto.npIndicadormetdescripcion"
+														ng-disabled="true"></textarea>
 												</div>
 
 												<div class="form-group"
