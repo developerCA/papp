@@ -57,7 +57,7 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 	};
 	
 	$scope.nuevo=function(){
-		$scope.objeto={id:null};
+		$scope.objeto={id:{permisoid:null}};
 		$scope.objetolista=[];
 		var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
 //		console.log(obj);

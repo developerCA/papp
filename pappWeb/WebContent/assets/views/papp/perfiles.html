@@ -86,27 +86,25 @@
 							<div class="col-md-6">
 								<div class="form-group"
 									ng-class="{'has-error':Form.id.$dirty && Form.id.$invalid, 'has-success':Form.id.$valid}">
-									<label class="control-label"> Id <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Id a generar"
+									<label class="control-label">
+										Id
+										<span class="symbol required"></span>
+									</label>
+									<input type="text" placeholder="Id a generar"
 										class="form-control" name="id" ng-model="objeto.id"
-										required ng-disabled="true"> <span class="error text-small block"
-										ng-if="Form.id.$dirty && Form.id.$invalid">Id
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.id.$valid">Listo</span>
+										required>
+									<!-- ng-disabled="true" -->
 								</div>
 
 								<div class="form-group"
 									ng-class="{'has-error':Form.nombre.$dirty && Form.nombre.$invalid, 'has-success':Form.nombre.$valid}">
-									<label class="control-label"> Nombre <span
-										class="symbol required"></span>
-									</label> <input type="text" placeholder="Nombre del perfil"
+									<label class="control-label">
+										Nombre
+										<span class="symbol required"></span>
+									</label>
+									<input type="text" placeholder="Nombre del perfil"
 										class="form-control" name="nombre" required
-										ng-model="objeto.nombre" ng-minlength="1" /> <span
-										class="error text-small block"
-										ng-if="Form.nombre.$dirty && Form.nombre.$invalid">Nombre
-										es incorrecto</span> <span class="success text-small"
-										ng-if="Form.nombre.$valid">Listo</span>
+										ng-model="objeto.nombre" ng-minlength="1" />
 								</div>
 							</div>
 						</div>
@@ -140,7 +138,7 @@
 															</a>
 														</td>
 <!-- 																required ng-model="obj.id.permisoid" -->
-														<td width="10%" data-title="'Nombre'">
+														<td width="10%" data-title="'ID'">
 															<div class="input-group">
 																<input type="text" placeholder="Seleccione el permiso"
 																	class="form-control" name="idpermisoid" ng-disabled="true"

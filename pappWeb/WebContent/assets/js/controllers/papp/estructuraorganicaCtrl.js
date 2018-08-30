@@ -351,14 +351,14 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	};
 
 	$scope.modificarUnidad=function(node){
-		console.log(node);
+		//console.log(node);
 		unidadFactory.traerUnidadArbol(
 				node.id
 			).then(function(resp){
 				if (resp.estado)
 					$scope.objetoUnidad=resp.json.unidadarbol;
 				$scope.edicion=true;
-				console.log(resp.json);
+				//console.log(resp.json);
 				$scope.dUnidad=false;
 				$scope.dUnidadEditar=true;
 		})
@@ -366,7 +366,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 	$scope.formUnidad = {
         submit: function (formUnidad) {
-			console.log("formUnidad");
+			//console.log("formUnidad");
             var firstError = null;
             if (formUnidad.$invalid) {
                 var field = null, firstError = null;
@@ -390,7 +390,6 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     					$scope.dUnidadEditar=false;
 	 		            $scope.objetUnidado={};
 	 		            SweetAlert.swal("Unidad!", "Registro guardado satisfactoriamente!", "success");
-
 	 		            $scope.mostrarUnidad($scope.estructuraSeleccionada);
         			}else{
 	 		            SweetAlert.swal("Unidad!", resp.mensajes.msg, "error");
@@ -408,15 +407,21 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
         }
 	};
 
-	$scope.cargarHijos=function(node){
-		if (!node.iscargado)
+	$scope.cargarHijos=function(node, recargar = false){
+		if (!node.iscargado) {
 			//console.log(node);
 		    node.iscargado=true;
 
-		    unidadFactory.traerUnidadesArbolhijos(pagina,$scope.estructuraSeleccionada,node.id,'A').then(function(resp){
+		    unidadFactory.traerUnidadesArbolhijos(
+	    		pagina,
+	    		$scope.estructuraSeleccionada,
+	    		node.id,
+	    		'A'
+    		).then(function(resp) {
 				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
 				node.nodes=nodes;
-			})
+			});
+		}
 	}
 
 	$scope.abrirInstitucion = function() {

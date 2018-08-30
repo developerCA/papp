@@ -38,7 +38,8 @@
 				<thead>
 					<tr>
 						<th></th>
-						<th>Nombre</th>
+						<th>Perfil</th>
+						<th>Permiso</th>
 					</tr>
 				</thead>
 				<tr ng-repeat="obj in data">
@@ -48,6 +49,7 @@
 							<i class="fa fa-check"></i>
 						</a>
 					</td>
+                    <td>{{obj.npperfil}}</td>
                     <td>{{obj.nppermiso}}</td>
 				</tr>
 			</table>

@@ -724,7 +724,8 @@
 													ng-class="{'has-error':FormSubActividad.npcodigo.$dirty && FormSubActividad.npcodigo.$invalid, 'has-success':FormSubActividad.npcodigo.$valid}">
 													<label class="control-label"> C&oacute;digo <span
 														class="symbol required"></span>
-													</label> <input type="text" placeholder="Escriba un c&oacute;digo"
+													</label>
+													<input type="text" placeholder="Escriba un c&oacute;digo"
 														class="form-control" name="npcodigo"
 														ng-model="objeto.npcodigo" required ng-disabled="true"
 														ng-maxlength="10">
@@ -734,11 +735,11 @@
 													ng-class="{'has-error':FormSubActividad.npdescripcion.$dirty && FormSubActividad.npdescripcion.$invalid, 'has-success':FormSubActividad.npdescripcion.$valid}">
 													<label class="control-label"> Descripci&oacute;n <span
 														class="symbol required"></span>
-													</label> <input type="text"
-														placeholder="Escriba un descripci&oacute;n"
-														class="form-control" name="npdescripcion"
-														ng-model="objeto.npdescripcion" required
-														ng-disabled="true">
+													</label>
+													<textarea name="npdescripcion" rows="5" style="width: 100%"
+														placeholder="Selecione" required
+														class="form-control" ng-model="objeto.npdescripcion"
+														ng-disabled="true"></textarea>
 												</div>
 
 												<div class="form-group"
@@ -945,11 +946,10 @@
 													<label class="control-label"> Unidad Medida Nombre
 														<span class="symbol required"></span>
 													</label>
-													<input type="text"
-														placeholder="Seleccione una Unidad Medida"
-														class="form-control" name="npUnidadMedidaNombre"
-														ng-model="objeto.npnombreunidad" required
-														ng-disabled="true">
+													<textarea name="npUnidadMedidaNombre" rows="5" style="width: 100%"
+														placeholder="Selecione una Unidad Medida" required
+														class="form-control" ng-model="objeto.npnombreunidad"
+														ng-disabled="true"></textarea>
 												</div>
 
 												<div class="form-group"
@@ -969,11 +969,10 @@
 													<label class="control-label"> Grupo Medida Nombre <span
 														class="symbol required"></span>
 													</label>
-													<input type="text"
-														placeholder="Seleccione una Unidad Medida"
-														class="form-control" name="npGrupoMedidaNombre"
-														ng-model="objeto.npnombregrupo" required
-														ng-disabled="true">
+													<textarea name="npGrupoMedidaNombre" rows="5" style="width: 100%"
+														placeholder="Selecione una Unidad Medida" required
+														class="form-control" ng-model="objeto.npnombregrupo"
+														ng-disabled="true"></textarea>
 												</div>
 
 												<div class="row">
@@ -1317,9 +1316,11 @@
 													ng-class="{'has-error':FormItem.npnombreitem.$dirty && FormItem.npnombreitem.$invalid, 'has-success':FormItem.npnombreitem.$valid}">
 													<label class="control-label"> Item Nombre <span
 														class="symbol required"></span>
-													</label> <input type="text" placeholder="Escriba un item nombre"
-														class="form-control" name="npnombreitem"
-														ng-model="objeto.npnombreitem" ng-disabled="true" required>
+													</label>
+													<textarea name="npnombreitem" rows="5" style="width: 100%"
+														placeholder="Selecione un INCOP" required
+														class="form-control" ng-model="objeto.npnombreitem"
+														ng-disabled="true"></textarea>
 												</div>
 
 												<div class="form-group"
@@ -1356,9 +1357,11 @@
 													ng-class="{'has-error':FormItem.npnombreobra.$dirty && FormItem.npnombreobra.$invalid, 'has-success':FormItem.npnombreobra.$valid}">
 													<label class="control-label"> Obra Nombre <span
 														class="symbol required"></span>
-													</label> <input type="text" placeholder="Escriba un obra nombre"
-														class="form-control" name="npnombreobra"
-														ng-model="objeto.npnombreobra" ng-disabled="true" required>
+													</label>
+													<textarea name="npnombreobra" rows="5" style="width: 100%"
+														placeholder="Selecione una obra nombre" required
+														class="form-control" ng-model="objeto.npnombreobra"
+														ng-disabled="true"></textarea>
 												</div>
 
 												<div class="form-group"
@@ -1384,11 +1387,11 @@
 													ng-class="{'has-error':FormItem.npnombrefuente.$dirty && FormItem.npnombrefuente.$invalid, 'has-success':FormItem.npnombrefuente.$valid}">
 													<label class="control-label"> Fuente Financiamiento
 														Nombre <span class="symbol required"></span>
-													</label> <input type="text"
-														placeholder="Escriba un fuente financiamiento nombre"
-														class="form-control" name="npnombrefuente"
-														ng-model="objeto.npnombrefuente" ng-disabled="true"
-														required>
+													</label>
+													<textarea name="npnombrefuente" rows="5" style="width: 100%"
+														placeholder="Selecione una fuente financiamiento" required
+														class="form-control" ng-model="objeto.npnombrefuente"
+														ng-disabled="true"></textarea>
 												</div>
 
 												<div class="form-group"
@@ -1414,11 +1417,11 @@
 													ng-class="{'has-error':FormItem.npnombreorganismo.$dirty && FormItem.npnombreorganismo.$invalid, 'has-success':FormItem.npnombreorganismo.$valid}">
 													<label class="control-label"> Organismo Pr&eacute;stamo Nombre <span
 														class="symbol required"></span>
-													</label> <input type="text"
-														placeholder="Escriba un organismo nombre"
-														class="form-control" name="npnombreorganismo"
-														ng-model="objeto.npnombreorganismo" ng-disabled="true"
-														required>
+													</label>
+													<textarea name="npnombreorganismo" rows="5" style="width: 100%"
+														placeholder="Selecione un organismo" required
+														class="form-control" ng-model="objeto.npnombreorganismo"
+														ng-disabled="true"></textarea>
 												</div>
 
 												<div class="form-group"
@@ -2655,7 +2658,12 @@
 				</table>
 			</td>
 			<td width="100%" ng-click="vista(node);">
-				&nbsp;{{node.npcodigo}}&nbsp;-&nbsp;{{node.npdescripcion}}
+				<span ng-if="node.nodeTipo!='IT'">
+					&nbsp;{{node.npcodigo}}&nbsp;-&nbsp;{{node.npdescripcion}}
+				</span>
+				<span ng-if="node.nodeTipo=='IT'">
+					&nbsp;{{node.npcodigo}}&nbsp;-&nbsp;{{node.npcodigocanton}}&nbsp;-&nbsp;{{node.npcodigofuente}}&nbsp;-&nbsp;{{node.npdescripcion}}
+				</span>
 			</td>
 			<td width="0%">
 				<table width="108px">
