@@ -1695,6 +1695,7 @@ public class PlanificacionController {
 				Collection<ActividadunidadacumuladorTO> actividadunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerActividadunidadacumulador(actividadunidadacumuladorTO);
 				//Si no existe debo crearlas
 				if(actividadunidadacumuladorTOs==null || actividadunidadacumuladorTOs.size()==0){
+					System.out.println("es nuevo");
 					//obtengo la lista de actividadunidadacumuladorTO existente para saber que acumulador toca
 					ActividadunidadacumuladorTO actividadunidadacumuladorExiste=new ActividadunidadacumuladorTO();
 					actividadunidadacumuladorExiste.getId().setId(id);
@@ -2296,7 +2297,7 @@ public class PlanificacionController {
 					cronogramalineaTO2.setNpfechainicio(UtilGeneral.parseDateToString(cronogramalineaTO2.getFechainicio()));
 			}
 			else{
-				log.println("no existe el cronograma");
+				System.out.println("no existe el cronograma");
 
 				//obtengo el ejerciciofiscal
 				cronogramaTO.setCronogramaunidadid(unidad);

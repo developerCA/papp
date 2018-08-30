@@ -409,7 +409,7 @@ public class EstructuraorganicaController {
 		return respuesta;	
 	}
 	
-	@RequestMapping(value = "/{clase}/{id}/{id2}/{di3}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{clase}/{id}/{id2}/{id3}", method = RequestMethod.DELETE)
 	//@ResponseStatus(HttpStatus.NO_CONTENT)
 	public Respuesta eliminar(@PathVariable String clase,@PathVariable Long id,@PathVariable Long id2,@PathVariable Long id3,HttpServletRequest request){
 		log.println("entra al metodo eliminar");

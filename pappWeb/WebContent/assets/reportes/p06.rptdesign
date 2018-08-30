@@ -1636,12 +1636,15 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                 </structure>
                 <structure>
                     <property name="name">estadoes</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">2</property>
                     <expression name="defaultValue" type="javascript">if(params["tipo"].value='P')&#13;
 'P'&#13;
 else&#13;
 'V'</expression>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -1690,17 +1693,16 @@ else&#13;
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select S.SOCIONEGOCIONOMBREMOSTRADO, C.CARGONOMBRE, G.GRADOSIGLA
-from ESTRUCTURAORGANICA ES, UNIDADARBOL UA, UNIDADARBOLPLAZA UAP, UNIDADARBOLPLAZAEMPLEADO UAPE, SOCIONEGOCIO S, CARGO C,
-GRADOESCALA GE, GRADOFUERZA GF, GRADO G
-where ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID and UA.UNIDADARBOLID=UAP.UNIDADARBOLID
-and UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID AND UAP.UNIDADARBOLPLAZAID=UAPE.UNIDADARBOLPLAZAID
-and UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
-and UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
-and S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
-and GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
-and GF.GRADOFUERZAGRADOID=G.GRADOID
-and UA.UNIDADARBOLESTADO='A'
-and UAP.UNIDADARBOLPLAZARESPONSABLE=1 and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=? and ES.EORGANICAESTADO=? 
+from ESTRUCTURAORGANICA ES inner join UNIDADARBOL UA on ES.EORGANICAID=UA.UNIDADARBOLEORGANICAID 
+inner join UNIDADARBOLPLAZA UAP on UA.UNIDADARBOLID=UAP.UNIDADARBOLID
+inner join UNIDADARBOLPLAZAEMPLEADO UAPE on UAP.UNIDADARBOLID=UAPE.UNIDADARBOLID AND UAP.UNIDADARBOLPLAZAID=UAPE.UNIDADARBOLPLAZAID
+inner join SOCIONEGOCIO S on UAPE.UNIDADARBOLPLAEMPEMPID=S.SOCIONEGOCIOID
+inner join CARGO C on UAP.UNIDADARBOLPLAZACARGOID=C.CARGOID
+left join GRADOESCALA GE on S.SNEMPGRADOESCALAID=GE.GRADOESCALAID
+left join GRADOFUERZA GF on GE.GEGRADOFUERZAID=GF.GRADOFUERZAID
+left join GRADO G on GF.GRADOFUERZAGRADOID=G.GRADOID
+where UA.UNIDADARBOLESTADO='A'
+and UAP.UNIDADARBOLPLAZARESPONSABLE=1 and UA.UNIDADARBOLESTADO='A' and UA.UNIDADARBOLUNIDADID=? and ES.EORGANICAESTADO= ?
 and (UAPE.UNIDADARBOLPLAEMPFECHAFIN is NULL or UAPE.UNIDADARBOLPLAEMPFECHAFIN= to_date('01/01/0001','mm/dd/yyyy')  or UAPE.UNIDADARBOLPLAEMPFECHAFIN=to_date('01/01/1901','mm/dd/yyyy'))
 and S.SOCIONEGOCIOESEMPLEADO=1
 ]]></xml-property>
