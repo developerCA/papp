@@ -174,14 +174,13 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	}
 	
 	$scope.agregarUnidadHija=function(node){
-		//console.log(node.unidadarbolerganicaid);
-		//console.log(node);
 		$scope.objetoUnidad={
 			id: null,
 			unidadarbolerganicaid: node.unidadarbolerganicaid,
 			unidadarbolpadreid: node.id,
 			estado: "A"
 		};
+		$scope.nodeCargar = node || null;
 		$scope.dUnidad=false;
 		$scope.dUnidadEditar=true;
 		$scope.nuevoar=true;
@@ -355,8 +354,9 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 		unidadFactory.traerUnidadArbol(
 				node.id
 			).then(function(resp){
-				if (resp.estado)
-					$scope.objetoUnidad=resp.json.unidadarbol;
+				if (!resp.estado) return;
+				$scope.objetoUnidad=resp.json.unidadarbol;
+				$scope.nodeCargar = node.nodePadre || null;
 				$scope.edicion=true;
 				//console.log(resp.json);
 				$scope.dUnidad=false;
@@ -390,7 +390,8 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     					$scope.dUnidadEditar=false;
 	 		            $scope.objetUnidado={};
 	 		            SweetAlert.swal("Unidad!", "Registro guardado satisfactoriamente!", "success");
-	 		            $scope.mostrarUnidad($scope.estructuraSeleccionada);
+	 		            //$scope.mostrarUnidad($scope.estructuraSeleccionada);
+	 		           $scope.cargarHijos($scope.nodeCargar, true)
         			}else{
 	 		            SweetAlert.swal("Unidad!", resp.mensajes.msg, "error");
         			}
@@ -403,12 +404,16 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.dUnidad=true;
 			$scope.dUnidadEditar=false;
             $scope.objetoUnidad={};
-            $scope.mostrarUnidad($scope.estructuraSeleccionada);
+            //$scope.mostrarUnidad($scope.estructuraSeleccionada);
         }
 	};
 
 	$scope.cargarHijos=function(node, recargar = false){
-		if (!node.iscargado) {
+		if (node == null) {
+			$scope.mostrarUnidad($scope.estructuraSeleccionada);
+			return;
+		}
+		if (!node.iscargado || recargar) {
 			//console.log(node);
 		    node.iscargado=true;
 
@@ -419,6 +424,9 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	    		'A'
     		).then(function(resp) {
 				var nodes=JSON.parse(JSON.stringify(resp).split('"descripcion":').join('"title":'));
+				for (var i = 0; i < nodes.length; i++) {
+					nodes[i].nodePadre=node;
+				}
 				node.nodes=nodes;
 			});
 		}
