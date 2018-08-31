@@ -618,6 +618,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	    //$scope.objetoPlazaDetail=resp.json.details;
         submit: function (formEmpleadosPlaza) {
             var firstError = null;
+            var errorFecha = false;
     		let obj = Object.assign({}, $scope.objetoPlaza);
     		//obj.details = $scope.objetoPlazaDetail.slice();
     		obj.details = [];
@@ -626,12 +627,24 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     			obj.details[i].npfechainicioc = toStringDate(obj.details[i].npfechainicioc);
     			//console.log("npfechainicioc:", i, obj.details[i].npfechainicioc);
     			obj.details[i].npfechafinc = toStringDate(obj.details[i].npfechafinc);
+    			if (obj.details[i].npfechainicioc == null) {
+    				errorFecha = true;
+    				break;
+    			}
+    			if (obj.details[i].npfechafinc == null && (i == $scope.objetoPlazaDetail.length - 1)) {
+    				errorFecha = true;
+    				break;
+    			}
 			}
+    		if (errorFecha) {
+				SweetAlert.swal("Plaza Empleado!", "Se requiere que ponga todas las fechas de Inicio y de Fin solo puede dejar sin poner la ultima!", "success");
+				return;
+    		}
     		//return;
     		//console.log("DETALLES FUENTE:", $scope.objetoPlazaDetail);
     		//console.log("DETALLES DESTINO:", obj.details);
     		unidadFactory.guardarEmpleadosPlaza(obj).then(function(resp){
-        		console.log(resp);
+        		//console.log(resp);
     			 if (resp.estado){
     				 formEmpleadosPlaza.$setPristine(true);
     				 $scope.limpiarEmpleadosPlaza();

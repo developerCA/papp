@@ -252,10 +252,19 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	//ng-change="modificarMetaPlanificada(treu);"
 	$scope.modificarMetaPlanificada = function(sumar) {
-		$scope.aDistribuirP = Number($scope.divActividad || $scope.divSubTarea
+		var v = Number($scope.divActividad || $scope.divSubTarea
 			? $scope.detalles[$scope.mPlanificadaID].cantidad
 			: $scope.npTotalPlanificado
 		);
+		if (v <= 0) {
+            SweetAlert.swal(
+        		"Planificacion UE!",
+        		"La meta planificada no puede ser cero o menos.",
+        		"error"
+    		);
+			return;
+		}
+		$scope.aDistribuirP = v;
 		if (sumar != undefined) {
 			$scope.sumarValoresP();
 		}
@@ -285,10 +294,19 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.modificarMetaAjustada = function(sumar) {
-		$scope.aDistribuirA = Number($scope.divActividad || $scope.divSubTarea
+		var v = Number($scope.divActividad || $scope.divSubTarea
 			? $scope.detalles[$scope.mAjustadaID].cantidad
 			: $scope.npTotalAjustado
 		);
+		if (v <= 0) {
+            SweetAlert.swal(
+        		"Planificacion UE!",
+        		"La meta ajustada no puede ser cero o menos.",
+        		"error"
+    		);
+			return;
+		}
+		$scope.aDistribuirA = v;
 		if (sumar != undefined) {
 			$scope.sumarValoresA();
 		}
