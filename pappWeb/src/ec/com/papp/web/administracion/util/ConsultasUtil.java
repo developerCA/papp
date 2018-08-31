@@ -154,7 +154,7 @@ public class ConsultasUtil {
 			if(parameters.get("institucionejerciciofiscalid")!=null && !parameters.get("institucionejerciciofiscalid").equals(""))
 				institucionTO.setInstitucionejerciciofiscalid(Long.valueOf(parameters.get("institucionejerciciofiscalid")));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				institucionTO.setNombre(parameters.get("nombre"));
+				institucionTO.setNombre(parameters.get("nombre").toUpperCase());
 			Collection<InstitucionTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerInstitucion(institucionTO);	
 //			HashMap<String, String>  resultado.size()=new HashMap<String, String>();
 //			resultado.size().put("valor", Integer.valueOf(resultado.size()).toString());
@@ -199,7 +199,7 @@ public class ConsultasUtil {
 			if(parameters.get("tipo")!=null && !parameters.get("tipo").equals(""))
 				tipo=parameters.get("tipo");
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				nombre=parameters.get("nombre");
+				nombre=parameters.get("nombre").toUpperCase();
 			if(parameters.get("nombrepadre")!=null && !parameters.get("nombrepadre").equals(""))
 				nombrepadre=parameters.get("nombrepadre");
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
@@ -323,7 +323,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigogrupo")!=null && !parameters.get("codigogrupo").equals(""))
 				grupomedidaTO.setCodigo(parameters.get("codigogrupo"));
 			if(parameters.get("nombregrupo")!=null && !parameters.get("nombregrupo").equals(""))
-				grupomedidaTO.setNombre(parameters.get("nombregrupo"));
+				grupomedidaTO.setNombre(parameters.get("nombregrupo").toUpperCase());
 
 			unidadmedidaTO.setGrupomedida(grupomedidaTO);
 //			SearchResultTO<UnidadmedidaTO> resultado=UtilSession.adminsitracionServicio.transObtenerUnidadmedidaPaginado(unidadmedidaTO);
@@ -375,7 +375,7 @@ public class ConsultasUtil {
 			else
 				parametroTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				parametroTO.setNombre(parameters.get("nombre"));
+				parametroTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				parametroTO.setEstado(parameters.get("estado"));
 //			SearchResultTO<ParametroTO> resultado=UtilSession.adminsitracionServicio.transObtenerParametroPaginado(parametroTO);
@@ -427,9 +427,9 @@ public class ConsultasUtil {
 			else
 				consecutivoTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("prefijo")!=null && !parameters.get("prefijo").equals(""))
-				consecutivoTO.setPrefijo(parameters.get("prefijo"));
+				consecutivoTO.setPrefijo(parameters.get("prefijo").toUpperCase());
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				consecutivoTO.setNombre(parameters.get("nombre"));
+				consecutivoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				consecutivoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
@@ -483,7 +483,7 @@ public class ConsultasUtil {
 			else
 				tipoidentificacionTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				tipoidentificacionTO.setNombre(parameters.get("nombre"));
+				tipoidentificacionTO.setNombre(parameters.get("nombre").toUpperCase());
 //			SearchResultTO<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacionPaginado(tipoidentificacionTO);
 			Collection<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacion(tipoidentificacionTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -535,7 +535,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				fuentefinanciamientoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				fuentefinanciamientoTO.setNombre(parameters.get("nombre"));
+				fuentefinanciamientoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				fuentefinanciamientoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
@@ -591,7 +591,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				organismoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				organismoTO.setNombre(parameters.get("nombre"));
+				organismoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				organismoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
@@ -649,13 +649,13 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				organismoprestamoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				organismoprestamoTO.setNombre(parameters.get("nombre"));
+				organismoprestamoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				organismoprestamoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("npcodigoorganismo")!=null && !parameters.get("npcodigoorganismo").equals(""))
 				organismoTO.setCodigo(parameters.get("npcodigoorganismo"));
 			if(parameters.get("npnombreorganismo")!=null && !parameters.get("npnombreorganismo").equals(""))
-				organismoTO.setNombre(parameters.get("npnombreorganismo"));
+				organismoTO.setNombre(parameters.get("npnombreorganismo").toUpperCase());
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				organismoTO.setOrganismoejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			if(parameters.get("organismoid")!=null && !parameters.get("organismoid").equals(""))
@@ -711,7 +711,7 @@ public class ConsultasUtil {
 			else
 				procedimientoTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				procedimientoTO.setNombre(parameters.get("nombre"));
+				procedimientoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				procedimientoTO.setActivo(Integer.valueOf(parameters.get("estado")));
 //			SearchResultTO<ProcedimientoTO> resultado=UtilSession.adminsitracionServicio.transObtenerProcedimientoPaginado(procedimientoTO);
@@ -763,7 +763,7 @@ public class ConsultasUtil {
 			else
 				tiporegimenTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				tiporegimenTO.setNombre(parameters.get("nombre"));
+				tiporegimenTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				tiporegimenTO.setActivo(Integer.valueOf(parameters.get("estado")));
 //			SearchResultTO<TiporegimenTO> resultado=UtilSession.adminsitracionServicio.transObtenerTiporegimenPaginado(tiporegimenTO);
@@ -815,7 +815,7 @@ public class ConsultasUtil {
 			else
 				tipoproductoTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				tipoproductoTO.setNombre(parameters.get("nombre"));
+				tipoproductoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				tipoproductoTO.setActivo(Integer.valueOf(parameters.get("estado")));
 //			SearchResultTO<TipoproductoTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoproductoPaginado(tipoproductoTO);
@@ -869,7 +869,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				obraTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				obraTO.setNombre(parameters.get("nombre"));
+				obraTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				obraTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
@@ -926,7 +926,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				itemTO.setCodigo(parameters.get("codigo")+"%");
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				itemTO.setNombre(parameters.get("nombre"));
+				itemTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				itemTO.setEstado(parameters.get("estado"));
 			if(parameters.get("tipo")!=null && !parameters.get("tipo").equals(""))
@@ -935,7 +935,7 @@ public class ConsultasUtil {
 				itemTO.setItemejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			log.println("nombrepadre: " + parameters.get("nombrepadre"));
 			if(parameters.get("nombrepadre")!=null && !parameters.get("nombrepadre").equals("")) {
-				padre.setNombre(parameters.get("nombrepadre"));
+				padre.setNombre(parameters.get("nombrepadre").toUpperCase());
 			}
 			itemTO.setItem(padre);
 			SearchResultTO<ItemTO> resultado=UtilSession.adminsitracionServicio.transObtenerItemPaginado(itemTO);
@@ -989,7 +989,7 @@ public class ConsultasUtil {
 				log.println("codigo incop " + subitemTO.getCodigo());
 			}
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				subitemTO.setNombre(parameters.get("nombre"));
+				subitemTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				subitemTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals("")){
@@ -997,7 +997,7 @@ public class ConsultasUtil {
 				log.println("va a consultar por ejerciciofiscal: " + itemTO.getItemejerciciofiscalid());
 			}	
 			if(parameters.get("itemnombre")!=null && !parameters.get("itemnombre").equals("")){
-				itemTO.setNombre(parameters.get("itemnombre"));
+				itemTO.setNombre(parameters.get("itemnombre").toUpperCase());
 			}	
 			if(parameters.get("itemcodigo")!=null && !parameters.get("itemcodigo").equals("")){
 				itemTO.setCodigo(parameters.get("itemcodigo"));
@@ -1056,7 +1056,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				grupomedidaTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				grupomedidaTO.setNombre(parameters.get("nombre"));
+				grupomedidaTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				grupomedidaTO.setEstado(parameters.get("estado"));
 //			SearchResultTO<GrupomedidaTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrupomedidaPaginado(grupomedidaTO);
@@ -1110,7 +1110,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				claseregistroTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				claseregistroTO.setNombre(parameters.get("nombre"));
+				claseregistroTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				claseregistroTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
@@ -1168,7 +1168,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				claseregistroclasemodificacionTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				claseregistroclasemodificacionTO.setNombre(parameters.get("nombre"));
+				claseregistroclasemodificacionTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				claseregistroclasemodificacionTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
@@ -1225,7 +1225,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				tipodocumentoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				tipodocumentoTO.setNombre(parameters.get("nombre"));
+				tipodocumentoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				tipodocumentoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
@@ -1270,7 +1270,7 @@ public class ConsultasUtil {
 //			int primero=(pagina*filas)-filas;
 			campo="tipoidentificacion.nombre";
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				tipoidentificacionTO.setNombre(parameters.get("nombre"));
+				tipoidentificacionTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("identificacionid")!=null && !parameters.get("identificacionid").equals(""))
 				tipoidentificaciontipoTO.getId().setIdentificacionid(Long.valueOf(parameters.get("identificacionid")));
 			if(parameters.get("tipo")!=null && !parameters.get("tipo").equals(""))
@@ -1325,7 +1325,7 @@ public class ConsultasUtil {
 			else
 				tipoidentificacionTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				tipoidentificacionTO.setNombre(parameters.get("nombre"));	
+				tipoidentificacionTO.setNombre(parameters.get("nombre").toUpperCase());	
 //			SearchResultTO<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacionPaginado(tipoidentificacionTO);
 			Collection<TipoidentificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerTipoidentificacion(tipoidentificacionTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -1377,7 +1377,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				parametroindicadorTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				parametroindicadorTO.setNombre(parameters.get("nombre"));
+				parametroindicadorTO.setNombre(parameters.get("nombre").toUpperCase());
 //			SearchResultTO<ParametroindicadorTO> resultado=UtilSession.adminsitracionServicio.transObtenerParametroindicadorPaginado(parametroindicadorTO);
 			Collection<ParametroindicadorTO> resultado=UtilSession.adminsitracionServicio.transObtenerParametroindicador(parametroindicadorTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -1429,9 +1429,9 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				fuerzaTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				fuerzaTO.setNombre(parameters.get("nombre"));
+				fuerzaTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
-				fuerzaTO.setNombre(parameters.get("sigla"));
+				fuerzaTO.setSigla(parameters.get("sigla").toUpperCase());
 			if(tipo.equals("busquedafuerza"))
 				fuerzaTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 //			SearchResultTO<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerzaPaginado(fuerzaTO);
@@ -1486,9 +1486,9 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				socionegocioTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				socionegocioTO.setNombremostrado(parameters.get("nombre"));
+				socionegocioTO.setNombremostrado(parameters.get("nombre").toUpperCase());
 			if(parameters.get("razonsocial")!=null && !parameters.get("razonsocial").equals(""))
-				socionegocioTO.setRazonsocial(parameters.get("razonsocial"));
+				socionegocioTO.setRazonsocial(parameters.get("razonsocial").toUpperCase());
 
 			//			if(parameters.get("primernombre")!=null && !parameters.get("primernombre").equals(""))
 //				socionegocioTO.setPrimernombre(parameters.get("primernombre"));
@@ -1497,7 +1497,7 @@ public class ConsultasUtil {
 //			if(parameters.get("segundonombre")!=null && !parameters.get("segundonombre").equals(""))
 //				socionegocioTO.setSegundonombre(parameters.get("segundonombre"));
 			if(parameters.get("nombremostrado")!=null && !parameters.get("nombremostrado").equals(""))
-				socionegocioTO.setNombremostrado(parameters.get("nombremostrado"));
+				socionegocioTO.setNombremostrado(parameters.get("nombremostrado").toUpperCase());
 			if(parameters.get("emptipo")!=null && !parameters.get("emptipo").equals(""))
 				socionegocioTO.setEmptipo(parameters.get("emptipo"));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
@@ -1505,13 +1505,13 @@ public class ConsultasUtil {
 			if(parameters.get("proveedor")!=null && !parameters.get("proveedor").equals(""))
 				socionegocioTO.setEsproveedor(Integer.valueOf(parameters.get("proveedor")));
 			if(parameters.get("primernombre")!=null && !parameters.get("primernombre").equals(""))
-				socionegocioTO.setPrimernombre(parameters.get("primernombre"));
+				socionegocioTO.setPrimernombre(parameters.get("primernombre").toUpperCase());
 			if(parameters.get("primerapellido")!=null && !parameters.get("primerapellido").equals(""))
-				socionegocioTO.setPrimerapellido(parameters.get("primerapellido"));
+				socionegocioTO.setPrimerapellido(parameters.get("primerapellido").toUpperCase());
 			if(parameters.get("nombrecomercial")!=null && !parameters.get("nombrecomercial").equals(""))
-				socionegocioTO.setNombrecomercial(parameters.get("nombrecomercial"));
+				socionegocioTO.setNombrecomercial(parameters.get("nombrecomercial").toUpperCase());
 			if(parameters.get("representantelegal")!=null && !parameters.get("representantelegal").equals(""))
-				socionegocioTO.setRepresentantelegal(parameters.get("representantelegal"));
+				socionegocioTO.setRepresentantelegal(parameters.get("representantelegal").toUpperCase());
 			log.println("es empleado "+ parameters.get("esempleado"));
 			if(parameters.get("esempleado")!=null && !parameters.get("esempleado").equals("")) {
 				log.println("va a consultar solo empleados");
@@ -1599,14 +1599,14 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				gradoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				gradoTO.setNombre(parameters.get("nombre"));
+				gradoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				gradoTO.setEstado(parameters.get("estado"));
 			GrupoTO grupoTO=new GrupoTO();
 			if(parameters.get("nombregrupo")!=null && !parameters.get("nombregrupo").equals(""))
-				grupoTO.setNombre(parameters.get("nombregrupo"));
+				grupoTO.setNombre(parameters.get("nombregrupo").toUpperCase());
 			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
-				gradoTO.setSigla(parameters.get("sigla"));
+				gradoTO.setSigla(parameters.get("sigla").toUpperCase());
 			gradoTO.setGrupo(grupoTO);
 //			SearchResultTO<GradoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGradoPaginado(gradoTO);
 			Collection<GradoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrado(gradoTO);
@@ -1659,11 +1659,11 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				clasificacionTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				clasificacionTO.setNombre(parameters.get("nombre"));
+				clasificacionTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				clasificacionTO.setEstado(parameters.get("estado"));
 			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
-				clasificacionTO.setSigla(parameters.get("sigla"));
+				clasificacionTO.setSigla(parameters.get("sigla").toUpperCase());
 //			SearchResultTO<ClasificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerClasificacionPaginado(clasificacionTO);
 			Collection<ClasificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerClasificacion(clasificacionTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -1716,9 +1716,9 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				grupoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				grupoTO.setNombre(parameters.get("nombre"));
+				grupoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
-				grupoTO.setSigla(parameters.get("sigla"));
+				grupoTO.setSigla(parameters.get("sigla").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				grupoTO.setEstado(parameters.get("estado"));
 //			SearchResultTO<GrupoTO> resultado=UtilSession.adminsitracionServicio.transObtenerGrupoPaginado(grupoTO);
@@ -1773,11 +1773,11 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				fuerzaTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				fuerzaTO.setNombre(parameters.get("nombre"));
+				fuerzaTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				fuerzaTO.setEstado(parameters.get("estado"));
 			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
-				fuerzaTO.setSigla(parameters.get("sigla"));
+				fuerzaTO.setSigla(parameters.get("sigla").toUpperCase());
 //			SearchResultTO<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerzaPaginado(fuerzaTO);
 			Collection<FuerzaTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerza(fuerzaTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -1834,11 +1834,11 @@ public class ConsultasUtil {
 			GradoTO gradoTO=new GradoTO();
 			GrupoTO grupoTO=new GrupoTO();
 			if(parameters.get("npnombregrado")!=null && !parameters.get("npnombregrado").equals(""))
-				gradoTO.setNombre(parameters.get("npnombregrado"));
+				gradoTO.setNombre(parameters.get("npnombregrado").toUpperCase());
 			if(parameters.get("npgrupo")!=null && !parameters.get("npgrupo").equals(""))
-				grupoTO.setNombre(parameters.get("npgrupo"));
+				grupoTO.setNombre(parameters.get("npgrupo").toUpperCase());
 			if(parameters.get("npnombrefuerza")!=null && !parameters.get("npnombrefuerza").equals(""))
-				fuerzaTO.setNombre(parameters.get("npnombrefuerza"));
+				fuerzaTO.setNombre(parameters.get("npnombrefuerza").toUpperCase());
 			if(parameters.get("idfuerza")!=null && !parameters.get("idfuerza").equals(""))
 				gradofuerzaTO.setGradofuerzafuerzaid(Long.valueOf(parameters.get("idfuerza")));
 			gradofuerzaTO.setFuerza(fuerzaTO);
@@ -1895,11 +1895,11 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				especialidadTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				especialidadTO.setNombre(parameters.get("nombre"));
+				especialidadTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				especialidadTO.setEstado(parameters.get("estado"));
 			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
-				especialidadTO.setSigla(parameters.get("sigla"));
+				especialidadTO.setSigla(parameters.get("sigla").toUpperCase());
 			if(parameters.get("tipo")!=null && !parameters.get("tipo").equals(""))
 				especialidadTO.setTipo(parameters.get("tipo"));
 			if(parameters.get("fuerza")!=null && !parameters.get("fuerza").equals(""))
@@ -1956,7 +1956,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				cargoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				cargoTO.setNombre(parameters.get("nombre"));
+				cargoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				cargoTO.setEstado(parameters.get("estado"));
 			Collection<CargoTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargo(cargoTO);
@@ -2071,11 +2071,11 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				clasificacionTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				clasificacionTO.setNombre(parameters.get("nombre"));
+				clasificacionTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				clasificacionTO.setEstado(parameters.get("estado"));
 			if(parameters.get("sigla")!=null && !parameters.get("sigla").equals(""))
-				clasificacionTO.setSigla(parameters.get("sigla"));
+				clasificacionTO.setSigla(parameters.get("sigla").toUpperCase());
 			fuerzaclasificacionTO.setClasificacionTO(clasificacionTO);
 			Collection<FuerzaclasificacionTO> resultado=UtilSession.adminsitracionServicio.transObtenerFuerzaclasificacion(fuerzaclasificacionTO);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,fuerzaclasificacionTO.getJsonConfig()));
@@ -2136,11 +2136,11 @@ public class ConsultasUtil {
 			GradofuerzaTO gradofuerzaTO=new GradofuerzaTO();
 			EscalarmuTO escalarmuTO=new EscalarmuTO();
 			if(parameters.get("npnombregrado")!=null && !parameters.get("npnombregrado").equals(""))
-				gradoTO.setNombre(parameters.get("npnombregrado"));
+				gradoTO.setNombre(parameters.get("npnombregrado").toUpperCase());
 			if(parameters.get("npnombrefuerza")!=null && !parameters.get("npnombrefuerza").equals(""))
-				fuerzaTO.setNombre(parameters.get("npnombrefuerza"));
+				fuerzaTO.setNombre(parameters.get("npnombrefuerza").toUpperCase());
 			if(parameters.get("npgrupoocupacional")!=null && !parameters.get("npgrupoocupacional").equals(""))
-				escalarmuTO.setGrupoocupacional(parameters.get("npgrupoocupacional"));
+				escalarmuTO.setGrupoocupacional(parameters.get("npgrupoocupacional").toUpperCase());
 			gradofuerzaTO.setFuerza(fuerzaTO);
 			gradofuerzaTO.setGrado(gradoTO);
 			gradoescalaTO.setGradofuerza(gradofuerzaTO);
@@ -2206,9 +2206,9 @@ public class ConsultasUtil {
 			CargoTO cargoTO=new CargoTO();
 			EscalarmuTO escalarmuTO=new EscalarmuTO();
 			if(parameters.get("npnombrecargo")!=null && !parameters.get("npnombrecargo").equals(""))
-				cargoTO.setNombre(parameters.get("npnombrecargo"));
+				cargoTO.setNombre(parameters.get("npnombrecargo").toUpperCase());
 			if(parameters.get("npgrupoocupacional")!=null && !parameters.get("npgrupoocupacional").equals(""))
-				escalarmuTO.setGrupoocupacional(parameters.get("npgrupoocupacional"));
+				escalarmuTO.setGrupoocupacional(parameters.get("npgrupoocupacional").toUpperCase());
 			cargoescalaTO.setCargo(cargoTO);
 			cargoescalaTO.setEscalarmu(escalarmuTO);
 //			SearchResultTO<CargoescalaTO> resultado=UtilSession.adminsitracionServicio.transObtenerCargoescalaPaginado(cargoescalaTO);
@@ -2264,7 +2264,7 @@ public class ConsultasUtil {
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				nivelorganicoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				nivelorganicoTO.setNombre(parameters.get("nombre"));
+				nivelorganicoTO.setNombre(parameters.get("nombre").toUpperCase());
 //			SearchResultTO<NivelorganicoTO> resultado=UtilSession.planificacionServicio.transObtenerNivelorganidoPaginado(nivelorganicoTO);
 			Collection<NivelorganicoTO> resultado=UtilSession.planificacionServicio.transObtenerNivelorganido(nivelorganicoTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
@@ -2310,15 +2310,15 @@ public class ConsultasUtil {
 			if(parameters.get("registrocodigo")!=null && !parameters.get("registrocodigo").equals(""))
 				claseregistroTO.setCodigo(parameters.get("registrocodigo"));
 			if(parameters.get("registronombre")!=null && !parameters.get("registronombre").equals(""))
-				claseregistroTO.setNombre(parameters.get("registronombre"));
+				claseregistroTO.setNombre(parameters.get("registronombre").toUpperCase());
 			if(parameters.get("modificacioncodigo")!=null && !parameters.get("modificacioncodigo").equals(""))
 				claseregistroclasemodificacionTO.setCodigo(parameters.get("modificacioncodigo"));
 			if(parameters.get("modificacionnombre")!=null && !parameters.get("modificacionnombre").equals(""))
-				claseregistroclasemodificacionTO.setNombre(parameters.get("modificacionnombre"));
+				claseregistroclasemodificacionTO.setNombre(parameters.get("modificacionnombre").toUpperCase());
 			if(parameters.get("gastocodigo")!=null && !parameters.get("gastocodigo").equals(""))
 				claseregistrocmcgastoTO.setNombre(parameters.get("gastocodigo"));
 			if(parameters.get("gastonombre")!=null && !parameters.get("gastonombre").equals(""))
-				claseregistrocmcgastoTO.setCodigo(parameters.get("gastonombre"));
+				claseregistrocmcgastoTO.setCodigo(parameters.get("gastonombre").toUpperCase());
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				claseregistrocmcgastoTO.setClaseregistrocmcgastoefid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			claseregistroclasemodificacionTO.setClaseregistro(claseregistroTO);
@@ -2363,11 +2363,11 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				tipodocumentoclasedocumentoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				tipodocumentoclasedocumentoTO.setNombre(parameters.get("nombre"));
+				tipodocumentoclasedocumentoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("tipocodigo")!=null && !parameters.get("tipocodigo").equals(""))
 				tipodocumentoTO.setCodigo(parameters.get("tipocodigo"));
 			if(parameters.get("tiponombre")!=null && !parameters.get("tiponombre").equals(""))
-				tipodocumentoTO.setNombre(parameters.get("tiponombre"));
+				tipodocumentoTO.setNombre(parameters.get("tiponombre").toUpperCase());
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				tipodocumentoclasedocumentoTO.setTipodocumentoclasedocefid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			tipodocumentoclasedocumentoTO.setTipodocumento(tipodocumentoTO);
@@ -2410,7 +2410,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				socionegocioTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				socionegocioTO.setNombremostrado(parameters.get("nombre"));
+				socionegocioTO.setNombremostrado(parameters.get("nombre").toUpperCase());
 			if(parameters.get("fecha")!=null && !parameters.get("fecha").equals(""))
 				contratoTO.setFechainicio(UtilGeneral.parseStringToDate(parameters.get("fecha")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))

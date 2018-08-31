@@ -121,7 +121,7 @@ public class ConsultasUtil {
 				if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 					certificacionTO.setEstado(parameters.get("estado"));
 				if(parameters.get("numprecompromiso")!=null && !parameters.get("numprecompromiso").equals(""))
-					certificacionTO.setNumprecompromiso(parameters.get("numprecompromiso"));
+					certificacionTO.setNumprecompromiso(parameters.get("numprecompromiso").toUpperCase());
 				if(parameters.get("certificacionejerfiscalid")!=null && !parameters.get("certificacionejerfiscalid").equals(""))
 					certificacionTO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("certificacionejerfiscalid")));
 				log.println("certificacion: " + certificacionTO.getCertificacionejerfiscalid());
@@ -272,7 +272,7 @@ public class ConsultasUtil {
 				if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 					ordengastoTO.setEstado(parameters.get("estado"));
 				if(parameters.get("compromiso")!=null && !parameters.get("compromiso").equals(""))
-					ordengastoTO.setNumerocompromiso(parameters.get("compromiso"));
+					ordengastoTO.setNumerocompromiso(parameters.get("compromiso").toUpperCase());
 				if(parameters.get("ordengastoejerfiscalid")!=null && !parameters.get("ordengastoejerfiscalid").equals(""))
 					ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ordengastoejerfiscalid")));
 				if(parameters.get("certificacion")!=null && !parameters.get("certificacion").equals("")){
@@ -376,7 +376,7 @@ public class ConsultasUtil {
 				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 					ordendevengoTO.setOrdendevengoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 				if(parameters.get("ordengasto")!=null && !parameters.get("ordengasto").equals("")){
-					ordengastoTO.setCodigo(parameters.get("ordengasto"));
+					ordengastoTO.setCodigo(parameters.get("ordengasto").toUpperCase());
 				}
 				ordendevengoTO.setOrdengasto(ordengastoTO);
 				SearchResultTO<OrdendevengoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdendevengoPaginado(ordendevengoTO);
@@ -464,7 +464,7 @@ public class ConsultasUtil {
 				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 					ordenreversionTO.setOrdenreversionejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 				if(parameters.get("ordengasto")!=null && !parameters.get("ordengasto").equals("")){
-					ordenreversionTO.setCodigo(parameters.get("ordengasto"));
+					ordenreversionTO.setCodigo(parameters.get("ordengasto").toUpperCase());
 				}
 				ordenreversionTO.setOrdengasto(ordengastoTO);
 				SearchResultTO<OrdenreversionTO> resultado=UtilSession.planificacionServicio.transObtenerOrdenreversionPaginado(ordenreversionTO);
@@ -517,7 +517,7 @@ public class ConsultasUtil {
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				certificacionTO.setEstado(parameters.get("estado"));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
-				certificacionTO.setDescripcion(parameters.get("descripcion"));
+				certificacionTO.setDescripcion(parameters.get("descripcion").toUpperCase());
 			if(parameters.get("unidadid")!=null && !parameters.get("unidadid").equals(""))
 				certificacionTO.setCertificacionunidadid(Long.valueOf(parameters.get("unidadid")));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
@@ -572,7 +572,7 @@ public class ConsultasUtil {
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				ordengastoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
-				ordengastoTO.setDescripcion(parameters.get("descripcion"));
+				ordengastoTO.setDescripcion(parameters.get("descripcion").toUpperCase());
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			if(parameters.get("unidad")!=null && !parameters.get("unidad").equals("")){
@@ -615,7 +615,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				certificacionOrdenVO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
-				certificacionOrdenVO.setDescripcion(parameters.get("descripcion"));
+				certificacionOrdenVO.setDescripcion(parameters.get("descripcion").toUpperCase());
 			Collection<CertificacionOrdenVO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionOrden(certificacionOrdenVO);
 			log.println("certificaciones: " + resultado.size());
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
@@ -643,7 +643,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				gastoDevengoVO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
-				gastoDevengoVO.setDescripcion(parameters.get("descripcion"));
+				gastoDevengoVO.setDescripcion(parameters.get("descripcion").toUpperCase());
 
 			Collection<GastoDevengoVO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastodevengo(gastoDevengoVO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();

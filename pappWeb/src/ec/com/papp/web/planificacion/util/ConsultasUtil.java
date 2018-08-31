@@ -112,7 +112,7 @@ public class ConsultasUtil {
 			if(parameters.get("id")!=null && !parameters.get("id").equals(""))
 				plannacionalTO.setId(Long.valueOf(parameters.get("id")));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
-				plannacionalTO.setDescripcion(parameters.get("unidadarbolnorganid"));
+				plannacionalTO.setDescripcion(parameters.get("descripcion").toUpperCase());
 			if(parameters.get("plannacionalejerciciofiscalid")!=null && !parameters.get("plannacionalejerciciofiscalid").equals(""))
 				plannacionalTO.setPlannacionalejerfiscalid(Long.valueOf(parameters.get("plannacionalejerciciofiscalid")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
@@ -155,7 +155,7 @@ public class ConsultasUtil {
 			if(parameters.get("nombrepadre")!=null && !parameters.get("nombrepadre").equals(""))
 				plannacionalTO.setNombrepadre(parameters.get("nombrepadre"));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
-				plannacionalTO.setDescripcion(parameters.get("unidadarbolnorganid"));
+				plannacionalTO.setDescripcion(parameters.get("descripcion").toUpperCase());
 			if(parameters.get("plannacionalejerfiscalid")!=null && !parameters.get("plannacionalejerfiscalid").equals(""))
 				plannacionalTO.setPlannacionalejerfiscalid(Long.valueOf(parameters.get("plannacionalejerfiscalid")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
@@ -204,7 +204,7 @@ public class ConsultasUtil {
 			if(parameters.get("id")!=null && !parameters.get("id").equals(""))
 				indicadorTO.setId(Long.valueOf(parameters.get("id")));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				indicadorTO.setDescripcion(parameters.get("unidadarbolnorganid"));
+				indicadorTO.setDescripcion(parameters.get("nombre").toUpperCase());
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				indicadorTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("indicadorejerciciofiscalid")!=null && !parameters.get("indicadorejerciciofiscalid").equals(""))
@@ -247,7 +247,7 @@ public class ConsultasUtil {
 			else
 				programaTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				programaTO.setNombre(parameters.get("nombre"));
+				programaTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				programaTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("programaejerciciofiscalid")!=null && !parameters.get("programaejerciciofiscalid").equals(""))
@@ -287,7 +287,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				objetivoTO.setCodigo4(parameters.get("codigo"));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
-				objetivoTO.setDescripcion4(parameters.get("descripcion"));
+				objetivoTO.setDescripcion4(parameters.get("descripcion").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				objetivoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("objetivoejerciciofiscalid")!=null && !parameters.get("objetivoejerciciofiscalid").equals(""))
@@ -410,11 +410,11 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				proyectoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				proyectoTO.setNombre(parameters.get("nombre"));
+				proyectoTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("npcodigoprograma")!=null && !parameters.get("npcodigoprograma").equals(""))
-				proyectoTO.setNpcodigoprograma(parameters.get("npcodigoprograma"));
+				proyectoTO.setNpcodigoprograma(parameters.get("npcodigoprograma").toUpperCase());
 			if(parameters.get("npnombreprograma")!=null && !parameters.get("npnombreprograma").equals(""))
-				proyectoTO.setNpnombreprograma(parameters.get("npnombreprograma"));
+				proyectoTO.setNpnombreprograma(parameters.get("npnombreprograma").toUpperCase());
 			if(parameters.get("npcodigosubprograma")!=null && !parameters.get("npcodigosubprograma").equals(""))
 				proyectoTO.setNpcodigosubprograma(parameters.get("npcodigosubprograma"));
 			if(parameters.get("npunidad")!=null && !parameters.get("npunidad").equals(""))
@@ -457,7 +457,7 @@ public class ConsultasUtil {
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				actividadTO.setActividadeejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				actividadTO.setDescripcion(parameters.get("nombre"));
+				actividadTO.setDescripcion(parameters.get("nombre").toUpperCase());
 			if(parameters.get("npunidad")!=null && !parameters.get("npunidad").equals(""))
 				actividadTO.setNpunidad(Long.valueOf(parameters.get("npunidad")));
 			if(parameters.get("npprogramaid")!=null && !parameters.get("npprogramaid").equals(""))
@@ -642,7 +642,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				indicadorTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				indicadorTO.setNombre(parameters.get("nombre"));
+				indicadorTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("indicadorejerciciofiscalid")!=null && !parameters.get("indicadorejerciciofiscalid").equals(""))
 				indicadorTO.setIndicadorejerciciofiscalid(Long.valueOf(parameters.get("indicadorejerciciofiscalid")));
 			UnidadmedidaTO unidadmedidaTO=new UnidadmedidaTO();
@@ -694,7 +694,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigopresup")!=null && !parameters.get("codigopresup").equals(""))
 				unidadTO.setCodigopresup(parameters.get("codigopresup"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				unidadTO.setNombre(parameters.get("nombre"));
+				unidadTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estadoaprobado")!=null && !parameters.get("estadoaprobado").equals(""))
 				unidadTO.setNpajusaprobado(Integer.valueOf(parameters.get("estadoaprobado")));
 			Collection<UnidadTO> resultado=UtilSession.planificacionServicio.transConsultaplanificacion(unidadTO, Long.valueOf(parameters.get("ejerciciofiscal")), principal.getName());

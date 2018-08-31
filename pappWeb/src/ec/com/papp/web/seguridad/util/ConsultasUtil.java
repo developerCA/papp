@@ -58,12 +58,12 @@ public class ConsultasUtil {
 			if(parameters.get("id")!=null && !parameters.get("id").equals(""))
 				menuTO.setId(Long.valueOf(parameters.get("id")));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				menuTO.setNombre(parameters.get("nombre"));
+				menuTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("orden")!=null && !parameters.get("orden").equals(""))
 				menuTO.setOrden(Double.valueOf(parameters.get("orden")));
 			if(parameters.get("nppadre")!=null && !parameters.get("nppadre").equals("")) {
 				MenuTO menu=new MenuTO();
-				menu.setNombre(parameters.get("nppadre"));
+				menu.setNombre(parameters.get("nppadre").toUpperCase());
 				menuTO.setMenu(menu);
 			}
 			menuTO.setPermiso(new PermisoTO());
@@ -110,7 +110,7 @@ public class ConsultasUtil {
 			else
 				perfilTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				perfilTO.setNombre(parameters.get("nombre"));
+				perfilTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("permisoid")!=null && !parameters.get("permisoid").equals(""))
 				perfilTO.setId(Long.valueOf(parameters.get("permisoid")));
 			SearchResultTO<PerfilTO> resultado=UtilSession.seguridadServicio.transObtenerPerfilPaginado(perfilTO);
@@ -159,7 +159,10 @@ public class ConsultasUtil {
 				perfilpermisoTO.getId().setPerfilid(Long.valueOf(parameters.get("perfilid")));
 			if(parameters.get("permisoid")!=null && !parameters.get("permisoid").equals(""))
 				perfilpermisoTO.getId().setPermisoid(Long.valueOf(parameters.get("permisoid")));
-			perfilpermisoTO.setPerfil(new PerfilTO());
+			PerfilTO perfilTO=new PerfilTO();
+			if(parameters.get("nombre")!=null && !parameters.get("permisoid").equals(""))
+				perfilTO.setNombre(parameters.get("nombre").toUpperCase());
+			perfilpermisoTO.setPerfil(perfilTO);
 			perfilpermisoTO.setPermiso(new PermisoTO());
 			SearchResultTO<PerfilpermisoTO> resultado=UtilSession.seguridadServicio.transObtenerPerfilpermisoPaginado(perfilpermisoTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
@@ -206,7 +209,7 @@ public class ConsultasUtil {
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
 				permisoTO.setDescripcion(parameters.get("descripcion"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				permisoTO.setNombre(parameters.get("nombre"));
+				permisoTO.setNombre(parameters.get("nombre").toUpperCase());
 			SearchResultTO<PermisoTO> resultado=UtilSession.seguridadServicio.transObtenerPermisoPaginado(permisoTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());
@@ -367,7 +370,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigopresup")!=null && !parameters.get("codigopresup").equals(""))
 				usuariounidadTO.getUnidadTO().setCodigopresup(parameters.get("codigopresup"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				usuariounidadTO.getUnidadTO().setNombre(parameters.get("nombre"));
+				usuariounidadTO.getUnidadTO().setNombre(parameters.get("nombre").toUpperCase());
 			usuariounidadTO.setUsuarioTO(new UsuarioTO());
 			SearchResultTO<UsuariounidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUsuariounidadPaginado(usuariounidadTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();

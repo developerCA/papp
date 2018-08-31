@@ -70,7 +70,7 @@ public class ConsultasUtil {
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				estructuraorganicaTO.setEstado(parameters.get("estado"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				estructuraorganicaTO.setNombre(parameters.get("nombre"));
+				estructuraorganicaTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("version")!=null && !parameters.get("version").equals(""))
 				estructuraorganicaTO.setVersion(Double.valueOf(parameters.get("version")));
 			InstitucionentidadTO institucionentidadTO=new InstitucionentidadTO();
@@ -133,7 +133,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				institucionentidadTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				institucionentidadTO.setNombre(parameters.get("nombre"));
+				institucionentidadTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				institucionentidadTO.setEstado(parameters.get("estado"));
 			if(parameters.get("institucionentcantonid")!=null && !parameters.get("institucionentcantonid").equals(""))
@@ -148,7 +148,7 @@ public class ConsultasUtil {
 				institucionTO.setInstitucionejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 			}
 			if(parameters.get("nombreInstitucion")!=null && !parameters.get("nombreInstitucion").equals(""))
-				institucionTO.setNombre(parameters.get("nombreInstitucion"));
+				institucionTO.setNombre(parameters.get("nombreInstitucion").toUpperCase());
 			if(parameters.get("codigoInstitucion")!=null && !parameters.get("codigoInstitucion").equals(""))
 				institucionTO.setCodigo(parameters.get("codigoInstitucion"));
 			if(parameters.get("ejercicoFiscal")!=null && !parameters.get("ejercicoFiscal").equals("")) {
@@ -212,13 +212,13 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				institucionentidadTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				institucionentidadTO.setNombre(parameters.get("nombre"));
+				institucionentidadTO.setNombre(parameters.get("nombre").toUpperCase());
 			institucionentidadTO.setEstado("A");
 			InstitucionTO institucionTO=new InstitucionTO();
 			if(parameters.get("institucionejerciciofiscalid")!=null && !parameters.get("institucionejerciciofiscalid").equals(""))
 				institucionTO.setInstitucionejerciciofiscalid(Long.valueOf(parameters.get("institucionejerciciofiscalid")));
 			if(parameters.get("nombreInstitucion")!=null && !parameters.get("nombreInstitucion").equals(""))
-				institucionTO.setNombre(parameters.get("nombreInstitucion"));
+				institucionTO.setNombre(parameters.get("nombreInstitucion").toUpperCase());
 			if(parameters.get("codigoInstitucion")!=null && !parameters.get("codigoInstitucion").equals(""))
 				institucionTO.setCodigo(parameters.get("codigoInstitucion"));
 			if(parameters.get("ejercicoFiscal")!=null && !parameters.get("ejercicoFiscal").equals("")) {
@@ -406,7 +406,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				socionegocioTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				socionegocioTO.setNombrecomercial(parameters.get("nombre"));
+				socionegocioTO.setNombrecomercial(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				socionegocioTO.setEstado(parameters.get("estado"));
 //			if(parameters.get("primernombre")!=null && !parameters.get("primernombre").equals(""))
@@ -416,7 +416,7 @@ public class ConsultasUtil {
 //			if(parameters.get("segundonombre")!=null && !parameters.get("segundonombre").equals(""))
 //				socionegocioTO.setSegundonombre(parameters.get("segundonombre"));
 			if(parameters.get("nombremostrado")!=null && !parameters.get("nombremostrado").equals(""))
-				socionegocioTO.setNombremostrado(parameters.get("nombremostrado"));
+				socionegocioTO.setNombremostrado(parameters.get("nombremostrado").toUpperCase());
 			SearchResultTO<SocionegocioTO> resultado=UtilSession.adminsitracionServicio.transObtenerSocionegocioPaginado(socionegocioTO);	
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
@@ -464,7 +464,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				empleadoTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				empleadoTO.setNombremostrado(parameters.get("nombre"));
+				empleadoTO.setNombremostrado(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				empleadoTO.setEstado(parameters.get("estado"));
 //			if(parameters.get("primernombre")!=null && !parameters.get("primernombre").equals(""))
@@ -578,11 +578,11 @@ public class ConsultasUtil {
 			else
 				unidadTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				unidadTO.setNombre(parameters.get("nombre"));
+				unidadTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				unidadTO.setEstado(parameters.get("estado"));
 			if(parameters.get("codigopresup")!=null && !parameters.get("codigopresup").equals(""))
-				unidadTO.setCodigopresup(parameters.get("codigopresup"));
+				unidadTO.setCodigopresup(parameters.get("codigopresup").toUpperCase());
 //			unidadTO.setInstitucion(new InstitucionTO());
 //			unidadTO.setInstitucionentidad(new InstitucionentidadTO());
 			Collection<UnidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidad(unidadTO);
@@ -638,11 +638,11 @@ public class ConsultasUtil {
 			else
 				unidadTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				unidadTO.setNombre(parameters.get("nombre"));
+				unidadTO.setNombre(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				unidadTO.setEstado(parameters.get("estado"));
 			if(parameters.get("codigopresup")!=null && !parameters.get("codigopresup").equals(""))
-				unidadTO.setCodigopresup(parameters.get("codigopresup"));
+				unidadTO.setCodigopresup(parameters.get("codigopresup").toUpperCase());
 			Collection<UnidadTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerUnidad(unidadTO);
 //			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 //			HashMap<String, String>  totalMap=new HashMap<String, String>();

@@ -1247,7 +1247,7 @@ public class AdministracionController {
 				}
 				else{
 					UtilSession.adminsitracionServicio.transCrearModificarCargo(cargoTO);
-					id=cargoTO.getNpid().toString();
+					//id=cargoTO.getNpid().toString();
 					jsonObject.put("cargo", (JSONObject)JSONSerializer.toJSON(cargoTO,cargoTO.getJsonConfig()));
 				}
 			}
