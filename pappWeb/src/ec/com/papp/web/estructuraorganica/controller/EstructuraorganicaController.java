@@ -465,8 +465,14 @@ public class EstructuraorganicaController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al eliminar");
-			mensajes.setMsg(MensajesWeb.getString("error.eliminar"));
-			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			if(clase.equals("unidadarbolplaza")){
+				mensajes.setMsg("Error al eliminar el registro: Verifique que no tengan asignados empleados" );
+				mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			}
+			else {
+				mensajes.setMsg(MensajesWeb.getString("error.eliminar"));
+				mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			}
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
