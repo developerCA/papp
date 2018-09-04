@@ -95,13 +95,15 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 		//console.log("aqui");
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalPermiso.html',
-			controller : 'ModalPerfilesPermisosController',
+			controller : 'ModalPermisosController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			$scope.objetolista[index].id.permisoid = obj.id.permisoid;
-			$scope.objetolista[index].nppermiso=obj.nppermiso;
+			console.log(obj);
+			$scope.objetolista[index].id.permisoid = obj.id;
+			$scope.objetolista[index].nppermiso=obj.descripcion;
+			//$scope.objetolista[index].id.permisoid = obj.id.permisoid;
+			//$scope.objetolista[index].nppermiso=obj.nppermiso;
 		}, function() {
 			//console.log("close modal");
 		});

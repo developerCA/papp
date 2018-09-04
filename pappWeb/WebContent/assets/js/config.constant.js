@@ -284,6 +284,7 @@ app.constant('JS_REQUIRES', {
         'PerfilesPermisosFactory':'assets/js/factory/perfilesPermisosFactory.js',
         'ModalNombrePerfilCtrl':'assets/js/controllers/papp/modales/modalNombrePerfilCtrl.js',
         'ModalPlanificacionUECtrl':'assets/js/controllers/papp/modales/modalPlanificacionUECtrl.js',
+        'ModalPermisosCtrl':'assets/js/controllers/papp/modales/modalPermisosCtrl.js',
 
 
     },

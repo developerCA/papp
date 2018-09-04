@@ -357,7 +357,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/perfiles",
         templateUrl: "assets/views/papp/perfiles.html",
         resolve: loadSequence('ngTable','PerfilesCtrl','PerfilesFactory',
-        		'ModalPerfilesPermisosCtrl','PerfilesPermisosFactory'),
+        		'ModalPermisosCtrl','PermisosFactory'),
         title: 'Perfiles',
         ncyBreadcrumb: {
             label: 'Perfiles'

@@ -1,7 +1,7 @@
 'use strict';
  
-app.controller('ModalPermisosController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","perfilesFactory",
-	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,perfilesFactory) {
+app.controller('ModalPermisosController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","permisosFactory",
+	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,permisosFactory) {
 
 	$scope.nombreFiltro=null;
 	$scope.idFiltro=null;
@@ -13,7 +13,7 @@ app.controller('ModalPermisosController', [ "$scope","$uibModalInstance","SweetA
 
     $scope.consultar = function () {
 		$scope.data=[];
-		perfilesFactory.traer(
+		permisosFactory.traerPermisos(
 			$scope.pagina
 		).then(function(resp){
         	$scope.data = resp.json.result;
@@ -36,9 +36,8 @@ app.controller('ModalPermisosController', [ "$scope","$uibModalInstance","SweetA
     }  
 
 	$scope.filtrarUnico=function(){
-		perfilesFactory.traerFiltro(
+		permisosFactory.traerPermisosFiltro(
 			$scope.pagina,
-			$scope.idFiltro,
 			$scope.nombreFiltro
 		).then(function(resp){
         	$scope.data = resp.json.result;

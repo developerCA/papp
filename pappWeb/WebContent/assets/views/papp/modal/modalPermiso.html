@@ -38,14 +38,40 @@
 			</div>
 		</div>
 		<div>
-			<table ng-table="tableParams" class="table table-striped">
-				<tr ng-repeat="obj in $data">
-					<td><a class="btn btn-sm btn-primary"
-						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-							class="fa fa-check"></i></a></td>
-					<td data-title="'Nombre'">{{obj.nombre}}</td>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>ID</th>
+						<th>Nombre</th>
+						<th>Descripción</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="obj in data">
+					<td>
+						<a class="btn btn-sm btn-primary"
+							uib-tooltip="Modificar" ng-click="seleccionar(obj)">
+							<i class="fa fa-pencil"></i>
+						</a>
+					</td>
+					<td>
+						{{obj.id}}
+					</td>
+					<td>
+						{{obj.nombre}}
+					</td>
+					<td>
+						{{obj.descripcion}}
+					</td>
 				</tr>
 			</table>
+	
+			<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+				previous-text="Atras" uib-pagination total-items="total"
+				ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
+				max-size="10" class="pagination-sm" boundary-links="true"
+				force-ellipses="true">
+			</ul>
 		</div>
 	</div>
 </div>
