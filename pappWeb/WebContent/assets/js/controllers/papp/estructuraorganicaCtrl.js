@@ -631,7 +631,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
     				errorFecha = true;
     				break;
     			}
-    			if (obj.details[i].npfechafinc == null && (i == $scope.objetoPlazaDetail.length - 1)) {
+    			if (obj.details[i].npfechafinc == null && (i != $scope.objetoPlazaDetail.length - 1)) {
     				errorFecha = true;
     				break;
     			}

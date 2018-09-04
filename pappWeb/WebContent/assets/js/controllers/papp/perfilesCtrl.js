@@ -99,7 +99,7 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objetolista[index].id.permisoid = obj.id;
 			$scope.objetolista[index].nppermiso=obj.descripcion;
 			//$scope.objetolista[index].id.permisoid = obj.id.permisoid;
