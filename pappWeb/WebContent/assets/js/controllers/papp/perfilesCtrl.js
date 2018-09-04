@@ -90,7 +90,7 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.removerDetalle=function(index){
 		$scope.objetolista.splice(index,1);
 	}
-
+ 
 	$scope.abrirPerfilesPermisos = function(index) {
 		//console.log("aqui");
 		var modalInstance = $uibModal.open({

@@ -1,5 +1,5 @@
 'use strict';
-
+ 
 app.controller('ModalPermisosController', [ "$scope","$uibModalInstance","SweetAlert","$filter", "ngTableParams","perfilesFactory",
 	function($scope,$uibModalInstance,SweetAlert,$filter, ngTableParams,perfilesFactory) {
 
