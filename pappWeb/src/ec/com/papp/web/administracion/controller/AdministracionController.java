@@ -188,6 +188,35 @@ public class AdministracionController {
 				}
 			}
 
+			//ValidaEmpleado
+			else if(clase.equals("validaempleado")){
+				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
+				accion = (socionegocioTO.getId()==null)?"I":"U";
+				//pregunto si ya existe el codigo en el nivel actual
+				SocionegocioTO socionegocioTO2=new SocionegocioTO();
+				socionegocioTO2.setCodigo(socionegocioTO.getCodigo());
+				Collection<SocionegocioTO> socionegocioTOs=UtilSession.adminsitracionServicio.transObtenerSocionegocio(socionegocioTO2);
+				boolean grabar=true;
+				if(socionegocioTOs.size()>0){
+					for(SocionegocioTO socionegocioTO3:socionegocioTOs) {
+						//socionegocioTO2=(SocionegocioTO)socionegocioTOs.iterator().next();
+						if((socionegocioTO.getId()!=null && socionegocioTO.getId().longValue()!=0) && socionegocioTO3.getId().longValue()!=socionegocioTO.getId().longValue() && socionegocioTO3.getCodigo().equals(socionegocioTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+						else if((socionegocioTO.getId()==null || (socionegocioTO.getId()!=null && socionegocioTO3.getId().longValue()!=socionegocioTO.getId().longValue())) && socionegocioTO.getCodigo()!=null && socionegocioTO3.getCodigo().equals(socionegocioTO.getCodigo())) {
+							grabar=false;
+							break;
+						}
+					}
+
+				}
+				if(!grabar){
+					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado") + ": Verifique en la seccion Socio negocio que se lo indique como empleado");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				}
+			}
+
 			//Empleado
 			else if(clase.equals("empleado")){
 				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
@@ -212,7 +241,7 @@ public class AdministracionController {
 
 				}
 				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado") + ": Verifique en la seccion Socio negocio que se lo indique como empleado");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 				else{

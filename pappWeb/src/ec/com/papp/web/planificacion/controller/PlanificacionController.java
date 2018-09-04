@@ -621,7 +621,7 @@ public class PlanificacionController {
 				//Obtengo los valores acumulados
 				ActividadTO actividadTO=UtilSession.planificacionServicio.transObtenerActividad(actividadunidadTO.getId().getId());
 				Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumulados(actividadunidadTO.getId().getId(), "AC", actividadunidadTO.getId().getUnidadid(), actividadTO.getActividadeejerciciofiscalid());
-				if(actividadunidadTO.getPresupplanif()>=totales.get("tplanificado") && actividadunidadTO.getPresupajust()>=totales.get("tacumulado")) {
+				if(actividadunidadTO.getPresupplanif()+1>=totales.get("tplanificado") && actividadunidadTO.getPresupajust()+1>=totales.get("tacumulado")) {
 					UtilSession.planificacionServicio.transCrearModificarActividadunidad(actividadunidadTO);
 					//id=actividadunidadTO.getId().toString();
 					jsonObject.put("actividadunidad", (JSONObject)JSONSerializer.toJSON(actividadunidadTO,actividadunidadTO.getJsonConfig()));
