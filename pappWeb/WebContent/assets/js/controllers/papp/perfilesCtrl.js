@@ -94,7 +94,7 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.abrirPerfilesPermisos = function(index) {
 		//console.log("aqui");
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalPerfilesPermisos.html',
+			templateUrl : 'assets/views/papp/modal/modalPermiso.html',
 			controller : 'ModalPerfilesPermisosController',
 			size : 'lg'
 		});
