@@ -70,12 +70,9 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	$scope.editar=function(id){
 		PerfilesFactory.traerPermiso(id).then(function(resp){
-//console.clear();
-//console.log(resp.json);
 			if (resp.estado) {
 			   $scope.objeto=resp.json.perfil;
 			   $scope.objetolista=resp.json.details;
-			   //console.log($scope.objetolista);
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;
@@ -128,7 +125,10 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	PerfilesFactory.guardar($scope.objeto).then(function(resp){
+            	var tObj={};
+            	angular.copy($scope.objeto, tObj);
+            	tObj.detalles=$scope.objetolista;
+            	PerfilesFactory.guardar(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
 	 		             $scope.edicion=false;
