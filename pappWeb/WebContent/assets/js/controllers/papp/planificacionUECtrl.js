@@ -20,6 +20,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.vLimpio=false;
 	$scope.jsRegresar = null;
 	$scope.noCancelar = true;
+	$scope.aDistribuirA = 0;
 
 	$scope.limpiarEdicion = function(recargar = true) {
 		$scope.ninguno = false;
@@ -2221,6 +2222,9 @@ function distribuirValor(
 	divSubItem,
 	vLimpio
 ) {
+	if (total === undefined) {
+		total = 0;
+	}
 	var presupuesto = total;
 	var nPeriodo = 0;
 	var intervalo = 0;
