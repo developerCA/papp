@@ -15,6 +15,15 @@ app.factory("permisosFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customGET();
 		},
 		
+		traerPermisosFiltro2 : function(pagina,nombre,id) {
+			var url = "seguridad/consultar/permiso/pagina="+pagina+"&filas=10";
+
+			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
+			if(id!=null && id != "") url += "&id=" + id;	
+			 
+			return Restangular.allUrl(url).customGET();
+		},
+		
 		traerPermiso : function(id) {
 			var url = "seguridad/permiso/"+id+"/-1";
 		   

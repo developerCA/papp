@@ -83,6 +83,9 @@ seccion.rols = '${sm_utilitario_permisosusuario}';
 seccion.cambiarclave = '${sm_utilitario_cambiarclave}';
 </script>
     <script src="assets/js/seccion.rols.js"></script>
+<script>
+//console.log(seccion);
+</script>
 </head>
 <body ng-controller="AppCtrl">
     <div ui-view id="app" class="lyt-3" ng-class="{'app-mobile' : app.isMobile, 'app-navbar-fixed' : app.layout.isNavbarFixed, 'app-sidebar-fixed' : app.layout.isSidebarFixed, 'app-sidebar-closed':app.layout.isSidebarClosed, 'app-footer-fixed':app.layout.isFooterFixed}"></div>

@@ -36,9 +36,10 @@ app.controller('ModalPermisosController', [ "$scope","$uibModalInstance","SweetA
     }  
 
 	$scope.filtrarUnico=function(){
-		permisosFactory.traerPermisosFiltro(
+		permisosFactory.traerPermisosFiltro2(
 			$scope.pagina,
-			$scope.nombreFiltro
+			$scope.nombreFiltro,
+			$scope.idFiltro
 		).then(function(resp){
         	$scope.data = resp.json.result;
             $scope.total = resp.json.total.valor;
