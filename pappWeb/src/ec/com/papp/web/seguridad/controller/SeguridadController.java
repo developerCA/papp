@@ -83,7 +83,7 @@ public class SeguridadController {
 				PerfilpermisoTO perfilpermisoTO = gson.fromJson(new StringReader(objeto), PerfilpermisoTO.class);
 				accion = (perfilpermisoTO.getId()==null)?"I":"U";
 				UtilSession.seguridadServicio.transCrearModificarPerfilpermiso(perfilpermisoTO);
-				id=perfilpermisoTO.getId().toString();
+				//id=perfilpermisoTO.getId().toString();
 				perfilpermisoTO=UtilSession.seguridadServicio.transObtenerPerfilpermisoTO(new PerfilpermisoID(perfilpermisoTO.getId().getPerfilid(), perfilpermisoTO.getId().getPermisoid()));
 				jsonObject.put("perfilpermiso", (JSONObject)JSONSerializer.toJSON(perfilpermisoTO,perfilpermisoTO.getJsonConfig()));
 			}
@@ -95,6 +95,13 @@ public class SeguridadController {
 				UtilSession.seguridadServicio.transCrearModificarPerfil(perfilTO);
 				//id=perfilTO.getId().toString();
 				jsonObject.put("perfil", (JSONObject)JSONSerializer.toJSON(perfilTO,perfilTO.getJsonConfig()));
+				//traigo los permisos
+				PerfilpermisoTO perfilpermisoTO=new PerfilpermisoTO();
+				perfilpermisoTO.getId().setPerfilid(perfilTO.getId());
+				perfilpermisoTO.setPerfil(new PerfilTO());
+				perfilpermisoTO.setPermiso(new PermisoTO());
+				Collection<PerfilpermisoTO> perfilpermisoTOs=UtilSession.seguridadServicio.transObtenerPerfilpermiso(perfilpermisoTO);
+				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(perfilpermisoTOs,perfilpermisoTO.getJsonConfig()));
 			}
 
 			//Permiso
@@ -213,6 +220,7 @@ public class SeguridadController {
 //			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
+		System.out.println("retorna: " + respuesta.getJson()+ "-"+ respuesta.getMensajes().getMsg());
 		return respuesta;		
 	}
 	
