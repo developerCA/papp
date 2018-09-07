@@ -257,14 +257,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			? $scope.detalles[$scope.mPlanificadaID].cantidad
 			: $scope.npTotalPlanificado
 		);
-		if (v <= 0) {
+		// AQUI
+/*		if (v <= 0) {
             SweetAlert.swal(
         		"Planificacion UE!",
         		"La meta planificada no puede ser cero o menos.",
         		"error"
     		);
 			return;
-		}
+		} */
 		$scope.aDistribuirP = v;
 		if (sumar != undefined) {
 			$scope.sumarValoresP();
@@ -299,14 +300,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			? $scope.detalles[$scope.mAjustadaID].cantidad
 			: $scope.npTotalAjustado
 		);
-		if (v <= 0) {
+		// AQUI
+/*		if (v <= 0) {
             SweetAlert.swal(
         		"Planificacion UE!",
         		"La meta ajustada no puede ser cero o menos.",
         		"error"
     		);
 			return;
-		}
+		} */
 		$scope.aDistribuirA = v;
 		if (sumar != undefined) {
 			$scope.sumarValoresA();

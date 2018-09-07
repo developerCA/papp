@@ -89,7 +89,6 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 	}
  
 	$scope.abrirPerfilesPermisos = function(index) {
-		//console.log("aqui");
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalPermiso.html',
 			controller : 'ModalPermisosController',
@@ -97,8 +96,13 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
+			$scope.objetolista[index].id.perfilid = $scope.objeto.id;
 			$scope.objetolista[index].id.permisoid = obj.id;
-			$scope.objetolista[index].nppermiso=obj.descripcion;
+			$scope.objetolista[index].npperfil = $scope.objeto.nombre;
+			$scope.objetolista[index].nppermiso = obj.descripcion;
+			$scope.objetolista[index].perfilpermisolectura = 0;
+			//descripcion:"ROLE_APP"
+			//nombre:"APDFMATRIZPAPP"
 			//$scope.objetolista[index].id.permisoid = obj.id.permisoid;
 			//$scope.objetolista[index].nppermiso=obj.nppermiso;
 		}, function() {

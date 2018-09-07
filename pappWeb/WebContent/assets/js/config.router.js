@@ -340,7 +340,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/menuseguridades",
         templateUrl: "assets/views/papp/menuSeguridades.html",
         resolve: loadSequence('ngTable','MenuSeguridadesCtrl','MenuPadreCtrl','MenuSeguridadesFactory',
-        		'ModalPerfilesPermisosCtrl','PerfilesPermisosFactory'),
+        		'ModalPerfilesPermisosCtrl','PerfilesPermisosFactory',
+        		'ModalPermisosCtrl','PermisosFactory'),
         title: 'Menu',
         ncyBreadcrumb: {
             label: 'Menu'

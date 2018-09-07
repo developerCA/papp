@@ -111,16 +111,17 @@ app.controller('MenuSeguridadController', [ "$scope","$rootScope","$uibModal","_
 	$scope.abrirPermiso = function() {
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalPermiso.html',
-			controller : 'ModalPerfilesPermisosController',
+			controller : 'ModalPermisosController',
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.permisoid = obj.id;
 			$scope.objeto.nppermisonombre = obj.nombre;
 			$scope.objeto.nppermisodescripcion = obj.descripcion;
+			//descripcion:"ROLE_APP"
+			//nombre:"APDFMATRIZPAPP"
 		}, function() {
-			console.log("close modal");
 		});
 	};
 
