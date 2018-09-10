@@ -103,13 +103,13 @@
 									</label>
 									<span ng-if="nuevo">
 										<input type="text"
-											placeholder="Ingrese el Id" class="form-control" name="id"
-											ng-model="objeto.id" required>
+											placeholder="Se genera en el servidor" class="form-control" name="id"
+											ng-model="objeto.id" ng-disabled="true">
 									</span>
 									<span ng-if="!nuevo">
 										<input type="text"
 											placeholder="Ingrese el Id" class="form-control" name="id"
-											ng-model="objeto.id" required ng-disabled="true">
+											ng-model="objeto.id" ng-disabled="true">
 									</span>
 									<span class="error text-small block"
 										ng-if="Form.id.$dirty && Form.id.$invalid">
