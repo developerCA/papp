@@ -82,6 +82,10 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.agregarDetalle=function(){
 		var obj={id:{perfilid:$scope.objeto,permisoid:null},nppermiso:null};
 		$scope.objetolista.push(obj);
+		//window.location.href = "#final";
+		//$('html, body').animate({scrollTop:0}, 'slow'); // OK
+		//$("body").animate({ scrollTop: $(document).height()}, 1000);
+		$('html, body').animate({scrollTop: $(document).height()}, 'slow');
 	}
 
 	$scope.removerDetalle=function(index){
