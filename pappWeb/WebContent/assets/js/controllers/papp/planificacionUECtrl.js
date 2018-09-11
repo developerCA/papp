@@ -541,14 +541,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.esnuevo=false;
 		$scope.objeto=null;
 		if (node.siEditar == undefined) {
-			$scope.editarP=($scope.planificacionUE.npestadopresupuesto == "Planificado"? true: false);
-			$scope.editarA=($scope.planificacionUE.npestadopresupajus == "Planificado" 
+			$scope.editarP=($scope.planificacionUE.npestadopresupuesto == "Planificado" || $scope.planificacionUE.npestadopresupuesto == "Denegado"? true: false);
+			$scope.editarA=($scope.planificacionUE.npestadopresupajus == "Planificado" || $scope.planificacionUE.npestadopresupajus == "Denegado"
 				? ($scope.planificacionUE.npestadopresupuesto == "Aprobado"? true: false)
 				: false
 			);
 		} else {
-			$scope.editarP=($scope.objetoPA.npestadopresupuesto == "Planificado"? true: false);
-			$scope.editarA=($scope.objetoPA.npestadopresupajus == "Planificado" 
+			$scope.editarP=($scope.objetoPA.npestadopresupuesto == "Planificado" || $scope.objetoPA.npestadopresupuesto == "Denegado"? true: false);
+			$scope.editarA=($scope.objetoPA.npestadopresupajus == "Planificado" || $scope.objetoPA.npestadopresupajus == "Denegado"
 				? ($scope.objetoPA.npestadopresupuesto == "Aprobado"? true: false)
 				: false
 			);
@@ -765,7 +765,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     }
 
 	$scope.vista=function(node){
-		console.log(node);
+		//console.log(node);
 		$scope.node = node;
 		$scope.divMenuActividad = false;
 		$scope.divMenuSubitems = false;
@@ -776,7 +776,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.npIdunidad,
 				$rootScope.ejefiscal
 			).then(function(resp){
-				console.log(node.nodeTipo);
+				//console.log(node.nodeTipo);
 				if (resp.estado) {
 					$scope.objetoVista=resp.json.actividadplanificacion;
 					$scope.divPlanificacionAnualVista=true;
@@ -792,7 +792,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.npIdunidad,
 				$rootScope.ejefiscal
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (resp.estado) {
 					$scope.objetoVista=resp.json.subactividadplanificacion;
 					$scope.divPlanificacionAnualVista=true;
@@ -808,7 +808,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.npIdunidad,
 				$rootScope.ejefiscal
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (resp.estado) {
 					$scope.objetoVista=resp.json.tareaplanificacion;
 					$scope.divPlanificacionAnualVista=true;
@@ -824,7 +824,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.npIdunidad,
 				$rootScope.ejefiscal
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (resp.estado) {
 					$scope.objetoVista=resp.json.subtareaplanificacion;
 					$scope.divPlanificacionAnualVista=true;
@@ -840,7 +840,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.npIdunidad,
 				$rootScope.ejefiscal
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (resp.estado) {
 					$scope.objetoVista=resp.json.itemplanificacion;
 					$scope.divPlanificacionAnualVista=true;
@@ -856,7 +856,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				node.npIdunidad,
 				$rootScope.ejefiscal
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				if (resp.estado) {
 					$scope.objetoVista=resp.json.subitemplanificacion;
 					$scope.divPlanificacionAnualVista=true;
@@ -2007,8 +2007,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.solicitarPlanificacion = function(obj) {
 		$scope.detallesPA = null;
-		if (obj.npestadopresupuesto != "Planificado") {
-			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado", "warning");
+		if (!(obj.npestadopresupuesto == "Planificado" || obj.npestadopresupuesto == "Denegado")) {
+			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado o denegado", "warning");
 			return;
 		}
 		$scope.aprobacionPlanificacion = true;
@@ -2044,7 +2044,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.aprobarAjustado = function(obj) {
-		if (obj.npestadopresupajus != "Solicitado") {
+		if (obj.npestadopresupuesto != "Aprobado")  {
+			SweetAlert.swal("Ajustado!", "El presupuesto planificado tiene que estar aprobado, para realizar esta acción.", "error");
+			return;
+		}
+		if (!(obj.npestadopresupajus == "Solicitado")) {
 			SweetAlert.swal("Ajustado!", "Solo se puede aprobar si esta en estado solicitado.", "error");
 			return;
 		}
@@ -2085,7 +2089,15 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.solicitarAjustado = function(obj) {
 		$scope.detallesPA = null;
-		if (obj.npestadopresupuesto == "Planificado") {
+		if (!(obj.npestadopresupuesto == "Aprobobado")) {
+			SweetAlert.swal(
+				"Aprobacion Planificacion!",
+				"Mientras que el presupuesto no esta aprobado no puede solicitar ajustado",
+				"warning"
+			);
+			return;
+		}
+		if (!(obj.npestadopresupajus == "Planificado" || obj.npestadopresupajus == "Denegado")) {
 			SweetAlert.swal(
 				"Aprobacion Planificacion!",
 				"Solo se puede Solicitar el Ajustado si el Planificado esta Solicitado",
