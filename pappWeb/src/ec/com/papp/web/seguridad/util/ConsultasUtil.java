@@ -210,6 +210,8 @@ public class ConsultasUtil {
 				permisoTO.setDescripcion(parameters.get("descripcion"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				permisoTO.setNombre(parameters.get("nombre").toUpperCase());
+			if(parameters.get("id")!=null && !parameters.get("id").equals(""))
+				permisoTO.setId(Long.valueOf(parameters.get("id")));
 			SearchResultTO<PermisoTO> resultado=UtilSession.seguridadServicio.transObtenerPermisoPaginado(permisoTO);
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());

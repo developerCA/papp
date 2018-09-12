@@ -1538,7 +1538,6 @@ public class ConsultasUtil {
 				tipoidentificaciontipoTO.setTipoidentificacion(new TipoidentificacionTO());
 				socionegocioTO.setTipoidentificaciontipo(tipoidentificaciontipoTO);
 			}
-			System.out.println("es empleado: " + socionegocioTO.getEsempleado());
 			SearchResultTO<SocionegocioTO> resultado=UtilSession.adminsitracionServicio.transObtenerSocionegocioPaginado(socionegocioTO);	
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();

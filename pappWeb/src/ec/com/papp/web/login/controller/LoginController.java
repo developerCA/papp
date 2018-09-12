@@ -43,7 +43,10 @@ public class LoginController {
 			UsuarioTO usuarioTO = new UsuarioTO();
 			usuarioTO.setUsuario(username);
 			Collection<UsuarioTO> usuarioTOs=UtilSession.seguridadServicio.transObtenerusuario(usuarioTO);
-			usuarioTO=usuarioTOs.iterator().next();
+			for(UsuarioTO usuarioTO2: usuarioTOs) {
+				if(usuarioTO2.getUsuario().equals(usuarioTO.getUsuario()))
+					usuarioTO=usuarioTO2;
+			}
 			UtilSession.setUsuario(request, usuarioTO);
 			if(UtilSession.getUsuario(request).getCambiarclave()==null || UtilSession.getUsuario(request).getCambiarclave().equals("1"))
 				request.getSession(true).setAttribute(ConstantesSesion.USUARIO_CAMBIARCLAVE,"1");

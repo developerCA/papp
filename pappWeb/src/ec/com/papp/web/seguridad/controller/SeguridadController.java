@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.tools.commons.to.OrderBy;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -150,11 +151,11 @@ public class SeguridadController {
 					if(usuarioTOs.size()>0) {
 						for(UsuarioTO usuarioTO3:usuarioTOs) {
 							if((usuarioTO.getId()!=null && usuarioTO.getId().longValue()!=0) && usuarioTO3.getId().longValue()!=usuarioTO.getId().longValue() && usuarioTO3.getSocionegocioid().longValue()==usuarioTO.getSocionegocioid().longValue()) {
-								grabar=false;
+								//grabar=false;
 								break;
 							}
 							else if((usuarioTO.getId()==null || (usuarioTO.getId()!=null && usuarioTO3.getId().longValue()!=usuarioTO.getId().longValue()))  && usuarioTO3.getSocionegocioid().longValue()==usuarioTO.getSocionegocioid().longValue()) {
-								grabar=false;
+								//grabar=false;
 								break;
 							}
 						}
@@ -251,6 +252,7 @@ public class SeguridadController {
 				perfilpermisoTO.getId().setPerfilid(perfilTO.getId());
 				perfilpermisoTO.setPerfil(new PerfilTO());
 				perfilpermisoTO.setPermiso(new PermisoTO());
+				perfilpermisoTO.setOrderByField(OrderBy.orderAsc("id"));
 				Collection<PerfilpermisoTO> perfilpermisoTOs=UtilSession.seguridadServicio.transObtenerPerfilpermiso(perfilpermisoTO);
 				jsonObject.put("details", (JSONArray)JSONSerializer.toJSON(perfilpermisoTOs,perfilpermisoTO.getJsonConfig()));
 			}
