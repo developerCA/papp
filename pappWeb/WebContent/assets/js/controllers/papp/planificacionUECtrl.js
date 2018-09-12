@@ -81,8 +81,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
-			if (resp.meta)
-				$scope.data=resp;
+			if (!resp.meta) return;
+			$scope.data=resp;
 		})
 	};
 
@@ -590,11 +590,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
-				if ($scope.planificacionUE.npestadopresupuesto == "Planificado") {
-					$scope.editar=true;
-				} else {
-					$scope.editar=false;
-				}
+//				if ($scope.planificacionUE.npestadopresupuesto == "Planificado") {
+//					$scope.editar=true;
+//				} else {
+//					$scope.editar=false;
+//				}
 				$scope.objeto=Object.assign({}, resp.json.subactividadunidad);
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubActividad=true;
