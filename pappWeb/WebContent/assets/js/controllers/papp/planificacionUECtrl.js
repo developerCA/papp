@@ -2089,7 +2089,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.solicitarAjustado = function(obj) {
 		$scope.detallesPA = null;
-		if (!(obj.npestadopresupuesto == "Aprobobado")) {
+		if (obj.npestadopresupuesto != "Aprobado") {
 			SweetAlert.swal(
 				"Aprobacion Planificacion!",
 				"Mientras que el presupuesto no esta aprobado no puede solicitar ajustado",
