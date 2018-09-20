@@ -2100,7 +2100,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if (!(obj.npestadopresupajus == "Planificado" || obj.npestadopresupajus == "Denegado")) {
 			SweetAlert.swal(
 				"Aprobacion Planificacion!",
-				"Solo se puede Solicitar el Ajustado si el Planificado esta Solicitado",
+				"Para solicitar lo ajustado tiene que estar en estado Planificado o Denegado",
 				"warning"
 			);
 			return;
