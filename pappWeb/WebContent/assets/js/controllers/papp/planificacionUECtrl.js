@@ -430,9 +430,20 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		//console.log(node);
 		$scope.noCancelar = true;
 		$scope.esnuevo=true;
-		$scope.editar=true;
-		$scope.editarP=true;
-		$scope.editarA=false;
+		if (node.siEditar == undefined) {
+			$scope.editarP=($scope.planificacionUE.npestadopresupuesto == "No Planificado" || $scope.planificacionUE.npestadopresupuesto == "Planificado" || $scope.planificacionUE.npestadopresupuesto == "Denegado"? true: false);
+			$scope.editarA=($scope.planificacionUE.npestadopresupajus == "No Planificado" || $scope.planificacionUE.npestadopresupajus == "Planificado" || $scope.planificacionUE.npestadopresupajus == "Denegado"
+				? ($scope.planificacionUE.npestadopresupuesto == "Aprobado"? true: false)
+				: false
+			);
+		} else {
+			$scope.editarP=($scope.objetoPA.npestadopresupuesto == "No Planificado" || $scope.objetoPA.npestadopresupuesto == "Planificado" || $scope.objetoPA.npestadopresupuesto == "Denegado"? true: false);
+			$scope.editarA=($scope.objetoPA.npestadopresupajus == "No Planificado" || $scope.objetoPA.npestadopresupajus == "Planificado" || $scope.objetoPA.npestadopresupajus == "Denegado"
+				? ($scope.objetoPA.npestadopresupuesto == "Aprobado"? true: false)
+				: false
+			);
+		}
+		$scope.editar=($scope.editarP || $scope.editarA);
 		$scope.objeto=null;
 		$scope.nodeActivo=node;
 		if (node.nodeTipo == "SA") {// Tarea
