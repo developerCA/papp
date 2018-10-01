@@ -779,6 +779,10 @@ public class PlanificacionController {
 							}
 
 						}
+						if(!grabar){
+							mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						}
 					}
 				}
 				if(grabar) {
@@ -852,15 +856,26 @@ public class PlanificacionController {
 					//								
 					//				NivelactividadTO nivelactividadTO=new NivelactividadTO();
 					//				nivelactividadTO.setNivelactividadejerfiscalid(itemunidadTO.getItemunidadejerciciofiscalid());
-					//				nivelactividadTO.setNivelactividadpadreid(itemunidadTO.getPadre());
+					//				nivelactividadTO.setNivelactividadpadreid(itemunidadTO.getPadre());em
 					//				log.println("eje: "+ itemunidadTO.getItemunidadejerciciofiscalid()+" padre " + itemunidadTO.getPadre());
 					//				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
 					log.println("codigo del item "+itemunidadTO.getNpcodigoitem());
 					for(NivelactividadTO nivelactividadTO2:resultado){
-							//						log.println("descripcion::: " + descripcion[0]);
+//						System.out.println("nivelactividadTO2.getNpcodigo()" + nivelactividadTO2.getNpcodigo());
+//						System.out.println("nivelactividadTO2.getNpcodigoobra()" + nivelactividadTO2.getNpcodigoobra());
+//						System.out.println("nivelactividadTO2.getNpcodigofuente()" + nivelactividadTO2.getNpcodigofuente());
+//						System.out.println("nivelactividadTO2.getNpcodigocanton()" + nivelactividadTO2.getNpcodigocanton());
+//						System.out.println("nivelactividadTO2.getNpcodigoorganismo()" + nivelactividadTO2.getNpcodigoorganismo());
+//						System.out.println("nivelactividadTO2.getNpcodigoorgpres()" + nivelactividadTO2.getNpcodigoorgpres());
+
+						//						log.println("descripcion::: " + descripcion[0]);
 							if((itemunidadTO.getId()==null || itemunidadTO.getId().longValue()==0) && (nivelactividadTO2.getNpcodigo().equals(itemunidadTO.getNpcodigoitem())
-									&& nivelactividadTO2.getNpcodigoobra().equals(itemunidadTO.getNpcodigoobra()) && nivelactividadTO2.getNpcodigofuente().equals(itemunidadTO.getNpcodigofuente())
-									&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton()))){
+									&& nivelactividadTO2.getNpcodigoobra().equals(itemunidadTO.getNpcodigoobra()) 
+									&& nivelactividadTO2.getNpcodigofuente().equals(itemunidadTO.getNpcodigofuente())
+									&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton())
+									&& nivelactividadTO2.getNpcodigoorganismo().equals(itemunidadTO.getNpcodigoorganismo())
+									&& nivelactividadTO2.getNpcodigoorgpres().equals(itemunidadTO.getNpcodigoorgpres()))){
+								System.out.println("entro por 1");
 								grabar=false;
 								break;
 							}
@@ -868,7 +883,10 @@ public class PlanificacionController {
 									&& (itemunidadTO.getId().longValue()!=nivelactividadTO2.getTablarelacionid().longValue())
 									&& (nivelactividadTO2.getNpcodigo().equals(itemunidadTO.getNpcodigoitem())
 											&& nivelactividadTO2.getNpcodigoobra().equals(itemunidadTO.getNpcodigoobra()) && nivelactividadTO2.getNpcodigofuente().equals(itemunidadTO.getNpcodigofuente())
-											&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton()))){
+											&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton())
+											&& nivelactividadTO2.getNpcodigoorganismo().equals(itemunidadTO.getNpcodigoorganismo())
+											&& nivelactividadTO2.getNpcodigoorgpres().equals(itemunidadTO.getNpcodigoorgpres()))){
+								System.out.println("entro por 2");
 								grabar=false;
 								break;
 							}
@@ -879,7 +897,8 @@ public class PlanificacionController {
 					id=itemunidadTO.getNpid().toString();
 					jsonObject.put("itemunidad", (JSONObject)JSONSerializer.toJSON(itemunidadTO,itemunidadTO.getJsonConfig()));
 				}
-				else if(mensajes.getMsg()==null){
+				//else if(mensajes.getMsg()==null){
+				else if(!grabar) {
 					mensajes.setMsg(MensajesWeb.getString("advertencia.crearitem"));
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
@@ -937,7 +956,8 @@ public class PlanificacionController {
 					subitemunidadTO.setId(subitemunidadTO.getNpid());
 					jsonObject.put("subitemunidad", (JSONObject)JSONSerializer.toJSON(subitemunidadTO,subitemunidadTO.getJsonConfig()));
 				}
-				else{
+				//else{
+				else if(!grabar) {
 					mensajes.setMsg(MensajesWeb.getString("advertencia.crearsubitem"));
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
@@ -1695,7 +1715,6 @@ public class PlanificacionController {
 				Collection<ActividadunidadacumuladorTO> actividadunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerActividadunidadacumulador(actividadunidadacumuladorTO);
 				//Si no existe debo crearlas
 				if(actividadunidadacumuladorTOs==null || actividadunidadacumuladorTOs.size()==0){
-					System.out.println("es nuevo");
 					//obtengo la lista de actividadunidadacumuladorTO existente para saber que acumulador toca
 					ActividadunidadacumuladorTO actividadunidadacumuladorExiste=new ActividadunidadacumuladorTO();
 					actividadunidadacumuladorExiste.getId().setId(id);
@@ -1805,8 +1824,8 @@ public class PlanificacionController {
 				itemunidadTO.setNpnombreobra(itemunidadTO.getObra().getNombre());
 				itemunidadTO.setNpcodigofuente(itemunidadTO.getFuentefinanciamiento().getCodigo());
 				itemunidadTO.setNpnombrefuente(itemunidadTO.getFuentefinanciamiento().getNombe());
-				itemunidadTO.setNpcodigoorganismo(itemunidadTO.getOrganismoprestamo().getCodigo());
-				itemunidadTO.setNpnombreorganismo(itemunidadTO.getOrganismoprestamo().getNombre());
+				itemunidadTO.setNpcodigoorganismo(itemunidadTO.getOrganismoprestamo().getOrganismo().getCodigo());
+				itemunidadTO.setNpnombreorganismo(itemunidadTO.getOrganismoprestamo().getOrganismo().getNombre());
 				itemunidadTO.setNpcodigoorgpres(itemunidadTO.getOrganismoprestamo().getCodigo());
 				itemunidadTO.setNpnombreorgpres(itemunidadTO.getOrganismoprestamo().getNombre());
 				itemunidadTO.setNpcodigocanton(itemunidadTO.getDivisiongeografica().getCodigo());
@@ -2297,8 +2316,6 @@ public class PlanificacionController {
 					cronogramalineaTO2.setNpfechainicio(UtilGeneral.parseDateToString(cronogramalineaTO2.getFechainicio()));
 			}
 			else{
-				System.out.println("no existe el cronograma");
-
 				//obtengo el ejerciciofiscal
 				cronogramaTO.setCronogramaunidadid(unidad);
 				cronogramaTO.setTiporelacion(tipo);
