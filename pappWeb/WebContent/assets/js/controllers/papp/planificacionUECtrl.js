@@ -1058,10 +1058,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			//console.log(obj);
 			$scope.objeto.itemunidadorganismoid = obj.id.id;
 			$scope.objeto.itemunidadorgprestamoid = obj.id.prestamoid;
-			$scope.objeto.npcodigoorganismo = obj.codigo;
-			$scope.objeto.npnombreorganismo = obj.nombre;		
-			$scope.objeto.npcodigoorgpres = obj.npcodigoorganismo;
-			$scope.objeto.npnombreorgpres = obj.npnombreorganismo;		
+			$scope.objeto.npcodigoorganismo = obj.npcodigoorganismo;
+			$scope.objeto.npnombreorganismo = obj.npnombreorganismo;		
+			$scope.objeto.npcodigoorgpres = obj.codigo;
+			$scope.objeto.npnombreorgpres = obj.nombre;		
 		}, function() {
 		});
 	};
