@@ -657,7 +657,7 @@ public class AdministracionController {
 				if(subitemTO.getSubitemunidadmedidaid()!=null && subitemTO.getSubitemunidadmedidaid().longValue()==0)
 					subitemTO.setSubitemunidadmedidaid(null);
 				UtilSession.adminsitracionServicio.transCrearModificarSubitem(subitemTO);
-				id=subitemTO.getNpid().toString();
+				//id=subitemTO.getNpid().toString();
 				jsonObject.put("subitem", (JSONObject)JSONSerializer.toJSON(subitemTO,subitemTO.getJsonConfig()));
 			}
 

@@ -917,24 +917,31 @@ public class PlanificacionController {
 				nivelactividadTO.setTipo("SI");
 				nivelactividadTO.setNivelactividadunidadid(subitemunidadTO.getSubitemunidadunidadid());
 				log.println("eje: "+ subitemunidadTO.getSubitemunidadejerfiscalid()+" padre " + subitemunidadTO.getPadre());
-				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividadArbol(nivelactividadTO);
+				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO,false);
+//				System.out.println("hijos....: " + resultado.size());
+//				System.out.println("id  " + subitemunidadTO.getId());
+//				System.out.println("codigo  " + subitemunidadTO.getSubitemunidadsubitemid());
 				boolean grabar=true;
-				log.println("codigo del subitem "+subitemunidadTO.getNpcodigosubitem());
+				
 				for(NivelactividadTO nivelactividadTO2:resultado){
 					//					log.println("descripcion " + nivelactividadTO2.getDescripcionexten());
-					//					log.println("tablarelacion id " + nivelactividadTO2.getTablarelacionid());
-					//					log.println("id del subitem " + subitemunidadTO.getId());
-						//						log.println("descripcion::: " + descripcion[0]);
-					if((subitemunidadTO.getId()!=null && subitemunidadTO.getId().longValue()!=0) && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue() && subitemunidadTO.getNpcodigosubitem()!=null  && nivelactividadTO2.getTablarelacionid()==(subitemunidadTO.getNpitemid())
-							//&& nivelactividadTO2.getNpcodigointerno().equals(subitemunidadTO.getNpcodigointerno())){
-							) {
-						grabar=false;
+//										System.out.println("tablarelacion id " + nivelactividadTO2.getTablarelacionid());
+//										System.out.println("codigo... " + nivelactividadTO2.getNpcodigo());
+											
+					if((subitemunidadTO.getId()!=null && subitemunidadTO.getId().longValue()!=0) && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue()
+							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())){
+							
+						//grabar=false;
+//						System.out.println("entra por 1");
 						break;
 					}
-					else if((subitemunidadTO.getId()==null || (subitemunidadTO.getId()!=null && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue())) && subitemunidadTO.getNpitemid()!=null && nivelactividadTO2.getTablarelacionid()==(subitemunidadTO.getNpitemid())
+					//else if((subitemunidadTO.getId()==null || (subitemunidadTO.getId()!=null && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue())) && subitemunidadTO.getNpitemid()!=null && nivelactividadTO2.getTablarelacionid()==(subitemunidadTO.getId().longValue())
+					else if((subitemunidadTO.getId()==null)
+							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())) {
 					//		&& nivelactividadTO2.getNpcodigointerno().equals(subitemunidadTO.getNpcodigointerno())){
-							) {
-						grabar=false;
+							//) {
+						//grabar=false;
+//						System.out.println("entra por 2");
 						break;
 					}
 
