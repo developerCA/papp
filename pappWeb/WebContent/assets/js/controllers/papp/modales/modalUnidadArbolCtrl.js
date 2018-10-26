@@ -6,7 +6,7 @@ app.controller('ModalUnidadArbolController', [ "$scope","$rootScope","$uibModalI
 	$scope.id=null;
 	$scope.institucion=null;
 	$scope.estado='A';
-	$scope.data=[];
+	$scope.arbol=[];
 
 	$scope.consultar=function(){
 		unidadFactory.traerUnidadArbolFiltro(
@@ -17,7 +17,7 @@ app.controller('ModalUnidadArbolController', [ "$scope","$rootScope","$uibModalI
 			$scope.estado
 		).then(function(resp){
 			if (resp.meta)
-				$scope.data=resp;
+				$scope.arbol=resp;
 		})
 	}
 	
@@ -29,26 +29,6 @@ app.controller('ModalUnidadArbolController', [ "$scope","$rootScope","$uibModalI
 		$scope.consultar();
 	};
 
-	$scope.$watch('data', function() {
-		$scope.tableParams = new ngTableParams({
-			page : 1, // show first page
-			count : 5, // count per page
-			filter: {} 	
-		}, {
-			total : $scope.data.length, // length of data
-			getData : function($defer, params) {
-				var orderedData = params.filter() ? $filter('filter')(
-						$scope.data, params.filter()) : $scope.data;
-				$scope.lista = orderedData.slice(
-						(params.page() - 1) * params.count(), params
-								.page()
-								* params.count());
-				params.total(orderedData.length);
-				$defer.resolve($scope.lista);
-			}
-		});
-	});
-
 	$scope.seleccionar=function(obj){
 		$uibModalInstance.close(obj);		
 	};
@@ -56,4 +36,32 @@ app.controller('ModalUnidadArbolController', [ "$scope","$rootScope","$uibModalI
 	$scope.cancelar = function() {
 		$uibModalInstance.dismiss('cancel');
 	};
+
+	$scope.cargarHijos=function(node){
+		//console.log(node);
+		if (!node.iscargado)
+		    node.iscargado=true;
+		else
+			return;
+
+		unidadFactory.traerUnidadArbolFiltro(
+			1,
+    		node.id,
+			instituicionFuente,
+			institucionentidad,
+			$scope.estado
+		).then(function(resp){
+//			//console.log(resp);
+//			for (var i = 0; i < resp.length; i++) {
+//				resp[i].nodeTipo = tipo;
+//				resp[i].padreID = node.id;
+//			}
+			var nodes=resp;
+			//console.log(nodes);
+			for (var i = 0; i < nodes.length; i++) {
+				nodes[i].nodePadre = node;
+			}
+			node.nodes=nodes;
+		});
+	}
 }]);

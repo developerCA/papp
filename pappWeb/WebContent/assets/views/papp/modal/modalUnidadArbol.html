@@ -4,63 +4,13 @@
 	</h3>
 </div>
 <div class="modal-body">
-	<div class="panel-body" ng-init="consultar();" >
-		<div class="panel panel-white" id="panel1">
-			<div class="panel-heading">
-				<h4 class="panel-title text-primary">Filtros</h4>
-				<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-			</div>
-			<div uib-collapse="panel1" ng-init="panel1=true"
-				class="panel-wrapper">
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label> C&oacute;digo  Presupestario</label> <input type="text"
-									class="form-control" ng-model="codigoFiltro">
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label> Nombres </label> <input type="text"
-									class="form-control" ng-model="nombreFiltro">
-							</div>
-						</div>
-					</div>
-					<div class="row" ng-show="!unidadesActivas">
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label> Estado </label> <select name="country"
-									ng-model="estadoFiltro" class="form-control">
-									<option value>Todos</option>
-									<option value="A">Activo</option>
-									<option value="I">Inactivo</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-								class="fa fa-search"></i> Buscar</a> <a
-								class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div>
-			<table ng-table="tableParams" class="table table-striped">
-				<tr ng-repeat="obj in $data">
-					<td><a class="btn btn-sm btn-primary"
-						uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-							class="fa fa-check"></i></a></td>
-					<td data-title="'C&oacute;digo'">{{obj.codigoorganico}}</td>
-					<td data-title="'Nombre'">{{obj.nombre}}</td>
-					<td data-title="'Estado'">{{obj.npestado}}</td>
-				</tr>
-			</table>
+	<div class="panel-body" ng-init="consultar();">
+		<div ui-tree="treeOptions" id="tree-root"
+			data-nodrop-enabled="true" data-drag-enabled="true">
+			<ol ui-tree-nodes ng-model="arbol">
+				<li ng-repeat="node in arbol" ui-tree-node
+					ng-include="'nodes_renderer.html'"></li>
+			</ol>
 		</div>
 	</div>
 	<div class="modal-footer">
@@ -69,3 +19,54 @@
 		</button>
 	</div>
 </div>
+
+<script type="text/ng-template" id="nodes_renderer.html">
+<div ui-tree-handle class="tree-node tree-node-content" style="padding: 3px 3px;border-bottom: 1px dashed black !important;border: none;">
+	<table width="100%">
+		<tr>
+			<td width="0%">
+				<table width="33px" border="0" cellpadding="0">
+				  <tr>
+					<td width="30px">
+						<div class="col-md-12" ng-show="!node.nphoja" style="padding: 3px 3px;">
+							<a class="btn btn-default btn-xs"
+								data-nodrag ng-click="toggle(this);cargarHijos(node)">
+								<span class="glyphicon" ng-class="{
+									'glyphicon-chevron-right': collapsed,
+									'glyphicon-chevron-down': !collapsed
+								}">
+								</span>
+							</a>
+						</div>
+					</td>
+					<td width="3px">
+					</td>
+				  </tr>
+				</table>
+			</td>
+			<td width="100%" ng-click="vista(node);">
+				<span>
+					&nbsp;{{node.npcodigodescripcion}}
+				</span>
+			</td>
+			<td width="0%">
+				<table width="37px">
+					<tr>
+						<td width="3px"></td>
+						<td width="34px">
+							<a class="btn btn-sm btn-primary" data-nodrag
+								uib-tooltip="Seleccionar" ng-click="seleccionar(node)">
+								<i class="fa fa-check"></i>
+							</a>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</div>
+<ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+</ol>
+</script>
