@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706222054</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -1020,32 +1020,44 @@ acu.ACTIVIDADUNIDADOBJETIVOGENERAL, acu.ACTIVIDADUNIDADOBJETIVOESPEC, acu.ACTIVI
                     <text-property name="displayName">CRONOGRAMALINEAMETAVALOR</text-property>
                     <text-property name="heading">CRONOGRAMALINEAMETAVALOR</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">MAX(CR.CRONOGRAMAACUMULADORID)</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MAX(CR.CRONOGRAMAACUMULADORID)</text-property>
+                    <text-property name="heading">MAX(CR.CRONOGRAMAACUMULADORID)</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
                     <property name="name">actividad</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">1</property>
                     <expression name="defaultValue" type="javascript">params["actividadid"].value</expression>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">acumuador</property>
-                    <property name="dataType">integer</property>
-                    <property name="position">2</property>
-                    <expression name="defaultValue" type="javascript">if(params["tipo"].value='P')&#13;
-1&#13;
-else&#13;
-2</expression>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
                     <property name="name">unidad</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">integer</property>
-                    <property name="position">3</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">2</property>
                     <expression name="defaultValue" type="javascript">params["unidadid"].value</expression>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">tipo</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">3</property>
+                    <expression name="defaultValue" type="javascript">params["tipo"].value</expression>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -1060,6 +1072,11 @@ else&#13;
                     <structure>
                         <property name="position">2</property>
                         <property name="name">CRONOGRAMALINEAMETAVALOR</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">MAX(CR.CRONOGRAMAACUMULADORID)</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -1080,11 +1097,21 @@ else&#13;
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">MAX(CR.CRONOGRAMAACUMULADORID)</property>
+                    <property name="nativeName">MAX(CR.CRONOGRAMAACUMULADORID)</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select crl.cronogramalineames, crl.cronogramalineametavalor
-from Cronograma cr, Cronogramalinea crl
+            <xml-property name="queryText"><![CDATA[select crl.cronogramalineames, crl.cronogramalineametavalor,max(cr.CRONOGRAMAACUMULADORID)
+from Cronograma cr, Cronogramalinea crl, actividadunidadacumulador acu
 where cr.CRONOGRAMAID=crl.CRONOGRAMAID
-and cr.CRONOGRAMATABLARELACIONID=? and cr.CRONOGRAMAACUMULADORID=? and cr.CRONOGRAMATIPORELACION='AC' and cr.CRONOGRAMAUNIDADID=?
+and cr.CRONOGRAMATABLARELACIONID=?  and cr.CRONOGRAMATIPORELACION='AC' and cr.CRONOGRAMAUNIDADID=? and cr.CRONOGRAMAACUMULADORID=acu.ACTIVIDADUNIDADACUMID
+and acu.ACTIVIDADUNIDADACUMTIPO=?
+group by crl.cronogramalineames, crl.cronogramalineametavalor
+
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1219,6 +1246,14 @@ and cr.CRONOGRAMATABLARELACIONID=? and cr.CRONOGRAMAACUMULADORID=? and cr.CRONOG
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">tipo</property>
+                    <property name="dataType">string</property>
+                    <property name="position">4</property>
+                    <expression name="defaultValue" type="javascript">params["tipo"].value</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -1335,6 +1370,7 @@ and nivelactiv3_.NIVELACTIVIDADESTADO='A'
 and nivelactiv2_.NIVELACTIVIDADESTADO='A'
 and  tareaun_.TAREAUNIDADUNIDADID=?
 and tareaun_.tareaunidadejerciciofiscalid=? and nivelactiv7_.nivelactividadid=?
+and subitemuni0_.SUBITEMUNIDADACUMTIPO=?
 group by tareaun_.tareaunidaddescripcion,subtareaun8_.SUBTAREAUNIDADDESCRIPCION,tareaun_.tareaunidadcodigo,subtareaun8_.SUBTAREAUNIDADCODIGO,
 subitemuni0_.SUBITEMUNIDADACUMTIPO, subitemuni0_.subitemunidadacumid
 order by tareaun_.tareaunidadcodigo,subtareaun8_.SUBTAREAUNIDADCODIGO]]></xml-property>
@@ -1494,7 +1530,7 @@ order by tareaun_.tareaunidadcodigo,subtareaun8_.SUBTAREAUNIDADCODIGO]]></xml-pr
                     <property name="dataType">string</property>
                     <property name="nativeDataType">0</property>
                     <property name="position">2</property>
-                    <expression name="defaultValue" type="javascript">if(params["tipo"].value='P')&#13;
+                    <expression name="defaultValue" type="javascript">if(params["tipo"].value=='P')&#13;
 'P'&#13;
 else&#13;
 'V'</expression>
@@ -1674,7 +1710,7 @@ and S.SOCIONEGOCIOESEMPLEADO=1
                     <property name="dataType">string</property>
                     <property name="nativeDataType">0</property>
                     <property name="position">2</property>
-                    <expression name="defaultValue" type="javascript">if(params["tipo"].value='P')&#13;
+                    <expression name="defaultValue" type="javascript">if(params["tipo"].value=='P')&#13;
 'P'&#13;
 else&#13;
 'V'</expression>
@@ -2042,25 +2078,42 @@ and S.SOCIONEGOCIOESEMPLEADO=1]]></xml-property>
             <list-property name="parameters">
                 <structure>
                     <property name="name">unidad</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">1</property>
                     <expression name="defaultValue" type="javascript">params["unidadid"].value</expression>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
                     <property name="name">ejerciciofiscal</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">2</property>
                     <expression name="defaultValue" type="javascript">params["ejerciciofiscalid"].value</expression>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
                     <property name="name">nivelactividad</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">3</property>
                     <expression name="defaultValue" type="javascript">params["nivelactividadid"].value</expression>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">tipo</property>
+                    <property name="dataType">string</property>
+                    <property name="position">4</property>
+                    <expression name="defaultValue" type="javascript">params["tipo"].value</expression>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -2173,6 +2226,7 @@ nivelactiv5_.NIVELACTIVIDADESTADO='A'
 and nivelactiv6_.NIVELACTIVIDADESTADO='A'
 and  tareaun_.TAREAUNIDADUNIDADID=?
 and tareaun_.tareaunidadejerciciofiscalid=? and nivelactiv7_.nivelactividadid=?
+and subitemuni0_.SUBITEMUNIDADACUMTIPO=?
 group by tareaun_.tareaunidaddescripcion,subtareaun8_.SUBTAREAUNIDADDESCRIPCION,tareaun_.tareaunidadcodigo,subtareaun8_.SUBTAREAUNIDADCODIGO,
 subitemuni0_.SUBITEMUNIDADACUMTIPO, subitemuni0_.subitemunidadacumid
 order by tareaun_.tareaunidadcodigo,subtareaun8_.SUBTAREAUNIDADCODIGO]]></xml-property>
