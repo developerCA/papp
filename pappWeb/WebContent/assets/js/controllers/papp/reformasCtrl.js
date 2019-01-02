@@ -388,7 +388,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	reformasFactory.guardar($scope.objeto).then(function(resp){
+                var tObj = Object.assign({}, $scope.objeto);
+                tObj.incluyemeta = (tObj.incluyemeta? 1: 0);
+            	reformasFactory.guardar(tObj).then(function(resp){
         			 if (resp.estado){
         				 if ($scope.nuevoar) {
 	      					 $scope.noeditar = false;
