@@ -1066,6 +1066,60 @@
                     <text-property name="displayName">CODIFICADO</text-property>
                     <text-property name="heading">CODIFICADO</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">CFONDOS</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">CFONDOS</text-property>
+                    <text-property name="heading">CFONDOS</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">COMPROMISO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">COMPROMISO</text-property>
+                    <text-property name="heading">COMPROMISO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DEVENGO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">DEVENGO</text-property>
+                    <text-property name="heading">DEVENGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SCOM</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SCOM</text-property>
+                    <text-property name="heading">SCOM</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SDEVENGO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SDEVENGO</text-property>
+                    <text-property name="heading">SDEVENGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TRAMITE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">TRAMITE</text-property>
+                    <text-property name="heading">TRAMITE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ANTICIPO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ANTICIPO</text-property>
+                    <text-property name="heading">ANTICIPO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DEV</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">DEV</text-property>
+                    <text-property name="heading">DEV</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DISPONIBLE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">DISPONIBLE</text-property>
+                    <text-property name="heading">DISPONIBLE</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -1212,6 +1266,51 @@
                         <property name="name">CODIFICADO</property>
                         <property name="dataType">decimal</property>
                     </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">CFONDOS</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">COMPROMISO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">DEVENGO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">SCOM</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">SDEVENGO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">TRAMITE</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">ANTICIPO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">DEV</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">DISPONIBLE</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Data Source</property>
@@ -1321,6 +1420,69 @@
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">CFONDOS</property>
+                    <property name="nativeName">CFONDOS</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">COMPROMISO</property>
+                    <property name="nativeName">COMPROMISO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">DEVENGO</property>
+                    <property name="nativeName">DEVENGO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">SCOM</property>
+                    <property name="nativeName">SCOM</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">SDEVENGO</property>
+                    <property name="nativeName">SDEVENGO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">TRAMITE</property>
+                    <property name="nativeName">TRAMITE</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">ANTICIPO</property>
+                    <property name="nativeName">ANTICIPO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">DEV</property>
+                    <property name="nativeName">DEV</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">DISPONIBLE</property>
+                    <property name="nativeName">DISPONIBLE</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT PROGRAMACODIGO,
        PROYECTOCODIGO,
@@ -1336,7 +1498,16 @@
        DENOMINACION,
        SUM(INICIAL) AS INICIALS,
        SUM(REFORMA) AS REFORMAS,
-       SUM(INICIAL + REFORMA) AS CODIFICADO
+       SUM(INICIAL + REFORMA) AS CODIFICADO,
+       SUM(SUBITEMUNIDADVALPRECOMPROMISO) AS CFONDOS,
+       SUM(SUBITEMUNIDADVALCOMPROMISO) AS COMPROMISO,
+       SUM(SUBITEMUNIDADVALDEVENGO) AS DEVENGO,
+       SUM(INICIAL + REFORMA) - SUM(SUBITEMUNIDADVALCOMPROMISO) AS SCOM,
+       SUM(INICIAL + REFORMA) - SUM(SUBITEMUNIDADVALDEVENGO) AS SDEVENGO,
+       0 AS TRAMITE,
+       0 AS ANTICIPO,
+       SUM(SUBITEMUNIDADVALDEVENGO) / SUM(INICIAL + REFORMA) * 100 AS DEV,
+       SUM(INICIAL + REFORMA) - SUM(SUBITEMUNIDADVALPRECOMPROMISO) - SUM(SUBITEMUNIDADVALDEVENGO) - 0 AS DISPONIBLE
   FROM S01
  WHERE INSTITUCIONID = ?
    AND INSTITUCIONENTID = ?
@@ -3161,11 +3332,11 @@
                     </grid>
                 </cell>
             </row>
-            <row id="3007">
-                <cell id="3008">
+            <row id="3693">
+                <cell id="3694">
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
-                    <table id="3599">
+                    <table id="3773">
                         <property name="dataSet">Detalles</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -3258,482 +3429,1429 @@
                                 <expression name="expression" type="javascript">dataSetRow["CODIFICADO"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
+                            <structure>
+                                <property name="name">CFONDOS</property>
+                                <text-property name="displayName">CFONDOS</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["CFONDOS"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">COMPROMISO</property>
+                                <text-property name="displayName">COMPROMISO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["COMPROMISO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">DEVENGO</property>
+                                <text-property name="displayName">DEVENGO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["DEVENGO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SCOM</property>
+                                <text-property name="displayName">SCOM</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SCOM"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SDEVENGO</property>
+                                <text-property name="displayName">SDEVENGO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SDEVENGO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TRAMITE</property>
+                                <text-property name="displayName">TRAMITE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["TRAMITE"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ANTICIPO</property>
+                                <text-property name="displayName">ANTICIPO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ANTICIPO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">DEV</property>
+                                <text-property name="displayName">DEV</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["DEV"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">DISPONIBLE</property>
+                                <text-property name="displayName">DISPONIBLE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["DISPONIBLE"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
                         </list-property>
-                        <column id="3678"/>
-                        <column id="3679"/>
-                        <column id="3680"/>
-                        <column id="3681"/>
-                        <column id="3682"/>
-                        <column id="3683"/>
-                        <column id="3684"/>
-                        <column id="3685"/>
-                        <column id="3686"/>
-                        <column id="3687"/>
-                        <column id="3688"/>
-                        <column id="3689"/>
-                        <column id="3690"/>
-                        <column id="3691"/>
-                        <column id="3692"/>
-                        <column id="3726"/>
-                        <column id="3736"/>
-                        <column id="3766"/>
-                        <column id="3761"/>
-                        <column id="3756"/>
-                        <column id="3751"/>
-                        <column id="3746"/>
-                        <column id="3741"/>
-                        <column id="3731"/>
+                        <column id="3897"/>
+                        <column id="3898"/>
+                        <column id="3899"/>
+                        <column id="3900"/>
+                        <column id="3901"/>
+                        <column id="3902"/>
+                        <column id="3903"/>
+                        <column id="3904"/>
+                        <column id="3905"/>
+                        <column id="3906"/>
+                        <column id="3907"/>
+                        <column id="3908"/>
+                        <column id="3909"/>
+                        <column id="3910"/>
+                        <column id="3911"/>
+                        <column id="3912"/>
+                        <column id="3913"/>
+                        <column id="3914"/>
+                        <column id="3915"/>
+                        <column id="3916"/>
+                        <column id="3917"/>
+                        <column id="3918"/>
+                        <column id="3919"/>
+                        <column id="3920"/>
                         <header>
-                            <row id="3699">
-                                <cell id="3700">
+                            <row id="3921">
+                                <cell id="3922">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3602">
+                                    <label id="3946">
                                         <text-property name="text">CÓDIGO (PROG)</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3701">
+                                <cell id="3923">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3604">
+                                    <label id="3953">
                                         <text-property name="text">CÓDIGO (PROY)</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3702">
+                                <cell id="3924">
                                     <property name="colSpan">2</property>
                                     <property name="rowSpan">1</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3606">
+                                    <label id="3954">
                                         <text-property name="text">ACTIVIDAD</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3704">
+                                <cell id="3926">
                                     <property name="colSpan">2</property>
                                     <property name="rowSpan">1</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3716">
+                                    <label id="3961">
                                         <text-property name="text">TAREA</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3706">
+                                <cell id="3928">
                                     <property name="colSpan">2</property>
                                     <property name="rowSpan">1</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3719">
+                                    <label id="3962">
                                         <text-property name="text">SUBTAREA</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3708">
+                                <cell id="3930">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3618">
+                                    <label id="3965">
                                         <text-property name="text">ITEM</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3709">
+                                <cell id="3931">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3620">
+                                    <label id="3966">
                                         <text-property name="text">SUBITEM</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3710">
+                                <cell id="3932">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3622">
+                                    <label id="3967">
                                         <text-property name="text">FUENTE</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3711">
+                                <cell id="3933">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3624">
+                                    <label id="3968">
                                         <text-property name="text">DENOMINACIÓN</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3712">
+                                <cell id="3934">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3626">
+                                    <label id="3969">
                                         <text-property name="text">INICIAL</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3713">
+                                <cell id="3935">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3628">
+                                    <label id="3970">
                                         <text-property name="text">REFORMAS</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3714">
+                                <cell id="3936">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3630">
+                                    <label id="3971">
                                         <text-property name="text">CODIFICADO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3722">
+                                <cell id="3937">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
+                                    <label id="3806">
+                                        <text-property name="text">CFONDOS</text-property>
+                                    </label>
                                 </cell>
-                                <cell id="3732">
+                                <cell id="3938">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
+                                    <label id="3808">
+                                        <text-property name="text">COMPROMISO</text-property>
+                                    </label>
                                 </cell>
-                                <cell id="3762">
+                                <cell id="3939">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
+                                    <label id="3810">
+                                        <text-property name="text">DEVENGO</text-property>
+                                    </label>
                                 </cell>
-                                <cell id="3757">
+                                <cell id="3940">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
+                                    <label id="3812">
+                                        <text-property name="text">SCOM</text-property>
+                                    </label>
                                 </cell>
-                                <cell id="3752">
+                                <cell id="3941">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
+                                    <label id="3814">
+                                        <text-property name="text">SDEVENGO</text-property>
+                                    </label>
                                 </cell>
-                                <cell id="3747">
+                                <cell id="3942">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
+                                    <label id="3816">
+                                        <text-property name="text">TRAMITE</text-property>
+                                    </label>
                                 </cell>
-                                <cell id="3742">
+                                <cell id="3943">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
+                                    <label id="3818">
+                                        <text-property name="text">ANTICIPO</text-property>
+                                    </label>
                                 </cell>
-                                <cell id="3737">
+                                <cell id="3944">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
+                                    <label id="3820">
+                                        <text-property name="text">DEV</text-property>
+                                    </label>
                                 </cell>
-                                <cell id="3727">
+                                <cell id="3945">
                                     <property name="colSpan">1</property>
                                     <property name="rowSpan">2</property>
-                                    <property name="fontWeight">normal</property>
                                     <property name="verticalAlign">middle</property>
+                                    <label id="3822">
+                                        <text-property name="text">DISPONIBLE</text-property>
+                                    </label>
                                 </cell>
                             </row>
-                            <row id="3600">
-                                <cell id="3605">
-                                    <property name="fontWeight">normal</property>
+                            <row id="3774">
+                                <cell id="3779">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3715">
+                                    <label id="3955">
                                         <text-property name="text">CÓDIGO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3607">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3781">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3608">
+                                    <label id="3958">
                                         <text-property name="text">DESCRIPCIÓN</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3609">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3783">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3717">
+                                    <label id="3956">
                                         <text-property name="text">CÓDIGO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3611">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3785">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3718">
+                                    <label id="3959">
                                         <text-property name="text">DESCRIPCIÓN</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3613">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3787">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3720">
+                                    <label id="3957">
                                         <text-property name="text">CÓDIGO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="3615">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3789">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="3721">
+                                    <label id="3960">
                                         <text-property name="text">DESCRIPCIÓN</text-property>
                                     </label>
                                 </cell>
                             </row>
                         </header>
                         <detail>
-                            <row id="3631">
-                                <cell id="3632">
-                                    <property name="fontWeight">normal</property>
+                            <row id="3823">
+                                <cell id="3824">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3633">
+                                    <data id="3825">
+                                        <property name="textAlign">center</property>
                                         <property name="resultSetColumn">PROGRAMACODIGO</property>
                                     </data>
                                 </cell>
-                                <cell id="3634">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3826">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3635">
+                                    <data id="3827">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">PROYECTOCODIGO</property>
                                     </data>
                                 </cell>
-                                <cell id="3636">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3828">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3637">
+                                    <data id="3829">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">ACTIVIDADCODIGO</property>
                                     </data>
                                 </cell>
-                                <cell id="3638">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3830">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3639">
+                                    <data id="3831">
                                         <property name="resultSetColumn">ACTIVIDADDESCRIPCION</property>
                                     </data>
                                 </cell>
-                                <cell id="3640">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3832">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3641">
+                                    <data id="3833">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">TAREAUNIDADCODIGO</property>
                                     </data>
                                 </cell>
-                                <cell id="3642">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3834">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3643">
+                                    <data id="3835">
                                         <property name="resultSetColumn">TAREAUNIDADDESCRIPCION</property>
                                     </data>
                                 </cell>
-                                <cell id="3644">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3836">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3645">
+                                    <data id="3837">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">SUBTAREAUNIDADCODIGO</property>
                                     </data>
                                 </cell>
-                                <cell id="3646">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3838">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3647">
+                                    <data id="3839">
                                         <property name="resultSetColumn">SUBTAREAUNIDADDESCRIPCION</property>
                                     </data>
                                 </cell>
-                                <cell id="3648">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3840">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3649">
+                                    <data id="3841">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">ITEMCODIGO</property>
                                     </data>
                                 </cell>
-                                <cell id="3650">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3842">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3651">
+                                    <data id="3843">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">SUBITEMCODIGO</property>
                                     </data>
                                 </cell>
-                                <cell id="3652">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3844">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3653">
+                                    <data id="3845">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">FUENTEFINANCIAMIENTOCODIGO</property>
                                     </data>
                                 </cell>
-                                <cell id="3654">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3846">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3655">
+                                    <data id="3847">
                                         <property name="resultSetColumn">DENOMINACION</property>
                                     </data>
                                 </cell>
-                                <cell id="3656">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3848">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3657">
+                                    <data id="3849">
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
                                         <property name="resultSetColumn">INICIALS</property>
                                     </data>
                                 </cell>
-                                <cell id="3658">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3850">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3659">
+                                    <data id="3851">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">REFORMAS</property>
                                     </data>
                                 </cell>
-                                <cell id="3660">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3852">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="3661">
+                                    <data id="3853">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">CODIFICADO</property>
                                     </data>
                                 </cell>
-                                <cell id="3724">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3854">
                                     <property name="verticalAlign">middle</property>
+                                    <data id="3855">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">CFONDOS</property>
+                                    </data>
                                 </cell>
-                                <cell id="3734">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3856">
                                     <property name="verticalAlign">middle</property>
+                                    <data id="3857">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">COMPROMISO</property>
+                                    </data>
                                 </cell>
-                                <cell id="3764">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3858">
                                     <property name="verticalAlign">middle</property>
+                                    <data id="3859">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">DEVENGO</property>
+                                    </data>
                                 </cell>
-                                <cell id="3759">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3860">
                                     <property name="verticalAlign">middle</property>
+                                    <data id="3861">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">SCOM</property>
+                                    </data>
                                 </cell>
-                                <cell id="3754">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3862">
                                     <property name="verticalAlign">middle</property>
+                                    <data id="3863">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">SDEVENGO</property>
+                                    </data>
                                 </cell>
-                                <cell id="3749">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3864">
                                     <property name="verticalAlign">middle</property>
+                                    <data id="3865">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">TRAMITE</property>
+                                    </data>
                                 </cell>
-                                <cell id="3744">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3866">
                                     <property name="verticalAlign">middle</property>
+                                    <data id="3867">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">ANTICIPO</property>
+                                    </data>
                                 </cell>
-                                <cell id="3739">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3868">
                                     <property name="verticalAlign">middle</property>
+                                    <data id="3869">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">DEV</property>
+                                    </data>
                                 </cell>
-                                <cell id="3729">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3870">
                                     <property name="verticalAlign">middle</property>
+                                    <data id="3871">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">DISPONIBLE</property>
+                                    </data>
                                 </cell>
                             </row>
                         </detail>
                         <footer>
-                            <row id="3662">
-                                <cell id="3663">
-                                    <property name="fontWeight">normal</property>
+                            <row id="3872">
+                                <cell id="3873">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3664">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3874">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3665">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3875">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3666">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3876">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3667">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3877">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3668">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3878">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3669">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3879">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3670">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3880">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3671">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3881">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3672">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3882">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3673">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3883">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3674">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3884">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3675">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3885">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3676">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3886">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3677">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3887">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3725">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3888">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3735">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3889">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3765">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3890">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3760">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3891">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3755">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3892">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3750">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3893">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3745">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3894">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3740">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3895">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="3730">
-                                    <property name="fontWeight">normal</property>
+                                <cell id="3896">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
                             </row>
@@ -3741,10 +4859,10 @@
                     </table>
                 </cell>
             </row>
-            <row id="3693">
-                <cell id="3694"/>
-                <cell id="3695"/>
-                <cell id="3696"/>
+            <row id="3769">
+                <cell id="3770"/>
+                <cell id="3771"/>
+                <cell id="3772"/>
             </row>
         </grid>
         <grid id="1431">
