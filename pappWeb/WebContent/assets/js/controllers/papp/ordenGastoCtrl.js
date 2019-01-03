@@ -130,6 +130,12 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			SweetAlert.swal("Orden de Gasto!", "El valor total tiene que ser mayor que cero.", "error");
 			return;
 		}
+		if ($scope.data[index].npingresarcontrato) {
+			if ($scope.data[index].ordengastocontratoid == 0) {
+				SweetAlert.swal("Orden de Gasto!", "Tiene que tener un contrato para poder hacer la solicitud.", "error");
+				return;
+			}
+		}
 		SweetAlert.swal({ 
 				title: "Orden de Gasto?",
 				text: "Seguro que desea hacer la solicitud!",

@@ -494,6 +494,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		} else
 		if (node.nodeTipo == "ST") {// Item
+			if (rol('ROLE_WWITEM')) {
+				$scope.editar=true;
+				$scope.editarP=false
+				$scope.editarA=false;
+			}
 			PlanificacionUEFactory.nuevo(
 				"IT",
 				node.id,
@@ -510,6 +515,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.divItem=true;
 			});
 		} else {// SubItem
+			if (rol('ROLE_WWSUBITEM')) {
+				$scope.editar=true;
+				$scope.editarP=false
+				$scope.editarA=false;
+			}
 			PlanificacionUEFactory.nuevo(
 				"SI",
 				node.id,
@@ -651,6 +661,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		}
 		if (node.nodeTipo == "IT") {
+			if (rol('ROLE_WWITEM')) {
+				$scope.editar=true;
+				$scope.editarP=false
+				$scope.editarA=false;
+			}
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
@@ -665,6 +680,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		}
 		if (node.nodeTipo == "SI") {
+			if (rol('ROLE_WWSUBITEM')) {
+				$scope.editar=true;
+				$scope.editarP=false
+				$scope.editarA=false;
+			}
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
@@ -1607,7 +1627,19 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.submitformItem = function(form) {
-    	var tObj=$scope.objeto;
+    	var tObj={};
+    	angular.copy($scope.objeto, tObj);
+//		if ($scope.detalles[$scope.mPlanificadaID].cantidad != $scope.detalles[$scope.mPlanificadaID].npValor) {
+//            SweetAlert.swal(
+//        		"Planificacion UE! - Actividad",
+//        		"DEBE CREAR EL CRONOGRAMA DE META PLANIFICADO.",
+//        		"error"
+//    		);
+//    		$scope.metaDistribucion('P');
+//            $scope.divMetaDistribucionPlanificada=true;
+//            $scope.divMetaDistribucionAjustada=false;
+//            return;
+//		}
     	//tObj.actividadunidadacumulador=$scope.detalles;
     	PlanificacionUEFactory.guardarActividades("IT",tObj).then(function(resp){
 			if (resp.estado) {
