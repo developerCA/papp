@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.sun.deploy.uitoolkit.impl.fx.ui.UITextArea;
+
 
 import ec.com.papp.administracion.to.DivisiongeograficaTO;
 import ec.com.papp.administracion.to.FuentefinanciamientoTO;
@@ -875,7 +875,7 @@ public class PlanificacionController {
 									&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton())
 									&& nivelactividadTO2.getNpcodigoorganismo().equals(itemunidadTO.getNpcodigoorganismo())
 									&& nivelactividadTO2.getNpcodigoorgpres().equals(itemunidadTO.getNpcodigoorgpres()))){
-								log.println("entro por 1");
+								System.out.println("entro por 1");
 								grabar=false;
 								break;
 							}
@@ -886,7 +886,7 @@ public class PlanificacionController {
 											&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton())
 											&& nivelactividadTO2.getNpcodigoorganismo().equals(itemunidadTO.getNpcodigoorganismo())
 											&& nivelactividadTO2.getNpcodigoorgpres().equals(itemunidadTO.getNpcodigoorgpres()))){
-								log.println("entro por 2");
+								System.out.println("entro por 2");
 								grabar=false;
 								break;
 							}
@@ -916,7 +916,7 @@ public class PlanificacionController {
 				nivelactividadTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 				nivelactividadTO.setTipo("SI");
 				nivelactividadTO.setNivelactividadunidadid(subitemunidadTO.getSubitemunidadunidadid());
-				log.println("eje: "+ subitemunidadTO.getSubitemunidadejerfiscalid()+" padre " + subitemunidadTO.getPadre());
+				System.out.println("eje: "+ subitemunidadTO.getSubitemunidadejerfiscalid()+" padre " + subitemunidadTO.getPadre());
 				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO,false);
 //				log.println("hijos....: " + resultado.size());
 //				log.println("id  " + subitemunidadTO.getId());

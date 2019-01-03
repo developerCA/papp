@@ -981,7 +981,7 @@ public class EjecucionController {
 				}
 				//Verifico que no tenga atada una orden de gasto
 				else if(tipo.equals("LT")) {
-					certificacionTO.setEstado(tipo);
+					certificacionTO.setEstado("AN");
 					OrdengastoTO ordengastoTO=new OrdengastoTO();
 					ordengastoTO.setOrdengastocertificacionid(id);
 					Collection<OrdengastoTO> ordengastoTOs=UtilSession.planificacionServicio.transObtenerOrdengasto(ordengastoTO);
@@ -1475,7 +1475,7 @@ public class EjecucionController {
 				UtilSession.planificacionServicio.transEliminarReformasubtarea(new ReformametasubtareaTO(new ReformametasubtareaID(id, id2)));
 			}
 
-			ComunController.crearAuditoria(request, clase, "D", "", id.toString());
+			//ComunController.crearAuditoria(request, clase, "D", "", id.toString());
 			mensajes.setMsg(MensajesWeb.getString("mensaje.eliminar") + " " + clase);
 			mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 //			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
