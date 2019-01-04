@@ -58,6 +58,7 @@ import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.ContratoTO;
+import ec.com.papp.planificacion.to.ItemunidadTO;
 import ec.com.papp.planificacion.to.NivelorganicoTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdengastoTO;
@@ -65,6 +66,7 @@ import ec.com.papp.planificacion.to.OrdengastolineaTO;
 import ec.com.papp.planificacion.to.OrdenreversionTO;
 import ec.com.papp.planificacion.to.OrdenreversionlineaTO;
 import ec.com.papp.planificacion.to.OrganismoprestamoTO;
+import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.administracion.util.ConsultasUtil;
 import ec.com.papp.web.comun.util.ConstantesSesion;
@@ -638,15 +640,29 @@ public class AdministracionController {
 						}
 					}
 				}
-				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				//Si no esta repetido verifico si no esta asignado a la planificacion ue
+				if(grabar && itemTO.getEstado().equals("I")){
+					ItemunidadTO itemunidadTO=new ItemunidadTO();
+					itemunidadTO.setItemunidadejerciciofiscalid(itemTO.getItemejerciciofiscalid());
+					itemunidadTO.setEstado("A");
+					itemunidadTO.setItemunidaditemid(itemTO.getId());
+					Collection<ItemunidadTO> itemunidadTOs=UtilSession.planificacionServicio.transObtenerItemunidad(itemunidadTO);
+					//System.out.println("items unidad: " + itemunidadTOs.size());
+					if(itemunidadTOs.size()>0){
+						grabar=false;
+						mensajes.setMsg("No se puede inactivar el Item puesto que esta siendo utilizado en la planificacion");
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
 				}
-				else{
+				if(mensajes.getMsg()==null && grabar){
 					UtilSession.adminsitracionServicio.transCrearModificarItem(itemTO);
 					id=itemTO.getNpid().toString();
 					log.println("id del item: " + id);
 					jsonObject.put("item", (JSONObject)JSONSerializer.toJSON(itemTO,itemTO.getJsonConfig()));
+				}
+				else if(mensajes.getMsg()==null){
+					mensajes.setMsg(MensajesWeb.getString("error.codigo.duplicado"));
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
 
@@ -656,7 +672,22 @@ public class AdministracionController {
 				accion = (subitemTO.getId()==null)?"I":"U";
 				if(subitemTO.getSubitemunidadmedidaid()!=null && subitemTO.getSubitemunidadmedidaid().longValue()==0)
 					subitemTO.setSubitemunidadmedidaid(null);
-				UtilSession.adminsitracionServicio.transCrearModificarSubitem(subitemTO);
+				//Si no esta repetido verifico si no esta asignado a la planificacion ue
+				if(subitemTO.getEstado().equals("I")){
+					SubitemunidadTO subitemunidadTO=new SubitemunidadTO();
+					subitemunidadTO.setSubitemunidadejerfiscalid(subitemTO.getNpejerciciofiscal());
+					subitemunidadTO.setSubitemunidadsubitemid(subitemTO.getId());
+					subitemunidadTO.setEstado("A");
+					Collection<SubitemunidadTO> subitemunidadTOs=UtilSession.planificacionServicio.transObtenerSubitemunidad(subitemunidadTO);
+					//System.out.println("subitems unidad: " + subitemunidadTOs.size());
+					if(subitemunidadTOs.size()>0){
+						mensajes.setMsg("No se puede inactivar el Subitem puesto que esta siendo utilizado en la planificacion");
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+				}
+				if(mensajes.getMsg()==null){
+					UtilSession.adminsitracionServicio.transCrearModificarSubitem(subitemTO);
+				}
 				//id=subitemTO.getNpid().toString();
 				jsonObject.put("subitem", (JSONObject)JSONSerializer.toJSON(subitemTO,subitemTO.getJsonConfig()));
 			}

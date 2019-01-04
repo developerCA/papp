@@ -931,7 +931,7 @@ public class PlanificacionController {
 					if((subitemunidadTO.getId()!=null && subitemunidadTO.getId().longValue()!=0) && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue()
 							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())){
 							
-						//grabar=false;
+						grabar=false;
 //						log.println("entra por 1");
 						break;
 					}
@@ -940,7 +940,7 @@ public class PlanificacionController {
 							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())) {
 					//		&& nivelactividadTO2.getNpcodigointerno().equals(subitemunidadTO.getNpcodigointerno())){
 							//) {
-						//grabar=false;
+						grabar=false;
 //						log.println("entra por 2");
 						break;
 					}
