@@ -91,18 +91,18 @@
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="control-label">
-											Programa
+											Objetivo Estrat&eacute;gico 
 										</label>
 									</div>
 									<div class="col-md-8">
 										<div class="input-group">
 											<input type="text"
-												placeholder="Seleccione un Programa"
-												class="form-control" name="npprograma"
-												ng-disabled="true" ng-model="npprograma">
+												placeholder="Seleccione un Objetivo Estrat&eacute;gico"
+												class="form-control" name="npestrategico"
+												ng-disabled="true" ng-model="npestrategico">
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirPrograma();">
+													ng-click="abrirObjetivoEstrategico();">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -114,252 +114,15 @@
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="control-label">
-											Proyecto
+											Objetivo operacional
 										</label>
 									</div>
 									<div class="col-md-8">
 										<div class="input-group">
 											<input type="text"
-												placeholder="Seleccione un Proyecto"
-												class="form-control" name="npproyecto"
-												ng-disabled="true" ng-model="npproyecto">
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirProyecto();">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-4">
-										<label class="control-label">
-											Actividad
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group">
-											<input type="text"
-												placeholder="Seleccione una Actividad"
-												class="form-control" name="npactividad"
-												ng-disabled="true" ng-model="objeto.npactividad">
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirActividad()"
-													ng-disabled="!proyectoActivo">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-4">
-										<label class="control-label">
-											Subactividad
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group">
-											<input type="text"
-												placeholder="Seleccione una Subactividad"
-												class="form-control" name="npactividad"
-												ng-disabled="true" ng-model="objeto.npactividad" />
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirSubActividad();"
-													ng-disabled="!actividadActivo">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-4">
-										<label class="control-label">
-											Tarea
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group">
-											<input type="text"
-												placeholder="Seleccione una Tarea"
-												class="form-control" name="npactividad"
-												ng-disabled="true" ng-model="objeto.npactividad" />
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirTarea();"
-													ng-disabled="!subactividadActivo">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-4">
-										<label class="control-label">
-											Subtarea
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group">
-											<input type="text"
-												placeholder="Seleccione una Subtarea"
-												class="form-control" name="npsubtarea"
-												ng-disabled="true" ng-model="objeto.npsubtarea" />
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirSubtarea();"
-													ng-disabled="!tareaActivo">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-4">
-										<label class="control-label">
-											Items
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group">
-											<input type="text"
-												placeholder="Seleccione un Item"
-												class="form-control" name="npitem"
-												ng-disabled="true" ng-model="objeto.npitem">
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirItems()"
-													ng-disabled="!subtareaActivo">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group"">
-									<div class="col-md-4">
-										<label class="control-label">
-											SubItems
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group">
-											<input type="text"
-												placeholder="Seleccione un SubItems"
-												class="form-control" name="npsubitem"
-												ng-disabled="true" ng-model="npsubitem"
-												required>
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirSubItems();"
-													ng-disabled="!itemsActivo">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-4">
-										<label class="control-label">
-											Fuente de Financiamiento 
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group">
-											<input type="text"
-												placeholder="Seleccione una Fuente de Financiamiento"
-												class="form-control" name="npfuentefinanciamiento"
-												ng-disabled="true" ng-model="npfuentefinanciamiento">
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirFuenteFinanciamiento()">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-4">
-										<label class="control-label">
-											Geogr&aacute;fico 
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group">
-											<input type="text"
-												placeholder="Seleccione Geografia"
-												class="form-control" name="npgeografico"
-												ng-disabled="true" ng-model="npgeografico">
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirGeografico();">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-4">
-										<label class="control-label">
-											Organismo 
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group">
-											<input type="text"
-												placeholder="Seleccione un Organismo"
-												class="form-control" name="nporganismo"
-												ng-disabled="true" ng-model="nporganismo">
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirOrganismo();">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-4">
-										<label class="control-label">
-											Pr&eacute;stamo 
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group">
-											<input type="text"
-												placeholder="Seleccione un Pr&eacute;stamo"
-												class="form-control" name="npprestamo"
-												ng-disabled="true" ng-model="npprestamo">
+												placeholder="Seleccione un Objetivo Operacional"
+												class="form-control" name="npoperacional"
+												ng-disabled="true" ng-model="npoperacional">
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
 													ng-click="abrirPrestamo();">
@@ -378,7 +141,7 @@
 							<div class="col-md-12">
 								<div class="pull-right">
 									<button type="submit" class="btn btn-primary">
-										Reporte P1
+										Reporte S01
 									</button>
 								</div>
 							</div>

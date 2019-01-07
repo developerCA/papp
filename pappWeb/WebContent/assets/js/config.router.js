@@ -756,6 +756,30 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Contrato'
         }
+    }).state('app.reporteP01', {
+        url: "/reporteP01",
+        templateUrl: "assets/views/papp/reporteP01.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteP01Ctrl','ReporteP01Factory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalProgramaCtrl','ProgramaFactory',
+        		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
+        		'ModalActividadReporteCtrl','ActividadReporteFactory',
+        		'ModalSubActividadReporteCtrl','SubActividadReporteFactory',
+        		'ModalTareaReporteCtrl','TareaReporteFactory',
+        		'ModalSubTareaReporteCtrl','SubTareaReporteFactory',
+        		'ModalItemsReporteCtrl','ItemsReporteFactory',
+        		'ModalSubItemsReporteCtrl','SubItemsReporteFactory',
+        		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory',
+        		'ModalGeograficoCtrl','GeograficoFactory',
+        		'ModalOrganismoCtrl','OrganismoFactory'
+		),
+        title: 'Reporte P01',
+        ncyBreadcrumb: {
+            label: 'Reporte P01'
+        }
     }).state('app.reporteP06', {
         url: "/reporteP06",
         templateUrl: "assets/views/papp/reporteP06.html",
