@@ -928,15 +928,16 @@ public class PlanificacionController {
 //										log.println("tablarelacion id " + nivelactividadTO2.getTablarelacionid());
 //										log.println("codigo... " + nivelactividadTO2.getNpcodigo());
 											
-					if((subitemunidadTO.getId()!=null && subitemunidadTO.getId().longValue()!=0) && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue()
-							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())){
-							
-						grabar=false;
-//						log.println("entra por 1");
-						break;
-					}
-					//else if((subitemunidadTO.getId()==null || (subitemunidadTO.getId()!=null && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue())) && subitemunidadTO.getNpitemid()!=null && nivelactividadTO2.getTablarelacionid()==(subitemunidadTO.getId().longValue())
-					else if((subitemunidadTO.getId()==null)
+//					if((subitemunidadTO.getId()!=null && subitemunidadTO.getId().longValue()!=0) && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue()
+//							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())){
+//							
+//						grabar=false;
+////						log.println("entra por 1");
+//						break;
+//					}
+//					//else if((subitemunidadTO.getId()==null || (subitemunidadTO.getId()!=null && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue())) && subitemunidadTO.getNpitemid()!=null && nivelactividadTO2.getTablarelacionid()==(subitemunidadTO.getId().longValue())
+//					else 
+					if((subitemunidadTO.getId()==null)
 							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())) {
 					//		&& nivelactividadTO2.getNpcodigointerno().equals(subitemunidadTO.getNpcodigointerno())){
 							//) {
