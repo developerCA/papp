@@ -494,7 +494,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		} else
 		if (node.nodeTipo == "ST") {// Item
-			if ($scope.rol('ROLE_WWITEM')) {
+			if ($scope.rol('ROLE_WWITEM') && !$scope.editar) {
 				$scope.editar=true;
 				$scope.editarP=false
 				$scope.editarA=false;
@@ -515,7 +515,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.divItem=true;
 			});
 		} else {// SubItem
-			if ($scope.rol('ROLE_WWSUBITEM')) {
+			if ($scope.rol('ROLE_WWSUBITEM') && !$scope.editar) {
 				$scope.editar=true;
 				$scope.editarP=false
 				$scope.editarA=false;
@@ -661,7 +661,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		}
 		if (node.nodeTipo == "IT") {
-			if ($scope.rol('ROLE_WWITEM')) {
+			if ($scope.rol('ROLE_WWITEM') && !$scope.editar) {
 				$scope.editar=true;
 				$scope.editarP=false
 				$scope.editarA=false;
@@ -680,7 +680,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		}
 		if (node.nodeTipo == "SI") {
-			if ($scope.rol('ROLE_WWSUBITEM')) {
+			if ($scope.rol('ROLE_WWSUBITEM') && !$scope.editar) {
 				$scope.editar=true;
 				$scope.editarP=false
 				$scope.editarA=false;

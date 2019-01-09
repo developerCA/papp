@@ -438,12 +438,12 @@
 													ng-class="{'has-error':FormActividad.npMetaPlanificada.$dirty && FormActividad.npMetaPlanificada.$invalid, 'has-success':FormActividad.npMetaPlanificada.$valid}">
 													<label class="control-label">
 														Meta Planificada
-														<span class="symbol required"></span>
+														<span class="symbol"></span>
 													</label>
-													<input type="number" min="1"
+													<input type="number"
 														placeholder="Escriba un meta planificada"
 														class="form-control" name="npMetaPlanificada"
-														ng-model="detalles[mPlanificadaID].cantidad" required
+														ng-model="detalles[mPlanificadaID].cantidad"
 														ng-disabled="!editarP || !editarUnidad" ng-change="modificarMetaPlanificada(true);">
 												</div>
 
@@ -451,13 +451,13 @@
 													ng-class="{'has-error':FormActividad.npMetaPlanificadaDescripcion.$dirty && FormActividad.npMetaPlanificadaDescripcion.$invalid, 'has-success':FormActividad.npMetaPlanificadaDescripcion.$valid}">
 													<label class="control-label">
 														Meta Planificada Descripci&oacute;n
-														<span class="symbol required"></span>
+														<span class="symbol"></span>
 													</label>
 													<textarea name="npMetaPlanificadaDescripcion" rows="5"
 														style="width: 100%"
-														placeholder="Escriba un meta planificada descripci&oacute;n (no llega en el servicio)"
+														placeholder="Escriba un meta planificada descripci&oacute;n"
 														class="form-control"
-														ng-model="detalles[mPlanificadaID].acummetadesc" required
+														ng-model="detalles[mPlanificadaID].acummetadesc"
 														ng-disabled="!editarP"></textarea>
 												</div>
 
