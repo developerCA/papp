@@ -85,6 +85,17 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="acumulador" id="2998">
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7">
@@ -1186,10 +1197,7 @@ and cr.CRONOGRAMATABLARELACIONID=? and cr.CRONOGRAMAACUMULADORID=? and cr.CRONOG
                     <property name="name">acumulador</property>
                     <property name="dataType">string</property>
                     <property name="position">2</property>
-                    <expression name="defaultValue" type="javascript">if(params["tipo"].value=='P')&#13;
-1&#13;
-else&#13;
-2</expression>
+                    <expression name="defaultValue" type="javascript">params["acumulador"].value</expression>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
