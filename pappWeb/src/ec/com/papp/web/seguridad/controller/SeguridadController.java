@@ -184,7 +184,7 @@ public class SeguridadController {
 							usuarioTO.setFechaactualizacionclave(new Date());
 						}
 					}
-					UtilSession.seguridadServicio.transCrearModificarusuario(usuarioTO);
+					UtilSession.seguridadServicio.transCrearModificarusuario(usuarioTO,false);
 					System.out.println("guardo");
 					//id=usuarioTO.getId().toString();
 					jsonObject.put("usuario", (JSONObject)JSONSerializer.toJSON(usuarioTO,usuarioTO.getJsonConfig()));
@@ -495,7 +495,7 @@ public class SeguridadController {
 						log.println("va a guardar el usuario");
 						log.println("el nombre de usuario es:"+usuario.getNombre());
 						usuario.setFechaactualizacionclave(new Date());
-						UtilSession.seguridadServicio.transCrearModificarusuario(usuario);
+						UtilSession.seguridadServicio.transCrearModificarusuario(usuario,true);
 					}
 					else{
 						log.println("La clave es igual a la guardada en base");
