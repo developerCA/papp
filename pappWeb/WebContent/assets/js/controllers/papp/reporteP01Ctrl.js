@@ -416,7 +416,7 @@ app.controller('ReporteP01Controller', [ "$scope","$rootScope","$uibModal","Swee
             	reporteP01Factory.guardar($scope.objeto).then(function(resp){
         			 if (resp.estado){
       					 SweetAlert.swal("Reporte P01!", "Registro guardado satisfactoriamente!", "success");
-        				 alert("ok");
+        				 //alert("ok");
         			 }else{ 
 	 		             SweetAlert.swal("Reporte P01!", resp.mensajes.msg, "error");
         			 }

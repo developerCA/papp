@@ -101,6 +101,7 @@ app.controller('MatrizFormulacionActividadProyectoController', [ "$scope","$root
 	        			"&unidadid=" + $scope.objeto.unidadid +
 	        			"&ejerciciofiscalid=" + $scope.objeto.ejerciciofiscalid +
 	        			"&tipo=" + $scope.objeto.tipo +
+	        			"&acumulador=" + ($scope.objeto.tipo == "P"? "1": "2") +
 	        			"&nivelactividadid=" + $scope.objeto.nivelactividadid;
 	        	console.log(url);
 	            console.log($scope.objeto);

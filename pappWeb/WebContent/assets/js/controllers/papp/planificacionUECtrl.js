@@ -443,7 +443,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				: false
 			);
 		}
-		$scope.editar=($scope.editarP || $scope.editarA);
+		$scope.editar=$scope.editarP; // ($scope.editarP || $scope.editarA);
 		$scope.objeto=null;
 		$scope.nodeActivo=node;
 		if (node.nodeTipo == "SA") {// Tarea
@@ -494,10 +494,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		} else
 		if (node.nodeTipo == "ST") {// Item
-			if ($scope.rol('ROLE_WWITEM') && !$scope.editar) {
+			if ($scope.rol('ROLE_WWITEM')) { // && !$scope.editar) {
 				$scope.editar=true;
-				$scope.editarP=false
-				$scope.editarA=false;
+				$scope.editarP=true;
+				$scope.editarA=true;
 			}
 			PlanificacionUEFactory.nuevo(
 				"IT",
@@ -515,10 +515,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.divItem=true;
 			});
 		} else {// SubItem
-			if ($scope.rol('ROLE_WWSUBITEM') && !$scope.editar) {
+			if ($scope.rol('ROLE_WWSUBITEM')) { // && !$scope.editar) {
 				$scope.editar=true;
-				$scope.editarP=false
-				$scope.editarA=false;
+				$scope.editarP=true;
+				$scope.editarA=true;
 			}
 			PlanificacionUEFactory.nuevo(
 				"SI",
@@ -574,7 +574,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				: false
 			);
 		}
-		$scope.editar=($scope.editarP || $scope.editarA);
+		$scope.editar=$scope.editarP; // ($scope.editarP || $scope.editarA);
 		$scope.nodeActivo=node;
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
@@ -661,10 +661,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		}
 		if (node.nodeTipo == "IT") {
-			if ($scope.rol('ROLE_WWITEM') && !$scope.editar) {
+			if ($scope.rol('ROLE_WWITEM')) { // && !$scope.editar) {
 				$scope.editar=true;
-				$scope.editarP=false
-				$scope.editarA=false;
+				$scope.editarP=true;
+				$scope.editarA=true;
 			}
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
@@ -680,10 +680,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		}
 		if (node.nodeTipo == "SI") {
-			if ($scope.rol('ROLE_WWSUBITEM') && !$scope.editar) {
+			if ($scope.rol('ROLE_WWSUBITEM')) { // && !$scope.editar) {
 				$scope.editar=true;
-				$scope.editarP=false
-				$scope.editarA=false;
+				$scope.editarP=true;
+				$scope.editarA=true;
 			}
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
