@@ -177,9 +177,10 @@ public class SeguridadController {
 						//Si la clave es distinta la encripto nuevamente
 						UsuarioTO usuariograbado=UtilSession.seguridadServicio.transObtenerUsuarioTO(usuarioTO.getId());
 						if(!usuarioTO.getClave().equals(usuariograbado.getClave())){
-							System.out.println("va a cambiar clave");
+							//System.out.println("va a cambiar clave");
 							String clave=usuarioTO.getClave();
-							usuarioTO.setClave(ConsultasUtil.encriptarClave(clave.toLowerCase()));
+							//usuarioTO.setClave(ConsultasUtil.encriptarClave(clave.toLowerCase()));
+							usuarioTO.setClave(ConsultasUtil.encriptarClave(clave));
 							usuarioTO.setCambiarclave("1");
 							usuarioTO.setFechaactualizacionclave(new Date());
 						}

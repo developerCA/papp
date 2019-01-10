@@ -860,8 +860,10 @@ public class PlanificacionController {
 					//				log.println("eje: "+ itemunidadTO.getItemunidadejerciciofiscalid()+" padre " + itemunidadTO.getPadre());
 					//				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
 					log.println("codigo del item "+itemunidadTO.getNpcodigoitem());
+					log.println("id del item "+itemunidadTO.getId());
 					for(NivelactividadTO nivelactividadTO2:resultado){
-//						log.println("nivelactividadTO2.getNpcodigo()" + nivelactividadTO2.getNpcodigo());
+//						System.out.println("nivelactividadTO2.getTablarelacionid()" + nivelactividadTO2.getTablarelacionid());
+//						System.out.println("nivelactividadTO2.getNpcodigo()" + nivelactividadTO2.getNpcodigo());
 //						log.println("nivelactividadTO2.getNpcodigoobra()" + nivelactividadTO2.getNpcodigoobra());
 //						log.println("nivelactividadTO2.getNpcodigofuente()" + nivelactividadTO2.getNpcodigofuente());
 //						log.println("nivelactividadTO2.getNpcodigocanton()" + nivelactividadTO2.getNpcodigocanton());
@@ -875,7 +877,7 @@ public class PlanificacionController {
 									&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton())
 									&& nivelactividadTO2.getNpcodigoorganismo().equals(itemunidadTO.getNpcodigoorganismo())
 									&& nivelactividadTO2.getNpcodigoorgpres().equals(itemunidadTO.getNpcodigoorgpres()))){
-								System.out.println("entro por 1");
+//								System.out.println("entro por 1");
 								grabar=false;
 								break;
 							}
@@ -886,7 +888,7 @@ public class PlanificacionController {
 											&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton())
 											&& nivelactividadTO2.getNpcodigoorganismo().equals(itemunidadTO.getNpcodigoorganismo())
 											&& nivelactividadTO2.getNpcodigoorgpres().equals(itemunidadTO.getNpcodigoorgpres()))){
-								System.out.println("entro por 2");
+//								System.out.println("entro por 2");
 								grabar=false;
 								break;
 							}
@@ -916,7 +918,7 @@ public class PlanificacionController {
 				nivelactividadTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 				nivelactividadTO.setTipo("SI");
 				nivelactividadTO.setNivelactividadunidadid(subitemunidadTO.getSubitemunidadunidadid());
-				System.out.println("eje: "+ subitemunidadTO.getSubitemunidadejerfiscalid()+" padre " + subitemunidadTO.getPadre());
+				System.out.println("id: "+ subitemunidadTO.getId()+" codigo " + subitemunidadTO.getNpcodigosubitem());
 				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO,false);
 //				log.println("hijos....: " + resultado.size());
 //				log.println("id  " + subitemunidadTO.getId());
@@ -924,9 +926,9 @@ public class PlanificacionController {
 				boolean grabar=true;
 				
 				for(NivelactividadTO nivelactividadTO2:resultado){
-					//					log.println("descripcion " + nivelactividadTO2.getDescripcionexten());
-//										log.println("tablarelacion id " + nivelactividadTO2.getTablarelacionid());
-//										log.println("codigo... " + nivelactividadTO2.getNpcodigo());
+//					System.out.println("descripcion " + nivelactividadTO2.getDescripcionexten());
+//					System.out.println("tablarelacion id " + nivelactividadTO2.getTablarelacionid());
+//					System.out.println("codigo... " + nivelactividadTO2.getNpcodigo());
 											
 //					if((subitemunidadTO.getId()!=null && subitemunidadTO.getId().longValue()!=0) && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue()
 //							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())){
@@ -937,7 +939,7 @@ public class PlanificacionController {
 //					}
 //					//else if((subitemunidadTO.getId()==null || (subitemunidadTO.getId()!=null && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue())) && subitemunidadTO.getNpitemid()!=null && nivelactividadTO2.getTablarelacionid()==(subitemunidadTO.getId().longValue())
 //					else 
-					if((subitemunidadTO.getId()==null)
+					if((subitemunidadTO.getId()==null || subitemunidadTO.getId().longValue()==0)
 							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())) {
 					//		&& nivelactividadTO2.getNpcodigointerno().equals(subitemunidadTO.getNpcodigointerno())){
 							//) {
@@ -2311,7 +2313,7 @@ public class PlanificacionController {
 			cronogramaTO.setTiporelacion(tipo);
 			cronogramaTO.setCronogramaunidadid(unidad);
 			Collection<CronogramaTO> cronogramaTOs=UtilSession.planificacionServicio.transObtenerCronograma(cronogramaTO);
-			log.println("numero de cronogramas encontrados: " + cronogramaTOs.size());
+			System.out.println("numero de cronogramas encontrados: " + cronogramaTOs.size());
 			//Si existe ya creado obtengo todo los datos sino, creo la cabecera y el detalle
 			Collection<CronogramalineaTO> cronogramalineaTOs=new ArrayList<CronogramalineaTO>();
 			if(cronogramaTOs.size()>0){
@@ -2320,7 +2322,7 @@ public class PlanificacionController {
 				CronogramalineaTO cronogramalineaTO=new CronogramalineaTO();
 				cronogramalineaTO.getId().setId(cronogramaTO.getId());
 				cronogramalineaTOs=UtilSession.planificacionServicio.transObtenerCronogramalinea(cronogramalineaTO);
-				log.println("detalle cronograma: " + cronogramalineaTOs.size()); 
+				System.out.println("detalle cronograma: " + cronogramalineaTOs.size()); 
 				for(CronogramalineaTO cronogramalineaTO2:cronogramalineaTOs)
 					cronogramalineaTO2.setNpfechainicio(UtilGeneral.parseDateToString(cronogramalineaTO2.getFechainicio()));
 			}
@@ -2346,6 +2348,7 @@ public class PlanificacionController {
 					cronogramalineaTO.setFechainicio(UtilGeneral.parseStringToDate(fecha));
 					cronogramalineaTO.setNpfechainicio(fecha);
 					cronogramalineaTOs.add(cronogramalineaTO);
+					System.out.println("lineas nuevas: " + cronogramalineaTOs.size());
 				}
 			}
 			jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
