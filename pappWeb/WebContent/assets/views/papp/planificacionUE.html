@@ -224,8 +224,8 @@
 															ng-model="objeto.npFechainicio"
 															is-open="popupnpFechainicio.opened"
 															datepicker-options="dateOptions" ng-required="true"
-															close-text="Close" ng-disabled="!editar"> <span
-															class="input-group-btn">
+															close-text="Close" ng-disabled="!editar">
+														<span class="input-group-btn">
 															<button type="button" class="btn btn-primary"
 																ng-click="opennpFechainicio()">
 																<i class="glyphicon glyphicon-calendar"></i>
@@ -819,9 +819,11 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormTarea.STponderacion.$dirty && FormTarea.STponderacion.$invalid, 'has-success':FormTarea.STponderacion.$valid}">
-													<label class="control-label"> Ponderaci&oacute;n <span
-														class="symbol required"></span>
-													</label> <input type="text"
+													<label class="control-label">
+														Ponderaci&oacute;n
+														<span class="symbol required"></span>
+													</label>
+													<input type="text" ng-disabled="!editar"
 														placeholder="Escriba un ponderaci&oacute;n"
 														class="form-control" name="STponderacion"
 														ng-model="objeto.ponderacion" numericOnly
@@ -830,10 +832,12 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormTarea.STestado.$dirty && FormTarea.STestado.$invalid, 'has-success':FormTarea.STestado.$valid}">
-													<label class="control-label"> Estado <span
-														class="symbol required"></span>
-													</label> <select class="form-control" name="STestado"
-														ng-model="objeto.estado" required>
+													<label class="control-label">
+														Estado
+														<span class="symbol required"></span>
+													</label>
+													 <select class="form-control" name="STestado"
+														ng-model="objeto.estado" required ng-disabled="!editar">
 														<option value="A">Activo</option>
 														<option value="I">Inactivo</option>
 													</select>
@@ -1301,10 +1305,10 @@
 															placeholder="Escriba un item c&oacute;digo"
 															class="form-control" name="npcodigoitem"
 															ng-disabled="true" ng-model="objeto.npcodigoitem"
-															ng-maxlength="10" required> <span
-															class="input-group-btn">
+															ng-maxlength="10" required>
+														<span class="input-group-btn">
 															<button type="button" class="btn btn-primary"
-																ng-click="abrirItemCodigo()">
+																ng-click="abrirItemCodigo()" ng-disabled="!editar">
 																<i class="fa fa-search"></i> Seleccione
 															</button>
 														</span>
@@ -1313,39 +1317,44 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npnombreitem.$dirty && FormItem.npnombreitem.$invalid, 'has-success':FormItem.npnombreitem.$valid}">
-													<label class="control-label"> Item Nombre <span
-														class="symbol required"></span>
+													<label class="control-label">
+														Item Nombre
+														<span class="symbol required"></span>
 													</label>
 													<textarea name="npnombreitem" rows="5" style="width: 100%"
 														placeholder="Selecione un INCOP" required
 														class="form-control" ng-model="objeto.npnombreitem"
-														ng-disabled="true"></textarea>
+														ng-disabled="true">
+													</textarea>
 												</div>
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.descripcion.$dirty && FormItem.descripcion.$invalid, 'has-success':FormItem.descripcion.$valid}">
-													<label class="control-label"> Descripci&oacute;n <span
-														class="symbol required"></span>
+													<label class="control-label">
+														Descripci&oacute;n
+														<span class="symbol required"></span>
 													</label>
 													<textarea name="descripcion" rows="5" style="width: 100%"
-														placeholder="Escriba un descripci&oacute;n"
+														placeholder="Escriba un descripci&oacute;n" ng-disabled="!editar"
 														class="form-control" ng-model="objeto.descripcion"
 														required></textarea>
 												</div>
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npcodigoobra.$dirty && FormItem.npcodigoobra.$invalid, 'has-success':FormItem.npcodigoobra.$valid}">
-													<label class="control-label"> Obra C&oacute;digo <span
-														class="symbol required"></span>
+													<label class="control-label">
+														Obra C&oacute;digo
+														<span class="symbol required"></span>
 													</label>
 													<div class="input-group">
 														<input type="text"
 															placeholder="Escriba un obra c&oacute;digo"
 															class="form-control" name="npcodigoobra"
 															ng-disabled="true" ng-model="objeto.npcodigoobra"
-															required> <span class="input-group-btn">
+															required>
+														<span class="input-group-btn">
 															<button type="button" class="btn btn-primary"
-																ng-click="abrirObraCodigo()">
+																ng-click="abrirObraCodigo()" ng-disabled="!editar">
 																<i class="fa fa-search"></i> Seleccione
 															</button>
 														</span>
@@ -1354,8 +1363,9 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npnombreobra.$dirty && FormItem.npnombreobra.$invalid, 'has-success':FormItem.npnombreobra.$valid}">
-													<label class="control-label"> Obra Nombre <span
-														class="symbol required"></span>
+													<label class="control-label">
+														Obra Nombre
+														<span class="symbol required"></span>
 													</label>
 													<textarea name="npnombreobra" rows="5" style="width: 100%"
 														placeholder="Selecione una obra nombre" required
@@ -1365,16 +1375,18 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npcodigofuente.$dirty && FormItem.npcodigofuente.$invalid, 'has-success':FormItem.npcodigofuente.$valid}">
-													<label class="control-label"> Fuente Financiamiento
-														C&oacute;digo <span class="symbol required"></span>
+													<label class="control-label">
+														Fuente Financiamiento C&oacute;digo
+														<span class="symbol required"></span>
 													</label>
 													<div class="input-group">
 														<input type="text"
 															placeholder="Escriba un fuente financiamiento c&oacute;digo"
 															class="form-control" name="npcodigofuente"
 															ng-disabled="true" ng-model="objeto.npcodigofuente"
-															required> <span class="input-group-btn">
-															<button type="button" class="btn btn-primary"
+															required>
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-primary" ng-disabled="!editar"
 																ng-click="abrirFuenteFinanciamientoCodigo()">
 																<i class="fa fa-search"></i> Seleccione
 															</button>
@@ -1384,27 +1396,31 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npnombrefuente.$dirty && FormItem.npnombrefuente.$invalid, 'has-success':FormItem.npnombrefuente.$valid}">
-													<label class="control-label"> Fuente Financiamiento
-														Nombre <span class="symbol required"></span>
+													<label class="control-label">
+														Fuente Financiamiento Nombre
+														<span class="symbol required"></span>
 													</label>
 													<textarea name="npnombrefuente" rows="5" style="width: 100%"
 														placeholder="Selecione una fuente financiamiento" required
 														class="form-control" ng-model="objeto.npnombrefuente"
-														ng-disabled="true"></textarea>
+														ng-disabled="true">
+													</textarea>
 												</div>
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npcodigoorganismo.$dirty && FormItem.npcodigoorganismo.$invalid, 'has-success':FormItem.npcodigoorganismo.$valid}">
-													<label class="control-label"> Organismo
-														C&oacute;digo <span class="symbol required"></span>
+													<label class="control-label">
+														Organismo C&oacute;digo
+														<span class="symbol required"></span>
 													</label>
 													<div class="input-group">
 														<input type="text"
 															placeholder="Escriba un organismo c&oacute;digo"
 															class="form-control" name="npcodigoorganismo"
 															ng-disabled="true" ng-model="objeto.npcodigoorganismo"
-															required> <span class="input-group-btn">
-															<button type="button" class="btn btn-primary"
+															required>
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-primary" ng-disabled="!editar"
 																ng-click="abrirOrganismoCodigo();">
 																<i class="fa fa-search"></i> Seleccione
 															</button>
@@ -1414,8 +1430,9 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npnombreorganismo.$dirty && FormItem.npnombreorganismo.$invalid, 'has-success':FormItem.npnombreorganismo.$valid}">
-													<label class="control-label"> Organismo Pr&eacute;stamo Nombre <span
-														class="symbol required"></span>
+													<label class="control-label">
+														Organismo Pr&eacute;stamo Nombre
+														<span class="symbol required"></span>
 													</label>
 													<textarea name="npnombreorganismo" rows="5" style="width: 100%"
 														placeholder="Selecione un organismo" required
@@ -1425,10 +1442,11 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npcodigoorgpres.$dirty && FormItem.npcodigoorgpres.$invalid, 'has-success':FormItem.npcodigoorgpres.$valid}">
-													<label class="control-label"> Organismo
-														Pr&eacute;stamo C&oacute;digo <span
-														class="symbol required"></span>
-													</label> <input type="text"
+													<label class="control-label">
+														Organismo Pr&eacute;stamo C&oacute;digo
+														<span class="symbol required"></span>
+													</label>
+													<input type="text"
 														placeholder="Escriba un organismo pr&eacute;stamo c&oacute;digo"
 														class="form-control" name="npcodigoorgpres"
 														ng-model="objeto.npcodigoorgpres" required
@@ -1437,9 +1455,11 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npnombreorgpres.$dirty && FormItem.npnombreorgpres.$invalid, 'has-success':FormItem.npnombreorgpres.$valid}">
-													<label class="control-label"> Organismo
-														Pr&eacute;stamo Nombre <span class="symbol required"></span>
-													</label> <input type="text"
+													<label class="control-label">
+														Organismo Pr&eacute;stamo Nombre
+														<span class="symbol required"></span>
+													</label>
+													<input type="text"
 														placeholder="Escriba un organismo pr&eacute;stamo nombre"
 														class="form-control" name="npnombreorgpres"
 														ng-model="objeto.npnombreorgpres" ng-disabled="true"
@@ -1448,17 +1468,19 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npcodigocanton.$dirty && FormItem.npcodigocanton.$invalid, 'has-success':FormItem.npcodigocanton.$valid}">
-													<label class="control-label"> Cant&oacute;n
-														C&oacute;digo <span class="symbol required"></span>
+													<label class="control-label">
+														Cant&oacute;n C&oacute;digo
+														<span class="symbol required"></span>
 													</label>
 													<div class="input-group">
 														<input type="text"
 															placeholder="Escriba un cant&oacute;n c&oacute;digo"
 															class="form-control" name="npcodigocanton"
 															ng-disabled="true" ng-model="objeto.npcodigocanton"
-															required> <span class="input-group-btn">
+															required>
+														<span class="input-group-btn">
 															<button type="button" class="btn btn-primary"
-																ng-click="abrirCantonCodigo()">
+																ng-click="abrirCantonCodigo()" ng-disabled="!editar">
 																<i class="fa fa-search"></i> Seleccione
 															</button>
 														</span>
@@ -1467,9 +1489,11 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.npnombrecanton.$dirty && FormItem.npnombrecanton.$invalid, 'has-success':FormItem.npnombrecanton.$valid}">
-													<label class="control-label"> Cant&oacute;n Nombre
+													<label class="control-label">
+														Cant&oacute;n Nombre
 														<span class="symbol required"></span>
-													</label> <input type="text"
+													</label>
+													<input type="text"
 														placeholder="Escriba un cant&oacute;n nombre"
 														class="form-control" name="npnombrecanton"
 														ng-model="objeto.npnombrecanton" ng-disabled="true"
@@ -1478,15 +1502,18 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormItem.estado.$dirty && FormItem.estado.$invalid, 'has-success':FormItem.estado.$valid}">
-													<label class="control-label"> Estado <span
-														class="symbol required"></span>
-													</label> <select class="form-control" name="estado"
-														ng-model="objeto.estado" required>
+													<label class="control-label">
+														Estado
+														<span class="symbol required"></span>
+													</label>
+													<select class="form-control" name="estado"
+														ng-model="objeto.estado" required ng-disabled="!editar">
 														<option value="A">Activo</option>
 														<option value="I">Inactivo</option>
 													</select>
 												</div>
 											</div>
+
 											<div class="pull-right">
 												<button type="submit" class="btn btn-primary"
 													ng-show="editar">Confirmar</button>
@@ -1531,7 +1558,8 @@
 															placeholder="Escriba un c&oacute;digo incop"
 															class="form-control" name="npcodigosubitem"
 															ng-disabled="true" ng-model="objeto.npcodigosubitem"
-															required> <span class="input-group-btn">
+															required>
+														<span class="input-group-btn">
 															<button type="button" class="btn btn-primary"
 																ng-click="abrirCodigoINCOP()" ng-disabled="!editar">
 																<i class="fa fa-search"></i> Seleccione
@@ -1549,16 +1577,17 @@
 													<textarea name="npnombresubitem" rows="5" style="width: 100%"
 														placeholder="Escriba un nombre" ng-disabled="true"
 														class="form-control" ng-model="objeto.npnombresubitem"
-														required></textarea>
+														required>
+													</textarea>
 												</div>
 
 												<div class="form-group"
 													ng-class="{'has-error':FormSubItem.npprecio.$dirty && FormSubItem.npprecio.$invalid, 'has-success':FormSubItem.npprecio.$valid}">
 													<label class="control-label">
 														Precio
-													<span
-														class="symbol required"></span>
-													</label> <input type="text" numericOnly style="text-align: right;"
+														<span class="symbol required"></span>
+													</label>
+													<input type="text" numericOnly style="text-align: right;"
 														format="currency" placeholder="Escriba un precio"
 														class="form-control" name="npprecio"
 														ng-model="objeto.npprecio" required ng-disabled="true">
@@ -1568,14 +1597,14 @@
 													ng-class="{'has-error':FormSubItem.nptipoprodnombre.$dirty && FormSubItem.nptipoprodnombre.$invalid, 'has-success':FormSubItem.nptipoprodnombre.$valid}">
 													<label class="control-label">
 														Tipo Producto
-													<span
-														class="symbol required"></span>
+														<span class="symbol required"></span>
 													</label>
 													<div class="input-group">
 														<input type="text" placeholder="Escriba un tipo producto"
 															class="form-control" name="nptipoprodnombre"
 															ng-disabled="true" ng-model="objeto.nptipoprodnombre"
-															required> <span class="input-group-btn">
+															required>
+														<span class="input-group-btn">
 															<button type="button" class="btn btn-primary"
 																ng-click="abrirTipoProducto()" ng-disabled="!editar">
 																<i class="fa fa-search"></i> Seleccione
@@ -1588,8 +1617,7 @@
 													ng-class="{'has-error':FormSubItem.npprocedimientonombre.$dirty && FormSubItem.npprocedimientonombre.$invalid, 'has-success':FormSubItem.npprocedimientonombre.$valid}">
 													<label class="control-label">
 														Procedimiento
-													<span
-														class="symbol required"></span>
+														<span class="symbol required"></span>
 													</label>
 													<div class="input-group">
 														<input type="text" placeholder="Escriba un procedimiento"
@@ -1598,8 +1626,7 @@
 															ng-model="objeto.npprocedimientonombre" required>
 														<span class="input-group-btn">
 															<button type="button" class="btn btn-primary"
-																ng-click="abrirProcedimiento()"
-																ng-disabled="ninguno || !editar">
+																ng-click="abrirProcedimiento()" ng-disabled="!editar">
 																<i class="fa fa-search"></i> Seleccione
 															</button>
 														</span>
@@ -1610,18 +1637,17 @@
 													ng-class="{'has-error':FormSubItem.nptiporegnombre.$dirty && FormSubItem.nptiporegnombre.$invalid, 'has-success':FormSubItem.nptiporegnombre.$valid}">
 													<label class="control-label">
 														Tipo R&eacute;gimen
-														<span
-														class="symbol required"></span>
+														<span class="symbol required"></span>
 													</label>
 													<div class="input-group">
 														<input type="text"
 															placeholder="Escriba un tipo r&eacute;gimen"
 															class="form-control" name="nptiporegnombre"
 															ng-disabled="true" ng-model="objeto.nptiporegnombre"
-															required> <span class="input-group-btn">
+															required>
+														<span class="input-group-btn">
 															<button type="button" class="btn btn-primary"
-																ng-click="abrirTipoRegimen()"
-																ng-disabled="ninguno || !editar">
+																ng-click="abrirTipoRegimen()" ng-disabled="!editar">
 																<i class="fa fa-search"></i> Seleccione
 															</button>
 														</span>
@@ -1631,9 +1657,10 @@
 												<div class="form-group"
 													ng-class="{'has-error':FormSubItem.estado.$dirty && FormSubItem.estado.$invalid, 'has-success':FormSubItem.estado.$valid}">
 													<label class="control-label">
-														Estado <span
-														class="symbol required"></span>
-													</label> <select class="form-control" name="estado"
+														Estado
+														<span class="symbol required"></span>
+													</label>
+													<select class="form-control" name="estado"
 														ng-model="objeto.estado" required ng-disabled="!editar">
 														<option value="A">Activo</option>
 														<option value="I">Inactivo</option>
