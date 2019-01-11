@@ -186,7 +186,7 @@ public class SeguridadController {
 						}
 					}
 					UtilSession.seguridadServicio.transCrearModificarusuario(usuarioTO,false);
-					System.out.println("guardo");
+					//System.out.println("guardo");
 					//id=usuarioTO.getId().toString();
 					jsonObject.put("usuario", (JSONObject)JSONSerializer.toJSON(usuarioTO,usuarioTO.getJsonConfig()));
 				}
