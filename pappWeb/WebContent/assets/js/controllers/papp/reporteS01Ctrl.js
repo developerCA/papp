@@ -3,6 +3,9 @@
 app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","reporteS01Factory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, reporteS01Factory) {
 
+//	/planificacion/consultar/objetivo/objetivoejeerciciofisca={ejerciciofiscal}&estado=A&tipo=O
+//	/planificacion/consultar/objetivo/objetivoejeerciciofisca={ejerciciofiscal}&id={idpadre}&estado=A&tipo=E
+
 	$scope.objeto = {};
 	$scope.institucioncodigo = null;
 
@@ -96,11 +99,11 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 		});
 	};
 
-	$scope.objetivoEstrategicoActivo = false;
-	$scope.abrirObjetivoEstrategico = function() {
+	$scope.objetivoOperacionalActivo = false;
+	$scope.abrirObjetivoOperacional = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalPrograma.html',
-			controller : 'ModalProgramaController',
+			templateUrl : 'assets/views/papp/modal/modalObjetivoOperacionalReporte.html',
+			controller : 'ModalObjetivoOperacionalReporteController',
 			size : 'lg',
 			resolve : {
 				ejefiscal : function() {
@@ -109,38 +112,34 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.programaid = obj.id;
-			$scope.npprograma = obj.codigo + ' - ' + obj.nombre;
-			$scope.programaActivo=true;
+			$scope.objeto.objetivooperacionalid = obj.id;
+			$scope.npobjetivooperacional = obj.codigo + ' - ' + obj.npdescripcion;
+			$scope.objetivoOperacionalActivo = true;
 		}, function() {
 		});
 	};
 
-//	$scope.proyectoActivo = false;
-//	$scope.abrirProyecto = function() {
-//		var modalInstance = $uibModal.open({
-//			templateUrl : 'assets/views/papp/modal/modalProyectoReporte.html',
-//			controller : 'ModalProyectoReporteController',
-//			size : 'lg',
-//			resolve : {
-//				ejefiscal : function() {
-//					return $rootScope.ejefiscal;
-//				},
-//				npunidad : function() {
-//					return $scope.objeto.unidadid;
-//				},
-//				npprogramaid : function() {
-//					return $scope.objeto.programaid;
-//				}
-//			}
-//		});
-//		modalInstance.result.then(function(obj) {
-//			$scope.objeto.proyectoid = obj.id;
-//			$scope.npproyecto = obj.codigo + ' - ' + obj.nombre;
-//			$scope.proyectoActivo = true;
-//		}, function() {
-//		});
-//	};
+	$scope.objetivoEstrategicoActivo = false;
+	$scope.abrirObjetivoEstrategico = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalObjetivoEstrategicoReporte.html',
+			controller : 'ModalObjetivoEstrategicoReporteController',
+			size : 'lg',
+			resolve : {
+				ejefiscal : function() {
+					return $rootScope.ejefiscal;
+				},
+				padre : function() {
+					return $scope.objeto.objetivooperacionalid;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			$scope.objeto.objetivoestrategicoid = obj.id;
+			$scope.npobjetivoestrategico = obj.codigo + ' - ' + obj.nombre;
+		}, function() {
+		});
+	};
 
 	$scope.form = {
         submit: function (form) {

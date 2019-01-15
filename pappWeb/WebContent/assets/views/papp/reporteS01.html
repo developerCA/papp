@@ -91,18 +91,18 @@
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="control-label">
-											Objetivo Estrat&eacute;gico 
+											Objetivo operacional
 										</label>
 									</div>
 									<div class="col-md-8">
 										<div class="input-group">
 											<input type="text"
-												placeholder="Seleccione un Objetivo Estrat&eacute;gico"
-												class="form-control" name="npestrategico"
-												ng-disabled="true" ng-model="npestrategico">
+												placeholder="Seleccione un Objetivo Operacional"
+												class="form-control" name="npobjetivooperacional"
+												ng-disabled="true" ng-model="npobjetivooperacional">
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirObjetivoEstrategico();">
+													ng-click="abrirObjetivoOperacional();">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>
@@ -114,18 +114,18 @@
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="control-label">
-											Objetivo operacional
+											Objetivo Estrat&eacute;gico 
 										</label>
 									</div>
 									<div class="col-md-8">
 										<div class="input-group">
 											<input type="text"
-												placeholder="Seleccione un Objetivo Operacional"
-												class="form-control" name="npoperacional"
-												ng-disabled="true" ng-model="npoperacional">
+												placeholder="Seleccione un Objetivo Estrat&eacute;gico"
+												class="form-control" name="npobjetivoestrategico"
+												ng-disabled="true" ng-model="npobjetivoestrategico">
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
-													ng-click="abrirPrestamo();">
+													ng-click="abrirObjetivoEstrategico();" ng-disabled="!objetivoOperacionalActivo">
 													<i class="fa fa-search"></i>
 													Seleccione
 												</button>

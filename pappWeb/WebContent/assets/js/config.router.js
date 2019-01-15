@@ -812,17 +812,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalInstitucionCtrl','InstitucionFactory',
         		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
         		'ModalUnidadArbolCtrl','UnidadFactory',
-        		'ModalProgramaCtrl','ProgramaFactory',
-        		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
-        		'ModalActividadReporteCtrl','ActividadReporteFactory',
-        		'ModalSubActividadReporteCtrl','SubActividadReporteFactory',
-        		'ModalTareaReporteCtrl','TareaReporteFactory',
-        		'ModalSubTareaReporteCtrl','SubTareaReporteFactory',
-        		'ModalItemsReporteCtrl','ItemsReporteFactory',
-        		'ModalSubItemsReporteCtrl','SubItemsReporteFactory',
-        		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory',
-        		'ModalGeograficoCtrl','GeograficoFactory',
-        		'ModalOrganismoCtrl','OrganismoFactory'
+        		'ModalObjetivoOperacionalReporteCtrl','ObjetivoOperacionalReporteFactory',
+        		'ModalObjetivoEstrategicoReporteCtrl','ObjetivoEstrategicoReporteFactory'
 		),
         title: 'Reporte S01',
         ncyBreadcrumb: {
