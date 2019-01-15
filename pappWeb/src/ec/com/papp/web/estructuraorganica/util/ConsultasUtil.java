@@ -279,7 +279,7 @@ public class ConsultasUtil {
 				unidadarbolplazaTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("unidadarbolerganicaid")!=null && !parameters.get("unidadarbolerganicaid").equals("")) {
 				UnidadarbolTO unidadarbolTO=new UnidadarbolTO();
-				System.out.println("papp: unidadarbolerganicaid " + parameters.get("unidadarbolerganicaid"));
+				//System.out.println("papp: unidadarbolerganicaid " + parameters.get("unidadarbolerganicaid"));
 				unidadarbolTO.setUnidadarbolerganicaid(Long.valueOf(parameters.get("unidadarbolerganicaid")));
 				unidadarbolplazaTO.setUnidadarbol(unidadarbolTO);
 			}

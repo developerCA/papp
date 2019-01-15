@@ -918,7 +918,7 @@ public class PlanificacionController {
 				nivelactividadTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 				nivelactividadTO.setTipo("SI");
 				nivelactividadTO.setNivelactividadunidadid(subitemunidadTO.getSubitemunidadunidadid());
-				System.out.println("id: "+ subitemunidadTO.getId()+" codigo " + subitemunidadTO.getNpcodigosubitem());
+				//System.out.println("id: "+ subitemunidadTO.getId()+" codigo " + subitemunidadTO.getNpcodigosubitem());
 				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO,false);
 //				log.println("hijos....: " + resultado.size());
 //				log.println("id  " + subitemunidadTO.getId());
@@ -2182,7 +2182,7 @@ public class PlanificacionController {
 				//				actividadTO.setActividadeejerciciofiscalid(Long.valueOf(parameters.get("nivelactividadejerfiscalid")));
 				//				actividadunidadTO.setActividad(actividadTO);
 				//				Collection<ActividadunidadTO> actividadunidadTOs=UtilSession.planificacionServicio.transObtenerActividadunidad(actividadunidadTO);
-				log.println("actividades: " + nivelactividadTOs.size());
+				//System.out.println("actividades: " + nivelactividadTOs.size());
 				Collection<Map<String, String>> resultadofinal=new ArrayList<>();
 				for(NivelactividadTO nivelactividadTO2:nivelactividadTOs) {
 					log.println("activiad.. "+ nivelactividadTO2.getTablarelacionid());
@@ -2313,7 +2313,7 @@ public class PlanificacionController {
 			cronogramaTO.setTiporelacion(tipo);
 			cronogramaTO.setCronogramaunidadid(unidad);
 			Collection<CronogramaTO> cronogramaTOs=UtilSession.planificacionServicio.transObtenerCronograma(cronogramaTO);
-			System.out.println("numero de cronogramas encontrados: " + cronogramaTOs.size());
+			//System.out.println("numero de cronogramas encontrados: " + cronogramaTOs.size());
 			//Si existe ya creado obtengo todo los datos sino, creo la cabecera y el detalle
 			Collection<CronogramalineaTO> cronogramalineaTOs=new ArrayList<CronogramalineaTO>();
 			if(cronogramaTOs.size()>0){
@@ -2322,7 +2322,7 @@ public class PlanificacionController {
 				CronogramalineaTO cronogramalineaTO=new CronogramalineaTO();
 				cronogramalineaTO.getId().setId(cronogramaTO.getId());
 				cronogramalineaTOs=UtilSession.planificacionServicio.transObtenerCronogramalinea(cronogramalineaTO);
-				System.out.println("detalle cronograma: " + cronogramalineaTOs.size()); 
+				//System.out.println("detalle cronograma: " + cronogramalineaTOs.size()); 
 				for(CronogramalineaTO cronogramalineaTO2:cronogramalineaTOs)
 					cronogramalineaTO2.setNpfechainicio(UtilGeneral.parseDateToString(cronogramalineaTO2.getFechainicio()));
 			}
@@ -2348,7 +2348,7 @@ public class PlanificacionController {
 					cronogramalineaTO.setFechainicio(UtilGeneral.parseStringToDate(fecha));
 					cronogramalineaTO.setNpfechainicio(fecha);
 					cronogramalineaTOs.add(cronogramalineaTO);
-					System.out.println("lineas nuevas: " + cronogramalineaTOs.size());
+					//System.out.println("lineas nuevas: " + cronogramalineaTOs.size());
 				}
 			}
 			jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));

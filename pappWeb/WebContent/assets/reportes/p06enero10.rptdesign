@@ -1045,7 +1045,7 @@ acu.ACTIVIDADUNIDADOBJETIVOGENERAL, acu.ACTIVIDADUNIDADOBJETIVOESPEC, acu.ACTIVI
                     <property name="name">acumuador</property>
                     <property name="dataType">integer</property>
                     <property name="position">2</property>
-                    <expression name="defaultValue" type="javascript">if(params["tipo"].value='P')&#13;
+                    <expression name="defaultValue" type="javascript">if(params["tipo"].value=='P')&#13;
 1&#13;
 else&#13;
 2</expression>

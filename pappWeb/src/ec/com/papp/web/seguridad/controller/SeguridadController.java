@@ -165,7 +165,7 @@ public class SeguridadController {
 						}
 					}
 				}
-				System.out.println("grabar: " + grabar);
+				//System.out.println("grabar: " + grabar);
 				if(grabar) {
 					if(usuarioTO.getId()==null) {
 						usuarioTO.setClave(MensajesWeb.getString("clave.inicial.usuario"));
@@ -224,7 +224,7 @@ public class SeguridadController {
 //			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		respuesta.setJson(jsonObject);
 		respuesta.setMensajes(mensajes);
-		System.out.println("retorna: " + respuesta.getJson()+ "-"+ respuesta.getMensajes().getMsg());
+		//System.out.println("retorna: " + respuesta.getJson()+ "-"+ respuesta.getMensajes().getMsg());
 		return respuesta;		
 	}
 	
