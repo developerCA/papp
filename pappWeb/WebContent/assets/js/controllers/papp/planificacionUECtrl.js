@@ -1309,7 +1309,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				porcentaje = porcentaje + $scope.detallesAjustada[i].lineametavalor;
 			}
 			porcentaje = Number(porcentaje.toFixed(0));
-			if (porcentaje != 100) {
+			if ((porcentaje != 100) && !(porcentaje == 0 && $scope.detalles[$scope.mAjustadaID].cantidad == 0)) {
 	            SweetAlert.swal(
             		"Planificacion UE! - Distribucion Ajustada",
             		"La suma de los porcientos es diferente de 100%",
@@ -1327,16 +1327,18 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			}
 		}
 		t = Number(t.toFixed(2));
-		if (t != ($scope.divActividad || $scope.divSubTarea
-				? $scope.detalles[$scope.mAjustadaID].cantidad
-				: $scope.npTotalAjustado
-			)) {
-            SweetAlert.swal(
-        		"Planificacion UE! - Distribucion Ajustada",
-        		"La suma de los valores es diferente de la Meta Ajustada",
-        		"error"
-    		);
-			return;
+		if (!(t == 0 && $scope.detalles[$scope.mAjustadaID].cantidad == 0)) {
+			if (t != ($scope.divActividad || $scope.divSubTarea
+					? $scope.detalles[$scope.mAjustadaID].cantidad
+					: $scope.npTotalAjustado
+				)) {
+	            SweetAlert.swal(
+	        		"Planificacion UE! - Distribucion Ajustada",
+	        		"La suma de los valores es diferente de la Meta Ajustada",
+	        		"error"
+	    		);
+				return;
+			}
 		}
 		if (!$scope.divSubItem) {
 			for (var i = 0; i < 12; i++) {
