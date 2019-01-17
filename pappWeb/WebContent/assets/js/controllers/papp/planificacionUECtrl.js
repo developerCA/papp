@@ -1631,7 +1631,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.submitformItem = function(form) {
     	var tObj={};
     	angular.copy($scope.objeto, tObj);
-    	tObj.padre=$scope.nodeActivo.padreID;
+//    	tObj.padre=$scope.nodeActivo.padreID;
 //		if ($scope.detalles[$scope.mPlanificadaID].cantidad != $scope.detalles[$scope.mPlanificadaID].npValor) {
 //            SweetAlert.swal(
 //        		"Planificacion UE! - Actividad",
