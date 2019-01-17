@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalObjetivoOperacionalReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","SweetAlert","$filter", "ngTableParams","ObjetivoOperacionalReporteFactory",
-	function($scope,$uibModalInstance,$uibModal,ejefiscal,SweetAlert,$filter, ngTableParams, ObjetivoOperacionalReporteFactory) {
+app.controller('ModalObjetivoOperacionalReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","padre","SweetAlert","$filter", "ngTableParams","ObjetivoOperacionalReporteFactory",
+	function($scope,$uibModalInstance,$uibModal,ejefiscal,padre,SweetAlert,$filter, ngTableParams, ObjetivoOperacionalReporteFactory) {
 
 	$scope.edicion=false;
 	$scope.guardar=false;
@@ -14,9 +14,10 @@ app.controller('ModalObjetivoOperacionalReporteController', [ "$scope","$uibModa
 		$scope.data=[];
 		ObjetivoOperacionalReporteFactory.traerFiltro(
 			pagina,
-			ejefiscal
+			ejefiscal,
+			padre
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})

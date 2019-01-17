@@ -108,6 +108,9 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			resolve : {
 				ejefiscal : function() {
 					return $rootScope.ejefiscal;
+				},
+				padre : function() {
+					return $scope.objeto.objetivoestrategicoid;
 				}
 			}
 		});
@@ -130,7 +133,8 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 					return $rootScope.ejefiscal;
 				},
 				padre : function() {
-					return $scope.objeto.objetivooperacionalid;
+					return null;
+					//return $scope.objeto.objetivooperacionalid;
 				}
 			}
 		});

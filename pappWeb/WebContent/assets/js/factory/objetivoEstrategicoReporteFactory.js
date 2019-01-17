@@ -11,8 +11,8 @@ app.factory("ObjetivoEstrategicoReporteFactory", [ "Restangular", function(Resta
 //			planificacion/consultar/objetivo/objetivoejeerciciofisca={ejerciciofiscal}&id={idpadre}&estado=A&tipo=E
 			var url = "planificacion/consultar/objetivo/estado=A&tipo=E&pagina="+pagina;
 
-			if(ejerfiscalid!=null && ejerfiscalid != "") url += "&objetivoejeerciciofisca=" + ejerfiscalid;	
-			if(padre!=null && padre != "") url += "&id=" + padre;	
+			if(ejerfiscalid!=null && ejerfiscalid != "") url += "&objetivoejeerciciofisca=" + ejerfiscalid;
+			if(padre!=null && padre != "") url += "&id=" + padre;
 
 			return Restangular.allUrl(url).getList();
 		},
