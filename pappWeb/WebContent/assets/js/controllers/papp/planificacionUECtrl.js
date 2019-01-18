@@ -533,6 +533,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					SweetAlert.swal("Planificacion UE! - Nuevo Subitem", resp.mensajes.msg, "error");
 					return;
 				}
+				$scope.editar=true;
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
 				$scope.objeto=Object.assign({}, resp.json.subitemunidad, resp.json.totales);
 				$scope.detalles=resp.json.subitemunidadacumulador;
