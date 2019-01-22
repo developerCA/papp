@@ -1,5 +1,6 @@
 package ec.com.papp.web.ejecucion.util;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -61,7 +62,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static JSONObject consultaCertificacionPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+	public static JSONObject consultaCertificacionPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes, Principal principal) throws MyException {
 		String campo="";
 		CertificacionTO certificacionTO=new CertificacionTO();
 		try{
@@ -125,7 +126,7 @@ public class ConsultasUtil {
 				if(parameters.get("certificacionejerfiscalid")!=null && !parameters.get("certificacionejerfiscalid").equals(""))
 					certificacionTO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("certificacionejerfiscalid")));
 				log.println("certificacion: " + certificacionTO.getCertificacionejerfiscalid());
-				SearchResultTO<CertificacionTO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionPaginado(certificacionTO);
+				SearchResultTO<CertificacionTO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionPaginado(certificacionTO, principal.getName());
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 				HashMap<String, String>  totalMap=new HashMap<String, String>();
 				totalMap.put("valor", resultado.getCountResults().toString());
@@ -212,7 +213,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static JSONObject consultaOrdengastoPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+	public static JSONObject consultaOrdengastoPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes, Principal principal) throws MyException {
 		String campo="";
 		OrdengastoTO ordengastoTO=new OrdengastoTO();
 		//CertificacionTO certificacionTO=new CertificacionTO();
@@ -290,7 +291,7 @@ public class ConsultasUtil {
 				TipodocumentoTO tipodocumentoTO=new TipodocumentoTO();
 				tipodocumentoclasedocumentoTO.setTipodocumento(tipodocumentoTO);
 				ordengastoTO.setTipodocumentoclasedocumento(tipodocumentoclasedocumentoTO);
-				SearchResultTO<OrdengastoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastoPaginado(ordengastoTO);
+				SearchResultTO<OrdengastoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastoPaginado(ordengastoTO, principal.getName());
 				log.println("resultado** " + resultado.getCountResults());
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 				HashMap<String, String>  totalMap=new HashMap<String, String>();
@@ -314,7 +315,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static JSONObject consultaOrdendevengoPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+	public static JSONObject consultaOrdendevengoPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes, Principal principal) throws MyException {
 		String campo="";
 		OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
 		OrdengastoTO ordengastoTO=new OrdengastoTO();
@@ -379,7 +380,7 @@ public class ConsultasUtil {
 					ordengastoTO.setCodigo(parameters.get("ordengasto").toUpperCase());
 				}
 				ordendevengoTO.setOrdengasto(ordengastoTO);
-				SearchResultTO<OrdendevengoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdendevengoPaginado(ordendevengoTO);
+				SearchResultTO<OrdendevengoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdendevengoPaginado(ordendevengoTO, principal.getName());
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 				HashMap<String, String>  totalMap=new HashMap<String, String>();
 				totalMap.put("valor", resultado.getCountResults().toString());
@@ -402,7 +403,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static JSONObject consultaOrdenreversionPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+	public static JSONObject consultaOrdenreversionPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes, Principal principal) throws MyException {
 		String campo="";
 		OrdenreversionTO ordenreversionTO=new OrdenreversionTO();
 		OrdengastoTO ordengastoTO=new OrdengastoTO();
@@ -467,7 +468,7 @@ public class ConsultasUtil {
 					ordenreversionTO.setCodigo(parameters.get("ordengasto").toUpperCase());
 				}
 				ordenreversionTO.setOrdengasto(ordengastoTO);
-				SearchResultTO<OrdenreversionTO> resultado=UtilSession.planificacionServicio.transObtenerOrdenreversionPaginado(ordenreversionTO);
+				SearchResultTO<OrdenreversionTO> resultado=UtilSession.planificacionServicio.transObtenerOrdenreversionPaginado(ordenreversionTO, principal.getName());
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 				HashMap<String, String>  totalMap=new HashMap<String, String>();
 				totalMap.put("valor", resultado.getCountResults().toString());
@@ -490,7 +491,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static JSONObject consultaCertificacionBusquedaPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+	public static JSONObject consultaCertificacionBusquedaPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes,Principal principal) throws MyException {
 		String campo="";
 		CertificacionTO certificacionTO=new CertificacionTO();
 		try{
@@ -522,7 +523,7 @@ public class ConsultasUtil {
 				certificacionTO.setCertificacionunidadid(Long.valueOf(parameters.get("unidadid")));
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				certificacionTO.setCertificacionejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-			SearchResultTO<CertificacionTO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionPaginado(certificacionTO);
+			SearchResultTO<CertificacionTO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionPaginado(certificacionTO,principal.getName());
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());
@@ -544,7 +545,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static JSONObject consultaOrdengastoBusquedaPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+	public static JSONObject consultaOrdengastoBusquedaPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes,Principal principal) throws MyException {
 		String campo="";
 		OrdengastoTO ordengastoTO=new OrdengastoTO();
 		UnidadTO unidadTO=new UnidadTO();
@@ -581,7 +582,7 @@ public class ConsultasUtil {
 			ordengastoTO.setUnidad(unidadTO);
 			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 				ordengastoTO.setOrdengastoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-			SearchResultTO<OrdengastoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastoPaginado(ordengastoTO);
+			SearchResultTO<OrdengastoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastoPaginado(ordengastoTO,principal.getName());
 			long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", resultado.getCountResults().toString());
@@ -603,7 +604,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static JSONObject certificacionbusqueda(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+	public static JSONObject certificacionbusqueda(Map<String, String> parameters,JSONObject jsonObject, Principal principal) throws MyException {
 		CertificacionOrdenVO certificacionOrdenVO=new CertificacionOrdenVO();
 		try{
 			if(parameters.get("ejerciciofiscal")!=null && !parameters.get("ejerciciofiscal").equals(""))
@@ -616,7 +617,7 @@ public class ConsultasUtil {
 				certificacionOrdenVO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
 				certificacionOrdenVO.setDescripcion(parameters.get("descripcion").toUpperCase());
-			Collection<CertificacionOrdenVO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionOrden(certificacionOrdenVO);
+			Collection<CertificacionOrdenVO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionOrden(certificacionOrdenVO, principal.getName());
 			log.println("certificaciones: " + resultado.size());
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
@@ -629,7 +630,7 @@ public class ConsultasUtil {
 		return jsonObject;
 	}
 	
-	public static JSONObject ordenesgastobusqueda(Map<String, String> parameters,JSONObject jsonObject) throws MyException {
+	public static JSONObject ordenesgastobusqueda(Map<String, String> parameters,JSONObject jsonObject, Principal principal) throws MyException {
 		GastoDevengoVO gastoDevengoVO=new GastoDevengoVO();
 		try{
 			if(parameters.get("ejerciciofiscal")!=null && !parameters.get("ejerciciofiscal").equals(""))
@@ -645,7 +646,7 @@ public class ConsultasUtil {
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
 				gastoDevengoVO.setDescripcion(parameters.get("descripcion").toUpperCase());
 
-			Collection<GastoDevengoVO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastodevengo(gastoDevengoVO);
+			Collection<GastoDevengoVO> resultado=UtilSession.planificacionServicio.transObtenerOrdengastodevengo(gastoDevengoVO, principal.getName());
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,gastoDevengoVO.getJsonConfig()));
@@ -1083,7 +1084,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static JSONObject consultaReformaPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+	public static JSONObject consultaReformaPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes, Principal principal) throws MyException {
 		String campo="";
 		ReformaTO reformaTO=new ReformaTO();
 		try{
@@ -1133,7 +1134,7 @@ public class ConsultasUtil {
 				if(parameters.get("tipo")!=null && !parameters.get("tipo").equals("")){
 					reformaTO.setTipo(parameters.get("tipo"));
 				}
-				SearchResultTO<ReformaTO> resultado=UtilSession.planificacionServicio.transObtenerReformaPaginado(reformaTO);
+				SearchResultTO<ReformaTO> resultado=UtilSession.planificacionServicio.transObtenerReformaPaginado(reformaTO, principal.getName());
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 				HashMap<String, String>  totalMap=new HashMap<String, String>();
 				totalMap.put("valor", resultado.getCountResults().toString());
@@ -1156,7 +1157,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static JSONObject consultaReformametaPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+	public static JSONObject consultaReformametaPaginado(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes, Principal principal) throws MyException {
 		String campo="";
 		ReformametaTO reformametaTO=new ReformametaTO();
 		try{
@@ -1203,7 +1204,7 @@ public class ConsultasUtil {
 					reformametaTO.setEstado(parameters.get("estado"));
 				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 					reformametaTO.setEjerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-				SearchResultTO<ReformametaTO> resultado=UtilSession.planificacionServicio.transObtenerReformametaPaginado(reformametaTO);
+				SearchResultTO<ReformametaTO> resultado=UtilSession.planificacionServicio.transObtenerReformametaPaginado(reformametaTO, principal.getName());
 				long totalRegistrosPagina=(resultado.getCountResults()/filas)+1;
 				HashMap<String, String>  totalMap=new HashMap<String, String>();
 				totalMap.put("valor", resultado.getCountResults().toString());

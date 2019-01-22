@@ -1,6 +1,7 @@
 package ec.com.papp.web.ejecucion.controller;
 
 import java.io.StringReader;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -1302,7 +1303,7 @@ public class EjecucionController {
 	}
 
 	@RequestMapping(value = "/consultar/{clase}", method = RequestMethod.POST)
-	public String consultarpost(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request){
+	public String consultarpost(@PathVariable String clase, @RequestBody String objeto,HttpServletRequest request, Principal principal){
 		log.println("entra al metodo consultar: " + objeto);
 		Mensajes mensajes=new Mensajes();
 		Gson gson = new Gson();
@@ -1311,44 +1312,44 @@ public class EjecucionController {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			//Certificacion
 			if(clase.equals("certificacion")){
-				jsonObject=ConsultasUtil.consultaCertificacionPaginado(parameters, jsonObject, mensajes);
+				jsonObject=ConsultasUtil.consultaCertificacionPaginado(parameters, jsonObject, mensajes,principal);
 			}
 			
 			//Orden de gasto
 			else if(clase.equals("ordengasto")){
-				jsonObject=ConsultasUtil.consultaOrdengastoPaginado(parameters, jsonObject, mensajes);
+				jsonObject=ConsultasUtil.consultaOrdengastoPaginado(parameters, jsonObject, mensajes,principal);
 			}
 			
 			//Orden de devengo
 			else if(clase.equals("ordendevengo")){
-				jsonObject=ConsultasUtil.consultaOrdendevengoPaginado(parameters, jsonObject, mensajes);
+				jsonObject=ConsultasUtil.consultaOrdendevengoPaginado(parameters, jsonObject, mensajes,principal);
 			}
 			
 			//Orden de reversion
 			else if(clase.equals("ordenreversion")){
-				jsonObject=ConsultasUtil.consultaOrdenreversionPaginado(parameters, jsonObject, mensajes);
+				jsonObject=ConsultasUtil.consultaOrdenreversionPaginado(parameters, jsonObject, mensajes,principal);
 			}
 
 			//Reforma
 			else if(clase.equals("reforma")){
-				jsonObject=ConsultasUtil.consultaReformaPaginado(parameters, jsonObject, mensajes);
+				jsonObject=ConsultasUtil.consultaReformaPaginado(parameters, jsonObject, mensajes,principal);
 			}
 
 			//Reformameta
 			else if(clase.equals("reformameta")){
-				jsonObject=ConsultasUtil.consultaReformametaPaginado(parameters, jsonObject, mensajes);
+				jsonObject=ConsultasUtil.consultaReformametaPaginado(parameters, jsonObject, mensajes,principal);
 			}
 
 			//Certificacion busqueda
 			else if(clase.equals("certificacionbusqueda")){
 				//jsonObject=ConsultasUtil.consultaCertificacionBusquedaPaginado(parameters, jsonObject, mensajes);
-				jsonObject=ConsultasUtil.certificacionbusqueda(parameters, jsonObject);
+				jsonObject=ConsultasUtil.certificacionbusqueda(parameters, jsonObject,principal);
 			}
 			
 			//Ordengasto busqueda
 			else if(clase.equals("ordengastobusqueda")){
 				//jsonObject=ConsultasUtil.consultaOrdengastoBusquedaPaginado(parameters, jsonObject, mensajes);
-				jsonObject=ConsultasUtil.ordenesgastobusqueda(parameters, jsonObject);
+				jsonObject=ConsultasUtil.ordenesgastobusqueda(parameters, jsonObject,principal);
 			}
 	} catch (Exception e) {
 			e.printStackTrace();
