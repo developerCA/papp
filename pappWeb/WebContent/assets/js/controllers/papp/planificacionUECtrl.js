@@ -446,6 +446,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.editar=$scope.editarP; // ($scope.editarP || $scope.editarA);
 		$scope.objeto=null;
 		$scope.nodeActivo=node;
+		if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+			$scope.editar=true;
+			$scope.editarP=true;
+			$scope.editarA=true;
+		}
 		if (node.nodeTipo == "SA") {// Tarea
 			PlanificacionUEFactory.nuevo(
 				"TA",
@@ -457,7 +462,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					SweetAlert.swal("Planificacion UE! - Nueva Tarea", resp.mensajes.msg, "error");
 					return;
 				}
-				$scope.editar=true;
+				if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+					$scope.editar=true;
+				}
 				$scope.objeto=Object.assign({}, resp.json.tareaunidad);
 				$scope.divPlanificacionAnual=false;
 				$scope.divTarea=true;
@@ -475,7 +482,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					SweetAlert.swal("Planificacion UE! - Nueva Subtarea", resp.mensajes.msg, "error");
 					return;
 				}
-				$scope.editar=true;
+				if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+					$scope.editar=true;
+				}
 				$scope.objUnidad=resp.json.subtareaunidad.subtareaunidadunidadid;
 				$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
 				$scope.detalles=resp.json.subtareaunidadacumulador;
@@ -494,11 +503,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		} else
 		if (node.nodeTipo == "ST") {// Item
-			if ($scope.rol('ROLE_WWITEM')) { // && !$scope.editar) {
-				$scope.editar=true;
-				$scope.editarP=true;
-				$scope.editarA=true;
-			}
 			PlanificacionUEFactory.nuevo(
 				"IT",
 				node.id,
@@ -509,17 +513,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					SweetAlert.swal("Planificacion UE! - Nuevo Item", resp.mensajes.msg, "error");
 					return;
 				}
-				$scope.editar=true;
+				if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+					$scope.editar=true;
+				}
 				$scope.objeto=Object.assign({}, resp.json.itemunidad);
 				$scope.divPlanificacionAnual=false;
 				$scope.divItem=true;
 			});
 		} else {// SubItem
-			if ($scope.rol('ROLE_WWSUBITEM')) { // && !$scope.editar) {
-				$scope.editar=true;
-				$scope.editarP=true;
-				$scope.editarA=true;
-			}
 			PlanificacionUEFactory.nuevo(
 				"SI",
 				node.id,
@@ -533,7 +534,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					SweetAlert.swal("Planificacion UE! - Nuevo Subitem", resp.mensajes.msg, "error");
 					return;
 				}
-				$scope.editar=true;
+				if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+					$scope.editar=true;
+				}
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
 				$scope.objeto=Object.assign({}, resp.json.subitemunidad, resp.json.totales);
 				$scope.detalles=resp.json.subitemunidadacumulador;
@@ -577,6 +580,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		}
 		$scope.editar=$scope.editarP; // ($scope.editarP || $scope.editarA);
 		$scope.nodeActivo=node;
+		if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+			$scope.editar=true;
+			$scope.editarP=true;
+			$scope.editarA=true;
+		}
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
@@ -585,6 +593,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
+				if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+					$scope.editar=true;
+				}
 				$scope.objeto=Object.assign({}, resp.json.actividad, resp.json.actividadunidad);
 			    $scope.objeto.npFechainicio=toDate($scope.objeto.npFechainicio);
 			    $scope.objeto.npFechafin=toDate($scope.objeto.npFechafin);
@@ -612,11 +623,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
-//				if ($scope.planificacionUE.npestadopresupuesto == "Planificado") {
-//					$scope.editar=true;
-//				} else {
-//					$scope.editar=false;
-//				}
+				if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+					$scope.editar=true;
+				}
 				$scope.objeto=Object.assign({}, resp.json.subactividadunidad);
 				$scope.divPlanificacionAnual=false;
 				$scope.divSubActividad=true;
@@ -631,6 +640,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
+				if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+					$scope.editar=true;
+				}
 				$scope.objeto=Object.assign({}, resp.json.tareaunidad);
 				$scope.divPlanificacionAnual=false;
 				$scope.divTarea=true;
@@ -645,6 +657,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
+				if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+					$scope.editar=true;
+				}
 				$scope.objUnidad=resp.json.subtareaunidad.subtareaunidadunidadid;
 				$scope.objeto=Object.assign({}, resp.json.subtareaunidad);
 				$scope.detalles=resp.json.subtareaunidadacumulador;
@@ -662,11 +677,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		}
 		if (node.nodeTipo == "IT") {
-			if ($scope.rol('ROLE_WWITEM')) { // && !$scope.editar) {
-				$scope.editar=true;
-				$scope.editarP=true;
-				$scope.editarA=true;
-			}
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
@@ -674,6 +684,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
+				if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+					$scope.editar=true;
+				}
 				$scope.objeto=Object.assign({}, resp.json.itemunidad);
 				$scope.divPlanificacionAnual=false;
 				$scope.divItem=true;
@@ -681,11 +694,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			});
 		}
 		if (node.nodeTipo == "SI") {
-			if ($scope.rol('ROLE_WWSUBITEM')) { // && !$scope.editar) {
-				$scope.editar=true;
-				$scope.editarP=true;
-				$scope.editarA=true;
-			}
 			PlanificacionUEFactory.editar(
 				node.nodeTipo,
 				node.tablarelacionid,
@@ -696,6 +704,9 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			).then(function(resp){
 				//console.log(resp);
 				if (!resp.estado) return;
+				if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+					$scope.editar=true;
+				}
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
 				$scope.objeto=Object.assign({}, resp.json.subitemunidad, resp.json.totales);
 				$scope.detalles=resp.json.subitemunidadacumulador;
@@ -1571,6 +1582,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 				} else {
 					SweetAlert.swal("Planificacion UE! - Subtarea", resp.mensajes.msg, "error");
+					return;
 				}
 			})
 		}
@@ -1684,6 +1696,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    			$scope.noCancelar = false;
 				} else {
 					SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+					return;
 				}
 			})
 		}
@@ -2082,6 +2095,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.detallesPA = null;
 				$scope.objetoPA.npestadopresupuesto = "Solicitado";
 			}
+			volver();
 		});
 	};
 	
@@ -2176,6 +2190,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.detallesPA = null;
 				$scope.objetoPA.npestadopresupajus = "Solicitado";
 			}
+			volver();
 		})
 	};
 
