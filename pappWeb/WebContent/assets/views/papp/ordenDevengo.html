@@ -152,20 +152,10 @@
 					</a>
 
 					<div>
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th></th>
-									<th>C&oacute;digo</th>
-									<th>Valor total</th>
-									<th>Creado</th>
-									<th>N&uacute;mero precompromiso</th>
-									<th>Estado</th>
-								</tr>
-							</thead>
-							<tr ng-repeat="obj in data">
-								<td>
-									<table>
+						<table ng-table="tableParams" class="table table-striped">
+							<tr ng-repeat="obj in $data">
+								<td width="270px">
+									<table width="270px">
 										<tr>
 											<td width="32px">
 												<a class="btn btn-sm btn-primary"
@@ -225,24 +215,17 @@
 										</tr>
 									</table>
 								</td>
-								<td>{{obj.codigo}}</td>
-								<td style="text-align: right;">
+								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+								<td data-title="'Valor<br>total'" style="text-align: right;">
 									<span>
 										{{obj.valortotal | number:2}}
 									</span>
 								</td>
-								<td>{{obj.npfecha}}</td>
-								<td>{{obj.npordengasto}}</td>
-								<td>{{obj.npestado}}</td>
+								<td data-title="'Creado'">{{obj.npfecha}}</td>
+								<td data-title="'N&uacute;mero<br>precompromiso'">{{obj.npordengasto}}</td>
+								<td data-title="'Estado'">{{obj.npestado}}</td>
 							</tr>
 						</table>
-
-						<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
-							previous-text="Atras" uib-pagination total-items="total"
-							ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
-							max-size="10" class="pagination-sm" boundary-links="true"
-							force-ellipses="true">
-						</ul>
 					</div>
 				</div>
 

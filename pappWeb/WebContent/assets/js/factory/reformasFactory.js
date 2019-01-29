@@ -7,13 +7,16 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 			pagina,
 			ejefiscal
 		) {
-			var url = "ejecucion/consultar/reforma";
-			var tObj = {
-				filas: "10",
-				pagina: pagina.toString(),
-				ejerciciofiscalid: ejefiscal.toString()
-			}
-			return Restangular.allUrl(url).customPOST(tObj);
+			return this.traerFiltro(
+					pagina,
+					ejefiscal,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null
+				);
 		},
 
 		traerFiltro: function(
@@ -29,10 +32,10 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 			var url = "ejecucion/consultar/reforma";
 			var tObj = {
 				filas: "10",
-				pagina: pagina.toString(),
-				ejerciciofiscalid: ejefiscal.toString()
+				pagina: pagina.toString()
 			}
 
+			if(ejefiscal != null && ejefiscal != "") tObj.ejerciciofiscalid= "" + ejefiscal;	
 			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
 			if(tipo != null && tipo != "") tObj.tipo= "" + tipo;
 			if(fechainicial != null && fechainicial != "") tObj.fechainicial= "" + encodeURIComponent(fechainicial);	

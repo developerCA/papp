@@ -7,13 +7,17 @@ app.factory("ordenReversionFactory", [ "Restangular", function(Restangular) {
 			pagina,
 			ejefiscal
 		) {
-			var url = "ejecucion/consultar/ordenreversion";
-			var tObj = {
-				filas: "10",
-				pagina: pagina.toString(),
-				ejerciciofiscalid: ejefiscal.toString()
-			}
-			return Restangular.allUrl(url).customPOST(tObj);
+			return this.traerFiltro(
+					pagina,
+					ejefiscal,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null
+				);
 		},
 
 		traerFiltro: function(
@@ -30,10 +34,10 @@ app.factory("ordenReversionFactory", [ "Restangular", function(Restangular) {
 			var url = "ejecucion/consultar/ordenreversion";
 			var tObj = {
 				filas: "10",
-				pagina: pagina.toString(),
-				ejerciciofiscalid: ejefiscal.toString()
+				pagina: pagina.toString()
 			}
 
+			if(ejefiscal != null && ejefiscal != "") tObj.ejerciciofiscalid= "" + ejefiscal;	
 			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
 			if(precompromiso != null && precompromiso != "") tObj.numprecompromiso= "" + precompromiso;	
 			if(valorinicial!= null && valorinicial != "") tObj.valorinicial= "" + valorinicial;	

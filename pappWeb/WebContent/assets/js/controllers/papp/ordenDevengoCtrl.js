@@ -28,26 +28,36 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
     $scope.aplicafiltro=false;
 	
 	$scope.consultar=function(){
+		$scope.data = [];
 		ordenDevengoFactory.traer(
 			$scope.pagina,
 			$rootScope.ejefiscal,
 			$scope.estadoFiltro
 		).then(function(resp){
-			//console.log(resp);
-        	$scope.data = resp.result;
-            $scope.total = resp.total.valor;
-			console.log($scope.data);
+			$scope.data = resp.result;
 		})
 	};
 
-    $scope.pageChanged = function() {
-        if ($scope.aplicafiltro){
-        	$scope.filtrar();
-        }else{
-        	$scope.consultar();	
-        }
-    };  
-    
+	$scope.$watch('data', function() {
+		$scope.tableParams = new ngTableParams({
+			page : 1, // show first page
+			count : 5, // count per page
+			filter: {} 	
+		}, {
+			total : $scope.data.length, // length of data
+			getData : function($defer, params) {
+				var orderedData = params.filter() ? $filter('filter')(
+						$scope.data, params.filter()) : $scope.data;
+				$scope.lista = orderedData.slice(
+						(params.page() - 1) * params.count(), params
+								.page()
+								* params.count());
+				params.total(orderedData.length);
+				$defer.resolve($scope.lista);
+			}
+		});
+	});
+
     $scope.filtrarUnico=function(){
     	$scope.pagina=1;
     	$scope.aplicafiltro=true;

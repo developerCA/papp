@@ -155,44 +155,44 @@
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
-											<td>
-												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Modificar" ng-click="editar($index)">
-													<i class="fa fa-pencil"></i>
-												</a>
-												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Solicitar" ng-click="solicitar($index)">
-													<i class="fa fa-list-alt"></i>
-												</a>
-												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Imprimir solicitud" ng-click="imprimirsolicitud(obj.id)">
-													<i class="fa fa-file-text"></i>
-												</a>
-												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Imprimir oficio" ng-click="imprimiroficio(obj.id)">
-													<i class="fa fa-file-text-o"></i>
-												</a>
-												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Aprobar" ng-click="aprobar($index)">
-													<i class="fa ti-check"></i>
-												</a>
-												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Negar" ng-click="negar($index)">
-													<i class="fa ti-minus"></i>
-												</a>
-												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Liquidaci&oacute;n Total" ng-click="LiquidacionTotal($index)">
-													<i class="fa fa-clipboard"></i>
-												</a>
-												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Liquidaci&oacute;n Parcial" ng-click="LiquidacionParcial($index)">
-													<i class="fa fa-clipboard"></i>
-												</a>
-												<a class="btn btn-sm btn-primary"
-													uib-tooltip="Eliminar" ng-click="eliminar($index)">
-													<i class="fa fa-trash-o"></i>
-												</a>
-											</td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Modificar" ng-click="editar($index)">
+										<i class="fa fa-pencil"></i>
+									</a>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Solicitar" ng-click="solicitar($index)">
+										<i class="fa fa-list-alt"></i>
+									</a>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Imprimir solicitud" ng-click="imprimirsolicitud(obj.id)">
+										<i class="fa fa-file-text"></i>
+									</a>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Imprimir oficio" ng-click="imprimiroficio(obj.id)">
+										<i class="fa fa-file-text-o"></i>
+									</a>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Aprobar" ng-click="aprobar($index)">
+										<i class="fa ti-check"></i>
+									</a>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Negar" ng-click="negar($index)">
+										<i class="fa ti-minus"></i>
+									</a>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Liquidaci&oacute;n Total" ng-click="LiquidacionTotal($index)">
+										<i class="fa fa-clipboard"></i>
+									</a>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Liquidaci&oacute;n Parcial" ng-click="LiquidacionParcial($index)">
+										<i class="fa fa-clipboard"></i>
+									</a>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Eliminar" ng-click="eliminar($index)">
+										<i class="fa fa-trash-o"></i>
+									</a>
+								</td>
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
 								<td data-title="'Valor total'" style="text-align: right;">
 									<span>
