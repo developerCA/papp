@@ -19,9 +19,8 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 				$scope.data=resp;
 		})
 	};
-	
+
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
@@ -40,18 +39,15 @@ app.controller('UnidadController', [ "$scope","$rootScope","$uibModal","SweetAle
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
 		unidadFactory.traerUnidadesFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
-			
 			if (resp.meta)
 				$scope.data=resp;
 		})
 	}
-	
+
 	$scope.limpiar=function(){
 		$scope.nombreFiltro=null;
 		$scope.codigoFiltro=null;

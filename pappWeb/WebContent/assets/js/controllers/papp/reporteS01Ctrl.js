@@ -168,31 +168,31 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 		    console.log($scope.objeto);
 		    window.open(url, '_blank');
         	return;
-            var firstError = null;
-            if (form.$invalid) {
-                var field = null, firstError = null;
-                for (field in form) {
-                    if (field[0] != '$') {
-                        if (firstError === null && !form[field].$valid) {
-                            firstError = form[field].$name;
-                        }
-                        if (form[field].$pristine) {
-                            form[field].$dirty = true;
-                        }
-                    }
-                }
-                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                return;
-            } else {
-            	reporteS01Factory.guardar($scope.objeto).then(function(resp){
-        			 if (resp.estado){
-      					 //SweetAlert.swal("Reporte S01!", "Registro guardado satisfactoriamente!", "success");
-        				 alert("ok");
-        			 }else{
-	 		             SweetAlert.swal("Reporte S01!", resp.mensajes.msg, "error");
-        			 }
-        		})
-            }
+//            var firstError = null;
+//            if (form.$invalid) {
+//                var field = null, firstError = null;
+//                for (field in form) {
+//                    if (field[0] != '$') {
+//                        if (firstError === null && !form[field].$valid) {
+//                            firstError = form[field].$name;
+//                        }
+//                        if (form[field].$pristine) {
+//                            form[field].$dirty = true;
+//                        }
+//                    }
+//                }
+//                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+//                return;
+//            } else {
+//            	reporteS01Factory.guardar($scope.objeto).then(function(resp){
+//        			 if (resp.estado){
+//      					 //SweetAlert.swal("Reporte S01!", "Registro guardado satisfactoriamente!", "success");
+//        				 alert("ok");
+//        			 }else{
+//	 		             SweetAlert.swal("Reporte S01!", resp.mensajes.msg, "error");
+//        			 }
+//        		})
+//            }
         },
         reset: function (form) {
             $scope.myModel = angular.copy($scope.master);

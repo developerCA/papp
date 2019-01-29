@@ -56,7 +56,7 @@ app.controller('CambiarContrasenaController', [ "$scope","$rootScope","$location
 							//console.log(resp);
 		            		if (resp.estado){
 		        				 SweetAlert.swal("Cambiar Contrasena!", "Registro registrado satisfactoriamente!", "success");
-		        				 $location.path("/index");
+		        				 $location.path("logout");
 		        			 }else{
 			 		             SweetAlert.swal("Cambiar Contrasena!", resp.mensajes.msg, "error");
 		        				 

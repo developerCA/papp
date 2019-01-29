@@ -7,13 +7,17 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			pagina,
 			ejefiscal
 		) {
-			var url = "ejecucion/consultar/certificacion";
-			var tObj = {
-				filas: "10",
-				pagina: pagina.toString(),
-				certificacionejerfiscalid: ejefiscal.toString()
-			}
-			return Restangular.allUrl(url).customPOST(tObj);
+			return this.traerFiltro(
+					pagina,
+					ejefiscal,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null
+				);
 		},
 
 		traerFiltro: function(
@@ -30,10 +34,10 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			var url = "ejecucion/consultar/certificacion";
 			var tObj = {
 				filas: "10",
-				pagina: pagina.toString(),
-				certificacionejerfiscalid: ejefiscal.toString()
+				pagina: pagina.toString()
 			}
 
+			if(ejefiscal != null && ejefiscal != "") tObj.certificacionejerfiscalid= "" + ejefiscal;	
 			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
 			if(precompromiso != null && precompromiso != "") tObj.numprecompromiso= "" + precompromiso;	
 			if(valorinicial!= null && valorinicial != "") tObj.valorinicial= "" + valorinicial;	
