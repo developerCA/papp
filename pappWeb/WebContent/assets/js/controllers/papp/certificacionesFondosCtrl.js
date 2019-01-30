@@ -115,7 +115,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		//console.log($scope.data[index]);
 		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 		certificacionesFondosFactory.traerCertificacionesFondosEditar($scope.data[index].id).then(function(resp){
-			console.log(resp.json);
+			//console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.certificacion;
 			    $scope.detalles=resp.json.certificacionlineas;
@@ -144,7 +144,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			null
 		).then(function(resp){
 			//console.log(resp);
-			$scope.pageChanged();
+			//$scope.pageChanged();
 			SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
 		});
 	}
@@ -179,8 +179,8 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 				cur,
 				null
 			).then(function(resp){
-				console.log(resp);
-				$scope.pageChanged();
+				//console.log(resp);
+				//$scope.pageChanged();
 				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
@@ -218,8 +218,8 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 				null,
 				obj
 			).then(function(resp){
-				console.log(resp);
-				$scope.pageChanged();
+				//console.log(resp);
+				//$scope.pageChanged();
 				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
@@ -258,7 +258,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 				obj
 			).then(function(resp){
 				//console.log(resp);
-				$scope.pageChanged();
+				//$scope.pageChanged();
 				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
@@ -297,7 +297,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 				obj
 			).then(function(resp){
 				//console.log(resp);
-				$scope.pageChanged();
+				//$scope.pageChanged();
 				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
@@ -336,7 +336,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 				obj
 			).then(function(resp){
 				//console.log(resp);
-				$scope.pageChanged();
+				//$scope.pageChanged();
 				SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
@@ -455,7 +455,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.certificacionclaseregid = obj.id.id;
 			$scope.objeto.certificacionclasemoid = obj.id.cmid;
 			$scope.objeto.certificaciongastoid = obj.id.cmcgastoid;
@@ -516,7 +516,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
           		             $scope.edicion=false;
           		             $scope.objeto={};
         				 }
-        				 $scope.pageChanged();
+        				 //$scope.pageChanged();
       					 SweetAlert.swal("Certificaciones de Fondos!", "Registro guardado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
@@ -529,7 +529,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
             form.$setPristine(true);
             $scope.edicion=false;
             $scope.objeto={};
-            $scope.pageChanged();
+            //$scope.pageChanged();
         }
     };
 

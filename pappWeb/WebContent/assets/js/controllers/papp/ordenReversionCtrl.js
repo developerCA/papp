@@ -151,7 +151,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 					null,
 					null
 				).then(function(resp){
-					$scope.pageChanged();
+					//$scope.pageChanged();
 					SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 				});
 			}
@@ -187,7 +187,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				cur,
 				null
 			).then(function(resp){
-				$scope.pageChanged();
+				//$scope.pageChanged();
 				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
@@ -226,7 +226,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				obj
 			).then(function(resp){
 				//console.log(resp);
-				$scope.pageChanged();
+				//$scope.pageChanged();
 				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
@@ -265,7 +265,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				obj
 			).then(function(resp){
 				//console.log(resp);
-				$scope.pageChanged();
+				//$scope.pageChanged();
 				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {

@@ -157,7 +157,7 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 			id,
 			linea
 		){
-			var url = "ejecucion/certificacionlinea/" +
+			var url = "ejecucion/reformalinea/" +
 				id + "/" +
 				linea;
 			return Restangular.allUrl(url).customDELETE();
@@ -174,7 +174,7 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 		guardarLinea:function(
 			objeto
 		){
-			var url = "ejecucion/certificacionlinea";
+			var url = "ejecucion/reformalinea";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 	}

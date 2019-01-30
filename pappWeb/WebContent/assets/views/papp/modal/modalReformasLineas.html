@@ -179,7 +179,7 @@
 			        Valor Actual
 			    </label>
 		        <input type="text" style="text-align:right;" decimal="2"
-		            class="form-control" name="npvaloractual" ng-model="objeto.npvaloractual" ng-disabled="true">
+		            class="form-control" name="valorajustado" ng-model="valorajustado" ng-disabled="true">
 			</div>
 			
 			<div class="form-group has-success">
@@ -199,16 +199,8 @@
 			    <div class="input-group col-md-12">
 			        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="0.00"
 			            class="form-control" name="valorincremento" ng-model="objeto.valorincremento"
-			            required ng-max="saldo">
+			            ng-max="saldo">
 			    </div>
-			    <span class="error text-small block"
-			        ng-if="Form.valorincremento.$dirty && Form.valorincremento.$invalid">
-			        Incorrecto, valor mayor que el saldo sidponible
-			    </span>
-			    <span class="success text-small"
-			        ng-if="Form.valorincremento.$valid">
-			        Listo
-			    </span>
 			</div>
 			
 			<div class="form-group"
@@ -220,16 +212,8 @@
 			    <div class="input-group col-md-12">
 			        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="0.00"
 			            class="form-control" name="valordecremento" ng-model="objeto.valordecremento"
-			            required ng-max="saldo">
+			            ng-max="saldo">
 			    </div>
-			    <span class="error text-small block"
-			        ng-if="Form.valordecremento.$dirty && Form.valordecremento.$invalid">
-			        Incorrecto, valor mayor que el saldo sidponible
-			    </span>
-			    <span class="success text-small"
-			        ng-if="Form.valordecremento.$valid">
-			        Listo
-			    </span>
 			</div>
 
 			<div class="row">

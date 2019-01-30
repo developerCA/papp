@@ -77,7 +77,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			toStringDate($scope.fechafinalFiltro),
 			$scope.estadoFiltro
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
         	$scope.data = resp.result;
             $scope.total = resp.total.valor;
 		})
@@ -101,7 +101,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		ordenGastoFactory.nuevo(
 			$rootScope.ejefiscal
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.ordengasto;
 			    $scope.detalles=[];
@@ -119,7 +119,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		ordenGastoFactory.editar(
 			$scope.data[index].id
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.ordengasto;
 			    $scope.detalles=resp.json.ordengastolineas;
@@ -167,7 +167,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 					null
 				).then(function(resp){
 					//console.log(resp);
-					$scope.pageChanged();
+					//$scope.pageChanged();
 					SweetAlert.swal("Orden de Gasto!", resp.mensajes.msg, resp.mensajes.type);
 				});
 			}
@@ -204,8 +204,8 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				cur,
 				null
 			).then(function(resp){
-				console.log(resp);
-				$scope.pageChanged();
+				//console.log(resp);
+				//$scope.pageChanged();
 				SweetAlert.swal("Orden de Gasto!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
@@ -243,8 +243,8 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				null,
 				obj
 			).then(function(resp){
-				console.log(resp);
-				$scope.pageChanged();
+				//console.log(resp);
+				//$scope.pageChanged();
 				SweetAlert.swal("Orden de Gasto!", resp.mensajes.msg, resp.mensajes.type);
 			});
 		}, function() {
@@ -321,7 +321,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.ordengastoclaseregid = obj.id.id;
 			$scope.objeto.ordengastoclasemodid = obj.id.cmid;
 			$scope.objeto.ordengastocgastoid = obj.id.cmcgastoid;
@@ -390,7 +390,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				obj
 			).then(function(resp){
 				if (resp.estado) {
-					$scope.pageChanged();
+					//$scope.pageChanged();
 		            SweetAlert.swal(
 	            		"Orden de Gastos!",
 	            		"Registro anulado satisfactoriamente!",
@@ -444,7 +444,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				obj
 			).then(function(resp){
 				if (resp.estado) {
-					$scope.pageChanged();
+					//$scope.pageChanged();
 		            SweetAlert.swal(
 	            		"Orden de Gastos!",
 	            		"Registro eliminado satisfactoriamente!",
@@ -604,7 +604,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
     	 		             $scope.objeto={};
     	 		             //$scope.limpiar();
         				 }
-        		         $scope.pageChanged();
+        		         //$scope.pageChanged();
 	 		             SweetAlert.swal("Orden de Gastos!", "Registro registrado satisfactoriamente!", "success");
         			 }else{
 	 		             SweetAlert.swal("Orden de Gastos!", resp.mensajes.msg, "error");
@@ -617,7 +617,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
             form.$setPristine(true);
             $scope.edicion=false;
             $scope.objeto={};
-            $scope.pageChanged();
+            //$scope.pageChanged();
         }
     };
 

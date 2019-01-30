@@ -16,6 +16,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 				console.log(resp.json.certificacionlinea);
 	        	$scope.objeto = resp.json.certificacionlinea;
 	        	$scope.noeditar = false;
+	        	$scope.valorajustado = 0;
 	        	$scope.saldo = 0;
 	        	reformasFactory.listarSubtareas(
 					$rootScope.ejefiscal,
@@ -36,6 +37,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 					//console.log(resp);
 		        	$scope.objeto = resp.json.certificacionlinea;
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
+		        	$scope.valorajustado = 0;
 		        	$scope.saldo = $scope.objeto.npvalor + $scope.objeto.npvalorinicial;
 		        	$scope.ponerCodigos();
 		        	$scope.noeditar=true;
@@ -70,6 +72,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
     		id: "",
     		descripcionexten: "Pendiente"
     	}];
+    	$scope.valorajustado = 0;
     	$scope.saldo = 0;
 		reformasFactory.obtenerDetalles(
 			$scope.objeto.subtarea
@@ -98,6 +101,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
     		id: "",
     		descripcionexten: "Cargando subitems"
     	}];
+    	$scope.valorajustado = 0;
     	$scope.saldo = 0;
 		reformasFactory.listarSubItems(
 			$rootScope.ejefiscal,
@@ -127,6 +131,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 			$scope.si[i].tablarelacionid
 		).then(function(resp){
 			//console.log(resp);
+        	$scope.valorajustado = resp.json.valordisponiblesi.valorajustado;
         	$scope.saldo = resp.json.valordisponiblesi.saldo;
 		})
 	}
@@ -153,6 +158,24 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
             	if (tObj.nivelactid == 0) {
             	  tObj.nivelactid = tObj.subitem;
             	  //delete tObj.subitem;
+            	}
+            	if (tObj.valorincremento == null) tObj.valorincremento = 0;
+            	if (tObj.valordecremento == null) tObj.valordecremento = 0;
+            	if (parseInt(tObj.valorincremento) == 0 && parseInt(tObj.valordecremento) == 0) {
+            		SweetAlert.swal(
+            				"Reformas!",
+            				"Valor incremento o valor decremento tienen que tener valor uno de los dos",
+            				"error"
+    				);
+            		return;
+            	}
+            	if (parseInt(tObj.valorincremento) != 0 && parseInt(tObj.valordecremento) != 0) {
+            		SweetAlert.swal(
+            				"Reformas!",
+            				"Valor incremento o valor decremento solo uno de los dos puede tener valor",
+            				"error"
+    				);
+            		return;
             	}
             	reformasFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){

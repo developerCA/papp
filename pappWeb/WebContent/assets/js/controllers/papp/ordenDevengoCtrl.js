@@ -179,7 +179,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 					null
 				).then(function(resp){
 					//console.log(resp);
-					$scope.pageChanged();
+					//$scope.pageChanged();
 					SweetAlert.swal(
 						"Orden de Devengo!",
 						resp.mensajes.msg,
@@ -225,7 +225,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				null
 			).then(function(resp){
 				if (resp.estado) {
-					$scope.pageChanged();
+					//$scope.pageChanged();
 					SweetAlert.swal(
 						"Orden de Devengo!",
 		        		"Registro guardado satisfactoriamente!",
@@ -275,7 +275,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				obj
 			).then(function(resp){
 				if (resp.estado) {
-					$scope.pageChanged();
+					//$scope.pageChanged();
 					SweetAlert.swal(
 						"Orden de Devengo!",
 		        		"Registro guardado satisfactoriamente!",
@@ -329,7 +329,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				obj
 			).then(function(resp){
 				if (resp.estado) {
-					$scope.pageChanged();
+					//$scope.pageChanged();
 					SweetAlert.swal(
 						"Orden de Devengo!",
 		        		"Registro guardado satisfactoriamente!",
@@ -499,7 +499,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
       		             form.$setPristine(true);
       		             $scope.edicion=false;
       		             $scope.objeto={};
-      		             $scope.pageChanged();
+      		             //$scope.pageChanged();
         			 }else{
 	 		             SweetAlert.swal("Orden de Devengo!", resp.mensajes.msg, "error");
         			 }
