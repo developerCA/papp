@@ -172,35 +172,49 @@
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
-								<td>
+								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Modificar" ng-click="editar($index)">
 										<i class="fa fa-pencil"></i>
 									</a>
+								</td>
+								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Solicitar" ng-click="solicitar($index)">
 										<i class="fa fa-list-alt"></i>
 									</a>
+								</td>
+								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Imprimir solicitud" ng-click="imprimirsolicitud(obj.id)">
 										<i class="fa fa-file-text"></i>
 									</a>
+								</td>
+								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Imprimir oficio" ng-click="imprimiroficio(obj.id)">
 										<i class="fa fa-file-text-o"></i>
 									</a>
+								</td>
+								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar" ng-click="aprobar($index)">
 										<i class="fa ti-check"></i>
 									</a>
+								</td>
+								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Negar" ng-click="negar($index)">
 										<i class="fa ti-minus"></i>
 									</a>
+								</td>
+								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Anular" ng-click="anular($index)">
 										<i class="fa ti-bolt-alt"></i>
 									</a>
+								</td>
+								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Eliminar" ng-click="eliminar($index)">
 										<i class="fa fa-trash-o"></i>
