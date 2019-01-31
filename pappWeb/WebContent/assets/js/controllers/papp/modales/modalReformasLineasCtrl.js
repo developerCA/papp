@@ -13,8 +13,8 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 			reformasFactory.nuevoLinea(
 				ID
 			).then(function(resp){
-				console.log(resp.json.certificacionlinea);
-	        	$scope.objeto = resp.json.certificacionlinea;
+//				console.log(resp.json.certificacionlinea);
+	        	$scope.objeto = resp.json.reformalinea;
 	        	$scope.noeditar = false;
 	        	$scope.valorajustado = 0;
 	        	$scope.saldo = 0;
@@ -35,7 +35,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 					editar
 				).then(function(resp){
 					//console.log(resp);
-		        	$scope.objeto = resp.json.certificacionlinea;
+		        	$scope.objeto = resp.json.reformalinea;
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
 		        	$scope.valorajustado = 0;
 		        	$scope.saldo = $scope.objeto.npvalor + $scope.objeto.npvalorinicial;
@@ -183,9 +183,20 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
 	 		             tObj = {
- 		            		 lineas: resp.json.certificacionlineas,
- 		            		 valortotal: resp.json.certificacion.valortotal
+ 		            		 lineas: resp.json.reformalinea
 	 		             }
+	 		             try {
+	 		            	 tObj.valorincremento = resp.json.reforma.valorincremento;
+						 } catch (e) {
+							 tObj.valorincremento = 0;
+						 	console.log("ERROR QUE REPARAR");
+						 }
+	 		             try {
+	 		            	 tObj.valordecremento = resp.json.reforma.valordecremento;
+						 } catch (e) {
+							 tObj.valorincremento = 0;
+						 	console.log("ERROR QUE REPARAR");
+						 }
 	 		    		 $uibModalInstance.close(tObj);		
         			 }else{
 	 		             SweetAlert.swal("Reformas!", resp.mensajes.msg, "error");

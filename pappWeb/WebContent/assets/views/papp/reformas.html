@@ -141,55 +141,64 @@
 							<tr ng-repeat="obj in $data">
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Modificar" ng-click="editar($index)">
+										uib-tooltip="Modificar"
+										ng-click="editar($index)">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Solicitar" ng-click="solicitar($index)">
+										uib-tooltip="Solicitar"
+										ng-click="solicitar($index)">
 										<i class="fa fa-list-alt"></i>
 									</a>
 								</td>
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Imprimir solicitud" ng-click="imprimirsolicitud(obj.id)">
+										uib-tooltip="Imprimir solicitud"
+										ng-click="imprimirsolicitud(obj.id)">
 										<i class="fa fa-file-text"></i>
 									</a>
 								</td>
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Imprimir oficio" ng-click="imprimiroficio(obj.id)">
+										uib-tooltip="Imprimir oficio"
+										ng-click="imprimiroficio(obj.id)">
 										<i class="fa fa-file-text-o"></i>
 									</a>
 								</td>
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Aprobar" ng-click="aprobar($index)">
+										uib-tooltip="Aprobar"
+										ng-click="aprobar($index)">
 										<i class="fa ti-check"></i>
 									</a>
 								</td>
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Negar" ng-click="negar($index)">
+										uib-tooltip="Negar"
+										ng-click="negar($index)">
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Liquidaci&oacute;n Total" ng-click="LiquidacionTotal($index)">
+										uib-tooltip="Liquidaci&oacute;n Total"
+										ng-click="LiquidacionTotal($index)">
 										<i class="fa fa-clipboard"></i>
 									</a>
 								</td>
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Liquidaci&oacute;n Parcial" ng-click="LiquidacionParcial($index)">
+										uib-tooltip="Liquidaci&oacute;n Parcial"
+										ng-click="LiquidacionParcial($index)">
 										<i class="fa fa-clipboard"></i>
 									</a>
 								</td>
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Eliminar" ng-click="eliminar($index)">
+										uib-tooltip="Eliminar"
+										ng-click="eliminar($index)">
 										<i class="fa fa-trash-o"></i>
 									</a>
 								</td>
@@ -380,7 +389,7 @@
 									    </label>
 									    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
 									        class="form-control" name="numerooficio" ng-model="objeto.numerooficio"
-									        ng-disabled="noeditar">
+									        ng-disabled="noeditar" required>
 									    <span class="error text-small block"
 									        ng-if="Form.numerooficio.$dirty && Form.numerooficio.$invalid">
 									        Incorrecto

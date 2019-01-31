@@ -285,7 +285,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 		modalInstance.result.then(function(obj) {
 		    $scope.detalles = obj.lineas;
-		    //$scope.objeto.valortotal = obj.valortotal;
+		    $scope.objeto.valorincremento = obj.valorincremento;
+		    $scope.objeto.valordecremento = obj.valordecremento;
 		    $scope.form.submit(Form);
             SweetAlert.swal("Reformas! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
