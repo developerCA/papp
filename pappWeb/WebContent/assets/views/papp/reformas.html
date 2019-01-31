@@ -483,9 +483,10 @@
 													<tr>
 														<th></th>
 														<th>Descripci&oacute;n</th>
-														<th>Saldo</th>
-														<th>Valor Certificaci&oacute;n</th>
 														<th>Fuente Financiamiento</th>
+														<th>Valor</th>
+														<th>Incremento</th>
+														<th>Decremento</th>
 													</tr>
 													<tr ng-repeat="obj in detalles">
 														<td>
@@ -501,14 +502,17 @@
 														<td>
 															{{ obj.npSubitemcodigo }}: {{ obj.npSubitem }}
 														</td>
-														<td style="text-align:right;">
-															{{ obj.npvalorinicial | currency }}
-														</td>
-														<td style="text-align:right;">
-															{{ obj.npvalor | currency }}
+														<td>
+															<!-- FALTA -->
 														</td>
 														<td>
-															{{obj.npfuentefinanciamiento}}
+															<!-- FALTA -->
+														</td>
+														<td style="text-align:right;">
+															{{ obj.valorincremento | currency }}
+														</td>
+														<td style="text-align:right;">
+															{{ obj.valordecremento | currency }}
 														</td>
 													</tr>
 												</table>
