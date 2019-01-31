@@ -142,6 +142,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	}
 
+	
 	$scope.aprobar = function(id) {
 		index = $scope.cacularIndexFromId(id);
 		if ($scope.data[index].estado != "SO") {
