@@ -202,7 +202,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 	 		             SweetAlert.swal("Reformas!", resp.mensajes.msg, "error");
         			 }
         		})
-        		console.log($scope.objeto);
+        		//console.log($scope.objeto);
             }
         },
         reset: function (form) {

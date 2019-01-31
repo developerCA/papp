@@ -74,7 +74,7 @@ app.controller('FuenteController', [ "$scope","$rootScope","SweetAlert","$filter
 			if (resp.estado)
 			   $scope.objeto=resp.json.fuentefinanciamiento;
 			   $scope.edicion=true;
-			   console.log($scope.objeto);
+			   //console.log($scope.objeto);
 
 		})
 		

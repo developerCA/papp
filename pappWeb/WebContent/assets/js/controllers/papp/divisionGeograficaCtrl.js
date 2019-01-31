@@ -76,7 +76,7 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 			if (resp.estado)
 			   $scope.objeto=resp.json.divisiongeografica;
 			   $scope.edicion=true;
-			   console.log($scope.objeto);
+			   //console.log($scope.objeto);
 
 		})
 		
@@ -115,7 +115,7 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.npcodigopadre = obj.codigo;
 			$scope.objeto.npnombrepadre = obj.nombre;
 			$scope.objeto.nptipopadrenombre = obj.nptipopadrenombre;
@@ -146,7 +146,7 @@ app.controller('DivisionGeograficaController', [ "$scope","$rootScope","$uibModa
 		                return;
 
 		            } else {
-		                console.log($scope.objeto);
+		                //console.log($scope.objeto);
 		            	divisionGeograficaFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);

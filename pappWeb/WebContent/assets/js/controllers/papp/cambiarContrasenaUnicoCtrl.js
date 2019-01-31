@@ -12,7 +12,7 @@ app.controller('CambiarContrasenaUnicoController', [ "$scope","$rootScope","$loc
 			   $scope.objeto=resp.ususario;
 			   $scope.objeto.clave=''; 
 			   $scope.edicion=true;
-			   console.log($scope.objeto);
+			   //console.log($scope.objeto);
 		})
 		
 	};

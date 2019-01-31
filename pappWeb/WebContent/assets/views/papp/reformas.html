@@ -142,7 +142,7 @@
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Modificar"
-										ng-click="editar($index)">
+										ng-click="editar(obj.id)">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
@@ -166,30 +166,29 @@
 										ng-click="imprimiroficio(obj.id)">
 										<i class="fa fa-file-text-o"></i>
 									</a>
-								</td>
-								
-								<td width="32px">
+								</td> 
+								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar"
 										ng-click="aprobar(obj.id)">
 										<i class="fa ti-check"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Negar"
-										ng-click="negar($index)">
+										ng-click="negar(obj.id)">
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Liquidaci&oacute;n Total"
 										ng-click="LiquidacionTotal($index)">
 										<i class="fa fa-clipboard"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Liquidaci&oacute;n Parcial"
 										ng-click="LiquidacionParcial($index)">
@@ -199,7 +198,7 @@
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Eliminar"
-										ng-click="eliminar($index)">
+										ng-click="eliminar(obj.id)">
 										<i class="fa fa-trash-o"></i>
 									</a>
 								</td>

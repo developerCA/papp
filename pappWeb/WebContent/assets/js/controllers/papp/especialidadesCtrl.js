@@ -115,7 +115,7 @@ app.controller('EspecialidadesController', [ "$scope","$rootScope","$uibModal","
 			$scope.objeto.especialidadfuerzaid = obj.id;
 			$scope.objeto.npfuerzanombre = obj.nombre;
 		}, function() {
-			console.log("close modal");
+			//console.log("close modal");
 		});
 	};
 

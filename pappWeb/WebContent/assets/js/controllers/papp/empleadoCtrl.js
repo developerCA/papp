@@ -110,7 +110,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 
 	$scope.editar=function(id){
 		empleadosFactory.traerEmpleadosEditar(id).then(function(resp){
-			console.log(resp.json);
+			//console.log(resp.json);
 			if (resp.estado) {
 				$scope.objeto=resp.json.empleado;
 				$scope.fuerza=$scope.objeto.npfuerzaid;
@@ -171,7 +171,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.snempgradoescalaid = obj.id;
 			$scope.objeto.npgradoescalacodigo = obj.codigo;
 			$scope.objeto.npgradonombre = obj.npnombregrado;
@@ -186,7 +186,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 	};
 
 	$scope.abrirEspecialidad = function(index) {
-		console.log($scope.fuerza);
+		//console.log($scope.fuerza);
 		var modalInstance = $uibModal.open({
 			templateUrl : 'modalEspecialidades.html',
 			controller : 'ModalEspecialidadesController',
@@ -218,7 +218,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.socionegocioempclasifid = obj.id.fuerzaclasificacionid;
 			$scope.objeto.npclasificacioncodigo = obj.codigo;
 			$scope.objeto.npclasificacionnombre = obj.nombre;

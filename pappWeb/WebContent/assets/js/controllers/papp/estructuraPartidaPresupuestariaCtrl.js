@@ -36,7 +36,7 @@ app.controller('EstructuraPartidaPresupuestariaController', [ "$scope","$rootSco
 		//console.log($rootScope);
 
 		estructuraPartidaPresupuestariaFactory.traerPartidapresupuestaria($rootScope.ejefiscal).then(function(resp){
-			console.log(resp.json);
+			//console.log(resp.json);
 			if (resp.estado) {
 			    $scope.feLista=resp.json.formulacion;
 			    $scope.pLista=resp.json.planificacion;

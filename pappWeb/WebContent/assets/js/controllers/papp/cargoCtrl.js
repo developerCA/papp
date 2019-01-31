@@ -15,7 +15,7 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 		
 		$scope.data=[];
 		cargoFactory.traerCargos(pagina).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 				
@@ -43,13 +43,10 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 			}
 		});
 	});
-	
-	
+
 	$scope.filtrar=function(){
-		
 		$scope.data=[];
 		cargoFactory.traerCargosFiltro(pagina,$scope.nombreFiltro,$scope.codigoFiltro,$scope.estadoFiltro).then(function(resp){
-			
 			if (resp.meta)
 				$scope.data=resp;
 		})
@@ -71,67 +68,49 @@ app.controller('CargoController', [ "$scope","$rootScope","SweetAlert","$filter"
 	
 	$scope.editar=function(id){
 		cargoFactory.traerCargo(id).then(function(resp){
-			
 			if (resp.estado)
-				
 				$scope.objeto=resp.json.cargo;
 				$scope.edicion=true;
-				console.log($scope.objeto);
+				//console.log($scope.objeto);
 		})
-		
 	};
-	
-	
-	
-	 $scope.form = {
 
-		        submit: function (form) {
-		            var firstError = null;
-		            if (form.$invalid) {
-
-		                var field = null, firstError = null;
-		                for (field in form) {
-		                    if (field[0] != '$') {
-		                        if (firstError === null && !form[field].$valid) {
-		                            firstError = form[field].$name;
-		                        }
-
-		                        if (form[field].$pristine) {
-		                            form[field].$dirty = true;
-		                        }
-		                    }
-		                }
-
-		                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-		                return;
-
-		            } else {
-		                
-		            	cargoFactory.guardar($scope.objeto).then(function(resp){
-		        			 if (resp.estado){
-		        				 form.$setPristine(true);
-			 		             $scope.edicion=false;
-			 		             $scope.objeto={};
-			 		             $scope.limpiar();
-			 		             SweetAlert.swal("Cargo!", "Registro guardado satisfactoriamente!", "success");
-	 
-		        			 }else{
-			 		             SweetAlert.swal("Cargo!", resp.mensajes.msg, "error");
-		        				 
-		        			 }
-		        			
-		        		})
-		        		
-		            }
-
-		        },
-		        reset: function (form) {
-
-		            $scope.myModel = angular.copy($scope.master);
-		            form.$setPristine(true);
-		            $scope.edicion=false;
-		            $scope.objeto={};
-
-		        }
+	$scope.form = {
+		submit: function (form) {
+			var firstError = null;
+			if (form.$invalid) {
+				var field = null, firstError = null;
+				for (field in form) {
+					if (field[0] != '$') {
+						if (firstError === null && !form[field].$valid) {
+							firstError = form[field].$name;
+						}
+						if (form[field].$pristine) {
+							form[field].$dirty = true;
+						}
+					}
+				}
+				angular.element('.ng-invalid[name=' + firstError + ']').focus();
+				return;
+			} else {
+				cargoFactory.guardar($scope.objeto).then(function(resp){
+					 if (resp.estado){
+						 form.$setPristine(true);
+						 $scope.edicion=false;
+						 $scope.objeto={};
+						 $scope.limpiar();
+						 SweetAlert.swal("Cargo!", "Registro guardado satisfactoriamente!", "success");
+					 }else{
+						 SweetAlert.swal("Cargo!", resp.mensajes.msg, "error");
+					 }
+				})
+			}
+		},
+		reset: function (form) {
+			$scope.myModel = angular.copy($scope.master);
+			form.$setPristine(true);
+			$scope.edicion=false;
+			$scope.objeto={};
+		}
     };
 } ]);

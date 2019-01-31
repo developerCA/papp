@@ -20,7 +20,7 @@ app.controller('CopiarContenidoEjercicioFiscalController', [ "$scope","$rootScop
 			$scope.objeto.origen = obj.id.toString();
 			$scope.objeto.origenanio = obj.anio;
 		}, function() {
-			console.log("close modal");
+			//console.log("close modal");
 		});
 	};
 
@@ -35,7 +35,7 @@ app.controller('CopiarContenidoEjercicioFiscalController', [ "$scope","$rootScop
 			$scope.objeto.destino = obj.id.toString();
 			$scope.objeto.destinoanio = obj.anio;
 		}, function() {
-			console.log("close modal");
+			//console.log("close modal");
 		});
 	};
 
@@ -62,7 +62,7 @@ app.controller('CopiarContenidoEjercicioFiscalController', [ "$scope","$rootScop
 		                return;
 
 		            } else {
-		                console.log($scope.objeto);
+		                //console.log($scope.objeto);
 		            	copiarContenidoEjercicioFiscalFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);

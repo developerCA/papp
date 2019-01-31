@@ -3,6 +3,10 @@
 app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","reformasFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, reformasFactory) {
 
+	$scope.rol=function(nombre) {
+		return ifRollPermiso(nombre);
+	}
+
 	var index = 0;
 	$scope.dateOptions = {
 	    changeYear: true,
@@ -107,7 +111,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		})
 	}
 
-	$scope.editar=function(index){
+	$scope.editar=function(id){
+		index = $scope.cacularIndexFromId(id);
 		//console.log($scope.data[index]);
 		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 		reformasFactory.traerEditar($scope.data[index].id).then(function(resp){
@@ -142,7 +147,6 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	}
 
-	
 	$scope.aprobar = function(id) {
 		index = $scope.cacularIndexFromId(id);
 		if ($scope.data[index].estado != "SO") {
@@ -155,7 +159,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		}
 		SweetAlert.swal({
 			title: "Reformas?",
-			text: "Está seguro de aprobar la reforma..?",
+			text: "Seguro de aprobar la reforma..?",
 			type: "warning",
 			showCancelButton: true,
 			confirmButtonClass: "btn-danger",
@@ -182,81 +186,73 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	}
 
-	$scope.negar = function(index) {
+	$scope.negar = function(id) {
+		index = $scope.cacularIndexFromId(id);
 		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal("Reformas!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
 		}
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg',
-			resolve: {
-				titulo: function() {
-					return "Negar";
-				},
-				subtitulo : function() {
-					return "Observaci&oacute;n";
-				}
+		SweetAlert.swal({
+			title: "Reformas?",
+			text: "Seguro de negar la reforma..?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (isConfirm) {
+				$scope.data[index].estado = "NE";
+				$scope.data[index].npestado = "Negando";
+				reformasFactory.solicitar(
+					$scope.data[index].id,
+					"NE",
+					null,
+					null
+				).then(function(resp){
+					SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
+				});
 			}
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			if (obj === undefined) {
-				obj = "";
-			}
-			var cur = 0;
-			$scope.data[index].npestado = "Negando";
-			reformasFactory.solicitar(
-				$scope.data[index].id,
-				"NE",
-				null,
-				obj
-			).then(function(resp){
-				//console.log(resp);
-				//$scope.pageChanged();
-				SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
-			});
-		}, function() {
 		});
 	}
 
-	$scope.eliminar = function(index) {
+	$scope.eliminar = function(id) {
+		index = $scope.cacularIndexFromId(id);
 		if ($scope.data[index].estado != "RE") {
-			SweetAlert.swal("Reformas!", "No se permite eliminar este articulo, solo los que estan 'Registrados'.", "error");
+			SweetAlert.swal(
+					"Reformas!",
+					"No se permite eliminar este articulo, solo los que estan 'Registrados'.",
+					"error"
+			);
 			return;
 		}
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg',
-			resolve: {
-				titulo: function() {
-					return "Eliminar";
-				},
-				subtitulo : function() {
-					return "Observaci&oacute;n";
-				}
+		SweetAlert.swal({
+			title: "Reformas?",
+			text: "Seguro que desea eliminar la reforma..?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (isConfirm) {
+				$scope.data[index].estado = "EL";
+				$scope.data[index].npestado = "Eliminando";
+				reformasFactory.solicitar(
+					$scope.data[index].id,
+					"EL",
+					null,
+					null
+				).then(function(resp){
+					SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
+				});
 			}
-		});
-		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			if (obj === undefined) {
-				obj = "";
-			}
-			var cur = 0;
-			$scope.data[index].npestado = "Eliminando";
-			reformasFactory.solicitar(
-				$scope.data[index].id,
-				"EL",
-				null,
-				obj
-			).then(function(resp){
-				//console.log(resp);
-				//$scope.pageChanged();
-				SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
-			});
-		}, function() {
 		});
 	}
 

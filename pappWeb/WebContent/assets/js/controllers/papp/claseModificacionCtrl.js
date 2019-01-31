@@ -86,7 +86,7 @@ app.controller('ClaseModificacionController', [ "$scope","$rootScope","SweetAler
 			   $scope.objeto=resp.json.clasemodificacion;
 			   $scope.detalles=resp.json.details;
 			   $scope.edicion=true;
-			   console.log($scope.objeto);
+			   //console.log($scope.objeto);
 
 		})
 		
@@ -129,7 +129,7 @@ app.controller('ClaseModificacionController', [ "$scope","$rootScope","SweetAler
 		            } else {
 		                
 		            	$scope.objeto.details=$scope.detalles;
-		            	console.log($scope.objeto);
+		            	//console.log($scope.objeto);
 		            	
 		            	claseModificacionFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){

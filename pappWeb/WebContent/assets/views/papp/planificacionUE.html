@@ -56,35 +56,43 @@
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Matriz de Presupuesto"
-									ng-click="editarMatrizPresupuesto($index);"> <i
-										class="fa fa-pencil"></i>
-								</a></td>
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Planificacion"
-									ng-click="cargarPlanificacionAnual(obj);"> <i
-										class="fa fa-clipboard"></i>
-								</a></td>
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Matriz de Metas"
-									ng-click="editarMatrizMetas($index);"> <i
-										class="fa fa-list-alt"></i>
-								</a></td>
-
-								<td><a class="btn btn-sm btn-primary"
-									style="background-color: #00B300 !important"
-									uib-tooltip="Solicitar Planificaci&oacute;n"
-									ng-click="solicitarPlanificacion(obj);"> <i
-										class="fa ti-layout"></i>
-								</a></td>
-								<td><a class="btn btn-sm btn-primary"
-									style="background-color: #00B300 !important"
-									uib-tooltip="Solicitar Ajustada"
-									ng-click="solicitarAjustado(obj);">
-									<i class="fa ti-pencil-alt"></i>
-								</a></td>
-
+								<td>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Matriz de Presupuesto"
+										ng-click="editarMatrizPresupuesto($index);">
+										<i class="fa fa-pencil"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Planificacion"
+										ng-click="cargarPlanificacionAnual(obj);">
+										<i class="fa fa-clipboard"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Matriz de Metas"
+										ng-click="editarMatrizMetas($index);">
+										<i class="fa fa-list-alt"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										style="background-color: #00B300 !important"
+										uib-tooltip="Solicitar Planificaci&oacute;n"
+										ng-click="solicitarPlanificacion(obj);">
+										<i class="fa ti-layout"></i>
+									</a>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-primary"
+										style="background-color: #00B300 !important"
+										uib-tooltip="Solicitar Ajustada"
+										ng-click="solicitarAjustado(obj);">
+										<i class="fa ti-pencil-alt"></i>
+									</a>
+								</td>
 								<td ng-if="rol('PLANIFICACIONAPROBACION');">
 									<a class="btn btn-sm btn-primary"
 										style="background-color: #00B300 !important"

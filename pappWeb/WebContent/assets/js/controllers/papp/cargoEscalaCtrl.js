@@ -16,7 +16,7 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		
 		$scope.data=[];
 		cargoEscalaFactory.traer(pagina).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;				
 		})
@@ -75,11 +75,11 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 		
 		cargoEscalaFactory.traerObj(id).then(function(resp){
 			
-			console.log(resp.json.cargoescala);
+			//console.log(resp.json.cargoescala);
 			if (resp.estado){
 				$scope.objeto=resp.json.cargoescala;
 				$scope.edicion=true;
-				console.log($scope.objeto);
+				//console.log($scope.objeto);
 				$scope.objeto.npremuneracion=$scope.convertirDecimal($scope.objeto.npremuneracion);
 				
 			}
@@ -99,7 +99,7 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.npcodigoescalarmu = obj.codigo;
 			$scope.objeto.npgrupoocupacional = obj.grupoocupacional;
 			$scope.objeto.npremuneracion= obj.remuneracion;
@@ -118,7 +118,7 @@ app.controller('CargoEscalaController', [ "$scope","$rootScope","$uibModal","Swe
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.npcodigocargo = obj.codigo;
 			$scope.objeto.npnombrecargo = obj.nombre;
 			$scope.objeto.cecargoid = obj.id;

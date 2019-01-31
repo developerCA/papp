@@ -17,7 +17,7 @@ app.controller('ContratoController', [ "$scope","$rootScope","$uibModal","SweetA
 			$scope.toStringDate($scope.cFechainicialFiltro),
 			$scope.cEstadoFiltro
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;
 		})

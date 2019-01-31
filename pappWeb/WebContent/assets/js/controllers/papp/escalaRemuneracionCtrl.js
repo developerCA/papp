@@ -15,7 +15,7 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 		
 		$scope.data=[];
 		escalaRemuneracionFactory.traer(pagina).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.meta)
 				$scope.data=resp;				
 		})
@@ -74,7 +74,7 @@ app.controller('EscalaRemuneracionController', [ "$scope","$rootScope","SweetAle
 			if (resp.estado){
 				$scope.objeto=resp.json.escalarmu;
 				$scope.edicion=true;
-				console.log($scope.objeto);
+				//console.log($scope.objeto);
 			}
 		})
 		

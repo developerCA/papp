@@ -76,7 +76,7 @@ app.controller('ClasificacionController', [ "$scope","$rootScope","SweetAlert","
 				
 				$scope.objeto=resp.json.clasificacion;
 				$scope.edicion=true;
-				console.log($scope.objeto);
+				//console.log($scope.objeto);
 		})
 		
 	};

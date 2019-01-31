@@ -80,8 +80,8 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 				$scope.detalles=resp.json.details;
 				
 				$scope.edicion=true;
-				console.log($scope.objeto);
-				console.log($scope.detalles);
+				//console.log($scope.objeto);
+				//console.log($scope.detalles);
 				
 		})
 		
@@ -109,7 +109,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 			}
 		});
 		modalInstance.result.then(function(seleccion) {
-			console.log(seleccion);
+			//console.log(seleccion);
 			obj.codigo	 = seleccion.codigo;
 			obj.nombre = seleccion.nombre;
 			obj.id.fuerzaclasificacionid=seleccion.id;
@@ -142,7 +142,7 @@ app.controller('FuerzaController', [ "$scope","$rootScope","$uibModal","SweetAle
 		            } else {
 		            	
 		            	$scope.objeto.details=$scope.detalles;
-		            	console.log($scope.objeto);
+		            	//console.log($scope.objeto);
 		            	fuerzaFactory.guardar($scope.objeto).then(function(resp){
 		        			 if (resp.estado){
 		        				 form.$setPristine(true);

@@ -104,7 +104,7 @@ app.controller('AprobarCertificacionesFondosController', [ "$scope","$rootScope"
 
 	$scope.editar=function(id){
 		aprobarCertificacionesFondosFactory.traerEditar(id).then(function(resp){
-			console.log(resp.json);
+			//console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.certificacion;
 			    $scope.objetodetalles=resp.json.certificacionlineas;
@@ -128,7 +128,7 @@ app.controller('AprobarCertificacionesFondosController', [ "$scope","$rootScope"
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 /*			aprobarCertificacionesFondosFactory.liquidarManualMente(id, obj).then(function(resp){
 		        SweetAlert.swal("Certificaciones de Fondos!", "Solicitud enviada", "success");
 			});
@@ -173,7 +173,7 @@ app.controller('AprobarCertificacionesFondosController', [ "$scope","$rootScope"
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.certificacionunidadid = obj.id;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;
@@ -188,7 +188,7 @@ app.controller('AprobarCertificacionesFondosController', [ "$scope","$rootScope"
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.certificacionclaseregid = obj.id.id;
 			$scope.objeto.certificacionclasemoid = obj.id.cmid;
 			$scope.objeto.certificaciongastoid = obj.id.cmcgastoid;

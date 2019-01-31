@@ -160,7 +160,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			$scope.edicion=true;
 			$scope.nuevoar=false;
 			$scope.guardar=true;
-			console.log($scope.objeto);
+			//console.log($scope.objeto);
 			//$scope.tabactivo=0;
 			$scope.divEO=true;
 		})
@@ -234,7 +234,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 
 	$scope.formUnidadPlaza = {
 	    submit: function (formUnidadPlaza) {
-			console.log("formUnidadPlaza");
+			//console.log("formUnidadPlaza");
 	        var firstError = null;
 	        if (formUnidadPlaza.$invalid) {
 	            var field = null, firstError = null;
@@ -433,7 +433,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	}
 
 	$scope.abrirInstitucion = function() {
-		console.log($rootScope.ejefiscal);
+		//console.log($rootScope.ejefiscal);
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalInstitucion.html',
 			controller : 'ModalInstitucionController',
@@ -445,7 +445,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.eorganicainstitucionid = obj.id;
 			$scope.objeto.npcodigoinstitucion = obj.codigo;
 			$scope.objeto.npnombreinstitucion = obj.nombre;
@@ -548,7 +548,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objetoPlazaDetail[index].unidadarbolplazagfid = obj.id;
 			$scope.objetoPlazaDetail[index].npgradocodigo = obj.codigo;
 			$scope.objetoPlazaDetail[index].npgradonombre = obj.npnombregrado;
@@ -598,7 +598,7 @@ app.controller('EstructuraOrganicaController', [ "$scope","$rootScope","$uibModa
 	};
 
 	$scope.abrirEmpleadoSocioNegocio = function(index) {
-		console.log(index);
+		//console.log(index);
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalSocioNegocio.html',
 			controller : 'ModalSocioNegocioEmpleadosController',

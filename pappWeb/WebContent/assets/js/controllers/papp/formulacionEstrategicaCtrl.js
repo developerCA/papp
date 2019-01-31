@@ -86,7 +86,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	    		node.npNivelid,
 	    		$rootScope.ejefiscal
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				for (var i = 0; i < resp.length; i++) {
 					resp[i].nodeTipo = "AC";
 					//resp[i].nodePadre = node;
@@ -104,7 +104,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	    		node.npNivelid,
 	    		$rootScope.ejefiscal
 			).then(function(resp){
-				console.log(resp);
+				//console.log(resp);
 				for (var i = 0; i < resp.length; i++) {
 					resp[i].nodeTipo = "SA";
 					//resp[i].nodePadre = node;
@@ -325,7 +325,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 		if ($scope.objetolistaPy == undefined) {
 			$scope.objetolistaPy = [];
 		}
-		console.log($scope.editarId);
+		//console.log($scope.editarId);
 		var obj={
 			id: {
 				id: null, //$scope.editarId,
@@ -377,7 +377,7 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objetoPy.proyectofuerzaid = obj.id;
 			$scope.objetoPy.npFuerzacodigo = obj.codigo;
 			$scope.objetoPy.npFuerzanombre = obj.nombre;
@@ -565,8 +565,8 @@ app.controller('FormulacionEstrategicaController', [ "$scope","$rootScope","$uib
 	        					 $scope.nodeActivo.iscargado = false;
 	        					 if ($scope.nodeActivo.nodes) {
 	        						 delete $scope.nodeActivo.nodes;
-	        						 console.log($scope.nodeActivo);
-	        						 console.log($scope.nodeActivo.nodes);
+	        						 //console.log($scope.nodeActivo);
+	        						 //console.log($scope.nodeActivo.nodes);
 	        					 }
 	        				 }
 	        				 if ($scope.nodeActivo.nodeTipo == "PR") {

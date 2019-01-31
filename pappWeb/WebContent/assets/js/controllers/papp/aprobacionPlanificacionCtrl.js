@@ -136,7 +136,7 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 		PlanificacionUEFactory.cargarMatrizPresupuesto(
 			tObj
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (resp.estado) {
 	            SweetAlert.swal("Planificacion UE! - Subitem", "Registro registrado satisfactoriamente!", "success");
 			} else {
@@ -163,7 +163,7 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 			$rootScope.ejefiscal,
 			$scope.tipo
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.unidad = resp.json.unidad;
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
@@ -185,7 +185,7 @@ app.controller('AprobacionPlanificacionController', [ "$scope","$rootScope","$ui
 			$rootScope.ejefiscal,
 			$scope.tipo
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.unidad = resp.json.unidad;
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
