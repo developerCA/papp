@@ -1284,7 +1284,7 @@ public class EjecucionController {
 					reformametaTO.setFechanegacion(new Date());
 				}
 				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO, tipo);
-				ComunController.crearAuditoria(request, "REFORMAMETA", "U", objeto, id.toString());
+				//ComunController.crearAuditoria(request, "REFORMAMETA", "U", objeto, id.toString());
 				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
