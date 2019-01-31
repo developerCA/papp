@@ -1277,7 +1277,7 @@ public class EjecucionController {
 					if(parameters.get("observacion")!=null)
 						reformametaTO.setMotivoeliminar(parameters.get("observacion"));
 					reformametaTO.setFechaeliminacion(new Date());
-				}
+			 	}
 				else if(tipo.equals("NE")) {
 					if(parameters.get("observacion")!=null)
 						reformametaTO.setMotivonegacion(parameters.get("observacion"));
