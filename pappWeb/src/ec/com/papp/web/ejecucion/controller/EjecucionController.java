@@ -421,11 +421,15 @@ public class EjecucionController {
 					accion = (reformalineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarReformalinea(reformalineaTO);
 					id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
-					//Traigo la lista de ordengastolinea
-					ReformalineaTO reformalineaTO3=new ReformalineaTO();
-					reformalineaTO3.getId().setId(reformalineaTO.getId().getId());
-					Collection<ReformalineaTO> reformalineaTOs2=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO3);
-					jsonObject.put("reformalinea", (JSONArray)JSONSerializer.toJSON(reformalineaTOs2,reformalineaTO.getJsonConfig()));
+					//Traiga la lista de cetificacionlinea
+					ConsultasUtil.obtenerreforma(reformalineaTO.getId().getId(), jsonObject);
+
+					
+//					//Traigo la lista de ordengastolinea
+//					ReformalineaTO reformalineaTO3=new ReformalineaTO();
+//					reformalineaTO3.getId().setId(reformalineaTO.getId().getId());
+//					Collection<ReformalineaTO> reformalineaTOs2=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO3);
+//					jsonObject.put("reformalinea", (JSONArray)JSONSerializer.toJSON(reformalineaTOs2,reformalineaTO.getJsonConfig()));
 				}
 
 			}
