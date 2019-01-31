@@ -3,6 +3,7 @@
 app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","reformasFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, reformasFactory) {
 
+	var index = 0;
 	$scope.dateOptions = {
 	    changeYear: true,
 	    changeMonth: true,
@@ -121,12 +122,13 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		})
 	};
 
-	$scope.solicitar=function(index) {
-		//console.log($scope.data[index]);
+	$scope.solicitar=function(id) {
+		index = $scope.cacularIndexFromId(id);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal("Reformas!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
 		}
+		$scope.data[index].estado = "SO";
 		$scope.data[index].npestado = "Solicitando";
 		reformasFactory.solicitar(
 			$scope.data[index].id,
@@ -134,47 +136,48 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			null,
 			null
 		).then(function(resp){
-			//console.log(resp);
+			//console.log(resp.estado);
 			//$scope.pageChanged();
 			SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
 		});
 	}
 
-	$scope.aprobar = function(index) {
+	$scope.aprobar = function(id) {
+		index = $scope.cacularIndexFromId(id);
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Reformas!", "Solo se puede aprobar si esta en estado solicitado.", "error");
+			SweetAlert.swal(
+					"Reformas!",
+					"Solo se puede aprobar si esta en estado solicitado.",
+					"error"
+			);
 			return;
 		}
-		var modalInstance = $uibModal.open({
-			templateUrl : 'modalLiquidacionManua.html',
-			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
-			size : 'lg',
-			resolve: {
-				titulo: function() {
-					return "Aprobar";
-				},
-				subtitulo : function() {
-					return "Ingrese CUR";
-				}
+		SweetAlert.swal({
+			title: "Reformas?",
+			text: "Está seguro de aprobar la reforma..?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (isConfirm) {
+				$scope.data[index].estado = "AP";
+				$scope.data[index].npestado = "Aprobando";
+				reformasFactory.solicitar(
+					$scope.data[index].id,
+					"AP",
+					null,
+					null
+				).then(function(resp){
+					//console.log(resp);
+					//$scope.pageChanged();
+					SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
+				});
 			}
-		});
-		modalInstance.result.then(function(cur) {
-			//console.log(obj);
-			if (cur === undefined) {
-				cur = 0;
-			}
-			$scope.data[index].npestado = "Aprobando";
-			reformasFactory.solicitar(
-				$scope.data[index].id,
-				"AP",
-				cur,
-				null
-			).then(function(resp){
-				//console.log(resp);
-				//$scope.pageChanged();
-				SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
-			});
-		}, function() {
 		});
 	}
 
@@ -455,5 +458,13 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	};
 	$scope.opennpFechafin = function() {
 	    $scope.popupnpFechafin.opened = true;
+	}
+
+	$scope.cacularIndexFromId = function(id) {
+	    for (var i = 0; i < $scope.data.length; i++) {
+			if ($scope.data[i].id == id) {
+				return i;
+			}
+		}
 	}
 } ]);
