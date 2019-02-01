@@ -1034,6 +1034,7 @@ public class ConsultasUtil {
 			ReformalineaTO reformalineaTO=new ReformalineaTO();
 			reformalineaTO.getId().setId(reformaTO.getId());
 			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO);
+			//System.out.println("lineas... " + reformalineaTOs.size());
 			jsonObject.put("reformalineas", (JSONArray)JSONSerializer.toJSON(reformalineaTOs,reformalineaTO.getJsonConfig()));
 			jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
 		}catch (Exception e) {

@@ -394,19 +394,20 @@ public class EjecucionController {
 				ReformalineaTO reformalineaTO = gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				ReformalineaTO reformalineaTO2=new ReformalineaTO();
-				log.println("consulta lineas: " + reformalineaTO.getNivelactid() +"-"+ reformalineaTO.getId().getId());
+				System.out.println("consulta lineas: " + reformalineaTO.getNivelactid() +"-"+ reformalineaTO.getId().getId() +"-"+reformalineaTO.getId().getLineaid());
 				reformalineaTO2.setNivelactid(reformalineaTO.getNivelactid());
 				reformalineaTO2.getId().setId(reformalineaTO.getId().getId());
 				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO2);
-				log.println("ordenes: " + reformalineaTOs.size());
+				System.out.println("reformas: " + reformalineaTOs.size());
 				boolean grabar=true;
 				if(reformalineaTOs.size()>0){
 					for(ReformalineaTO reformalineaTO3:reformalineaTOs) {
-						if((reformalineaTO.getId().getLineaid()!=null && reformalineaTO.getId().getLineaid().longValue()!=0) && reformalineaTO3.getId().getLineaid().longValue()!=reformalineaTO.getId().getLineaid().longValue()) {
+						System.out.println("reforma linea existente: " + reformalineaTO3.getNivelactid() +"-"+ reformalineaTO3.getId().getId() + " - " +reformalineaTO3.getId().getLineaid() );
+						if((reformalineaTO.getId().getLineaid()!=null && reformalineaTO.getId().getLineaid().longValue()!=0) && (reformalineaTO3.getId().getLineaid().longValue()!=reformalineaTO.getId().getLineaid().longValue() && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue())) {
 							grabar=false;
 							break;
 						}
-						else if(reformalineaTO.getId().getLineaid()==null || reformalineaTO.getId().getLineaid().longValue()==0L) {
+						else if((reformalineaTO.getId().getLineaid()==null || reformalineaTO.getId().getLineaid().longValue()==0L) && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue()) {
 							grabar=false;
 							break;
 						}
