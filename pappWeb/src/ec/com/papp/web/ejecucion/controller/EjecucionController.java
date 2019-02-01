@@ -386,7 +386,7 @@ public class EjecucionController {
 				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO,null);
 				//id=reformaTO.getNpid().toString();
 				reformaTO.setId(reformaTO.getNpid());
-				jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
+				ConsultasUtil.obtenerreforma(reformaTO.getId(), jsonObject);
 			}
 			
 			//reforma linea
@@ -1084,30 +1084,44 @@ public class EjecucionController {
 			OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(id);
 			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			ordengastoTO.setNpcodigoregistro(ordengastoTO.getClaseregistrocmcgasto().getClaseregistroclasemodificacion().getClaseregistro().getCodigo());
-			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
-				ordengastoTO.setEstado(tipo);
-				if(parameters.get("cur")!=null)
-					ordengastoTO.setCur(parameters.get("cur"));
-				if(tipo.equals("EL")) {
-					if(parameters.get("observacion")!=null)
-						ordengastoTO.setMotivoeliminacion(parameters.get("observacion"));
+			boolean continuar=true;
+			if(tipo.equals("SO")) {
+				//obtengo las lineas
+				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
+				ordengastolineaTO.getId().setId(ordengastoTO.getId());
+				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO, false);
+				if(ordengastolineaTOs.size()==0) {
+					continuar=false;
+					mensajes.setMsg("Debe existir al menos una linea creada");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
-				else if(tipo.equals("NE")) {
-					if(parameters.get("observacion")!=null)
-						ordengastoTO.setMotivonegacion(parameters.get("observacion"));
+			}
+			if(continuar) {
+				if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
+					ordengastoTO.setEstado(tipo);
+					if(parameters.get("cur")!=null)
+						ordengastoTO.setCur(parameters.get("cur"));
+					if(tipo.equals("EL")) {
+						if(parameters.get("observacion")!=null)
+							ordengastoTO.setMotivoeliminacion(parameters.get("observacion"));
+					}
+					else if(tipo.equals("NE")) {
+						if(parameters.get("observacion")!=null)
+							ordengastoTO.setMotivonegacion(parameters.get("observacion"));
+					}
+					else if(tipo.equals("AN")) {
+						if(parameters.get("observacion")!=null)
+							ordengastoTO.setMotivoanulacion(parameters.get("observacion"));
+					}
+					UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO, tipo);
+					ComunController.crearAuditoria(request, "ORDENGASTO", "U", objeto, id.toString());
+					//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+					mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+		//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 				}
-				else if(tipo.equals("AN")) {
-					if(parameters.get("observacion")!=null)
-						ordengastoTO.setMotivoanulacion(parameters.get("observacion"));
-				}
-				UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO, tipo);
-				ComunController.crearAuditoria(request, "ORDENGASTO", "U", objeto, id.toString());
-				//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
-				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
-				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 			}
-//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al eliminar");
@@ -1137,27 +1151,41 @@ public class EjecucionController {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			OrdendevengoTO ordendevengoTO=UtilSession.planificacionServicio.transObtenerOrdendevengoTO(id);
 			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
-			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
-				ordendevengoTO.setEstado(tipo);
-				if(tipo.equals("EL")) {
-					if(parameters.get("observacion")!=null)
-						ordendevengoTO.setMotivoeliminacion(parameters.get("observacion"));
+			boolean continuar=true;
+			if(tipo.equals("SO")) {
+				//obtengo las lineas
+				OrdendevengolineaTO ordendevengolineaTO=new OrdendevengolineaTO();
+				ordendevengolineaTO.getId().setId(ordendevengoTO.getId());
+				Collection<OrdendevengolineaTO> ordendevengolineaTOs=UtilSession.planificacionServicio.transObtenerOrdendevengolinea(ordendevengolineaTO);
+				if(ordendevengolineaTOs.size()==0) {
+					continuar=false;
+					mensajes.setMsg("Debe existir al menos una linea creada");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
-				else if(tipo.equals("NE")) {
-					if(parameters.get("observacion")!=null)
-						ordendevengoTO.setMotivonegacion(parameters.get("observacion"));
+			}
+			if(continuar) {
+				if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
+					ordendevengoTO.setEstado(tipo);
+					if(tipo.equals("EL")) {
+						if(parameters.get("observacion")!=null)
+							ordendevengoTO.setMotivoeliminacion(parameters.get("observacion"));
+					}
+					else if(tipo.equals("NE")) {
+						if(parameters.get("observacion")!=null)
+							ordendevengoTO.setMotivonegacion(parameters.get("observacion"));
+					}
+					else if(tipo.equals("AN")) {
+						if(parameters.get("observacion")!=null)
+							ordendevengoTO.setMotivoanulacion(parameters.get("observacion"));
+					}
+					UtilSession.planificacionServicio.transCrearModificarOrdendevengo(ordendevengoTO, tipo);
+					ComunController.crearAuditoria(request, "ORDENDEVENGO", "U", objeto, id.toString());
+					mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+		//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 				}
-				else if(tipo.equals("AN")) {
-					if(parameters.get("observacion")!=null)
-						ordendevengoTO.setMotivoanulacion(parameters.get("observacion"));
-				}
-				UtilSession.planificacionServicio.transCrearModificarOrdendevengo(ordendevengoTO, tipo);
-				ComunController.crearAuditoria(request, "ORDENDEVENGO", "U", objeto, id.toString());
-				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
-				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 			}
-//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al eliminar");
@@ -1169,6 +1197,8 @@ public class EjecucionController {
 		if(mensajes.getMsg()!=null){
 			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 			log.println("existen mensajes");
+			respuesta.setMensajes(mensajes);
+
 		}
 		log.println("devuelve**** " + jsonObject.toString());
 		return respuesta;	
@@ -1210,6 +1240,8 @@ public class EjecucionController {
 		if(mensajes.getMsg()!=null){
 			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 			log.println("existen mensajes");
+			respuesta.setMensajes(mensajes);
+
 		}
 		log.println("devuelve**** " + jsonObject.toString());
 		return respuesta;	
@@ -1226,25 +1258,40 @@ public class EjecucionController {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(id);
 			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
-			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
-				reformaTO.setEstado(tipo);
-				if(tipo.equals("EL")) {
-					if(parameters.get("observacion")!=null)
-						reformaTO.setMotivoeliminacion(parameters.get("observacion"));
-					reformaTO.setFechaeliminacion(new Date());
+			boolean continuar=true;
+			if(tipo.equals("SO")) {
+				//obtengo las lineas
+				ReformalineaTO reformalineaTO=new ReformalineaTO();
+				reformalineaTO.getId().setId(reformaTO.getId());
+				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO);
+				if(reformalineaTOs.size()==0) {
+					continuar=false;
+					mensajes.setMsg("Debe existir al menos una linea creada");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
-				else if(tipo.equals("NE")) {
-					if(parameters.get("observacion")!=null)
-						reformaTO.setMotivonegacion(parameters.get("observacion"));
-					reformaTO.setFechanegacion(new Date());
+			}
+			if(continuar) {
+				if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
+					reformaTO.setEstado(tipo);
+					if(tipo.equals("EL")) {
+						if(parameters.get("observacion")!=null)
+							reformaTO.setMotivoeliminacion(parameters.get("observacion"));
+						reformaTO.setFechaeliminacion(new Date());
+					}
+					else if(tipo.equals("NE")) {
+						if(parameters.get("observacion")!=null)
+							reformaTO.setMotivonegacion(parameters.get("observacion"));
+						reformaTO.setFechanegacion(new Date());
+					}
+					System.out.println("va a enviar al flujo la reforma");
+					UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO, tipo);
+					ComunController.crearAuditoria(request, "REFORMA", "U", objeto, id.toString());
+					mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+		//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 				}
-				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO, tipo);
-				ComunController.crearAuditoria(request, "REFORMA", "U", objeto, id.toString());
-				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
-				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 			}
-//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al eliminar");
@@ -1254,10 +1301,12 @@ public class EjecucionController {
 			//throw new MyException(e);
 		}
 		if(mensajes.getMsg()!=null){
+			System.out.println("tiene mensajes");
 			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+			respuesta.setMensajes(mensajes);
 			log.println("existen mensajes");
 		}
-		log.println("devuelve**** " + jsonObject.toString());
+		System.out.println("devuelve**** " + jsonObject.toString());
 		return respuesta;	
 	}
 
@@ -1272,25 +1321,39 @@ public class EjecucionController {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			ReformametaTO reformametaTO=UtilSession.planificacionServicio.transObtenerReformametaTO(id);
 			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
-			if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
-				reformametaTO.setEstado(tipo);
-				if(tipo.equals("EL")) {
-					if(parameters.get("observacion")!=null)
-						reformametaTO.setMotivoeliminar(parameters.get("observacion"));
-					reformametaTO.setFechaeliminacion(new Date());
-			 	}
-				else if(tipo.equals("NE")) {
-					if(parameters.get("observacion")!=null)
-						reformametaTO.setMotivonegacion(parameters.get("observacion"));
-					reformametaTO.setFechanegacion(new Date());
+			boolean continuar=true;
+			if(tipo.equals("SO")) {
+				//obtengo las lineas
+				ReformametalineaTO reformametalineaTO=new ReformametalineaTO();
+				reformametalineaTO.getId().setId(reformametaTO.getId());
+				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO);
+				if(reformametalineaTOs.size()==0) {
+					continuar=false;
+					mensajes.setMsg("Debe existir al menos una linea creada");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
-				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO, tipo);
-				//ComunController.crearAuditoria(request, "REFORMAMETA", "U", objeto, id.toString());
-				mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
-				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+			}
+			if(continuar) {
+				if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
+					reformametaTO.setEstado(tipo);
+					if(tipo.equals("EL")) {
+						if(parameters.get("observacion")!=null)
+							reformametaTO.setMotivoeliminar(parameters.get("observacion"));
+						reformametaTO.setFechaeliminacion(new Date());
+				 	}
+					else if(tipo.equals("NE")) {
+						if(parameters.get("observacion")!=null)
+							reformametaTO.setMotivonegacion(parameters.get("observacion"));
+						reformametaTO.setFechanegacion(new Date());
+					}
+					UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO, tipo);
+					//ComunController.crearAuditoria(request, "REFORMAMETA", "U", objeto, id.toString());
+					mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+		//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
+				}
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 			}
-//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al eliminar");
@@ -1301,6 +1364,7 @@ public class EjecucionController {
 		}
 		if(mensajes.getMsg()!=null){
 			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+			respuesta.setMensajes(mensajes);
 			log.println("existen mensajes");
 		}
 		log.println("devuelve**** " + jsonObject.toString());
