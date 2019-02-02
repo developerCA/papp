@@ -3,6 +3,10 @@
 app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","ordenGastoFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, ordenGastoFactory) {
 
+	$scope.rol=function(nombre) {
+		return ifRollPermiso(nombre);
+	}
+
 	$scope.codigoFiltro = null;
 	$scope.compromisoFiltro = null;
 	$scope.certificacionFiltro = null;

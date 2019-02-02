@@ -133,16 +133,16 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			SweetAlert.swal("Reformas!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
 		}
-		$scope.data[index].estado = "SO";
-		$scope.data[index].npestado = "Solicitando";
 		reformasFactory.solicitar(
 			$scope.data[index].id,
 			"SO",
 			null,
 			null
 		).then(function(resp){
-			//console.log(resp.estado);
-			//$scope.pageChanged();
+			if (resp.estado) {
+				$scope.data[index].estado = "SO";
+				$scope.data[index].npestado = "Solicitando";
+			}
 			SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
 		});
 	}
@@ -170,16 +170,16 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		},
 		function(isConfirm) {
 			if (isConfirm) {
-				$scope.data[index].estado = "AP";
-				$scope.data[index].npestado = "Aprobando";
 				reformasFactory.solicitar(
 					$scope.data[index].id,
 					"AP",
 					null,
 					null
 				).then(function(resp){
-					//console.log(resp);
-					//$scope.pageChanged();
+					if (resp.estado) {
+						$scope.data[index].estado = "AP";
+						$scope.data[index].npestado = "Aprobando";
+					}
 					SweetAlert.swal("Reformas!", resp.mensajes.msg, resp.mensajes.type);
 				});
 			}

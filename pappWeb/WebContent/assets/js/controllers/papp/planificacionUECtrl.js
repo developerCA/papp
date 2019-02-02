@@ -1586,6 +1586,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				}
 			})
 		}
+		if ($scope.detalles[$scope.mPlanificadaID].cantidad < 0) {
+            SweetAlert.swal(
+        		"Planificacion UE! - Subtarea",
+        		"La Cantidad Planifcada no puede ser menor que cero (0)",
+        		"error"
+    		);
+    		$scope.metaDistribucion('P');
+            $scope.divMetaDistribucionPlanificada=true;
+            $scope.divMetaDistribucionAjustada=false;
+            return;
+		}
 		if ($scope.detalles[$scope.mPlanificadaID].cantidad != $scope.detalles[$scope.mPlanificadaID].npValor) {
             SweetAlert.swal(
         		"Planificacion UE! - Subtarea",
@@ -1596,6 +1607,17 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
             $scope.divMetaDistribucionPlanificada=true;
             $scope.divMetaDistribucionAjustada=false;
             return;
+		}
+		if ($scope.detalles[$scope.mAjustadaID].cantidad < 0) {
+	        SweetAlert.swal(
+	    		"Planificacion UE! - Subtarea",
+	    		"La Cantidad Ajustado no puede ser menor que cero (0)",
+	    		"error"
+			);
+			$scope.metaDistribucion('A');
+            $scope.divMetaDistribucionPlanificada=false;
+            $scope.divMetaDistribucionAjustada=true;
+	        return;
 		}
 		if ($scope.detalles[$scope.mAjustadaID].cantidad != $scope.detalles[$scope.mAjustadaID].npValor) {
 	        SweetAlert.swal(

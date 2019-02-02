@@ -3,6 +3,10 @@
 app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","ordenDevengoFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, ordenDevengoFactory) {
 
+	$scope.rol=function(nombre) {
+		return ifRollPermiso(nombre);
+	}
+
 	$scope.dateOptions = {
 	    changeYear: true,
 	    changeMonth: true,

@@ -3,6 +3,10 @@
 app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, certificacionesFondosFactory) {
 
+	$scope.rol=function(nombre) {
+		return ifRollPermiso(nombre);
+	}
+
 	$scope.dateOptions = {
 	    changeYear: true,
 	    changeMonth: true,
@@ -517,7 +521,11 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
           		             $scope.objeto={};
         				 }
         				 //$scope.pageChanged();
-      					 SweetAlert.swal("Certificaciones de Fondos!", "Registro guardado satisfactoriamente!", "success");
+      					 SweetAlert.swal(
+      							 "Certificaciones de Fondos!",
+      							 "Registro guardado satisfactoriamente!",
+      							 "success"
+						 );
         			 }else{
 	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
         			 }
