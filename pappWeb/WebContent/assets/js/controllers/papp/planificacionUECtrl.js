@@ -290,8 +290,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.totalPlanificadaV += $scope.detallesPlanificada[i].metacantidad;
 				$scope.totalPlanificadaP += $scope.detallesPlanificada[i].lineametavalor;
 			}
-			$scope.diferenciaPlanificadaV = mrasta($scope.aDistribuirP, $scope.totalPlanificadaV, 5);
-			$scope.diferenciaPlanificadaP = mrasta(100, $scope.totalPlanificadaP, 5);
+			$scope.diferenciaPlanificadaV = mresta($scope.aDistribuirP, $scope.totalPlanificadaV, 5);
+			$scope.diferenciaPlanificadaP = mresta(100, $scope.totalPlanificadaP, 5);
 		}
 	}
 
@@ -2609,21 +2609,29 @@ function distribucionCalcularTotal(
 }
 
 function msuma(a, b, decimal) {
+	if (a == undefined) a = 0;
+	if (b == undefined) b = 0;
 	d = Math.pow(10,decimal);
 	return Number(Number((a * d) + (b * d)) / d).toFixed(decimal);
 }
 
 function mresta(a, b, decimal) {
+	if (a == undefined) a = 0;
+	if (b == undefined) b = 0;
 	d = Math.pow(10,decimal);
 	return Number(Number((a * d) - (b * d)) / d).toFixed(decimal);
 }
 
 function mmultiplica(a, b, decimal) {
+	if (a == undefined) a = 0;
+	if (b == undefined) b = 0;
 	d = Math.pow(10,decimal);
 	return Number(Number((a * d) * (b * d)) / d).toFixed(decimal);
 }
 
 function mdivide(a, b, decimal) {
+	if (a == undefined) a = 0;
+	if (b == undefined) b = 0;
 	d = Math.pow(10,decimal);
 	return Number(Number((a * d) / (b * d)) / d).toFixed(decimal);
 }
