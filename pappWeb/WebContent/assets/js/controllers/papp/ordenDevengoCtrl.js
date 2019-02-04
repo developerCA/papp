@@ -117,6 +117,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 
 	$scope.editar=function(index){
 		//console.log($scope.data[index]);
+		index = $scope.calcularIndex(index);
 		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 		$scope.dataIndex = index;
 		ordenDevengoFactory.traerEditar(
@@ -137,6 +138,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	$scope.visualizar=function(index){
 		//console.log($scope.data[index]);
 		//return;
+		index = $scope.calcularIndex(index);
 		ordenDevengoFactory.traerEditar(
 			$scope.data[index].id
 		).then(function(resp){
@@ -155,12 +157,21 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 
 	$scope.solicitar = function(index) {
 		//console.log($scope.data[index]);
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede solicitar si esta en estado registrar.", "error");
+			SweetAlert.swal(
+					"Orden de Devengo!",
+					"Solo se puede solicitar si esta en estado registrar.",
+					"error"
+			);
 			return;
 		}
 		if ($scope.data[index].valortotal <= 0) {
-			SweetAlert.swal("Orden de Devengo!", "El valor total tiene que ser mayor que cero.", "error");
+			SweetAlert.swal(
+					"Orden de Devengo!",
+					"El valor total tiene que ser mayor que cero.",
+					"error"
+			);
 			return;
 		}
 		SweetAlert.swal({ 
@@ -195,6 +206,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	}
 
 	$scope.aprobar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal(
 				"Orden de Devengo!",
@@ -248,8 +260,13 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	}
 
 	$scope.negar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Orden de Devengo!", "Solo se puede negar si esta en estado solicitado.", "error");
+			SweetAlert.swal(
+					"Orden de Devengo!",
+					"Solo se puede negar si esta en estado solicitado.",
+					"error"
+			);
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -298,6 +315,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	}
 
 	$scope.eliminar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
 				"Orden de Devengo!",
@@ -544,5 +562,9 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	};
 	$scope.opennpFechafin = function() {
 	    $scope.popupnpFechafin.opened = true;
+	}
+
+	$scope.calcularIndex = function(index) {
+		return (($scope.tableParams.page() - 1) * 5) + index;
 	}
 } ]);

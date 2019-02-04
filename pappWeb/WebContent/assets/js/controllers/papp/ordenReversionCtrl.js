@@ -108,6 +108,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	}
 
 	$scope.editar=function(index){
+		index = $scope.calcularIndex(index);
 		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 		$scope.dataIndex = index;
 		ordenReversionFactory.traerEditar(
@@ -124,6 +125,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	};
 
 	$scope.solicitar=function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal("Orden de Reversion!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
@@ -159,6 +161,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	}
 
 	$scope.aprobar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal("Orden de Reversion!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
@@ -195,6 +198,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	}
 
 	$scope.negar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal("Orden de Reversion!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
@@ -234,6 +238,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	}
 
 	$scope.eliminar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal("Orden de Reversion!", "No se permite eliminar este articulo, solo los que estan 'Registrados'.", "error");
 			return;
@@ -515,5 +520,9 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	};
 	$scope.opennpFechafin = function() {
 	    $scope.popupnpFechafin.opened = true;
+	}
+
+	$scope.calcularIndex = function(index) {
+		return (($scope.tableParams.page() - 1) * 5) + index;
 	}
 } ]);

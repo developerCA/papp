@@ -111,8 +111,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		})
 	}
 
-	$scope.editar=function(id){
-		index = $scope.cacularIndexFromId(id);
+	$scope.editar=function(index){
+		index = $scope.calcularIndex(index);
 		//console.log($scope.data[index]);
 		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 		reformasFactory.traerEditar($scope.data[index].id).then(function(resp){
@@ -127,8 +127,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		})
 	};
 
-	$scope.solicitar=function(id) {
-		index = $scope.cacularIndexFromId(id);
+	$scope.solicitar=function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal("Reformas!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
@@ -147,8 +147,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	}
 
-	$scope.aprobar = function(id) {
-		index = $scope.cacularIndexFromId(id);
+	$scope.aprobar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal(
 					"Reformas!",
@@ -186,8 +186,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	}
 
-	$scope.negar = function(id) {
-		index = $scope.cacularIndexFromId(id);
+	$scope.negar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal("Reformas!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
@@ -219,8 +219,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	}
 
-	$scope.eliminar = function(id) {
-		index = $scope.cacularIndexFromId(id);
+	$scope.eliminar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
 					"Reformas!",
@@ -457,11 +457,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	    $scope.popupnpFechafin.opened = true;
 	}
 
-	$scope.cacularIndexFromId = function(id) {
-	    for (var i = 0; i < $scope.data.length; i++) {
-			if ($scope.data[i].id == id) {
-				return i;
-			}
-		}
+	$scope.calcularIndex = function(index) {
+		return (($scope.tableParams.page() - 1) * 5) + index;
 	}
 } ]);

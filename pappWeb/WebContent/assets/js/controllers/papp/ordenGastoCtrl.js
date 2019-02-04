@@ -119,6 +119,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	}
 	
 	$scope.editar=function(index) {
+		index = $scope.calcularIndex(index);
 		$scope.noeditar = ($scope.data[index].npestado == 'Registrado'? false: true);
 		ordenGastoFactory.editar(
 			$scope.data[index].id
@@ -137,17 +138,30 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 
 	$scope.solicitar = function(index) {
 		//console.log($scope.data[index]);
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
-			SweetAlert.swal("Orden de Gasto!", "Solo se puede solicitar si esta en estado registrar.", "error");
+			SweetAlert.swal(
+					"Orden de Gasto!",
+					"Solo se puede solicitar si esta en estado registrar.",
+					"error"
+			);
 			return;
 		}
 		if ($scope.data[index].valortotal <= 0) {
-			SweetAlert.swal("Orden de Gasto!", "El valor total tiene que ser mayor que cero.", "error");
+			SweetAlert.swal(
+					"Orden de Gasto!",
+					"El valor total tiene que ser mayor que cero.",
+					"error"
+			);
 			return;
 		}
 		if ($scope.data[index].npingresarcontrato) {
 			if ($scope.data[index].ordengastocontratoid == 0) {
-				SweetAlert.swal("Orden de Gasto!", "Tiene que tener un contrato para poder hacer la solicitud.", "error");
+				SweetAlert.swal(
+						"Orden de Gasto!",
+						"Tiene que tener un contrato para poder hacer la solicitud.",
+						"error"
+				);
 				return;
 			}
 		}
@@ -179,8 +193,13 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	}
 
 	$scope.aprobar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Orden de Gasto!", "Solo se puede aprobar si esta en estado solicitado.", "error");
+			SweetAlert.swal(
+					"Orden de Gasto!",
+					"Solo se puede aprobar si esta en estado solicitado.",
+					"error"
+			);
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -217,8 +236,13 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	}
 
 	$scope.negar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
-			SweetAlert.swal("Orden de Gasto!", "Solo se puede negar si esta en estado solicitado.", "error");
+			SweetAlert.swal(
+					"Orden de Gasto!",
+					"Solo se puede negar si esta en estado solicitado.",
+					"error"
+			);
 			return;
 		}
 		var modalInstance = $uibModal.open({
@@ -249,7 +273,11 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			).then(function(resp){
 				//console.log(resp);
 				//$scope.pageChanged();
-				SweetAlert.swal("Orden de Gasto!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal(
+						"Orden de Gasto!",
+						resp.mensajes.msg,
+						resp.mensajes.type
+				);
 			});
 		}, function() {
 		});
@@ -650,5 +678,9 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	};
 	$scope.opennpFechafin = function() {
 	    $scope.popupnpFechafin.opened = true;
+	}
+
+	$scope.calcularIndex = function(index) {
+		return (($scope.tableParams.page() - 1) * 5) + index;
 	}
 } ]);

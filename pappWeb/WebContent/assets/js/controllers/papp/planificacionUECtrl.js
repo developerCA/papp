@@ -251,21 +251,21 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		});
 	}
 
-	//ng-change="modificarMetaPlanificada(treu);"
+	//ng-change="modificarMetaPlanificada(true);"
 	$scope.modificarMetaPlanificada = function(sumar) {
 		var v = Number($scope.divActividad || $scope.divSubTarea
 			? $scope.detalles[$scope.mPlanificadaID].cantidad
 			: $scope.npTotalPlanificado
 		);
 		// AQUI
-/*		if (v <= 0) {
+		if (v <= 0) {
             SweetAlert.swal(
         		"Planificacion UE!",
         		"La meta planificada no puede ser cero o menos.",
         		"error"
     		);
 			return;
-		} */
+		}
 		$scope.aDistribuirP = v;
 		if (sumar != undefined) {
 			$scope.sumarValoresP();
@@ -290,8 +290,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.totalPlanificadaV += $scope.detallesPlanificada[i].metacantidad;
 				$scope.totalPlanificadaP += $scope.detallesPlanificada[i].lineametavalor;
 			}
-			$scope.diferenciaPlanificadaV = Number($scope.aDistribuirP.toFixed(2)) - Number($scope.totalPlanificadaV.toFixed(2));
-			$scope.diferenciaPlanificadaP = 100 - Number($scope.totalPlanificadaP.toFixed(2));
+			$scope.diferenciaPlanificadaV = mrasta($scope.aDistribuirP, $scope.totalPlanificadaV, 5);
+			$scope.diferenciaPlanificadaP = mrasta(100, $scope.totalPlanificadaP, 5);
 		}
 	}
 
@@ -301,14 +301,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			: $scope.npTotalAjustado
 		);
 		// AQUI
-/*		if (v <= 0) {
+		if (v <= 0) {
             SweetAlert.swal(
         		"Planificacion UE!",
         		"La meta ajustada no puede ser cero o menos.",
         		"error"
     		);
 			return;
-		} */
+		}
 		$scope.aDistribuirA = v;
 		if (sumar != undefined) {
 			$scope.sumarValoresA();
@@ -334,14 +334,14 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			for (var i = 0; i < 12; i++) {
 				$scope.totalAjustadaV += $scope.detallesAjustada[i].valor;
 			}
-			$scope.diferenciaAjustadaV = Number($scope.npTotalAjustado.toFixed(2)) - Number($scope.totalAjustadaV.toFixed(2));
+			$scope.diferenciaAjustadaV = mresta($scope.npTotalAjustado, $scope.totalAjustadaV, 5);
 		} else {
 			for (var i = 0; i < 12; i++) {
 				$scope.totalAjustadaV += $scope.detallesAjustada[i].metacantidad;
 				$scope.totalAjustadaP += $scope.detallesAjustada[i].lineametavalor;
 			}
-			$scope.diferenciaAjustadaV = Number($scope.aDistribuirA.toFixed(2)) - Number($scope.totalAjustadaV.toFixed(2));
-			$scope.diferenciaAjustadaP = 100 - Number($scope.totalAjustadaP.toFixed(2));
+			$scope.diferenciaAjustadaV = mresta($scope.aDistribuirA, $scope.totalAjustadaV, 5);
+			$scope.diferenciaAjustadaP = mresta(100, $scope.totalAjustadaP, 5);
 		}
 	}
 
@@ -354,7 +354,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		for (var i = 0; i < 12; i++) {
 			$scope.totalDevengoV += $scope.detallesDevengo[i].valor;
 		}
-		$scope.diferenciaDevengoV = Number($scope.npTotalAjustado.toFixed(2)) - Number($scope.totalDevengoV.toFixed(2));
+		///$scope.diferenciaDevengoV = Number($scope.npTotalAjustado.toFixed(2)) - Number($scope.totalDevengoV.toFixed(2));
+		$scope.diferenciaDevengoV = mresta($scope.npTotalAjustado, $scope.totalDevengoV, 5);
 	}
 
 	$scope.distribucionValores = function(estado) {
@@ -1116,7 +1117,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			console.log(obj);
+			//console.log(obj);
 			$scope.objeto.itemunidadcantonid = obj.id;
 			$scope.objeto.npcodigocanton = obj.codigo;
 			$scope.objeto.npnombrecanton = obj.nombre;
@@ -1320,7 +1321,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			for (var i = 0; i < 12; i++) {
 				porcentaje = porcentaje + $scope.detallesAjustada[i].lineametavalor;
 			}
-			porcentaje = Number(porcentaje.toFixed(0));
+			///porcentaje = Number(porcentaje.toFixed(0));
 			if ((porcentaje != 100) && !(porcentaje == 0 && $scope.detalles[$scope.mAjustadaID].cantidad == 0)) {
 	            SweetAlert.swal(
             		"Planificacion UE! - Distribucion Ajustada",
@@ -1396,7 +1397,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		for (var i = 0; i < 12; i++) {
 			$scope.totalDevengo += $scope.detallesDevengo[i].valor;
 		}
-		$scope.totalDevengo = Number($scope.totalDevengo.toFixed(2));
+		$scope.totalDevengo = Number($scope.totalDevengo.toFixed(5));
 		if ($scope.totalDevengo !=  $scope.npTotalAjustado) {
             SweetAlert.swal(
         		"Planificacion UE! - Distribucion Devengo",
@@ -1412,11 +1413,19 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				//form.$setPristine(true);
 				$scope.detallesDevengo = null;
 				$scope.metaDistribucion("D");
-	            SweetAlert.swal("Planificacion UE! - Distribucion Devengo", "Registro registrado satisfactoriamente!", "success");
+	            SweetAlert.swal(
+	            		"Planificacion UE! - Distribucion Devengo",
+	            		"Registro registrado satisfactoriamente!",
+	            		"success"
+        		);
 	            $scope.divPlanificacionAnual = false;
 	            $scope.detalles[$scope.mDevengoID].npvalor = $scope.totalDevengo; 
 			} else {
-				SweetAlert.swal("Planificacion UE! - Distribucion Devengo", resp.mensajes.msg, "error");
+				SweetAlert.swal(
+						"Planificacion UE! - Distribucion Devengo",
+						resp.mensajes.msg,
+						"error"
+				);
 	    		$scope.divPlanificacionAnual = false;
 			}
 		})
@@ -1495,11 +1504,19 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				form.$setPristine(true);
 				$scope.limpiarEdicion();
 	            //$scope.limpiar();
-	            SweetAlert.swal("Planificacion UE! - Actividad", "Registro registrado satisfactoriamente!", "success");
+	            SweetAlert.swal(
+	            		"Planificacion UE! - Actividad",
+	            		"Registro registrado satisfactoriamente!",
+	            		"success"
+        		);
 	            if ($scope.nodeActivo.siEditar != undefined) return;
             	$scope.cargarPlanificacionAnual($scope.planificacionUE);
 			} else {
-				SweetAlert.swal("Planificacion UE! - Actividad", resp.mensajes.msg, "error");
+				SweetAlert.swal(
+						"Planificacion UE! - Actividad",
+						resp.mensajes.msg,
+						"error"
+				);
 	    		$scope.divPlanificacionAnual = false;
 			}
 		});
@@ -1520,12 +1537,20 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				form.$setPristine(true);
 				$scope.limpiarEdicion();
 	            //$scope.limpiar();
-	            SweetAlert.swal("Planificacion UE! - Subactividad", "Registro registrado satisfactoriamente!", "success");
+	            SweetAlert.swal(
+	            		"Planificacion UE! - Subactividad",
+	            		"Registro registrado satisfactoriamente!",
+	            		"success"
+        		);
 	            if ($scope.nodeActivo.siEditar != undefined) return;
     			$scope.nodeActivo.nodePadre.iscargado = false;
     			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 			} else {
-				SweetAlert.swal("Planificacion UE! - Subactividad", resp.mensajes.msg, "error");
+				SweetAlert.swal(
+						"Planificacion UE! - Subactividad",
+						resp.mensajes.msg,
+						"error"
+				);
 	    		$scope.divPlanificacionAnual = false;
 			}
 		})
@@ -1545,12 +1570,20 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			if (resp.estado) {
 				form.$setPristine(true);
 				$scope.limpiarEdicion();
-	            SweetAlert.swal("Planificacion UE! - Tarea", "Registro registrado satisfactoriamente!", "success");
+	            SweetAlert.swal(
+	            		"Planificacion UE! - Tarea",
+	            		"Registro registrado satisfactoriamente!",
+	            		"success"
+        		);
 	            if ($scope.nodeActivo.siEditar != undefined) return;
     			$scope.nodeActivo.nodePadre.iscargado = false;
     			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 			} else {
-				SweetAlert.swal("Planificacion UE! - Tarea", resp.mensajes.msg, "error");
+				SweetAlert.swal(
+						"Planificacion UE! - Tarea",
+						resp.mensajes.msg,
+						"error"
+				);
 	    		$scope.divPlanificacionAnual = false;
 			}
 		})
@@ -1581,7 +1614,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    			$scope.nodeActivo.nodePadre.iscargado = false;
 	    			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 				} else {
-					SweetAlert.swal("Planificacion UE! - Subtarea", resp.mensajes.msg, "error");
+					SweetAlert.swal(
+							"Planificacion UE! - Subtarea",
+							resp.mensajes.msg,
+							"error"
+					);
 					return;
 				}
 			})
@@ -1646,7 +1683,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				form.$setPristine(true);
 				$scope.limpiarEdicion();
 	            //$scope.limpiar();
-	            SweetAlert.swal("Planificacion UE! - Subtarea", "Registro registrado satisfactoriamente!", "success");
+	            SweetAlert.swal(
+	            		"Planificacion UE! - Subtarea",
+	            		"Registro registrado satisfactoriamente!",
+	            		"success"
+        		);
 	            if ($scope.nodeActivo.siEditar != undefined) return;
     			$scope.nodeActivo.nodePadre.iscargado = false;
     			$scope.cargarHijos($scope.nodeActivo.nodePadre);
@@ -1684,12 +1725,20 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				form.$setPristine(true);
 				$scope.limpiarEdicion();
 	            //$scope.limpiar();
-	            SweetAlert.swal("Planificacion UE! - Item", "Registro registrado satisfactoriamente!", "success");
+	            SweetAlert.swal(
+	            		"Planificacion UE! - Item",
+	            		"Registro registrado satisfactoriamente!",
+	            		"success"
+        		);
 	            if ($scope.nodeActivo.siEditar != undefined) return;
     			$scope.nodeActivo.nodePadre.iscargado = false;
     			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 			} else {
-				SweetAlert.swal("Planificacion UE! - Item", resp.mensajes.msg, "error");
+				SweetAlert.swal(
+						"Planificacion UE! - Item",
+						resp.mensajes.msg,
+						"error"
+				);
 	    		$scope.divPlanificacionAnual = false;
 			}
 		})
@@ -1717,7 +1766,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	    			$scope.editarDistribucionPlanificado();
 	    			$scope.noCancelar = false;
 				} else {
-					SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+					SweetAlert.swal(
+							"Planificacion UE! - Subitem",
+							resp.mensajes.msg,
+							"error"
+					);
 					return;
 				}
 			})
@@ -1790,12 +1843,20 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				form.$setPristine(true);
 				$scope.limpiarEdicion();
 	            //$scope.limpiar();
-	            SweetAlert.swal("Planificacion UE! - Subitem", "Registro registrado satisfactoriamente!", "success");
+	            SweetAlert.swal(
+	            		"Planificacion UE! - Subitem",
+	            		"Registro registrado satisfactoriamente!",
+	            		"success"
+        		);
 	            if ($scope.nodeActivo.siEditar != undefined) return;
     			$scope.nodeActivo.nodePadre.iscargado = false;
     			$scope.cargarHijos($scope.nodeActivo.nodePadre);
 			} else {
-				SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+				SweetAlert.swal(
+						"Planificacion UE! - Subitem",
+						resp.mensajes.msg,
+						"error"
+				);
 	    		$scope.divPlanificacionAnual = false;
 			}
 		})
@@ -1864,13 +1925,23 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	}
 
 	$scope.calcularTotalPlanificado = function() {
-		$scope.npTotalPlanificado = $scope.detalles[$scope.mPlanificadaID].valor * $scope.detalles[$scope.mPlanificadaID].cantidad;
+		///$scope.npTotalPlanificado = $scope.detalles[$scope.mPlanificadaID].valor * $scope.detalles[$scope.mPlanificadaID].cantidad;
+		$scope.npTotalPlanificado = mmultiplica(
+				$scope.detalles[$scope.mPlanificadaID].valor,
+				$scope.detalles[$scope.mPlanificadaID].cantidad,
+				5
+		);
 		$scope.detalles[$scope.mPlanificadaID].total = $scope.npTotalPlanificado;
 		$scope.sumarValoresP();
 	}
 
 	$scope.calcularTotalAjustado = function() {
-		$scope.npTotalAjustado = $scope.detalles[$scope.mAjustadaID].valor * $scope.detalles[$scope.mAjustadaID].cantidad;
+		///$scope.npTotalAjustado = $scope.detalles[$scope.mAjustadaID].valor * $scope.detalles[$scope.mAjustadaID].cantidad;
+		$scope.npTotalAjustado = mmultiplica(
+				$scope.detalles[$scope.mAjustadaID].valor,
+				$scope.detalles[$scope.mAjustadaID].cantidad,
+				5
+		);
 		$scope.detalles[$scope.mAjustadaID].total = $scope.npTotalAjustado;
 		$scope.sumarValoresA();
 	}
@@ -1908,19 +1979,18 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		if ($scope.edicionMatrizMetas) {
 			$scope.cargarMatrizMetasTipo();
 		}
-		return;
-		var tObj = Object.assign($scope.unidad, $scope.cabecera);
-		tObj.detalle = $scope.detalle;
-		PlanificacionUEFactory.cargarMatrizPresupuesto(
-			tObj
-		).then(function(resp){
-			console.log(resp);
-			if (resp.estado) {
-	            SweetAlert.swal("Planificacion UE! - Subitem", "Registro registrado satisfactoriamente!", "success");
-			} else {
-				SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
-			}
-		});
+//		var tObj = Object.assign($scope.unidad, $scope.cabecera);
+//		tObj.detalle = $scope.detalle;
+//		PlanificacionUEFactory.cargarMatrizPresupuesto(
+//			tObj
+//		).then(function(resp){
+//			console.log(resp);
+//			if (resp.estado) {
+//	            SweetAlert.swal("Planificacion UE! - Subitem", "Registro registrado satisfactoriamente!", "success");
+//			} else {
+//				SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+//			}
+//		});
 	}
 
 	$scope.volver = function() {
@@ -2050,7 +2120,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.aprobarPlanificacion = function(obj) {
 		if (obj.npestadopresupuesto != "Solicitado") {
-			SweetAlert.swal("Planificacion!", "Solo se puede aprobar si esta en estado solicitado.", "error");
+			SweetAlert.swal(
+					"Planificacion!",
+					"Solo se puede aprobar si esta en estado solicitado.",
+					"error"
+			);
 			return;
 		}
 		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
@@ -2061,7 +2135,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			"AP"
 		).then(function(resp){
 			//$scope.detallesPA = resp.json.resultadoaprobacion;
-			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			SweetAlert.swal(
+					"Aprobacion Planificacion!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+			);
 			if (resp.estado) {
 				obj.npestadopresupuesto = "Aprobado";
 			}
@@ -2070,7 +2148,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.denegarPlanificacion = function(obj) {
 		if (obj.npestadopresupuesto != "Solicitado") {
-			SweetAlert.swal("Planificacion!", "Solo se puede denegar si esta en estado solicitado.", "error");
+			SweetAlert.swal(
+					"Planificacion!",
+					"Solo se puede denegar si esta en estado solicitado.",
+					"error"
+			);
 			return;
 		}
 		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
@@ -2080,7 +2162,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			"P",
 			"DE"
 		).then(function(resp){
-			SweetAlert.swal("Denegar Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			SweetAlert.swal(
+					"Denegar Planificacion!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+			);
 			if (resp.estado) {
 				obj.npestadopresupuesto = "Planificado";
 			}
@@ -2090,7 +2176,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 	$scope.solicitarPlanificacion = function(obj) {
 		$scope.detallesPA = null;
 		if (!(obj.npestadopresupuesto == "Planificado" || obj.npestadopresupuesto == "Denegado")) {
-			SweetAlert.swal("Aprobacion Planificacion!", "Solo se puede aprobar si esta Planificado o denegado", "warning");
+			SweetAlert.swal(
+					"Aprobacion Planificacion!",
+					"Solo se puede aprobar si esta Planificado o denegado",
+					"warning"
+			);
 			return;
 		}
 		$scope.aprobacionPlanificacion = true;
@@ -2107,7 +2197,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			"P",
 			"SO"
 		).then(function(resp){
-			SweetAlert.swal("Aprobacion Planificacion!", resp.mensajes.msg, resp.mensajes.type);
+			SweetAlert.swal(
+					"Aprobacion Planificacion!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+			);
 			if (resp.json.resultadoaprobacion.length != 0) {
 				$scope.detallesPA = resp.json.resultadoaprobacion;
 				if ($scope.detallesPA == []) {
@@ -2128,11 +2222,19 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.aprobarAjustado = function(obj) {
 		if (obj.npestadopresupuesto != "Aprobado")  {
-			SweetAlert.swal("Ajustado!", "El presupuesto planificado tiene que estar aprobado, para realizar esta acción.", "error");
+			SweetAlert.swal(
+					"Ajustado!",
+					"El presupuesto planificado tiene que estar aprobado, para realizar esta acción.",
+					"error"
+			);
 			return;
 		}
 		if (!(obj.npestadopresupajus == "Solicitado")) {
-			SweetAlert.swal("Ajustado!", "Solo se puede aprobar si esta en estado solicitado.", "error");
+			SweetAlert.swal(
+					"Ajustado!",
+					"Solo se puede aprobar si esta en estado solicitado.",
+					"error"
+			);
 			return;
 		}
 		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
@@ -2143,7 +2245,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			"AP"
 		).then(function(resp){
 			//$scope.detallesPA = resp.json.resultadoaprobacion;
-			SweetAlert.swal("Aprobacion Ajustado!", resp.mensajes.msg, resp.mensajes.type);
+			SweetAlert.swal(
+					"Aprobacion Ajustado!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+			);
 			if (resp.estado) {
 				obj.npestadopresupajus = "Aprobado";
 			}
@@ -2152,7 +2258,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 
 	$scope.denegarAjustado = function(obj) {
 		if (obj.npestadopresupajus != "Solicitado") {
-			SweetAlert.swal("Ajustado!", "Solo se puede aprobar si esta en estado solicitado.", "error");
+			SweetAlert.swal(
+					"Ajustado!",
+					"Solo se puede aprobar si esta en estado solicitado.",
+					"error"
+			);
 			return;
 		}
 		AprobacionPlanificacionFactory.editarAprobarPlanificacion(
@@ -2163,7 +2273,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			"DE"
 		).then(function(resp){
 			//$scope.detallesPA = resp.json.resultadoaprobacion;
-			SweetAlert.swal("Denegar Ajustado!", resp.mensajes.msg, resp.mensajes.type);
+			SweetAlert.swal(
+					"Denegar Ajustado!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+			);
 			if (resp.estado) {
 				obj.npestadopresupajus = "Planificado";
 			}
@@ -2202,7 +2316,11 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			"A",
 			"SO"
 		).then(function(resp){
-			SweetAlert.swal("Aprobacion Ajustada!", resp.mensajes.msg, resp.mensajes.type);
+			SweetAlert.swal(
+					"Aprobacion Ajustada!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+			);
 			if (resp.json.resultadoaprobacion.length != 0) {
 				$scope.detallesPA = resp.json.resultadoaprobacion;
 				if ($scope.detallesPA == []) {
@@ -2369,26 +2487,27 @@ function distribuirValor(
 		}
 	}
 
-	var valor = Number(
-		presupuesto / nPeriodo
-	);
-	var valorResto = valor - valor.toFixed(2);
-	var porcientoResto = 0;
+	///var valor = Number(presupuesto / nPeriodo);
+	var valor = mdivide(presupuesto, nPeriodo, 5);
+	///var valorResto = valor - valor.toFixed(2);
+	///var porcientoResto = 0;
 	var suma = 0;
-	var resto = 0;
+	///var resto = 0;
 	for (var i = (intervalo - 1); i < 12; i = i + intervalo) {
 		if (divSubItem) {
 			if (nPeriodo != 0) {
 				if (i == 11) {
-					detalles[11].valor = Number((presupuesto - suma).toFixed(2));
+					detalles[11].valor = mresta(presupuesto, suma, 5);
 				} else {
-					detalles[i].valor = Number(valor.toFixed(2));
-					resto = resto + valorResto;
-					if (resto >= 0.01) {
-						detalles[i].valor = Number(detalles[i].valor + Number(resto.toFixed(2)));
-						resto = resto - resto.toFixed(2);
-					}
-					suma = suma + detalles[i].valor;
+					///detalles[i].valor = Number(valor.toFixed(2));
+					detalles[i].valor = Number(valor);
+//					resto = resto + valorResto;
+//					if (resto >= 0.01) {
+//						detalles[i].valor = Number(detalles[i].valor + Number(resto.toFixed(2)));
+//						resto = resto - resto.toFixed(2);
+//					}
+					///suma = suma + detalles[i].valor;
+					suma = msuma(suma, detalles[i].valor, 5);
 				}
 			}
 			if (detalles[i].valor == undefined) {
@@ -2397,15 +2516,18 @@ function distribuirValor(
 		} else {
 			if (nPeriodo != 0) {
 				if (i == 11) {
-					detalles[11].metacantidad = Number((presupuesto - suma).toFixed(2));
+					///detalles[11].metacantidad = Number((presupuesto - suma).toFixed(2));
+					detalles[11].metacantidad = mresta(presupuesto, suma, 5);
 				} else {
-					detalles[i].metacantidad = Number(valor.toFixed(2));
-					resto = resto + valorResto;
-					if (resto >= 0.01) {
-						detalles[i].metacantidad = Number(detalles[i].metacantidad + Number(resto.toFixed(2)));
-						resto = resto - resto.toFixed(2);
-					}
-					suma = suma + detalles[i].metacantidad;
+					///detalles[i].metacantidad = Number(valor.toFixed(2));
+					detalles[i].metacantidad = Number(valor);
+//					resto = resto + valorResto;
+//					if (resto >= 0.01) {
+//						detalles[i].metacantidad = Number(detalles[i].metacantidad + Number(resto.toFixed(2)));
+//						resto = resto - resto.toFixed(2);
+//					}
+					///suma = suma + detalles[i].metacantidad;
+					suma = msuma(suma, detalles[i].metacantidad, 5);
 				}
 			}
 			if (detalles[i].metacantidad == undefined) {
@@ -2414,22 +2536,29 @@ function distribuirValor(
 			if (detalles[i].metacantidad == 0 || presupuesto == 0) {
 				detalles[i].lineametavalor = 0;
 			} else {
+//				detalles[i].lineametavalor = Number(
+//					(detalles[i].metacantidad * 100) / presupuesto
+//				);
 				detalles[i].lineametavalor = Number(
-					(detalles[i].metacantidad * 100)
-					/ presupuesto
+					mdivide(
+						mmultiplica(detalles[i].metacantidad,  100, 5),
+						presupuesto,
+						5
+					)
 				);
 				if (detalles[i].lineametavalor == NaN) {
 					detalles[i].lineametavalor = 0;
 				} else {
-					porcientoResto = porcientoResto + (detalles[i].lineametavalor - Number(detalles[i].lineametavalor.toFixed(2)));
-					detalles[i].lineametavalor = Number(detalles[i].lineametavalor.toFixed(2));
-					if (porcientoResto >= 0.01) {
-						detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
-						porcientoResto = porcientoResto - porcientoResto.toFixed(2);
-					} else if (porcientoResto <= -0.01) {
-						detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
-						porcientoResto = porcientoResto - porcientoResto.toFixed(2);
-					}
+					///porcientoResto = porcientoResto + (detalles[i].lineametavalor - Number(detalles[i].lineametavalor.toFixed(2)));
+					///detalles[i].lineametavalor = Number(detalles[i].lineametavalor.toFixed(2));
+					detalles[i].lineametavalor = detalles[i].lineametavalor.toFixed(5);
+//					if (porcientoResto >= 0.01) {
+//						detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
+//						porcientoResto = porcientoResto - porcientoResto.toFixed(2);
+//					} else if (porcientoResto <= -0.01) {
+//						detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
+//						porcientoResto = porcientoResto - porcientoResto.toFixed(2);
+//					}
 				}
 			}
 		}
@@ -2438,24 +2567,30 @@ function distribuirValor(
 	if (nPeriodo == 0 || !divActividad || !divSubItem) {
 		return;
 	}
-	valor = Number(
-		cantidad / nPeriodo
+	///valor = Number(cantidad / nPeriodo);
+	valor = mdivide(
+			cantidad,
+			nPeriodo,
+			5
 	);
-	valorResto = valor - valor.toFixed(2);
+	//valorResto = valor - valor.toFixed(2);
 	suma = 0;
-	resto = 0;
+	//resto = 0;
 	for (var i = (intervalo - 1); i < 12; i = i + intervalo) {
 		if (i == 11) {
-			detalles[11].metacantidad = Number((cantidad - suma).toFixed(2));
+			//detalles[11].metacantidad = Number((cantidad - suma).toFixed(2));
+			detalles[11].metacantidad = mresta(cantidad, suma, 5);
 		} else {
 			try {
-				detalles[i].metacantidad = Number(valor.toFixed(2));
-				resto = resto + valorResto;
-				if (resto >= 0.01) {
-					detalles[i].metacantidad = Number(detalles[i].metacantidad + Number(resto.toFixed(2)));
-					resto = resto - Number(resto.toFixed(2));
-				}
-				suma = suma + detalles[i].metacantidad;
+				///detalles[i].metacantidad = Number(valor.toFixed(2));
+				detalles[i].metacantidad = valor.toFixed(5);
+				///resto = resto + valorResto;
+//				if (resto >= 0.01) {
+//					detalles[i].metacantidad = Number(detalles[i].metacantidad + Number(resto.toFixed(2)));
+//					resto = resto - Number(resto.toFixed(2));
+//				}
+				///suma = suma + detalles[i].metacantidad;
+				suma = msuma(suma, detalles[i].metacantidad, 5);
 			} catch (e) {
 				detalles[i].metacantidad = 0;
 			} 
@@ -2468,7 +2603,27 @@ function distribucionCalcularTotal(
 ) {
 	var total = 0;
 	for (var i = 0; i < 12; i++) {
-		total = total + detalles[i].valor;
+		total = msuma(total, detalles[i].valor, 5);
 	}
 	return total;
+}
+
+function msuma(a, b, decimal) {
+	d = Math.pow(10,decimal);
+	return Number(Number((a * d) + (b * d)) / d).toFixed(decimal);
+}
+
+function mresta(a, b, decimal) {
+	d = Math.pow(10,decimal);
+	return Number(Number((a * d) - (b * d)) / d).toFixed(decimal);
+}
+
+function mmultiplica(a, b, decimal) {
+	d = Math.pow(10,decimal);
+	return Number(Number((a * d) * (b * d)) / d).toFixed(decimal);
+}
+
+function mdivide(a, b, decimal) {
+	d = Math.pow(10,decimal);
+	return Number(Number((a * d) / (b * d)) / d).toFixed(decimal);
 }
