@@ -326,8 +326,9 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormActividad.presupplanif.$dirty && FormActividad.presupplanif.$invalid, 'has-success':FormActividad.presupplanif.$valid}">
-													<label class="control-label"> Presupuesto
-														Planificado <span class="symbol required"></span>
+													<label class="control-label">
+														Presupuesto Planificado
+														<span class="symbol required"></span>
 													</label>
 													<input type="text" numericOnly style="text-align: right;"
 														decimal="2"
@@ -339,9 +340,11 @@
 
 												<div class="form-group"
 													ng-class="{'has-error':FormActividad.presupajust.$dirty && FormActividad.presupajust.$invalid, 'has-success':FormActividad.presupajust.$valid}">
-													<label class="control-label"> Presupuesto Ajustado
+													<label class="control-label">
+														Presupuesto Ajustado
 														<span class="symbol required"></span>
-													</label> <input type="text" numericOnly style="text-align: right;"
+													</label>
+													<input type="text" numericOnly style="text-align: right;"
 														decimal="2" placeholder="Escriba un presupuesto ajustado"
 														class="form-control" name="presupajust"
 														ng-model="objeto.presupajust" required
@@ -563,7 +566,7 @@
 																	placeholder="Escriba una cantida para el mes"
 																	class="form-control" name="{{'pvalor_'+$index}}"
 																	ng-model="obj.metacantidad" numericOnly
-																	style="text-align: right;" required decimal="2"
+																	style="text-align: right;" required decimal="5"
 																	ng-disabled="!editarP || objetoPlanificada.unidadtiempo!='PE'"
 																	ng-change="calcularPorcientoP();">
 															</td>
@@ -572,7 +575,7 @@
 																	placeholder="Escriba una cantida para el mes"
 																	class="form-control" name="{{'pporcentaje_'+$index}}"
 																	ng-model="obj.lineametavalor" numericOnly
-																	style="text-align: right;" required decimal="2"
+																	style="text-align: right;" required decimal="5"
 																	ng-disabled="true">
 															</td>
 															<td>
@@ -586,13 +589,13 @@
 														<tr>
 															<td>Diferencia</td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" name="diferenciaPlanificadaV"
 															        ng-model="diferenciaPlanificadaV"
 															        ng-disabled="true">
 														    </td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" name="diferenciaPlanificadaP"
 															        ng-model="diferenciaPlanificadaP"
 															        ng-disabled="true">
@@ -662,7 +665,7 @@
 																	placeholder="Escriba una cantida para el mes"
 																	class="form-control" name="{{'pvalor_'+$index}}"
 																	ng-model="obj.metacantidad" numericOnly
-																	style="text-align: right;" required decimal="2"
+																	style="text-align: right;" required decimal="5"
 																	ng-disabled="objetoAjustada.unidadtiempo!='PE'"
 																	ng-change="calcularPorcientoA();">
 															</td>
@@ -671,7 +674,7 @@
 																	placeholder="Escriba una cantida para el mes"
 																	class="form-control" name="{{'pporcentaje_'+$index}}"
 																	ng-model="obj.lineametavalor" numericOnly
-																	style="text-align: right;" required decimal="2"
+																	style="text-align: right;" required decimal="5"
 																	ng-disabled="true">
 															</td>
 															<td>
@@ -684,12 +687,12 @@
 														<tr>
 															<td>Diferencia</td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" ng-model="diferenciaAjustadaV"
 															        ng-disabled="true" name="diferenciaAjustadaV">
 														    </td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" ng-model="diferenciaAjustadaP"
 															        ng-disabled="true" name="diferenciaAjustadaP">
 															</td>
@@ -1006,8 +1009,9 @@
 
 														<div class="form-group"
 															ng-class="{'has-error':FormSubTarea.npMetaPlanificadaCantidad.$dirty && FormSubTarea.npMetaPlanificadaCantidad.$invalid, 'has-success':FormSubTarea.npMetaPlanificadaCantidad.$valid}">
-															<label class="control-label"> Meta Planificada
-																Cantidad <span class="symbol required"></span>
+															<label class="control-label">
+																Meta Planificada Cantidad
+																<span class="symbol required"></span>
 															</label>
 															<input type="text"
 																placeholder="Escriba un meta planificada cantidad"
@@ -1020,8 +1024,9 @@
 
 														<div class="form-group"
 															ng-class="{'has-error':FormSubTarea.npMetaPlanificadaDescripcion.$dirty && FormSubTarea.npMetaPlanificadaDescripcion.$invalid, 'has-success':FormSubTarea.npMetaPlanificadaDescripcion.$valid}">
-															<label class="control-label"> Meta Planificada
-																Descripci&oacute;n <span class="symbol"></span>
+															<label class="control-label">
+																Meta Planificada Descripci&oacute;n
+																<span class="symbol"></span>
 															</label>
 															<textarea name="npMetaPlanificadaDescripcion" rows="5"
 																style="width: 100%"
@@ -1139,7 +1144,7 @@
 																	placeholder="Escriba una cantida para el mes"
 																	class="form-control" name="{{'pvalor_'+$index}}"
 																	ng-model="obj.metacantidad" numericOnly
-																	style="text-align: right;" required decimal="2"
+																	style="text-align: right;" required decimal="5"
 																	ng-disabled="!editarP || objetoPlanificada.unidadtiempo!='PE'"
 																	ng-change="calcularPorcientoP();">
 															</td>
@@ -1148,7 +1153,7 @@
 																	placeholder="Escriba un porciento"
 																	class="form-control" name="{{'pporcentaje_'+$index}}"
 																	ng-model="obj.lineametavalor" numericOnly
-																	style="text-align: right;" required decimal="2"
+																	style="text-align: right;" required decimal="5"
 																	ng-disabled="true"
 																	ng-change="">
 															</td>
@@ -1163,13 +1168,13 @@
 														<tr>
 															<td>Diferencia</td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" name="diferenciaPlanificadaV"
 															        ng-model="diferenciaPlanificadaV"
 															        ng-disabled="true">
 														    </td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" name="diferenciaPlanificadaP"
 															        ng-model="diferenciaPlanificadaP"
 															        ng-disabled="true">
@@ -1239,7 +1244,7 @@
 																	placeholder="Escriba una cantida para el mes"
 																	class="form-control" name="{{'pvalor_'+$index}}"
 																	ng-model="obj.metacantidad" numericOnly
-																	style="text-align: right;" required decimal="2"
+																	style="text-align: right;" required decimal="5"
 																	ng-disabled="!editarA || objetoAjustada.unidadtiempo!='PE'"
 																	ng-change="calcularPorcientoA();">
 															</td>
@@ -1248,7 +1253,7 @@
 																	placeholder="Escriba una cantida para el mes"
 																	class="form-control" name="{{'pporcentaje_'+$index}}"
 																	ng-model="obj.lineametavalor" numericOnly
-																	style="text-align: right;" required decimal="2"
+																	style="text-align: right;" required decimal="5"
 																	ng-disabled="true"
 																	ng-change="">
 															</td>
@@ -1263,13 +1268,13 @@
 														<tr>
 															<td>Diferencia</td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" name="diferenciaAjustadaV"
 															        ng-model="diferenciaAjustadaV"
 															        ng-disabled="true">
 														    </td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" name="diferenciaAjustadaP"
 															        ng-model="diferenciaAjustadaP"
 															        ng-disabled="true">
@@ -1739,8 +1744,7 @@
 														ng-class="{'has-error':FormSubItem.npTotalPlanificado.$dirty && FormSubItem.npTotalPlanificado.$invalid, 'has-success':FormSubItem.npTotalPlanificado.$valid}">
 														<label class="control-label">
 															Total Planificado
-															<span
-															class="symbol required"></span>
+															<span class="symbol required"></span>
 														</label>
 														<input type="text" numericOnly
 															style="text-align: right;" decimal="2"
@@ -1883,7 +1887,7 @@
 																	placeholder="Escriba una cantida para el mes"
 																	class="form-control" name="{{'pvalor_'+$index}}"
 																	ng-model="obj.valor" numericOnly
-																	style="text-align: right;" required decimal="2"
+																	style="text-align: right;" required decimal="5"
 																	ng-disabled="!editarP || objetoPlanificada.unidadtiempo!='PE'"
 																	ng-change="calcularPorcientoP();">
 															</td>
@@ -1891,7 +1895,7 @@
 														<tr>
 															<td>Diferencia</td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" name="diferenciaPlanificadaV"
 															        ng-model="diferenciaPlanificadaV"
 															        ng-disabled="true">
@@ -1962,7 +1966,7 @@
 																	placeholder="Escriba una cantida para el mes"
 																	class="form-control" name="{{'pvalor_'+$index}}"
 																	ng-model="obj.valor" numericOnly
-																	style="text-align: right;" required decimal="2"
+																	style="text-align: right;" required decimal="5"
 																	ng-disabled="objetoAjustada.unidadtiempo!='PE'"
 																	ng-change="calcularPorcientoA();">
 															</td>
@@ -1970,7 +1974,7 @@
 														<tr>
 															<td>Diferencia</td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" name="diferenciaAjustadaV"
 															        ng-model="diferenciaAjustadaV"
 															        ng-disabled="true">
@@ -2039,14 +2043,14 @@
 																placeholder="Escriba una cantida para el mes"
 																class="form-control" name="{{'pvalor_'+$index}}"
 																ng-model="obj.valor" numericOnly
-																style="text-align: right;" required decimal="2"
+																style="text-align: right;" required decimal="5"
 																ng-disabled="!editarA || objetoDevengo.unidadtiempo!='PE'"
 																ng-change="calcularPorcientoD();"></td>
 														</tr>
 														<tr>
 															<td>Diferencia</td>
 															<td>
-															    <input type="text" style="text-align:right;" decimal="2"
+															    <input type="text" style="text-align:right;" decimal="5"
 															        class="form-control" name="diferenciaDevengoV"
 															        ng-model="diferenciaDevengoV"
 															        ng-disabled="true">

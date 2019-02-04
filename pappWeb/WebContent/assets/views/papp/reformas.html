@@ -142,14 +142,14 @@
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Modificar"
-										ng-click="editar(obj.id)">
+										ng-click="editar($index)">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Solicitar"
-										ng-click="solicitar(obj.id)">
+										ng-click="solicitar($index)">
 										<i class="fa fa-list-alt"></i>
 									</a>
 								</td>
@@ -170,14 +170,14 @@
 								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar"
-										ng-click="aprobar(obj.id)">
+										ng-click="aprobar($index)">
 										<i class="fa ti-check"></i>
 									</a>
 								</td>
 								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Negar"
-										ng-click="negar(obj.id)">
+										ng-click="negar($index)">
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>
@@ -198,7 +198,7 @@
 								<td width="32px">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Eliminar"
-										ng-click="eliminar(obj.id)">
+										ng-click="eliminar($index)">
 										<i class="fa fa-trash-o"></i>
 									</a>
 								</td>

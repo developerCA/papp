@@ -117,6 +117,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 
 	$scope.editar=function(index){
 		//console.log($scope.data[index]);
+		index = $scope.calcularIndex(index);
 		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 		certificacionesFondosFactory.traerCertificacionesFondosEditar($scope.data[index].id).then(function(resp){
 			//console.log(resp.json);
@@ -132,6 +133,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 
 	$scope.solicitar=function(index) {
 		//console.log($scope.data[index]);
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede solicitar si esta en estado registrar.", "error");
 			return;
@@ -154,6 +156,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	}
 
 	$scope.aprobar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede aprobar si esta en estado solicitado.", "error");
 			return;
@@ -192,6 +195,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	}
 
 	$scope.negar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede negar si esta en estado solicitado.", "error");
 			return;
@@ -231,6 +235,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	}
 
 	$scope.LiquidacionTotal = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "AP") {
 			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede liquidar si esta en estado aprobado.", "error");
 			return;
@@ -270,6 +275,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	}
 
 	$scope.LiquidacionParcial = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "AP") {
 			SweetAlert.swal("Certificaciones de Fondos!", "Solo se puede liquidar si esta en estado aprobado.", "error");
 			return;
@@ -309,6 +315,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	}
 
 	$scope.eliminar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal("Certificaciones de Fondos!", "No se permite eliminar este articulo, solo los que estan 'Registrados'.", "error");
 			return;
@@ -581,4 +588,8 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	    window.open(url, '_blank');
 		return;
 	};
+
+	$scope.calcularIndex = function(index) {
+		return (($scope.tableParams.page() - 1) * 5) + index;
+	}
 } ]);
