@@ -1333,3 +1333,27 @@ app.directive('mayusculas', function(){
         }
     };
 });
+
+angular.module('numfmt-error-module', [])
+
+.run(function($rootScope) {
+  $rootScope.typeOf = function(value) {
+    return typeof value;
+  };
+})
+
+.directive('stringToNumber', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(value) {
+    	console.log('stringToNumber.$parsers: ' + value);
+        return '' + value;
+      });
+      ngModel.$formatters.push(function(value) {
+      	console.log('stringToNumber.$formatters: ' + value);
+        return parseFloat(value, 10);
+      });
+    }
+  };
+});
