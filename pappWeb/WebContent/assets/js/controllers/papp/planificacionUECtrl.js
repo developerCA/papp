@@ -2396,17 +2396,27 @@ function distribuirValor(
 					(detalles[i].metacantidad * 100)
 					/ presupuesto
 				);
-				if (detalles[i].lineametavalor == NaN) {
-					detalles[i].lineametavalor = 0;
+				if (i == 11) {
+					if (detalles[i].lineametavalor == NaN) {
+						detalles[i].lineametavalor = Number(porcientoResto.toFixed(2));
+					} else {
+						porcientoResto = porcientoResto + (detalles[i].lineametavalor - Number(detalles[i].lineametavalor.toFixed(2)));
+						detalles[i].lineametavalor = Number(detalles[i].lineametavalor.toFixed(2));
+						detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
+					}
 				} else {
-					porcientoResto = porcientoResto + (detalles[i].lineametavalor - Number(detalles[i].lineametavalor.toFixed(2)));
-					detalles[i].lineametavalor = Number(detalles[i].lineametavalor.toFixed(2));
-					if (porcientoResto >= 0.01) {
-						detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
-						porcientoResto = porcientoResto - porcientoResto.toFixed(2);
-					} else if (porcientoResto <= -0.01) {
-						detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
-						porcientoResto = porcientoResto - porcientoResto.toFixed(2);
+					if (detalles[i].lineametavalor == NaN) {
+						detalles[i].lineametavalor = 0;
+					} else {
+						porcientoResto = porcientoResto + (detalles[i].lineametavalor - Number(detalles[i].lineametavalor.toFixed(2)));
+						detalles[i].lineametavalor = Number(detalles[i].lineametavalor.toFixed(2));
+						if (porcientoResto >= 0.01) {
+							detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
+							porcientoResto = porcientoResto - porcientoResto.toFixed(2);
+						} else if (porcientoResto <= -0.01) {
+							detalles[i].lineametavalor = Number(detalles[i].lineametavalor + Number(porcientoResto.toFixed(2)));
+							porcientoResto = porcientoResto - porcientoResto.toFixed(2);
+						}
 					}
 				}
 			}
