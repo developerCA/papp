@@ -747,8 +747,8 @@ public class ConsultasUtil {
 					ajustado=true;
 					total=total+subitemunidadacumuladorTO2.getTotal().doubleValue();
 				}
-				else if(subitemunidadacumuladorTO2.getTipo().equals("R"))
-					total=total+subitemunidadacumuladorTO2.getTotal().doubleValue();
+//				else if(subitemunidadacumuladorTO2.getTipo().equals("R"))
+//					total=total+subitemunidadacumuladorTO2.getTotal().doubleValue();
 			}
 			return total;
 
@@ -770,10 +770,10 @@ public class ConsultasUtil {
 		try{
 			SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(idsubitem);
 			//traigo las reformas asignadas al subitem
-			Collection<ReformaTO> reformaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
 			double totalreforma=0.0;
-			for(ReformaTO reformaTO:reformaTOs)
-				totalreforma=totalreforma+reformaTO.getValorincremento().doubleValue()-reformaTO.getValordecremento();
+			for(ReformalineaTO reformalineaTO:reformalineaTOs)
+				totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento();
 			double saldo=total+totalreforma-subitemunidadTO.getValprecompromiso().doubleValue()-subitemunidadTO.getValxcomprometer().doubleValue()-subitemunidadTO.getValcompromiso().doubleValue();
 			return saldo;
 

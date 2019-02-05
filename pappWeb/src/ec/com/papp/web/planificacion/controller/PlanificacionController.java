@@ -1351,7 +1351,8 @@ public class PlanificacionController {
 					Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorExiste);
 					SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 					Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=new ArrayList<>();
-					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+1));
+					//subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+1));
+					subitemunidadacumuladorTO.getId().setAcumid(1L);
 					//subitemunidadacumuladorTO.getId().setId(id);
 					subitemunidadacumuladorTO.setNpvalor(0.0);
 					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
@@ -1359,14 +1360,16 @@ public class PlanificacionController {
 
 					subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 					//subitemunidadacumuladorTO.getId().setId(id);
-					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
+					//subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
+					subitemunidadacumuladorTO.getId().setAcumid(2L);
 					subitemunidadacumuladorTO.setNpvalor(0.0);
 					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 					subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
 
 					subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 					//subitemunidadacumuladorTO.getId().setId(id);
-					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+3));
+					subitemunidadacumuladorTO.getId().setAcumid(3L);
+					//subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+3));
 					subitemunidadacumuladorTO.setNpvalor(0.0);
 					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.devengo"));
 					subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
@@ -1863,14 +1866,15 @@ public class PlanificacionController {
 				SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 				subitemunidadacumuladorTO.getId().setId(id);
 				subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
-				Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
+				ArrayList<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=(ArrayList<SubitemunidadacumuladorTO>)UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
 				//Si no existe debo crearlas
 				if(subitemunidadacumuladorTOs==null || subitemunidadacumuladorTOs.size()==0){
 					//obtengo la lista de subitemunidadacumuladorTO existente para saber que acumulador toca
 					SubitemunidadacumuladorTO subitemunidadacumuladorExiste=new SubitemunidadacumuladorTO();
 					subitemunidadacumuladorExiste.getId().setId(id);
 					Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorExiste);
-					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+1));
+					//subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+1));
+					subitemunidadacumuladorTO.getId().setAcumid(1L);
 					//subitemunidadacumuladorTO.getId().setId(id);
 					subitemunidadacumuladorTO.setNpvalor(0.0);
 					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
@@ -1878,14 +1882,16 @@ public class PlanificacionController {
 
 					subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 					//subitemunidadacumuladorTO.getId().setId(id);
-					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
+					//subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
+					subitemunidadacumuladorTO.getId().setAcumid(2L);
 					subitemunidadacumuladorTO.setNpvalor(0.0);
 					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 					subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
 
 					subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 					//subitemunidadacumuladorTO.getId().setId(id);
-					subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
+					subitemunidadacumuladorTO.getId().setAcumid(3L);
+					//subitemunidadacumuladorTO.getId().setAcumid(Long.valueOf(subitemunidadacumuladorExistentes.size()+2));
 					subitemunidadacumuladorTO.setNpvalor(0.0);
 					subitemunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.devengo"));
 					subitemunidadacumuladorTOs.add(subitemunidadacumuladorTO);
@@ -1895,6 +1901,16 @@ public class PlanificacionController {
 					for(SubitemunidadacumuladorTO subitemunidadacumuladorTO2:subitemunidadacumuladorTOs){
 						subitemunidadacumuladorTO2.setNpvalor(subitemunidadacumuladorTO2.getTotal());
 					}
+					System.out.println("numero de acumuladores: " +subitemunidadacumuladorTOs.size());
+					int tamano=subitemunidadacumuladorTOs.size();
+					//quito las lineas sobrantes y solo tomo las primeras
+					if(subitemunidadacumuladorTOs.size()>3){
+						for(int i=3; i<tamano;i++){
+							System.out.println("va a eliminar: " + i);
+							subitemunidadacumuladorTOs.remove(3);
+						}
+					}
+					System.out.println("numero que quedaron: " + subitemunidadacumuladorTOs.size());
 				}
 				jsonObject.put("subitemunidadacumulador", (JSONArray)JSONSerializer.toJSON(subitemunidadacumuladorTOs,subitemunidadacumuladorTO.getJsonConfig()));
 				//Saldo para los valores planificados y acumulados

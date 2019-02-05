@@ -421,7 +421,7 @@ public class EjecucionController {
 				else{
 					accion = (reformalineaTO.getId()==null)?"I":"U";
 					UtilSession.planificacionServicio.transCrearModificarReformalinea(reformalineaTO);
-					id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
+					//id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
 					//Traiga la lista de cetificacionlinea
 					ConsultasUtil.obtenerreforma(reformalineaTO.getId().getId(), jsonObject);
 
