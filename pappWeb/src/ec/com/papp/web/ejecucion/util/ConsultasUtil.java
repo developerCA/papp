@@ -747,8 +747,9 @@ public class ConsultasUtil {
 					ajustado=true;
 					total=total+subitemunidadacumuladorTO2.getTotal().doubleValue();
 				}
-//				else if(subitemunidadacumuladorTO2.getTipo().equals("R"))
-//					total=total+subitemunidadacumuladorTO2.getTotal().doubleValue();
+				//si existe reformas tomo la ultima porque ahi esta el valor codificado
+				if(subitemunidadacumuladorTO2.getTipo().equals("R"))
+					total=subitemunidadacumuladorTO2.getTotal().doubleValue();
 			}
 			return total;
 
@@ -770,10 +771,16 @@ public class ConsultasUtil {
 		try{
 			SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(idsubitem);
 			//traigo las reformas asignadas al subitem
-			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+			//..Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(69118L);
+			System.out.println("reformalineatos: " + reformalineaTOs.size());
 			double totalreforma=0.0;
-			for(ReformalineaTO reformalineaTO:reformalineaTOs)
-				totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento();
+			for(ReformalineaTO reformalineaTO:reformalineaTOs){
+				if(reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO"))
+					totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento();
+			}
+			System.out.println("totalreforma: " + totalreforma);
+			System.out.println("valores: " +total+"-"+totalreforma+"-"+subitemunidadTO.getValprecompromiso()+"-"+subitemunidadTO.getValxcomprometer().doubleValue()+"-"+subitemunidadTO.getValcompromiso());
 			double saldo=total+totalreforma-subitemunidadTO.getValprecompromiso().doubleValue()-subitemunidadTO.getValxcomprometer().doubleValue()-subitemunidadTO.getValcompromiso().doubleValue();
 			return saldo;
 
