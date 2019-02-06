@@ -771,8 +771,8 @@ public class ConsultasUtil {
 		try{
 			SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(idsubitem);
 			//traigo las reformas asignadas al subitem
-			//..Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
-			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(69118L);
+			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+			//Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(69118L);
 			System.out.println("reformalineatos: " + reformalineaTOs.size());
 			double totalreforma=0.0;
 			for(ReformalineaTO reformalineaTO:reformalineaTOs){
