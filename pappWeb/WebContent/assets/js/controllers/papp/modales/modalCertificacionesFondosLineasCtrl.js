@@ -112,7 +112,8 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 		if (i == $scope.si.length)
 			return;
 		certificacionesFondosFactory.obtenerTotal(
-			$scope.si[i].tablarelacionid
+			$scope.si[i].tablarelacionid,
+			$scope.si[i].id
 		).then(function(resp){
 			//console.log(resp);
         	$scope.saldo = resp.json.valordisponiblesi.saldo;
