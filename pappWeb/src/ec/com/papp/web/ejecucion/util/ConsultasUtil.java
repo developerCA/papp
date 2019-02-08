@@ -776,8 +776,12 @@ public class ConsultasUtil {
 			System.out.println("reformalineatos: " + reformalineaTOs.size());
 			double totalreforma=0.0;
 			for(ReformalineaTO reformalineaTO:reformalineaTOs){
-				if(reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO"))
-					totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento();
+				if(reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")){
+					System.out.println("incremento: " + reformalineaTO.getValorincremento() + " - " + reformalineaTO.getValordecremento());
+					//totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
+					totalreforma=totalreforma-reformalineaTO.getValordecremento().doubleValue();
+					System.out.println("total: " + totalreforma);
+				}
 			}
 			System.out.println("totalreforma: " + totalreforma);
 			System.out.println("valores: " +total+"-"+totalreforma+"-"+subitemunidadTO.getValprecompromiso()+"-"+subitemunidadTO.getValxcomprometer().doubleValue()+"-"+subitemunidadTO.getValcompromiso());
