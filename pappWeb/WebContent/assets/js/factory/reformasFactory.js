@@ -114,9 +114,10 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 		},
 
 		obtenerTotal:function(
-			tablarelacionid
+			tablarelacionid,
+			id
 		){
-			var url = "ejecucion/valordisponiblesi/" + tablarelacionid + "/0";
+			var url = "ejecucion/valordisponiblesi/" + tablarelacionid + "/" + id;
 			return Restangular.allUrl(url).customGET();
 		},
 

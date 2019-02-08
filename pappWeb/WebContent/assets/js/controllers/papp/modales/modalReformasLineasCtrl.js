@@ -128,7 +128,8 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 		if (i == $scope.si.length)
 			return;
 		reformasFactory.obtenerTotal(
-			$scope.si[i].tablarelacionid
+			$scope.si[i].tablarelacionid,
+			$scope.si[i].id
 		).then(function(resp){
 			//console.log(resp);
         	$scope.valorajustado = resp.json.valordisponiblesi.valorajustado;
