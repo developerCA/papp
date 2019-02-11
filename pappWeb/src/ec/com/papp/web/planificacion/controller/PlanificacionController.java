@@ -943,9 +943,11 @@ public class PlanificacionController {
 							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())) {
 					//		&& nivelactividadTO2.getNpcodigointerno().equals(subitemunidadTO.getNpcodigointerno())){
 							//) {
-						grabar=false;
+						if(subitemunidadTO.getNpcodigointerno()==nivelactividadTO2.getNpcodigointerno()){
+							grabar=false;
 //						log.println("entra por 2");
-						break;
+							break;
+						}
 					}
 
 //						if((subitemunidadTO.getId()==null || subitemunidadTO.getId().longValue()==0) && (descripcion[0].trim().equals(subitemunidadTO.getNpcodigosubitem()) && descripcion[1].trim().equals(subitemunidadTO.getNpnombresubitem()))){
