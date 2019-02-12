@@ -568,6 +568,28 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Planificación UE'
         }
+    }).state('app.planificacionue1', {
+        url: "/planificacionue1",
+        templateUrl: "assets/views/papp/planificacionUE1.html",
+        resolve: loadSequence(
+        		'ngTable', 'PlanificacionUECtrl1', 'PlanificacionUEFactory',
+        		'ModalItemCtrl', 'ItemFactory',
+        		'ModalObraCtrl', 'ObrasFactory',
+        		'ModalFuenteFinanciamientoCtrl', 'FuenteFactory',
+        		'ModalOrganismoCtrl', 'OrganismoFactory',
+        		'ModalDivisionGeograficaCtrl', 'DivisionGeograficaFactory',
+        		'ModalSubItemCtrl', 'SubItemsFactory',
+        		'ModalTipoProductoCtrl', 'TipoProductoFactory',
+        		'ModalProcedimientoCtrl', 'TipoProcedimientoFactory',
+        		'ModalTipoRegimenCtrl', 'ComunTipoRegimenFactory',
+        		'ModalUnidadMedidaCtrl', 'UnidadesMedidaFactory',
+        		'AprobacionPlanificacionFactory',
+        		'PUECtrl'
+		),
+        title: 'Planificación UE',
+        ncyBreadcrumb: {
+            label: 'Planificación UE'
+        }
     }).state('app.aprobacionplanificacion', {
         url: "/aprobacionplanificacion",
         templateUrl: "assets/views/papp/aprobacionPlanificacion.html",

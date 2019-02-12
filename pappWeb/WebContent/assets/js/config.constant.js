@@ -214,6 +214,7 @@ app.constant('JS_REQUIRES', {
         'ModalIndicadoresActividadCtrl':'assets/js/controllers/papp/modales/modalIndicadoresActividadCtrl.js',
         'IndicadoresActividadFactory':'assets/js/factory/indicadoresActividadFactory.js',
         'PlanificacionUECtrl':'assets/js/controllers/papp/planificacionUECtrl.js',
+        'PlanificacionUECtrl1':'assets/js/controllers/papp/planificacionUECtrl1.js',
         'PlanificacionUEFactory':'assets/js/factory/planificacionUEFactory.js',
         'ModalUnidadCortoCtrl':'assets/js/controllers/papp/modales/modalUnidadCortoCtrl.js',
         'ModalClaseGastoCtrl':'assets/js/controllers/papp/modales/modalClaseGastoCtrl.js',
