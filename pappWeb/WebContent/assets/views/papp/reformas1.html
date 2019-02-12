@@ -18,7 +18,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body" ng-show="!edicion">
+				<div class="panel-body" ng-show="!edicion && !metasLista && !metasSubtarea && !metasDistribucion">
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -167,6 +167,13 @@
 										<i class="fa fa-file-text-o"></i>
 									</a>
 								</td> 
+								<td width="32px">
+									<a class="btn btn-sm btn-primary"
+										uib-tooltip="Imprimir reforma meta"
+										ng-click="imprimiroficio(obj.id)">
+										<i class="fa fa-file-text-o"></i>
+									</a>
+								</td> 
 								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar"
@@ -179,20 +186,6 @@
 										uib-tooltip="Negar"
 										ng-click="negar($index)">
 										<i class="fa ti-minus"></i>
-									</a>
-								</td>
-								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
-									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Liquidaci&oacute;n Total"
-										ng-click="LiquidacionTotal($index)">
-										<i class="fa fa-clipboard"></i>
-									</a>
-								</td>
-								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
-									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Liquidaci&oacute;n Parcial"
-										ng-click="LiquidacionParcial($index)">
-										<i class="fa fa-clipboard"></i>
 									</a>
 								</td>
 								<td width="32px">
@@ -217,7 +210,6 @@
 							Reformas
 						</h5>
 					</div>
-
 					<form name="Form" id="form1" novalidate
 						ng-submit="form.submit(Form)">
 						<div class="row">
@@ -462,10 +454,11 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<button ng-if="objeto.incluyemeta"
-										class="btn" ng-click="metaEditar()">
+									<a ng-if="objeto.incluyemeta" href="#"
+										class="btn btn-sm btn-dark-azure"
+										ng-click="metaEditar();">
 										Metas
-									</button>
+									</a>
 									<span ng-if="guardar && !noeditar">
 										<button type="submit" class="btn btn-primary">
 											Guardar
@@ -498,6 +491,7 @@
 												<table class="table table-striped">
 													<tr>
 														<th></th>
+														<th></th>
 														<th>Descripci&oacute;n</th>
 														<th>Fuente Financiamiento</th>
 														<th>Valor</th>
@@ -505,11 +499,13 @@
 														<th>Decremento</th>
 													</tr>
 													<tr ng-repeat="obj in detalles">
-														<td>
+														<td width="32px">
 															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
 																uib-tooltip="Modificar" ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
+														</td>
+														<td width="32px">
 															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
 																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
 																<i class="fa ti-trash"></i>
@@ -541,56 +537,228 @@
 
 						</div>
 					</form>
+				</div>
 
+				<div ng-show="metasLista" class="panel-body" id="metas">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Mantener Reformas
+						</h5>
+					</div>
+					<form name="FormMetas" id="formMetas" novalidate
+						ng-submit="form.submit(FormMetas)">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+								    <label class="control-label">
+								        Tipo
+								    </label>
+								    <select class="form-control" name="tipo"
+								        ng-model="objeto.tipo" ng-disabled="true">
+								        <option value="" ng-selected="selected">(Ninguno)</option>
+								        <option value="EP">Especial</option>
+								        <option value="MU">Misma Unidad</option>
+								        <option value="EU">Entre Unidades</option>
+								        <option value="ES">Entre Subitems</option>
+								    </select>
+								</div>
+								
+								<div class="form-group">
+								    <label class="control-label">
+								        C&oacute;digo
+								    </label>
+								    <input type="text" placeholder="Escriba un c&oacute;digo"
+								        class="form-control" name="codigo" ng-model="objeto.codigo"
+								        ng-disabled="true">
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        Unidad C&oacute;digo
+								    </label>
+							        <input type="text" placeholder="Escriba un unidad c&oacute;digo"
+							            class="form-control" name="npunidadcodigo" ng-disabled="true"
+							            ng-model="objeto.npunidadcodigo">
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        Unidad Nombre
+								    </label>
+								    <input type="text" placeholder="Escriba un unidad nombre"
+								        class="form-control" name="npunidadnombre" ng-model="objeto.npunidadnombre"
+								        required ng-disabled="true">
+								</div>
+									
+								<div ng-show="objeto.tipo=='ES'">
+									<div class="form-group">
+									    <label class="control-label">
+									        &Iacute;tem C&oacute;digo
+									    </label>
+								        <input type="text" placeholder="Escriba un &iacute;tem c&oacute;digo"
+								            class="form-control" name="npitemcodigo" ng-disabled="true"
+								            ng-model="objeto.npitemcodigo">
+									</div>
+										
+									<div class="form-group">
+									    <label class="control-label">
+									        &Iacute;tem Nombre
+									    </label>
+									    <input type="text" placeholder="Escriba un &iacute;tem nombre"
+									        class="form-control" name="npitemnombre" ng-model="objeto.npitemnombre"
+									        ng-disabled="true">
+									</div>
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        Descripci&oacute;n
+								    </label>
+								    <textarea name="descripcion" rows="5" style="width: 100%"
+								    	placeholder="Escriba un descripci&oacute;n"
+								        class="form-control" ng-model="objeto.descripcion"
+								        ng-disabled="true">
+							        </textarea>
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        N&uacute;mero Oficio
+								    </label>
+								    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
+								        class="form-control" name="numerooficio" ng-model="objeto.numerooficio"
+								        ng-disabled="true">
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        Valor Incrementado
+								    </label>
+								    <input type="text" placeholder="Escriba un valor incrementado"
+								        class="form-control" name="valorincremento" ng-model="objeto.valorincremento" numericOnly style="text-align:right;"
+								        ng-disabled="true" format="number">
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        Valor Decrementado
+								    </label>
+								    <input type="text" placeholder="Escriba un valor decrementado"
+								        class="form-control" name="valordecremento" ng-model="objeto.valordecremento" numericOnly style="text-align:right;"
+								        ng-disabled="true" format="number">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<span ng-if="guardar && !noeditar">
+										<button type="submit" class="btn btn-primary">
+											Guardar
+										</button>
+									</span>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(FormMetas)">
+										Cancelar
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<br>
+							<div class="col-sm-12">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											L&iacute;neas
+										</h4>
+									</div>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<th></th>
+														<th></th>
+														<th></th>
+														<th>Descripci&oacute;n Subtarea</th>
+														<th>Unidad</th>
+														<th>Meta</th>
+														<th>Incremento</th>
+														<th>Decremento</th>
+													</tr>
+													<tr ng-repeat="obj in detalles">
+														<td width="32px">
+															<a class="btn btn-sm btn-primary"
+																ng-show="!noeditar"
+																uib-tooltip="Actualizar"
+																ng-click="metaActualizar($index)">
+																<i class="fa fa-pencil"></i>
+															</a>
+														</td>
+														<td width="32px">
+															<a class="btn btn-sm btn-primary"
+																ng-show="!noeditar"
+																uib-tooltip="Distribucion"
+																ng-click="metaDistribucion($index)">
+																<i class="fa fa-file-text"></i>
+															</a>
+														</td>
+														<td width="32px">
+															<a class="btn btn-sm btn-primary"
+																style="background-color: Red !important;"
+																ng-show="!noeditar"
+																uib-tooltip="Eliminar"
+																ng-click="metaEliminar($index)">
+																<i class="fa ti-trash"></i>
+															</a>
+														</td>
+														<td>
+															{{ obj.npSubitemcodigo }}: {{ obj.npSubitem }}
+														</td>
+														<td>
+															{{ obj.npfuentefinanciamiento }}
+														</td>
+														<td>
+															{{ obj.npvalortotal }}
+														</td>
+														<td style="text-align:right;">
+															{{ obj.valorincremento | currency }}
+														</td>
+														<td style="text-align:right;">
+															{{ obj.valordecremento | currency }}
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+
+				<div ng-show="metasSubtarea" class="panel-body" id="subtarea">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Reformas Meta - Subtarea
+						</h5>
+					</div>
+				</div>
+
+				<div ng-show="metasDistribucion" class="panel-body" id="distribucion">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Distribución de Meta
+						</h5>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-<script type="text/ng-template" id="modalLiquidacionManua.html">
-<div class="modal-header">
-	<h3 class="modal-title">
-		{{ nptitulo }}
-	</h3>
 </div>
-<div class="modal-body">
-	<div class="panel-body" ng-init="consultar();" >
-
-		<div class="row">
-			<div class="col-md-12">
-				<div class="form-group"
-				    ng-class="{'has-error':Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$dirty && Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$invalid, 'has-success':Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$valid}">
-				    <label class="control-label">
-				        {{ npsubtitulo }}: 
-				    </label>
-				    <textarea name="CTLCERTIFICACIONMOTIVOLIQUIDACION" rows="5" style="width: 100%" placeholder="Escriba un motivo"
-				        class="form-control" ng-model="objeto.CTLCERTIFICACIONMOTIVOLIQUIDACION"></textarea>
-				    <span class="error text-small block"
-				        ng-if="Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$dirty && Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$invalid">
-				        Incorrecto
-				    </span>
-				    <span class="success text-small"
-				        ng-if="Form.CTLCERTIFICACIONMOTIVOLIQUIDACION.$valid">
-				        Listo
-				    </span>
-				</div>
-			</div>
-		</div>
-
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-primary" ng-click="aceptar(objeto.CTLCERTIFICACIONMOTIVOLIQUIDACION);">
-			Aceptar
-		</button>
-		<button class="btn btn-default btn-o" ng-click="cancelar()">
-			Cancelar
-		</button>
-	</div>
-</div>
-</script>
-</div>
-
-
-
-
-

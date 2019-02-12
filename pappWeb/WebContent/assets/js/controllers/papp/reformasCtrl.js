@@ -8,6 +8,13 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	}
 
 	var index = 0;
+	// Metas
+	$scope.metasLista = false;
+	$scope.metasLinea = false;
+	$scope.metasSubtarea = false;
+	$scope.metasDistribucion = false;
+
+	// Reformas
 	$scope.dateOptions = {
 	    changeYear: true,
 	    changeMonth: true,
@@ -464,6 +471,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	}
 
 	$scope.metaEditar=function(){
+		$scope.edicion = false;
+		$scope.metasLista = true;
 		//index = $scope.calcularIndex(index);
 //		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 //		reformasFactory.traerEditar($scope.data[index].id).then(function(resp){
@@ -476,5 +485,65 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 //			$scope.nuevoar=false;
 //			$scope.guardar=true;
 //		})
+	};
+
+	$scope.metaActualizar = function(index) {
+//		var modalInstance = $uibModal.open({
+//			templateUrl : 'assets/views/papp/modal/modalReformasLineas.html',
+//			controller : 'ModalReformasLineasController',
+//			size : 'lg',
+//			resolve : {
+//				ID : function() {
+//					return $scope.objeto.id;
+//				},
+//				unidadID : function() {
+//					return $scope.objeto.reformaunidadid;
+//				},
+//				editar : function() {
+//					return $scope.detalles[index].id
+//				}
+//			}
+//		});
+//		modalInstance.result.then(function(obj) {
+//		    $scope.detalles = obj.lineas;
+//		    //$scope.objeto.valortotal = obj.valortotal;
+//		    $scope.form.submit(Form);
+//            SweetAlert.swal("Reformas! - Lineas", "Registro guardado satisfactoriamente!", "success");
+//		}, function() {
+//		});
+	};
+
+	$scope.metaDistribucion = function(index) {
+		
+	}
+
+	$scope.metaEliminar = function(index) {
+//		SweetAlert.swal({
+//			title: "Reformas?",
+//			text: "Seguro que desea eliminar esta linea?",
+//			type: "warning",
+//			showCancelButton: true,
+//			confirmButtonClass: "btn-danger",
+//			confirmButtonText: "SI!",
+//			cancelButtonText: "NO",
+//			closeOnConfirm: false,
+//			closeOnCancel: true
+//		},
+//		function(isConfirm) {
+//			if (!isConfirm) return;
+//			reformasFactory.eliminarLinea(
+//				$scope.detalles[index].id.id,
+//				$scope.detalles[index].id.lineaid
+//			).then(function(resp){
+//				if (resp.estado){
+//					SweetAlert.swal("Reformas!", "Eliminado satisfactoriamente!", "success");
+//					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
+//				    $scope.detalles.splice(index, 1);
+//				    $scope.form.submit(Form);
+//	   			}else{
+//		            SweetAlert.swal("Reformas!", resp.mensajes.msg, "error");
+//	   			}
+//          	})
+//		});
 	};
 } ]);
