@@ -108,6 +108,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			$scope.nuevoar=true;
 			$scope.guardar=true;
 			$scope.noeditar=false;
+			$scope.objeto.incluyemeta=$scope.objeto.incluyemeta==1;
 		})
 	}
 
@@ -119,6 +120,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			//console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.reforma;
+				$scope.objeto.incluyemeta=$scope.objeto.incluyemeta==1;
 			    $scope.detalles=resp.json.reformalineas;
 			}
 			$scope.edicion=true;
@@ -460,4 +462,19 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.calcularIndex = function(index) {
 		return (($scope.tableParams.page() - 1) * 5) + index;
 	}
+
+	$scope.metaEditar=function(){
+		//index = $scope.calcularIndex(index);
+//		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
+//		reformasFactory.traerEditar($scope.data[index].id).then(function(resp){
+//			//console.log(resp.json);
+//			if (resp.estado) {
+//			    $scope.objeto=resp.json.reforma;
+//			    $scope.detalles=resp.json.reformalineas;
+//			}
+//			$scope.edicion=true;
+//			$scope.nuevoar=false;
+//			$scope.guardar=true;
+//		})
+	};
 } ]);

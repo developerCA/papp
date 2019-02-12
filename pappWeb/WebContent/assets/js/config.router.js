@@ -768,6 +768,19 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Reformas'
         }
+    }).state('app.reformas1', {
+        url: "/reformas1",
+        templateUrl: "assets/views/papp/reformas1.html",
+        resolve: loadSequence(
+        		'ngTable','ReformasCtrl','ReformasFactory',
+        		'ModalUnidadCortoCtrl','UnidadFactory',
+        		'ModalItemCtrl','ItemFactory',
+        		'ModalReformasLineasCtrl'
+		),
+        title: 'Reformas',
+        ncyBreadcrumb: {
+            label: 'Reformas'
+        }
     }).state('app.contrato', {
         url: "/contrato",
         templateUrl: "assets/views/papp/contrato.html",
