@@ -16,6 +16,7 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
 				return;
 			}
 			$scope.objeto=resp.json.contrato;
+			console.log($scope.objeto);
 			$scope.objeto.npfechainicio = toDate($scope.objeto.npfechainicio);
 			$scope.anticipo=0;
 			$scope.noeditar=false;

@@ -257,9 +257,10 @@
 								        Descripci&oacute;n
 								        <span class="symbol required"></span>
 								    </label>
-								    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
+								    <textarea name="descripcion" rows="5" style="width: 100%"
+								    	placeholder="Escriba un descripci&oacute;n"
 								        class="form-control" ng-model="objeto.descripcion"
-								        required ng-disabled="noeditar"></textarea>
+								        required ng-disabled="noeditar" ng-maxlength="500"></textarea>
 								    <span class="error text-small block"
 								        ng-if="FormEditar.descripcion.$dirty && FormEditar.descripcion.$invalid">
 								        Incorrecto

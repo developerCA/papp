@@ -13,11 +13,10 @@
 					    ng-class="{'has-error':Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
 					    <label class="control-label">
 					        Proveedor C&oacute;digo
-					        <span class="symbol required"></span>
 					    </label>
 					    <input type="text" placeholder="Escriba un proveedor c&oacute;digo"
 					        class="form-control" name="codigo" ng-model="objeto.npproveedorcodigo"
-					        required ng-disabled="true" format="number">
+					        ng-disabled="true">
 					    <span class="error text-small block"
 					        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
 					        Incorrecto
@@ -32,11 +31,10 @@
 					    ng-class="{'has-error':Form.nombremostrado.$dirty && Form.nombremostrado.$invalid, 'has-success':Form.nombremostrado.$valid}">
 					    <label class="control-label">
 					        Proveedor Nombre Mostrado
-					        <span class="symbol required"></span>
 					    </label>
 					    <input type="text" placeholder="Escriba un proveedor nombre mostrado"
 					        class="form-control" name="nombremostrado" ng-model="objeto.npproveedor"
-					        required ng-disabled="true">
+					        ng-disabled="true">
 					    <span class="error text-small block"
 					        ng-if="Form.nombremostrado.$dirty && Form.nombremostrado.$invalid">
 					        Incorrecto

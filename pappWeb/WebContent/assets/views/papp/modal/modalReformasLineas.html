@@ -190,11 +190,9 @@
 		            class="form-control" name="saldo" ng-model="saldo" ng-disabled="true">
 			</div>
 			
-			<div class="form-group"
-			    ng-class="{'has-error':Form.valorincremento.$dirty && Form.valorincremento.$invalid, 'has-success':Form.valorincremento.$valid}">
+			<div class="form-group">
 			    <label class="control-label">
 			        Valor Incremento
-			        <span class="symbol required"></span>
 			    </label>
 			    <div class="input-group col-md-12">
 			        <input type="number" numericOnly style="text-align:right;"
@@ -204,15 +202,13 @@
 			    </div>
 			</div>
 
-			<div class="form-group"
-			    ng-class="{'has-error':Form.valordecremento.$dirty && Form.valordecremento.$invalid, 'has-success':Form.valordecremento.$valid}">
+			<div class="form-group">
 			    <label class="control-label">
 			        Valor Decremento
-			        <span class="symbol required"></span>
 			    </label>
 			    <div class="input-group col-md-12">
 			        <input type="number" numericOnly style="text-align:right;"
-			        	decimal="2" placeholder="0.00"
+			        	decimal="2" placeholder="0.00" ng-max="saldo"
 			            class="form-control" name="valordecremento"
 			            ng-model="objeto.valordecremento">
 			    </div>
