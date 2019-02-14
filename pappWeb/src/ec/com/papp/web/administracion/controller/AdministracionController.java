@@ -1510,7 +1510,7 @@ public class AdministracionController {
 					contratoTO.setFechainicio(UtilGeneral.parseStringToDate(contratoTO.getNpfechainicio()));
 				contratoTO.setSocionegocio(new SocionegocioTO());
 				UtilSession.planificacionServicio.transCrearModificarContrato(contratoTO);
-				id=contratoTO.getNpid().toString();
+			//id=contratoTO.getNpid().toString();
 				contratoTO.setId(contratoTO.getNpid());
 				jsonObject.put("contrato", (JSONObject)JSONSerializer.toJSON(contratoTO,contratoTO.getJsonConfigedicion()));
 			}
