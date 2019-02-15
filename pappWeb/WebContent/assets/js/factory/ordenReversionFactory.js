@@ -76,7 +76,7 @@ app.factory("ordenReversionFactory", [ "Restangular", function(Restangular) {
 			cur,
 			observacion
 		){
-			var url = "ejecucion/flujo/" + id + "/" + tipo;
+			var url = "ejecucion/flujoreversion/" + id + "/" + tipo;
 			var tObj = {};
 			if (cur != null) {
 				tObj.cur = cur;
