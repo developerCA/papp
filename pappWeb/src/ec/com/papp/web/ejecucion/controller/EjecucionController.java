@@ -776,9 +776,11 @@ public class EjecucionController {
 			else if(clase.equals("valordisponiblesi")) {
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(id);
+				System.out.println("total***: " + total);
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
 				double saldo=ConsultasUtil.obtenersaldodisponible(total, id,id2);
+				System.out.println("saldo*** " + saldo);
 //				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
 //				double valorcertificacion=0.0;
 //				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificacionesnoeliminadas(id);
