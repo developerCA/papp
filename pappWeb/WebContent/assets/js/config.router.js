@@ -749,7 +749,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalCertificacionesFondoLiquidacionManuaCtrl',
         		'ModalOrdenDevengoLineasCtrl','OrdenDevengoLineasFactory',
         		'ModalOrdenGastoCtrl','OrdenGastoFactory','OrdenDevengoFactory',
-        		'ModalOrdenReversionLineasCtrl', 'OrdenReversionLineasFactory'
+        		'ModalOrdenReversionLineasCtrl', 'OrdenReversionLineasFactory',
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl',
+        		'ModalCertificacionesFondosLineasCtrl'
 		),
         title: 'Orden de Reversion',
         ncyBreadcrumb: {
