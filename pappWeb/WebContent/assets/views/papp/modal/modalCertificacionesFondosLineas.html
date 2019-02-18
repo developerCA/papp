@@ -137,24 +137,14 @@
 			    </span>
 			</div>
 			
-			<div class="form-group"
-			    ng-class="{'has-error':Form.npvalor.$dirty && Form.npvalor.$invalid, 'has-success':Form.npvalor.$valid}">
+			<div class="form-group">
 			    <label class="control-label">
 			        Saldo
-			        <span class="symbol required"></span>
 			    </label>
 			    <div class="input-group col-md-12">
-			        <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un saldo"
+			        <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Saldo"
 			            class="form-control" name="saldo" ng-model="saldo" ng-disabled="true">
 			    </div>
-			    <span class="error text-small block"
-			        ng-if="Form.npvalor.$dirty && Form.npvalor.$invalid">
-			        Incorrecto
-			    </span>
-			    <span class="success text-small"
-			        ng-if="Form.npvalor.$valid">
-			        Listo
-			    </span>
 			</div>
 			
 			<div class="form-group"
@@ -166,11 +156,11 @@
 			    <div class="input-group col-md-12">
 			        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor"
 			            class="form-control" name="valor" ng-model="objeto.valor"
-			            required ng-max="saldo">
+			            required>
 			    </div>
 			    <span class="error text-small block"
 			        ng-if="Form.valor.$dirty && Form.valor.$invalid">
-			        Incorrecto, valor mayor que el saldo sidponible
+			        Incorrecto
 			    </span>
 			    <span class="success text-small"
 			        ng-if="Form.valor.$valid">

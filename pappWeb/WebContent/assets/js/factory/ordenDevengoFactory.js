@@ -115,14 +115,14 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			id,
 			motivo
 		){
-			var url = "ejecucion/flujo/" + id + "/SO";
+			var url = "ejecucion/flujodevengo/" + id + "/SO";
 			return Restangular.allUrl(url).customGET();
 		},
 
 		eliminar:function(
 			id
 		){
-			var url = "ejecucion/flujo/" + id + "/EL";
+			var url = "ejecucion/flujodevengo/" + id + "/EL";
 			return Restangular.allUrl(url).customGET();
 		},
 

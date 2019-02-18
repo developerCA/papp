@@ -634,6 +634,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
             				 form.$setPristine(true);
     	 		             $scope.edicion=false;
     	 		             $scope.objeto={};
+    	 		             $scope.filtrar();
     	 		             //$scope.limpiar();
         				 }
         		         //$scope.pageChanged();

@@ -105,6 +105,7 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
             } else {
             	var tObj = {};
             	angular.copy($scope.objeto, tObj);
+            	//objeto.valortotal
             	tObj.npfechainicio = $scope.toStringDate(tObj.npfechainicio);
             	contratoFactory.guardar(tObj).then(function(resp){
         			 if (resp.estado){

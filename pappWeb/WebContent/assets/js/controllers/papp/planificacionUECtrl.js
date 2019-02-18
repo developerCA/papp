@@ -251,7 +251,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		});
 	}
 
-	//ng-change="modificarMetaPlanificada(treu);"
+	//ng-change="modificarMetaPlanificada(true);"
 	$scope.modificarMetaPlanificada = function(sumar) {
 		var v = Number($scope.divActividad || $scope.divSubTarea
 			? $scope.detalles[$scope.mPlanificadaID].cantidad

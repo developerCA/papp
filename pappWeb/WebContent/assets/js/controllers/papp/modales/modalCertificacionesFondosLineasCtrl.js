@@ -138,6 +138,14 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
+            	if (Number($scope.objeto.valor) > Number(saldo)) {
+        			SweetAlert.swal(
+        					"Certificaciones de Fondos!",
+        					"El valor no puede ser mayor que el saldo.",
+        					"error"
+        			);
+        			return;
+            	}
             	var tObj = Object.assign({}, $scope.objeto);
             	if (tObj.nivelactid == 0) {
             	  tObj.nivelactid = tObj.subitem;
@@ -157,7 +165,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
         			 }
         		})
-        		console.log($scope.objeto);
+        		//console.log($scope.objeto);
             }
         },
         reset: function (form) {
