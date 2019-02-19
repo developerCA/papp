@@ -355,7 +355,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
 					"Certificaciones de Fondos!",
-					"No se permite eliminar este articulo, solo los que estan 'Registrados'.",
+					"No se permite eliminar, solo se puede eliminar si esta en estado registrado.",
 					"error"
 			);
 			return;

@@ -97,7 +97,7 @@
 					    ng-repeat="operator in listarItems" 
 					    value="{{operator.id}}"
 					>
-					    {{operator.descripcionexten}}
+					    {{operator.npcodigo}} - {{operator.npcodigocanton}} - {{operator.npcodigofuente}} - {{operator.npcodigoorganismo}} - {{operator.npdescripcion}}
 					</option>
 			    </select>
 			    <span class="error text-small block"
@@ -142,7 +142,8 @@
 			        Saldo
 			    </label>
 			    <div class="input-group col-md-12">
-			        <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Saldo"
+			        <input type="text" numericOnly style="text-align:right;"
+			        	decimal="2" placeholder="Saldo"
 			            class="form-control" name="saldo" ng-model="saldo" ng-disabled="true">
 			    </div>
 			</div>
@@ -154,9 +155,10 @@
 			        <span class="symbol required"></span>
 			    </label>
 			    <div class="input-group col-md-12">
-			        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor"
+			        <input type="number" numericOnly style="text-align:right;"
+			        	decimal="2" placeholder="Escriba un valor"
 			            class="form-control" name="valor" ng-model="objeto.valor"
-			            required>
+			            required ng-max="saldo">
 			    </div>
 			    <span class="error text-small block"
 			        ng-if="Form.valor.$dirty && Form.valor.$invalid">

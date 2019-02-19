@@ -208,7 +208,7 @@
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Anular" ng-click="anular($index)">
 										<i class="fa ti-bolt-alt"></i>
