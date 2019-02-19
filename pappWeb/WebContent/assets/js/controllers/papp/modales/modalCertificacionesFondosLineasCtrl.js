@@ -138,7 +138,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	if (Number($scope.objeto.valor) > Number(saldo)) {
+            	if (Number($scope.objeto.valor) > Number($scope.saldo)) {
         			SweetAlert.swal(
         					"Certificaciones de Fondos!",
         					"El valor no puede ser mayor que el saldo.",
