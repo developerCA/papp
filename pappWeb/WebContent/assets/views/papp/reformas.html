@@ -139,56 +139,58 @@
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Modificar"
 										ng-click="editar($index)">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Solicitar"
 										ng-click="solicitar($index)">
 										<i class="fa fa-list-alt"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Imprimir solicitud"
 										ng-click="imprimirsolicitud(obj.id)">
 										<i class="fa fa-file-text"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Imprimir oficio"
 										ng-click="imprimiroficio(obj.id)">
 										<i class="fa fa-file-text-o"></i>
 									</a>
 								</td> 
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Imprimir reforma meta"
 										ng-click="imprimiroficio(obj.id)">
 										<i class="fa fa-file-text-o"></i>
 									</a>
 								</td> 
-								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+								<td width="32px" style="padding: 1px;"
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar"
 										ng-click="aprobar($index)">
 										<i class="fa ti-check"></i>
 									</a>
 								</td>
-								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+								<td width="32px" style="padding: 1px;"
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Negar"
 										ng-click="negar($index)">
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Eliminar"
 										ng-click="eliminar($index)">
@@ -204,14 +206,14 @@
 								<td data-title="'Fecha Creaci&oacute;n'">
 									{{obj.npfecha}}
 								</td>
-								<td data-title="'Decremento'">
-									{{obj.valordecremento}}
+								<td data-title="'Decremento'" style="text-align:right;">
+									{{ obj.valordecremento | currency }}
 								</td>
-								<td data-title="'Incremento'">
+								<td data-title="'Incremento'" style="text-align:right;">
 									{{ obj.valorincremento | currency }}
 								</td>
 								<td data-title="'Estado'">
-									{{ obj.npestado | currency }}
+									{{obj.npestado}}
 								</td>
 							</tr>
 						</table>
@@ -518,13 +520,13 @@
 														<th>Decremento</th>
 													</tr>
 													<tr ng-repeat="obj in detalles">
-														<td width="32px">
+														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
 																uib-tooltip="Modificar" ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
-														<td width="32px">
+														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
 																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
 																<i class="fa ti-trash"></i>
@@ -708,7 +710,7 @@
 														<th>Decremento</th>
 													</tr>
 													<tr ng-repeat="obj in detalles">
-														<td width="32px">
+														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary"
 																ng-show="!noeditar"
 																uib-tooltip="Actualizar"
@@ -716,7 +718,7 @@
 																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
-														<td width="32px">
+														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary"
 																ng-show="!noeditar"
 																uib-tooltip="Distribucion"
@@ -724,7 +726,7 @@
 																<i class="fa fa-file-text"></i>
 															</a>
 														</td>
-														<td width="32px">
+														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary"
 																style="background-color: Red !important;"
 																ng-show="!noeditar"

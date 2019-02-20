@@ -172,55 +172,68 @@
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Modificar" ng-click="editar($index)">
+										uib-tooltip="Modificar"
+										ng-click="editar($index)">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Solicitar" ng-click="solicitar($index)">
+										uib-tooltip="Solicitar"
+										ng-click="solicitar($index)">
 										<i class="fa fa-list-alt"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Imprimir solicitud" ng-click="imprimirsolicitud(obj.id)">
+										uib-tooltip="Imprimir solicitud"
+										ng-click="imprimirsolicitud(obj.id)">
 										<i class="fa fa-file-text"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Imprimir oficio" ng-click="imprimiroficio(obj.id)">
+										uib-tooltip="Imprimir oficio"
+										ng-click="imprimiroficio(obj.id)">
 										<i class="fa fa-file-text-o"></i>
 									</a>
 								</td>
-								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+								<td width="32px" style="padding: 1px;"
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Aprobar" ng-click="aprobar($index)">
+										uib-tooltip="Aprobar"
+										ng-click="aprobar($index)">
 										<i class="fa ti-check"></i>
 									</a>
 								</td>
-								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+								<td width="32px" style="padding: 1px;"
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Negar" ng-click="negar($index)">
+										uib-tooltip="Negar"
+										ng-click="negar($index)">
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>
-								<td width="32px" ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+								<td width="32px" style="padding: 1px;"
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Anular" ng-click="anular($index)">
+										uib-tooltip="Anular"
+										ng-click="anular($index)">
 										<i class="fa ti-bolt-alt"></i>
 									</a>
 								</td>
-								<td width="32px">
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Eliminar" ng-click="eliminar($index)">
+										uib-tooltip="Eliminar"
+										ng-click="eliminar($index)">
 										<i class="fa fa-trash-o"></i>
 									</a>
 								</td>
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
+								<td data-title="'C&oacute;digo'">
+									{{obj.codigo}}
+								</td>
 								<td data-title="'Contrato'" style="text-align: center;">
 									<div ng-show="obj.npingresarcontrato">
 										<div ng-show="obj.ordengastocontratoid != 0" style="color: Green;">
@@ -239,10 +252,18 @@
 										{{obj.valortotal | number:2}}
 									</span>
 								</td>
-								<td data-title="'Creado'">{{obj.npfecha}}</td>
-								<td data-title="'# precompromiso'">{{obj.numerocompromiso}}</td>
-								<td data-title="'Certificaci&oacute;n C&oacute;digo'">{{obj.npcertificacioncodigo}}</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
+								<td data-title="'Creado'">
+									{{obj.npfecha}}
+								</td>
+								<td data-title="'# precompromiso'">
+									{{obj.numerocompromiso}}
+								</td>
+								<td data-title="'Certificaci&oacute;n C&oacute;digo'">
+									{{obj.npcertificacioncodigo}}
+								</td>
+								<td data-title="'Estado'">
+									{{obj.npestado}}
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -747,15 +768,17 @@
 														<th>Valor Orden de Gasto</th>
 													</tr>
 													<tr ng-repeat="obj in detalles">
-														<td width="32px">
+														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
-																uib-tooltip="Modificar" ng-click="editarLinea($index)">
+																uib-tooltip="Modificar"
+																ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
-														<td width="32px">
+														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
-																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
+																uib-tooltip="Eliminar"
+																ng-click="eliminarLinea($index)">
 																<i class="fa ti-trash"></i>
 															</a>
 														</td>

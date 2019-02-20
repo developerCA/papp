@@ -56,28 +56,28 @@
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
-								<td>
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Matriz de Presupuesto"
 										ng-click="editarMatrizPresupuesto($index);">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
-								<td>
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Planificacion"
 										ng-click="cargarPlanificacionAnual(obj);">
 										<i class="fa fa-clipboard"></i>
 									</a>
 								</td>
-								<td>
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Matriz de Metas"
 										ng-click="editarMatrizMetas($index);">
 										<i class="fa fa-list-alt"></i>
 									</a>
 								</td>
-								<td>
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										style="background-color: #00B300 !important"
 										uib-tooltip="Solicitar Planificaci&oacute;n"
@@ -85,7 +85,7 @@
 										<i class="fa ti-layout"></i>
 									</a>
 								</td>
-								<td>
+								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
 										style="background-color: #00B300 !important"
 										uib-tooltip="Solicitar Ajustada"
@@ -93,7 +93,8 @@
 										<i class="fa ti-pencil-alt"></i>
 									</a>
 								</td>
-								<td ng-if="rol('PLANIFICACIONAPROBACION');">
+								<td width="32px" style="padding: 1px;"
+									ng-if="rol('PLANIFICACIONAPROBACION');">
 									<a class="btn btn-sm btn-primary"
 										style="background-color: #00B300 !important"
 										uib-tooltip="Aprobar Planificaci&oacute;n"
@@ -101,7 +102,8 @@
 										<i class="fa ti-marker-alt"></i>
 									</a>
 								</td>
-								<td ng-if="rol('AJUSTADAAPROBACION');">
+								<td width="32px" style="padding: 1px;"
+									ng-if="rol('AJUSTADAAPROBACION');">
 									<a class="btn btn-sm btn-primary"
 										style="background-color: #00B300 !important"
 										uib-tooltip="Aprobar Ajustada"
@@ -109,7 +111,8 @@
 										<i class="fa ti-signal"></i>
 									</a>
 								</td>
-								<td ng-if="rol('PLANIFICACIONDENEGAR');">
+								<td width="32px" style="padding: 1px;"
+									ng-if="rol('PLANIFICACIONDENEGAR');">
 									<a class="btn btn-sm btn-primary"
 										style="background-color: #B30000 !important"
 										uib-tooltip="Denegar Planificaci&oacute;n"
@@ -117,7 +120,8 @@
 										<i class="fa ti-marker-alt"></i>
 									</a>
 								</td>
-								<td ng-if="rol('AJUSTADADENEGAR');">
+								<td width="32px" style="padding: 1px;"
+									ng-if="rol('AJUSTADADENEGAR');">
 									<a class="btn btn-sm btn-primary"
 										style="background-color: #B30000 !important"
 										uib-tooltip="Denegar Ajustada"
@@ -125,22 +129,36 @@
 										<i class="fa ti-signal"></i>
 									</a>
 								</td>
-								<td><a class="btn btn-sm btn-primary"
-									style="background-color: #00B300 !important"
-									uib-tooltip="Matriz Presupuestos"
-									ng-click="editarMatrizPresupuestoAP(obj);"> <i
-										class="fa ti-layers-alt"></i>
-								</a></td>
-								<td><a class="btn btn-sm btn-primary"
-									style="background-color: #00B300 !important"
-									uib-tooltip="Matriz Metas" ng-click="editarMatrizMetasAP(obj);">
+								<td width="32px" style="padding: 1px;">
+									<a class="btn btn-sm btn-primary"
+										style="background-color: #00B300 !important"
+										uib-tooltip="Matriz Presupuestos"
+										ng-click="editarMatrizPresupuestoAP(obj);">
+										<i class="fa ti-layers-alt"></i>
+									</a>
+								</td>
+								<td width="32px" style="padding: 1px;">
+									<a class="btn btn-sm btn-primary"
+										style="background-color: #00B300 !important"
+										uib-tooltip="Matriz Metas" ng-click="editarMatrizMetasAP(obj);">
 										<i class="fa ti-pencil-alt"></i>
-								</a></td>
-								<td data-title="'C&oacute;digo Presupestario'">{{obj.codigopresup}}</td>
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
-								<td data-title="'Pres. Planificado'">{{obj.npestadopresupuesto}}</td>
-								<td data-title="'Pres. Ajustado'">{{obj.npestadopresupajus}}</td>
+									</a>
+								</td>
+								<td data-title="'C&oacute;digo Presupestario'">
+									{{obj.codigopresup}}
+								</td>
+								<td data-title="'Nombre'">
+									{{obj.nombre}}
+								</td>
+								<td data-title="'Estado'">
+									{{obj.npestado}}
+								</td>
+								<td data-title="'Pres. Planificado'">
+									{{obj.npestadopresupuesto}}
+								</td>
+								<td data-title="'Pres. Ajustado'">
+									{{obj.npestadopresupajus}}
+								</td>
 							</tr>
 						</table>
 					</div>

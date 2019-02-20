@@ -16,8 +16,10 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
 				return;
 			}
 			$scope.objeto=resp.json.contrato;
-			console.log($scope.objeto);
+			//console.log($scope.objeto);
 			$scope.objeto.npfechainicio = toDate($scope.objeto.npfechainicio);
+			$scope.objeto.npproveedorcodigo = objetoFuente.npproveedorcodigo;
+			$scope.objeto.npproveedor = objetoFuente.npproveedornombre;
 			$scope.anticipo=0;
 			$scope.noeditar=false;
 			$scope.edicion=true;
@@ -109,10 +111,18 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
             	tObj.npfechainicio = $scope.toStringDate(tObj.npfechainicio);
             	contratoFactory.guardar(tObj).then(function(resp){
         			 if (resp.estado){
-      					 SweetAlert.swal("Contrato!", "Registro guardado satisfactoriamente!", "success");
+      					 SweetAlert.swal(
+      							 "Contrato!",
+      							 "Registro guardado satisfactoriamente!",
+      							 "success"
+						 );
       					 $uibModalInstance.close(resp.json.contrato);
         			 }else{
-	 		             SweetAlert.swal("Contrato!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal(
+	 		            		 "Contrato!",
+	 		            		 resp.mensajes.msg,
+	 		            		 "error"
+	            		 );
 	 		             $uibModalInstance.close(null);
         			 }
         		})

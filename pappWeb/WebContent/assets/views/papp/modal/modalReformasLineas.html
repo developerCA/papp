@@ -131,7 +131,7 @@
 					    ng-repeat="operator in listarItems" 
 					    value="{{operator.id}}"
 					>
-					    {{operator.descripcionexten}}
+					    {{operator.npcodigo}} - {{operator.npcodigocanton}} - {{operator.npcodigofuente}} - {{operator.npcodigoorganismo}} - {{operator.npdescripcion}}
 					</option>
 			    </select>
 			    <span class="error text-small block"
@@ -179,7 +179,8 @@
 			        Valor Actual
 			    </label>
 		        <input type="text" style="text-align:right;" decimal="2"
-		            class="form-control" name="valorajustado" ng-model="valorajustado" ng-disabled="true">
+		            class="form-control" name="valorajustado"
+		            ng-model="valorajustado" ng-disabled="true">
 			</div>
 			
 			<div class="form-group has-success">
@@ -187,7 +188,8 @@
 			        Saldo
 			    </label>
 		        <input type="text" style="text-align:right;" decimal="2"
-		            class="form-control" name="saldo" ng-model="saldo" ng-disabled="true">
+		            class="form-control" name="saldo"
+		            ng-model="saldo" ng-disabled="true">
 			</div>
 			
 			<div class="form-group">

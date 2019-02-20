@@ -38,7 +38,11 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 		        	$scope.objeto = resp.json.reformalinea;
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
 		        	$scope.valorajustado = 0;
-		        	$scope.saldo = $scope.objeto.npvalor + $scope.objeto.npvalorinicial;
+		        	try {
+			        	$scope.saldo = $scope.objeto.npvalor + $scope.objeto.npvalorinicial;
+					} catch (e) {
+			        	$scope.saldo = 0;
+					}
 		        	$scope.ponerCodigos();
 		        	$scope.noeditar=true;
 				})
@@ -184,7 +188,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
 	 		             tObj = {
- 		            		 lineas: resp.json.reformalinea
+ 		            		reformalineas: resp.json.reformalineas
 	 		             }
 	 		             try {
 	 		            	 tObj.valorincremento = resp.json.reforma.valorincremento;
