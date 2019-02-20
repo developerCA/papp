@@ -39,7 +39,7 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
 		        	$scope.valorajustado = 0;
 		        	try {
-			        	$scope.saldo = $scope.objeto.npvalor + $scope.objeto.npvalorinicial;
+			        	$scope.saldo = $scope.objeto.npvalortotal + $scope.objeto.npvalordecremento - $scope.objeto.npvalorincremento;
 					} catch (e) {
 			        	$scope.saldo = 0;
 					}
