@@ -319,7 +319,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
 				"Orden de Devengo!",
-				"No se permite eliminar este articulo, solo los que estan 'Registrados'.",
+				"No se permite eliminar este registro, solo los que estan 'Registrados'.",
 				"error"
 			);
 			return;
@@ -394,6 +394,9 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				ordenGastoValor : function() {
 					return $scope.objeto.tipo;
 					//return ($scope.objeto.tipo == 'L'? $scope.objeto.npordengastovalor: 0);
+				},
+				valorTotal : function() {
+					return $scope.objeto.valortotal;
 				}
 			}
 		});
@@ -433,6 +436,9 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				},
 				ordenGastoValor : function() {
 					return ($scope.objeto.tipo == 'L'? $scope.objeto.npordengastovalor: 0);
+				},
+				valorTotal : function() {
+					return $scope.objeto.valortotal;
 				}
 			}
 		});
@@ -440,7 +446,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		    $scope.detalles = obj.ordendevengolineas;
 			$scope.objeto.valortotal = obj.ordendevengo.valortotal;
 			$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
-            SweetAlert.swal("Orden Devengo! - Lineas", "Registro guardado satisfactoriamente!", "success");
+            SweetAlert.swal(
+            		"Orden Devengo! - Lineas",
+            		"Registro guardado satisfactoriamente!",
+            		"success"
+    		);
 		}, function() {
 		});
 	};
@@ -508,6 +518,14 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
+            	if ($scope.objeto.ordendevengoordengastoid === undefined) {
+ 					SweetAlert.swal(
+  							 "Orden de Devengo!",
+  							 "No selecciono la Orden de Gasto!",
+  							 "error"
+					);
+            		return;
+            	}
             	ordenDevengoFactory.guardar($scope.objeto).then(function(resp){
         			 if (resp.estado){
       					 SweetAlert.swal(

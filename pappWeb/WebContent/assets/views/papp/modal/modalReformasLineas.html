@@ -202,16 +202,24 @@
 			    </div>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group"
+			    ng-class="{'has-error':Form.subitem.$dirty && Form.subitem.$invalid, 'has-success':Form.subitem.$valid}">
 			    <label class="control-label">
 			        Valor Decremento
+			        <span class="symbol required"></span>
 			    </label>
-			    <div class="input-group col-md-12">
-			        <input type="number" numericOnly style="text-align:right;"
-			        	decimal="2" placeholder="0.00" ng-max="saldo"
-			            class="form-control" name="valordecremento"
-			            ng-model="objeto.valordecremento">
-			    </div>
+		        <input type="number" numericOnly style="text-align:right;"
+		        	decimal="2" placeholder="0.00" ng-max="saldo"
+		            class="form-control" name="valordecremento"
+		            ng-model="objeto.valordecremento">
+			    <span class="error text-small block"
+			        ng-if="Form.subitem.$dirty && Form.subitem.$invalid">
+			        Incorrecto, el saldo supera el saldo
+			    </span>
+			    <span class="success text-small"
+			        ng-if="Form.subitem.$valid">
+			        Listo
+			    </span>
 			</div>
 
 			<div class="row">

@@ -390,7 +390,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		if ($scope.data[index].estado != "AP") {
 			SweetAlert.swal(
 	    		"Orden de Gastos!",
-				"No se permite anular este articulo, solo los que estan 'Aprobado'.",
+				"No se permite anular este registro, solo los que estan 'Aprobado'.",
 				"error"
 			);
 			return;
@@ -444,7 +444,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
 	    		"Orden de Gastos!",
-				"No se permite eliminar este articulo, solo los que estan 'Registrados'.",
+				"No se permite eliminar este registro, solo los que estan 'Registrados'.",
 				"error"
 			);
 			return;

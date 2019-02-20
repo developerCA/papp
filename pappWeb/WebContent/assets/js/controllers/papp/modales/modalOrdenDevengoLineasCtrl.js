@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ordenDevengoID","unidadID","editar","ordenGastoID","ordenGastoValor","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
-	function($scope,$rootScope,ordenDevengoID,unidadID,editar,ordenGastoID,ordenGastoValor,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
+app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ordenDevengoID","unidadID","editar","ordenGastoID","ordenGastoValor","valorTotal","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
+	function($scope,$rootScope,ordenDevengoID,unidadID,editar,ordenGastoID,ordenGastoValor,valorTotal,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
 
 	$scope.noeditar=false;
 	$scope.init=function(){
@@ -25,7 +25,11 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 				//console.log(resp);
 	        	$scope.objeto = resp.json.ordendevengolinea;
 	        	$scope.objetoDetalles = resp.json.subiteminfo;
-	        	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
+	        	try {
+		        	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
+				} catch (e) {
+		        	$scope.objeto.npvalor = 0;
+				}
 	        	$scope.noeditar=true;
 			})
 		}
@@ -68,7 +72,11 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
         	$scope.objeto.npdevengado = resp.json.datoslineaordend.aprobadas;
         	$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
         	$scope.objeto.npsaldo = resp.json.datoslineaordend.saldo;
-        	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
+        	try {
+            	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
+			} catch (e) {
+	        	$scope.objeto.npvalor = 0;
+			}
         	if (!$scope.editarValor) {
         		//$scope.objeto.valor = $scope.objeto.npsaldo;
         		$scope.objeto.valor = $scope.objeto.npvalor;
@@ -128,6 +136,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
             		tObj.nivelactid = tObj.subitem;
             	}
             	delete tObj.subitem;
+            	tObj.npvalor = valorTotal; ///
             	ordenDevengoLineasFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
@@ -135,7 +144,11 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 	 		             $scope.objeto={};
 	 		    		 $uibModalInstance.close(resp.json);		
         			 }else{
-	 		             SweetAlert.swal("Orden Devengo!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal(
+	 		            		 "Orden Devengo!",
+	 		            		 resp.mensajes.msg,
+	 		            		 "error"
+	            		 );
         			 }
         		})
         		//console.log($scope.objeto);

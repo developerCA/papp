@@ -203,7 +203,7 @@
 									</a>
 								</td>
 								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Valor<br>total'" style="text-align: right;">
+								<td data-title="'Valor total'" style="text-align: right;">
 									<span>
 										{{obj.valortotal | number:2}}
 									</span>
@@ -321,8 +321,10 @@
 								        Valor Total
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" style="text-align:right;" decimal="2" placeholder="Escriba un valor total"
-								        class="form-control" name="valortotal" ng-model="objeto.valortotal"
+								    <input type="text" style="text-align:right;"
+								    	decimal="2" placeholder="Escriba un valor total"
+								        class="form-control" name="valortotal"
+								        ng-model="objeto.valortotal"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
 								        ng-if="FormEditar.valortotal.$dirty && FormEditar.valortotal.$invalid">

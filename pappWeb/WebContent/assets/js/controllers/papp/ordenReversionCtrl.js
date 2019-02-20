@@ -240,7 +240,11 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	$scope.eliminar = function(index) {
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
-			SweetAlert.swal("Orden de Reversion!", "No se permite eliminar este articulo, solo los que estan 'Registrados'.", "error");
+			SweetAlert.swal(
+					"Orden de Reversion!",
+					"No se permite eliminar este registro, solo los que estan 'Registrados'.",
+					"error"
+			);
 			return;
 		}
 		var modalInstance = $uibModal.open({

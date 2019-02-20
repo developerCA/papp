@@ -233,7 +233,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
 					"Reformas!",
-					"No se permite eliminar este articulo, solo los que estan 'Registrados'.",
+					"No se permite eliminar este registro, solo los que estan 'Registrados'.",
 					"error"
 			);
 			return;
@@ -314,6 +314,12 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 				unidadID : function() {
 					return $scope.objeto.reformaunidadid;
 				},
+				unidadcodigo : function() {
+					return $scope.objeto.npunidadcodigo;
+				},
+				unidadnombre : function() {
+					return $scope.objeto.npunidadnombre;
+				},
 				editar : function() {
 					return $scope.detalles[index].id
 				}
@@ -323,7 +329,11 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		    $scope.detalles = obj.lineas;
 		    //$scope.objeto.valortotal = obj.valortotal;
 		    $scope.form.submit(Form);
-            SweetAlert.swal("Reformas! - Lineas", "Registro guardado satisfactoriamente!", "success");
+            SweetAlert.swal(
+            		"Reformas! - Lineas",
+            		"Registro guardado satisfactoriamente!",
+            		"success"
+    		);
 		}, function() {
 		});
 	};
@@ -347,12 +357,20 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 				$scope.detalles[index].id.lineaid
 			).then(function(resp){
 				if (resp.estado){
-					SweetAlert.swal("Reformas!", "Eliminado satisfactoriamente!", "success");
+					SweetAlert.swal(
+							"Reformas!",
+							"Eliminado satisfactoriamente!",
+							"success"
+					);
 					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
 				    $scope.detalles.splice(index, 1);
 				    $scope.form.submit(Form);
 	   			}else{
-		            SweetAlert.swal("Reformas!", resp.mensajes.msg, "error");
+		            SweetAlert.swal(
+		            		"Reformas!",
+		            		resp.mensajes.msg,
+		            		"error"
+            		);
 	   			}
           	})
 		});
@@ -423,9 +441,17 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
           		             $scope.objeto={};
         				 }
         				 //$scope.pageChanged();
-      					 SweetAlert.swal("Reformas!", "Registro guardado satisfactoriamente!", "success");
+      					 SweetAlert.swal(
+      							 "Reformas!",
+      							 "Registro guardado satisfactoriamente!",
+      							 "success"
+						 );
         			 }else{
-	 		             SweetAlert.swal("Reformas!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal(
+	 		            		 "Reformas!",
+	 		            		 resp.mensajes.msg,
+	 		            		 "error"
+	            		 );
         			 }
         		})
             }

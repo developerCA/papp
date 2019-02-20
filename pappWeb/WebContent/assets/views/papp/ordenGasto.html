@@ -343,8 +343,9 @@
 								    </label>
 								    <div class="input-group">
 								        <input type="text" placeholder="Seleccione proveedor c&oacute;digo"
-								            class="form-control" name="npproveedorcodigo" ng-disabled="true"
-								            ng-model="objeto.npproveedorcodigo" required>
+								            class="form-control" name="npproveedorcodigo"
+								            ng-disabled="true" required
+								            ng-model="objeto.npproveedorcodigo">
 								        <span class="input-group-btn">
 								            <button type="button" class="btn btn-primary"
 								                ng-click="abrirProveedorCodigo()" ng-disabled="noeditar">
@@ -370,7 +371,8 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <input type="text" placeholder="Seleccione un proveedor"
-								        class="form-control" name="npproveedornombre" ng-model="objeto.npproveedornombre"
+								        class="form-control" name="npproveedornombre"
+								        ng-model="objeto.npproveedornombre"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
 								        ng-if="Form.npproveedornombre.$dirty && Form.npproveedornombre.$invalid">
@@ -739,16 +741,19 @@
 												<table class="table table-striped">
 													<tr>
 														<td></td>
+														<td></td>
 														<th>Descripci&oacute;n</th>
 														<th>Valor Inicial</th>
 														<th>Valor Orden de Gasto</th>
 													</tr>
 													<tr ng-repeat="obj in detalles">
-														<td>
+														<td width="32px">
 															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
 																uib-tooltip="Modificar" ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
+														</td>
+														<td width="32px">
 															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
 																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
 																<i class="fa ti-trash"></i>

@@ -195,10 +195,24 @@
 										<i class="fa fa-trash-o"></i>
 									</a>
 								</td>
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Descripci&oacute;n'">{{obj.descripcion}}</td>
-								<td data-title="'Fecha Creaci&oacute;n'">{{obj.npfecha}}</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
+								<td data-title="'C&oacute;digo'">
+									{{obj.codigo}}
+								</td>
+								<td data-title="'Descripci&oacute;n'">
+									{{obj.descripcion}}
+								</td>
+								<td data-title="'Fecha Creaci&oacute;n'">
+									{{obj.npfecha}}
+								</td>
+								<td data-title="'Decremento'">
+									{{obj.valordecremento}}
+								</td>
+								<td data-title="'Incremento'">
+									{{ obj.valorincremento | currency }}
+								</td>
+								<td data-title="'Estado'">
+									{{ obj.npestado | currency }}
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -400,7 +414,9 @@
 									        <span class="symbol required"></span>
 									    </label>
 									    <input type="text" placeholder="Escriba un valor incrementado"
-									        class="form-control" name="valorincremento" ng-model="objeto.valorincremento" numericOnly style="text-align:right;"
+									        class="form-control" name="valorincremento"
+									        ng-model="objeto.valorincremento" numericOnly
+									        style="text-align:right;"
 									        ng-disabled="true" format="number">
 									    <span class="error text-small block"
 									        ng-if="Form.valorincremento.$dirty && Form.valorincremento.$invalid">
@@ -419,7 +435,9 @@
 									        <span class="symbol required"></span>
 									    </label>
 									    <input type="text" placeholder="Escriba un valor decrementado"
-									        class="form-control" name="valordecremento" ng-model="objeto.valordecremento" numericOnly style="text-align:right;"
+									        class="form-control" name="valordecremento"
+									        ng-model="objeto.valordecremento" numericOnly
+									        style="text-align:right;"
 									        ng-disabled="true" format="number">
 									    <span class="error text-small block"
 									        ng-if="Form.valordecremento.$dirty && Form.valordecremento.$invalid">
