@@ -177,16 +177,21 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			}, 
 			function(isConfirm) { 
 				if (!isConfirm) return;
-				$scope.data[index].npestado = "Solicitando";
 				ordenGastoFactory.solicitar(
 					$scope.data[index].id,
 					"SO",
 					null,
 					null
 				).then(function(resp){
-					//console.log(resp);
-					//$scope.pageChanged();
-					SweetAlert.swal("Orden de Gasto!", resp.mensajes.msg, resp.mensajes.type);
+					if (resp.estado) {
+						$scope.data[index].estado = "SO";
+						$scope.data[index].npestado = "Solicitado";
+					}
+					SweetAlert.swal(
+							"Orden de Gasto!",
+							resp.mensajes.msg,
+							resp.mensajes.type
+					);
 				});
 			}
 		); 
@@ -220,16 +225,21 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			if (cur === undefined) {
 				cur = 0;
 			}
-			$scope.data[index].npestado = "Aprobando";
 			ordenGastoFactory.solicitar(
 				$scope.data[index].id,
 				"AP",
 				cur,
 				null
 			).then(function(resp){
-				//console.log(resp);
-				//$scope.pageChanged();
-				SweetAlert.swal("Orden de Gasto!", resp.mensajes.msg, resp.mensajes.type);
+				if (resp) {
+					$scope.data[index].estado = "AP";
+					$scope.data[index].npestado = "Aprobando";
+				}
+				SweetAlert.swal(
+						"Orden de Gasto!",
+						resp.mensajes.msg,
+						resp.mensajes.type
+				);
 			});
 		}, function() {
 		});
@@ -264,15 +274,16 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				obj = "";
 			}
 			var cur = 0;
-			$scope.data[index].npestado = "Negando";
 			ordenGastoFactory.solicitar(
 				$scope.data[index].id,
 				"NE",
 				null,
 				obj
 			).then(function(resp){
-				//console.log(resp);
-				//$scope.pageChanged();
+				if (resp.estado) {
+					$scope.data[index].estado = "NE";
+					$scope.data[index].npestado = "Negando";
+				}
 				SweetAlert.swal(
 						"Orden de Gasto!",
 						resp.mensajes.msg,
@@ -414,7 +425,6 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				obj = "";
 			}
 			var cur = 0;
-			$scope.data[index].npestado = "Anulando";
 			ordenGastoFactory.solicitar(
 				$scope.data[index].id,
 				"AN",
@@ -422,7 +432,8 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				obj
 			).then(function(resp){
 				if (resp.estado) {
-					//$scope.pageChanged();
+					$scope.data[index].estado = "AN";
+					$scope.data[index].npestado = "Anulando";
 		            SweetAlert.swal(
 	            		"Orden de Gastos!",
 	            		"Registro anulado satisfactoriamente!",
@@ -458,7 +469,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 					return "Eliminar";
 				},
 				subtitulo : function() {
-					return "Observacion";
+					return "Motivo de eliminacion";
 				}
 			}
 		});
@@ -468,7 +479,6 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				obj = "";
 			}
 			var cur = 0;
-			$scope.data[index].npestado = "Eliminando";
 			ordenGastoFactory.solicitar(
 				$scope.data[index].id,
 				"EL",
@@ -476,7 +486,8 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				obj
 			).then(function(resp){
 				if (resp.estado) {
-					//$scope.pageChanged();
+					$scope.data[index].estado = "EL";
+					$scope.data[index].npestado = "Eliminando";
 		            SweetAlert.swal(
 	            		"Orden de Gastos!",
 	            		"Registro eliminado satisfactoriamente!",

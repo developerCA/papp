@@ -369,7 +369,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 					return "Eliminar";
 				},
 				subtitulo : function() {
-					return "Observaci&oacute;n";
+					return "Motivo de eliminacion";
 				}
 			}
 		});

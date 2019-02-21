@@ -333,7 +333,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 					return "Eliminar";
 				},
 				subtitulo : function() {
-					return "Observacion";
+					return "Motivo de eliminacion";
 				}
 			}
 		});
