@@ -767,7 +767,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static Double obtenersaldodisponible(Double total,Long idsubitem,Long nivelactividadid) throws MyException {
+	public static Double obtenersaldodisponible(Double total,Long idsubitem,Long nivelactividadid,Date fecha) throws MyException {
 		try{
 			SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(idsubitem);
 			//traigo las reformas asignadas al subitem
@@ -775,8 +775,10 @@ public class ConsultasUtil {
 			//Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(69118L);
 			System.out.println("reformalineatos: " + reformalineaTOs.size());
 			double totalreforma=0.0;
+			System.out.println("fecha creacion: " + fecha);
 			for(ReformalineaTO reformalineaTO:reformalineaTOs){
-				if(reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")){
+				System.out.println("fecha a comparar: " + reformalineaTO.getReforma().getFechacreacion());
+				if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
 					System.out.println("incremento: " + reformalineaTO.getValorincremento() + " - " + reformalineaTO.getValordecremento());
 					//totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
 					totalreforma=totalreforma-reformalineaTO.getValordecremento().doubleValue();

@@ -719,7 +719,7 @@ public class EjecucionController {
 				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),certificacionlineaTO.getNivelactid());
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),certificacionlineaTO.getNivelactid(),certificacionlineaTO.getCertificacion().getFechacreacion());
 				certificacionlineaTO.setNpvalorinicial(saldo);
 				jsonObject.put("certificacionlinea", (JSONObject)JSONSerializer.toJSON(certificacionlineaTO,certificacionlineaTO.getJsonConfig()));
 			}
@@ -755,7 +755,7 @@ public class EjecucionController {
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(ordendevengolineaTO.getNivelactid()));
 				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
 				//2. Obtengo el detalle del subitem
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(), ordendevengolineaTO.getNivelactid());
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(), ordendevengolineaTO.getNivelactid(),ordendevengolineaTO.getOrdendevengo().getFechacreacion());
 				ordendevengolineaTO.setNpsaldo(saldo);
 				jsonObject.put("ordendevengolinea", (JSONObject)JSONSerializer.toJSON(ordendevengolineaTO,ordendevengolineaTO.getJsonConfig()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordendevengolineaTO.getNivelactid(), jsonObject, mensajes);
@@ -779,7 +779,7 @@ public class EjecucionController {
 				System.out.println("total***: " + total);
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, id,id2);
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, id,id2,new Date());
 				System.out.println("saldo*** " + saldo);
 //				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
 //				double valorcertificacion=0.0;
@@ -810,7 +810,7 @@ public class EjecucionController {
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(id);
 				//2. Obtengo el detalle del subitem
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, id, id2);
+				double saldo=ConsultasUtil.obtenersaldodisponible(total, id, id2,new Date());
 				//3. Obtengos las ordenes pendientes de este nivel
 				log.println("id para calculo de no aprobadas:  " + id2);
 				Collection<OrdendevengolineaTO> pendientes=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2);
@@ -844,10 +844,18 @@ public class EjecucionController {
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(reformalineaTO.getNivelactid(), jsonObject, mensajes);
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformalineaTO.getNivelactid()));
 				//1. traigo el total disponible del subitem
-				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
+				//..double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());f
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
-				double valtotal=ConsultasUtil.obtenertotalsubitem(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid(),reformalineaTO);
+				//..double valtotal=ConsultasUtil.obtenertotalsubitem(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid(),reformalineaTO);
+				double valtotal=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
+				//2. Obtengo el detalle del subitem
+				double saldo=ConsultasUtil.obtenersaldodisponible(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),reformalineaTO.getReforma().getFechacreacion());
+
+				log.println("saldo: " + saldo);
+				//double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid());
+				reformalineaTO.setNpsaldo(saldo);
+
 				reformalineaTO.setNpvalortotal(valtotal);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
 			}
@@ -965,6 +973,7 @@ public class EjecucionController {
 					continuar=false;
 					mensajes.setMsg("Debe existir al menos una linea creada");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					respuesta.setEstado(false);
 				}
 			}
 			if(continuar) {
@@ -1096,6 +1105,7 @@ public class EjecucionController {
 					continuar=false;
 					mensajes.setMsg("Debe existir al menos una linea creada");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					respuesta.setEstado(false);
 				}
 			}
 			if(continuar) {
@@ -1163,6 +1173,7 @@ public class EjecucionController {
 					continuar=false;
 					mensajes.setMsg("Debe existir al menos una linea creada");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					respuesta.setEstado(false);
 				}
 			}
 			if(continuar) {
@@ -1270,6 +1281,7 @@ public class EjecucionController {
 					continuar=false;
 					mensajes.setMsg("Debe existir al menos una linea creada");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					respuesta.setEstado(false);
 				}
 			}
 			if(continuar) {
@@ -1297,6 +1309,7 @@ public class EjecucionController {
 						if(total!=0){
 							mensajes.setMsg("El valor de incremento debe ser igual al de decremento");
 							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+							respuesta.setEstado(false);
 						}
 					}
 					if(mensajes.getMsg()==null || mensajes.getMsg().equals("")){
