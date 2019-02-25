@@ -549,6 +549,7 @@ public class EjecucionController {
 	public Respuesta nuevo(@PathVariable String clase,@PathVariable Long id,HttpServletRequest request){
 		log.println("entra al metodo nuevo: " + id);
 		JSONObject jsonObject=new JSONObject();
+		request.getSession().removeAttribute(ConstantesSesion.ORDENGASTO);
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
 		try {
@@ -634,9 +635,11 @@ public class EjecucionController {
 			}
 			//Ordendevengolinea
 			else if(clase.equals("ordendevengolinea")){
-				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
-				ordengastolineaTO.getId().setId(id);
-				jsonObject.put("ordendevengolinea", (JSONObject)JSONSerializer.toJSON(ordengastolineaTO,ordengastolineaTO.getJsonConfig()));
+				OrdendevengolineaTO ordendevengolineaTO=new OrdendevengolineaTO();
+				ordendevengolineaTO.getId().setId(id);
+				jsonObject.put("ordendevengolinea", (JSONObject)JSONSerializer.toJSON(ordendevengolineaTO,ordendevengolineaTO.getJsonConfig()));
+				OrdendevengoTO ordendevengoTO=UtilSession.planificacionServicio.transObtenerOrdendevengoTO(id);
+				request.getSession().setAttribute(ConstantesSesion.ORDENGASTO, ordendevengoTO.getOrdengasto());
 			}
 			//Ordendreversion
 			else if(clase.equals("ordenreversion")){
@@ -819,8 +822,9 @@ public class EjecucionController {
 				for(OrdendevengolineaTO ordendevengolineaTO:pendientes)
 					ordenesnoaprob=ordenesnoaprob+ordendevengolineaTO.getValor();
 				log.println("ordenesnoaprob " +ordenesnoaprob);
+				OrdengastoTO ordengastoTO=(OrdengastoTO) request.getSession().getAttribute(ConstantesSesion.ORDENGASTO);
 				//4. Consulto las ordenes de devengo aprobada
-				Collection<OrdendevengolineaTO> aprobadas=UtilSession.planificacionServicio.transObtieneordenesdevengoaprobadas(id2);
+				Collection<OrdendevengolineaTO> aprobadas=UtilSession.planificacionServicio.transObtieneordenesdevengoaprobadas(id2,ordengastoTO.getId());
 				log.println("aprobadas "+ aprobadas.size());
 				double ordenesaprobadas=0.0;
 				for(OrdendevengolineaTO aprobada:aprobadas)
