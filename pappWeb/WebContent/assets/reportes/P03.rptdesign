@@ -1,0 +1,3062 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
+    <property name="units">in</property>
+    <text-property name="displayName">P03</text-property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="institucion" id="3047">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">82</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="institucionentidad" id="3052">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">1</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="unidad" id="3055">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2503</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ejerciciofiscal" id="3498">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">81</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">oracle.jdbc.driver.OracleDriver</property>
+            <property name="odaURL">jdbc:oracle:thin:@172.17.26.117:1521:orcl</property>
+            <property name="odaUser">comaco03</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">Q29tYWNvMjAxOA==</encrypted-property>
+            <property name="odaJndiName">java:jboss/datasources/pappDS</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Institucion" id="3048">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">INSTITUCIONID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">INSTITUCIONID</text-property>
+                    <text-property name="heading">INSTITUCIONID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONEJERCICIOFISCALID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">INSTITUCIONEJERCICIOFISCALID</text-property>
+                    <text-property name="heading">INSTITUCIONEJERCICIOFISCALID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONCODIGO</text-property>
+                    <text-property name="heading">INSTITUCIONCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONNOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONNOMBRE</text-property>
+                    <text-property name="heading">INSTITUCIONNOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONBASELEGAL</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONBASELEGAL</text-property>
+                    <text-property name="heading">INSTITUCIONBASELEGAL</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONMISION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONMISION</text-property>
+                    <text-property name="heading">INSTITUCIONMISION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONVISION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONVISION</text-property>
+                    <text-property name="heading">INSTITUCIONVISION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONESTADO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONESTADO</text-property>
+                    <text-property name="heading">INSTITUCIONESTADO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONENTIDADIDSERIAL</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">INSTITUCIONENTIDADIDSERIAL</text-property>
+                    <text-property name="heading">INSTITUCIONENTIDADIDSERIAL</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">institucion</property>
+                    <property name="paramName">institucion</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">INSTITUCIONID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">INSTITUCIONEJERCICIOFISCALID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">INSTITUCIONCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">INSTITUCIONNOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">INSTITUCIONBASELEGAL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">INSTITUCIONMISION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">INSTITUCIONVISION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">INSTITUCIONESTADO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">INSTITUCIONENTIDADIDSERIAL</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">INSTITUCIONID</property>
+                    <property name="nativeName">INSTITUCIONID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">INSTITUCIONEJERCICIOFISCALID</property>
+                    <property name="nativeName">INSTITUCIONEJERCICIOFISCALID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">INSTITUCIONCODIGO</property>
+                    <property name="nativeName">INSTITUCIONCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">INSTITUCIONNOMBRE</property>
+                    <property name="nativeName">INSTITUCIONNOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">INSTITUCIONBASELEGAL</property>
+                    <property name="nativeName">INSTITUCIONBASELEGAL</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">INSTITUCIONMISION</property>
+                    <property name="nativeName">INSTITUCIONMISION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">INSTITUCIONVISION</property>
+                    <property name="nativeName">INSTITUCIONVISION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">INSTITUCIONESTADO</property>
+                    <property name="nativeName">INSTITUCIONESTADO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">INSTITUCIONENTIDADIDSERIAL</property>
+                    <property name="nativeName">INSTITUCIONENTIDADIDSERIAL</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT *
+  FROM Institucion ins
+ WHERE ins.INSTITUCIONID = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONID</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONEJERCICIOFISCALID</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONEJERCICIOFISCALID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONEJERCICIOFISCALID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONCODIGO</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONNOMBRE</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONNOMBRE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONNOMBRE</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONBASELEGAL</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>500</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONBASELEGAL</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONBASELEGAL</design:label>
+            <design:formattingHints>
+              <design:displaySize>500</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONMISION</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>500</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONMISION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONMISION</design:label>
+            <design:formattingHints>
+              <design:displaySize>500</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONVISION</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>500</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONVISION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONVISION</design:label>
+            <design:formattingHints>
+              <design:displaySize>500</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONESTADO</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONESTADO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONESTADO</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONENTIDADIDSERIAL</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONENTIDADIDSERIAL</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONENTIDADIDSERIAL</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="InstitucionEntidad" id="3051">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">INSTITUCIONID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">INSTITUCIONID</text-property>
+                    <text-property name="heading">INSTITUCIONID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONENTID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">INSTITUCIONENTID</text-property>
+                    <text-property name="heading">INSTITUCIONENTID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONENTCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONENTCODIGO</text-property>
+                    <text-property name="heading">INSTITUCIONENTCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONENTNOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONENTNOMBRE</text-property>
+                    <text-property name="heading">INSTITUCIONENTNOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONENTPAISID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">INSTITUCIONENTPAISID</text-property>
+                    <text-property name="heading">INSTITUCIONENTPAISID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONENTPROVINCIAID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">INSTITUCIONENTPROVINCIAID</text-property>
+                    <text-property name="heading">INSTITUCIONENTPROVINCIAID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONENTCANTONID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">INSTITUCIONENTCANTONID</text-property>
+                    <text-property name="heading">INSTITUCIONENTCANTONID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONENTESTADO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONENTESTADO</text-property>
+                    <text-property name="heading">INSTITUCIONENTESTADO</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">institucion</property>
+                    <property name="paramName">institucion</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">institucionentidad</property>
+                    <property name="paramName">institucionentidad</property>
+                    <property name="dataType">string</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">INSTITUCIONID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">INSTITUCIONENTID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">INSTITUCIONENTCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">INSTITUCIONENTNOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">INSTITUCIONENTPAISID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">INSTITUCIONENTPROVINCIAID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">INSTITUCIONENTCANTONID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">INSTITUCIONENTESTADO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">INSTITUCIONID</property>
+                    <property name="nativeName">INSTITUCIONID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">INSTITUCIONENTID</property>
+                    <property name="nativeName">INSTITUCIONENTID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">INSTITUCIONENTCODIGO</property>
+                    <property name="nativeName">INSTITUCIONENTCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">INSTITUCIONENTNOMBRE</property>
+                    <property name="nativeName">INSTITUCIONENTNOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">INSTITUCIONENTPAISID</property>
+                    <property name="nativeName">INSTITUCIONENTPAISID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">INSTITUCIONENTPROVINCIAID</property>
+                    <property name="nativeName">INSTITUCIONENTPROVINCIAID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">INSTITUCIONENTCANTONID</property>
+                    <property name="nativeName">INSTITUCIONENTCANTONID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">INSTITUCIONENTESTADO</property>
+                    <property name="nativeName">INSTITUCIONENTESTADO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT *
+  FROM INSTITUCIONENTIDAD ie
+ WHERE ie.INSTITUCIONID = ?
+   AND ie.INSTITUCIONENTID = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONID</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONENTID</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONENTID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONENTID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONENTCODIGO</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONENTCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONENTCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONENTNOMBRE</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONENTNOMBRE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONENTNOMBRE</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONENTPAISID</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONENTPAISID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONENTPAISID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONENTPROVINCIAID</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONENTPROVINCIAID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONENTPROVINCIAID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONENTCANTONID</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONENTCANTONID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONENTCANTONID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONENTESTADO</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONENTESTADO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONENTESTADO</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Detalles" id="3072">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">UNIDAD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">UNIDAD</text-property>
+                    <text-property name="heading">UNIDAD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROGRAMA</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROGRAMA</text-property>
+                    <text-property name="heading">PROGRAMA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROYECTO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROYECTO</text-property>
+                    <text-property name="heading">PROYECTO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ACTIVIDAD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ACTIVIDAD</text-property>
+                    <text-property name="heading">ACTIVIDAD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBACTIVIDAD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBACTIVIDAD</text-property>
+                    <text-property name="heading">SUBACTIVIDAD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">TAREA</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">TAREA</text-property>
+                    <text-property name="heading">TAREA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBTAREA</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBTAREA</text-property>
+                    <text-property name="heading">SUBTAREA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ITEM</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ITEM</text-property>
+                    <text-property name="heading">ITEM</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FUENTE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">FUENTE</text-property>
+                    <text-property name="heading">FUENTE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBITEM</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBITEM</text-property>
+                    <text-property name="heading">SUBITEM</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DENOMINACION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">DENOMINACION</text-property>
+                    <text-property name="heading">DENOMINACION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PRESUPUESTO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PRESUPUESTO</text-property>
+                    <text-property name="heading">PRESUPUESTO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ENERO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ENERO</text-property>
+                    <text-property name="heading">ENERO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FEBRERO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">FEBRERO</text-property>
+                    <text-property name="heading">FEBRERO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MARZO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MARZO</text-property>
+                    <text-property name="heading">MARZO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ABRIL</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ABRIL</text-property>
+                    <text-property name="heading">ABRIL</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MAYO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MAYO</text-property>
+                    <text-property name="heading">MAYO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">JUNIO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">JUNIO</text-property>
+                    <text-property name="heading">JUNIO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">JULIO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">JULIO</text-property>
+                    <text-property name="heading">JULIO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">AGOSTO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">AGOSTO</text-property>
+                    <text-property name="heading">AGOSTO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SEPTIEMBRE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SEPTIEMBRE</text-property>
+                    <text-property name="heading">SEPTIEMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">OCTUBRE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">OCTUBRE</text-property>
+                    <text-property name="heading">OCTUBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">NOVIEMBRE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">NOVIEMBRE</text-property>
+                    <text-property name="heading">NOVIEMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DICIEMBRE</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">DICIEMBRE</text-property>
+                    <text-property name="heading">DICIEMBRE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">institucion</property>
+                    <property name="paramName">institucion</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">institucionentidad</property>
+                    <property name="paramName">institucionentidad</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">unidad</property>
+                    <property name="paramName">unidad</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">3</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">ejerciciofiscal</property>
+                    <property name="paramName">ejerciciofiscal</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">4</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">UNIDAD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">PROGRAMA</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">PROYECTO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">ACTIVIDAD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">SUBACTIVIDAD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">TAREA</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">SUBTAREA</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">ITEM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">FUENTE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">SUBITEM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">DENOMINACION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">PRESUPUESTO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">ENERO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">FEBRERO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">MARZO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">ABRIL</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">MAYO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">JUNIO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">JULIO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">AGOSTO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">SEPTIEMBRE</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">OCTUBRE</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">NOVIEMBRE</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">DICIEMBRE</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">UNIDAD</property>
+                    <property name="nativeName">UNIDAD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">PROGRAMA</property>
+                    <property name="nativeName">PROGRAMA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">PROYECTO</property>
+                    <property name="nativeName">PROYECTO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">ACTIVIDAD</property>
+                    <property name="nativeName">ACTIVIDAD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">SUBACTIVIDAD</property>
+                    <property name="nativeName">SUBACTIVIDAD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">TAREA</property>
+                    <property name="nativeName">TAREA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">SUBTAREA</property>
+                    <property name="nativeName">SUBTAREA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">ITEM</property>
+                    <property name="nativeName">ITEM</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">FUENTE</property>
+                    <property name="nativeName">FUENTE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">SUBITEM</property>
+                    <property name="nativeName">SUBITEM</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">DENOMINACION</property>
+                    <property name="nativeName">DENOMINACION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">PRESUPUESTO</property>
+                    <property name="nativeName">PRESUPUESTO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">ENERO</property>
+                    <property name="nativeName">ENERO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">FEBRERO</property>
+                    <property name="nativeName">FEBRERO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">MARZO</property>
+                    <property name="nativeName">MARZO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">ABRIL</property>
+                    <property name="nativeName">ABRIL</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">MAYO</property>
+                    <property name="nativeName">MAYO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">JUNIO</property>
+                    <property name="nativeName">JUNIO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">JULIO</property>
+                    <property name="nativeName">JULIO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">AGOSTO</property>
+                    <property name="nativeName">AGOSTO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">SEPTIEMBRE</property>
+                    <property name="nativeName">SEPTIEMBRE</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">OCTUBRE</property>
+                    <property name="nativeName">OCTUBRE</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">NOVIEMBRE</property>
+                    <property name="nativeName">NOVIEMBRE</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">DICIEMBRE</property>
+                    <property name="nativeName">DICIEMBRE</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT UNIDADCODIGO || ' ' || UNIDADNOMBRE AS unidad,
+       PROGRAMACODIGO || ' ' || PROGRAMADESCRIPCION AS programa,
+       PROYECTOCODIGO || ' ' || NOMBRE AS proyecto,
+       ACTIVIDADCODIGO || ' ' || ACTIVIDADDESCRIPCION AS actividad,
+       SUBACTIVIDADCODIGO || ' ' || SUBACTIVIDADDESCRIPCION AS subactividad,
+       TAREAUNIDADCODIGO || ' ' ||  TAREAUNIDADDESCRIPCION AS tarea,
+       SUBTAREAUNIDADCODIGO || ' ' ||  SUBTAREAUNIDADDESCRIPCION AS subtarea,
+       ITEMCODIGO || ' ' ||  ITEMNOMBRE AS item,
+       FUENTEFINANCIAMIENTOCODIGO AS fuente,
+       SUBITEMCODIGO AS subitem,
+       SUBITEMNOMBRE AS denominacion,
+       PRESUPUESTO,
+       ENERO,
+       FEBRERO,
+       MARZO,
+       ABRIL,
+       MAYO,
+       JUNIO,
+       JULIO,
+       AGOSTO,
+       SEPTIEMBRE,
+       OCTUBRE,
+       NOVIEMBRE,
+       DICIEMBRE
+  FROM P03
+ WHERE INSTITUCIONID = ?
+   AND INSTITUCIONENTID = ?
+   AND UNIDADCODIGOPRESUP = ?
+   AND NIVELACTIVIDADEJERFISCALID = ?
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONID</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONENTID</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONENTID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONENTID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>UNIDADID</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>UNIDADID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>UNIDADID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ESTRATEGICOID</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ESTRATEGICOID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ESTRATEGICOID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ESTRATEGICOCODIGO</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ESTRATEGICOCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ESTRATEGICOCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ESTRATEGICODESCRIPCION</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>500</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ESTRATEGICODESCRIPCION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ESTRATEGICODESCRIPCION</design:label>
+            <design:formattingHints>
+              <design:displaySize>500</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>OERATIVOID</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>OERATIVOID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>OERATIVOID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>OPERATIVOCODIGO</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>OPERATIVOCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>OPERATIVOCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>OPERATIVODESCRIPCION</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>500</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>OPERATIVODESCRIPCION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>OPERATIVODESCRIPCION</design:label>
+            <design:formattingHints>
+              <design:displaySize>500</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PROGRAMACODIGO</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PROGRAMACODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PROGRAMACODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PROGRAMADESCRIPCION</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>500</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PROGRAMADESCRIPCION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PROGRAMADESCRIPCION</design:label>
+            <design:formattingHints>
+              <design:displaySize>500</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PROYECTOCODIGO</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PROYECTOCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PROYECTOCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PROYECTONOMBRE</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PROYECTONOMBRE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PROYECTONOMBRE</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ACTIVIDADCODIGO</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ACTIVIDADCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ACTIVIDADCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ACTIVIDADDESCRIPCION</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>500</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ACTIVIDADDESCRIPCION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ACTIVIDADDESCRIPCION</design:label>
+            <design:formattingHints>
+              <design:displaySize>500</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>TAREAUNIDADCODIGO</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>TAREAUNIDADCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>TAREAUNIDADCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>TAREAUNIDADDESCRIPCION</design:name>
+              <design:position>17</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>500</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>TAREAUNIDADDESCRIPCION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>TAREAUNIDADDESCRIPCION</design:label>
+            <design:formattingHints>
+              <design:displaySize>500</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBTAREAUNIDADCODIGO</design:name>
+              <design:position>18</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBTAREAUNIDADCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBTAREAUNIDADCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBTAREAUNIDADDESCRIPCION</design:name>
+              <design:position>19</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>500</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBTAREAUNIDADDESCRIPCION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBTAREAUNIDADDESCRIPCION</design:label>
+            <design:formattingHints>
+              <design:displaySize>500</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ITEMCODIGO</design:name>
+              <design:position>20</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ITEMCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ITEMCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMCODIGO</design:name>
+              <design:position>21</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>DENOMINACION</design:name>
+              <design:position>22</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>300</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>DENOMINACION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>DENOMINACION</design:label>
+            <design:formattingHints>
+              <design:displaySize>300</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>FUENTEFINANCIAMIENTOCODIGO</design:name>
+              <design:position>23</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>FUENTEFINANCIAMIENTOCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>FUENTEFINANCIAMIENTOCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INICIAL</design:name>
+              <design:position>24</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INICIAL</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INICIAL</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>REFORMA</design:name>
+              <design:position>25</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>REFORMA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>REFORMA</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>EJERCICIOFISCALID</design:name>
+              <design:position>26</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>EJERCICIOFISCALID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>EJERCICIOFISCALID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBPROGRAMACODIGO</design:name>
+              <design:position>27</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBPROGRAMACODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBPROGRAMACODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>OBRACODIGO</design:name>
+              <design:position>28</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>OBRACODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>OBRACODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>DIVISIONGEOGRAFICACODIGO</design:name>
+              <design:position>29</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>12</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>DIVISIONGEOGRAFICACODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>DIVISIONGEOGRAFICACODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>12</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ORGANISMOPRESTAMOCODIGO</design:name>
+              <design:position>30</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ORGANISMOPRESTAMOCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ORGANISMOPRESTAMOCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBACTIVIDADCODIGO</design:name>
+              <design:position>31</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBACTIVIDADCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBACTIVIDADCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>NIVELACTIVIDADEJERFISCALID</design:name>
+              <design:position>32</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>NIVELACTIVIDADEJERFISCALID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>NIVELACTIVIDADEJERFISCALID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADACUMTIPO</design:name>
+              <design:position>33</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADACUMTIPO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADACUMTIPO</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADACUMID</design:name>
+              <design:position>34</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADACUMID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADACUMID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADACUMCANTIDAD</design:name>
+              <design:position>35</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>5</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADACUMCANTIDAD</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADACUMCANTIDAD</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADACUMVALOR</design:name>
+              <design:position>36</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADACUMVALOR</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADACUMVALOR</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADACUMREFORMAID</design:name>
+              <design:position>37</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADACUMREFORMAID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADACUMREFORMAID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADVALCOMPROMISO</design:name>
+              <design:position>38</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADVALCOMPROMISO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADVALCOMPROMISO</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADVALPRECOMPROMISO</design:name>
+              <design:position>39</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADVALPRECOMPROMISO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADVALPRECOMPROMISO</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADVALDEVENGO</design:name>
+              <design:position>40</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADVALDEVENGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADVALDEVENGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADVALSALDCOMPROMISO</design:name>
+              <design:position>41</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADVALSALDCOMPROMISO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADVALSALDCOMPROMISO</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADVALDISPDEVENGO</design:name>
+              <design:position>42</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADVALDISPDEVENGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADVALDISPDEVENGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMUNIDADVALREVERSION</design:name>
+              <design:position>43</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMUNIDADVALREVERSION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMUNIDADVALREVERSION</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="page" id="67">
+            <property name="backgroundColor">#FFFFFF</property>
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">11px</property>
+            <property name="color">#336699</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1px</property>
+            <property name="lineHeight">24px</property>
+            <property name="width">100%</property>
+        </style>
+        <style name="title" id="69">
+            <property name="backgroundColor">#99CC00</property>
+            <property name="fontFamily">"Verdana", "Arial", "Helvetica", sans-serif</property>
+            <property name="fontSize">24px</property>
+            <property name="fontWeight">bolder</property>
+            <property name="color">#000000</property>
+            <property name="lineHeight">40px</property>
+        </style>
+        <style name="col-title" id="70">
+            <property name="fontSize">11px</property>
+            <property name="fontWeight">bold</property>
+        </style>
+        <style name="col-hide" id="71">
+            <property name="color">#FFFFFF</property>
+        </style>
+        <style name="table-header" id="116">
+            <property name="backgroundColor">#043B76</property>
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">11px</property>
+            <property name="color">#FFFFFF</property>
+            <property name="width">100%</property>
+        </style>
+        <style name="table-detail" id="117">
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">11px</property>
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1px</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1px</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1px</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1px</property>
+            <property name="width">100%</property>
+        </style>
+        <style name="table" id="129">
+            <property name="width">100%</property>
+        </style>
+        <style name="table-footer" id="130">
+            <property name="backgroundColor">#CCFF99</property>
+            <property name="fontFamily">"Arial", "Helvetica", sans-serif</property>
+            <property name="fontSize">14px</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#333333</property>
+            <property name="lineHeight">22px</property>
+            <property name="width">100%</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">us-super-b</property>
+            <property name="orientation">landscape</property>
+            <property name="topMargin">0.05in</property>
+            <property name="leftMargin">0.2in</property>
+            <property name="bottomMargin">0.2in</property>
+            <property name="rightMargin">0.45in</property>
+            <property name="borderBottomStyle">none</property>
+            <property name="borderLeftStyle">none</property>
+            <property name="borderRightStyle">none</property>
+            <property name="borderTopStyle">none</property>
+            <property name="numberAlign">right</property>
+            <property name="lineHeight">12px</property>
+            <property name="showHeaderOnFirst">false</property>
+            <property name="showFooterOnLast">false</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="683">
+            <property name="width">18.341666666666665in</property>
+            <column id="684">
+                <property name="width">0.7708333333333334in</property>
+            </column>
+            <column id="1130">
+                <property name="width">3.7395833333333335in</property>
+            </column>
+            <column id="685">
+                <property name="width">12.758333333333333in</property>
+            </column>
+            <row id="686">
+                <cell id="687">
+                    <property name="borderLeftColor">#C0C0C0</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightColor">#C0C0C0</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopColor">#C0C0C0</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <image id="2642">
+                        <property name="source">url</property>
+                        <expression name="uri" type="constant">http://172.17.26.118:8081/birt/comaco.jpg</expression>
+                    </image>
+                </cell>
+                <cell id="1128"/>
+                <cell id="688">
+                    <text id="2811">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">left</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[COMANDO CONJUNTO DE LAS FF.AA.]]></text-property>
+                    </text>
+                    <label id="1170">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12px</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">ESTADO MAYOR INSTITUCIONAL</text-property>
+                    </label>
+                    <label id="1435">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12px</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">SEGUIMIENTO A LA EJECUCIÓN DE LA PROGRAMACIÓN ANUAL DE LA POLÍTICA PÚBLICA</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="3011">
+                <cell id="3012">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <grid id="3016">
+                        <column id="3017">
+                            <property name="width">2.033333333333333in</property>
+                        </column>
+                        <column id="3018">
+                            <property name="width">1.75in</property>
+                        </column>
+                        <column id="3019">
+                            <property name="width">7.175in</property>
+                        </column>
+                        <row id="3020">
+                            <cell id="3021">
+                                <label id="2390">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">serif</property>
+                                    <property name="fontSize">10pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
+                                    <text-property name="text">Institución:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="3022">
+                                <data id="3059">
+                                    <property name="dataSet">Institucion</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">INSTITUCIONCODIGO</property>
+                                            <text-property name="displayName">INSTITUCIONCODIGO</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["INSTITUCIONCODIGO"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">INSTITUCIONCODIGO</property>
+                                </data>
+                            </cell>
+                            <cell id="3023">
+                                <data id="3060">
+                                    <property name="dataSet">Institucion</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">INSTITUCIONNOMBRE</property>
+                                            <text-property name="displayName">INSTITUCIONNOMBRE</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["INSTITUCIONNOMBRE"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">INSTITUCIONNOMBRE</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="3024">
+                            <cell id="3025">
+                                <label id="3015">
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Entidad operativa estratégica:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="3026">
+                                <data id="3061">
+                                    <property name="dataSet">InstitucionEntidad</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">INSTITUCIONENTCODIGO</property>
+                                            <text-property name="displayName">INSTITUCIONENTCODIGO</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["INSTITUCIONENTCODIGO"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">INSTITUCIONENTCODIGO</property>
+                                </data>
+                            </cell>
+                            <cell id="3027">
+                                <data id="3062">
+                                    <property name="dataSet">InstitucionEntidad</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">INSTITUCIONENTNOMBRE</property>
+                                            <text-property name="displayName">INSTITUCIONENTNOMBRE</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["INSTITUCIONENTNOMBRE"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">INSTITUCIONENTNOMBRE</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="3028">
+                            <cell id="3029">
+                                <label id="3044">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">serif</property>
+                                    <property name="fontSize">10pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
+                                    <text-property name="text">Unidad:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="3030">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <data id="3975">
+                                    <property name="dataSet">Detalles</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">UNIDAD</property>
+                                            <text-property name="displayName">UNIDAD</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["UNIDAD"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">UNIDAD</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="3040">
+                            <cell id="3041">
+                                <label id="3974"/>
+                            </cell>
+                            <cell id="3042"/>
+                            <cell id="3043"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="3693">
+                <cell id="3694">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <table id="3976">
+                        <property name="dataSet">Detalles</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">PROGRAMA</property>
+                                <text-property name="displayName">PROGRAMA</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["PROGRAMA"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">PROYECTO</property>
+                                <text-property name="displayName">PROYECTO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["PROYECTO"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ACTIVIDAD</property>
+                                <text-property name="displayName">ACTIVIDAD</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDAD"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SUBACTIVIDAD</property>
+                                <text-property name="displayName">SUBACTIVIDAD</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SUBACTIVIDAD"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TAREA</property>
+                                <text-property name="displayName">TAREA</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["TAREA"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SUBTAREA</property>
+                                <text-property name="displayName">SUBTAREA</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SUBTAREA"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ITEM</property>
+                                <text-property name="displayName">ITEM</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ITEM"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">FUENTE</property>
+                                <text-property name="displayName">FUENTE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["FUENTE"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SUBITEM</property>
+                                <text-property name="displayName">SUBITEM</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SUBITEM"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">DENOMINACION</property>
+                                <text-property name="displayName">DENOMINACION</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["DENOMINACION"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">PRESUPUESTO</property>
+                                <text-property name="displayName">PRESUPUESTO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["PRESUPUESTO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ENERO</property>
+                                <text-property name="displayName">ENERO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ENERO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">FEBRERO</property>
+                                <text-property name="displayName">FEBRERO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["FEBRERO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MARZO</property>
+                                <text-property name="displayName">MARZO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MARZO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ABRIL</property>
+                                <text-property name="displayName">ABRIL</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ABRIL"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MAYO</property>
+                                <text-property name="displayName">MAYO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MAYO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">JUNIO</property>
+                                <text-property name="displayName">JUNIO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["JUNIO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">JULIO</property>
+                                <text-property name="displayName">JULIO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["JULIO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">AGOSTO</property>
+                                <text-property name="displayName">AGOSTO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["AGOSTO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SEPTIEMBRE</property>
+                                <text-property name="displayName">SEPTIEMBRE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SEPTIEMBRE"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">OCTUBRE</property>
+                                <text-property name="displayName">OCTUBRE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["OCTUBRE"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">NOVIEMBRE</property>
+                                <text-property name="displayName">NOVIEMBRE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["NOVIEMBRE"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">DICIEMBRE</property>
+                                <text-property name="displayName">DICIEMBRE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["DICIEMBRE"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <column id="4095"/>
+                        <column id="4096"/>
+                        <column id="4097"/>
+                        <column id="4098"/>
+                        <column id="4099"/>
+                        <column id="4100"/>
+                        <column id="4101"/>
+                        <column id="4102"/>
+                        <column id="4103"/>
+                        <column id="4104"/>
+                        <column id="4105"/>
+                        <column id="4106"/>
+                        <column id="4107"/>
+                        <column id="4108"/>
+                        <column id="4109"/>
+                        <column id="4110"/>
+                        <column id="4111"/>
+                        <column id="4112"/>
+                        <column id="4113"/>
+                        <column id="4114"/>
+                        <column id="4115"/>
+                        <column id="4116"/>
+                        <column id="4117"/>
+                        <header>
+                            <row id="3977">
+                                <cell id="3978">
+                                    <label id="3979">
+                                        <text-property name="text">PROGRAMA</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="3980">
+                                    <label id="3981">
+                                        <text-property name="text">PROYECTO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="3982">
+                                    <label id="3983">
+                                        <text-property name="text">ACTIVIDAD</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="3984">
+                                    <label id="3985">
+                                        <text-property name="text">SUBACTIVIDAD</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="3986">
+                                    <label id="3987">
+                                        <text-property name="text">TAREA</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="3988">
+                                    <label id="3989">
+                                        <text-property name="text">SUBTAREA</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="3990">
+                                    <label id="3991">
+                                        <text-property name="text">ITEM</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="3992">
+                                    <label id="3993">
+                                        <text-property name="text">FUENTE</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="3994">
+                                    <label id="3995">
+                                        <text-property name="text">SUBITEM</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="3996">
+                                    <label id="3997">
+                                        <text-property name="text">DENOMINACION</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="3998">
+                                    <label id="3999">
+                                        <text-property name="text">PRESUPUESTO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4000">
+                                    <label id="4001">
+                                        <text-property name="text">ENERO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4002">
+                                    <label id="4003">
+                                        <text-property name="text">FEBRERO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4004">
+                                    <label id="4005">
+                                        <text-property name="text">MARZO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4006">
+                                    <label id="4007">
+                                        <text-property name="text">ABRIL</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4008">
+                                    <label id="4009">
+                                        <text-property name="text">MAYO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4010">
+                                    <label id="4011">
+                                        <text-property name="text">JUNIO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4012">
+                                    <label id="4013">
+                                        <text-property name="text">JULIO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4014">
+                                    <label id="4015">
+                                        <text-property name="text">AGOSTO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4016">
+                                    <label id="4017">
+                                        <text-property name="text">SEPTIEMBRE</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4018">
+                                    <label id="4019">
+                                        <text-property name="text">OCTUBRE</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4020">
+                                    <label id="4021">
+                                        <text-property name="text">NOVIEMBRE</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4022">
+                                    <label id="4023">
+                                        <text-property name="text">DICIEMBRE</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="4024">
+                                <cell id="4025">
+                                    <data id="4026">
+                                        <property name="resultSetColumn">PROGRAMA</property>
+                                    </data>
+                                </cell>
+                                <cell id="4027">
+                                    <data id="4028">
+                                        <property name="resultSetColumn">PROYECTO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4029">
+                                    <data id="4030">
+                                        <property name="resultSetColumn">ACTIVIDAD</property>
+                                    </data>
+                                </cell>
+                                <cell id="4031">
+                                    <data id="4032">
+                                        <property name="resultSetColumn">SUBACTIVIDAD</property>
+                                    </data>
+                                </cell>
+                                <cell id="4033">
+                                    <data id="4034">
+                                        <property name="resultSetColumn">TAREA</property>
+                                    </data>
+                                </cell>
+                                <cell id="4035">
+                                    <data id="4036">
+                                        <property name="resultSetColumn">SUBTAREA</property>
+                                    </data>
+                                </cell>
+                                <cell id="4037">
+                                    <data id="4038">
+                                        <property name="resultSetColumn">ITEM</property>
+                                    </data>
+                                </cell>
+                                <cell id="4039">
+                                    <data id="4040">
+                                        <property name="resultSetColumn">FUENTE</property>
+                                    </data>
+                                </cell>
+                                <cell id="4041">
+                                    <data id="4042">
+                                        <property name="resultSetColumn">SUBITEM</property>
+                                    </data>
+                                </cell>
+                                <cell id="4043">
+                                    <data id="4044">
+                                        <property name="resultSetColumn">DENOMINACION</property>
+                                    </data>
+                                </cell>
+                                <cell id="4045">
+                                    <data id="4046">
+                                        <property name="resultSetColumn">PRESUPUESTO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4047">
+                                    <data id="4048">
+                                        <property name="resultSetColumn">ENERO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4049">
+                                    <data id="4050">
+                                        <property name="resultSetColumn">FEBRERO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4051">
+                                    <data id="4052">
+                                        <property name="resultSetColumn">MARZO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4053">
+                                    <data id="4054">
+                                        <property name="resultSetColumn">ABRIL</property>
+                                    </data>
+                                </cell>
+                                <cell id="4055">
+                                    <data id="4056">
+                                        <property name="resultSetColumn">MAYO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4057">
+                                    <data id="4058">
+                                        <property name="resultSetColumn">JUNIO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4059">
+                                    <data id="4060">
+                                        <property name="resultSetColumn">JULIO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4061">
+                                    <data id="4062">
+                                        <property name="resultSetColumn">AGOSTO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4063">
+                                    <data id="4064">
+                                        <property name="resultSetColumn">SEPTIEMBRE</property>
+                                    </data>
+                                </cell>
+                                <cell id="4065">
+                                    <data id="4066">
+                                        <property name="resultSetColumn">OCTUBRE</property>
+                                    </data>
+                                </cell>
+                                <cell id="4067">
+                                    <data id="4068">
+                                        <property name="resultSetColumn">NOVIEMBRE</property>
+                                    </data>
+                                </cell>
+                                <cell id="4069">
+                                    <data id="4070">
+                                        <property name="resultSetColumn">DICIEMBRE</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="4071">
+                                <cell id="4072"/>
+                                <cell id="4073"/>
+                                <cell id="4074"/>
+                                <cell id="4075"/>
+                                <cell id="4076"/>
+                                <cell id="4077"/>
+                                <cell id="4078"/>
+                                <cell id="4079"/>
+                                <cell id="4080"/>
+                                <cell id="4081"/>
+                                <cell id="4082"/>
+                                <cell id="4083"/>
+                                <cell id="4084"/>
+                                <cell id="4085"/>
+                                <cell id="4086"/>
+                                <cell id="4087"/>
+                                <cell id="4088"/>
+                                <cell id="4089"/>
+                                <cell id="4090"/>
+                                <cell id="4091"/>
+                                <cell id="4092"/>
+                                <cell id="4093"/>
+                                <cell id="4094"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+            <row id="3769">
+                <cell id="3770"/>
+                <cell id="3771"/>
+                <cell id="3772"/>
+            </row>
+        </grid>
+    </body>
+</report>
