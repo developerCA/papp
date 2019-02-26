@@ -1332,19 +1332,19 @@
        FUENTEFINANCIAMIENTOCODIGO AS fuente,
        SUBITEMCODIGO AS subitem,
        SUBITEMNOMBRE AS denominacion,
-       PRESUPUESTO,
-       ENERO,
-       FEBRERO,
-       MARZO,
-       ABRIL,
-       MAYO,
-       JUNIO,
-       JULIO,
-       AGOSTO,
-       SEPTIEMBRE,
-       OCTUBRE,
-       NOVIEMBRE,
-       DICIEMBRE
+       NVL(PRESUPUESTO, 0) AS PRESUPUESTO,
+       NVL(ENERO, 0) AS ENERO,
+       NVL(FEBRERO, 0) AS FEBRERO,
+       NVL(MARZO, 0) AS MARZO,
+       NVL(ABRIL, 0) AS ABRIL,
+       NVL(MAYO, 0) AS MAYO,
+       NVL(JUNIO, 0) AS JUNIO,
+       NVL(JULIO, 0) AS JULIO,
+       NVL(AGOSTO, 0) AS AGOSTO,
+       NVL(SEPTIEMBRE, 0) AS SEPTIEMBRE,
+       NVL(OCTUBRE, 0) AS OCTUBRE,
+       NVL(NOVIEMBRE, 0) AS NOVIEMBRE,
+       NVL(DICIEMBRE, 0) AS DICIEMBRE
   FROM P03
  WHERE INSTITUCIONID = ?
    AND INSTITUCIONENTID = ?
@@ -2613,6 +2613,12 @@
                             <cell id="3043"/>
                         </row>
                     </grid>
+                </cell>
+            </row>
+            <row id="4118">
+                <cell id="4119">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
                 </cell>
             </row>
             <row id="3693">
