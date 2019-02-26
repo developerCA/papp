@@ -398,6 +398,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	};
 
 	$scope.anular = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "AP") {
 			SweetAlert.swal(
 	    		"Orden de Gastos!",
@@ -452,6 +453,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	}
 
 	$scope.eliminar = function(index) {
+		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
 	    		"Orden de Gastos!",
