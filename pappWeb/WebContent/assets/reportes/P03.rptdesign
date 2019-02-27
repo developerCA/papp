@@ -2266,6 +2266,259 @@
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="N1-Programa" id="4120">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">PROGRAMAID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PROGRAMAID</text-property>
+                    <text-property name="heading">PROGRAMAID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROGRAMA</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROGRAMA</text-property>
+                    <text-property name="heading">PROGRAMA</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">institucion</property>
+                    <property name="paramName">institucion</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">entidad</property>
+                    <property name="paramName">institucionentidad</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">unidad</property>
+                    <property name="paramName">unidad</property>
+                    <property name="dataType">string</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">ef</property>
+                    <property name="paramName">ejerciciofiscal</property>
+                    <property name="dataType">integer</property>
+                    <property name="position">4</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">PROGRAMAID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">PROGRAMA</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">PROGRAMAID</property>
+                    <property name="nativeName">PROGRAMAID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">PROGRAMA</property>
+                    <property name="nativeName">PROGRAMA</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT PROGRAMAID,
+       PROGRAMACODIGO || ' ' || PROGRAMADESCRIPCION AS programa
+  FROM P03
+ WHERE INSTITUCIONID = ?
+   AND INSTITUCIONENTID = ?
+   AND UNIDADCODIGOPRESUP = ?
+   AND NIVELACTIVIDADEJERFISCALID = ?
+ GROUP BY PROGRAMAID,
+       PROGRAMACODIGO,
+       PROGRAMADESCRIPCION
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PROGRAMAID</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PROGRAMAID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PROGRAMAID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PROGRAMA</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>541</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PROGRAMA</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PROGRAMA</design:label>
+            <design:formattingHints>
+              <design:displaySize>541</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="N2-Proyectos" id="4140">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">PROYECTOID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">PROYECTOID</text-property>
+                    <text-property name="heading">PROYECTOID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROYECTO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROYECTO</text-property>
+                    <text-property name="heading">PROYECTO</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">PROYECTOID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">PROYECTO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">PROYECTOID</property>
+                    <property name="nativeName">PROYECTOID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">PROYECTO</property>
+                    <property name="nativeName">PROYECTO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT PROYECTOID,
+       PROYECTOCODIGO || ' ' || NOMBRE AS proyecto
+  FROM P03
+ WHERE PROGRAMAID = ?
+ GROUP BY PROYECTOID,
+       PROYECTOCODIGO,
+       NOMBRE
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PROYECTOID</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PROYECTOID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PROYECTOID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PROYECTO</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>141</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PROYECTO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PROYECTO</design:label>
+            <design:formattingHints>
+              <design:displaySize>141</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="page" id="67">
@@ -3064,5 +3317,97 @@
                 <cell id="3772"/>
             </row>
         </grid>
+        <table id="4121">
+            <property name="dataSet">N1-Programa</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">PROGRAMAID</property>
+                    <text-property name="displayName">PROGRAMAID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROGRAMAID"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">PROGRAMA</property>
+                    <text-property name="displayName">PROGRAMA</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROGRAMA"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="4135">
+                <property name="width">0.9791666666666666in</property>
+            </column>
+            <column id="4136">
+                <property name="width">17.322916666666668in</property>
+            </column>
+            <detail>
+                <row id="4127">
+                    <cell id="4128">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <data id="4131">
+                            <property name="resultSetColumn">PROGRAMA</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="4137">
+                    <cell id="4138"/>
+                    <cell id="4139">
+                        <table id="4141">
+                            <property name="dataSet">N2-Proyectos</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">PROYECTOID</property>
+                                    <text-property name="displayName">PROYECTOID</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["PROYECTOID"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">PROYECTO</property>
+                                    <text-property name="displayName">PROYECTO</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["PROYECTO"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <column id="4155"/>
+                            <column id="4156"/>
+                            <header>
+                                <row id="4142">
+                                    <cell id="4143">
+                                        <label id="4144">
+                                            <text-property name="text">PROYECTOID</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="4145">
+                                        <label id="4146">
+                                            <text-property name="text">PROYECTO</text-property>
+                                        </label>
+                                    </cell>
+                                </row>
+                            </header>
+                            <detail>
+                                <row id="4147">
+                                    <cell id="4148">
+                                        <data id="4149">
+                                            <property name="resultSetColumn">PROYECTOID</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="4150">
+                                        <data id="4151">
+                                            <property name="resultSetColumn">PROYECTO</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </detail>
+                            <footer>
+                                <row id="4152">
+                                    <cell id="4153"/>
+                                    <cell id="4154"/>
+                                </row>
+                            </footer>
+                        </table>
+                    </cell>
+                </row>
+            </detail>
+        </table>
     </body>
 </report>
