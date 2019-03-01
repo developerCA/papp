@@ -1306,11 +1306,13 @@ public class EjecucionController {
 						ReformalineaTO reformalineaTO=new ReformalineaTO();
 						reformalineaTO.getId().setId(reformaTO.getId());
 						Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO);
+						System.out.println("reformalineaTOs "+ reformalineaTOs.size());
 						double total=0.0;
 						for(ReformalineaTO reformalineaTO2:reformalineaTOs){
 							total=total+reformalineaTO2.getValorincremento()-reformalineaTO2.getValordecremento();
 						}
-						if(total!=0){
+						System.out.println("tooootal "+ total);
+						if(UtilGeneral.redondear(total,2)!=0.0){
 							mensajes.setMsg("El valor de incremento debe ser igual al de decremento");
 							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 							respuesta.setEstado(false);
