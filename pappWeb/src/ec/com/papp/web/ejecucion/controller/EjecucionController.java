@@ -1126,14 +1126,28 @@ public class EjecucionController {
 							ordengastoTO.setMotivonegacion(parameters.get("observacion"));
 					}
 					else if(tipo.equals("AN")) {
+						//valido que no tenga ordenes de devengo aprobadas o en proceso para poder anular
+						OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
+						ordendevengoTO.setOrdendevengoordengastoid(ordengastoTO.getId());
+						Collection<OrdendevengoTO> ordendevengoTOs=UtilSession.planificacionServicio.transObtenerOrdendevengo(ordendevengoTO);
+						for(OrdendevengoTO ordendevengoTO2:ordendevengoTOs){
+							if(ordendevengoTO2.getEstado().equals("RE") || ordendevengoTO2.getEstado().equals("SOL") || ordendevengoTO2.getEstado().equals("AP")){
+								mensajes.setMsg("No se puede anular la orden porque existen ordenes de devengo");
+								mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+								respuesta.setEstado(false);
+								break;
+							}
+						}
 						if(parameters.get("observacion")!=null)
 							ordengastoTO.setMotivoanulacion(parameters.get("observacion"));
 					}
-					UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO, tipo);
-					ComunController.crearAuditoria(request, "ORDENGASTO", "U", objeto, id.toString());
-					//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
-					mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
-					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+					if(mensajes.getMsg()==null){
+						UtilSession.planificacionServicio.transCrearModificarOrdengasto(ordengastoTO, tipo);
+						ComunController.crearAuditoria(request, "ORDENGASTO", "U", objeto, id.toString());
+						//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
+						mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
+						mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+					}
 		//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
 				}
 	//			UtilSession.planificacionServicio.transCrearModificarAuditoria(auditoriaTO);
@@ -1301,17 +1315,14 @@ public class EjecucionController {
 							reformaTO.setMotivonegacion(parameters.get("observacion"));
 						reformaTO.setFechanegacion(new Date());
 					}
-					System.out.println("va a enviar al flujo la reforma");
 					if(tipo.equals("SO") && (reformaTO.getTipo().equals("MU") || reformaTO.getTipo().equals("EU") || reformaTO.getTipo().equals("ES"))){
 						ReformalineaTO reformalineaTO=new ReformalineaTO();
 						reformalineaTO.getId().setId(reformaTO.getId());
 						Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO);
-						System.out.println("reformalineaTOs "+ reformalineaTOs.size());
 						double total=0.0;
 						for(ReformalineaTO reformalineaTO2:reformalineaTOs){
 							total=total+reformalineaTO2.getValorincremento()-reformalineaTO2.getValordecremento();
 						}
-						System.out.println("tooootal "+ total);
 						if(UtilGeneral.redondear(total,2)!=0.0){
 							mensajes.setMsg("El valor de incremento debe ser igual al de decremento");
 							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
