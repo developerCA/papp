@@ -425,6 +425,10 @@
            c.CERTIFICACIONEJERFISCALID,
            si.SUBITEMID,
            c.CERTIFICACIONID
+       ) +
+       CAL_CERTIFICADO_SALDO_REFORMA(
+           na15.nivelactividadid,
+           c.CERTIFICACIONFECHACREACION
        ) AS saldo
   FROM certificacion                        c
        INNER JOIN Unidad                    u               ON u.UNIDADID = c.CERTIFICACIONUNIDADID
@@ -498,7 +502,9 @@
        sia.subitemunidadacumvalor,
        c.CERTIFICACIONEJERFISCALID,
        si.SUBITEMID,
-       c.CERTIFICACIONID
+       c.CERTIFICACIONID,
+       na15.nivelactividadid,
+       c.CERTIFICACIONFECHACREACION
  ORDER BY cl.CERTIFICACIONLINEAID
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
