@@ -131,7 +131,8 @@
 						</div>
 					</div>
 
-					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();">
+					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"
+						ng-if="!rol('ROLE_APROBADOR');">
 						<i class="fa fa-plus-square"></i>
 						Agregar
 					</a>
@@ -146,7 +147,8 @@
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;"
+									ng-if="!rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Solicitar"
 										ng-click="solicitar($index)">
@@ -175,7 +177,7 @@
 									</a>
 								</td> 
 								<td width="32px" style="padding: 1px;"
-									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO') || rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar"
 										ng-click="aprobar($index)">
@@ -183,14 +185,15 @@
 									</a>
 								</td>
 								<td width="32px" style="padding: 1px;"
-									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO' || rol('ROLE_APROBADOR'));">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Negar"
 										ng-click="negar($index)">
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;"
+									ng-if="!rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Eliminar"
 										ng-click="eliminar($index)">
@@ -458,7 +461,8 @@
 									        <span class="symbol required"></span>
 									    </label>
 									    <input type="checkbox" class="form-control"
-									    	name="incluyemeta" ng-model="objeto.incluyemeta">
+									    	name="incluyemeta" ng-model="objeto.incluyemeta"
+									    	ng-disabled="rol('ROLE_APROBADOR')">
 									    <span class="error text-small block"
 									        ng-if="Form.incluyemeta.$dirty && Form.incluyemeta.$invalid">
 									        Incorrecto
@@ -475,13 +479,14 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<a ng-if="objeto.incluyemeta" href="#"
+									<a ng-if="objeto.incluyemeta && rol('ROLE_APROBADOR')" href="#"
 										class="btn btn-sm btn-dark-azure"
 										ng-click="metaEditar();">
 										Metas
 									</a>
 									<span ng-if="guardar && !noeditar">
-										<button type="submit" class="btn btn-primary">
+										<button type="submit" class="btn btn-primary"
+											ng-if="!rol('ROLE_APROBADOR');">
 											Guardar
 										</button>
 									</span>
@@ -526,7 +531,8 @@
 																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
-														<td width="32px" style="padding: 1px;">
+														<td width="32px" style="padding: 1px;"
+															ng-if="!rol('ROLE_APROBADOR');">
 															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
 																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
 																<i class="fa ti-trash"></i>
@@ -675,7 +681,8 @@
 							<div class="col-md-12">
 								<div class="pull-right">
 									<span ng-if="guardar && !noeditar">
-										<button type="submit" class="btn btn-primary">
+										<button type="submit" class="btn btn-primary"
+											ng-if="!rol('ROLE_APROBADOR');">
 											Guardar
 										</button>
 									</span>

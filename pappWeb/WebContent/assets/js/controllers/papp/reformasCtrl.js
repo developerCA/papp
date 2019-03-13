@@ -122,7 +122,11 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.editar=function(index){
 		index = $scope.calcularIndex(index);
 		//console.log($scope.data[index]);
-		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
+		if ($scope.rol('ROLE_APROBADOR')) {
+			$scope.noeditar = true;
+		} else {
+			$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
+		}
 		reformasFactory.traerEditar($scope.data[index].id).then(function(resp){
 			//console.log(resp.json);
 			if (resp.estado) {
