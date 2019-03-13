@@ -392,17 +392,20 @@ public class EjecucionController {
 			//reforma linea
 			else if(clase.equals("reformalinea")){
 				ReformalineaTO reformalineaTO = gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
+				//traigo la reforma para saber de que tipo es
+				ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(reformalineaTO.getId().getId());
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				ReformalineaTO reformalineaTO2=new ReformalineaTO();
-				System.out.println("consulta lineas: " + reformalineaTO.getNivelactid() +"-"+ reformalineaTO.getId().getId() +"-"+reformalineaTO.getId().getLineaid());
+				//System.out.println("consulta lineas: " + reformalineaTO.getNivelactid() +"-"+ reformalineaTO.getId().getId() +"-"+reformalineaTO.getId().getLineaid());
 				reformalineaTO2.setNivelactid(reformalineaTO.getNivelactid());
 				reformalineaTO2.getId().setId(reformalineaTO.getId().getId());
 				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO2);
-				System.out.println("reformas: " + reformalineaTOs.size());
+				//System.out.println("reformas: " + reformalineaTOs.size());
 				boolean grabar=true;
 				if(reformalineaTOs.size()>0){
 					for(ReformalineaTO reformalineaTO3:reformalineaTOs) {
-						System.out.println("reforma linea existente: " + reformalineaTO3.getNivelactid() +"-"+ reformalineaTO3.getId().getId() + " - " +reformalineaTO3.getId().getLineaid() );
+						//si la reforma es de tipo entre subitem "es" debo ver que pertenezcan al mismo item
+						//System.out.println("reforma linea existente: " + reformalineaTO3.getNivelactid() +"-"+ reformalineaTO3.getId().getId() + " - " +reformalineaTO3.getId().getLineaid() );
 						if((reformalineaTO.getId().getLineaid()!=null && reformalineaTO.getId().getLineaid().longValue()!=0) && (reformalineaTO3.getId().getLineaid().longValue()!=reformalineaTO.getId().getLineaid().longValue() && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue())) {
 							grabar=false;
 							break;
@@ -1348,7 +1351,7 @@ public class EjecucionController {
 			//throw new MyException(e);
 		}
 		if(mensajes.getMsg()!=null){
-			System.out.println("tiene mensajes");
+			//System.out.println("tiene mensajes");
 			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 			respuesta.setMensajes(mensajes);
 			log.println("existen mensajes");
@@ -1424,6 +1427,7 @@ public class EjecucionController {
 		Mensajes mensajes=new Mensajes();
 		Gson gson = new Gson();
 		JSONObject jsonObject=new JSONObject();
+		Respuesta respuesta=new Respuesta();
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
 			//Certificacion
@@ -1472,13 +1476,18 @@ public class EjecucionController {
 			log.println("error grabar");
 			mensajes.setMsg("Error al realizar la consulta");
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
 		log.println("existe mensaje: " + mensajes.getMsg());
 		if(mensajes.getMsg()!=null)
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-		log.println("json retornado: " + jsonObject.toString());
-		return jsonObject.toString();	
+			//jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+			respuesta.setMensajes(mensajes);
+		//System.out.println("json retornado: " + jsonObject.toString());
+		respuesta.setJson(jsonObject);
+		
+		//return respuesta;
+		return jsonObject.toString();
 	}
 
 
@@ -1621,11 +1630,12 @@ public class EjecucionController {
 	 * @return
 	 */
 	@RequestMapping(value = "/metareforma/{tipo}/{ejerciciofiscal}", method = RequestMethod.POST)
-	public String obtienecronogramareforma(@PathVariable String tipo,@PathVariable String ejerciciofiscal, @RequestBody String objeto,HttpServletRequest request){
+	public Respuesta obtienecronogramareforma(@PathVariable String tipo,@PathVariable String ejerciciofiscal, @RequestBody String objeto,HttpServletRequest request){
 		log.println("entra al metodo: " +tipo +" "+ " - "+ objeto);
 		Mensajes mensajes=new Mensajes();
 		Gson gson = new Gson();
 		JSONObject jsonObject=new JSONObject();
+		Respuesta respuesta=new Respuesta();
 		try {
 			//tipo=r y accion=o
 			if(tipo.equals("r")){
@@ -1657,13 +1667,17 @@ public class EjecucionController {
 			log.println("error grabar");
 			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
 			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
 		log.println("existe mensaje: " + mensajes.getMsg());
 		if(mensajes.getMsg()!=null)
 			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
 		log.println("json retornado: " + jsonObject.toString());
-		return jsonObject.toString();	
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
+
 	}
 
 	
