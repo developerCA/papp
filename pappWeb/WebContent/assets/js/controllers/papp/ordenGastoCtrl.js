@@ -120,7 +120,11 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	
 	$scope.editar=function(index) {
 		index = $scope.calcularIndex(index);
-		$scope.noeditar = ($scope.data[index].npestado == 'Registrado'? false: true);
+		if ($scope.rol('ROLE_APROBADOR')) {
+			$scope.noeditar = true;
+		} else {
+			$scope.noeditar = ($scope.data[index].npestado == 'Registrado'? false: true);
+		}
 		ordenGastoFactory.editar(
 			$scope.data[index].id
 		).then(function(resp){

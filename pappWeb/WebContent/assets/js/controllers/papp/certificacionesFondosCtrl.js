@@ -118,7 +118,11 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	$scope.editar=function(index){
 		//console.log($scope.data[index]);
 		index = $scope.calcularIndex(index);
-		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
+		if ($scope.rol('ROLE_APROBADOR')) {
+			$scope.noeditar = true;
+		} else {
+			$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
+		}
 		certificacionesFondosFactory.traerCertificacionesFondosEditar($scope.data[index].id).then(function(resp){
 			//console.log(resp.json);
 			if (resp.estado) {
