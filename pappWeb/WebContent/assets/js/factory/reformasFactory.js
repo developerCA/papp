@@ -60,6 +60,15 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 		    return Restangular.allUrl(url).customGET();
 		},
 
+		editarLineaMeta: function(
+			anio,
+			reformaliea
+		) {
+			//console.log("Año fiscal: " + anio);
+			var url = "ejecucion/metareforma/r/"+anio;
+		    return Restangular.allUrl(url).customPOST(reformaliea);
+		},
+
 		guardar:function(
 			objeto
 		){
