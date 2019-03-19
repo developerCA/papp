@@ -399,7 +399,7 @@ public class EjecucionController {
 				//System.out.println("consulta lineas: " + reformalineaTO.getNivelactid() +"-"+ reformalineaTO.getId().getId() +"-"+reformalineaTO.getId().getLineaid());
 				reformalineaTO2.setNivelactid(reformalineaTO.getNivelactid());
 				reformalineaTO2.getId().setId(reformalineaTO.getId().getId());
-				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO2);
+				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO2,null);
 				//System.out.println("reformas: " + reformalineaTOs.size());
 				boolean grabar=true;
 				if(reformalineaTOs.size()>0){
@@ -1290,14 +1290,14 @@ public class EjecucionController {
 		Gson gson = new Gson();
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
-			ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(id);
+			ReformametaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformametaTO(id);
 			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			boolean continuar=true;
 			if(tipo.equals("SO")) {
 				//obtengo las lineas
-				ReformalineaTO reformalineaTO=new ReformalineaTO();
+				ReformametalineaTO reformalineaTO=new ReformametalineaTO();
 				reformalineaTO.getId().setId(reformaTO.getId());
-				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO);
+				Collection<ReformametalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformalineaTO);
 				if(reformalineaTOs.size()==0) {
 					continuar=false;
 					mensajes.setMsg("Debe existir al menos una linea creada");
@@ -1310,7 +1310,7 @@ public class EjecucionController {
 					reformaTO.setEstado(tipo);
 					if(tipo.equals("EL")) {
 						if(parameters.get("observacion")!=null)
-							reformaTO.setMotivoeliminacion(parameters.get("observacion"));
+							reformaTO.setMotivoeliminar(parameters.get("observacion"));
 						reformaTO.setFechaeliminacion(new Date());
 					}
 					else if(tipo.equals("NE")) {
@@ -1318,22 +1318,8 @@ public class EjecucionController {
 							reformaTO.setMotivonegacion(parameters.get("observacion"));
 						reformaTO.setFechanegacion(new Date());
 					}
-					if(tipo.equals("SO") && (reformaTO.getTipo().equals("MU") || reformaTO.getTipo().equals("EU") || reformaTO.getTipo().equals("ES"))){
-						ReformalineaTO reformalineaTO=new ReformalineaTO();
-						reformalineaTO.getId().setId(reformaTO.getId());
-						Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO);
-						double total=0.0;
-						for(ReformalineaTO reformalineaTO2:reformalineaTOs){
-							total=total+reformalineaTO2.getValorincremento()-reformalineaTO2.getValordecremento();
-						}
-						if(UtilGeneral.redondear(total,2)!=0.0){
-							mensajes.setMsg("El valor de incremento debe ser igual al de decremento");
-							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-							respuesta.setEstado(false);
-						}
-					}
 					if(mensajes.getMsg()==null || mensajes.getMsg().equals("")){
-						UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO, tipo);
+						UtilSession.planificacionServicio.transCrearModificarReformameta(reformaTO, tipo);
 						ComunController.crearAuditoria(request, "REFORMA", "U", objeto, id.toString());
 						mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 						mensajes.setType(MensajesWeb.getString("mensaje.exito"));

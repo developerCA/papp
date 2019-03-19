@@ -1930,8 +1930,15 @@ public class PlanificacionController {
 				Map<String, Double> totales=UtilSession.planificacionServicio.transObtieneAcumuladosporactividad(id, Long.valueOf(parameters.get("unidadid")), Long.valueOf(parameters.get("ejerciciofiscal")), Long.valueOf(parameters.get("actividadid")));
 				log.println("total planificados: " + totales.get("tplanificado"));
 				log.println("total ajustados: " + totales.get("tacumulado"));
-				actividadunidadTO.setPresupplanif(UtilGeneral.redondear(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue(),2));
-				actividadunidadTO.setPresupajust(UtilGeneral.redondear(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue(),2));
+				log.println("actividadunidadTO.getPresupplanif: " + actividadunidadTO.getPresupplanif());
+				if(actividadunidadTO.getPresupplanif()!=null && totales.get("tplanificado")!=null)
+					actividadunidadTO.setPresupplanif(UtilGeneral.redondear(actividadunidadTO.getPresupplanif().doubleValue()-totales.get("tplanificado").doubleValue(),2));
+				else
+					actividadunidadTO.setPresupplanif(0.0);
+				if(actividadunidadTO.getPresupajust()!=null && totales.get("tacumulado")!=null)
+					actividadunidadTO.setPresupajust(UtilGeneral.redondear(actividadunidadTO.getPresupajust().doubleValue()-totales.get("tacumulado").doubleValue(),2));
+				else
+					actividadunidadTO.setPresupajust(0.0);
 				log.println("total planificado=: " + actividadunidadTO.getPresupplanif());
 				log.println("toal presupuestado=: " + actividadunidadTO.getPresupajust());
 				Map<String, Double> saldos= new HashMap<String,Double>();
