@@ -18,7 +18,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body" ng-show="!edicion && !metasLista && !metasSubtarea && !metasDistribucion">
+				<div class="panel-body" ng-show="!edicion && !metasLista && !metasSubtarea && !metasDistribucion && !metasDistribucion && !metasDistribucionLinea">
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -783,8 +783,8 @@
 							Distribuci&oacute;n de Meta
 						</h5>
 					</div>
-					<form name="Form" id="form1" novalidate
-						ng-submit="form.submit(Form)">
+					<form name="FormMetasDistribucion" id="formMetasDistribucion" novalidate
+						ng-submit="formMetasDistribucion.submit(FormMetasDistribucion)">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -901,11 +901,11 @@
 								<div class="pull-right">
 									<a ng-if="objeto.incluyemeta && rol('ROLE_APROBADOR')" href="#"
 										class="btn btn-sm btn-dark-azure"
-										ng-click="metaEditar();">
+										ng-click="metaEditarDeDistribicion();">
 										Metas
 									</a>
 									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">
+										ng-click="formMetasDistribucionReset()">
 										Cancelar
 									</button>
 								</div>
@@ -977,19 +977,20 @@
 						<h5 class="panel-title">
 							Distribuci&oacute;n de Presupuesto
 						</h5>
+					</div>
 					<form name="FormMetasDistribucionLinea"
 						id="formMetasDistribucionLinea" novalidate
-						ng-submit="form.submit(FormMetasDistribucionLinea)">
+						ng-submit="formMetasDistribucionLinea.submit(FormMetasDistribucionLinea)">
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<div class="form-group">
 								    <label class="control-label">
 								        C&oacute;digo
 								    </label>
 								    <input type="text"
 								        class="form-control"
-								        name="codigo"
-								        ng-model="objeto.codigo"
+								        name="npSubitemcodigo"
+								        ng-model="objetoP.reformalinea.npSubitemcodigo"
 								        ng-disabled="true">
 								</div>
 									
@@ -997,8 +998,10 @@
 								    <label class="control-label">
 								        Descripci&oacute;n
 								    </label>
-								    <textarea name="descripcion" rows="5" style="width: 100%"
-								    	class="form-control" ng-model="objeto.descripcion"
+								    <textarea rows="5" style="width: 100%"
+								    	class="form-control"
+								    	name="npSubitem"
+								    	ng-model="objetoP.reformalinea.npSubitem"
 								        ng-disabled="true">
 							        </textarea>
 								</div>
@@ -1007,10 +1010,12 @@
 								    <label class="control-label">
 								        Presupuesto
 								    </label>
-								    <input type="text"
-								        class="form-control"
-								        name="nppresupuesto"
-								        ng-model="objeto.nppresupuesto"
+									<input type="number"
+										class="form-control"
+								        name="npSubitemvalor"
+								        ng-model="objetoP.reformalinea.npSubitemvalor"
+										numericOnly
+										decimal="2"
 								        ng-disabled="true">
 								</div>
 									
@@ -1020,74 +1025,47 @@
 								    </label>
 								    <input type="text"
 								        class="form-control"
-								        name="unidad"
-								        ng-model="objeto.unidad"
+								        value="Personalizado"
 								        ng-disabled="true">
 								</div>
 							</div>
 
 							<div class="col-sm-12">
 								<div class="panel panel-primary">
-									<div class="panel-body no-padding panel-white">
-										<div class="col-md-12 panel-white no-padding">
-											<table class="table table-striped">
-												<tr>
-													<th>Mes</th>
-													<th>Codificado</th>
-													<th>Ejecutado</th>
-													<th>Ejecutado %</th>
-													<th>Valor</th>
-												</tr>
-												<tr ng-repeat="obj in detalles">
-													<td>
-														{{ obj.mes }}
-													</td>
-													<td style="text-align:right;">
-														{{ obj.codificado | currency }}
-													</td>
-													<td style="text-align:right;">
-														{{ obj.ejecutado | currency }}
-													</td>
-													<td style="text-align:right;">
-														{{ obj.ejecutadoporciento | currency }}
-													</td>
-													<td style="text-align:right;">
-														{{ obj.valor | currency }}
-													</td>
-												</tr>
-											</table>
-										</div>
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											Valores mensuales
+										</h4>
 									</div>
-								</div>
-							</div>
-
-							<div class="col-sm-12">
-								<div class="panel panel-primary">
 									<div class="panel-body no-padding panel-white">
 										<div class="col-md-12 panel-white no-padding">
 											<table class="table table-striped">
 												<tr>
-													<th>Mes</th>
-													<th>Codificado</th>
-													<th>Ejecutado</th>
-													<th>Ejecutado %</th>
-													<th>Valor</th>
+													<th style="text-align:center;">Mes</th>
+													<th style="text-align:center;">Codificado</th>
+													<th style="text-align:center;">Ejecutado</th>
+													<th style="text-align:center;">Ejecutado %</th>
+													<th style="text-align:center;">Valor</th>
 												</tr>
-												<tr ng-repeat="obj in detalles">
-													<td>
-														{{ obj.mes }}
+												<tr ng-repeat="obj in detallesP">
+													<td style="padding: 0px 4px !important;">
+														{{ obj.npMes }}
 													</td>
-													<td style="text-align:right;">
-														{{ obj.codificado | currency }}
+													<td style="text-align:right;padding: 0px 4px !important;">
+														{{ obj.npcodificado | currency }}
 													</td>
-													<td style="text-align:right;">
-														{{ obj.ejecutado | currency }}
+													<td style="text-align:right;padding: 0px 4px !important;">
+														{{ obj.npejecutado | currency }}
 													</td>
-													<td style="text-align:right;">
-														{{ obj.ejecutadoporciento | currency }}
+													<td style="text-align:center;padding: 0px 4px !important;">
+														{{ obj.npejecutadop | number }}
 													</td>
-													<td>
-														<input type="number"
+													<td style="text-align:right; height: 35px;padding: 0px 4px !important;">
+														<span ng-if="!obj.nphabilitado">
+															{{ obj.valor | currency }}
+														</span>
+														<input ng-if="obj.nphabilitado"
+															type="number"
 															class="form-control"
 															name="{{'pvalor_'+$index}}"
 															ng-model="obj.valor" numericOnly
@@ -1096,7 +1074,6 @@
 													</td>
 												</tr>
 											</table>
-										</div>
 										</div>
 									</div>
 								</div>
@@ -1114,7 +1091,7 @@
 										</button>
 									</span>
 									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(FormMetasDistribucionLinea)">
+										ng-click="formMetasDistribucionLinea.reset(FormMetasDistribucionLinea)">
 										Cancelar
 									</button>
 								</div>

@@ -377,19 +377,25 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 //		} else {
 //			$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 //		}
-		console.log("aqui");
+		//console.log("aqui");
 		reformasFactory.editarLineaMeta(
 				$rootScope.ejefiscalobj.anio,
 				$scope.detalles[index]
 		).then(function(resp){
-			console.log(resp.json);
-//			if (resp.estado) {
-//			    $scope.objeto=resp.json.reforma;
-//				$scope.objeto.incluyemeta=$scope.objeto.incluyemeta==1;
-//			    $scope.detalles=resp.json.reformalineas;
-//			}
-			$scope.edicion=true;
-			$scope.nuevoar=false;
+			//console.log(resp.json);
+			if (!resp.estado) {
+	            SweetAlert.swal(
+	            		"Reformas! - Distribucion de Meta - Editar Presupuesto",
+	            		resp.mensajes.msg,
+	            		"error"
+	    		);
+				return;
+			}
+		    $scope.objetoP=resp.json;
+			$scope.detallesP=resp.json.cronogramalinea;
+
+			$scope.metasDistribucionLinea=true;
+			$scope.metasDistribucion=false;
 			$scope.guardar=true;
 		})
 	};
@@ -520,6 +526,61 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             //$scope.pageChanged();
         }
     };
+
+	$scope.formMetasDistribucionLinea = {
+        submit: function (formMetasDistribucionLinea) {
+            var firstError = null;
+            if (formMetasDistribucionLinea.$invalid) {
+                var field = null, firstError = null;
+                for (field in formMetasDistribucionLinea) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !formMetasDistribucionLinea[field].$valid) {
+                            firstError = formMetasDistribucionLinea[field].$name;
+                        }
+                        if (formMetasDistribucionLinea[field].$pristine) {
+                        	formMetasDistribucionLinea[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+                var tObj = Object.assign({}, $scope.objetoP.reformalinea);
+                var tDet = Object.assign({}, $scope.detallesP);
+                tObj.cronogramalineaTOs = tDet;
+            	reformasFactory.guardarLineaMeta(tObj).then(function(resp){
+        			 if (!resp.estado){
+ 	 		             SweetAlert.swal(
+	 		            		 "Reformas!",
+	 		            		 resp.mensajes.msg,
+	 		            		 "error"
+	            		 );
+ 	 		             return;
+        			 }
+					 $scope.metasDistribucionLinea = false;
+					 $scope.metasDistribucion = true;
+					 $scope.objetoP = {};
+  					 SweetAlert.swal(
+  							 "Reformas!",
+  							 "Registro guardado satisfactoriamente!",
+  							 "success"
+					 );
+        		})
+            }
+        },
+        reset: function (formMetasDistribucionLinea) {
+            $scope.myModel = angular.copy($scope.master);
+            formMetasDistribucionLinea.$setPristine(true);
+            $scope.metasDistribucionLinea = false;
+            $scope.metasDistribucion = true;
+            $scope.objetoP = {};
+        }
+    };
+
+	$scope.formMetasDistribucionReset = function() {
+        $scope.metasDistribucion = false;
+		$scope.edicion = true;
+	}
 
 	function toStringDate(fuente) {
 		if (fuente == null) {

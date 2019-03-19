@@ -187,5 +187,12 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 			var url = "ejecucion/reformalinea";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
+
+		guardarLineaMeta:function(
+			objeto
+		){
+			var url = "planificacion/cronograma";
+			return Restangular.allUrl(url).customPOST(objeto);
+		},
 	}
 } ]);
