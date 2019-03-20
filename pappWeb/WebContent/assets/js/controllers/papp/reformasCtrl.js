@@ -545,7 +545,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-                var tObj = Object.assign({}, $scope.objetoP.reformalinea);
+                var tObj = Object.assign({}, $scope.objetoP.cronograma);
                 var tDet = Object.assign({}, $scope.detallesP);
                 tObj.cronogramalineaTOs = tDet;
             	reformasFactory.guardarLineaMeta(tObj).then(function(resp){
