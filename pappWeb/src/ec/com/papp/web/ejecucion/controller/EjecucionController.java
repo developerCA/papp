@@ -1283,21 +1283,23 @@ public class EjecucionController {
 
 	@RequestMapping(value = "/flujoreforma/{id}/{tipo}", method = RequestMethod.POST)
 	public Respuesta flujoreforma(@PathVariable Long id,@PathVariable String tipo,@RequestBody String objeto,HttpServletRequest request){
-		log.println("entra al metodo flujo");
+		log.println("entra al metodo flujo: " + id);
 		Mensajes mensajes=new Mensajes();
 		Respuesta respuesta=new Respuesta();
 		JSONObject jsonObject=new JSONObject();
 		Gson gson = new Gson();
 		try {
 			Map<String, String> parameters= gson.fromJson(new StringReader(objeto), Map.class);
-			ReformametaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformametaTO(id);
+			ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(id);
+			System.out.println("reforma: " + reformaTO);
+			System.out.println("reforma id: " + reformaTO.getId());
 			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			boolean continuar=true;
 			if(tipo.equals("SO")) {
 				//obtengo las lineas
-				ReformametalineaTO reformalineaTO=new ReformametalineaTO();
+				ReformalineaTO reformalineaTO=new ReformalineaTO();
 				reformalineaTO.getId().setId(reformaTO.getId());
-				Collection<ReformametalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformalineaTO);
+				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO, null);
 				if(reformalineaTOs.size()==0) {
 					continuar=false;
 					mensajes.setMsg("Debe existir al menos una linea creada");
@@ -1310,7 +1312,7 @@ public class EjecucionController {
 					reformaTO.setEstado(tipo);
 					if(tipo.equals("EL")) {
 						if(parameters.get("observacion")!=null)
-							reformaTO.setMotivoeliminar(parameters.get("observacion"));
+							reformaTO.setMotivoeliminacion(parameters.get("observacion"));
 						reformaTO.setFechaeliminacion(new Date());
 					}
 					else if(tipo.equals("NE")) {
@@ -1319,7 +1321,7 @@ public class EjecucionController {
 						reformaTO.setFechanegacion(new Date());
 					}
 					if(mensajes.getMsg()==null || mensajes.getMsg().equals("")){
-						UtilSession.planificacionServicio.transCrearModificarReformameta(reformaTO, tipo);
+						UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO, tipo);
 						ComunController.crearAuditoria(request, "REFORMA", "U", objeto, id.toString());
 						mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
 						mensajes.setType(MensajesWeb.getString("mensaje.exito"));
