@@ -521,6 +521,7 @@
 													<tr>
 														<th></th>
 														<th></th>
+														<th></th>
 														<th>Descripci&oacute;n</th>
 														<th>Fuente Financiamiento</th>
 														<th>Valor</th>
@@ -539,6 +540,14 @@
 															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
 																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
 																<i class="fa ti-trash"></i>
+															</a>
+														</td>
+														<td width="32px" style="padding: 1px;"
+															ng-if="!rol('ROLE_APROBADOR');">
+															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
+																uib-tooltip="Distribucion de Presupuesto"
+																ng-click="editarLineaMeta($index)">
+																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
 														<td>
@@ -939,12 +948,6 @@
 												<tr ng-repeat="obj in detalles">
 													<td width="32px" style="padding: 1px;"
 														ng-if="!rol('ROLE_APROBADOR');">
-														<a class="btn btn-sm btn-primary" ng-show="!noeditar"
-															uib-tooltip="Modificar"
-															ng-click="editarLineaMeta($index)">
-															<i class="fa fa-pencil"></i>
-														</a>
-													</td>
 													<td>
 														{{ obj.npSubitemcodigo }}: {{ obj.npSubitem }}
 													</td>

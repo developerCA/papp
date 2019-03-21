@@ -372,12 +372,6 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 
 	$scope.editarLineaMeta = function(index) {
 		//$scope.detalles[index]
-//		if ($scope.rol('ROLE_APROBADOR')) {
-//			$scope.noeditar = true;
-//		} else {
-//			$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
-//		}
-		//console.log("aqui");
 		reformasFactory.editarLineaMeta(
 				$rootScope.ejefiscalobj.anio,
 				$scope.detalles[index]
@@ -395,7 +389,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			$scope.detallesP=resp.json.cronogramalinea;
 
 			$scope.metasDistribucionLinea=true;
-			$scope.metasDistribucion=false;
+			$scope.edicion=false;
 			$scope.guardar=true;
 		})
 	};
@@ -558,7 +552,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
  	 		             return;
         			 }
 					 $scope.metasDistribucionLinea = false;
-					 $scope.metasDistribucion = true;
+					 $scope.edicion = true;
 					 $scope.objetoP = {};
   					 SweetAlert.swal(
   							 "Reformas!",
