@@ -541,6 +541,10 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             } else {
                 var tObj = Object.assign({}, $scope.objetoP.cronograma);
                 var tDet = Object.assign({}, $scope.detallesP);
+                var item = null;
+                for (item in tDet) {
+					delete tDet[item].nphabilitado;
+				}
                 tObj.cronogramalineaTOs = tDet;
             	reformasFactory.guardarLineaMeta(tObj).then(function(resp){
         			 if (!resp.estado){
