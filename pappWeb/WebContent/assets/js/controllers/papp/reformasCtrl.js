@@ -540,11 +540,11 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 return;
             } else {
                 var tObj = Object.assign({}, $scope.objetoP.cronograma);
-                var tDet = Object.assign({}, $scope.detallesP);
-                var item = null;
-                for (item in tDet) {
-					delete tDet[item].nphabilitado;
-				}
+                var tDet = Object.assign([], $scope.detallesP);
+//                var item = null;
+//                for (item in tDet) {
+//					delete tDet[item].nphabilitado;
+//				}
                 tObj.cronogramalineaTOs = tDet;
             	reformasFactory.guardarLineaMeta(tObj).then(function(resp){
         			 if (!resp.estado){
@@ -557,7 +557,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         			 }
 					 $scope.metasDistribucionLinea = false;
 					 $scope.edicion = true;
-					 $scope.objetoP = {};
+					 //$scope.objetoP = {};
   					 SweetAlert.swal(
   							 "Reformas!",
   							 "Registro guardado satisfactoriamente!",
@@ -569,8 +569,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         reset: function (formMetasDistribucionLinea) {
             $scope.myModel = angular.copy($scope.master);
             formMetasDistribucionLinea.$setPristine(true);
-            $scope.metasDistribucionLinea = false;
-            $scope.metasDistribucion = true;
+			$scope.metasDistribucionLinea = false;
+			$scope.edicion = true;
             $scope.objetoP = {};
         }
     };

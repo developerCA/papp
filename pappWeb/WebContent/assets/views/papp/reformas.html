@@ -1064,10 +1064,10 @@
 														{{ obj.npejecutadop | number }}
 													</td>
 													<td style="text-align:right; height: 35px;padding: 0px 4px !important;">
-														<span ng-if="!obj.nphabilitado">
+														<span ng-if="obj.nphabilitado=='0'">
 															{{ obj.valor | currency }}
 														</span>
-														<input ng-if="obj.nphabilitado"
+														<input ng-if="obj.nphabilitado=='1'"
 															type="number"
 															class="form-control"
 															name="{{'pvalor_'+$index}}"
