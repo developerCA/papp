@@ -372,9 +372,11 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 
 	$scope.editarLineaMeta = function(index) {
 		//$scope.detalles[index]
+		var tObjLinea = Object.assign({}, $scope.detalles[index]);
+		tObjLinea.npfechacreacion = $scope.objeto.npfechacreacion;
 		reformasFactory.editarLineaMeta(
 				$rootScope.ejefiscalobj.anio,
-				$scope.detalles[index]
+				tObjLinea
 		).then(function(resp){
 			//console.log(resp.json);
 			if (!resp.estado) {
