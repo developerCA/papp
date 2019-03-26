@@ -1633,13 +1633,13 @@ public class EjecucionController {
 				System.out.println("valtotal: " + valtotal);
 				System.out.println("relacion: " + nivelactividadTO.getTablarelacionid());
 				System.out.println("nivelacti: "+reformalineaTO.getNivelactid());
-				//System.out.println("fecha: "+reformalineaTO.getReforma().getFechacreacion());
+				System.out.println("fecha: "+reformalineaTO.getNpfechacreacion());
 				//2. Obtengo el detalle del subitem
-				//..double saldo=ConsultasUtil.obtenersaldodisponible(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),reformalineaTO.getReforma().getFechacreacion());
+				double saldo=ConsultasUtil.obtenersaldodisponible(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),UtilGeneral.parseStringToDate(reformalineaTO.getNpfechacreacion()));
 
 				//..log.println("saldo: " + saldo);
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid());
-				//..reformalineaTO.setNpSubitemvalor(saldo);
+				reformalineaTO.setNpSubitemvalor(saldo);
 				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, reformalineaTO, null,null);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
 				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
