@@ -544,7 +544,7 @@
 														</td> 
 														<td width="32px" style="padding: 1px;"
 															ng-if="!rol('ROLE_APROBADOR');">
-															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
+															<a class="btn btn-sm btn-primary"
 																uib-tooltip="Distribucion de Presupuesto"
 																ng-click="editarLineaMeta($index)">
 																<i class="fa fa-pencil"></i>
@@ -1064,10 +1064,10 @@
 														{{ obj.npejecutadop | number }}
 													</td>
 													<td style="text-align:right; height: 35px;padding: 0px 4px !important;">
-														<span ng-if="obj.nphabilitado=='0'">
+														<span ng-if="!(obj.nphabilitado=='1' && !noeditar)">
 															{{ obj.valor | currency }}
 														</span>
-														<input ng-if="obj.nphabilitado=='1'"
+														<input ng-if="obj.nphabilitado=='1' && !noeditar"
 															type="number"
 															class="form-control"
 															name="{{'pvalor_'+$index}}"
