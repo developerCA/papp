@@ -543,10 +543,6 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             } else {
                 var tObj = Object.assign({}, $scope.objetoP.cronograma);
                 var tDet = Object.assign([], $scope.detallesP);
-//                var item = null;
-//                for (item in tDet) {
-//					delete tDet[item].nphabilitado;
-//				}
                 tObj.cronogramalineaTOs = tDet;
             	reformasFactory.guardarLineaMeta(tObj).then(function(resp){
         			 if (!resp.estado){
@@ -614,21 +610,26 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	}
 
 	$scope.metaEditar=function(){
-		$scope.edicion = false;
-		//$scope.metasLista = true;
-		$scope.metasDistribucion = true;
-		//index = $scope.calcularIndex(index);
-//		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
-//		reformasFactory.traerEditar($scope.data[index].id).then(function(resp){
-//			//console.log(resp.json);
-//			if (resp.estado) {
-//			    $scope.objeto=resp.json.reforma;
-//			    $scope.detalles=resp.json.reformalineas;
-//			}
-//			$scope.edicion=true;
-//			$scope.nuevoar=false;
-//			$scope.guardar=true;
-//		})
+        var tObj = Object.assign({}, $scope.objeto);
+        delete tObj.incluyemeta;
+        var tDet = Object.assign([], $scope.detalles);
+        tObj.reformametasubtarea = tDet;
+		reformasFactory.traerEditarMeta(
+				tObj
+		).then(function(resp){
+			if (!resp.estado){
+	             SweetAlert.swal(
+	            		 "Reformas Meta!",
+	            		 resp.mensajes.msg,
+	            		 "error"
+        		 );
+	             return;
+			}
+		    $scope.objetoM=resp.json.reforma;
+		    $scope.detallesM=resp.json.reformalineas;
+			$scope.edicion = false;
+			$scope.metasDistribucion = true;
+		})
 	};
 
 	$scope.metaActualizar = function(index) {

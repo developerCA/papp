@@ -60,6 +60,13 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 		    return Restangular.allUrl(url).customGET();
 		},
 
+		traerEditarMeta: function(
+			reforma
+		) {
+			var url = "ejecucion/obtenerreformametasubtarea";
+		    return Restangular.allUrl(url).customPOST(reforma);
+		},
+
 		editarLineaMeta: function(
 			anio,
 			reformaliea
