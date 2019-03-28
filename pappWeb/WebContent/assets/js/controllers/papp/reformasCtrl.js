@@ -613,7 +613,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         var tObj = Object.assign({}, $scope.objeto);
         delete tObj.incluyemeta;
         var tDet = Object.assign([], $scope.detalles);
-        tObj.reformametasubtarea = tDet;
+        tObj.detail = tDet;
 		reformasFactory.traerEditarMeta(
 				tObj
 		).then(function(resp){
