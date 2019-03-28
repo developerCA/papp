@@ -505,7 +505,7 @@ public class EjecucionController {
 				reformaTO=UtilSession.planificacionServicio.transObtienereformametasubtarea(reformaTO);
 				jsonObject.put("reforma", (JSONObject)JSONSerializer.toJSON(reformaTO,reformaTO.getJsonConfig()));
 				jsonObject.put("reformametasubtarea", (JSONArray)JSONSerializer.toJSON(reformaTO.getReformametasubtareaTOs(),(new ReformametasubtareaTO()).getJsonConfig()));
-				if(!reformaTO.getMensajes().equals("")) {
+				if(reformaTO.getMensajes()!=null && !reformaTO.getMensajes().equals("")) {
 					mensajes.setMsg(reformaTO.getMensajes());
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
