@@ -557,7 +557,7 @@
 															{{ obj.npfuentefinanciamiento }}
 														</td>
 														<td style="text-align:right;">
-															{{ obj.npvalortotal | currency }}
+															{{ obj.npSubitemvalor | currency }}
 														</td>
 														<td style="text-align:right;">
 															{{ obj.valorincremento | currency }}
@@ -939,29 +939,29 @@
 											<table class="table table-striped">
 												<tr>
 													<th></th>
-													<th>Descripci&oacute;n</th>
-													<th>Fuente Financiamiento</th>
-													<th>Valor</th>
+													<th>Descripci&oacute;n Subtarea</th>
+													<th>Unidad Medida</th>
+													<th>Meta</th>
 													<th>Incremento</th>
 													<th>Decremento</th>
 												</tr>
-												<tr ng-repeat="obj in detalles">
+												<tr ng-repeat="obj in detallesM">
 													<td width="32px" style="padding: 1px;"
 														ng-if="!rol('ROLE_APROBADOR');">
 													<td>
-														{{ obj.npSubitemcodigo }}: {{ obj.npSubitem }}
+														{{ obj.npSubtarea }}
 													</td>
 													<td>
-														{{ obj.npfuentefinanciamiento }}
+														{{ obj.npunidadmedida }}
 													</td>
 													<td style="text-align:right;">
-														{{ obj.npvalortotal | currency }}
+														{{ obj.codificado | currency }}
 													</td>
 													<td style="text-align:right;">
-														{{ obj.valorincremento | currency }}
+														{{ obj.incremento | currency }}
 													</td>
 													<td style="text-align:right;">
-														{{ obj.valordecremento | currency }}
+														{{ obj.npdecremento | currency }}
 													</td>
 												</tr>
 											</table>

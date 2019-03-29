@@ -626,7 +626,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	             return;
 			}
 		    $scope.objetoM=resp.json.reforma;
-		    $scope.detallesM=resp.json.reformalineas;
+		    $scope.detallesM=resp.json.reformametasubtarea;
 			$scope.edicion = false;
 			$scope.metasDistribucion = true;
 		})
