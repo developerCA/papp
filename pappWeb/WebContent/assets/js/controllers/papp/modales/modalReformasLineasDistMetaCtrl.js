@@ -8,7 +8,6 @@ app.controller('ModalReformasLineasDistMetaController', [ "$scope","$rootScope",
 	$scope.init=function(){
 		//editar
 		reformasFactory.editarLineaDistMeta(
-			ID,
 			editar
 		).then(function(resp){
 			console.log(resp);
