@@ -764,7 +764,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','ReformasCtrl','ReformasFactory',
         		'ModalUnidadCortoCtrl','UnidadFactory',
         		'ModalItemCtrl','ItemFactory',
-        		'ModalReformasLineasCtrl'
+        		'ModalReformasLineasCtrl',
+        		'ModalReformasLineasDistMetaCtrl'
 		),
         title: 'Reformas',
         ncyBreadcrumb: {
