@@ -948,20 +948,25 @@
 												<tr ng-repeat="obj in detallesM">
 													<td width="32px" style="padding: 1px;"
 														ng-if="!rol('ROLE_APROBADOR');">
+														<a class="btn btn-sm btn-primary" ng-show="!noeditar"
+															uib-tooltip="Modificar" ng-click="editarLinea($index)">
+															<i class="fa fa-pencil"></i>
+														</a>
+													</td>
 													<td>
 														{{ obj.npSubtarea }}
 													</td>
 													<td>
 														{{ obj.npunidadmedida }}
 													</td>
-													<td style="text-align:right;">
-														{{ obj.codificado | currency }}
+													<td style="text-align:center;">
+														{{ obj.codificado | number }}
 													</td>
 													<td style="text-align:right;">
 														{{ obj.incremento | currency }}
 													</td>
 													<td style="text-align:right;">
-														{{ obj.npdecremento | currency }}
+														{{ obj.decremento | currency }}
 													</td>
 												</tr>
 											</table>
