@@ -55,6 +55,7 @@ import ec.com.papp.planificacion.to.ReformametasubtareaTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.to.SubtareaunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
+import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.administracion.controller.ComunController;
 import ec.com.papp.web.comun.util.ConstantesSesion;
@@ -68,6 +69,7 @@ import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+import sun.nio.cs.ext.MacArabic;
 
 /**
  * @autor: jcalderon
@@ -924,21 +926,28 @@ public class EjecucionController {
 				reformametasubtareaTO.setNpdecremento(reformametasubtareaTO.getDecremento());
 				reformametasubtareaTO.setNpincremento(reformametasubtareaTO.getIncremento());
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformametasubtareaTO.getNivelacid()));
+				MatrizDetalle matrizDetalle=UtilSession.planificacionServicio.transObtienedetallesubtarea(null, nivelactividadTO.getId());
+				reformametasubtareaTO.setNpmetadescripcion(matrizDetalle.getSubtareanombre());
+				reformametasubtareaTO.setNpunidadmedida(matrizDetalle.getNpunidadmedida());
 				//1. traigo los datos de unidad medida y meta descripcion
 				SubtareaunidadTO subtareaunidadTO=new SubtareaunidadTO();
 				subtareaunidadTO.setId(nivelactividadTO.getTablarelacionid());
 				subtareaunidadTO.setUnidadmedidaTO(new UnidadmedidaTO());
 				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
 				subtareaunidadacumuladorTO.setSubtareaunidad(subtareaunidadTO);
+				subtareaunidadacumuladorTO.getId().setAcumid(2L);
 				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 				subtareaunidadacumuladorTO.setOrderByField(OrderBy.orderDesc("id.acumid"));
 				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
 				if(subtareaunidadacumuladorTOs.size()>0) {
 					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
-					reformametasubtareaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
+					reformametasubtareaTO.setCodificado(subtareaunidadacumuladorTO.getValor());
 				}
-				reformametasubtareaTO.setNpunidadmedida(subtareaunidadTO.getUnidadmedidaTO().getNombre());
+
+				System.out.println("descripcion: " + reformametasubtareaTO.getNpmetadescripcion());
+				System.out.println("unidad: " + reformametasubtareaTO.getNpunidadmedida());
 				jsonObject.put("reformametasubtarea", (JSONObject)JSONSerializer.toJSON(reformametasubtareaTO,reformametasubtareaTO.getJsonConfig()));
+				jsonObject.put("subtareainfo", (JSONObject)JSONSerializer.toJSON(matrizDetalle,matrizDetalle.getJsonConfigsubitemarbol()));
 			}
 
 
