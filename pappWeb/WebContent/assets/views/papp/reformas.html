@@ -375,7 +375,7 @@
 										    </span>
 										</div>
 									</div>
-									
+
 									<div class="form-group"
 									    ng-class="{'has-error':Form.descripcion.$dirty && Form.descripcion.$invalid, 'has-success':Form.descripcion.$valid}">
 									    <label class="control-label">
@@ -456,7 +456,7 @@
 									        Listo
 									    </span>
 									</div>
-									
+
 									<div class="form-group"
 									    ng-class="{'has-error':Form.incluyemeta.$dirty && Form.incluyemeta.$invalid, 'has-success':Form.incluyemeta.$valid}">
 									    <label class="control-label">
@@ -557,7 +557,7 @@
 															{{ obj.npfuentefinanciamiento }}
 														</td>
 														<td style="text-align:right;">
-															{{ obj.npvalortotal | currency }}
+															{{ obj.npSubitemvalor | currency }}
 														</td>
 														<td style="text-align:right;">
 															{{ obj.valorincremento | currency }}
@@ -801,7 +801,7 @@
 								        Tipo
 								    </label>
 								    <select class="form-control" name="tipo"
-								        ng-model="objeto.tipo" required ng-disabled="true">
+								        ng-model="objetoM.tipo" required ng-disabled="true">
 								        <option value="" ng-selected="selected">(Ninguno)</option>
 								        <option value="EP">Especial</option>
 								        <option value="MU">Misma Unidad</option>
@@ -810,13 +810,13 @@
 								    </select>
 								</div>
 								
-								<div ng-show="objeto.tipo!=''">
-									<div ng-show="objeto.id!=0" class="form-group">
+								<div ng-show="objetoM.tipo!=''">
+									<div ng-show="objetoM.id!=0" class="form-group">
 									    <label class="control-label">
 									        C&oacute;digo
 									    </label>
 									    <input type="text" placeholder="Escriba un c&oacute;digo"
-									        class="form-control" name="codigo" ng-model="objeto.codigo"
+									        class="form-control" name="codigo" ng-model="objetoM.codigo"
 									        ng-disabled="true">
 									</div>
 									
@@ -824,7 +824,7 @@
 									    <label class="control-label">
 									        Unidad C&oacute;digo
 									    </label>
-								        <input type="text" ng-model="objeto.npunidadcodigo"
+								        <input type="text" ng-model="objetoM.npunidadcodigo"
 								        	placeholder="Escriba un unidad c&oacute;digo"
 								            class="form-control" name="npunidadcodigo"
 								            ng-disabled="true">
@@ -835,18 +835,18 @@
 									        Unidad Nombre
 									    </label>
 									    <input type="text" placeholder="Escriba un unidad nombre"
-									        class="form-control" name="npunidadnombre" ng-model="objeto.npunidadnombre"
+									        class="form-control" name="npunidadnombre" ng-model="objetoM.npunidadnombre"
 									        required ng-disabled="true">
 									</div>
 									
-									<div ng-show="objeto.tipo=='ES'">
+									<div ng-show="objetoM.tipo=='ES'">
 										<div class="form-group">
 										    <label class="control-label">
 										        &Iacute;tem C&oacute;digo
 										    </label>
 									        <input type="text" placeholder="Escriba un &iacute;tem c&oacute;digo"
 									            class="form-control" name="npitemcodigo"
-									            ng-model="objeto.npitemcodigo"
+									            ng-model="objetoM.npitemcodigo"
 									            ng-disabled="true">
 										</div>
 										
@@ -855,7 +855,7 @@
 										        &Iacute;tem Nombre
 										    </label>
 										    <input type="text" placeholder="Escriba un &iacute;tem nombre"
-										        class="form-control" name="npitemnombre" ng-model="objeto.npitemnombre"
+										        class="form-control" name="npitemnombre" ng-model="objetoM.npitemnombre"
 										        ng-disabled="true">
 										</div>
 									</div>
@@ -866,7 +866,7 @@
 									    </label>
 									    <textarea name="descripcion" rows="5" style="width: 100%"
 									    	placeholder="Escriba un descripci&oacute;n"
-									        class="form-control" ng-model="objeto.descripcion"
+									        class="form-control" ng-model="objetoM.descripcion"
 									        required ng-maxlength="500"
 									        ng-disabled="true"></textarea>
 									</div>
@@ -876,7 +876,7 @@
 									        N&uacute;mero Oficio
 									    </label>
 									    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
-									        class="form-control" name="numerooficio" ng-model="objeto.numerooficio"
+									        class="form-control" name="numerooficio" ng-model="objetoM.numerooficio"
 									        ng-disabled="true" required>
 									</div>
 									
@@ -886,7 +886,7 @@
 									    </label>
 									    <input type="text" placeholder="Escriba un valor incrementado"
 									        class="form-control" name="valorincremento"
-									        ng-model="objeto.valorincremento" numericOnly
+									        ng-model="objetoM.valorincremento" numericOnly
 									        style="text-align:right;"
 									        ng-disabled="true" format="number">
 									</div>
@@ -897,7 +897,7 @@
 									    </label>
 									    <input type="text" placeholder="Escriba un valor decrementado"
 									        class="form-control" name="valordecremento"
-									        ng-model="objeto.valordecremento" numericOnly
+									        ng-model="objetoM.valordecremento" numericOnly
 									        style="text-align:right;"
 									        ng-disabled="true" format="number">
 									</div>
@@ -908,11 +908,13 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
+<!--
 									<a ng-if="objeto.incluyemeta && rol('ROLE_APROBADOR')" href="#"
 										class="btn btn-sm btn-dark-azure"
 										ng-click="metaEditarDeDistribicion();">
 										Metas
 									</a>
+-->
 									<button type="reset" class="btn btn-default btn-o"
 										ng-click="formMetasDistribucionReset()">
 										Cancelar
@@ -939,29 +941,36 @@
 											<table class="table table-striped">
 												<tr>
 													<th></th>
-													<th>Descripci&oacute;n</th>
-													<th>Fuente Financiamiento</th>
-													<th>Valor</th>
+													<th>Descripci&oacute;n Subtarea</th>
+													<th>Unidad Medida</th>
+													<th>Meta</th>
 													<th>Incremento</th>
 													<th>Decremento</th>
 												</tr>
-												<tr ng-repeat="obj in detalles">
+												<tr ng-repeat="obj in detallesM">
 													<td width="32px" style="padding: 1px;"
 														ng-if="!rol('ROLE_APROBADOR');">
-													<td>
-														{{ obj.npSubitemcodigo }}: {{ obj.npSubitem }}
+														<a class="btn btn-sm btn-primary"
+															ng-show="!noeditar"
+															uib-tooltip="Modificar"
+															ng-click="editarLineaDistMeta($index)">
+															<i class="fa fa-pencil"></i>
+														</a>
 													</td>
 													<td>
-														{{ obj.npfuentefinanciamiento }}
+														{{ obj.npSubtarea }}
+													</td>
+													<td>
+														{{ obj.npunidadmedida }}
+													</td>
+													<td style="text-align:center;">
+														{{ obj.codificado | number }}
 													</td>
 													<td style="text-align:right;">
-														{{ obj.npvalortotal | currency }}
+														{{ obj.incremento | currency }}
 													</td>
 													<td style="text-align:right;">
-														{{ obj.valorincremento | currency }}
-													</td>
-													<td style="text-align:right;">
-														{{ obj.valordecremento | currency }}
+														{{ obj.decremento | currency }}
 													</td>
 												</tr>
 											</table>

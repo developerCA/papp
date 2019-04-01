@@ -396,6 +396,33 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		})
 	};
 
+	$scope.editarLineaDistMeta = function(index) {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalReformasLineasDistMeta.html',
+			controller : 'ModalReformasLineasDistMetaController',
+			size : 'lg',
+			resolve : {
+				ID : function() {
+					return $scope.objetoM.id;
+				},
+				editar : function() {
+					return $scope.detallesM[index].id
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+		    $scope.detallesM = obj.reformalineas;
+		    //$scope.objeto.valortotal = obj.valortotal;
+		    $scope.form.submit(Form);
+            SweetAlert.swal(
+            		"Reformas! - Lineas",
+            		"Registro guardado satisfactoriamente!",
+            		"success"
+    		);
+		}, function() {
+		});
+	};
+
 	$scope.eliminarLinea = function(index) {
 		SweetAlert.swal({
 			title: "Reformas?",
@@ -626,7 +653,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	             return;
 			}
 		    $scope.objetoM=resp.json.reforma;
-		    $scope.detallesM=resp.json.reformalineas;
+		    $scope.detallesM=resp.json.reformametasubtarea;
 			$scope.edicion = false;
 			$scope.metasDistribucion = true;
 		})

@@ -201,5 +201,12 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 			var url = "planificacion/cronograma";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
+
+		editarLineaDistMeta:function(
+			id
+		){
+			var url = "ejecucion/reformametasubtarea/" + id.id + "/" + id.lineaid;
+			return Restangular.allUrl(url).customGET();
+		},
 	}
 } ]);
