@@ -203,10 +203,9 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 		},
 
 		editarLineaDistMeta:function(
-			idreforma,
-			idreformametasubtarea
+			id
 		){
-			var url = "ejecucion/reformametasubtarea/" + idreforma + "/" +  + idreformametasubtarea.id + "/" + idreformametasubtarea.lineaid;
+			var url = "ejecucion/reformametasubtarea/" + id.id + "/" + id.lineaid;
 			return Restangular.allUrl(url).customGET();
 		},
 	}
