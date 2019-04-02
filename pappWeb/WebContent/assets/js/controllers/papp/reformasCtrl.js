@@ -601,6 +601,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
     };
 
 	$scope.formMetasDistribucionReset = function() {
+	    delete $scope.objetoM;
+	    delete $scope.detallesM;
         $scope.metasDistribucion = false;
 		$scope.edicion = true;
 	}

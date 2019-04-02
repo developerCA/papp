@@ -482,7 +482,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<a ng-if="objeto.incluyemeta && !rol('ROLE_APROBADOR')" href="#"
+									<a ng-if="objeto.incluyemeta" href="#"
 										class="btn btn-sm btn-dark-azure"
 										ng-click="metaEditar();">
 										Metas
@@ -941,6 +941,7 @@
 											<table class="table table-striped">
 												<tr>
 													<th></th>
+													<th></th>
 													<th>Descripci&oacute;n Subtarea</th>
 													<th>Unidad Medida</th>
 													<th>Meta</th>
@@ -948,11 +949,18 @@
 													<th>Decremento</th>
 												</tr>
 												<tr ng-repeat="obj in detallesM">
-													<td width="32px" style="padding: 1px;"
-														ng-if="!rol('ROLE_APROBADOR');">
+													<td width="32px" style="padding: 1px;">
 														<a class="btn btn-sm btn-primary"
 															ng-show="!noeditar"
-															uib-tooltip="Modificar"
+															uib-tooltip="Actualizar"
+															ng-click="editarLineaDistMeta($index)">
+															<i class="fa fa-pencil"></i>
+														</a>
+													</td>
+													<td width="32px" style="padding: 1px;">
+														<a class="btn btn-sm btn-primary"
+															ng-show="!noeditar"
+															uib-tooltip="Distribuir meta"
 															ng-click="editarLineaDistMeta($index)">
 															<i class="fa fa-pencil"></i>
 														</a>
