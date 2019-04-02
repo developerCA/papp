@@ -10,9 +10,9 @@ app.controller('ModalReformasLineasDistMetaController', [ "$scope","$rootScope",
 		reformasFactory.editarLineaDistMeta(
 			editar
 		).then(function(resp){
-			console.log(resp);
-//        	$scope.objeto = resp.json.reformalinea;
-//        	$scope.objetoDetalles = resp.json.subiteminfo;
+//			console.log(resp);
+        	$scope.objeto = resp.json.reformametasubtarea;
+        	$scope.objetoDetalles = resp.json.subtareainfo;
 //        	try {
 //	        	$scope.saldo = $scope.objeto.npsaldo - $scope.objeto.npvalorincremento + $scope.objeto.npvalordecremento;
 //			} catch (e) {

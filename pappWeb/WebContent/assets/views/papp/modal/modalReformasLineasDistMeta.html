@@ -90,20 +90,17 @@
 			    </label>
 			    <textarea name="descripcion" rows="5" style="width: 100%"
 			    	placeholder="Escriba un descripci&oacute;n"
-			        class="form-control" ng-model="objeto.descripcion"
+			        class="form-control" ng-model="objetoDetalles.npmetadescripcion"
 			        required ng-disabled="true" ng-maxlength="500"></textarea>
 			</div>
 
-			<h3>
-				Presupuesto
-			</h3>
 			<div class="form-group has-success">
 			    <label class="control-label">
 			        Unidad de medida
 			    </label>
 		        <input type="text" style="text-align:right;" decimal="2"
 		            class="form-control" name="valorajustado"
-		            ng-model="objeto.npvalortotal" ng-disabled="true">
+		            ng-model="objetoDetalles.npunidadmedida" ng-disabled="true">
 			</div>
 			
 			<div class="form-group has-success">
@@ -111,8 +108,8 @@
 			        Valor Actual
 			    </label>
 		        <input type="text" style="text-align:right;" decimal="2"
-		            class="form-control" name="npvaloractual"
-		            ng-model="objeto.npvaloractual" ng-disabled="true">
+		            class="form-control" name="codificado"
+		            ng-model="objetoDetalles.codificado" ng-disabled="true">
 			</div>
 			
 			<div class="form-group">
@@ -122,8 +119,8 @@
 			    <div class="input-group col-md-12">
 			        <input type="number" numericOnly style="text-align:right;"
 			        	decimal="2" placeholder="0.00"
-			            class="form-control" name="valorincremento" 
-			            ng-model="objeto.valorincremento">
+			            class="form-control" name="incremento" 
+			            ng-model="objetoDetalles.incremento">
 			    </div>
 			</div>
 
@@ -134,17 +131,9 @@
 			        <span class="symbol required"></span>
 			    </label>
 		        <input type="number" numericOnly style="text-align:right;"
-		        	decimal="2" placeholder="0.00" ng-max="saldo"
-		            class="form-control" name="valordecremento"
-		            ng-model="objeto.valordecremento">
-			    <span class="error text-small block"
-			        ng-if="Form.subitem.$dirty && Form.subitem.$invalid">
-			        Incorrecto, el saldo supera el saldo
-			    </span>
-			    <span class="success text-small"
-			        ng-if="Form.subitem.$valid">
-			        Listo
-			    </span>
+		        	decimal="2" placeholder="0.00"
+		            class="form-control" name="decremento"
+		            ng-model="objetoDetalles.decremento">
 			</div>
 
 			<div class="row">
