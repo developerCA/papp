@@ -961,7 +961,7 @@
 														<a class="btn btn-sm btn-primary"
 															ng-show="!noeditar"
 															uib-tooltip="Distribuir meta"
-															ng-click="editarLineaDistMeta($index)">
+															ng-click="editarLineaDistMetaSubtareaMeta($index)">
 															<i class="fa fa-pencil"></i>
 														</a>
 													</td>
@@ -1127,6 +1127,135 @@
 						</h5>
 					</div>
 				</div>
+
+				<div ng-show="metasDistribucionSubtareaMeta" class="panel-body">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Distribuci&oacute;n de Subtarea Meta
+						</h5>
+					</div>
+					<form name="FormMetasDistribucionLinea"
+						id="formMetasDistribucionLinea" novalidate
+						ng-submit="formMetasDistribucionLinea.submit(FormMetasDistribucionLinea)">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								    <label class="control-label">
+								        C&oacute;digo
+								    </label>
+								    <input type="text"
+								        class="form-control"
+								        name="npSubitemcodigo"
+								        ng-model="objetoP.reformalinea.npSubitemcodigo"
+								        ng-disabled="true">
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        Descripci&oacute;n
+								    </label>
+								    <textarea rows="5" style="width: 100%"
+								    	class="form-control"
+								    	name="npSubitem"
+								    	ng-model="objetoP.reformalinea.npSubitem"
+								        ng-disabled="true">
+							        </textarea>
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        Presupuesto
+								    </label>
+									<input type="number"
+										class="form-control"
+								        name="npSubitemvalor"
+								        ng-model="objetoP.reformalinea.npSubitemvalor"
+										numericOnly
+										decimal="2"
+								        ng-disabled="true">
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        Unidad Tiempo
+								    </label>
+								    <input type="text"
+								        class="form-control"
+								        value="Personalizado"
+								        ng-disabled="true">
+								</div>
+							</div>
+
+							<div class="col-sm-12">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											Valores mensuales
+										</h4>
+									</div>
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<table class="table table-striped">
+												<tr>
+													<th style="text-align:center;">Mes</th>
+													<th style="text-align:center;">Codificado</th>
+													<th style="text-align:center;">Ejecutado</th>
+													<th style="text-align:center;">Ejecutado %</th>
+													<th style="text-align:center;">Valor</th>
+												</tr>
+												<tr ng-repeat="obj in detallesP">
+													<td style="padding: 0px 4px !important;">
+														{{ obj.npMes }}
+													</td>
+													<td style="text-align:right;padding: 0px 4px !important;">
+														{{ obj.npcodificado | currency }}
+													</td>
+													<td style="text-align:right;padding: 0px 4px !important;">
+														{{ obj.npejecutado | currency }}
+													</td>
+													<td style="text-align:center;padding: 0px 4px !important;">
+														{{ obj.npejecutadop | number }}
+													</td>
+													<td style="text-align:right; height: 35px;padding: 0px 4px !important;">
+														<span ng-if="!(obj.nphabilitado=='1' && !noeditar)">
+															{{ obj.valor | currency }}
+														</span>
+														<input ng-if="obj.nphabilitado=='1' && !noeditar"
+															type="number"
+															class="form-control"
+															name="{{'pvalor_'+$index}}"
+															ng-model="obj.valor" numericOnly
+															style="text-align: right;"
+															required decimal="2">
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<span ng-if="guardar && !noeditar">
+										<button type="submit" class="btn btn-primary"
+											ng-if="!rol('ROLE_APROBADOR');">
+											Guardar
+										</button>
+									</span>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="formMetasDistribucionLinea.reset(FormMetasDistribucionLinea)">
+										Cancelar
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
 			</div>
 		</div>
 	</div>

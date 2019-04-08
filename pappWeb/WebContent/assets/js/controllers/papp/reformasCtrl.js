@@ -423,6 +423,31 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	};
 
+	$scope.editarLineaDistMetaSubtareaMeta = function(index) {
+		var tObjLinea = Object.assign({}, $scope.detalles[index]);
+		tObjLinea.npfechacreacion = $scope.objeto.npfechacreacion;
+		reformasFactory.editarLineaMetaSubtareaMeta(
+				$rootScope.ejefiscalobj.anio,
+				tObjLinea
+		).then(function(resp){
+			//console.log(resp.json);
+			if (!resp.estado) {
+	            SweetAlert.swal(
+	            		"Reformas! - Distribucion de Meta - Editar Presupuesto",
+	            		resp.mensajes.msg,
+	            		"error"
+	    		);
+				return;
+			}
+		    $scope.objetoP=resp.json;
+			$scope.detallesP=resp.json.cronogramalinea;
+
+			$scope.metasDistribucionSubtareaMeta=true;
+			$scope.edicion=false;
+			$scope.guardar=true;
+		})
+	};
+
 	$scope.eliminarLinea = function(index) {
 		SweetAlert.swal({
 			title: "Reformas?",
