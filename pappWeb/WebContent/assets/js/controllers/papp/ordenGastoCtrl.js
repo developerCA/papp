@@ -701,4 +701,11 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	$scope.calcularIndex = function(index) {
 		return (($scope.tableParams.page() - 1) * 5) + index;
 	}
+	
+	$scope.imprimirsolicitud=function(id){
+    	var url = "/birt/frameset?__report=E01-CF.rptdesign" +
+		"&certificacion=" + id;
+	    window.open(url, '_blank');
+		return;
+	};
 } ]);
