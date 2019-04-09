@@ -530,20 +530,18 @@
 													</tr>
 													<tr ng-repeat="obj in detalles">
 														<td width="32px" style="padding: 1px;">
-															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
+															<a class="btn btn-sm btn-primary"
 																uib-tooltip="Modificar" ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
-														<td width="32px" style="padding: 1px;"
-															ng-if="!rol('ROLE_APROBADOR');">
-															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
+														<td width="32px" style="padding: 1px;">
+															<a class="btn btn-sm btn-primary" style="background-color: Red !important;"
 																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
 																<i class="fa ti-trash"></i>
 															</a>
 														</td> 
-														<td width="32px" style="padding: 1px;"
-															ng-if="!rol('ROLE_APROBADOR');">
+														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary"
 																uib-tooltip="Distribucion de Presupuesto"
 																ng-click="editarLineaMeta($index)">
@@ -951,7 +949,6 @@
 												<tr ng-repeat="obj in detallesM">
 													<td width="32px" style="padding: 1px;">
 														<a class="btn btn-sm btn-primary"
-															ng-show="!noeditar"
 															uib-tooltip="Actualizar"
 															ng-click="editarLineaDistMeta($index)">
 															<i class="fa fa-pencil"></i>
@@ -959,7 +956,6 @@
 													</td>
 													<td width="32px" style="padding: 1px;">
 														<a class="btn btn-sm btn-primary"
-															ng-show="!noeditar"
 															uib-tooltip="Distribuir meta"
 															ng-click="editarLineaDistMetaSubtareaMeta($index)">
 															<i class="fa fa-pencil"></i>

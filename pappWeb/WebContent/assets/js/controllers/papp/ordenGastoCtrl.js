@@ -703,7 +703,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	}
 	
 	$scope.imprimirsolicitud=function(id){
-    	var url = "/birt/frameset?__report=E01-CF.rptdesign" +
+    	var url = "/birt/frameset?__report=E02-OG.rptdesign" +
 		"&certificacion=" + id;
 	    window.open(url, '_blank');
 		return;
