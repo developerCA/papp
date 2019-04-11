@@ -424,8 +424,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	};
 
 	$scope.editarLineaDistMetaSubtareaMeta = function(index) {
-		var tObjLinea = Object.assign({}, $scope.detalles[index]);
-		tObjLinea.npfechacreacion = $scope.objeto.npfechacreacion;
+		var tObjLinea = Object.assign({}, $scope.detallesM[index]);
+		//tObjLinea.npfechacreacion = $scope.objeto.npfechacreacion;
 		reformasFactory.editarLineaMetaSubtareaMeta(
 				$rootScope.ejefiscalobj.anio,
 				tObjLinea
