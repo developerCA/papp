@@ -12,8 +12,9 @@ function ($rootScope, $state, $stateParams) {
     // GLOBAL APP SCOPE
     // set below basic information
     $rootScope.app = {
-        name: 'PAP', // name of your project
+        name: 'PAPPWEB', // name of your project
         author: 'COMACO', // author's name or company name
+        developedBy: 'UPDATECOM', // desarrollado por
         description: 'Angular Bootstrap Admin Template', // brief description
         version: '1.0', // current version
         year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
