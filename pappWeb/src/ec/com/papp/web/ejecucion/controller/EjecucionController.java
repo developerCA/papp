@@ -537,9 +537,16 @@ public class EjecucionController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error grabar");
-			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
-			mensajes.setType(MensajesWeb.getString("mensaje.error"));
-			respuesta.setEstado(false);
+			if(clase.equals("obtenerreformametasubtarea")){
+				mensajes.setMsg("Error al obtener las subtareas");
+				mensajes.setType(MensajesWeb.getString("mensaje.error"));
+				respuesta.setEstado(false);
+			}
+			else{
+				mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+				mensajes.setType(MensajesWeb.getString("mensaje.error"));
+				respuesta.setEstado(false);
+			}
 			//throw new MyException(e);
 		}
 		log.println("existe mensaje: " + mensajes.getMsg());
