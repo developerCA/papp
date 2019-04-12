@@ -2,8 +2,13 @@
 <div class="footer-inner">
     <div class="pull-left">
         &copy; {{app.year}}
-        <span class="text-bold text-uppercase">{{ app.author }}</span>.
-        Desarrollado por: <span class="text-bold text-uppercase">{{ app.developedBy }}</span>.
+        <span class="text-bold text-uppercase">
+       		{{ app.author }}
+   		</span>.
+        Desarrollado por:
+       	<a href="{{ app.developedByUrl }}" target="_blank">
+        	<span class="text-bold text-uppercase">{{ app.developedBy }}</span>.
+		</a>
         <span translate="footer.copyright.MESSAGE">All rights reserved</span>
     </div>
     <div class="pull-right">

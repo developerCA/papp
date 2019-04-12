@@ -15,6 +15,7 @@ function ($rootScope, $state, $stateParams) {
         name: 'PAPPWEB', // name of your project
         author: 'COMACO', // author's name or company name
         developedBy: 'UPDATECOM', // desarrollado por
+        developedByUrl: 'http://www.updatecom.com.ec/', // desarrollado por, URL
         description: 'Angular Bootstrap Admin Template', // brief description
         version: '1.0', // current version
         year: ((new Date()).getFullYear()), // automatic current year (for copyright information)
