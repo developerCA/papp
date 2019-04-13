@@ -18,7 +18,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body" ng-show="!edicion && !metasLista && !metasSubtarea && !metasDistribucion && !metasDistribucion && !metasDistribucionLinea">
+				<div class="panel-body" ng-show="!edicion && !metasLista && !metasSubtarea && !metasDistribucion && !metasDistribucion && !metasDistribucionLinea && !metasDistribucionSubtareaMeta">
 					<div class="panel panel-white" id="panel1">
 						<div class="panel-heading">
 							<h4 class="panel-title text-primary">Filtros</h4>
@@ -1141,31 +1141,55 @@
 								    </label>
 								    <input type="text"
 								        class="form-control"
-								        name="npSubitemcodigo"
-								        ng-model="objetoP.reformalinea.npSubitemcodigo"
+								        name="npSubtareacodigo"
+								        ng-model="objetoP.reformalinea.npSubtareacodigo"
 								        ng-disabled="true">
 								</div>
 									
 								<div class="form-group">
 								    <label class="control-label">
-								        Descripci&oacute;n
+								        Subtarea
 								    </label>
-								    <textarea rows="5" style="width: 100%"
+								    <textarea rows="2" style="width: 100%"
 								    	class="form-control"
-								    	name="npSubitem"
-								    	ng-model="objetoP.reformalinea.npSubitem"
+								    	name="npSubtarea"
+								    	ng-model="objetoP.reformalinea.npSubtarea"
 								        ng-disabled="true">
 							        </textarea>
 								</div>
-									
+
 								<div class="form-group">
 								    <label class="control-label">
-								        Presupuesto
+								        Unidad de Medida
+								    </label>
+								    <input type="text"
+								        class="form-control"
+								        name="npunidadmedida"
+								        ng-model="objetoP.reformalinea.npunidadmedida"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Meta Actual
 								    </label>
 									<input type="number"
 										class="form-control"
-								        name="npSubitemvalor"
-								        ng-model="objetoP.reformalinea.npSubitemvalor"
+								        name="npdecremento"
+								        ng-model="objetoP.reformalinea.npdecremento"
+										numericOnly
+										decimal="2"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Meta Reprogramada
+								    </label>
+									<input type="number"
+										class="form-control"
+								        name="npdecremento"
+								        ng-model="objetoP.reformalinea.npdecremento"
 										numericOnly
 										decimal="2"
 								        ng-disabled="true">
@@ -1173,12 +1197,14 @@
 									
 								<div class="form-group">
 								    <label class="control-label">
-								        Unidad Tiempo
+								        Descripción Meta
 								    </label>
-								    <input type="text"
-								        class="form-control"
-								        value="Personalizado"
+								    <textarea rows="2" style="width: 100%"
+								    	class="form-control"
+								    	name="npmetadescripcion"
+								    	ng-model="objetoP.reformalinea.npmetadescripcion"
 								        ng-disabled="true">
+							        </textarea>
 								</div>
 							</div>
 
@@ -1194,35 +1220,43 @@
 											<table class="table table-striped">
 												<tr>
 													<th style="text-align:center;">Mes</th>
-													<th style="text-align:center;">Codificado</th>
+													<th style="text-align:center;">Actual</th>
 													<th style="text-align:center;">Ejecutado</th>
-													<th style="text-align:center;">Ejecutado %</th>
-													<th style="text-align:center;">Valor</th>
+													<th style="text-align:center;">Reprogramar</th>
+													<th style="text-align:center;">Detalles</th>
 												</tr>
 												<tr ng-repeat="obj in detallesP">
 													<td style="padding: 0px 4px !important;">
 														{{ obj.npMes }}
 													</td>
 													<td style="text-align:right;padding: 0px 4px !important;">
-														{{ obj.npcodificado | currency }}
-													</td>
-													<td style="text-align:right;padding: 0px 4px !important;">
-														{{ obj.npejecutado | currency }}
+														{{ obj.ultimovalor | number : 5 }}
 													</td>
 													<td style="text-align:center;padding: 0px 4px !important;">
-														{{ obj.npejecutadop | number }}
+														{{ obj.npejecutado | number }}
 													</td>
 													<td style="text-align:right; height: 35px;padding: 0px 4px !important;">
 														<span ng-if="!(obj.nphabilitado=='1' && !noeditar)">
-															{{ obj.valor | currency }}
+															{{ obj.metacantidad | number : 5 }}
 														</span>
 														<input ng-if="obj.nphabilitado=='1' && !noeditar"
 															type="number"
 															class="form-control"
-															name="{{'pvalor_'+$index}}"
-															ng-model="obj.valor" numericOnly
+															name="{{'pmetacantidad_'+$index}}"
+															ng-model="obj.metacantidad" numericOnly
 															style="text-align: right;"
-															required decimal="2">
+															required decimal="5">
+													</td>
+													<td style="padding: 0px 4px !important;">
+														<span ng-if="!(obj.nphabilitado=='1' && !noeditar)">
+															{{ obj.observacion }}
+														</span>
+													    <textarea ng-if="obj.nphabilitado=='1' && !noeditar"
+													    	rows="2" style="width: 100%"
+													    	class="form-control"
+													    	name="{{'observacion_'+$index}}"
+													    	ng-model="obj.observacion">
+												        </textarea>
 													</td>
 												</tr>
 											</table>

@@ -443,7 +443,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			$scope.detallesP=resp.json.cronogramalinea;
 
 			$scope.metasDistribucionSubtareaMeta=true;
-			$scope.edicion=false;
+			$scope.metasDistribucion=false;
 			$scope.guardar=true;
 		})
 	};
@@ -619,8 +619,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         reset: function (formMetasDistribucionLinea) {
             $scope.myModel = angular.copy($scope.master);
             formMetasDistribucionLinea.$setPristine(true);
-			$scope.metasDistribucionLinea = false;
-			$scope.edicion = true;
+			$scope.metasDistribucionSubtareaMeta = false;
+			$scope.metasDistribucion = true;
             $scope.objetoP = {};
         }
     };
