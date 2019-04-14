@@ -771,14 +771,15 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Reformas'
         }
-    }).state('app.reformas1', {
-        url: "/reformas1",
-        templateUrl: "assets/views/papp/reformas1.html",
+    }).state('app.reformasalasmetas', {
+        url: "/reformasalasmetas",
+        templateUrl: "assets/views/papp/reformasALasMetas.html",
         resolve: loadSequence(
-        		'ngTable','ReformasCtrl','ReformasFactory',
+        		'ngTable','ReformasALasMetasCtrl','ReformasALasMetasFactory',
         		'ModalUnidadCortoCtrl','UnidadFactory',
         		'ModalItemCtrl','ItemFactory',
-        		'ModalReformasLineasCtrl'
+        		'ModalReformasLineasCtrl',
+        		'ModalReformasLineasDistMetaCtrl'
 		),
         title: 'Reformas',
         ncyBreadcrumb: {
