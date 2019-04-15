@@ -41,9 +41,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">oracle.jdbc.driver.OracleDriver</property>
-            <property name="odaURL">jdbc:oracle:thin:@172.17.26.117:1521:orcl</property>
-            <property name="odaUser">comaco03</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">Q29tYWNvMjAxOA==</encrypted-property>
+            <property name="odaURL">jdbc:oracle:thin:@172.17.26.90:1521:papp</property>
+            <property name="odaUser">comaco</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">Q29tYWMw</encrypted-property>
             <property name="odaJndiName">java:jboss/datasources/pappDS</property>
         </oda-data-source>
     </data-sources>

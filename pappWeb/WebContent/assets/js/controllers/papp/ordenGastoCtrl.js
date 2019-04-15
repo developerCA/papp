@@ -708,4 +708,11 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	    window.open(url, '_blank');
 		return;
 	};
+	
+	$scope.imprimiroficio=function(id){
+    	var url = "/birt/frameset?__report=E02-OGO.rptdesign" +
+		"&certificacion=" + id;
+	    window.open(url, '_blank');
+		return;
+	};
 } ]);
