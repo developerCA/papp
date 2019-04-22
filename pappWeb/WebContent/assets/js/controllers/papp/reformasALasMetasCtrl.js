@@ -128,7 +128,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			//console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.reforma;
-				$scope.objeto.incluyemeta=$scope.objeto.incluyemeta==1;
+				//$scope.objeto.incluyemeta=$scope.objeto.incluyemeta==1;
 			    $scope.detalles=resp.json.reformalineas;
 			}
 			$scope.edicion=true;

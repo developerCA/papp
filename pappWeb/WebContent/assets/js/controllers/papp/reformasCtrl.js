@@ -413,7 +413,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		modalInstance.result.then(function(obj) {
 		    $scope.detallesM = obj.reformalineas;
 		    //$scope.objeto.valortotal = obj.valortotal;
-		    $scope.form.submit(Form);
+		    //$scope.form.submit(Form);
             SweetAlert.swal(
             		"Reformas! - Lineas",
             		"Registro guardado satisfactoriamente!",
@@ -546,7 +546,6 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	      					 $scope.nuevoar=false;
 	      				     $scope.objeto=resp.json.reforma;
         				 } else {
-          		             form.$setPristine(true);
           		             $scope.edicion=false;
           		             $scope.objeto={};
         				 }
@@ -605,8 +604,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	            		 );
  	 		             return;
         			 }
-					 $scope.metasDistribucionLinea = false;
-					 $scope.edicion = true;
+					 $scope.metasDistribucionSubtareaMeta = false;
+					 $scope.metasDistribucion = true;
 					 //$scope.objetoP = {};
   					 SweetAlert.swal(
   							 "Reformas!",
@@ -618,8 +617,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         },
         reset: function (formMetasDistribucionLinea) {
             $scope.myModel = angular.copy($scope.master);
-            formMetasDistribucionLinea.$setPristine(true);
-			$scope.metasDistribucionSubtareaMeta = false;
+            $scope.metasDistribucionSubtareaMeta = false;
 			$scope.metasDistribucion = true;
             $scope.objetoP = {};
         }
