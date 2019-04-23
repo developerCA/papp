@@ -1078,13 +1078,13 @@
 													</td>
 													<td style="text-align:right; height: 35px;padding: 0px 4px !important;">
 														<span ng-if="!(obj.nphabilitado=='1' && !noeditar)">
-															{{ obj.metacantidad | currency }}
+															{{ obj.valor | currency }}
 														</span>
 														<input ng-if="obj.nphabilitado=='1' && !noeditar"
 															type="number"
 															class="form-control"
 															name="{{'pvalor_'+$index}}"
-															ng-model="obj.metacantidad" numericOnly
+															ng-model="obj.valor" numericOnly
 															style="text-align: right;"
 															required decimal="2">
 													</td>
