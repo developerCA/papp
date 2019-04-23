@@ -948,7 +948,7 @@ public class EjecucionController {
 				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
 				if(subtareaunidadacumuladorTOs.size()>0) {
 					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
-					reformametasubtareaTO.setCodificado(subtareaunidadacumuladorTO.getValor());
+					reformametasubtareaTO.setCodificado(subtareaunidadacumuladorTO.getCantidad());
 				}
 
 				System.out.println("descripcion: " + reformametasubtareaTO.getNpmetadescripcion());
