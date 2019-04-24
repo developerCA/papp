@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","reformasFactory",
-	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, reformasFactory) {
+app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","reformasALasMetasFactory",
+	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, reformasALasMetasFactory) {
 
 	$scope.rol=function(nombre) {
 		return ifRollPermiso(nombre);
@@ -40,7 +40,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	
 	$scope.consultar=function(){
 		$scope.data = [];
-		reformasFactory.traer(
+		reformasALasMetasFactory.traer(
 			$scope.pagina,
 			$rootScope.ejefiscal
 		).then(function(resp){
@@ -75,7 +75,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
     }  
 
 	$scope.filtrar=function(){
-		reformasFactory.traerFiltro(
+		reformasALasMetasFactory.traerFiltro(
 			$scope.pagina,
 			$rootScope.ejefiscal,
 			$scope.codigoFiltro,
@@ -100,7 +100,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	};
 	
 	$scope.nuevo=function(){
-		reformasFactory.traerNuevo(
+		reformasALasMetasFactory.traerNuevo(
 			$rootScope.ejefiscal
 		).then(function(resp){
 			//console.log(resp);
@@ -124,7 +124,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		} else {
 			$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 		}
-		reformasFactory.traerEditar($scope.data[index].id).then(function(resp){
+		reformasALasMetasFactory.traerEditar($scope.data[index].id).then(function(resp){
 			//console.log(resp.json);
 			if (resp.estado) {
 			    $scope.objeto=resp.json.reforma;
@@ -147,7 +147,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			);
 			return;
 		}
-		reformasFactory.solicitar(
+		reformasALasMetasFactory.solicitar(
 			$scope.data[index].id,
 			"SO",
 			null,
@@ -188,7 +188,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		},
 		function(isConfirm) {
 			if (isConfirm) {
-				reformasFactory.solicitar(
+				reformasALasMetasFactory.solicitar(
 					$scope.data[index].id,
 					"AP",
 					null,
@@ -233,7 +233,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			if (isConfirm) {
 				$scope.data[index].estado = "NE";
 				$scope.data[index].npestado = "Negando";
-				reformasFactory.solicitar(
+				reformasALasMetasFactory.solicitar(
 					$scope.data[index].id,
 					"NE",
 					null,
@@ -274,7 +274,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			if (isConfirm) {
 				$scope.data[index].estado = "EL";
 				$scope.data[index].npestado = "Eliminando";
-				reformasFactory.solicitar(
+				reformasALasMetasFactory.solicitar(
 					$scope.data[index].id,
 					"EL",
 					null,
@@ -333,8 +333,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 
 	$scope.editarLinea = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalReformasLineas.html',
-			controller : 'ModalReformasLineasController',
+			templateUrl : 'assets/views/papp/modal/modalReformasMetaLineas.html',
+			controller : 'ModalReformasMetaLineasController',
 			size : 'lg',
 			resolve : {
 				ID : function() {
@@ -359,7 +359,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		    //$scope.objeto.valortotal = obj.valortotal;
 		    $scope.form.submit(Form);
             SweetAlert.swal(
-            		"Reformas! - Lineas",
+            		"Reformas Meta! - Lineas",
             		"Registro guardado satisfactoriamente!",
             		"success"
     		);
@@ -371,14 +371,14 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		//$scope.detalles[index]
 		var tObjLinea = Object.assign({}, $scope.detalles[index]);
 		tObjLinea.npfechacreacion = $scope.objeto.npfechacreacion;
-		reformasFactory.editarLineaMeta(
+		reformasALasMetasFactory.editarLineaMeta(
 				$rootScope.ejefiscalobj.anio,
 				tObjLinea
 		).then(function(resp){
 			//console.log(resp.json);
 			if (!resp.estado) {
 	            SweetAlert.swal(
-	            		"Reformas! - Distribucion de Meta - Editar Presupuesto",
+	            		"Reformas Meta! - Distribucion de Meta - Editar Presupuesto",
 	            		resp.mensajes.msg,
 	            		"error"
 	    		);
@@ -423,7 +423,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.editarLineaDistMetaSubtareaMeta = function(index) {
 		var tObjLinea = Object.assign({}, $scope.detallesM[index]);
 		//tObjLinea.npfechacreacion = $scope.objeto.npfechacreacion;
-		reformasFactory.editarLineaMetaSubtareaMeta(
+		reformasALasMetasFactory.editarLineaMetaSubtareaMeta(
 				$rootScope.ejefiscalobj.anio,
 				tObjLinea
 		).then(function(resp){
@@ -445,43 +445,43 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		})
 	};
 
-	$scope.eliminarLinea = function(index) {
-		SweetAlert.swal({
-			title: "Reformas?",
-			text: "Seguro que desea eliminar esta linea?",
-			type: "warning",
-			showCancelButton: true,
-			confirmButtonClass: "btn-danger",
-			confirmButtonText: "SI!",
-			cancelButtonText: "NO",
-			closeOnConfirm: false,
-			closeOnCancel: true
-		},
-		function(isConfirm) {
-			if (!isConfirm) return;
-			reformasFactory.eliminarLinea(
-				$scope.detalles[index].id.id,
-				$scope.detalles[index].id.lineaid
-			).then(function(resp){
-				if (resp.estado){
-					SweetAlert.swal(
-							"Reformas!",
-							"Eliminado satisfactoriamente!",
-							"success"
-					);
-					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
-				    $scope.detalles.splice(index, 1);
-				    $scope.form.submit(Form);
-	   			}else{
-		            SweetAlert.swal(
-		            		"Reformas!",
-		            		resp.mensajes.msg,
-		            		"error"
-            		);
-	   			}
-          	})
-		});
-	};
+//	$scope.eliminarLinea = function(index) {
+//		SweetAlert.swal({
+//			title: "Reformas?",
+//			text: "Seguro que desea eliminar esta linea?",
+//			type: "warning",
+//			showCancelButton: true,
+//			confirmButtonClass: "btn-danger",
+//			confirmButtonText: "SI!",
+//			cancelButtonText: "NO",
+//			closeOnConfirm: false,
+//			closeOnCancel: true
+//		},
+//		function(isConfirm) {
+//			if (!isConfirm) return;
+//			reformasALasMetasFactory.eliminarLinea(
+//				$scope.detalles[index].id.id,
+//				$scope.detalles[index].id.lineaid
+//			).then(function(resp){
+//				if (resp.estado){
+//					SweetAlert.swal(
+//							"Reformas!",
+//							"Eliminado satisfactoriamente!",
+//							"success"
+//					);
+//					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
+//				    $scope.detalles.splice(index, 1);
+//				    $scope.form.submit(Form);
+//	   			}else{
+//		            SweetAlert.swal(
+//		            		"Reformas!",
+//		            		resp.mensajes.msg,
+//		            		"error"
+//            		);
+//	   			}
+//          	})
+//		});
+//	};
 
 	$scope.abrirUnidad = function() {
 		var modalInstance = $uibModal.open({
@@ -536,7 +536,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             } else {
                 var tObj = Object.assign({}, $scope.objeto);
                 tObj.incluyemeta = (tObj.incluyemeta? 1: 0);
-            	reformasFactory.guardar(tObj).then(function(resp){
+            	reformasALasMetasFactory.guardar(tObj).then(function(resp){
         			 if (resp.estado){
         				 if ($scope.nuevoar) {
 	      					 $scope.noeditar = false;
@@ -593,7 +593,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 var tObj = Object.assign({}, $scope.objetoP.cronograma);
                 var tDet = Object.assign([], $scope.detallesP);
                 tObj.cronogramalineaTOs = tDet;
-            	reformasFactory.guardarLineaMeta(tObj).then(function(resp){
+            	reformasALasMetasFactory.guardarLineaMeta(tObj).then(function(resp){
         			 if (!resp.estado){
  	 		             SweetAlert.swal(
 	 		            		 "Reformas!",
@@ -660,28 +660,28 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		return (($scope.tableParams.page() - 1) * 5) + index;
 	}
 
-	$scope.metaEditar=function(){
-        var tObj = Object.assign({}, $scope.objeto);
-        delete tObj.incluyemeta;
-        var tDet = Object.assign([], $scope.detalles);
-        tObj.details = tDet;
-		reformasFactory.traerEditarMeta(
-				tObj
-		).then(function(resp){
-			if (!resp.estado){
-	             SweetAlert.swal(
-	            		 "Reformas Meta!",
-	            		 resp.mensajes.msg,
-	            		 "error"
-        		 );
-	             return;
-			}
-		    $scope.objetoM=resp.json.reforma;
-		    $scope.detallesM=resp.json.reformametasubtarea;
-			$scope.edicion = false;
-			$scope.metasDistribucion = true;
-		})
-	};
+//	$scope.metaEditar=function(){
+//        var tObj = Object.assign({}, $scope.objeto);
+//        delete tObj.incluyemeta;
+//        var tDet = Object.assign([], $scope.detalles);
+//        tObj.details = tDet;
+//		reformasALasMetasFactory.traerEditarMeta(
+//				tObj
+//		).then(function(resp){
+//			if (!resp.estado){
+//	             SweetAlert.swal(
+//	            		 "Reformas Meta!",
+//	            		 resp.mensajes.msg,
+//	            		 "error"
+//        		 );
+//	             return;
+//			}
+//		    $scope.objetoM=resp.json.reforma;
+//		    $scope.detallesM=resp.json.reformametasubtarea;
+//			$scope.edicion = false;
+//			$scope.metasDistribucion = true;
+//		})
+//	};
 
 	$scope.metaActualizar = function(index) {
 //		var modalInstance = $uibModal.open({
@@ -727,7 +727,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 //		},
 //		function(isConfirm) {
 //			if (!isConfirm) return;
-//			reformasFactory.eliminarLinea(
+//			reformasALasMetasFactory.eliminarLinea(
 //				$scope.detalles[index].id.id,
 //				$scope.detalles[index].id.lineaid
 //			).then(function(resp){

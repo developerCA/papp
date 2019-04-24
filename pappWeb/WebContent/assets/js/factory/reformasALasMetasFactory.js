@@ -1,4 +1,4 @@
-app.factory("reformasFactory", [ "Restangular", function(Restangular) {
+app.factory("reformasALasMetasFactory", [ "Restangular", function(Restangular) {
 
 	var service = Restangular.service("/ejecucion");
 
@@ -120,14 +120,14 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 		nuevoLinea:function(
 			id
 		){
-			var url = "ejecucion/nuevo/reformalinea/" + id ;
+			var url = "ejecucion/nuevo/reformametalinea/" + id ;
 			return Restangular.allUrl(url).customGET();
 		},
 
 		editarLinea:function(
 			id
 		){
-			var url = "ejecucion/reformalinea/" + id.id + "/" + id.lineaid;
+			var url = "ejecucion/reformametalinea/" + id.id + "/" + id.lineaid;
 			return Restangular.allUrl(url).customGET();
 		},
 
@@ -176,7 +176,7 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 			id,
 			linea
 		){
-			var url = "ejecucion/reformalinea/" +
+			var url = "ejecucion/reformametalinea/" +
 				id + "/" +
 				linea;
 			return Restangular.allUrl(url).customDELETE();
@@ -193,7 +193,7 @@ app.factory("reformasFactory", [ "Restangular", function(Restangular) {
 		guardarLinea:function(
 			objeto
 		){
-			var url = "ejecucion/reformalinea";
+			var url = "ejecucion/reformametalinea";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 

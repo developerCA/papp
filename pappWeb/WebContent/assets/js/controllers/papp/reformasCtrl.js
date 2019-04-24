@@ -604,7 +604,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	            		 );
  	 		             return;
         			 }
-					 $scope.metasDistribucionLinea = false;
+					 $scope.metasDistribucionSubtareaMeta = false;
 					 $scope.metasDistribucion = true;
 					 //$scope.objetoP = {};
   					 SweetAlert.swal(
@@ -617,7 +617,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         },
         reset: function (formMetasDistribucionLinea) {
             $scope.myModel = angular.copy($scope.master);
-            $scope.metasDistribucionLinea = false;
+            $scope.metasDistribucionSubtareaMeta = false;
 			$scope.metasDistribucion = true;
             $scope.objetoP = {};
         }

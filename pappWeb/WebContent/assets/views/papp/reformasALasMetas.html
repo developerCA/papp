@@ -8,7 +8,7 @@
 <!-- end: BREADCRUMB -->
 <!-- start: SIMPLE TABLE WITH PAGINATION -->
 <div class="container-fluid container-fullw"
-	ng-controller="ReformasController" ng-init="consultar()">
+	ng-controller="ReformasALasMetasController" ng-init="consultar()">
 
 	<div class="row">
 		<div class="col-md-12"></div>
@@ -93,6 +93,7 @@
 												<option value="SO">Solicitado</option>
 												<option value="NE">Negado</option>
 												<option value="AP">Aprobado</option>
+												<option value="AN">Anulado</option>
 											</select>
 										</div>
 									</div>
@@ -306,11 +307,6 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<a ng-if="objeto.incluyemeta" href="#"
-										class="btn btn-sm btn-dark-azure"
-										ng-click="metaEditar();">
-										Metas
-									</a>
 									<span ng-if="guardar && !noeditar">
 										<button type="submit" class="btn btn-primary"
 											ng-if="!rol('ROLE_APROBADOR');">
@@ -345,29 +341,23 @@
 													<tr>
 														<th></th>
 														<th></th>
-														<th></th>
 														<th>Descripci&oacute;n</th>
-														<th>Fuente Financiamiento</th>
-														<th>Valor</th>
+														<th>Meta</th>
+														<th>Unidad Medida</th>
 														<th>Incremento</th>
 														<th>Decremento</th>
 													</tr>
 													<tr ng-repeat="obj in detalles">
 														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary"
-																uib-tooltip="Modificar" ng-click="editarLinea($index)">
+																uib-tooltip="Modificar"
+																ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
 														<td width="32px" style="padding: 1px;">
-															<a class="btn btn-sm btn-primary" style="background-color: Red !important;"
-																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
-																<i class="fa ti-trash"></i>
-															</a>
-														</td> 
-														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary"
-																uib-tooltip="Distribucion de Presupuesto"
+																uib-tooltip="Distribucion de Meta"
 																ng-click="editarLineaMeta($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
@@ -376,10 +366,10 @@
 															{{ obj.npSubitemcodigo }}: {{ obj.npSubitem }}
 														</td>
 														<td>
-															{{ obj.npfuentefinanciamiento }}
+															
 														</td>
-														<td style="text-align:right;">
-															{{ obj.npSubitemvalor | currency }}
+														<td>
+															
 														</td>
 														<td style="text-align:right;">
 															{{ obj.valorincremento | currency }}
@@ -815,7 +805,7 @@
 				<div ng-show="metasDistribucionLinea" class="panel-body">
 					<div class="panel-heading">
 						<h5 class="panel-title">
-							Distribuci&oacute;n de Presupuesto
+							Distribuci&oacute;n de Meta
 						</h5>
 					</div>
 					<form name="FormMetasDistribucionLinea"
@@ -848,7 +838,7 @@
 									
 								<div class="form-group">
 								    <label class="control-label">
-								        Presupuesto
+								        Unidad de Medida
 								    </label>
 									<input type="number"
 										class="form-control"
@@ -856,6 +846,26 @@
 								        ng-model="objetoP.reformalinea.npSubitemvalor"
 										numericOnly
 										decimal="2"
+								        ng-disabled="true">
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        Meta Actual
+								    </label>
+								    <input type="text"
+								        class="form-control"
+								        value="Personalizado"
+								        ng-disabled="true">
+								</div>
+									
+								<div class="form-group">
+								    <label class="control-label">
+								        Meta Reprogramada
+								    </label>
+								    <input type="text"
+								        class="form-control"
+								        value="Personalizado"
 								        ng-disabled="true">
 								</div>
 									
@@ -882,35 +892,43 @@
 											<table class="table table-striped">
 												<tr>
 													<th style="text-align:center;">Mes</th>
-													<th style="text-align:center;">Codificado</th>
+													<th style="text-align:center;">Actual</th>
 													<th style="text-align:center;">Ejecutado</th>
-													<th style="text-align:center;">Ejecutado %</th>
-													<th style="text-align:center;">Valor</th>
+													<th style="text-align:center;">Reprogramar</th>
+													<th style="text-align:center;">Detalles</th>
 												</tr>
 												<tr ng-repeat="obj in detallesP">
 													<td style="padding: 0px 4px !important;">
 														{{ obj.npMes }}
 													</td>
 													<td style="text-align:right;padding: 0px 4px !important;">
-														{{ obj.npcodificado | currency }}
-													</td>
-													<td style="text-align:right;padding: 0px 4px !important;">
-														{{ obj.npejecutado | currency }}
+														{{ obj.ultimovalor | number : 5 }}
 													</td>
 													<td style="text-align:center;padding: 0px 4px !important;">
-														{{ obj.npejecutadop | number }}
+														{{ obj.npejecutado | number }}
 													</td>
 													<td style="text-align:right; height: 35px;padding: 0px 4px !important;">
 														<span ng-if="!(obj.nphabilitado=='1' && !noeditar)">
-															{{ obj.valor | currency }}
+															{{ obj.metacantidad | number : 5 }}
 														</span>
 														<input ng-if="obj.nphabilitado=='1' && !noeditar"
 															type="number"
 															class="form-control"
-															name="{{'pvalor_'+$index}}"
-															ng-model="obj.valor" numericOnly
+															name="{{'pmetacantidad_'+$index}}"
+															ng-model="obj.metacantidad" numericOnly
 															style="text-align: right;"
-															required decimal="2">
+															required decimal="5">
+													</td>
+													<td style="padding: 0px 4px !important;">
+														<span ng-if="!(obj.nphabilitado=='1' && !noeditar)">
+															{{ obj.observacion }}
+														</span>
+													    <textarea ng-if="obj.nphabilitado=='1' && !noeditar"
+													    	rows="2" style="width: 100%"
+													    	class="form-control"
+													    	name="{{'observacion_'+$index}}"
+													    	ng-model="obj.observacion">
+												        </textarea> 
 													</td>
 												</tr>
 											</table>
