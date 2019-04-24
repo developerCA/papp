@@ -394,6 +394,9 @@ public class EjecucionController {
 			//reforma linea
 			else if(clase.equals("reformalinea")){
 				ReformalineaTO reformalineaTO = gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
+				//valido que el subitem no exista en otra reforma que no este aprobada
+				
+				
 				//traigo la reforma para saber de que tipo es
 				ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(reformalineaTO.getId().getId());
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
@@ -1651,7 +1654,8 @@ public class EjecucionController {
 				System.out.println("nivelacti: "+reformalineaTO.getNivelactid());
 				System.out.println("fecha: "+reformalineaTO.getNpfechacreacion());
 				//2. Obtengo el detalle del subitem
-				double saldo=ConsultasUtil.obtenersaldodisponible(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),UtilGeneral.parseStringToDate(reformalineaTO.getNpfechacreacion()));
+				//double saldo=ConsultasUtil.obtenersaldodisponible(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),UtilGeneral.parseStringToDate(reformalineaTO.getNpfechacreacion()));
+				double saldo=ConsultasUtil.obtenercodificadoyreformas(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),UtilGeneral.parseStringToDate(reformalineaTO.getNpfechacreacion()));
 
 				//..log.println("saldo: " + saldo);
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid());

@@ -795,6 +795,43 @@ public class ConsultasUtil {
 			throw new MyException(e);
 		}
 	}
+	
+	/**
+	* Metodo que obtiene el saldo disponible de un subitem
+	*
+	* @param request 
+	* @return total
+	* @throws MyException
+	*/
+
+	public static Double obtenercodificadoyreformas(Double total,Long idsubitem,Long nivelactividadid,Date fecha) throws MyException {
+		try{
+			//SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(idsubitem);
+			//traigo las reformas asignadas al subitem
+			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+			//Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(69118L);
+			System.out.println("reformalineatos: " + reformalineaTOs.size());
+			double totalreforma=0.0;
+			System.out.println("fecha creacion: " + fecha);
+			for(ReformalineaTO reformalineaTO:reformalineaTOs){
+				System.out.println("fecha a comparar: " + reformalineaTO.getReforma().getFechacreacion());
+				if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
+					System.out.println("incremento: " + reformalineaTO.getValorincremento() + " - " + reformalineaTO.getValordecremento());
+					//totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
+					totalreforma=totalreforma-reformalineaTO.getValordecremento().doubleValue();
+					System.out.println("total: " + totalreforma);
+				}
+			}
+			System.out.println("totalreforma: " + totalreforma);
+			double saldo=total+totalreforma;
+			return saldo;
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+	}
+
 
 	/**
 	* Metodo que obtiene el valor total del subitem
