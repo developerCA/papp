@@ -260,6 +260,7 @@ app.constant('JS_REQUIRES', {
         'OrdenReversionLineasFactory':'assets/js/factory/ordenReversionLineasFactory.js',
         'ModalReformasLineasCtrl':'assets/js/controllers/papp/modales/modalReformasLineasCtrl.js',
         'ModalReformasLineasDistMetaCtrl':'assets/js/controllers/papp/modales/modalReformasLineasDistMetaCtrl.js',
+        'ModalReformasALasMetasLineasCtrl':'assets/js/controllers/papp/modales/modalReformasALasMetasLineasCtrl.js',
         'ReporteP06Ctrl':'assets/js/controllers/papp/reporteP06Ctrl.js',
         'ReporteP01Factory':'assets/js/factory/reporteP01Factory.js',
         'ReporteP01Ctrl':'assets/js/controllers/papp/reporteP01Ctrl.js',
