@@ -604,6 +604,55 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	            		 );
  	 		             return;
         			 }
+					 $scope.metasDistribucionLinea = false;
+					 $scope.edicion = true;
+					 //$scope.objetoP = {};
+  					 SweetAlert.swal(
+  							 "Reformas!",
+  							 "Registro guardado satisfactoriamente!",
+  							 "success"
+					 );
+        		})
+            }
+        },
+        reset: function (formMetasDistribucionLinea) {
+            $scope.myModel = angular.copy($scope.master);
+            $scope.metasDistribucionLinea = false;
+			$scope.edicion = true;
+            $scope.objetoP = {};
+        }
+    };
+
+	$scope.formMetasDistribucionSubtariaLinea = {
+        submit: function (formMetasDistribucionSubtariaLinea) {
+            var firstError = null;
+            if (formMetasDistribucionSubtariaLinea.$invalid) {
+                var field = null, firstError = null;
+                for (field in formMetasDistribucionSubtariaLinea) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !formMetasDistribucionSubtariaLinea[field].$valid) {
+                            firstError = formMetasDistribucionSubtariaLinea[field].$name;
+                        }
+                        if (formMetasDistribucionSubtariaLinea[field].$pristine) {
+                        	formMetasDistribucionSubtariaLinea[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+                var tObj = Object.assign({}, $scope.objetoP.cronograma);
+                var tDet = Object.assign([], $scope.detallesP);
+                tObj.cronogramalineaTOs = tDet;
+            	reformasFactory.guardarLineaMeta(tObj).then(function(resp){
+        			 if (!resp.estado){
+ 	 		             SweetAlert.swal(
+	 		            		 "Reformas!",
+	 		            		 resp.mensajes.msg,
+	 		            		 "error"
+	            		 );
+ 	 		             return;
+        			 }
 					 $scope.metasDistribucionSubtareaMeta = false;
 					 $scope.metasDistribucion = true;
 					 //$scope.objetoP = {};
@@ -615,7 +664,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         		})
             }
         },
-        reset: function (formMetasDistribucionLinea) {
+        reset: function (formMetasDistribucionSubtariaLinea) {
             $scope.myModel = angular.copy($scope.master);
             $scope.metasDistribucionSubtareaMeta = false;
 			$scope.metasDistribucion = true;
