@@ -587,11 +587,11 @@ public class PlanificacionController {
 				else{
 					//Si va a inactivar valido que no hayan hijos
 					if(subactividadTO.getId()!=null && subactividadTO.getId().longValue()!=0 && subactividadTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
-						NivelprogramaTO nivelprogramaTO=new NivelprogramaTO();
+						NivelactividadTO nivelprogramaTO=new NivelactividadTO();
 						nivelprogramaTO.setTablarelacionid(subactividadTO.getId());
-						nivelprogramaTO.setNivelprogramaejerfiscalid(subactividadTO.getSubactividadejerfiscalid());
+						nivelprogramaTO.setNivelactividadejerfiscalid(subactividadTO.getSubactividadejerfiscalid());
 						nivelprogramaTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.subactividad"));
-						nivelprogramaTO=UtilSession.planificacionServicio.transObtenerNivelprogramaTO(nivelprogramaTO);
+						nivelprogramaTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(nivelprogramaTO);
 						NivelprogramaTO hijo=new NivelprogramaTO();
 						hijo.setId(nivelprogramaTO.getId());
 						hijo.setEstado(MensajesAplicacion.getString("estado.activo"));

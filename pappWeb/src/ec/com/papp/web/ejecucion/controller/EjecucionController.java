@@ -395,52 +395,76 @@ public class EjecucionController {
 			else if(clase.equals("reformalinea")){
 				ReformalineaTO reformalineaTO = gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
 				//valido que el subitem no exista en otra reforma que no este aprobada
-				
-				
-				//traigo la reforma para saber de que tipo es
-				ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(reformalineaTO.getId().getId());
-				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
-				ReformalineaTO reformalineaTO2=new ReformalineaTO();
-				//System.out.println("consulta lineas: " + reformalineaTO.getNivelactid() +"-"+ reformalineaTO.getId().getId() +"-"+reformalineaTO.getId().getLineaid());
-				reformalineaTO2.setNivelactid(reformalineaTO.getNivelactid());
-				reformalineaTO2.getId().setId(reformalineaTO.getId().getId());
-				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO2,null);
-				//System.out.println("reformas: " + reformalineaTOs.size());
+				Collection<ReformalineaTO> reformalineaTOexistentes=UtilSession.planificacionServicio.transObtienereformasnoelne(reformalineaTO.getNivelactid());
 				boolean grabar=true;
-				if(reformalineaTOs.size()>0){
-					for(ReformalineaTO reformalineaTO3:reformalineaTOs) {
-						//si la reforma es de tipo entre subitem "es" debo ver que pertenezcan al mismo item
-						//System.out.println("reforma linea existente: " + reformalineaTO3.getNivelactid() +"-"+ reformalineaTO3.getId().getId() + " - " +reformalineaTO3.getId().getLineaid() );
-						if((reformalineaTO.getId().getLineaid()!=null && reformalineaTO.getId().getLineaid().longValue()!=0) && (reformalineaTO3.getId().getLineaid().longValue()!=reformalineaTO.getId().getLineaid().longValue() && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue())) {
+				String codigoreforma="";
+				if(reformalineaTOexistentes.size()>0){
+					for(ReformalineaTO reformalineaTO2:reformalineaTOexistentes){
+						if((reformalineaTO.getId().getLineaid()!=null && reformalineaTO.getId().getLineaid().longValue()!=0) && 
+								(reformalineaTO2.getReforma().getEstado().equals("RE") || reformalineaTO2.getReforma().getEstado().equals("SO")) &&
+								(reformalineaTO2.getId().getLineaid().longValue()!=reformalineaTO.getId().getLineaid().longValue() && reformalineaTO.getNivelactid().longValue()==reformalineaTO2.getNivelactid().longValue())) {
 							grabar=false;
+							codigoreforma=reformalineaTO2.getReforma().getCodigo();
 							break;
 						}
-						else if((reformalineaTO.getId().getLineaid()==null || reformalineaTO.getId().getLineaid().longValue()==0L) && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue()) {
+						else if((reformalineaTO.getId().getLineaid()==null || reformalineaTO.getId().getLineaid().longValue()==0L) && 
+								(reformalineaTO2.getReforma().getEstado().equals("RE") || reformalineaTO2.getReforma().getEstado().equals("SO")) &&
+								reformalineaTO.getNivelactid().longValue()==reformalineaTO2.getNivelactid().longValue()) {
 							grabar=false;
+							codigoreforma=reformalineaTO2.getReforma().getCodigo();
 							break;
 						}
 					}
 				}
-
-				if(!grabar){
-					mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				if(grabar){
+					//traigo la reforma para saber de que tipo es
+					ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(reformalineaTO.getId().getId());
+					//pregunto si ya tiene una linea con el mismo subitem y no le dejo
+					ReformalineaTO reformalineaTO2=new ReformalineaTO();
+					//System.out.println("consulta lineas: " + reformalineaTO.getNivelactid() +"-"+ reformalineaTO.getId().getId() +"-"+reformalineaTO.getId().getLineaid());
+					reformalineaTO2.setNivelactid(reformalineaTO.getNivelactid());
+					reformalineaTO2.getId().setId(reformalineaTO.getId().getId());
+					Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO2,null);
+					//System.out.println("reformas: " + reformalineaTOs.size());
+					grabar=true;
+					if(reformalineaTOs.size()>0){
+						for(ReformalineaTO reformalineaTO3:reformalineaTOs) {
+							//si la reforma es de tipo entre subitem "es" debo ver que pertenezcan al mismo item
+							//System.out.println("reforma linea existente: " + reformalineaTO3.getNivelactid() +"-"+ reformalineaTO3.getId().getId() + " - " +reformalineaTO3.getId().getLineaid() );
+							if((reformalineaTO.getId().getLineaid()!=null && reformalineaTO.getId().getLineaid().longValue()!=0) && (reformalineaTO3.getId().getLineaid().longValue()!=reformalineaTO.getId().getLineaid().longValue() && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue())) {
+								grabar=false;
+								break;
+							}
+							else if((reformalineaTO.getId().getLineaid()==null || reformalineaTO.getId().getLineaid().longValue()==0L) && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue()) {
+								grabar=false;
+								break;
+							}
+						}
+					}
+	
+					if(!grabar){
+						mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					}
+					else{
+						accion = (reformalineaTO.getId()==null)?"I":"U";
+						UtilSession.planificacionServicio.transCrearModificarReformalinea(reformalineaTO);
+						//id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
+						//Traiga la lista de cetificacionlinea
+						ConsultasUtil.obtenerreforma(reformalineaTO.getId().getId(), jsonObject);
+	
+						
+	//					//Traigo la lista de ordengastolinea
+	//					ReformalineaTO reformalineaTO3=new ReformalineaTO();
+	//					reformalineaTO3.getId().setId(reformalineaTO.getId().getId());
+	//					Collection<ReformalineaTO> reformalineaTOs2=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO3);
+	//					jsonObject.put("reformalinea", (JSONArray)JSONSerializer.toJSON(reformalineaTOs2,reformalineaTO.getJsonConfig()));
+					}
 				}
 				else{
-					accion = (reformalineaTO.getId()==null)?"I":"U";
-					UtilSession.planificacionServicio.transCrearModificarReformalinea(reformalineaTO);
-					//id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
-					//Traiga la lista de cetificacionlinea
-					ConsultasUtil.obtenerreforma(reformalineaTO.getId().getId(), jsonObject);
-
-					
-//					//Traigo la lista de ordengastolinea
-//					ReformalineaTO reformalineaTO3=new ReformalineaTO();
-//					reformalineaTO3.getId().setId(reformalineaTO.getId().getId());
-//					Collection<ReformalineaTO> reformalineaTOs2=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO3);
-//					jsonObject.put("reformalinea", (JSONArray)JSONSerializer.toJSON(reformalineaTOs2,reformalineaTO.getJsonConfig()));
+					mensajes.setMsg("El subitem ya esta siendo utilizado en otra reforma en curso: " + codigoreforma);
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
-
 			}
 
 			//reformameta
