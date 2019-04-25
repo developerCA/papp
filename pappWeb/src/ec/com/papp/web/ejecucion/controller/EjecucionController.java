@@ -1684,7 +1684,7 @@ public class EjecucionController {
 				//..log.println("saldo: " + saldo);
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid());
 				reformalineaTO.setNpSubitemvalor(saldo);
-				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, reformalineaTO, null,null);
+				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, reformalineaTO, null,null,saldo);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
 				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
 				jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramaTO.getCronogramalineaTOs(),new CronogramalineaTO().getJsonConfigreforma()));
@@ -1692,7 +1692,7 @@ public class EjecucionController {
 			//tipo=rm
 			if(tipo.equals("rm")){
 				ReformametalineaTO reformametalineaTO= gson.fromJson(new StringReader(objeto), ReformametalineaTO.class);
-				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, null, reformametalineaTO,null);
+				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, null, reformametalineaTO,null,null);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformametalineaTO,reformametalineaTO.getJsonConfig()));
 				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
 				jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramaTO.getCronogramalineaTOs(),new CronogramalineaTO().getJsonConfigreforma()));
@@ -1700,7 +1700,7 @@ public class EjecucionController {
 			//tipo=rmm
 			if(tipo.equals("rmm")){
 				ReformametasubtareaTO reformametasubtareaTO= gson.fromJson(new StringReader(objeto), ReformametasubtareaTO.class);
-				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, null, null ,reformametasubtareaTO);
+				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, null, null ,reformametasubtareaTO,null);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformametasubtareaTO,reformametasubtareaTO.getJsonConfig()));
 				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
 				jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramaTO.getCronogramalineaTOs(),new CronogramalineaTO().getJsonConfigreforma()));
