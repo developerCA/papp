@@ -139,6 +139,13 @@ app.factory("reformasALasMetasFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customGET();
 		},
 
+		obtenerTodoSubtarea:function(
+			tablarelacionid
+		){
+			var url = "ejecucion/datossubtarea/" + tablarelacionid + "/0";
+			return Restangular.allUrl(url).customGET();
+		},
+
 		listarSubtareas:function(
 			ejerciciofiscal,
 			unidad

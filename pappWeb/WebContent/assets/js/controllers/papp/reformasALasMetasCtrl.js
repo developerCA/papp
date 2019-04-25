@@ -105,7 +105,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		).then(function(resp){
 			//console.log(resp);
 			if (!resp.estado) return;
-			$scope.objeto=resp.json.reforma;
+			$scope.objeto=resp.json.reformameta;
 			$scope.detalles={};
 			//$scope.agregarDetalles();
 			$scope.edicion=true;
@@ -127,9 +127,9 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		reformasALasMetasFactory.traerEditar($scope.data[index].id).then(function(resp){
 			//console.log(resp.json);
 			if (resp.estado) {
-			    $scope.objeto=resp.json.reforma;
+			    $scope.objeto=resp.json.reformameta;
 				//$scope.objeto.incluyemeta=$scope.objeto.incluyemeta==1;
-			    $scope.detalles=resp.json.reformalineas;
+			    $scope.detalles=resp.json.reformametalineas;
 			}
 			$scope.edicion=true;
 			$scope.nuevoar=false;
@@ -141,7 +141,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
-					"Reformas!",
+					"Reformas Metas!",
 					"Solo se puede solicitar si esta en estado registrar.",
 					"error"
 			);
@@ -158,7 +158,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 				$scope.data[index].npestado = "Solicitando";
 			}
 			SweetAlert.swal(
-					"Reformas!",
+					"Reformas Metas!",
 					resp.mensajes.msg,
 					resp.mensajes.type
 			);
@@ -169,14 +169,14 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal(
-					"Reformas!",
+					"Reformas Metas!",
 					"Solo se puede aprobar si esta en estado solicitado.",
 					"error"
 			);
 			return;
 		}
 		SweetAlert.swal({
-			title: "Reformas?",
+			title: "Reformas Metas?",
 			text: "Seguro de aprobar la reforma..?",
 			type: "warning",
 			showCancelButton: true,
@@ -199,7 +199,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 						$scope.data[index].npestado = "Aprobando";
 					}
 					SweetAlert.swal(
-							"Reformas!",
+							"Reformas Meta!",
 							resp.mensajes.msg,
 							resp.mensajes.type
 					);
@@ -212,14 +212,14 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
 			SweetAlert.swal(
-					"Reformas!",
+					"Reformas Meta!",
 					"Solo se puede negar si esta en estado solicitado.",
 					"error"
 			);
 			return;
 		}
 		SweetAlert.swal({
-			title: "Reformas?",
+			title: "Reformas Meta?",
 			text: "Seguro de negar la reforma..?",
 			type: "warning",
 			showCancelButton: true,
@@ -240,7 +240,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 					null
 				).then(function(resp){
 					SweetAlert.swal(
-							"Reformas!",
+							"Reformas Meta!",
 							resp.mensajes.msg,
 							resp.mensajes.type
 					);
@@ -253,14 +253,14 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
-					"Reformas!",
+					"Reformas Meta!",
 					"No se permite eliminar este registro, solo los que estan 'Registrados'.",
 					"error"
 			);
 			return;
 		}
 		SweetAlert.swal({
-			title: "Reformas?",
+			title: "Reformas Meta?",
 			text: "Seguro que desea eliminar la reforma..?",
 			type: "warning",
 			showCancelButton: true,
@@ -281,7 +281,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 					null
 				).then(function(resp){
 					SweetAlert.swal(
-							"Reformas!",
+							"Reformas Meta!",
 							resp.mensajes.msg,
 							resp.mensajes.type
 					);
@@ -296,15 +296,15 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 
 	$scope.agregarLinea = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalReformasLineas.html',
-			controller : 'ModalReformasLineasController',
+			templateUrl : 'assets/views/papp/modal/modalReformasALasMetasLineas.html',
+			controller : 'ModalReformasALasMetasLineasController',
 			size : 'lg',
 			resolve : {
 				ID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
-					return $scope.objeto.reformaunidadid;
+					return $scope.objeto.metaunidadid;
 				},
 				unidadcodigo : function() {
 					return $scope.objeto.npunidadcodigo;
@@ -333,15 +333,15 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 
 	$scope.editarLinea = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalReformasMetaLineas.html',
-			controller : 'ModalReformasMetaLineasController',
+			templateUrl : 'assets/views/papp/modal/modalReformasALasMetasLineas.html',
+			controller : 'ModalReformasALasMetasLineasController',
 			size : 'lg',
 			resolve : {
 				ID : function() {
 					return $scope.objeto.id;
 				},
 				unidadID : function() {
-					return $scope.objeto.reformaunidadid;
+					return $scope.objeto.metaunidadid;
 				},
 				unidadcodigo : function() {
 					return $scope.objeto.npunidadcodigo;
@@ -495,7 +495,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.reformaunidadid = obj.id;
+			$scope.objeto.metaunidadid = obj.id;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;
 		}, function() {
@@ -541,7 +541,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
         				 if ($scope.nuevoar) {
 	      					 $scope.noeditar = false;
 	      					 $scope.nuevoar=false;
-	      				     $scope.objeto=resp.json.reforma;
+	      				     $scope.objeto=resp.json.reformameta;
         				 } else {
           		             form.$setPristine(true);
           		             $scope.edicion=false;
@@ -549,13 +549,13 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
         				 }
         				 //$scope.pageChanged();
       					 SweetAlert.swal(
-      							 "Reformas!",
+      							 "Reformas Meta!",
       							 "Registro guardado satisfactoriamente!",
       							 "success"
 						 );
         			 }else{
 	 		             SweetAlert.swal(
-	 		            		 "Reformas!",
+	 		            		 "Reformas Meta!",
 	 		            		 resp.mensajes.msg,
 	 		            		 "error"
 	            		 );
@@ -596,7 +596,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
             	reformasALasMetasFactory.guardarLineaMeta(tObj).then(function(resp){
         			 if (!resp.estado){
  	 		             SweetAlert.swal(
-	 		            		 "Reformas!",
+	 		            		 "Reformas Meta!",
 	 		            		 resp.mensajes.msg,
 	 		            		 "error"
 	            		 );
@@ -606,7 +606,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 					 $scope.edicion = true;
 					 //$scope.objetoP = {};
   					 SweetAlert.swal(
-  							 "Reformas!",
+  							 "Reformas Meta!",
   							 "Registro guardado satisfactoriamente!",
   							 "success"
 					 );
@@ -693,7 +693,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 //					return $scope.objeto.id;
 //				},
 //				unidadID : function() {
-//					return $scope.objeto.reformaunidadid;
+//					return $scope.objeto.metaunidadid;
 //				},
 //				editar : function() {
 //					return $scope.detalles[index].id

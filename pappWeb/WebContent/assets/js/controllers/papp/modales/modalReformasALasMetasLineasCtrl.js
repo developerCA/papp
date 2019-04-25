@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ModalReformasMetaLineasController', [ "$scope","$rootScope","ID","unidadID","unidadcodigo","unidadnombre","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasALasMetasFactory",
+app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope","ID","unidadID","unidadcodigo","unidadnombre","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasALasMetasFactory",
 	function($scope,$rootScope,ID,unidadID,unidadcodigo,unidadnombre,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasALasMetasFactory) {
 
 	$scope.noeditar = false;
@@ -22,6 +22,7 @@ app.controller('ModalReformasMetaLineasController', [ "$scope","$rootScope","ID"
 					$rootScope.ejefiscal,
 					unidadID
 				).then(function(resp){
+					$scope.si = resp.json.result;
 		        	$scope.listarSubtareas = [{
 		        		id: "",
 		        		descripcionexten: "Selecione una subtarea"
@@ -34,6 +35,7 @@ app.controller('ModalReformasMetaLineasController', [ "$scope","$rootScope","ID"
 			reformasALasMetasFactory.editarLinea(
 					editar
 				).then(function(resp){
+					$scope.si = resp.json.result;
 					//console.log(resp);
 		        	$scope.objeto = resp.json.reformalinea;
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
@@ -90,56 +92,21 @@ app.controller('ModalReformasMetaLineasController', [ "$scope","$rootScope","ID"
 			//console.log($scope.objetoDetalles);
         	$scope.ponerCodigos();
 		});
-		reformasALasMetasFactory.listarItems(
-			$rootScope.ejefiscal,
-			$scope.objeto.subtarea
-		).then(function(resp){
-        	for (var i = 0; i < resp.json.result.length; i++) {
-        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + " - " + resp.json.result[i].npcodigocanton + " - " + resp.json.result[i].npcodigofuente + " - " + resp.json.result[i].npdescripcion;
-			}
-        	$scope.listarItems = [{
-        		id: "",
-        		descripcionexten: "Selecione un item"
-        	}].concat(resp.json.result);
-		});
-	}
-
-	$scope.cambioSubItems=function(){
-    	$scope.listarSubItems = [{
-    		id: "",
-    		descripcionexten: "Cargando subitems"
-    	}];
-    	$scope.valorajustado = 0;
-    	$scope.saldo = 0;
-		reformasALasMetasFactory.listarSubItems(
-			$rootScope.ejefiscal,
-			$scope.objeto.item
-		).then(function(resp){
-			$scope.si = resp.json.result;
-        	for (var i = 0; i < resp.json.result.length; i++) {
-        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + " - " + resp.json.result[i].npdescripcion;
-        		//$scope.listarSubItems.push(resp.json.result[i]);
-			}
-        	$scope.listarSubItems = [{
-        		id: "",
-        		descripcionexten: "Selecione un subitem"
-        	}].concat(resp.json.result);
-		})
+		$scope.obtenerTotal();
 	}
 
 	$scope.obtenerTotal=function(){
 		var i;
 		for (i = 0; i < $scope.si.length; i++) {
-			if ($scope.si[i].id == $scope.objeto.subitem)
+			if ($scope.si[i].id == $scope.objeto.subtarea)
 				break;
 		}
 		if (i == $scope.si.length)
 			return;
-		reformasALasMetasFactory.obtenerTotal(
-			$scope.si[i].tablarelacionid,
-			$scope.si[i].id
+		reformasALasMetasFactory.obtenerTodoSubtarea(
+			$scope.si[i].tablarelacionid
 		).then(function(resp){
-			//console.log(resp);
+			console.log(resp);
         	$scope.valorajustado = resp.json.valordisponiblesi.valorajustado;
         	$scope.saldo = resp.json.valordisponiblesi.saldo;
 		})

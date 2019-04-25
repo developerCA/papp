@@ -1,0 +1,172 @@
+<div class="modal-header">
+	<h3 class="modal-title">
+		Reformas Meta - L&iacute;neas
+	</h3>
+</div>
+<div class="modal-body">
+	<div class="panel-body" ng-init="init();" >
+		<form name="Form" id="form1" novalidate
+			ng-submit="form.submit(Form)">
+
+			<div class="form-group">
+			    <label class="control-label">
+			        Programa
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="programanombre"
+			        ng-model="objetoDetalles.programanombre">
+			</div>
+		
+			<div class="form-group">
+			    <label class="control-label">
+			        Subprograma
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="subprogramanombre"
+			        ng-model="objetoDetalles.subprogramanombre">
+			</div>
+		
+			<div class="form-group">
+			    <label class="control-label">
+			        Proyecto
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="proyectonombre"
+			        ng-model="objetoDetalles.proyectonombre">
+			</div>
+		
+			<div class="form-group">
+			    <label class="control-label">
+			        Actividad
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="actividadnombre"
+			        ng-model="objetoDetalles.actividadnombre">
+			</div>
+		
+			<div class="form-group">
+			    <label class="control-label">
+			        Subactividad
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="subactividadnombre"
+			        ng-model="objetoDetalles.subactividadnombre">
+			</div>
+		
+			<div class="form-group">
+			    <label class="control-label">
+			        Tarea
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="tareanombre"
+			        ng-model="objetoDetalles.tareanombre">
+			</div>
+			
+			<div class="form-group"
+			    ng-class="{'has-error':Form.subtarea.$dirty && Form.subtarea.$invalid, 'has-success':Form.subtarea.$valid}">
+			    <label class="control-label">
+			        Subtarea
+			        <span class="symbol required"></span>
+			    </label>
+			    <input ng-show="noeditar" type="text" ng-disabled="true"
+			        class="form-control" name="subtareanombre" ng-model="objetoDetalles.subtareanombre">
+			    <select ng-show="!noeditar" class="form-control" name="subtarea"
+			        ng-model="objeto.subtarea" ng-change="cambioItems();">
+					<option 
+					    ng-repeat="operator in listarSubtareas" 
+					    value="{{operator.id}}"
+					>
+					    {{operator.npcodigo}} - {{operator.npdescripcion}}
+					</option>
+			    </select>
+			    <span class="error text-small block"
+			        ng-if="Form.subtarea.$dirty && Form.subtarea.$invalid">
+			        Incorrecto
+			    </span>
+			    <span class="success text-small"
+			        ng-if="Form.subtarea.$valid">
+			        Listo
+			    </span>
+			</div>
+
+			<div class="form-group">
+			    <label class="control-label">
+			        Cambios en meta
+			    </label>
+			    <input type="checkbox" class="form-control"
+			    	name="incluyemeta" ng-model="objeto.incluyemeta"
+			    	ng-disabled="rol('ROLE_APROBADOR')">
+			</div>
+
+			<h2>
+				Meta
+			</h2>
+
+			<div class="form-group">
+			    <label class="control-label">
+			        Descripci&oacute;n
+			    </label>
+			    <textarea name="descripcion" rows="5" style="width: 100%"
+			    	placeholder="Escriba un descripci&oacute;n"
+			        class="form-control" ng-model="objeto.npmetadescripcion"
+			        required ng-disabled="true" ng-maxlength="500"></textarea>
+			</div>
+
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Unidad de medida
+			    </label>
+		        <input type="text"
+		            class="form-control" name="npunidadmedida"
+		            ng-model="objeto.npunidadmedida" ng-disabled="true">
+			</div>
+			
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Valor Actual
+			    </label>
+		        <input type="text" style="text-align:right;" decimal="2"
+		            class="form-control" name="codificado"
+		            ng-model="objeto.codificado" ng-disabled="true">
+			</div>
+			
+			<div class="form-group">
+			    <label class="control-label">
+			        Valor Incremento
+			    </label>
+			    <div class="input-group col-md-12">
+			        <input type="number" numericOnly style="text-align:right;"
+			        	decimal="2" placeholder="0.00"
+			            class="form-control" name="incremento" 
+			            ng-model="objeto.npincremento">
+			    </div>
+			</div>
+
+			<div class="form-group"
+			    ng-class="{'has-error':Form.subitem.$dirty && Form.subitem.$invalid, 'has-success':Form.subitem.$valid}">
+			    <label class="control-label">
+			        Valor Decremento
+			        <span class="symbol required"></span>
+			    </label>
+		        <input type="number" numericOnly style="text-align:right;"
+		        	decimal="2" placeholder="0.00"
+		            class="form-control" name="decremento"
+		            ng-model="objeto.npdecremento">
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="pull-right">
+						<button type="submit" class="btn btn-primary">
+							Confirmar
+						</button>
+						<button type="reset" class="btn btn-default btn-o"
+							ng-click="form.reset(Form)">
+							Cancelar
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
