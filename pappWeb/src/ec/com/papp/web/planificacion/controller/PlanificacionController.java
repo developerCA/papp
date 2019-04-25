@@ -587,19 +587,22 @@ public class PlanificacionController {
 				else{
 					//Si va a inactivar valido que no hayan hijos
 					if(subactividadTO.getId()!=null && subactividadTO.getId().longValue()!=0 && subactividadTO.getEstado().equals(MensajesAplicacion.getString("estado.inactivo"))) {
-						NivelactividadTO nivelprogramaTO=new NivelactividadTO();
-						nivelprogramaTO.setTablarelacionid(subactividadTO.getId());
-						nivelprogramaTO.setNivelactividadejerfiscalid(subactividadTO.getSubactividadejerfiscalid());
-						nivelprogramaTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.subactividad"));
-						nivelprogramaTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(nivelprogramaTO);
-						NivelprogramaTO hijo=new NivelprogramaTO();
-						hijo.setId(nivelprogramaTO.getId());
-						hijo.setEstado(MensajesAplicacion.getString("estado.activo"));
-						Collection<NivelprogramaTO> nivelprogramaTOs=UtilSession.planificacionServicio.transObtenerNivelprogramaArbol(hijo);
-						if(nivelprogramaTOs.size()>0) {
-							grabar=false;
-							mensajes.setMsg(MensajesWeb.getString("error.hijo.existe"));
-							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						NivelactividadTO nivelactividadTO=new NivelactividadTO();
+						nivelactividadTO.setTablarelacionid(subactividadTO.getId());
+						nivelactividadTO.setNivelactividadejerfiscalid(subactividadTO.getSubactividadejerfiscalid());
+						nivelactividadTO.setTipo(MensajesAplicacion.getString("formulacion.tipo.subactividad"));
+						Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtenerNivelactividad(nivelactividadTO);
+						for(NivelactividadTO nivelactividadTO2:nivelactividadTOs){
+							NivelactividadTO hijo=new NivelactividadTO();
+							hijo.setId(nivelactividadTO2.getId());
+							hijo.setEstado(MensajesAplicacion.getString("estado.activo"));
+							Collection<NivelactividadTO> nivelactividadTOs1=UtilSession.planificacionServicio.transObtenerNivelactividadArbol(hijo);
+							if(nivelactividadTOs1.size()>0) {
+								grabar=false;
+								mensajes.setMsg(MensajesWeb.getString("error.hijo.existe"));
+								mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+								break;
+							}
 						}
 					}
 					if(grabar) {
