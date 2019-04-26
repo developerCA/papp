@@ -474,7 +474,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 					);
 					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
 				    $scope.detalles.splice(index, 1);
-				    $scope.form.submit(Form);
+				    //$scope.form.submit(Form);
 	   			}else{
 		            SweetAlert.swal(
 		            		"Reformas!",

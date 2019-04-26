@@ -268,7 +268,8 @@
 									        <span class="symbol required"></span>
 									    </label>
 									    <input type="text" placeholder="Escriba un c&oacute;digo"
-									        class="form-control" name="codigo" ng-model="objeto.codigo"
+									        class="form-control" name="codigo"
+									        ng-model="objeto.codigo"
 									        ng-disabled="true">
 									    <span class="error text-small block"
 									        ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
@@ -292,7 +293,8 @@
 									            ng-model="objeto.npunidadcodigo">
 									        <span class="input-group-btn">
 									            <button type="button" class="btn btn-primary"
-									                ng-click="abrirUnidad()" ng-disabled="noeditar">
+									                ng-click="abrirUnidad()"
+									                ng-disabled="noeditar">
 									                <i class="fa fa-search"></i>
 									                Seleccione
 									            </button>
@@ -465,7 +467,7 @@
 									    </label>
 									    <input type="checkbox" class="form-control"
 									    	name="incluyemeta" ng-model="objeto.incluyemeta"
-									    	ng-disabled="rol('ROLE_APROBADOR')">
+									    	ng-disabled="noeditar">
 									    <span class="error text-small block"
 									        ng-if="Form.incluyemeta.$dirty && Form.incluyemeta.$invalid">
 									        Incorrecto
@@ -531,13 +533,15 @@
 													<tr ng-repeat="obj in detalles">
 														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary"
-																uib-tooltip="Modificar" ng-click="editarLinea($index)">
+																uib-tooltip="Modificar"
+																ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
 														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary" style="background-color: Red !important;"
-																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
+																uib-tooltip="Eliminar"
+																ng-click="eliminarLinea($index)">
 																<i class="fa ti-trash"></i>
 															</a>
 														</td> 
