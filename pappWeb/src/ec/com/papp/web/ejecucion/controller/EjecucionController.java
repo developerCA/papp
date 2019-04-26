@@ -751,6 +751,11 @@ public class EjecucionController {
 			if(clase.equals("certificacion")){
 				ConsultasUtil.obtenercertificacion(id, jsonObject);
 			}
+			//Certificacion
+			if(clase.equals("certificacionbusqueda")){
+				ConsultasUtil.obtenercertificacionbusqueda(id, jsonObject);
+			}
+
 			//Certificacionlinea
 			else if(clase.equals("certificacionlinea")){
 				CertificacionlineaTO certificacionlineaTO = UtilSession.planificacionServicio.transObtenerCertificacionlineaTO(new CertificacionlineaID(id, id2));
