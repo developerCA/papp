@@ -1,12 +1,13 @@
 'use strict';
 
-app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootScope","ID","unidadID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
-	function($scope,$rootScope,ID,unidadID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,certificacionesFondosFactory) {
+app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootScope","ID","unidadID","editar","noeditar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
+	function($scope,$rootScope,ID,unidadID,editar,noeditar,$uibModalInstance,SweetAlert,$filter, ngTableParams,certificacionesFondosFactory) {
 
 	$scope.noeditar = false;
 
 	$scope.init=function(){
 		//$scope.npcertificacionvalor = npcertificacionvalor;
+		$scope.noeditar = noeditar;
 		if (editar == null) {
 			//nuevo
 			certificacionesFondosFactory.nuevoLinea(
@@ -14,7 +15,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 			).then(function(resp){
 				console.log(resp.json.certificacionlinea);
 	        	$scope.objeto = resp.json.certificacionlinea;
-	        	$scope.noeditar = false;
+	        	//$scope.noeditar = false;
 	        	$scope.saldo = 0;
 	        	certificacionesFondosFactory.listarSubtareas(
 					$rootScope.ejefiscal,
@@ -39,7 +40,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
 		        	$scope.saldo = $scope.objeto.npvalor + $scope.objeto.npvalorinicial;
 		        	$scope.ponerCodigos();
-		        	$scope.noeditar=true;
+		        	//$scope.noeditar=true;
 				})
 		}
 	}

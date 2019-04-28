@@ -420,6 +420,9 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 				},
 				editar : function() {
 					return null;
+				},
+				noeditar : function() {
+					return $scope.noeditar
 				}
 			}
 		});
@@ -446,6 +449,9 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 				},
 				editar : function() {
 					return $scope.detalles[index].id
+				},
+				noeditar : function() {
+					return $scope.noeditar
 				}
 			}
 		});
