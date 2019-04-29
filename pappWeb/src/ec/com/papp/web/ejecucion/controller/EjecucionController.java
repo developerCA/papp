@@ -938,6 +938,7 @@ public class EjecucionController {
 			//datossubtarea: Recibo el id de la subtareaunidad y el id del nivelactividadid para buscar la unidadmedida y la descripcion y valor actual de la meta
 			else if(clase.equals("datossubtarea")) {
 				//1. Consulto la subtareaunidadacumulador y la subtarea para traer los datos necesarios
+				System.out.println("va a consultar datos subtarea: " + id);
 				SubtareaunidadTO subtareaunidadTO=new SubtareaunidadTO();
 				subtareaunidadTO.setId(id);
 				subtareaunidadTO.setUnidadmedidaTO(new UnidadmedidaTO());
@@ -946,16 +947,20 @@ public class EjecucionController {
 				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 				subtareaunidadacumuladorTO.setOrderByField(OrderBy.orderDesc("id.acumid"));
 				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
+				System.out.println("subtareaunidadacumuladorTOs "+subtareaunidadacumuladorTOs.size());
 				if(subtareaunidadacumuladorTOs.size()>0) {
 					Map<String, Double> valoractual=new HashMap<>();
 					Map<String, String> descripciones=new HashMap<>();
 					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
+					System.out.println("metadescripcion: " +subtareaunidadacumuladorTO.getDescripcion());
+					System.out.println("unidadmedida: " +subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
+					System.out.println("valor: " +subtareaunidadacumuladorTO.getCantidad());
 					descripciones.put("metadescripcion", subtareaunidadacumuladorTO.getDescripcion());
-					descripciones.put("unidadmedida", subtareaunidadTO.getUnidadmedidaTO().getNombre());
+					descripciones.put("unidadmedida", subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
 					valoractual.put("valor", subtareaunidadacumuladorTO.getCantidad());
 					jsonObject.put("descripciones", (JSONObject)JSONSerializer.toJSON(descripciones));
 					jsonObject.put("valoractual", (JSONObject)JSONSerializer.toJSON(valoractual));
-
+					System.out.println("json " + jsonObject.toString());
 				}
 			}
 			
