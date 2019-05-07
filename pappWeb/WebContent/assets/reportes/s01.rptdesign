@@ -9,10 +9,10 @@
     <parameters>
         <scalar-parameter name="institucion" id="3047">
             <property name="valueType">static</property>
-            <property name="dataType">string</property>
+            <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">1</value>
+                <value type="constant">121</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -23,7 +23,7 @@
         </scalar-parameter>
         <scalar-parameter name="institucionentidad" id="3052">
             <property name="valueType">static</property>
-            <property name="dataType">string</property>
+            <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
                 <value type="constant">1</value>
@@ -37,10 +37,10 @@
         </scalar-parameter>
         <scalar-parameter name="unidad" id="3055">
             <property name="valueType">static</property>
-            <property name="dataType">string</property>
+            <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">10</value>
+                <value type="constant">30</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -51,10 +51,10 @@
         </scalar-parameter>
         <scalar-parameter name="ejerciciofiscal" id="3498">
             <property name="valueType">static</property>
-            <property name="dataType">string</property>
+            <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">61</value>
+                <value type="constant">81</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -65,7 +65,7 @@
         </scalar-parameter>
         <scalar-parameter name="oerativo" id="3499">
             <property name="valueType">static</property>
-            <property name="dataType">string</property>
+            <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
                 <value type="constant">13</value>
@@ -79,7 +79,7 @@
         </scalar-parameter>
         <scalar-parameter name="estrategico" id="3504">
             <property name="valueType">static</property>
-            <property name="dataType">string</property>
+            <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
                 <value type="constant">3</value>
