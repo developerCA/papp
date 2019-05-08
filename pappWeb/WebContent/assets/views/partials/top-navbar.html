@@ -28,69 +28,57 @@
 		<ul class="nav navbar-left hidden-sm hidden-xs">
 			<li class="sidebar-toggler-wrapper">
 				<div>
-					<button href="javascript:void(0)" uib-tooltip="Minimizar Menu" tooltip-placement="right"
+					<button href="javascript:void(0)" uib-tooltip="Minimizar Menu"
+						tooltip-placement="right" v-pressable
 						class="btn sidebar-toggler visible-md visible-lg"
-						ng-click="app.layout.isSidebarClosed = !app.layout.isSidebarClosed"
-						v-pressable>
+						ng-click="app.layout.isSidebarClosed = !app.layout.isSidebarClosed">
 						<i class="fa fa-bars"></i>
 					</button>
 				</div>
 			</li>
-			<li><a ng-click="goFullscreen()"> <i class="fa fa-expand"
-					ng-show="!isFullscreen"></i> <i class="fa fa-compress"
-					ng-show="isFullscreen"></i></a></li>
 			<li>
-
+				<a ng-click="goFullscreen()">
+					<i class="fa fa-expand" ng-show="!isFullscreen"></i>
+					<i class="fa fa-compress" ng-show="isFullscreen"></i>
+				</a>
+			</li>
+			<li>
 				<div class="col-md-12">
 					<h4 class="over-title margin-top-20">
-						<span class="text-bold text-white">Sistema de
-							Gesti&oacute;n Institucional</span>
+						<span class="text-bold text-white">
+							Sistema de Gesti&oacute;n Institucional
+						</span>
 					</h4>
-
 				</div>
-
-
 			</li>
-
 			<li>
 				<div>
 					<form class="form-horizontal" role="form"
 						ng-controller="EjerciciosFiscalesController"
 						ng-init="iniciaAplicacion()">
 						<div class="form-group ">
-
 							<div class="col-md-12">
 								<select class="col-md-12  margin-top-15"
 									ng-model="ejercicioSistema" ng-change="cambiarEjercicio()"
 									ng-options="item.anio for item in ejerciciosFiscales track by item.id"
 									class="form-control" >
 								</select>
-
 							</div>
-
-
-
-
 						</div>
-
 					</form>
-
 				</div>
-
-
 			</li>
-
-
 		</ul>
-
 		<ul class="nav navbar-right">
-
 			<li class="dropdown" uib-dropdown="" on-toggle="toggled(open)" style="">
-                <a href="" class="dropdown-toggle text-white" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false"><i class="ti-user"></i><span id="nombreUsuario" class="ng-binding text-bold text-white"></span></a>
+                <a href="" class="dropdown-toggle text-white" uib-dropdown-toggle=""
+               		aria-haspopup="true" aria-expanded="false">
+       				<i class="ti-user"></i>
+       				<span id="nombreUsuario" class="ng-binding text-bold text-white"></span>
+  				</a>
 <script type = "text/javascript">
 document.getElementById('nombreUsuario').innerHTML = '&nbsp;'+seccion.usuario;
 </script>
-
                 <ul role="menu" class="dropdown-menu dropdown-light animated fadeInUpShort ">
                     <li class="ng-scope">
                         <a ui-sref="app.cambiarcontrasena"
@@ -99,14 +87,13 @@ document.getElementById('nombreUsuario').innerHTML = '&nbsp;'+seccion.usuario;
 						</a>
                     </li>
                     <li class="ng-scope">
-                        <a  href="logout" class="menu-toggler ng-binding"> Cerrar sesi&oacute;n </a>
+                        <a  href="logout" class="menu-toggler ng-binding">
+                        	Cerrar sesi&oacute;n
+                       	</a>
                     </li>
                 </ul>
             </li>
-
 		</ul>
 	</div>
-
-
 	<!-- end: NAVBAR COLLAPSE -->
 </header>

@@ -13,15 +13,13 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 	var pagina = 1;
 	
 	$scope.consultar=function(){
-		
 		$scope.data=[];
 		ejercicioFiscalFactory.traerEjercicios(pagina).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
 		})
-	
 	};
-	
+
 	$scope.iniciaAplicacion=function(){
 		$scope.data=[];
 		$scope.ejerciciosFiscales=[];
@@ -33,21 +31,33 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 				var ano = fecha.getFullYear();
 
 				var tObj = [];
+				// Si el Ejercicio Fiscal es visible (= '1') se muestra
 			    for (var i=0;i<$scope.ejerciciosFiscales.length;i++){
 			    	if ($scope.ejerciciosFiscales[i].visible == '1') {
 			    		tObj.push($scope.ejerciciosFiscales[i]);
 			    	}
 			    }
+
 			    $scope.ejerciciosFiscales = tObj;
 			    $rootScope.ejefiscal = null;
-			    for (var i=0;i<$scope.ejerciciosFiscales.length;i++){
-			    	if (ano==$scope.ejerciciosFiscales[i].anio){
-			    		$rootScope.ejefiscal = $scope.ejerciciosFiscales[i].id;
-			    		$rootScope.ejefiscalobj = $scope.ejerciciosFiscales[i];
-			    		$scope.ejercicioSistema = $rootScope.ejefiscalobj;
-			    	}
+			    if ($rootScope.ejefiscalobj == undefined) {
+			    	// Si no se seleccionó un año fiscal se toma el año actual por defecto
+				    for (var i=0;i<$scope.ejerciciosFiscales.length;i++) {
+				    	if (ano == $scope.ejerciciosFiscales[i].anio) {
+				    		$rootScope.ejefiscal = $scope.ejerciciosFiscales[i].id;
+				    		$rootScope.ejefiscalobj = $scope.ejerciciosFiscales[i];
+				    		$scope.ejercicioSistema = $rootScope.ejefiscalobj;
+				    	}
+				    }
+			    } else {
+			    	// Aquí cuando ya esta seleccionado el año
+			    	$rootScope.ejefiscal = $rootScope.ejefiscalobj.id;
+			    	$scope.ejercicioSistema = $rootScope.ejefiscalobj;
 			    }
+
 			    if ($rootScope.ejefiscal == null) {
+			    	// Si el año actual no esta en la lista de ejercicio fiscales,
+			    	// se toma el primero por defecto
 		    		$rootScope.ejefiscal = $scope.ejerciciosFiscales[0].id;
 		    		$rootScope.ejefiscalobj = $scope.ejerciciosFiscales[0];
 		    		$scope.ejercicioSistema = $rootScope.ejefiscalobj;
@@ -56,7 +66,6 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 	};
 	
 	$scope.cambiarEjercicio=function(){
-		
 		 SweetAlert.swal({
 	            title: "Ejercicio Fiscal",
 	            text: "Esta seguro de cambiar el ejercicio fiscal del sistema ?",
@@ -67,28 +76,18 @@ app.controller('EjerciciosFiscalesController', [ "$scope","$rootScope","$locatio
 	            cancelButtonText: "NO",
 	            closeOnConfirm: true,
 				closeOnCancel: true
-	       
-		 
 		 },function(isConfirm) {
 				if (isConfirm) {
-					 $rootScope.ejefiscal=$scope.ejercicioSistema.id;
-					 $rootScope.ejefiscalobj=$scope.ejercicioSistema;
+					 $rootScope.ejefiscal = $scope.ejercicioSistema.id;
+					 $rootScope.ejefiscalobj = $scope.ejercicioSistema;
 					 $location.path( "/index" );
-				}else{
-					$scope.ejercicioSistema= $rootScope.ejefiscalobj;
+				} else {
+					$scope.ejercicioSistema = $rootScope.ejefiscalobj;
 				}
 		});
-		 
-		 
-		
-		 
-		
-		
 	}
-	
-	
+
 	$scope.$watch('data', function() {
-		
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
 			count : 5, // count per page
