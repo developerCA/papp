@@ -14,7 +14,7 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
 				ID
 			).then(function(resp){
 //				console.log(resp.json.certificacionlinea);
-	        	$scope.objeto = resp.json.reformalinea;
+	        	$scope.objeto = resp.json.reformametalinea;
 	        	$scope.noeditar = false;
 	        	$scope.valorajustado = 0;
 	        	$scope.saldo = 0;
@@ -37,18 +37,18 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
 				).then(function(resp){
 					$scope.si = resp.json.result;
 					//console.log(resp);
-		        	$scope.objeto = resp.json.reformalinea;
+		        	$scope.objeto = resp.json.reformametalinea;
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
 //		        	try {
 //			        	$scope.valorajustado = $scope.objeto.npvalortotal + $scope.objeto.npvalorincremento - $scope.objeto.npvalordecremento;
 //					} catch (e) {
 //			        	$scope.valorajustado = 0;
 //					}
-		        	try {
-			        	$scope.saldo = $scope.objeto.npsaldo - $scope.objeto.npvalorincremento + $scope.objeto.npvalordecremento;
-					} catch (e) {
-			        	$scope.saldo = 0;
-					}
+//		        	try {
+//			        	$scope.saldo = $scope.objeto.npsaldo - $scope.objeto.npvalorincremento + $scope.objeto.npvalordecremento;
+//					} catch (e) {
+//			        	$scope.saldo = 0;
+//					}
 		        	$scope.ponerCodigos();
 		        	$scope.noeditar=true;
 				})
@@ -106,9 +106,10 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
 		reformasALasMetasFactory.obtenerTodoSubtarea(
 			$scope.si[i].tablarelacionid
 		).then(function(resp){
-			console.log(resp);
-        	$scope.valorajustado = resp.json.valordisponiblesi.valorajustado;
-        	$scope.saldo = resp.json.valordisponiblesi.saldo;
+			//console.log(resp);
+        	$scope.metadescripcion = resp.json.descripciones.metadescripcion;
+        	$scope.unidadmedida = resp.json.descripciones.unidadmedida;
+        	$scope.valoractual = resp.json.valoractual.valor;
 		})
 	}
 
@@ -135,20 +136,28 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
             	  tObj.nivelactid = tObj.subitem;
             	  //delete tObj.subitem;
             	}
-            	if (tObj.valorincremento == null) tObj.valorincremento = 0;
-            	if (tObj.valordecremento == null) tObj.valordecremento = 0;
-            	if (parseInt(tObj.valorincremento) == 0 && parseInt(tObj.valordecremento) == 0) {
+            	if (tObj.npvalorincremento == null) tObj.npvalorincremento = 0;
+            	if (tObj.npvalordecremento == null) tObj.npvalordecremento = 0;
+            	if (parseInt(tObj.npvalorincremento) == 0 && parseInt(tObj.npvalordecremento) == 0) {
             		SweetAlert.swal(
-            				"Reformas!",
-            				"Valor incremento o valor decremento tienen que tener valor uno de los dos",
+            				"Reformas a las Metas!",
+            				"El incremento o el decremento tienen que tener valor uno de los dos",
             				"error"
     				);
             		return;
             	}
-            	if (parseInt(tObj.valorincremento) != 0 && parseInt(tObj.valordecremento) != 0) {
+            	if (parseInt(tObj.npvalorincremento) != 0 && parseInt(tObj.npvalordecremento) != 0) {
             		SweetAlert.swal(
-            				"Reformas!",
-            				"Valor incremento o valor decremento solo uno de los dos puede tener valor",
+            				"Reformas a las Metas!",
+            				"El incremento o el decremento solo uno de los dos puede tener valor",
+            				"error"
+    				);
+            		return;
+            	}
+            	if (parseInt(tObj.npvalordecremento) > $scope.valoractual) {
+            		SweetAlert.swal(
+            				"Reformas a las Metas!",
+            				"El decremento no puede ser mayor al valor actual",
             				"error"
     				);
             		return;
@@ -161,18 +170,18 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
 	 		             tObj = {
  		            		reformalineas: resp.json.reformalineas
 	 		             }
-	 		             try {
-	 		            	 tObj.valorincremento = resp.json.reforma.valorincremento;
-						 } catch (e) {
-							 tObj.valorincremento = 0;
-						 	console.log("ERROR QUE REPARAR");
-						 }
-	 		             try {
-	 		            	 tObj.valordecremento = resp.json.reforma.valordecremento;
-						 } catch (e) {
-							 tObj.valorincremento = 0;
-						 	console.log("ERROR QUE REPARAR");
-						 }
+//	 		             try {
+//	 		            	 tObj.valorincremento = resp.json.reforma.valorincremento;
+//						 } catch (e) {
+//							 tObj.valorincremento = 0;
+//						 	console.log("ERROR QUE REPARAR");
+//						 }
+//	 		             try {
+//	 		            	 tObj.valordecremento = resp.json.reforma.valordecremento;
+//						 } catch (e) {
+//							 tObj.valorincremento = 0;
+//						 	console.log("ERROR QUE REPARAR");
+//						 }
 	 		    		 $uibModalInstance.close(tObj);		
         			 }else{
 	 		             SweetAlert.swal("Reformas!", resp.mensajes.msg, "error");

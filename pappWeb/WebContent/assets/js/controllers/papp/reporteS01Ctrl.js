@@ -91,7 +91,7 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.unidadid = obj.id;
+			$scope.objeto.unidadid = obj.unidadarbolunidadid;
 			$scope.npunidad = obj.codigoorganico + ' - ' + obj.nombre;
 			$scope.unidadActivo = true;
 			$scope.limpiarListas(3);
@@ -110,7 +110,8 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 					return $rootScope.ejefiscal;
 				},
 				padre : function() {
-					return $scope.objeto.objetivoestrategicoid;
+					return null;
+					//return $scope.objeto.objetivoestrategicoid;
 				}
 			}
 		});
@@ -140,30 +141,40 @@ app.controller('ReporteS01Controller', [ "$scope","$rootScope","$uibModal","Swee
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.objetivoestrategicoid = obj.id;
-			$scope.npobjetivoestrategico = obj.codigo + ' - ' + obj.nombre;
+			$scope.npobjetivoestrategico = obj.codigo + ' - ' + obj.npdescripcion;
 		}, function() {
 		});
 	};
 
 	$scope.form = {
         submit: function (form) {
-        	if (!$scope.objeto.actividadid) {
-        		SweetAlert.swal("Reporte S01!", "Seleccione una Actividad", "error");
-        		return;
-        	}
         	if (!$scope.objeto.institucionid) {
         		SweetAlert.swal("Reporte S01!", "Seleccione una Institucion", "error");
         		return;
         	}
-        	if (!$scope.objeto.organismoid) {
-        		SweetAlert.swal("Reporte S01!", "Seleccione un Organismo", "error");
+        	if (!$scope.objeto.entidadid) {
+        		SweetAlert.swal("Reporte S01!", "Seleccione una Entidad", "error");
+        		return;
+        	}
+        	if (!$scope.objeto.unidadid) {
+        		SweetAlert.swal("Reporte S01!", "Seleccione una Unidad", "error");
+        		return;
+        	}
+        	if (!$scope.objeto.objetivooperacionalid) {
+        		SweetAlert.swal("Reporte S01!", "Seleccione una Objetivo Operacional", "error");
+        		return;
+        	}
+        	if (!$scope.objeto.objetivoestrategicoid) {
+        		SweetAlert.swal("Reporte S01!", "Seleccione un Objetivo Estratégico", "error");
         		return;
         	}
         	var url = "/birt/frameset?__report=s01.rptdesign" +
-				"&NivelActividad=" + $scope.objeto.actividadid +
-				"&InstitucionActividad=" + $scope.objeto.institucionid +
-				"&Organismo=" + $scope.objeto.organismoid +
-				"&ejerciciofiscalid=" + $rootScope.ejefiscal;
+				"&institucion=" + $scope.objeto.institucionid +
+				"&institucionentidad=" + $scope.objeto.entidadid +
+				"&unidad=" + $scope.objeto.unidadid +
+				"&oerativo=" + $scope.objeto.objetivooperacionalid +
+				"&estrategico=" + $scope.objeto.objetivoestrategicoid +
+				"&ejerciciofiscal=" + $rootScope.ejefiscal;
 			console.log(url);
 		    console.log($scope.objeto);
 		    window.open(url, '_blank');
