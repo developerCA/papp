@@ -74,6 +74,7 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
 		//$scope.objeto.subitemid = $scope.listarSubtareas[i].id;
 		$scope.objeto.npSubitemcodigo = $scope.listarSubtareas[i].npcodigo;
 		$scope.objeto.npSubitem = $scope.listarSubtareas[i].npdescripcion;
+		$scope.objeto.nivelactid = $scope.listarSubtareas[i].id;
     	$scope.listarItems = [{
     		id: "",
     		descripcionexten: "Cargando items"
