@@ -1695,12 +1695,12 @@ span[role="slider"] {
   margin-top: 2px !important;
 }
 .lyt-3 #sidebar > div nav > ul > li .sub-menu li > a {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 2px; /* 10px */
+  padding-bottom: 2px; /* 10px */
 }
 .lyt-3 #sidebar > div nav > ul > li > a {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 2px; /* 10px */
+  padding-bottom: 2px; /* 10px */
   font-weight:bold;
 }
 .lyt-3 #sidebar > div nav > ul > li > ul > li > a {
@@ -1945,7 +1945,7 @@ span[role="slider"] {
 #sidebar > div nav > ul > li {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  margin: 0 0 10px 0;
+  margin: 0 0 2px 0; /* 10px */
 }
 @media (max-width: 991px) {
   #sidebar > div nav > ul > li {
@@ -15389,4 +15389,22 @@ figure.effect-goliath:hover p {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   margin-top: 60px;
+}
+ul.sub-menu li a:focus,
+ul.sub-menu li a:hover,
+ul.sub-menu li a:active {
+  background: #516b8c !important;
+  color: #f2f2f2 !important;
+}
+ul.sub-menu li ul.sub-menu li a:focus,
+ul.sub-menu li ul.sub-menu li a:hover,
+ul.sub-menu li ul.sub-menu li a:active {
+  background: #516b8c !important;
+  color: #f2f2f2 !important;
+}
+ul.sub-menu li ul.sub-menu li ul.sub-menu li a:focus,
+ul.sub-menu li ul.sub-menu li ul.sub-menu li a:hover,
+ul.sub-menu li ul.sub-menu li ul.sub-menu li a:active {
+  background: #516b8c !important;
+  color: #f2f2f2 !important;
 }
