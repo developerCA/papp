@@ -1153,9 +1153,12 @@ public class ConsultasUtil {
 			reformametaTO.setNpfechasolicitud(UtilGeneral.parseDateToString(reformametaTO.getFechasolicitud()));
 			//traigo las reformaslinea las traigo
 			ReformametalineaTO reformametalineaTO=new ReformametalineaTO();
+			reformametalineaTO.getId().setId(reformametaTO.getId());
 			Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO);
-			jsonObject.put("reformametalineas", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs,reformametalineaTO.getJsonConfig()));
+			System.out.println("lineas: "+ reformametalineaTOs.size());
+			jsonObject.put("reformametalineas", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs,reformametalineaTO.getJsonConfigconsulta()));
 			jsonObject.put("reformameta", (JSONObject)JSONSerializer.toJSON(reformametaTO,reformametaTO.getJsonConfig()));
+			System.out.println("json: " + jsonObject.toString());
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new MyException(e);
