@@ -162,7 +162,7 @@ public class ReportesConsultas {
 				cell.setCellValue(s01to2.getInstitucioncodigo() +" - " + s01to2.getInstitucionnombre());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(1);
-				cell.setCellValue(s01to2.getInstitucioncodigo() +" - " + s01to2.getInstitucionentnombre());
+				cell.setCellValue(s01to2.getInstitucionentcodigo() +" - " + s01to2.getInstitucionentnombre());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(2);
 				cell.setCellValue(s01to2.getOperativodescripcion());
