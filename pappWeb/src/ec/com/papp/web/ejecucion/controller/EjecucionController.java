@@ -492,20 +492,22 @@ public class EjecucionController {
 				ReformametalineaTO reformametalineaTO = gson.fromJson(new StringReader(objeto), ReformametalineaTO.class);
 				//pregunto si ya tiene una linea con el mismo subtarea y no le dejo
 				ReformametalineaTO reformalineaTO2=new ReformametalineaTO();
-				log.println("consulta lineas: " + reformametalineaTO.getNivelacid() +"-"+ reformametalineaTO.getId().getId());
-				reformalineaTO2.setNivelacid(reformametalineaTO.getNivelacid());
+				System.out.println("consulta lineas: " + reformametalineaTO.getNivelactid() +"-"+ reformametalineaTO.getId().getId());
+				reformalineaTO2.setNivelactid(reformametalineaTO.getNivelactid());
 				reformalineaTO2.getId().setId(reformametalineaTO.getId().getId());
 				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformalineaTO2);
-				log.println("ordenes: " + reformametalineaTOs.size());
+				System.out.println("ordenes: " + reformametalineaTOs.size());
 				boolean grabar=true;
 				if(reformametalineaTOs.size()>0){
 					for(ReformametalineaTO reformalineaTO3:reformametalineaTOs) {
 						if((reformametalineaTO.getId().getLineaid()!=null && reformametalineaTO.getId().getLineaid().longValue()!=0) && reformalineaTO3.getId().getLineaid().longValue()!=reformametalineaTO.getId().getLineaid().longValue()) {
 							grabar=false;
+							System.out.println("entro 1");
 							break;
 						}
 						else if(reformametalineaTO.getId().getLineaid()==null || reformametalineaTO.getId().getLineaid().longValue()==0L) {
 							grabar=false;
+							System.out.println("entro 2");
 							break;
 						}
 					}
@@ -517,6 +519,10 @@ public class EjecucionController {
 				}
 				else{
 					accion = (reformametalineaTO.getId()==null)?"I":"U";
+					if(reformametalineaTO.getValorincremento().doubleValue()>0 && reformametalineaTO.getValordecremento().doubleValue()>0)
+						reformametalineaTO.setCambia(1);
+					else
+						reformametalineaTO.setCambia(0);
 					UtilSession.planificacionServicio.transCrearModificarReformametalinea(reformametalineaTO);
 					id=reformametalineaTO.getId().getId().toString() + reformametalineaTO.getId().getLineaid();
 					//Traigo la lista de reformametalinea
@@ -915,9 +921,10 @@ public class EjecucionController {
 			//Reformametalinea
 			else if(clase.equals("reformametalinea")){
 				ReformametalineaTO reformametalineaTO = UtilSession.planificacionServicio.transObtenerReformametalineaTO(new ReformametalineaID(id, id2));
-				reformametalineaTO.setNpdecremento(reformametalineaTO.getDecremento());
-				reformametalineaTO.setNpincremento(reformametalineaTO.getIncremento());
-				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformametalineaTO.getNivelacid()));
+				reformametalineaTO.setNpdecremento(reformametalineaTO.getValordecremento());
+				reformametalineaTO.setNpincremento(reformametalineaTO.getValorincremento());
+				jsonObject=ConsultasUtil.consultaInformacionsubtarea(reformametalineaTO.getNivelactid(), jsonObject, mensajes);
+				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformametalineaTO.getNivelactid()));
 				//1. traigo los datos de unidad medida y meta descripcion
 				SubtareaunidadTO subtareaunidadTO=new SubtareaunidadTO();
 				subtareaunidadTO.setId(nivelactividadTO.getTablarelacionid());
@@ -930,6 +937,7 @@ public class EjecucionController {
 				if(subtareaunidadacumuladorTOs.size()>0) {
 					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
 					reformametalineaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
+					reformametalineaTO.setNpunidadmedida(subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
 				}
 				reformametalineaTO.setNpunidadmedida(subtareaunidadTO.getUnidadmedidaTO().getNombre());
 				jsonObject.put("reformametalinea", (JSONObject)JSONSerializer.toJSON(reformametalineaTO,reformametalineaTO.getJsonConfig()));
@@ -967,9 +975,9 @@ public class EjecucionController {
 			//Reformametasubtarea
 			else if(clase.equals("reformametasubtarea")){
 				ReformametasubtareaTO reformametasubtareaTO = UtilSession.planificacionServicio.transObtenerReformasubtareaTO(new ReformametasubtareaID(id, id2));
-				reformametasubtareaTO.setNpdecremento(reformametasubtareaTO.getDecremento());
-				reformametasubtareaTO.setNpincremento(reformametasubtareaTO.getIncremento());
-				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformametasubtareaTO.getNivelacid()));
+				reformametasubtareaTO.setNpdecremento(reformametasubtareaTO.getValordecremento());
+				reformametasubtareaTO.setNpincremento(reformametasubtareaTO.getValorincremento());
+				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformametasubtareaTO.getNivelactid()));
 				MatrizDetalle matrizDetalle=UtilSession.planificacionServicio.transObtienedetallesubtarea(null, nivelactividadTO.getId());
 				reformametasubtareaTO.setNpmetadescripcion(matrizDetalle.getSubtareanombre());
 				reformametasubtareaTO.setNpunidadmedida(matrizDetalle.getNpunidadmedida());

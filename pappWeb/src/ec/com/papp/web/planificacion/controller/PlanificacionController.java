@@ -1960,6 +1960,7 @@ public class PlanificacionController {
 				log.println("id:... " + id);
 				ActividadTO actividadTO1 = UtilSession.planificacionServicio.transObtieneActividadesniveles(actividadTO,Long.valueOf(parameters.get("unidadid")),Long.valueOf(parameters.get("ejerciciofiscal")));
 				jsonObject.put("actividadplanificacion", (JSONObject)JSONSerializer.toJSON(actividadTO1,actividadTO.getJsonConfigEditarPlanificacion()));
+				System.out.println("jsonObj " + jsonObject.toString());
 			}
 
 			//SubctividadPlanificacion

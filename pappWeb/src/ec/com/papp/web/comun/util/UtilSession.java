@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import ec.com.papp.administracion.servicio.AdminsitracionServicio;
 import ec.com.papp.estructuraorganica.servicio.EstructuraorganicaServicio;
 import ec.com.papp.planificacion.servicio.PlanificacionServicio;
+import ec.com.papp.reporte.servicio.ReporteServicio;
 import ec.com.papp.seguridad.servicio.SeguridadServicio;
 import ec.com.papp.seguridad.to.PerfilTO;
 import ec.com.papp.seguridad.to.PerfilpermisoTO;
@@ -28,6 +29,7 @@ public class UtilSession {
 	public static EstructuraorganicaServicio estructuraorganicaServicio=(EstructuraorganicaServicio) Factory.getFactory().getBean("estructuraorganicaTrans");
 	public static PlanificacionServicio planificacionServicio=(PlanificacionServicio) Factory.getFactory().getBean("planificacionTrans");
 	public static SeguridadServicio seguridadServicio=(SeguridadServicio) Factory.getFactory().getBean("seguridadTrans");
+	public static ReporteServicio reporteServicio=(ReporteServicio) Factory.getFactory().getBean("reporteTrans");
 		
 	/**
 	 * Método LogoutUser 
