@@ -254,7 +254,12 @@ public class ReportesConsultas {
 					cell.setCellValue(s01to2.getValanticipo());
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(27);
-				cell.setCellValue("0.0");
+				if(s01to2.getDevengo()!=null){
+					double dev= (s01to2.getDevengo()/codificado)*100;
+					cell.setCellValue(UtilGeneral.redondear(dev, 2));
+				}
+				else
+					cell.setCellValue("0.0");
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(28);
 				double disponible=codificado-s01to2.getXcomprometer()-s01to2.getCertfondos()-s01to2.getCompromiso();

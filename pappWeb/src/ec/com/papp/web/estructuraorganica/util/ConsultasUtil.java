@@ -701,6 +701,17 @@ public class ConsultasUtil {
 				unidadarbolTO.setUnidadarbolunidadid(Long.valueOf(parameters.get("unidadarbolunidadid")));
 			if(parameters.get("unidadarbolerganicaid")!=null && !parameters.get("unidadarbolerganicaid").equals(""))
 				unidadarbolTO.setUnidadarbolerganicaid(Long.valueOf(parameters.get("unidadarbolerganicaid")));
+			else{
+				EstructuraorganicaTO estructuraorganicaTO=new EstructuraorganicaTO();
+				estructuraorganicaTO.setEstado("V");
+				estructuraorganicaTO.setOrderByField(OrderBy.orderDesc("id"));
+				Collection<EstructuraorganicaTO> resultado=UtilSession.estructuraorganicaServicio.transObtenerEstructuraorganica(estructuraorganicaTO);
+				if(resultado.size()>0){
+					estructuraorganicaTO=(EstructuraorganicaTO)resultado.iterator().next();
+					unidadarbolTO.setUnidadarbolerganicaid(estructuraorganicaTO.getId());
+				}
+			}
+			
 			if(parameters.get("unidadarbolpadreid")!=null && !parameters.get("unidadarbolerganicaid").equals(""))
 				unidadarbolTO.setUnidadarbolpadreid(Long.valueOf(parameters.get("unidadarbolpadreid")));
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
