@@ -9,13 +9,15 @@
     <parameters>
         <scalar-parameter name="certificacion" id="4037">
             <property name="valueType">static</property>
+            <property name="isRequired">true</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">54048</value>
+                <value type="constant">63290</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
             <property name="controlType">text-box</property>
             <structure name="format">
                 <property name="category">Unformatted</property>
@@ -48,792 +50,6 @@
         </oda-data-source>
     </data-sources>
     <data-sets>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="todo" id="4306">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">CERTIFICACIONID</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">CERTIFICACIONID</text-property>
-                    <text-property name="heading">CERTIFICACIONID</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">EJERCICIOFISCALANIO</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">EJERCICIOFISCALANIO</text-property>
-                    <text-property name="heading">EJERCICIOFISCALANIO</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">SUBITEMID</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">SUBITEMID</text-property>
-                    <text-property name="heading">SUBITEMID</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">INSTITUCION</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">INSTITUCION</text-property>
-                    <text-property name="heading">INSTITUCION</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">INSTITUCIONENTIDAD</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">INSTITUCIONENTIDAD</text-property>
-                    <text-property name="heading">INSTITUCIONENTIDAD</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">UNIDADCODIGOPRESUP</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">UNIDADCODIGOPRESUP</text-property>
-                    <text-property name="heading">UNIDADCODIGOPRESUP</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">UNIDADNOMBRE</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">UNIDADNOMBRE</text-property>
-                    <text-property name="heading">UNIDADNOMBRE</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">CERTIFICACIONFECHACREACION</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">CERTIFICACIONFECHACREACION</text-property>
-                    <text-property name="heading">CERTIFICACIONFECHACREACION</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">CERTIFICACIONFECHAAPROBACION</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">CERTIFICACIONFECHAAPROBACION</text-property>
-                    <text-property name="heading">CERTIFICACIONFECHAAPROBACION</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">CERTIFICACIONESTADO</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">CERTIFICACIONESTADO</text-property>
-                    <text-property name="heading">CERTIFICACIONESTADO</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">CERTIFICACIONCODIGO</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">CERTIFICACIONCODIGO</text-property>
-                    <text-property name="heading">CERTIFICACIONCODIGO</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">PROCESO</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">PROCESO</text-property>
-                    <text-property name="heading">PROCESO</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">CERTIFICACIONDESCRIPCION</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">CERTIFICACIONDESCRIPCION</text-property>
-                    <text-property name="heading">CERTIFICACIONDESCRIPCION</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">ID</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">ID</text-property>
-                    <text-property name="heading">ID</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">DETALLE</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">DETALLE</text-property>
-                    <text-property name="heading">DETALLE</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">VALOR</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">VALOR</text-property>
-                    <text-property name="heading">VALOR</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">TOTALSUBITEM</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">TOTALSUBITEM</text-property>
-                    <text-property name="heading">TOTALSUBITEM</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">SALDO</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">SALDO</text-property>
-                    <text-property name="heading">SALDO</text-property>
-                </structure>
-            </list-property>
-            <list-property name="parameters">
-                <structure>
-                    <property name="name">certificacionid</property>
-                    <property name="paramName">certificacion</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">1</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">CERTIFICACIONID</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">EJERCICIOFISCALANIO</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">SUBITEMID</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">INSTITUCION</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">INSTITUCIONENTIDAD</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">UNIDADCODIGOPRESUP</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">UNIDADNOMBRE</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">CERTIFICACIONFECHACREACION</property>
-                        <property name="dataType">date-time</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">CERTIFICACIONFECHAAPROBACION</property>
-                        <property name="dataType">date-time</property>
-                    </structure>
-                    <structure>
-                        <property name="position">10</property>
-                        <property name="name">CERTIFICACIONESTADO</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">11</property>
-                        <property name="name">CERTIFICACIONCODIGO</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">12</property>
-                        <property name="name">PROCESO</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">13</property>
-                        <property name="name">CERTIFICACIONDESCRIPCION</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">14</property>
-                        <property name="name">ID</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">15</property>
-                        <property name="name">DETALLE</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">16</property>
-                        <property name="name">VALOR</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">17</property>
-                        <property name="name">TOTALSUBITEM</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">18</property>
-                        <property name="name">SALDO</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">CERTIFICACIONID</property>
-                    <property name="nativeName">CERTIFICACIONID</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">EJERCICIOFISCALANIO</property>
-                    <property name="nativeName">EJERCICIOFISCALANIO</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">SUBITEMID</property>
-                    <property name="nativeName">SUBITEMID</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">INSTITUCION</property>
-                    <property name="nativeName">INSTITUCION</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">INSTITUCIONENTIDAD</property>
-                    <property name="nativeName">INSTITUCIONENTIDAD</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">UNIDADCODIGOPRESUP</property>
-                    <property name="nativeName">UNIDADCODIGOPRESUP</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">UNIDADNOMBRE</property>
-                    <property name="nativeName">UNIDADNOMBRE</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">CERTIFICACIONFECHACREACION</property>
-                    <property name="nativeName">CERTIFICACIONFECHACREACION</property>
-                    <property name="dataType">date-time</property>
-                    <property name="nativeDataType">93</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">CERTIFICACIONFECHAAPROBACION</property>
-                    <property name="nativeName">CERTIFICACIONFECHAAPROBACION</property>
-                    <property name="dataType">date-time</property>
-                    <property name="nativeDataType">93</property>
-                </structure>
-                <structure>
-                    <property name="position">10</property>
-                    <property name="name">CERTIFICACIONESTADO</property>
-                    <property name="nativeName">CERTIFICACIONESTADO</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">11</property>
-                    <property name="name">CERTIFICACIONCODIGO</property>
-                    <property name="nativeName">CERTIFICACIONCODIGO</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">12</property>
-                    <property name="name">PROCESO</property>
-                    <property name="nativeName">PROCESO</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">13</property>
-                    <property name="name">CERTIFICACIONDESCRIPCION</property>
-                    <property name="nativeName">CERTIFICACIONDESCRIPCION</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">14</property>
-                    <property name="name">ID</property>
-                    <property name="nativeName">ID</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">15</property>
-                    <property name="name">DETALLE</property>
-                    <property name="nativeName">DETALLE</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">16</property>
-                    <property name="name">VALOR</property>
-                    <property name="nativeName">VALOR</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">17</property>
-                    <property name="name">TOTALSUBITEM</property>
-                    <property name="nativeName">TOTALSUBITEM</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">18</property>
-                    <property name="name">SALDO</property>
-                    <property name="nativeName">SALDO</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT 
-       c.CERTIFICACIONID,
-       ef.EJERCICIOFISCALANIO,
-       si.SUBITEMID,
-       i.INSTITUCIONCODIGO || '-' || i.INSTITUCIONNOMBRE AS institucion,
-       ie.INSTITUCIONENTCODIGO || '-' || ie.INSTITUCIONENTNOMBRE AS institucionentidad,
-       u.UNIDADCODIGOPRESUP,
-       u.UNIDADNOMBRE,
-       c.CERTIFICACIONFECHACREACION,
-       c.CERTIFICACIONFECHAAPROBACION,
-       c.CERTIFICACIONESTADO,
-       c.CERTIFICACIONCODIGO,
-       c.CERTIFICACIONNUMERODOCUMENTO AS PROCESO,
-       c.CERTIFICACIONDESCRIPCION,
-       cl.CERTIFICACIONLINEAID AS ID,
-       'Programa: ' || pr.PROGRAMACODIGO || '-' || pr.PROGRAMADESCRIPCION || chr(10) ||
-       'Proyecto: ' || py.PROYECTOCODIGO || '-' || py.PROYECTODESCRIPCION || chr(10) ||
-       'Actividad: ' || ac.ACTIVIDADCODIGO || '-' || ac.ACTIVIDADDESCRIPCION || chr(10) ||
-       'Subactividad: ' || sa.SUBACTIVIDADCODIGO || '-' || sa.SUBACTIVIDADDESCRIPCION || chr(10) ||
-       'Tarea: ' || ta.TAREAUNIDADCODIGO || '-' || ta.TAREAUNIDADDESCRIPCION || chr(10) ||
-       'Subtarea: ' || st.SUBTAREAUNIDADCODIGO || '-' || st.SUBTAREAUNIDADDESCRIPCION || chr(10) ||
-       'Item: ' || it.ITEMCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
-       'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
-       AS detalle,
-       cl.CERTIFICACIONLINEAVALOR AS valor,
-       sia.subitemunidadacumvalor AS totalsubitem,
-       CAL_CERTIFICADO_SALDO_SUBITEM(
-           c.CERTIFICACIONEJERFISCALID,
-           si.SUBITEMID,
-           c.CERTIFICACIONID
-       ) +
-       CAL_CERTIFICADO_SALDO_REFORMA(
-           na15.nivelactividadid,
-           c.CERTIFICACIONFECHACREACION
-       ) AS saldo
-  FROM certificacion                        c
-       INNER JOIN Unidad                    u               ON u.UNIDADID = c.CERTIFICACIONUNIDADID
-       INNER JOIN Unidadinst                ui              ON ui.unidadid = u.unidadid
-       INNER JOIN INSTITUCIONENTIDAD        ie              ON (ui.unidadinstid = ie.institucionid AND ui.unidadinstentidadid = ie.institucionentid) 
-       INNER JOIN INSTITUCION               i               ON ie.institucionid = i.institucionid
-       INNER JOIN EJERCICIOFISCAL           ef              ON ef.EJERCICIOFISCALID = i.INSTITUCIONEJERCICIOFISCALID
-       INNER JOIN CERTIFICACIONLINEA        cl              ON cl.certificacionid = c.CERTIFICACIONID
-       INNER JOIN NIVELACTIVIDAD            na              ON cl.CERTIFICACIONLINEANIVELACTID = na.NIVELACTIVIDADID
-       INNER JOIN SUBITEMUNIDAD             siu             ON na.NIVELACTIVIDADTABLARELACIONID = siu.SUBITEMUNIDADID
-       INNER JOIN SUBITEM                   si              ON siu.SUBITEMUNIDADSUBITEMID = si.SUBITEMID
-       INNER JOIN subitemunidadacumulador   sia             ON (siu.subitemunidadid = sia.subitemunidadid AND sia.subitemunidadacumid = 2 AND sia.SUBITEMUNIDADACUMTIPO = 'A')
-       INNER JOIN nivelactividad            nivelsubitem    ON siu.subitemunidadid = nivelsubitem.nivelactividadtablarelacionid
-       INNER JOIN nivelactividad            na7             ON na7.nivelactividadid = nivelsubitem.nivelactividadpadreid
-       INNER JOIN itemunidad                itu             ON itu.itemunidadid = na7.nivelactividadtablarelacionid
-       INNER JOIN ITEM                      it              ON itu.itemunidaditemid = it.ITEMID
-       INNER JOIN nivelactividad            na12            ON na12.nivelactividadid = na7.nivelactividadpadreid
-       INNER JOIN subtareaunidad            st              ON st.subtareaunidadid = na12.nivelactividadtablarelacionid
-       INNER JOIN nivelactividad            na13            ON na13.NIVELACTIVIDADID=na12.NIVELACTIVIDADPADREID 
-       INNER JOIN tareaunidad               ta              ON ta.tareaunidadid = na13.nivelactividadtablarelacionid
-       INNER JOIN nivelactividad            na14            ON na14.nivelactividadid = na13.nivelactividadpadreid
-       INNER JOIN subactividadunidad        sau             ON sau.subactividadid = na14.nivelactividadtablarelacionid
-       INNER JOIN Subactividad              sa              ON sa.subactividadid = sau.subactividadid
-       INNER JOIN nivelactividad            na15            ON na15.nivelactividadid = na14.nivelactividadpadreid
-       INNER JOIN actividad                 ac              ON ac.actividadid = na15.nivelactividadtablarelacionid
-       INNER JOIN nivelprograma             na8             ON na8.nivelprogramatablarelacionid = ac.actividadid
-       INNER JOIN nivelprograma             na9             ON na9.nivelprogramaid = na8.nivelprogramapadreid
-       INNER JOIN proyecto                  py              ON py.proyectoid = na9.nivelprogramatablarelacionid
-       INNER JOIN nivelprograma             na10            ON na10.nivelprogramaid = na9.nivelprogramapadreid
-       INNER JOIN subprograma               sp              ON sp.subprogramaid = na10.nivelprogramatablarelacionid
-       INNER JOIN nivelprograma             na11            ON na11.nivelprogramaid = na10.nivelprogramapadreid
-       INNER JOIN programa                  pr              ON pr.programaid = na11.nivelprogramatablarelacionid
- WHERE c.CERTIFICACIONID = ?
-   AND ef.EJERCICIOFISCALID = c.CERTIFICACIONEJERFISCALID
- GROUP BY
-       c.CERTIFICACIONID,
-       ef.EJERCICIOFISCALANIO,
-       si.SUBITEMID,
-       i.INSTITUCIONCODIGO,
-       i.INSTITUCIONNOMBRE,
-       ie.INSTITUCIONENTCODIGO,
-       ie.INSTITUCIONENTNOMBRE,
-       u.UNIDADINSTITUCIONID,
-       u.UNIDADINSTITUCIONENTID,
-       u.UNIDADCODIGOPRESUP,
-       u.UNIDADNOMBRE,
-       c.CERTIFICACIONFECHACREACION,
-       c.CERTIFICACIONFECHAAPROBACION,
-       c.CERTIFICACIONESTADO,
-       c.CERTIFICACIONCODIGO,
-       c.CERTIFICACIONNUMERODOCUMENTO,
-       c.CERTIFICACIONDESCRIPCION,
-       cl.CERTIFICACIONLINEAID,
-       pr.PROGRAMACODIGO,
-       pr.PROGRAMADESCRIPCION,
-       py.PROYECTOCODIGO,
-       py.PROYECTODESCRIPCION,
-       ac.ACTIVIDADCODIGO,
-       ac.ACTIVIDADDESCRIPCION,
-       sa.SUBACTIVIDADCODIGO,
-       sa.SUBACTIVIDADDESCRIPCION,
-       ta.TAREAUNIDADCODIGO,
-       ta.TAREAUNIDADDESCRIPCION,
-       st.SUBTAREAUNIDADCODIGO,
-       st.SUBTAREAUNIDADDESCRIPCION,
-       it.ITEMCODIGO,
-       it.ITEMNOMBRE,
-       si.SUBITEMCODIGO,
-       si.SUBITEMNOMBRE,
-       cl.CERTIFICACIONLINEAVALOR,
-       sia.subitemunidadacumvalor,
-       c.CERTIFICACIONEJERFISCALID,
-       si.SUBITEMID,
-       c.CERTIFICACIONID,
-       na15.nivelactividadid,
-       c.CERTIFICACIONFECHACREACION
- ORDER BY cl.CERTIFICACIONLINEAID
-]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>2.0</Version>
-  <design:ResultSets derivedMetaData="true">
-    <design:resultSetDefinitions>
-      <design:resultSetColumns>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>CERTIFICACIONID</design:name>
-              <design:position>1</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>10</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>CERTIFICACIONID</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>CERTIFICACIONID</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>EJERCICIOFISCALANIO</design:name>
-              <design:position>2</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>4</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>EJERCICIOFISCALANIO</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>EJERCICIOFISCALANIO</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>INSTITUCION</design:name>
-              <design:position>3</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>111</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>INSTITUCION</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>INSTITUCION</design:label>
-            <design:formattingHints>
-              <design:displaySize>111</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>INSTITUCIONENTIDAD</design:name>
-              <design:position>4</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>111</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>INSTITUCIONENTIDAD</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>INSTITUCIONENTIDAD</design:label>
-            <design:formattingHints>
-              <design:displaySize>111</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>UNIDADCODIGOPRESUP</design:name>
-              <design:position>5</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>10</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>UNIDADCODIGOPRESUP</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>UNIDADCODIGOPRESUP</design:label>
-            <design:formattingHints>
-              <design:displaySize>10</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>UNIDADNOMBRE</design:name>
-              <design:position>6</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>100</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>UNIDADNOMBRE</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>UNIDADNOMBRE</design:label>
-            <design:formattingHints>
-              <design:displaySize>100</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>CERTIFICACIONFECHAAPROBACION</design:name>
-              <design:position>7</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
-            <design:precision>0</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>CERTIFICACIONFECHAAPROBACION</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>CERTIFICACIONFECHAAPROBACION</design:label>
-            <design:formattingHints>
-              <design:displaySize>7</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>CERTIFICACIONESTADO</design:name>
-              <design:position>8</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>2</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>CERTIFICACIONESTADO</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>CERTIFICACIONESTADO</design:label>
-            <design:formattingHints>
-              <design:displaySize>2</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>CERTIFICACIONCODIGO</design:name>
-              <design:position>9</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>100</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>CERTIFICACIONCODIGO</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>CERTIFICACIONCODIGO</design:label>
-            <design:formattingHints>
-              <design:displaySize>100</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>PROCESO</design:name>
-              <design:position>10</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>5</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>PROCESO</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>PROCESO</design:label>
-            <design:formattingHints>
-              <design:displaySize>5</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>CERTIFICACIONDESCRIPCION</design:name>
-              <design:position>11</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>500</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>CERTIFICACIONDESCRIPCION</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>CERTIFICACIONDESCRIPCION</design:label>
-            <design:formattingHints>
-              <design:displaySize>500</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>ID</design:name>
-              <design:position>12</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>10</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>ID</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>ID</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>DETALLE</design:name>
-              <design:position>13</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>3832</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>DETALLE</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>DETALLE</design:label>
-            <design:formattingHints>
-              <design:displaySize>3832</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>VALOR</design:name>
-              <design:position>14</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>14</design:precision>
-            <design:scale>2</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>VALOR</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>VALOR</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>SALDO</design:name>
-              <design:position>15</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>0</design:precision>
-            <design:scale>-127</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>SALDO</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>SALDO</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-      </design:resultSetColumns>
-      <design:criteria/>
-    </design:resultSetDefinitions>
-  </design:ResultSets>
-</model:DesignValues>]]></xml-property>
-        </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="aprobado" id="4439">
             <list-property name="columnHints">
                 <structure>
@@ -863,7 +79,7 @@
             </list-property>
             <list-property name="parameters">
                 <structure>
-                    <property name="name">certificacion</property>
+                    <property name="name">id</property>
                     <property name="paramName">certificacion</property>
                     <property name="nativeName"></property>
                     <property name="dataType">integer</property>
@@ -1090,7 +306,7 @@
             </list-property>
             <list-property name="parameters">
                 <structure>
-                    <property name="name">certificacion</property>
+                    <property name="name">id</property>
                     <property name="paramName">certificacion</property>
                     <property name="dataType">integer</property>
                     <property name="position">1</property>
@@ -1305,7 +521,7 @@
             </list-property>
             <list-property name="parameters">
                 <structure>
-                    <property name="name">certificacion</property>
+                    <property name="name">id</property>
                     <property name="paramName">certificacion</property>
                     <property name="dataType">integer</property>
                     <property name="position">1</property>
@@ -1501,6 +717,868 @@
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="todo" id="4496">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">CERTIFICACIONID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">CERTIFICACIONID</text-property>
+                    <text-property name="heading">CERTIFICACIONID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CERTIFICACIONLINEANIVELACTID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">CERTIFICACIONLINEANIVELACTID</text-property>
+                    <text-property name="heading">CERTIFICACIONLINEANIVELACTID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">EJERCICIOFISCALANIO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">EJERCICIOFISCALANIO</text-property>
+                    <text-property name="heading">EJERCICIOFISCALANIO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SUBITEMID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SUBITEMID</text-property>
+                    <text-property name="heading">SUBITEMID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCION</text-property>
+                    <text-property name="heading">INSTITUCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INSTITUCIONENTIDAD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">INSTITUCIONENTIDAD</text-property>
+                    <text-property name="heading">INSTITUCIONENTIDAD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">UNIDADCODIGOPRESUP</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">UNIDADCODIGOPRESUP</text-property>
+                    <text-property name="heading">UNIDADCODIGOPRESUP</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">UNIDADNOMBRE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">UNIDADNOMBRE</text-property>
+                    <text-property name="heading">UNIDADNOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CERTIFICACIONFECHACREACION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CERTIFICACIONFECHACREACION</text-property>
+                    <text-property name="heading">CERTIFICACIONFECHACREACION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CERTIFICACIONFECHAAPROBACION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CERTIFICACIONFECHAAPROBACION</text-property>
+                    <text-property name="heading">CERTIFICACIONFECHAAPROBACION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CERTIFICACIONESTADO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CERTIFICACIONESTADO</text-property>
+                    <text-property name="heading">CERTIFICACIONESTADO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CERTIFICACIONCODIGO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CERTIFICACIONCODIGO</text-property>
+                    <text-property name="heading">CERTIFICACIONCODIGO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROCESO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROCESO</text-property>
+                    <text-property name="heading">PROCESO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CERTIFICACIONDESCRIPCION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CERTIFICACIONDESCRIPCION</text-property>
+                    <text-property name="heading">CERTIFICACIONDESCRIPCION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ID</text-property>
+                    <text-property name="heading">ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DETALLE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">DETALLE</text-property>
+                    <text-property name="heading">DETALLE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">VALOR</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">VALOR</text-property>
+                    <text-property name="heading">VALOR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SALDO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">SALDO</text-property>
+                    <text-property name="heading">SALDO</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">certificacion</property>
+                    <property name="dataType">string</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">CERTIFICACIONID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">CERTIFICACIONLINEANIVELACTID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">EJERCICIOFISCALANIO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">SUBITEMID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">INSTITUCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">INSTITUCIONENTIDAD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">UNIDADCODIGOPRESUP</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">UNIDADNOMBRE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">CERTIFICACIONFECHACREACION</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">CERTIFICACIONFECHAAPROBACION</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">CERTIFICACIONESTADO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">CERTIFICACIONCODIGO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">PROCESO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">CERTIFICACIONDESCRIPCION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">ID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">DETALLE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">VALOR</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">SALDO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">CERTIFICACIONID</property>
+                    <property name="nativeName">CERTIFICACIONID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">CERTIFICACIONLINEANIVELACTID</property>
+                    <property name="nativeName">CERTIFICACIONLINEANIVELACTID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">EJERCICIOFISCALANIO</property>
+                    <property name="nativeName">EJERCICIOFISCALANIO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">SUBITEMID</property>
+                    <property name="nativeName">SUBITEMID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">INSTITUCION</property>
+                    <property name="nativeName">INSTITUCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">INSTITUCIONENTIDAD</property>
+                    <property name="nativeName">INSTITUCIONENTIDAD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">UNIDADCODIGOPRESUP</property>
+                    <property name="nativeName">UNIDADCODIGOPRESUP</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">UNIDADNOMBRE</property>
+                    <property name="nativeName">UNIDADNOMBRE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">CERTIFICACIONFECHACREACION</property>
+                    <property name="nativeName">CERTIFICACIONFECHACREACION</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">CERTIFICACIONFECHAAPROBACION</property>
+                    <property name="nativeName">CERTIFICACIONFECHAAPROBACION</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">CERTIFICACIONESTADO</property>
+                    <property name="nativeName">CERTIFICACIONESTADO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">CERTIFICACIONCODIGO</property>
+                    <property name="nativeName">CERTIFICACIONCODIGO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">PROCESO</property>
+                    <property name="nativeName">PROCESO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">CERTIFICACIONDESCRIPCION</property>
+                    <property name="nativeName">CERTIFICACIONDESCRIPCION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">ID</property>
+                    <property name="nativeName">ID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">DETALLE</property>
+                    <property name="nativeName">DETALLE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">VALOR</property>
+                    <property name="nativeName">VALOR</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">SALDO</property>
+                    <property name="nativeName">SALDO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT 
+       c.ORDENGASTOID 					AS CERTIFICACIONID,
+       cl.ORDENGASTOLINEANIVELACTID 	AS CERTIFICACIONLINEANIVELACTID,
+       ef.EJERCICIOFISCALANIO,
+       si.SUBITEMID,
+       i.INSTITUCIONCODIGO || '-' || i.INSTITUCIONNOMBRE AS institucion,
+       ie.INSTITUCIONENTCODIGO || '-' || ie.INSTITUCIONENTNOMBRE AS institucionentidad,
+       u.UNIDADCODIGOPRESUP,
+       u.UNIDADNOMBRE,
+       c.ORDENGASTOFECHACREACION 		AS CERTIFICACIONFECHACREACION,
+       c.ORDENGASTOFECHAAPROBACION 		AS CERTIFICACIONFECHAAPROBACION,
+       c.ORDENGASTOESTADO 				AS CERTIFICACIONESTADO,
+       c.ORDENGASTOCODIGO 				AS CERTIFICACIONCODIGO,
+       c.ORDENGASTONUMERODOCUMENTO 		AS PROCESO,
+       c.ORDENGASTODESCRIPCION 			AS CERTIFICACIONDESCRIPCION,
+       cl.ORDENGASTOLINEAID 			AS ID,
+       'Programa: ' || pr.PROGRAMACODIGO || '-' || pr.PROGRAMADESCRIPCION || chr(10) ||
+       'Proyecto: ' || py.PROYECTOCODIGO || '-' || py.PROYECTODESCRIPCION || chr(10) ||
+       'Actividad: ' || ac.ACTIVIDADCODIGO || '-' || ac.ACTIVIDADDESCRIPCION || chr(10) ||
+       'Subactividad: ' || sa.SUBACTIVIDADCODIGO || '-' || sa.SUBACTIVIDADDESCRIPCION || chr(10) ||
+       'Tarea: ' || ta.TAREAUNIDADCODIGO || '-' || ta.TAREAUNIDADDESCRIPCION || chr(10) ||
+       'Subtarea: ' || st.SUBTAREAUNIDADCODIGO || '-' || st.SUBTAREAUNIDADDESCRIPCION || chr(10) ||
+       'Item: ' || it.ITEMCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
+       'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
+										AS detalle,
+       cl.ORDENGASTOLINEAVALOR 			AS valor,
+       ((
+        SELECT
+            NVL(SUM(SUBITEMUNIDADACUMVALOR), 0) AS valor1
+        FROM
+            SUBITEMUNIDADACUMULADOR
+        WHERE
+            SUBITEMUNIDADID = sia.SUBITEMUNIDADID
+            AND SUBITEMUNIDADACUMTIPO = 'A'
+            AND SUBITEMUNIDADACUMID = 2
+       ) + (
+       SELECT
+            NVL(SUM(rl.reformalineavalorincremento), 0) -
+            NVL(SUM(rl.reformalineavalordecremento), 0) AS valor2
+        FROM
+            REFORMALINEA rl
+            INNER JOIN REFORMA r ON r.REFORMAID = rl.REFORMAID
+        WHERE rl.reformalineanivelactid = cl.ORDENGASTOLINEANIVELACTID
+          AND r.REFORMAESTADO IN ('RE', 'AP')
+          AND r.REFORMAFECHACREACION < c.ORDENGASTOFECHACREACION
+       ) - (
+       SELECT
+            NVL(SUM(ccl.ORDENGASTOLINEAVALOR), 0) AS valor3
+        FROM
+            ORDENGASTOLINEA ccl
+            INNER JOIN ORDENGASTO cc ON cc.ORDENGASTOID = ccl.ORDENGASTOID
+        WHERE ccl.ORDENGASTOLINEANIVELACTID = cl.ORDENGASTOLINEANIVELACTID
+          AND cc.ORDENGASTOESTADO IN ('RE', 'AP', 'SO')
+          AND cc.ORDENGASTOFECHACREACION <= c.ORDENGASTOFECHACREACION
+       )) 								AS saldo
+  FROM ORDENGASTO                           c
+       INNER JOIN Unidad                    u               ON u.UNIDADID = c.ORDENGASTOUNIDADID
+       INNER JOIN Unidadinst                ui              ON ui.unidadid = u.unidadid
+       INNER JOIN INSTITUCIONENTIDAD        ie              ON (ui.unidadinstid = ie.institucionid AND ui.unidadinstentidadid = ie.institucionentid) 
+       INNER JOIN INSTITUCION               i               ON ie.institucionid = i.institucionid
+       INNER JOIN EJERCICIOFISCAL           ef              ON ef.EJERCICIOFISCALID = i.INSTITUCIONEJERCICIOFISCALID
+       INNER JOIN ORDENGASTOLINEA        cl              ON cl.ORDENGASTOid = c.ORDENGASTOID
+       INNER JOIN NIVELACTIVIDAD            na              ON cl.ORDENGASTOLINEANIVELACTID = na.NIVELACTIVIDADID
+       INNER JOIN SUBITEMUNIDAD             siu             ON na.NIVELACTIVIDADTABLARELACIONID = siu.SUBITEMUNIDADID
+       INNER JOIN SUBITEM                   si              ON siu.SUBITEMUNIDADSUBITEMID = si.SUBITEMID
+       INNER JOIN subitemunidadacumulador   sia             ON (siu.subitemunidadid = sia.subitemunidadid AND sia.subitemunidadacumid = 2 AND sia.SUBITEMUNIDADACUMTIPO = 'A')
+       INNER JOIN nivelactividad            nivelsubitem    ON siu.subitemunidadid = nivelsubitem.nivelactividadtablarelacionid
+       INNER JOIN nivelactividad            na7             ON na7.nivelactividadid = nivelsubitem.nivelactividadpadreid
+       INNER JOIN itemunidad                itu             ON itu.itemunidadid = na7.nivelactividadtablarelacionid
+       INNER JOIN ITEM                      it              ON itu.itemunidaditemid = it.ITEMID
+       INNER JOIN nivelactividad            na12            ON na12.nivelactividadid = na7.nivelactividadpadreid
+       INNER JOIN subtareaunidad            st              ON st.subtareaunidadid = na12.nivelactividadtablarelacionid
+       INNER JOIN nivelactividad            na13            ON na13.NIVELACTIVIDADID=na12.NIVELACTIVIDADPADREID 
+       INNER JOIN tareaunidad               ta              ON ta.tareaunidadid = na13.nivelactividadtablarelacionid
+       INNER JOIN nivelactividad            na14            ON na14.nivelactividadid = na13.nivelactividadpadreid
+       INNER JOIN subactividadunidad        sau             ON sau.subactividadid = na14.nivelactividadtablarelacionid
+       INNER JOIN Subactividad              sa              ON sa.subactividadid = sau.subactividadid
+       INNER JOIN nivelactividad            na15            ON na15.nivelactividadid = na14.nivelactividadpadreid
+       INNER JOIN actividad                 ac              ON ac.actividadid = na15.nivelactividadtablarelacionid
+       INNER JOIN nivelprograma             na8             ON na8.nivelprogramatablarelacionid = ac.actividadid
+       INNER JOIN nivelprograma             na9             ON na9.nivelprogramaid = na8.nivelprogramapadreid
+       INNER JOIN proyecto                  py              ON py.proyectoid = na9.nivelprogramatablarelacionid
+       INNER JOIN nivelprograma             na10            ON na10.nivelprogramaid = na9.nivelprogramapadreid
+       INNER JOIN subprograma               sp              ON sp.subprogramaid = na10.nivelprogramatablarelacionid
+       INNER JOIN nivelprograma             na11            ON na11.nivelprogramaid = na10.nivelprogramapadreid
+       INNER JOIN programa                  pr              ON pr.programaid = na11.nivelprogramatablarelacionid
+ WHERE c.ORDENGASTOID = ?
+   AND ef.EJERCICIOFISCALID = c.ORDENGASTOEJERFISCALID
+ GROUP BY
+       c.ORDENGASTOID,
+       ef.EJERCICIOFISCALANIO,
+       si.SUBITEMID,
+       i.INSTITUCIONCODIGO,
+       i.INSTITUCIONNOMBRE,
+       ie.INSTITUCIONENTCODIGO,
+       ie.INSTITUCIONENTNOMBRE,
+       u.UNIDADINSTITUCIONID,
+       u.UNIDADINSTITUCIONENTID,
+       u.UNIDADCODIGOPRESUP,
+       u.UNIDADNOMBRE,
+       c.ORDENGASTOFECHACREACION,
+       c.ORDENGASTOFECHAAPROBACION,
+       c.ORDENGASTOESTADO,
+       c.ORDENGASTOCODIGO,
+       c.ORDENGASTONUMERODOCUMENTO,
+       c.ORDENGASTODESCRIPCION,
+       cl.ORDENGASTOLINEAID,
+       pr.PROGRAMACODIGO,
+       pr.PROGRAMADESCRIPCION,
+       py.PROYECTOCODIGO,
+       py.PROYECTODESCRIPCION,
+       ac.ACTIVIDADCODIGO,
+       ac.ACTIVIDADDESCRIPCION,
+       sa.SUBACTIVIDADCODIGO,
+       sa.SUBACTIVIDADDESCRIPCION,
+       ta.TAREAUNIDADCODIGO,
+       ta.TAREAUNIDADDESCRIPCION,
+       st.SUBTAREAUNIDADCODIGO,
+       st.SUBTAREAUNIDADDESCRIPCION,
+       it.ITEMCODIGO,
+       it.ITEMNOMBRE,
+       si.SUBITEMCODIGO,
+       si.SUBITEMNOMBRE,
+       cl.ORDENGASTOLINEAVALOR,
+       sia.SUBITEMUNIDADID,
+       cl.ORDENGASTOLINEANIVELACTID,
+       cl.ORDENGASTOID
+ ORDER BY cl.ORDENGASTOLINEAID]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CERTIFICACIONID</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CERTIFICACIONID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CERTIFICACIONID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CERTIFICACIONLINEANIVELACTID</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CERTIFICACIONLINEANIVELACTID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CERTIFICACIONLINEANIVELACTID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>EJERCICIOFISCALANIO</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>4</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>EJERCICIOFISCALANIO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>EJERCICIOFISCALANIO</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SUBITEMID</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SUBITEMID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SUBITEMID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCION</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>111</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCION</design:label>
+            <design:formattingHints>
+              <design:displaySize>111</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INSTITUCIONENTIDAD</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>111</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>INSTITUCIONENTIDAD</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INSTITUCIONENTIDAD</design:label>
+            <design:formattingHints>
+              <design:displaySize>111</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>UNIDADCODIGOPRESUP</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>UNIDADCODIGOPRESUP</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>UNIDADCODIGOPRESUP</design:label>
+            <design:formattingHints>
+              <design:displaySize>10</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>UNIDADNOMBRE</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>UNIDADNOMBRE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>UNIDADNOMBRE</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CERTIFICACIONFECHACREACION</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CERTIFICACIONFECHACREACION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CERTIFICACIONFECHACREACION</design:label>
+            <design:formattingHints>
+              <design:displaySize>7</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CERTIFICACIONFECHAAPROBACION</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CERTIFICACIONFECHAAPROBACION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CERTIFICACIONFECHAAPROBACION</design:label>
+            <design:formattingHints>
+              <design:displaySize>7</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CERTIFICACIONESTADO</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CERTIFICACIONESTADO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CERTIFICACIONESTADO</design:label>
+            <design:formattingHints>
+              <design:displaySize>2</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CERTIFICACIONCODIGO</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CERTIFICACIONCODIGO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CERTIFICACIONCODIGO</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>PROCESO</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>40</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>PROCESO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>PROCESO</design:label>
+            <design:formattingHints>
+              <design:displaySize>40</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CERTIFICACIONDESCRIPCION</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>600</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>CERTIFICACIONDESCRIPCION</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CERTIFICACIONDESCRIPCION</design:label>
+            <design:formattingHints>
+              <design:displaySize>600</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ID</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ID</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ID</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>DETALLE</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>3832</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>DETALLE</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>DETALLE</design:label>
+            <design:formattingHints>
+              <design:displaySize>3832</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>VALOR</design:name>
+              <design:position>17</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>14</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>VALOR</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>VALOR</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>SALDO</design:name>
+              <design:position>18</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>0</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>SALDO</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>SALDO</design:label>
+            <design:formattingHints>
+              <design:displaySize>22</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="page" id="67">
@@ -1660,7 +1738,7 @@
                                     <property name="fontWeight">normal</property>
                                     <property name="textAlign">center</property>
                                     <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[ORDEN DE GASTO]]></text-property>
+                                    <text-property name="content"><![CDATA[SOLICITUD DE ORDEN DE GASTO]]></text-property>
                                 </text>
                             </cell>
                         </row>
@@ -1775,55 +1853,7 @@
                                     <property name="overflow">hidden</property>
                                     <text-property name="text">PAPP Año</text-property>
                                 </label>
-                                <data id="4435">
-                                    <property name="backgroundAttachment">scroll</property>
-                                    <property name="backgroundPositionX">0%</property>
-                                    <property name="backgroundPositionY">0%</property>
-                                    <property name="backgroundRepeat">repeat</property>
-                                    <property name="fontFamily">serif</property>
-                                    <property name="fontSize">9pt</property>
-                                    <property name="fontWeight">normal</property>
-                                    <property name="fontStyle">normal</property>
-                                    <property name="fontVariant">normal</property>
-                                    <property name="color">black</property>
-                                    <property name="textLineThrough">none</property>
-                                    <property name="textOverline">none</property>
-                                    <property name="textUnderline">none</property>
-                                    <property name="borderBottomColor">black</property>
-                                    <property name="borderBottomStyle">none</property>
-                                    <property name="borderBottomWidth">medium</property>
-                                    <property name="borderLeftColor">black</property>
-                                    <property name="borderLeftStyle">none</property>
-                                    <property name="borderLeftWidth">medium</property>
-                                    <property name="borderRightColor">black</property>
-                                    <property name="borderRightStyle">none</property>
-                                    <property name="borderRightWidth">medium</property>
-                                    <property name="borderTopColor">black</property>
-                                    <property name="borderTopStyle">none</property>
-                                    <property name="borderTopWidth">medium</property>
-                                    <property name="marginTop">0pt</property>
-                                    <property name="marginLeft">0pt</property>
-                                    <property name="marginBottom">0pt</property>
-                                    <property name="marginRight">0pt</property>
-                                    <property name="paddingTop">1pt</property>
-                                    <property name="paddingLeft">1pt</property>
-                                    <property name="paddingBottom">1pt</property>
-                                    <property name="paddingRight">1pt</property>
-                                    <property name="textAlign">left</property>
-                                    <property name="letterSpacing">normal</property>
-                                    <property name="lineHeight">normal</property>
-                                    <property name="orphans">2</property>
-                                    <property name="textTransform">none</property>
-                                    <property name="whiteSpace">normal</property>
-                                    <property name="widows">2</property>
-                                    <property name="wordSpacing">normal</property>
-                                    <property name="display">inline</property>
-                                    <property name="pageBreakAfter">auto</property>
-                                    <property name="pageBreakBefore">auto</property>
-                                    <property name="pageBreakInside">auto</property>
-                                    <property name="showIfBlank">false</property>
-                                    <property name="canShrink">false</property>
-                                    <property name="overflow">hidden</property>
+                                <data id="4498">
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -1979,7 +2009,7 @@
                                     <property name="overflow">hidden</property>
                                     <text-property name="text">Institución:</text-property>
                                 </label>
-                                <data id="4434">
+                                <data id="4499">
                                     <property name="display">inline</property>
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
@@ -2048,7 +2078,7 @@
                                     <property name="overflow">hidden</property>
                                     <text-property name="text">Entidad Operativa Desconcentrada:</text-property>
                                 </label>
-                                <data id="4433">
+                                <data id="4500">
                                     <property name="display">inline</property>
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
@@ -2115,7 +2145,7 @@
                                     <property name="overflow">hidden</property>
                                     <text-property name="text">Unidad:</text-property>
                                 </label>
-                                <data id="4431">
+                                <data id="4501">
                                     <property name="display">inline</property>
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
@@ -2128,7 +2158,7 @@
                                     </list-property>
                                     <property name="resultSetColumn">UNIDADCODIGOPRESUP</property>
                                 </data>
-                                <data id="4432">
+                                <data id="4502">
                                     <property name="display">inline</property>
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
@@ -2150,7 +2180,7 @@
                                     <property name="backgroundRepeat">repeat</property>
                                     <property name="fontFamily">serif</property>
                                     <property name="fontSize">9pt</property>
-                                    <property name="fontWeight">normal</property>
+                                    <property name="fontWeight">bold</property>
                                     <property name="fontStyle">normal</property>
                                     <property name="fontVariant">normal</property>
                                     <property name="color">black</property>
@@ -2193,58 +2223,8 @@
                                     <property name="overflow">hidden</property>
                                     <text-property name="text">Fecha:</text-property>
                                 </label>
-                                <data id="4495">
-                                    <property name="backgroundAttachment">scroll</property>
-                                    <property name="backgroundPositionX">0%</property>
-                                    <property name="backgroundPositionY">0%</property>
-                                    <property name="backgroundRepeat">repeat</property>
-                                    <property name="fontFamily">serif</property>
-                                    <property name="fontSize">9pt</property>
-                                    <property name="fontWeight">normal</property>
-                                    <property name="fontStyle">normal</property>
-                                    <property name="fontVariant">normal</property>
-                                    <property name="color">black</property>
-                                    <property name="textLineThrough">none</property>
-                                    <property name="textOverline">none</property>
-                                    <property name="textUnderline">none</property>
-                                    <property name="borderBottomColor">black</property>
-                                    <property name="borderBottomStyle">none</property>
-                                    <property name="borderBottomWidth">medium</property>
-                                    <property name="borderLeftColor">black</property>
-                                    <property name="borderLeftStyle">none</property>
-                                    <property name="borderLeftWidth">medium</property>
-                                    <property name="borderRightColor">black</property>
-                                    <property name="borderRightStyle">none</property>
-                                    <property name="borderRightWidth">medium</property>
-                                    <property name="borderTopColor">black</property>
-                                    <property name="borderTopStyle">none</property>
-                                    <property name="borderTopWidth">medium</property>
-                                    <property name="marginTop">0pt</property>
-                                    <property name="marginLeft">0pt</property>
-                                    <property name="marginBottom">0pt</property>
-                                    <property name="marginRight">0pt</property>
-                                    <property name="paddingTop">1pt</property>
-                                    <property name="paddingLeft">1pt</property>
-                                    <property name="paddingBottom">1pt</property>
-                                    <property name="paddingRight">1pt</property>
-                                    <structure name="dateTimeFormat">
-                                        <property name="category">Custom</property>
-                                        <property name="pattern">d/MM/yyyy</property>
-                                    </structure>
-                                    <property name="letterSpacing">normal</property>
-                                    <property name="lineHeight">normal</property>
-                                    <property name="orphans">2</property>
-                                    <property name="textTransform">none</property>
-                                    <property name="whiteSpace">normal</property>
-                                    <property name="widows">2</property>
-                                    <property name="wordSpacing">normal</property>
+                                <data id="4503">
                                     <property name="display">inline</property>
-                                    <property name="pageBreakAfter">auto</property>
-                                    <property name="pageBreakBefore">auto</property>
-                                    <property name="pageBreakInside">auto</property>
-                                    <property name="showIfBlank">false</property>
-                                    <property name="canShrink">false</property>
-                                    <property name="overflow">hidden</property>
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -2265,7 +2245,7 @@
                                     <property name="backgroundRepeat">repeat</property>
                                     <property name="fontFamily">serif</property>
                                     <property name="fontSize">9pt</property>
-                                    <property name="fontWeight">normal</property>
+                                    <property name="fontWeight">bold</property>
                                     <property name="fontStyle">normal</property>
                                     <property name="fontVariant">normal</property>
                                     <property name="color">black</property>
@@ -2308,8 +2288,54 @@
                                     <property name="overflow">hidden</property>
                                     <text-property name="text">Estado:</text-property>
                                 </label>
-                                <data id="4429">
+                                <data id="4504">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">serif</property>
+                                    <property name="fontSize">10pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
                                     <property name="display">inline</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -2375,8 +2401,54 @@
                                     <property name="overflow">hidden</property>
                                     <text-property name="text">Número:</text-property>
                                 </label>
-                                <data id="4428">
+                                <data id="4505">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">serif</property>
+                                    <property name="fontSize">10pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
                                     <property name="display">inline</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -2399,7 +2471,7 @@
                                     <property name="backgroundRepeat">repeat</property>
                                     <property name="fontFamily">serif</property>
                                     <property name="fontSize">9pt</property>
-                                    <property name="fontWeight">normal</property>
+                                    <property name="fontWeight">bold</property>
                                     <property name="fontStyle">normal</property>
                                     <property name="fontVariant">normal</property>
                                     <property name="color">black</property>
@@ -2442,9 +2514,54 @@
                                     <property name="overflow">hidden</property>
                                     <text-property name="text">Proceso SERCOP:</text-property>
                                 </label>
-                                <data id="4452">
-                                    <property name="fontSize">9pt</property>
+                                <data id="4507">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">serif</property>
+                                    <property name="fontSize">10pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
                                     <property name="display">inline</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="overflow">hidden</property>
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -2518,7 +2635,7 @@
                             <cell id="4380">
                                 <property name="colSpan">3</property>
                                 <property name="rowSpan">1</property>
-                                <data id="4426">
+                                <data id="4506">
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -2559,8 +2676,9 @@
                             <structure>
                                 <property name="name">SALDO</property>
                                 <text-property name="displayName">SALDO</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["SALDO"]</expression>
+                                <expression name="expression" type="javascript">dataSetRow["SALDO"] </expression>
                                 <property name="dataType">decimal</property>
+                                <property name="allowExport">true</property>
                             </structure>
                             <structure>
                                 <property name="name">TVALOR</property>
