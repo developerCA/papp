@@ -14,6 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 import ec.com.papp.reporte.to.S01TO;
 import ec.com.papp.web.comun.util.ExcelUtil;
@@ -66,6 +67,25 @@ public class ReportesConsultas {
 			HSSFCell cell = row.createCell(0);
 			int fila=0;
 			//Titulos de la grilla
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(0);
+			cell.setCellValue("COMANDO CONJUNTO DE LAS FF.AA.");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(0,0,0,23)); 
+			fila++;
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(0);
+			cell.setCellValue("ESTADO MAYOR INSTITUCIONAL");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(1,1,0,23)); 
+			fila++;
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(0);
+			cell.setCellValue("SEGUIMIENTO A LA EJECUCIÓN DE LA PROGRAMACIÓN ANUAL DE LA POLÍTICA PÚBLICA");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(2,2,0,23)); 
+			fila++;
+
 			row = sheet.createRow((short)fila);
 			cell = row.createCell(0);
 			cell.setCellValue("INSTITUTO");

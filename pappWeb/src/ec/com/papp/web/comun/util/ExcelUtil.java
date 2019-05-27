@@ -28,7 +28,7 @@ public class ExcelUtil extends PdfPageEventHelper{
         style = wb.createCellStyle();
 		HSSFFont tituloFont = wb.createFont();
 		tituloFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-		tituloFont.setFontHeightInPoints(new Short("8"));
+		tituloFont.setFontHeightInPoints(new Short("9"));
 		tituloFont.setFontName("Verdana");
         style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		style.setFont(tituloFont);
