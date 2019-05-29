@@ -1356,16 +1356,30 @@ public class EjecucionController {
 			System.out.println("reforma id: " + reformaTO.getId());
 			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 			boolean continuar=true;
+			//obtengo las lineas
+			ReformalineaTO reformalineaTO=new ReformalineaTO();
+			reformalineaTO.getId().setId(reformaTO.getId());
+			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO, null);
 			if(tipo.equals("SO")) {
-				//obtengo las lineas
-				ReformalineaTO reformalineaTO=new ReformalineaTO();
-				reformalineaTO.getId().setId(reformaTO.getId());
-				Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO, null);
 				if(reformalineaTOs.size()==0) {
 					continuar=false;
 					mensajes.setMsg("Debe existir al menos una linea creada");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 					respuesta.setEstado(false);
+				}
+			}
+			//si va a solicitar debo validar que de acuerdo al tipo que escogio tenga el mismo incremento y el mismo decremento
+			if(tipo.equals("SO") && (reformaTO.getTipo().equals("MU") || reformaTO.getTipo().equals("EU"))){
+				double totaldecremento=0.0;
+				double totalincremento=0.0;
+				for(ReformalineaTO reformalineaTO2:reformalineaTOs){
+					totaldecremento=totaldecremento+reformalineaTO2.getValordecremento();
+					totalincremento=totalincremento+reformalineaTO2.getValorincremento();
+				}
+				if(totalincremento-totaldecremento!=0){
+					continuar=false;
+					mensajes.setMsg("El valor del incremento debe ser igual a decremento");
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
 			if(continuar) {

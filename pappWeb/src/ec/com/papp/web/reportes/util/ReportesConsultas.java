@@ -127,51 +127,57 @@ public class ReportesConsultas {
 			cell.setCellValue("DESCRIPCIONITEM");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(13);
-			cell.setCellValue("SUBITEM");
+			cell.setCellValue("CORRELATIVO");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(14);
-			cell.setCellValue("CANTON");
+			cell.setCellValue("PRESTAMO");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(15);
-			cell.setCellValue("FUENTE");
+			cell.setCellValue("SUBITEM");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(16);
-			cell.setCellValue("DENOMINACION");
+			cell.setCellValue("CANTON");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(17);
-			cell.setCellValue("INICIAL");
+			cell.setCellValue("FUENTE");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(18);
-			cell.setCellValue("REFORMAS");
+			cell.setCellValue("DENOMINACION");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(19);
-			cell.setCellValue("CODIFICADO");
+			cell.setCellValue("INICIAL");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(20);
-			cell.setCellValue("C.FONDOS");
+			cell.setCellValue("REFORMAS");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(21);
-			cell.setCellValue("COMPROMISO");
+			cell.setCellValue("CODIFICADO");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(22);
-			cell.setCellValue("DEVENGO");
+			cell.setCellValue("C.FONDOS");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(23);
-			cell.setCellValue("S. COM.");
+			cell.setCellValue("COMPROMISO");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(24);
-			cell.setCellValue("S. DEVENGO");
+			cell.setCellValue("DEVENGO");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(25);
-			cell.setCellValue("POR COMPROMETER C.F (TRÁMITE)");
+			cell.setCellValue("S. COM.");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(26);
-			cell.setCellValue("ANTICIPO");
+			cell.setCellValue("S. DEVENGO");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(27);
-			cell.setCellValue("%DEV.");
+			cell.setCellValue("POR COMPROMETER C.F (TRÁMITE)");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(28);
+			cell.setCellValue("ANTICIPO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(29);
+			cell.setCellValue("%DEV.");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(30);
 			cell.setCellValue("DISPONIBLE");
 			cell.setCellStyle(styles.get("titulo"));
 
@@ -218,26 +224,32 @@ public class ReportesConsultas {
 				cell.setCellValue(s01to2.getItemnombre());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(13);
-				cell.setCellValue(s01to2.getSubitemcodigo());
+				cell.setCellValue(s01to2.getOrganismoprestamocodigo());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(14);
-				cell.setCellValue(s01to2.getDivisiongeograficacodigo().substring(2, 6));
+				cell.setCellValue(s01to2.getOrganismoprestamonombre());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(15);
-				cell.setCellValue(s01to2.getFuentecodigo());
+				cell.setCellValue(s01to2.getSubitemcodigo());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(16);
-				cell.setCellValue(s01to2.getSubitemnombre());
+				cell.setCellValue(s01to2.getDivisiongeograficacodigo().substring(2, 6));
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(17);
+				cell.setCellValue(s01to2.getFuentecodigo());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(18);
+				cell.setCellValue(s01to2.getSubitemnombre());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(19);
 				if(s01to2.getValorinicial()!=null)
 					cell.setCellValue(s01to2.getValorinicial());
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(18);
+				cell = row.createCell(20);
 				if(s01to2.getReforma()!=null)
 					cell.setCellValue(s01to2.getReforma());
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(19);
+				cell = row.createCell(21);
 				double inicial=s01to2.getValorinicial();
 				double vreforma=0.0;
 				if(s01to2.getReforma()!=null)
@@ -245,35 +257,35 @@ public class ReportesConsultas {
 				double codificado=s01to2.getValorinicial()+vreforma;
 				cell.setCellValue(UtilGeneral.redondear(codificado,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(20);
+				cell = row.createCell(22);
 				if(s01to2.getCertfondos()!=null)
 					cell.setCellValue(s01to2.getCertfondos());
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(21);
+				cell = row.createCell(23);
 				if(s01to2.getCompromiso()!=null)
 					cell.setCellValue(s01to2.getCompromiso());
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(22);
+				cell = row.createCell(24);
 				if(s01to2.getDevengo()!=null)
 					cell.setCellValue(s01to2.getDevengo());
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(23);
+				cell = row.createCell(25);
 				double scom=codificado-s01to2.getCompromiso();
 				cell.setCellValue(UtilGeneral.redondear(scom,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(24);
+				cell = row.createCell(26);
 				double sdev=scom+s01to2.getCompromiso()-s01to2.getDevengo();
 				cell.setCellValue(UtilGeneral.redondear(sdev,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(25);
+				cell = row.createCell(27);
 				if(s01to2.getXcomprometer()!=null)
 					cell.setCellValue(s01to2.getXcomprometer());
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(26);
+				cell = row.createCell(28);
 				if(s01to2.getValanticipo()!=null)
 					cell.setCellValue(s01to2.getValanticipo());
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(27);
+				cell = row.createCell(29);
 				if(s01to2.getDevengo()!=null){
 					double dev= (s01to2.getDevengo()/codificado)*100;
 					cell.setCellValue(UtilGeneral.redondear(dev, 2));
@@ -281,7 +293,7 @@ public class ReportesConsultas {
 				else
 					cell.setCellValue("0.0");
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(28);
+				cell = row.createCell(30);
 				double disponible=codificado-s01to2.getXcomprometer()-s01to2.getCertfondos()-s01to2.getCompromiso();
 				cell.setCellValue(UtilGeneral.redondear(disponible,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
@@ -305,9 +317,9 @@ public class ReportesConsultas {
 			sheet.setColumnWidth(13, 256*15);
 			sheet.setColumnWidth(14, 256*15);
 			sheet.setColumnWidth(15, 256*15);
-			sheet.setColumnWidth(16, 256*20);
+			sheet.setColumnWidth(16, 256*15);
 			sheet.setColumnWidth(17, 256*15);
-			sheet.setColumnWidth(18, 256*15);
+			sheet.setColumnWidth(18, 256*20);
 			sheet.setColumnWidth(19, 256*15);
 			sheet.setColumnWidth(20, 256*15);
 			sheet.setColumnWidth(21, 256*15);
@@ -318,6 +330,8 @@ public class ReportesConsultas {
 			sheet.setColumnWidth(26, 256*15);
 			sheet.setColumnWidth(27, 256*15);
 			sheet.setColumnWidth(28, 256*15);
+			sheet.setColumnWidth(29, 256*15);
+			sheet.setColumnWidth(30, 256*15);
 			
 
 			wb.write(response.getOutputStream());

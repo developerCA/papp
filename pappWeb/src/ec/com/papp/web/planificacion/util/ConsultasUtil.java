@@ -287,7 +287,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				objetivoTO.setCodigo4(parameters.get("codigo"));
 			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
-				objetivoTO.setDescripcion4(parameters.get("descripcion").toUpperCase());
+				objetivoTO.setDescripcion(parameters.get("descripcion").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				objetivoTO.setEstado(parameters.get("estado"));
 			if(parameters.get("objetivoejerciciofiscalid")!=null && !parameters.get("objetivoejerciciofiscalid").equals(""))

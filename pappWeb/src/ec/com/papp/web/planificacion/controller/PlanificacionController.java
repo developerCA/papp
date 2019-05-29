@@ -924,13 +924,15 @@ public class PlanificacionController {
 				//System.out.println("id: "+ subitemunidadTO.getId()+" codigo " + subitemunidadTO.getNpcodigosubitem());
 				Collection<NivelactividadTO> resultado=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO,false);
 //				log.println("hijos....: " + resultado.size());
-//				log.println("id  " + subitemunidadTO.getId());
+				System.out.println("subitemunidadTO.getId()" + subitemunidadTO.getId());
+				System.out.println("subitemunidadTO.getNpcodigosubitem()" + subitemunidadTO.getNpcodigosubitem());
+				System.out.println("subitemunidadTO.getNpcodigointerno()" + subitemunidadTO.getNpcodigointerno());
 //				log.println("codigo  " + subitemunidadTO.getSubitemunidadsubitemid());
 				boolean grabar=true;
 				
 				for(NivelactividadTO nivelactividadTO2:resultado){
-//					System.out.println("descripcion " + nivelactividadTO2.getDescripcionexten());
-//					System.out.println("tablarelacion id " + nivelactividadTO2.getTablarelacionid());
+					System.out.println("nivelactividadTO2.getNpcodigo() " + nivelactividadTO2.getNpcodigo());
+					System.out.println("nivelactividadTO2.getNpcodigointerno() " + nivelactividadTO2.getNpcodigointerno());
 //					System.out.println("codigo... " + nivelactividadTO2.getNpcodigo());
 											
 //					if((subitemunidadTO.getId()!=null && subitemunidadTO.getId().longValue()!=0) && nivelactividadTO2.getTablarelacionid().longValue()!=subitemunidadTO.getId().longValue()
