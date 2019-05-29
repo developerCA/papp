@@ -156,7 +156,6 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	};
 
 	$scope.solicitar = function(index) {
-		//console.log($scope.data[index]);
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
@@ -176,11 +175,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		}
 		SweetAlert.swal({ 
 				title: "Orden de Devengo?",
-				text: "Seguro que desea hacer la solicitud!",
+				text: "Seguro que desea hacer la solicitud?",
 				type: "warning",
 				showCancelButton: true,
-				confirmButtonText: "Si!",
-				cancelButtonText: "No",
+				confirmButtonText: "SI!",
+				cancelButtonText: "NO",
 				closeOnConfirm: true,
 				closeOnCancel: true 
 			}, 

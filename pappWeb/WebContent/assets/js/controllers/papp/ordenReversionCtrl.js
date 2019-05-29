@@ -127,20 +127,28 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	$scope.solicitar=function(index) {
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
-			SweetAlert.swal("Orden de Reversion!", "Solo se puede solicitar si esta en estado registrar.", "error");
+			SweetAlert.swal(
+					"Orden de Reversion!", 
+					"Solo se puede solicitar si esta en estado registrar.", 
+					"error"
+			);
 			return;
 		}
 		if ($scope.data[index].valortotal <= 0) {
-			SweetAlert.swal("Orden de Reversion!", "El valor total tiene que ser mayor que cero.", "error");
+			SweetAlert.swal(
+					"Orden de Reversion!", 
+					"El valor total tiene que ser mayor que cero.", 
+					"error"
+			);
 			return;
 		}
 		SweetAlert.swal({ 
 				title: "Orden de Reversion?",
-				text: "Seguro que desea hacer la solicitud!",
+				text: "Seguro que desea hacer la solicitud?",
 				type: "warning",
 				showCancelButton: true,
-				confirmButtonText: "Si!",
-				cancelButtonText: "No",
+				confirmButtonText: "SI!",
+				cancelButtonText: "NO",
 				closeOnConfirm: false,
 				closeOnCancel: false 
 			}, 
@@ -154,7 +162,11 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 					null
 				).then(function(resp){
 					//$scope.pageChanged();
-					SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
+					SweetAlert.swal(
+							"Orden de Reversion!",
+							resp.mensajes.msg, 
+							resp.mensajes.type
+					);
 				});
 			}
 		); 

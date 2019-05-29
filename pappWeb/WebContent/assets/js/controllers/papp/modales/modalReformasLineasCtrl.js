@@ -170,6 +170,14 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
             	}
             	if (tObj.valorincremento == null) tObj.valorincremento = 0;
             	if (tObj.valordecremento == null) tObj.valordecremento = 0;
+            	if (parseInt($scope.saldo) <= 0 && parseInt(tObj.valordecremento) > 0) {
+            		SweetAlert.swal(
+            				"Reformas!",
+            				"Valor de saldo es cero no puede hacer un decremento",
+            				"error"
+    				);
+            		return;
+            	}
             	if (parseInt(tObj.valorincremento) == 0 && parseInt(tObj.valordecremento) == 0) {
             		SweetAlert.swal(
             				"Reformas!",

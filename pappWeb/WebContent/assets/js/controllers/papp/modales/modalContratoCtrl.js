@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInstance","objetoFuente","SweetAlert","$filter","ngTableParams","contratoFactory",
-	function($scope,$rootScope,$uibModalInstance,objetoFuente,SweetAlert,$filter,ngTableParams,contratoFactory) {
+app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInstance","objetoFuente","vTotal","SweetAlert","$filter","ngTableParams","contratoFactory",
+	function($scope,$rootScope,$uibModalInstance,objetoFuente,vTotal,SweetAlert,$filter,ngTableParams,contratoFactory) {
 
 	$scope.anticipo=0;
 
@@ -20,6 +20,7 @@ app.controller('ModalContratoController', [ "$scope","$rootScope","$uibModalInst
 			$scope.objeto.npfechainicio = toDate($scope.objeto.npfechainicio);
 			$scope.objeto.npproveedorcodigo = objetoFuente.npproveedorcodigo;
 			$scope.objeto.npproveedor = objetoFuente.npproveedornombre;
+			$scope.objeto.valortotal = vTotal;
 			$scope.anticipo=0;
 			$scope.noeditar=false;
 			$scope.edicion=true;

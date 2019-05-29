@@ -136,7 +136,6 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 	};
 
 	$scope.solicitar=function(index) {
-		//console.log($scope.data[index]);
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
@@ -154,20 +153,34 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			);
 			return;
 		}
-		//$scope.data[index].npestado = "Solicitando";
-		certificacionesFondosFactory.solicitar(
-			$scope.data[index].id,
-			"SO",
-			null,
-			null
-		).then(function(resp){
-			//$scope.pageChanged();
-			SweetAlert.swal(
-					"Certificaciones de Fondos!",
-					resp.mensajes.msg,
-					resp.mensajes.type
-			);
-			$scope.filtrar();
+		SweetAlert.swal({
+			title: "Certificaciones de Fondos?",
+			text: "Esta seguro que desea solicitar?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (!isConfirm) return;
+			//$scope.data[index].npestado = "Solicitando";
+			certificacionesFondosFactory.solicitar(
+				$scope.data[index].id,
+				"SO",
+				null,
+				null
+			).then(function(resp){
+				//$scope.pageChanged();
+				SweetAlert.swal(
+						"Certificaciones de Fondos!",
+						resp.mensajes.msg,
+						resp.mensajes.type
+				);
+				$scope.filtrar();
+			});
 		});
 	}
 
@@ -229,7 +242,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 					return "Negar";
 				},
 				subtitulo : function() {
-					return "Observaci&oacute;n";
+					return "Observacion";
 				}
 			}
 		});
@@ -274,10 +287,10 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			size : 'lg',
 			resolve: {
 				titulo: function() {
-					return "Liquidaci&oacute;n Total";
+					return "Liquidacion Total";
 				},
 				subtitulo : function() {
-					return "Observaci&oacute;n";
+					return "Observacion";
 				}
 			}
 		});
@@ -323,10 +336,10 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 			size : 'lg',
 			resolve: {
 				titulo: function() {
-					return "Liquidaci&oacute;n Parcial";
+					return "Liquidacion Parcial";
 				},
 				subtitulo : function() {
-					return "Observaci&oacute;n";
+					return "Observacion";
 				}
 			}
 		});

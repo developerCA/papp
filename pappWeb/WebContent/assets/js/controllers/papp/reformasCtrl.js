@@ -8,6 +8,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	}
 
 	var index = 0;
+	var noSalir = false;
 	// Metas
 	$scope.metasLista = false;
 	$scope.metasLinea = false;
@@ -150,21 +151,35 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			);
 			return;
 		}
-		reformasFactory.solicitar(
-			$scope.data[index].id,
-			"SO",
-			null,
-			null
-		).then(function(resp){
-			if (resp.estado) {
-				$scope.data[index].estado = "SO";
-				$scope.data[index].npestado = "Solicitando";
-			}
-			SweetAlert.swal(
-					"Reformas!",
-					resp.mensajes.msg,
-					resp.mensajes.type
-			);
+		SweetAlert.swal({
+			title: "Reformas!",
+			text: "Esta seguro que desea solicitar?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (!isConfirm) return;
+			reformasFactory.solicitar(
+				$scope.data[index].id,
+				"SO",
+				null,
+				null
+			).then(function(resp){
+				if (resp.estado) {
+					$scope.data[index].estado = "SO";
+					$scope.data[index].npestado = "Solicitando";
+				}
+				SweetAlert.swal(
+						"Reformas!",
+						resp.mensajes.msg,
+						resp.mensajes.type
+				);
+			});
 		});
 	}
 
@@ -324,6 +339,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		    $scope.detalles = obj.reformalineas;
 		    $scope.objeto.valorincremento = obj.valorincremento;
 		    $scope.objeto.valordecremento = obj.valordecremento;
+		    noSalir = true;
 		    $scope.form.submit(Form);
             SweetAlert.swal(
             		"Reformas! - Lineas",
@@ -360,6 +376,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		modalInstance.result.then(function(obj) {
 		    $scope.detalles = obj.reformalineas;
 		    //$scope.objeto.valortotal = obj.valortotal;
+		    noSalir = true;
 		    $scope.form.submit(Form);
             SweetAlert.swal(
             		"Reformas! - Lineas",
@@ -472,7 +489,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 							"Eliminado satisfactoriamente!",
 							"success"
 					);
-					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
+					//$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
+					$scope.objeto.valorincremento -= $scope.detalles[index].valorincremento;
+					$scope.objeto.valordecremento -= $scope.detalles[index].valordecremento;
 				    $scope.detalles.splice(index, 1);
 				    //$scope.form.submit(Form);
 	   			}else{
@@ -541,13 +560,19 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 tObj.incluyemeta = (tObj.incluyemeta? 1: 0);
             	reformasFactory.guardar(tObj).then(function(resp){
         			 if (resp.estado){
+        				 if (noSalir == true) {
+        					 noSalir = false;
+	      				     $scope.objeto = resp.json.reforma;
+	      				     $scope.detalles = resp.json.reformalineas;
+        					 return;
+        				 }
         				 if ($scope.nuevoar) {
 	      					 $scope.noeditar = false;
-	      					 $scope.nuevoar=false;
-	      				     $scope.objeto=resp.json.reforma;
+	      					 $scope.nuevoar = false;
+	      				     $scope.objeto = resp.json.reforma;
         				 } else {
-          		             $scope.edicion=false;
-          		             $scope.objeto={};
+          		             $scope.edicion = false;
+          		             $scope.objeto = {};
         				 }
         				 //$scope.pageChanged();
       					 SweetAlert.swal(

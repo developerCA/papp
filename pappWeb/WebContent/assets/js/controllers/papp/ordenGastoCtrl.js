@@ -141,7 +141,6 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	};
 
 	$scope.solicitar = function(index) {
-		//console.log($scope.data[index]);
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "RE") {
 			SweetAlert.swal(
@@ -171,11 +170,11 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		}
 		SweetAlert.swal({ 
 				title: "Orden de Gasto?",
-				text: "Seguro que desea hacer la solicitud!",
+				text: "Seguro que desea hacer la solicitud?",
 				type: "warning",
 				showCancelButton: true,
-				confirmButtonText: "Si!",
-				cancelButtonText: "No",
+				confirmButtonText: "SI!",
+				cancelButtonText: "NO",
 				closeOnConfirm: true,
 				closeOnCancel: true 
 			}, 
@@ -512,6 +511,10 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	}
 
 	$scope.contrato = function() {
+		var vtotal = 0;
+		for (var i = 0; i < $scope.detalles.length; i++) {
+			vtotal += $scope.detalles[i].npvalor;
+		}
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalContrato.html',
 			controller : 'ModalContratoController',
@@ -519,6 +522,9 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			resolve: {
 				objetoFuente: function() {
 					return $scope.objeto;
+				},
+				vTotal: function() {
+					return vtotal;
 				}
 			}
 		});

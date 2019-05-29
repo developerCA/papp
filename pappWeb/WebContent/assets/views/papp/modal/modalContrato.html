@@ -168,7 +168,7 @@
 					    <input type="text" numericOnly style="text-align:right;" decimal="2"
 					    	placeholder="Escriba un valor total"
 					        class="form-control" name="valortotal" ng-model="objeto.valortotal"
-					        required>
+					        required ng-disabled="true">
 					    <span class="error text-small block"
 					        ng-if="Form.valortotal.$dirty && Form.valortotal.$invalid">
 					        Incorrecto
