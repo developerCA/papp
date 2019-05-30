@@ -258,6 +258,51 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		});
 	}
 
+	$scope.anular = function(index) {
+		index = $scope.calcularIndex(index);
+		if ($scope.data[index].estado != "SO") {
+			SweetAlert.swal(
+					"Orden de Devengo!",
+					"Solo se puede anular si esta en estado solicitado.",
+					"error"
+			);
+			return;
+		}
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalLiquidacionManua.html',
+			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
+			size : 'lg',
+			resolve: {
+				titulo: function() {
+					return "Anular";
+				},
+				subtitulo : function() {
+					return "Observacion";
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			if (obj === undefined) {
+				obj = "";
+			}
+			var cur = 0;
+			$scope.data[index].npestado = "Anular";
+			ordenDevengoFactory.solicitar(
+				$scope.data[index].id,
+				"AN",
+				null,
+				obj
+			).then(function(resp){
+				SweetAlert.swal(
+					"Orden de Devengo!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+				);
+			});
+		}, function() {
+		});
+	}
+
 	$scope.negar = function(index) {
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
@@ -294,20 +339,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				null,
 				obj
 			).then(function(resp){
-				if (resp.estado) {
-					//$scope.pageChanged();
-					SweetAlert.swal(
-						"Orden de Devengo!",
-		        		"Registro guardado satisfactoriamente!",
-		        		"success"
-					);
-				} else {
-					SweetAlert.swal(
-						"Orden de Devengo!",
-		        		"No se pudo eliminar",
-		        		"error"
-					);
-				}
+				SweetAlert.swal(
+					"Orden de Devengo!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+				);
 			});
 		}, function() {
 		});

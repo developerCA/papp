@@ -2015,35 +2015,35 @@
 									<form name="Form" id="formMetaDistribucionDevengo" novalidate
 										ng-submit="form.submit(Form,'formMetaDistribucionDevengo')">
 										<span>
-										&nbsp;Distribuci&oacute;n:
-										 <a class="btn btn-sm btn-default"
-											ng-click="editarDistribucionPlanificado();">
-											Planificado
-										</a> &nbsp;
-										<a class="btn btn-sm btn-default"
-											uib-tooltip="Copiar Planificado a Ajustado"
-											ng-click="copiarPlanificadoAjustado();">
-											<i class="fa ti-hand-point-right"></i>
-										</a> &nbsp; <a class="btn btn-sm btn-default"
-											ng-click="editarDistribucionAjustado();">
-											Ajustado
-										</a>&nbsp;
-										<a class="btn btn-sm btn-primary"
-											style="background-color: #00B300 !important">
-											Devengo
-										</a>
-										<br>&nbsp;Unidad Tipo:
-										<select name="periodoPlanificado" ng-disabled="!editarA"
-											ng-model="objetoDevengo.unidadtiempo"
-											ng-change="vLimpio=true;distribucionValores('D');sumarValoresD();">
-												<option value="ME">Mensual</option>
-												<option value="BI">Bimensual</option>
-												<option value="TM">Trimestral</option>
-												<option value="CM">Cuatrimestral</option>
-												<option value="SE">Semestral</option>
-												<option value="AN">Anual</option>
-												<option value="PE">Personalizado</option>
-										</select>
+											&nbsp;Distribuci&oacute;n:
+											<a class="btn btn-sm btn-default"
+												ng-click="editarDistribucionPlanificado();">
+												Planificado
+											</a> &nbsp;
+											<a class="btn btn-sm btn-default"
+												uib-tooltip="Copiar Planificado a Ajustado"
+												ng-click="copiarPlanificadoAjustado();">
+												<i class="fa ti-hand-point-right"></i>
+											</a> &nbsp; <a class="btn btn-sm btn-default"
+												ng-click="editarDistribucionAjustado();">
+												Ajustado
+											</a>&nbsp;
+											<a class="btn btn-sm btn-primary"
+												style="background-color: #00B300 !important">
+												Devengo
+											</a>
+											<br>&nbsp;Unidad Tipo:
+											<select name="periodoPlanificado" ng-disabled="!editarA"
+												ng-model="objetoDevengo.unidadtiempo"
+												ng-change="vLimpio=true;distribucionValores('D');sumarValoresD();">
+													<option value="ME">Mensual</option>
+													<option value="BI">Bimensual</option>
+													<option value="TM">Trimestral</option>
+													<option value="CM">Cuatrimestral</option>
+													<option value="SE">Semestral</option>
+													<option value="AN">Anual</option>
+													<option value="PE">Personalizado</option>
+											</select>
 										</span>
 										<div class="panel-body no-padding panel-white">
 											<div class="col-md-12 panel-white no-padding">

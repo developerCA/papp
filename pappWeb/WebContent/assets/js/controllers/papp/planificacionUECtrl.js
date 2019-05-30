@@ -231,7 +231,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 				$scope.objetoDevengo=resp.json.cronograma;
 				$scope.detallesDevengo=resp.json.cronogramalinea;
 				if ($scope.objetoDevengo.unidadtiempo == "") {
-					$scope.objetoDevengo.unidadtiempo = "ME";
+					$scope.objetoDevengo.unidadtiempo = "PE";
 					$scope.distribucionValores("D");
 				}
 				if ($scope.detalles[$scope.mAjustadaID].cantidad > 0) {

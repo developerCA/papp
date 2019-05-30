@@ -209,6 +209,52 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		});
 	}
 
+	$scope.anular = function(index) {
+		index = $scope.calcularIndex(index);
+		if ($scope.data[index].estado != "SO") {
+			SweetAlert.swal(
+				"Orden de Reversion!",
+				"Solo se puede anular si esta en estado solicitado.",
+				"error"
+			);
+			return;
+		}
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalLiquidacionManua.html',
+			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
+			size : 'lg',
+			resolve: {
+				titulo: function() {
+					return "Anular";
+				},
+				subtitulo : function() {
+					return "Observacion";
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			if (obj === undefined) {
+				obj = "";
+			}
+			var cur = 0;
+			$scope.data[index].npestado = "Anular";
+			ordenReversionFactory.solicitar(
+				$scope.data[index].id,
+				"AN",
+				null,
+				obj
+			).then(function(resp){
+				SweetAlert.swal(
+					"Orden de Reversion!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+				);
+			});
+		}, function() {
+		});
+	}
+
 	$scope.negar = function(index) {
 		index = $scope.calcularIndex(index);
 		if ($scope.data[index].estado != "SO") {
@@ -224,7 +270,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 					return "Negar";
 				},
 				subtitulo : function() {
-					return "Observaci&oacute;n";
+					return "Observacion";
 				}
 			}
 		});
@@ -241,9 +287,11 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				null,
 				obj
 			).then(function(resp){
-				//console.log(resp);
-				//$scope.pageChanged();
-				SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, resp.mensajes.type);
+				SweetAlert.swal(
+					"Orden de Reversion!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+				);
 			});
 		}, function() {
 		});
@@ -268,7 +316,7 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 					return "Eliminar";
 				},
 				subtitulo : function() {
-					return "Observaci&oacute;n";
+					return "Observacion";
 				}
 			}
 		});

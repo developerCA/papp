@@ -120,7 +120,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		})
 	}
 
-	$scope.editar=function(index){
+	$scope.editar = function(index){
 		index = $scope.calcularIndex(index);
 		//console.log($scope.data[index]);
 		if ($scope.rol('ROLE_APROBADOR')) {
@@ -337,8 +337,12 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 		modalInstance.result.then(function(obj) {
 		    $scope.detalles = obj.reformalineas;
-		    $scope.objeto.valorincremento = obj.valorincremento;
-		    $scope.objeto.valordecremento = obj.valordecremento;
+			$scope.objeto.valorincremento = 0;
+			$scope.objeto.valordecremento = 0;
+		    for (var i = 0; i < $scope.detalles.length; i++) {
+				$scope.objeto.valorincremento += $scope.detalles[i].valorincremento;
+				$scope.objeto.valordecremento += $scope.detalles[i].valordecremento;
+			}
 		    noSalir = true;
 		    $scope.form.submit(Form);
             SweetAlert.swal(
@@ -376,6 +380,12 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		modalInstance.result.then(function(obj) {
 		    $scope.detalles = obj.reformalineas;
 		    //$scope.objeto.valortotal = obj.valortotal;
+			$scope.objeto.valorincremento = 0;
+			$scope.objeto.valordecremento = 0;
+		    for (var i = 0; i < $scope.detalles.length; i++) {
+				$scope.objeto.valorincremento += $scope.detalles[i].valorincremento;
+				$scope.objeto.valordecremento += $scope.detalles[i].valordecremento;
+			}
 		    noSalir = true;
 		    $scope.form.submit(Form);
             SweetAlert.swal(

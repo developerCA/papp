@@ -509,7 +509,7 @@
 									<div class="panel-heading">
 										<a uib-tooltip="Agregar" ng-show="!noeditar && !nuevoar"
 											class="pull-right btn btn-sm btn-info"
-											ng-click="agregarLinea();">
+											ng-click="agregarLinea();" ng-disabled="noeditar">
 											<i class="fa fa-plus-square"></i>
 										</a>
 										<h4 class="panel-title">
@@ -534,14 +534,17 @@
 														<td width="32px" style="padding: 1px;">
 															<a class="btn btn-sm btn-primary"
 																uib-tooltip="Modificar"
-																ng-click="editarLinea($index)">
+																ng-click="editarLinea($index)"
+																ng-show="!noeditar">
 																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
 														<td width="32px" style="padding: 1px;">
-															<a class="btn btn-sm btn-primary" style="background-color: Red !important;"
+															<a class="btn btn-sm btn-primary"
+																style="background-color: Red !important;"
 																uib-tooltip="Eliminar"
-																ng-click="eliminarLinea($index)">
+																ng-click="eliminarLinea($index)"
+																ng-show="!noeditar">
 																<i class="fa ti-trash"></i>
 															</a>
 														</td> 

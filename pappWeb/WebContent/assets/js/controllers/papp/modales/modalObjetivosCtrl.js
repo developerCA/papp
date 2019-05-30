@@ -39,7 +39,7 @@ app.controller('ModalObjetivosController', [ "$scope","$rootScope","ejefiscal","
 	}
 	
 	$scope.limpiar=function(){
-		$scope.nombreFiltro=null;
+		$scope.descripcionFiltro=null;
 		$scope.codigoFiltro=null;
 		$scope.estadoFiltro=null;
 		

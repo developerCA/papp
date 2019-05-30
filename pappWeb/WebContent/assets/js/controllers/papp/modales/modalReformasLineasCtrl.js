@@ -43,7 +43,8 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 			        	$scope.valorajustado = 0;
 					}
 		        	try {
-			        	$scope.saldo = $scope.objeto.npsaldo - $scope.objeto.npvalorincremento + $scope.objeto.npvalordecremento;
+			        	//$scope.saldo = $scope.objeto.npsaldo - $scope.objeto.npvalorincremento + $scope.objeto.npvalordecremento;
+		        		$scope.saldo = $scope.objeto.npsaldo;
 					} catch (e) {
 			        	$scope.saldo = 0;
 					}
