@@ -211,10 +211,10 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.anular = function(index) {
 		index = $scope.calcularIndex(index);
-		if ($scope.data[index].estado != "SO") {
+		if ($scope.data[index].estado != "AP") {
 			SweetAlert.swal(
 				"Orden de Reversion!",
-				"Solo se puede anular si esta en estado solicitado.",
+				"Solo se puede anular si esta en estado aprobado.",
 				"error"
 			);
 			return;
