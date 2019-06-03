@@ -28,7 +28,7 @@ public class ReportesController {
 	private Log log = new Log(ReportesController.class);
 	
 	@RequestMapping(value = "/rest/reportes/consultar/s01/{parametro}", method = RequestMethod.GET)
-	public ModelAndView sueldofechas(HttpServletRequest request,HttpServletResponse response,@PathVariable String parametro) throws Throwable {
+	public ModelAndView s01(HttpServletRequest request,HttpServletResponse response,@PathVariable String parametro) throws Throwable {
 		try {
 			System.out.println("ingresa a generar el reporte s01 ");
 			String[] pares = parametro.split("&");
@@ -37,7 +37,7 @@ public class ReportesController {
 			    String[] nameAndValue = pare.split("=");
 			    parameters.put(nameAndValue[0], nameAndValue[1]);
 			}
-			ReportesConsultas.generarXcelSueldosparticipes(request, response, parameters);
+			ReportesConsultas.generarS01plano(request, response, parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al cargaro no adheridos actuario");
@@ -45,4 +45,21 @@ public class ReportesController {
 		return null;
 	}
 
+	@RequestMapping(value = "/rest/reportes/consultar/p01/{parametro}", method = RequestMethod.GET)
+	public ModelAndView p01(HttpServletRequest request,HttpServletResponse response,@PathVariable String parametro) throws Throwable {
+		try {
+			System.out.println("ingresa a generar el reporte p01 ");
+			String[] pares = parametro.split("&");
+			Map<String, String> parameters = new HashMap<String, String>();
+			for(String pare : pares) {
+			    String[] nameAndValue = pare.split("=");
+			    parameters.put(nameAndValue[0], nameAndValue[1]);
+			}
+			ReportesConsultas.generarP01(request, response, parameters);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.println("error al cargaro no adheridos actuario");
+		}
+		return null;
+	}
 }

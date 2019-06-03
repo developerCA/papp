@@ -16,6 +16,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 
+import ec.com.papp.reporte.to.P01TO;
 import ec.com.papp.reporte.to.S01TO;
 import ec.com.papp.web.comun.util.ExcelUtil;
 import ec.com.papp.web.comun.util.UtilSession;
@@ -25,7 +26,7 @@ import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
 public class ReportesConsultas {
 
 	
-	public static void generarXcelSueldosparticipes(HttpServletRequest request, HttpServletResponse response,Map<String, String> parameters) throws MyException {
+	public static void generarS01plano(HttpServletRequest request, HttpServletResponse response,Map<String, String> parameters) throws MyException {
 		try{
 			S01TO s01TO=new S01TO();
 			s01TO.getId().setEjerciciofiscal(Long.valueOf(parameters.get("ejerciciofiscal")));
@@ -341,6 +342,236 @@ public class ReportesConsultas {
 		}
 	}
 
+	public static void generarP01(HttpServletRequest request, HttpServletResponse response,Map<String, String> parameters) throws MyException {
+		try{
+			P01TO p01TO=new P01TO();
+			p01TO.getId().setNivelactividadejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscal")));
+			if(parameters.get("institucionid")!=null)
+				p01TO.getId().setInstitucionid(Long.valueOf(parameters.get("institucionid")));
+			if(parameters.get("institucionentid")!=null)
+				p01TO.getId().setInstitucionentid(Long.valueOf(parameters.get("institucionentid")));
+			if(parameters.get("unidadid")!=null)
+				p01TO.getId().setUnidadid(Long.valueOf(parameters.get("unidadid")));
+			if(parameters.get("actividadid")!=null)
+				p01TO.getId().setActividadid(Long.valueOf(parameters.get("actividadid")));
 
+			Collection<P01TO> p01tos=UtilSession.reporteServicio.transObtenerP01(p01TO);
+			response.setContentType("application/vnd.ms-excel");
+			Calendar fecha = new GregorianCalendar();
+			fecha.setTime(new Date());
+			int mes=fecha.get(Calendar.MONTH)+1;
+			String nombrearchivo="P1"+fecha.get(Calendar.YEAR)+fecha.get(Calendar.DATE)+mes;
+			response.setHeader("Content-Disposition", "attachment; filename="+nombrearchivo+".xls");
+			HSSFWorkbook wb = new HSSFWorkbook();
+			HSSFSheet sheet = wb.createSheet("Hoja1");
+			Map<String, HSSFCellStyle> styles = ExcelUtil.createStyles(wb);
+			HSSFRow row = sheet.createRow((short)0);
+			//pestana aportes
+			HSSFCell cell = row.createCell(0);
+			int fila=0;
+			//Titulos de la grilla
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(0);
+			cell.setCellValue("COMANDO CONJUNTO DE LAS FF.AA.");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(0,0,0,12)); 
+			fila++;
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(0);
+			cell.setCellValue("ESTADO MAYOR INSTITUCIONAL");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(1,1,0,12)); 
+			fila++;
+			if(p01tos.size()>0){
+				p01TO=(P01TO)p01tos.iterator().next();
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(0);
+				cell.setCellValue("PLANIFICACIÓN ESTRATÉGICA");
+				cell.setCellStyle(styles.get("treporteTitulo"));
+				sheet.addMergedRegion(new CellRangeAddress(2,2,0,12)); 
+				fila++;
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(11);
+				cell.setCellValue("Reporte");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(12);
+				cell.setCellValue("P-01");
+				cell.setCellStyle(styles.get("titulo"));
+				fila++;
+
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(11);
+				cell.setCellValue("PAAP Año: ");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(12);
+				cell.setCellValue(p01TO.getEjerciciofiscalanio());
+				cell.setCellStyle(styles.get("titulo"));
+				fila++;
+
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(11);
+				cell.setCellValue(" Fecha:  ");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(12);
+				cell.setCellValue(UtilGeneral.parseDateToString(new Date()));
+				cell.setCellStyle(styles.get("titulo"));
+				fila++;
+
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(0);
+				cell.setCellValue(" Institucion:  ");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(1);
+				cell.setCellValue(p01TO.getInstitucionnombre());
+				cell.setCellStyle(styles.get("titulo"));
+				fila++;
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(0);
+				cell.setCellValue("BASE LEGAL INSTITUCIONAL");
+				cell.setCellStyle(styles.get("titulo"));
+				sheet.addMergedRegion(new CellRangeAddress(7,7,0,12)); 
+				fila++;
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(0);
+				cell.setCellValue(p01TO.getBaselegal());
+				cell.setCellStyle(styles.get("titulo"));
+				sheet.addMergedRegion(new CellRangeAddress(8,8,0,12)); 
+				fila++;
+
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(0);
+				cell.setCellValue("VISION INSTITUCIONAL");
+				cell.setCellStyle(styles.get("titulo"));
+				sheet.addMergedRegion(new CellRangeAddress(9,9,0,12)); 
+				fila++;
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(0);
+				cell.setCellValue(p01TO.getVision());
+				cell.setCellStyle(styles.get("titulo"));
+				sheet.addMergedRegion(new CellRangeAddress(10,10,0,12)); 
+				fila++;
+
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(0);
+				cell.setCellValue("MISION INSTITUCIONAL");
+				cell.setCellStyle(styles.get("titulo"));
+				sheet.addMergedRegion(new CellRangeAddress(11,11,0,12)); 
+				fila++;
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(0);
+				cell.setCellValue(p01TO.getMision());
+				cell.setCellStyle(styles.get("titulo"));
+				sheet.addMergedRegion(new CellRangeAddress(12,12,0,12)); 
+				fila++;
+
+				
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(0);
+				cell.setCellValue("OBJETIVO PLAN  NACIONAL");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(1);
+				cell.setCellValue("OBJETIVO MIDENA");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(2);
+				cell.setCellValue("OBJETIVO FF.AA.");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(3);
+				cell.setCellValue("OBJETIVO FUERZAS");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(4);
+				cell.setCellValue("PROGRAMA");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(5);
+				cell.setCellValue("ACTIVIDAD");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(6);
+				cell.setCellValue("INDICADOR ACTIVIDAD");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(7);
+				cell.setCellValue("FÓRMULA ACTIVIDAD");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(8);
+				cell.setCellValue("META DESCRIPCIÓN");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(9);
+				cell.setCellValue("META PLANIFICADA");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(10);
+				cell.setCellValue("META AJUSTADA");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(11);
+				cell.setCellValue(" MONTO PLANIFICADO ");
+				cell.setCellStyle(styles.get("titulo"));
+				cell = row.createCell(12);
+				cell.setCellValue(" MONTO AJUSTADO ");
+				cell.setCellStyle(styles.get("titulo"));
+	
+				fila++;
+				for(P01TO p01to2:p01tos){
+					row = sheet.createRow((short)fila);
+					cell = row.createCell(0);
+					cell.setCellValue(p01to2.getPlancodigo() +" - " + p01to2.getPlandescripcion());
+					cell.setCellStyle(styles.get("contenido"));
+					cell = row.createCell(1);
+					cell.setCellValue(p01to2.getEstrategicocodigo() +" - " + p01to2.getEstrategicodescripcion());
+					cell.setCellStyle(styles.get("contenido"));
+					cell = row.createCell(2);
+					cell.setCellValue(p01to2.getOperativocodigo() + " - " + p01to2.getOperativodescripcion());
+					cell.setCellStyle(styles.get("contenido"));
+					cell = row.createCell(3);
+					cell.setCellValue(p01to2.getFuerzacodigo() + " - " + p01to2.getFuerzadescripcion());
+					cell.setCellStyle(styles.get("contenido"));
+					cell = row.createCell(4);
+					cell.setCellValue(p01to2.getProgramacodigo() +" - " + p01to2.getProgramadescripcion());
+					cell.setCellStyle(styles.get("contenido"));
+					cell = row.createCell(5);
+					cell.setCellValue(p01to2.getActividadcodigo() +" - " + p01to2.getActividaddescripcion());
+					cell.setCellStyle(styles.get("contenido"));
+					cell = row.createCell(6);
+					cell.setCellValue(p01to2.getIndicadoractividad());
+					cell.setCellStyle(styles.get("contenido"));
+					cell = row.createCell(7);
+					cell.setCellValue(p01to2.getFormulaactividad());
+					cell.setCellStyle(styles.get("contenido"));
+					cell = row.createCell(8);
+					cell.setCellValue(p01to2.getMetadescripcion());
+					cell.setCellStyle(styles.get("contenido"));
+					cell = row.createCell(9);
+					cell.setCellValue(p01to2.getMetaplanificada());
+					cell.setCellStyle(styles.get("contenidonumero"));
+					cell = row.createCell(10);
+					cell.setCellValue(p01to2.getMetaaprobada());
+					cell.setCellStyle(styles.get("contenidonumero"));
+					cell = row.createCell(11);
+					cell.setCellValue(p01to2.getSumaplanificada());
+					cell.setCellStyle(styles.get("contenidonumero"));
+					cell = row.createCell(12);
+					cell.setCellValue(p01to2.getSumaajustada());
+					cell.setCellStyle(styles.get("contenidonumero"));
+					fila++;
+				}
+			}
+			row = sheet.createRow((short)fila);
+			sheet.setColumnWidth(0, 256*40);
+			sheet.setColumnWidth(1, 256*40);
+			sheet.setColumnWidth(2, 256*40);
+			sheet.setColumnWidth(3, 256*40);
+			sheet.setColumnWidth(4, 256*15);
+			sheet.setColumnWidth(5, 256*15);
+			sheet.setColumnWidth(6, 256*15);
+			sheet.setColumnWidth(7, 256*15);
+			sheet.setColumnWidth(8, 256*15);
+			sheet.setColumnWidth(9, 256*15);
+			sheet.setColumnWidth(10, 256*15);
+			sheet.setColumnWidth(11, 256*15);
+			sheet.setColumnWidth(12, 256*15);
+
+			wb.write(response.getOutputStream());
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+	}
+	
 	
 }

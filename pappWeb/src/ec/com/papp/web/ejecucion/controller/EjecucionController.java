@@ -394,11 +394,11 @@ public class EjecucionController {
 			//reforma linea
 			else if(clase.equals("reformalinea")){
 				ReformalineaTO reformalineaTO = gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
-				//valido que el subitem no exista en otra reforma que no este aprobada
 				Collection<ReformalineaTO> reformalineaTOexistentes=UtilSession.planificacionServicio.transObtienereformasnoelne(reformalineaTO.getNivelactid());
 				boolean grabar=true;
 				String codigoreforma="";
 				if(reformalineaTOexistentes.size()>0){
+					//verifico que si es de tipo MU O EU debe tener la misma fuente de financiamiento
 					for(ReformalineaTO reformalineaTO2:reformalineaTOexistentes){
 						if((reformalineaTO.getId().getLineaid()!=null && reformalineaTO.getId().getLineaid().longValue()!=0) && 
 								(reformalineaTO2.getReforma().getEstado().equals("RE") || reformalineaTO2.getReforma().getEstado().equals("SO")) &&
@@ -427,38 +427,62 @@ public class EjecucionController {
 					Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO2,null);
 					//System.out.println("reformas: " + reformalineaTOs.size());
 					grabar=true;
-					if(reformalineaTOs.size()>0){
+					if(reformalineaTOs.size()>0 && (reformaTO.getTipo().equals("MU") || reformaTO.getTipo().equals("EU"))){
+						NivelactividadTO subitemnivelact=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformalineaTO.getNivelactid()));
+						NivelactividadTO nivelactividadTO=new NivelactividadTO();
+						nivelactividadTO.setId(subitemnivelact.getNivelactividadpadreid());
+						nivelactividadTO.setNivelactividadejerfiscalid(reformaTO.getReformaejerfiscalid());
+						nivelactividadTO.setTipo("IT");
+						nivelactividadTO.setEstado("A");
+						Collection<NivelactividadTO> nivelactividadTOs=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO, false);
+						nivelactividadTO =(NivelactividadTO)nivelactividadTOs.iterator().next();
 						for(ReformalineaTO reformalineaTO3:reformalineaTOs) {
-							//si la reforma es de tipo entre subitem "es" debo ver que pertenezcan al mismo item
-							//System.out.println("reforma linea existente: " + reformalineaTO3.getNivelactid() +"-"+ reformalineaTO3.getId().getId() + " - " +reformalineaTO3.getId().getLineaid() );
-							if((reformalineaTO.getId().getLineaid()!=null && reformalineaTO.getId().getLineaid().longValue()!=0) && (reformalineaTO3.getId().getLineaid().longValue()!=reformalineaTO.getId().getLineaid().longValue() && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue())) {
-								grabar=false;
-								break;
-							}
-							else if((reformalineaTO.getId().getLineaid()==null || reformalineaTO.getId().getLineaid().longValue()==0L) && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue()) {
+							if(!nivelactividadTO.getNpcodigofuente().equals(reformalineaTO3.getNpcodigofuente())){
 								grabar=false;
 								break;
 							}
 						}
 					}
-	
-					if(!grabar){
-						mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
-						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					if(grabar){
+						if(reformalineaTOs.size()>0){
+							//valido que el subitem no exista en otra reforma que no este aprobada
+							
+							for(ReformalineaTO reformalineaTO3:reformalineaTOs) {
+								//si la reforma es de tipo entre subitem "es" debo ver que pertenezcan al mismo item
+								//System.out.println("reforma linea existente: " + reformalineaTO3.getNivelactid() +"-"+ reformalineaTO3.getId().getId() + " - " +reformalineaTO3.getId().getLineaid() );
+								if((reformalineaTO.getId().getLineaid()!=null && reformalineaTO.getId().getLineaid().longValue()!=0) && (reformalineaTO3.getId().getLineaid().longValue()!=reformalineaTO.getId().getLineaid().longValue() && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue())) {
+									grabar=false;
+									break;
+								}
+								else if((reformalineaTO.getId().getLineaid()==null || reformalineaTO.getId().getLineaid().longValue()==0L) && reformalineaTO.getNivelactid().longValue()==reformalineaTO3.getNivelactid().longValue()) {
+									grabar=false;
+									break;
+								}
+							}
+						}
+		
+						if(!grabar){
+							mensajes.setMsg(MensajesWeb.getString("advertencia.certificacionlinea.repetida"));
+							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						}
+						else{
+							accion = (reformalineaTO.getId()==null)?"I":"U";
+							UtilSession.planificacionServicio.transCrearModificarReformalinea(reformalineaTO);
+							//id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
+							//Traiga la lista de cetificacionlinea
+							ConsultasUtil.obtenerreforma(reformalineaTO.getId().getId(), jsonObject);
+		
+							
+		//					//Traigo la lista de ordengastolinea
+		//					ReformalineaTO reformalineaTO3=new ReformalineaTO();
+		//					reformalineaTO3.getId().setId(reformalineaTO.getId().getId());
+		//					Collection<ReformalineaTO> reformalineaTOs2=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO3);
+		//					jsonObject.put("reformalinea", (JSONArray)JSONSerializer.toJSON(reformalineaTOs2,reformalineaTO.getJsonConfig()));
+						}
 					}
 					else{
-						accion = (reformalineaTO.getId()==null)?"I":"U";
-						UtilSession.planificacionServicio.transCrearModificarReformalinea(reformalineaTO);
-						//id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
-						//Traiga la lista de cetificacionlinea
-						ConsultasUtil.obtenerreforma(reformalineaTO.getId().getId(), jsonObject);
-	
-						
-	//					//Traigo la lista de ordengastolinea
-	//					ReformalineaTO reformalineaTO3=new ReformalineaTO();
-	//					reformalineaTO3.getId().setId(reformalineaTO.getId().getId());
-	//					Collection<ReformalineaTO> reformalineaTOs2=UtilSession.planificacionServicio.transObtenerReformalinea(reformalineaTO3);
-	//					jsonObject.put("reformalinea", (JSONArray)JSONSerializer.toJSON(reformalineaTOs2,reformalineaTO.getJsonConfig()));
+						mensajes.setMsg("El subitem debe tener la misma fuente de financiamiento: " + codigoreforma);
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 					}
 				}
 				else{
