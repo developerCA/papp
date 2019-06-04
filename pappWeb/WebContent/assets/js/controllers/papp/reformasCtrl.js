@@ -566,6 +566,16 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
+            	if ($scope.objeto.tipo == "MU") {
+            		if ($scope.objeto.valorincremento != $scope.objeto.valordecremento) {
+	                    SweetAlert.swal(
+	                		"Reformas",
+	                		"El valor incrementado es diferente del valor decrementado",
+	                		"error"
+	            		);
+	        			return;
+            		}
+            	}
                 var tObj = Object.assign({}, $scope.objeto);
                 tObj.incluyemeta = (tObj.incluyemeta? 1: 0);
             	reformasFactory.guardar(tObj).then(function(resp){
@@ -627,6 +637,18 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
+            	var diferencia = $scope.objetoP.reformalinea.npSubitemvalor;
+            	for (var i = 0; i < $scope.detallesP.length; i++) {
+            		diferencia -= $scope.detallesP[i].valor;
+				}
+            	if (diferencia != 0) {
+                    SweetAlert.swal(
+                		"Reformas",
+                		"Tiene una diferencia de: " + diferencia + ", con el Presupuesto",
+                		"error"
+            		);
+        			return;
+            	}
                 var tObj = Object.assign({}, $scope.objetoP.cronograma);
                 var tDet = Object.assign([], $scope.detallesP);
                 tObj.cronogramalineaTOs = tDet;

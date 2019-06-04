@@ -1138,7 +1138,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		modalInstance.result.then(function(obj) {
 			//console.log(obj);
 			$scope.objeto.subitemunidadsubitemid = obj.id;
-			$scope.objeto.npcodigosubitem = obj.codigointerno; // obj.codigo
+			$scope.objeto.npcodigosubitem = obj.codigo;
+			$scope.objeto.npcodigointerno = obj.codigointerno; // obj.codigo
 			$scope.objeto.npnombresubitem = obj.nombre;	
 			$scope.objeto.npprecio = obj.precio;	
 		}, function() {
