@@ -463,7 +463,7 @@ public class ConsultasUtil {
 				empleadoTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				empleadoTO.setCodigo(parameters.get("codigo"));
-			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
+			if(parameters.get("nombremostrado")!=null && !parameters.get("nombremostrado").equals(""))
 				empleadoTO.setNombremostrado(parameters.get("nombre").toUpperCase());
 			if(parameters.get("estado")!=null && !parameters.get("estado").equals(""))
 				empleadoTO.setEstado(parameters.get("estado"));

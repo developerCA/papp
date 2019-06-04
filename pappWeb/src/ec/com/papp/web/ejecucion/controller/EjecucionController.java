@@ -1739,7 +1739,7 @@ public class EjecucionController {
 
 				//..log.println("saldo: " + saldo);
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid());
-				reformalineaTO.setNpSubitemvalor(saldo);
+				reformalineaTO.setNpSubitemvalor(saldo+reformalineaTO.getValorincremento()-reformalineaTO.getValordecremento());
 				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, reformalineaTO, null,null,saldo);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
 				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
