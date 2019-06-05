@@ -710,14 +710,14 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 	
 	$scope.imprimirsolicitud=function(id){
     	var url = "/birt/frameset?__report=E02-OG.rptdesign" +
-		"&certificacion=" + id;
+		"&ordengasto=" + id;
 	    window.open(url, '_blank');
 		return;
 	};
 	
 	$scope.imprimiroficio=function(id){
     	var url = "/birt/frameset?__report=E02-OGO.rptdesign" +
-		"&certificacion=" + id;
+		"&ordengasto=" + id;
 	    window.open(url, '_blank');
 		return;
 	};

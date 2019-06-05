@@ -628,4 +628,11 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 	$scope.calcularIndex = function(index) {
 		return (($scope.tableParams.page() - 1) * 5) + index;
 	}
+	
+	$scope.imprimirsolicitud=function(id){
+    	var url = "/birt/frameset?__report=E07-OD.rptdesign" +
+		"&ordendevengo=" + id;
+	    window.open(url, '_blank');
+		return;
+	};
 } ]);

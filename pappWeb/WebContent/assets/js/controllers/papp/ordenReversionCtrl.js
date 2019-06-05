@@ -589,4 +589,11 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	$scope.calcularIndex = function(index) {
 		return (($scope.tableParams.page() - 1) * 5) + index;
 	}
+
+	$scope.imprimirsolicitud=function(id){
+    	var url = "/birt/frameset?__report=RV01-OR.rptdesign" +
+		"&ordenreversion=" + id;
+	    window.open(url, '_blank');
+		return;
+	};
 } ]);

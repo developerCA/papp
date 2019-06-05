@@ -849,4 +849,11 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 //          	})
 //		});
 	};
+
+	$scope.imprimirsolicitud=function(id){
+    	var url = "/birt/frameset?__report=E03-R.rptdesign" +
+		"&reforma=" + id;
+	    window.open(url, '_blank');
+		return;
+	};
 } ]);
