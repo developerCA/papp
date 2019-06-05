@@ -225,10 +225,10 @@ public class ReportesConsultas {
 				cell.setCellValue(s01to2.getItemnombre());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(13);
-				cell.setCellValue(s01to2.getOrganismoprestamocodigo());
+				cell.setCellValue(s01to2.getOrganismocodigo());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(14);
-				cell.setCellValue(s01to2.getOrganismoprestamonombre());
+				cell.setCellValue(s01to2.getOrganismoprestamocodigo());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(15);
 				cell.setCellValue(s01to2.getSubitemcodigo());
