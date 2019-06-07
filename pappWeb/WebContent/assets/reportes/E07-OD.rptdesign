@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
+    <text-property name="title">E-07: SOLICITUD DE ORDEN DE DEVENGO</text-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="layoutPreference">auto layout</property>
@@ -1266,7 +1267,7 @@
        'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
 										AS detalle,
        og.ORDENGASTOVALORTOTAL 			AS VALORCONTRATO,
-       odl.ORDENDEVENGOLINEAVALOR AS ORDENDEVENGOLINEAVALOR,
+       odl.ORDENGASTOLINEAVALOR AS ORDENDEVENGOLINEAVALOR,
        ogl.ORDENGASTOLINEAVALOR -
        (
        SELECT
