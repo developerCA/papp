@@ -52,7 +52,7 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
             		"pagina=" + pagina+ "&" +
     				"filas=10&" +
     				"nivelactividadejerfiscalid=" + ejercicio + "&" +
-    				"nivelactividadunidadid=" + nivelactividadunidadid +
+    				"nivelactividadunidadid=" + nivelactividadunidadid + "&" +
     				"tipo=IT&" +
     				"estado=A";
             if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();
