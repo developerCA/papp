@@ -912,7 +912,7 @@ public class PlanificacionController {
 			//Subitem (Planificacion anual - modificar subitem)
 			else if(clase.equals("subitemunidad")){
 				SubitemunidadTO subitemunidadTO = gson.fromJson(new StringReader(objeto), SubitemunidadTO.class);
-				log.println("detalle**: " + subitemunidadTO.getSubitemunidadejerfiscalid()+"--"+ subitemunidadTO.getNpcodigosubitem()+" - " +subitemunidadTO.getNpnombresubitem());
+				System.out.println("detalle**: " + subitemunidadTO.getSubitemunidadejerfiscalid()+"--"+ subitemunidadTO.getNpcodigosubitem()+" - " +subitemunidadTO.getNpnombresubitem());
 				accion = (subitemunidadTO.getId()==null)?"I":"U";
 				//Verifico que no exista ya creado otro subitem unidad del mismo subitem en este nivel
 				NivelactividadTO nivelactividadTO=new NivelactividadTO();
@@ -948,9 +948,10 @@ public class PlanificacionController {
 							&& subitemunidadTO.getNpcodigosubitem().equals(nivelactividadTO2.getNpcodigo())) {
 					//		&& nivelactividadTO2.getNpcodigointerno().equals(subitemunidadTO.getNpcodigointerno())){
 							//) {
-						if(subitemunidadTO.getNpcodigointerno()==nivelactividadTO2.getNpcodigointerno()){
+						System.out.println("entro 1");
+						if(subitemunidadTO.getNpcodigointerno().equals(nivelactividadTO2.getNpcodigointerno())){
 							grabar=false;
-//						log.println("entra por 2");
+						log.println("entra por 2");
 							break;
 						}
 					}

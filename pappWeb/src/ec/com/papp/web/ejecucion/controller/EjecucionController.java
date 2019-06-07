@@ -363,6 +363,10 @@ public class EjecucionController {
 						contratoTO.setNpproveedorcodigo(ordengastoTO.getNpproveedorcodigo());
 						contratoTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 					}
+					//si tiene anticipo calculo el porcentaje
+					if(contratoTO.getAnticipovalor()!=null && contratoTO.getValortotal()!=null && contratoTO.getValortotal()>0){
+						contratoTO.setAnticipoporcentaje(UtilGeneral.redondear(((contratoTO.getAnticipoporcentaje()*100)/contratoTO.getValortotal()),2));
+					}
 					jsonObject.put("contrato", (JSONObject)JSONSerializer.toJSON(contratoTO,contratoTO.getJsonConfigedicion()));
 		        }
 		        else {
@@ -887,7 +891,7 @@ public class EjecucionController {
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(id);
 				//2. Obtengo el detalle del subitem
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, id, id2,new Date());
+				//double saldo=ConsultasUtil.obtenersaldodisponible(total, id, id2,new Date());
 				//3. Obtengos las ordenes pendientes de este nivel
 				log.println("id para calculo de no aprobadas:  " + id2);
 				Collection<OrdendevengolineaTO> pendientes=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2);
@@ -904,6 +908,7 @@ public class EjecucionController {
 				for(OrdendevengolineaTO aprobada:aprobadas)
 					ordenesaprobadas=ordenesaprobadas+aprobada.getValor();
 				log.println("valor aprobadas " + ordenesaprobadas);
+				double saldo=ordengastoTO.getValortotal()-ordenesnoaprob-ordenesaprobadas;
 				Map<String, Double> saldodisponible=new HashMap<>();
 				saldodisponible.put("saldo", saldo);
 				saldodisponible.put("noaprobadas", ordenesnoaprob);
@@ -1623,6 +1628,8 @@ public class EjecucionController {
 			//subitemordengasto
 			else if(clase.equals("subitemordengasto")){
 				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
+				OrdengastoTO ordengastoTO=UtilSession.planificacionServicio.transObtenerOrdengastoTO(Long.valueOf(parameters.get("ordengastoid")));
+				request.getSession().setAttribute(ConstantesSesion.ORDENGASTO, ordengastoTO);
 				Collection<OrdengastolineaTO> resultado=UtilSession.planificacionServicio.transObtienesubitemporordengasto(Long.valueOf(parameters.get("ordengastoid")));
 				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,ordengastolineaTO.getJsonConfigbusqueda()));
 				HashMap<String, Integer>  totalMap=new HashMap<String, Integer>();
@@ -1739,7 +1746,8 @@ public class EjecucionController {
 
 				//..log.println("saldo: " + saldo);
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid());
-				reformalineaTO.setNpSubitemvalor(saldo+reformalineaTO.getValorincremento()-reformalineaTO.getValordecremento());
+				System.out.println("saldo: " + valtotal + " inc: " + reformalineaTO.getValorincremento()+" dec: "+reformalineaTO.getValordecremento());
+				reformalineaTO.setNpSubitemvalor(valtotal+reformalineaTO.getValorincremento()-reformalineaTO.getValordecremento());
 				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, reformalineaTO, null,null,saldo);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
 				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
