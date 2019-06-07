@@ -137,6 +137,7 @@ app.constant('JS_REQUIRES', {
         'ModalUnidadMedidaCtrl':'assets/js/controllers/papp/modales/modalUnidadMedidaCtrl.js',   
         'ModalClasificacionCtrl':'assets/js/controllers/papp/modales/modalClasificacionCtrl.js',
         'ModalItemCtrl':'assets/js/controllers/papp/modales/modalItemCtrl.js',
+        'ModalItemNivelActividadCtrl':'assets/js/controllers/papp/modales/modalItemNivelActividadCtrl.js',
         'SubItemCtrl': 'assets/js/controllers/papp/subitemCtrl.js',
         'SubItemsFactory': 'assets/js/factory/subitemFactory.js',
         'ModalSubItemCtrl':'assets/js/controllers/papp/modales/modalSubItemCtrl.js',        

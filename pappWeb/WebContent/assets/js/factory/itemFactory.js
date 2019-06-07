@@ -46,5 +46,23 @@ app.factory("ItemsFactory", ["Restangular", function (Restangular) {
             var url = "administrar/item/";
             return Restangular.allUrl(url).customPOST(objeto);
         },
+
+        traerItemsNivelActividadFiltroCustom: function (pagina, ejercicio, nivelactividadunidadid, codigo, nombre, estado, tipo, codigopadre, nombrepadre) {
+            var url = "planificacion/consultar/nivelactividad/" +
+            		"pagina=" + pagina+ "&" +
+    				"filas=10&" +
+    				"nivelactividadejerfiscalid=" + ejercicio + "&" +
+    				"nivelactividadunidadid=" + nivelactividadunidadid +
+    				"tipo=IT&" +
+    				"estado=A";
+            if (codigo != null && codigo != "") url += "&codigo=" + codigo.toUpperCase();
+            if (nombre != null && nombre != "") url += "&nombre=" + nombre;
+            if (tipo != null && tipo != "") url += "&tipo=" + tipo;
+            //if (estado != null && estado != "") url += "&estado=" + estado;
+            if (codigopadre != null && codigopadre != "") url += "&codigopadre=" + codigopadre;
+            if (nombrepadre != null && nombrepadre != "") url += "&nombrepadre=" + nombrepadre;
+            //console.log("FILTRAR: " + url);
+            return Restangular.allUrl(url).customGET();
+        },
     }
 }]);

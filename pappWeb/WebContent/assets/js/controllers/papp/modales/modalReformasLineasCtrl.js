@@ -171,6 +171,14 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
             	}
             	if (tObj.valorincremento == null) tObj.valorincremento = 0;
             	if (tObj.valordecremento == null) tObj.valordecremento = 0;
+            	if (parseInt($scope.saldo) < parseInt(tObj.valordecremento)) {
+            		SweetAlert.swal(
+            				"Reformas!",
+            				"El valor decremento no puede ser mayor que el saldo",
+            				"error"
+    				);
+            		return;
+            	}
             	if (parseInt($scope.saldo) <= 0 && parseInt(tObj.valordecremento) > 0) {
             		SweetAlert.swal(
             				"Reformas!",

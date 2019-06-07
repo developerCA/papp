@@ -1,0 +1,135 @@
+<div class="modal-header">
+	<h3 class="modal-title">
+		Lista de Selecci&oacute;n de Items
+	</h3>
+</div>
+<div class="modal-body">
+	<div class="panel-body" ng-init="inicio()" >
+
+		<div class="panel panel-white" id="panel1">
+			<div class="panel-heading">
+				<h4 class="panel-title text-primary">Filtros</h4>
+				<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+			</div>
+			<div uib-collapse="panel1" ng-init="panel1=true"
+				class="panel-wrapper">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>C&oacute;digo</label>
+								<input type="text" class="form-control" ng-model="codigo">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label> C&oacute;digo Padre</label>
+								<input type="text"
+									class="form-control" name="codigopadre"
+									ng-model="codigopadre">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label>Nombre</label> <input type="text" class="form-control"
+									ng-model="nombre">
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label> Tipo </label> <select name="tipo" ng-model="tipo"
+									class="form-control">
+									<option value="" selected="selected">(Todos)</option>
+									<option value="I">Ingresos</option>
+									<option value="E">Egresos</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label> Estado </label> <select name="estado"
+									ng-model="estado" class="form-control">
+									<option value>Todos</option>
+									<option value="A">Activo</option>
+									<option value="I">Inactivo</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<a class="btn btn-wide btn-dark-azure" ng-click="filtrarUnico()">
+								<i class="fa fa-search"></i> Buscar
+							</a> <a class="btn btn-wide btn-o btn-default"
+								ng-click="limpiar()">Limpiar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>C&oacute;digo</th>
+						<th>Nombre</th>
+						<th>Nombre Padre</th>
+						<th>Aplica Iva</th>
+						<th>Tipo</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="obj in dataset">
+					<td>
+						<a class="btn btn-sm btn-primary" uib-tooltip="Seleccionar"
+							ng-click="seleccionar(obj)">
+							<i class="fa fa-check"></i>
+						</a>
+					</td>
+					<td data-title="'C&oacute;digo'">
+						{{obj.codigo}}
+					</td>
+					<td data-title="'Nombre'">
+						{{obj.nombre}}
+					</td>
+					<td data-title="'Nombre Padre'">
+						{{obj.npnombrepadre}}
+					</td>
+					<td data-title="'Aplica Iva'">
+	                    <span ng-if="obj.aplicaiva==1">
+	                    	Si
+	                    </span>
+	                    <span ng-if="obj.aplicaiva==0">
+	                    	No
+	                    </span>
+	                </td>
+				 	<td data-title="'Tipo'">
+	                    <span ng-if="obj.tipo=='I'">
+	                    	INGRESO
+	                    </span>
+	                    <span ng-if="obj.tipo=='E'">
+	                    	EGRESO
+	                    </span>
+	                </td>
+				</tr>
+			</table>
+
+			<ul first-text="Primero" last-text="Ultimo" next-text="Siguiente"
+				previous-text="Atras"  uib-pagination total-items="total"
+				ng-change="pageChanged()" items-per-page="10" ng-model="pagina"
+				max-size="5" class="pagination-sm" boundary-links="true"
+				force-ellipses="true">
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary btn-o" ng-click="cancelar()">
+    	Cancelar
+    </button>
+</div>

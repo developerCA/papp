@@ -763,7 +763,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: loadSequence(
         		'ngTable','ReformasCtrl','ReformasFactory',
         		'ModalUnidadCortoCtrl','UnidadFactory',
-        		'ModalItemCtrl','ItemFactory',
+        		'ModalItemCtrl','ModalItemNivelActividadCtrl','ItemFactory',
         		'ModalReformasLineasCtrl',
         		'ModalReformasLineasDistMetaCtrl'
 		),

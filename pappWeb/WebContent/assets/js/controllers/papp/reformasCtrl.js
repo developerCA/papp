@@ -528,20 +528,36 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.reformaunidadid = obj.id;
+			npacitividadunidad = obj.npacitividadunidad;
 			$scope.objeto.npunidadcodigo = obj.codigopresup;
 			$scope.objeto.npunidadnombre = obj.nombre;
 		}, function() {
 		});
 	};
+	var npacitividadunidad = 0;
 
 	$scope.abrirItem = function() {
+		if ($scope.objeto.reformaunidadid == 0) {
+			SweetAlert.swal(
+        		"Reformas",
+        		"Tiene que seleccionar primero una unidad",
+        		"error"
+    		);
+			return;
+		}
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalItems.html',
-			controller : 'ModalItemController',
-			size : 'lg'
+			templateUrl : 'assets/views/papp/modal/modalItemsNivelActividad.html',
+			controller : 'ModalItemNivelActividadController',
+			size : 'lg',
+			resolve : {
+				nivelactividadunidadid : function() {
+					return $scope.objeto.reformaunidadid; // npacitividadunidad;
+				}
+			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.reformaitemid = obj.id;
+			$scope.objeto.nivelactividadid = obj.id;
 			$scope.objeto.npitemcodigo = obj.codigo;			
 			$scope.objeto.npitemnombre = obj.nombre;			
 		}, function() {
