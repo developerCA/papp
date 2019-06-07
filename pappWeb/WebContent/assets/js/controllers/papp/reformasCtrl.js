@@ -558,8 +558,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.reformaitemid = obj.id;
 			$scope.objeto.nivelactividadid = obj.id;
-			$scope.objeto.npitemcodigo = obj.codigo;			
-			$scope.objeto.npitemnombre = obj.nombre;			
+			$scope.objeto.npitemcodigo = obj.npcodigo + ' - ' + obj.npcodigocanton + ' - ' + obj.npcodigofuente;			
+			$scope.objeto.npitemnombre = obj.npdescripcion;
 		}, function() {
 		});
 	};

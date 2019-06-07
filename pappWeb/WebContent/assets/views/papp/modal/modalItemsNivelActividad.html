@@ -74,16 +74,6 @@
 	
 		<div>
 			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th></th>
-						<th>C&oacute;digo</th>
-						<th>Nombre</th>
-						<th>Nombre Padre</th>
-						<th>Aplica Iva</th>
-						<th>Tipo</th>
-					</tr>
-				</thead>
 				<tr ng-repeat="obj in dataset">
 					<td>
 						<a class="btn btn-sm btn-primary" uib-tooltip="Seleccionar"
@@ -91,31 +81,9 @@
 							<i class="fa fa-check"></i>
 						</a>
 					</td>
-					<td data-title="'C&oacute;digo'">
-						{{obj.codigo}}
+					<td data-title="'C&oacute;digo - Descripci&oacute;n'">
+						{{obj.descripcionexten}}
 					</td>
-					<td data-title="'Nombre'">
-						{{obj.nombre}}
-					</td>
-					<td data-title="'Nombre Padre'">
-						{{obj.npnombrepadre}}
-					</td>
-					<td data-title="'Aplica Iva'">
-	                    <span ng-if="obj.aplicaiva==1">
-	                    	Si
-	                    </span>
-	                    <span ng-if="obj.aplicaiva==0">
-	                    	No
-	                    </span>
-	                </td>
-				 	<td data-title="'Tipo'">
-	                    <span ng-if="obj.tipo=='I'">
-	                    	INGRESO
-	                    </span>
-	                    <span ng-if="obj.tipo=='E'">
-	                    	EGRESO
-	                    </span>
-	                </td>
 				</tr>
 			</table>
 
