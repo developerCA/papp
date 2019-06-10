@@ -1100,16 +1100,26 @@ public class ConsultasUtil {
 			reformaTO = UtilSession.planificacionServicio.transObtenerReformaTO(id);
 			reformaTO.setNpunidadcodigo(reformaTO.getUnidad().getCodigopresup());
 			reformaTO.setNpunidadnombre(reformaTO.getUnidad().getNombre());
-			NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformaTO.getId()));
-			//Consulto el item
-			ItemunidadTO itemunidadTO=new ItemunidadTO();
-			itemunidadTO.setItem(new ItemTO());
-			itemunidadTO.setId(nivelactividadTO.getTablarelacionid());
-			Collection<ItemunidadTO> itemunidadTOs=UtilSession.planificacionServicio.transObtenerItemunidad(itemunidadTO);
-			if(itemunidadTOs.size()>0) {
-				itemunidadTO=(ItemunidadTO)itemunidadTOs.iterator().next();
-				reformaTO.setNpitemcodigo(itemunidadTO.getItem().getCodigo());
-				reformaTO.setNpitemnombre(itemunidadTO.getItem().getNombre());
+			if(reformaTO.getNivelactividadid()!=null){
+				NivelactividadTO nivelactividadTO=new NivelactividadTO();
+				System.out.println("Ejericio fical " + reformaTO.getEjerciciofiscal());
+				//nivelactividadTO.setId(reformaTO.getId());
+				nivelactividadTO.setTipo("IT");
+				nivelactividadTO.setNivelactividadejerfiscalid(reformaTO.getReformaejerfiscalid());
+				nivelactividadTO.setId(reformaTO.getNivelactividadid());
+				nivelactividadTO.setEstado("A");
+				Collection<NivelactividadTO> nivelactividadTO2s=UtilSession.planificacionServicio.transObtieneNivelactividadarbolact(nivelactividadTO, false);
+				nivelactividadTO=(NivelactividadTO)nivelactividadTO2s.iterator().next();
+				//Consulto el item
+	//			ItemunidadTO itemunidadTO=new ItemunidadTO();
+	//			itemunidadTO.setItem(new ItemTO());
+	//			itemunidadTO.setId(nivelactividadTO.getTablarelacionid());
+	//			Collection<ItemunidadTO> itemunidadTOs=UtilSession.planificacionServicio.transObtenerItemunidad(itemunidadTO);
+	//			if(itemunidadTOs.size()>0) {
+	//				itemunidadTO=(ItemunidadTO)itemunidadTOs.iterator().next();
+					reformaTO.setNpitemcodigo(nivelactividadTO.getNpcodigo()+" - "+ nivelactividadTO.getNpcodigocanton().substring(2) + " - " + nivelactividadTO.getNpcodigofuente());
+					reformaTO.setNpitemnombre(nivelactividadTO.getNpdescripcion());
+	//			}
 			}
 			//asigno las fechas
 			reformaTO.setNpfechaaprobacion(UtilGeneral.parseDateToString(reformaTO.getFechaaprobacion()));
