@@ -389,6 +389,8 @@ public class EjecucionController {
 					reformaTO.setFechanegacion(UtilGeneral.parseStringToDate(reformaTO.getNpfechanegacion()));
 				if(reformaTO.getNpfechasolicitud()!=null)
 					reformaTO.setFechasolicitud(UtilGeneral.parseStringToDate(reformaTO.getNpfechasolicitud()));
+				if(reformaTO.getNivelactividadid()!=null && reformaTO.getNivelactividadid()==0)
+					reformaTO.setNivelactividadid(null);
 				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO,null);
 				//id=reformaTO.getNpid().toString();
 				reformaTO.setId(reformaTO.getNpid());
