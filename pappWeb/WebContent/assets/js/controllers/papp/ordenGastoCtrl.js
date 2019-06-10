@@ -96,7 +96,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 		$scope.fechainicialFiltro = null;
 		$scope.fechafinalFiltro = null;
 		$scope.estadoFiltro = null;
-	    $scope.aplicafiltro=false;
+	    $scope.aplicafiltro = false;
 
 		$scope.consultar();
 	};

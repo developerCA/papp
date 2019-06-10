@@ -95,7 +95,8 @@
 										Fecha inicial
 									</label>
 							        <div class="input-group">
-							            <input type="text" class="form-control" placeholder="Ingrese un de fecha inicial"
+							            <input type="text" class="form-control"
+							            	placeholder="Ingrese un de fecha inicial"
 							                uib-datepicker-popup="dd/MM/yyyy" 
 							                name="fechainicialFiltro" ng-model="fechainicialFiltro"
 							                is-open="popupnpFechainicio.opened" datepicker-options="dateOptions"
@@ -115,7 +116,8 @@
 										Fecha final
 									</label>
 							        <div class="input-group">
-							            <input type="text" class="form-control" placeholder="Ingrese un de fecha final"
+							            <input type="text" class="form-control"
+							            	placeholder="Ingrese un de fecha final"
 							                uib-datepicker-popup="dd/MM/yyyy" 
 							                name="fechafinalFiltro" ng-model="fechafinalFiltro"
 							                is-open="popupnpFechafin.opened" datepicker-options="dateOptions"
@@ -136,7 +138,9 @@
 									<label class="control-label">
 										Estado
 									</label>
-									<select class="form-control" name="estadoFiltro" ng-model="estadoFiltro">
+									<select class="form-control"
+										name="estadoFiltro"
+										ng-model="estadoFiltro">
 										<option value="">Selecione un estado o ver todos</option>
 										<option value="RE">Registrado</option>
 										<option value="EL">Eliminado</option>
@@ -151,11 +155,13 @@
 
 								<div class="row">
 									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrarUnico()">
+										<a class="btn btn-wide btn-dark-azure"
+											ng-click="filtrarUnico()">
 											<i class="fa fa-search"></i>
 											Buscar
 										</a>
-										<a class="btn btn-wide btn-o btn-default" ng-click="limpiar()">
+										<a class="btn btn-wide btn-o btn-default"
+											ng-click="limpiar()">
 											Limpiar
 										</a>
 									</div>
