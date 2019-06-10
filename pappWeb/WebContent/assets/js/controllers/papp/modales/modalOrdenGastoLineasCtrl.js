@@ -1,8 +1,9 @@
 'use strict';
 
-app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","certificacionID","editar","npcertificacionvalor","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenGastoLineasFactory",
-	function($scope,$rootScope,ID,certificacionID,editar,npcertificacionvalor,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenGastoLineasFactory) {
+app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","certificacionID","editar","npcertificacionvalor","noeditar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenGastoLineasFactory",
+	function($scope,$rootScope,ID,certificacionID,editar,npcertificacionvalor,noeditar,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenGastoLineasFactory) {
 
+	$scope.noeditar2=false;
 	$scope.noeditar=false;
 	$scope.errorLimpio=false;
 
@@ -28,6 +29,7 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","
 	        	$scope.objetoDetalles = resp.json.subiteminfo;
 				$scope.cargarListaCodigos();
 	        	$scope.noeditar=true;
+	        	$scope.noeditar2=noeditar;
 			})
 		}
 	}

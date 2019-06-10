@@ -525,6 +525,9 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				},
 				vTotal: function() {
 					return vtotal;
+				},
+				noeditar : function() {
+					return $scope.noeditar;
 				}
 			}
 		});
@@ -556,6 +559,9 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				},
 				npcertificacionvalor : function() {
 					return null;
+				},
+				noeditar : function() {
+					return $scope.noeditar;
 				}
 			}
 		});
@@ -586,6 +592,9 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 				},
 				npcertificacionvalor : function() {
 					return $scope.objeto.npcertificacionvalor;
+				},
+				noeditar : function() {
+					return $scope.noeditar;
 				}
 			}
 		});

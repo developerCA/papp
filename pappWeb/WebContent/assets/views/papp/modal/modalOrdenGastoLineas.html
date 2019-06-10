@@ -142,7 +142,9 @@
 					        <span class="symbol required"></span>
 					    </label>
 					    <div class="input-group col-md-12">
-					        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor"
+					        <input type="number" numericOnly style="text-align:right;"
+					        	decimal="2" placeholder="Escriba un valor"
+					        	ng-disabled="noeditar2"
 					            class="form-control" name="valor" ng-model="objeto.valor"
 					            required ng-max="objeto.npsaldocertificacion">
 					    </div>

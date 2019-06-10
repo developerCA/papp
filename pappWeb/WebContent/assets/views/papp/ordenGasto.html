@@ -734,16 +734,18 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-									<span ng-if="guardar">
+									<span ng-if="!noeditar">
 										<button type="submit" class="btn btn-primary">
 											Guardar
 										</button>
-										<a class="btn btn-sm btn-dark-azure" ng-click="contrato();">
-											Contrato
-										</a>
 									</span>
+									<a class="btn btn-sm btn-dark-azure" ng-click="contrato();">
+										Contrato
+									</a>
 									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">Cancelar</button>
+										ng-click="form.reset(Form)">
+										Cancelar
+									</button>
 								</div>
 							</div>
 						</div>
@@ -774,14 +776,16 @@
 													</tr>
 													<tr ng-repeat="obj in detalles">
 														<td width="32px" style="padding: 1px;">
-															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
+															<a class="btn btn-sm btn-primary"
 																uib-tooltip="Modificar"
 																ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
 														<td width="32px" style="padding: 1px;">
-															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
+															<a class="btn btn-sm btn-primary"
+																style="background-color: Red !important;"
+																ng-show="!noeditar"
 																uib-tooltip="Eliminar"
 																ng-click="eliminarLinea($index)">
 																<i class="fa ti-trash"></i>
