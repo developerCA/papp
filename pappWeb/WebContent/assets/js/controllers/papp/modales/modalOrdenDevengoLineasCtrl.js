@@ -1,8 +1,9 @@
 'use strict';
 
-app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ordenDevengoID","unidadID","editar","ordenGastoID","ordenGastoValor","valorTotal","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
-	function($scope,$rootScope,ordenDevengoID,unidadID,editar,ordenGastoID,ordenGastoValor,valorTotal,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
+app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ordenDevengoID","unidadID","editar","ordenGastoID","ordenGastoValor","valorTotal","noeditar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
+	function($scope,$rootScope,ordenDevengoID,unidadID,editar,ordenGastoID,ordenGastoValor,valorTotal,noeditar,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
 
+	$scope.noeditar2=false;
 	$scope.noeditar=false;
 	$scope.init=function(){
 		$scope.editarValor = (ordenGastoValor != 'L'? true: false);
@@ -31,6 +32,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 		        	$scope.objeto.npvalor = 0;
 				}
 	        	$scope.noeditar=true;
+	        	$scope.noeditar2=(!$scope.editarValor? false: noeditar);
 			})
 		}
 	}

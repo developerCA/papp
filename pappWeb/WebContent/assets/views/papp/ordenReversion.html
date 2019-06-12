@@ -277,7 +277,8 @@
 								        <span class="symbol required"></span>
 								    </label>
 								    <select class="form-control" name="tipo"
-								        ng-model="objeto.tipo" required>
+								        ng-model="objeto.tipo" required
+								        ng-disabled="noeditar">
 								        <option value="" ng-selected="selected">(Ninguno)</option>
 								        <option value="A">Anticipado</option>
 								        <option value="F">Final</option>
@@ -326,7 +327,8 @@
 								        Orden Gasto Valor
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un orden gasto valor (no llega en rest)"
+								    <input type="text" numericOnly style="text-align:right;" decimal="2"
+								    	placeholder="Escriba un orden gasto valor (no llega en rest)"
 								        class="form-control" name="npordengastovalor" ng-model="objeto.npordengastovalor"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
@@ -345,7 +347,8 @@
 								        Valor Total
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor total"
+								    <input type="text" numericOnly style="text-align:right;" decimal="2"
+								    	placeholder="Escriba un valor total"
 								        class="form-control" name="valortotal" ng-model="objeto.valortotal"
 								        required ng-disabled="true">
 								    <span class="error text-small block"
@@ -364,9 +367,10 @@
 								        Descripci&oacute;n
 								        <span class="symbol required"></span>
 								    </label>
-								    <textarea name="descripcion" rows="5" style="width: 100%" placeholder="Escriba un descripci&oacute;n"
+								    <textarea name="descripcion" rows="5" style="width: 100%"
+								    	placeholder="Escriba un descripci&oacute;n"
 								        class="form-control" ng-model="objeto.descripcion"
-								        required></textarea>
+								        required ng-disabled="noeditar"></textarea>
 								    <span class="error text-small block"
 								        ng-if="Form.descripcion.$dirty && Form.descripcion.$invalid">
 								        Incorrecto
@@ -383,8 +387,9 @@
 								        N&uacute;mero Oficio
 								        <span class="symbol required"></span>
 								    </label>
-								    <input type="text" placeholder="Escriba un n&uacute;mero oficio" required
-								        class="form-control" name="numerooficio" ng-model="objeto.numerooficio">
+								    <input type="text" placeholder="Escriba un n&uacute;mero oficio"
+								    	required class="form-control" name="numerooficio"
+								        ng-model="objeto.numerooficio" ng-disabled="noeditar">
 								    <span class="error text-small block"
 								        ng-if="Form.numerooficio.$dirty && Form.numerooficio.$invalid">
 								        Incorrecto
@@ -416,7 +421,7 @@
 							<div class="col-sm-12">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<a uib-tooltip="Agregar" ng-show="objeto.id"
+										<a uib-tooltip="Agregar" ng-show="objeto.id && !noeditar"
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarLinea();">
 											<i class="fa fa-plus-square"></i>
@@ -436,7 +441,7 @@
 													</tr>
 													<tr ng-repeat="obj in detalles">
 														<td>
-															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
+															<a class="btn btn-sm btn-primary"
 																uib-tooltip="Modificar" ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>

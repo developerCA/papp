@@ -432,6 +432,9 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				},
 				valorTotal : function() {
 					return $scope.objeto.valortotal;
+				},
+				noeditar : function() {
+					return $scope.noeditar;
 				}
 			}
 		});
@@ -474,6 +477,9 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 				},
 				valorTotal : function() {
 					return $scope.objeto.valortotal;
+				},
+				noeditar : function() {
+					return $scope.noeditar;
 				}
 			}
 		});

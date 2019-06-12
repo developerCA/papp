@@ -424,6 +424,7 @@
 								<div class="panel panel-primary">
 									<div class="panel-heading">
 										<a uib-tooltip="Agregar" ng-show="objeto.id"
+											 ng-if="guardar && !noeditar"
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarLinea();">
 											<i class="fa fa-plus-square"></i>
@@ -443,11 +444,12 @@
 													</tr>
 													<tr ng-repeat="obj in detalles">
 														<td>
-															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
+															<a class="btn btn-sm btn-primary"
 																uib-tooltip="Modificar" ng-click="editarLinea($index)">
 																<i class="fa fa-pencil"></i>
 															</a>
-															<a class="btn btn-sm btn-primary" style="background-color: Red !important;" ng-show="!noeditar"
+															<a class="btn btn-sm btn-primary" ng-show="!noeditar"
+																style="background-color: Red !important;"
 																uib-tooltip="Eliminar" ng-click="eliminarLinea($index)">
 																<i class="fa ti-trash"></i>
 															</a>
