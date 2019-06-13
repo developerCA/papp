@@ -74,7 +74,7 @@
 				    <div class="input-group col-md-12">
 				        <input type="number" numericOnly style="text-align:right;" decimal="2" placeholder="Escriba un valor"
 				            class="form-control" name="valor" ng-model="objeto.valor"
-				            required ng-max="objeto.npvalor" ng-disabled="!editarValor">
+				            required ng-max="objeto.npvalor" ng-disabled="noeditar2">
 				    </div>
 				    <span class="error text-small block"
 				        ng-if="Form.valor.$dirty && Form.valor.$invalid">
@@ -89,7 +89,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="pull-right">
-						<button type="submit" class="btn btn-primary">
+						<button type="submit" class="btn btn-primary" ng-show="!noeditar2">
 							Guardar
 						</button>
 						<button type="reset" class="btn btn-default btn-o"

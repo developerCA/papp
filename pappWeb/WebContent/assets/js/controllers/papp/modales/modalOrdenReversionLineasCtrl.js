@@ -1,9 +1,10 @@
 'use strict';
 
-app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","ordenReversionID","unidadID","editar","ordenGastoID","ordenGastoValor","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenReversionLineasFactory",
-	function($scope,$rootScope,ordenReversionID,unidadID,editar,ordenGastoID,ordenGastoValor,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenReversionLineasFactory) {
+app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","ordenReversionID","unidadID","editar","ordenGastoID","ordenGastoValor","noeditar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenReversionLineasFactory",
+	function($scope,$rootScope,ordenReversionID,unidadID,editar,ordenGastoID,ordenGastoValor,noeditar,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenReversionLineasFactory) {
 
 	$scope.noeditar=false;
+	$scope.noeditar2=false;
 	$scope.init=function(){
 		$scope.editarValor = (ordenGastoValor == 0? true: false);
 		if (editar == null) {
@@ -26,6 +27,7 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
 	        	$scope.objetoDetalles = resp.json.subiteminfo;
 	        	$scope.objeto.npvalor = $scope.objeto.nptotalordengasto - $scope.objeto.npdevengado;
 	        	$scope.noeditar = true;
+	        	$scope.noeditar2 = (!$scope.editarValor? false: noeditar);
 			})
 		}
 	}

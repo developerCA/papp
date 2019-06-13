@@ -35,6 +35,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.guardar=false;
 	$scope.objeto={estado:null};
 	$scope.detalles={};
+	$scope.detallesDP=[];
 	
     $scope.pagina = 1;
     $scope.aplicafiltro=false;
@@ -111,6 +112,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			if (!resp.estado) return;
 			$scope.objeto=resp.json.reforma;
 			$scope.detalles={};
+			$scope.detallesDP=[];
 			//$scope.agregarDetalles();
 			$scope.edicion=true;
 			$scope.nuevoar=true;
@@ -134,6 +136,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			    $scope.objeto=resp.json.reforma;
 				$scope.objeto.incluyemeta=$scope.objeto.incluyemeta==1;
 			    $scope.detalles=resp.json.reformalineas;
+			    for (var i = 0; i < $scope.detalles.length; i++) {
+			    	$scope.detallesDP.push(true);
+				}
 			}
 			$scope.edicion=true;
 			$scope.nuevoar=false;
@@ -308,9 +313,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	}
 
-	$scope.agregarDetalles=function(){
-		$scope.detalles={id: null};
-	};
+//	$scope.agregarDetalles=function(){
+//		$scope.detalles={id: null};
+//	};
 
 	$scope.agregarLinea = function() {
 		var modalInstance = $uibModal.open({
@@ -332,11 +337,15 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 				},
 				editar : function() {
 					return null;
+				},
+				noeditar : function() {
+					return $scope.noeditar;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 		    $scope.detalles = obj.reformalineas;
+		    $scope.detallesDP.push(false);
 			$scope.objeto.valorincremento = 0;
 			$scope.objeto.valordecremento = 0;
 		    for (var i = 0; i < $scope.detalles.length; i++) {
@@ -374,6 +383,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 				},
 				editar : function() {
 					return $scope.detalles[index].id
+				},
+				noeditar : function() {
+					return $scope.noeditar;
 				}
 			}
 		});
@@ -397,8 +409,10 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	};
 
+	$scope.index = null;
 	$scope.editarLineaMeta = function(index) {
 		//$scope.detalles[index]
+		$scope.index = index;
 		var tObjLinea = Object.assign({}, $scope.detalles[index]);
 		tObjLinea.npfechacreacion = $scope.objeto.npfechacreacion;
 		reformasFactory.editarLineaMeta(
@@ -476,6 +490,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	};
 
 	$scope.eliminarLinea = function(index) {
+		$scope.index = index;
 		SweetAlert.swal({
 			title: "Reformas?",
 			text: "Seguro que desea eliminar esta linea?",
@@ -503,6 +518,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 					$scope.objeto.valorincremento -= $scope.detalles[index].valorincremento;
 					$scope.objeto.valordecremento -= $scope.detalles[index].valordecremento;
 				    $scope.detalles.splice(index, 1);
+					$scope.detallesDP.splice($scope.index, 1);
 				    //$scope.form.submit(Form);
 	   			}else{
 		            SweetAlert.swal(
@@ -592,6 +608,16 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	        			return;
             		}
             	}
+            	for (var i = 0; i < $scope.detallesDP.length; i++) {
+					if (!$scope.detallesDP[i]) {
+	                    SweetAlert.swal(
+	                		"Reformas",
+	                		"Todas las líneas nuevas tienen que tener echa la Distribución del Presupuesto",
+	                		"error"
+	            		);
+	        			return;
+					}
+				}
                 var tObj = Object.assign({}, $scope.objeto);
                 tObj.incluyemeta = (tObj.incluyemeta? 1: 0);
             	reformasFactory.guardar(tObj).then(function(resp){
@@ -679,6 +705,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         			 }
 					 $scope.metasDistribucionLinea = false;
 					 $scope.edicion = true;
+					 $scope.detallesDP[$scope.index] = true;
 					 //$scope.objetoP = {};
   					 SweetAlert.swal(
   							 "Reformas!",

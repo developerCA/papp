@@ -361,6 +361,9 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				},
 				ordenGastoValor : function() {
 					return 0;
+				},
+				noeditar : function() {
+					return $scope.noeditar;
 				}
 			}
 		});
@@ -400,6 +403,9 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				},
 				ordenGastoValor : function() {
 					return 0;
+				},
+				noeditar : function() {
+					return $scope.noeditar;
 				}
 			}
 		});

@@ -1,9 +1,10 @@
 'use strict';
 
-app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","unidadID","unidadcodigo","unidadnombre","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
-	function($scope,$rootScope,ID,unidadID,unidadcodigo,unidadnombre,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
+app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","unidadID","unidadcodigo","unidadnombre","editar","noeditar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
+	function($scope,$rootScope,ID,unidadID,unidadcodigo,unidadnombre,editar,noeditar,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
 
 	$scope.noeditar = false;
+	$scope.noeditar2 = false;
 
 	$scope.init=function(){
 		$scope.npunidadcodigo = unidadcodigo;
@@ -49,7 +50,8 @@ app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","un
 			        	$scope.saldo = 0;
 					}
 		        	$scope.ponerCodigos();
-		        	$scope.noeditar=true;
+		        	$scope.noeditar = true;
+		        	$scope.noeditar2 = noeditar;
 				})
 		}
 	}

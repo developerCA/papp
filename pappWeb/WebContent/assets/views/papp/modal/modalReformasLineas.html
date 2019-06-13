@@ -181,7 +181,7 @@
 			        Valor Incremento
 			    </label>
 		        <input type="number" numericOnly style="text-align:right;"
-		        	decimal="2" placeholder="0.00"
+		        	decimal="2" placeholder="0.00" ng-disabled="noeditar2"
 		            class="form-control" name="valorincremento" 
 		            ng-model="objeto.valorincremento">
 			</div>
@@ -191,7 +191,7 @@
 			        Valor Decremento
 			    </label>
 		        <input type="number" numericOnly style="text-align:right;"
-		        	decimal="2" placeholder="0.00"
+		        	decimal="2" placeholder="0.00" ng-disabled="noeditar2"
 		            class="form-control" name="valordecremento"
 		            ng-model="objeto.valordecremento">
 			</div>
@@ -199,7 +199,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="pull-right">
-						<button type="submit" class="btn btn-primary">
+						<button type="submit" class="btn btn-primary" ng-show="!noeditar2">
 							Guardar
 						</button>
 						<button type="reset" class="btn btn-default btn-o"
