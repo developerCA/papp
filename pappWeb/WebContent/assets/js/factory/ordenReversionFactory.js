@@ -170,5 +170,14 @@ app.factory("ordenReversionFactory", [ "Restangular", function(Restangular) {
 			var url = "ejecucion/ordenreversionlinea";
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
-	}
+
+		eliminarLinea:function(
+			id,
+			linea
+		){
+			var url = "ejecucion/ordenreversionlinea/" +
+				id + "/" +
+				linea;
+			return Restangular.allUrl(url).customDELETE();
+		},	}
 } ]);

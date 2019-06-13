@@ -136,6 +136,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			    $scope.objeto=resp.json.reforma;
 				$scope.objeto.incluyemeta=$scope.objeto.incluyemeta==1;
 			    $scope.detalles=resp.json.reformalineas;
+			    $scope.detallesDP=[];
 			    for (var i = 0; i < $scope.detalles.length; i++) {
 			    	$scope.detallesDP.push(true);
 				}
@@ -608,16 +609,18 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	        			return;
             		}
             	}
-            	for (var i = 0; i < $scope.detallesDP.length; i++) {
-					if (!$scope.detallesDP[i]) {
-	                    SweetAlert.swal(
-	                		"Reformas",
-	                		"Todas las líneas nuevas tienen que tener echa la Distribución del Presupuesto",
-	                		"error"
-	            		);
-	        			return;
+            	if (!noSalir) {
+	            	for (var i = 0; i < $scope.detallesDP.length; i++) {
+						if (!$scope.detallesDP[i]) {
+		                    SweetAlert.swal(
+		                		"Reformas",
+		                		"Todas las lineas nuevas tienen que tener echa la Distribucion del Presupuesto",
+		                		"error"
+		            		);
+		        			return;
+						}
 					}
-				}
+            	}
                 var tObj = Object.assign({}, $scope.objeto);
                 tObj.incluyemeta = (tObj.incluyemeta? 1: 0);
             	reformasFactory.guardar(tObj).then(function(resp){

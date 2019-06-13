@@ -437,12 +437,20 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 				$scope.detalles[index].id.lineaid
 			).then(function(resp){
 				if (resp.estado){
-					SweetAlert.swal("Orden Reversion!", "Eliminado satisfactoriamente!", "success");
+					SweetAlert.swal(
+							"Orden Reversion!",
+							"Eliminado satisfactoriamente!",
+							"success"
+					);
 					$scope.objeto.valortotal -= $scope.detalles[index].valor;
 				    $scope.detalles.splice(index, 1);
 					$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
 	   			}else{
-		            SweetAlert.swal("Orden Reversion!", resp.mensajes.msg, "error");
+		            SweetAlert.swal(
+		            		"Orden Reversion!",
+		            		resp.mensajes.msg,
+		            		"error"
+            		);
 	   			}
           	});
 		});
