@@ -376,8 +376,8 @@ public class ConsultasUtil {
 					ordendevengoTO.setEstado(parameters.get("estado"));
 				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 					ordendevengoTO.setOrdendevengoejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
-				if(parameters.get("ordengasto")!=null && !parameters.get("ordengasto").equals("")){
-					ordengastoTO.setCodigo(parameters.get("ordengasto").toUpperCase());
+				if(parameters.get("numprecompromiso")!=null && !parameters.get("numprecompromiso").equals("")){
+					ordengastoTO.setCodigo(parameters.get("numprecompromiso").toUpperCase());
 				}
 				ordendevengoTO.setOrdengasto(ordengastoTO);
 				SearchResultTO<OrdendevengoTO> resultado=UtilSession.planificacionServicio.transObtenerOrdendevengoPaginado(ordendevengoTO, principal.getName());

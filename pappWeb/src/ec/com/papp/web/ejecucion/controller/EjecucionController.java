@@ -365,7 +365,10 @@ public class EjecucionController {
 					}
 					//si tiene anticipo calculo el porcentaje
 					if(contratoTO.getAnticipovalor()!=null && contratoTO.getValortotal()!=null && contratoTO.getValortotal()>0){
-						contratoTO.setAnticipoporcentaje(UtilGeneral.redondear(((contratoTO.getAnticipoporcentaje()*100)/contratoTO.getValortotal()),2));
+						System.out.println("total: " +contratoTO.getValortotal() +"anticipo: "+ contratoTO.getAnticipovalor());
+						double porcentaje=(contratoTO.getAnticipovalor()*100)/contratoTO.getValortotal();
+						System.out.println("porcentaje: "+porcentaje);
+						contratoTO.setAnticipoporcentaje(UtilGeneral.redondear(porcentaje,2));
 					}
 					jsonObject.put("contrato", (JSONObject)JSONSerializer.toJSON(contratoTO,contratoTO.getJsonConfigedicion()));
 		        }
