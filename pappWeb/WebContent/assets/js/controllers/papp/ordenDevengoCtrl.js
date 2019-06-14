@@ -92,7 +92,7 @@ app.controller('OrdenDevengoController', [ "$scope","$rootScope","$uibModal","Sw
 		$scope.valorfinalFiltro=null;
 		$scope.fechainicialFiltro=null;
 		$scope.fechafinalFiltro=null;
-		$scope.estadoFiltro="AP";
+		$scope.estadoFiltro=null;
 		$scope.aplicafiltro=false;
 
 		$scope.consultar();
