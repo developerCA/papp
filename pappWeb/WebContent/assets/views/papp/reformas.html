@@ -1083,16 +1083,22 @@
 														{{ obj.npejecutadop | number }}
 													</td>
 													<td style="text-align:right; height: 35px;padding: 0px 4px !important;">
-														<span ng-if="!(obj.nphabilitado=='1' && !noeditar)">
-															{{ obj.npejecutado | currency }}
+														<span ng-if="obj.nphabilitado != '1'">
+														    {{ obj.npejecutado | currency }}
 														</span>
-														<input ng-if="obj.nphabilitado=='1' && !noeditar"
-															type="number"
-															class="form-control"
-															name="{{'pvalor_'+$index}}"
-															ng-model="obj.valor" numericOnly
-															style="text-align: right;"
-															required decimal="2">
+														<span ng-if="obj.nphabilitado == '1'">
+														    <span ng-if="!noeditar">
+																<input type="number"
+																	class="form-control"
+																	name="{{'pvalor_'+$index}}"
+																	ng-model="obj.valor" numericOnly
+																	style="text-align: right;"
+																	required decimal="2">
+														    </span>
+														    <span ng-if="noeditar">
+																{{ obj.valor | currency }}
+														    </span>
+														</span>
 													</td>
 												</tr>
 											</table>
