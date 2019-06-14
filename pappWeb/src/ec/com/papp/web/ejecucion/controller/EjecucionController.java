@@ -2,7 +2,6 @@ package ec.com.papp.web.ejecucion.controller;
 
 import java.io.StringReader;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,7 +20,6 @@ import com.google.gson.Gson;
 
 import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
-import ec.com.papp.administracion.to.ItemTO;
 import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
@@ -39,7 +37,6 @@ import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.ContratoTO;
 import ec.com.papp.planificacion.to.CronogramaTO;
 import ec.com.papp.planificacion.to.CronogramalineaTO;
-import ec.com.papp.planificacion.to.ItemunidadTO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdendevengolineaTO;
@@ -52,7 +49,6 @@ import ec.com.papp.planificacion.to.ReformalineaTO;
 import ec.com.papp.planificacion.to.ReformametaTO;
 import ec.com.papp.planificacion.to.ReformametalineaTO;
 import ec.com.papp.planificacion.to.ReformametasubtareaTO;
-import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.to.SubtareaunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
@@ -69,7 +65,6 @@ import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
-import sun.nio.cs.ext.MacArabic;
 
 /**
  * @autor: jcalderon
@@ -894,7 +889,7 @@ public class EjecucionController {
 			//datoslineaordend: Obtiene el saldo disponible de la certificacion y el valor de las ordenes no aprobadas
 			else if(clase.equals("datoslineaordend")) {
 				//1. traigo el total disponible del subitem
-				double total=ConsultasUtil.obtenertotalsubitem(id);
+				//..double total=ConsultasUtil.obtenertotalsubitem(id);
 				//2. Obtengo el detalle del subitem
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, id, id2,new Date());
 				//3. Obtengos las ordenes pendientes de este nivel
@@ -913,6 +908,13 @@ public class EjecucionController {
 				for(OrdendevengolineaTO aprobada:aprobadas)
 					ordenesaprobadas=ordenesaprobadas+aprobada.getValor();
 				log.println("valor aprobadas " + ordenesaprobadas);
+				//Traigo el valor total de la linea de la orden de gasto
+//				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
+//				ordengastolineaTO.setNivelactid(id2);
+//				ordengastolineaTO.getId().setId(ordengastoTO.getId());
+//				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO, false);
+//				ordengastolineaTO=(OrdengastolineaTO)ordengastolineaTOs.iterator().next();
+//				double saldo=ordengastolineaTO.getValor()-ordenesnoaprob-ordenesaprobadas;
 				double saldo=ordengastoTO.getValortotal()-ordenesnoaprob-ordenesaprobadas;
 				Map<String, Double> saldodisponible=new HashMap<>();
 				saldodisponible.put("saldo", saldo);
