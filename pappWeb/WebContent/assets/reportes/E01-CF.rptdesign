@@ -418,7 +418,7 @@
        'Subactividad: ' || sa.SUBACTIVIDADCODIGO || '-' || sa.SUBACTIVIDADDESCRIPCION || chr(10) ||
        'Tarea: ' || ta.TAREAUNIDADCODIGO || '-' || ta.TAREAUNIDADDESCRIPCION || chr(10) ||
        'Subtarea: ' || st.SUBTAREAUNIDADCODIGO || '-' || st.SUBTAREAUNIDADDESCRIPCION || chr(10) ||
-       'Item: ' || it.ITEMCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
+       'Item: ' || it.ITEMCODIGO || '-' ||ca.DIVISIONGEOGRAFICACODIGO|| '-' ||f.FUENTEFINANCIAMIENTOCODIGO|| '-' ||org.ORGANISMOCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
        'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
        AS detalle,
        cl.CERTIFICACIONLINEAVALOR AS valor,
@@ -465,6 +465,10 @@
        INNER JOIN nivelactividad            nivelsubitem    ON siu.subitemunidadid = nivelsubitem.nivelactividadtablarelacionid
        INNER JOIN nivelactividad            na7             ON na7.nivelactividadid = nivelsubitem.nivelactividadpadreid
        INNER JOIN itemunidad                itu             ON itu.itemunidadid = na7.nivelactividadtablarelacionid
+	   INNER JOIN DIVISIONGEOGRAFICA        ca              ON ca.DIVISIONGEOGRAFICAID = itu.ITEMUNIDADCANTONID	
+	   INNER JOIN Fuentefinanciamiento      f               ON  f.fuentefinanciamientoid = itu.itemunidadfuentefinanid      
+       INNER JOIN Organismoprestamo         orp             ON (orp.ORGANISMOID = itu.ITEMUNIDADORGANISMOID and orp.ORGANISMOPRESTAMOID=itu.ITEMUNIDADORGPRESTAMOID)
+       INNER JOIN Organismo                 org             ON org.ORGANISMOID =  orp.ORGANISMOID
        INNER JOIN ITEM                      it              ON itu.itemunidaditemid = it.ITEMID
        INNER JOIN nivelactividad            na12            ON na12.nivelactividadid = na7.nivelactividadpadreid
        INNER JOIN subtareaunidad            st              ON st.subtareaunidadid = na12.nivelactividadtablarelacionid
@@ -516,6 +520,9 @@
        st.SUBTAREAUNIDADCODIGO,
        st.SUBTAREAUNIDADDESCRIPCION,
        it.ITEMCODIGO,
+	   ca.DIVISIONGEOGRAFICACODIGO, 
+       f.FUENTEFINANCIAMIENTOCODIGO,
+       org.ORGANISMOCODIGO,
        it.ITEMNOMBRE,
        si.SUBITEMCODIGO,
        si.SUBITEMNOMBRE,
