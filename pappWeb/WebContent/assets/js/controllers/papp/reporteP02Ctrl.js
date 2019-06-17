@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ReporteP01Controller', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","reporteP01Factory",
+app.controller('ReporteP02Controller', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","reporteP01Factory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, reporteP01Factory) {
 
 	$scope.objeto = {};
@@ -190,8 +190,8 @@ app.controller('ReporteP01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.actividadid = obj.id;
-			$scope.objeto.npactividad = obj.codigo + ' - ' + obj.nombre;
+			$scope.objeto.subactividadid = obj.id;
+			$scope.objeto.npsubactividad = obj.codigo + ' - ' + obj.nombre;
 			$scope.subactividadActivo = true;
 		}, function() {
 		});
@@ -216,8 +216,8 @@ app.controller('ReporteP01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.actividadid = obj.id;
-			$scope.objeto.npactividad = obj.codigo + ' - ' + obj.nombre;
+			$scope.objeto.tareaid = obj.id;
+			$scope.objeto.nptarea = obj.codigo + ' - ' + obj.nombre;
 			$scope.tareaActivo = true;
 		}, function() {
 		});
@@ -388,13 +388,31 @@ app.controller('ReporteP01Controller', [ "$scope","$rootScope","$uibModal","Swee
         		SweetAlert.swal("Reporte P1!", "Seleccione un Unidad", "error");
         		return;
         	}
-        	var url = "/pappWeb/rest/reportes/consultar/p01/" +
+        	var url = "/pappWeb/rest/reportes/consultar/p02/" +
         			"ejerciciofiscal=" + $rootScope.ejefiscal +
         			"&institucionid=" + $scope.objeto.institucionid +
         			"&institucionentid=" + $scope.objeto.entidadid +
         			"&unidadid=" + $scope.objeto.unidadid;
+        	if ($scope.objeto.programaid != undefined && $scope.objeto.programaid != null) {
+        		url += "&programaid=" + $scope.objeto.programaid;
+        	}
+        	if ($scope.objeto.proyectoid != undefined && $scope.objeto.proyectoid != null) {
+        		url += "&proyectoid=" + $scope.objeto.proyectoid;
+        	}
         	if ($scope.objeto.actividadid != undefined && $scope.objeto.actividadid != null) {
         		url += "&actividadid=" + $scope.objeto.actividadid;
+        	}
+        	if ($scope.objeto.subactividadid != undefined && $scope.objeto.subactividadid != null) {
+        		url += "&subactividadid=" + $scope.objeto.subactividadid;
+        	}
+        	if ($scope.objeto.tareaid != undefined && $scope.objeto.tareaid != null) {
+        		url += "&tareaunidadid=" + $scope.objeto.tareaid;
+        	}
+        	if ($scope.objeto.subtareaid != undefined && $scope.objeto.subtareaid != null) {
+        		url += "&subtareaunidadid=" + $scope.objeto.subtareaid;
+        	}
+        	if ($scope.objeto.itemid != undefined && $scope.objeto.itemid != null) {
+        		url += "&itemid=" + $scope.objeto.itemid;
         	}
 		    window.open(url);
 /*

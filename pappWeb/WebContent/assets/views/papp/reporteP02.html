@@ -1,14 +1,14 @@
 <!-- start: BREADCRUMB -->
 <div class="breadcrumb-wrapper">
 	<h4 class="mainTitle no-margin">
-		Reporte de Seguimiento de la Ejecuci&oacute;n PAPP - P01
+		Reporte de Matriz de Indicadores P-02
 	</h4>
 	<div ncy-breadcrumb class="pull-right"></div>
 </div>
 <!-- end: BREADCRUMB -->
 <!-- start: SIMPLE TABLE WITH PAGINATION -->
 <div class="container-fluid container-fullw"
-	ng-controller="ReporteP01Controller" ng-init="consultar()">
+	ng-controller="ReporteP02Controller" ng-init="consultar()">
 
 	<div class="row">
 		<div class="col-md-12">
@@ -87,7 +87,7 @@
 										</div>
 									</div>
 								</div>
-<!-- 
+
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="control-label">
@@ -133,7 +133,7 @@
 										</div>
 									</div>
 								</div>
- -->
+
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="control-label">
@@ -156,7 +156,7 @@
 										</div>
 									</div>
 								</div>
-<!-- 
+
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="control-label">
@@ -167,8 +167,8 @@
 										<div class="input-group">
 											<input type="text"
 												placeholder="Seleccione una Subactividad"
-												class="form-control" name="npactividad"
-												ng-disabled="true" ng-model="objeto.npactividad" />
+												class="form-control" name="npsubactividad"
+												ng-disabled="true" ng-model="objeto.npsubactividad" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
 													ng-click="abrirSubActividad();">
@@ -190,8 +190,8 @@
 										<div class="input-group">
 											<input type="text"
 												placeholder="Seleccione una Tarea"
-												class="form-control" name="npactividad"
-												ng-disabled="true" ng-model="objeto.npactividad" />
+												class="form-control" name="nptarea"
+												ng-disabled="true" ng-model="objeto.nptarea" />
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-primary"
 													ng-click="abrirTarea();">
@@ -248,7 +248,7 @@
 										</div>
 									</div>
 								</div>
-
+<!-- 
 								<div class="form-group"">
 									<div class="col-md-4">
 										<label class="control-label">

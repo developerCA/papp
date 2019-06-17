@@ -818,6 +818,54 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Reporte P01'
         }
+    }).state('app.reporteP02', {
+        url: "/reporteP02",
+        templateUrl: "assets/views/papp/reporteP02.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteP02Ctrl','ReporteP01Factory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalProgramaCtrl','ProgramaFactory',
+        		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
+        		'ModalActividadReporteCtrl','ActividadReporteFactory',
+        		'ModalSubActividadReporteCtrl','SubActividadReporteFactory',
+        		'ModalTareaReporteCtrl','TareaReporteFactory',
+        		'ModalSubTareaReporteCtrl','SubTareaReporteFactory',
+        		'ModalItemsReporteCtrl','ItemsReporteFactory',
+        		'ModalSubItemsReporteCtrl','SubItemsReporteFactory',
+        		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory',
+        		'ModalGeograficoCtrl','GeograficoFactory',
+        		'ModalOrganismoCtrl','OrganismoFactory'
+		),
+        title: 'Reporte P02',
+        ncyBreadcrumb: {
+            label: 'Reporte P02'
+        }
+    }).state('app.reporteP03', {
+        url: "/reporteP03",
+        templateUrl: "assets/views/papp/reporteP03.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteP03Ctrl','ReporteP01Factory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalProgramaCtrl','ProgramaFactory',
+        		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
+        		'ModalActividadReporteCtrl','ActividadReporteFactory',
+        		'ModalSubActividadReporteCtrl','SubActividadReporteFactory',
+        		'ModalTareaReporteCtrl','TareaReporteFactory',
+        		'ModalSubTareaReporteCtrl','SubTareaReporteFactory',
+        		'ModalItemsReporteCtrl','ItemsReporteFactory',
+        		'ModalSubItemsReporteCtrl','SubItemsReporteFactory',
+        		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory',
+        		'ModalGeograficoCtrl','GeograficoFactory',
+        		'ModalOrganismoCtrl','OrganismoFactory'
+		),
+        title: 'Reporte P03',
+        ncyBreadcrumb: {
+            label: 'Reporte P03'
+        }
     }).state('app.reporteP06', {
         url: "/reporteP06",
         templateUrl: "assets/views/papp/reporteP06.html",
