@@ -3430,7 +3430,7 @@
                                     <property name="showIfBlank">false</property>
                                     <property name="canShrink">false</property>
                                     <property name="overflow">hidden</property>
-                                    <text-property name="text">No. Documento de Respaldo:</text-property>
+                                    <text-property name="text">Proceso SERCOP:</text-property>
                                 </label>
                                 <data id="4539">
                                     <property name="backgroundAttachment">scroll</property>

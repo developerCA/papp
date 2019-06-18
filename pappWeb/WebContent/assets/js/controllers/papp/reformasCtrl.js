@@ -364,7 +364,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	};
 
+	var indexLinea = 0;
 	$scope.editarLinea = function(index) {
+		indexLinea = index;
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalReformasLineas.html',
 			controller : 'ModalReformasLineasController',
@@ -406,6 +408,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             		"Registro guardado satisfactoriamente!",
             		"success"
     		);
+            $scope.detallesDP[indexLinea] = false;
 		}, function() {
 		});
 	};
