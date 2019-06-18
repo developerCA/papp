@@ -1231,7 +1231,7 @@ public class EjecucionController {
 						ordendevengoTO.setOrdendevengoordengastoid(ordengastoTO.getId());
 						Collection<OrdendevengoTO> ordendevengoTOs=UtilSession.planificacionServicio.transObtenerOrdendevengo(ordendevengoTO);
 						for(OrdendevengoTO ordendevengoTO2:ordendevengoTOs){
-							if(ordendevengoTO2.getEstado().equals("RE") || ordendevengoTO2.getEstado().equals("SOL") || ordendevengoTO2.getEstado().equals("AP")){
+							if(ordendevengoTO2.getEstado().equals("RE") || ordendevengoTO2.getEstado().equals("SO") || ordendevengoTO2.getEstado().equals("AP")){
 								mensajes.setMsg("No se puede anular la orden porque existen ordenes de devengo");
 								mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 								respuesta.setEstado(false);
