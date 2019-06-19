@@ -358,12 +358,12 @@ public class EjecucionController {
 						contratoTO.setNpproveedorcodigo(ordengastoTO.getNpproveedorcodigo());
 						contratoTO.setEstado(MensajesAplicacion.getString("estado.activo"));
 					}
-					//si tiene anticipo calculo el porcentaje
-					if(contratoTO.getAnticipovalor()!=null && contratoTO.getValortotal()!=null && contratoTO.getValortotal()>0){
-						System.out.println("total: " +contratoTO.getValortotal() +"anticipo: "+ contratoTO.getAnticipovalor());
-						double porcentaje=(contratoTO.getAnticipovalor()*100)/contratoTO.getValortotal();
-						System.out.println("porcentaje: "+porcentaje);
-						contratoTO.setAnticipoporcentaje(UtilGeneral.redondear(porcentaje,2));
+					//si tiene porcentaje calculo el anticipo
+					if(contratoTO.getAnticipoporcentaje()!=null && contratoTO.getValortotal()!=null && contratoTO.getValortotal()>0){
+						System.out.println("total: " +contratoTO.getValortotal() +"anticipo%: "+ contratoTO.getAnticipoporcentaje());
+						double anticipo=(contratoTO.getValortotal()*contratoTO.getAnticipoporcentaje())/100;
+						System.out.println("anticipo: "+anticipo);
+						contratoTO.setAnticipovalor(UtilGeneral.redondear(anticipo,2));
 					}
 					jsonObject.put("contrato", (JSONObject)JSONSerializer.toJSON(contratoTO,contratoTO.getJsonConfigedicion()));
 		        }
@@ -1238,6 +1238,14 @@ public class EjecucionController {
 								break;
 							}
 						}
+						//valido que si la certificacion esta en estado LT o LP no se pueda anular
+						CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(ordengastoTO.getOrdengastocertificacionid());
+						if(certificacionTO.getEstado().equals("LT") || certificacionTO.getEstado().equals("LP")){
+							mensajes.setMsg("No se puede anular la orden porque la certificacion esta en estado Liquidado");
+							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+							respuesta.setEstado(false);
+						}
+						
 						if(parameters.get("observacion")!=null)
 							ordengastoTO.setMotivoanulacion(parameters.get("observacion"));
 					}
@@ -1405,7 +1413,7 @@ public class EjecucionController {
 				}
 			}
 			//si va a solicitar debo validar que de acuerdo al tipo que escogio tenga el mismo incremento y el mismo decremento
-			if(tipo.equals("SO") && (reformaTO.getTipo().equals("MU") || reformaTO.getTipo().equals("EU"))){
+			if(tipo.equals("SO") && (reformaTO.getTipo().equals("MU") || reformaTO.getTipo().equals("EU") || reformaTO.getTipo().equals("ES"))){
 				double totaldecremento=0.0;
 				double totalincremento=0.0;
 				for(ReformalineaTO reformalineaTO2:reformalineaTOs){
