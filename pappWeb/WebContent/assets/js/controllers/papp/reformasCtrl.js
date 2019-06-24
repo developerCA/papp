@@ -242,7 +242,49 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			);
 			return;
 		}
-		SweetAlert.swal({
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalLiquidacionManua.html',
+			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
+			size : 'lg',
+			resolve: {
+				titulo: function() {
+					return "Negar";
+				},
+				subtitulo : function() {
+					return "Observacion";
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			if (obj === undefined) {
+				obj = "";
+			}
+			var cur = 0;
+			reformasFactory.solicitar(
+				$scope.data[index].id,
+				"NE",
+				null,
+				obj
+			).then(function(resp){
+				$scope.data[index].estado = "NE";
+				$scope.data[index].npestado = "Negando";
+				reformasFactory.solicitar(
+					$scope.data[index].id,
+					"NE",
+					null,
+					null
+				).then(function(resp){
+					SweetAlert.swal(
+							"Reformas!",
+							resp.mensajes.msg,
+							resp.mensajes.type
+					);
+					$scope.filtrar();
+				});
+			});
+		}, function() {
+		});
+/*		SweetAlert.swal({
 			title: "Reformas?",
 			text: "Seguro de negar la reforma..?",
 			type: "warning",
@@ -270,7 +312,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 					);
 				});
 			}
-		});
+		}); */
 	}
 
 	$scope.eliminar = function(index) {
@@ -283,7 +325,50 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			);
 			return;
 		}
-		SweetAlert.swal({
+		var modalInstance = $uibModal.open({
+			templateUrl : 'modalLiquidacionManua.html',
+			controller : 'ModalCertificacionesFondoLiquidacionManuaController',
+			size : 'lg',
+			resolve: {
+				titulo: function() {
+					return "Eliminar";
+				},
+				subtitulo : function() {
+					return "Motivo de eliminacion";
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+			//console.log(obj);
+			if (obj === undefined) {
+				obj = "";
+			}
+			var cur = 0;
+			reformasFactory.solicitar(
+				$scope.data[index].id,
+				"EL",
+				null,
+				obj
+			).then(function(resp){
+				$scope.data[index].estado = "EL";
+				$scope.data[index].npestado = "Eliminando";
+				reformasFactory.solicitar(
+					$scope.data[index].id,
+					"EL",
+					null,
+					null
+				).then(function(resp){
+					SweetAlert.swal(
+							"Reformas!",
+							resp.mensajes.msg,
+							resp.mensajes.type
+					);
+					$scope.filtrar();
+				});
+			});
+		}, function() {
+		});
+/*		SweetAlert.swal({
 			title: "Reformas?",
 			text: "Seguro que desea eliminar la reforma..?",
 			type: "warning",
@@ -311,7 +396,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 					);
 				});
 			}
-		});
+		});*/
 	}
 
 //	$scope.agregarDetalles=function(){
