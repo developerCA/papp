@@ -88,7 +88,7 @@ app.controller('ReporteP01Controller', [ "$scope","$rootScope","$uibModal","Swee
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.unidadid = obj.id;
+			$scope.objeto.unidadid = obj.unidadarbolunidadid;
 			$scope.npunidad = obj.codigoorganico + ' - ' + obj.nombre;
 			$scope.unidadActivo = true;
 			$scope.limpiarListas(3);
@@ -396,34 +396,8 @@ app.controller('ReporteP01Controller', [ "$scope","$rootScope","$uibModal","Swee
         	if ($scope.objeto.actividadid != undefined && $scope.objeto.actividadid != null) {
         		url += "&actividadid=" + $scope.objeto.actividadid;
         	}
+        	console.log('Reporte en: ' + url)
 		    window.open(url);
-/*
-            var firstError = null;
-            if (form.$invalid) {
-                var field = null, firstError = null;
-                for (field in form) {
-                    if (field[0] != '$') {
-                        if (firstError === null && !form[field].$valid) {
-                            firstError = form[field].$name;
-                        }
-                        if (form[field].$pristine) {
-                            form[field].$dirty = true;
-                        }
-                    }
-                }
-                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                return;
-            } else {
-            	reporteP01Factory.guardar($scope.objeto).then(function(resp){
-        			 if (resp.estado){
-      					 SweetAlert.swal("Reporte P01!", "Registro guardado satisfactoriamente!", "success");
-        				 //alert("ok");
-        			 }else{ 
-	 		             SweetAlert.swal("Reporte P01!", resp.mensajes.msg, "error");
-        			 }
-        		})
-            }
-*/
         },
         reset: function (form) {
             $scope.myModel = angular.copy($scope.master);

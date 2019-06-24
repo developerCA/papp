@@ -349,9 +349,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		    $scope.detallesDP.push(false);
 			$scope.objeto.valorincremento = 0;
 			$scope.objeto.valordecremento = 0;
-		    for (var i = 0; i < $scope.detalles.length; i++) {
-				$scope.objeto.valorincremento += $scope.detalles[i].valorincremento;
-				$scope.objeto.valordecremento += $scope.detalles[i].valordecremento;
+		    for (var i = 0; i < $scope.detallesM.length; i++) {
+				$scope.objeto.valorincremento += $scope.detallesM[i].valorincremento;
+				$scope.objeto.valordecremento += $scope.detallesM[i].valordecremento;
 			}
 		    noSalir = true;
 		    $scope.form.submit(Form);
@@ -613,16 +613,22 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             		}
             	}
             	if (!noSalir) {
+            		var terminar = false;
+            		var listaCodigos = '';
 	            	for (var i = 0; i < $scope.detallesDP.length; i++) {
 						if (!$scope.detallesDP[i]) {
-		                    SweetAlert.swal(
-		                		"Reformas",
-		                		"Todas las lineas nuevas tienen que tener echa la Distribucion del Presupuesto",
-		                		"error"
-		            		);
-		        			return;
+							terminar = true;
+							listaCodigos += '\n\r - ' + $scope.detalles[i].npSubitemcodigo + ': ' + $scope.detalles[i].npSubitem;
 						}
 					}
+	            	if (terminar) {
+	                    SweetAlert.swal(
+	                		"Reformas",
+	                		"Todas las lineas nuevas tienen que tener echa la Distribucion del Presupuesto." + listaCodigos,
+	                		"error"
+	            		);
+	        			return;
+	            	}
             	}
                 var tObj = Object.assign({}, $scope.objeto);
                 tObj.incluyemeta = (tObj.incluyemeta? 1: 0);
