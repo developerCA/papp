@@ -49,6 +49,7 @@ import ec.com.papp.planificacion.to.ReformalineaTO;
 import ec.com.papp.planificacion.to.ReformametaTO;
 import ec.com.papp.planificacion.to.ReformametalineaTO;
 import ec.com.papp.planificacion.to.ReformametasubtareaTO;
+import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
@@ -797,7 +798,7 @@ public class EjecucionController {
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(certificacionlineaTO.getNivelactid(), jsonObject, mensajes);
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(certificacionlineaTO.getNivelactid()));
 				//1. traigo el total disponible del subitem
-				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
+				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),true);
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
 				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),certificacionlineaTO.getNivelactid(),certificacionlineaTO.getCertificacion().getFechacreacion());
@@ -834,7 +835,7 @@ public class EjecucionController {
 				ordendevengolineaTO.setNpvalor(ordendevengolineaTO.getValor());
 				//1. traigo el total disponible del subitem
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(ordendevengolineaTO.getNivelactid()));
-				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
+				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),true);
 				//2. Obtengo el detalle del subitem
 				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(), ordendevengolineaTO.getNivelactid(),ordendevengolineaTO.getOrdendevengo().getFechacreacion());
 				ordendevengolineaTO.setNpsaldo(saldo);
@@ -856,7 +857,7 @@ public class EjecucionController {
 			//subitemacumulador: Recibo el id del subitem y traigo el valor disponible eso es para Certificacion de fondos
 			else if(clase.equals("valordisponiblesi")) {
 				//1. traigo el total disponible del subitem
-				double total=ConsultasUtil.obtenertotalsubitem(id);
+				double total=ConsultasUtil.obtenertotalsubitem(id,true);
 				System.out.println("total***: " + total);
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
@@ -936,12 +937,30 @@ public class EjecucionController {
 				//1. traigo el total disponible del subitem
 				//..double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());f
 				//2. Obtengo el detalle del subitem
-//				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
+				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
 				//..double valtotal=ConsultasUtil.obtenertotalsubitem(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid(),reformalineaTO);
-				double valtotal=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
+				double valtotalsubitem=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),false);
+				double valtotal=0.0;
+				ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(reformalineaTO.getId().getId());
+				//Collection<ReformalineaTO> resultado=UtilSession.planificacionServicio.transObtienereformalinea(reformalineaTO.getId().getId());
+				System.out.println("fecha: " + reformaTO.getFechacreacion());
+				System.out.println("valor subitemvalor: " + reformalineaTO.getNpSubitemvalor());
+				Collection<ReformalineaTO> reformalineaTO1s=UtilSession.planificacionServicio.transObtienereformasnoelne(reformalineaTO.getNivelactid());
+				double totalreforma=0.0;
+				//  System.out.println("reformalinea.getNpSubitemvalor(): " + reformalinea.getNpSubitemvalor() + " id " +reformalinea.getNpreformaid());
+				for(ReformalineaTO reformalinea1TO:reformalineaTO1s){
+					if(reformalinea1TO.getReforma().getEstado().equals("AP") && reformalinea1TO.getReforma().getFechacreacion().compareTo(reformaTO.getFechacreacion())<=0
+							&& reformalineaTO.getId().getId().longValue()!=reformalinea1TO.getId().getId().longValue()){
+						//System.out.println("valor: " + reformalinea1TO.getValorincremento() + ", " + reformalinea1TO.getValordecremento()+" id "+reformalinea1TO.getId().getId());
+						totalreforma=totalreforma+reformalinea1TO.getValorincremento().doubleValue()-reformalinea1TO.getValordecremento().doubleValue();
+					}
+				}
+				//System.out.println("total**: " + totalreforma);
+				valtotal=valtotalsubitem + totalreforma;
+
 				//2. Obtengo el detalle del subitem
 				double saldo=ConsultasUtil.obtenersaldodisponible(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),reformalineaTO.getReforma().getFechacreacion());
-
+				saldo=saldo+reformalineaTO.getValordecremento()-reformalineaTO.getValorincremento();
 				log.println("saldo: " + saldo);
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid());
 				reformalineaTO.setNpsaldo(saldo);
@@ -1750,7 +1769,7 @@ public class EjecucionController {
 			if(tipo.equals("r")){
 				ReformalineaTO reformalineaTO= gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformalineaTO.getNivelactid()));
-				double valtotal=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
+				double valtotal=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),true);
 				System.out.println("valtotal: " + valtotal);
 				System.out.println("relacion: " + nivelactividadTO.getTablarelacionid());
 				System.out.println("nivelacti: "+reformalineaTO.getNivelactid());

@@ -733,7 +733,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static Double obtenertotalsubitem(Long idsubitem) throws MyException {
+	public static Double obtenertotalsubitem(Long idsubitem, boolean reforma) throws MyException {
 		double total=0.0;
 		try{
 			//traigo los datos de subitemunidadacumulador
@@ -748,9 +748,11 @@ public class ConsultasUtil {
 					ajustado=true;
 					total=total+subitemunidadacumuladorTO2.getTotal().doubleValue();
 				}
-				//si existe reformas tomo la ultima porque ahi esta el valor codificado
-				if(subitemunidadacumuladorTO2.getTipo().equals("R"))
-					total=subitemunidadacumuladorTO2.getTotal().doubleValue();
+				if(reforma){
+					//si existe reformas tomo la ultima porque ahi esta el valor codificado
+					if(subitemunidadacumuladorTO2.getTipo().equals("R"))
+						total=subitemunidadacumuladorTO2.getTotal().doubleValue();
+				}
 			}
 			return total;
 
