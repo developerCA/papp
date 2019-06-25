@@ -541,7 +541,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			}
 		});
 		modalInstance.result.then(function(obj) {
-		    $scope.detallesM = obj.reformalineas;
+		    $scope.detallesM = obj.reformametasubtarea;
 		    //$scope.objeto.valortotal = obj.valortotal;
 		    //$scope.form.submit(Form);
             SweetAlert.swal(
