@@ -390,10 +390,34 @@ public class EjecucionController {
 					reformaTO.setFechasolicitud(UtilGeneral.parseStringToDate(reformaTO.getNpfechasolicitud()));
 				if(reformaTO.getNivelactividadid()!=null && reformaTO.getNivelactividadid()==0)
 					reformaTO.setNivelactividadid(null);
+				//verifico que esten hechas las distribuciones
+				String resultado="";
+				if(reformaTO.getId()!=null && reformaTO.getId().longValue()!=0){
+					System.out.println("va a ver las distribuciones ");
+					resultado=UtilSession.planificacionServicio.transListareformalineasdistribucion(reformaTO.getId());
+				}
 				UtilSession.planificacionServicio.transCrearModificarReforma(reformaTO,null);
 				//id=reformaTO.getNpid().toString();
 				reformaTO.setId(reformaTO.getNpid());
 				ConsultasUtil.obtenerreforma(reformaTO.getId(), jsonObject);
+				if(!resultado.equals("")){
+					mensajes.setMsg("Realice la distribucion de los subitems: " + resultado);
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					System.out.println("mensaje: " + mensajes.getMsg());
+				}
+				else{
+					resultado="";
+					if(reformaTO.getId()!=null && reformaTO.getId().longValue()!=0){
+						System.out.println("va a ver las distribuciones de las subtareas ");
+						resultado=UtilSession.planificacionServicio.transListareformalineasdistribucionrms(reformaTO);
+						System.out.println("resultad: " + resultado);
+						if(!resultado.equals("")){
+							mensajes.setMsg("Realice la distribucion de las subtareas: " + resultado);
+							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+							System.out.println("mensaje: " + mensajes.getMsg());
+						}
+					}
+				}
 			}
 			
 			//reforma linea
@@ -510,7 +534,20 @@ public class EjecucionController {
 					reformametaTO.setFechanegacion(UtilGeneral.parseStringToDate(reformametaTO.getNpfechanegacion()));
 				if(reformametaTO.getNpfechasolicitud()!=null)
 					reformametaTO.setFechasolicitud(UtilGeneral.parseStringToDate(reformametaTO.getNpfechasolicitud()));
+				String resultado="";
+				if(reformametaTO.getId()!=null && reformametaTO.getId().longValue()!=0){
+					System.out.println("va a ver las distribuciones ");
+					resultado=UtilSession.planificacionServicio.transListareformalineasdistribucionrm(reformametaTO.getId());
+				}
 				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO,null);
+				//id=reformaTO.getNpid().toString();
+				reformametaTO.setId(reformametaTO.getNpid());
+				ConsultasUtil.obtenerreforma(reformametaTO.getId(), jsonObject);
+				if(!resultado.equals("")){
+					mensajes.setMsg("Realice la distribucion de las subtareas: " + resultado);
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					System.out.println("mensaje: " + mensajes.getMsg());
+				}
 				//id=reformametaTO.getNpid().toString();
 				reformametaTO.setId(reformametaTO.getNpid());
 				jsonObject.put("reformameta", (JSONObject)JSONSerializer.toJSON(reformametaTO,reformametaTO.getJsonConfig()));
@@ -579,7 +616,17 @@ public class EjecucionController {
 			else if(clase.equals("reformametasubtarea")){
 				ReformametasubtareaTO reformametasubtareaTO = gson.fromJson(new StringReader(objeto), ReformametasubtareaTO.class);
 				accion = (reformametasubtareaTO.getId()==null)?"I":"U";
-				UtilSession.planificacionServicio.transCrearModificarReformametasubtarea(reformametasubtareaTO);
+				//verifico que esten hechas las distribuciones
+				String resultado="";
+				if(reformametasubtareaTO.getId()!=null && reformametasubtareaTO.getId().getId()!=0){
+					System.out.println("va a ver las distribuciones ");
+					resultado=UtilSession.planificacionServicio.transListareformalineasdistribucionrmm(reformametasubtareaTO);
+				}
+				if(!resultado.equals("")){
+					mensajes.setMsg("Realice la distribucion de la subtarea ");
+					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+					System.out.println("mensaje: " + mensajes.getMsg());
+				}
 				id=reformametasubtareaTO.getId().getId().toString() + reformametasubtareaTO.getId().getLineaid();
 				//Traigo la lista de reformametasubtarea
 				ReformametasubtareaTO reformametasubtareaTO2=new ReformametasubtareaTO();
@@ -588,13 +635,13 @@ public class EjecucionController {
 				jsonObject.put("reformametasubtarea", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs2,reformametasubtareaTO.getJsonConfig()));
 			}
 
-
+			System.out.println("mensajes.... " + mensajes.getMsg());
 			if(mensajes.getMsg()==null){
 				ComunController.crearAuditoria(request, clase, accion, objeto, id);
 				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
 				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 			}
-			else
+			else if(!mensajes.getType().equals(MensajesWeb.getString("mensaje.exito")))
 				respuesta.setEstado(false);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1445,6 +1492,26 @@ public class EjecucionController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
+			if(tipo.equals("SO")){
+				//verifico que esten hechas las distribuciones
+				String resultado="";
+				if(reformaTO.getId()!=null && reformaTO.getId().longValue()!=0){
+					resultado=UtilSession.planificacionServicio.transListareformalineasdistribucion(reformaTO.getId());
+				}
+				if(!resultado.equals("")){
+					mensajes.setMsg("Realice la distribucion de los subitems: " + resultado);
+					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					continuar=false;
+				}
+				else{
+					resultado=UtilSession.planificacionServicio.transListareformalineasdistribucionrms(reformaTO);
+					if(!resultado.equals("")){
+						mensajes.setMsg("Realice la distribucion de las subtareas: " + resultado);
+						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						System.out.println("mensaje: " + mensajes.getMsg());
+					}
+				}
+			}
 			if(continuar) {
 				if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
 					reformaTO.setEstado(tipo);
@@ -1509,6 +1576,17 @@ public class EjecucionController {
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 				}
 			}
+			//verifico que esten hechas las distribuciones
+			String resultado="";
+			if(reformametaTO.getId()!=null && reformametaTO.getId().longValue()!=0){
+				resultado=UtilSession.planificacionServicio.transListareformalineasdistribucionrm(reformametaTO.getId());
+			}
+			if(!resultado.equals("")){
+				mensajes.setMsg("Realice la distribucion de las subtareas: " + resultado);
+				mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+				continuar=false;
+			}
+
 			if(continuar) {
 				if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP") || tipo.equals("AN")) {
 					reformametaTO.setEstado(tipo);

@@ -454,8 +454,8 @@ public class ConsultasUtil {
 				actividadTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			else
 				actividadTO.setOrderByField(OrderBy.orderAsc(orderBy));
-			if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
-				actividadTO.setActividadeejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
+			if(parameters.get("ejerciciofiscal")!=null && !parameters.get("ejerciciofiscal").equals(""))
+				actividadTO.setActividadeejerciciofiscalid(Long.valueOf(parameters.get("ejerciciofiscal")));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
 				actividadTO.setDescripcion(parameters.get("nombre").toUpperCase());
 			if(parameters.get("npunidad")!=null && !parameters.get("npunidad").equals(""))
