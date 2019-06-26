@@ -609,7 +609,7 @@
        'Subactividad: ' || sa.SUBACTIVIDADCODIGO || '-' || sa.SUBACTIVIDADDESCRIPCION || chr(10) ||
        'Tarea: ' || ta.TAREAUNIDADCODIGO || '-' || ta.TAREAUNIDADDESCRIPCION || chr(10) ||
        'Subtarea: ' || st.SUBTAREAUNIDADCODIGO || '-' || st.SUBTAREAUNIDADDESCRIPCION || chr(10) ||
-       'Item: ' || it.ITEMCODIGO || '-' || orp.ORGANISMOPRESTAMOCODIGO || '-' || org.ORGANISMOCODIGO || '-' || ca.DIVISIONGEOGRAFICACODIGO || '-' || f.FUENTEFINANCIAMIENTOCODIGO || '-' || org.ORGANISMOCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
+       'Item: ' || it.ITEMCODIGO || '-' || orp.ORGANISMOPRESTAMOCODIGO || '-' || org.ORGANISMOCODIGO || '-' || ca.DIVISIONGEOGRAFICACODIGO || '-' || f.FUENTEFINANCIAMIENTOCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
        'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
 											AS detalle,
        ogl.ORDENGASTOLINEAVALOR 			AS valor,

@@ -8,7 +8,6 @@ app.controller('ModalCertificacionesFondoLiquidacionManuaController', [ "$scope"
 	$scope.npsubtitulo="";
 
 	$scope.consultar=function(){
-		//console.log("cargo:",titulo,subtitulo);
 		$scope.nptitulo=titulo;
 		$scope.npsubtitulo=subtitulo;
 	}

@@ -747,11 +747,11 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalUnidadCtrl','UnidadFactory',
         		'ModalTipoDocumentoCtrl','TipoDocumentoFactory',
         		'ModalCertificacionesFondoLiquidacionManuaCtrl',
+        		'CertificacionesFondosFactory',
         		'ModalOrdenDevengoLineasCtrl','OrdenDevengoLineasFactory',
         		'ModalOrdenGastoCtrl','OrdenGastoFactory','OrdenDevengoFactory',
         		'ModalOrdenReversionLineasCtrl', 'OrdenReversionLineasFactory',
-        		'ModalCertificacionesFondosLineasCtrl',
-        		'CertificacionesFondosFactory'
+        		'ModalCertificacionesFondosLineasCtrl'
 		),
         title: 'Orden de Reversion',
         ncyBreadcrumb: {
@@ -764,6 +764,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','ReformasCtrl','ReformasFactory',
         		'ModalUnidadCortoCtrl','UnidadFactory',
         		'ModalItemCtrl','ModalItemNivelActividadCtrl','ItemFactory',
+        		'ModalCertificacionesFondoLiquidacionManuaCtrl',
+        		'CertificacionesFondosFactory',
         		'ModalReformasLineasCtrl',
         		'ModalReformasLineasDistMetaCtrl'
 		),
