@@ -404,6 +404,10 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 //	};
 
 	$scope.agregarLinea = function() {
+		if ($scope.objeto.tipo == 'ES') {
+			$scope.agregarLineaSubItem();
+			return;
+		}
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalReformasLineas.html',
 			controller : 'ModalReformasLineasController',
@@ -426,6 +430,58 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 				},
 				noeditar : function() {
 					return $scope.noeditar;
+				}
+			}
+		});
+		modalInstance.result.then(function(obj) {
+		    $scope.detallesM = obj.reformalineas;
+		    $scope.detallesDP.push(false);
+			$scope.objeto.valorincremento = 0;
+			$scope.objeto.valordecremento = 0;
+		    for (var i = 0; i < $scope.detallesM.length; i++) {
+				$scope.objeto.valorincremento += $scope.detallesM[i].valorincremento;
+				$scope.objeto.valordecremento += $scope.detallesM[i].valordecremento;
+			}
+		    noSalir = true;
+		    $scope.form.submit(Form);
+            SweetAlert.swal(
+            		"Reformas! - Lineas",
+            		"Registro guardado satisfactoriamente!",
+            		"success"
+    		);
+		}, function() {
+		});
+	};
+
+	$scope.agregarLineaSubItem = function() {
+		var modalInstance = $uibModal.open({
+			templateUrl : 'assets/views/papp/modal/modalReformasLineasSubItem.html',
+			controller : 'ModalReformasLineasSubItemController',
+			size : 'lg',
+			resolve : {
+				ID : function() {
+					return $scope.objeto.id;
+				},
+				unidadID : function() {
+					return $scope.objeto.reformaunidadid;
+				},
+				unidadcodigo : function() {
+					return $scope.objeto.npunidadcodigo;
+				},
+				unidadnombre : function() {
+					return $scope.objeto.npunidadnombre;
+				},
+				editar : function() {
+					return null;
+				},
+				noeditar : function() {
+					return $scope.noeditar;
+				},
+				subItemId : function() {
+					return null;
+				},
+				subItemTablarelacionid : function() {
+					return null;
 				}
 			}
 		});

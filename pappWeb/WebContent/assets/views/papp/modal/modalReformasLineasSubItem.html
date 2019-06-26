@@ -1,0 +1,93 @@
+<div class="modal-header">
+	<h3 class="modal-title">
+		Reformas - L&iacute;neas
+	</h3>
+</div>
+<div class="modal-body">
+	<div class="panel-body" ng-init="init();" >
+		<form name="Form" id="form1" novalidate
+			ng-submit="form.submit(Form)">
+
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Unidad C&oacute;digo
+			    </label>
+		        <input type="text" placeholder="Unidad c&oacute;digo"
+		            class="form-control" name="npunidadcodigo" ng-disabled="true"
+		            ng-model="npunidadcodigo">
+			</div>
+			
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Unidad Nombre
+			    </label>
+			    <input type="text" placeholder="Escriba un unidad nombre"
+			        class="form-control" name="npunidadnombre" ng-model="npunidadnombre"
+			        ng-disabled="true">
+			</div>
+
+			<div class="form-group">
+			    <label class="control-label">
+			        Subitem
+			    </label>
+			    <input ng-show="noeditar" type="text" ng-disabled="true"
+			        class="form-control" name="subitemnombre" ng-model="objetoDetalles.subitemnombre">
+			</div>
+			
+			<h3>
+				Presupuesto
+			</h3>
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Valor Actual
+			    </label>
+		        <input type="text" style="text-align:right;" decimal="2"
+		            class="form-control" name="valorajustado"
+		            ng-model="valorajustado" ng-disabled="true">
+			</div>
+
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Saldo
+			    </label>
+		        <input type="text" style="text-align:right;" decimal="2"
+		            class="form-control" name="saldo"
+		            ng-model="saldo" ng-disabled="true">
+			</div>
+			
+			<div class="form-group">
+			    <label class="control-label">
+			        Valor Incremento
+			    </label>
+		        <input type="number" numericOnly style="text-align:right;"
+		        	decimal="2" placeholder="0.00" ng-disabled="noeditar2"
+		            class="form-control" name="valorincremento" 
+		            ng-model="objeto.valorincremento">
+			</div>
+
+			<div class="form-group">
+			    <label class="control-label">
+			        Valor Decremento
+			    </label>
+		        <input type="number" numericOnly style="text-align:right;"
+		        	decimal="2" placeholder="0.00" ng-disabled="noeditar2"
+		            class="form-control" name="valordecremento"
+		            ng-model="objeto.valordecremento">
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="pull-right">
+						<button type="submit" class="btn btn-primary" ng-show="!noeditar2">
+							Guardar
+						</button>
+						<button type="reset" class="btn btn-default btn-o"
+							ng-click="form.reset(Form)">
+							Cancelar
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

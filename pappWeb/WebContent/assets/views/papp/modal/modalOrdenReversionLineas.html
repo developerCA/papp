@@ -44,7 +44,7 @@
 				        class="form-control" name="nptotalordengasto" ng-model="objeto.nptotalordengasto"
 				        ng-disabled="true">
 				</div>
-				
+
 				<div class="form-group">
 				    <label class="control-label">
 				        Devengado
@@ -54,7 +54,17 @@
 				        class="form-control" name="npdevengado" ng-model="objeto.npdevengado"
 				        ng-disabled="true">
 				</div>
-				
+
+				<div class="form-group">
+				    <label class="control-label">
+				        Devengados no aprobados
+				    </label>
+				    <input type="text" numericOnly style="text-align:right;" decimal="2"
+				    	placeholder="Escriba un devengado"
+				        class="form-control" name="npdevengosnoapro" ng-model="objeto.npdevengosnoapro"
+				        ng-disabled="true">
+				</div>
+
 				<div class="form-group">
 				    <label class="control-label">
 				        Saldo Disponible Devengo
