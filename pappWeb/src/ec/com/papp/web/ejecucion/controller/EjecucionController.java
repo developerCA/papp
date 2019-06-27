@@ -845,7 +845,7 @@ public class EjecucionController {
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(certificacionlineaTO.getNivelactid(), jsonObject, mensajes);
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(certificacionlineaTO.getNivelactid()));
 				//1. traigo el total disponible del subitem
-				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),true);
+				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),false);
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
 				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),certificacionlineaTO.getNivelactid(),certificacionlineaTO.getCertificacion().getFechacreacion());
@@ -1217,6 +1217,10 @@ public class EjecucionController {
 							if(ordengastoTO2.getEstado().equals("AP")) {
 								valorordenes=valorordenes+ordengastoTO2.getValortotal();
 								aprobada=true;
+							}
+							else if(ordengastoTO2.getEstado().equals("RE") || ordengastoTO2.getEstado().equals("SO")){
+								aprobada=false;
+								break;
 							}
 						}
 						if(!aprobada) {
