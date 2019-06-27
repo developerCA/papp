@@ -434,7 +434,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			}
 		});
 		modalInstance.result.then(function(obj) {
-		    $scope.detallesM = obj.reformalineas;
+		    $scope.detalles = obj.reformalineas;
 		    $scope.detallesDP.push(false);
 			$scope.objeto.valorincremento = 0;
 			$scope.objeto.valordecremento = 0;
