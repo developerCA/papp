@@ -38,7 +38,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 					//console.log(resp);
 		        	$scope.objeto = resp.json.certificacionlinea;
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
-		        	$scope.saldo = $scope.objeto.npvalor + $scope.objeto.npvalorinicial;
+		        	$scope.saldo = $scope.objeto.npvalorinicial; //$scope.objeto.npvalor + $scope.objeto.npvalorinicial;
 		        	$scope.ponerCodigos();
 		        	//$scope.noeditar=true;
 				})
