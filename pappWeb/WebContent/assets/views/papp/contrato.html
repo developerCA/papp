@@ -13,7 +13,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white">
 
-				<div class="panel-body">
+				<div class="panel-body" ng-show="!edicion">
 					<div class="modal-body">
 						<div class="panel panel-white" id="panel1">
 							<div class="panel-heading">
@@ -45,12 +45,12 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="control-label">
-													Contrato Fecha Inicial
+													Contrato Fecha Inicio
 												</label>
 										        <div class="input-group">
 										            <input type="text" class="form-control" placeholder="Selecione una fecha de inicio"
 										                uib-datepicker-popup="dd/MM/yyyy" 
-										                name="cFechainicialFiltro" ng-model="cFechainicialFiltro"
+										                name="cFechaInicialFiltro" ng-model="cFechaInicialFiltro"
 										                is-open="popupnpcFechainicio.opened" datepicker-options="dateOptions"
 										                ng-required="true" close-text="Close">
 										            <span class="input-group-btn">
@@ -95,13 +95,13 @@
 								<tr ng-repeat="obj in $data">
 									<td>
 										<a class="btn btn-sm btn-primary"
-											uib-tooltip="Modificar" ng-click="cEditar($index)">
+											uib-tooltip="Modificar" ng-click="vista(obj.id)"> <!-- $index -->
 											<i class="fa fa-pencil"></i>
 										</a>
 									</td>
-									<td data-title="'Proveedor C&oacute;digo'">{{obj.codigo}}</td>
-									<td data-title="'Proveedor Nombre Mostrado'">{{obj.nombre}}</td>
-									<td data-title="'Contrato Fecha Inicial'">{{obj.npfechainicioc}}</td>
+									<td data-title="'Proveedor C&oacute;digo'">{{obj.npproveedorcodigo}}</td>
+									<td data-title="'Proveedor Nombre Mostrado'">{{obj.npproveedor}}</td>
+									<td data-title="'Fecha Inicio'">{{obj.npfechainicioc}}</td>
 									<td data-title="'Estado'">{{obj.npestado}}</td>
 								</tr>
 							</table>
@@ -113,9 +113,142 @@
 						   	</button>
 						</div>
 					</div>
-
 				</div>
-						
+
+				<div ng-show="edicion" class="panel-body" id="panel1">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							Contrato
+						</h5>
+					</div>
+
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+								    <label class="control-label">
+								        ID
+								    </label>
+								    <input type="text" class="form-control"
+								        name="id" ng-model="objeto.id"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Proveedor C&oacute;digo
+								    </label>
+								    <input type="text" class="form-control"
+								        name="npproveedorcodigo" ng-model="objeto.npproveedorcodigo"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Proveedor Nombre Mostrado
+								    </label>
+								    <input type="text" class="form-control"
+								        name="npproveedor" ng-model="objeto.npproveedor"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Forma de Pago
+								    </label>
+								    <input type="text" class="form-control"
+								        name="formapago" ng-model="objeto.formapago"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Tipo Inicio
+								    </label>
+								    <input type="text" class="form-control"
+								        name="inicio" ng-model="objeto.inicio"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Fecha de Inicio
+								    </label>
+								    <input type="text" class="form-control"
+								        name="npfechainicio" ng-model="objeto.npfechainicio"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Duraci&oacute;n en D&iacute;as
+								    </label>
+								    <input type="text" class="form-control"
+								        name="duraciondias" ng-model="objeto.duraciondias"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Fecha Fin
+								    </label>
+								    <input type="text" class="form-control"
+								        name="npfechafin" ng-model="objeto.npfechafin"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Valor Total
+								    </label>
+								    <input type="text" class="form-control"
+								        name="valortotal" ng-model="objeto.valortotal"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Anticipo Porcentaje
+								    </label>
+								    <input type="text" class="form-control"
+								        name="anticipoporcentaje" ng-model="objeto.anticipoporcentaje"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Anticipo Valor
+								    </label>
+								    <input type="text" class="form-control"
+								        name="anticipovalor" ng-model="objeto.anticipovalor"
+								        ng-disabled="true">
+								</div>
+
+								<div class="form-group">
+								    <label class="control-label">
+								        Estado
+								    </label>
+								    <input type="text" class="form-control"
+								        name="npestado" ng-model="objeto.npestado"
+								        ng-disabled="true">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">
+										Cancelar
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
 			</div>
 		</div>
 	</div>

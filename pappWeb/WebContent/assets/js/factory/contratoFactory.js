@@ -14,12 +14,20 @@ function(Restangular) {
 			var url = "administrar/consultar/contrato/" +
 				"pagina=" + pagina;
 
-			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
-			if(nombre!=null && nombre != "") url += "&nombre=" + nombre;	
-			if(fecha!=null && fecha != "") url += "&fecha=" + fecha;	
-			if(estado!=null && estado != "" ) url += "&estado=" + estado;
+			if (codigo != null && codigo != "") url += "&codigo=" + codigo;	
+			if (nombre != null && nombre != "") url += "&nombre=" + nombre;	
+			if (fecha != null && fecha != "") url += "&fecha=" + fecha;	
+			if (estado != null && estado != "" ) url += "&estado=" + estado;
 
 			return Restangular.allUrl(url).getList();
+		},
+
+		vista : function(
+			id
+		) {
+			var url = "administrar/contrato/" + id + "/0";
+
+		    return Restangular.allUrl(url).customGET();
 		},
 
 		editar : function(

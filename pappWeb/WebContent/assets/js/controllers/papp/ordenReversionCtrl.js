@@ -115,8 +115,8 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			$scope.data[index].id
 		).then(function(resp){
 			if (resp.estado) {
-			    $scope.objeto=resp.json.ordenreversion;
-			    $scope.detalles=resp.json.ordenreversionlineas;
+			    $scope.objeto = resp.json.ordenreversion;
+			    $scope.detalles = resp.json.ordenreversionlineas;
 			}
 			$scope.edicion=true;
 			$scope.nuevoar=false;

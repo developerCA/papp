@@ -5,8 +5,9 @@ app.controller('ContratoController', [ "$scope","$rootScope","$uibModal","SweetA
 
 	$scope.cProveedorCodigoFiltro = null;
 	$scope.cProveedorNombreMostradoFiltro = null;
-	$scope.cFechainicialFiltro = null;
+	$scope.cFechaInicialFiltro = null;
 	$scope.cEstadoFiltro = null;
+	$scope.edicion = false;
 	var pagina = 1;
 
 	$scope.cFiltrar = function(){
@@ -14,7 +15,7 @@ app.controller('ContratoController', [ "$scope","$rootScope","$uibModal","SweetA
 			pagina,
 			$scope.cProveedorCodigoFiltro,
 			$scope.cProveedorNombreMostradoFiltro,
-			$scope.toStringDate($scope.cFechainicialFiltro),
+			$scope.toStringDate($scope.cFechaInicialFiltro),
 			$scope.cEstadoFiltro
 		).then(function(resp){
 			//console.log(resp);
@@ -26,7 +27,7 @@ app.controller('ContratoController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.cLimpiar = function(){
 		$scope.cProveedorCodigoFiltro = null;
 		$scope.cProveedorNombreMostradoFiltro = null;
-		$scope.cFechainicialFiltro = null;
+		$scope.cFechaInicialFiltro = null;
 		$scope.cEstadoFiltro = null;
 
 		$scope.cFiltrar();
@@ -55,6 +56,23 @@ app.controller('ContratoController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 	});
 
+	$scope.vista = function(id) {
+		contratoFactory.vista(
+			id
+		).then(function(resp){
+			if (!resp.estado) {
+				SweetAlert.swal(
+					"Contratos!",
+					resp.mensajes.msg,
+					resp.mensajes.type
+				);
+			} else {
+				$scope.objeto = resp.json.contrato;
+				$scope.edicion = true;
+			}
+		})
+	}
+
 	$scope.toStringDate = function(fuente) {
 		if (fuente == null) {
 			return null;
@@ -75,4 +93,13 @@ app.controller('ContratoController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.opennpcFechainicio = function() {
 	    $scope.popupnpcFechainicio.opened = true;
 	}
+
+
+	$scope.form = {
+        submit: function (form) {
+        },
+        reset: function (form) {
+            $scope.edicion=false;
+        }
+    };
 } ]);

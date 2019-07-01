@@ -786,7 +786,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Reformas'
         }
-    }).state('app.contrato', {
+    }).state('app.contratos', {
         url: "/contrato",
         templateUrl: "assets/views/papp/contrato.html",
         resolve: loadSequence(
