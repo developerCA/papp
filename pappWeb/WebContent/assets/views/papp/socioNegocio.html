@@ -119,29 +119,44 @@
                         <div class="row">
                             <div class="col-md-6">
 
-                                <div class="form-group" ng-class="{'has-error': Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
+                                <div class="form-group"
+                                	ng-class="{'has-error': Form.codigo.$dirty && Form.codigo.$invalid, 'has-success':Form.codigo.$valid}">
                                     <label class="control-label">
                                         C&oacute;digo
                                         <span class="symbol required"></span>
                                     </label>
-                                    <input type="text" placeholder="Ingrese el c&oacute;digo" ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
-                                           class="form-control" name="codigo" ng-disabled="objeto.id !=null" required ng-model="objeto.codigo" ng-minlength="2"/>
-                                    <span class="error text-small block" ng-if="Form.codigo.$dirty && Form.codigo.$invalid">C&oacute;digo incorrecto</span>
-                                    <span class="success text-small" ng-if="Form.codigo.$valid">Listo</span>
+                                    <input type="text" placeholder="Ingrese el c&oacute;digo"
+                                    	ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
+                                        class="form-control" name="codigo" ng-minlength="2"
+                                        ng-disabled="objeto.id != null" required ng-model="objeto.codigo" />
+                                    <span class="error text-small block"
+                                    	ng-if="Form.codigo.$dirty && Form.codigo.$invalid">
+                                    	C&oacute;digo incorrecto
+                                   	</span>
+                                    <span class="success text-small"
+                                    	ng-if="Form.codigo.$valid">
+                                    	Listo
+                                   	</span>
                                 </div>
 
                                 <div class="form-group"
-                                     ng-class="{'has-error':Form.nombremostrado.$dirty && Form.nombremostrado.$invalid, 'has-success':Form.nombremostrado.$valid}">
+                                    ng-class="{'has-error':Form.nombremostrado.$dirty && Form.nombremostrado.$invalid, 'has-success':Form.nombremostrado.$valid}">
                                     <label class="control-label">
                                         Nombre
                                         <span class="symbol required"></span>
-                                    </label> <input type="text" placeholder="Ingrese el nombre"
-                                                    class="form-control" name="nombremostrado" required
-                                                    ng-model="objeto.nombremostrado" /> <span class="error text-small block"
-                                                                              ng-if="Form.nombremostrado.$dirty && Form.nombremostrado.$invalid">
+                                    </label>
+                                    <input type="text" placeholder="Ingrese el nombre"
+                                    	class="form-control" name="nombremostrado" required
+                                        ng-model="objeto.nombremostrado"
+                                        ng-disabled="objeto.id != null" />
+                                    <span class="error text-small block"
+										ng-if="Form.nombremostrado.$dirty && Form.nombremostrado.$invalid">
                                         Nombre incorrecto
-                                    </span> <span class="success text-small"
-                                                  ng-if="Form.nombremostrado.$valid">Listo</span>
+                                    </span>
+                                    <span class="success text-small"
+                                    	ng-if="Form.nombremostrado.$valid">
+                                    	Listo
+                                   	</span>
                                 </div>
 
 								 <div class="form-group"

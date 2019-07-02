@@ -1127,14 +1127,6 @@
 					</form>
 				</div>
 
-				<div ng-show="metasSubtarea" class="panel-body" id="subtarea">
-					<div class="panel-heading">
-						<h5 class="panel-title">
-							Reformas Meta - Subtarea
-						</h5>
-					</div>
-				</div>
-
 				<div ng-show="metasDistribucionSubtareaMeta" class="panel-body">
 					<div class="panel-heading">
 						<h5 class="panel-title">
@@ -1186,8 +1178,8 @@
 								    </label>
 									<input type="number"
 										class="form-control"
-								        name="npdecremento"
-								        ng-model="objetoP.reformalinea.npdecremento"
+								        name="metaActual"
+								        ng-model="objetoP.reformalinea.codificado"
 										numericOnly
 										decimal="2"
 								        ng-disabled="true">
@@ -1199,8 +1191,8 @@
 								    </label>
 									<input type="number"
 										class="form-control"
-								        name="npdecremento"
-								        ng-model="objetoP.reformalinea.npdecremento"
+								        name="metaReprogramada"
+								        ng-model="objetoP.reformalinea.metaReprogramada"
 										numericOnly
 										decimal="2"
 								        ng-disabled="true">

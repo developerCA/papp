@@ -628,6 +628,17 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		    $scope.objetoP=resp.json;
 			$scope.detallesP=resp.json.cronogramalinea;
 
+			if (typeof($scope.objetoP.reformalinea.codificado) != 'number') {
+				$scope.objetoP.reformalinea.codificado = 0;
+			}
+			if (typeof($scope.objetoP.reformalinea.valordecremento) != 'number') {
+				$scope.objetoP.reformalinea.valordecremento = 0;
+			}
+			if (typeof($scope.objetoP.reformalinea.valorincremento) != 'number') {
+				$scope.objetoP.reformalinea.valorincremento = 0;
+			}
+			var i = $scope.objetoP.reformalinea.codificado - $scope.objetoP.reformalinea.valordecremento + $scope.objetoP.reformalinea.valorincremento;
+			$scope.objetoP.reformalinea.metaReprogramada = i;
 			$scope.metasDistribucionSubtareaMeta=true;
 			$scope.metasDistribucion=false;
 			$scope.guardar=true;
