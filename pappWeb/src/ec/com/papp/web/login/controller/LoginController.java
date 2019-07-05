@@ -47,6 +47,7 @@ public class LoginController {
 				if(usuarioTO2.getUsuario().equals(usuarioTO.getUsuario()))
 					usuarioTO=usuarioTO2;
 			}
+			System.out.println("id usuario: " + usuarioTO.getId() + " - socionegocio: " + usuarioTO.getSocionegocioid());
 			UtilSession.setUsuario(request, usuarioTO);
 			if(UtilSession.getUsuario(request).getCambiarclave()==null || UtilSession.getUsuario(request).getCambiarclave().equals("1"))
 				request.getSession(true).setAttribute(ConstantesSesion.USUARIO_CAMBIARCLAVE,"1");

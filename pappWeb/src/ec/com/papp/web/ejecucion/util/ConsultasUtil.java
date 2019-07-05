@@ -1,7 +1,6 @@
 package ec.com.papp.web.ejecucion.util;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -9,13 +8,13 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.poi.hssf.record.CellValueRecordInterface;
 import org.hibernate.tools.commons.to.OrderBy;
 import org.hibernate.tools.commons.to.RangeValueTO;
 import org.hibernate.tools.commons.to.SearchResultTO;
 
 import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
-import ec.com.papp.administracion.to.ItemTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
 import ec.com.papp.estructuraorganica.to.UnidadTO;
@@ -24,7 +23,6 @@ import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
 import ec.com.papp.planificacion.to.GastoDevengoVO;
-import ec.com.papp.planificacion.to.ItemunidadTO;
 import ec.com.papp.planificacion.to.NivelactividadTO;
 import ec.com.papp.planificacion.to.OrdendevengoTO;
 import ec.com.papp.planificacion.to.OrdendevengolineaTO;
@@ -41,7 +39,6 @@ import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.UtilSession;
-import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.exception.MyException;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
@@ -81,9 +78,9 @@ public class ConsultasUtil {
 			certificacionTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
-				certificacionTO.setOrderByField(OrderBy.orderDesc(orderBy));
-			else
 				certificacionTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			else
+				certificacionTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			Date fechaInicial=null;
 			Date fechaFinal=null;
 			if(parameters.get("fechainicial")!=null)
@@ -233,9 +230,9 @@ public class ConsultasUtil {
 			ordengastoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
-				ordengastoTO.setOrderByField(OrderBy.orderDesc(orderBy));
-			else
 				ordengastoTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			else
+				ordengastoTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			Date fechaInicial=null;
 			Date fechaFinal=null;
 			if(parameters.get("fechainicial")!=null)
@@ -335,9 +332,9 @@ public class ConsultasUtil {
 			ordendevengoTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
-				ordendevengoTO.setOrderByField(OrderBy.orderDesc(orderBy));
-			else
 				ordendevengoTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			else
+				ordendevengoTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			Date fechaInicial=null;
 			Date fechaFinal=null;
 			if(parameters.get("fechainicial")!=null)
@@ -423,9 +420,9 @@ public class ConsultasUtil {
 			ordenreversionTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
-				ordenreversionTO.setOrderByField(OrderBy.orderDesc(orderBy));
-			else
 				ordenreversionTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			else
+				ordenreversionTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			Date fechaInicial=null;
 			Date fechaFinal=null;
 			if(parameters.get("fechainicial")!=null)
@@ -770,27 +767,39 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static Double obtenersaldodisponible(Double total,Long idsubitem,Long nivelactividadid,Date fecha) throws MyException {
+	public static Double obtenersaldodisponibleactual(Long idsubitem,Long nivelactividadid,Date fecha) throws MyException {
 		try{
+			SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
+			subitemunidadacumuladorTO.getId().setId(idsubitem);
+			//subitemunidadacumuladorTO.setTipo("A");
+			subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
+			Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
+			boolean ajustado=false;//uso una bandera para solo tomar un valor ajustado de la coleccion
+			double totalajustado=0.0;
+			for(SubitemunidadacumuladorTO subitemunidadacumuladorTO2:subitemunidadacumuladorTOs) {
+				if(subitemunidadacumuladorTO2.getTipo().equals("A") && !ajustado) {
+					ajustado=true;
+					totalajustado=totalajustado+subitemunidadacumuladorTO2.getTotal().doubleValue();
+				}
+			}
 			SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(idsubitem);
 			//traigo las reformas asignadas al subitem
 			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
-			//Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(69118L);
 			System.out.println("reformalineatos: " + reformalineaTOs.size());
 			double totalreforma=0.0;
 			System.out.println("fecha creacion: " + fecha);
 			for(ReformalineaTO reformalineaTO:reformalineaTOs){
 				System.out.println("fecha a comparar: " + reformalineaTO.getReforma().getFechacreacion());
-				if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
-					System.out.println("incremento: " + reformalineaTO.getValorincremento() + " - " + reformalineaTO.getValordecremento());
-					//totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
-					totalreforma=totalreforma-reformalineaTO.getValordecremento().doubleValue();
-					System.out.println("total: " + totalreforma);
+				//if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
+				if(reformalineaTO.getReforma().getEstado().equals("AP") ||reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")){
+					totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
 				}
 			}
-			System.out.println("totalreforma: " + totalreforma);
-			System.out.println("valores: " +total+"-"+totalreforma+"-"+subitemunidadTO.getValprecompromiso()+"-"+subitemunidadTO.getValxcomprometer().doubleValue()+"-"+subitemunidadTO.getValcompromiso());
-			double saldo=total+totalreforma-subitemunidadTO.getValprecompromiso().doubleValue()-subitemunidadTO.getValxcomprometer().doubleValue()-subitemunidadTO.getValcompromiso().doubleValue();
+			double codificado=totalajustado+totalreforma;
+			System.out.println("totalajustad: " + totalajustado + "totalreforma: " + totalreforma);
+			double saldo=codificado-subitemunidadTO.getValxcomprometer().doubleValue()-subitemunidadTO.getValprecompromiso()-subitemunidadTO.getValcompromiso().doubleValue();
+			System.out.println("valores: " +codificado+"-"+subitemunidadTO.getValprecompromiso()+"-"+subitemunidadTO.getValxcomprometer().doubleValue()+"-"+subitemunidadTO.getValcompromiso());
+			//double saldo=total+totalreforma-subitemunidadTO.getValprecompromiso().doubleValue()-subitemunidadTO.getValxcomprometer().doubleValue()-subitemunidadTO.getValcompromiso().doubleValue();
 			return saldo;
 
 		}catch (Exception e) {
@@ -798,6 +807,208 @@ public class ConsultasUtil {
 			throw new MyException(e);
 		}
 	}
+
+	public static Double obtenersaldodisponiblelineacertificacion(Long idsubitem,Long nivelactividadid,Date fecha,CertificacionlineaTO certificacionlineaTO) throws MyException {
+		try{
+			SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
+			subitemunidadacumuladorTO.getId().setId(idsubitem);
+			//subitemunidadacumuladorTO.setTipo("A");
+			subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
+			Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
+			boolean ajustado=false;//uso una bandera para solo tomar un valor ajustado de la coleccion
+			double totalajustado=0.0;
+			for(SubitemunidadacumuladorTO subitemunidadacumuladorTO2:subitemunidadacumuladorTOs) {
+				if(subitemunidadacumuladorTO2.getTipo().equals("A") && !ajustado) {
+					ajustado=true;
+					totalajustado=totalajustado+subitemunidadacumuladorTO2.getTotal().doubleValue();
+				}
+			}
+			//traigo las reformas asignadas al subitem
+			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+			System.out.println("reformalineatos: " + reformalineaTOs.size());
+			double totalreforma=0.0;
+			System.out.println("fecha creacion: " + fecha);
+			for(ReformalineaTO reformalineaTO:reformalineaTOs){
+				System.out.println("fecha a comparar: " + reformalineaTO.getReforma().getFechacreacion());
+				//if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
+				if((reformalineaTO.getReforma().getEstado().equals("AP")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0 &&
+						((reformalineaTO.getReformalineaultimacertificacion()!=null && reformalineaTO.getReformalineaultimacertificacion().longValue()<certificacionlineaTO.getId().getId()) || reformalineaTO.getReformalineaultimacertificacion()==null)){
+					totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
+				}
+			}
+			double codificado=totalajustado+totalreforma;
+			Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificacionesnoeliminadas(nivelactividadid);
+			//Itero para obtener el valor inicial
+			double saldo=codificado;
+			for(CertificacionlineaTO certificacionlineaTO2: certificacionlineaTOs) {
+				System.out.println("certificacion propia: "+ certificacionlineaTO.getId().getId() + " - "+certificacionlineaTO.getId().getLineaid());
+				System.out.println("certificacion a comparar: "+ certificacionlineaTO2.getNpcertificacionid());
+				if(certificacionlineaTO2.getNpcertificacionid().longValue()<certificacionlineaTO.getId().getId().longValue()) {
+					System.out.println("va a restar el valor: "+ certificacionlineaTO2.getValor());
+					//si la liquidacion es parcial debo ver cuanto se utilizo realmente
+					if(certificacionlineaTO2.getNpcertificacionestado().equals("LP")){
+						//Obtengo las ordenes de gasto aprobadas
+						OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
+						ordengastolineaTO.setNivelactid(certificacionlineaTO.getNivelactid());
+						OrdengastoTO ordengastoTO=new OrdengastoTO();
+						ordengastoTO.setOrdengastocertificacionid(certificacionlineaTO2.getNpcertificacionid());
+						ordengastoTO.setEstado("AP");
+						ordengastolineaTO.setOrdengasto(ordengastoTO);
+						Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO);
+						double totalordenes=0.0;
+						for(OrdengastolineaTO ordengastolineaTO2:ordengastolineaTOs)
+							totalordenes=totalordenes+ordengastolineaTO2.getValor();
+						saldo=saldo-totalordenes;
+					}
+					else{
+						saldo=saldo-certificacionlineaTO2.getValor().doubleValue();
+					}
+				}
+				else
+					break;
+			}
+			return saldo;
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+	}
+
+	public static Double obtenersaldodisponiblelineareforma(Long idsubitem,Long nivelactividadid,ReformalineaTO reformalinea,boolean certificacion) throws MyException {
+		try{
+			System.out.println("subitem: " + idsubitem);
+			SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
+			subitemunidadacumuladorTO.getId().setId(idsubitem);
+			subitemunidadacumuladorTO.setTipo("A");
+			subitemunidadacumuladorTO.setOrderByField(OrderBy.orderAsc("id.acumid"));
+			Collection<SubitemunidadacumuladorTO> subitemunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubitemunidadacumuladro(subitemunidadacumuladorTO);
+			boolean ajustado=false;//uso una bandera para solo tomar un valor ajustado de la coleccion
+			double totalajustado=0.0;
+			for(SubitemunidadacumuladorTO subitemunidadacumuladorTO2:subitemunidadacumuladorTOs) {
+				if(subitemunidadacumuladorTO2.getTipo().equals("A") && !ajustado) {
+					ajustado=true;
+					totalajustado=totalajustado+subitemunidadacumuladorTO2.getTotal().doubleValue();
+				}
+			}
+			System.out.println("total ajustado: " + totalajustado);
+			//traigo las reformas asignadas al subitem
+			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+			System.out.println("reformalineatos: " + reformalineaTOs.size());
+			double totalreforma=0.0;
+			System.out.println("fecha creacion: " + reformalinea.getNpfechacreacion());
+			for(ReformalineaTO reformalineaTO:reformalineaTOs){
+				System.out.println("fecha a comparar: " + reformalineaTO.getReforma().getFechacreacion());
+				//if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
+				if((reformalineaTO.getReforma().getEstado().equals("AP")) && reformalineaTO.getId().getId().longValue()<reformalinea.getId().getId().longValue()){
+					totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
+				}
+			}
+			System.out.println("total reformas: " + totalreforma);
+			double codificado=totalajustado+totalreforma;
+			double saldo=codificado;
+			double certificaciones=0.0;
+			double ordenesgasto=0.0;
+			if(certificacion){
+				Collection<CertificacionlineaTO> certificacionlineaTOs=UtilSession.planificacionServicio.transObtienecertificacionesnoeliminadas(nivelactividadid);
+				System.out.println("certificaciones:  "+ certificacionlineaTOs.size());
+				//Itero para obtener el valor inicial
+				for(CertificacionlineaTO certificacionlineaTO2: certificacionlineaTOs) {
+					System.out.println("certificacion: " + certificacionlineaTO2.getNpfechacreacion() + " - "+certificacionlineaTO2.getNpcertificacionestado());
+					if(reformalinea.getReforma().getEstado().equals("AP") || reformalinea.getReforma().getEstado().equals("NE") || reformalinea.getReforma().getEstado().equals("EL")){
+						if(certificacionlineaTO2.getNpfechacreacion().compareTo(UtilGeneral.parseStringToDate(reformalinea.getNpfechacreacion()))<=0 &&
+								((reformalinea.getReformalineaultimacertificacion()==null ||reformalinea.getReformalineaultimacertificacion().longValue()==0) || (reformalinea.getReformalineaultimacertificacion()!=null && reformalinea.getReformalineaultimacertificacion().longValue()!=0 && certificacionlineaTO2.getNpcertificacionid()<=reformalinea.getReformalineaultimacertificacion().longValue()))){
+							System.out.println("va a restar el valor: "+ certificacionlineaTO2.getValor());
+							//si la liquidacion es parcial debo ver cuanto se utilizo realmente
+							if(certificacionlineaTO2.getNpcertificacionestado().equals("LP")){
+								//Obtengo las ordenes de gasto aprobadas
+								OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
+								ordengastolineaTO.setNivelactid(reformalinea.getNivelactid());
+								OrdengastoTO ordengastoTO=new OrdengastoTO();
+								ordengastoTO.setOrdengastocertificacionid(certificacionlineaTO2.getNpcertificacionid());
+								ordengastoTO.setEstado("AP");
+								ordengastolineaTO.setOrdengasto(ordengastoTO);
+								Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO);
+								double totalordenes=0.0;
+								for(OrdengastolineaTO ordengastolineaTO2:ordengastolineaTOs)
+									totalordenes=totalordenes+ordengastolineaTO2.getValor();
+								System.out.println("ordenes: " + totalordenes);
+								ordenesgasto=ordenesgasto+totalordenes;
+							}
+							//else if(certificacionlineaTO2.getNpcertificacionestado().equals("AP")){
+							else{
+								certificaciones=certificaciones+certificacionlineaTO2.getValor();
+							}
+						}
+					}
+					else if(reformalinea.getReforma().getEstado().equals("SO") || reformalinea.getReforma().getEstado().equals("RE")){
+						//si la liquidacion es parcial debo ver cuanto se utilizo realmente
+						if(certificacionlineaTO2.getNpcertificacionestado().equals("LP")){
+							//Obtengo las ordenes de gasto aprobadas
+							OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
+							ordengastolineaTO.setNivelactid(reformalinea.getNivelactid());
+							OrdengastoTO ordengastoTO=new OrdengastoTO();
+							ordengastoTO.setOrdengastocertificacionid(certificacionlineaTO2.getNpcertificacionid());
+							ordengastoTO.setEstado("AP");
+							ordengastolineaTO.setOrdengasto(ordengastoTO);
+							Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO);
+							double totalordenes=0.0;
+							for(OrdengastolineaTO ordengastolineaTO2:ordengastolineaTOs)
+								totalordenes=totalordenes+ordengastolineaTO2.getValor();
+							System.out.println("ordenes: " + totalordenes);
+							ordenesgasto=ordenesgasto+totalordenes;
+						}
+						else{
+							certificaciones=certificaciones+certificacionlineaTO2.getValor();
+						}
+					}
+
+					//					else
+//						break;
+				}
+			}
+			System.out.println("codificado: "+ codificado);
+			System.out.println("certificaciones: "+ certificaciones);
+			System.out.println("ordenesgasto: "+ ordenesgasto);
+			saldo=codificado-ordenesgasto-certificaciones;
+			System.out.println("saldo: "+ saldo);
+			return saldo;
+
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+	}
+
+	//	public static Double obtenersaldodisponible(Double total,Long idsubitem,Long nivelactividadid,Date fecha) throws MyException {
+//		try{
+//			SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(idsubitem);
+//			//traigo las reformas asignadas al subitem
+//			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
+//			//Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(69118L);
+//			System.out.println("reformalineatos: " + reformalineaTOs.size());
+//			double totalreforma=0.0;
+//			System.out.println("fecha creacion: " + fecha);
+//			for(ReformalineaTO reformalineaTO:reformalineaTOs){
+//				System.out.println("fecha a comparar: " + reformalineaTO.getReforma().getFechacreacion());
+//				//if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
+//				if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
+//					System.out.println("incremento: " + reformalineaTO.getValorincremento() + " - " + reformalineaTO.getValordecremento());
+//					//totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
+//					totalreforma=totalreforma-reformalineaTO.getValordecremento().doubleValue();
+//					System.out.println("total: " + totalreforma);
+//				}
+//			}
+//			System.out.println("totalreforma: " + totalreforma);
+//			System.out.println("valores: " +total+"-"+totalreforma+"-"+subitemunidadTO.getValprecompromiso()+"-"+subitemunidadTO.getValxcomprometer().doubleValue()+"-"+subitemunidadTO.getValcompromiso());
+//			double saldo=total+totalreforma-subitemunidadTO.getValprecompromiso().doubleValue()-subitemunidadTO.getValxcomprometer().doubleValue()-subitemunidadTO.getValcompromiso().doubleValue();
+//			return saldo;
+//
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//			throw new MyException(e);
+//		}
+//	}
 	
 	/**
 	* Metodo que obtiene el saldo disponible de un subitem
@@ -1207,9 +1418,9 @@ public class ConsultasUtil {
 			reformaTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
-				reformaTO.setOrderByField(OrderBy.orderDesc(orderBy));
-			else
 				reformaTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			else
+				reformaTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			Date fechaInicial=null;
 			Date fechaFinal=null;
 			if(parameters.get("fechainicial")!=null)
@@ -1284,9 +1495,9 @@ public class ConsultasUtil {
 			reformametaTO.setMaxResults(filas);
 			String[] orderBy = columnas;
 			if(parameters.get("sord")!=null && parameters.get("sord").equals("desc"))
-				reformametaTO.setOrderByField(OrderBy.orderDesc(orderBy));
-			else
 				reformametaTO.setOrderByField(OrderBy.orderAsc(orderBy));
+			else
+				reformametaTO.setOrderByField(OrderBy.orderDesc(orderBy));
 			Date fechaInicial=null;
 			Date fechaFinal=null;
 			if(parameters.get("fechainicial")!=null)

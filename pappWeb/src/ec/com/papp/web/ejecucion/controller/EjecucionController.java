@@ -618,20 +618,35 @@ public class EjecucionController {
 				accion = (reformametasubtareaTO.getId()==null)?"I":"U";
 				//verifico que esten hechas las distribuciones
 				String resultado="";
-				if(reformametasubtareaTO.getId()!=null && reformametasubtareaTO.getId().getId()!=0){
+				//if(reformametasubtareaTO.getId()!=null && reformametasubtareaTO.getId().getId()!=0){
 					System.out.println("va a ver las distribuciones ");
 					resultado=UtilSession.planificacionServicio.transListareformalineasdistribucionrmm(reformametasubtareaTO);
-				}
+				//}
 				if(!resultado.equals("")){
 					mensajes.setMsg("Realice la distribucion de la subtarea ");
 					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
 					System.out.println("mensaje: " + mensajes.getMsg());
 				}
-				id=reformametasubtareaTO.getId().getId().toString() + reformametasubtareaTO.getId().getLineaid();
+				UtilSession.planificacionServicio.transCrearModificarReformametasubtarea(reformametasubtareaTO);
+				//id=reformametasubtareaTO.getId().getId().toString() + reformametasubtareaTO.getId().getLineaid();
 				//Traigo la lista de reformametasubtarea
 				ReformametasubtareaTO reformametasubtareaTO2=new ReformametasubtareaTO();
 				reformametasubtareaTO2.getId().setId(reformametasubtareaTO.getId().getId());
 				Collection<ReformametasubtareaTO> reformametalineaTOs2=UtilSession.planificacionServicio.transObtenerReformametasubatera(reformametasubtareaTO2);
+				for(ReformametasubtareaTO reformametasubtareaTO3: reformametalineaTOs2){
+					MatrizDetalle subtareaunidad=UtilSession.planificacionServicio.transObtienedetallesubtarea(reformametasubtareaTO3.getNivelactid(), 0L);
+					SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
+					subtareaunidadacumuladorTO.getId().setId(subtareaunidad.getIdtarea());
+					subtareaunidadacumuladorTO.setTipo("A");
+					subtareaunidadacumuladorTO.getId().setAcumid(2L);
+					Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
+					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO) subtareaunidadacumuladorTOs.iterator().next();
+					reformametasubtareaTO3.setNpSubtarea(subtareaunidad.getSubtareanombre());
+					reformametasubtareaTO3.setNpSubtareacodigo(subtareaunidad.getSubtareacodigo());
+					reformametasubtareaTO3.setNpSubtareaid(subtareaunidad.getIdtarea());
+					reformametasubtareaTO3.setNpunidadmedida(subtareaunidad.getNpunidadmedida());
+					reformametasubtareaTO3.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
+				}
 				jsonObject.put("reformametasubtarea", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs2,reformametasubtareaTO.getJsonConfig()));
 			}
 
@@ -845,10 +860,10 @@ public class EjecucionController {
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(certificacionlineaTO.getNivelactid(), jsonObject, mensajes);
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(certificacionlineaTO.getNivelactid()));
 				//1. traigo el total disponible del subitem
-				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),false);
+				//double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),false);
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),certificacionlineaTO.getNivelactid(),certificacionlineaTO.getCertificacion().getFechacreacion());
+				double saldo=ConsultasUtil.obtenersaldodisponiblelineacertificacion(nivelactividadTO.getTablarelacionid(),certificacionlineaTO.getNivelactid(),certificacionlineaTO.getCertificacion().getFechacreacion(),certificacionlineaTO);
 				certificacionlineaTO.setNpvalorinicial(saldo);
 				jsonObject.put("certificacionlinea", (JSONObject)JSONSerializer.toJSON(certificacionlineaTO,certificacionlineaTO.getJsonConfig()));
 			}
@@ -883,9 +898,9 @@ public class EjecucionController {
 				//1. traigo el total disponible del subitem
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(ordendevengolineaTO.getNivelactid()));
 				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),true);
-				//2. Obtengo el detalle del subitem
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(), ordendevengolineaTO.getNivelactid(),ordendevengolineaTO.getOrdendevengo().getFechacreacion());
-				ordendevengolineaTO.setNpsaldo(saldo);
+//				//2. Obtengo el detalle del subitem
+//				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(), ordendevengolineaTO.getNivelactid(),ordendevengolineaTO.getOrdendevengo().getFechacreacion());
+//				ordendevengolineaTO.setNpsaldo(saldo);
 				jsonObject.put("ordendevengolinea", (JSONObject)JSONSerializer.toJSON(ordendevengolineaTO,ordendevengolineaTO.getJsonConfig()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(ordendevengolineaTO.getNivelactid(), jsonObject, mensajes);
 
@@ -905,10 +920,10 @@ public class EjecucionController {
 			else if(clase.equals("valordisponiblesi")) {
 				//1. traigo el total disponible del subitem
 				double total=ConsultasUtil.obtenertotalsubitem(id,true);
-				System.out.println("total***: " + total);
+				//System.out.println("total***: " + total);
 				//2. Obtengo el detalle del subitem
-//				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
-				double saldo=ConsultasUtil.obtenersaldodisponible(total, id,id2,new Date());
+				//double saldo=ConsultasUtil.obtenersaldodisponible(total, id,id2,new Date());
+				double saldo=ConsultasUtil.obtenersaldodisponibleactual(id, id2, new Date());
 				System.out.println("saldo*** " + saldo);
 //				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
 //				double valorcertificacion=0.0;
@@ -979,35 +994,40 @@ public class EjecucionController {
 				ReformalineaTO reformalineaTO = UtilSession.planificacionServicio.transObtenerReformalineaTO(new ReformalineaID(id, id2));
 				reformalineaTO.setNpvalordecremento(reformalineaTO.getValordecremento());
 				reformalineaTO.setNpvalorincremento(reformalineaTO.getValorincremento());
+				reformalineaTO.setNpfechacreacion(UtilGeneral.parseDateToString(reformalineaTO.getReforma().getFechacreacion()));
 				jsonObject=ConsultasUtil.consultaInformacionsubitemunidad(reformalineaTO.getNivelactid(), jsonObject, mensajes);
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformalineaTO.getNivelactid()));
 				//1. traigo el total disponible del subitem
-				//..double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());f
+				//..double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid());
 				//2. Obtengo el detalle del subitem
-				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
+				//SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
 				//..double valtotal=ConsultasUtil.obtenertotalsubitem(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid(),reformalineaTO);
 				double valtotalsubitem=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),false);
+				System.out.println("valtotalsubitem "+valtotalsubitem);
 				double valtotal=0.0;
-				ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(reformalineaTO.getId().getId());
+				//..ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(reformalineaTO.getId().getId());
 				//Collection<ReformalineaTO> resultado=UtilSession.planificacionServicio.transObtienereformalinea(reformalineaTO.getId().getId());
-				System.out.println("fecha: " + reformaTO.getFechacreacion());
-				System.out.println("valor subitemvalor: " + reformalineaTO.getNpSubitemvalor());
+				//System.out.println("fecha: " + reformaTO.getFechacreacion());
+				System.out.println("reformaid: " + reformalineaTO.getId().getId());
 				Collection<ReformalineaTO> reformalineaTO1s=UtilSession.planificacionServicio.transObtienereformasnoelne(reformalineaTO.getNivelactid());
 				double totalreforma=0.0;
 				//  System.out.println("reformalinea.getNpSubitemvalor(): " + reformalinea.getNpSubitemvalor() + " id " +reformalinea.getNpreformaid());
 				for(ReformalineaTO reformalinea1TO:reformalineaTO1s){
-					if(reformalinea1TO.getReforma().getEstado().equals("AP") && reformalinea1TO.getReforma().getFechacreacion().compareTo(reformaTO.getFechacreacion())<=0
-							&& reformalineaTO.getId().getId().longValue()!=reformalinea1TO.getId().getId().longValue()){
+					System.out.println("idreforma: " + reformalinea1TO.getId().getId()+"fecha reforma comparar: " + reformalinea1TO.getNpfechacreacion());
+					if((reformalinea1TO.getReforma().getEstado().equals("AP")) && reformalinea1TO.getId().getId().longValue()<reformalineaTO.getId().getId().longValue()){
+//					if(reformalinea1TO.getReforma().getEstado().equals("AP") && reformalinea1TO.getReforma().getFechacreacion().compareTo(reformaTO.getFechacreacion())<=0
+//							&& reformalineaTO.getId().getId().longValue()<reformalinea1TO.getId().getId().longValue()){
 						//System.out.println("valor: " + reformalinea1TO.getValorincremento() + ", " + reformalinea1TO.getValordecremento()+" id "+reformalinea1TO.getId().getId());
 						totalreforma=totalreforma+reformalinea1TO.getValorincremento().doubleValue()-reformalinea1TO.getValordecremento().doubleValue();
 					}
 				}
-				//System.out.println("total**: " + totalreforma);
+				System.out.println("total**: " + totalreforma);
 				valtotal=valtotalsubitem + totalreforma;
 
 				//2. Obtengo el detalle del subitem
-				double saldo=ConsultasUtil.obtenersaldodisponible(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),reformalineaTO.getReforma().getFechacreacion());
-				saldo=saldo+reformalineaTO.getValordecremento()-reformalineaTO.getValorincremento();
+				//double saldo=ConsultasUtil.obtenersaldodisponible(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),reformalineaTO.getReforma().getFechacreacion());
+				double saldo=ConsultasUtil.obtenersaldodisponiblelineareforma(nivelactividadTO.getTablarelacionid(), nivelactividadTO.getId(), reformalineaTO,true);
+				//saldo=saldo+reformalineaTO.getValordecremento()-reformalineaTO.getValorincremento();
 				log.println("saldo: " + saldo);
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid());
 				reformalineaTO.setNpsaldo(saldo);
@@ -1159,6 +1179,14 @@ public class EjecucionController {
 						if(parameters.get("observacion")!=null)
 							certificacionTO.setMotivonegacion(parameters.get("observacion"));
 					}
+					else if(tipo.equals("SO")) {
+						certificacionTO.setFechasolicitud(new Date());
+					}
+					else if(tipo.equals("AP")) {
+						certificacionTO.setCertificacionemprevisaid(UtilSession.getUsuario(request).getSocionegocioid());
+						certificacionTO.setCertificacionempapruebaid(UtilSession.getUsuario(request).getSocionegocioid());
+					}
+
 					UtilSession.planificacionServicio.transCrearModificarCertificacion(certificacionTO,tipo);
 					//FormularioUtil.crearAuditoria(request, clase, "Eliminar", "", id.toString());
 					ComunController.crearAuditoria(request, "CERTIFICACION", "U", objeto, id.toString());
@@ -1295,6 +1323,10 @@ public class EjecucionController {
 						if(parameters.get("observacion")!=null)
 							ordengastoTO.setMotivonegacion(parameters.get("observacion"));
 					}
+					else if(tipo.equals("AP")) {
+						ordengastoTO.setOrdengastoempapruebaid(UtilSession.getUsuario(request).getSocionegocioid());
+						ordengastoTO.setOrdengastoemprevisaid(UtilSession.getUsuario(request).getSocionegocioid());
+					}
 					else if(tipo.equals("AN")) {
 						//valido que no tenga ordenes de devengo aprobadas o en proceso para poder anular
 						OrdendevengoTO ordendevengoTO=new OrdendevengoTO();
@@ -1387,6 +1419,10 @@ public class EjecucionController {
 						if(parameters.get("observacion")!=null)
 							ordendevengoTO.setMotivoanulacion(parameters.get("observacion"));
 					}
+					else if(tipo.equals("AP")) {
+						ordendevengoTO.setOrdendevengoempapruebaid(UtilSession.getUsuario(request).getSocionegocioid());
+						ordendevengoTO.setOrdendevengoemprevisaid(UtilSession.getUsuario(request).getSocionegocioid());
+					}
 					UtilSession.planificacionServicio.transCrearModificarOrdendevengo(ordendevengoTO, tipo);
 					ComunController.crearAuditoria(request, "ORDENDEVENGO", "U", objeto, id.toString());
 					mensajes.setMsg(MensajesWeb.getString("mensaje.flujo.exito"));
@@ -1432,6 +1468,10 @@ public class EjecucionController {
 			else if(tipo.equals("NE")) {
 				if(parameters.get("observacion")!=null)
 					ordenreversionTO.setMotivonegacion(parameters.get("observacion"));
+			}
+			else if(tipo.equals("AP")) {
+				ordenreversionTO.setOrdenreversionempapruebaid(UtilSession.getUsuario(request).getSocionegocioid());
+				ordenreversionTO.setOrdenreversionemprevisaid(UtilSession.getUsuario(request).getSocionegocioid());
 			}
 			UtilSession.planificacionServicio.transCrearModificarOrdenreversion(ordenreversionTO, tipo);
 			ComunController.crearAuditoria(request, "ORDENREVERSION", "U", objeto, id.toString());
@@ -1483,7 +1523,7 @@ public class EjecucionController {
 				}
 			}
 			//si va a solicitar debo validar que de acuerdo al tipo que escogio tenga el mismo incremento y el mismo decremento
-			if(tipo.equals("SO") && (reformaTO.getTipo().equals("MU") || reformaTO.getTipo().equals("EU") || reformaTO.getTipo().equals("ES"))){
+			if(tipo.equals("SO") && (reformaTO.getTipo().equals("MU") || reformaTO.getTipo().equals("EU"))){
 				double totaldecremento=0.0;
 				double totalincremento=0.0;
 				for(ReformalineaTO reformalineaTO2:reformalineaTOs){
@@ -1494,6 +1534,7 @@ public class EjecucionController {
 					continuar=false;
 					mensajes.setMsg("El valor del incremento debe ser igual a decremento");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+					respuesta.setEstado(false);
 				}
 			}
 			if(tipo.equals("SO")){
@@ -1512,6 +1553,7 @@ public class EjecucionController {
 					if(!resultado.equals("")){
 						mensajes.setMsg("Realice la distribucion de las subtareas: " + resultado);
 						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+						respuesta.setEstado(false);
 						System.out.println("mensaje: " + mensajes.getMsg());
 					}
 				}
@@ -1519,7 +1561,13 @@ public class EjecucionController {
 			if(continuar) {
 				if(tipo.equals("SO") || tipo.equals("EL") || tipo.equals("NE") || tipo.equals("AP")) {
 					reformaTO.setEstado(tipo);
-					if(tipo.equals("EL")) {
+					if(tipo.equals("AP")) {
+						System.out.println(" - socionegocio: " + UtilSession.getUsuario(request).getSocionegocioid());
+						reformaTO.setReformaempapruebaid(UtilSession.getUsuario(request).getSocionegocioid());
+						reformaTO.setReformaemprevisaid(UtilSession.getUsuario(request).getSocionegocioid());
+						reformaTO.setFechaaprobacion(new Date());
+					}
+					else if(tipo.equals("EL")) {
 						if(parameters.get("observacion")!=null)
 							reformaTO.setMotivoeliminacion(parameters.get("observacion"));
 						reformaTO.setFechaeliminacion(new Date());
@@ -1850,21 +1898,23 @@ public class EjecucionController {
 			//tipo=r y accion=o
 			if(tipo.equals("r")){
 				ReformalineaTO reformalineaTO= gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
-				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformalineaTO.getNivelactid()));
-				double valtotal=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),true);
+				//NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformalineaTO.getNivelactid()));
+				//double valtotal=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),true);
+				double valtotal=ConsultasUtil.obtenersaldodisponiblelineareforma(reformalineaTO.getNpSubitemid(), reformalineaTO.getNivelactid(), reformalineaTO,false);
+				//double valtotal=ConsultasUtil.obtenersaldodisponibleactual(reformalineaTO.getNpSubitemid(), reformalineaTO.getNivelactid(), UtilGeneral.parseStringToDate(reformalineaTO.getNpfechacreacion()));
 				System.out.println("valtotal: " + valtotal);
-				System.out.println("relacion: " + nivelactividadTO.getTablarelacionid());
+				System.out.println("relacion: " + reformalineaTO.getNpSubitemid());
 				System.out.println("nivelacti: "+reformalineaTO.getNivelactid());
 				System.out.println("fecha: "+reformalineaTO.getNpfechacreacion());
 				//2. Obtengo el detalle del subitem
 				//double saldo=ConsultasUtil.obtenersaldodisponible(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),UtilGeneral.parseStringToDate(reformalineaTO.getNpfechacreacion()));
-				double saldo=ConsultasUtil.obtenercodificadoyreformas(valtotal, nivelactividadTO.getTablarelacionid(), reformalineaTO.getNivelactid(),UtilGeneral.parseStringToDate(reformalineaTO.getNpfechacreacion()));
+				//..double saldo=ConsultasUtil.obtenercodificadoyreformas(valtotal, reformalineaTO.getNpSubitemid(), reformalineaTO.getNivelactid(),UtilGeneral.parseStringToDate(reformalineaTO.getNpfechacreacion()));
 
 				//..log.println("saldo: " + saldo);
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid());
 				System.out.println("saldo: " + valtotal + " inc: " + reformalineaTO.getValorincremento()+" dec: "+reformalineaTO.getValordecremento());
 				reformalineaTO.setNpSubitemvalor(valtotal+reformalineaTO.getValorincremento()-reformalineaTO.getValordecremento());
-				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, reformalineaTO, null,null,saldo);
+				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, reformalineaTO, null,null,reformalineaTO.getNpSubitemvalor());
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
 				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
 				jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramaTO.getCronogramalineaTOs(),new CronogramalineaTO().getJsonConfigreforma()));
