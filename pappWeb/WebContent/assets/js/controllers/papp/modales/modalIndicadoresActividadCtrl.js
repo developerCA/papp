@@ -4,7 +4,7 @@ app.controller('ModalIndicadoresActividadController', [ "$scope","$rootScope","e
 	function($scope,$rootScope,ejefiscal,$uibModalInstance,SweetAlert,$filter, ngTableParams,indicadoresActividadFactory) {
 
 	$scope.codigoFiltro=null;
-	$scope.descripcionFiltro=null;
+	$scope.nombreFiltro=null;
 	$scope.edicion=false;
 	$scope.objeto={};
 	$scope.detalles=[];
@@ -50,7 +50,8 @@ app.controller('ModalIndicadoresActividadController', [ "$scope","$rootScope","e
 		indicadoresActividadFactory.traerIndicadoresActividadFiltro(
 			pagina,
 			ejefiscal,
-			$scope.codigoFiltro
+			$scope.codigoFiltro,
+			$scope.nombreFiltro
 		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;

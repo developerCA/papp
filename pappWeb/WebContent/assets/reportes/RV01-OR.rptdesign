@@ -608,7 +608,14 @@
        u.UNIDADNOMBRE,
        ore.ORDENREVERSIONFECHACREACION 		AS ORDENREVERSIONFECHACREACION,
        ore.ORDENREVERSIONFECHAAPROBACION 	AS ORDENREVERSIONFECHAAPROBACION,
-       ore.ORDENREVERSIONESTADO 			AS ORDENREVERSIONESTADO,
+       CASE ore.ORDENREVERSIONESTADO
+         WHEN 'EL' THEN 'Eliminado'
+         WHEN 'AP' THEN 'Aprobado'
+         WHEN 'NE' THEN 'Negado'
+         WHEN 'RE' THEN 'Registrado'
+         WHEN 'SO' THEN 'Solicitado'
+         ELSE ore.ORDENREVERSIONESTADO
+       END AS  ORDENREVERSIONESTADO,
        ore.ORDENREVERSIONNUMEROOFICIO 		AS PROCESO,
        ore.ORDENREVERSIONDESCRIPCION 		AS ORDENREVERSIONDESCRIPCION,
        orl.ORDENREVERSIONLINEAID 			AS ID,
@@ -1811,7 +1818,7 @@
                         <property name="fontSize">12px</property>
                         <property name="fontWeight">bold</property>
                         <property name="textAlign">left</property>
-                        <text-property name="text">SEGUIMIENTO A LA EJECUCIÓN DE LA PROGRAMACIÓN ANUAL DE LA POLÍTICA PÚBLICA</text-property>
+                        <text-property name="text"></text-property>
                     </label>
                 </cell>
             </row>

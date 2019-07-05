@@ -718,22 +718,71 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			return;
 		}
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalItemsNivelActividad.html',
-			controller : 'ModalItemNivelActividadController',
+			templateUrl : 'assets/views/papp/modal/modalReformasLineasItem.html',
+			controller : 'ModalReformasLineasItemController',
 			size : 'lg',
 			resolve : {
-				nivelactividadunidadid : function() {
-					return $scope.objeto.reformaunidadid; // npacitividadunidad;
+				ID : function() {
+					return $scope.objeto.id;
+				},
+				unidadID : function() {
+					return $scope.objeto.reformaunidadid;
+				},
+				unidadcodigo : function() {
+					return $scope.objeto.npunidadcodigo;
+				},
+				unidadnombre : function() {
+					return $scope.objeto.npunidadnombre;
+				},
+				editar : function() {
+					return null; //$scope.detalles[index].id
+				},
+				noeditar : function() {
+					return $scope.noeditar;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
+			//console.log(obj);
 			$scope.objeto.reformaitemid = obj.id;
 			$scope.objeto.nivelactividadid = obj.id;
 			$scope.objeto.npitemcodigo = obj.npcodigo + ' - ' + obj.npcodigocanton + ' - ' + obj.npcodigofuente;			
 			$scope.objeto.npitemnombre = obj.npdescripcion;
+//		    $scope.detalles = obj.reformalineas;
+//		    //$scope.objeto.valortotal = obj.valortotal;
+//			$scope.objeto.valorincremento = 0;
+//			$scope.objeto.valordecremento = 0;
+//		    for (var i = 0; i < $scope.detalles.length; i++) {
+//				$scope.objeto.valorincremento += $scope.detalles[i].valorincremento;
+//				$scope.objeto.valordecremento += $scope.detalles[i].valordecremento;
+//			}
+//		    noSalir = true;
+//		    $scope.form.submit(Form);
+//            SweetAlert.swal(
+//            		"Reformas! - Lineas",
+//            		"Registro guardado satisfactoriamente!",
+//            		"success"
+//    		);
+//            $scope.detallesDP[indexLinea] = false;
 		}, function() {
 		});
+//		var modalInstance = $uibModal.open({
+//			templateUrl : 'assets/views/papp/modal/modalItemsNivelActividad.html',
+//			controller : 'ModalItemNivelActividadController',
+//			size : 'lg',
+//			resolve : {
+//				nivelactividadunidadid : function() {
+//					return $scope.objeto.reformaunidadid; // npacitividadunidad;
+//				}
+//			}
+//		});
+//		modalInstance.result.then(function(obj) {
+//			$scope.objeto.reformaitemid = obj.id;
+//			$scope.objeto.nivelactividadid = obj.id;
+//			$scope.objeto.npitemcodigo = obj.npcodigo + ' - ' + obj.npcodigocanton + ' - ' + obj.npcodigofuente;			
+//			$scope.objeto.npitemnombre = obj.npdescripcion;
+//		}, function() {
+//		});
 	};
 
 	$scope.form = {

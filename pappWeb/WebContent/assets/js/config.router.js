@@ -767,7 +767,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalCertificacionesFondoLiquidacionManuaCtrl',
         		'CertificacionesFondosFactory',
         		'ModalReformasLineasCtrl',
-        		'ModalReformasLineasDistMetaCtrl'
+        		'ModalReformasLineasDistMetaCtrl',
+        		'ModalReformasLineasItemCtrl',
+        		'ModalReformasLineasSubItemCtrl'
 		),
         title: 'Reformas',
         ncyBreadcrumb: {

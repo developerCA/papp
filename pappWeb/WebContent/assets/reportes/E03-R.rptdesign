@@ -463,7 +463,14 @@
 		u.UNIDADNOMBRE,
 		c.REFORMAFECHACREACION 				AS CERTIFICACIONFECHACREACION,
 		c.REFORMAFECHAAPROBACION 			AS CERTIFICACIONFECHAAPROBACION,
-		c.REFORMAESTADO 					AS CERTIFICACIONESTADO,
+       CASE c.REFORMAESTADO
+         WHEN 'EL' THEN 'Eliminado'
+         WHEN 'AP' THEN 'Aprobado'
+         WHEN 'NE' THEN 'Negado'
+         WHEN 'RE' THEN 'Registrado'
+         WHEN 'SO' THEN 'Solicitado'
+         ELSE c.REFORMAESTADO
+       END AS  CERTIFICACIONESTADO,
 		c.REFORMACODIGO 					AS CERTIFICACIONCODIGO,
 		c.REFORMACODIGO 					AS PROCESO,
 		c.REFORMADESCRIPCION 				AS CERTIFICACIONDESCRIPCION,
@@ -1659,7 +1666,7 @@
                         <property name="overflow">hidden</property>
                         <property name="height">80px</property>
                         <property name="source">url</property>
-                        <expression name="uri" type="constant">/birt/comaco.jpg</expression>
+                        <expression name="uri" type="constant">comaco.jpg</expression>
                     </image>
                 </cell>
                 <cell id="4313"/>
@@ -1684,7 +1691,7 @@
                         <property name="fontSize">12px</property>
                         <property name="fontWeight">bold</property>
                         <property name="textAlign">left</property>
-                        <text-property name="text">SEGUIMIENTO A LA EJECUCIÓN DE LA PROGRAMACIÓN ANUAL DE LA POLÍTICA PÚBLICA</text-property>
+                        <text-property name="text"></text-property>
                     </label>
                 </cell>
             </row>
