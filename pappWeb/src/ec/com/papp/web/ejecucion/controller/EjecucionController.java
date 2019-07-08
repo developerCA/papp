@@ -963,6 +963,12 @@ public class EjecucionController {
 				for(OrdendevengolineaTO ordendevengolineaTO:pendientes)
 					ordenesnoaprob=ordenesnoaprob+ordendevengolineaTO.getValor();
 				log.println("ordenesnoaprob " +ordenesnoaprob);
+				Collection<OrdenreversionlineaTO> pendientesrev=UtilSession.planificacionServicio.transObtieneordenesreversionpendientes(id2);
+				log.println("ordenes reversion no aprobadas " + pendientes.size());
+				double ordenesnoaprobrev=0.0;
+				for(OrdenreversionlineaTO ordenreversionlineaTO:pendientesrev)
+					ordenesnoaprobrev=ordenesnoaprobrev+ordenreversionlineaTO.getValor();
+
 				OrdengastoTO ordengastoTO=(OrdengastoTO) request.getSession().getAttribute(ConstantesSesion.ORDENGASTO);
 				//4. Consulto las ordenes de devengo aprobada
 				Collection<OrdendevengolineaTO> aprobadas=UtilSession.planificacionServicio.transObtieneordenesdevengoaprobadas(id2,ordengastoTO.getId());
@@ -971,6 +977,13 @@ public class EjecucionController {
 				for(OrdendevengolineaTO aprobada:aprobadas)
 					ordenesaprobadas=ordenesaprobadas+aprobada.getValor();
 				log.println("valor aprobadas " + ordenesaprobadas);
+				Collection<OrdenreversionlineaTO> aprobadasrev=UtilSession.planificacionServicio.transObtieneordenesreversionaprobadas(id2, null, null, ordengastoTO.getId());
+				log.println("aprobadas rev"+ aprobadasrev.size());
+				double ordenesaprobadasrev=0.0;
+				for(OrdenreversionlineaTO aprobadarev:aprobadasrev)
+					ordenesaprobadasrev=ordenesaprobadasrev+aprobadarev.getValor();
+				log.println("valor aprobadas " + ordenesaprobadasrev);
+
 				//Traigo el valor total de la linea de la orden de gasto
 //				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
 //				ordengastolineaTO.setNivelactid(id2);
@@ -978,11 +991,13 @@ public class EjecucionController {
 //				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO, false);
 //				ordengastolineaTO=(OrdengastolineaTO)ordengastolineaTOs.iterator().next();
 //				double saldo=ordengastolineaTO.getValor()-ordenesnoaprob-ordenesaprobadas;
-				double saldo=ordengastoTO.getValortotal()-ordenesnoaprob-ordenesaprobadas;
+				double saldo=ordengastoTO.getValortotal()-ordenesnoaprob-ordenesaprobadas-ordenesnoaprobrev-ordenesaprobadasrev;
 				Map<String, Double> saldodisponible=new HashMap<>();
 				saldodisponible.put("saldo", saldo);
 				saldodisponible.put("noaprobadas", ordenesnoaprob);
 				saldodisponible.put("aprobadas", ordenesaprobadas);
+				saldodisponible.put("noaprobadasreversion", ordenesnoaprobrev);
+				saldodisponible.put("aprobadasreversion", ordenesaprobadasrev);
 				jsonObject.put("datoslineaordend", (JSONObject)JSONSerializer.toJSON(saldodisponible));
 			}
 			//Reforma
@@ -1342,7 +1357,7 @@ public class EjecucionController {
 						}
 						//valido que si la certificacion esta en estado LT o LP no se pueda anular
 						CertificacionTO certificacionTO=UtilSession.planificacionServicio.transObtenerCertificacionTO(ordengastoTO.getOrdengastocertificacionid());
-						if(certificacionTO.getEstado().equals("LT") || certificacionTO.getEstado().equals("LP")){
+						if(certificacionTO.getEstado().equals("LP")){
 							mensajes.setMsg("No se puede anular la orden porque la certificacion esta en estado Liquidado");
 							mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 							respuesta.setEstado(false);
