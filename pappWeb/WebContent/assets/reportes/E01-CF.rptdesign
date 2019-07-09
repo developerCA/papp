@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
     <text-property name="title">E-01: SOLICITUD DE CERTIFICADO DE FONDOS</text-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -446,8 +446,8 @@
             REFORMALINEA rl
             INNER JOIN REFORMA r ON r.REFORMAID = rl.REFORMAID
         WHERE rl.reformalineanivelactid = cl.CERTIFICACIONLINEANIVELACTID
-          AND r.REFORMAESTADO IN ('RE', 'AP')
-          AND r.REFORMAFECHACREACION < c.CERTIFICACIONFECHACREACION
+          AND r.REFORMAESTADO = 'AP'
+          AND r.REFORMAFECHACREACION <= c.CERTIFICACIONFECHACREACION
        ) - (
        SELECT
             NVL(SUM(ccl.CERTIFICACIONLINEAVALOR), 0) AS valor3
@@ -456,8 +456,20 @@
             INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = ccl.CERTIFICACIONID
         WHERE ccl.CERTIFICACIONLINEANIVELACTID = cl.CERTIFICACIONLINEANIVELACTID
           AND cc.CERTIFICACIONESTADO IN ('RE', 'AP', 'SO')
-          AND cc.CERTIFICACIONFECHACREACION <= c.CERTIFICACIONFECHACREACION
+          AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
+       )
+	    - (
+       SELECT
+            NVL(SUM(orgl.ORDENGASTOLINEAVALOR), 0) AS valor3
+        FROM
+			ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGASTOID 
+            INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = org.ORDENGASTOCERTIFICACIONID
+        WHERE orgl.ORDENGASTOLINEANIVELACTID = cl.CERTIFICACIONLINEANIVELACTID
+		  AND org.ORDENGASTOESTADO = 'AP'
+          AND cc.CERTIFICACIONESTADO = 'LP'
+          AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
        )) AS saldo
+
   FROM certificacion                        c
        INNER JOIN Unidad                    u               ON u.UNIDADID = c.CERTIFICACIONUNIDADID
        INNER JOIN Unidadinst                ui              ON ui.unidadid = u.unidadid
