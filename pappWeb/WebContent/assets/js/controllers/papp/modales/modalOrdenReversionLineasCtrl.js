@@ -117,7 +117,7 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
             	if ($scope.objeto.npdevengosnoapro > 0) {
                     SweetAlert.swal(
                 		"Orden Reversion! - Lineas",
-                		"No se puede agregar mientras tenga devengados no aprobados",
+                		"No puede realizar una orden de reversiòn mientras tenga ordenes de devengo resgistrados o solicitados",
                 		"error"
             		);
             		return;
