@@ -550,7 +550,11 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
             	ordenReversionFactory.guardar($scope.objeto).then(function(resp){
         			 if (resp.estado){
       				     $scope.objeto=resp.json.ordenreversion;
-      					 SweetAlert.swal("Orden de Reversion!", "Registro guardado satisfactoriamente!", "success");
+      					 SweetAlert.swal(
+      							 "Orden de Reversion!",
+      							 "Registro guardado satisfactoriamente!",
+      							 "success"
+						 );
         				 if ($scope.nuevoar) {
 	      					 $scope.noeditar = false;
 	      					 $scope.nuevoar=false;
@@ -560,7 +564,11 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
     			            $scope.objeto={};
         				 }
         			 }else{
-	 		             SweetAlert.swal("Orden de Reversion!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal(
+	 		            		 "Orden de Reversion!",
+	 		            		 resp.mensajes.msg,
+	 		            		 "error"
+	            		 );
         			 }
         		})
             }
