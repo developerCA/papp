@@ -131,8 +131,10 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
             		return;
             	}
             	var tObj = Object.assign({}, $scope.objeto);
-//            	tObj.nivelactid = tObj.subitem;
-//            	delete tObj.subitem;
+            	if (tObj.nivelactid == 0) {
+	            	tObj.nivelactid = tObj.subitem;
+	            	delete tObj.subitem;
+            	}
             	ordenReversionLineasFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
