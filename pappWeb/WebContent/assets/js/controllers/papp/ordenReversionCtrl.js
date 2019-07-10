@@ -410,10 +410,14 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 			}
 		});
 		modalInstance.result.then(function(obj) {
-		    $scope.detalles = obj.ordendevengolineas;
-			$scope.objeto.valortotal = obj.ordendevengo.valortotal;
+		    $scope.detalles = obj.ordenreversionlineas;
+			$scope.objeto.valortotal = obj.ordenreversion.valortotal;
 			$scope.data[$scope.dataIndex].valortotal = $scope.objeto.valortotal;
-            SweetAlert.swal("Orden Reversion! - Lineas", "Registro guardado satisfactoriamente!", "success");
+            SweetAlert.swal(
+            		"Orden Reversion! - Lineas",
+            		"Registro guardado satisfactoriamente!",
+            		"success"
+    		);
 		}, function() {
 		});
 	};

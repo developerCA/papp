@@ -122,9 +122,17 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
             		);
             		return;
             	}
+            	if ($scope.objeto.valor.toFixed(2) > $scope.objeto.npsaldo.toFixed(2)) {
+                    SweetAlert.swal(
+                		"Orden Devengo! - Lineas",
+                		"El valor no puede ser mayor que el saldo por devengar",
+                		"error"
+            		);
+            		return;
+            	}
             	var tObj = Object.assign({}, $scope.objeto);
-            	tObj.nivelactid = tObj.subitem;
-            	delete tObj.subitem;
+//            	tObj.nivelactid = tObj.subitem;
+//            	delete tObj.subitem;
             	ordenReversionLineasFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);
