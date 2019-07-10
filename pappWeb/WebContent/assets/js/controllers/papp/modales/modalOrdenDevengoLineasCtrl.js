@@ -125,7 +125,15 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	if ($scope.objeto.valor == $scope.objeto.npsaldo.toFixed(2)) {
+            	if ($scope.objeto.valor.toFixed(2) > $scope.objeto.npsaldo.toFixed(2)) {
+                    SweetAlert.swal(
+                		"Orden Devengo! - Lineas",
+                		"El valor no puede ser mayor que el saldo por devengar",
+                		"error"
+            		);
+            		return;
+            	}
+            	if ($scope.objeto.valor.toFixed(2) == $scope.objeto.npsaldo.toFixed(2)) {
                     SweetAlert.swal(
                 		"Orden Devengo! - Lineas",
                 		"Tiene que cambiar el tipo de la Orden de Devengo a: Liquidacion",
