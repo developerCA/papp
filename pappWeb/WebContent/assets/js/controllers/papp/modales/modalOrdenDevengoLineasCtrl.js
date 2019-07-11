@@ -3,43 +3,40 @@
 app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ordenDevengoID","unidadID","editar","ordenGastoID","ordenGastoValor","valorTotal","noeditar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenDevengoLineasFactory",
 	function($scope,$rootScope,ordenDevengoID,unidadID,editar,ordenGastoID,ordenGastoValor,valorTotal,noeditar,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenDevengoLineasFactory) {
 
-	$scope.noeditar2=false;
-	$scope.noeditar=false;
-	$scope.init=function(){
+	$scope.noeditar2 = false;
+	$scope.noeditar = false;
+	$scope.init=function() {
 		$scope.editarValor = (ordenGastoValor != 'L'? true: false);
 		if (editar == null) {
-			//nuevo
+			// nuevo
 			ordenDevengoLineasFactory.nuevoLinea(
 				ordenDevengoID
 			).then(function(resp){
-				//console.log(resp.json.ordendevengolinea);
-	        	$scope.objeto = resp.json.ordendevengolinea;
+				$scope.objeto = resp.json.ordendevengolinea;
 				//$scope.objeto.valor = ordenGastoValor;
-	        	$scope.noeditar=false;
+	        	$scope.noeditar = false;
 	        	$scope.cambioSubItems();
 			})
 		} else {
-			//editar
+			// editar
 			ordenDevengoLineasFactory.editarLinea(
 				editar
 			).then(function(resp){
-				//console.log(resp);
-	        	$scope.objeto = resp.json.ordendevengolinea;
+				$scope.objeto = resp.json.ordendevengolinea;
 	        	$scope.objetoDetalles = resp.json.subiteminfo;
 	        	try {
 		        	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
 				} catch (e) {
 		        	$scope.objeto.npvalor = 0;
 				}
-	        	$scope.noeditar=true;
-	        	$scope.noeditar2=(!$scope.editarValor? false: noeditar);
+	        	$scope.noeditar = true;
+	        	$scope.noeditar2 = (!$scope.editarValor? false: noeditar);
 			})
 		}
 	}
 
 	$scope.cambioSubItems=function(){
 		$scope.listarSubItems = [];
-		//console.log($scope.objeto);
 		ordenDevengoLineasFactory.listarSubItems(
 			ordenGastoID
 		).then(function(resp){
@@ -80,8 +77,8 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 	        	$scope.objeto.npvalor = 0;
 			}
         	if (!$scope.editarValor) {
-        		//$scope.objeto.valor = $scope.objeto.npsaldo;
-        		$scope.objeto.valor = $scope.objeto.npvalor;
+        		$scope.objeto.valor = $scope.objeto.npsaldo;
+        		//$scope.objeto.valor = $scope.objeto.npvalor;
         	}
 		})
 		ordenDevengoLineasFactory.obtenerTotal(
@@ -125,7 +122,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	if ($scope.objeto.valor.toFixed(2) > $scope.objeto.npsaldo.toFixed(2)) {
+            	if (Number($scope.objeto.valor.toFixed(2)) > Number($scope.objeto.npsaldo.toFixed(2))) {
                     SweetAlert.swal(
                 		"Orden Devengo! - Lineas",
                 		"El valor no puede ser mayor que el saldo por devengar",
@@ -133,7 +130,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
             		);
             		return;
             	}
-            	if ($scope.objeto.valor.toFixed(2) == $scope.objeto.npsaldo.toFixed(2)) {
+            	if (ordenGastoValor != 'L' && Number($scope.objeto.valor.toFixed(2)) == Number($scope.objeto.npsaldo.toFixed(2))) {
                     SweetAlert.swal(
                 		"Orden Devengo! - Lineas",
                 		"Tiene que cambiar el tipo de la Orden de Devengo a: Liquidacion",
