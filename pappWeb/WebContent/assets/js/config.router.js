@@ -766,7 +766,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ModalItemCtrl','ModalItemNivelActividadCtrl','ItemFactory',
         		'ModalCertificacionesFondoLiquidacionManuaCtrl',
         		'CertificacionesFondosFactory',
-        		'ModalReformasLineasCtrl',
+        		'ModalReformasLineasCtrl1',
         		'ModalReformasLineasDistMetaCtrl',
         		'ModalReformasLineasItemCtrl',
         		'ModalReformasLineasSubItemCtrl'

@@ -409,8 +409,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			return;
 		}
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalReformasLineas.html',
-			controller : 'ModalReformasLineasController',
+			templateUrl : 'assets/views/papp/modal/modalReformasLineas1.html',
+			controller : 'ModalReformasLineasController1',
 			size : 'lg',
 			resolve : {
 				ID : function() {
@@ -510,7 +510,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		indexLinea = index;
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalReformasLineas.html',
-			controller : 'ModalReformasLineasController',
+			controller : 'ModalReformasLineasController1',
 			size : 'lg',
 			resolve : {
 				ID : function() {
@@ -954,18 +954,6 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	var diferencia = $scope.objetoP.reformalinea.metaReprogramada;
-            	for (var i = 0; i < $scope.detallesP.length; i++) {
-            		diferencia -= $scope.detallesP[i].metacantidad;
-				}
-            	if (diferencia != 0) {
-                    SweetAlert.swal(
-                		"Reformas!",
-                		"Tiene una diferencia de: " + diferencia + ", con la Meta Reprogramada",
-                		"error"
-            		);
-        			return;
-            	}
                 var tObj = Object.assign({}, $scope.objetoP.cronograma);
                 var tDet = Object.assign([], $scope.detallesP);
                 tObj.cronogramalineaTOs = tDet;
@@ -1061,7 +1049,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.metaActualizar = function(index) {
 //		var modalInstance = $uibModal.open({
 //			templateUrl : 'assets/views/papp/modal/modalReformasLineas.html',
-//			controller : 'ModalReformasLineasController',
+//			controller : 'ModalReformasLineasController1',
 //			size : 'lg',
 //			resolve : {
 //				ID : function() {

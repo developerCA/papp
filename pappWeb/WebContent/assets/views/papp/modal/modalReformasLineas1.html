@@ -1,0 +1,214 @@
+<div class="modal-header">
+	<h3 class="modal-title">
+		Reformas - L&iacute;neas
+	</h3>
+</div>
+<div class="modal-body">
+	<div class="panel-body" ng-init="init();" >
+		<form name="Form" id="form1" novalidate
+			ng-submit="form.submit(Form)">
+
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Unidad C&oacute;digo
+			    </label>
+		        <input type="text" placeholder="Unidad c&oacute;digo"
+		            class="form-control" name="npunidadcodigo" ng-disabled="true"
+		            ng-model="npunidadcodigo">
+			</div>
+			
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Unidad Nombre
+			    </label>
+			    <input type="text" placeholder="Escriba un unidad nombre"
+			        class="form-control" name="npunidadnombre" ng-model="npunidadnombre"
+			        ng-disabled="true">
+			</div>
+
+			<div class="form-group">
+			    <label class="control-label">
+			        Programa
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="programanombre" ng-model="objetoDetalles.programanombre">
+			</div>
+		
+			<div class="form-group">
+			    <label class="control-label">
+			        Subprograma
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="subprogramanombre" ng-model="objetoDetalles.subprogramanombre">
+			</div>
+		
+			<div class="form-group">
+			    <label class="control-label">
+			        Proyecto
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="proyectonombre" ng-model="objetoDetalles.proyectonombre">
+			</div>
+		
+			<div class="form-group">
+			    <label class="control-label">
+			        Actividad
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="actividadnombre" ng-model="objetoDetalles.actividadnombre">
+			</div>
+		
+			<div class="form-group">
+			    <label class="control-label">
+			        Subactividad
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="subactividadnombre" ng-model="objetoDetalles.subactividadnombre">
+			</div>
+		
+			<div class="form-group">
+			    <label class="control-label">
+			        Tarea
+			    </label>
+			    <input type="text" ng-disabled="true"
+			        class="form-control" name="tareanombre" ng-model="objetoDetalles.tareanombre">
+			</div>
+			
+			<div class="form-group"
+			    ng-class="{'has-error':Form.subtarea.$dirty && Form.subtarea.$invalid, 'has-success':Form.subtarea.$valid}">
+			    <label class="control-label">
+			        Subtarea
+			        <span class="symbol required"></span>
+			    </label>
+			    <input ng-show="noeditar" type="text" ng-disabled="true"
+			        class="form-control" name="subtareanombre" ng-model="objetoDetalles.subtareanombre">
+			    <select ng-show="!noeditar" class="form-control" name="subtarea"
+			        ng-model="objeto.subtarea" ng-change="cambioItems();">
+					<option 
+					    ng-repeat="operator in listarSubtareas" 
+					    value="{{operator.id}}"
+					>
+					    {{operator.npcodigo}} - {{operator.npdescripcion}}
+					</option>
+			    </select>
+			    <span class="error text-small block"
+			        ng-if="Form.subtarea.$dirty && Form.subtarea.$invalid">
+			        Incorrecto
+			    </span>
+			    <span class="success text-small"
+			        ng-if="Form.subtarea.$valid">
+			        Listo
+			    </span>
+			</div>
+			
+			<div class="form-group"
+			    ng-class="{'has-error':Form.item.$dirty && Form.item.$invalid, 'has-success':Form.item.$valid}">
+			    <label class="control-label">
+			        Item
+			        <span class="symbol required"></span>
+			    </label>
+			    <input ng-show="noeditar" type="text" ng-disabled="true"
+			        class="form-control" name="itemnombre" ng-model="objetoDetalles.itemnombre">
+			    <select ng-show="!noeditar" class="form-control" name="item"
+			        ng-model="objeto.item" ng-change="cambioSubItems();">
+					<option 
+					    ng-repeat="operator in listarItems" 
+					    value="{{operator.id}}"
+					>
+					    {{operator.npcodigo}} - {{operator.npcodigocanton}} - {{operator.npcodigofuente}} - {{operator.npcodigoorganismo}} - {{operator.npdescripcion}}
+					</option>
+			    </select>
+			    <span class="error text-small block"
+			        ng-if="Form.item.$dirty && Form.item.$invalid">
+			        Incorrecto
+			    </span>
+			    <span class="success text-small"
+			        ng-if="Form.item.$valid">
+			        Listo
+			    </span>
+			</div>
+			
+			<div class="form-group"
+			    ng-class="{'has-error':Form.subitem.$dirty && Form.subitem.$invalid, 'has-success':Form.subitem.$valid}">
+			    <label class="control-label">
+			        Subitem
+			        <span class="symbol required"></span>
+			    </label>
+			    <input ng-show="noeditar" type="text" ng-disabled="true"
+			        class="form-control" name="subitemnombre" ng-model="objetoDetalles.subitemnombre">
+			    <select ng-show="!noeditar" class="form-control" name="subitem"
+			        ng-model="objeto.subitem" ng-change="obtenerTotal();">
+					<option 
+					    ng-repeat="operator in listarSubItems" 
+					    value="{{operator.id}}"
+					>
+					    {{operator.descripcionexten}}
+					</option>
+			    </select>
+			    <span class="error text-small block"
+			        ng-if="Form.subitem.$dirty && Form.subitem.$invalid">
+			        Incorrecto
+			    </span>
+			    <span class="success text-small"
+			        ng-if="Form.subitem.$valid">
+			        Listo
+			    </span>
+			</div>
+			
+			<h3>
+				Presupuesto
+			</h3>
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Valor Actual
+			    </label>
+		        <input type="text" style="text-align:right;" decimal="2"
+		            class="form-control" name="valorajustado"
+		            ng-model="valorajustado" ng-disabled="true">
+			</div>
+
+			<div class="form-group has-success">
+			    <label class="control-label">
+			        Saldo
+			    </label>
+		        <input type="text" style="text-align:right;" decimal="2"
+		            class="form-control" name="saldo"
+		            ng-model="saldo" ng-disabled="true">
+			</div>
+			
+			<div class="form-group">
+			    <label class="control-label">
+			        Valor Incremento
+			    </label>
+		        <input type="number" numericOnly style="text-align:right;"
+		        	decimal="2" placeholder="0.00" ng-disabled="noeditar2"
+		            class="form-control" name="valorincremento" 
+		            ng-model="objeto.valorincremento">
+			</div>
+
+			<div class="form-group">
+			    <label class="control-label">
+			        Valor Decremento
+			    </label>
+		        <input type="number" numericOnly style="text-align:right;"
+		        	decimal="2" placeholder="0.00" ng-disabled="noeditar2"
+		            class="form-control" name="valordecremento"
+		            ng-model="objeto.valordecremento">
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<div class="pull-right">
+						<button type="submit" class="btn btn-primary" ng-show="!noeditar2">
+							Guardar
+						</button>
+						<button type="reset" class="btn btn-default btn-o"
+							ng-click="form.reset(Form)">
+							Cancelar
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

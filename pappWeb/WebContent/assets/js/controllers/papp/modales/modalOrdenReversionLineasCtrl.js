@@ -14,7 +14,7 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
 			).then(function(resp){
 				//console.log(resp.json.ordenreversionlinea);
 	        	$scope.objeto = resp.json.ordenreversionlinea;
-				$scope.noeditar = false;
+	        	$scope.noeditar = false;
 	        	$scope.cargarSubItems();
 			})
 		} else {
@@ -67,6 +67,7 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
 		).then(function(resp){
 			//console.log(resp);
         	$scope.objeto.npdevengado = resp.json.datoslineaordend.aprobadas;
+			$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
         	//$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
         	//$scope.objeto.npsaldodisponible = resp.json.datoslineaordend.saldo;
         	$scope.objeto.npsaldo = resp.json.datoslineaordend.saldo;
@@ -117,7 +118,7 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
             	if ($scope.objeto.npdevengosnoapro > 0) {
                     SweetAlert.swal(
                 		"Orden Reversion! - Lineas",
-                		"No puede realizar una orden de reversiòn mientras tenga ordenes de devengo resgistrados o solicitados",
+                		"No puede realizar una orden de reversion mientras tenga ordenes de devengo resgistrados o solicitados",
                 		"error"
             		);
             		return;
