@@ -39,7 +39,7 @@ app.factory("ordenReversionFactory", [ "Restangular", function(Restangular) {
 
 			if(ejefiscal != null && ejefiscal != "") tObj.ejerciciofiscalid= "" + ejefiscal;	
 			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
-			if(precompromiso != null && precompromiso != "") tObj.numprecompromiso= "" + precompromiso;	
+			if(precompromiso != null && precompromiso != "") tObj.ordengasto= "" + precompromiso;	
 			if(valorinicial!= null && valorinicial != "") tObj.valorinicial= "" + valorinicial;	
 			if(valorfinal != null && valorfinal != "") tObj.valorfinal= "" + valorfinal;	
 			if(fechainicial != null && fechainicial != "") tObj.fechainicial= "" + encodeURIComponent(fechainicial);	
