@@ -16,6 +16,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 				//$scope.objeto.valor = ordenGastoValor;
 	        	$scope.noeditar = false;
 	        	$scope.cambioSubItems();
+	        	$scope.noeditar2 = !$scope.editarValor;
 			})
 		} else {
 			// editar
@@ -29,8 +30,8 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 				} catch (e) {
 		        	$scope.objeto.npvalor = 0;
 				}
-	        	$scope.noeditar = true;
-	        	$scope.noeditar2 = (!$scope.editarValor? false: noeditar);
+	        	//$scope.noeditar = true;
+	        	$scope.noeditar2 = !$scope.editarValor || noeditar; //(!$scope.editarValor? false: noeditar);
 			})
 		}
 	}
