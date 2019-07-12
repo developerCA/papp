@@ -496,6 +496,10 @@ public class EjecucionController {
 						}
 						else{
 							accion = (reformalineaTO.getId()==null)?"I":"U";
+							if(reformalineaTO.getNpvalordecremento()==null)
+								reformalineaTO.setNpvalordecremento(0.0);
+							if(reformalineaTO.getNpvalorincremento()==null)
+								reformalineaTO.setNpvalorincremento(0.0);
 							UtilSession.planificacionServicio.transCrearModificarReformalinea(reformalineaTO);
 							//id=reformalineaTO.getId().getId().toString() + reformalineaTO.getId().getLineaid();
 							//Traiga la lista de cetificacionlinea
@@ -957,13 +961,13 @@ public class EjecucionController {
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, id, id2,new Date());
 				//3. Obtengos las ordenes pendientes de este nivel
 				log.println("id para calculo de no aprobadas:  " + id2);
-				Collection<OrdendevengolineaTO> pendientes=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2);
+				Collection<OrdendevengolineaTO> pendientes=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2,null);
 				log.println("ordenes no aprobadas " + pendientes.size());
 				double ordenesnoaprob=0.0;
 				for(OrdendevengolineaTO ordendevengolineaTO:pendientes)
 					ordenesnoaprob=ordenesnoaprob+ordendevengolineaTO.getValor();
 				log.println("ordenesnoaprob " +ordenesnoaprob);
-				Collection<OrdenreversionlineaTO> pendientesrev=UtilSession.planificacionServicio.transObtieneordenesreversionpendientes(id2);
+				Collection<OrdenreversionlineaTO> pendientesrev=UtilSession.planificacionServicio.transObtieneordenesreversionpendientes(id2,null);
 				log.println("ordenes reversion no aprobadas " + pendientes.size());
 				double ordenesnoaprobrev=0.0;
 				for(OrdenreversionlineaTO ordenreversionlineaTO:pendientesrev)
