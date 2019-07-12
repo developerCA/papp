@@ -1458,13 +1458,15 @@ public class EjecucionController {
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null){
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-			log.println("existen mensajes");
-			respuesta.setMensajes(mensajes);
-
-		}
+//		if(mensajes.getMsg()!=null){
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+//			log.println("existen mensajes");
+//			respuesta.setMensajes(mensajes);
+//
+//		}
 		log.println("devuelve**** " + jsonObject.toString());
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
 	
@@ -1505,13 +1507,15 @@ public class EjecucionController {
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null){
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-			log.println("existen mensajes");
-			respuesta.setMensajes(mensajes);
-
-		}
+//		if(mensajes.getMsg()!=null){
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+//			log.println("existen mensajes");
+//			respuesta.setMensajes(mensajes);
+//
+//		}
 		log.println("devuelve**** " + jsonObject.toString());
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
 
@@ -1566,6 +1570,7 @@ public class EjecucionController {
 					mensajes.setMsg("Realice la distribucion de los subitems: " + resultado);
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 					continuar=false;
+					respuesta.setEstado(false);
 				}
 				else{
 					resultado=UtilSession.planificacionServicio.transListareformalineasdistribucionrms(reformaTO);
@@ -1573,6 +1578,7 @@ public class EjecucionController {
 						mensajes.setMsg("Realice la distribucion de las subtareas: " + resultado);
 						mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
 						respuesta.setEstado(false);
+						continuar=false;
 						System.out.println("mensaje: " + mensajes.getMsg());
 					}
 				}
@@ -1614,13 +1620,15 @@ public class EjecucionController {
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null){
-			//System.out.println("tiene mensajes");
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-			respuesta.setMensajes(mensajes);
-			log.println("existen mensajes");
-		}
+//		if(mensajes.getMsg()!=null){dd
+//			//System.out.println("tiene mensajes");
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+//			respuesta.setMensajes(mensajes);
+//			log.println("existen mensajes");
+//		}
 		System.out.println("devuelve**** " + jsonObject.toString());
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
 
@@ -1687,12 +1695,14 @@ public class EjecucionController {
 			respuesta.setEstado(false);
 			//throw new MyException(e);
 		}
-		if(mensajes.getMsg()!=null){
-			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
-			respuesta.setMensajes(mensajes);
-			log.println("existen mensajes");
-		}
+//		if(mensajes.getMsg()!=null){
+//			jsonObject.put("mensajes", (JSONObject)JSONSerializer.toJSON(mensajes));
+//			respuesta.setMensajes(mensajes);
+//			log.println("existen mensajes");
+//		}
 		log.println("devuelve**** " + jsonObject.toString());
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
 

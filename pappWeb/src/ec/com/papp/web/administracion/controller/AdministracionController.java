@@ -1816,9 +1816,10 @@ public class AdministracionController {
 			//Contrato
 			else if(clase.equals("contrato")){
 				ContratoTO contratoTO = UtilSession.planificacionServicio.transObtenerContratoTO(id);
-				contratoTO.setSocionegocio(new SocionegocioTO());
-				if(contratoTO.getNpfechainicio()!=null)
-					contratoTO.setFechainicio(UtilGeneral.parseStringToDate(contratoTO.getNpfechainicio()));
+				//contratoTO.setSocionegocio(new SocionegocioTO());
+				System.out.println("socio negocio: " + contratoTO.getNpproveedorcodigov());
+				if(contratoTO.getFechainicio()!=null)
+					contratoTO.setNpfechainicio(UtilGeneral.parseDateToString(contratoTO.getFechainicio()));
 				jsonObject.put("contrato", (JSONObject)JSONSerializer.toJSON(contratoTO,contratoTO.getJsonConfigedicion()));
 			}
 
