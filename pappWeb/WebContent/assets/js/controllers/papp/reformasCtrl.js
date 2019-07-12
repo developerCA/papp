@@ -438,9 +438,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		    $scope.detallesDP.push(false);
 			$scope.objeto.valorincremento = 0;
 			$scope.objeto.valordecremento = 0;
-		    for (var i = 0; i < $scope.detallesM.length; i++) {
-				$scope.objeto.valorincremento += $scope.detallesM[i].valorincremento;
-				$scope.objeto.valordecremento += $scope.detallesM[i].valordecremento;
+		    for (var i = 0; i < $scope.detalles.length; i++) {
+				$scope.objeto.valorincremento += $scope.detalles[i].valorincremento;
+				$scope.objeto.valordecremento += $scope.detalles[i].valordecremento;
 			}
 		    noSalir = true;
 		    $scope.form.submit(Form);
@@ -670,7 +670,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 							"Eliminado satisfactoriamente!",
 							"success"
 					);
-					//$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
+					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
 					$scope.objeto.valorincremento -= $scope.detalles[index].valorincremento;
 					$scope.objeto.valordecremento -= $scope.detalles[index].valordecremento;
 				    $scope.detalles.splice(index, 1);
