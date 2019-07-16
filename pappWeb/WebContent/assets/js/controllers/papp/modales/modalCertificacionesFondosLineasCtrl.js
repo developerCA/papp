@@ -4,6 +4,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 	function($scope,$rootScope,ID,unidadID,editar,noeditar,$uibModalInstance,SweetAlert,$filter, ngTableParams,certificacionesFondosFactory) {
 
 	$scope.noeditar = false;
+	$scope.editarSub = false;
 
 	$scope.init=function(){
 		//$scope.npcertificacionvalor = npcertificacionvalor;
@@ -13,7 +14,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 			certificacionesFondosFactory.nuevoLinea(
 				ID
 			).then(function(resp){
-				console.log(resp.json.certificacionlinea);
+				//console.log(resp.json.certificacionlinea);
 	        	$scope.objeto = resp.json.certificacionlinea;
 	        	//$scope.noeditar = false;
 	        	$scope.saldo = 0;
@@ -21,6 +22,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 					$rootScope.ejefiscal,
 					unidadID
 				).then(function(resp){
+					$scope.editarSub = !noeditar;
 		        	for (var i = 0; i < resp.json.result.length; i++) {
 		        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + " - " + resp.json.result[i].npdescripcion;
 					}
@@ -38,9 +40,12 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 					//console.log(resp);
 		        	$scope.objeto = resp.json.certificacionlinea;
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
+		        	$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ' ' + $scope.objetoDetalles.subtareanombre;
+		        	$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ' ' + $scope.objetoDetalles.itemnombre;
+		        	$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ' ' + $scope.objetoDetalles.subitemnombre;
 		        	$scope.saldo = $scope.objeto.npvalorinicial; //$scope.objeto.npvalor + $scope.objeto.npvalorinicial;
 		        	$scope.ponerCodigos();
-		        	//$scope.noeditar=true;
+		        	$scope.editarSub = false;
 				})
 		}
 	}

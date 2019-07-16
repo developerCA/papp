@@ -62,9 +62,9 @@
 			        Subtarea
 			        <span class="symbol required"></span>
 			    </label>
-			    <input ng-show="noeditar" type="text" ng-disabled="true"
+			    <input ng-show="!editarSub" type="text" ng-disabled="true"
 			        class="form-control" name="subtareanombre" ng-model="objetoDetalles.subtareanombre">
-			    <select ng-show="!noeditar" class="form-control" name="subtarea"
+			    <select ng-show="editarSub" class="form-control" name="subtarea"
 			        ng-model="objeto.subtarea" ng-change="cambioItems();">
 					<option 
 					    ng-repeat="operator in listarSubtareas" 
@@ -89,9 +89,9 @@
 			        Item
 			        <span class="symbol required"></span>
 			    </label>
-			    <input ng-show="noeditar" type="text" ng-disabled="true"
+			    <input ng-show="!editarSub" type="text" ng-disabled="true"
 			        class="form-control" name="itemnombre" ng-model="objetoDetalles.itemnombre">
-			    <select ng-show="!noeditar" class="form-control" name="item"
+			    <select ng-show="editarSub" class="form-control" name="item"
 			        ng-model="objeto.item" ng-change="cambioSubItems();">
 					<option 
 					    ng-repeat="operator in listarItems" 
@@ -116,9 +116,9 @@
 			        Subitem
 			        <span class="symbol required"></span>
 			    </label>
-			    <input ng-show="noeditar" type="text" ng-disabled="true"
+			    <input ng-show="!editarSub" type="text" ng-disabled="true"
 			        class="form-control" name="subitemnombre" ng-model="objetoDetalles.subitemnombre">
-			    <select ng-show="!noeditar" class="form-control" name="subitem"
+			    <select ng-show="editarSub" class="form-control" name="subitem"
 			        ng-model="objeto.subitem" ng-change="obtenerTotal();">
 					<option 
 					    ng-repeat="operator in listarSubItems" 

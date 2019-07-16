@@ -80,9 +80,9 @@
 				        Subitem
 				        <span class="symbol required"></span>
 				    </label>
-				    <input ng-show="noeditar" type="text" ng-disabled="true"
+				    <input ng-show="noeditarSub" type="text" ng-disabled="true"
 				        class="form-control" name="subitemnombre" ng-model="objetoDetalles.subitemnombre">
-				    <select ng-show="!noeditar" class="form-control" name="subitem"
+				    <select ng-show="!noeditarSub" class="form-control" name="subitem"
 				        ng-model="objeto.subitem" ng-change="obtenerTotal();">
 						<option 
 						    ng-repeat="operator in listarSubItems" 
@@ -100,6 +100,7 @@
 				        Listo
 				    </span>
 				</div>
+
 				<div class="form-group">
 				    <label class="control-label">
 				        Total Orden de Gasto

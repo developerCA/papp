@@ -954,6 +954,18 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
+            	var diferencia = $scope.objetoP.reformalinea.metaReprogramada;
+            	for (var i = 0; i < $scope.detallesP.length; i++) {
+            		diferencia -= $scope.detallesP[i].nphabilitado;
+				}
+            	if (diferencia != 0) {
+                    SweetAlert.swal(
+                		"Reformas",
+                		"Tiene una diferencia de: " + diferencia + ", con la Meta Reprogramada",
+                		"error"
+            		);
+        			return;
+            	}
                 var tObj = Object.assign({}, $scope.objetoP.cronograma);
                 var tDet = Object.assign([], $scope.detallesP);
                 tObj.cronogramalineaTOs = tDet;

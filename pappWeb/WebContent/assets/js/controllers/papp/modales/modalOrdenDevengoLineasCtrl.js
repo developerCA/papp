@@ -5,6 +5,8 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 
 	$scope.noeditar2 = false;
 	$scope.noeditar = false;
+	$scope.noeditarSub = true;
+
 	$scope.init=function() {
 		$scope.editarValor = (ordenGastoValor != 'L'? true: false);
 		if (editar == null) {
@@ -17,6 +19,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 	        	$scope.noeditar = false;
 	        	$scope.cambioSubItems();
 	        	$scope.noeditar2 = !$scope.editarValor;
+	        	$scope.noeditarSub = false;
 			})
 		} else {
 			// editar
@@ -31,7 +34,8 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 		        	$scope.objeto.npvalor = 0;
 				}
 	        	//$scope.noeditar = true;
-	        	$scope.noeditar2 = !$scope.editarValor || noeditar; //(!$scope.editarValor? false: noeditar);
+	        	//$scope.noeditar2 = !$scope.editarValor || noeditar; //(!$scope.editarValor? false: noeditar);
+	        	$scope.noeditar2 = (ordenGastoValor == 'L'? true: !$scope.editarValor || noeditar);
 			})
 		}
 	}
