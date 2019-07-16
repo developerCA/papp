@@ -24,5 +24,5 @@ public interface ConstantesSesion {
     public final static String USUARIO_CAMBIARCLAVE				= SESSION_MANAGER  + "_cambiarclave";
     
     public final static String ORDENGASTO						= SESSION_MANAGER + "_orgengasto";
-    
+    public final static String REFORMA					    	= SESSION_MANAGER + "_reforma";		
 }

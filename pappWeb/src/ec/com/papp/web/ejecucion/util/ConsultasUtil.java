@@ -462,7 +462,7 @@ public class ConsultasUtil {
 				if(parameters.get("ejerciciofiscalid")!=null && !parameters.get("ejerciciofiscalid").equals(""))
 					ordenreversionTO.setOrdenreversionejerfiscalid(Long.valueOf(parameters.get("ejerciciofiscalid")));
 				if(parameters.get("ordengasto")!=null && !parameters.get("ordengasto").equals("")){
-					ordenreversionTO.setCodigo(parameters.get("ordengasto").toUpperCase());
+					ordengastoTO.setCodigo(parameters.get("ordengasto").toUpperCase());
 				}
 				ordenreversionTO.setOrdengasto(ordengastoTO);
 				SearchResultTO<OrdenreversionTO> resultado=UtilSession.planificacionServicio.transObtenerOrdenreversionPaginado(ordenreversionTO, principal.getName());
