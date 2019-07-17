@@ -157,6 +157,7 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
             	  tObj.nivelactid = tObj.subitem;
             	  //delete tObj.subitem;
             	}
+            	tObj.saldo = $scope.saldo;
             	certificacionesFondosFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);

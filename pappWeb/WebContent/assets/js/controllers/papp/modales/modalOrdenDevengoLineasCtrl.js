@@ -148,7 +148,8 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
             		tObj.nivelactid = tObj.subitem;
             	}
             	delete tObj.subitem;
-            	tObj.npvalor = valorTotal; ///
+            	tObj.npvalor = valorTotal;
+            	tObj.saldo = $scope.saldo;
             	ordenDevengoLineasFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);

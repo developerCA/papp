@@ -205,6 +205,7 @@ app.controller('ModalReformasLineasController1', [ "$scope","$rootScope","ID","u
     				);
             		return;
             	}
+            	tObj.saldo = $scope.saldo;
             	reformasFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);

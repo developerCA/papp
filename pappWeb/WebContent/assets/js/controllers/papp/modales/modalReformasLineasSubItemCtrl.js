@@ -1,7 +1,8 @@
 'use strict';
 
-app.controller('ModalReformasLineasSubItemController', [ "$scope","$rootScope","ID","unidadID","unidadcodigo","unidadnombre","editar","noeditar","subItemId","subItemTablarelacionid","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
-	function($scope,$rootScope,ID,unidadID,unidadcodigo,unidadnombre,editar,noeditar,subItemId, subItemTablarelacionid,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
+app.controller('ModalReformasLineasSubItemController', 
+		[ "$scope","$rootScope","ID","unidadID","unidadcodigo","unidadnombre","editar","noeditar","itemId","subItemId","subItemTablarelacionid","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
+	function($scope,$rootScope,ID,unidadID,unidadcodigo,unidadnombre,editar,noeditar,itemId,subItemId, subItemTablarelacionid,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
 
 	$scope.noeditar = false;
 	$scope.noeditar2 = false;
@@ -19,6 +20,7 @@ app.controller('ModalReformasLineasSubItemController', [ "$scope","$rootScope","
 	        	$scope.valorajustado = 0;
 	        	$scope.saldo = 0;
 			})
+			$scope.cambioSubItems();
 		} else {
 			//editar
 			reformasFactory.editarLinea(
@@ -42,10 +44,40 @@ app.controller('ModalReformasLineasSubItemController', [ "$scope","$rootScope","
 		}
 	}
 
+	$scope.cambioSubItems=function(){
+    	$scope.listarSubItems = [{
+    		id: "",
+    		descripcionexten: "Cargando subitems"
+    	}];
+    	$scope.valorajustado = 0;
+    	$scope.saldo = 0;
+		reformasFactory.listarSubItems(
+			$rootScope.ejefiscal,
+			itemId
+		).then(function(resp){
+			$scope.si = resp.json.result;
+        	for (var i = 0; i < resp.json.result.length; i++) {
+        		resp.json.result[i].descripcionexten = resp.json.result[i].npcodigo + " - " + resp.json.result[i].npdescripcion;
+        		//$scope.listarSubItems.push(resp.json.result[i]);
+			}
+        	$scope.listarSubItems = [{
+        		id: "",
+        		descripcionexten: "Selecione un subitem"
+        	}].concat(resp.json.result);
+		})
+	}
+
 	$scope.obtenerTotal=function(){
+		var i;
+		for (i = 0; i < $scope.si.length; i++) {
+			if ($scope.si[i].id == $scope.objeto.subitem)
+				break;
+		}
+		if (i == $scope.si.length)
+			return;
 		reformasFactory.obtenerTotal(
-				subItemTablarelacionid,
-			subItemId
+			$scope.si[i].tablarelacionid,
+			$scope.si[i].id
 		).then(function(resp){
         	$scope.valorajustado = resp.json.valordisponiblesi.valorajustado;
         	$scope.saldo = resp.json.valordisponiblesi.saldo;
@@ -109,6 +141,7 @@ app.controller('ModalReformasLineasSubItemController', [ "$scope","$rootScope","
     				);
             		return;
             	}
+            	tObj.saldo = $scope.saldo;
             	reformasFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);

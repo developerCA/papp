@@ -113,6 +113,7 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","
             	var tObj = Object.assign({}, $scope.objeto);
             	//tObj.nivelactid = tObj.subitem;
             	delete tObj.subitem;
+            	tObj.saldo = $scope.saldo;
             	ordenGastoLineasFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
         				 form.$setPristine(true);

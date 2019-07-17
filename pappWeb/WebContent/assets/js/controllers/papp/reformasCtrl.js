@@ -477,6 +477,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 				noeditar : function() {
 					return $scope.noeditar;
 				},
+				itemId : function() {
+					return $scope.objeto.nivelactividadid;
+				},
 				subItemId : function() {
 					return null;
 				},
