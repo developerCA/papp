@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ModalReformasLineasController', [ "$scope","$rootScope","ID","unidadID","unidadcodigo","unidadnombre","editar","noeditar","subItemId","subItemTablarelacionid","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
+app.controller('ModalReformasLineasSubItemController', [ "$scope","$rootScope","ID","unidadID","unidadcodigo","unidadnombre","editar","noeditar","subItemId","subItemTablarelacionid","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
 	function($scope,$rootScope,ID,unidadID,unidadcodigo,unidadnombre,editar,noeditar,subItemId, subItemTablarelacionid,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
 
 	$scope.noeditar = false;
