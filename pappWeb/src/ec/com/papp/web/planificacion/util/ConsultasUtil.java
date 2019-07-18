@@ -508,6 +508,8 @@ public class ConsultasUtil {
 				indicadorTO.setOrderByField(OrderBy.orderAsc(orderBy));
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				indicadorTO.setCodigo(parameters.get("codigo"));
+			if(parameters.get("descripcion")!=null && !parameters.get("descripcion").equals(""))
+				indicadorTO.setDescripcion(parameters.get("descripcion"));
 			if(parameters.get("indicadorejerciciofiscalid")!=null && !parameters.get("indicadorejerciciofiscalid").equals(""))
 				indicadorTO.setIndicadorejerciciofiscalid(Long.valueOf(parameters.get("indicadorejerciciofiscalid")));
 			SearchResultTO<IndicadorTO> resultado=UtilSession.planificacionServicio.transObtenerIndicadorPaginado(indicadorTO);

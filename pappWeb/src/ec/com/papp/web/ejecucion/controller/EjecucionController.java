@@ -1151,7 +1151,7 @@ public class EjecucionController {
 				reformametasubtareaTO.setNpincremento(reformametasubtareaTO.getValorincremento());
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformametasubtareaTO.getNivelactid()));
 				MatrizDetalle matrizDetalle=UtilSession.planificacionServicio.transObtienedetallesubtarea(null, nivelactividadTO.getId());
-				reformametasubtareaTO.setNpmetadescripcion(matrizDetalle.getSubtareanombre());
+				
 				reformametasubtareaTO.setNpunidadmedida(matrizDetalle.getNpunidadmedida());
 				//1. traigo los datos de unidad medida y meta descripcion
 				SubtareaunidadTO subtareaunidadTO=new SubtareaunidadTO();
@@ -1166,6 +1166,7 @@ public class EjecucionController {
 				if(subtareaunidadacumuladorTOs.size()>0) {
 					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
 					reformametasubtareaTO.setCodificado(subtareaunidadacumuladorTO.getCantidad());
+					reformametasubtareaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
 				}
 
 				System.out.println("descripcion: " + reformametasubtareaTO.getNpmetadescripcion());
