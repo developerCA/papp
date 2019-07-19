@@ -1578,7 +1578,7 @@ public class EjecucionController {
 				}
 			}
 			//si va a solicitar debo validar que de acuerdo al tipo que escogio tenga el mismo incremento y el mismo decremento
-			if(tipo.equals("SO") && (reformaTO.getTipo().equals("MU") || reformaTO.getTipo().equals("EU"))){
+			if(tipo.equals("SO") && (reformaTO.getTipo().equals("MU") || reformaTO.getTipo().equals("ES"))){
 				double totaldecremento=0.0;
 				double totalincremento=0.0;
 				for(ReformalineaTO reformalineaTO2:reformalineaTOs){
