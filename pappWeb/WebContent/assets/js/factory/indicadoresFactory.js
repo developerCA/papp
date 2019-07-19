@@ -8,10 +8,11 @@ app.factory("indicadoresFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).getList();
 		},
 
-		traerIndicadoresFiltro : function(pagina, ejercicio, codigo) {
+		traerIndicadoresFiltro : function(pagina, ejercicio, codigo, nombre) {
 			var url = "planificacion/consultar/consultaBusquedaIndicador/pagina="+pagina + "&indicadorejerciciofiscalid=" + ejercicio;
 
 			if(codigo!=null && codigo != "") url += "&codigo=" + codigo;	
+			if(nombre!=null && nombre != "") url += "&descripcion=" + nombre;	
 
 			return Restangular.allUrl(url).getList();
 		},
