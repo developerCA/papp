@@ -567,11 +567,11 @@ public class EjecucionController {
 				//id=reformaTO.getNpid().toString();
 				reformametaTO.setId(reformametaTO.getNpid());
 				ConsultasUtil.obtenerreforma(reformametaTO.getId(), jsonObject);
-				if(!resultado.equals("")){
-					mensajes.setMsg("Realice la distribucion de las subtareas: " + resultado);
-					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
-					System.out.println("mensaje: " + mensajes.getMsg());
-				}
+//				if(!resultado.equals("")){
+//					mensajes.setMsg("Realice la distribucion de las subtareas: " + resultado);
+//					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
+//					System.out.println("mensaje: " + mensajes.getMsg());
+//				}
 				//id=reformametaTO.getNpid().toString();
 				reformametaTO.setId(reformametaTO.getNpid());
 				jsonObject.put("reformameta", (JSONObject)JSONSerializer.toJSON(reformametaTO,reformametaTO.getJsonConfig()));
@@ -647,11 +647,11 @@ public class EjecucionController {
 					System.out.println("va a ver las distribuciones ");
 					resultado=UtilSession.planificacionServicio.transListareformalineasdistribucionrmm(reformametasubtareaTO);
 				//}
-				if(!resultado.equals("")){
-					mensajes.setMsg("Realice la distribucion de la subtarea ");
-					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
-					System.out.println("mensaje: " + mensajes.getMsg());
-				}
+//				if(!resultado.equals("")){
+//					mensajes.setMsg("Realice la distribucion de la subtarea ");
+//					mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+//					System.out.println("mensaje: " + mensajes.getMsg());
+//				}
 				UtilSession.planificacionServicio.transCrearModificarReformametasubtarea(reformametasubtareaTO);
 				ReformaTO reformaTO = (ReformaTO) request.getSession().getAttribute(ConstantesSesion.REFORMA);
 				//debe llegar tambien las lineas
