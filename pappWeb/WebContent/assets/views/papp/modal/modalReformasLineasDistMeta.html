@@ -77,7 +77,7 @@
 			    </label>
 			    <input type="checkbox" class="form-control"
 			    	name="incluyemeta" ng-model="objeto.incluyemeta"
-			    	ng-disabled="rol('ROLE_APROBADOR')">
+			    	ng-disabled="rol('ROLE_APROBADOR') || noeditar">
 			</div>
 
 			<h2>
@@ -118,7 +118,7 @@
 			    </label>
 			    <div class="input-group col-md-12">
 			        <input type="number" numericOnly style="text-align:right;"
-			        	decimal="2" placeholder="0.00"
+			        	decimal="2" placeholder="0.00" ng-disabled="noeditar"
 			            class="form-control" name="valorincremento" 
 			            ng-model="objeto.valorincremento">
 			    </div>
@@ -131,7 +131,7 @@
 			        <span class="symbol required"></span>
 			    </label>
 		        <input type="number" numericOnly style="text-align:right;"
-		        	decimal="2" placeholder="0.00"
+		        	decimal="2" placeholder="0.00" ng-disabled="noeditar"
 		            class="form-control" name="valordecremento"
 		            ng-model="objeto.valordecremento">
 			</div>

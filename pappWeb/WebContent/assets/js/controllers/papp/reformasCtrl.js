@@ -596,6 +596,9 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 				},
 				editar : function() {
 					return $scope.detallesM[index].id
+				},
+				noeditar : function() {
+					return $scope.noeditar
 				}
 			}
 		});
@@ -806,7 +809,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
-            	if ($scope.objeto.tipo == "MU") {
+            	if ($scope.objeto.tipo == "MU" || $scope.objeto.tipo == "ES") {
             		if ($scope.objeto.valorincremento != $scope.objeto.valordecremento) {
 	                    SweetAlert.swal(
 	                		"Reformas",

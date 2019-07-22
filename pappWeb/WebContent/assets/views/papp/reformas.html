@@ -212,11 +212,11 @@
 								<td data-title="'Fecha Creaci&oacute;n'">
 									{{obj.npfecha}}
 								</td>
-								<td data-title="'Decremento'" style="text-align:right;">
-									{{ obj.valordecremento | currency }}
-								</td>
 								<td data-title="'Incremento'" style="text-align:right;">
 									{{ obj.valorincremento | currency }}
+								</td>
+								<td data-title="'Decremento'" style="text-align:right;">
+									{{ obj.valordecremento | currency }}
 								</td>
 								<td data-title="'Estado'">
 									{{obj.npestado}}
@@ -955,7 +955,7 @@
 												<tr ng-repeat="obj in detallesM">
 													<td width="32px" style="padding: 1px;">
 														<a class="btn btn-sm btn-primary"
-															uib-tooltip="Actualizar"
+															uib-tooltip="Modificar"
 															ng-click="editarLineaDistMeta($index)">
 															<i class="fa fa-pencil"></i>
 														</a>

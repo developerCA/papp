@@ -1,12 +1,13 @@
 'use strict';
 
-app.controller('ModalReformasLineasDistMetaController', [ "$scope","$rootScope","ID","editar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
-	function($scope,$rootScope,ID,editar,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
+app.controller('ModalReformasLineasDistMetaController', [ "$scope","$rootScope","ID","editar","noeditar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
+	function($scope,$rootScope,ID,editar,noeditar,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
 
 	$scope.noeditar = false;
 
 	$scope.init=function(){
 		//editar
+		$scope.noeditar = noeditar;
 		reformasFactory.editarLineaDistMeta(
 			editar
 		).then(function(resp){
