@@ -489,13 +489,13 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			}
 		});
 		modalInstance.result.then(function(obj) {
-		    $scope.detallesM = obj.reformalineas;
+		    $scope.detalles = obj.reformalineas;
 		    $scope.detallesDP.push(false);
 			$scope.objeto.valorincremento = 0;
 			$scope.objeto.valordecremento = 0;
-		    for (var i = 0; i < $scope.detallesM.length; i++) {
-				$scope.objeto.valorincremento += $scope.detallesM[i].valorincremento;
-				$scope.objeto.valordecremento += $scope.detallesM[i].valordecremento;
+		    for (var i = 0; i < $scope.detalles.length; i++) {
+				$scope.objeto.valorincremento += $scope.detalles[i].valorincremento;
+				$scope.objeto.valordecremento += $scope.detalles[i].valordecremento;
 			}
 		    noSalir = true;
 		    $scope.form.submit(Form);
@@ -504,6 +504,21 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             		"Registro guardado satisfactoriamente!",
             		"success"
     		);
+//		    $scope.detallesM = obj.reformalineas;
+//		    $scope.detallesDP.push(false);
+//			$scope.objeto.valorincremento = 0;
+//			$scope.objeto.valordecremento = 0;
+//		    for (var i = 0; i < $scope.detallesM.length; i++) {
+//				$scope.objeto.valorincremento += $scope.detallesM[i].valorincremento;
+//				$scope.objeto.valordecremento += $scope.detallesM[i].valordecremento;
+//			}
+//		    noSalir = true;
+//		    $scope.form.submit(Form);
+//            SweetAlert.swal(
+//            		"Reformas! - Lineas",
+//            		"Registro guardado satisfactoriamente!",
+//            		"success"
+//    		);
 		}, function() {
 		});
 	};
