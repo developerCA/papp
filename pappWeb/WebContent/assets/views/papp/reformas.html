@@ -912,17 +912,18 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="pull-right">
-<!--
-									<a ng-if="objeto.incluyemeta && rol('ROLE_APROBADOR')" href="#"
-										class="btn btn-sm btn-dark-azure"
-										ng-click="metaEditarDeDistribicion();">
-										Metas
-									</a>
--->
-									<button type="reset" class="btn btn-default btn-o"
-										ng-click="formMetasDistribucionReset()">
-										Cancelar
-									</button>
+									<span ng-if="guardar && !noeditar">
+										<button type="submit" class="btn btn-primary"
+											ng-if="!rol('ROLE_APROBADOR');">
+											Actualizar
+										</button>
+									</span>
+									<span ng-if="!(guardar && !noeditar)">
+										<button type="reset" class="btn btn-default btn-o"
+											ng-click="formMetasDistribucionReset()">
+											Regresar
+										</button>
+									</span>
 								</div>
 							</div>
 						</div>
@@ -931,13 +932,15 @@
 							<div class="col-sm-12">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
+<!--
 										<a uib-tooltip="Agregar" ng-show="!noeditar && !nuevoar"
 											class="pull-right btn btn-sm btn-info"
 											ng-click="agregarLinea();">
 											<i class="fa fa-plus-square"></i>
 										</a>
+-->
 										<h4 class="panel-title">
-											L&iacute;neas
+											L&iacute;neas de la Meta
 										</h4>
 									</div>
 									<div class="panel-body no-padding panel-white">

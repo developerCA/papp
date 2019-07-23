@@ -36,6 +36,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	$scope.objeto={estado:null};
 	$scope.detalles={};
 	$scope.detallesDP=[];
+	$scope.detallesDPmeta=[];
 	
     $scope.pagina = 1;
     $scope.aplicafiltro=false;
@@ -600,7 +601,13 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		})
 	};
 
+	var mIncremento = 0;
+	var mDecremento = 0;
+	var mIndex = 0;
 	$scope.editarLineaDistMeta = function(index) {
+		mIndex = index;
+		mIncremento = $scope.detallesM[index].valorincremento;
+		mDecremento = $scope.detallesM[index].valordecremento;
 		var modalInstance = $uibModal.open({
 			templateUrl : 'assets/views/papp/modal/modalReformasLineasDistMeta.html',
 			controller : 'ModalReformasLineasDistMetaController',
@@ -619,8 +626,10 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		});
 		modalInstance.result.then(function(obj) {
 		    $scope.detallesM = obj.reformametasubtarea;
-		    //$scope.objeto.valortotal = obj.valortotal;
-		    //$scope.form.submit(Form);
+		    if (mIncremento != $scope.detallesM[mIndex].valorincremento
+		    		|| mDecremento != $scope.detallesM[mIndex].valordecremento) {
+		    	$scope.detallesDPmeta[mIndex] = false;
+		    }
             SweetAlert.swal(
             		"Reformas! - Lineas",
             		"Registro guardado satisfactoriamente!",
@@ -631,6 +640,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	};
 
 	$scope.editarLineaDistMetaSubtareaMeta = function(index) {
+		mIndex = index;
 		var tObjLinea = Object.assign({}, $scope.detallesM[index]);
 		//tObjLinea.npfechacreacion = $scope.objeto.npfechacreacion;
 		reformasFactory.editarLineaMetaSubtareaMeta(
@@ -895,6 +905,67 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         }
     };
 
+	$scope.formMetasDistribucion = {
+        submit: function (formMetasDistribucion) {
+            var firstError = null;
+            if (formMetasDistribucion.$invalid) {
+                var field = null, firstError = null;
+                for (field in formMetasDistribucion) {
+                    if (field[0] != '$') {
+                        if (firstError === null && !formMetasDistribucion[field].$valid) {
+                            firstError = form[field].$name;
+                        }
+                        if (formMetasDistribucion[field].$pristine) {
+                        	formMetasDistribucion[field].$dirty = true;
+                        }
+                    }
+                }
+                angular.element('.ng-invalid[name=' + firstError + ']').focus();
+                return;
+            } else {
+            	if ($scope.objeto.tipo == "MU" || $scope.objeto.tipo == "ES") {
+            		if ($scope.objeto.valorincremento != $scope.objeto.valordecremento) {
+	                    SweetAlert.swal(
+	                		"Reformas - Meta",
+	                		"El valor incrementado es diferente del valor decrementado",
+	                		"error"
+	            		);
+	        			return;
+            		}
+            	}
+            	if (!noSalir) {
+            		var terminar = false;
+            		var listaCodigos = '';
+	            	for (var i = 0; i < $scope.detallesDPmeta.length; i++) {
+						if (!$scope.detallesDPmeta[i]) {
+							terminar = true;
+							listaCodigos += '\n\r - ' + $scope.detallesM[i].npSubtarea + ' (' + $scope.detallesM[i].npunidadmedida + ')';
+						}
+					}
+	            	if (terminar) {
+	                    SweetAlert.swal(
+	                		"Reformas - Metas",
+	                		"Todas las lineas nuevas tienen que tener echa la Distribucion del Presupuesto." + listaCodigos,
+	                		"error"
+	            		);
+	        			return;
+	            	}
+            	}
+            	$scope.formMetasDistribucionReset();
+            }
+        },
+        reset: function (form) {
+        	$scope.formMetasDistribucionReset();
+        }
+    };
+
+	$scope.formMetasDistribucionReset = function() {
+	    delete $scope.objetoM;
+	    delete $scope.detallesM;
+        $scope.metasDistribucion = false;
+		$scope.edicion = true;
+	}
+
 	$scope.formMetasDistribucionLinea = {
         submit: function (formMetasDistribucionLinea) {
             var firstError = null;
@@ -999,6 +1070,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	            		 );
  	 		             return;
         			 }
+        			 $scope.detallesDPmeta[mIndex] = true;
 					 $scope.metasDistribucionSubtareaMeta = false;
 					 $scope.metasDistribucion = true;
 					 //$scope.objetoP = {};
@@ -1017,13 +1089,6 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             $scope.objetoP = {};
         }
     };
-
-	$scope.formMetasDistribucionReset = function() {
-	    delete $scope.objetoM;
-	    delete $scope.detallesM;
-        $scope.metasDistribucion = false;
-		$scope.edicion = true;
-	}
 
 	function toStringDate(fuente) {
 		if (fuente == null) {
@@ -1056,7 +1121,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		return (($scope.tableParams.page() - 1) * 5) + index;
 	}
 
-	$scope.metaEditar=function(){
+	$scope.metaEditar = function(){
         var tObj = Object.assign({}, $scope.objeto);
         delete tObj.incluyemeta;
         var tDet = Object.assign([], $scope.detalles);
@@ -1072,8 +1137,16 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
         		 );
 	             return;
 			}
-		    $scope.objetoM=resp.json.reforma;
-		    $scope.detallesM=resp.json.reformametasubtarea;
+		    $scope.objetoM = resp.json.reforma;
+		    $scope.detallesM = resp.json.reformametasubtarea;
+		    $scope.detallesDPmeta = [];
+		    for (var i = 0; i < $scope.detallesM.length; i++) {
+		    	$scope.detallesDPmeta.push(
+		    			$scope.detallesM[i].valorincremento == 0 && $scope.detallesM[i].valordecremento == 0
+		    			? false
+		    			: true
+		    	);
+			}
 			$scope.edicion = false;
 			$scope.metasDistribucion = true;
 		})
