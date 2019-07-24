@@ -1,10 +1,11 @@
 'use strict';
  
-app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","ordenReversionID","unidadID","editar","ordenGastoID","ordenGastoValor","noeditar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenReversionLineasFactory",
-	function($scope,$rootScope,ordenReversionID,unidadID,editar,ordenGastoID,ordenGastoValor,noeditar,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenReversionLineasFactory) {
+app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","ordenReversionID","unidadID","editar","ordenGastoID","ordenGastoValor","noeditar","tipo","$uibModalInstance","SweetAlert","$filter", "ngTableParams","ordenReversionLineasFactory",
+	function($scope,$rootScope,ordenReversionID,unidadID,editar,ordenGastoID,ordenGastoValor,noeditar,tipo,$uibModalInstance,SweetAlert,$filter, ngTableParams,ordenReversionLineasFactory) {
 
 	$scope.noeditar=false;
 	$scope.noeditar2=false;
+	$scope.boton=true;
 	$scope.init=function(){
 		$scope.editarValor = (ordenGastoValor == 0? true: false);
 		if (editar == null) {
@@ -12,29 +13,29 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
 			ordenReversionLineasFactory.nuevoLinea(
 				ordenReversionID
 			).then(function(resp){
-				//console.log(resp.json.ordenreversionlinea);
-	        	$scope.objeto = resp.json.ordenreversionlinea;
+				$scope.objeto = resp.json.ordenreversionlinea;
 	        	$scope.noeditar = false;
 	        	$scope.cargarSubItems();
+	        	$scope.noeditar2 = (tipo == 'F'? true: noeditar);
 			})
 		} else {
 			//editar
 			ordenReversionLineasFactory.editarLinea(
 				editar
 			).then(function(resp){
-				//console.log(resp);
-	        	$scope.objeto = resp.json.ordenreversionlinea;
+				$scope.objeto = resp.json.ordenreversionlinea;
 	        	$scope.objetoDetalles = resp.json.subiteminfo;
 	        	$scope.objeto.npvalor = $scope.objeto.nptotalordengasto - $scope.objeto.npdevengado;
 	        	$scope.noeditar = true;
-	        	$scope.noeditar2 = (!$scope.editarValor? false: noeditar);
+	        	$scope.noeditar2 = (tipo == 'F'? true: noeditar);
+	        	$scope.boton = (tipo == 'F'? false: !noeditar);
+//	        	$scope.noeditar2 = (!$scope.editarValor? false: noeditar);
 			})
 		}
 	}
 
 	$scope.cargarSubItems=function(){
 		$scope.listarSubItems = [];
-		//console.log($scope.objeto);
 		ordenReversionLineasFactory.listarSubItems(
 			ordenGastoID
 		).then(function(resp){
@@ -65,19 +66,20 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
 			$scope.si[i].npSubitemunidadid,
 			$scope.si[i].nivelactid //, ordenGastoID
 		).then(function(resp){
-			//console.log(resp);
-        	$scope.objeto.npdevengado = resp.json.datoslineaordend.aprobadas;
+			$scope.objeto.npdevengado = resp.json.datoslineaordend.aprobadas;
 			$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
         	//$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
         	//$scope.objeto.npsaldodisponible = resp.json.datoslineaordend.saldo;
         	$scope.objeto.npsaldo = resp.json.datoslineaordend.saldo;
         	//$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
         	$scope.objeto.npvalor = $scope.objeto.nptotalordengasto - $scope.objeto.npdevengado;
+        	if (tipo == 'F') {
+        		$scope.objeto.valor = $scope.objeto.npsaldo;
+        	}
 		})
 		ordenReversionLineasFactory.obtenerTotal(
 			$scope.si[i].nivelactid
 		).then(function(resp){
-			//console.log(resp);
 			$scope.objetoDetalles = resp.json.subiteminfo;
 			$scope.ponerCodigos();
 		})
@@ -123,10 +125,18 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
             		);
             		return;
             	}
-            	if ($scope.objeto.valor.toFixed(2) > $scope.objeto.npsaldo.toFixed(2)) {
+//            	if ($scope.objeto.valor.toFixed(2) > $scope.objeto.npsaldo.toFixed(2)) {
+//                    SweetAlert.swal(
+//                		"Orden Devengo! - Lineas",
+//                		"El valor no puede ser mayor que el saldo por devengar",
+//                		"error"
+//            		);
+//            		return;
+//            	}
+            	if (tipo != 'F' && $scope.objeto.valor.toFixed(2) == $scope.objeto.npsaldo.toFixed(2)) {
                     SweetAlert.swal(
                 		"Orden Devengo! - Lineas",
-                		"El valor no puede ser mayor que el saldo por devengar",
+                		"Tiene que cambiar el Tipo de la Orden de Reversion a Final para poder poner el valor total",
                 		"error"
             		);
             		return;
