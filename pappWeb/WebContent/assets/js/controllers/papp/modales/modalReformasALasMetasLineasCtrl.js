@@ -13,7 +13,6 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
 			reformasALasMetasFactory.nuevoLinea(
 				ID
 			).then(function(resp){
-//				console.log(resp.json.certificacionlinea);
 	        	$scope.objeto = resp.json.reformametalinea;
 	        	$scope.noeditar = false;
 	        	$scope.valorajustado = 0;
@@ -27,7 +26,6 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
 		        		id: "",
 		        		descripcionexten: "Selecione una subtarea"
 		        	}].concat(resp.json.result);
-					//console.log($scope.listarSubtareas);
 				})
 			})
 		} else {
@@ -36,9 +34,8 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
 					editar
 				).then(function(resp){
 					$scope.si = resp.json.result;
-					//console.log(resp);
 		        	$scope.objeto = resp.json.reformametalinea;
-		        	$scope.objetoDetalles = resp.json.subiteminfo;
+		        	$scope.objetoDetalles = resp.json.subtareainfo;
 //		        	try {
 //			        	$scope.valorajustado = $scope.objeto.npvalortotal + $scope.objeto.npvalorincremento - $scope.objeto.npvalordecremento;
 //					} catch (e) {
