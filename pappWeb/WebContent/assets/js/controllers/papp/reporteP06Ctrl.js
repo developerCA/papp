@@ -90,7 +90,7 @@ app.controller('ReporteP06Controller', [ "$scope","$rootScope","$uibModal","Swee
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.unidadid = obj.id;
+			$scope.objeto.unidadid = obj.unidadarbolunidadid; // obj.id;
 			$scope.npunidad = obj.codigoorganico + ' - ' + obj.nombre;
 			$scope.unidadActivo = true;
 			$scope.limpiarListas(3);
