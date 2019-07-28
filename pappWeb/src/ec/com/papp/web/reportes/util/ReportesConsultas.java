@@ -872,76 +872,148 @@ public class ReportesConsultas {
 					cell.setCellValue(p02.getMontoacumulado());
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(20);
-					cell.setCellValue(p02.getEneroc());
+					if(p02.getEneroc()!=null)
+						cell.setCellValue(p02.getEneroc());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(21);
-					cell.setCellValue(p02.getEnerod());
+					if(p02.getEnerod()!=null)
+						cell.setCellValue(p02.getEnerod());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(22);
-					cell.setCellValue(p02.getFebreroc());
+					if(p02.getFebreroc()!=null)
+						cell.setCellValue(p02.getFebreroc());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(23);
-					cell.setCellValue(p02.getFebrerod());
+					if(p02.getFebrerod()!=null)
+						cell.setCellValue(p02.getFebrerod());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(24);
-					cell.setCellValue(p02.getMarzoc());
+					if(p02.getMarzoc()!=null)
+						cell.setCellValue(p02.getMarzoc());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(25);
-					cell.setCellValue(p02.getMarzod());
+					if(p02.getMarzod()!=null)
+						cell.setCellValue(p02.getMarzod());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(26);
-					cell.setCellValue(p02.getAbrilc());
+					if(p02.getAbrilc()!=null)
+						cell.setCellValue(p02.getAbrilc());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(27);
-					cell.setCellValue(p02.getAbrild());
+					if(p02.getAbrild()!=null)
+						cell.setCellValue(p02.getAbrild());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(28);
-					cell.setCellValue(p02.getMayoc());
+					if(p02.getMayoc()!=null)
+						cell.setCellValue(p02.getMayoc());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(29);
-					cell.setCellValue(p02.getMayod());
+					if(p02.getMayod()!=null)
+						cell.setCellValue(p02.getMayod());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(30);
-					cell.setCellValue(p02.getJunioc());
+					if(p02.getJunioc()!=null)
+						cell.setCellValue(p02.getJunioc());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(31);
-					cell.setCellValue(p02.getJuniod());
+					if(p02.getJuniod()!=null)
+						cell.setCellValue(p02.getJuniod());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(32);
-					cell.setCellValue(p02.getJulioc());
+					if(p02.getJulioc()!=null)
+						cell.setCellValue(p02.getJulioc());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(33);
-					cell.setCellValue(p02.getJuliod());
+					if(p02.getJuliod()!=null)
+						cell.setCellValue(p02.getJuliod());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(34);
-					cell.setCellValue(p02.getAgostoc());
+					if(p02.getAgostoc()!=null)
+						cell.setCellValue(p02.getAgostoc());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(35);
-					cell.setCellValue(p02.getAgostod());
+					if(p02.getAgostod()!=null)
+						cell.setCellValue(p02.getAgostod());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(36);
-					cell.setCellValue(p02.getSeptiembrec());
+					if(p02.getSeptiembrec()!=null)
+						cell.setCellValue(p02.getSeptiembrec());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(37);
-					cell.setCellValue(p02.getSeptiembred());
+					if(p02.getSeptiembred()!=null)
+						cell.setCellValue(p02.getSeptiembred());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(38);
-					cell.setCellValue(p02.getOctubrec());
+					if(p02.getOctubrec()!=null)
+						cell.setCellValue(p02.getOctubrec());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(39);
-					cell.setCellValue(p02.getOctubred());
+					if(p02.getOctubred()!=null)
+						cell.setCellValue(p02.getOctubred());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(40);
-					cell.setCellValue(p02.getNoviembrec());
+					if(p02.getNoviembrec()!=null)
+						cell.setCellValue(p02.getNoviembrec());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(41);
-					cell.setCellValue(p02.getNoviembred());
+					if(p02.getNoviembred()!=null)
+						cell.setCellValue(p02.getNoviembred());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(42);
-					cell.setCellValue(p02.getDiciembrec());
+					if(p02.getDiciembrec()!=null)
+						cell.setCellValue(p02.getDiciembrec());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(43);
-					cell.setCellValue(p02.getDiciembred());
+					if(p02.getDiciembred()!=null)
+						cell.setCellValue(p02.getDiciembred());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 
 					fila++;
