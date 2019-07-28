@@ -380,19 +380,23 @@ app.controller('ReporteP01Controller', [ "$scope","$rootScope","$uibModal","Swee
         		SweetAlert.swal("Reporte P1!", "Seleccione una Institucion", "error");
         		return;
         	}
-        	if (!$scope.objeto.entidadid) {
-        		SweetAlert.swal("Reporte P1!", "Seleccione una Entidad", "error");
-        		return;
-        	}
-        	if (!$scope.objeto.unidadid) {
-        		SweetAlert.swal("Reporte P1!", "Seleccione un Unidad", "error");
-        		return;
-        	}
+//        	if (!$scope.objeto.entidadid) {
+//        		SweetAlert.swal("Reporte P1!", "Seleccione una Entidad", "error");
+//        		return;
+//        	}
+//        	if (!$scope.objeto.unidadid) {
+//        		SweetAlert.swal("Reporte P1!", "Seleccione un Unidad", "error");
+//        		return;
+//        	}
         	var url = "/pappWeb/rest/reportes/consultar/p01/" +
         			"ejerciciofiscal=" + $rootScope.ejefiscal +
-        			"&institucionid=" + $scope.objeto.institucionid +
-        			"&institucionentid=" + $scope.objeto.entidadid +
-        			"&unidadid=" + $scope.objeto.unidadid;
+        			"&institucionid=" + $scope.objeto.institucionid;
+        	if ($scope.objeto.entidadid != undefined && $scope.objeto.entidadid != null) {
+        		url += "&institucionentid=" + $scope.objeto.entidadid;
+        	}
+        	if ($scope.objeto.unidadid != undefined && $scope.objeto.unidadid != null) {
+        		url += "&unidadid=" + $scope.objeto.unidadid;
+        	}
         	if ($scope.objeto.actividadid != undefined && $scope.objeto.actividadid != null) {
         		url += "&actividadid=" + $scope.objeto.actividadid;
         	}
