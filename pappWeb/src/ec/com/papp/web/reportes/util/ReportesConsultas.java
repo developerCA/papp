@@ -869,7 +869,10 @@ public class ReportesConsultas {
 					cell.setCellValue(p02.getOrganismoprestamocodigo());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(19);
-					cell.setCellValue(p02.getMontoacumulado());
+					if(p02.getMontoacumulado()!=null)
+						cell.setCellValue(p02.getMontoacumulado());
+					else
+						cell.setCellValue("");
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(20);
 					if(p02.getEneroc()!=null)
