@@ -158,6 +158,8 @@ app.constant('JS_REQUIRES', {
         'ModalCargoCtrl':'assets/js/controllers/papp/modales/modalCargoCtrl.js',
         'EmpleadoCtrl':'assets/js/controllers/papp/empleadoCtrl.js',
         'EmpleadoFactory':'assets/js/factory/empleadoFactory.js',
+        'ProveedorRucCtrl':'assets/js/controllers/papp/proveedorrucCtrl.js',
+        'ProveedorRucFactory':'assets/js/factory/proveedorrucFactory.js',
         'ModalGradoFuerzaCtrl':'assets/js/controllers/papp/modales/modalGradoFuerzaCtrl.js',
         'ModalInstitucionCtrl':'assets/js/controllers/papp/modales/modalInstitucionCtrl.js',
         'ModalGradoEscalaCtrl':'assets/js/controllers/papp/modales/modalGradoEscalaCtrl.js',

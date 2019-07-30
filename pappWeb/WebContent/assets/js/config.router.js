@@ -675,6 +675,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Empleados'
         }
+    }).state('app.proveedorruc', {
+        url: "/proveedorruc",
+        templateUrl: "assets/views/papp/proveedorruc.html",
+        resolve: loadSequence(
+        		'ngTable','ProveedorRucCtrl','ProveedorRucFactory'
+		),
+        title: 'Proveedores Juridicos',
+        ncyBreadcrumb: {
+            label: 'Proveedores Juridicos'
+        }
     }).state('app.certificacionesfondos', {
         url: "/certificacionesfondos",
         templateUrl: "assets/views/papp/certificacionesfondos.html",

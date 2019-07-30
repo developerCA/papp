@@ -20,7 +20,7 @@ app.controller('PerfilesController', [ "$scope","$rootScope","$uibModal","SweetA
 				$scope.data=resp;
 		})
 	};
-	
+
 	$scope.$watch('data', function() {
 		$scope.tableParams = new ngTableParams({
 			page : 1, // show first page
