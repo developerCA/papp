@@ -88,8 +88,7 @@ app.controller('ProveedorController', [ "$scope","$rootScope","$uibModal","Sweet
 	$scope.editar=function(id){
 		proveedorrucFactory.traerEditar(id).then(function(resp){
 			if (resp.estado) {
-				$scope.objeto=resp.json.empleado;
-				$scope.fuerza=$scope.objeto.npfuerzaid;
+				$scope.objeto=resp.json.empleadoproveedor;
 			}
 			$scope.edicion=true;
 			$scope.guardar=true;
@@ -142,11 +141,12 @@ app.controller('ProveedorController', [ "$scope","$rootScope","$uibModal","Sweet
 	 		             $scope.objeto={};
 	 		             $scope.limpiar();
 	 		             resp.mensajes.msg = "Registro guardado satisfactoriamente!";
+	 		             resp.mensajes.type = "success";
         			 }
  		             SweetAlert.swal(
  		            		 "Proveedor Juridico!",
  		            		 resp.mensajes.msg,
- 		            		 "error"
+ 		            		 resp.mensajes.type
             		 );
         		})
             }

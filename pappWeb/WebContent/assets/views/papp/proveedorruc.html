@@ -85,10 +85,10 @@
 							</div>
 						</div>
 					</div>
-
+<!-- 
 					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"><i
 						class="fa fa-plus-square"></i> Agregar</a>
-
+-->
 					<div>
 						<table class="table table-striped">
 							<thead>
@@ -136,7 +136,7 @@
 
 				<div ng-show="edicion" class="panel-body" id="panel1">
 					<div class="panel-heading">
-						<h5 class="panel-title">Empleado</h5>
+						<h5 class="panel-title">Proveedor Juridico</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
@@ -153,9 +153,9 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" placeholder="Ingrese un c&oacute;digo" ng-change="objeto.codigo=objeto.codigo.toUpperCase();"
+										<input type="text" placeholder="Ingrese un c&oacute;digo"
 											class="form-control" name="codigo" ng-model="objeto.codigo"
-											ng-minlength="1" ng-maxlength="30" required ng-disabled="!nuevoar">
+											ng-minlength="1" ng-maxlength="30" required>
 									</div>
 								</div>
 
@@ -163,14 +163,29 @@
 									ng-class="{'has-error':Form.socionegociotipoidentid.$dirty && Form.socionegociotipoidentid.$invalid, 'has-success':Form.socionegociotipoidentid.$valid}">
 									<div class="col-md-4">
 										<label class="control-label">
-											Tipo de identidad
+											Tipo de identidad Id
 											<span class="symbol required"></span>
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione una identidad"
+										<input type="text"
 											class="form-control" name="socionegociotipoidentid" ng-disabled="true"
 											ng-model="objeto.socionegociotipoidentid" required>
+									</div>
+								</div>
+
+								<div class="form-group"
+									ng-class="{'has-error':Form.socionegociotipoidentid.$dirty && Form.socionegociotipoidentid.$invalid, 'has-success':Form.socionegociotipoidentid.$valid}">
+									<div class="col-md-4">
+										<label class="control-label">
+											Tipo de identidad Nombre
+											<span class="symbol required"></span>
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" placeholder="Ingrese una identidad"
+											class="form-control" name="nptipoidentificacion" ng-disabled="true"
+											ng-model="objeto.nptipoidentificacion" required>
 									</div>
 								</div>
 
@@ -184,7 +199,7 @@
 									</div>
 									<div class="col-md-8">
 										<div class="input-group">
-											<input type="text" placeholder="Seleccione una identidad"
+											<input type="text" placeholder="Seleccione un tipo"
 												class="form-control" name="socionegociotipoidenttipoid" ng-disabled="true"
 												ng-model="objeto.socionegociotipoidenttipoid">
 											<span class="input-group-btn">
@@ -202,14 +217,13 @@
 									ng-class="{'has-error':Form.primernombre.$dirty && Form.primernombre.$invalid, 'has-success':Form.primernombre.$valid}">
 									<div class="col-md-4">
 										<label class="control-label">
-											Primer nombre
+											Socio Negocio Tipo
 											<span class="symbol required"></span>
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" placeholder="Ingrese el primer nombre"
-											class="form-control" name="primernombre" required
-											ng-model="objeto.primernombre" ng-minlength="1" ng-change="nombreMostrado();">
+										<input type="text" placeholder="Juridico"
+											class="form-control" ng-disabled="true">
 									</div>
 								</div>
 
@@ -217,14 +231,14 @@
 									ng-class="{'has-error':Form.segundonombre.$dirty && Form.segundonombre.$invalid, 'has-success':Form.segundonombre.$valid}">
 									<div class="col-md-4">
 										<label class="control-label">
-											Segundo Nombre
+											Razon Social
 											<span class="symbol required"></span>
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" placeholder="Ingrese el primer segundo nombre"
-											class="form-control" name="segundonombre" required
-											ng-model="objeto.segundonombre" ng-minlength="1" ng-change="nombreMostrado();">
+										<input type="text" placeholder="Ingrese la Razon Social"
+											class="form-control" name="razonsocial" required
+											ng-model="objeto.razonsocial" ng-minlength="1">
 									</div>
 								</div>
 
@@ -232,14 +246,14 @@
 									ng-class="{'has-error':Form.primerapellido.$dirty && Form.primerapellido.$invalid, 'has-success':Form.primerapellido.$valid}">
 									<div class="col-md-4">
 										<label class="control-label">
-											Primer apellido
+											Representante Legal
 											<span class="symbol required"></span>
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" placeholder="Ingrese el primer primer apellido"
-											class="form-control" name="primerapellido" required
-											ng-model="objeto.primerapellido" ng-minlength="1" ng-change="nombreMostrado();">
+										<input type="text" placeholder="Ingrese el Representante Legal"
+											class="form-control" name="representantelegal" required
+											ng-model="objeto.representantelegal" ng-minlength="1">
 									</div>
 								</div>
 
@@ -247,336 +261,14 @@
 									ng-class="{'has-error':Form.segundoapellido.$dirty && Form.segundoapellido.$invalid, 'has-success':Form.segundoapellido.$valid}">
 									<div class="col-md-4">
 										<label class="control-label">
-											Segundo apellido
+											Nombre Comercial
 											<span class="symbol required"></span>
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" placeholder="Ingrese el primer segundo apellido"
-											class="form-control" name="segundoapellido" required
-											ng-model="objeto.segundoapellido" ng-minlength="1" ng-change="nombreMostrado();">
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											Nombre mostrado
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Nombre mostrado completo"
-											class="form-control" name="nombremostrado" ng-disabled="true"
-											ng-model="objeto.nombremostrado">
-									</div>
-								</div>
-
-								<div class="form-group"
-									ng-class="{'has-error':Form.emptipo.$dirty && Form.emptipo.$invalid, 'has-success':Form.emptipo.$valid}">
-									<div class="col-md-4">
-										<label for="form-field-select-1"> Tipo <span
-											class="symbol required"></span>
-										</label>
-									</div>
-									<div class="col-md-8">
-										<select class="form-control" name="emptipo"
-											ng-model="objeto.emptipo" required>
-											<option value="" ng-selected="selected">Seleccione un tipo</option>
-											<option value="M">Militar</option>
-											<option value="C">Civil</option>
-										</select>
-									</div>
-								</div>
-
-<div ng-if="objeto.emptipo=='M'">
-								<div class="form-group"
-									ng-class="{'has-error':Form.npgradoescalacodigo.$dirty && Form.npgradoescalacodigo.$invalid, 'has-success':Form.npgradoescalacodigo.$valid}">
-									<div class="col-md-4">
-										<label class="control-label">
-											Grado escala c&oacute;digo
-											<span class="symbol required"></span>
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group col-md-12">
-											<input type="text" placeholder="Seleccione un grado escala"
-												class="form-control" name="npgradoescalacodigo" ng-disabled="true"
-												required ng-model="objeto.npgradoescalacodigo">
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirGradoEscala()">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											Grado escala nombre
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione un grado escala"
-											class="form-control" name="npgradonombre" ng-model="objeto.npgradonombre"
-											ng-disabled="true">
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											Fuerza nombre
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione un grado escala"
-											class="form-control" name="npfuerzanombre" ng-model="objeto.npfuerzanombre"
-											ng-disabled="true">
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											RMU Grupo ocupacional
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione un grado escala"
-											class="form-control" name="npgrupoocupacional" ng-model="objeto.npgrupoocupacional"
-											ng-disabled="true">
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											RMU Grupo c&oacute;digo
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione un grado escala"
-											class="form-control" name="rmugrupocodigo" ng-model="objeto.npcodigoescalarmu"
-											ng-disabled="true">
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											RMU Remuneraci&oacute;n
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione un grado escala"
-											class="form-control" name="npcargoremuneracion" ng-model="objeto.npcargoremuneracion"
-											ng-disabled="true" numericOnly style="text-align:right;" decimal="2">
-									</div>
-								</div>
-</div>
-
-<div ng-if="objeto.emptipo!='M'">
-								<div class="form-group"
-									ng-class="{'has-error':Form.cargoescalacodigo.$dirty && Form.cargoescalacodigo.$invalid, 'has-success':Form.cargoescalacodigo.$valid}">
-									<div class="col-md-4">
-										<label class="control-label">
-											Cargo escala c&oacute;digo
-											<span class="symbol required"></span>
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group col-md-12">
-											<input type="text" placeholder="Seleccione un grado escala"
-												class="form-control" name="npcargocodigo" ng-model="objeto.npcargocodigo"
-												required ng-disabled="true">
-											<span ng-if="objeto.emptipo=='C'" class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirCargoEscala()">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											Cargo nombre
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione un cargo escala"
-											class="form-control" name="npncargoombre" ng-model="objeto.npncargoombre"
-											ng-disabled="true">
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											Escala RMU Grupo ocupacional
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione un cargo escala"
-											class="form-control" name="npcargogrupoocupacional" ng-model="objeto.npcargogrupoocupacional"
-											ng-disabled="true">
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											RMU Grado c&oacute;digo
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione un cargo escala"
-											class="form-control" name="npcargocodigoescalarmu" ng-model="objeto.npcargocodigoescalarmu"
-											ng-disabled="true">
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											RMU Remuneraci&oacute;n
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione un grado escala"
-											class="form-control" name="npcargoremuneracion" ng-model="objeto.npcargoremuneracion"
-											ng-disabled="true" numericOnly style="text-align:right;" decimal="2">
-									</div>
-								</div>
-</div>
-
-								<div class="form-group"
-									ng-class="{'has-error':Form.especialidadcodigo.$dirty && Form.especialidadcodigo.$invalid, 'has-success':Form.especialidadcodigo.$valid}">
-									<div class="col-md-4">
-										<label class="control-label">
-											Especialidad c&oacute;digo
-											<span class="symbol required"></span>
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group col-md-12">
-											<input type="text" placeholder="Seleccione una especialidad"
-												class="form-control" name="npespecialidadcodigo" ng-disabled="true"
-												ng-model="objeto.npespecialidadcodigo">
-											<span ng-if="objeto.emptipo=='M'" class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirEspecialidad()">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											Especialidad nombre
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione una especialidad"
-											class="form-control" name="npespecialidadnombre" ng-model="objeto.npespecialidadnombre"
-											ng-disabled="true">
-									</div>
-								</div>
-
-								<div class="form-group"
-									ng-class="{'has-error':Form.empleadoclasificacioncodigo.$dirty && Form.empleadoclasificacioncodigo.$invalid, 'has-success':Form.empleadoclasificacioncodigo.$valid}">
-									<div class="col-md-4">
-										<label class="control-label">
-											Empleado clasificaci&oacute;n c&oacute;digo
-											<span class="symbol required"></span>
-										</label>
-									</div>
-									<div class="col-md-8">
-										<div class="input-group col-md-12">
-											<input type="text" placeholder="Seleccione un empleado"
-												class="form-control" name="npclasificacioncodigo" ng-disabled="true"
-												ng-model="objeto.npclasificacioncodigo">
-											<span ng-if="objeto.emptipo=='M'" class="input-group-btn">
-												<button type="button" class="btn btn-primary"
-													ng-click="abrirClasificacion()">
-													<i class="fa fa-search"></i>
-													Seleccione
-												</button>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group has-success">
-									<div class="col-md-4">
-										<label class="control-label">
-											Empleado clasificaci&oacute;n nombre
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Seleccione un empleado"
-											class="form-control" name="npclasificacionnombre" ng-model="objeto.npclasificacionnombre"
-											ng-disabled="true">
-									</div>
-								</div>
-
-								<div class="form-group"
-									ng-class="{'has-error':Form.empsituacion.$dirty && Form.empsituacion.$invalid, 'has-success':Form.empsituacion.$valid}">
-									<div class="col-md-4">
-										<label for="form-field-select-1">
-											Situaci&oacute;n
-											<span class="symbol required"></span>
-										</label>
-									</div>
-									<div class="col-md-8">
-										<select class="form-control" name="empsituacion"
-											ng-model="objeto.empsituacion" required>
-											<option value="N">Nombramiento</option>
-											<option value="C">Contrato</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="form-group"
-									ng-class="{'has-error':Form.empfinanciamiento.$dirty && Form.empfinanciamiento.$invalid, 'has-success':Form.empfinanciamiento.$valid}">
-									<div class="col-md-4">
-										<label for="form-field-select-1">
-											Financiamiento
-											<span class="symbol required"></span>
-										</label>
-									</div>
-									<div class="col-md-8">
-										<select class="form-control" name="empfinanciamiento"
-											ng-model="objeto.empfinanciamiento" required>
-											<option value="F">Fondo Fiscal</option>
-											<option value="A">Auto Gesti&oacute;n</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="form-group"
-									ng-class="{'has-error':Form.personaoid.$dirty && Form.personaoid.$invalid, 'has-success':Form.personaoid.$valid}">
-									<div class="col-md-4">
-										<label class="control-label">
-											Persona OID
-											<span class="symbol required"></span>
-										</label>
-									</div>
-									<div class="col-md-8">
-										<input type="text" placeholder="Ingrese un c&oacute;digo"
-											class="form-control" name="personaid" ng-model="objeto.personaid"
-											required ng-disabled="!nuevoar">
+										<input type="text" placeholder="Ingrese el Nombre Comercial"
+											class="form-control" name="nombrecomercial" required
+											ng-model="objeto.nombrecomercial" ng-minlength="1">
 									</div>
 								</div>
 
@@ -618,435 +310,6 @@
 						</div>
 
 					</form>
-
-				<script type="text/ng-template" id="modalGradoEscala.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Grado Escala</h3>
-                            </div>
-                            <div class="modal-body">
-
-				<div class="panel-body" ng-init="consultar();" >
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> C&oacute;digo </label> <input type="text"
-												class="form-control" ng-model="codigo">
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre grado </label> <input type="text"
-												class="form-control" ng-model="nombregrado">
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre Fuerza </label> <input type="text"
-												class="form-control" ng-model="nombrefuerza">
-										</div>
-									</div>
-																		
-								</div>
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> Grupo Ocupacional </label> <input type="text"
-												class="form-control" ng-model="grupoocupacional">
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> Estado </label> <select name="estado"
-												ng-model="estado" class="form-control">
-												<option value>Todos</option>
-												<option value="A">Activo</option>
-												<option value="I">Inactivo</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Nombre Grado'">{{obj.npnombregrado}}</td>
-								<td data-title="'Sigla Grado'">{{obj.npsiglagrado}}</td>
-								<td data-title="'Nombre Fuerza'">{{obj.npnombrefuerza}}</td>
-								<td data-title="'Sigla Fuerza'">{{obj.npsiglafuerza}}</td>
-								<td data-title="'Grupo Ocupacional'">{{obj.npgrupoocupacional}}</td>
-								<td data-title="'Grado Remuneraci&oacute;n'">{{obj.npnombregrado}}</td>
-								<td data-title="'Remuneraci&oacute;n'">{{obj.npremuneracion}}</td>
-								<td data-title="'R&eacute;gimen Laboral'">
-									<span ng-if="obj.regimenlaboraltipo=='L'">LOSEP</span>
-									<span ng-if="obj.regimenlaboraltipo!='L'">C&oacute;digo de Trabajo</span>
-								</td>								
-								<td data-title="'Estado'">{{obj.estado}}</td>
-							</tr>
-						</table>
-					</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
-				<script type="text/ng-template" id="modalEspecialidades.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Especialidades</h3>
-                            </div>
-                            <div class="modal-body">
-
-				<div class="panel-body" ng-init="consultar();" >
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group" class="has-success">
-									<label class="control-label">
-										C&oacute;digo
-									</label>
-									<input type="text" placeholder="Ingrese un c&oacute;digo"
-										class="form-control" name="codigo"
-										ng-model="codigo" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group" class="has-success">
-									<label class="control-label">
-										Nombre
-									</label>
-									<input type="text" placeholder="Ingrese un nombre"
-										class="form-control" name="nombre"
-										ng-model="nombre" />
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group" class="has-success">
-									<label class="control-label">
-										Sigla
-									</label>
-									<input type="text" placeholder="Ingrese una Sigla"
-										class="form-control" name="sigla"
-										ng-model="sigla" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group" class="has-success">
-									<label class="control-label">
-										Tipo
-									</label>
-									<select class="form-control" name="tipo" ng-model="tipo">
-									  <option value="" selected="selected">Selecione un Tipo</option>
-									  <option value="S">Servicios</option>
-									  <option value="A">Armas</option>
-									  <option value="E">Especialista</option>
-									  <option value="T">T&eacute;cnico</option>
-									  <option value="N">No Tiene Informaci&oacute;n</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label class="control-label">
-										Estado
-									</label>
-									<select class="form-control" name="estado" ng-model="estado">
-									  <option value="">Selecione un estado</option>
-									  <option value="A">Activo</option>
-									  <option value="I">Inactivo</option>
-									</select>
-								</div>
-							</div>
-						</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-								<td data-title="'Sigla'">{{obj.sigla}}</td>
-								<td data-title="'Fuerza nombre'">{{obj.npfuerzanombre}}</td>
-								<td data-title="'Tipo'">{{obj.nptipo}}</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
-							</tr>
-						</table>
-					</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
-				<script type="text/ng-template" id="modalClasificacion.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Clasificaciones</h3>
-                            </div>
-                            <div class="modal-body">
-
-				<div class="panel-body" ng-init="consultar();" >
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> C&oacute;digo </label> <input type="text"
-												class="form-control" ng-model="codigoFiltro">
-										</div>
-									</div>
-									
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> Estado </label> <select name="country"
-												ng-model="estadoFiltro" class="form-control">
-												<option value>Todos</option>
-												<option value="A">Activo</option>
-												<option value="I">Inactivo</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-<!--								<td data-title="'Sigla'">{{obj.sigla}}</td>
-								<td data-title="'Estado'">{{obj.npestado}}</td>
--->							</tr>
-						</table>
-					</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
-				<script type="text/ng-template" id="modalTipoIdentificacion.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Tipo de identidad</h3>
-                            </div>
-                            <div class="modal-body">
-
-				<div class="panel-body" ng-init="consultarTipo();" >
-
-                    <div class="panel panel-white" id="panel1">
-                        <div class="panel-heading">
-                            <h4 class="panel-title text-primary">Filtros</h4>
-                            <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-                        </div>
-                        <div uib-collapse="panel1" ng-init="panel1=true"
-                             class="panel-wrapper">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Nombre</label> <input type="text"
-                                                class="form-control" ng-model="nombre" ng-change="mayusculas()">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <a class="btn btn-wide btn-dark-azure" ng-click="consultarTipo()">
-                                            <i class="fa fa-search"></i> Buscar
-                                        </a> <a class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-                                <td data-title="'Nombre'">{{obj.npnombretipo}}</td>
-							</tr>
-						</table>
-					</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
-				<script type="text/ng-template" id="modalCargoEscala.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Cargo Escala</h3>
-                            </div>
-                            <div class="modal-body">
-
-				<div class="panel-body" ng-init="consultar();" >
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> C&oacute;digo </label> <input type="text"
-												class="form-control" ng-model="codigo">
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> Nombre Cargo </label> <input type="text"
-												class="form-control" ng-model="nombrecargo">
-										</div>
-									</div>									
-																		
-								</div>
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> Grupo Ocupacional </label> <input type="text"
-												class="form-control" ng-model="grupoocupacional">
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group">
-											<label> Estado </label> <select name="estado"
-												ng-model="estado" class="form-control">
-												<option value>Todos</option>
-												<option value="A">Activo</option>
-												<option value="I">Inactivo</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-								<td data-title="'C&oacute;digo'">{{obj.codigo}}</td>
-								<td data-title="'Nombre Cargo'">{{obj.npnombrecargo}}</td>
-								<td data-title="'Grupo Ocupacional'">{{obj.npgrupoocupacional}}</td>
-								<td data-title="'Grado Remuneraci&oacute;n'">{{obj.npcodigoescalarmu}}</td>
-								<td data-title="'Escala Remuneraci&oacute;n'">{{obj.npremuneracion}}</td>
-								<td data-title="'R&eacute;gimen Laboral'">
-									<span ng-if="obj.laboraltipo=='L'">LOSEP</span>
-									<span ng-if="obj.laboraltipo=='C'">C&oacute;digo de Trabajo</span>
-								</td>
-								<td data-title="'Estado'">{{obj.estado}}</td>
-							</tr>
-						</table>
-					</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
 				</div>
 			</div>
 		</div>
