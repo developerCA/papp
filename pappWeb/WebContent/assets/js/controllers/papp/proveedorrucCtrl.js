@@ -96,22 +96,16 @@ app.controller('ProveedorController', [ "$scope","$rootScope","$uibModal","Sweet
 		})
 	};
 
-	$scope.abrirEspecialidad = function(index) {
+	$scope.abrirIdentificacion = function(index) {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'modalEspecialidades.html',
-			controller : 'ModalEspecialidadesController',
-			size : 'lg',
-			resolve : {
-				fuerza : function() {
-					return $scope.fuerza;
-				}
-			}
+			templateUrl : 'modalTipoIdentificacion.html',
+			controller : 'ModalTipoIdentificacionController',
+			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			//console.log(obj);
-			$scope.objeto.socionegocioempespid = obj.id;
-			$scope.objeto.npespecialidadcodigo = obj.codigo;
-			$scope.objeto.npespecialidadnombre = obj.nombre;
+			$scope.objeto.socionegociotipoidentid = obj.tipoidentificacion.id;
+			$scope.objeto.nptipoidentificacion = obj.tipoidentificacion.nombre;
+			$scope.objeto.socionegociotipoidenttipoid = obj.tipoidentificacion.tipoidserial;
 		}, function() {
 		});
 	};

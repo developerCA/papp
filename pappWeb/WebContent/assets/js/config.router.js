@@ -679,7 +679,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: "/proveedorruc",
         templateUrl: "assets/views/papp/proveedorruc.html",
         resolve: loadSequence(
-        		'ngTable','ProveedorRucCtrl','ProveedorRucFactory'
+        		'ngTable','ProveedorRucCtrl','ProveedorRucFactory',
+        		'ModalTipoIdentificacionCtrl','TipoIdentificacionFactory'
 		),
         title: 'Proveedores Juridicos',
         ncyBreadcrumb: {

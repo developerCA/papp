@@ -32,7 +32,6 @@ app.controller('ModalTipoIdentificacionController', ["$scope", "$uibModalInstanc
         $scope.data = [];
 
         tipoIdentificacionFactory.traerTiposTipo(pagina, $scope.nombre).then(function (resp) {
-        	console.log(resp);
             if (resp.meta)
                 $scope.data = resp;
         });
