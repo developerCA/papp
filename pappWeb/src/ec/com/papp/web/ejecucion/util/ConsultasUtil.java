@@ -17,6 +17,7 @@ import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
+import ec.com.papp.administracion.to.UnidadmedidaTO;
 import ec.com.papp.estructuraorganica.to.UnidadTO;
 import ec.com.papp.planificacion.to.CertificacionOrdenVO;
 import ec.com.papp.planificacion.to.CertificacionTO;
@@ -36,9 +37,12 @@ import ec.com.papp.planificacion.to.ReformametaTO;
 import ec.com.papp.planificacion.to.ReformametalineaTO;
 import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
+import ec.com.papp.planificacion.to.SubtareaunidadTO;
+import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
 import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.UtilSession;
+import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.exception.MyException;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
@@ -980,6 +984,42 @@ public class ConsultasUtil {
 		}
 	}
 
+	public static Double obtenersaldodisponiblesubtarea(Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs,Long nivelactividadid,Date fecha) throws MyException {
+		try{
+			double saldo=0.0;
+			System.out.println("subtareaunidadacumuladorTOs "+subtareaunidadacumuladorTOs.size());
+			if(subtareaunidadacumuladorTOs.size()>0) {
+				boolean ajustado=false;//uso una bandera para solo tomar un valor ajustado de la coleccion
+				double totalajustado=0.0;
+				for(SubtareaunidadacumuladorTO subtareaunidadacumuladorTO2:subtareaunidadacumuladorTOs) {
+					if(subtareaunidadacumuladorTO2.getTipo().equals("A") && !ajustado) {
+						ajustado=true;
+						totalajustado=totalajustado+subtareaunidadacumuladorTO2.getTotal().doubleValue();
+					}
+				}	
+				
+				//traigo las metassubtarea asignadas al subitem
+				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtienereformassinoelne(nivelactividadid);
+				System.out.println("reformametalineatos: " + reformametalineaTOs.size());
+				double totalreforma=0.0;
+				System.out.println("fecha creacion: " + fecha);
+				for(ReformametalineaTO reformametalineaTO:reformametalineaTOs){
+					System.out.println("fecha a comparar: " + reformametalineaTO.getReformameta().getFechacreacion());
+					//if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
+					if(reformametalineaTO.getReformameta().getEstado().equals("AP") ||reformametalineaTO.getReformameta().getEstado().equals("RE") || reformametalineaTO.getReformameta().getEstado().equals("SO")){
+						totalreforma=totalreforma+reformametalineaTO.getValorincremento().doubleValue()-reformametalineaTO.getValordecremento().doubleValue();
+					}
+				}
+				saldo=totalajustado+totalreforma;
+				System.out.println("totalajustad: " + totalajustado + "saldo: " + saldo);
+			}
+				return saldo;
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+	}
+
 	//	public static Double obtenersaldodisponible(Double total,Long idsubitem,Long nivelactividadid,Date fecha) throws MyException {
 //		try{
 //			SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(idsubitem);
@@ -1377,7 +1417,7 @@ public class ConsultasUtil {
 			//traigo las reformaslinea las traigo
 			ReformametalineaTO reformametalineaTO=new ReformametalineaTO();
 			reformametalineaTO.getId().setId(reformametaTO.getId());
-			Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO);
+			Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO,reformametaTO.getFechacreacion());
 			System.out.println("lineas: "+ reformametalineaTOs.size());
 			jsonObject.put("reformametalineas", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs,reformametalineaTO.getJsonConfigconsulta()));
 			jsonObject.put("reformameta", (JSONObject)JSONSerializer.toJSON(reformametaTO,reformametaTO.getJsonConfig()));

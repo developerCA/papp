@@ -558,11 +558,11 @@ public class EjecucionController {
 					reformametaTO.setFechanegacion(UtilGeneral.parseStringToDate(reformametaTO.getNpfechanegacion()));
 				if(reformametaTO.getNpfechasolicitud()!=null)
 					reformametaTO.setFechasolicitud(UtilGeneral.parseStringToDate(reformametaTO.getNpfechasolicitud()));
-				String resultado="";
-				if(reformametaTO.getId()!=null && reformametaTO.getId().longValue()!=0){
-					System.out.println("va a ver las distribuciones ");
-					resultado=UtilSession.planificacionServicio.transListareformalineasdistribucionrm(reformametaTO.getId());
-				}
+//				String resultado="";
+//				if(reformametaTO.getId()!=null && reformametaTO.getId().longValue()!=0){
+//					System.out.println("va a ver las distribuciones ");
+//					resultado=UtilSession.planificacionServicio.transListareformalineasdistribucionrm(reformametaTO.getId());
+//				}
 				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO,null);
 				//id=reformaTO.getNpid().toString();
 				reformametaTO.setId(reformametaTO.getNpid());
@@ -585,7 +585,7 @@ public class EjecucionController {
 				System.out.println("consulta lineas: " + reformametalineaTO.getNivelactid() +"-"+ reformametalineaTO.getId().getId());
 				reformalineaTO2.setNivelactid(reformametalineaTO.getNivelactid());
 				reformalineaTO2.getId().setId(reformametalineaTO.getId().getId());
-				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformalineaTO2);
+				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformalineaTO2,null);
 				System.out.println("ordenes: " + reformametalineaTOs.size());
 				boolean grabar=true;
 				if(reformametalineaTOs.size()>0){
@@ -618,7 +618,8 @@ public class EjecucionController {
 					//Traigo la lista de reformametalinea
 					ReformametalineaTO reformametalineaTO3=new ReformametalineaTO();
 					reformametalineaTO3.getId().setId(reformametalineaTO.getId().getId());
-					Collection<ReformametalineaTO> reformametalineaTOs2=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO3);
+					ReformametaTO reformametaTO=UtilSession.planificacionServicio.transObtenerReformametaTO(reformametalineaTO.getId().getId());
+					Collection<ReformametalineaTO> reformametalineaTOs2=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO3,reformametaTO.getFechacreacion());
 					jsonObject.put("reformametalinea", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs2,reformametalineaTO.getJsonConfig()));
 				}
 			}
@@ -1111,7 +1112,9 @@ public class EjecucionController {
 					reformametalineaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
 					reformametalineaTO.setNpunidadmedida(subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
 				}
-				reformametalineaTO.setNpunidadmedida(subtareaunidadTO.getUnidadmedidaTO().getNombre());
+				reformametalineaTO.setNpunidadmedida(subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
+				double saldo=ConsultasUtil.obtenersaldodisponiblesubtarea(subtareaunidadacumuladorTOs,reformametalineaTO.getNivelactid(),reformametalineaTO.getReformameta().getFechacreacion());
+				reformametalineaTO.setNpvalorinicial(saldo);
 				jsonObject.put("reformametalinea", (JSONObject)JSONSerializer.toJSON(reformametalineaTO,reformametalineaTO.getJsonConfig()));
 			}
 			
@@ -1129,9 +1132,12 @@ public class EjecucionController {
 				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
 				System.out.println("subtareaunidadacumuladorTOs "+subtareaunidadacumuladorTOs.size());
 				if(subtareaunidadacumuladorTOs.size()>0) {
+					//busco las lineas agregadas para sumar incrementos y restar decrementos
 					Map<String, Double> valoractual=new HashMap<>();
 					Map<String, String> descripciones=new HashMap<>();
 					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
+					double saldo=ConsultasUtil.obtenersaldodisponiblesubtarea(subtareaunidadacumuladorTOs,id,null);
+
 					System.out.println("metadescripcion: " +subtareaunidadacumuladorTO.getDescripcion());
 					System.out.println("unidadmedida: " +subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
 					System.out.println("valor: " +subtareaunidadacumuladorTO.getCantidad());
@@ -1680,7 +1686,7 @@ public class EjecucionController {
 				//obtengo las lineas
 				ReformametalineaTO reformametalineaTO=new ReformametalineaTO();
 				reformametalineaTO.getId().setId(reformametaTO.getId());
-				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO);
+				Collection<ReformametalineaTO> reformametalineaTOs=UtilSession.planificacionServicio.transObtenerReformametalinea(reformametalineaTO,null);
 				if(reformametalineaTOs.size()==0) {
 					continuar=false;
 					mensajes.setMsg("Debe existir al menos una linea creada");
