@@ -193,6 +193,7 @@ public class EjecucionController {
 			//ordengasto linea
 			else if(clase.equals("ordengastolinea")){
 				OrdengastolineaTO ordengastolineaTO = gson.fromJson(new StringReader(objeto), OrdengastolineaTO.class);
+				ordengastolineaTO.setSaldo(ordengastolineaTO.getNpsaldocertificacion());
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				OrdengastolineaTO ordengastolineaTO2=new OrdengastolineaTO();
 				log.println("consulta lineas: " + ordengastolineaTO.getNivelactid() +"-"+ ordengastolineaTO.getId().getId());
@@ -252,6 +253,7 @@ public class EjecucionController {
 			//ordendevengo linea
 			else if(clase.equals("ordendevengolinea")){
 				OrdendevengolineaTO ordendevengolineaTO = gson.fromJson(new StringReader(objeto), OrdendevengolineaTO.class);
+				ordendevengolineaTO.setSaldo(ordendevengolineaTO.getNpsaldo());
 				OrdendevengolineaTO ordendevengolineaTO2=new OrdendevengolineaTO();
 				log.println("consulta lineas: " + ordendevengolineaTO.getNivelactid() +"-"+ ordendevengolineaTO.getId().getId());
 				ordendevengolineaTO2.setNivelactid(ordendevengolineaTO.getNivelactid());
@@ -307,6 +309,7 @@ public class EjecucionController {
 			//ordenreversion linea
 			else if(clase.equals("ordenreversionlinea")){
 				OrdenreversionlineaTO ordenreversionlineaTO = gson.fromJson(new StringReader(objeto), OrdenreversionlineaTO.class);
+				ordenreversionlineaTO.setSaldo(ordenreversionlineaTO.getSaldo());
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				OrdenreversionlineaTO ordenreversionlineaTO2=new OrdenreversionlineaTO();
 				log.println("consulta lineas: " + ordenreversionlineaTO.getNivelactid() +"-"+ ordenreversionlineaTO.getId().getId());
@@ -1114,7 +1117,8 @@ public class EjecucionController {
 				}
 				reformametalineaTO.setNpunidadmedida(subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
 				double saldo=ConsultasUtil.obtenersaldodisponiblesubtarea(subtareaunidadacumuladorTOs,reformametalineaTO.getNivelactid(),reformametalineaTO.getReformameta().getFechacreacion());
-				reformametalineaTO.setNpvalorinicial(saldo);
+				reformametalineaTO.setCodificado(saldo);
+				//reformametalineaTO.setNpvalorinicial(saldo);
 				jsonObject.put("reformametalinea", (JSONObject)JSONSerializer.toJSON(reformametalineaTO,reformametalineaTO.getJsonConfig()));
 			}
 			
@@ -1127,7 +1131,7 @@ public class EjecucionController {
 				subtareaunidadTO.setUnidadmedidaTO(new UnidadmedidaTO());
 				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
 				subtareaunidadacumuladorTO.setSubtareaunidad(subtareaunidadTO);
-				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
+				//subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 				subtareaunidadacumuladorTO.setOrderByField(OrderBy.orderDesc("id.acumid"));
 				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
 				System.out.println("subtareaunidadacumuladorTOs "+subtareaunidadacumuladorTOs.size());
@@ -1140,10 +1144,10 @@ public class EjecucionController {
 
 					System.out.println("metadescripcion: " +subtareaunidadacumuladorTO.getDescripcion());
 					System.out.println("unidadmedida: " +subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
-					System.out.println("valor: " +subtareaunidadacumuladorTO.getCantidad());
+					System.out.println("valor: " +saldo);
 					descripciones.put("metadescripcion", subtareaunidadacumuladorTO.getDescripcion());
 					descripciones.put("unidadmedida", subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
-					valoractual.put("valor", subtareaunidadacumuladorTO.getCantidad());
+					valoractual.put("valor", saldo);
 					jsonObject.put("descripciones", (JSONObject)JSONSerializer.toJSON(descripciones));
 					jsonObject.put("valoractual", (JSONObject)JSONSerializer.toJSON(valoractual));
 					System.out.println("json " + jsonObject.toString());
@@ -1166,7 +1170,7 @@ public class EjecucionController {
 				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
 				subtareaunidadacumuladorTO.setSubtareaunidad(subtareaunidadTO);
 				subtareaunidadacumuladorTO.getId().setAcumid(2L);
-				subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
+				//subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 				subtareaunidadacumuladorTO.setOrderByField(OrderBy.orderDesc("id.acumid"));
 				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
 				if(subtareaunidadacumuladorTOs.size()>0) {
@@ -1174,7 +1178,7 @@ public class EjecucionController {
 					reformametasubtareaTO.setCodificado(subtareaunidadacumuladorTO.getCantidad());
 					reformametasubtareaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
 				}
-
+				//double saldo=ConsultasUtil.obtenersaldodisponiblesubtarea(subtareaunidadacumuladorTOs,reformametalineaTO.getNivelactid(),reformametalineaTO.getReformameta().getFechacreacion());
 				System.out.println("descripcion: " + reformametasubtareaTO.getNpmetadescripcion());
 				System.out.println("unidad: " + reformametasubtareaTO.getNpunidadmedida());
 				jsonObject.put("reformametasubtarea", (JSONObject)JSONSerializer.toJSON(reformametasubtareaTO,reformametasubtareaTO.getJsonConfig()));
@@ -1991,6 +1995,17 @@ public class EjecucionController {
 			if(tipo.equals("rm")){
 				ReformametalineaTO reformametalineaTO= gson.fromJson(new StringReader(objeto), ReformametalineaTO.class);
 				CronogramaTO cronogramaTO=UtilSession.planificacionServicio.transCronogramarforma(tipo, ejerciciofiscal, null, reformametalineaTO,null,null);
+				SubtareaunidadTO subtareaunidadTO=new SubtareaunidadTO();
+				subtareaunidadTO.setId(reformametalineaTO.getNpSubtareaid());
+				subtareaunidadTO.setUnidadmedidaTO(new UnidadmedidaTO());
+				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
+				subtareaunidadacumuladorTO.setSubtareaunidad(subtareaunidadTO);
+				//subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
+				subtareaunidadacumuladorTO.setOrderByField(OrderBy.orderDesc("id.acumid"));
+				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
+				System.out.println("subtareaunidadacumuladorTOs "+subtareaunidadacumuladorTOs.size());
+				double valtotal=ConsultasUtil.obtenersaldodisponiblesubtarea(subtareaunidadacumuladorTOs, reformametalineaTO.getNivelactid(), null);
+				reformametalineaTO.setNpvalorinicial(valtotal);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformametalineaTO,reformametalineaTO.getJsonConfig()));
 				jsonObject.put("cronograma", (JSONObject)JSONSerializer.toJSON(cronogramaTO,cronogramaTO.getJsonConfig()));
 				jsonObject.put("cronogramalinea", (JSONArray)JSONSerializer.toJSON(cronogramaTO.getCronogramalineaTOs(),new CronogramalineaTO().getJsonConfigreforma()));
