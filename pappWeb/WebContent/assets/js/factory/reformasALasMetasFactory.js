@@ -65,8 +65,7 @@ app.factory("reformasALasMetasFactory", [ "Restangular", function(Restangular) {
 			anio,
 			reformaliea
 		) {
-			//console.log("Año fiscal: " + anio);
-			var url = "ejecucion/metareforma/r/"+anio;
+			var url = "ejecucion/metareforma/rm/"+anio;
 		    return Restangular.allUrl(url).customPOST(reformaliea);
 		},
 
