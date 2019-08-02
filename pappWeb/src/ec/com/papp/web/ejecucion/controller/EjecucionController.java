@@ -1175,10 +1175,11 @@ public class EjecucionController {
 				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
 				if(subtareaunidadacumuladorTOs.size()>0) {
 					subtareaunidadacumuladorTO=(SubtareaunidadacumuladorTO)subtareaunidadacumuladorTOs.iterator().next();
-					reformametasubtareaTO.setCodificado(subtareaunidadacumuladorTO.getCantidad());
+					//reformametasubtareaTO.setCodificado(subtareaunidadacumuladorTO.getCantidad());
 					reformametasubtareaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
 				}
-				//double saldo=ConsultasUtil.obtenersaldodisponiblesubtarea(subtareaunidadacumuladorTOs,reformametalineaTO.getNivelactid(),reformametalineaTO.getReformameta().getFechacreacion());
+				double saldo=ConsultasUtil.obtenersaldodisponiblereformasubtarea(subtareaunidadacumuladorTOs,reformametasubtareaTO.getNivelactid(),reformametasubtareaTO.getReforma().getFechacreacion());
+				reformametasubtareaTO.setCodificado(saldo);
 				System.out.println("descripcion: " + reformametasubtareaTO.getNpmetadescripcion());
 				System.out.println("unidad: " + reformametasubtareaTO.getNpunidadmedida());
 				jsonObject.put("reformametasubtarea", (JSONObject)JSONSerializer.toJSON(reformametasubtareaTO,reformametasubtareaTO.getJsonConfig()));

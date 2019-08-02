@@ -1021,41 +1021,41 @@ public class ConsultasUtil {
 		}
 	}
 
-//	public static Double obtenersaldodisponiblereformasubtarea(Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs,Long nivelactividadid,Date fecha) throws MyException {
-//		try{
-//			double saldo=0.0;
-//			System.out.println("subtareaunidadacumuladorTOs "+subtareaunidadacumuladorTOs.size());
-//			if(subtareaunidadacumuladorTOs.size()>0) {
-//				boolean ajustado=false;//uso una bandera para solo tomar un valor ajustado de la coleccion
-//				double totalajustado=0.0;
-//				for(SubtareaunidadacumuladorTO subtareaunidadacumuladorTO2:subtareaunidadacumuladorTOs) {
-//					if(subtareaunidadacumuladorTO2.getTipo().equals("A") && !ajustado) {
-//						ajustado=true;
-//						totalajustado=totalajustado+subtareaunidadacumuladorTO2.getCantidad().doubleValue();
-//					}
-//				}	
-//				
-//				//traigo las metassubtarea asignadas al subitem
-//				Collection<ReformametasubtareaTO> reformametasubtareaTOs=UtilSession.planificacionServicio.transObtienereform
-//				System.out.println("reformametalineatos: " + reformametalineaTOs.size());
-//				double totalreforma=0.0;
-//				System.out.println("fecha creacion: " + fecha);
-//				for(ReformametalineaTO reformametalineaTO:reformametalineaTOs){
-//					System.out.println("fecha a comparar: " + reformametalineaTO.getReformameta().getFechacreacion());
-//					//if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
-//					if(reformametalineaTO.getReformameta().getEstado().equals("AP") ||reformametalineaTO.getReformameta().getEstado().equals("RE") || reformametalineaTO.getReformameta().getEstado().equals("SO")){
-//						totalreforma=totalreforma+reformametalineaTO.getValorincremento().doubleValue()-reformametalineaTO.getValordecremento().doubleValue();
-//					}
-//				}
-//				saldo=totalajustado+totalreforma;
-//				System.out.println("totalajustad: " + totalajustado + "saldo: " + saldo);
-//			}
-//				return saldo;
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//			throw new MyException(e);
-//		}
-//	}
+	public static Double obtenersaldodisponiblereformasubtarea(Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs,Long nivelactividadid,Date fecha) throws MyException {
+		try{
+			double saldo=0.0;
+			System.out.println("subtareaunidadacumuladorTOs "+subtareaunidadacumuladorTOs.size());
+			if(subtareaunidadacumuladorTOs.size()>0) {
+				boolean ajustado=false;//uso una bandera para solo tomar un valor ajustado de la coleccion
+				double totalajustado=0.0;
+				for(SubtareaunidadacumuladorTO subtareaunidadacumuladorTO2:subtareaunidadacumuladorTOs) {
+					if(subtareaunidadacumuladorTO2.getTipo().equals("A") && !ajustado) {
+						ajustado=true;
+						totalajustado=totalajustado+subtareaunidadacumuladorTO2.getCantidad().doubleValue();
+					}
+				}	
+				
+				//traigo las metassubtarea asignadas al subitem
+				Collection<ReformametasubtareaTO> reformametasubtareaTOs=UtilSession.planificacionServicio.transObtienereformametasubtareanoelne(nivelactividadid);
+				System.out.println("reformametalineatos: " + reformametasubtareaTOs.size());
+				double totalreforma=0.0;
+				System.out.println("fecha creacion: " + fecha);
+				for(ReformametasubtareaTO reformametasubtareaTO:reformametasubtareaTOs){
+					System.out.println("fecha a comparar: " + reformametasubtareaTO.getReforma().getFechacreacion());
+					//if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
+					if(reformametasubtareaTO.getReforma().getEstado().equals("AP") ||reformametasubtareaTO.getReforma().getEstado().equals("RE") || reformametasubtareaTO.getReforma().getEstado().equals("SO")){
+						totalreforma=totalreforma+reformametasubtareaTO.getValorincremento().doubleValue()-reformametasubtareaTO.getValordecremento().doubleValue();
+					}
+				}
+				saldo=totalajustado+totalreforma;
+				System.out.println("totalajustad: " + totalajustado + "saldo: " + saldo);
+			}
+				return saldo;
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+	}
 
 	//	public static Double obtenersaldodisponible(Double total,Long idsubitem,Long nivelactividadid,Date fecha) throws MyException {
 //		try{
