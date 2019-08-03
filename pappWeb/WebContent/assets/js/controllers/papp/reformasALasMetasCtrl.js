@@ -318,7 +318,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 			}
 		});
 		modalInstance.result.then(function(obj) {
-		    $scope.detalles = obj.reformalineas;
+		    $scope.detalles = obj.reformametalineas;
 		    $scope.objeto.valorincremento = obj.valorincremento;
 		    $scope.objeto.valordecremento = obj.valordecremento;
 		    $scope.form.submit(Form);
@@ -355,7 +355,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 			}
 		});
 		modalInstance.result.then(function(obj) {
-		    $scope.detalles = obj.reformalineas;
+		    $scope.detalles = obj.reformametalineas;
 		    //$scope.objeto.valortotal = obj.valortotal;
 		    $scope.form.submit(Form);
             SweetAlert.swal(
@@ -408,7 +408,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 			}
 		});
 		modalInstance.result.then(function(obj) {
-		    $scope.detallesM = obj.reformalineas;
+		    $scope.detallesM = obj.reformametalineas;
 		    //$scope.objeto.valortotal = obj.valortotal;
 		    $scope.form.submit(Form);
             SweetAlert.swal(
@@ -543,7 +543,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 	      					 $scope.nuevoar=false;
 	      				     $scope.objeto=resp.json.reformameta;
         				 } else {
-          		             form.$setPristine(true);
+          		             //form.$setPristine(true);
           		             $scope.edicion=false;
           		             $scope.objeto={};
         				 }

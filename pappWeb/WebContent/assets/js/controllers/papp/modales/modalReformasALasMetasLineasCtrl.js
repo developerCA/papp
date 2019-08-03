@@ -36,16 +36,9 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
 					$scope.si = resp.json.result;
 		        	$scope.objeto = resp.json.reformametalinea;
 		        	$scope.objetoDetalles = resp.json.subtareainfo;
-//		        	try {
-//			        	$scope.valorajustado = $scope.objeto.npvalortotal + $scope.objeto.npvalorincremento - $scope.objeto.npvalordecremento;
-//					} catch (e) {
-//			        	$scope.valorajustado = 0;
-//					}
-//		        	try {
-//			        	$scope.saldo = $scope.objeto.npsaldo - $scope.objeto.npvalorincremento + $scope.objeto.npvalordecremento;
-//					} catch (e) {
-//			        	$scope.saldo = 0;
-//					}
+		        	$scope.metadescripcion = resp.json.reformametalinea.npmetadescripcion;
+		        	$scope.unidadmedida = resp.json.reformametalinea.npunidadmedida;
+		        	$scope.valoractual = resp.json.reformametalinea.codificado;
 		        	$scope.ponerCodigos();
 		        	$scope.noeditar=true;
 				})
@@ -134,9 +127,9 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
             	  tObj.nivelactid = tObj.subitem;
             	  //delete tObj.subitem;
             	}
-            	if (tObj.npvalorincremento == null) tObj.npvalorincremento = 0;
-            	if (tObj.npvalordecremento == null) tObj.npvalordecremento = 0;
-            	if (parseInt(tObj.npvalorincremento) == 0 && parseInt(tObj.npvalordecremento) == 0) {
+            	if (tObj.valorincremento == null) tObj.valorincremento = 0;
+            	if (tObj.valordecremento == null) tObj.valordecremento = 0;
+            	if (parseInt(tObj.valorincremento) == 0 && parseInt(tObj.valordecremento) == 0) {
             		SweetAlert.swal(
             				"Reformas a las Metas!",
             				"El incremento o el decremento tienen que tener valor uno de los dos",
@@ -144,7 +137,7 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
     				);
             		return;
             	}
-            	if (parseInt(tObj.npvalorincremento) != 0 && parseInt(tObj.npvalordecremento) != 0) {
+            	if (parseInt(tObj.valorincremento) != 0 && parseInt(tObj.valordecremento) != 0) {
             		SweetAlert.swal(
             				"Reformas a las Metas!",
             				"El incremento o el decremento solo uno de los dos puede tener valor",
@@ -152,7 +145,7 @@ app.controller('ModalReformasALasMetasLineasController', [ "$scope","$rootScope"
     				);
             		return;
             	}
-            	if (parseInt(tObj.npvalordecremento) > $scope.valoractual) {
+            	if (parseInt(tObj.valordecremento) > $scope.valoractual) {
             		SweetAlert.swal(
             				"Reformas a las Metas!",
             				"El decremento no puede ser mayor al valor actual",
