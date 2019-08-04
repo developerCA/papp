@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
     <text-property name="title">RV-01: SOLICITUD DE ORDEN DE REVERSION</text-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -14,7 +14,7 @@
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">1621</value>
+                <value type="constant">1725</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -708,8 +708,6 @@
        ORDENREVERSION                       ore 
        INNER JOIN ORDENGASTO                og              ON og.ORDENGASTOID=ore.ORDENREVERSIONOGASTOID
        INNER JOIN ORDENREVERSIONLINEA       orl             ON orl.ORDENREVERSIONID=ore.ORDENREVERSIONID
-       INNER JOIN ORDENDEVENGO              od              ON od.ORDENDEVENGOORDENGASTOID=og.ORDENGASTOID
-       INNER JOIN ORDENDEVENGOLINEA         odl              ON odl.ORDENDEVENGOID = od.ORDENDEVENGOID
        INNER JOIN CLASEREGISTROCMCGASTO     cgm             ON (cgm.CLASEREGISTROID=og.ORDENGASTOCLASEREGID AND cgm.CLASEREGISTROCMID=og.ORDENGASTOCLASEMODID AND cgm.CLASEREGISTROCMCGASTOID=og.ORDENGASTOCGASTOID)
        INNER JOIN CLASEREGISTROCLASEMODIFICACION crm        ON (crm.CLASEREGISTROID=cgm.CLASEREGISTROID AND crm.CLASEREGISTROCMID=cgm.CLASEREGISTROCMID)
        INNER JOIN claseregistro             cr              ON cr.CLASEREGISTROID=crm.CLASEREGISTROID
@@ -748,7 +746,6 @@
        INNER JOIN nivelprograma             na9             ON na9.nivelprogramaid = na8.nivelprogramapadreid
        INNER JOIN proyecto                  py              ON py.proyectoid = na9.nivelprogramatablarelacionid
        INNER JOIN nivelprograma             na10            ON na10.nivelprogramaid = na9.nivelprogramapadreid
-       INNER JOIN subprograma               sp              ON sp.subprogramaid = na10.nivelprogramatablarelacionid
        INNER JOIN nivelprograma             na11            ON na11.nivelprogramaid = na10.nivelprogramapadreid
        INNER JOIN programa                  pr              ON pr.programaid = na11.nivelprogramatablarelacionid
  WHERE ore.ORDENREVERSIONID = ?
@@ -808,9 +805,6 @@
        orl.ORDENREVERSIONLINEAVALOR,
        orl.ORDENREVERSIONLINEANIVELACID,
        ore.ORDENREVERSIONOGASTOID,
-       odl.ORDENDEVENGOLINEANIVELACTID,
-       od.ORDENDEVENGOFECHACREACION,
-       od.ORDENDEVENGOORDENGASTOID,
        orl.ORDENREVERSIONLINEASALDO
  ORDER BY orl.ORDENREVERSIONLINEAID
 ]]></xml-property>
