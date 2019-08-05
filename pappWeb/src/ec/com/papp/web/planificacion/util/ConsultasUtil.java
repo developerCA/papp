@@ -644,7 +644,7 @@ public class ConsultasUtil {
 			if(parameters.get("codigo")!=null && !parameters.get("codigo").equals(""))
 				indicadorTO.setCodigo(parameters.get("codigo"));
 			if(parameters.get("nombre")!=null && !parameters.get("nombre").equals(""))
-				indicadorTO.setNombre(parameters.get("nombre").toUpperCase());
+				indicadorTO.setNombre(parameters.get("nombre"));
 			if(parameters.get("indicadorejerciciofiscalid")!=null && !parameters.get("indicadorejerciciofiscalid").equals(""))
 				indicadorTO.setIndicadorejerciciofiscalid(Long.valueOf(parameters.get("indicadorejerciciofiscalid")));
 			UnidadmedidaTO unidadmedidaTO=new UnidadmedidaTO();
