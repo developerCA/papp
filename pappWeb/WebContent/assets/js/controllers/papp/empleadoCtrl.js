@@ -89,7 +89,7 @@ app.controller('EmpleadosController', [ "$scope","$rootScope","$uibModal","Sweet
 			}
 		});
 	});
-	
+
 	$scope.nuevo=function(){
 		$scope.objeto={
 			id:null,

@@ -85,6 +85,25 @@ app.controller('ProveedorController', [ "$scope","$rootScope","$uibModal","Sweet
 		});
 	});
 
+	$scope.nuevo=function(){
+		$scope.objeto={
+			id: 0,
+			nombremostrado: ' ',
+			esempleado: 0,
+			empsituacion: 'P',
+			empfinanciamiento: 'F',
+			esproveedor: 1
+		};
+		//$scope.objetolista=[];
+		//var obj={id:{permisoid:$scope.objeto},perfilpermisolectura:null};
+		//$scope.objetolista.push(obj);
+		$scope.fuerza=null;
+
+		$scope.edicion=true;
+		$scope.guardar=true;
+		$scope.nuevoar=true;
+	};
+
 	$scope.editar=function(id){
 		proveedorrucFactory.traerEditar(id).then(function(resp){
 			if (resp.estado) {
@@ -106,6 +125,7 @@ app.controller('ProveedorController', [ "$scope","$rootScope","$uibModal","Sweet
 			$scope.objeto.socionegociotipoidentid = obj.tipoidentificacion.id;
 			$scope.objeto.nptipoidentificacion = obj.tipoidentificacion.nombre;
 			$scope.objeto.socionegociotipoidenttipoid = obj.tipoidentificacion.tipoidserial;
+			$scope.objeto.emptipo = obj.tipo;
 		}, function() {
 		});
 	};
@@ -134,14 +154,10 @@ app.controller('ProveedorController', [ "$scope","$rootScope","$uibModal","Sweet
 	 		             $scope.edicion=false;
 	 		             $scope.objeto={};
 	 		             $scope.limpiar();
-	 		             resp.mensajes.msg = "Registro guardado satisfactoriamente!";
-	 		             resp.mensajes.type = "success";
-        			 }
- 		             SweetAlert.swal(
- 		            		 "Proveedor Juridico!",
- 		            		 resp.mensajes.msg,
- 		            		 resp.mensajes.type
-            		 );
+	 		             SweetAlert.swal("Proveedor Juridico!", "Registro guardado satisfactoriamente!", "success");
+					 } else {
+						 SweetAlert.swal("Proveedor Juridico!", resp.mensajes.msg, "error");
+					 }
         		})
             }
         },
