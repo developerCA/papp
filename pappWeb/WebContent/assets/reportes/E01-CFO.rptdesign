@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
+    <text-property name="title">E-01: OFICIO DE CERTIFICADO DE FONDOS</text-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="layoutPreference">auto layout</property>
@@ -12,7 +13,7 @@
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">54048</value>
+                <value type="constant">53078</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -57,6 +58,18 @@
                     <text-property name="heading">CERTIFICACIONID</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">CERTIFICACIONLINEANIVELACTID</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">CERTIFICACIONLINEANIVELACTID</text-property>
+                    <text-property name="heading">CERTIFICACIONLINEANIVELACTID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CERTIFICACIONLINEASALDO</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">CERTIFICACIONLINEASALDO</text-property>
+                    <text-property name="heading">CERTIFICACIONLINEASALDO</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">EJERCICIOFISCALANIO</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">EJERCICIOFISCALANIO</text-property>
@@ -91,6 +104,12 @@
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">UNIDADNOMBRE</text-property>
                     <text-property name="heading">UNIDADNOMBRE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CERTIFICACIONFECHACREACION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CERTIFICACIONFECHACREACION</text-property>
+                    <text-property name="heading">CERTIFICACIONFECHACREACION</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">CERTIFICACIONFECHAAPROBACION</property>
@@ -141,12 +160,6 @@
                     <text-property name="heading">VALOR</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">TOTALSUBITEM</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">TOTALSUBITEM</text-property>
-                    <text-property name="heading">TOTALSUBITEM</text-property>
-                </structure>
-                <structure>
                     <property name="columnName">SALDO</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">SALDO</text-property>
@@ -175,81 +188,91 @@
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">EJERCICIOFISCALANIO</property>
+                        <property name="name">CERTIFICACIONLINEANIVELACTID</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">SUBITEMID</property>
+                        <property name="name">CERTIFICACIONLINEASALDO</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
+                        <property name="name">EJERCICIOFISCALANIO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">SUBITEMID</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
                         <property name="name">INSTITUCION</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">7</property>
                         <property name="name">INSTITUCIONENTIDAD</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">8</property>
                         <property name="name">UNIDADCODIGOPRESUP</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">9</property>
                         <property name="name">UNIDADNOMBRE</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">10</property>
+                        <property name="name">CERTIFICACIONFECHACREACION</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
                         <property name="name">CERTIFICACIONFECHAAPROBACION</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
+                        <property name="position">12</property>
                         <property name="name">CERTIFICACIONESTADO</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">13</property>
                         <property name="name">CERTIFICACIONCODIGO</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">14</property>
                         <property name="name">PROCESO</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">15</property>
                         <property name="name">CERTIFICACIONDESCRIPCION</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">16</property>
                         <property name="name">ID</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">17</property>
                         <property name="name">DETALLE</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">18</property>
                         <property name="name">VALOR</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
-                        <property name="name">TOTALSUBITEM</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">17</property>
+                        <property name="position">19</property>
                         <property name="name">SALDO</property>
                         <property name="dataType">decimal</property>
                     </structure>
@@ -266,111 +289,125 @@
                 </structure>
                 <structure>
                     <property name="position">2</property>
+                    <property name="name">CERTIFICACIONLINEANIVELACTID</property>
+                    <property name="nativeName">CERTIFICACIONLINEANIVELACTID</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">CERTIFICACIONLINEASALDO</property>
+                    <property name="nativeName">CERTIFICACIONLINEASALDO</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
                     <property name="name">EJERCICIOFISCALANIO</property>
                     <property name="nativeName">EJERCICIOFISCALANIO</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">5</property>
                     <property name="name">SUBITEMID</property>
                     <property name="nativeName">SUBITEMID</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">6</property>
                     <property name="name">INSTITUCION</property>
                     <property name="nativeName">INSTITUCION</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">7</property>
                     <property name="name">INSTITUCIONENTIDAD</property>
                     <property name="nativeName">INSTITUCIONENTIDAD</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">8</property>
                     <property name="name">UNIDADCODIGOPRESUP</property>
                     <property name="nativeName">UNIDADCODIGOPRESUP</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">9</property>
                     <property name="name">UNIDADNOMBRE</property>
                     <property name="nativeName">UNIDADNOMBRE</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">10</property>
+                    <property name="name">CERTIFICACIONFECHACREACION</property>
+                    <property name="nativeName">CERTIFICACIONFECHACREACION</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
                     <property name="name">CERTIFICACIONFECHAAPROBACION</property>
                     <property name="nativeName">CERTIFICACIONFECHAAPROBACION</property>
                     <property name="dataType">date-time</property>
                     <property name="nativeDataType">93</property>
                 </structure>
                 <structure>
-                    <property name="position">9</property>
+                    <property name="position">12</property>
                     <property name="name">CERTIFICACIONESTADO</property>
                     <property name="nativeName">CERTIFICACIONESTADO</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">10</property>
+                    <property name="position">13</property>
                     <property name="name">CERTIFICACIONCODIGO</property>
                     <property name="nativeName">CERTIFICACIONCODIGO</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">11</property>
+                    <property name="position">14</property>
                     <property name="name">PROCESO</property>
                     <property name="nativeName">PROCESO</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">12</property>
+                    <property name="position">15</property>
                     <property name="name">CERTIFICACIONDESCRIPCION</property>
                     <property name="nativeName">CERTIFICACIONDESCRIPCION</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">13</property>
+                    <property name="position">16</property>
                     <property name="name">ID</property>
                     <property name="nativeName">ID</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">14</property>
+                    <property name="position">17</property>
                     <property name="name">DETALLE</property>
                     <property name="nativeName">DETALLE</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">15</property>
+                    <property name="position">18</property>
                     <property name="name">VALOR</property>
                     <property name="nativeName">VALOR</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">16</property>
-                    <property name="name">TOTALSUBITEM</property>
-                    <property name="nativeName">TOTALSUBITEM</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">17</property>
+                    <property name="position">19</property>
                     <property name="name">SALDO</property>
                     <property name="nativeName">SALDO</property>
                     <property name="dataType">decimal</property>
@@ -379,16 +416,26 @@
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT 
        c.CERTIFICACIONID,
+       cl.CERTIFICACIONLINEANIVELACTID,
+       cl.CERTIFICACIONLINEASALDO as CERTIFICACIONLINEASALDO,
        ef.EJERCICIOFISCALANIO,
        si.SUBITEMID,
        i.INSTITUCIONCODIGO || '-' || i.INSTITUCIONNOMBRE AS institucion,
        ie.INSTITUCIONENTCODIGO || '-' || ie.INSTITUCIONENTNOMBRE AS institucionentidad,
        u.UNIDADCODIGOPRESUP,
        u.UNIDADNOMBRE,
+       c.CERTIFICACIONFECHACREACION,
        c.CERTIFICACIONFECHAAPROBACION,
-       c.CERTIFICACIONESTADO,
+       CASE c.CERTIFICACIONESTADO
+         WHEN 'EL' THEN 'Eliminado'
+         WHEN 'AP' THEN 'Aprobado'
+         WHEN 'NE' THEN 'Negado'
+         WHEN 'RE' THEN 'Registrado'
+         WHEN 'SO' THEN 'Solicitado'
+         ELSE c.CERTIFICACIONESTADO
+       END AS CERTIFICACIONESTADO,
        c.CERTIFICACIONCODIGO,
-       ' ' AS PROCESO,
+       c.CERTIFICACIONNUMERODOCUMENTO AS PROCESO,
        c.CERTIFICACIONDESCRIPCION,
        cl.CERTIFICACIONLINEAID AS ID,
        'Programa: ' || pr.PROGRAMACODIGO || '-' || pr.PROGRAMADESCRIPCION || chr(10) ||
@@ -397,16 +444,51 @@
        'Subactividad: ' || sa.SUBACTIVIDADCODIGO || '-' || sa.SUBACTIVIDADDESCRIPCION || chr(10) ||
        'Tarea: ' || ta.TAREAUNIDADCODIGO || '-' || ta.TAREAUNIDADDESCRIPCION || chr(10) ||
        'Subtarea: ' || st.SUBTAREAUNIDADCODIGO || '-' || st.SUBTAREAUNIDADDESCRIPCION || chr(10) ||
-       'Item: ' || it.ITEMCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
+       'Item: ' || it.ITEMCODIGO || '-' || orp.ORGANISMOPRESTAMOCODIGO || '-' || org.ORGANISMOCODIGO || '-' || ca.DIVISIONGEOGRAFICACODIGO || '-' || f.FUENTEFINANCIAMIENTOCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
        'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
        AS detalle,
        cl.CERTIFICACIONLINEAVALOR AS valor,
-       sia.subitemunidadacumvalor AS totalsubitem,
-       CAL_CERTIFICADO_SALDO_SUBITEM(
-           c.CERTIFICACIONEJERFISCALID,
-           si.SUBITEMID,
-           c.CERTIFICACIONID
-       ) AS saldo
+       ((
+        SELECT
+            NVL(SUM(SUBITEMUNIDADACUMVALOR), 0) AS valor1
+        FROM
+            SUBITEMUNIDADACUMULADOR
+        WHERE
+            SUBITEMUNIDADID = sia.SUBITEMUNIDADID
+            AND SUBITEMUNIDADACUMTIPO = 'A'
+            AND SUBITEMUNIDADACUMID = 2
+       ) + (
+       SELECT
+            NVL(SUM(rl.reformalineavalorincremento), 0) -
+            NVL(SUM(rl.reformalineavalordecremento), 0) AS valor2
+        FROM
+            REFORMALINEA rl
+            INNER JOIN REFORMA r ON r.REFORMAID = rl.REFORMAID
+        WHERE rl.reformalineanivelactid = cl.CERTIFICACIONLINEANIVELACTID
+          AND r.REFORMAESTADO = 'AP'
+          AND r.REFORMAFECHACREACION <= c.CERTIFICACIONFECHACREACION
+       ) - (
+       SELECT
+            NVL(SUM(ccl.CERTIFICACIONLINEAVALOR), 0) AS valor3
+        FROM
+            CERTIFICACIONLINEA ccl
+            INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = ccl.CERTIFICACIONID
+        WHERE ccl.CERTIFICACIONLINEANIVELACTID = cl.CERTIFICACIONLINEANIVELACTID
+          AND cc.CERTIFICACIONESTADO IN ('RE', 'AP', 'SO')
+          AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
+       )
+	    - (
+       SELECT
+            NVL(SUM(orgl.ORDENGASTOLINEAVALOR), 0) AS valor3
+        FROM
+			ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGASTOID 
+            INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = org.ORDENGASTOCERTIFICACIONID
+        WHERE orgl.ORDENGASTOLINEANIVELACTID = cl.CERTIFICACIONLINEANIVELACTID
+		  AND org.ORDENGASTOESTADO = 'AP'
+          AND cc.CERTIFICACIONESTADO = 'LP'
+          AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
+       )) AS SALDO
+
   FROM certificacion                        c
        INNER JOIN Unidad                    u               ON u.UNIDADID = c.CERTIFICACIONUNIDADID
        INNER JOIN Unidadinst                ui              ON ui.unidadid = u.unidadid
@@ -421,6 +503,10 @@
        INNER JOIN nivelactividad            nivelsubitem    ON siu.subitemunidadid = nivelsubitem.nivelactividadtablarelacionid
        INNER JOIN nivelactividad            na7             ON na7.nivelactividadid = nivelsubitem.nivelactividadpadreid
        INNER JOIN itemunidad                itu             ON itu.itemunidadid = na7.nivelactividadtablarelacionid
+	   INNER JOIN DIVISIONGEOGRAFICA        ca              ON ca.DIVISIONGEOGRAFICAID = itu.ITEMUNIDADCANTONID	
+	   INNER JOIN Fuentefinanciamiento      f               ON  f.fuentefinanciamientoid = itu.itemunidadfuentefinanid      
+       INNER JOIN Organismoprestamo         orp             ON (orp.ORGANISMOID = itu.ITEMUNIDADORGANISMOID and orp.ORGANISMOPRESTAMOID=itu.ITEMUNIDADORGPRESTAMOID)
+       INNER JOIN Organismo                 org             ON org.ORGANISMOID =  orp.ORGANISMOID
        INNER JOIN ITEM                      it              ON itu.itemunidaditemid = it.ITEMID
        INNER JOIN nivelactividad            na12            ON na12.nivelactividadid = na7.nivelactividadpadreid
        INNER JOIN subtareaunidad            st              ON st.subtareaunidadid = na12.nivelactividadtablarelacionid
@@ -452,9 +538,11 @@
        u.UNIDADINSTITUCIONENTID,
        u.UNIDADCODIGOPRESUP,
        u.UNIDADNOMBRE,
+       c.CERTIFICACIONFECHACREACION,
        c.CERTIFICACIONFECHAAPROBACION,
        c.CERTIFICACIONESTADO,
        c.CERTIFICACIONCODIGO,
+       c.CERTIFICACIONNUMERODOCUMENTO,
        c.CERTIFICACIONDESCRIPCION,
        cl.CERTIFICACIONLINEAID,
        pr.PROGRAMACODIGO,
@@ -470,16 +558,20 @@
        st.SUBTAREAUNIDADCODIGO,
        st.SUBTAREAUNIDADDESCRIPCION,
        it.ITEMCODIGO,
+	   orp.ORGANISMOPRESTAMOCODIGO,
+	   org.ORGANISMOCODIGO,
+	   ca.DIVISIONGEOGRAFICACODIGO, 
+       f.FUENTEFINANCIAMIENTOCODIGO,
+       org.ORGANISMOCODIGO,
        it.ITEMNOMBRE,
        si.SUBITEMCODIGO,
        si.SUBITEMNOMBRE,
        cl.CERTIFICACIONLINEAVALOR,
-       sia.subitemunidadacumvalor,
-       c.CERTIFICACIONEJERFISCALID,
-       si.SUBITEMID,
-       c.CERTIFICACIONID
- ORDER BY cl.CERTIFICACIONLINEAID
-]]></xml-property>
+       sia.SUBITEMUNIDADID,
+       cl.CERTIFICACIONLINEANIVELACTID,
+       cl.CERTIFICACIONID,
+       cl.CERTIFICACIONLINEASALDO
+ ORDER BY cl.CERTIFICACIONLINEAID]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -937,7 +1029,7 @@
         OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = TO_DATE('01/01/1901', 'mm/dd/yyyy')
         )
    AND S.SOCIONEGOCIOESEMPLEADO = 1
-]]></xml-property>
+   AND ES.EORGANICAESTADO = 'V']]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -1065,8 +1157,11 @@
                 <structure>
                     <property name="name">certificacion</property>
                     <property name="paramName">certificacion</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">1</property>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -1152,6 +1247,7 @@
         OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = TO_DATE('01/01/1901','mm/dd/yyyy')
        )
    AND S.SOCIONEGOCIOESEMPLEADO = 1
+   AND ES.EORGANICAESTADO = 'V'
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1280,8 +1376,11 @@
                 <structure>
                     <property name="name">certificacion</property>
                     <property name="paramName">certificacion</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">1</property>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -1377,7 +1476,7 @@
         OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = TO_DATE('01/01/1901','mm/dd/yyyy')
        )
    AND S.SOCIONEGOCIOESEMPLEADO = 1
-]]></xml-property>
+   AND ES.EORGANICAESTADO = 'V']]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -1571,43 +1670,76 @@
             </column>
             <row id="4311">
                 <cell id="4312">
-                    <property name="borderLeftColor">#C0C0C0</property>
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">thin</property>
-                    <property name="borderRightColor">#C0C0C0</property>
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">thin</property>
-                    <property name="borderTopColor">#C0C0C0</property>
-                    <property name="borderTopStyle">solid</property>
-                    <property name="borderTopWidth">thin</property>
                     <image id="2642">
+                        <property name="fontFamily">serif</property>
+                        <property name="fontSize">10pt</property>
+                        <property name="fontWeight">normal</property>
+                        <property name="fontStyle">normal</property>
+                        <property name="fontVariant">normal</property>
+                        <property name="color">black</property>
+                        <property name="textLineThrough">none</property>
+                        <property name="textOverline">none</property>
+                        <property name="textUnderline">none</property>
+                        <property name="borderBottomColor">black</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftColor">black</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightColor">black</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopColor">black</property>
+                        <property name="borderTopStyle">none</property>
+                        <property name="borderTopWidth">medium</property>
+                        <property name="marginTop">0pt</property>
+                        <property name="marginLeft">0pt</property>
+                        <property name="marginBottom">0pt</property>
+                        <property name="marginRight">0pt</property>
+                        <property name="paddingTop">1pt</property>
+                        <property name="paddingLeft">1pt</property>
+                        <property name="paddingBottom">1pt</property>
+                        <property name="paddingRight">1pt</property>
+                        <property name="display">block</property>
+                        <property name="pageBreakAfter">auto</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="showIfBlank">false</property>
+                        <property name="overflow">hidden</property>
+                        <property name="height">80px</property>
                         <property name="source">url</property>
-                        <expression name="uri" type="constant">http://172.17.26.118:8081/birt/comaco.jpg</expression>
+                        <expression name="uri" type="constant">comaco.jpg</expression>
                     </image>
                 </cell>
                 <cell id="4313"/>
                 <cell id="4314">
-                    <text id="4315">
-                        <property name="fontFamily">"Arial"</property>
-                        <property name="fontSize">14pt</property>
-                        <property name="fontWeight">bold</property>
-                        <property name="textAlign">left</property>
-                        <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[COMANDO CONJUNTO DE LAS FF.AA.]]></text-property>
-                    </text>
                     <label id="4316">
                         <property name="fontFamily">"Arial"</property>
                         <property name="fontSize">12px</property>
-                        <property name="fontWeight">bold</property>
-                        <property name="textAlign">left</property>
-                        <text-property name="text">ESTADO MAYOR INSTITUCIONAL</text-property>
+                        <property name="fontWeight">normal</property>
+                        <property name="textAlign">right</property>
+                        <text-property name="text">Calle la Exposición 208</text-property>
                     </label>
-                    <label id="4317">
+                    <label id="4610">
                         <property name="fontFamily">"Arial"</property>
                         <property name="fontSize">12px</property>
-                        <property name="fontWeight">bold</property>
-                        <property name="textAlign">left</property>
-                        <text-property name="text">SEGUIMIENTO A LA EJECUCIÓN DE LA PROGRAMACIÓN ANUAL DE LA POLÍTICA PÚBLICA</text-property>
+                        <property name="fontWeight">normal</property>
+                        <property name="textAlign">right</property>
+                        <text-property name="text">La Recoleta</text-property>
+                    </label>
+                    <label id="4611">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12px</property>
+                        <property name="fontWeight">normal</property>
+                        <property name="textAlign">right</property>
+                        <text-property name="text">Teléfono: 2958803</text-property>
+                    </label>
+                    <label id="4612">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12px</property>
+                        <property name="fontWeight">normal</property>
+                        <property name="textAlign">right</property>
+                        <text-property name="text">www.comaco.mil.ec</text-property>
                     </label>
                 </cell>
             </row>
@@ -1615,6 +1747,29 @@
                 <cell id="4319">
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
+                    <grid id="4320">
+                        <property name="width">7.608333333333333in</property>
+                        <column id="4321">
+                            <property name="width">70%</property>
+                        </column>
+                        <column id="4322">
+                            <property name="width">30%</property>
+                        </column>
+                        <row id="4323">
+                            <cell id="4324">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <text id="4325">
+                                    <property name="fontFamily">"Arial"</property>
+                                    <property name="fontSize">14pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[COMANDO CONJUNTO DE LAS FUERZAS ARMADAS]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                    </grid>
                 </cell>
             </row>
             <row id="4340">
@@ -1633,18 +1788,17 @@
                             <property name="width">1.9583333333333333in</property>
                         </column>
                         <row id="4346">
-                            <property name="height">0.5208333333333334in</property>
                             <cell id="4347">
-                                <property name="colSpan">1</property>
+                                <property name="colSpan">2</property>
                                 <property name="rowSpan">1</property>
-                                <label id="4348">
+                                <label id="4372">
                                     <property name="backgroundAttachment">scroll</property>
                                     <property name="backgroundPositionX">0%</property>
                                     <property name="backgroundPositionY">0%</property>
                                     <property name="backgroundRepeat">repeat</property>
                                     <property name="fontFamily">serif</property>
                                     <property name="fontSize">9pt</property>
-                                    <property name="fontWeight">normal</property>
+                                    <property name="fontWeight">bold</property>
                                     <property name="fontStyle">normal</property>
                                     <property name="fontVariant">normal</property>
                                     <property name="color">black</property>
@@ -1685,21 +1839,33 @@
                                     <property name="showIfBlank">false</property>
                                     <property name="canShrink">false</property>
                                     <property name="overflow">hidden</property>
-                                    <text-property name="text">OFICIO No.:</text-property>
+                                    <text-property name="text">OFICIO N°</text-property>
                                 </label>
+                                <data id="4452">
+                                    <property name="fontSize">9pt</property>
+                                    <property name="display">inline</property>
+                                    <property name="dataSet">todo</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">PROCESO</property>
+                                            <text-property name="displayName">PROCESO</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["PROCESO"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">PROCESO</property>
+                                </data>
                             </cell>
-                            <cell id="4453">
-                                <property name="colSpan">2</property>
-                                <property name="rowSpan">1</property>
+                            <cell id="4614">
                                 <property name="textAlign">right</property>
-                                <label id="4362">
+                                <label id="4338">
                                     <property name="backgroundAttachment">scroll</property>
                                     <property name="backgroundPositionX">0%</property>
                                     <property name="backgroundPositionY">0%</property>
                                     <property name="backgroundRepeat">repeat</property>
                                     <property name="fontFamily">serif</property>
                                     <property name="fontSize">9pt</property>
-                                    <property name="fontWeight">normal</property>
+                                    <property name="fontWeight">bold</property>
                                     <property name="fontStyle">normal</property>
                                     <property name="fontVariant">normal</property>
                                     <property name="color">black</property>
@@ -1726,6 +1892,7 @@
                                     <property name="paddingLeft">1pt</property>
                                     <property name="paddingBottom">1pt</property>
                                     <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">left</property>
                                     <property name="letterSpacing">normal</property>
                                     <property name="lineHeight">normal</property>
                                     <property name="orphans">2</property>
@@ -1742,84 +1909,34 @@
                                     <property name="overflow">hidden</property>
                                     <text-property name="text">Fecha:</text-property>
                                 </label>
-                                <data id="4430">
-                                    <property name="backgroundAttachment">scroll</property>
-                                    <property name="backgroundPositionX">0%</property>
-                                    <property name="backgroundPositionY">0%</property>
-                                    <property name="backgroundRepeat">repeat</property>
-                                    <property name="fontFamily">serif</property>
+                                <data id="4339">
                                     <property name="fontSize">9pt</property>
-                                    <property name="fontWeight">normal</property>
-                                    <property name="fontStyle">normal</property>
-                                    <property name="fontVariant">normal</property>
-                                    <property name="color">black</property>
-                                    <property name="textLineThrough">none</property>
-                                    <property name="textOverline">none</property>
-                                    <property name="textUnderline">none</property>
-                                    <property name="borderBottomColor">black</property>
-                                    <property name="borderBottomStyle">none</property>
-                                    <property name="borderBottomWidth">medium</property>
-                                    <property name="borderLeftColor">black</property>
-                                    <property name="borderLeftStyle">none</property>
-                                    <property name="borderLeftWidth">medium</property>
-                                    <property name="borderRightColor">black</property>
-                                    <property name="borderRightStyle">none</property>
-                                    <property name="borderRightWidth">medium</property>
-                                    <property name="borderTopColor">black</property>
-                                    <property name="borderTopStyle">none</property>
-                                    <property name="borderTopWidth">medium</property>
-                                    <property name="marginTop">0pt</property>
-                                    <property name="marginLeft">0pt</property>
-                                    <property name="marginBottom">0pt</property>
-                                    <property name="marginRight">0pt</property>
-                                    <property name="paddingTop">1pt</property>
-                                    <property name="paddingLeft">1pt</property>
-                                    <property name="paddingBottom">1pt</property>
-                                    <property name="paddingRight">1pt</property>
-                                    <structure name="dateTimeFormat">
-                                        <property name="category">Custom</property>
-                                        <property name="pattern">d/MM/yy</property>
-                                    </structure>
-                                    <property name="letterSpacing">normal</property>
-                                    <property name="lineHeight">normal</property>
-                                    <property name="orphans">2</property>
-                                    <property name="textTransform">none</property>
-                                    <property name="whiteSpace">normal</property>
-                                    <property name="widows">2</property>
-                                    <property name="wordSpacing">normal</property>
                                     <property name="display">inline</property>
-                                    <property name="pageBreakAfter">auto</property>
-                                    <property name="pageBreakBefore">auto</property>
-                                    <property name="pageBreakInside">auto</property>
-                                    <property name="showIfBlank">false</property>
-                                    <property name="canShrink">false</property>
-                                    <property name="overflow">hidden</property>
-                                    <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
-                                            <property name="name">CERTIFICACIONFECHAAPROBACION</property>
-                                            <text-property name="displayName">CERTIFICACIONFECHAAPROBACION</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["CERTIFICACIONFECHAAPROBACION"]</expression>
-                                            <property name="dataType">date-time</property>
+                                            <property name="name">Hoy</property>
+                                            <text-property name="displayName">Hoy</text-property>
+                                            <expression name="expression" type="javascript">vars["Hoy"]</expression>
+                                            <property name="dataType">string</property>
                                         </structure>
                                     </list-property>
-                                    <property name="resultSetColumn">CERTIFICACIONFECHAAPROBACION</property>
+                                    <property name="resultSetColumn">Hoy</property>
                                 </data>
                             </cell>
                         </row>
                         <row id="4351">
-                            <property name="height">1.0208333333333333in</property>
+                            <property name="height">0.7916666666666666in</property>
                             <cell id="4352">
                                 <property name="colSpan">3</property>
                                 <property name="rowSpan">1</property>
-                                <label id="4353">
+                                <label id="4615">
                                     <property name="backgroundAttachment">scroll</property>
                                     <property name="backgroundPositionX">0%</property>
                                     <property name="backgroundPositionY">0%</property>
                                     <property name="backgroundRepeat">repeat</property>
                                     <property name="fontFamily">serif</property>
                                     <property name="fontSize">9pt</property>
-                                    <property name="fontWeight">normal</property>
+                                    <property name="fontWeight">bold</property>
                                     <property name="fontStyle">normal</property>
                                     <property name="fontVariant">normal</property>
                                     <property name="color">black</property>
@@ -1853,7 +1970,7 @@
                                     <property name="whiteSpace">normal</property>
                                     <property name="widows">2</property>
                                     <property name="wordSpacing">normal</property>
-                                    <property name="display">inline</property>
+                                    <property name="display">block</property>
                                     <property name="pageBreakAfter">auto</property>
                                     <property name="pageBreakBefore">auto</property>
                                     <property name="pageBreakInside">auto</property>
@@ -1865,11 +1982,11 @@
                             </cell>
                         </row>
                         <row id="4356">
-                            <property name="height">0.5208333333333334in</property>
+                            <property name="height">0.5416666666666666in</property>
                             <cell id="4357">
                                 <property name="colSpan">3</property>
                                 <property name="rowSpan">1</property>
-                                <label id="4358">
+                                <label id="4616">
                                     <property name="backgroundAttachment">scroll</property>
                                     <property name="backgroundPositionX">0%</property>
                                     <property name="backgroundPositionY">0%</property>
@@ -1910,7 +2027,7 @@
                                     <property name="whiteSpace">normal</property>
                                     <property name="widows">2</property>
                                     <property name="wordSpacing">normal</property>
-                                    <property name="display">inline</property>
+                                    <property name="display">block</property>
                                     <property name="pageBreakAfter">auto</property>
                                     <property name="pageBreakBefore">auto</property>
                                     <property name="pageBreakInside">auto</property>
@@ -1930,7 +2047,7 @@
                                     <property name="backgroundRepeat">repeat</property>
                                     <property name="fontFamily">serif</property>
                                     <property name="fontSize">9pt</property>
-                                    <property name="fontWeight">normal</property>
+                                    <property name="fontWeight">bold</property>
                                     <property name="fontStyle">normal</property>
                                     <property name="fontVariant">normal</property>
                                     <property name="color">black</property>
@@ -2020,12 +2137,6 @@
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
-                                <property name="name">SALDO</property>
-                                <text-property name="displayName">SALDO</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["SALDO"]</expression>
-                                <property name="dataType">decimal</property>
-                            </structure>
-                            <structure>
                                 <property name="name">TVALOR</property>
                                 <text-property name="displayName">TVALOR</text-property>
                                 <expression name="expression" type="javascript">Total.sum(row["VALOR"])</expression>
@@ -2033,9 +2144,32 @@
                                 <property name="allowExport">true</property>
                             </structure>
                             <structure>
-                                <property name="name">TSALDO</property>
+                                <property name="name">CERTIFICACIONLINEASALDO</property>
+                                <text-property name="displayName">CERTIFICACIONLINEASALDO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["CERTIFICACIONLINEASALDO"]</expression>
+                                <property name="dataType">decimal</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SALDOACTUAL1</property>
+                                <expression name="expression" type="javascript">if(dataSetRow["CERTIFICACIONLINEASALDO"]>0)&#13;
+BirtMath.round(row["CERTIFICACIONLINEASALDO"],2)&#13;
+else&#13;
+row["SALDO"]</expression>
+                                <property name="dataType">decimal</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">TSALDO1</property>
                                 <text-property name="displayName">TSALDO</text-property>
-                                <expression name="expression" type="javascript">Total.sum(row["SALDO"])</expression>
+                                <expression name="expression" type="javascript">Total.sum(row["SALDOACTUAL1"])</expression>
+                                <property name="dataType">decimal</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SALDO</property>
+                                <text-property name="displayName">SALDO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SALDO"]</expression>
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>
@@ -2053,7 +2187,7 @@
                             <row id="4405">
                                 <cell id="4406">
                                     <label id="4407">
-                                        <text-property name="text">CATEGORIA PROGRAMÁTICA</text-property>
+                                        <text-property name="text">DETALLE</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4408">
@@ -2137,60 +2271,13 @@
                                 </cell>
                                 <cell id="4417">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4418">
-                                        <property name="backgroundAttachment">scroll</property>
-                                        <property name="backgroundPositionX">0%</property>
-                                        <property name="backgroundPositionY">0%</property>
-                                        <property name="backgroundRepeat">repeat</property>
-                                        <property name="fontFamily">"Arial"</property>
-                                        <property name="fontSize">11px</property>
-                                        <property name="fontWeight">normal</property>
-                                        <property name="fontStyle">normal</property>
-                                        <property name="fontVariant">normal</property>
-                                        <property name="color">black</property>
-                                        <property name="textLineThrough">none</property>
-                                        <property name="textOverline">none</property>
-                                        <property name="textUnderline">none</property>
-                                        <property name="borderBottomColor">black</property>
-                                        <property name="borderBottomStyle">none</property>
-                                        <property name="borderBottomWidth">medium</property>
-                                        <property name="borderLeftColor">black</property>
-                                        <property name="borderLeftStyle">none</property>
-                                        <property name="borderLeftWidth">medium</property>
-                                        <property name="borderRightColor">black</property>
-                                        <property name="borderRightStyle">none</property>
-                                        <property name="borderRightWidth">medium</property>
-                                        <property name="borderTopColor">black</property>
-                                        <property name="borderTopStyle">none</property>
-                                        <property name="borderTopWidth">medium</property>
-                                        <property name="marginTop">0pt</property>
-                                        <property name="marginLeft">0pt</property>
-                                        <property name="marginBottom">0pt</property>
-                                        <property name="marginRight">0pt</property>
-                                        <property name="paddingTop">1pt</property>
-                                        <property name="paddingLeft">1pt</property>
-                                        <property name="paddingBottom">1pt</property>
-                                        <property name="paddingRight">1pt</property>
+                                    <data id="4609">
                                         <structure name="numberFormat">
                                             <property name="category">Currency</property>
-                                            <property name="pattern">$ ###0.00{RoundingMode=HALF_UP}</property>
+                                            <property name="pattern">$###0.00{RoundingMode=HALF_UP}</property>
                                         </structure>
                                         <property name="textAlign">right</property>
-                                        <property name="letterSpacing">normal</property>
-                                        <property name="lineHeight">normal</property>
-                                        <property name="orphans">2</property>
-                                        <property name="textTransform">none</property>
-                                        <property name="whiteSpace">normal</property>
-                                        <property name="widows">2</property>
-                                        <property name="wordSpacing">normal</property>
-                                        <property name="display">block</property>
-                                        <property name="pageBreakAfter">auto</property>
-                                        <property name="pageBreakBefore">auto</property>
-                                        <property name="pageBreakInside">auto</property>
-                                        <property name="showIfBlank">false</property>
-                                        <property name="canShrink">false</property>
-                                        <property name="overflow">hidden</property>
-                                        <property name="resultSetColumn">SALDO</property>
+                                        <property name="resultSetColumn">SALDOACTUAL1</property>
                                     </data>
                                 </cell>
                             </row>
@@ -2318,7 +2405,7 @@
                                         <property name="showIfBlank">false</property>
                                         <property name="canShrink">false</property>
                                         <property name="overflow">hidden</property>
-                                        <property name="resultSetColumn">TSALDO</property>
+                                        <property name="resultSetColumn">TSALDO1</property>
                                     </data>
                                 </cell>
                             </row>
@@ -2327,18 +2414,9 @@
                 </cell>
             </row>
             <row id="4400">
-                <cell id="4401">
-                    <label id="4480"/>
-                </cell>
+                <cell id="4401"/>
                 <cell id="4402"/>
                 <cell id="4403"/>
-            </row>
-            <row id="4498">
-                <cell id="4499">
-                    <label id="1486"/>
-                </cell>
-                <cell id="4500"/>
-                <cell id="4501"/>
             </row>
         </grid>
         <grid id="1431">
@@ -2360,34 +2438,118 @@
             </column>
             <row id="3065">
                 <cell id="3066">
+                    <label id="1486"/>
+                </cell>
+                <cell id="3067"/>
+                <cell id="3068"/>
+                <cell id="3069"/>
+                <cell id="3070"/>
+            </row>
+            <row id="1433">
+                <cell id="1434">
                     <property name="colSpan">5</property>
                     <property name="rowSpan">1</property>
-                    <label id="4455">
+                    <label id="1450">
+                        <property name="fontFamily">"Calibri"</property>
+                        <property name="fontSize">10pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">left</property>
                         <text-property name="text">ATENTAMENTE, DIOS, PATRIA Y LIBERTAD</text-property>
                     </label>
                 </cell>
             </row>
-            <row id="4469">
-                <cell id="4470">
-                    <label id="4475"/>
+            <row id="2962">
+                <cell id="2963">
+                    <label id="2979"/>
                 </cell>
-                <cell id="4471"/>
-                <cell id="4472"/>
-                <cell id="4473"/>
-                <cell id="4474"/>
-            </row>
-            <row id="4463">
-                <cell id="4464">
-                    <label id="4476"/>
+                <cell id="2964"/>
+                <cell id="2965">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
                 </cell>
-                <cell id="4465"/>
-                <cell id="4466"/>
-                <cell id="4467"/>
-                <cell id="4468"/>
+                <cell id="2966">
+                    <property name="backgroundAttachment">scroll</property>
+                    <property name="backgroundImageType">url</property>
+                    <property name="backgroundPositionX">0%</property>
+                    <property name="backgroundPositionY">0%</property>
+                    <property name="backgroundRepeat">repeat</property>
+                    <property name="backgroundSizeHeight">auto</property>
+                    <property name="backgroundSizeWidth">auto</property>
+                    <property name="fontFamily">serif</property>
+                    <property name="fontSize">10pt</property>
+                    <property name="fontWeight">normal</property>
+                    <property name="fontStyle">normal</property>
+                    <property name="fontVariant">normal</property>
+                    <property name="color">black</property>
+                    <property name="textLineThrough">none</property>
+                    <property name="textOverline">none</property>
+                    <property name="textUnderline">none</property>
+                    <property name="marginTop">0pt</property>
+                    <property name="marginLeft">0pt</property>
+                    <property name="marginBottom">0pt</property>
+                    <property name="marginRight">0pt</property>
+                    <property name="paddingTop">1pt</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="paddingRight">1pt</property>
+                    <property name="textIndent">0em</property>
+                    <property name="letterSpacing">normal</property>
+                    <property name="lineHeight">normal</property>
+                    <property name="orphans">2</property>
+                    <property name="textTransform">none</property>
+                    <property name="whiteSpace">normal</property>
+                    <property name="widows">2</property>
+                    <property name="wordSpacing">normal</property>
+                    <property name="display">block</property>
+                    <property name="pageBreakAfter">auto</property>
+                    <property name="pageBreakBefore">auto</property>
+                    <property name="pageBreakInside">auto</property>
+                    <property name="showIfBlank">false</property>
+                    <property name="canShrink">false</property>
+                    <property name="overflow">hidden</property>
+                </cell>
+                <cell id="2967"/>
             </row>
             <row id="1437">
                 <cell id="2923">
-                    <label id="2976"/>
+                    <label id="2980"/>
                 </cell>
                 <cell id="2924"/>
                 <cell id="2928">
@@ -2476,14 +2638,9 @@
             </row>
             <row id="1439">
                 <cell id="2925">
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">thin</property>
-                    <label id="2977"/>
+                    <label id="2981"/>
                 </cell>
-                <cell id="2926">
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">thin</property>
-                </cell>
+                <cell id="2926"/>
                 <cell id="2930">
                     <property name="backgroundAttachment">scroll</property>
                     <property name="backgroundImageType">url</property>
@@ -2551,15 +2708,6 @@
                     <property name="textLineThrough">none</property>
                     <property name="textOverline">none</property>
                     <property name="textUnderline">none</property>
-                    <property name="borderLeftColor">black</property>
-                    <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
-                    <property name="borderRightColor">black</property>
-                    <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
-                    <property name="borderTopColor">black</property>
-                    <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -2601,15 +2749,6 @@
                     <property name="textLineThrough">none</property>
                     <property name="textOverline">none</property>
                     <property name="textUnderline">none</property>
-                    <property name="borderLeftColor">black</property>
-                    <property name="borderLeftStyle">none</property>
-                    <property name="borderLeftWidth">medium</property>
-                    <property name="borderRightColor">black</property>
-                    <property name="borderRightStyle">none</property>
-                    <property name="borderRightWidth">medium</property>
-                    <property name="borderTopColor">black</property>
-                    <property name="borderTopStyle">none</property>
-                    <property name="borderTopWidth">medium</property>
                     <property name="marginTop">0pt</property>
                     <property name="marginLeft">0pt</property>
                     <property name="marginBottom">0pt</property>
@@ -2638,10 +2777,11 @@
             <row id="1441">
                 <property name="height">0.2833333333333333in</property>
                 <cell id="1442">
-                    <property name="colSpan">2</property>
-                    <property name="rowSpan">3</property>
-                    <data id="4495">
-                        <property name="textAlign">center</property>
+                    <property name="colSpan">5</property>
+                    <property name="rowSpan">1</property>
+                    <data id="4440">
+                        <property name="fontSize">9pt</property>
+                        <property name="textAlign">left</property>
                         <property name="dataSet">aprobado</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2653,8 +2793,16 @@
                         </list-property>
                         <property name="resultSetColumn">SOCIONEGOCIONOMBREMOSTRADO</property>
                     </data>
-                    <data id="4496">
-                        <property name="textAlign">center</property>
+                </cell>
+            </row>
+            <row id="1443">
+                <property name="height">0.2833333333333333in</property>
+                <cell id="4618">
+                    <property name="colSpan">5</property>
+                    <property name="rowSpan">1</property>
+                    <data id="4442">
+                        <property name="fontSize">9pt</property>
+                        <property name="textAlign">left</property>
                         <property name="dataSet">aprobado</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2666,8 +2814,16 @@
                         </list-property>
                         <property name="resultSetColumn">GRADOSIGLA</property>
                     </data>
-                    <data id="4497">
-                        <property name="textAlign">center</property>
+                </cell>
+            </row>
+            <row id="1445">
+                <property name="height">0.3125in</property>
+                <cell id="4620">
+                    <property name="colSpan">5</property>
+                    <property name="rowSpan">1</property>
+                    <data id="4443">
+                        <property name="fontSize">9pt</property>
+                        <property name="textAlign">left</property>
                         <property name="dataSet">aprobado</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2680,152 +2836,6 @@
                         <property name="resultSetColumn">CARGONOMBRE</property>
                     </data>
                 </cell>
-                <cell id="2716"/>
-                <cell id="2708">
-                    <property name="colSpan">2</property>
-                    <property name="rowSpan">3</property>
-                </cell>
-            </row>
-            <row id="1443">
-                <property name="height">0.2833333333333333in</property>
-                <cell id="2717"/>
-            </row>
-            <row id="1445">
-                <property name="height">0.3125in</property>
-                <cell id="2718"/>
-            </row>
-            <row id="4487">
-                <cell id="4488">
-                    <label id="4479"/>
-                </cell>
-                <cell id="4489"/>
-                <cell id="4490"/>
-                <cell id="4491"/>
-                <cell id="4492"/>
-            </row>
-            <row id="2738">
-                <cell id="2739">
-                    <property name="colSpan">5</property>
-                    <property name="rowSpan">1</property>
-                    <label id="2691">
-                        <property name="backgroundAttachment">scroll</property>
-                        <property name="backgroundPositionX">0%</property>
-                        <property name="backgroundPositionY">0%</property>
-                        <property name="backgroundRepeat">repeat</property>
-                        <property name="fontFamily">serif</property>
-                        <property name="fontSize">10pt</property>
-                        <property name="fontWeight">normal</property>
-                        <property name="fontStyle">normal</property>
-                        <property name="fontVariant">normal</property>
-                        <property name="color">black</property>
-                        <property name="textLineThrough">none</property>
-                        <property name="textOverline">none</property>
-                        <property name="textUnderline">none</property>
-                        <property name="borderBottomColor">black</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderBottomWidth">medium</property>
-                        <property name="borderLeftColor">black</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderLeftWidth">medium</property>
-                        <property name="borderRightColor">black</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderRightWidth">medium</property>
-                        <property name="borderTopColor">black</property>
-                        <property name="borderTopStyle">none</property>
-                        <property name="borderTopWidth">medium</property>
-                        <property name="marginTop">0pt</property>
-                        <property name="marginLeft">0pt</property>
-                        <property name="marginBottom">0pt</property>
-                        <property name="marginRight">0pt</property>
-                        <property name="paddingTop">1pt</property>
-                        <property name="paddingLeft">1pt</property>
-                        <property name="paddingBottom">1pt</property>
-                        <property name="paddingRight">1pt</property>
-                        <property name="textAlign">center</property>
-                        <property name="letterSpacing">normal</property>
-                        <property name="lineHeight">normal</property>
-                        <property name="orphans">2</property>
-                        <property name="textTransform">none</property>
-                        <property name="whiteSpace">normal</property>
-                        <property name="widows">2</property>
-                        <property name="wordSpacing">normal</property>
-                        <property name="display">inline</property>
-                        <property name="pageBreakAfter">auto</property>
-                        <property name="pageBreakBefore">auto</property>
-                        <property name="pageBreakInside">auto</property>
-                        <property name="showIfBlank">false</property>
-                        <property name="canShrink">false</property>
-                        <property name="overflow">hidden</property>
-                        <text-property name="text">ELABORADO POR:</text-property>
-                    </label>
-                    <data id="4494">
-                        <property name="backgroundAttachment">scroll</property>
-                        <property name="backgroundPositionX">0%</property>
-                        <property name="backgroundPositionY">0%</property>
-                        <property name="backgroundRepeat">repeat</property>
-                        <property name="fontFamily">serif</property>
-                        <property name="fontSize">10pt</property>
-                        <property name="fontWeight">normal</property>
-                        <property name="fontStyle">normal</property>
-                        <property name="fontVariant">normal</property>
-                        <property name="color">black</property>
-                        <property name="textLineThrough">none</property>
-                        <property name="textOverline">none</property>
-                        <property name="textUnderline">none</property>
-                        <property name="borderBottomColor">black</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderBottomWidth">medium</property>
-                        <property name="borderLeftColor">black</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderLeftWidth">medium</property>
-                        <property name="borderRightColor">black</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderRightWidth">medium</property>
-                        <property name="borderTopColor">black</property>
-                        <property name="borderTopStyle">none</property>
-                        <property name="borderTopWidth">medium</property>
-                        <property name="marginTop">0pt</property>
-                        <property name="marginLeft">0pt</property>
-                        <property name="marginBottom">0pt</property>
-                        <property name="marginRight">0pt</property>
-                        <property name="paddingTop">1pt</property>
-                        <property name="paddingLeft">1pt</property>
-                        <property name="paddingBottom">1pt</property>
-                        <property name="paddingRight">1pt</property>
-                        <property name="textAlign">center</property>
-                        <property name="letterSpacing">normal</property>
-                        <property name="lineHeight">normal</property>
-                        <property name="orphans">2</property>
-                        <property name="textTransform">none</property>
-                        <property name="whiteSpace">normal</property>
-                        <property name="widows">2</property>
-                        <property name="wordSpacing">normal</property>
-                        <property name="display">inline</property>
-                        <property name="pageBreakAfter">auto</property>
-                        <property name="pageBreakBefore">auto</property>
-                        <property name="pageBreakInside">auto</property>
-                        <property name="showIfBlank">false</property>
-                        <property name="canShrink">false</property>
-                        <property name="overflow">hidden</property>
-                        <property name="dataSet">elaborado</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
-                                <text-property name="displayName">SOCIONEGOCIONOMBREMOSTRADO</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["SOCIONEGOCIONOMBREMOSTRADO"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                        </list-property>
-                        <property name="resultSetColumn">SOCIONEGOCIONOMBREMOSTRADO</property>
-                    </data>
-                </cell>
-            </row>
-            <row id="4481">
-                <cell id="4482"/>
-                <cell id="4483"/>
-                <cell id="4484"/>
-                <cell id="4485"/>
-                <cell id="4486"/>
             </row>
         </grid>
     </body>
