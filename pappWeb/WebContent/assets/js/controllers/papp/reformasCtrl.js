@@ -1218,4 +1218,11 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	    window.open(url, '_blank');
 		return;
 	};
+
+	$scope.imprimiroficio=function(id){
+    	var url = "/birt/frameset?__report=E03-RO.rptdesign" +
+		"&reforma=" + id;
+	    window.open(url, '_blank');
+		return;
+	};
 } ]);

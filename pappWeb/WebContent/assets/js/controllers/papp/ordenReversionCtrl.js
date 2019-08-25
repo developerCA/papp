@@ -628,4 +628,11 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 	    window.open(url, '_blank');
 		return;
 	};
+
+	$scope.imprimiroficio=function(id){
+    	var url = "/birt/frameset?__report=RV01-ORO.rptdesign" +
+		"&ordenreversion=" + id;
+	    window.open(url, '_blank');
+		return;
+	};
 } ]);
