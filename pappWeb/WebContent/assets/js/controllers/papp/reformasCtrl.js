@@ -986,7 +986,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             } else {
             	var diferencia = $scope.objetoP.reformalinea.npSubitemvalor;
             	for (var i = 0; i < $scope.detallesP.length; i++) {
-            		diferencia -= $scope.detallesP[i].valor;
+            		diferencia -= $scope.detallesP[i].valor.toFixed(2);
 				}
             	if (diferencia != 0) {
                     SweetAlert.swal(
@@ -1048,7 +1048,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             } else {
             	var diferencia = $scope.objetoP.reformalinea.metaReprogramada;
             	for (var i = 0; i < $scope.detallesP.length; i++) {
-            		diferencia -= $scope.detallesP[i].metacantidad;
+            		diferencia -= $scope.detallesP[i].metacantidad.toFixed(2);
 				}
             	if (diferencia != 0) {
                     SweetAlert.swal(
