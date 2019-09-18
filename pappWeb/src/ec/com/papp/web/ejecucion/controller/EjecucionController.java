@@ -33,6 +33,7 @@ import ec.com.papp.planificacion.id.OrdenreversionlineaID;
 import ec.com.papp.planificacion.id.ReformalineaID;
 import ec.com.papp.planificacion.id.ReformametalineaID;
 import ec.com.papp.planificacion.id.ReformametasubtareaID;
+import ec.com.papp.planificacion.to.ActividadTO;
 import ec.com.papp.planificacion.to.CertificacionTO;
 import ec.com.papp.planificacion.to.CertificacionlineaTO;
 import ec.com.papp.planificacion.to.ClaseregistrocmcgastoTO;
@@ -1185,9 +1186,18 @@ public class EjecucionController {
 				jsonObject.put("reformametasubtarea", (JSONObject)JSONSerializer.toJSON(reformametasubtareaTO,reformametasubtareaTO.getJsonConfig()));
 				jsonObject.put("subtareainfo", (JSONObject)JSONSerializer.toJSON(matrizDetalle,matrizDetalle.getJsonConfigsubitemarbol()));
 			}
+			//trae las actividades por unidad
+			else if(clase.equals("actividadunidad")){
+				Collection<ActividadTO> actividadTOs=UtilSession.planificacionServicio.transObtieneActividadesporunidad(id, id2);
+				System.out.println("actividades: " + actividadTOs.size());
+				jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(actividadTOs,new ActividadTO().getJsonConfigActividadunidad()));
+				HashMap<String, String>  totalMap=new HashMap<String, String>();
+				totalMap.put("valor", Integer.valueOf(actividadTOs.size()).toString());
+				jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+			}
 
 
-			log.println("json retornado: " + jsonObject.toString());
+			System.out.println("json retornado: " + jsonObject.toString());
 			request.getSession().setAttribute(ConstantesSesion.VALORANTIGUO, jsonObject.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1800,6 +1810,13 @@ public class EjecucionController {
 				//jsonObject=ConsultasUtil.consultaOrdengastoBusquedaPaginado(parameters, jsonObject, mensajes);
 				jsonObject=ConsultasUtil.ordenesgastobusqueda(parameters, jsonObject,principal);
 			}
+			
+			//Ordengasto consultaActividadesEjecucionMetas
+			else if(clase.equals("actividadesEjecucionMetas")){
+				//jsonObject=ConsultasUtil.consultaOrdengastoBusquedaPaginado(parameters, jsonObject, mensajes);
+				jsonObject=ConsultasUtil.consultaActividadesEjecucionMetas(parameters, jsonObject, mensajes);
+			}
+			
 	} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error grabar");
@@ -1835,6 +1852,11 @@ public class EjecucionController {
 			}
 			log.println("pagina** " + parameters.get("pagina"));
 			log.println("filas: " + parameters.get("filas"));
+
+			if(clase.equals("actividadesEjecucionMetas")){
+				//jsonObject=ConsultasUtil.consultaOrdengastoBusquedaPaginado(parameters, jsonObject, mensajes);
+				jsonObject=ConsultasUtil.consultaActividadesEjecucionMetas(parameters, jsonObject, mensajes);
+			}
 
 			
 			//Subitemunidad

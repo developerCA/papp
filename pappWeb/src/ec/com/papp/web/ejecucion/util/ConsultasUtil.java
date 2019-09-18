@@ -1,6 +1,7 @@
 package ec.com.papp.web.ejecucion.util;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -40,6 +41,7 @@ import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
 import ec.com.papp.planificacion.to.SubtareaunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
+import ec.com.papp.planificacion.util.Ejecucioncabeceraact;
 import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.UtilSession;
@@ -1616,5 +1618,37 @@ public class ConsultasUtil {
 		return jsonObject;
 	}
 
+	/**
+	* Metodo que consulta las actividades para la ejecucion de meta paginadas y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaActividadesEjecucionMetas(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+		Collection<Ejecucioncabeceraact> ejecucioncabeceraacts=new ArrayList<Ejecucioncabeceraact>();
+		try{
+			Long actividadid=null;
+			Long mes=null;
+			if(parameters.get("actividadid")!=null){
+				actividadid=Long.valueOf(parameters.get("actividadid"));
+			}
+			if(parameters.get("mes")!=null){
+				mes=Long.valueOf(parameters.get("mes"));
+			}
+			ejecucioncabeceraacts=UtilSession.planificacionServicio.transObtieneActividadesejecucionagrupado(Long.valueOf(parameters.get("institucionid")), Long.valueOf(parameters.get("entidadid")), Long.valueOf(parameters.get("unidadid")),actividadid, mes,Long.valueOf(parameters.get("ejerciciofiscalid")));
+			Integer totalRegistrosPagina=ejecucioncabeceraacts.size();
+			HashMap<String, String>  totalMap=new HashMap<String, String>();
+			totalMap.put("valor", totalRegistrosPagina.toString());
+			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(ejecucioncabeceraacts));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
 
 }
