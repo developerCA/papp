@@ -616,9 +616,10 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
         reset: function (formMetasDistribucionLinea) {
             $scope.myModel = angular.copy($scope.master);
             formMetasDistribucionLinea.$setPristine(true);
-			$scope.metasDistribucionSubtareaMeta = false;
-			$scope.metasDistribucion = true;
+			$scope.metasDistribucionLinea = false;
+			$scope.edicion = true;
             $scope.objetoP = {};
+            $scope.detallesP = {};
         }
     };
 

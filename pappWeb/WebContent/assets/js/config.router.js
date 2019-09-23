@@ -1003,6 +1003,36 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Reporte S01'
         }
+    }).state('app.reporteS02', {
+        url: "/reporteS02",
+        templateUrl: "assets/views/papp/reporteS02.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteS02Ctrl','ReporteS01Factory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalObjetivoOperacionalReporteCtrl','ObjetivoOperacionalReporteFactory',
+        		'ModalObjetivoEstrategicoReporteCtrl','ObjetivoEstrategicoReporteFactory'
+		),
+        title: 'Reporte S02',
+        ncyBreadcrumb: {
+            label: 'Reporte S02'
+        }
+    }).state('app.reporteS03', {
+        url: "/reporteS03",
+        templateUrl: "assets/views/papp/reporteS03.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteS03Ctrl','ReporteS01Factory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalObjetivoOperacionalReporteCtrl','ObjetivoOperacionalReporteFactory',
+        		'ModalObjetivoEstrategicoReporteCtrl','ObjetivoEstrategicoReporteFactory'
+		),
+        title: 'Reporte S03',
+        ncyBreadcrumb: {
+            label: 'Reporte S03'
+        }
     }).state('app.reporteE04', {
         url: "/reporteE04",
         templateUrl: "assets/views/papp/reporteE04.html",
