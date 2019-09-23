@@ -55,6 +55,8 @@ import ec.com.papp.planificacion.to.ReformametasubtareaTO;
 import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
+import ec.com.papp.planificacion.util.Ejecuciondetalleact;
+import ec.com.papp.planificacion.util.Ejecuciondetallesubtarea;
 import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.resource.MensajesAplicacion;
 import ec.com.papp.web.administracion.controller.ComunController;
@@ -569,8 +571,9 @@ public class EjecucionController {
 //				}
 				UtilSession.planificacionServicio.transCrearModificarReformameta(reformametaTO,null);
 				//id=reformaTO.getNpid().toString();
+				System.out.println("reforma metaid:  " + reformametaTO.getNpid());
 				reformametaTO.setId(reformametaTO.getNpid());
-				ConsultasUtil.obtenerreforma(reformametaTO.getId(), jsonObject);
+				ConsultasUtil.obtenerreformameta(reformametaTO.getId(), jsonObject);
 //				if(!resultado.equals("")){
 //					mensajes.setMsg("Realice la distribucion de las subtareas: " + resultado);
 //					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
@@ -690,6 +693,7 @@ public class EjecucionController {
 //				jsonObject.put("reformametasubtarea", (JSONArray)JSONSerializer.toJSON(reformametalineaTOs2,reformametasubtareaTO.getJsonConfig()));
 			}
 
+
 			System.out.println("mensajes.... " + mensajes.getMsg());
 			if(mensajes.getMsg()==null){
 				ComunController.crearAuditoria(request, clase, accion, objeto, id);
@@ -720,6 +724,49 @@ public class EjecucionController {
 		respuesta.setMensajes(mensajes);
 		return respuesta;	
 	}
+
+	@RequestMapping(value = "/{clase}/{ejerciciofiscal}", method = RequestMethod.POST)
+	public Respuesta grabarejecucion(@PathVariable String clase, @RequestBody String objeto, @PathVariable Long ejerciciofiscal,HttpServletRequest request){
+		log.println("entra al metodo grabar en ejecucion de metas: " + objeto);
+		Mensajes mensajes=new Mensajes();
+		Respuesta respuesta=new Respuesta();
+		Gson gson = new Gson();
+		JSONObject jsonObject=new JSONObject();
+		String id="";
+		String accion="";
+		try {
+			//para la ejecucion de metas
+			if(clase.equals("cronogramaactividades")){
+				Ejecuciondetalleact ejecuciondetalleact= gson.fromJson(new StringReader(objeto), Ejecuciondetalleact.class);
+				//accion = (cronogramaTO.getId()==null)?"I":"U";
+				UtilSession.planificacionServicio.transCrearModificarCronogramaejeactividad(ejecuciondetalleact, ejerciciofiscal);
+			}
+			else if(clase.equals("cronogramasubtareas")){
+				Ejecuciondetallesubtarea ejecuciondetallesubtarea= gson.fromJson(new StringReader(objeto), Ejecuciondetallesubtarea.class);
+				//accion = (cronogramaTO.getId()==null)?"I":"U";
+				UtilSession.planificacionServicio.transCrearModificarCronogramaejesubtarea(ejecuciondetallesubtarea, ejerciciofiscal);
+			}
+			System.out.println("mensajes.... " + mensajes.getMsg());
+			if(mensajes.getMsg()==null){
+				ComunController.crearAuditoria(request, clase, accion, objeto, id);
+				mensajes.setMsg(MensajesWeb.getString("mensaje.guardar") + " " + clase);
+				mensajes.setType(MensajesWeb.getString("mensaje.exito"));
+			}
+			else if(!mensajes.getType().equals(MensajesWeb.getString("mensaje.exito")))
+				respuesta.setEstado(false);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.println("error grabar");
+			mensajes.setMsg(MensajesWeb.getString("error.guardar"));
+			mensajes.setType(MensajesWeb.getString("mensaje.error"));
+			respuesta.setEstado(false);
+		}
+		log.println("existe mensaje: " + mensajes.getMsg());
+		respuesta.setJson(jsonObject);
+		respuesta.setMensajes(mensajes);
+		return respuesta;	
+	}
+
 	
 	@RequestMapping(value = "/nuevo/{clase}/{id}", method = RequestMethod.GET)
 	public Respuesta nuevo(@PathVariable String clase,@PathVariable Long id,HttpServletRequest request){
@@ -1811,13 +1858,18 @@ public class EjecucionController {
 				jsonObject=ConsultasUtil.ordenesgastobusqueda(parameters, jsonObject,principal);
 			}
 			
-			//Ordengasto consultaActividadesEjecucionMetas
+			//ejecucion de metas actividadesEjecucionMetas
 			else if(clase.equals("actividadesEjecucionMetas")){
 				//jsonObject=ConsultasUtil.consultaOrdengastoBusquedaPaginado(parameters, jsonObject, mensajes);
 				jsonObject=ConsultasUtil.consultaActividadesEjecucionMetas(parameters, jsonObject, mensajes);
 			}
 			
-	} catch (Exception e) {
+			//ejecucion de metas actividadesEjecucionMetas
+			else if(clase.equals("subtareaEjecucionMetas")){
+				jsonObject=ConsultasUtil.consultaSubtareaEjecucionMetas(parameters, jsonObject, mensajes);
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error grabar");
 			mensajes.setMsg("Error al realizar la consulta");

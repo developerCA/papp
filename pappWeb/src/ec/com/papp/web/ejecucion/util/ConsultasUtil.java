@@ -9,7 +9,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.poi.hssf.record.CellValueRecordInterface;
 import org.hibernate.tools.commons.to.OrderBy;
 import org.hibernate.tools.commons.to.RangeValueTO;
 import org.hibernate.tools.commons.to.SearchResultTO;
@@ -18,7 +17,6 @@ import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
-import ec.com.papp.administracion.to.UnidadmedidaTO;
 import ec.com.papp.estructuraorganica.to.UnidadTO;
 import ec.com.papp.planificacion.to.CertificacionOrdenVO;
 import ec.com.papp.planificacion.to.CertificacionTO;
@@ -39,13 +37,12 @@ import ec.com.papp.planificacion.to.ReformametalineaTO;
 import ec.com.papp.planificacion.to.ReformametasubtareaTO;
 import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubitemunidadacumuladorTO;
-import ec.com.papp.planificacion.to.SubtareaunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
 import ec.com.papp.planificacion.util.Ejecucioncabeceraact;
+import ec.com.papp.planificacion.util.Ejecucioncabecerasubtarea;
 import ec.com.papp.planificacion.util.MatrizDetalle;
 import ec.com.papp.web.comun.util.Mensajes;
 import ec.com.papp.web.comun.util.UtilSession;
-import ec.com.papp.web.resource.MensajesWeb;
 import ec.com.xcelsa.utilitario.exception.MyException;
 import ec.com.xcelsa.utilitario.metodos.Log;
 import ec.com.xcelsa.utilitario.metodos.UtilGeneral;
@@ -1643,6 +1640,55 @@ public class ConsultasUtil {
 			totalMap.put("valor", totalRegistrosPagina.toString());
 			log.println("totalresultado: " + totalRegistrosPagina);
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(ejecucioncabeceraacts));
+			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+		return jsonObject;
+	}
+
+
+	/**
+	* Metodo que consulta las actividades para la ejecucion de meta paginadas y arma el json para mostrarlos en la grilla
+	*
+	* @param request 
+	* @return JSONObject Estructura que contiene los valores para armar la grilla
+	* @throws MyException
+	*/
+
+	public static JSONObject consultaSubtareaEjecucionMetas(Map<String, String> parameters,JSONObject jsonObject,Mensajes mensajes) throws MyException {
+		Collection<Ejecucioncabecerasubtarea> ejecucioncabecerasubtareas=new ArrayList<Ejecucioncabecerasubtarea>();
+		try{
+			Long actividadid=null;
+			Long mesdesde=null;
+			Long meshasta=null;
+			Long tarea=null;
+			Long subactividad=null;
+			if(parameters.get("actividadid")!=null){
+				actividadid=Long.valueOf(parameters.get("actividadid"));
+			}
+			if(parameters.get("subactividadid")!=null){
+				subactividad=Long.valueOf(parameters.get("subactividadid"));
+			}
+			if(parameters.get("tareaid")!=null){
+				tarea=Long.valueOf(parameters.get("tareaid"));
+			}
+
+			if(parameters.get("mesdesde")!=null){
+				mesdesde=Long.valueOf(parameters.get("mesdesde"));
+			}
+			if(parameters.get("meshasta")!=null){
+				meshasta=Long.valueOf(parameters.get("meshasta"));
+			}
+
+			
+			ejecucioncabecerasubtareas=UtilSession.planificacionServicio.transObtieneSubtareasejecucionagrupado(Long.valueOf(parameters.get("institucionid")), Long.valueOf(parameters.get("entidadid")), Long.valueOf(parameters.get("unidadid")),actividadid, mesdesde,meshasta,Long.valueOf(parameters.get("ejerciciofiscalid")),subactividad,tarea);
+			Integer totalRegistrosPagina=ejecucioncabecerasubtareas.size();
+			HashMap<String, String>  totalMap=new HashMap<String, String>();
+			totalMap.put("valor", totalRegistrosPagina.toString());
+			log.println("totalresultado: " + totalRegistrosPagina);
+			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(ejecucioncabecerasubtareas));
 			jsonObject.put("total", (JSONObject)JSONSerializer.toJSON(totalMap));
 		}catch (Exception e) {
 			e.printStackTrace();

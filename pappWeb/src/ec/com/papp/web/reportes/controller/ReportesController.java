@@ -63,6 +63,25 @@ public class ReportesController {
 		return null;
 	}
 
+	@RequestMapping(value = "/rest/reportes/consultar/s02/{parametro}", method = RequestMethod.GET)
+	public ModelAndView s02(HttpServletRequest request,HttpServletResponse response,@PathVariable String parametro) throws Throwable {
+		try {
+			System.out.println("ingresa a generar el reporte s02 ");
+//			String[] pares = parametro.split("&");
+//			Map<String, String> parameters = new HashMap<String, String>();
+//			for(String pare : pares) {
+//			    String[] nameAndValue = pare.split("=");
+//			    parameters.put(nameAndValue[0], nameAndValue[1]);
+//			}
+//			ReportesConsultas.generarS02plano(request, response, parameters);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.println("error al cargaro no adheridos actuario");
+		}
+		return null;
+	}
+
+	
 	@RequestMapping(value = "/rest/reportes/consultar/p01/{parametro}", method = RequestMethod.GET)
 	public ModelAndView p01(HttpServletRequest request,HttpServletResponse response,@PathVariable String parametro) throws Throwable {
 		try {
