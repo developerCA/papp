@@ -278,6 +278,8 @@ app.constant('JS_REQUIRES', {
         'ReporteP06Factory':'assets/js/factory/reporteP06Factory.js',
         'ReporteS01Ctrl':'assets/js/controllers/papp/reporteS01Ctrl.js',
         'ReporteS01Factory':'assets/js/factory/reporteS01Factory.js',
+        'ReporteE04Ctrl':'assets/js/controllers/papp/reporteE04Ctrl.js',
+        'ReporteE05Ctrl':'assets/js/controllers/papp/reporteE05Ctrl.js',
         'ModalObjetivoOperacionalReporteCtrl':'assets/js/controllers/papp/modales/modalObjetivoOperacionalReporteCtrl.js',
         'ObjetivoOperacionalReporteFactory':'assets/js/factory/objetivoOperacionalReporteFactory.js',
         'ModalObjetivoEstrategicoReporteCtrl':'assets/js/controllers/papp/modales/modalObjetivoEstrategicoReporteCtrl.js',
@@ -307,6 +309,8 @@ app.constant('JS_REQUIRES', {
         'ModalNombrePerfilCtrl':'assets/js/controllers/papp/modales/modalNombrePerfilCtrl.js',
         'ModalPlanificacionUECtrl':'assets/js/controllers/papp/modales/modalPlanificacionUECtrl.js',
         'ModalPermisosCtrl':'assets/js/controllers/papp/modales/modalPermisosCtrl.js',
+        'EjecucionMetasCtrl':'assets/js/controllers/papp/ejecucionMetasCtrl.js',
+        'EjecucionMetasFactory':'assets/js/factory/ejecucionMetasFactory.js',
 
 
     },

@@ -530,6 +530,17 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Matriz Programación Anual de la Política Publica'
         }
+    }).state('app.ejecucionmetas', {
+        url: "/ejecucionmetas",
+        templateUrl: "assets/views/papp/ejecucionMetas.html",
+        resolve: loadSequence(
+    		'ngTable','EjecucionMetasCtrl','EjecucionMetasFactory',
+    		'ModalDivisionGeograficaCtrl','DivisionGeograficaFactory'
+		),
+        title: 'Registro Ejecucion de Metas',
+        ncyBreadcrumb: {
+            label: 'Registro Ejecucion de Metas'
+        }
     }).state('app.formulacionestrategica', {
         url: "/formulacionestrategica",
         templateUrl: "assets/views/papp/formulacionEstrategica.html",
@@ -991,6 +1002,54 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         title: 'Reporte S01',
         ncyBreadcrumb: {
             label: 'Reporte S01'
+        }
+    }).state('app.reporteE04', {
+        url: "/reporteE04",
+        templateUrl: "assets/views/papp/reporteE04.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteE04Ctrl','ReporteP01Factory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalProgramaCtrl','ProgramaFactory',
+        		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
+        		'ModalActividadReporteCtrl','ActividadReporteFactory',
+        		'ModalSubActividadReporteCtrl','SubActividadReporteFactory',
+        		'ModalTareaReporteCtrl','TareaReporteFactory',
+        		'ModalSubTareaReporteCtrl','SubTareaReporteFactory',
+        		'ModalItemsReporteCtrl','ItemsReporteFactory',
+        		'ModalSubItemsReporteCtrl','SubItemsReporteFactory',
+        		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory',
+        		'ModalGeograficoCtrl','GeograficoFactory',
+        		'ModalOrganismoCtrl','OrganismoFactory'
+		),
+        title: 'Reporte E04',
+        ncyBreadcrumb: {
+            label: 'Reporte E04'
+        }
+    }).state('app.reporteE05', {
+        url: "/reporteE05",
+        templateUrl: "assets/views/papp/reporteE05.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteE05Ctrl','ReporteP01Factory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalProgramaCtrl','ProgramaFactory',
+        		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
+        		'ModalActividadReporteCtrl','ActividadReporteFactory',
+        		'ModalSubActividadReporteCtrl','SubActividadReporteFactory',
+        		'ModalTareaReporteCtrl','TareaReporteFactory',
+        		'ModalSubTareaReporteCtrl','SubTareaReporteFactory',
+        		'ModalItemsReporteCtrl','ItemsReporteFactory',
+        		'ModalSubItemsReporteCtrl','SubItemsReporteFactory',
+        		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory',
+        		'ModalGeograficoCtrl','GeograficoFactory',
+        		'ModalOrganismoCtrl','OrganismoFactory'
+		),
+        title: 'Reporte E05',
+        ncyBreadcrumb: {
+            label: 'Reporte E05'
         }
     }).state('app.layouts', {
         url: "/layouts",
