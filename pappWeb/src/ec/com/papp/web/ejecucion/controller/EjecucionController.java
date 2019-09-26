@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
-import com.sun.corba.se.impl.logging.UtilSystemException;
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 
 import ec.com.papp.administracion.to.ClaseregistroTO;
 import ec.com.papp.administracion.to.ClaseregistroclasemodificacionTO;
@@ -52,7 +50,6 @@ import ec.com.papp.planificacion.to.ReformalineaTO;
 import ec.com.papp.planificacion.to.ReformametaTO;
 import ec.com.papp.planificacion.to.ReformametalineaTO;
 import ec.com.papp.planificacion.to.ReformametasubtareaTO;
-import ec.com.papp.planificacion.to.SubitemunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadTO;
 import ec.com.papp.planificacion.to.SubtareaunidadacumuladorTO;
 import ec.com.papp.planificacion.util.Ejecuciondetalleact;
@@ -984,7 +981,7 @@ public class EjecucionController {
 				ordendevengolineaTO.setNpvalor(ordendevengolineaTO.getValor());
 				//1. traigo el total disponible del subitem
 				NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(ordendevengolineaTO.getNivelactid()));
-				double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),true);
+				//double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),true);
 //				//2. Obtengo el detalle del subitem
 //				double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(), ordendevengolineaTO.getNivelactid(),ordendevengolineaTO.getOrdendevengo().getFechacreacion());
 //				ordendevengolineaTO.setNpsaldo(saldo);
@@ -1044,19 +1041,19 @@ public class EjecucionController {
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, id, id2,new Date());
 				//3. Obtengos las ordenes pendientes de este nivel
 				log.println("id para calculo de no aprobadas:  " + id2);
-				Collection<OrdendevengolineaTO> pendientes=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2,null);
+				OrdengastoTO ordengastoTO=(OrdengastoTO) request.getSession().getAttribute(ConstantesSesion.ORDENGASTO);
+				Collection<OrdendevengolineaTO> pendientes=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2,ordengastoTO.getId());
 				log.println("ordenes no aprobadas " + pendientes.size());
 				double ordenesnoaprob=0.0;
 				for(OrdendevengolineaTO ordendevengolineaTO:pendientes)
 					ordenesnoaprob=ordenesnoaprob+ordendevengolineaTO.getValor();
 				log.println("ordenesnoaprob " +ordenesnoaprob);
-				Collection<OrdenreversionlineaTO> pendientesrev=UtilSession.planificacionServicio.transObtieneordenesreversionpendientes(id2,null);
+				Collection<OrdenreversionlineaTO> pendientesrev=UtilSession.planificacionServicio.transObtieneordenesreversionpendientes(id2,ordengastoTO.getId());
 				log.println("ordenes reversion no aprobadas " + pendientes.size());
 				double ordenesnoaprobrev=0.0;
 				for(OrdenreversionlineaTO ordenreversionlineaTO:pendientesrev)
 					ordenesnoaprobrev=ordenesnoaprobrev+ordenreversionlineaTO.getValor();
 
-				OrdengastoTO ordengastoTO=(OrdengastoTO) request.getSession().getAttribute(ConstantesSesion.ORDENGASTO);
 				//4. Consulto las ordenes de devengo aprobada
 				Collection<OrdendevengolineaTO> aprobadas=UtilSession.planificacionServicio.transObtieneordenesdevengoaprobadas(id2,ordengastoTO.getId());
 				log.println("aprobadas "+ aprobadas.size());
