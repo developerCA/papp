@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
     <text-property name="title">E-02: SOLICITUD DE ORDEN DE GASTO</text-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -222,6 +222,11 @@
                     <text-property name="heading">SALDO</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">VALOR_FINAL</property>
+                    <text-property name="displayName">VALOR_FINAL</text-property>
+                    <text-property name="heading">VALOR_FINAL</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">CUR</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">CUR</text-property>
@@ -385,6 +390,11 @@
                     </structure>
                     <structure>
                         <property name="position">29</property>
+                        <property name="name">VALOR_FINAL</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
                         <property name="name">CUR</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -590,6 +600,13 @@
                 </structure>
                 <structure>
                     <property name="position">29</property>
+                    <property name="name">VALOR_FINAL</property>
+                    <property name="nativeName">VALOR_FINAL</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
                     <property name="name">CUR</property>
                     <property name="nativeName">CUR</property>
                     <property name="dataType">string</property>
@@ -659,6 +676,27 @@
              AND ORG.ORDENGASTOESTADO IN ('RE', 'AP', 'SO')
        )
        as SALDO,
+        ogl.ORDENGASTOLINEAVALOR - (
+       (
+       SELECT
+            NVL(SUM(ccl.CERTIFICACIONLINEAVALOR), 0) AS valor3
+        FROM
+            CERTIFICACIONLINEA ccl
+            INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = ccl.CERTIFICACIONID
+        WHERE ccl.CERTIFICACIONLINEANIVELACTID = ogl.ORDENGASTOLINEANIVELACTID
+          AND cc.CERTIFICACIONESTADO IN ('RE', 'AP', 'SO')
+          AND cc.CERTIFICACIONFECHACREACION <= og.ORDENGASTOFECHACREACION
+       )-
+        (
+        SELECT
+            NVL(SUM(ORDENGASTOLINEAVALOR), 0) AS valor1
+        FROM
+            ORDENGASTOLINEA ORGL inner join ORDENGASTO ORG ON ORG.ORDENGASTOID=ORGL.ORDENGASTOID
+        WHERE
+            ORGL.ORDENGASTOLINEANIVELACTID = ogl.ORDENGASTOLINEANIVELACTID
+             AND ORG.ORDENGASTOESTADO IN ('RE', 'AP', 'SO')
+       )
+       )	AS valor_final,
        og.ORDENGASTOCUR				AS CUR
   FROM ORDENGASTO                           og
        INNER JOIN CLASEREGISTROCMCGASTO     cgm             ON (cgm.CLASEREGISTROID=og.ORDENGASTOCLASEREGID AND cgm.CLASEREGISTROCMID=og.ORDENGASTOCLASEMODID AND cgm.CLASEREGISTROCMCGASTOID=og.ORDENGASTOCGASTOID)
@@ -3589,13 +3627,11 @@
                     </grid>
                 </cell>
             </row>
-            <row id="4382">
-                <property name="height">0.8333333333333334in</property>
-                <cell id="4383">
+            <row id="4551">
+                <cell id="4552">
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
-                    <table id="4404">
-                        <property name="width">7.59375in</property>
+                    <table id="4555">
                         <property name="dataSet">todo</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -3613,12 +3649,14 @@
                             <structure>
                                 <property name="name">SALDO</property>
                                 <text-property name="displayName">SALDO</text-property>
-                                <expression name="expression" type="javascript">if(dataSetRow["ORDENGASTOLINEASALDO"]>0)&#13;
-dataSetRow["ORDENGASTOLINEASALDO"]&#13;
-else&#13;
-BirtMath.round(dataSetRow["SALDO"],2)</expression>
+                                <expression name="expression" type="javascript">dataSetRow["SALDO"]</expression>
                                 <property name="dataType">decimal</property>
-                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">VALOR_FINAL</property>
+                                <text-property name="displayName">VALOR_FINAL</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["VALOR_FINAL"]</expression>
+                                <property name="dataType">decimal</property>
                             </structure>
                             <structure>
                                 <property name="name">TVALOR</property>
@@ -3634,47 +3672,59 @@ BirtMath.round(dataSetRow["SALDO"],2)</expression>
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">TVALOR_FINAL</property>
+                                <text-property name="displayName">TVALOR_FINAL</text-property>
+                                <expression name="expression" type="javascript">Total.sum(row["VALOR_FINAL"])</expression>
+                                <property name="dataType">decimal</property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
-                        <column id="4423">
-                            <property name="width">5.15625in</property>
+                        <column id="4579">
+                            <property name="width">55%</property>
                         </column>
-                        <column id="4424">
-                            <property name="width">1.21875in</property>
+                        <column id="4580">
+                            <property name="width">15%</property>
                         </column>
-                        <column id="4425">
-                            <property name="width">1.21875in</property>
+                        <column id="4581">
+                            <property name="width">15%</property>
+                        </column>
+                        <column id="4582">
+                            <property name="width">15%</property>
                         </column>
                         <header>
-                            <row id="4405">
-                                <cell id="4406">
-                                    <label id="4407">
+                            <row id="4556">
+                                <cell id="4557">
+                                    <label id="4558">
                                         <text-property name="text">DETALLE</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4408">
-                                    <label id="4409">
-                                        <text-property name="text">VALOR</text-property>
+                                <cell id="4559">
+                                    <label id="4560">
+                                        <text-property name="text">VALOR C.F.</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4410">
-                                    <label id="4411">
-                                        <text-property name="text">SALDO</text-property>
+                                <cell id="4561">
+                                    <label id="4562">
+                                        <text-property name="text">VALOR O.G.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4563">
+                                    <label id="4564">
+                                        <text-property name="text">VALOR</text-property>
                                     </label>
                                 </cell>
                             </row>
                         </header>
                         <detail>
-                            <row id="4412">
-                                <property name="height">0.25in</property>
-                                <cell id="4413">
-                                    <data id="4414">
-                                        <property name="textAlign">justify</property>
+                            <row id="4565">
+                                <cell id="4566">
+                                    <data id="4567">
                                         <property name="resultSetColumn">DETALLE</property>
                                     </data>
                                 </cell>
-                                <cell id="4415">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4416">
+                                <cell id="4568">
+                                    <data id="4569">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -3730,9 +3780,8 @@ BirtMath.round(dataSetRow["SALDO"],2)</expression>
                                         <property name="resultSetColumn">VALOR</property>
                                     </data>
                                 </cell>
-                                <cell id="4417">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4418">
+                                <cell id="4570">
+                                    <data id="4571">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -3788,29 +3837,14 @@ BirtMath.round(dataSetRow["SALDO"],2)</expression>
                                         <property name="resultSetColumn">SALDO</property>
                                     </data>
                                 </cell>
-                            </row>
-                        </detail>
-                        <footer>
-                            <row id="4419">
-                                <property name="height">0.2604166666666667in</property>
-                                <cell id="4420">
-                                    <property name="verticalAlign">middle</property>
-                                    <label id="4438">
-                                        <property name="fontFamily">"Arial"</property>
-                                        <property name="fontSize">12px</property>
-                                        <property name="textAlign">right</property>
-                                        <text-property name="text">TOTALES:</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="4421">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4436">
+                                <cell id="4572">
+                                    <data id="4573">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
                                         <property name="backgroundRepeat">repeat</property>
                                         <property name="fontFamily">"Arial"</property>
-                                        <property name="fontSize">12px</property>
+                                        <property name="fontSize">11px</property>
                                         <property name="fontWeight">normal</property>
                                         <property name="fontStyle">normal</property>
                                         <property name="fontVariant">normal</property>
@@ -3847,6 +3881,76 @@ BirtMath.round(dataSetRow["SALDO"],2)</expression>
                                         <property name="lineHeight">normal</property>
                                         <property name="orphans">2</property>
                                         <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">VALOR_FINAL</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="4574">
+                                <cell id="4575">
+                                    <label id="4438">
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">12px</property>
+                                        <property name="textAlign">right</property>
+                                        <text-property name="text">TOTALES:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4576">
+                                    <data id="4583">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$ ###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
                                         <property name="widows">2</property>
                                         <property name="wordSpacing">normal</property>
                                         <property name="display">block</property>
@@ -3859,15 +3963,14 @@ BirtMath.round(dataSetRow["SALDO"],2)</expression>
                                         <property name="resultSetColumn">TVALOR</property>
                                     </data>
                                 </cell>
-                                <cell id="4422">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4437">
+                                <cell id="4577">
+                                    <data id="4584">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
                                         <property name="backgroundRepeat">repeat</property>
                                         <property name="fontFamily">"Arial"</property>
-                                        <property name="fontSize">12px</property>
+                                        <property name="fontSize">11px</property>
                                         <property name="fontWeight">normal</property>
                                         <property name="fontStyle">normal</property>
                                         <property name="fontVariant">normal</property>
@@ -3904,6 +4007,7 @@ BirtMath.round(dataSetRow["SALDO"],2)</expression>
                                         <property name="lineHeight">normal</property>
                                         <property name="orphans">2</property>
                                         <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
                                         <property name="widows">2</property>
                                         <property name="wordSpacing">normal</property>
                                         <property name="display">block</property>
@@ -3914,6 +4018,63 @@ BirtMath.round(dataSetRow["SALDO"],2)</expression>
                                         <property name="canShrink">false</property>
                                         <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">TSALDO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4578">
+                                    <data id="4585">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$ ###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">TVALOR_FINAL</property>
                                     </data>
                                 </cell>
                             </row>

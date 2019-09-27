@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
     <text-property name="title">E-07: SOLICITUD DE ORDEN DE DEVENGO</text-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -1293,7 +1293,6 @@
        'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
 										AS detalle,
        ogl.ORDENGASTOLINEAVALOR			AS VALORCONTRATO,
-       ogl.ORDENGASTOLINEAVALOR AS ORDENDEVENGOLINEAVALOR,
        (ogl.ORDENGASTOLINEAVALOR+
        odl.ORDENDEVENGOLINEAVALOR-
        (SELECT
@@ -1338,7 +1337,8 @@
           AND ods.ORDENREVERSIONESTADO ='AP'
           AND ods.ORDENREVERSIONOGASTOID=od.ORDENDEVENGOORDENGASTOID
           AND ods.ORDENREVERSIONFECHACREACION <= od.ORDENDEVENGOFECHACREACION
-       )) AS VALORPORDEVENGAR
+       )) AS ORDENDEVENGOLINEAVALOR,
+       ORDENDEVENGOLINEAVALOR AS VALORPORDEVENGAR
        ,
        (ogl.ORDENGASTOLINEAVALOR-
        (SELECT
@@ -4097,14 +4097,14 @@ dataSetRow["SALDOPORDEVENGAR"]</expression>
                             <structure>
                                 <property name="name">TORDENDEVENGOLINEAVALOR</property>
                                 <text-property name="displayName">TORDENDEVENGOLINEAVALOR</text-property>
-                                <expression name="expression" type="javascript">Total.sum(row["ORDENDEVENGOLINEAVALOR"])</expression>
+                                <expression name="expression" type="javascript">Total.sum(row["VALORPORDEVENGAR"])</expression>
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>
                             <structure>
                                 <property name="name">TVALORPORDEVENGAR</property>
                                 <text-property name="displayName">TVALORPORDEVENGAR</text-property>
-                                <expression name="expression" type="javascript">Total.sum(row["VALORPORDEVENGAR"])</expression>
+                                <expression name="expression" type="javascript">Total.sum(row["ORDENDEVENGOLINEAVALOR"])</expression>
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>
@@ -4182,7 +4182,7 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                 <cell id="4577">
                                     <property name="verticalAlign">middle</property>
                                     <label id="4578">
-                                        <text-property name="text">DEVENGO</text-property>
+                                        <text-property name="text">VALOR DE DEVENGO</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4579">

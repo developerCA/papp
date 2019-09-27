@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
     <text-property name="title">E-01: SOLICITUD DE CERTIFICADO DE FONDOS</text-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -165,6 +165,11 @@
                     <text-property name="displayName">SALDO</text-property>
                     <text-property name="heading">SALDO</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">VALOR_FINAL</property>
+                    <text-property name="displayName">VALOR_FINAL</text-property>
+                    <text-property name="heading">VALOR_FINAL</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -274,6 +279,11 @@
                     <structure>
                         <property name="position">19</property>
                         <property name="name">SALDO</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">VALOR_FINAL</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -413,6 +423,13 @@
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">VALOR_FINAL</property>
+                    <property name="nativeName">VALOR_FINAL</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT 
        c.CERTIFICACIONID,
@@ -447,7 +464,6 @@
        'Item: ' || it.ITEMCODIGO || '-' || orp.ORGANISMOPRESTAMOCODIGO || '-' || org.ORGANISMOCODIGO || '-' || ca.DIVISIONGEOGRAFICACODIGO || '-' || f.FUENTEFINANCIAMIENTOCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
        'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
        AS detalle,
-       cl.CERTIFICACIONLINEAVALOR AS valor,
        ((
         SELECT
             NVL(SUM(SUBITEMUNIDADACUMVALOR), 0) AS valor1
@@ -487,7 +503,49 @@
 		  AND org.ORDENGASTOESTADO = 'AP'
           AND cc.CERTIFICACIONESTADO = 'LP'
           AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
-       )) AS SALDO
+       )) AS valor,
+       cl.CERTIFICACIONLINEAVALOR AS SALDO,
+       ((
+        SELECT
+            NVL(SUM(SUBITEMUNIDADACUMVALOR), 0) AS valor1
+        FROM
+            SUBITEMUNIDADACUMULADOR
+        WHERE
+            SUBITEMUNIDADID = sia.SUBITEMUNIDADID
+            AND SUBITEMUNIDADACUMTIPO = 'A'
+            AND SUBITEMUNIDADACUMID = 2
+       ) + (
+       SELECT
+            NVL(SUM(rl.reformalineavalorincremento), 0) -
+            NVL(SUM(rl.reformalineavalordecremento), 0) AS valor2
+        FROM
+            REFORMALINEA rl
+            INNER JOIN REFORMA r ON r.REFORMAID = rl.REFORMAID
+        WHERE rl.reformalineanivelactid = cl.CERTIFICACIONLINEANIVELACTID
+          AND r.REFORMAESTADO = 'AP'
+          AND r.REFORMAFECHACREACION <= c.CERTIFICACIONFECHACREACION
+       ) - (
+       SELECT
+            NVL(SUM(ccl.CERTIFICACIONLINEAVALOR), 0) AS valor3
+        FROM
+            CERTIFICACIONLINEA ccl
+            INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = ccl.CERTIFICACIONID
+        WHERE ccl.CERTIFICACIONLINEANIVELACTID = cl.CERTIFICACIONLINEANIVELACTID
+          AND cc.CERTIFICACIONESTADO IN ('RE', 'AP', 'SO')
+          AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
+       )
+	    - (
+       SELECT
+            NVL(SUM(orgl.ORDENGASTOLINEAVALOR), 0) AS valor3
+        FROM
+			ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGASTOID 
+            INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = org.ORDENGASTOCERTIFICACIONID
+        WHERE orgl.ORDENGASTOLINEANIVELACTID = cl.CERTIFICACIONLINEANIVELACTID
+		  AND org.ORDENGASTOESTADO = 'AP'
+          AND cc.CERTIFICACIONESTADO = 'LP'
+          AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
+       )) -
+       cl.CERTIFICACIONLINEAVALOR AS valor_final
 
   FROM certificacion                        c
        INNER JOIN Unidad                    u               ON u.UNIDADID = c.CERTIFICACIONUNIDADID
@@ -2634,13 +2692,11 @@
                     </grid>
                 </cell>
             </row>
-            <row id="4382">
-                <property name="height">0.8333333333333334in</property>
-                <cell id="4383">
+            <row id="4610">
+                <cell id="4611">
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
-                    <table id="4404">
-                        <property name="width">7.59375in</property>
+                    <table id="4614">
                         <property name="dataSet">todo</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -2656,6 +2712,18 @@
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
+                                <property name="name">SALDO</property>
+                                <text-property name="displayName">SALDO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SALDO"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">VALOR_FINAL</property>
+                                <text-property name="displayName">VALOR_FINAL</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["VALOR_FINAL"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
                                 <property name="name">TVALOR</property>
                                 <text-property name="displayName">TVALOR</text-property>
                                 <expression name="expression" type="javascript">Total.sum(row["VALOR"])</expression>
@@ -2663,76 +2731,65 @@
                                 <property name="allowExport">true</property>
                             </structure>
                             <structure>
-                                <property name="name">CERTIFICACIONLINEASALDO</property>
-                                <text-property name="displayName">CERTIFICACIONLINEASALDO</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["CERTIFICACIONLINEASALDO"]</expression>
-                                <property name="dataType">decimal</property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">SALDOACTUAL1</property>
-                                <expression name="expression" type="javascript">if(dataSetRow["CERTIFICACIONLINEASALDO"]>0)&#13;
-BirtMath.round(row["CERTIFICACIONLINEASALDO"],2)&#13;
-else&#13;
-row["SALDO"]</expression>
-                                <property name="dataType">decimal</property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">TSALDO1</property>
+                                <property name="name">TSALDO</property>
                                 <text-property name="displayName">TSALDO</text-property>
-                                <expression name="expression" type="javascript">Total.sum(row["SALDOACTUAL1"])</expression>
+                                <expression name="expression" type="javascript">Total.sum(row["SALDO"])</expression>
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>
                             <structure>
-                                <property name="name">SALDO</property>
-                                <text-property name="displayName">SALDO</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["SALDO"]</expression>
+                                <property name="name">TVALOR_FINAL</property>
+                                <text-property name="displayName">TVALOR_FINAL</text-property>
+                                <expression name="expression" type="javascript">Total.sum(row["VALOR_FINAL"])</expression>
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>
                         </list-property>
-                        <column id="4423">
-                            <property name="width">5.15625in</property>
+                        <column id="4638">
+                            <property name="width">55%</property>
                         </column>
-                        <column id="4424">
-                            <property name="width">1.21875in</property>
+                        <column id="4639">
+                            <property name="width">15%</property>
                         </column>
-                        <column id="4425">
-                            <property name="width">1.21875in</property>
+                        <column id="4640">
+                            <property name="width">15%</property>
+                        </column>
+                        <column id="4641">
+                            <property name="width">15%</property>
                         </column>
                         <header>
-                            <row id="4405">
-                                <cell id="4406">
-                                    <label id="4407">
+                            <row id="4615">
+                                <cell id="4616">
+                                    <label id="4617">
                                         <text-property name="text">DETALLE</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4408">
-                                    <label id="4409">
-                                        <text-property name="text">VALOR</text-property>
+                                <cell id="4618">
+                                    <label id="4619">
+                                        <text-property name="text">VALOR DISPONIBLE </text-property>
                                     </label>
                                 </cell>
-                                <cell id="4410">
-                                    <label id="4411">
+                                <cell id="4620">
+                                    <label id="4621">
+                                        <text-property name="text">VALOR C.F.</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4622">
+                                    <label id="4623">
                                         <text-property name="text">SALDO</text-property>
                                     </label>
                                 </cell>
                             </row>
                         </header>
                         <detail>
-                            <row id="4412">
-                                <property name="height">0.25in</property>
-                                <cell id="4413">
-                                    <data id="4414">
-                                        <property name="textAlign">justify</property>
+                            <row id="4624">
+                                <cell id="4625">
+                                    <data id="4626">
                                         <property name="resultSetColumn">DETALLE</property>
                                     </data>
                                 </cell>
-                                <cell id="4415">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4416">
+                                <cell id="4627">
+                                    <data id="4628">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -2788,40 +2845,14 @@ row["SALDO"]</expression>
                                         <property name="resultSetColumn">VALOR</property>
                                     </data>
                                 </cell>
-                                <cell id="4417">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4609">
-                                        <structure name="numberFormat">
-                                            <property name="category">Currency</property>
-                                            <property name="pattern">$###0.00{RoundingMode=HALF_UP}</property>
-                                        </structure>
-                                        <property name="textAlign">right</property>
-                                        <property name="resultSetColumn">SALDOACTUAL1</property>
-                                    </data>
-                                </cell>
-                            </row>
-                        </detail>
-                        <footer>
-                            <row id="4419">
-                                <property name="height">0.2604166666666667in</property>
-                                <cell id="4420">
-                                    <property name="verticalAlign">middle</property>
-                                    <label id="4438">
-                                        <property name="fontFamily">"Arial"</property>
-                                        <property name="fontSize">12px</property>
-                                        <property name="textAlign">right</property>
-                                        <text-property name="text">TOTALES:</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="4421">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4436">
+                                <cell id="4629">
+                                    <data id="4630">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
                                         <property name="backgroundRepeat">repeat</property>
                                         <property name="fontFamily">"Arial"</property>
-                                        <property name="fontSize">12px</property>
+                                        <property name="fontSize">11px</property>
                                         <property name="fontWeight">normal</property>
                                         <property name="fontStyle">normal</property>
                                         <property name="fontVariant">normal</property>
@@ -2858,6 +2889,133 @@ row["SALDO"]</expression>
                                         <property name="lineHeight">normal</property>
                                         <property name="orphans">2</property>
                                         <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">SALDO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4631">
+                                    <data id="4632">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$ ###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">VALOR_FINAL</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="4633">
+                                <cell id="4634">
+                                    <label id="4438">
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">12px</property>
+                                        <property name="textAlign">right</property>
+                                        <text-property name="text">TOTALES:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4635">
+                                    <data id="4642">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$ ###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
                                         <property name="widows">2</property>
                                         <property name="wordSpacing">normal</property>
                                         <property name="display">block</property>
@@ -2870,15 +3028,14 @@ row["SALDO"]</expression>
                                         <property name="resultSetColumn">TVALOR</property>
                                     </data>
                                 </cell>
-                                <cell id="4422">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4437">
+                                <cell id="4636">
+                                    <data id="4643">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
                                         <property name="backgroundRepeat">repeat</property>
                                         <property name="fontFamily">"Arial"</property>
-                                        <property name="fontSize">12px</property>
+                                        <property name="fontSize">11px</property>
                                         <property name="fontWeight">normal</property>
                                         <property name="fontStyle">normal</property>
                                         <property name="fontVariant">normal</property>
@@ -2915,6 +3072,7 @@ row["SALDO"]</expression>
                                         <property name="lineHeight">normal</property>
                                         <property name="orphans">2</property>
                                         <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
                                         <property name="widows">2</property>
                                         <property name="wordSpacing">normal</property>
                                         <property name="display">block</property>
@@ -2924,7 +3082,64 @@ row["SALDO"]</expression>
                                         <property name="showIfBlank">false</property>
                                         <property name="canShrink">false</property>
                                         <property name="overflow">hidden</property>
-                                        <property name="resultSetColumn">TSALDO1</property>
+                                        <property name="resultSetColumn">TSALDO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4637">
+                                    <data id="4644">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$ ###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">TVALOR_FINAL</property>
                                     </data>
                                 </cell>
                             </row>

@@ -29,7 +29,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 				$scope.objeto = resp.json.ordendevengolinea;
 	        	$scope.objetoDetalles = resp.json.subiteminfo;
 	        	try {
-		        	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
+		        	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado).toFixed(2) - $scope.objeto.npdevengosnoapro;
 				} catch (e) {
 		        	$scope.objeto.npvalor = 0;
 				}
@@ -77,7 +77,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
         	$scope.objeto.npdevengosnoapro = resp.json.datoslineaordend.noaprobadas;
         	$scope.objeto.npsaldo = resp.json.datoslineaordend.saldo;
         	try {
-            	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado) - $scope.objeto.npdevengosnoapro;
+            	$scope.objeto.npvalor = ($scope.objeto.nptotalordengasto - $scope.objeto.npdevengado).toFixed(2) - $scope.objeto.npdevengosnoapro;
 			} catch (e) {
 	        	$scope.objeto.npvalor = 0;
 			}
