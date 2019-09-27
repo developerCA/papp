@@ -383,7 +383,7 @@ app.controller('ReporteE05Controller', [ "$scope","$rootScope","$uibModal","Swee
         	}
 */
         	var url = "/birt/frameset?__report=E05-OG.rptdesign" +
-					"ejercicio=" + $rootScope.ejefiscal;
+					"&ejercicio=" + $rootScope.ejefiscal;
         	if ($scope.objeto.institucionid != undefined && $scope.objeto.institucionid != null) {
         		url += "&institucion=" + $scope.objeto.institucionid;
         	}
