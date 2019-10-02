@@ -901,12 +901,24 @@ public class ConsultasUtil {
 			System.out.println("reformalineatos: " + reformalineaTOs.size());
 			double totalreforma=0.0;
 			System.out.println("fecha creacion: " + reformalinea.getNpfechacreacion());
+			System.out.println("reformalinea.getId().getId(): " + reformalinea.getId().getId());
+			System.out.println("reformalineaTO.getReforma().getEstado(): " + reformalinea.getReforma().getEstado());
+			System.out.println("reformalinea.getReforma().getFechaaprobacion(): "+ reformalinea.getReforma().getFechaaprobacion());
 			for(ReformalineaTO reformalineaTO:reformalineaTOs){
 				System.out.println("fecha a comparar: " + reformalineaTO.getReforma().getFechacreacion());
 				//if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
-				if((reformalineaTO.getReforma().getEstado().equals("AP")) && reformalineaTO.getId().getId().longValue()<reformalinea.getId().getId().longValue()){
+				if((reformalinea.getReforma().getEstado().equals("SO") || reformalinea.getReforma().getEstado().equals("RE")) && reformalinea.getId().getId().longValue()!=reformalineaTO.getId().getId().longValue()){
+//								&& reformalinea.getNpreformaid().longValue()<reformalinea1TO.getId().getId().longValue()){
+					System.out.println("valor:/// " + reformalineaTO.getValorincremento() + ", " + reformalineaTO.getValordecremento()+" id "+reformalineaTO.getId().getId());
 					totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
 				}
+				else if(reformalinea.getId().getId().longValue()!=reformalineaTO.getId().getId().longValue() && reformalinea.getReforma().getEstado().equals("AP") && reformalineaTO.getReforma().getFechacreacion().compareTo(reformalinea.getReforma().getFechaaprobacion())<=0){
+//								&& reformalinea.getNpreformaid().longValue()<reformalinea1TO.getId().getId().longValue()){
+					System.out.println("valor:***** " + reformalineaTO.getValorincremento() + ", " + reformalineaTO.getValordecremento()+" id "+reformalineaTO.getId().getId());
+					totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
+				}
+
+				
 			}
 			System.out.println("total reformas: " + totalreforma);
 			double codificado=totalajustado+totalreforma;

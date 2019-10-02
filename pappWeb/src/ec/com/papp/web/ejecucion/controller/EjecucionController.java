@@ -24,6 +24,7 @@ import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
 import ec.com.papp.administracion.to.UnidadmedidaTO;
+import ec.com.papp.planificacion.dao.OrdengastolineaDAO;
 import ec.com.papp.planificacion.id.CertificacionlineaID;
 import ec.com.papp.planificacion.id.OrdendevengolineaID;
 import ec.com.papp.planificacion.id.OrdengastolineaID;
@@ -1042,6 +1043,11 @@ public class EjecucionController {
 				//3. Obtengos las ordenes pendientes de este nivel
 				log.println("id para calculo de no aprobadas:  " + id2);
 				OrdengastoTO ordengastoTO=(OrdengastoTO) request.getSession().getAttribute(ConstantesSesion.ORDENGASTO);
+				OrdengastolineaTO ordengastolineaTO=new OrdengastolineaTO();
+				ordengastolineaTO.getId().setId(ordengastoTO.getId());
+				ordengastolineaTO.setNivelactid(id2);
+				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO);
+				ordengastolineaTO=ordengastolineaTOs.iterator().next();
 				Collection<OrdendevengolineaTO> pendientes=UtilSession.planificacionServicio.transObtieneordenesdevengopendientes(id2,ordengastoTO.getId());
 				log.println("ordenes no aprobadas " + pendientes.size());
 				double ordenesnoaprob=0.0;
@@ -1075,7 +1081,7 @@ public class EjecucionController {
 //				Collection<OrdengastolineaTO> ordengastolineaTOs=UtilSession.planificacionServicio.transObtenerOrdengastolinea(ordengastolineaTO, false);
 //				ordengastolineaTO=(OrdengastolineaTO)ordengastolineaTOs.iterator().next();
 //				double saldo=ordengastolineaTO.getValor()-ordenesnoaprob-ordenesaprobadas;
-				double saldo=ordengastoTO.getValortotal()-ordenesnoaprob-ordenesaprobadas-ordenesnoaprobrev-ordenesaprobadasrev;
+				double saldo=ordengastolineaTO.getValor()-ordenesnoaprob-ordenesaprobadas-ordenesnoaprobrev-ordenesaprobadasrev;
 				Map<String, Double> saldodisponible=new HashMap<>();
 				saldodisponible.put("saldo", saldo);
 				saldodisponible.put("noaprobadas", ordenesnoaprob);
@@ -1112,14 +1118,29 @@ public class EjecucionController {
 				double totalreforma=0.0;
 				//  System.out.println("reformalinea.getNpSubitemvalor(): " + reformalinea.getNpSubitemvalor() + " id " +reformalinea.getNpreformaid());
 				for(ReformalineaTO reformalinea1TO:reformalineaTO1s){
-					System.out.println("idreforma: " + reformalinea1TO.getId().getId()+"fecha reforma comparar: " + reformalinea1TO.getNpfechacreacion());
-					if((reformalinea1TO.getReforma().getEstado().equals("AP")) && reformalinea1TO.getId().getId().longValue()<reformalineaTO.getId().getId().longValue()){
-//					if(reformalinea1TO.getReforma().getEstado().equals("AP") && reformalinea1TO.getReforma().getFechacreacion().compareTo(reformaTO.getFechacreacion())<=0
-//							&& reformalineaTO.getId().getId().longValue()<reformalinea1TO.getId().getId().longValue()){
-						//System.out.println("valor: " + reformalinea1TO.getValorincremento() + ", " + reformalinea1TO.getValordecremento()+" id "+reformalinea1TO.getId().getId());
+//						if(reformalinea1TO.getReforma().getEstado().equals("AP") && reformalinea1TO.getReforma().getFechacreacion().compareTo(fechacreacion)<=0
+					if((reformalineaTO.getReforma().getEstado().equals("SO") || reformalineaTO.getReforma().getEstado().equals("RE")) && reformalineaTO.getReforma().getId().longValue()!=reformalinea1TO.getId().getId().longValue()){
+//								&& reformalinea.getNpreformaid().longValue()<reformalinea1TO.getId().getId().longValue()){
+						System.out.println("valor:/// " + reformalinea1TO.getValorincremento() + ", " + reformalinea1TO.getValordecremento()+" id "+reformalinea1TO.getId().getId());
+						totalreforma=totalreforma+reformalinea1TO.getValorincremento().doubleValue()-reformalinea1TO.getValordecremento().doubleValue();
+					}
+					else if(reformalineaTO.getReforma().getId().longValue()!=reformalinea1TO.getId().getId().longValue() && reformalineaTO.getReforma().getEstado().equals("AP") && reformalinea1TO.getReforma().getFechacreacion().compareTo(reformalineaTO.getReforma().getFechaaprobacion())<=0){
+//								&& reformalinea.getNpreformaid().longValue()<reformalinea1TO.getId().getId().longValue()){
+						System.out.println("valor:***** " + reformalinea1TO.getValorincremento() + ", " + reformalinea1TO.getValordecremento()+" id "+reformalinea1TO.getId().getId());
 						totalreforma=totalreforma+reformalinea1TO.getValorincremento().doubleValue()-reformalinea1TO.getValordecremento().doubleValue();
 					}
 				}
+//				
+//				
+//				for(ReformalineaTO reformalinea1TO:reformalineaTO1s){
+//					System.out.println("idreforma: " + reformalinea1TO.getId().getId()+"fecha reforma comparar: " + reformalinea1TO.getNpfechacreacion());
+//					if((reformalinea1TO.getReforma().getEstado().equals("AP")) && reformalinea1TO.getId().getId().longValue()<reformalineaTO.getId().getId().longValue()){
+////					if(reformalinea1TO.getReforma().getEstado().equals("AP") && reformalinea1TO.getReforma().getFechacreacion().compareTo(reformaTO.getFechacreacion())<=0
+////							&& reformalineaTO.getId().getId().longValue()<reformalinea1TO.getId().getId().longValue()){
+//						//System.out.println("valor: " + reformalinea1TO.getValorincremento() + ", " + reformalinea1TO.getValordecremento()+" id "+reformalinea1TO.getId().getId());
+//						totalreforma=totalreforma+reformalinea1TO.getValorincremento().doubleValue()-reformalinea1TO.getValordecremento().doubleValue();
+//					}
+//				}
 				System.out.println("total**: " + totalreforma);
 				valtotal=valtotalsubitem + totalreforma;
 
@@ -1129,7 +1150,7 @@ public class EjecucionController {
 				//saldo=saldo+reformalineaTO.getValordecremento()-reformalineaTO.getValorincremento();
 				log.println("saldo: " + saldo);
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, nivelactividadTO.getTablarelacionid(),reformalineaTO.getNivelactid());
-				reformalineaTO.setNpsaldo(saldo);
+				reformalineaTO.setNpsaldo(UtilGeneral.redondear(saldo,2));
 
 				reformalineaTO.setNpvalortotal(valtotal);
 				jsonObject.put("reformalinea", (JSONObject)JSONSerializer.toJSON(reformalineaTO,reformalineaTO.getJsonConfig()));
@@ -2044,6 +2065,8 @@ public class EjecucionController {
 				ReformalineaTO reformalineaTO= gson.fromJson(new StringReader(objeto), ReformalineaTO.class);
 				//NivelactividadTO nivelactividadTO=UtilSession.planificacionServicio.transObtenerNivelactividadTO(new NivelactividadTO(reformalineaTO.getNivelactid()));
 				//double valtotal=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),true);
+				ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(reformalineaTO.getId().getId());
+				reformalineaTO.setReforma(reformaTO);
 				double valtotal=ConsultasUtil.obtenersaldodisponiblelineareforma(reformalineaTO.getNpSubitemid(), reformalineaTO.getNivelactid(), reformalineaTO,false);
 				//double valtotal=ConsultasUtil.obtenersaldodisponibleactual(reformalineaTO.getNpSubitemid(), reformalineaTO.getNivelactid(), UtilGeneral.parseStringToDate(reformalineaTO.getNpfechacreacion()));
 				System.out.println("valtotal: " + valtotal);
