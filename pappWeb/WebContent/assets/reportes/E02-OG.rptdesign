@@ -655,49 +655,11 @@
        'Item: ' || it.ITEMCODIGO || '-' || orp.ORGANISMOPRESTAMOCODIGO || '-' || org.ORGANISMOCODIGO || '-' || ca.DIVISIONGEOGRAFICACODIGO || '-' || f.FUENTEFINANCIAMIENTOCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
        'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
 											AS detalle,
-       ogl.ORDENGASTOLINEAVALOR 			AS valor,
-       (
-       SELECT
-            NVL(SUM(ccl.CERTIFICACIONLINEAVALOR), 0) AS valor3
-        FROM
-            CERTIFICACIONLINEA ccl
-            INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = ccl.CERTIFICACIONID
-        WHERE ccl.CERTIFICACIONLINEANIVELACTID = ogl.ORDENGASTOLINEANIVELACTID
-          AND cc.CERTIFICACIONESTADO IN ('RE', 'AP', 'SO')
-          AND cc.CERTIFICACIONFECHACREACION <= og.ORDENGASTOFECHACREACION
-       )-
-        (
-        SELECT
-            NVL(SUM(ORDENGASTOLINEAVALOR), 0) AS valor1
-        FROM
-            ORDENGASTOLINEA ORGL inner join ORDENGASTO ORG ON ORG.ORDENGASTOID=ORGL.ORDENGASTOID
-        WHERE
-            ORGL.ORDENGASTOLINEANIVELACTID = ogl.ORDENGASTOLINEANIVELACTID
-             AND ORG.ORDENGASTOESTADO IN ('RE', 'AP', 'SO')
-       )
-       as SALDO,
-        ogl.ORDENGASTOLINEAVALOR - (
-       (
-       SELECT
-            NVL(SUM(ccl.CERTIFICACIONLINEAVALOR), 0) AS valor3
-        FROM
-            CERTIFICACIONLINEA ccl
-            INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = ccl.CERTIFICACIONID
-        WHERE ccl.CERTIFICACIONLINEANIVELACTID = ogl.ORDENGASTOLINEANIVELACTID
-          AND cc.CERTIFICACIONESTADO IN ('RE', 'AP', 'SO')
-          AND cc.CERTIFICACIONFECHACREACION <= og.ORDENGASTOFECHACREACION
-       )-
-        (
-        SELECT
-            NVL(SUM(ORDENGASTOLINEAVALOR), 0) AS valor1
-        FROM
-            ORDENGASTOLINEA ORGL inner join ORDENGASTO ORG ON ORG.ORDENGASTOID=ORGL.ORDENGASTOID
-        WHERE
-            ORGL.ORDENGASTOLINEANIVELACTID = ogl.ORDENGASTOLINEANIVELACTID
-             AND ORG.ORDENGASTOESTADO IN ('RE', 'AP', 'SO')
-       )
-       )	AS valor_final,
-       og.ORDENGASTOCUR				AS CUR
+       ogl.ordengastolineasaldo 			AS valor,
+       ogl.ordengastolineavalor             as SALDO,
+       ogl.ordengastolineasaldo -
+       ogl.ordengastolineavalor             AS valor_final,
+       og.ORDENGASTOCUR				        AS CUR
   FROM ORDENGASTO                           og
        INNER JOIN CLASEREGISTROCMCGASTO     cgm             ON (cgm.CLASEREGISTROID=og.ORDENGASTOCLASEREGID AND cgm.CLASEREGISTROCMID=og.ORDENGASTOCLASEMODID AND cgm.CLASEREGISTROCMCGASTOID=og.ORDENGASTOCGASTOID)
        INNER JOIN CLASEREGISTROCLASEMODIFICACION crm        ON (crm.CLASEREGISTROID=cgm.CLASEREGISTROID AND crm.CLASEREGISTROCMID=cgm.CLASEREGISTROCMID)
@@ -3711,7 +3673,7 @@
                                 </cell>
                                 <cell id="4563">
                                     <label id="4564">
-                                        <text-property name="text">VALOR</text-property>
+                                        <text-property name="text">SALDO</text-property>
                                     </label>
                                 </cell>
                             </row>

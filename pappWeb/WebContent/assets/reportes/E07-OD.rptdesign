@@ -1293,6 +1293,7 @@
        'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
 										AS detalle,
        ogl.ORDENGASTOLINEAVALOR			AS VALORCONTRATO,
+       ORDENDEVENGOLINEAVALOR AS ORDENDEVENGOLINEAVALOR,
        (ogl.ORDENGASTOLINEAVALOR+
        odl.ORDENDEVENGOLINEAVALOR-
        (SELECT
@@ -1337,9 +1338,7 @@
           AND ods.ORDENREVERSIONESTADO ='AP'
           AND ods.ORDENREVERSIONOGASTOID=od.ORDENDEVENGOORDENGASTOID
           AND ods.ORDENREVERSIONFECHACREACION <= od.ORDENDEVENGOFECHACREACION
-       )) AS ORDENDEVENGOLINEAVALOR,
-       ORDENDEVENGOLINEAVALOR AS VALORPORDEVENGAR
-       ,
+       )) AS VALORPORDEVENGAR,
        (ogl.ORDENGASTOLINEAVALOR-
        (SELECT
             NVL(SUM(ordl.ORDENDEVENGOLINEAVALOR), 0) AS valor3
@@ -4182,7 +4181,7 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                 <cell id="4577">
                                     <property name="verticalAlign">middle</property>
                                     <label id="4578">
-                                        <text-property name="text">VALOR DE DEVENGO</text-property>
+                                        <text-property name="text">VALOR ORD. DEVENGO</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4579">

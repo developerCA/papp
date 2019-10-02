@@ -167,6 +167,7 @@
                 </structure>
                 <structure>
                     <property name="columnName">VALOR_FINAL</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">VALOR_FINAL</text-property>
                     <text-property name="heading">VALOR_FINAL</text-property>
                 </structure>
@@ -431,7 +432,7 @@
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT 
+            <xml-property name="queryText"><![CDATA[SELECT
        c.CERTIFICACIONID,
        cl.CERTIFICACIONLINEANIVELACTID,
        cl.CERTIFICACIONLINEASALDO as CERTIFICACIONLINEASALDO,
@@ -449,6 +450,7 @@
          WHEN 'NE' THEN 'Negado'
          WHEN 'RE' THEN 'Registrado'
          WHEN 'SO' THEN 'Solicitado'
+         WHEN 'AN' THEN 'Anulado'
          ELSE c.CERTIFICACIONESTADO
        END AS CERTIFICACIONESTADO,
        c.CERTIFICACIONCODIGO,
@@ -462,8 +464,9 @@
        'Tarea: ' || ta.TAREAUNIDADCODIGO || '-' || ta.TAREAUNIDADDESCRIPCION || chr(10) ||
        'Subtarea: ' || st.SUBTAREAUNIDADCODIGO || '-' || st.SUBTAREAUNIDADDESCRIPCION || chr(10) ||
        'Item: ' || it.ITEMCODIGO || '-' || orp.ORGANISMOPRESTAMOCODIGO || '-' || org.ORGANISMOCODIGO || '-' || ca.DIVISIONGEOGRAFICACODIGO || '-' || f.FUENTEFINANCIAMIENTOCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
-       'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
+       'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE
        AS detalle,
+       cl.CERTIFICACIONLINEAVALOR +
        ((
         SELECT
             NVL(SUM(SUBITEMUNIDADACUMVALOR), 0) AS valor1
@@ -473,8 +476,7 @@
             SUBITEMUNIDADID = sia.SUBITEMUNIDADID
             AND SUBITEMUNIDADACUMTIPO = 'A'
             AND SUBITEMUNIDADACUMID = 2
-       ) + (
-       SELECT
+       ) + (SELECT
             NVL(SUM(rl.reformalineavalorincremento), 0) -
             NVL(SUM(rl.reformalineavalordecremento), 0) AS valor2
         FROM
@@ -482,7 +484,8 @@
             INNER JOIN REFORMA r ON r.REFORMAID = rl.REFORMAID
         WHERE rl.reformalineanivelactid = cl.CERTIFICACIONLINEANIVELACTID
           AND r.REFORMAESTADO = 'AP'
-          AND r.REFORMAFECHACREACION <= c.CERTIFICACIONFECHACREACION
+          AND ((c.CERTIFICACIONESTADO ='AP' AND  r.REFORMAFECHACREACION <= c.CERTIFICACIONFECHACREACION) OR
+          (c.CERTIFICACIONESTADO ='RE' OR c.CERTIFICACIONESTADO ='SO'))
        ) - (
        SELECT
             NVL(SUM(ccl.CERTIFICACIONLINEAVALOR), 0) AS valor3
@@ -493,14 +496,14 @@
           AND cc.CERTIFICACIONESTADO IN ('RE', 'AP', 'SO')
           AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
        )
-	    - (
+   - (
        SELECT
             NVL(SUM(orgl.ORDENGASTOLINEAVALOR), 0) AS valor3
         FROM
-			ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGASTOID 
+ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGASTOID
             INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = org.ORDENGASTOCERTIFICACIONID
         WHERE orgl.ORDENGASTOLINEANIVELACTID = cl.CERTIFICACIONLINEANIVELACTID
-		  AND org.ORDENGASTOESTADO = 'AP'
+ AND org.ORDENGASTOESTADO = 'AP'
           AND cc.CERTIFICACIONESTADO = 'LP'
           AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
        )) AS valor,
@@ -514,8 +517,7 @@
             SUBITEMUNIDADID = sia.SUBITEMUNIDADID
             AND SUBITEMUNIDADACUMTIPO = 'A'
             AND SUBITEMUNIDADACUMID = 2
-       ) + (
-       SELECT
+       ) + (SELECT
             NVL(SUM(rl.reformalineavalorincremento), 0) -
             NVL(SUM(rl.reformalineavalordecremento), 0) AS valor2
         FROM
@@ -523,7 +525,8 @@
             INNER JOIN REFORMA r ON r.REFORMAID = rl.REFORMAID
         WHERE rl.reformalineanivelactid = cl.CERTIFICACIONLINEANIVELACTID
           AND r.REFORMAESTADO = 'AP'
-          AND r.REFORMAFECHACREACION <= c.CERTIFICACIONFECHACREACION
+          AND ((c.CERTIFICACIONESTADO ='AP' AND  r.REFORMAFECHACREACION <= c.CERTIFICACIONFECHACREACION) OR
+          (c.CERTIFICACIONESTADO ='RE' OR c.CERTIFICACIONESTADO ='SO'))
        ) - (
        SELECT
             NVL(SUM(ccl.CERTIFICACIONLINEAVALOR), 0) AS valor3
@@ -534,23 +537,22 @@
           AND cc.CERTIFICACIONESTADO IN ('RE', 'AP', 'SO')
           AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
        )
-	    - (
+   - (
        SELECT
             NVL(SUM(orgl.ORDENGASTOLINEAVALOR), 0) AS valor3
         FROM
-			ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGASTOID 
+ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGASTOID
             INNER JOIN CERTIFICACION cc ON cc.CERTIFICACIONID = org.ORDENGASTOCERTIFICACIONID
         WHERE orgl.ORDENGASTOLINEANIVELACTID = cl.CERTIFICACIONLINEANIVELACTID
-		  AND org.ORDENGASTOESTADO = 'AP'
+ AND org.ORDENGASTOESTADO = 'AP'
           AND cc.CERTIFICACIONESTADO = 'LP'
           AND cc.CERTIFICACIONID <= c.CERTIFICACIONID
-       )) -
-       cl.CERTIFICACIONLINEAVALOR AS valor_final
+       )) AS valor_final
 
   FROM certificacion                        c
        INNER JOIN Unidad                    u               ON u.UNIDADID = c.CERTIFICACIONUNIDADID
        INNER JOIN Unidadinst                ui              ON ui.unidadid = u.unidadid
-       INNER JOIN INSTITUCIONENTIDAD        ie              ON (ui.unidadinstid = ie.institucionid AND ui.unidadinstentidadid = ie.institucionentid) 
+       INNER JOIN INSTITUCIONENTIDAD        ie              ON (ui.unidadinstid = ie.institucionid AND ui.unidadinstentidadid = ie.institucionentid)
        INNER JOIN INSTITUCION               i               ON ie.institucionid = i.institucionid
        INNER JOIN EJERCICIOFISCAL           ef              ON ef.EJERCICIOFISCALID = i.INSTITUCIONEJERCICIOFISCALID
        INNER JOIN CERTIFICACIONLINEA        cl              ON cl.certificacionid = c.CERTIFICACIONID
@@ -561,14 +563,14 @@
        INNER JOIN nivelactividad            nivelsubitem    ON siu.subitemunidadid = nivelsubitem.nivelactividadtablarelacionid
        INNER JOIN nivelactividad            na7             ON na7.nivelactividadid = nivelsubitem.nivelactividadpadreid
        INNER JOIN itemunidad                itu             ON itu.itemunidadid = na7.nivelactividadtablarelacionid
-	   INNER JOIN DIVISIONGEOGRAFICA        ca              ON ca.DIVISIONGEOGRAFICAID = itu.ITEMUNIDADCANTONID	
-	   INNER JOIN Fuentefinanciamiento      f               ON  f.fuentefinanciamientoid = itu.itemunidadfuentefinanid      
+  INNER JOIN DIVISIONGEOGRAFICA        ca              ON ca.DIVISIONGEOGRAFICAID = itu.ITEMUNIDADCANTONID
+  INNER JOIN Fuentefinanciamiento      f               ON  f.fuentefinanciamientoid = itu.itemunidadfuentefinanid      
        INNER JOIN Organismoprestamo         orp             ON (orp.ORGANISMOID = itu.ITEMUNIDADORGANISMOID and orp.ORGANISMOPRESTAMOID=itu.ITEMUNIDADORGPRESTAMOID)
        INNER JOIN Organismo                 org             ON org.ORGANISMOID =  orp.ORGANISMOID
        INNER JOIN ITEM                      it              ON itu.itemunidaditemid = it.ITEMID
        INNER JOIN nivelactividad            na12            ON na12.nivelactividadid = na7.nivelactividadpadreid
        INNER JOIN subtareaunidad            st              ON st.subtareaunidadid = na12.nivelactividadtablarelacionid
-       INNER JOIN nivelactividad            na13            ON na13.NIVELACTIVIDADID=na12.NIVELACTIVIDADPADREID 
+       INNER JOIN nivelactividad            na13            ON na13.NIVELACTIVIDADID=na12.NIVELACTIVIDADPADREID
        INNER JOIN tareaunidad               ta              ON ta.tareaunidadid = na13.nivelactividadtablarelacionid
        INNER JOIN nivelactividad            na14            ON na14.nivelactividadid = na13.nivelactividadpadreid
        INNER JOIN subactividadunidad        sau             ON sau.subactividadid = na14.nivelactividadtablarelacionid
@@ -616,9 +618,9 @@
        st.SUBTAREAUNIDADCODIGO,
        st.SUBTAREAUNIDADDESCRIPCION,
        it.ITEMCODIGO,
-	   orp.ORGANISMOPRESTAMOCODIGO,
-	   org.ORGANISMOCODIGO,
-	   ca.DIVISIONGEOGRAFICACODIGO, 
+  orp.ORGANISMOPRESTAMOCODIGO,
+  org.ORGANISMOCODIGO,
+  ca.DIVISIONGEOGRAFICACODIGO,
        f.FUENTEFINANCIAMIENTOCODIGO,
        org.ORGANISMOCODIGO,
        it.ITEMNOMBRE,
@@ -2766,7 +2768,7 @@
                                 </cell>
                                 <cell id="4618">
                                     <label id="4619">
-                                        <text-property name="text">VALOR DISPONIBLE </text-property>
+                                        <text-property name="text">VALOR INICIAL</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4620">
