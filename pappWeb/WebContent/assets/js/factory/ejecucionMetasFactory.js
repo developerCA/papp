@@ -54,13 +54,13 @@ app.factory("ejecucionMetasFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customGET();
 		},
 
-		traerRenovarSubtareas: function(actividad, ejerciciofiscal, mesDesde, mesHasta, subtactividadid, tareaid) {
+		traerRenovarSubtareas: function(institucionId, entidadId, unidadId, ejerciciofiscal, actividadId, mesDesde, mesHasta, subtactividadid, tareaid) {
 			var url = "ejecucion/consultar/subtareasEjecucionMetas/";
-			url += "institucionid=" + actividad.npInstitucionId;
-			url += "&entidadid=" + actividad.npentidadid;
-			url += "&unidadid=" + actividad.npunidad;
+			url += "institucionid=" + institucionId;
+			url += "&entidadid=" + entidadId;
+			url += "&unidadid=" + unidadId;
 			url += "&ejerciciofiscalid=" + ejerciciofiscal;
-			url += "&actividadid=" + actividad.id;
+			if (actividadId != null && actividadId != "") url += "&actividadid=" + actividadId;
 			if (mesDesde != null && mesDesde != "") url += "&mesdesde=" + mesDesde;
 			if (mesHasta != null && mesHasta != "") url += "&meshasta=" + mesHasta;
 			if (subtactividadid != null && subtactividadid != "") url += "&subtactividadid=" + subtactividadid;

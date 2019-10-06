@@ -83,8 +83,12 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		$scope.unidad = null;
 		$scope.unidadId = null;
 		$scope.listaDetalles = null;
-		$scope.programa = null;
-		$scope.proyecto = null;
+		$scope.tituloObjetivo = null;
+		$scope.tituloPrograma = null;
+		$scope.tituloProyecto = null;
+		$scope.tituloActividad = null;
+		$scope.tituloSubactividad = null;
+		$scope.tituloTarea = null;
 	}
 
 	$scope.actulizarPantalla=function() {
@@ -121,8 +125,8 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		).then(function(resp){
 			//console.log(resp.json);
 			$scope.listaDetalles = resp.json.result[0].ejecuciondetalleacts;
-			$scope.programa = resp.json.result[0].programa;
-			$scope.proyecto = resp.json.result[0].proyecto;
+			$scope.tituloPrograma = resp.json.result[0].programa;
+			$scope.tituloProyecto = resp.json.result[0].proyecto;
 		})
 	}
 
@@ -189,8 +193,11 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.renovarSubtareas=function() {
 		ejecucionMetasFactory.traerRenovarSubtareas(
-				$scope.actividad,
+				$scope.institucionId,
+				$scope.entidadId,
+				$scope.unidadId,
 				$rootScope.ejefiscal,
+				$scope.actividad.id,
 				$scope.mesDesde,
 				$scope.mesHasta,
 				$scope.subactividad.id,
@@ -198,6 +205,12 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		).then(function(resp){
 			//console.log(resp.json);
 			$scope.listaDetalles=resp.json.result;
+			$scope.tituloObjetivo = null;
+			$scope.tituloPrograma = resp.json.result[0].programa;
+			$scope.tituloProyecto = resp.json.result[0].proyecto;
+			$scope.tituloActividad = null;
+			$scope.tituloSubactividad = null;
+			$scope.tituloTarea = null;
 		})
 	}
 

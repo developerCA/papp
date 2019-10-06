@@ -86,14 +86,15 @@
 
 				<div ng-show="edicionActividades" class="panel-body" id="panel1">
 					<div class="panel-heading">
-						<h5 class="panel-title">Ejecucion Metas - Actividades</h5>
+						<h5 class="panel-title">
+							Ejecucion Metas - Actividades
+						</h5>
 					</div>
 
 					<form name="Form" id="form1" novalidate
 						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-12">
-
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="control-label">
@@ -189,23 +190,11 @@
 										ng-click="volverActividad();">
 										Volver
 									</a>
-<!--
-									<span ng-if="guardar && !noeditar">
-										<button type="submit" class="btn btn-primary"
-											ng-if="!rol('ROLE_APROBADOR');">
-											Renovar
-										</button>
-									</span>
-									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">
-										Cancelar
-									</button>
--->
 								</div>
 							</div>
 						</div>
 						<br>
-						<div class="row">
+						<div class="row" ng-if="listaDetalles != null">
 							<div class="col-sm-12">
 								<div class="form-group">
 									<div class="col-md-4">
@@ -214,8 +203,8 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" value="{{programa}}"
-											class="form-control" name="programa"
+										<input type="text" value="{{tituloPrograma}}"
+											class="form-control" name="tituloPrograma"
 											ng-disabled="true" />
 									</div>
 								</div>
@@ -226,8 +215,8 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" value="{{proyecto}}"
-											class="form-control" name="proyecto"
+										<input type="text" value="{{tituloProyecto}}"
+											class="form-control" name="tituloProyecto"
 											ng-disabled="true" />
 									</div>
 								</div>
@@ -316,7 +305,7 @@
 															<a uib-tooltip="Guardar"
 																class="btn btn-sm"
 																ng-click="guardarLineActividad($index)">
-																<i class="fa fa-pencil"></i>
+																<i class="fa fa-floppy-o"></i>
 															</a>
 														</td>
 													</tr>
@@ -329,25 +318,7 @@
 							</div>
 
 						</div>
-<!--
-						<div class="row">
-							<div class="col-md-12">
-								<div class="pull-right">
-									<span ng-if="guardar">
-										<button type="submit" class="btn btn-primary">
-											Guardar
-										</button>
-									</span>
-									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">
-										Cancelar
-									</button>
-								</div>
-							</div>
-						</div>
--->
 					</form>
-
 				</div>
 
 				<div ng-show="edicionSubtareas" class="panel-body" id="panel1">
@@ -359,7 +330,6 @@
 						ng-submit="form.submit(Form)">
 						<div class="row">
 							<div class="col-md-12">
-
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="control-label">
@@ -367,7 +337,7 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" value="{{actividad.npInstitucioncodigo}} {{actividad.npInstitucion}}"
+										<input type="text" value="{{institucion}}"
 											class="form-control" name="institucion"
 											ng-disabled="true" />
 									</div>
@@ -380,7 +350,7 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" value="{{actividad.npentidadcodigo}} {{actividad.npentidad}}"
+										<input type="text" value="{{entidad}}"
 											class="form-control" name="entidad"
 											ng-disabled="true" />
 									</div>
@@ -393,7 +363,7 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" value="{{actividad.npunidadcodigo}} {{actividad.npunidadnombre}}"
+										<input type="text" value="{{unidad}}"
 											class="form-control" name="unidad"
 											ng-disabled="true" />
 									</div>
@@ -506,23 +476,85 @@
 										ng-click="volverSubtareas();">
 										Volver
 									</a>
-<!--
-									<span ng-if="guardar && !noeditar">
-										<button type="submit" class="btn btn-primary"
-											ng-if="!rol('ROLE_APROBADOR');">
-											Renovar
-										</button>
-									</span>
-									<button type="reset" class="btn btn-default btn-o"
-										ng-click="form.reset(Form)">
-										Cancelar
-									</button>
--->
 								</div>
 							</div>
 						</div>
 						<br>
-						<div class="row">
+						<div class="row" ng-if="listaDetalles != null">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Objetivo:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{tituloObjetivo}}"
+											class="form-control" name="tituloObjetivo"
+											ng-disabled="true" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Programa:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{tituloPrograma}}"
+											class="form-control" name="tituloPrograma"
+											ng-disabled="true" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Proyecto:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{tituloProyecto}}"
+											class="form-control" name="tituloProyecto"
+											ng-disabled="true" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Actividad:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{tituloActividad}}"
+											class="form-control" name="tituloActividad"
+											ng-disabled="true" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Subactividad:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{tituloSubactividad}}"
+											class="form-control" name="tituloSubactividad"
+											ng-disabled="true" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Tarea:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{tituloTarea}}"
+											class="form-control" name="tituloTarea"
+											ng-disabled="true" />
+									</div>
+								</div>
+							</div>
 							<div class="col-sm-12">
 								<div class="panel panel-primary">
 									<div class="panel-body no-padding panel-white">
@@ -625,7 +657,7 @@
 															<a uib-tooltip="Guardar"
 																class="btn btn-sm btn-danger"
 																ng-click="guardarLineTarea($index)">
-																<i class="fa fa-trash"></i>
+																<i class="fa fa-floppy-o"></i>
 															</a>
 														</td>
 													</tr>
