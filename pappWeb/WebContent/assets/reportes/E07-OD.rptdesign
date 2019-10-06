@@ -4123,10 +4123,7 @@ dataSetRow["SALDOPORDEVENGAR"]</expression>
                             <structure>
                                 <property name="name">SALDOPORDEVENGAR1</property>
                                 <text-property name="displayName">SALDOPORDEVENGAR</text-property>
-                                <expression name="expression" type="javascript">if(dataSetRow["ORDENDEVENGOLINEASALDO"]>0)&#13;
-dataSetRow["ORDENDEVENGOLINEASALDO"]&#13;
-else&#13;
-BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
+                                <expression name="expression" type="javascript">BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>

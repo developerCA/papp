@@ -9,11 +9,17 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.edicion=false;
 	$scope.guardar=false;
-	$scope.objeto={};
-	$scope.objetolista={};
-	$scope.lista=null;
+	$scope.listaActividades=null;
+	$scope.listaSubactividades=null;
+	$scope.listaTareas=null;
 	$scope.actividad={};
+	$scope.subactividad={};
+	$scope.tarea={};
+	$scope.mesDesde=null;
+	$scope.mesHasta=null;
 	$scope.mes=null;
+	$scope.edicionActividades=false;
+	$scope.edicionSubtareas=false;
 
 	var pagina = 1;
 	
@@ -59,16 +65,17 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 				$scope.data=resp;
 		})
 	}
-	
+
 	$scope.limpiar=function(){
 		$scope.codigoFiltro=null;
 		$scope.nombreFiltro=null;
 		$scope.estadoFiltro=null;
-
 		$scope.consultar();
 	};
 
-	$scope.actulizarPantalla=function() {}
+	$scope.actulizarPantalla=function() {
+		// esta se utiliza solo para que refresque la pantalla
+	}
 
 	$scope.editarActividad=function(id) {
 		ejecucionMetasFactory.traerActividades(
@@ -77,13 +84,13 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		).then(function(resp){
 			//console.log(resp.json);
 			$scope.edicion=true;
-			$scope.guardar=true;
-			$scope.lista=resp.json.result;
+			$scope.edicionActividades=true;
+			$scope.listaActividades=resp.json.result;
 		})
 	};
 
-	$scope.renovar=function() {
-		ejecucionMetasFactory.traerRenovar(
+	$scope.renovarActividad=function() {
+		ejecucionMetasFactory.traerRenovarActividades(
 				$scope.actividad,
 				$rootScope.ejefiscal,
 				$scope.mes
@@ -93,45 +100,98 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		})
 	}
 
-	$scope.form = {
-        submit: function (form) {
-            var firstError = null;
-            if (form.$invalid) {
-                var field = null, firstError = null;
-                for (field in form) {
-                    if (field[0] != '$') {
-                        if (firstError === null && !form[field].$valid) {
-                            firstError = form[field].$name;
-                        }
-                        if (form[field].$pristine) {
-                            form[field].$dirty = true;
-                        }
-                    }
-                }
-                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                return;
-            } else {
-                var objEnviar = Object.assign({}, $scope.objeto);
-                objEnviar.details = $scope.objetolista;
-                console.log(objEnviar);
-            	ejecucionMetasFactory.guardar(objEnviar).then(function(resp){
-        			 if (resp.estado){
-        				 form.$setPristine(true);
-	 		             $scope.edicion=false;
-	 		             $scope.objeto={};
-	 		             $scope.limpiar();
-	 		             SweetAlert.swal("EjecucionMetas!", "Registro guardado satisfactoriamente!", "success");
-        			 }else{
-	 		             SweetAlert.swal("EjecucionMetas!", resp.mensajes.msg, "error");
-        			 }
-        		})
-            }
-        },
-        reset: function (form) {
-            $scope.myModel = angular.copy($scope.master);
-            form.$setPristine(true);
-            $scope.edicion=false;
-            $scope.objeto={};
-        }
+	$scope.guardarLineActividad = function(index) {
+        var objEnviar = Object.assign({}, $scope.objeto);
+        objEnviar.details = $scope.objetolista;
+    	ejecucionMetasFactory.guardarLineActividad(objEnviar).then(function(resp){
+			 if (resp.estado){
+//	             SweetAlert.swal(
+//	            		 "EjecucionMetas!",
+//	            		 "Registro guardado satisfactoriamente!",
+//	            		 "success"
+//        		 );
+			 }else{
+	             SweetAlert.swal(
+	            		 "EjecucionMetas!",
+	            		 resp.mensajes.msg,
+	            		 "error"
+        		 );
+			 }
+		})
     };
+
+    $scope.volverActividad = function() {
+		$scope.edicionActividades = false;
+		$scope.edicion = false;
+	}
+
+	$scope.editarSubtareas = function(id) {
+		ejecucionMetasFactory.traerActividades(
+				id,
+				$rootScope.ejefiscal
+		).then(function(resp){
+			//console.log(resp.json);
+			$scope.edicion=true;
+			$scope.edicionSubtareas=true;
+			$scope.listaActividades=resp.json.result;
+		})
+	};
+
+	$scope.actulizarSubactividades = function(id) {
+		ejecucionMetasFactory.traerSubactividades(
+				$scope.actividad.id,
+				$scope.actividad.npunidad,
+				$rootScope.ejefiscal
+		).then(function(resp){
+			$scope.listaSubactividades=resp.json.result;
+		})
+	};
+
+	$scope.actulizarTareas = function(id) {
+		ejecucionMetasFactory.traerTareas(
+				id,
+				$rootScope.ejefiscal
+		).then(function(resp){
+			$scope.listaSubactividades=resp.json.result;
+		})
+	};
+
+	$scope.renovarSubtareas=function() {
+		ejecucionMetasFactory.traerRenovarSubtareas(
+				$scope.actividad,
+				$rootScope.ejefiscal,
+				$scope.mesDesde,
+				$scope.mesHasta,
+				$scope.subactividad.id,
+				$scope.tarea.id
+		).then(function(resp){
+			//console.log(resp.json);
+			$scope.listaDetalles=resp.json.result;
+		})
+	}
+
+	$scope.guardarLineSubtarea = function(index) {
+        var objEnviar = Object.assign({}, $scope.objeto);
+        objEnviar.details = $scope.objetolista;
+    	ejecucionMetasFactory.guardarLineSubtarea(objEnviar).then(function(resp){
+			 if (resp.estado){
+//	             SweetAlert.swal(
+//	            		 "EjecucionMetas!",
+//	            		 "Registro guardado satisfactoriamente!",
+//	            		 "success"
+//        		 );
+			 }else{
+	             SweetAlert.swal(
+	            		 "EjecucionMetas!",
+	            		 resp.mensajes.msg,
+	            		 "error"
+        		 );
+			 }
+		})
+    };
+
+    $scope.volverSubtareas = function() {
+		$scope.edicionSubtareas = false;
+		$scope.edicion = false;
+	}
 } ]);

@@ -65,8 +65,8 @@
 								</td>
 								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Planificacion"
-										ng-click=""editarActividad($index);"">
+										uib-tooltip="Subtareas"
+										ng-click="editarSubtareas(obj.id);">
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
@@ -84,7 +84,7 @@
 					</div>
 				</div>
 
-				<div ng-show="edicion" class="panel-body" id="panel1">
+				<div ng-show="edicionActividades" class="panel-body" id="panel1">
 					<div class="panel-heading">
 						<h5 class="panel-title">Ejecucion Metas - Actividades</h5>
 					</div>
@@ -143,9 +143,9 @@
 									</div>
 									<div class="col-md-8">
 										<select class="form-control" name="actividad"
-											ng-options="option.descripcion for option in lista"
+											ng-options="option.descripcion for option in listaActividades"
 											ng-change="actulizarPantalla()" ng-model="actividad">
-											<option value="">Seleccione a actividad</option>
+											<option value="">Seleccione una actividad</option>
 										</select>
 									</div>
 								</div>
@@ -182,8 +182,12 @@
 							<div class="col-md-12">
 								<div class="pull-right">
 									<a href="#" class="btn btn-sm btn-dark-azure"
-										ng-click="renovar();">
+										ng-click="renovarActividad();">
 										Renovar
+									</a>
+									<a href="#" class="btn btn-sm btn-dark-azure"
+										ng-click="volverActividad();">
+										Volver
 									</a>
 <!--
 									<span ng-if="guardar && !noeditar">
@@ -192,11 +196,11 @@
 											Renovar
 										</button>
 									</span>
--->
 									<button type="reset" class="btn btn-default btn-o"
 										ng-click="form.reset(Form)">
 										Cancelar
 									</button>
+-->
 								</div>
 							</div>
 						</div>
@@ -283,9 +287,318 @@
 															</div>
 														</td>
 														<td>
-															<a uib-tooltip="Eliminar"
+															<a uib-tooltip="Guardar"
 																class="btn btn-sm btn-danger"
-																ng-click="removerDetalle($index)">
+																ng-click="guardarLineActividad($index)">
+																<i class="fa fa-trash"></i>
+															</a>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+<!--
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<span ng-if="guardar">
+										<button type="submit" class="btn btn-primary">
+											Guardar
+										</button>
+									</span>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">
+										Cancelar
+									</button>
+								</div>
+							</div>
+						</div>
+-->
+					</form>
+
+				</div>
+
+				<div ng-show="edicionSubtareas" class="panel-body" id="panel1">
+					<div class="panel-heading">
+						<h5 class="panel-title">Ejecucion Metas - Subtareas</h5>
+					</div>
+
+					<form name="Form" id="form1" novalidate
+						ng-submit="form.submit(Form)">
+						<div class="row">
+							<div class="col-md-12">
+
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Institucion:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{actividad.npInstitucioncodigo}} {{actividad.npInstitucion}}"
+											class="form-control" name="institucion"
+											ng-disabled="true" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Entidad Operatica Desconcentrada:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{actividad.npentidadcodigo}} {{actividad.npentidad}}"
+											class="form-control" name="entidad"
+											ng-disabled="true" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Unidad Desconcentrada:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{actividad.npunidadcodigo}} {{actividad.npunidadnombre}}"
+											class="form-control" name="unidad"
+											ng-disabled="true" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Actividad:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="actividad"
+											ng-options="option.descripcion for option in listaActividades"
+											ng-change="actulizarSubactividades()" ng-model="actividad">
+											<option value="">Seleccione una actividad</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Subactividad:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="subactividad"
+											ng-options="option.descripcion for option in listaSubactividades"
+											ng-change="actulizarTareas()" ng-model="subactividad">
+											<option value="">Todas las subactividad</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Tarea:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<select class="form-control" name="tarea"
+											ng-options="option.descripcion for option in listaTareas"
+											ng-model="tarea">
+											<option value="">Todas las tarea</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-md-3">
+										<label class="control-label">
+											Mes desde:
+										</label>
+									</div>
+									<div class="col-md-3">
+										<select class="form-control" name="mesDesde"
+											ng-model="mesDesde">
+											<option value="">Todos</option>
+											<option value="1">Enero</option>
+											<option value="2">Febrero</option>
+											<option value="3">Marzo</option>
+											<option value="4">Abril</option>
+											<option value="5">Mayo</option>
+											<option value="6">Junio</option>
+											<option value="7">Julio</option>
+											<option value="8">Agosto</option>
+											<option value="9">Septiembre</option>
+											<option value="10">Octubre</option>
+											<option value="11">Noviembre</option>
+											<option value="12">Diciembre</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<label class="control-label">
+											Mes hasta:
+										</label>
+									</div>
+									<div class="col-md-3">
+										<select class="form-control" name="mesHasta"
+											ng-model="mesHasta">
+											<option value="">Todos</option>
+											<option value="1">Enero</option>
+											<option value="2">Febrero</option>
+											<option value="3">Marzo</option>
+											<option value="4">Abril</option>
+											<option value="5">Mayo</option>
+											<option value="6">Junio</option>
+											<option value="7">Julio</option>
+											<option value="8">Agosto</option>
+											<option value="9">Septiembre</option>
+											<option value="10">Octubre</option>
+											<option value="11">Noviembre</option>
+											<option value="12">Diciembre</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-right">
+									<a href="#" class="btn btn-sm btn-dark-azure"
+										ng-click="renovarSubtareas();">
+										Renovar
+									</a>
+									<a href="#" class="btn btn-sm btn-dark-azure"
+										ng-click="volverSubtareas();">
+										Volver
+									</a>
+<!--
+									<span ng-if="guardar && !noeditar">
+										<button type="submit" class="btn btn-primary"
+											ng-if="!rol('ROLE_APROBADOR');">
+											Renovar
+										</button>
+									</span>
+									<button type="reset" class="btn btn-default btn-o"
+										ng-click="form.reset(Form)">
+										Cancelar
+									</button>
+-->
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="panel panel-primary">
+									<div class="panel-body no-padding panel-white">
+										<div class="col-md-12 panel-white no-padding">
+											<div>
+												<table class="table table-striped">
+													<tr>
+														<th>Subtarea</th>
+														<th>Descripcion</th>
+														<th>Unidad Medida</th>
+														<th>Cerrado</th>
+														<th>Mes</th>
+														<th>Meta PL</th>
+														<th>Meta EJ</th>
+														<th>Observacion</th>
+														<th>Observacion de cierre</th>
+														<th></th>
+													</tr>
+													<tr ng-repeat="obj in listaDetalles">
+														<td>
+															<div class="form-group">
+															    <div class="input-group">
+															        <input type="text" placeholder="Actividad"
+															            class="form-control" name="npactividad_{{$index}}"
+															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															    </div>
+															</div>
+														</td>
+														<td>
+															<div class="form-group">
+															    <div class="input-group">
+															        <input type="text" placeholder="Descripci&oacute;n"
+															            class="form-control" name="npmetapl_{{$index}}"
+															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															    </div>
+															</div>
+														</td>
+														<td>
+															<div class="form-group">
+															    <div class="input-group">
+															        <input type="text" placeholder="Unidad Medida"
+															            class="form-control" name="npunidadmedida_{{$index}}"
+															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															    </div>
+															</div>
+														</td>
+														<td>
+															<div class="form-group">
+															    <div class="input-group">
+															        <!-- cerrar -->
+															    </div>
+															</div>
+														</td>
+														<td>
+															<div class="form-group">
+															    <div class="input-group">
+															        <input type="text" placeholder="Mes"
+															            class="form-control" name="npmes_{{$index}}"
+															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															    </div>
+															</div>
+														</td>
+														<td>
+															<div class="form-group">
+															    <div class="input-group">
+															        <input type="text" placeholder="Valor Meta PL"
+															            class="form-control" name="npmetapl_{{$index}}"
+															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															    </div>
+															</div>
+														</td>
+														<td>
+															<div class="form-group">
+															    <div class="input-group">
+															        <input type="text" placeholder="Valor Meta EJ"
+															            class="form-control" name="npmetaej_{{$index}}"
+															            ng-model="obj.npnombrecanton">
+															    </div>
+															</div>
+														</td>
+														<td>
+															<div class="form-group">
+															    <div class="input-group">
+															        <input type="text" placeholder="Descripci&oacute;n de la observaci&oacute;n"
+															            class="form-control" name="npobservacion_{{$index}}"
+															            ng-model="obj.npnombrecanton">
+															    </div>
+															</div>
+														</td>
+														<td>
+															<div class="form-group">
+															    <div class="input-group">
+															        <input type="text"
+															            class="form-control" name="npobservacioncierre_{{$index}}"
+															            ng-model="obj.npnombrecanton" ng-disabled="true">>
+															    </div>
+															</div>
+														</td>
+														<td>
+															<a uib-tooltip="Guardar"
+																class="btn btn-sm btn-danger"
+																ng-click="guardarLineTarea($index)">
 																<i class="fa fa-trash"></i>
 															</a>
 														</td>
@@ -323,178 +636,3 @@
 		</div>
 	</div>
 </div>
-
-<script type="text/ng-template" id="modalPaises.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Paises</h3>
-                            </div>
-                            <div class="modal-body">
-                               
-
-				<div class="panel-body" ng-init="consultarPaises();" >
-
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-
-							</tr>
-						</table>
-					</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
-					<script type="text/ng-template" id="modalProvincias.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Provincias</h3>
-                            </div>
-                            <div class="modal-body">
-
-				<div class="panel-body" ng-init="consultarProvincias();" >
-
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-
-							</tr>
-						</table>
-					</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
-					<script type="text/ng-template" id="modalCantones.html">
-                            <div class="modal-header">
-                                <h3 class="modal-title">Cantones</h3>
-                            </div>
-                            <div class="modal-body">
-                               
-
-				<div class="panel-body" ng-init="consultarCantones();" >
-
-
-					<div class="panel panel-white" id="panel1">
-						<div class="panel-heading">
-							<h4 class="panel-title text-primary">Filtros</h4>
-							<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
-						</div>
-						<div uib-collapse="panel1" ng-init="panel1=true"
-							class="panel-wrapper">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="form-group">
-											<label> Nombre </label> <input type="text"
-												class="form-control" ng-model="nombreFiltro">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<a class="btn btn-wide btn-dark-azure" ng-click="filtrar()"><i
-											class="fa fa-search"></i> Buscar</a> <a
-											class="btn btn-wide btn-o btn-default" ng-click="limpiar()">Limpiar</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<table ng-table="tableParams" class="table table-striped">
-							<tr ng-repeat="obj in $data">
-								<td><a class="btn btn-sm btn-primary"
-									uib-tooltip="Seleccionar" ng-click="seleccionar(obj)"><i
-										class="fa fa-check"></i></a></td>
-
-								<td data-title="'Nombre'">{{obj.nombre}}</td>
-
-							</tr>
-						</table>
-					</div>
-
-                            </div>
-                            <div class="modal-footer">
-                                
-                                <button class="btn btn-primary btn-o" ng-click="cancelar()">Cancelar</button>
-                            </div>
-                    </script>
-
-
-
-
-
