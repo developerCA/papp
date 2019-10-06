@@ -127,7 +127,7 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 	}
 
 	$scope.guardarLineActividad = function(index) {
-        ejecucionMetasFactory.guardarLineActividad($scope.listaDetalles[index]).then(function(resp){
+        ejecucionMetasFactory.guardarLineActividad($scope.listaDetalles[index], $rootScope.ejefiscal).then(function(resp){
 			 if (resp.estado){
 //	             SweetAlert.swal(
 //	            		 "EjecucionMetas!",

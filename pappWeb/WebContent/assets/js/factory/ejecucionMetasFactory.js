@@ -30,8 +30,8 @@ app.factory("ejecucionMetasFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customGET();
 		},
 
-		guardarLineActividad: function(objeto){
-			var url = "administrar/ejecucionMetas/";
+		guardarLineActividad: function(objeto, ejerciciofiscal){
+			var url = "ejecucion/cronogramaactividades/" + ejerciciofiscal;
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 
