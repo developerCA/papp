@@ -313,14 +313,15 @@ public class EjecucionController {
 				ordenreversionlineaTO.setSaldo(ordenreversionlineaTO.getSaldo());
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				OrdenreversionlineaTO ordenreversionlineaTO2=new OrdenreversionlineaTO();
-				log.println("consulta lineas: " + ordenreversionlineaTO.getNivelactid() +"-"+ ordenreversionlineaTO.getId().getId());
+				System.out.println("consulta lineas: " + ordenreversionlineaTO.getNivelactid() +"-"+ ordenreversionlineaTO.getId().getId());
 				ordenreversionlineaTO2.setNivelactid(ordenreversionlineaTO.getNivelactid());
 				ordenreversionlineaTO2.getId().setId(ordenreversionlineaTO.getId().getId());
 				Collection<OrdenreversionlineaTO> ordenreversionlineaTOs=UtilSession.planificacionServicio.transObtenerOrdenreversionlinea(ordenreversionlineaTO2);
-				log.println("ordenes: " + ordenreversionlineaTOs.size());
+				System.out.println("ordenes: " + ordenreversionlineaTOs.size());
 				boolean grabar=true;
 				if(ordenreversionlineaTOs.size()>0){
 					for(OrdenreversionlineaTO ordenreversionlineaTO3:ordenreversionlineaTOs) {
+						System.out.println("nivelactividad3: " + ordenreversionlineaTO3.getNivelactid());
 						if((ordenreversionlineaTO.getId().getLineaid()!=null && ordenreversionlineaTO.getId().getLineaid().longValue()!=0) && ordenreversionlineaTO3.getId().getLineaid().longValue()!=ordenreversionlineaTO.getId().getLineaid().longValue()) {
 							grabar=false;
 							break;
@@ -737,6 +738,7 @@ public class EjecucionController {
 			if(clase.equals("cronogramaactividades")){
 				Ejecuciondetalleact ejecuciondetalleact= gson.fromJson(new StringReader(objeto), Ejecuciondetalleact.class);
 				//accion = (cronogramaTO.getId()==null)?"I":"U";
+				System.out.println("entra a grabar el cronogramaactividades");
 				UtilSession.planificacionServicio.transCrearModificarCronogramaejeactividad(ejecuciondetalleact, ejerciciofiscal);
 			}
 			else if(clase.equals("cronogramasubtareas")){
