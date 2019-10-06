@@ -101,7 +101,7 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" value="{{actividad.npInstitucioncodigo}} {{actividad.npInstitucion}}"
+										<input type="text" value="{{institucion}}"
 											class="form-control" name="institucion"
 											ng-disabled="true" />
 									</div>
@@ -114,7 +114,7 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" value="{{actividad.npentidadcodigo}} {{actividad.npentidad}}"
+										<input type="text" value="{{entidad}}"
 											class="form-control" name="entidad"
 											ng-disabled="true" />
 									</div>
@@ -127,7 +127,7 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" value="{{actividad.npunidadcodigo}} {{actividad.npunidadnombre}}"
+										<input type="text" value="{{unidad}}"
 											class="form-control" name="unidad"
 											ng-disabled="true" />
 									</div>
@@ -207,6 +207,32 @@
 						<br>
 						<div class="row">
 							<div class="col-sm-12">
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Programa:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{programa}}"
+											class="form-control" name="programa"
+											ng-disabled="true" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="control-label">
+											Proyecto:
+										</label>
+									</div>
+									<div class="col-md-8">
+										<input type="text" value="{{proyecto}}"
+											class="form-control" name="proyecto"
+											ng-disabled="true" />
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12">
 								<div class="panel panel-primary">
 									<div class="panel-body no-padding panel-white">
 										<div class="col-md-12 panel-white no-padding">
@@ -228,7 +254,7 @@
 															    <div class="input-group">
 															        <input type="text" placeholder="Actividad"
 															            class="form-control" name="npactividad_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															            value="{{obj.codigoactividad}} {{obj.nombreactividad}}" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
@@ -237,7 +263,7 @@
 															    <div class="input-group">
 															        <input type="text" placeholder="Descripci&oacute;n"
 															            class="form-control" name="npmetapl_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															            ng-model="obj.descripcion" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
@@ -246,7 +272,7 @@
 															    <div class="input-group">
 															        <input type="text" placeholder="Unidad Medida"
 															            class="form-control" name="npunidadmedida_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															            ng-model="obj.unidadmedida" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
@@ -255,7 +281,7 @@
 															    <div class="input-group">
 															        <input type="text" placeholder="Mes"
 															            class="form-control" name="npmes_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															            ng-model="obj.npMes" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
@@ -264,7 +290,7 @@
 															    <div class="input-group">
 															        <input type="text" placeholder="Valor Meta PL"
 															            class="form-control" name="npmetapl_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															            ng-model="obj.planificado" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
@@ -273,7 +299,7 @@
 															    <div class="input-group">
 															        <input type="text" placeholder="Valor Meta EJ"
 															            class="form-control" name="npmetaej_{{$index}}"
-															            ng-model="obj.npnombrecanton">
+															            ng-model="obj.ejecutado">
 															    </div>
 															</div>
 														</td>
@@ -282,15 +308,15 @@
 															    <div class="input-group">
 															        <input type="text" placeholder="Descripci&oacute;n de la observaci&oacute;n"
 															            class="form-control" name="npobservacion_{{$index}}"
-															            ng-model="obj.npnombrecanton">
+															            ng-model="obj.observacion">
 															    </div>
 															</div>
 														</td>
 														<td>
 															<a uib-tooltip="Guardar"
-																class="btn btn-sm btn-danger"
+																class="btn btn-sm"
 																ng-click="guardarLineActividad($index)">
-																<i class="fa fa-trash"></i>
+																<i class="fa fa-pencil"></i>
 															</a>
 														</td>
 													</tr>

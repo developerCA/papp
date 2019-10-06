@@ -24,6 +24,7 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 	var pagina = 1;
 	
 	$scope.consultar=function(){
+		$scope.limpiarBase();
 		$scope.data = [];
 		ejecucionMetasFactory.traerFiltro(pagina, $rootScope.ejefiscal, null, null, null).then(function(resp){
 			if (resp.meta)
@@ -73,37 +74,60 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		$scope.consultar();
 	};
 
+	$scope.limpiarBase=function() {
+		$scope.listaActividades = null;
+		$scope.institucion = null;
+		$scope.institucionId = null;
+		$scope.entidad = null;
+		$scope.entidadId = null;
+		$scope.unidad = null;
+		$scope.unidadId = null;
+		$scope.listaDetalles = null;
+		$scope.programa = null;
+		$scope.proyecto = null;
+	}
+
 	$scope.actulizarPantalla=function() {
 		// esta se utiliza solo para que refresque la pantalla
 	}
 
 	$scope.editarActividad=function(id) {
+		$scope.limpiarBase();
 		ejecucionMetasFactory.traerActividades(
 				id,
 				$rootScope.ejefiscal
 		).then(function(resp){
 			//console.log(resp.json);
-			$scope.edicion=true;
-			$scope.edicionActividades=true;
-			$scope.listaActividades=resp.json.result;
+			$scope.edicion = true;
+			$scope.edicionActividades = true;
+			$scope.listaActividades = resp.json.result;
+			$scope.institucion = $scope.listaActividades[0].npInstitucioncodigo + ' ' + $scope.listaActividades[0].npInstitucion;
+			$scope.institucionId = $scope.listaActividades[0].npInstitucionId;
+			$scope.entidad = $scope.listaActividades[0].npentidadcodigo + ' ' + $scope.listaActividades[0].npentidad;
+			$scope.entidadId = $scope.listaActividades[0].npentidadid;
+			$scope.unidad = $scope.listaActividades[0].npunidadcodigo + ' ' + $scope.listaActividades[0].npunidadnombre;
+			$scope.unidadId = $scope.listaActividades[0].npunidad;
 		})
 	};
 
 	$scope.renovarActividad=function() {
 		ejecucionMetasFactory.traerRenovarActividades(
-				$scope.actividad,
+				$scope.institucionId,
+				$scope.entidadId,
+				$scope.unidadId,
 				$rootScope.ejefiscal,
+				$scope.actividad.id,
 				$scope.mes
 		).then(function(resp){
 			//console.log(resp.json);
-			$scope.listaDetalles=resp.json.result;
+			$scope.listaDetalles = resp.json.result[0].ejecuciondetalleacts;
+			$scope.programa = resp.json.result[0].programa;
+			$scope.proyecto = resp.json.result[0].proyecto;
 		})
 	}
 
 	$scope.guardarLineActividad = function(index) {
-        var objEnviar = Object.assign({}, $scope.objeto);
-        objEnviar.details = $scope.objetolista;
-    	ejecucionMetasFactory.guardarLineActividad(objEnviar).then(function(resp){
+        ejecucionMetasFactory.guardarLineActividad($scope.listaDetalles[index]).then(function(resp){
 			 if (resp.estado){
 //	             SweetAlert.swal(
 //	            		 "EjecucionMetas!",
@@ -126,14 +150,21 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 	}
 
 	$scope.editarSubtareas = function(id) {
+		$scope.limpiarBase();
 		ejecucionMetasFactory.traerActividades(
 				id,
 				$rootScope.ejefiscal
 		).then(function(resp){
 			//console.log(resp.json);
-			$scope.edicion=true;
-			$scope.edicionSubtareas=true;
-			$scope.listaActividades=resp.json.result;
+			$scope.edicion = true;
+			$scope.edicionSubtareas = true;
+			$scope.listaActividades = resp.json.result;
+			$scope.institucion = $scope.listaActividades[0].npInstitucioncodigo + ' ' + $scope.listaActividades[0].npInstitucion;
+			$scope.institucionId = $scope.listaActividades[0].npInstitucionId;
+			$scope.entidad = $scope.listaActividades[0].npentidadcodigo + ' ' + $scope.listaActividades[0].npentidad;
+			$scope.entidadId = $scope.listaActividades[0].npentidadid;
+			$scope.unidad = $scope.listaActividades[0].npunidadcodigo + ' ' + $scope.listaActividades[0].npunidadnombre;
+			$scope.unidadId = $scope.listaActividades[0].npunidad;
 		})
 	};
 

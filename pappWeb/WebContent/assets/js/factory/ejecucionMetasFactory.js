@@ -19,13 +19,13 @@ app.factory("ejecucionMetasFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customGET();
 		},
 
-		traerRenovarActividades: function(actividad, ejerciciofiscal, mes) {
+		traerRenovarActividades: function(institucionId, entidadId, unidadId, ejerciciofiscal, actividadId, mes) {
 			var url = "ejecucion/consultar/actividadesEjecucionMetas/";
-			url += "institucionid=" + actividad.npInstitucionId;
-			url += "&entidadid=" + actividad.npentidadid;
-			url += "&unidadid=" + actividad.npunidad;
-			url += "&ejeciciofiscalid=" + ejerciciofiscal;
-			url += "&actividadid=" + actividad.id;
+			url += "institucionid=" + institucionId;
+			url += "&entidadid=" + entidadId;
+			url += "&unidadid=" + unidadId;
+			url += "&ejerciciofiscalid=" + ejerciciofiscal;
+			if (actividadId != null && actividadId != "") url += "&actividadid=" + actividadId;
 			if (mes != null && mes != "") url += "&mes=" + mes;
 			return Restangular.allUrl(url).customGET();
 		},
@@ -59,7 +59,7 @@ app.factory("ejecucionMetasFactory", [ "Restangular", function(Restangular) {
 			url += "institucionid=" + actividad.npInstitucionId;
 			url += "&entidadid=" + actividad.npentidadid;
 			url += "&unidadid=" + actividad.npunidad;
-			url += "&ejeciciofiscalid=" + ejerciciofiscal;
+			url += "&ejerciciofiscalid=" + ejerciciofiscal;
 			url += "&actividadid=" + actividad.id;
 			if (mesDesde != null && mesDesde != "") url += "&mesdesde=" + mesDesde;
 			if (mesHasta != null && mesHasta != "") url += "&meshasta=" + mesHasta;
