@@ -190,7 +190,7 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 			$scope.listaSubactividades=resp.json.result;
 		})
 	};
-
+ 
 	$scope.renovarSubtareas=function() {
 		ejecucionMetasFactory.traerRenovarSubtareas(
 				$scope.institucionId,
