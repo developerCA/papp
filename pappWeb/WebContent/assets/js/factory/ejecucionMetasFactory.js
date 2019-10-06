@@ -13,10 +13,20 @@ app.factory("ejecucionMetasFactory", [ "Restangular", function(Restangular) {
 
             return Restangular.allUrl(url).getList();
         },
-		
-		traerEditar : function(id) {
-			var url = "administrar/ejecucionMetas/"+id+"/-1";
 
+        traerActividades : function(acitividadunidad, ejerciciofiscal) {
+			var url = "ejecucion/actividadunidad/" + acitividadunidad + "/"+ ejerciciofiscal;
+			return Restangular.allUrl(url).customGET();
+		},
+
+		traerRenovar : function(actividad, ejerciciofiscal, mes) {
+			var url = "ejecucion/consultar/actividadesEjecucionMetas/";
+			url += "institucionid=" + actividad.npInstitucionId;
+			url += "&entidadid=" + actividad.npentidadid;
+			url += "&unidadid=" + actividad.npunidad;
+			url += "&ejeciciofiscalid=" + ejerciciofiscal;
+			url += "&actividadid=" + actividad.id;
+			if (mes != null && mes != "") url += "&mes=" + mes;
 			return Restangular.allUrl(url).customGET();
 		},
 
