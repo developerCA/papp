@@ -1885,7 +1885,7 @@ public class EjecucionController {
 			}
 			
 			//ejecucion de metas actividadesEjecucionMetas
-			else if(clase.equals("subtareaEjecucionMetas")){
+			else if(clase.equals("subtareasEjecucionMetas")){
 				jsonObject=ConsultasUtil.consultaSubtareaEjecucionMetas(parameters, jsonObject, mensajes);
 			}
 
@@ -1930,6 +1930,10 @@ public class EjecucionController {
 				jsonObject=ConsultasUtil.consultaActividadesEjecucionMetas(parameters, jsonObject, mensajes);
 			}
 
+			//ejecucion de metas actividadesEjecucionMetas
+			else if(clase.equals("subtareasEjecucionMetas")){
+				jsonObject=ConsultasUtil.consultaSubtareaEjecucionMetas(parameters, jsonObject, mensajes);
+			}
 			
 			//Subitemunidad
 			if(clase.equals("subitemunidad")){
