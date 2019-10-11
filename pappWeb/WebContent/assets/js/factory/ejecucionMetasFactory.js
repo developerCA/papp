@@ -35,12 +35,23 @@ app.factory("ejecucionMetasFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 
-        traerSubactividades: function(id, unidad, ejerciciofiscal) {
-			var url = "planificacion/subactividadplanificacion/" + id + "/" +
-        			"unidadid=" + unidad +
-        			"&ejerciciofiscal=" + ejerciciofiscal;
-			return Restangular.allUrl(url).customGET();
-		},
+//        traerSubactividades: function(id, unidad, ejerciciofiscal) {
+//			var url = "planificacion/subactividadplanificacion/" + id + "/" +
+//        			"unidadid=" + unidad +
+//        			"&ejerciciofiscal=" + ejerciciofiscal;
+//			return Restangular.allUrl(url).customGET();
+//		},
+
+		traerNiveles: function (tipo, padreid, unidad, ejercicio, actividadid) {
+        	var url = "planificacion/consultar/nivelactividad/" +
+    			"tipo=" + tipo +
+    			"&nivelactividadejerfiscalid=" + ejercicio +
+    			"&nivelactividadpadreid=" + padreid +
+    			"&nivelactividadunidadid=" + unidad +
+				"&estado=A" +
+				"&actividadid=" + actividadid
+			return Restangular.allUrl(url).getList();
+        },
 
         traerTareas: function(id, unidad, ejerciciofiscal) {
 			var url = "planificacion/tareaplanificacion/" + id + "/" +

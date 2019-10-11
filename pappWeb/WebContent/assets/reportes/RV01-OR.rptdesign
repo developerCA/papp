@@ -233,6 +233,12 @@
                     <text-property name="displayName">SALDOPORDEVENGAR</text-property>
                     <text-property name="heading">SALDOPORDEVENGAR</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">DEVENGOTOTAL</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">DEVENGOTOTAL</text-property>
+                    <text-property name="heading">DEVENGOTOTAL</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -397,6 +403,11 @@
                     <structure>
                         <property name="position">30</property>
                         <property name="name">SALDOPORDEVENGAR</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">DEVENGOTOTAL</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -613,20 +624,27 @@
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">DEVENGOTOTAL</property>
+                    <property name="nativeName">DEVENGOTOTAL</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT 
-       ore.ORDENREVERSIONID 				AS ORDENREVERSIONID,
-       orl.ORDENREVERSIONLINEAID 			AS ORDENREVERSIONLINEAID,
+            <xml-property name="queryText"><![CDATA[SELECT
+       ore.ORDENREVERSIONID AS ORDENREVERSIONID,
+       orl.ORDENREVERSIONLINEAID AS ORDENREVERSIONLINEAID,
        orl.ORDENREVERSIONLINEASALDO,
-       ore.ORDENREVERSIONCODIGO 			AS NUMERO,
+       ore.ORDENREVERSIONCODIGO AS NUMERO,
        ef.EJERCICIOFISCALANIO,
        si.SUBITEMID,
        i.INSTITUCIONCODIGO || '-' || i.INSTITUCIONNOMBRE AS institucion,
        ie.INSTITUCIONENTCODIGO || '-' || ie.INSTITUCIONENTNOMBRE AS institucionentidad,
        u.UNIDADCODIGOPRESUP,
        u.UNIDADNOMBRE,
-       ore.ORDENREVERSIONFECHACREACION 		AS ORDENREVERSIONFECHACREACION,
-       ore.ORDENREVERSIONFECHAAPROBACION 	AS ORDENREVERSIONFECHAAPROBACION,
+       ore.ORDENREVERSIONFECHACREACION AS ORDENREVERSIONFECHACREACION,
+       ore.ORDENREVERSIONFECHAAPROBACION AS ORDENREVERSIONFECHAAPROBACION,
        CASE ore.ORDENREVERSIONESTADO
          WHEN 'EL' THEN 'Eliminado'
          WHEN 'AP' THEN 'Aprobado'
@@ -635,18 +653,18 @@
          WHEN 'SO' THEN 'Solicitado'
          ELSE ore.ORDENREVERSIONESTADO
        END AS  ORDENREVERSIONESTADO,
-       ore.ORDENREVERSIONNUMEROOFICIO 		AS PROCESO,
-       ore.ORDENREVERSIONDESCRIPCION 		AS ORDENREVERSIONDESCRIPCION,
-       orl.ORDENREVERSIONLINEAID 			AS ID,
-       ce.CERTIFICACIONCODIGO 				AS CERTIFICACIONCODIGO,
-       og.ORDENGASTOCODIGO 					AS ORDENGASTOCODIGO,
-       og.ORDENGASTONUMEROCOMPROMISO 		AS ORDENGASTONUMEROCOMPROMISO,
-       cgm.CLASEREGISTROCMCGASTONOMBRE 		AS CLASEGASTO,
-       cr.CLASEREGISTRONOMBRE 				AS CLASEREGISTRO,
-       tdcd.TIPODOCUMENTOCLASEDOCNOMBRE 	AS CLASEDOCUMENTORESPALDO,
-       td.TIPODOCUMENTONOMBRE 				AS TIPODOCUMENTORESPALDO,
-       so.SOCIONEGOCIONOMBREMOSTRADO 		AS BENEFICIARIO,
-       so.SOCIONEGOCIOCODIGO 				AS DOCUMENTOBENEFICIARIO,  
+       ore.ORDENREVERSIONNUMEROOFICIO AS PROCESO,
+       ore.ORDENREVERSIONDESCRIPCION AS ORDENREVERSIONDESCRIPCION,
+       orl.ORDENREVERSIONLINEAID AS ID,
+       ce.CERTIFICACIONCODIGO AS CERTIFICACIONCODIGO,
+       og.ORDENGASTOCODIGO AS ORDENGASTOCODIGO,
+       og.ORDENGASTONUMEROCOMPROMISO AS ORDENGASTONUMEROCOMPROMISO,
+       cgm.CLASEREGISTROCMCGASTONOMBRE AS CLASEGASTO,
+       cr.CLASEREGISTRONOMBRE AS CLASEREGISTRO,
+       tdcd.TIPODOCUMENTOCLASEDOCNOMBRE AS CLASEDOCUMENTORESPALDO,
+       td.TIPODOCUMENTONOMBRE AS TIPODOCUMENTORESPALDO,
+       so.SOCIONEGOCIONOMBREMOSTRADO AS BENEFICIARIO,
+       so.SOCIONEGOCIOCODIGO AS DOCUMENTOBENEFICIARIO,  
        'Programa: ' || pr.PROGRAMACODIGO || '-' || pr.PROGRAMADESCRIPCION || chr(10) ||
        'Proyecto: ' || py.PROYECTOCODIGO || '-' || py.PROYECTODESCRIPCION || chr(10) ||
        'Actividad: ' || ac.ACTIVIDADCODIGO || '-' || ac.ACTIVIDADDESCRIPCION || chr(10) ||
@@ -654,11 +672,11 @@
        'Tarea: ' || ta.TAREAUNIDADCODIGO || '-' || ta.TAREAUNIDADDESCRIPCION || chr(10) ||
        'Subtarea: ' || st.SUBTAREAUNIDADCODIGO || '-' || st.SUBTAREAUNIDADDESCRIPCION || chr(10) ||
        'Item: ' || it.ITEMCODIGO || '-' || orp.ORGANISMOPRESTAMOCODIGO || '-' || org.ORGANISMOCODIGO || '-' || ca.DIVISIONGEOGRAFICACODIGO || '-' || f.FUENTEFINANCIAMIENTOCODIGO || '-' || it.ITEMNOMBRE || chr(10) ||
-       'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE 
-											AS detalle,
-       og.ORDENGASTOVALORTOTAL 				AS VALORCONTRATO,             
-       ogl.ORDENGASTOLINEAVALOR 			AS VALORORDENGASTO,             
-       orl.ORDENREVERSIONLINEAVALOR 		AS VALORPORREVERSAR,
+       'Subitem: ' || si.SUBITEMCODIGO || '-' || si.SUBITEMNOMBRE
+AS detalle,
+       og.ORDENGASTOVALORTOTAL AS VALORCONTRATO,            
+       ogl.ORDENGASTOLINEAVALOR AS VALORORDENGASTO,            
+       orl.ORDENREVERSIONLINEAVALOR AS VALORPORREVERSAR,
        (ogl.ORDENGASTOLINEAVALOR-
        (SELECT
             NVL(SUM(ordl.ORDENDEVENGOLINEAVALOR), 0) AS valor3
@@ -668,7 +686,6 @@
         WHERE ordl.ORDENDEVENGOLINEANIVELACTID = orl.ORDENREVERSIONLINEANIVELACID
           AND (ods.ORDENDEVENGOESTADO ='SO' or ods.ORDENDEVENGOESTADO ='RE')
           AND ods.ORDENDEVENGOORDENGASTOID=ore.ORDENREVERSIONOGASTOID
-          AND ods.ORDENDEVENGOFECHACREACION <= ore.ORDENREVERSIONFECHACREACION
        )
        -(
        SELECT
@@ -679,7 +696,6 @@
         WHERE ordl.ORDENDEVENGOLINEANIVELACTID = orl.ORDENREVERSIONLINEANIVELACID
           AND ods.ORDENDEVENGOESTADO ='AP'
           AND ods.ORDENDEVENGOORDENGASTOID=ore.ORDENREVERSIONOGASTOID
-          AND ods.ORDENDEVENGOFECHACREACION <= ore.ORDENREVERSIONFECHACREACION
        )
        -(
        SELECT
@@ -690,7 +706,6 @@
         WHERE ordl.ORDENREVERSIONLINEANIVELACID = orl.ORDENREVERSIONLINEANIVELACID
           AND (ods.ORDENREVERSIONESTADO ='SO' OR ods.ORDENREVERSIONESTADO ='RE')
           AND ods.ORDENREVERSIONOGASTOID=ore.ORDENREVERSIONOGASTOID
-          AND ods.ORDENREVERSIONFECHACREACION <= ore.ORDENREVERSIONFECHACREACION
        )
        -(
        SELECT
@@ -701,11 +716,21 @@
         WHERE ordl.ORDENREVERSIONLINEANIVELACID = orl.ORDENREVERSIONLINEANIVELACID
           AND ods.ORDENREVERSIONESTADO ='AP'
           AND ods.ORDENREVERSIONOGASTOID=ore.ORDENREVERSIONOGASTOID
-          AND ods.ORDENREVERSIONFECHACREACION <= ore.ORDENREVERSIONFECHACREACION
-       )) AS SALDOPORDEVENGAR
+       )) AS SALDOPORDEVENGAR,
+              (
+       SELECT
+            NVL(SUM(ordl.ORDENDEVENGOLINEAVALOR), 0) AS valor3
+        FROM
+            ORDENDEVENGOLINEA ordl
+            INNER JOIN ORDENDEVENGO ord ON ord.ORDENDEVENGOID = ordl.ORDENDEVENGOID
+        WHERE ordl.ORDENDEVENGOLINEANIVELACTID = orl.ORDENREVERSIONLINEANIVELACID
+          AND ord.ORDENDEVENGOESTADO ='AP'
+          AND ord.ORDENDEVENGOORDENGASTOID=ore.ORDENREVERSIONOGASTOID
+       ) AS DEVENGOTOTAL
+
        
-  FROM 
-       ORDENREVERSION                       ore 
+  FROM
+       ORDENREVERSION                       ore
        INNER JOIN ORDENGASTO                og              ON og.ORDENGASTOID=ore.ORDENREVERSIONOGASTOID
        INNER JOIN ORDENREVERSIONLINEA       orl             ON orl.ORDENREVERSIONID=ore.ORDENREVERSIONID
        INNER JOIN CLASEREGISTROCMCGASTO     cgm             ON (cgm.CLASEREGISTROID=og.ORDENGASTOCLASEREGID AND cgm.CLASEREGISTROCMID=og.ORDENGASTOCLASEMODID AND cgm.CLASEREGISTROCMCGASTOID=og.ORDENGASTOCGASTOID)
@@ -714,11 +739,11 @@
        INNER JOIN TIPODOCUMENTOCLASEDOCUMENTO tdcd          ON (tdcd.TIPODOCUMENTOID=og.ORDENGASTOTIPODOCID AND tdcd.TIPODOCUMENTOCLASEDOCID=og.ORDENGASTOTPCLASEDOCID)
        INNER JOIN TIPODOCUMENTO             td              ON td.TIPODOCUMENTOID=tdcd.TIPODOCUMENTOID
        INNER JOIN SOCIONEGOCIO              so              ON so.SOCIONEGOCIOID=og.ORDENGASTOPROVEEDORID
-       INNER JOIN ORDENGASTOLINEA           ogl             ON ogl.ORDENGASTOID=og.ORDENGASTOID       
+       INNER JOIN ORDENGASTOLINEA           ogl             ON ogl.ORDENGASTOID=og.ORDENGASTOID      
        INNER JOIN CERTIFICACION             ce              ON ce.CERTIFICACIONID=og.ORDENGASTOCERTIFICACIONID
        INNER JOIN Unidad                    u               ON u.UNIDADID = ce.CERTIFICACIONUNIDADID
        INNER JOIN Unidadinst                ui              ON ui.unidadid = u.unidadid
-       INNER JOIN INSTITUCIONENTIDAD        ie              ON (ui.unidadinstid = ie.institucionid AND ui.unidadinstentidadid = ie.institucionentid) 
+       INNER JOIN INSTITUCIONENTIDAD        ie              ON (ui.unidadinstid = ie.institucionid AND ui.unidadinstentidadid = ie.institucionentid)
        INNER JOIN INSTITUCION               i               ON ie.institucionid = i.institucionid
        INNER JOIN EJERCICIOFISCAL           ef              ON ef.EJERCICIOFISCALID = i.INSTITUCIONEJERCICIOFISCALID
        INNER JOIN NIVELACTIVIDAD            na              ON orl.ORDENREVERSIONLINEANIVELACID = na.NIVELACTIVIDADID
@@ -728,14 +753,14 @@
        INNER JOIN nivelactividad            nivelsubitem    ON siu.subitemunidadid = nivelsubitem.nivelactividadtablarelacionid
        INNER JOIN nivelactividad            na7             ON na7.nivelactividadid = nivelsubitem.nivelactividadpadreid
        INNER JOIN itemunidad                itu             ON itu.itemunidadid = na7.nivelactividadtablarelacionid
-	   INNER JOIN DIVISIONGEOGRAFICA        ca              ON ca.DIVISIONGEOGRAFICAID = itu.ITEMUNIDADCANTONID	
-	   INNER JOIN Fuentefinanciamiento      f               ON  f.fuentefinanciamientoid = itu.itemunidadfuentefinanid      
+  INNER JOIN DIVISIONGEOGRAFICA        ca              ON ca.DIVISIONGEOGRAFICAID = itu.ITEMUNIDADCANTONID
+  INNER JOIN Fuentefinanciamiento      f               ON  f.fuentefinanciamientoid = itu.itemunidadfuentefinanid      
        INNER JOIN Organismoprestamo         orp             ON (orp.ORGANISMOID=itu.ITEMUNIDADORGANISMOID and orp.ORGANISMOPRESTAMOID=itu.ITEMUNIDADORGPRESTAMOID)
        INNER JOIN Organismo                 org             ON org.ORGANISMOID=orp.ORGANISMOID
        INNER JOIN ITEM                      it              ON itu.itemunidaditemid = it.ITEMID
        INNER JOIN nivelactividad            na12            ON na12.nivelactividadid = na7.nivelactividadpadreid
        INNER JOIN subtareaunidad            st              ON st.subtareaunidadid = na12.nivelactividadtablarelacionid
-       INNER JOIN nivelactividad            na13            ON na13.NIVELACTIVIDADID=na12.NIVELACTIVIDADPADREID 
+       INNER JOIN nivelactividad            na13            ON na13.NIVELACTIVIDADID=na12.NIVELACTIVIDADPADREID
        INNER JOIN tareaunidad               ta              ON ta.tareaunidadid = na13.nivelactividadtablarelacionid
        INNER JOIN nivelactividad            na14            ON na14.nivelactividadid = na13.nivelactividadpadreid
        INNER JOIN subactividadunidad        sau             ON sau.subactividadid = na14.nivelactividadtablarelacionid
@@ -759,9 +784,9 @@
        ef.EJERCICIOFISCALANIO,
        si.SUBITEMID,
        i.INSTITUCIONCODIGO,
-	   i.INSTITUCIONNOMBRE,
+  i.INSTITUCIONNOMBRE,
        ie.INSTITUCIONENTCODIGO,
-	   ie.INSTITUCIONENTNOMBRE,
+  ie.INSTITUCIONENTNOMBRE,
        u.UNIDADCODIGOPRESUP,
        u.UNIDADNOMBRE,
        ore.ORDENREVERSIONFECHACREACION,
@@ -780,34 +805,33 @@
        so.SOCIONEGOCIONOMBREMOSTRADO,
        so.SOCIONEGOCIOCODIGO,
        pr.PROGRAMACODIGO,
-	   pr.PROGRAMADESCRIPCION,
-	   py.PROYECTOCODIGO,
-	   py.PROYECTODESCRIPCION,
-	   ac.ACTIVIDADCODIGO,
-	   ac.ACTIVIDADDESCRIPCION,
-	   sa.SUBACTIVIDADCODIGO,
-	   sa.SUBACTIVIDADDESCRIPCION,
-	   ta.TAREAUNIDADCODIGO,
-	   ta.TAREAUNIDADDESCRIPCION,
-	   st.SUBTAREAUNIDADCODIGO,
-	   st.SUBTAREAUNIDADDESCRIPCION,
-	   it.ITEMCODIGO,
-	   orp.ORGANISMOPRESTAMOCODIGO,
-	   org.ORGANISMOCODIGO,
-	   ca.DIVISIONGEOGRAFICACODIGO, 
+  pr.PROGRAMADESCRIPCION,
+  py.PROYECTOCODIGO,
+  py.PROYECTODESCRIPCION,
+  ac.ACTIVIDADCODIGO,
+  ac.ACTIVIDADDESCRIPCION,
+  sa.SUBACTIVIDADCODIGO,
+  sa.SUBACTIVIDADDESCRIPCION,
+  ta.TAREAUNIDADCODIGO,
+  ta.TAREAUNIDADDESCRIPCION,
+  st.SUBTAREAUNIDADCODIGO,
+  st.SUBTAREAUNIDADDESCRIPCION,
+  it.ITEMCODIGO,
+  orp.ORGANISMOPRESTAMOCODIGO,
+  org.ORGANISMOCODIGO,
+  ca.DIVISIONGEOGRAFICACODIGO,
        f.FUENTEFINANCIAMIENTOCODIGO,
        org.ORGANISMOCODIGO,
-	   it.ITEMNOMBRE,
-	   si.SUBITEMCODIGO,
-	   si.SUBITEMNOMBRE,
-       og.ORDENGASTOVALORTOTAL,           
+  it.ITEMNOMBRE,
+  si.SUBITEMCODIGO,
+  si.SUBITEMNOMBRE,
+       og.ORDENGASTOVALORTOTAL,          
        ogl.ORDENGASTOLINEAVALOR,
        orl.ORDENREVERSIONLINEAVALOR,
        orl.ORDENREVERSIONLINEANIVELACID,
        ore.ORDENREVERSIONOGASTOID,
        orl.ORDENREVERSIONLINEASALDO
- ORDER BY orl.ORDENREVERSIONLINEAID
-]]></xml-property>
+ ORDER BY orl.ORDENREVERSIONLINEAID]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -1880,12 +1904,12 @@
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <grid id="4320">
-                        <property name="width">7.608333333333333in</property>
+                        <property name="width">7.833333333333333in</property>
                         <column id="4321">
                             <property name="width">70%</property>
                         </column>
                         <column id="4322">
-                            <property name="width">30%</property>
+                            <property name="width">2.5104166666666665in</property>
                         </column>
                         <row id="4323">
                             <cell id="4324">
@@ -3882,7 +3906,13 @@
                 <cell id="4401">
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
-                    <table id="4611">
+                </cell>
+            </row>
+            <row id="4656">
+                <cell id="4657">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <table id="4660">
                         <property name="dataSet">todo</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -3890,12 +3920,6 @@
                                 <text-property name="displayName">DETALLE</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["DETALLE"]</expression>
                                 <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">VALORCONTRATO</property>
-                                <text-property name="displayName">VALORCONTRATO</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["VALORCONTRATO"]</expression>
-                                <property name="dataType">decimal</property>
                             </structure>
                             <structure>
                                 <property name="name">VALORORDENGASTO</property>
@@ -3910,21 +3934,16 @@
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
-                                <property name="name">DEVENGOTOTAL</property>
-                                <text-property name="displayName">DEVENGOTOTAL</text-property>
-                                <expression name="expression" type="javascript">if(dataSetRow["ORDENREVERSIONLINEASALDO"]>0)&#13;
-dataSetRow["ORDENREVERSIONLINEASALDO"]&#13;
-else&#13;
-BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
+                                <property name="name">SALDOPORDEVENGAR</property>
+                                <text-property name="displayName">SALDOPORDEVENGAR</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SALDOPORDEVENGAR"]</expression>
                                 <property name="dataType">decimal</property>
-                                <property name="allowExport">true</property>
                             </structure>
                             <structure>
-                                <property name="name">TVALORCONTRATO</property>
-                                <text-property name="displayName">TVALORCONTRATO</text-property>
-                                <expression name="expression" type="javascript">Total.sum(row["VALORCONTRATO"])</expression>
+                                <property name="name">DEVENGOTOTAL</property>
+                                <text-property name="displayName">DEVENGOTOTAL</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["DEVENGOTOTAL"]</expression>
                                 <property name="dataType">decimal</property>
-                                <property name="allowExport">true</property>
                             </structure>
                             <structure>
                                 <property name="name">TVALORORDENGASTO</property>
@@ -3947,49 +3966,57 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">TSALDOPORDEVENGAR</property>
+                                <text-property name="displayName">TSALDOPORDEVENGAR</text-property>
+                                <expression name="expression" type="javascript">Total.sum(row["SALDOPORDEVENGAR"])</expression>
+                                <property name="dataType">decimal</property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
-                        <column id="4640">
+                        <column id="4689">
                             <property name="width">52%</property>
                         </column>
-                        <column id="4641">
+                        <column id="4690">
                             <property name="width">12%</property>
                         </column>
-                        <column id="4642">
+                        <column id="4691">
                             <property name="width">12%</property>
                         </column>
-                        <column id="4643">
+                        <column id="4693">
+                            <property name="repeat">1</property>
                             <property name="width">12%</property>
                         </column>
-                        <column id="4644">
+                        <column id="4692">
                             <property name="width">12%</property>
                         </column>
                         <header>
-                            <row id="4612">
-                                <cell id="4613">
+                            <row id="4661">
+                                <cell id="4662">
                                     <property name="verticalAlign">middle</property>
                                     <label id="4572">
                                         <text-property name="text">CATEGORÍA PROGRAMÁTICA</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4615">
+                                <cell id="4664">
                                     <property name="verticalAlign">middle</property>
                                     <label id="4574">
                                         <text-property name="text">VALOR ORDEN GASTO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4617">
+                                <cell id="4666">
                                     <property name="verticalAlign">middle</property>
                                     <label id="4576">
                                         <text-property name="text">VALOR POR REVERSAR</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4619">
+                                <cell id="4670">
                                     <property name="verticalAlign">middle</property>
                                     <label id="4578">
                                         <text-property name="text">DEVENGO TOTAL</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4621">
+                                <cell id="4668">
                                     <property name="verticalAlign">middle</property>
                                     <label id="4580">
                                         <text-property name="text">SALDO ACTUAL POR DEVENGAR</text-property>
@@ -3998,74 +4025,16 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                             </row>
                         </header>
                         <detail>
-                            <row id="4623">
-                                <cell id="4624">
+                            <row id="4672">
+                                <cell id="4673">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4625">
+                                    <data id="4674">
                                         <property name="resultSetColumn">DETALLE</property>
                                     </data>
                                 </cell>
-                                <cell id="4626">
+                                <cell id="4675">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4627">
-                                        <property name="backgroundAttachment">scroll</property>
-                                        <property name="backgroundPositionX">0%</property>
-                                        <property name="backgroundPositionY">0%</property>
-                                        <property name="backgroundRepeat">repeat</property>
-                                        <property name="fontFamily">"Arial"</property>
-                                        <property name="fontSize">11px</property>
-                                        <property name="fontWeight">normal</property>
-                                        <property name="fontStyle">normal</property>
-                                        <property name="fontVariant">normal</property>
-                                        <property name="color">black</property>
-                                        <property name="textLineThrough">none</property>
-                                        <property name="textOverline">none</property>
-                                        <property name="textUnderline">none</property>
-                                        <property name="borderBottomColor">black</property>
-                                        <property name="borderBottomStyle">none</property>
-                                        <property name="borderBottomWidth">medium</property>
-                                        <property name="borderLeftColor">black</property>
-                                        <property name="borderLeftStyle">none</property>
-                                        <property name="borderLeftWidth">medium</property>
-                                        <property name="borderRightColor">black</property>
-                                        <property name="borderRightStyle">none</property>
-                                        <property name="borderRightWidth">medium</property>
-                                        <property name="borderTopColor">black</property>
-                                        <property name="borderTopStyle">none</property>
-                                        <property name="borderTopWidth">medium</property>
-                                        <property name="marginTop">0pt</property>
-                                        <property name="marginLeft">0pt</property>
-                                        <property name="marginBottom">0pt</property>
-                                        <property name="marginRight">0pt</property>
-                                        <property name="paddingTop">1pt</property>
-                                        <property name="paddingLeft">1pt</property>
-                                        <property name="paddingBottom">1pt</property>
-                                        <property name="paddingRight">1pt</property>
-                                        <structure name="numberFormat">
-                                            <property name="category">Currency</property>
-                                            <property name="pattern">$ ###0.00{RoundingMode=HALF_UP}</property>
-                                        </structure>
-                                        <property name="textAlign">right</property>
-                                        <property name="letterSpacing">normal</property>
-                                        <property name="lineHeight">normal</property>
-                                        <property name="orphans">2</property>
-                                        <property name="textTransform">none</property>
-                                        <property name="whiteSpace">normal</property>
-                                        <property name="widows">2</property>
-                                        <property name="wordSpacing">normal</property>
-                                        <property name="display">block</property>
-                                        <property name="pageBreakAfter">auto</property>
-                                        <property name="pageBreakBefore">auto</property>
-                                        <property name="pageBreakInside">auto</property>
-                                        <property name="showIfBlank">false</property>
-                                        <property name="canShrink">false</property>
-                                        <property name="overflow">hidden</property>
-                                        <property name="resultSetColumn">VALORCONTRATO</property>
-                                    </data>
-                                </cell>
-                                <cell id="4628">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4629">
+                                    <data id="4676">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -4121,9 +4090,9 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                         <property name="resultSetColumn">VALORORDENGASTO</property>
                                     </data>
                                 </cell>
-                                <cell id="4630">
+                                <cell id="4677">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4631">
+                                    <data id="4678">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -4179,9 +4148,9 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                         <property name="resultSetColumn">VALORPORREVERSAR</property>
                                     </data>
                                 </cell>
-                                <cell id="4632">
+                                <cell id="4681">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4633">
+                                    <data id="4682">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -4237,30 +4206,16 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                         <property name="resultSetColumn">DEVENGOTOTAL</property>
                                     </data>
                                 </cell>
-                            </row>
-                        </detail>
-                        <footer>
-                            <row id="4634">
-                                <cell id="4635">
+                                <cell id="4679">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="4438">
-                                        <property name="fontFamily">"Arial"</property>
-                                        <property name="fontSize">12px</property>
-                                        <property name="fontWeight">bold</property>
-                                        <property name="textAlign">right</property>
-                                        <text-property name="text">TOTALES:</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="4636">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4645">
+                                    <data id="4680">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
                                         <property name="backgroundRepeat">repeat</property>
                                         <property name="fontFamily">"Arial"</property>
                                         <property name="fontSize">11px</property>
-                                        <property name="fontWeight">bold</property>
+                                        <property name="fontWeight">normal</property>
                                         <property name="fontStyle">normal</property>
                                         <property name="fontVariant">normal</property>
                                         <property name="color">black</property>
@@ -4306,12 +4261,26 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                         <property name="showIfBlank">false</property>
                                         <property name="canShrink">false</property>
                                         <property name="overflow">hidden</property>
-                                        <property name="resultSetColumn">TVALORCONTRATO</property>
+                                        <property name="resultSetColumn">SALDOPORDEVENGAR</property>
                                     </data>
                                 </cell>
-                                <cell id="4637">
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="4683">
+                                <cell id="4684">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4646">
+                                    <label id="4438">
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">12px</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">right</property>
+                                        <text-property name="text">TOTALES:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4685">
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="4694">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -4367,9 +4336,9 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                         <property name="resultSetColumn">TVALORORDENGASTO</property>
                                     </data>
                                 </cell>
-                                <cell id="4638">
+                                <cell id="4686">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4647">
+                                    <data id="4695">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -4425,9 +4394,9 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                         <property name="resultSetColumn">TVALORPORREVERSAR</property>
                                     </data>
                                 </cell>
-                                <cell id="4639">
+                                <cell id="4688">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4648">
+                                    <data id="4696">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -4481,6 +4450,64 @@ BirtMath.round(dataSetRow["SALDOPORDEVENGAR"],2)</expression>
                                         <property name="canShrink">false</property>
                                         <property name="overflow">hidden</property>
                                         <property name="resultSetColumn">TDEVENGOTOTAL</property>
+                                    </data>
+                                </cell>
+                                <cell id="4687">
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="4697">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">black</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$ ###0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <property name="resultSetColumn">TSALDOPORDEVENGAR</property>
                                     </data>
                                 </cell>
                             </row>

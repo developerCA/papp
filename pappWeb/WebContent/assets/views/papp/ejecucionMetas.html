@@ -144,9 +144,9 @@
 									</div>
 									<div class="col-md-8">
 										<select class="form-control" name="actividad"
-											ng-options="option.descripcion for option in listaActividades"
+											ng-options="option.codigo+' - '+option.descripcion for option in listaActividades"
 											ng-change="actulizarPantalla()" ng-model="actividad">
-											<option value="">Seleccione una actividad</option>
+											<option value="">Todas</option>
 										</select>
 									</div>
 								</div>
@@ -377,9 +377,9 @@
 									</div>
 									<div class="col-md-8">
 										<select class="form-control" name="actividad"
-											ng-options="option.descripcion for option in listaActividades"
+											ng-options="option.codigo+' - '+option.descripcion for option in listaActividades"
 											ng-change="actulizarSubactividades()" ng-model="actividad">
-											<option value="">Seleccione una actividad</option>
+											<option value="">Todas</option>
 										</select>
 									</div>
 								</div>
@@ -392,9 +392,10 @@
 									</div>
 									<div class="col-md-8">
 										<select class="form-control" name="subactividad"
-											ng-options="option.descripcion for option in listaSubactividades"
-											ng-change="actulizarTareas()" ng-model="subactividad">
-											<option value="">Todas las subactividad</option>
+											ng-options="option.descripcionexten for option in listaSubactividades"
+											ng-change="actulizarTareas()" ng-model="subactividad"
+											ng-disabled="listaSubactividades==null">
+											<option value="">Todas</option>
 										</select>
 									</div>
 								</div>
@@ -407,9 +408,9 @@
 									</div>
 									<div class="col-md-8">
 										<select class="form-control" name="tarea"
-											ng-options="option.descripcion for option in listaTareas"
-											ng-model="tarea">
-											<option value="">Todas las tarea</option>
+											ng-options="option.descripcionexten for option in listaTareas"
+											ng-model="tarea" ng-disabled="listaTareas==null">
+											<option value="">Todas</option>
 										</select>
 									</div>
 								</div>

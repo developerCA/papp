@@ -76,6 +76,8 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.limpiarBase=function() {
 		$scope.listaActividades = null;
+		$scope.listaSubactividades = null;
+		$scope.listaTareas = null;
 		$scope.institucion = null;
 		$scope.institucionId = null;
 		$scope.entidad = null;
@@ -120,13 +122,24 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 				$scope.entidadId,
 				$scope.unidadId,
 				$rootScope.ejefiscal,
-				$scope.actividad.id,
+				($scope.actividad == null? null: $scope.actividad.id),
 				$scope.mes
 		).then(function(resp){
 			//console.log(resp.json);
-			$scope.listaDetalles = resp.json.result[0].ejecuciondetalleacts;
-			$scope.tituloPrograma = resp.json.result[0].programa;
-			$scope.tituloProyecto = resp.json.result[0].proyecto;
+			$scope.listaDetalles = [];
+			if (resp.json.result.length == 0) {
+	             SweetAlert.swal(
+		       		 "Ejecucion Metas!",
+		       		 "No se obtuvo resultados para estos detalles de búsqueda!",
+		       		 "success"
+				 );
+			} else {
+				for (var i = 0; i < resp.json.result.length; i++) {
+					$scope.listaDetalles = $scope.listaDetalles.concat(resp.json.result[i].ejecuciondetalleacts);
+				}
+				$scope.tituloPrograma = resp.json.result[0].programa;
+				$scope.tituloProyecto = resp.json.result[0].proyecto;
+			}
 		})
 	}
 
@@ -155,6 +168,8 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.editarSubtareas = function(id) {
 		$scope.limpiarBase();
+		$scope.listaSubactividades = null;
+		$scope.listaTareas = null;
 		ejecucionMetasFactory.traerActividades(
 				id,
 				$rootScope.ejefiscal
@@ -173,44 +188,60 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 	};
 
 	$scope.actulizarSubactividades = function(id) {
-		ejecucionMetasFactory.traerSubactividades(
-				$scope.actividad.id,
+		$scope.listaTareas = null;
+		ejecucionMetasFactory.traerNiveles(
+				'SA',
+				$scope.actividad.npNivelid,
 				$scope.actividad.npunidad,
-				$rootScope.ejefiscal
+				$rootScope.ejefiscal,
+				$scope.actividad.id
 		).then(function(resp){
-			$scope.listaSubactividades=resp.json.result;
+			$scope.listaSubactividades=resp;//.json.result;
 		})
 	};
 
 	$scope.actulizarTareas = function(id) {
-		ejecucionMetasFactory.traerTareas(
-				id,
-				$rootScope.ejefiscal
+		ejecucionMetasFactory.traerNiveles(
+				'TA',
+				$scope.subactividad.id,
+				$scope.actividad.npunidad,
+				$rootScope.ejefiscal,
+				$scope.actividad.id
 		).then(function(resp){
-			$scope.listaSubactividades=resp.json.result;
+			$scope.listaTareas=resp;//.json.result;
 		})
 	};
- 
+
 	$scope.renovarSubtareas=function() {
 		ejecucionMetasFactory.traerRenovarSubtareas(
 				$scope.institucionId,
 				$scope.entidadId,
 				$scope.unidadId,
 				$rootScope.ejefiscal,
-				$scope.actividad.id,
+				($scope.actividad == null? null: $scope.actividad.id),
 				$scope.mesDesde,
 				$scope.mesHasta,
 				$scope.subactividad.id,
 				$scope.tarea.id
 		).then(function(resp){
-			//console.log(resp.json);
-			$scope.listaDetalles=resp.json.result;
-			$scope.tituloObjetivo = null;
-			$scope.tituloPrograma = resp.json.result[0].programa;
-			$scope.tituloProyecto = resp.json.result[0].proyecto;
-			$scope.tituloActividad = null;
-			$scope.tituloSubactividad = null;
-			$scope.tituloTarea = null;
+			$scope.listaDetalles = [];
+			if (resp.json.result.length == 0) {
+	             SweetAlert.swal(
+		       		 "Ejecucion Metas!",
+		       		 "No se obtuvo resultados para estos detalles de búsqueda!",
+		       		 "success"
+				 );
+			} else {
+				for (var i = 0; i < resp.json.result.length; i++) {
+					$scope.listaDetalles = $scope.listaDetalles.concat(resp.json.result[i].ejecuciondetalleacts);
+				}
+				$scope.tituloObjetivo = null;
+				$scope.tituloPrograma = resp.json.result[0].programa;
+				$scope.tituloProyecto = resp.json.result[0].proyecto;
+				$scope.tituloActividad = null;
+				$scope.tituloSubactividad = null;
+				$scope.tituloTarea = null;
+			}
 		})
 	}
 
