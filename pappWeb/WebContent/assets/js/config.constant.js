@@ -282,6 +282,7 @@ app.constant('JS_REQUIRES', {
         'ReporteS03Ctrl':'assets/js/controllers/papp/reporteS03Ctrl.js',
         'ReporteE04Ctrl':'assets/js/controllers/papp/reporteE04Ctrl.js',
         'ReporteE05Ctrl':'assets/js/controllers/papp/reporteE05Ctrl.js',
+        'ReporteE07resumenCtrl':'assets/js/controllers/papp/reporteE07resumenCtrl.js',
         'ModalObjetivoOperacionalReporteCtrl':'assets/js/controllers/papp/modales/modalObjetivoOperacionalReporteCtrl.js',
         'ObjetivoOperacionalReporteFactory':'assets/js/factory/objetivoOperacionalReporteFactory.js',
         'ModalObjetivoEstrategicoReporteCtrl':'assets/js/controllers/papp/modales/modalObjetivoEstrategicoReporteCtrl.js',

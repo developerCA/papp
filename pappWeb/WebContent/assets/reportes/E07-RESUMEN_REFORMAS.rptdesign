@@ -25,7 +25,7 @@
         </scalar-parameter>
         <scalar-parameter name="entidad" id="4612">
             <property name="valueType">static</property>
-            <property name="isRequired">false</property>
+            <property name="isRequired">true</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
@@ -33,6 +33,7 @@
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
             <property name="controlType">text-box</property>
             <structure name="format">
                 <property name="category">Unformatted</property>
@@ -53,12 +54,74 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
-        <scalar-parameter name="ef" id="4614">
+        <scalar-parameter name="ejercicio" id="4614">
             <property name="valueType">static</property>
-            <property name="dataType">string</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
                 <value type="constant">81</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="programa" id="4769">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="proyecto" id="4770">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="actividad" id="4771">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="item" id="4772">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -97,16 +160,46 @@
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Programa" id="4615">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">PRCODIGO</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">PRCODIGO</text-property>
-                    <text-property name="heading">PRCODIGO</text-property>
-                </structure>
-                <structure>
                     <property name="columnName">PROGRAMA</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">PROGRAMA</text-property>
                     <text-property name="heading">PROGRAMA</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROYECTO</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROYECTO</text-property>
+                    <text-property name="heading">PROYECTO</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ACTIVIDAD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ACTIVIDAD</text-property>
+                    <text-property name="heading">ACTIVIDAD</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ITEM</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ITEM</text-property>
+                    <text-property name="heading">ITEM</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DENOMINACION</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">DENOMINACION</text-property>
+                    <text-property name="heading">DENOMINACION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">FUENTE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">FUENTE</text-property>
+                    <text-property name="heading">FUENTE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CANTON</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CANTON</text-property>
+                    <text-property name="heading">CANTON</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">INICIAL</property>
@@ -135,58 +228,143 @@
             </list-property>
             <list-property name="parameters">
                 <structure>
-                    <property name="name">EF</property>
-                    <property name="paramName">ef</property>
+                    <property name="name">ejercicio</property>
+                    <property name="paramName">ejercicio</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">1</property>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
                     <property name="name">inst</property>
                     <property name="paramName">institucion</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">2</property>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
                     <property name="name">inst_null</property>
                     <property name="paramName">institucion</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">3</property>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
                     <property name="name">enti</property>
                     <property name="paramName">entidad</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">4</property>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
                     <property name="name">enti_null</property>
-                    <property name="paramName">unidad</property>
+                    <property name="paramName">entidad</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">5</property>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
                     <property name="name">unid</property>
                     <property name="paramName">unidad</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">6</property>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
                 <structure>
                     <property name="name">unid_null</property>
                     <property name="paramName">unidad</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">7</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">pr</property>
+                    <property name="paramName">programa</property>
+                    <property name="dataType">string</property>
+                    <property name="position">8</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">pr_null</property>
+                    <property name="paramName">programa</property>
+                    <property name="dataType">string</property>
+                    <property name="position">9</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">py</property>
+                    <property name="paramName">proyecto</property>
+                    <property name="dataType">string</property>
+                    <property name="position">10</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">py_null</property>
+                    <property name="paramName">proyecto</property>
+                    <property name="dataType">string</property>
+                    <property name="position">11</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">ac</property>
+                    <property name="paramName">actividad</property>
+                    <property name="dataType">string</property>
+                    <property name="position">12</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">ac_null</property>
+                    <property name="paramName">actividad</property>
+                    <property name="dataType">string</property>
+                    <property name="position">13</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">it</property>
+                    <property name="paramName">item</property>
+                    <property name="dataType">string</property>
+                    <property name="position">14</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">it_null</property>
+                    <property name="paramName">item</property>
+                    <property name="dataType">string</property>
+                    <property name="position">15</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -195,31 +373,56 @@
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">PRCODIGO</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
                         <property name="name">PROGRAMA</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
+                        <property name="position">2</property>
+                        <property name="name">PROYECTO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
                         <property name="position">3</property>
+                        <property name="name">ACTIVIDAD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">ITEM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">DENOMINACION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">FUENTE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">CANTON</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
                         <property name="name">INICIAL</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">9</property>
                         <property name="name">INCREMENTO</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">10</property>
                         <property name="name">DECREMENTO</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">11</property>
                         <property name="name">CODIFICADO</property>
                         <property name="dataType">decimal</property>
                     </structure>
@@ -229,49 +432,90 @@
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">PRCODIGO</property>
-                    <property name="nativeName">PRCODIGO</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
                     <property name="name">PROGRAMA</property>
                     <property name="nativeName">PROGRAMA</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
+                    <property name="position">2</property>
+                    <property name="name">PROYECTO</property>
+                    <property name="nativeName">PROYECTO</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
                     <property name="position">3</property>
+                    <property name="name">ACTIVIDAD</property>
+                    <property name="nativeName">ACTIVIDAD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">ITEM</property>
+                    <property name="nativeName">ITEM</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">DENOMINACION</property>
+                    <property name="nativeName">DENOMINACION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">FUENTE</property>
+                    <property name="nativeName">FUENTE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">CANTON</property>
+                    <property name="nativeName">CANTON</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
                     <property name="name">INICIAL</property>
                     <property name="nativeName">INICIAL</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">9</property>
                     <property name="name">INCREMENTO</property>
                     <property name="nativeName">INCREMENTO</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">10</property>
                     <property name="name">DECREMENTO</property>
                     <property name="nativeName">DECREMENTO</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">11</property>
                     <property name="name">CODIFICADO</property>
                     <property name="nativeName">CODIFICADO</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT pr.programacodigo AS prcodigo,
-	   pr.programanombre AS programa,
+            <xml-property name="queryText"><![CDATA[SELECT 
+       pr.programacodigo || ' ' || pr.programanombre AS programa,
+       py.proyectocodigo || ' ' || py.proyectonombre AS proyecto,
+       ac.actividadcodigo || ' ' || ac.actividaddescripcion AS actividad,
+       it.itemcodigo AS item,
+       it.itemnombre AS denominacion,
+       ff.fuentefinanciamientocodigo AS fuente,
+       dg.divisiongeograficacodigo AS canton,
        0 AS inicial,
        SUM(rl.reformalineavalorincremento) AS incremento,
        SUM(rl.reformalineavalordecremento) AS decremento,
@@ -305,12 +549,27 @@
    AND (i.institucionid = TO_NUMBER(?) OR ? IS NULL)
    AND (ie.institucionentid = TO_NUMBER(?) OR ? IS NULL)
    AND (u.UNIDADID = TO_NUMBER(?) OR ? IS NULL)
+   AND (pr.PROGRAMAID = TO_NUMBER(?) OR ? IS NULL)
+   AND (py.PROYECTOID = TO_NUMBER(?) OR ? IS NULL)
+   AND (ac.ACTIVIDADID = TO_NUMBER(?) OR ? IS NULL)
+   AND (it.ITEMID = TO_NUMBER(?) OR ? IS NULL)
  GROUP BY
        pr.programacodigo,
-       pr.programanombre
+       pr.programanombre,
+       py.proyectocodigo,
+       py.proyectonombre,
+       ac.actividadcodigo,
+       ac.actividaddescripcion,
+       it.itemcodigo,
+       it.itemnombre,
+       ff.fuentefinanciamientocodigo,
+       dg.divisiongeograficacodigo
  ORDER BY
-       pr.programacodigo
-]]></xml-property>
+       pr.programacodigo,
+       py.proyectocodigo,
+       ac.actividadcodigo,
+       it.itemcodigo
+ ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -449,335 +708,6 @@
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Proyecto" id="4694">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">ACTIVIDADID</property>
-                    <text-property name="displayName">ACTIVIDADID</text-property>
-                    <text-property name="heading">ACTIVIDADID</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">ACTIVIDADCODIGO</property>
-                    <text-property name="displayName">ACTIVIDADCODIGO</text-property>
-                    <text-property name="heading">ACTIVIDADCODIGO</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">ACTIVIDADDESCRIPCION</property>
-                    <text-property name="displayName">ACTIVIDADDESCRIPCION</text-property>
-                    <text-property name="heading">ACTIVIDADDESCRIPCION</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">ACTIVIDADEJERCICIOFISCALID</property>
-                    <text-property name="displayName">ACTIVIDADEJERCICIOFISCALID</text-property>
-                    <text-property name="heading">ACTIVIDADEJERCICIOFISCALID</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">ACTIVIDADINDICADORID</property>
-                    <text-property name="displayName">ACTIVIDADINDICADORID</text-property>
-                    <text-property name="heading">ACTIVIDADINDICADORID</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">ACTIVIDADINDICADORMETODOID</property>
-                    <text-property name="displayName">ACTIVIDADINDICADORMETODOID</text-property>
-                    <text-property name="heading">ACTIVIDADINDICADORMETODOID</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">ACTIVIDADPONDERACION</property>
-                    <text-property name="displayName">ACTIVIDADPONDERACION</text-property>
-                    <text-property name="heading">ACTIVIDADPONDERACION</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">ACTIVIDADACUMIDSERIAL</property>
-                    <text-property name="displayName">ACTIVIDADACUMIDSERIAL</text-property>
-                    <text-property name="heading">ACTIVIDADACUMIDSERIAL</text-property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">ACTIVIDADID</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">ACTIVIDADCODIGO</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">ACTIVIDADDESCRIPCION</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">ACTIVIDADEJERCICIOFISCALID</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">ACTIVIDADINDICADORID</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">ACTIVIDADINDICADORMETODOID</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">ACTIVIDADPONDERACION</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">ACTIVIDADACUMIDSERIAL</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">ACTIVIDADID</property>
-                    <property name="nativeName">ACTIVIDADID</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">ACTIVIDADCODIGO</property>
-                    <property name="nativeName">ACTIVIDADCODIGO</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">ACTIVIDADDESCRIPCION</property>
-                    <property name="nativeName">ACTIVIDADDESCRIPCION</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">ACTIVIDADEJERCICIOFISCALID</property>
-                    <property name="nativeName">ACTIVIDADEJERCICIOFISCALID</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">ACTIVIDADINDICADORID</property>
-                    <property name="nativeName">ACTIVIDADINDICADORID</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">ACTIVIDADINDICADORMETODOID</property>
-                    <property name="nativeName">ACTIVIDADINDICADORMETODOID</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">ACTIVIDADPONDERACION</property>
-                    <property name="nativeName">ACTIVIDADPONDERACION</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">ACTIVIDADACUMIDSERIAL</property>
-                    <property name="nativeName">ACTIVIDADACUMIDSERIAL</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[select *
-from COMACO.ACTIVIDAD
-where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>2.0</Version>
-  <design:ResultSets derivedMetaData="true">
-    <design:resultSetDefinitions>
-      <design:resultSetColumns>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>ACTIVIDADID</design:name>
-              <design:position>1</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>10</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>ACTIVIDADID</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>ACTIVIDADID</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>ACTIVIDADCODIGO</design:name>
-              <design:position>2</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>40</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>ACTIVIDADCODIGO</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>ACTIVIDADCODIGO</design:label>
-            <design:formattingHints>
-              <design:displaySize>40</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>ACTIVIDADDESCRIPCION</design:name>
-              <design:position>3</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>500</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>ACTIVIDADDESCRIPCION</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>ACTIVIDADDESCRIPCION</design:label>
-            <design:formattingHints>
-              <design:displaySize>500</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>ACTIVIDADEJERCICIOFISCALID</design:name>
-              <design:position>4</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>10</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>ACTIVIDADEJERCICIOFISCALID</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>ACTIVIDADEJERCICIOFISCALID</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>ACTIVIDADINDICADORID</design:name>
-              <design:position>5</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>10</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>ACTIVIDADINDICADORID</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>ACTIVIDADINDICADORID</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>ACTIVIDADINDICADORMETODOID</design:name>
-              <design:position>6</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>10</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>ACTIVIDADINDICADORMETODOID</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>ACTIVIDADINDICADORMETODOID</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>ACTIVIDADPONDERACION</design:name>
-              <design:position>7</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>5</design:precision>
-            <design:scale>2</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>ACTIVIDADPONDERACION</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>ACTIVIDADPONDERACION</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>ACTIVIDADACUMIDSERIAL</design:name>
-              <design:position>8</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>10</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>ACTIVIDADACUMIDSERIAL</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>ACTIVIDADACUMIDSERIAL</design:label>
-            <design:formattingHints>
-              <design:displaySize>22</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-      </design:resultSetColumns>
-      <design:criteria/>
-    </design:resultSetDefinitions>
-  </design:ResultSets>
-</model:DesignValues>]]></xml-property>
-        </oda-data-set>
     </data-sets>
     <styles>
         <style name="page" id="67">
@@ -846,7 +776,7 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
             <property name="type">a4</property>
-            <property name="orientation">portrait</property>
+            <property name="orientation">landscape</property>
             <property name="topMargin">0.05in</property>
             <property name="leftMargin">0.2in</property>
             <property name="bottomMargin">0.2in</property>
@@ -863,7 +793,7 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
     </page-setup>
     <body>
         <grid id="4307">
-            <property name="width">19.446cm</property>
+            <property name="width">100%</property>
             <column id="4308">
                 <property name="width">1.675in</property>
             </column>
@@ -947,7 +877,7 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
                     <grid id="4320">
-                        <property name="width">7.614583333333333in</property>
+                        <property name="width">100%</property>
                         <column id="4321">
                             <property name="width">4.302083333333333in</property>
                         </column>
@@ -1107,27 +1037,49 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                 <cell id="4341">
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
-                </cell>
-            </row>
-            <row id="4565">
-                <cell id="4566">
-                    <property name="colSpan">3</property>
-                    <property name="rowSpan">1</property>
-                    <table id="4616">
-                        <property name="width">19.446cm</property>
+                    <table id="4695">
                         <property name="dataSet">Programa</property>
                         <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">PRCODIGO</property>
-                                <text-property name="displayName">PRCODIGO</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["PRCODIGO"] + " " + dataSetRow["PROGRAMA"]</expression>
-                                <property name="dataType">string</property>
-                                <property name="allowExport">true</property>
-                            </structure>
                             <structure>
                                 <property name="name">PROGRAMA</property>
                                 <text-property name="displayName">PROGRAMA</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["PROGRAMA"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">PROYECTO</property>
+                                <text-property name="displayName">PROYECTO</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["PROYECTO"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ACTIVIDAD</property>
+                                <text-property name="displayName">ACTIVIDAD</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ACTIVIDAD"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ITEM</property>
+                                <text-property name="displayName">ITEM</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ITEM"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">DENOMINACION</property>
+                                <text-property name="displayName">DENOMINACION</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["DENOMINACION"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">FUENTE</property>
+                                <text-property name="displayName">FUENTE</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["FUENTE"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">CANTON</property>
+                                <text-property name="displayName">CANTON</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["CANTON"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
@@ -1153,6 +1105,12 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                                 <text-property name="displayName">CODIFICADO</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["CODIFICADO"]</expression>
                                 <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Column Binding</property>
+                                <expression name="expression" type="javascript">Total.sum(row["INICIAL"])</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
                             </structure>
                             <structure>
                                 <property name="name">TINICIAL</property>
@@ -1183,88 +1141,236 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                                 <property name="allowExport">true</property>
                             </structure>
                         </list-property>
-                        <column id="4650">
-                            <property name="width">0.9723cm</property>
+                        <column id="4754"/>
+                        <column id="4755"/>
+                        <column id="4756"/>
+                        <column id="4757">
+                            <property name="textAlign">center</property>
                         </column>
-                        <column id="4651">
-                            <property name="width">0.9723cm</property>
+                        <column id="4758"/>
+                        <column id="4759">
+                            <property name="textAlign">center</property>
                         </column>
-                        <column id="4675">
-                            <property name="width">0.9723cm</property>
+                        <column id="4760">
+                            <property name="textAlign">center</property>
                         </column>
-                        <column id="4671">
-                            <property name="width">0.9723cm</property>
-                        </column>
-                        <column id="4667">
-                            <property name="width">0.9723cm</property>
-                        </column>
-                        <column id="4663">
-                            <property name="width">0.9723cm</property>
-                        </column>
-                        <column id="4659">
-                            <property name="width">4.27812cm</property>
-                        </column>
-                        <column id="4652">
-                            <property name="width">2.33352cm</property>
-                        </column>
-                        <column id="4653">
-                            <property name="width">2.33352cm</property>
-                        </column>
-                        <column id="4654">
-                            <property name="width">2.33352cm</property>
-                        </column>
-                        <column id="4655">
-                            <property name="width">2.33352cm</property>
-                        </column>
+                        <column id="4761"/>
+                        <column id="4762"/>
+                        <column id="4763"/>
+                        <column id="4764"/>
                         <header>
-                            <row id="4617">
-                                <cell id="4618">
-                                    <property name="colSpan">7</property>
-                                    <property name="rowSpan">1</property>
+                            <row id="4696">
+                                <cell id="4697">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="4619">
+                                    <label id="4698">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">#FFFFFF</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
                                         <text-property name="text">PROGRAMA</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4622">
+                                <cell id="4699">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="4623">
+                                    <label id="4700">
+                                        <property name="backgroundAttachment">scroll</property>
+                                        <property name="backgroundPositionX">0%</property>
+                                        <property name="backgroundPositionY">0%</property>
+                                        <property name="backgroundRepeat">repeat</property>
+                                        <property name="fontFamily">"Arial"</property>
+                                        <property name="fontSize">11px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="fontVariant">normal</property>
+                                        <property name="color">#FFFFFF</property>
+                                        <property name="textLineThrough">none</property>
+                                        <property name="textOverline">none</property>
+                                        <property name="textUnderline">none</property>
+                                        <property name="borderBottomColor">black</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderBottomWidth">medium</property>
+                                        <property name="borderLeftColor">black</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderLeftWidth">medium</property>
+                                        <property name="borderRightColor">black</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderRightWidth">medium</property>
+                                        <property name="borderTopColor">black</property>
+                                        <property name="borderTopStyle">none</property>
+                                        <property name="borderTopWidth">medium</property>
+                                        <property name="marginTop">0pt</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="marginBottom">0pt</property>
+                                        <property name="marginRight">0pt</property>
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="letterSpacing">normal</property>
+                                        <property name="lineHeight">normal</property>
+                                        <property name="orphans">2</property>
+                                        <property name="textTransform">none</property>
+                                        <property name="whiteSpace">normal</property>
+                                        <property name="widows">2</property>
+                                        <property name="wordSpacing">normal</property>
+                                        <property name="display">block</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="pageBreakInside">auto</property>
+                                        <property name="showIfBlank">false</property>
+                                        <property name="canShrink">false</property>
+                                        <property name="overflow">hidden</property>
+                                        <text-property name="text">PROYECTO</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4701">
+                                    <property name="verticalAlign">middle</property>
+                                    <label id="4702">
+                                        <text-property name="text">ACTIVIDAD</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4703">
+                                    <property name="verticalAlign">middle</property>
+                                    <label id="4704">
+                                        <text-property name="text">ITEM</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4705">
+                                    <property name="verticalAlign">middle</property>
+                                    <label id="4706">
+                                        <text-property name="text">DENOMINACION</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4707">
+                                    <property name="verticalAlign">middle</property>
+                                    <label id="4708">
+                                        <text-property name="text">FUENTE</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4709">
+                                    <property name="verticalAlign">middle</property>
+                                    <label id="4710">
+                                        <text-property name="text">CANTON</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4711">
+                                    <property name="verticalAlign">middle</property>
+                                    <label id="4712">
                                         <text-property name="text">INICIAL</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4624">
+                                <cell id="4713">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="4625">
+                                    <label id="4714">
                                         <text-property name="text">INCREMENTO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4626">
+                                <cell id="4715">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="4627">
+                                    <label id="4716">
                                         <text-property name="text">DECREMENTO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4628">
+                                <cell id="4717">
                                     <property name="verticalAlign">middle</property>
-                                    <label id="4629">
+                                    <label id="4718">
                                         <text-property name="text">CODIFICADO</text-property>
                                     </label>
                                 </cell>
                             </row>
                         </header>
                         <detail>
-                            <row id="4630">
-                                <cell id="4631">
-                                    <property name="colSpan">7</property>
-                                    <property name="rowSpan">1</property>
+                            <row id="4719">
+                                <cell id="4720">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4632">
-                                        <property name="resultSetColumn">PRCODIGO</property>
+                                    <data id="4721">
+                                        <property name="resultSetColumn">PROGRAMA</property>
                                     </data>
                                 </cell>
-                                <cell id="4635">
+                                <cell id="4722">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4636">
+                                    <data id="4723">
+                                        <property name="resultSetColumn">PROYECTO</property>
+                                    </data>
+                                </cell>
+                                <cell id="4724">
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="4725">
+                                        <property name="resultSetColumn">ACTIVIDAD</property>
+                                    </data>
+                                </cell>
+                                <cell id="4726">
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="4727">
+                                        <property name="resultSetColumn">ITEM</property>
+                                    </data>
+                                </cell>
+                                <cell id="4728">
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="4729">
+                                        <property name="resultSetColumn">DENOMINACION</property>
+                                    </data>
+                                </cell>
+                                <cell id="4730">
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="4731">
+                                        <property name="resultSetColumn">FUENTE</property>
+                                    </data>
+                                </cell>
+                                <cell id="4732">
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="4733">
+                                        <property name="resultSetColumn">CANTON</property>
+                                    </data>
+                                </cell>
+                                <cell id="4734">
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="4735">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -1320,9 +1426,9 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                                         <property name="resultSetColumn">INICIAL</property>
                                     </data>
                                 </cell>
-                                <cell id="4637">
+                                <cell id="4736">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4638">
+                                    <data id="4737">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -1378,9 +1484,9 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                                         <property name="resultSetColumn">INCREMENTO</property>
                                     </data>
                                 </cell>
-                                <cell id="4639">
+                                <cell id="4738">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4640">
+                                    <data id="4739">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -1436,9 +1542,9 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                                         <property name="resultSetColumn">DECREMENTO</property>
                                     </data>
                                 </cell>
-                                <cell id="4641">
+                                <cell id="4740">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4642">
+                                    <data id="4741">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -1495,38 +1601,18 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                                     </data>
                                 </cell>
                             </row>
-                            <row id="4680">
-                                <cell id="4681">
-                                    <property name="verticalAlign">middle</property>
-                                </cell>
-                                <cell id="4682">
-                                    <property name="colSpan">10</property>
-                                    <property name="rowSpan">1</property>
-                                    <property name="verticalAlign">middle</property>
-                                </cell>
-                            </row>
                         </detail>
                         <footer>
-                            <row id="4643">
-                                <cell id="4644">
+                            <row id="4742">
+                                <cell id="4743">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="4645">
+                                <cell id="4744">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
-                                <cell id="4674">
-                                    <property name="verticalAlign">middle</property>
-                                </cell>
-                                <cell id="4670">
-                                    <property name="verticalAlign">middle</property>
-                                </cell>
-                                <cell id="4666">
-                                    <property name="verticalAlign">middle</property>
-                                </cell>
-                                <cell id="4662">
-                                    <property name="verticalAlign">middle</property>
-                                </cell>
-                                <cell id="4658">
+                                <cell id="4745">
+                                    <property name="colSpan">5</property>
+                                    <property name="rowSpan">1</property>
                                     <property name="verticalAlign">middle</property>
                                     <label id="4438">
                                         <property name="fontFamily">"Arial"</property>
@@ -1535,9 +1621,9 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                                         <text-property name="text">TOTAL GENERAL:</text-property>
                                     </label>
                                 </cell>
-                                <cell id="4646">
+                                <cell id="4750">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4676">
+                                    <data id="4765">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -1593,9 +1679,9 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                                         <property name="resultSetColumn">TINICIAL</property>
                                     </data>
                                 </cell>
-                                <cell id="4647">
+                                <cell id="4751">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4677">
+                                    <data id="4766">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -1651,9 +1737,9 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                                         <property name="resultSetColumn">TINCREMENTO</property>
                                     </data>
                                 </cell>
-                                <cell id="4648">
+                                <cell id="4752">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4678">
+                                    <data id="4767">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -1709,9 +1795,9 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                                         <property name="resultSetColumn">TDECREMENTO</property>
                                     </data>
                                 </cell>
-                                <cell id="4649">
+                                <cell id="4753">
                                     <property name="verticalAlign">middle</property>
-                                    <data id="4679">
+                                    <data id="4768">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
                                         <property name="backgroundPositionY">0%</property>
@@ -1770,6 +1856,12 @@ where COMACO.ACTIVIDAD.ACTIVIDADID = ?]]></xml-property>
                             </row>
                         </footer>
                     </table>
+                </cell>
+            </row>
+            <row id="4565">
+                <cell id="4566">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
                 </cell>
             </row>
             <row id="4400">

@@ -1081,6 +1081,30 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Reporte E05'
         }
+    }).state('app.reporteE07resumen', {
+        url: "/reporteE07resumen",
+        templateUrl: "assets/views/papp/reporteE07resumen.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteE07resumenCtrl','ReporteP01Factory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalProgramaCtrl','ProgramaFactory',
+        		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
+        		'ModalActividadReporteCtrl','ActividadReporteFactory',
+        		'ModalSubActividadReporteCtrl','SubActividadReporteFactory',
+        		'ModalTareaReporteCtrl','TareaReporteFactory',
+        		'ModalSubTareaReporteCtrl','SubTareaReporteFactory',
+        		'ModalItemsReporteCtrl','ItemsReporteFactory',
+        		'ModalSubItemsReporteCtrl','SubItemsReporteFactory',
+        		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory',
+        		'ModalGeograficoCtrl','GeograficoFactory',
+        		'ModalOrganismoCtrl','OrganismoFactory'
+		),
+        title: 'Reporte E07 RESUMEN DE REFORMAS',
+        ncyBreadcrumb: {
+            label: 'Reporte E07 RESUMEN DE REFORMAS'
+        }
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",
