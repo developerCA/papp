@@ -65,7 +65,8 @@ app.controller('ModalReformasLineasController1', [ "$scope","$rootScope","ID","u
 		$scope.objetoDetalles.tareanombre = $scope.objetoDetalles.tareacodigo + ": " + $scope.objetoDetalles.tareanombre;
 		if (editar != null) {
 			$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ": " + $scope.objetoDetalles.subtareanombre;
-			$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
+			//$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
+        	$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ' - ' + $scope.objetoDetalles.npcodigocanton + ' - ' + $scope.objetoDetalles.npcodigofuente + ' - ' + $scope.objetoDetalles.npcodigoorganismo + ' - ' + $scope.objetoDetalles.itemnombre;
 			$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ": " + $scope.objetoDetalles.subitemnombre;
 		}
 	}

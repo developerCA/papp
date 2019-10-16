@@ -8,18 +8,15 @@ function(Restangular) {
 			pagina,
 			ejefiscal
 		) {
-			return this.traerFiltro(
-					pagina,
-					ejefiscal,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null
-				);
+			var url = "ejecucion/consultar/ordengasto";
+			var tObj = {
+				filas: "10",
+				pagina: pagina.toString()
+			}
+
+			if(ejefiscal != null && ejefiscal != "") tObj.ejerciciofiscalid= "" + ejefiscal;	
+
+			return Restangular.allUrl(url).customPOST(tObj);
 		},
 
 		traerFiltro : function(
@@ -41,9 +38,9 @@ function(Restangular) {
 			}
 
 			if(ejefiscal != null && ejefiscal != "") tObj.ordengastoejerfiscalid= "" + ejefiscal;	
-			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
-			if(compromiso != null && compromiso != "") tObj.compromiso= "" + compromiso;	
-			if(certificacion != null && certificacion != "") tObj.certificacion= "" + certificacion;	
+			if(codigo != null && codigo != "") tObj.codigo= "%" + codigo;	
+			if(compromiso != null && compromiso != "") tObj.compromiso= "%" + compromiso;	
+			if(certificacion != null && certificacion != "") tObj.certificacion= "%" + certificacion;	
 			if(valorinicial!= null && valorinicial != "") tObj.valorinicial= "" + valorinicial;	
 			if(valorfinal != null && valorfinal != "") tObj.valorfinal= "" + valorfinal;	
 			if(fechainicial != null && fechainicial != "") tObj.fechainicial= "" + fechainicial;	

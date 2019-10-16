@@ -85,7 +85,8 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","
 		$scope.objetoDetalles.subactividadnombre = $scope.objetoDetalles.subactividadcodigo + ": " + $scope.objetoDetalles.subactividadnombre;
 		$scope.objetoDetalles.tareanombre = $scope.objetoDetalles.tareacodigo + ": " + $scope.objetoDetalles.tareanombre;
 		$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ": " + $scope.objetoDetalles.subtareanombre;
-		$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
+		//$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
+    	$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ' - ' + $scope.objetoDetalles.npcodigocanton + ' - ' + $scope.objetoDetalles.npcodigofuente + ' - ' + $scope.objetoDetalles.npcodigoorganismo + ' - ' + $scope.objetoDetalles.itemnombre;
 		if (editar != null) {
 			$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ": " + $scope.objetoDetalles.subitemnombre;
 			$scope.objeto.npsaldocertificacion += $scope.objeto.valor;

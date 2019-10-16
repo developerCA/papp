@@ -8,17 +8,15 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			ejefiscal,
 			estado
 		) {
-			return this.traerFiltro(
-					pagina,
-					ejefiscal,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null
-				);
+			var url = "ejecucion/consultar/ordendevengo";
+			var tObj = {
+				filas: "10",
+				pagina: pagina.toString()
+			}
+
+			if(ejefiscal != null && ejefiscal != "") tObj.ejerciciofiscalid= "" + ejefiscal;	
+
+			return Restangular.allUrl(url).customPOST(tObj);
 		},
 
 		traerFiltro: function(
@@ -39,8 +37,8 @@ app.factory("ordenDevengoFactory", [ "Restangular", function(Restangular) {
 			}
 
 			if(ejefiscal != null && ejefiscal != "") tObj.ejerciciofiscalid= "" + ejefiscal;	
-			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
-			if(precompromiso != null && precompromiso != "") tObj.numprecompromiso= "" + precompromiso;	
+			if(codigo != null && codigo != "") tObj.codigo= "%" + codigo;	
+			if(precompromiso != null && precompromiso != "") tObj.numprecompromiso= "%" + precompromiso;	
 			if(valorinicial!= null && valorinicial != "") tObj.valorinicial= "" + valorinicial;	
 			if(valorfinal != null && valorfinal != "") tObj.valorfinal= "" + valorfinal;	
 			if(fechainicial != null && fechainicial != "") tObj.fechainicial= "" + encodeURIComponent(fechainicial);	

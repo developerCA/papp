@@ -7,17 +7,15 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			pagina,
 			ejefiscal
 		) {
-			return this.traerFiltro(
-					pagina,
-					ejefiscal,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null
-				);
+			var url = "ejecucion/consultar/certificacion";
+			var tObj = {
+				filas: "10",
+				pagina: pagina.toString()
+			}
+
+			if(ejefiscal != null && ejefiscal != "") tObj.certificacionejerfiscalid= "" + ejefiscal;	
+
+			return Restangular.allUrl(url).customPOST(tObj);
 		},
 
 		traerFiltro: function(
@@ -38,13 +36,20 @@ app.factory("certificacionesFondosFactory", [ "Restangular", function(Restangula
 			}
 
 			if(ejefiscal != null && ejefiscal != "") tObj.certificacionejerfiscalid= "" + ejefiscal;	
-			if(codigo != null && codigo != "") tObj.codigo= "" + codigo;	
-			if(precompromiso != null && precompromiso != "") tObj.numprecompromiso= "" + precompromiso;	
+			if(codigo != null && codigo != "") tObj.codigo= "%" + codigo;	
+			if(precompromiso != null && precompromiso != "") tObj.numprecompromiso= "%" + precompromiso;	
 			if(valorinicial!= null && valorinicial != "") tObj.valorinicial= "" + valorinicial;	
 			if(valorfinal != null && valorfinal != "") tObj.valorfinal= "" + valorfinal;	
 			if(fechainicial != null && fechainicial != "") tObj.fechainicial= "" + encodeURIComponent(fechainicial);	
 			if(fechafinal != null && fechafinal != "") tObj.fechafinal= "" + encodeURIComponent(fechafinal);	
 			if(estado != null && estado != "") tObj.estado= "" + estado;	
+//			tObj.codigo= "%" + (codigo != null && codigo != ""? codigo: "");
+//			tObj.numprecompromiso= "%" + (precompromiso != null && precompromiso != ""? precompromiso: "");	
+//			tObj.valorinicial= "%" + (valorinicial!= null && valorinicial != ""? valorinicial: "");
+//			tObj.valorfinal= "%" + (valorfinal != null && valorfinal != ""? valorfinal: "");
+//			tObj.fechainicial= "%" + (fechainicial != null && fechainicial != ""? encodeURIComponent(fechainicial): "");
+//			tObj.fechafinal= "%" + (fechafinal != null && fechafinal != ""? encodeURIComponent(fechafinal): "");
+//			tObj.estado= "%" + (estado != null && estado != ""? estado: "");
 
 			return Restangular.allUrl(url).customPOST(tObj);
 		},
