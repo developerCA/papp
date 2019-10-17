@@ -40,10 +40,6 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 					//console.log(resp);
 		        	$scope.objeto = resp.json.certificacionlinea;
 		        	$scope.objetoDetalles = resp.json.subiteminfo;
-		        	$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ' ' + $scope.objetoDetalles.subtareanombre;
-		        	//$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ' ' + $scope.objetoDetalles.itemnombre;
-		        	$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ' - ' + $scope.objetoDetalles.npcodigocanton + ' - ' + $scope.objetoDetalles.npcodigofuente + ' - ' + $scope.objetoDetalles.npcodigoorganismo + ' - ' + $scope.objetoDetalles.itemnombre;
-		        	$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ' ' + $scope.objetoDetalles.subitemnombre;
 		        	$scope.saldo = $scope.objeto.npvalorinicial; //$scope.objeto.npvalor + $scope.objeto.npvalorinicial;
 		        	$scope.ponerCodigos();
 		        	$scope.editarSub = false;
@@ -59,9 +55,13 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
 		$scope.objetoDetalles.subactividadnombre = $scope.objetoDetalles.subactividadcodigo + ": " + $scope.objetoDetalles.subactividadnombre;
 		$scope.objetoDetalles.tareanombre = $scope.objetoDetalles.tareacodigo + ": " + $scope.objetoDetalles.tareanombre;
 		if (editar != null) {
-			$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ": " + $scope.objetoDetalles.subtareanombre;
-			$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
-			$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ": " + $scope.objetoDetalles.subitemnombre;
+//			$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ": " + $scope.objetoDetalles.subtareanombre;
+//			$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ": " + $scope.objetoDetalles.itemnombre;
+//			$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ": " + $scope.objetoDetalles.subitemnombre;
+        	$scope.objetoDetalles.subtareanombre = $scope.objetoDetalles.subtareacodigo + ' ' + $scope.objetoDetalles.subtareanombre;
+        	//$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ' ' + $scope.objetoDetalles.itemnombre;
+        	$scope.objetoDetalles.itemnombre = $scope.objetoDetalles.itemcodigo + ' - ' + $scope.objetoDetalles.npcodigocanton + ' - ' + $scope.objetoDetalles.npcodigofuente + ' - ' + $scope.objetoDetalles.npcodigoorganismo + ' - ' + $scope.objetoDetalles.itemnombre;
+        	$scope.objetoDetalles.subitemnombre = $scope.objetoDetalles.subitemcodigo + ' ' + $scope.objetoDetalles.subitemnombre;
 		}
 	}
 

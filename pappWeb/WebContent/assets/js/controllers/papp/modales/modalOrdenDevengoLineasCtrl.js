@@ -36,6 +36,7 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
 	        	//$scope.noeditar = true;
 	        	//$scope.noeditar2 = !$scope.editarValor || noeditar; //(!$scope.editarValor? false: noeditar);
 	        	$scope.noeditar2 = (ordenGastoValor == 'L'? true: !$scope.editarValor || noeditar);
+	        	$scope.ponerCodigos();
 			})
 		}
 	}
