@@ -228,27 +228,25 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 			if (resp.json.result.length == 0) {
 	             SweetAlert.swal(
 		       		 "Ejecucion Metas!",
-		       		 "No se obtuvo resultados para estos detalles de búsqueda!",
+		       		 "No se obtuvo resultados para estos detalles de busqueda!",
 		       		 "success"
 				 );
 			} else {
 				for (var i = 0; i < resp.json.result.length; i++) {
-					$scope.listaDetalles = $scope.listaDetalles.concat(resp.json.result[i].ejecuciondetalleacts);
+					$scope.listaDetalles = $scope.listaDetalles.concat(resp.json.result[i].ejecuciondetallesubtareas);
 				}
-				$scope.tituloObjetivo = null;
+				$scope.tituloObjetivo = resp.json.result[0].objetivo;
 				$scope.tituloPrograma = resp.json.result[0].programa;
 				$scope.tituloProyecto = resp.json.result[0].proyecto;
-				$scope.tituloActividad = null;
-				$scope.tituloSubactividad = null;
-				$scope.tituloTarea = null;
+				$scope.tituloActividad = resp.json.result[0].actividad;
+				$scope.tituloSubactividad = resp.json.result[0].subtactividad;
+				$scope.tituloTarea = resp.json.result[0].tarea;
 			}
 		})
 	}
 
 	$scope.guardarLineSubtarea = function(index) {
-        var objEnviar = Object.assign({}, $scope.objeto);
-        objEnviar.details = $scope.objetolista;
-    	ejecucionMetasFactory.guardarLineSubtarea(objEnviar).then(function(resp){
+        ejecucionMetasFactory.guardarLineSubtarea($scope.listaDetalles[index], $rootScope.ejefiscal).then(function(resp){
 			 if (resp.estado){
 //	             SweetAlert.swal(
 //	            		 "EjecucionMetas!",

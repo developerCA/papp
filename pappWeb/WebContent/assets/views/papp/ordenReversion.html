@@ -175,28 +175,28 @@
 										<i class="fa fa-file-text"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;" ng-if="!rol('ROLE_GESTOR_GASTO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Imprimir oficio"
 										ng-click="imprimiroficio(obj.id)">
 										<i class="fa fa-file-text-o"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;" ng-if="!rol('ROLE_GESTOR_GASTO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar"
 										ng-click="aprobar($index)">
 										<i class="fa ti-check"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;" ng-if="!rol('ROLE_GESTOR_GASTO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Anular"
 										ng-click="anular($index)">
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;" ng-if="!rol('ROLE_GESTOR_GASTO');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Negar"
 										ng-click="negar($index)">

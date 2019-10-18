@@ -79,8 +79,8 @@ app.factory("ejecucionMetasFactory", [ "Restangular", function(Restangular) {
 			return Restangular.allUrl(url).customGET();
 		},
 
-		guardarLineSubtareas: function(objeto){
-			var url = "administrar/ejecucionMetas/";
+		guardarLineSubtarea: function(objeto, ejerciciofiscal){
+			var url = "ejecucion/cronogramasubtareas/" + ejerciciofiscal;
 			return Restangular.allUrl(url).customPOST(objeto);
 		},
 	}

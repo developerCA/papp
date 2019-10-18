@@ -578,9 +578,9 @@
 														<td>
 															<div class="form-group">
 															    <div class="input-group">
-															        <input type="text" placeholder="Actividad"
-															            class="form-control" name="npactividad_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															        <input type="text" placeholder="Subtarea"
+															            class="form-control" name="nombresubactividad_{{$index}}"
+															            ng-model="obj.nombresubactividad" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
@@ -588,8 +588,8 @@
 															<div class="form-group">
 															    <div class="input-group">
 															        <input type="text" placeholder="Descripci&oacute;n"
-															            class="form-control" name="npmetapl_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															            class="form-control" name="descripcion_{{$index}}"
+															            ng-model="obj.descripcion" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
@@ -597,8 +597,8 @@
 															<div class="form-group">
 															    <div class="input-group">
 															        <input type="text" placeholder="Unidad Medida"
-															            class="form-control" name="npunidadmedida_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															            class="form-control" name="unidadmedida_{{$index}}"
+															            ng-model="obj.unidadmedida" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
@@ -613,8 +613,8 @@
 															<div class="form-group">
 															    <div class="input-group">
 															        <input type="text" placeholder="Mes"
-															            class="form-control" name="npmes_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															            class="form-control" name="npMes_{{$index}}"
+															            ng-model="obj.npMes" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
@@ -622,8 +622,8 @@
 															<div class="form-group">
 															    <div class="input-group">
 															        <input type="text" placeholder="Valor Meta PL"
-															            class="form-control" name="npmetapl_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">
+															            class="form-control" name="planificado_{{$index}}"
+															            ng-model="obj.planificado" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
@@ -631,8 +631,8 @@
 															<div class="form-group">
 															    <div class="input-group">
 															        <input type="text" placeholder="Valor Meta EJ"
-															            class="form-control" name="npmetaej_{{$index}}"
-															            ng-model="obj.npnombrecanton">
+															            class="form-control" name="ejecutado_{{$index}}"
+															            ng-model="obj.ejecutado">
 															    </div>
 															</div>
 														</td>
@@ -640,8 +640,8 @@
 															<div class="form-group">
 															    <div class="input-group">
 															        <input type="text" placeholder="Descripci&oacute;n de la observaci&oacute;n"
-															            class="form-control" name="npobservacion_{{$index}}"
-															            ng-model="obj.npnombrecanton">
+															            class="form-control" name="observacion_{{$index}}"
+															            ng-model="obj.observacion">
 															    </div>
 															</div>
 														</td>
@@ -649,15 +649,15 @@
 															<div class="form-group">
 															    <div class="input-group">
 															        <input type="text"
-															            class="form-control" name="npobservacioncierre_{{$index}}"
-															            ng-model="obj.npnombrecanton" ng-disabled="true">>
+															            class="form-control" name="observacioncierre_{{$index}}"
+															            ng-model="obj.observacioncierre" ng-disabled="true">
 															    </div>
 															</div>
 														</td>
 														<td>
 															<a uib-tooltip="Guardar"
 																class="btn btn-sm btn-danger"
-																ng-click="guardarLineTarea($index)">
+																ng-click="guardarLineSubtarea($index)">
 																<i class="fa fa-floppy-o"></i>
 															</a>
 														</td>

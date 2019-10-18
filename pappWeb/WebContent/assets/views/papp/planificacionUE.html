@@ -2761,7 +2761,7 @@
 						</td>
 						<td width="3px"></td>
 						<td width="34px">
-							<a ng-show="node.nodeTipo!='AC' && node.nodeTipo!='SI'" uib-tooltip="Agregar"
+							<a ng-if="!rol('ROLE_GESTOR_GASTO');" ng-show="node.nodeTipo!='AC' && node.nodeTipo!='SI'" uib-tooltip="Agregar"
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="nuevo(node);">
 								<span class="glyphicon glyphicon-plus"></span>

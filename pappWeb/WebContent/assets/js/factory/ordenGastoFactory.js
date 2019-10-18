@@ -14,7 +14,7 @@ function(Restangular) {
 				pagina: pagina.toString()
 			}
 
-			if(ejefiscal != null && ejefiscal != "") tObj.ejerciciofiscalid= "" + ejefiscal;	
+			if(ejefiscal != null && ejefiscal != "") tObj.ordengastoejerfiscalid= "" + ejefiscal;	
 
 			return Restangular.allUrl(url).customPOST(tObj);
 		},
