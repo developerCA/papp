@@ -24,7 +24,6 @@ import ec.com.papp.administracion.to.SocionegocioTO;
 import ec.com.papp.administracion.to.TipodocumentoTO;
 import ec.com.papp.administracion.to.TipodocumentoclasedocumentoTO;
 import ec.com.papp.administracion.to.UnidadmedidaTO;
-import ec.com.papp.planificacion.dao.OrdengastolineaDAO;
 import ec.com.papp.planificacion.id.CertificacionlineaID;
 import ec.com.papp.planificacion.id.OrdendevengolineaID;
 import ec.com.papp.planificacion.id.OrdengastolineaID;
