@@ -584,6 +584,10 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.editar=true;
 			$scope.editarP=true;
 			$scope.editarA=true;
+		} else if ($scope.rol('ROLE_CONSULTA')) {
+			$scope.editar=false;
+			$scope.editarP=false;
+			$scope.editarA=false;
 		}
 		if (node.nodeTipo == "AC") {
 			PlanificacionUEFactory.editar(
@@ -1866,11 +1870,21 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
 			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
 			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
-			$scope.cabecera = resp.json.cabecera[0];
-			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
-			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
-			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
-			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			if (resp.json.cabecera.length > 0) {
+				// con datos
+				$scope.cabecera = resp.json.cabecera[0];
+				$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+				$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+				$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+				$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			} else {
+				// sin datos
+				$scope.cabecera = [];
+				$scope.programa = null;
+				$scope.proyecto = null;
+				$scope.actividad = null;
+				$scope.subactividad = null;
+			}
 			$scope.detalle = resp.json.detalle;
 			for (var i = 0; i < $scope.detalle.length; i++) {
 				$scope.detalle[i].tareanombre = $scope.detalle[i].tareacodigo + " " + $scope.detalle[i].tareanombre;
@@ -1924,17 +1938,27 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$rootScope.ejefiscal,
 			$scope.tipo
 		).then(function(resp){
-			console.log(resp);
+			//console.log(resp);
 			if (!resp.estado) return;
 			$scope.unidad = resp.json.unidad;
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
 			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
 			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
-			$scope.cabecera = resp.json.cabecera[0];
-			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
-			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
-			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
-			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			if (resp.json.cabecera.length > 0) {
+				// con datos
+				$scope.cabecera = resp.json.cabecera[0];
+				$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+				$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+				$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+				$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			} else {
+				// sin datos
+				$scope.cabecera = [];
+				$scope.programa = null;
+				$scope.proyecto = null;
+				$scope.actividad = null;
+				$scope.subactividad = null;
+			}
 			$scope.detallePA = resp.json.detalle;
 			$scope.edicionMatrizPresupuesto = true;
 		});
@@ -1959,11 +1983,21 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
 			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
 			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
-			$scope.cabecera = resp.json.cabecera[0];
-			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
-			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
-			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
-			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			if (resp.json.cabecera.length > 0) {
+				// con datos
+				$scope.cabecera = resp.json.cabecera[0];
+				$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+				$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+				$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+				$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			} else {
+				// sin datos
+				$scope.cabecera = [];
+				$scope.programa = null;
+				$scope.proyecto = null;
+				$scope.actividad = null;
+				$scope.subactividad = null;
+			}
 			$scope.detallePA = resp.json.detalle;
 			$scope.edicionMatrizMetas = true;
 		});
@@ -2228,11 +2262,21 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
 			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
 			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
-			$scope.cabecera = resp.json.cabecera[0];
-			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
-			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
-			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
-			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			if (resp.json.cabecera.length > 0) {
+				// con datos
+				$scope.cabecera = resp.json.cabecera[0];
+				$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+				$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+				$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+				$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			} else {
+				// sin datos
+				$scope.cabecera = [];
+				$scope.programa = null;
+				$scope.proyecto = null;
+				$scope.actividad = null;
+				$scope.subactividad = null;
+			}
 			$scope.detalles = resp.json.detalle;
 			$scope.edicionMatrizPresupuestoAP = true;
 		});
@@ -2250,11 +2294,21 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 			$scope.nombreinstitucion = $scope.unidad.codigoinstitucion + " " + $scope.unidad.nombreinstitucion;
 			$scope.nombreinstentidad = $scope.unidad.codigoinstentidad + " " + $scope.unidad.nombreinstentidad;
 			$scope.nombreunidad = $scope.unidad.codigounidad + " " + $scope.unidad.nombreunidad;
-			$scope.cabecera = resp.json.cabecera[0];
-			$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
-			$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
-			$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
-			$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			if (resp.json.cabecera.length > 0) {
+				// con datos
+				$scope.cabecera = resp.json.cabecera[0];
+				$scope.programa = $scope.cabecera.programacodigo + " " + $scope.cabecera.programa;
+				$scope.proyecto = $scope.cabecera.proyectocodigo + " " + $scope.cabecera.proyecto;
+				$scope.actividad = $scope.cabecera.actividadcodigo + " " + $scope.cabecera.actividad;
+				$scope.subactividad = $scope.cabecera.codigo + " " + $scope.cabecera.descripcion;
+			} else {
+				// sin datos
+				$scope.cabecera = [];
+				$scope.programa = null;
+				$scope.proyecto = null;
+				$scope.actividad = null;
+				$scope.subactividad = null;
+			}
 			$scope.detalles = resp.json.detalle;
 			$scope.edicionMatrizMetasAP = true;
 		});

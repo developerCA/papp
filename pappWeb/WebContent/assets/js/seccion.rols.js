@@ -23,7 +23,7 @@ function ifRollId(id) {
 
 function ifRollPermiso(nombre) {
 	if (nombre != undefined) {
-		if (nombre.trim() == "") return true;
+		if (nombre == "") return true;
 		for (var obj in seccion.rols) {
 			if (seccion.rols[obj].nppermiso == nombre) {
 				return true;

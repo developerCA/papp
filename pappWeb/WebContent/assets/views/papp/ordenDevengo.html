@@ -156,7 +156,8 @@
 					<div>
 						<table ng-table="tableParams" class="table table-striped">
 							<tr ng-repeat="obj in $data">
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;"
+									ng-if="!rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Modificar"
 										ng-click="editar($index)">
@@ -170,14 +171,16 @@
 										<i class="fa fa-list-alt"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;"
+									ng-if="!rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Imprimir solicitud"
 										ng-click="imprimirsolicitud(obj.id)">
 										<i class="fa fa-file-text"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;"
+									ng-if="!rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Imprimir oficio"
 										ng-click="imprimiroficio(obj.id)">
@@ -208,14 +211,16 @@
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;"
+									ng-if="!rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Visualizar"
 										ng-click="visualizar($index)">
 										<i class="fa ti-zoom-in"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;"
+									ng-if="!rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Eliminar"
 										ng-click="eliminar($index)">

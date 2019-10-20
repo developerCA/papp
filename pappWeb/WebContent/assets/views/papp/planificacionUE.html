@@ -79,6 +79,7 @@
 								</td>
 								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
+										ng-if="!rol('ROLE_CONSULTA');"
 										style="background-color: #00B300 !important"
 										uib-tooltip="Solicitar Planificaci&oacute;n"
 										ng-click="solicitarPlanificacion(obj);">
@@ -87,6 +88,7 @@
 								</td>
 								<td width="32px" style="padding: 1px;">
 									<a class="btn btn-sm btn-primary"
+										ng-if="!rol('ROLE_CONSULTA');"
 										style="background-color: #00B300 !important"
 										uib-tooltip="Solicitar Ajustada"
 										ng-click="solicitarAjustado(obj);">
@@ -180,7 +182,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<a class="btn btn-sm btn-default" ng-click="regresarPUE();">
-									<i class="fa ti-back-left"></i> Regresar
+									<i class="fa ti-back-left"></i>
+									Regresar
 								</a>
 								<br><br>
 								<div ui-tree="treeOptions" id="tree-root"
@@ -2135,8 +2138,11 @@
 								</div>
 								<div class="panel-footer pull-right">
 									<a class="btn btn-sm btn-primary" ng-click="renovar();">
-										Renovar </a> <a class="btn btn-sm btn-default"
-										ng-click="volver();"> Volver </a>
+										Renovar
+									</a>
+									<a class="btn btn-sm btn-default" ng-click="volver();">
+										Volver
+									</a>
 								</div>
 							</div>
 						</div>
@@ -2147,8 +2153,10 @@
 								</div>
 								<div class="panel-body">
 									<div class="form-group has-success">
-										<label class="control-label"> Programa </label> <input
-											type="text" class="form-control" name="programa"
+										<label class="control-label">
+											Programa
+										</label>
+										<input type="text" class="form-control" name="programa"
 											ng-model="programa" required ng-disabled="true">
 									</div>
 
@@ -2760,8 +2768,8 @@
 							</a>
 						</td>
 						<td width="3px"></td>
-						<td width="34px">
-							<a ng-if="!rol('ROLE_GESTOR_GASTO');" ng-show="node.nodeTipo!='AC' && node.nodeTipo!='SI'" uib-tooltip="Agregar"
+						<td width="34px" ng-if="!rol('ROLE_GESTOR_GASTO' && !rol('ROLE_CONSULTA'));">
+							<a ng-show="node.nodeTipo!='AC' && node.nodeTipo!='SI'" uib-tooltip="Agregar"
 								class="btn btn-info btn-sm" data-nodrag
 								ng-click="nuevo(node);">
 								<span class="glyphicon glyphicon-plus"></span>
