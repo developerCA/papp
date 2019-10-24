@@ -194,7 +194,7 @@
 							</div>
 						</div>
 						<br>
-						<div class="row" ng-if="listaDetalles != null">
+						<div class="row" ng-if="listaDetalles != null" ng-repeat="item in listaDetalles">
 							<div class="col-sm-12">
 								<div class="form-group">
 									<div class="col-md-4">
@@ -203,7 +203,7 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" value="{{tituloPrograma}}"
+										<input type="text" value="{{ item.codigoprograma }} {{ item.programa }}"
 											class="form-control" name="tituloPrograma"
 											ng-disabled="true" />
 									</div>
@@ -215,7 +215,7 @@
 										</label>
 									</div>
 									<div class="col-md-8">
-										<input type="text" value="{{tituloProyecto}}"
+										<input type="text" value="{{ item.codigoproyecto }} {{ item.proyecto }}"
 											class="form-control" name="tituloProyecto"
 											ng-disabled="true" />
 									</div>
@@ -237,7 +237,7 @@
 														<th>Observacion</th>
 														<th></th>
 													</tr>
-													<tr ng-repeat="obj in listaDetalles">
+													<tr ng-repeat="obj in item.ejecuciondetalleacts">
 														<td>
 															<div class="form-group">
 															    <div class="input-group">

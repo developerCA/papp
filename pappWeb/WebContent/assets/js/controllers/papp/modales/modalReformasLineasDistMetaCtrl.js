@@ -3,6 +3,10 @@
 app.controller('ModalReformasLineasDistMetaController', [ "$scope","$rootScope","ID","editar","noeditar","$uibModalInstance","SweetAlert","$filter", "ngTableParams","reformasFactory",
 	function($scope,$rootScope,ID,editar,noeditar,$uibModalInstance,SweetAlert,$filter, ngTableParams,reformasFactory) {
 
+	$scope.rol=function(nombre) {
+		return ifRollPermiso(nombre);
+	}
+
 	$scope.noeditar = false;
 
 	$scope.init=function(){

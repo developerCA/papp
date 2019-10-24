@@ -3,6 +3,10 @@
 app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","ordenReversionFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, ordenReversionFactory) {
 
+	$scope.rol=function(nombre) {
+		return ifRollPermiso(nombre);
+	}
+
 	$scope.dateOptions = {
 	    changeYear: true,
 	    changeMonth: true,

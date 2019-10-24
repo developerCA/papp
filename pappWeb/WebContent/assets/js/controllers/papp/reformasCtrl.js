@@ -844,7 +844,26 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 	        			return;
             		}
             	}
+            	if ($scope.objeto.tipo == "ES") {
+            		if (!$scope.objeto.npunidadcodigo) {
+	                    SweetAlert.swal(
+	                		"Reformas",
+	                		"Tiene que seleccionar una unidad, para continuar",
+	                		"error"
+	            		);
+	        			return;
+            		}
+            		if (!$scope.objeto.npitemcodigo) {
+            			SweetAlert.swal(
+	                		"Reformas",
+	                		"Tiene que seleccionar un item, para continuar",
+	                		"error"
+	            		);
+	        			return;
+            		}
+            	}
             	if (!noSalir) {
+            		noSalir = !noSalir;
             		var terminar = false;
             		var listaCodigos = '';
 	            	for (var i = 0; i < $scope.detallesDP.length; i++) {

@@ -164,7 +164,8 @@
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;"
+									ng-if="!rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Solicitar"
 										ng-click="solicitar($index)">
@@ -204,7 +205,7 @@
 									</a>
 								</td>
 								<td width="32px" style="padding: 1px;"
-									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO') || rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Liquidaci&oacute;n Total"
 										ng-click="LiquidacionTotal($index)">
@@ -212,7 +213,7 @@
 									</a>
 								</td>
 								<td width="32px" style="padding: 1px;"
-									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO') || rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Liquidaci&oacute;n Parcial"
 										ng-click="LiquidacionParcial($index)">

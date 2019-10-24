@@ -164,7 +164,8 @@
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;"
+									ng-if="!rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Solicitar"
 										ng-click="solicitar($index)">
@@ -188,7 +189,7 @@
 									</a>
 								</td>
 								<td width="32px" style="padding: 1px;"
-									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO') || rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar"
 										ng-click="aprobar($index)">
@@ -196,18 +197,18 @@
 									</a>
 								</td>
 								<td width="32px" style="padding: 1px;"
-									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO') || rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Anular"
-										ng-click="anular($index)">
+										uib-tooltip="Negar"
+										ng-click="negar($index)">
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>
 								<td width="32px" style="padding: 1px;"
-									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO');">
+									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO') || rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Negar"
-										ng-click="negar($index)">
+										uib-tooltip="Anular"
+										ng-click="anular($index)">
 										<i class="fa ti-minus"></i>
 									</a>
 								</td>

@@ -134,9 +134,10 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		       		 "success"
 				 );
 			} else {
-				for (var i = 0; i < resp.json.result.length; i++) {
-					$scope.listaDetalles = $scope.listaDetalles.concat(resp.json.result[i].ejecuciondetalleacts);
-				}
+				$scope.listaDetalles = resp.json.result;
+//				for (var i = 0; i < resp.json.result.length; i++) {
+//					$scope.listaDetalles = $scope.listaDetalles.concat(resp.json.result[i].ejecuciondetalleacts);
+//				}
 				$scope.tituloPrograma = resp.json.result[0].programa;
 				$scope.tituloProyecto = resp.json.result[0].proyecto;
 			}
