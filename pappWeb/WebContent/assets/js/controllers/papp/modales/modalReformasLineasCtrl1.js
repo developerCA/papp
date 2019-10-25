@@ -174,7 +174,7 @@ app.controller('ModalReformasLineasController1', [ "$scope","$rootScope","ID","u
             	}
             	if (tObj.valorincremento == null) tObj.valorincremento = 0;
             	if (tObj.valordecremento == null) tObj.valordecremento = 0;
-            	if (parseInt($scope.saldo) < parseInt(tObj.valordecremento)) {
+            	if (parseFloat($scope.saldo) < parseFloat(tObj.valordecremento)) {
             		SweetAlert.swal(
             				"Reformas!",
             				"El valor decremento no puede ser mayor que el saldo",
@@ -182,7 +182,7 @@ app.controller('ModalReformasLineasController1', [ "$scope","$rootScope","ID","u
     				);
             		return;
             	}
-            	if (parseInt($scope.saldo) <= 0 && parseInt(tObj.valordecremento) > 0) {
+            	if (parseFloat($scope.saldo) <= 0 && parseFloat(tObj.valordecremento) > 0) {
             		SweetAlert.swal(
             				"Reformas!",
             				"Valor de saldo es cero no puede hacer un decremento",
@@ -190,7 +190,7 @@ app.controller('ModalReformasLineasController1', [ "$scope","$rootScope","ID","u
     				);
             		return;
             	}
-            	if (parseInt(tObj.valorincremento) == 0 && parseInt(tObj.valordecremento) == 0) {
+            	if (parseFloat(tObj.valorincremento) == 0 && parseFloat(tObj.valordecremento) == 0) {
             		SweetAlert.swal(
             				"Reformas!",
             				"Valor incremento o valor decremento tienen que tener valor uno de los dos",
@@ -198,7 +198,7 @@ app.controller('ModalReformasLineasController1', [ "$scope","$rootScope","ID","u
     				);
             		return;
             	}
-            	if (parseInt(tObj.valorincremento) != 0 && parseInt(tObj.valordecremento) != 0) {
+            	if (parseFloat(tObj.valorincremento) != 0 && parseFloat(tObj.valordecremento) != 0) {
             		SweetAlert.swal(
             				"Reformas!",
             				"Valor incremento o valor decremento solo uno de los dos puede tener valor",
