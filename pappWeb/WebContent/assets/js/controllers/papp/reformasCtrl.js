@@ -1006,6 +1006,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
             	var diferencia = $scope.objetoP.reformalinea.npSubitemvalor;
             	for (var i = 0; i < $scope.detallesP.length; i++) {
             		diferencia -= $scope.detallesP[i].valor.toFixed(2);
+            		diferencia = diferencia.toFixed(2)
 				}
             	if (diferencia != 0) {
                     SweetAlert.swal(
