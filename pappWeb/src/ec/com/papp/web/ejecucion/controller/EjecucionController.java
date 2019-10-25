@@ -193,7 +193,10 @@ public class EjecucionController {
 			//ordengasto linea
 			else if(clase.equals("ordengastolinea")){
 				OrdengastolineaTO ordengastolineaTO = gson.fromJson(new StringReader(objeto), OrdengastolineaTO.class);
-				ordengastolineaTO.setSaldo(ordengastolineaTO.getNpsaldocertificacion());
+				if(ordengastolineaTO.getNpsaldocertificacion()!=null)
+					ordengastolineaTO.setSaldo(UtilGeneral.redondear(ordengastolineaTO.getNpsaldocertificacion(),2));
+				else
+					ordengastolineaTO.setSaldo(0.0);
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				OrdengastolineaTO ordengastolineaTO2=new OrdengastolineaTO();
 				log.println("consulta lineas: " + ordengastolineaTO.getNivelactid() +"-"+ ordengastolineaTO.getId().getId());
@@ -253,7 +256,10 @@ public class EjecucionController {
 			//ordendevengo linea
 			else if(clase.equals("ordendevengolinea")){
 				OrdendevengolineaTO ordendevengolineaTO = gson.fromJson(new StringReader(objeto), OrdendevengolineaTO.class);
-				ordendevengolineaTO.setSaldo(ordendevengolineaTO.getNpsaldo());
+				if(ordendevengolineaTO.getNpsaldo()!=null)
+					ordendevengolineaTO.setSaldo(UtilGeneral.redondear(ordendevengolineaTO.getNpsaldo(),2));
+				else
+					ordendevengolineaTO.setSaldo(0.0);
 				OrdendevengolineaTO ordendevengolineaTO2=new OrdendevengolineaTO();
 				log.println("consulta lineas: " + ordendevengolineaTO.getNivelactid() +"-"+ ordendevengolineaTO.getId().getId());
 				ordendevengolineaTO2.setNivelactid(ordendevengolineaTO.getNivelactid());
@@ -309,7 +315,10 @@ public class EjecucionController {
 			//ordenreversion linea
 			else if(clase.equals("ordenreversionlinea")){
 				OrdenreversionlineaTO ordenreversionlineaTO = gson.fromJson(new StringReader(objeto), OrdenreversionlineaTO.class);
-				ordenreversionlineaTO.setSaldo(ordenreversionlineaTO.getSaldo());
+				if(ordenreversionlineaTO.getNpsaldo()!=null)
+					ordenreversionlineaTO.setSaldo(UtilGeneral.redondear(ordenreversionlineaTO.getNpsaldo(),2));
+				else
+					ordenreversionlineaTO.setSaldo(0.0);
 				//pregunto si ya tiene una linea con el mismo subitem y no le dejo
 				OrdenreversionlineaTO ordenreversionlineaTO2=new OrdenreversionlineaTO();
 				System.out.println("consulta lineas: " + ordenreversionlineaTO.getNivelactid() +"-"+ ordenreversionlineaTO.getId().getId());
@@ -950,7 +959,7 @@ public class EjecucionController {
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
 				double saldo=ConsultasUtil.obtenersaldodisponiblelineacertificacion(nivelactividadTO.getTablarelacionid(),certificacionlineaTO.getNivelactid(),certificacionlineaTO.getCertificacion().getFechacreacion(),certificacionlineaTO);
-				certificacionlineaTO.setNpvalorinicial(saldo);
+				certificacionlineaTO.setNpvalorinicial(UtilGeneral.redondear(saldo,2));
 				jsonObject.put("certificacionlinea", (JSONObject)JSONSerializer.toJSON(certificacionlineaTO,certificacionlineaTO.getJsonConfig()));
 			}
 			//Ordengasto
@@ -1031,7 +1040,7 @@ public class EjecucionController {
 //					saldodisponible.put("valorajustado", subitemunidadacumuladorTO.getTotal());
 //				}
 				saldodisponible.put("valorajustado", total);
-				saldodisponible.put("saldo", saldo);
+				saldodisponible.put("saldo", UtilGeneral.redondear(saldo, 2));
 				jsonObject.put("valordisponiblesi", (JSONObject)JSONSerializer.toJSON(saldodisponible));
 			}
 			
@@ -1084,7 +1093,7 @@ public class EjecucionController {
 //				double saldo=ordengastolineaTO.getValor()-ordenesnoaprob-ordenesaprobadas;
 				double saldo=ordengastolineaTO.getValor()-ordenesnoaprob-ordenesaprobadas-ordenesnoaprobrev-ordenesaprobadasrev;
 				Map<String, Double> saldodisponible=new HashMap<>();
-				saldodisponible.put("saldo", saldo);
+				saldodisponible.put("saldo", UtilGeneral.redondear(saldo, 2));
 				saldodisponible.put("noaprobadas", ordenesnoaprob);
 				saldodisponible.put("aprobadas", ordenesaprobadas);
 				saldodisponible.put("noaprobadasreversion", ordenesnoaprobrev);
@@ -1184,7 +1193,7 @@ public class EjecucionController {
 				}
 				reformametalineaTO.setNpunidadmedida(subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
 				double saldo=ConsultasUtil.obtenersaldodisponiblesubtarea(subtareaunidadacumuladorTOs,reformametalineaTO.getNivelactid(),reformametalineaTO.getReformameta().getFechacreacion());
-				reformametalineaTO.setCodificado(saldo);
+				reformametalineaTO.setCodificado(UtilGeneral.redondear(saldo,2));
 				//reformametalineaTO.setNpvalorinicial(saldo);
 				jsonObject.put("reformametalinea", (JSONObject)JSONSerializer.toJSON(reformametalineaTO,reformametalineaTO.getJsonConfig()));
 			}
@@ -1214,7 +1223,7 @@ public class EjecucionController {
 					System.out.println("valor: " +saldo);
 					descripciones.put("metadescripcion", subtareaunidadacumuladorTO.getDescripcion());
 					descripciones.put("unidadmedida", subtareaunidadacumuladorTO.getSubtareaunidad().getUnidadmedidaTO().getNombre());
-					valoractual.put("valor", saldo);
+					valoractual.put("valor", UtilGeneral.redondear(saldo,2));
 					jsonObject.put("descripciones", (JSONObject)JSONSerializer.toJSON(descripciones));
 					jsonObject.put("valoractual", (JSONObject)JSONSerializer.toJSON(valoractual));
 					System.out.println("json " + jsonObject.toString());
@@ -1246,7 +1255,7 @@ public class EjecucionController {
 					reformametasubtareaTO.setNpmetadescripcion(subtareaunidadacumuladorTO.getDescripcion());
 				}
 				double saldo=ConsultasUtil.obtenersaldodisponiblereformasubtarea(subtareaunidadacumuladorTOs,reformametasubtareaTO.getNivelactid(),reformametasubtareaTO.getReforma().getFechacreacion());
-				reformametasubtareaTO.setCodificado(saldo);
+				reformametasubtareaTO.setCodificado(UtilGeneral.redondear(saldo,2));
 				System.out.println("descripcion: " + reformametasubtareaTO.getNpmetadescripcion());
 				System.out.println("unidad: " + reformametasubtareaTO.getNpunidadmedida());
 				jsonObject.put("reformametasubtarea", (JSONObject)JSONSerializer.toJSON(reformametasubtareaTO,reformametasubtareaTO.getJsonConfig()));

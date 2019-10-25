@@ -825,16 +825,28 @@ public class ReportesConsultas {
 					cell.setCellValue(p01to2.getMetadescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(9);
-					cell.setCellValue(p01to2.getMetaplanificada());
+					if(p01to2.getMetaplanificada()!=null)
+						cell.setCellValue(p01to2.getMetaplanificada());
+					else
+						cell.setCellValue(0.0);
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(10);
-					cell.setCellValue(p01to2.getMetaaprobada());
+					if(p01to2.getMetaaprobada()!=null)
+						cell.setCellValue(p01to2.getMetaaprobada());
+					else
+						cell.setCellValue(0.0);
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(11);
-					cell.setCellValue(p01to2.getSumaplanificada());
+					if(p01to2.getSumaplanificada()!=null)
+						cell.setCellValue(p01to2.getSumaplanificada());
+					else
+						cell.setCellValue(0.0);
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(12);
-					cell.setCellValue(p01to2.getSumaajustada());
+					if(p01to2.getMetaplanificada()!=null)
+						cell.setCellValue(p01to2.getSumaajustada());
+					else
+						cell.setCellValue(0.0);
 					cell.setCellStyle(styles.get("contenidonumero"));
 					fila++;
 				}
