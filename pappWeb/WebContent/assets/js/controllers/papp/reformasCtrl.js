@@ -442,6 +442,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		    for (var i = 0; i < $scope.detalles.length; i++) {
 				$scope.objeto.valorincremento += $scope.detalles[i].valorincremento;
 				$scope.objeto.valordecremento += $scope.detalles[i].valordecremento;
+				$scope.objeto.valorincremento = $scope.objeto.valorincremento.toFixed(2);
+				$scope.objeto.valordecremento = $scope.objeto.valordecremento.toFixed(2);
 			}
 		    noSalir = true;
 		    $scope.form.submit(Form);
@@ -497,6 +499,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		    for (var i = 0; i < $scope.detalles.length; i++) {
 				$scope.objeto.valorincremento += $scope.detalles[i].valorincremento;
 				$scope.objeto.valordecremento += $scope.detalles[i].valordecremento;
+				$scope.objeto.valorincremento = $scope.objeto.valorincremento.toFixed(2);
+				$scope.objeto.valordecremento = $scope.objeto.valordecremento.toFixed(2);
 			}
 		    noSalir = true;
 		    $scope.form.submit(Form);
@@ -560,6 +564,8 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 		    for (var i = 0; i < $scope.detalles.length; i++) {
 				$scope.objeto.valorincremento += $scope.detalles[i].valorincremento;
 				$scope.objeto.valordecremento += $scope.detalles[i].valordecremento;
+				$scope.objeto.valorincremento = $scope.objeto.valorincremento.toFixed(2);
+				$scope.objeto.valordecremento = $scope.objeto.valordecremento.toFixed(2);
 			}
 		    noSalir = true;
 		    $scope.form.submit(Form);
