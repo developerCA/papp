@@ -181,14 +181,6 @@
 									</a>
 								</td>
 								<td width="32px" style="padding: 1px;"
-									ng-if="!rol('ROLE_APROBADOR');">
-									<a class="btn btn-sm btn-primary"
-										uib-tooltip="Imprimir oficio"
-										ng-click="imprimiroficio(obj.id)">
-										<i class="fa fa-file-text-o"></i>
-									</a>
-								</td>
-								<td width="32px" style="padding: 1px;"
 									ng-if="rol('ROLE_ADMINISTRADOR_PROCESO') || rol('ROLE_APROBADOR');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Aprobar"
