@@ -103,8 +103,8 @@ app.factory("unidadFactory", [ "Restangular", function(Restangular) {
 					"pagina="+pagina +
 					"&filas=10";
 
+			if(id!=null && id != "") URL += "&id=" + id;
 			if(institucion!=null && institucion != "") URL += "&institucion=" + institucion;	
-			if(id!=null && id != "") URL += "&id=" + id;	
 			if(institucionentidad!=null && institucionentidad != "") URL += "&institucionentidad=" + institucionentidad;	
 			//if(estado!=null && estado != "" ) URL += "&estado=" + estado;
 
