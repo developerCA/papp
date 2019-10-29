@@ -1105,6 +1105,56 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Reporte E07 RESUMEN DE REFORMAS'
         }
+    }).state('app.reporteO01', {
+        url: "/reporteO01",
+        templateUrl: "assets/views/papp/reporteO01.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteO01Ctrl','ReporteP01Factory'
+		),
+        title: 'Reporte O01',
+        ncyBreadcrumb: {
+            label: 'Reporte O01'
+        }
+    }).state('app.reporteO02', {
+        url: "/reporteO02",
+        templateUrl: "assets/views/papp/reporteO02.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteO02Ctrl','ReporteP01Factory'
+		),
+        title: 'Reporte O02',
+        ncyBreadcrumb: {
+            label: 'Reporte O02'
+        }
+    }).state('app.reporteO03', {
+        url: "/reporteO03",
+        templateUrl: "assets/views/papp/reporteO03.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteO03Ctrl','ReporteP01Factory'
+		),
+        title: 'Reporte O03',
+        ncyBreadcrumb: {
+            label: 'Reporte O03'
+        }
+    }).state('app.reporteO04', {
+        url: "/reporteO04",
+        templateUrl: "assets/views/papp/reporteO04.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteO04Ctrl','ReporteP01Factory'
+		),
+        title: 'Reporte O04',
+        ncyBreadcrumb: {
+            label: 'Reporte O04'
+        }
+    }).state('app.reporteO05', {
+        url: "/reporteO05",
+        templateUrl: "assets/views/papp/reporteO05.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteO05Ctrl','ReporteP01Factory'
+		),
+        title: 'Reporte O05',
+        ncyBreadcrumb: {
+            label: 'Reporte O05'
+        }
     }).state('app.layouts', {
         url: "/layouts",
         templateUrl: "assets/views/layouts.html",
