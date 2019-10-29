@@ -95,7 +95,7 @@ public class ReportesConsultas {
 
 			row = sheet.createRow((short)fila);
 			cell = row.createCell(0);
-			cell.setCellValue("INSTITUTO");
+			cell.setCellValue("INSTITUCION");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(1);
 			cell.setCellValue("ENTIDAD");
@@ -198,10 +198,10 @@ public class ReportesConsultas {
 				cell.setCellValue(s01to2.getInstitucionentcodigo() +" - " + s01to2.getInstitucionentnombre());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(2);
-				cell.setCellValue(s01to2.getOperativodescripcion());
+				cell.setCellValue(s01to2.getEstrategicodescripcion());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(3);
-				cell.setCellValue(s01to2.getEstrategicodescripcion());
+				cell.setCellValue(s01to2.getOperativodescripcion());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(4);
 				cell.setCellValue(s01to2.getUnidadcodigo() +" - " + s01to2.getUnidadnombre());
@@ -693,7 +693,7 @@ public class ReportesConsultas {
 				cell.setCellStyle(styles.get("titulo"));
 				cell = row.createCell(12);
 				cell.setCellValue(p01TO.getEjerciciofiscalanio());
-				cell.setCellStyle(styles.get("titulo"));
+				cell.setCellStyle(styles.get("contenido"));
 				fila++;
 
 				row = sheet.createRow((short)fila);
@@ -702,7 +702,7 @@ public class ReportesConsultas {
 				cell.setCellStyle(styles.get("titulo"));
 				cell = row.createCell(12);
 				cell.setCellValue(UtilGeneral.parseDateToString(new Date()));
-				cell.setCellStyle(styles.get("titulo"));
+				cell.setCellStyle(styles.get("contenido"));
 				fila++;
 
 				row = sheet.createRow((short)fila);
@@ -710,8 +710,9 @@ public class ReportesConsultas {
 				cell.setCellValue(" Institucion:  ");
 				cell.setCellStyle(styles.get("titulo"));
 				cell = row.createCell(1);
+				System.out.println("institucion: " + p01TO.getInstitucionnombre());
 				cell.setCellValue(p01TO.getInstitucionnombre());
-				cell.setCellStyle(styles.get("titulo"));
+				cell.setCellStyle(styles.get("contenido"));
 				fila++;
 				row = sheet.createRow((short)fila);
 				cell = row.createCell(0);
@@ -722,7 +723,8 @@ public class ReportesConsultas {
 				row = sheet.createRow((short)fila);
 				cell = row.createCell(0);
 				cell.setCellValue(p01TO.getBaselegal());
-				cell.setCellStyle(styles.get("titulo"));
+				System.out.println("base legal: " + p01TO.getBaselegal());
+				cell.setCellStyle(styles.get("contenido"));
 				sheet.addMergedRegion(new CellRangeAddress(8,8,0,12)); 
 				fila++;
 
@@ -735,7 +737,7 @@ public class ReportesConsultas {
 				row = sheet.createRow((short)fila);
 				cell = row.createCell(0);
 				cell.setCellValue(p01TO.getVision());
-				cell.setCellStyle(styles.get("titulo"));
+				cell.setCellStyle(styles.get("contenido"));
 				sheet.addMergedRegion(new CellRangeAddress(10,10,0,12)); 
 				fila++;
 
@@ -748,7 +750,7 @@ public class ReportesConsultas {
 				row = sheet.createRow((short)fila);
 				cell = row.createCell(0);
 				cell.setCellValue(p01TO.getMision());
-				cell.setCellStyle(styles.get("titulo"));
+				cell.setCellStyle(styles.get("contenido"));
 				sheet.addMergedRegion(new CellRangeAddress(12,12,0,12)); 
 				fila++;
 

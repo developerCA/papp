@@ -1680,8 +1680,8 @@ public class ConsultasUtil {
 			if(parameters.get("actividadid")!=null){
 				actividadid=Long.valueOf(parameters.get("actividadid"));
 			}
-			if(parameters.get("subactividadid")!=null){
-				subactividad=Long.valueOf(parameters.get("subactividadid"));
+			if(parameters.get("subtactividadid")!=null){
+				subactividad=Long.valueOf(parameters.get("subtactividadid"));
 			}
 			if(parameters.get("tareaid")!=null){
 				tarea=Long.valueOf(parameters.get("tareaid"));
@@ -1694,7 +1694,7 @@ public class ConsultasUtil {
 				meshasta=Long.valueOf(parameters.get("meshasta"));
 			}
 
-			
+			System.out.println("actividad: " + actividadid + " subactividad: " + subactividad + " tarea: " + tarea);
 			ejecucioncabecerasubtareas=UtilSession.planificacionServicio.transObtieneSubtareasejecucionagrupado(Long.valueOf(parameters.get("institucionid")), Long.valueOf(parameters.get("entidadid")), Long.valueOf(parameters.get("unidadid")),actividadid, mesdesde,meshasta,Long.valueOf(parameters.get("ejerciciofiscalid")),subactividad,tarea);
 			Integer totalRegistrosPagina=ejecucioncabecerasubtareas.size();
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
