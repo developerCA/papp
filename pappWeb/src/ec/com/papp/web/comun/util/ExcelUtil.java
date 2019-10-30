@@ -64,6 +64,23 @@ public class ExcelUtil extends PdfPageEventHelper{
         style.setBorderTop(CellStyle.BORDER_THIN);
         style.setTopBorderColor(IndexedColors.BLACK.getIndex());
         styles.put("titulo", style);
+        //ESTILO PARA LOS TITULOS....
+        style = wb.createCellStyle();
+		HSSFFont Font12 = wb.createFont();
+		Font12.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        Font12.setFontHeightInPoints(new Short("8"));
+        Font12.setFontName("Verdana"); 
+        style.setAlignment(HSSFCellStyle.ALIGN_LEFT);
+        style.setFont(Font2);
+        style.setBorderBottom(CellStyle.BORDER_THIN);
+        style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderLeft(CellStyle.BORDER_THIN);
+        style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderRight(CellStyle.BORDER_THIN);
+        style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+        style.setBorderTop(CellStyle.BORDER_THIN);
+        style.setTopBorderColor(IndexedColors.BLACK.getIndex());
+        styles.put("tituloizquierda", style);
         //ESTILO PARA LOS CONTENIDOS TEXTO....
         style = wb.createCellStyle();
 		HSSFFont fontContenido = wb.createFont();
