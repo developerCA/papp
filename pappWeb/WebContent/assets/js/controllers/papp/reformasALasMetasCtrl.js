@@ -367,6 +367,8 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		});
 	};
 
+	$scope.vMetaActual = 0;
+	$scope.vReprogramada = 0;
 	$scope.editarLineaMeta = function(index) {
 		//$scope.detalles[index]
 		var tObjLinea = Object.assign({}, $scope.detalles[index]);
@@ -386,6 +388,8 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 			}
 		    $scope.objetoP=resp.json;
 			$scope.detallesP=resp.json.cronogramalinea;
+			$scope.vReprogramada = $scope.objetoP.reformalinea.valorincremento - $scope.objetoP.reformalinea.valordecremento;
+			$scope.vMetaActual = $scope.objetoP.reformalinea.npvalorinicial - $scope.vReprogramada;
 
 			$scope.metasDistribucionLinea=true;
 			$scope.edicion=false;

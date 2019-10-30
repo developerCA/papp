@@ -80,7 +80,7 @@ app.controller('ReporteP04pacController', [ "$scope","$rootScope","$uibModal","S
 			size : 'lg',
 			resolve : {
 				instituicionFuente : function() {
-					return null; //$scope.objeto.institucionid;
+					return $scope.objeto.institucionid;
 				},
 				institucionentidad : function() {
 					return $scope.objeto.entidadid;

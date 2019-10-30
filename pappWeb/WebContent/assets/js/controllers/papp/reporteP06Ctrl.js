@@ -82,7 +82,7 @@ app.controller('ReporteP06Controller', [ "$scope","$rootScope","$uibModal","Swee
 			size : 'lg',
 			resolve : {
 				instituicionFuente : function() {
-					return null; //$scope.objeto.institucionid;
+					return $scope.objeto.institucionid;
 				},
 				institucionentidad : function() {
 					return $scope.objeto.entidadid;
