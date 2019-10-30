@@ -304,7 +304,7 @@
 														<td>
 															<a uib-tooltip="Guardar"
 																class="btn btn-sm"
-																ng-click="guardarLineActividad($index)">
+																ng-click="guardarLineActividad($parent.$index, $index)">
 																<i class="fa fa-floppy-o"></i>
 															</a>
 														</td>
@@ -481,7 +481,7 @@
 							</div>
 						</div>
 						<br>
-						<div class="row" ng-if="listaDetalles != null">
+						<div class="row" ng-if="listaDetalles != null" ng-repeat="item in listaDetalles">
 							<div class="col-sm-12">
 								<div class="form-group">
 									<div class="col-md-4">
@@ -574,7 +574,7 @@
 														<th>Observacion de cierre</th>
 														<th></th>
 													</tr>
-													<tr ng-repeat="obj in listaDetalles">
+													<tr ng-repeat="obj in item.ejecuciondetallesubtareas">
 														<td>
 															<div class="form-group">
 															    <div class="input-group">
@@ -657,7 +657,7 @@
 														<td>
 															<a uib-tooltip="Guardar"
 																class="btn btn-sm btn-danger"
-																ng-click="guardarLineSubtarea($index)">
+																ng-click="guardarLineSubtarea($parent.$index, $index)">
 																<i class="fa fa-floppy-o"></i>
 															</a>
 														</td>

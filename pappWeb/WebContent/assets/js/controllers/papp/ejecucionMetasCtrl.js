@@ -144,8 +144,8 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		})
 	}
 
-	$scope.guardarLineActividad = function(index) {
-        ejecucionMetasFactory.guardarLineActividad($scope.listaDetalles[index], $rootScope.ejefiscal).then(function(resp){
+	$scope.guardarLineActividad = function(preIndex, index) {
+        ejecucionMetasFactory.guardarLineActividad($scope.listaDetalles[preIndex].ejecuciondetalleacts[index], $rootScope.ejefiscal).then(function(resp){
 			 if (resp.estado){
 //	             SweetAlert.swal(
 //	            		 "EjecucionMetas!",
@@ -233,9 +233,10 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		       		 "success"
 				 );
 			} else {
-				for (var i = 0; i < resp.json.result.length; i++) {
+				$scope.listaDetalles = resp.json.result;
+/*				for (var i = 0; i < resp.json.result.length; i++) {
 					$scope.listaDetalles = $scope.listaDetalles.concat(resp.json.result[i].ejecuciondetallesubtareas);
-				}
+				}*/
 				$scope.tituloObjetivo = resp.json.result[0].objetivo;
 				$scope.tituloPrograma = resp.json.result[0].programa;
 				$scope.tituloProyecto = resp.json.result[0].proyecto;
@@ -246,21 +247,13 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		})
 	}
 
-	$scope.guardarLineSubtarea = function(index) {
-        ejecucionMetasFactory.guardarLineSubtarea($scope.listaDetalles[index], $rootScope.ejefiscal).then(function(resp){
-			 if (resp.estado){
-//	             SweetAlert.swal(
-//	            		 "EjecucionMetas!",
-//	            		 "Registro guardado satisfactoriamente!",
-//	            		 "success"
-//        		 );
-			 }else{
-	             SweetAlert.swal(
-	            		 "EjecucionMetas!",
-	            		 resp.mensajes.msg,
-	            		 "error"
-        		 );
-			 }
+	$scope.guardarLineSubtarea = function(preIndex, index) {
+        ejecucionMetasFactory.guardarLineSubtarea($scope.listaDetalles[preIndex].ejecuciondetallesubtareas[index], $rootScope.ejefiscal).then(function(resp){
+             SweetAlert.swal(
+            		 "EjecucionMetas!",
+            		 resp.mensajes.msg,
+            		 "error"
+    		 );
 		})
     };
 
