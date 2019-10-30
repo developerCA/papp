@@ -5,6 +5,7 @@ app.controller('ReporteP04Controller', [ "$scope","$rootScope","$uibModal","Swee
 
 	$scope.objeto = {};
 	$scope.institucioncodigo = null;
+	$scope.tipoFormato = 'P';
 
 	$scope.limpiarListas = function(pos) {
 		$scope.objeto.programaid = null;
@@ -413,6 +414,7 @@ app.controller('ReporteP04Controller', [ "$scope","$rootScope","$uibModal","Swee
         	if ($scope.objeto.subitemid != undefined && $scope.objeto.subitemid != null) {
         		url += "&subitemid=" + $scope.objeto.subitemid;
         	}
+      		url += "&tipo=" + $scope.tipoFormato;
 		    window.open(url);
         },
         reset: function (form) {
