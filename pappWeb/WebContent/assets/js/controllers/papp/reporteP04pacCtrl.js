@@ -416,6 +416,7 @@ app.controller('ReporteP04pacController', [ "$scope","$rootScope","$uibModal","S
         	if ($scope.objeto.fuentefinanciamientoid != undefined && $scope.objeto.fuentefinanciamientoid != null) {
         		url += "&fuente=" + $scope.objeto.fuentefinanciamientoid;
         	}
+      		url += "&tipo=" + $scope.tipoFormato;
 		    window.open(url);
         },
         reset: function (form) {
@@ -426,6 +427,7 @@ app.controller('ReporteP04pacController', [ "$scope","$rootScope","$uibModal","S
             $scope.objeto={};
         }
     };
+	$scope.tipoFormato = 'P';
 
 	function toStringDate(fuente) {
 		if (fuente == null) {

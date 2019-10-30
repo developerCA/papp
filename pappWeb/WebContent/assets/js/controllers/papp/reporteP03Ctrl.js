@@ -421,34 +421,8 @@ app.controller('ReporteP03Controller', [ "$scope","$rootScope","$uibModal","Swee
         	if ($scope.objeto.subitemid != undefined && $scope.objeto.subitemid != null) {
         		url += "&subitemid=" + $scope.objeto.subitemid;
         	}
+      		url += "&tipo=" + $scope.tipoFormato;
 		    window.open(url);
-/*
-            var firstError = null;
-            if (form.$invalid) {
-                var field = null, firstError = null;
-                for (field in form) {
-                    if (field[0] != '$') {
-                        if (firstError === null && !form[field].$valid) {
-                            firstError = form[field].$name;
-                        }
-                        if (form[field].$pristine) {
-                            form[field].$dirty = true;
-                        }
-                    }
-                }
-                angular.element('.ng-invalid[name=' + firstError + ']').focus();
-                return;
-            } else {
-            	reporteP01Factory.guardar($scope.objeto).then(function(resp){
-        			 if (resp.estado){
-      					 SweetAlert.swal("Reporte P01!", "Registro guardado satisfactoriamente!", "success");
-        				 //alert("ok");
-        			 }else{ 
-	 		             SweetAlert.swal("Reporte P01!", resp.mensajes.msg, "error");
-        			 }
-        		})
-            }
-*/
         },
         reset: function (form) {
             $scope.myModel = angular.copy($scope.master);
@@ -458,6 +432,7 @@ app.controller('ReporteP03Controller', [ "$scope","$rootScope","$uibModal","Swee
             $scope.objeto={};
         }
     };
+	$scope.tipoFormato = 'P';
 
 	function toStringDate(fuente) {
 		if (fuente == null) {

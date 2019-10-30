@@ -413,6 +413,7 @@ app.controller('ReporteP05Controller', [ "$scope","$rootScope","$uibModal","Swee
         	if ($scope.objeto.subitemid != undefined && $scope.objeto.subitemid != null) {
         		url += "&subitemid=" + $scope.objeto.subitemid;
         	}
+      		url += "&tipo=" + $scope.tipoFormato;
 		    window.open(url);
         },
         reset: function (form) {
@@ -423,6 +424,7 @@ app.controller('ReporteP05Controller', [ "$scope","$rootScope","$uibModal","Swee
             $scope.objeto={};
         }
     };
+	$scope.tipoFormato = 'P';
 
 	function toStringDate(fuente) {
 		if (fuente == null) {
