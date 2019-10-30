@@ -586,9 +586,9 @@
        py.PROYECTOCODIGO || '-' || py.PROYECTODESCRIPCION AS proyecto,
        ac.ACTIVIDADCODIGO || '-' || ac.ACTIVIDADDESCRIPCION AS actividad,
        c.CERTIFICACIONCODIGO AS No_C_F,
-       '' AS COMP,
+       c.CERTIFICACIONNUMPRECOMPROMISO AS COMP,
        '' AS No_C_A,
-       '' AS beneficiario,
+       sn.SOCIONEGOCIONOMBREMOSTRADO AS beneficiario,
        c.CERTIFICACIONDESCRIPCION AS descripcion,
        it.ITEMCODIGO AS item,
        f.FUENTEFINANCIAMIENTOCODIGO AS fuente,
@@ -629,6 +629,7 @@
        INNER JOIN nivelprograma             na8             ON na8.nivelprogramatablarelacionid = ac.actividadid
        INNER JOIN nivelprograma             na9             ON na9.nivelprogramaid = na8.nivelprogramapadreid
        INNER JOIN proyecto                  py              ON py.proyectoid = na9.nivelprogramatablarelacionid
+       INNER JOIN SOCIONEGOCIO              sn              ON sn.SOCIONEGOCIOID = c.CERTIFICACIONEMPREVISAID
  WHERE ef.EJERCICIOFISCALID = ?
    AND c.CERTIFICACIONEJERFISCALID = ef.EJERCICIOFISCALID
    AND (TO_NUMBER(i.INSTITUCIONID) = ? OR ? IS NULL)
@@ -1838,7 +1839,6 @@
                         <column id="4795"/>
                         <column id="4796"/>
                         <column id="4797"/>
-                        <column id="4798"/>
                         <column id="4799"/>
                         <column id="4800">
                             <property name="width">2.875in</property>
@@ -1878,12 +1878,6 @@
                                     <property name="verticalAlign">middle</property>
                                     <label id="4729">
                                         <text-property name="text">COMP</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="4730">
-                                    <property name="verticalAlign">middle</property>
-                                    <label id="4731">
-                                        <text-property name="text">No.CO.APLI.</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4732">
@@ -1966,12 +1960,6 @@
                                     <property name="verticalAlign">middle</property>
                                     <data id="4758">
                                         <property name="resultSetColumn">COMP</property>
-                                    </data>
-                                </cell>
-                                <cell id="4759">
-                                    <property name="verticalAlign">middle</property>
-                                    <data id="4760">
-                                        <property name="resultSetColumn">NO_C_A</property>
                                     </data>
                                 </cell>
                                 <cell id="4761">
@@ -2094,9 +2082,6 @@
                                     <property name="verticalAlign">middle</property>
                                 </cell>
                                 <cell id="4783">
-                                    <property name="verticalAlign">middle</property>
-                                </cell>
-                                <cell id="4784">
                                     <property name="verticalAlign">middle</property>
                                 </cell>
                                 <cell id="4785">

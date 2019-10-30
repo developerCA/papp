@@ -622,11 +622,11 @@
        py.PROYECTOCODIGO || '-' || py.PROYECTODESCRIPCION AS proyecto,
        ac.ACTIVIDADCODIGO || '-' || ac.ACTIVIDADDESCRIPCION AS actividad,
        u.UNIDADCODIGOPRESUP AS unidad_des,
-       '000' AS No_O_A,
-       '000' AS COMP,
-       '000' AS No_C_F,
+       og.ORDENGASTOCODIGO AS No_O_A,
+       og.ORDENGASTONUMEROCOMPROMISO AS COMP,
+       c.CERTIFICACIONCODIGO AS No_C_F,
        og.ORDENGASTOCONTRATOID AS co_id,
-       '' AS proveedor,
+       sn.SOCIONEGOCIONOMBREMOSTRADO AS proveedor,
        og.ORDENGASTODESCRIPCION AS descripcion,
        it.ITEMCODIGO AS item,
        f.FUENTEFINANCIAMIENTOCODIGO AS fuente,
@@ -666,6 +666,8 @@
        INNER JOIN nivelprograma             na8             ON na8.nivelprogramatablarelacionid = ac.actividadid
        INNER JOIN nivelprograma             na9             ON na9.nivelprogramaid = na8.nivelprogramapadreid
        INNER JOIN proyecto                  py              ON py.proyectoid = na9.nivelprogramatablarelacionid
+       INNER JOIN CERTIFICACION             c               ON c.CERTIFICACIONID = og.ORDENGASTOCERTIFICACIONID
+       INNER JOIN SOCIONEGOCIO              sn              ON sn.SOCIONEGOCIOID = og.ORDENGASTOPROVEEDORID
  WHERE ef.EJERCICIOFISCALID = ?
    AND og.ORDENGASTOEJERFISCALID = ef.EJERCICIOFISCALID
    AND (TO_NUMBER(i.INSTITUCIONID) = ? OR ? IS NULL)
