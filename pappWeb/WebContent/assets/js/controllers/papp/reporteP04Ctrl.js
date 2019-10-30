@@ -5,7 +5,6 @@ app.controller('ReporteP04Controller', [ "$scope","$rootScope","$uibModal","Swee
 
 	$scope.objeto = {};
 	$scope.institucioncodigo = null;
-	$scope.tipoFormato = 'P';
 
 	$scope.limpiarListas = function(pos) {
 		$scope.objeto.programaid = null;
@@ -417,6 +416,7 @@ app.controller('ReporteP04Controller', [ "$scope","$rootScope","$uibModal","Swee
       		url += "&tipo=" + $scope.tipoFormato;
 		    window.open(url);
         },
+
         reset: function (form) {
             $scope.myModel = angular.copy($scope.master);
             form.$setPristine(true);
@@ -425,6 +425,7 @@ app.controller('ReporteP04Controller', [ "$scope","$rootScope","$uibModal","Swee
             $scope.objeto={};
         }
     };
+	$scope.tipoFormato = 'P';
 
 	function toStringDate(fuente) {
 		if (fuente == null) {
