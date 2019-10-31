@@ -67,13 +67,13 @@ public class ReportesController {
 	public ModelAndView s02(HttpServletRequest request,HttpServletResponse response,@PathVariable String parametro) throws Throwable {
 		try {
 			System.out.println("ingresa a generar el reporte s02 ");
-//			String[] pares = parametro.split("&");
-//			Map<String, String> parameters = new HashMap<String, String>();
-//			for(String pare : pares) {
-//			    String[] nameAndValue = pare.split("=");
-//			    parameters.put(nameAndValue[0], nameAndValue[1]);
-//			}
-//			ReportesConsultas.generarS02plano(request, response, parameters);
+			String[] pares = parametro.split("&");
+			Map<String, String> parameters = new HashMap<String, String>();
+			for(String pare : pares) {
+			    String[] nameAndValue = pare.split("=");
+			    parameters.put(nameAndValue[0], nameAndValue[1]);
+			}
+			ReportesConsultas.generarS02plano(request, response, parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.println("error al cargaro no adheridos actuario");

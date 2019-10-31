@@ -1681,7 +1681,7 @@ public class EjecucionController {
 					totaldecremento=totaldecremento+reformalineaTO2.getValordecremento();
 					totalincremento=totalincremento+reformalineaTO2.getValorincremento();
 				}
-				if(totalincremento-totaldecremento!=0){
+				if(UtilGeneral.redondear(totalincremento,2)-UtilGeneral.redondear(totaldecremento,2)!=0){
 					continuar=false;
 					mensajes.setMsg("El valor del incremento debe ser igual a decremento");
 					mensajes.setType(MensajesWeb.getString("mensaje.alerta"));
