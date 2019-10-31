@@ -636,6 +636,23 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
+            	var diferencia = $scope.vMetaActual;
+            	for (var i = 0; i < $scope.detallesP.length; i++) {
+            		diferencia -= $scope.detallesP[i].npejecutado.toFixed(2);
+            		diferencia = +diferencia.toFixed(2)
+				}
+            	for (var i = 0; i < $scope.detallesP.length; i++) {
+            		diferencia -= $scope.detallesP[i].metacantidad.toFixed(2);
+            		diferencia = +diferencia.toFixed(2)
+				}
+            	if (diferencia != 0) {
+                    SweetAlert.swal(
+                		"Reformas a las Metas",
+                		"Tiene una diferencia de: " + diferencia + ", con la Meta Actual",
+                		"error"
+            		);
+        			return;
+            	}
                 var tObj = Object.assign({}, $scope.objetoP.cronograma);
                 var tDet = Object.assign([], $scope.detallesP);
                 tObj.cronogramalineaTOs = tDet;

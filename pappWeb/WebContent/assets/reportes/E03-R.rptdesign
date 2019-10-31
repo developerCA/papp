@@ -2561,7 +2561,7 @@
                                     <property name="overflow">hidden</property>
                                     <text-property name="text">Tipo de Reforma:</text-property>
                                 </label>
-                                <data id="4507">
+                                <data id="4611">
                                     <property name="backgroundAttachment">scroll</property>
                                     <property name="backgroundPositionX">0%</property>
                                     <property name="backgroundPositionY">0%</property>
@@ -2612,13 +2612,13 @@
                                     <property name="dataSet">todo</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
-                                            <property name="name">PROCESO</property>
-                                            <text-property name="displayName">PROCESO</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["PROCESO"]</expression>
+                                            <property name="name">TIPOTIPO</property>
+                                            <text-property name="displayName">TIPOTIPO</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["TIPOTIPO"]</expression>
                                             <property name="dataType">string</property>
                                         </structure>
                                     </list-property>
-                                    <property name="resultSetColumn">PROCESO</property>
+                                    <property name="resultSetColumn">TIPOTIPO</property>
                                 </data>
                             </cell>
                         </row>
