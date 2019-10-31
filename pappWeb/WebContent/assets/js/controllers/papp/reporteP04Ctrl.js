@@ -75,26 +75,40 @@ app.controller('ReporteP04Controller', [ "$scope","$rootScope","$uibModal","Swee
 	$scope.unidadActivo = false;
 	$scope.abrirUnidad = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalUnidadArbol.html',
-			controller : 'ModalUnidadArbolController',
-			size : 'lg',
-			resolve : {
-				instituicionFuente : function() {
-					return $scope.objeto.institucionid;
-				},
-				institucionentidad : function() {
-					return $scope.objeto.entidadid;
-				}
-			}
+			templateUrl : 'assets/views/papp/modal/modalUnidad.html',
+			controller : 'ModalUnidadController',
+			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.unidadid = obj.unidadarbolunidadid; // obj.id;
-			$scope.npunidad = obj.codigoorganico + ' - ' + obj.nombre;
+			$scope.objeto.unidadid = obj.id;
+			$scope.npunidad = obj.codigopresup + ' - ' + obj.nombre;
 			$scope.unidadActivo = true;
 			$scope.limpiarListas(3);
 		}, function() {
 		});
 	};
+//	$scope.abrirUnidad = function() {
+//		var modalInstance = $uibModal.open({
+//			templateUrl : 'assets/views/papp/modal/modalUnidadArbol.html',
+//			controller : 'ModalUnidadArbolController',
+//			size : 'lg',
+//			resolve : {
+//				instituicionFuente : function() {
+//					return $scope.objeto.institucionid;
+//				},
+//				institucionentidad : function() {
+//					return $scope.objeto.entidadid;
+//				}
+//			}
+//		});
+//		modalInstance.result.then(function(obj) {
+//			$scope.objeto.unidadid = obj.unidadarbolunidadid; // obj.id;
+//			$scope.npunidad = obj.codigoorganico + ' - ' + obj.nombre;
+//			$scope.unidadActivo = true;
+//			$scope.limpiarListas(3);
+//		}, function() {
+//		});
+//	};
 
 	$scope.programaActivo = false;
 	$scope.abrirPrograma = function() {
