@@ -640,6 +640,8 @@
          WHEN 'RE' THEN 'Registrado'
          WHEN 'SO' THEN 'Solicitado'
          WHEN 'AN' THEN 'Anulado'
+         WHEN 'LP' THEN 'Liquidado Parcial'
+         WHEN 'LT' THEN 'Liquidado Totalmente'
          ELSE og.ORDENGASTOESTADO
        END  				AS estado,
        og.ORDENGASTOCUR AS ORDENGASTODESCRIPCION
@@ -1248,7 +1250,7 @@
                         <property name="fontWeight">normal</property>
                         <property name="textAlign">center</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[ORDENES DE APLICACIÓN]]></text-property>
+                        <text-property name="content"><![CDATA[ORDENES DE GASTO]]></text-property>
                     </text>
                 </cell>
             </row>

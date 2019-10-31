@@ -602,6 +602,8 @@
          WHEN 'RE' THEN 'Registrado'
          WHEN 'SO' THEN 'Solicitado'
          WHEN 'AN' THEN 'Anulado'
+         WHEN 'LP' THEN 'Liquidado Parcial'
+         WHEN 'LT' THEN 'Liquidado Totalmente'
          ELSE c.CERTIFICACIONESTADO
        END  				AS estado,
        c.CERTIFICACIONCUR
