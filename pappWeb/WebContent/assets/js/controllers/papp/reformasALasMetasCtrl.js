@@ -367,6 +367,48 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		});
 	};
 
+	$scope.eliminarLinea = function(index) {
+		$scope.index = index;
+		SweetAlert.swal({
+			title: "Reformas?",
+			text: "Seguro que desea eliminar esta linea?",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "SI!",
+			cancelButtonText: "NO",
+			closeOnConfirm: false,
+			closeOnCancel: true
+		},
+		function(isConfirm) {
+			if (!isConfirm) return;
+			reformasALasMetasFactory.eliminarLinea(
+				$scope.detalles[index].id.id,
+				$scope.detalles[index].id.lineaid
+			).then(function(resp){
+				if (resp.estado){
+					SweetAlert.swal(
+							"Reformas!",
+							"Eliminado satisfactoriamente!",
+							"success"
+					);
+					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
+					$scope.objeto.valorincremento -= $scope.detalles[index].valorincremento;
+					$scope.objeto.valordecremento -= $scope.detalles[index].valordecremento;
+				    $scope.detalles.splice(index, 1);
+					$scope.detallesDP.splice($scope.index, 1);
+				    //$scope.form.submit(Form);
+	   			}else{
+		            SweetAlert.swal(
+		            		"Reformas!",
+		            		resp.mensajes.msg,
+		            		"error"
+            		);
+	   			}
+          	})
+		});
+	};
+
 	$scope.vMetaActual = 0;
 	$scope.vReprogramada = 0;
 	$scope.editarLineaMeta = function(index) {
