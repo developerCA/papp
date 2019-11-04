@@ -63,7 +63,7 @@ public class ReportesController {
 		return null;
 	}
 
-	@RequestMapping(value = "/rest/reportes/consultar/s02/{parametro}", method = RequestMethod.GET)
+	@RequestMapping(value = "/rest/reportes/consultar/S02/{parametro}", method = RequestMethod.GET)
 	public ModelAndView s02(HttpServletRequest request,HttpServletResponse response,@PathVariable String parametro) throws Throwable {
 		try {
 			System.out.println("ingresa a generar el reporte s02 ");

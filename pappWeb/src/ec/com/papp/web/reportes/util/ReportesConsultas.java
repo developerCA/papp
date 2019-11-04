@@ -935,6 +935,7 @@ public class ReportesConsultas {
 				p02TO.setItemunidadacumtipo(parameters.get("tipo"));
 
 			Collection<P02TO> p02tos=UtilSession.reporteServicio.transObtenerP02(p02TO);
+			System.out.println("p02tos: " + p02tos.size());
 			response.setContentType("application/vnd.ms-excel");
 			Calendar fecha = new GregorianCalendar();
 			fecha.setTime(new Date());
@@ -1133,7 +1134,7 @@ public class ReportesConsultas {
 				for(P02TO p02:p02tos){
 					row = sheet.createRow((short)fila);
 					cell = row.createCell(0);
-					cell.setCellValue(p02.getPlandescripcion());
+					cell.setCellValue(p02.getId().getItemid() + " - " +p02.getPlandescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(1);
 					cell.setCellValue(p02.getEstrategicodescripcion());
@@ -1445,6 +1446,14 @@ public class ReportesConsultas {
 				p04pacTO.getId().setItemunidadid(Long.valueOf(parameters.get("itemid")));
 			if(parameters.get("fuente")!=null)
 				p04pacTO.getId().setFuentefinanciamientoid(Long.valueOf(parameters.get("fuente")));
+			if(parameters.get("tipo")!=null){
+				p04pacTO.setSubitemunidadacumtipo(parameters.get("tipo"));
+				if(p04pacTO.getSubitemunidadacumtipo().equals("A"))
+					p04pacTO.setSubitemunidadacumid(2L);
+				else
+					p04pacTO.setSubitemunidadacumid(1L);
+
+			}
 
 			
 			Collection<P04pacTO> p04pactos=UtilSession.reporteServicio.transObtenerP04pac(p04pacTO);
@@ -1653,19 +1662,19 @@ public class ReportesConsultas {
 					if(p04pac.getPrimer()!=null)
 						cell.setCellValue(p04pac.getPrimer());
 					else
-						cell.setCellValue("0.00");
+						cell.setCellValue(0.00);
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(22);
 					if(p04pac.getSegundo()!=null)
 						cell.setCellValue(p04pac.getSegundo());
 					else
-						cell.setCellValue("0.00");
+						cell.setCellValue(0.00);
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(23);
 					if(p04pac.getTercer()!=null)
 						cell.setCellValue(p04pac.getTercer());
 					else
-						cell.setCellValue("0.00");
+						cell.setCellValue(0.00);
 					cell.setCellStyle(styles.get("contenidonumero"));
 					cell = row.createCell(24);
 					cell.setCellValue(p04pac.getTipoproductonombre());
@@ -2347,7 +2356,10 @@ public class ReportesConsultas {
 					cell.setCellValue(p05.getUnidadcodigopresup() + " - " + p05.getUnidadnombre());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(4);
-					cell.setCellValue(p05.getSumaajustada());
+					if(parameters.get("tipo").equals("P"))
+						cell.setCellValue(p05.getSumaplanificada());
+					else	
+						cell.setCellValue(p05.getSumaajustada());
 					cell.setCellStyle(styles.get("contenidonumero"));
 					fila++;
 				}
@@ -2454,7 +2466,6 @@ public class ReportesConsultas {
 				fila++;
 				boolean cabecera=true;
 				for(P04TO p04to3:p04tos){
-
 					if(p04to2.getId().getActividadid().longValue()==p04to3.getId().getActividadid().longValue() &&
 							p04to2.getId().getInstitucionentid().longValue()==p04to3.getId().getInstitucionentid().longValue() &&
 							p04to2.getId().getObjesid().longValue()==p04to3.getId().getObjesid().longValue() &&
@@ -2500,7 +2511,7 @@ public class ReportesConsultas {
 							cell.setCellValue("RESPONSABLE DE LA ACTIVIDAD:  ");
 							cell.setCellStyle(styles.get("tituloizquierda"));
 							cell = row.createCell(1);
-							cell.setCellValue("");
+							cell.setCellValue(p04to3.getResponsable());
 							cell.setCellStyle(styles.get("contenido"));
 							fila++;
 							row = sheet.createRow((short)fila);
@@ -2745,12 +2756,13 @@ public class ReportesConsultas {
 						fila++;
 					}
 					else{
+						p04to2=(P04TO)p04to3;
 						row = sheet.createRow((short)fila);
 						cell = row.createCell(0);
 						cell.setCellValue("EJERCICIO FISCAL:  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getEjerciciofiscalanio());
+						cell.setCellValue(p04to2.getEjerciciofiscalanio());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2758,10 +2770,10 @@ public class ReportesConsultas {
 						cell.setCellValue("ENTIDAD OPERATIVA DESCONCENTRADA (EOD):  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getEntidadcodigo());
+						cell.setCellValue(p04to2.getEntidadcodigo());
 						cell.setCellStyle(styles.get("contenido"));
 						cell = row.createCell(2);
-						cell.setCellValue(p04to3.getEntidadnombre());
+						cell.setCellValue(p04to2.getEntidadnombre());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2769,10 +2781,10 @@ public class ReportesConsultas {
 						cell.setCellValue("UNIDAD EJECUTORA (UE)  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getUnidadcodigo());
+						cell.setCellValue(p04to2.getUnidadcodigo());
 						cell.setCellStyle(styles.get("contenido"));
 						cell = row.createCell(2);
-						cell.setCellValue(p04to3.getUnidadnombre());
+						cell.setCellValue(p04to2.getUnidadnombre());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2780,7 +2792,7 @@ public class ReportesConsultas {
 						cell.setCellValue("RESPONSABLE DE LA ACTIVIDAD:  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue("");
+						cell.setCellValue(p04to2.getResponsable());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2788,10 +2800,10 @@ public class ReportesConsultas {
 						cell.setCellValue("NOMBRE DEL PROGRAMA:  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getProgramacodigo());
+						cell.setCellValue(p04to2.getProgramacodigo());
 						cell.setCellStyle(styles.get("contenido"));
 						cell = row.createCell(2);
-						cell.setCellValue(p04to3.getProgramadescripcion());
+						cell.setCellValue(p04to2.getProgramadescripcion());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2799,10 +2811,10 @@ public class ReportesConsultas {
 						cell.setCellValue("NOMBRE DEL PROYECTO:  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getProyectocodigo());
+						cell.setCellValue(p04to2.getProyectocodigo());
 						cell.setCellStyle(styles.get("contenido"));
 						cell = row.createCell(2);
-						cell.setCellValue(p04to3.getProyectonombre());
+						cell.setCellValue(p04to2.getProyectonombre());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2810,10 +2822,10 @@ public class ReportesConsultas {
 						cell.setCellValue("NOMBRE DE LA ACTIVIDAD:  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getActividadcodigo());
+						cell.setCellValue(p04to2.getActividadcodigo());
 						cell.setCellStyle(styles.get("contenido"));
 						cell = row.createCell(2);
-						cell.setCellValue(p04to3.getActividaddescripcion());
+						cell.setCellValue(p04to2.getActividaddescripcion());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2821,7 +2833,7 @@ public class ReportesConsultas {
 						cell.setCellValue("OBJETIVO ESTRATEGICO INSTITUCIONAL (MIDENA)  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getEstrategicodescripcion());
+						cell.setCellValue(p04to2.getEstrategicodescripcion());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2829,7 +2841,7 @@ public class ReportesConsultas {
 						cell.setCellValue("OBJETIVO OPERATIVO DE FF.AA.  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getOperativodescripcion());
+						cell.setCellValue(p04to2.getOperativodescripcion());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2837,7 +2849,7 @@ public class ReportesConsultas {
 						cell.setCellValue("OBJETIVO FUERZAS  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getFuerzadescripcion());
+						cell.setCellValue(p04to2.getFuerzadescripcion());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2845,7 +2857,7 @@ public class ReportesConsultas {
 						cell.setCellValue("OBJETIVO GENERAL DE LA ACTIVIDAD  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getActividadunidadobjetivogeneral());
+						cell.setCellValue(p04to2.getActividadunidadobjetivogeneral());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
@@ -2853,7 +2865,7 @@ public class ReportesConsultas {
 						cell.setCellValue("OBJETIVO/S ESPECIFICO/S DE LA ACTIVIDAD  ");
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
-						cell.setCellValue(p04to3.getActividadunidadobjetivoespec());
+						cell.setCellValue(p04to2.getActividadunidadobjetivoespec());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						cabecera=false;
