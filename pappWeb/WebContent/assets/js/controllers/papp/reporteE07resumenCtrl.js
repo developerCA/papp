@@ -75,21 +75,13 @@ app.controller('ReporteE07resumenController', [ "$scope","$rootScope","$uibModal
 	$scope.unidadActivo = false;
 	$scope.abrirUnidad = function() {
 		var modalInstance = $uibModal.open({
-			templateUrl : 'assets/views/papp/modal/modalUnidadArbol.html',
-			controller : 'ModalUnidadArbolController',
-			size : 'lg',
-			resolve : {
-				instituicionFuente : function() {
-					return null; //$scope.objeto.institucionid;
-				},
-				institucionentidad : function() {
-					return $scope.objeto.entidadid;
-				}
-			}
+			templateUrl : 'assets/views/papp/modal/modalUnidad.html',
+			controller : 'ModalUnidadController',
+			size : 'lg'
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.unidadid = obj.unidadarbolunidadid; // obj.id;
-			$scope.npunidad = obj.codigoorganico + ' - ' + obj.nombre;
+			$scope.objeto.unidadid = obj.id;
+			$scope.npunidad = obj.codigopresup + ' - ' + obj.nombre;
 			$scope.unidadActivo = true;
 			$scope.limpiarListas(3);
 		}, function() {
