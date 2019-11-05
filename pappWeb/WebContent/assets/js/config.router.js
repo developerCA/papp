@@ -995,7 +995,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','ReporteS01Ctrl','ReporteS01Factory',
         		'ModalInstitucionCtrl','InstitucionFactory',
         		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
-        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
         		'ModalObjetivoOperacionalReporteCtrl','ObjetivoOperacionalReporteFactory',
         		'ModalObjetivoEstrategicoReporteCtrl','ObjetivoEstrategicoReporteFactory'
 		),
@@ -1010,7 +1010,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','ReporteS02Ctrl','ReporteS01Factory',
         		'ModalInstitucionCtrl','InstitucionFactory',
         		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
-        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
         		'ModalObjetivoOperacionalReporteCtrl','ObjetivoOperacionalReporteFactory',
         		'ModalObjetivoEstrategicoReporteCtrl','ObjetivoEstrategicoReporteFactory'
 		),
@@ -1025,7 +1025,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','ReporteS03Ctrl','ReporteS01Factory',
         		'ModalInstitucionCtrl','InstitucionFactory',
         		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
-        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
         		'ModalObjetivoOperacionalReporteCtrl','ObjetivoOperacionalReporteFactory',
         		'ModalObjetivoEstrategicoReporteCtrl','ObjetivoEstrategicoReporteFactory'
 		),
