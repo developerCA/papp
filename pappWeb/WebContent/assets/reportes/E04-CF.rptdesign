@@ -631,7 +631,7 @@
        INNER JOIN nivelprograma             na8             ON na8.nivelprogramatablarelacionid = ac.actividadid
        INNER JOIN nivelprograma             na9             ON na9.nivelprogramaid = na8.nivelprogramapadreid
        INNER JOIN proyecto                  py              ON py.proyectoid = na9.nivelprogramatablarelacionid
-       INNER JOIN SOCIONEGOCIO              sn              ON sn.SOCIONEGOCIOID = c.CERTIFICACIONEMPREVISAID
+       LEFT JOIN SOCIONEGOCIO               sn              ON sn.SOCIONEGOCIOID = c.CERTIFICACIONEMPREVISAID
  WHERE ef.EJERCICIOFISCALID = ?
    AND c.CERTIFICACIONEJERFISCALID = ef.EJERCICIOFISCALID
    AND (TO_NUMBER(i.INSTITUCIONID) = ? OR ? IS NULL)

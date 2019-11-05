@@ -1040,7 +1040,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','ReporteE04Ctrl','ReporteP01Factory',
         		'ModalInstitucionCtrl','InstitucionFactory',
         		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
-        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
         		'ModalProgramaCtrl','ProgramaFactory',
         		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
         		'ModalActividadReporteCtrl','ActividadReporteFactory',
@@ -1064,7 +1064,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','ReporteE05Ctrl','ReporteP01Factory',
         		'ModalInstitucionCtrl','InstitucionFactory',
         		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
-        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
         		'ModalProgramaCtrl','ProgramaFactory',
         		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
         		'ModalActividadReporteCtrl','ActividadReporteFactory',
@@ -1081,6 +1081,30 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Reporte E05'
         }
+    }).state('app.reporteE06', {
+        url: "/reporteE06",
+        templateUrl: "assets/views/papp/reporteE06.html",
+        resolve: loadSequence(
+        		'ngTable','ReporteE06Ctrl','ReporteP01Factory',
+        		'ModalInstitucionCtrl','InstitucionFactory',
+        		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
+        		'ModalProgramaCtrl','ProgramaFactory',
+        		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
+        		'ModalActividadReporteCtrl','ActividadReporteFactory',
+        		'ModalSubActividadReporteCtrl','SubActividadReporteFactory',
+        		'ModalTareaReporteCtrl','TareaReporteFactory',
+        		'ModalSubTareaReporteCtrl','SubTareaReporteFactory',
+        		'ModalItemsReporteCtrl','ItemsReporteFactory',
+        		'ModalSubItemsReporteCtrl','SubItemsReporteFactory',
+        		'ModalFuenteFinanciamientoCtrl','FuenteFinanciamientoFactory',
+        		'ModalGeograficoCtrl','GeograficoFactory',
+        		'ModalOrganismoCtrl','OrganismoFactory'
+		),
+        title: 'Reporte E06 LISTADO DE REFORMAS A LA PROGRAMACIÓN ANUAL DE POLÍTICA PÚBLICA',
+        ncyBreadcrumb: {
+            label: 'Reporte E06 LISTADO DE REFORMAS A LA PROGRAMACIÓN ANUAL DE POLÍTICA PÚBLICA'
+        }
     }).state('app.reporteE07resumen', {
         url: "/reporteE07resumen",
         templateUrl: "assets/views/papp/reporteE07resumen.html",
@@ -1088,7 +1112,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         		'ngTable','ReporteE07resumenCtrl','ReporteP01Factory',
         		'ModalInstitucionCtrl','InstitucionFactory',
         		'ModalInstitutoEntidadCtrl','InstitutoEntidadFactory',
-        		'ModalUnidadArbolCtrl','UnidadFactory',
+        		'ModalUnidadCtrl','UnidadFactory',
         		'ModalProgramaCtrl','ProgramaFactory',
         		'ModalProyectoReporteCtrl','ProyectoReporteFactory',
         		'ModalActividadReporteCtrl','ActividadReporteFactory',
