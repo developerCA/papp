@@ -122,7 +122,7 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 				$scope.entidadId,
 				$scope.unidadId,
 				$rootScope.ejefiscal,
-				($scope.actividad == null? null: $scope.actividad.id),
+				($scope.actividad == null? null: $scope.actividad.tablarelacionid),
 				$scope.mes
 		).then(function(resp){
 			//console.log(resp.json);
@@ -219,11 +219,11 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 				$scope.entidadId,
 				$scope.unidadId,
 				$rootScope.ejefiscal,
-				($scope.actividad == null? null: $scope.actividad.id),
+				($scope.actividad == null? null: $scope.actividad.tablarelacionid),
 				$scope.mesDesde,
 				$scope.mesHasta,
-				$scope.subactividad.id,
-				$scope.tarea.id
+				$scope.subactividad.tablarelacionid,
+				$scope.tarea.tablarelacionid
 		).then(function(resp){
 			$scope.listaDetalles = [];
 			if (resp.json.result.length == 0) {

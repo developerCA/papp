@@ -321,6 +321,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		    $scope.detalles = obj.reformametalineas;
 		    $scope.objeto.valorincremento = obj.valorincremento;
 		    $scope.objeto.valordecremento = obj.valordecremento;
+		    $scope.nuevoar = true;
 		    $scope.form.submit(Form);
             SweetAlert.swal(
             		"Reformas! - Lineas",
@@ -357,6 +358,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		modalInstance.result.then(function(obj) {
 		    $scope.detalles = obj.reformametalineas;
 		    //$scope.objeto.valortotal = obj.valortotal;
+		    $scope.nuevoar = true;
 		    $scope.form.submit(Form);
             SweetAlert.swal(
             		"Reformas Meta! - Lineas",
@@ -456,6 +458,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		modalInstance.result.then(function(obj) {
 		    $scope.detallesM = obj.reformametalineas;
 		    //$scope.objeto.valortotal = obj.valortotal;
+		    $scope.nuevoar = true;
 		    $scope.form.submit(Form);
             SweetAlert.swal(
             		"Reformas! - Lineas",
