@@ -843,12 +843,19 @@ public class AdministracionController {
 			else if(clase.equals("socionegocio")){
 				SocionegocioTO socionegocioTO = gson.fromJson(new StringReader(objeto), SocionegocioTO.class);
 				accion = (socionegocioTO.getId()==null)?"I":"U";
-				//Obtengo el registro de socio negocio
-				SocionegocioTO socionegocioTO2=UtilSession.adminsitracionServicio.transObtenerSocionegocioTO(socionegocioTO.getId());
-				//Le asigno lo que este seleccionado en esempleado y esproveedor
-				socionegocioTO2.setEsempleado(socionegocioTO.getEsempleado());
-				socionegocioTO2.setEsproveedor(socionegocioTO.getEsproveedor());
-				UtilSession.adminsitracionServicio.transCrearModificarSocionegocio(socionegocioTO2);
+				//Obtengo el registro de socio negocio cuando es edicion
+				if(socionegocioTO.getId()!=null && socionegocioTO.getId().longValue()!=0){
+					System.out.println("va a buscar el socio negocio");
+					SocionegocioTO socionegocioTO2=UtilSession.adminsitracionServicio.transObtenerSocionegocioTO(socionegocioTO.getId());
+					//Le asigno lo que este seleccionado en esempleado y esproveedor
+					socionegocioTO2.setEsempleado(socionegocioTO.getEsempleado());
+					socionegocioTO2.setEsproveedor(socionegocioTO.getEsproveedor());
+					UtilSession.adminsitracionServicio.transCrearModificarSocionegocio(socionegocioTO2);
+				}
+				else{
+					System.out.println("no va a buscar el socio negocio");
+					UtilSession.adminsitracionServicio.transCrearModificarSocionegocio(socionegocioTO);
+				}
 			}
 
 			//Parametroindicador
