@@ -1123,7 +1123,7 @@ public class EjecucionController {
 				//..ReformaTO reformaTO=UtilSession.planificacionServicio.transObtenerReformaTO(reformalineaTO.getId().getId());
 				//Collection<ReformalineaTO> resultado=UtilSession.planificacionServicio.transObtienereformalinea(reformalineaTO.getId().getId());
 				//System.out.println("fecha: " + reformaTO.getFechacreacion());
-				System.out.println("reformaid: " + reformalineaTO.getId().getId());
+				System.out.println("reformaid: " + reformalineaTO.getId().getId() + " - " + reformalineaTO.getNivelactid());
 				Collection<ReformalineaTO> reformalineaTO1s=UtilSession.planificacionServicio.transObtienereformasnoelne(reformalineaTO.getNivelactid());
 				double totalreforma=0.0;
 				//  System.out.println("reformalinea.getNpSubitemvalor(): " + reformalinea.getNpSubitemvalor() + " id " +reformalinea.getNpreformaid());
