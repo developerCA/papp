@@ -133,6 +133,7 @@
                 </structure>
                 <structure>
                     <property name="columnName">TIPOTIPO</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">TIPOTIPO</text-property>
                     <text-property name="heading">TIPOTIPO</text-property>
                 </structure>
@@ -685,7 +686,7 @@
        cr.CLASEREGISTRONOMBRE AS CLASEREGISTRO,
        tdcd.TIPODOCUMENTOCLASEDOCNOMBRE AS CLASEDOCUMENTORESPALDO,
        td.TIPODOCUMENTONOMBRE AS TIPODOCUMENTORESPALDO,
-       so.SOCIONEGOCIONOMBREMOSTRADO AS BENEFICIARIO,
+       CASE WHEN so.SOCIONEGOCIONOMBREMOSTRADO IS NULL THEN so.SOCIONEGOCIONOMBREMOSTRADO ELSE so.SOCIONEGOCIONOMBRECOMERCIAL END AS BENEFICIARIO,
        so.SOCIONEGOCIOCODIGO AS DOCUMENTOBENEFICIARIO,  
        'Programa: ' || pr.PROGRAMACODIGO || '-' || pr.PROGRAMADESCRIPCION || chr(10) ||
        'Proyecto: ' || py.PROYECTOCODIGO || '-' || py.PROYECTODESCRIPCION || chr(10) ||
@@ -826,6 +827,7 @@ AS detalle,
        tdcd.TIPODOCUMENTOCLASEDOCNOMBRE,
        td.TIPODOCUMENTONOMBRE,
        so.SOCIONEGOCIONOMBREMOSTRADO,
+       so.SOCIONEGOCIONOMBRECOMERCIAL,
        so.SOCIONEGOCIOCODIGO,
        pr.PROGRAMACODIGO,
   pr.PROGRAMADESCRIPCION,
@@ -3274,7 +3276,7 @@ AS detalle,
                                     <property name="whiteSpace">normal</property>
                                     <property name="widows">2</property>
                                     <property name="wordSpacing">normal</property>
-                                    <property name="display">block</property>
+                                    <property name="display">inline</property>
                                     <property name="pageBreakAfter">auto</property>
                                     <property name="pageBreakBefore">auto</property>
                                     <property name="pageBreakInside">auto</property>
