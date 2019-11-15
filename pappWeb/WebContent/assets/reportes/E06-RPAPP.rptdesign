@@ -178,6 +178,12 @@
                     <text-property name="heading">ACTIVIDAD</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">SUBACTIVIDAD</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">SUBACTIVIDAD</text-property>
+                    <text-property name="heading">SUBACTIVIDAD</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">TAREA</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">TAREA</text-property>
@@ -448,71 +454,76 @@
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">TAREA</property>
+                        <property name="name">SUBACTIVIDAD</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">SUBTAREA</property>
+                        <property name="name">TAREA</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">UNIDADCODIGOPRESUPUESTO</property>
+                        <property name="name">SUBTAREA</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">REFORMACODIGO</property>
+                        <property name="name">UNIDADCODIGOPRESUPUESTO</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">REFORMATIPO</property>
+                        <property name="name">REFORMACODIGO</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
-                        <property name="name">ITEM</property>
+                        <property name="name">REFORMATIPO</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
-                        <property name="name">DENOMINACION</property>
+                        <property name="name">ITEM</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">11</property>
-                        <property name="name">SUBITEMCODIGO</property>
+                        <property name="name">DENOMINACION</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">12</property>
-                        <property name="name">SUBITEMNOMBRE</property>
+                        <property name="name">SUBITEMCODIGO</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">13</property>
-                        <property name="name">FUENTE</property>
+                        <property name="name">SUBITEMNOMBRE</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">14</property>
+                        <property name="name">FUENTE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
                         <property name="name">REFORMAFECHAAPROBACION</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">16</property>
                         <property name="name">ESTADO</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
+                        <property name="position">17</property>
                         <property name="name">INCREMENTO</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">17</property>
+                        <property name="position">18</property>
                         <property name="name">DECREMENTO</property>
                         <property name="dataType">decimal</property>
                     </structure>
@@ -543,97 +554,104 @@
                 </structure>
                 <structure>
                     <property name="position">4</property>
+                    <property name="name">SUBACTIVIDAD</property>
+                    <property name="nativeName">SUBACTIVIDAD</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
                     <property name="name">TAREA</property>
                     <property name="nativeName">TAREA</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
                     <property name="name">SUBTAREA</property>
                     <property name="nativeName">SUBTAREA</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">7</property>
                     <property name="name">UNIDADCODIGOPRESUPUESTO</property>
                     <property name="nativeName">UNIDADCODIGOPRESUPUESTO</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">8</property>
                     <property name="name">REFORMACODIGO</property>
                     <property name="nativeName">REFORMACODIGO</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">9</property>
                     <property name="name">REFORMATIPO</property>
                     <property name="nativeName">REFORMATIPO</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">9</property>
+                    <property name="position">10</property>
                     <property name="name">ITEM</property>
                     <property name="nativeName">ITEM</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">10</property>
+                    <property name="position">11</property>
                     <property name="name">DENOMINACION</property>
                     <property name="nativeName">DENOMINACION</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">11</property>
+                    <property name="position">12</property>
                     <property name="name">SUBITEMCODIGO</property>
                     <property name="nativeName">SUBITEMCODIGO</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">12</property>
+                    <property name="position">13</property>
                     <property name="name">SUBITEMNOMBRE</property>
                     <property name="nativeName">SUBITEMNOMBRE</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">13</property>
+                    <property name="position">14</property>
                     <property name="name">FUENTE</property>
                     <property name="nativeName">FUENTE</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">14</property>
+                    <property name="position">15</property>
                     <property name="name">REFORMAFECHAAPROBACION</property>
                     <property name="nativeName">REFORMAFECHAAPROBACION</property>
                     <property name="dataType">date-time</property>
                     <property name="nativeDataType">93</property>
                 </structure>
                 <structure>
-                    <property name="position">15</property>
+                    <property name="position">16</property>
                     <property name="name">ESTADO</property>
                     <property name="nativeName">ESTADO</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">16</property>
+                    <property name="position">17</property>
                     <property name="name">INCREMENTO</property>
                     <property name="nativeName">INCREMENTO</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">17</property>
+                    <property name="position">18</property>
                     <property name="name">DECREMENTO</property>
                     <property name="nativeName">DECREMENTO</property>
                     <property name="dataType">decimal</property>
@@ -644,6 +662,7 @@
        pr.programacodigo || ' ' || pr.programanombre AS programa,
        py.proyectocodigo || ' ' || py.proyectonombre AS proyecto,
        ac.actividadcodigo || ' ' || ac.actividaddescripcion AS actividad,
+       sa.SUBACTIVIDADCODIGO || ' ' || sa.SUBACTIVIDADDESCRIPCION AS subactividad,
        ta.TAREAUNIDADCODIGO || ' ' || ta.TAREAUNIDADDESCRIPCION AS tarea,
        st.SUBTAREAUNIDADCODIGO || ' ' || st.SUBTAREAUNIDADDESCRIPCION AS subtarea,
        u.UNIDADCODIGOPRESUP AS unidadCodigoPresupuesto,
@@ -690,6 +709,8 @@
        INNER JOIN nivelactividad            na13            ON na13.NIVELACTIVIDADID = na12.NIVELACTIVIDADPADREID 
        INNER JOIN tareaunidad               ta              ON ta.tareaunidadid = na13.nivelactividadtablarelacionid
        INNER JOIN nivelactividad            na14            ON na14.nivelactividadid = na13.nivelactividadpadreid
+       INNER JOIN subactividadunidad        sau             ON sau.subactividadid = na14.nivelactividadtablarelacionid
+       INNER JOIN Subactividad              sa              ON sa.subactividadid = sau.subactividadid
        INNER JOIN nivelactividad            na15            ON na15.nivelactividadid = na14.nivelactividadpadreid
        INNER JOIN actividad                 ac              ON ac.actividadid = na15.nivelactividadtablarelacionid
        INNER JOIN nivelprograma             na8             ON na8.nivelprogramatablarelacionid = ac.actividadid
@@ -1593,11 +1614,11 @@ WHERE
                             <cell id="4978">
                                 <property name="textAlign">right</property>
                                 <property name="width">100%</property>
-                                <label id="4994"/>
                             </cell>
                             <cell id="4979">
                                 <property name="textAlign">right</property>
                                 <property name="width">100%</property>
+                                <label id="4994"/>
                             </cell>
                         </row>
                         <row id="4983">
@@ -1964,10 +1985,25 @@ WHERE
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">SUBACTIVIDAD</property>
+                                <text-property name="displayName">SUBACTIVIDAD</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SUBACTIVIDAD"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SUBACTIVIDAD1</property>
+                                <text-property name="displayName">SUBACTIVIDAD</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["SUBACTIVIDAD"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <column id="4953"/>
                         <column id="4954"/>
                         <column id="4955"/>
+                        <column id="5002"/>
                         <column id="4956"/>
                         <column id="4957"/>
                         <column id="4958"/>
@@ -1997,6 +2033,11 @@ WHERE
                                 <cell id="4870">
                                     <label id="4871">
                                         <text-property name="text">Actividad</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4999">
+                                    <label id="5003">
+                                        <text-property name="text">Subactividad</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4872">
@@ -2086,6 +2127,11 @@ WHERE
                                 <cell id="4905">
                                     <data id="4906">
                                         <property name="resultSetColumn">ACTIVIDAD</property>
+                                    </data>
+                                </cell>
+                                <cell id="5000">
+                                    <data id="5004">
+                                        <property name="resultSetColumn">SUBACTIVIDAD1</property>
                                     </data>
                                 </cell>
                                 <cell id="4907">
@@ -2269,6 +2315,7 @@ WHERE
                                 <cell id="4936"/>
                                 <cell id="4937"/>
                                 <cell id="4938"/>
+                                <cell id="5001"/>
                                 <cell id="4939"/>
                                 <cell id="4940"/>
                                 <cell id="4941"/>

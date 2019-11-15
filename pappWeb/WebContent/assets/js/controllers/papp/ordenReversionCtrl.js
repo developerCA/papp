@@ -113,7 +113,11 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 
 	$scope.editar=function(index){
 		index = $scope.calcularIndex(index);
-		$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
+		if ($scope.rol('ROLE_APROBADOR')) {
+			$scope.noeditar = true;
+		} else {
+			$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
+		}
 		$scope.dataIndex = index;
 		ordenReversionFactory.traerEditar(
 			$scope.data[index].id

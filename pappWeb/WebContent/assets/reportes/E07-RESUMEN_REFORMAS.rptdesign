@@ -587,13 +587,11 @@
          ELSE r.REFORMAESTADO
        END AS estado,
        (
-Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
-  from Nivelactividad nivelsubitem,
-       SUBITEMUNIDADACUMULADOR sia1,
+Select sia1.SUBITEMUNIDADACUMTOTAL as VALORINICIAL
+  from SUBITEMUNIDADACUMULADOR sia1,
        Subitemunidad siu1,
 	   Nivelactividad nivelsubitem1
- where nivelsubitem.nivelactividadunidadid = u.unidadid
-   and nivelsubitem1.NIVELACTIVIDADID = nivelsubitem.NIVELACTIVIDADID
+ where nivelsubitem1.NIVELACTIVIDADID = nivelsubitem.NIVELACTIVIDADID
    and siu1.SUBITEMUNIDADID = siu.SUBITEMUNIDADID
    and sia1.subitemunidadid = siu1.subitemunidadid
    and sia1.SUBITEMUNIDADACUMTIPO = 'A'
@@ -648,6 +646,7 @@ Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
        ff.fuentefinanciamientocodigo,
        dg.divisiongeograficacodigo,
        r.REFORMAESTADO,
+       nivelsubitem.NIVELACTIVIDADID,
        siu.SUBITEMUNIDADID,
        u.unidadid
  ORDER BY
@@ -1121,6 +1120,7 @@ Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
                 </cell>
             </row>
             <row id="4340">
+                <property name="height">1.1666666666666667in</property>
                 <cell id="4341">
                     <property name="colSpan">3</property>
                     <property name="rowSpan">1</property>
@@ -1202,8 +1202,9 @@ Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
                             <structure>
                                 <property name="name">CODIFICADO</property>
                                 <text-property name="displayName">CODIFICADO</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["CODIFICADO"]</expression>
+                                <expression name="expression" type="javascript">dataSetRow["CODIFICADO"] + dataSetRow["INCREMENTO"] - dataSetRow["DECREMENTO"]</expression>
                                 <property name="dataType">decimal</property>
+                                <property name="allowExport">true</property>
                             </structure>
                             <structure>
                                 <property name="name">TINICIAL</property>
@@ -1229,7 +1230,7 @@ Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
                             <structure>
                                 <property name="name">TCODIFICADO</property>
                                 <text-property name="displayName">TCODIFICADO</text-property>
-                                <expression name="expression" type="javascript">Total.sum(row["CODIFICADO"])</expression>
+                                <expression name="expression" type="javascript">Total.sum(row["CODIFICADO"] + row["INCREMENTO"] - row["DECREMENTO"])</expression>
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>
@@ -1250,68 +1251,81 @@ Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
                         <header>
                             <row id="4774">
                                 <cell id="4775">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4776">
                                         <text-property name="text">R. Codigo</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4777">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4778">
                                         <text-property name="text">Programa</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4779">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4780">
                                         <text-property name="text">Proyecto</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4781">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4782">
                                         <text-property name="text">Actividad</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4783">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4784">
                                         <text-property name="text">Item</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4785">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4786">
                                         <text-property name="text">Denominacion</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4787">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4788">
                                         <text-property name="text">Fuente</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4789">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4790">
                                         <text-property name="text">Canton</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4791">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4792">
                                         <text-property name="text">Estado</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4793">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4794">
-                                        <text-property name="text">Inicial</text-property>
+                                        <text-property name="text">Codificado Actual</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4795">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4796">
                                         <text-property name="text">Incremento</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4797">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4798">
                                         <text-property name="text">Decremento</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4799">
+                                    <property name="verticalAlign">middle</property>
                                     <label id="4800">
-                                        <text-property name="text">Codificado</text-property>
+                                        <text-property name="text">Codificado Modificado</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -1595,6 +1609,7 @@ Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
                         </detail>
                         <footer>
                             <row id="4828">
+                                <property name="height">0.25in</property>
                                 <cell id="4829"/>
                                 <cell id="4830"/>
                                 <cell id="4831"/>
@@ -1611,6 +1626,7 @@ Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
                                     </label>
                                 </cell>
                                 <cell id="4838">
+                                    <property name="verticalAlign">middle</property>
                                     <data id="4863">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
@@ -1668,6 +1684,7 @@ Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
                                     </data>
                                 </cell>
                                 <cell id="4839">
+                                    <property name="verticalAlign">middle</property>
                                     <data id="4862">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
@@ -1725,6 +1742,7 @@ Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
                                     </data>
                                 </cell>
                                 <cell id="4840">
+                                    <property name="verticalAlign">middle</property>
                                     <data id="4861">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
@@ -1782,6 +1800,7 @@ Select SUM(sia1.SUBITEMUNIDADACUMTOTAL) as VALORINICIAL
                                     </data>
                                 </cell>
                                 <cell id="4841">
+                                    <property name="verticalAlign">middle</property>
                                     <data id="4860">
                                         <property name="backgroundAttachment">scroll</property>
                                         <property name="backgroundPositionX">0%</property>
