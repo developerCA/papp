@@ -405,14 +405,14 @@ public class ReportesConsultas {
 			fila++;
 			row = sheet.createRow((short)fila);
 			cell = row.createCell(0);
-			cell.setCellValue("SEGUIMIENTO A LA EJECUCION DE LA PROGRAMACION ANUAL DE LA PLANIFICACION -S1");
+			cell.setCellValue("SEGUIMIENTO A LA EJECUCION DE LA PROGRAMACION ANUAL DE LA PLANIFICACION -S2");
 			cell.setCellStyle(styles.get("treporteTitulo"));
 			sheet.addMergedRegion(new CellRangeAddress(2,2,0,23)); 
 			fila++;
 
 			row = sheet.createRow((short)fila);
 			cell = row.createCell(0);
-			cell.setCellValue("INSTITUTO");
+			cell.setCellValue("INSTITUTO por INSTITUCIÓN (UDAF)");
 			cell.setCellStyle(styles.get("titulo"));
 			cell = row.createCell(1);
 			cell.setCellValue("ENTIDAD");
@@ -500,10 +500,10 @@ public class ReportesConsultas {
 				cell.setCellValue(s01to2.getInstitucionentcodigo() +" - " + s01to2.getInstitucionentnombre());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(2);
-				cell.setCellValue(s01to2.getOperativodescripcion());
+				cell.setCellValue(s01to2.getEstrategicodescripcion());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(3);
-				cell.setCellValue(s01to2.getEstrategicodescripcion());
+				cell.setCellValue(s01to2.getOperativodescripcion());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(4);
 				cell.setCellValue(s01to2.getUnidadcodigo() +" - " + s01to2.getUnidadnombre());
@@ -524,9 +524,11 @@ public class ReportesConsultas {
 				cell.setCellValue(s01to2.getItemnombre());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(10);
+				System.out.println("s01to2.getOrganismocodigo(): "+ s01to2.getOrganismocodigo());
 				cell.setCellValue(s01to2.getOrganismocodigo());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(11);
+				System.out.println("s01to2.getOrganismoprestamocodigo(): " +s01to2.getOrganismoprestamocodigo());
 				cell.setCellValue(s01to2.getOrganismoprestamocodigo());
 				cell.setCellStyle(styles.get("contenido"));
 				cell = row.createCell(12);
