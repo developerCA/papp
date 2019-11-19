@@ -987,6 +987,8 @@ public class ConsultasUtil {
 			System.out.println("certificaciones: "+ certificaciones);
 			System.out.println("ordenesgasto: "+ ordenesgasto);
 			saldo=codificado-ordenesgasto-certificaciones;
+			if(saldo<0)
+				saldo=0;
 			System.out.println("saldo: "+ saldo);
 			return saldo;
 
