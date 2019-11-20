@@ -122,7 +122,7 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
 			$scope.objeto.incluyemeta=$scope.objeto.incluyemeta==1;
 		})
 	}
-
+ 
 	$scope.editar = function(index){
 		index = $scope.calcularIndex(index);
 		//console.log($scope.data[index]);
