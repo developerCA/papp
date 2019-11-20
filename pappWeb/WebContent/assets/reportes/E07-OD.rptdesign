@@ -3260,7 +3260,7 @@
                                     <property name="showIfBlank">false</property>
                                     <property name="canShrink">false</property>
                                     <property name="overflow">hidden</property>
-                                    <text-property name="text">Beneficiario No.:</text-property>
+                                    <text-property name="text">RUC:</text-property>
                                 </label>
                                 <data id="4617">
                                     <property name="backgroundAttachment">scroll</property>

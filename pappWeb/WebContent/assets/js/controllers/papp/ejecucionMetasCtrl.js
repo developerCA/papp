@@ -210,6 +210,9 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 				$scope.actividad.id
 		).then(function(resp){
 			$scope.listaTareas=resp;//.json.result;
+			for (var i = 0; i < $scope.listaTareas.length; i++) {
+				$scope.listaTareas[i].nombremostrado = $scope.listaTareas[i].npcodigo + ' - ' + $scope.listaTareas[i].npdescripcion;
+			}
 		})
 	};
 

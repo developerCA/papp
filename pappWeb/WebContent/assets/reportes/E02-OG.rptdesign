@@ -2773,7 +2773,7 @@
                                     <property name="showIfBlank">false</property>
                                     <property name="canShrink">false</property>
                                     <property name="overflow">hidden</property>
-                                    <text-property name="text">Beneficiario No.:</text-property>
+                                    <text-property name="text">RUC:</text-property>
                                 </label>
                                 <data id="4591">
                                     <property name="backgroundAttachment">scroll</property>
@@ -2949,6 +2949,8 @@
                         </row>
                         <row id="4592">
                             <cell id="4593">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
                                 <label id="4590">
                                     <property name="backgroundAttachment">scroll</property>
                                     <property name="backgroundPositionX">0%</property>
@@ -3061,8 +3063,6 @@
                                     <property name="resultSetColumn">BENEFICIARIO</property>
                                 </data>
                             </cell>
-                            <cell id="4594"/>
-                            <cell id="4595"/>
                         </row>
                         <row id="4512">
                             <cell id="4513">
