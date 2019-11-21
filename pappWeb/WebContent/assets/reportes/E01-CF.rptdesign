@@ -13,7 +13,7 @@
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">53078</value>
+                <value type="constant">58548</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -1408,12 +1408,6 @@ ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGAS
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="revisado" id="4448">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">EORGANICAESTADO</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">EORGANICAESTADO</text-property>
-                    <text-property name="heading">EORGANICAESTADO</text-property>
-                </structure>
-                <structure>
                     <property name="columnName">SOCIONEGOCIONOMBREMOSTRADO</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">SOCIONEGOCIONOMBREMOSTRADO</text-property>
@@ -1449,21 +1443,16 @@ ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGAS
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">EORGANICAESTADO</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
                         <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">3</property>
+                        <property name="position">2</property>
                         <property name="name">CARGONOMBRE</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">3</property>
                         <property name="name">GRADOSIGLA</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -1473,27 +1462,20 @@ ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGAS
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">EORGANICAESTADO</property>
-                    <property name="nativeName">EORGANICAESTADO</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
                     <property name="name">SOCIONEGOCIONOMBREMOSTRADO</property>
                     <property name="nativeName">SOCIONEGOCIONOMBREMOSTRADO</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">2</property>
                     <property name="name">CARGONOMBRE</property>
                     <property name="nativeName">CARGONOMBRE</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">3</property>
                     <property name="name">GRADOSIGLA</property>
                     <property name="nativeName">GRADOSIGLA</property>
                     <property name="dataType">string</property>
@@ -1501,42 +1483,31 @@ ORDENGASTO org INNER JOIN ORDENGASTOLINEA orgl on orgl.ORDENGASTOID=org.ORDENGAS
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
-       ES.EORGANICAESTADO,
        S.SOCIONEGOCIONOMBREMOSTRADO,
-       C.CARGONOMBRE,
-       G.GRADOSIGLA
+	   C.CARGONOMBRE,
+	   G.GRADOSIGLA
   FROM certificacion                c
        INNER JOIN Unidad            u ON u.UNIDADID = c.CERTIFICACIONUNIDADID,
-       ESTRUCTURAORGANICA 			ES,
-       UNIDADARBOL 					UA,
-       UNIDADARBOLPLAZA 			UAP,
-       UNIDADARBOLPLAZAEMPLEADO 	UAPE,
-       SOCIONEGOCIO 				S,
-       CARGO 						C,
-       GRADOESCALA 					GE,
-       GRADOFUERZA 					GF,
-       GRADO 						G
+       ESTRUCTURAORGANICA ES
+       INNER JOIN UNIDADARBOL UA ON ES.EORGANICAID = UA.UNIDADARBOLEORGANICAID 
+       INNER JOIN UNIDADARBOLPLAZA UAP ON UA.UNIDADARBOLID = UAP.UNIDADARBOLID
+       INNER JOIN UNIDADARBOLPLAZAEMPLEADO UAPE ON UAP.UNIDADARBOLID = UAPE.UNIDADARBOLID AND UAP.UNIDADARBOLPLAZAID = UAPE.UNIDADARBOLPLAZAID
+       INNER JOIN SOCIONEGOCIO S ON UAPE.UNIDADARBOLPLAEMPEMPID = S.SOCIONEGOCIOID
+       INNER JOIN CARGO C ON UAP.UNIDADARBOLPLAZACARGOID = C.CARGOID
+       LEFT JOIN GRADOESCALA GE ON S.SNEMPGRADOESCALAID = GE.GRADOESCALAID
+       LEFT JOIN GRADOFUERZA GF ON GE.GEGRADOFUERZAID = GF.GRADOFUERZAID
+       LEFT JOIN GRADO G ON GF.GRADOFUERZAGRADOID = G.GRADOID
  WHERE c.CERTIFICACIONID = ?
-   AND ES.EORGANICAID = UA.UNIDADARBOLEORGANICAID
-   AND UA.UNIDADARBOLID = UAP.UNIDADARBOLID
-   AND UAP.UNIDADARBOLID = UAPE.UNIDADARBOLID
-   AND UAP.UNIDADARBOLPLAZAID = UAPE.UNIDADARBOLPLAZAID
-   AND UAPE.UNIDADARBOLPLAEMPEMPID = S.SOCIONEGOCIOID
-   AND UAP.UNIDADARBOLPLAZACARGOID = C.CARGOID
-   AND S.SNEMPGRADOESCALAID = GE.GRADOESCALAID
-   AND GE.GEGRADOFUERZAID = GF.GRADOFUERZAID
-   AND GF.GRADOFUERZAGRADOID = G.GRADOID
    AND UA.UNIDADARBOLESTADO = 'A'
    AND UAP.UNIDADARBOLPLAZAREVISA = 1
    AND UA.UNIDADARBOLESTADO = 'A'
    AND UA.UNIDADARBOLUNIDADID = u.UNIDADID
-   AND (
-        UAPE.UNIDADARBOLPLAEMPFECHAFIN IS NULL
-        OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = TO_DATE('01/01/0001','mm/dd/yyyy')
-        OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = TO_DATE('01/01/1901','mm/dd/yyyy')
-       )
-   AND S.SOCIONEGOCIOESEMPLEADO = 1
-   AND ES.EORGANICAESTADO = 'V']]></xml-property>
+   AND ES.EORGANICAESTADO = 'V'
+   AND (UAPE.UNIDADARBOLPLAEMPFECHAFIN IS NULL
+        OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = to_date('01/01/0001','mm/dd/yyyy')
+		OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = to_date('01/01/1901','mm/dd/yyyy')
+	   )
+   AND S.SOCIONEGOCIOESEMPLEADO = 1]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>

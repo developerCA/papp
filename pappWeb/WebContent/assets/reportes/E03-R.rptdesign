@@ -14,7 +14,7 @@
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">8234</value>
+                <value type="constant">8820</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -1057,8 +1057,11 @@
                 <structure>
                     <property name="name">param_1</property>
                     <property name="paramName">reforma</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">integer</property>
+                    <property name="nativeDataType">0</property>
                     <property name="position">1</property>
+                    <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -1108,40 +1111,30 @@
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT
        S.SOCIONEGOCIONOMBREMOSTRADO,
-       C.CARGONOMBRE,
-       G.GRADOSIGLA
+	   C.CARGONOMBRE,
+	   G.GRADOSIGLA
   FROM REFORMA                      c
        INNER JOIN Unidad            u ON u.UNIDADID  =  c.REFORMAUNIDADID,
-       ESTRUCTURAORGANICA 			ES,
-       UNIDADARBOL 					UA,
-       UNIDADARBOLPLAZA 			UAP,
-       UNIDADARBOLPLAZAEMPLEADO 	UAPE,
-       SOCIONEGOCIO 				S,
-       CARGO 						C,
-       GRADOESCALA 					GE,
-       GRADOFUERZA 					GF,
-       GRADO 						G
+       ESTRUCTURAORGANICA ES
+       INNER JOIN UNIDADARBOL UA ON ES.EORGANICAID = UA.UNIDADARBOLEORGANICAID 
+       INNER JOIN UNIDADARBOLPLAZA UAP ON UA.UNIDADARBOLID = UAP.UNIDADARBOLID
+       INNER JOIN UNIDADARBOLPLAZAEMPLEADO UAPE ON UAP.UNIDADARBOLID = UAPE.UNIDADARBOLID AND UAP.UNIDADARBOLPLAZAID = UAPE.UNIDADARBOLPLAZAID
+       INNER JOIN SOCIONEGOCIO S ON UAPE.UNIDADARBOLPLAEMPEMPID = S.SOCIONEGOCIOID
+       INNER JOIN CARGO C ON UAP.UNIDADARBOLPLAZACARGOID = C.CARGOID
+       LEFT JOIN GRADOESCALA GE ON S.SNEMPGRADOESCALAID = GE.GRADOESCALAID
+       LEFT JOIN GRADOFUERZA GF ON GE.GEGRADOFUERZAID = GF.GRADOFUERZAID
+       LEFT JOIN GRADO G ON GF.GRADOFUERZAGRADOID = G.GRADOID
  WHERE c.REFORMAID = ?
-   AND ES.EORGANICAID = UA.UNIDADARBOLEORGANICAID
-   AND UA.UNIDADARBOLID = UAP.UNIDADARBOLID
-   AND UAP.UNIDADARBOLID = UAPE.UNIDADARBOLID
-   AND UAP.UNIDADARBOLPLAZAID = UAPE.UNIDADARBOLPLAZAID
-   AND UAPE.UNIDADARBOLPLAEMPEMPID = S.SOCIONEGOCIOID
-   AND UAP.UNIDADARBOLPLAZACARGOID = C.CARGOID
-   AND S.SNEMPGRADOESCALAID = GE.GRADOESCALAID
-   AND GE.GEGRADOFUERZAID = GF.GRADOFUERZAID
-   AND GF.GRADOFUERZAGRADOID = G.GRADOID
    AND UA.UNIDADARBOLESTADO = 'A'
    AND UAP.UNIDADARBOLPLAZAREVISA = 1
    AND UA.UNIDADARBOLESTADO = 'A'
    AND UA.UNIDADARBOLUNIDADID = u.UNIDADID
-   AND (
-        UAPE.UNIDADARBOLPLAEMPFECHAFIN IS NULL
-        OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = TO_DATE('01/01/0001','mm/dd/yyyy')
-        OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = TO_DATE('01/01/1901','mm/dd/yyyy')
-       )
-   AND S.SOCIONEGOCIOESEMPLEADO = 1
-   AND ES.EORGANICAESTADO = 'V']]></xml-property>
+   AND ES.EORGANICAESTADO = 'V'
+   AND (UAPE.UNIDADARBOLPLAEMPFECHAFIN IS NULL
+        OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = to_date('01/01/0001','mm/dd/yyyy')
+		OR UAPE.UNIDADARBOLPLAEMPFECHAFIN = to_date('01/01/1901','mm/dd/yyyy')
+	   )
+   AND S.SOCIONEGOCIOESEMPLEADO = 1]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
