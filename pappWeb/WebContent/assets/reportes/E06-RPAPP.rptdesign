@@ -14,7 +14,7 @@
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="javascript">121</value>
+                <value type="javascript">122</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -324,116 +324,6 @@
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
-                <structure>
-                    <property name="name">unid</property>
-                    <property name="paramName">unidad</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">6</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">unid_null</property>
-                    <property name="paramName">unidad</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">7</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">pr</property>
-                    <property name="paramName">programa</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">8</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">pr_null</property>
-                    <property name="paramName">programa</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">9</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">py</property>
-                    <property name="paramName">proyecto</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">10</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">py_null</property>
-                    <property name="paramName">proyecto</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">11</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">ac</property>
-                    <property name="paramName">actividad</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">12</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">ac_null</property>
-                    <property name="paramName">actividad</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">13</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">it</property>
-                    <property name="paramName">item</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">14</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-                <structure>
-                    <property name="name">it_null</property>
-                    <property name="paramName">item</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">0</property>
-                    <property name="position">15</property>
-                    <property name="isOptional">false</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -723,11 +613,6 @@
  WHERE r.reformaejerfiscalid = ?
    AND (i.institucionid = TO_NUMBER(?) OR ? IS NULL)
    AND (ie.institucionentid = TO_NUMBER(?) OR ? IS NULL)
-   AND (u.UNIDADID = TO_NUMBER(?) OR ? IS NULL)
-   AND (pr.PROGRAMAID = TO_NUMBER(?) OR ? IS NULL)
-   AND (py.PROYECTOID = TO_NUMBER(?) OR ? IS NULL)
-   AND (ac.ACTIVIDADID = TO_NUMBER(?) OR ? IS NULL)
-   AND (it.ITEMID = TO_NUMBER(?) OR ? IS NULL)
  ORDER BY
        pr.programacodigo,
        pr.programanombre,
