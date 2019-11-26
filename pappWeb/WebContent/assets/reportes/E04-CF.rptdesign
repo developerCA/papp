@@ -94,6 +94,51 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="item" id="4830">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ff" id="4831">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="estado" id="4832">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7">
@@ -354,6 +399,54 @@
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
+                <structure>
+                    <property name="name">i</property>
+                    <property name="paramName">item</property>
+                    <property name="dataType">string</property>
+                    <property name="position">12</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">in</property>
+                    <property name="paramName">item</property>
+                    <property name="dataType">string</property>
+                    <property name="position">13</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">ff</property>
+                    <property name="paramName">ff</property>
+                    <property name="dataType">string</property>
+                    <property name="position">14</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">ffn</property>
+                    <property name="paramName">ff</property>
+                    <property name="dataType">string</property>
+                    <property name="position">15</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">e</property>
+                    <property name="paramName">estado</property>
+                    <property name="dataType">string</property>
+                    <property name="position">16</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">en</property>
+                    <property name="paramName">estado</property>
+                    <property name="dataType">string</property>
+                    <property name="position">17</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -587,8 +680,8 @@
        ac.ACTIVIDADCODIGO || '-' || ac.ACTIVIDADDESCRIPCION AS actividad,
        c.CERTIFICACIONCODIGO AS No_C_F,
        c.CERTIFICACIONNUMPRECOMPROMISO AS COMP,
-       '' AS No_C_A,
-       sn.SOCIONEGOCIONOMBREMOSTRADO AS beneficiario,
+       og.ORDENGASTOCODIGO AS No_C_A,
+       CASE WHEN sn.SOCIONEGOCIONOMBREMOSTRADO IS NOT NULL THEN sn.SOCIONEGOCIONOMBREMOSTRADO ELSE sn.SOCIONEGOCIONOMBRECOMERCIAL END AS beneficiario,
        c.CERTIFICACIONDESCRIPCION AS descripcion,
        it.ITEMCODIGO AS item,
        f.FUENTEFINANCIAMIENTOCODIGO AS fuente,
@@ -631,7 +724,8 @@
        INNER JOIN nivelprograma             na8             ON na8.nivelprogramatablarelacionid = ac.actividadid
        INNER JOIN nivelprograma             na9             ON na9.nivelprogramaid = na8.nivelprogramapadreid
        INNER JOIN proyecto                  py              ON py.proyectoid = na9.nivelprogramatablarelacionid
-       LEFT JOIN SOCIONEGOCIO               sn              ON sn.SOCIONEGOCIOID = c.CERTIFICACIONEMPREVISAID
+       LEFT JOIN ORDENGASTO                 og              ON og.ORDENGASTOCERTIFICACIONID = c.CERTIFICACIONID
+       LEFT JOIN SOCIONEGOCIO               sn              ON sn.SOCIONEGOCIOID = og.ORDENGASTOPROVEEDORID
  WHERE ef.EJERCICIOFISCALID = ?
    AND c.CERTIFICACIONEJERFISCALID = ef.EJERCICIOFISCALID
    AND (TO_NUMBER(i.INSTITUCIONID) = ? OR ? IS NULL)
@@ -639,6 +733,9 @@
    AND (TO_NUMBER(u.UNIDADID) = ? OR ? IS NULL)
    AND (TO_NUMBER(py.PROYECTOID) = ? OR ? IS NULL)
    AND (TO_NUMBER(ac.ACTIVIDADID) = ? OR ? IS NULL)
+   AND (TO_NUMBER(it.ITEMID) = ? OR ? IS NULL)
+   AND (TO_NUMBER(f.fuentefinanciamientoid) = ? OR ? IS NULL)
+   AND (c.CERTIFICACIONESTADO = ? OR ? IS NULL)
    AND ROWNUM <= 5000]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1836,11 +1933,19 @@
                                 <property name="dataType">decimal</property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">CA</property>
+                                <text-property name="displayName">NO_C_A</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["NO_C_A"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <column id="4794"/>
                         <column id="4795"/>
                         <column id="4796"/>
                         <column id="4797"/>
+                        <column id="4827"/>
                         <column id="4799"/>
                         <column id="4800">
                             <property name="width">2.875in</property>
@@ -1880,6 +1985,12 @@
                                     <property name="verticalAlign">middle</property>
                                     <label id="4729">
                                         <text-property name="text">COMP</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="4824">
+                                    <property name="verticalAlign">middle</property>
+                                    <label id="4828">
+                                        <text-property name="text">No.CO.APLI.</text-property>
                                     </label>
                                 </cell>
                                 <cell id="4732">
@@ -1962,6 +2073,12 @@
                                     <property name="verticalAlign">middle</property>
                                     <data id="4758">
                                         <property name="resultSetColumn">COMP</property>
+                                    </data>
+                                </cell>
+                                <cell id="4825">
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="4829">
+                                        <property name="resultSetColumn">CA</property>
                                     </data>
                                 </cell>
                                 <cell id="4761">
@@ -2084,6 +2201,10 @@
                                     <property name="verticalAlign">middle</property>
                                 </cell>
                                 <cell id="4783">
+                                    <property name="verticalAlign">middle</property>
+                                </cell>
+                                <cell id="4826">
+                                    <property name="textAlign">right</property>
                                     <property name="verticalAlign">middle</property>
                                 </cell>
                                 <cell id="4785">

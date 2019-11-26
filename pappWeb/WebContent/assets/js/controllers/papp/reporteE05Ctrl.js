@@ -5,6 +5,7 @@ app.controller('ReporteE05Controller', [ "$scope","$rootScope","$uibModal","Swee
 
 	$scope.objeto = {};
 	$scope.institucioncodigo = null;
+	$spoce.estadoFiltro = null;
 
 	$scope.limpiarListas = function(pos) {
 		$scope.objeto.programaid = null;
@@ -385,33 +386,37 @@ app.controller('ReporteE05Controller', [ "$scope","$rootScope","$uibModal","Swee
         	if ($scope.objeto.unidadid != undefined && $scope.objeto.unidadid != null) {
         		url += "&unidad=" + $scope.objeto.unidadid;
         	}
+        	if ($scope.objeto.programaid != undefined && $scope.objeto.programaid != null) {
+        		url += "&programa=" + $scope.objeto.programaid;
+        	}
         	if ($scope.objeto.proyectoid != undefined && $scope.objeto.proyectoid != null) {
         		url += "&proyecto=" + $scope.objeto.proyectoid;
         	}
         	if ($scope.objeto.actividadid != undefined && $scope.objeto.actividadid != null) {
         		url += "&actividad=" + $scope.objeto.actividadid;
         	}
-        	window.open(url, '_blank');
-/*
-        	if ($scope.objeto.programaid != undefined && $scope.objeto.programaid != null) {
-        		url += "&programaid=" + $scope.objeto.programaid;
-        	}
         	if ($scope.objeto.subactividadid != undefined && $scope.objeto.subactividadid != null) {
-        		url += "&subactividadid=" + $scope.objeto.subactividadid;
+        		url += "&subactividad=" + $scope.objeto.subactividadid;
         	}
         	if ($scope.objeto.tareaid != undefined && $scope.objeto.tareaid != null) {
-        		url += "&tareaunidadid=" + $scope.objeto.tareaid;
+        		url += "&tarea=" + $scope.objeto.tareaid;
         	}
         	if ($scope.objeto.subtareaid != undefined && $scope.objeto.subtareaid != null) {
-        		url += "&subtareaunidadid=" + $scope.objeto.subtareaid;
+        		url += "&subtarea=" + $scope.objeto.subtareaid;
         	}
         	if ($scope.objeto.itemid != undefined && $scope.objeto.itemid != null) {
-        		url += "&itemid=" + $scope.objeto.itemid;
+        		url += "&item=" + $scope.objeto.itemid;
         	}
         	if ($scope.objeto.subitemid != undefined && $scope.objeto.subitemid != null) {
-        		url += "&subitemid=" + $scope.objeto.subitemid;
+        		url += "&subitem=" + $scope.objeto.subitemid;
         	}
-*/
+        	if ($scope.objeto.npfuentefinanciamiento != undefined && $scope.objeto.npfuentefinanciamiento != null) {
+        		url += "&ff=" + $scope.objeto.npfuentefinanciamiento;
+        	}
+        	if ($scope.estadoFiltro != undefined && $scope.estadoFiltro != null) {
+        		url += "&estado=" + $scope.estadoFiltro;
+        	}
+        	window.open(url, '_blank');
         },
         reset: function (form) {
             $scope.myModel = angular.copy($scope.master);

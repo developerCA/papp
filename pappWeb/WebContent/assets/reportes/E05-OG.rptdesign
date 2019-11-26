@@ -94,6 +94,126 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="programa" id="4824">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="subactividad" id="4825">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="tarea" id="4826">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="subtarea" id="4827">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="item" id="4828">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="subitem" id="4829">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ff" id="4830">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="estado" id="4831">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="7">
@@ -362,6 +482,182 @@
                     <property name="dataType">string</property>
                     <property name="nativeDataType">0</property>
                     <property name="position">11</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">pr</property>
+                    <property name="paramName">programa</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">12</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">prn</property>
+                    <property name="paramName">programa</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">13</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">sa</property>
+                    <property name="paramName">subactividad</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">14</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">san</property>
+                    <property name="paramName">subactividad</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">15</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">t</property>
+                    <property name="paramName">tarea</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">16</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">tn</property>
+                    <property name="paramName">tarea</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">17</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">st</property>
+                    <property name="paramName">subtarea</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">18</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">stn</property>
+                    <property name="paramName">subtarea</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">19</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">i</property>
+                    <property name="paramName">item</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">20</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">in</property>
+                    <property name="paramName">item</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">21</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">si</property>
+                    <property name="paramName">subitem</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">22</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">sin</property>
+                    <property name="paramName">subitem</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">23</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">f</property>
+                    <property name="paramName">ff</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">24</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">fn</property>
+                    <property name="paramName">ff</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">25</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">e</property>
+                    <property name="paramName">estado</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">26</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">en</property>
+                    <property name="paramName">estado</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">0</property>
+                    <property name="position">27</property>
                     <property name="isOptional">false</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
@@ -650,7 +946,6 @@
        INNER JOIN Unidadinst                ui              ON ui.unidadid = u.unidadid
        INNER JOIN INSTITUCIONENTIDAD        ie              ON (ui.unidadinstid = ie.institucionid AND ui.unidadinstentidadid = ie.institucionentid) 
        INNER JOIN INSTITUCION               i               ON ie.institucionid = i.institucionid
-       INNER JOIN EJERCICIOFISCAL           ef              ON ef.EJERCICIOFISCALID = i.INSTITUCIONEJERCICIOFISCALID
        INNER JOIN ORDENGASTOLINEA           ogl             ON ogl.ORDENGASTOid = og.ORDENGASTOID
        INNER JOIN NIVELACTIVIDAD            na              ON ogl.ORDENGASTOLINEANIVELACTID = na.NIVELACTIVIDADID
        INNER JOIN SUBITEMUNIDAD             siu             ON na.NIVELACTIVIDADTABLARELACIONID = siu.SUBITEMUNIDADID
@@ -661,15 +956,24 @@
 	   INNER JOIN Fuentefinanciamiento      f               ON f.fuentefinanciamientoid = itu.itemunidadfuentefinanid      
        INNER JOIN ITEM                      it              ON itu.itemunidaditemid = it.ITEMID
        INNER JOIN nivelactividad            na12            ON na12.nivelactividadid = na7.nivelactividadpadreid
-       INNER JOIN nivelactividad            na13            ON na13.NIVELACTIVIDADID = na12.NIVELACTIVIDADPADREID 
+       INNER JOIN subtareaunidad            st              ON st.subtareaunidadid = na12.nivelactividadtablarelacionid
+       INNER JOIN nivelactividad            na13            ON na13.NIVELACTIVIDADID=na12.NIVELACTIVIDADPADREID 
+       INNER JOIN tareaunidad               ta              ON ta.tareaunidadid = na13.nivelactividadtablarelacionid
        INNER JOIN nivelactividad            na14            ON na14.nivelactividadid = na13.nivelactividadpadreid
+       INNER JOIN subactividadunidad        sau             ON sau.subactividadid = na14.nivelactividadtablarelacionid
+       INNER JOIN Subactividad              sa              ON sa.subactividadid = sau.subactividadid
        INNER JOIN nivelactividad            na15            ON na15.nivelactividadid = na14.nivelactividadpadreid
        INNER JOIN actividad                 ac              ON ac.actividadid = na15.nivelactividadtablarelacionid
        INNER JOIN nivelprograma             na8             ON na8.nivelprogramatablarelacionid = ac.actividadid
        INNER JOIN nivelprograma             na9             ON na9.nivelprogramaid = na8.nivelprogramapadreid
        INNER JOIN proyecto                  py              ON py.proyectoid = na9.nivelprogramatablarelacionid
-       INNER JOIN CERTIFICACION             c               ON c.CERTIFICACIONID = og.ORDENGASTOCERTIFICACIONID
-       INNER JOIN SOCIONEGOCIO              sn              ON sn.SOCIONEGOCIOID = og.ORDENGASTOPROVEEDORID
+       INNER JOIN nivelprograma             na10            ON na10.nivelprogramaid = na9.nivelprogramapadreid
+       INNER JOIN subprograma               sp              ON sp.subprogramaid = na10.nivelprogramatablarelacionid
+       INNER JOIN nivelprograma             na11            ON na11.nivelprogramaid = na10.nivelprogramapadreid
+       INNER JOIN programa                  pr              ON pr.programaid = na11.nivelprogramatablarelacionid
+       INNER JOIN SOCIONEGOCIO              so              ON so.SOCIONEGOCIOID=og.ORDENGASTOPROVEEDORID
+       INNER JOIN CERTIFICACION             ce              ON ce.CERTIFICACIONID=og.ORDENGASTOCERTIFICACIONID
+       ,EJERCICIOFISCAL           ef
  WHERE ef.EJERCICIOFISCALID = ?
    AND og.ORDENGASTOEJERFISCALID = ef.EJERCICIOFISCALID
    AND (TO_NUMBER(i.INSTITUCIONID) = ? OR ? IS NULL)
@@ -677,7 +981,44 @@
    AND (TO_NUMBER(u.UNIDADID) = ? OR ? IS NULL)
    AND (TO_NUMBER(py.PROYECTOID) = ? OR ? IS NULL)
    AND (TO_NUMBER(ac.ACTIVIDADID) = ? OR ? IS NULL)
-   AND ROWNUM <= 5000]]></xml-property>
+   AND (TO_NUMBER(pr.programaid) = ? OR ? IS NULL)
+   AND (TO_NUMBER(sau.subactividadid) = ? OR ? IS NULL)
+   AND (TO_NUMBER(ta.tareaunidadid) = ? OR ? IS NULL)
+   AND (TO_NUMBER(st.subtareaunidadid) = ? OR ? IS NULL)
+   AND (TO_NUMBER(it.ITEMID) = ? OR ? IS NULL)
+   AND (TO_NUMBER(si.SUBITEMID) = ? OR ? IS NULL)
+   AND (TO_NUMBER(f.fuentefinanciamientoid) = ? OR ? IS NULL)
+   AND (og.ORDENGASTOESTADO = ? OR ? IS NULL)
+   AND ROWNUM <= 5000
+ GROUP BY
+       ef.EJERCICIOFISCALANIO,
+       i.INSTITUCIONCODIGO,
+       i.INSTITUCIONNOMBRE,
+       ie.INSTITUCIONENTCODIGO,
+       ie.INSTITUCIONENTNOMBRE,
+       u.UNIDADCODIGOPRESUP,
+       u.UNIDADNOMBRE,
+       py.PROYECTOCODIGO,
+       py.PROYECTODESCRIPCION,
+       ac.ACTIVIDADCODIGO,
+       ac.ACTIVIDADDESCRIPCION,
+       u.UNIDADCODIGOPRESUP,
+       og.ORDENGASTOCODIGO,
+       og.ORDENGASTONUMEROCOMPROMISO,
+       ce.CERTIFICACIONCODIGO,
+       og.ORDENGASTOCONTRATOID,
+       so.SOCIONEGOCIONOMBREMOSTRADO,
+       og.ORDENGASTODESCRIPCION,
+       it.ITEMCODIGO,
+       f.FUENTEFINANCIAMIENTOCODIGO,
+       si.SUBITEMCODIGO,
+       si.SUBITEMNOMBRE,
+       ogl.ORDENGASTOLINEAVALOR,
+       og.ORDENGASTOFECHACREACION,
+       og.ORDENGASTOESTADO,
+       og.ORDENGASTOCUR
+ ORDER BY
+       og.ORDENGASTOCODIGO]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>

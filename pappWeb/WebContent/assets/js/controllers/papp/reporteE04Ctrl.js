@@ -391,6 +391,15 @@ app.controller('ReporteE04Controller', [ "$scope","$rootScope","$uibModal","Swee
         	if ($scope.objeto.actividadid != undefined && $scope.objeto.actividadid != null) {
         		url += "&actividad=" + $scope.objeto.actividadid;
         	}
+        	if ($scope.objeto.itemid != undefined && $scope.objeto.itemid != null) {
+        		url += "&item=" + $scope.objeto.itemid;
+        	}
+        	if ($scope.objeto.npfuentefinanciamiento != undefined && $scope.objeto.npfuentefinanciamiento != null) {
+        		url += "&ff=" + $scope.objeto.npfuentefinanciamiento;
+        	}
+        	if ($scope.estadoFiltro != undefined && $scope.estadoFiltro != null) {
+        		url += "&estado=" + $scope.estadoFiltro;
+        	}
         	window.open(url, '_blank');
 /*
         	if ($scope.objeto.programaid != undefined && $scope.objeto.programaid != null) {
