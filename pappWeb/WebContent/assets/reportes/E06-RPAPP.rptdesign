@@ -25,7 +25,7 @@
         </scalar-parameter>
         <scalar-parameter name="entidad" id="4612">
             <property name="valueType">static</property>
-            <property name="isRequired">true</property>
+            <property name="isRequired">false</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
@@ -116,6 +116,21 @@
             </structure>
         </scalar-parameter>
         <scalar-parameter name="item" id="4772">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="estado" id="5005">
             <property name="valueType">static</property>
             <property name="isRequired">false</property>
             <property name="dataType">string</property>
@@ -321,6 +336,38 @@
                     <property name="nativeDataType">0</property>
                     <property name="position">5</property>
                     <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">u</property>
+                    <property name="paramName">unidad</property>
+                    <property name="dataType">string</property>
+                    <property name="position">6</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">un</property>
+                    <property name="paramName">unidad</property>
+                    <property name="dataType">string</property>
+                    <property name="position">7</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">e</property>
+                    <property name="paramName">estado</property>
+                    <property name="dataType">string</property>
+                    <property name="position">8</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">en</property>
+                    <property name="paramName">estado</property>
+                    <property name="dataType">string</property>
+                    <property name="position">9</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -611,8 +658,10 @@
        INNER JOIN programa                  pr              ON pr.programaid = na11.nivelprogramatablarelacionid
        INNER JOIN FUENTEFINANCIAMIENTO      ff              ON ff.fuentefinanciamientoid = itu.itemunidadfuentefinanid
  WHERE r.reformaejerfiscalid = ?
-   AND (i.institucionid = TO_NUMBER(?) OR ? IS NULL)
-   AND (ie.institucionentid = TO_NUMBER(?) OR ? IS NULL)
+   AND (TO_NUMBER(i.INSTITUCIONID) = ? OR ? IS NULL)
+   AND (TO_NUMBER(ie.INSTITUCIONENTID) = ? OR ? IS NULL)
+   AND (TO_NUMBER(u.UNIDADID) = ? OR ? IS NULL)
+   AND (r.REFORMAESTADO = ? OR ? IS NULL)
  ORDER BY
        pr.programacodigo,
        pr.programanombre,
@@ -1241,7 +1290,7 @@ WHERE
                                     <property name="fontWeight">normal</property>
                                     <property name="textAlign">center</property>
                                     <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[LISTADO DE REFORMAS A LA PROGRAMACIÓN ANUAL DE POLÍTICA PÚBLICA]]></text-property>
+                                    <text-property name="content"><![CDATA[LISTADO DE REFORMAS A LA PROGRAMACIÓN ANUAL DE LA PLANIFICACIÓN]]></text-property>
                                 </text>
                             </cell>
                         </row>

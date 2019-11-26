@@ -5,7 +5,7 @@ app.controller('ReporteE05Controller', [ "$scope","$rootScope","$uibModal","Swee
 
 	$scope.objeto = {};
 	$scope.institucioncodigo = null;
-	$spoce.estadoFiltro = null;
+	$scope.estadoFiltro = null;
 
 	$scope.limpiarListas = function(pos) {
 		$scope.objeto.programaid = null;

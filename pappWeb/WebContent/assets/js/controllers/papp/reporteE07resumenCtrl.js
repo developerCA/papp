@@ -397,6 +397,12 @@ app.controller('ReporteE07resumenController', [ "$scope","$rootScope","$uibModal
         	if ($scope.objeto.itemid != undefined && $scope.objeto.itemid != null) {
         		url += "&item=" + $scope.objeto.itemid;
         	}
+        	if ($scope.objeto.npfuentefinanciamiento != undefined && $scope.objeto.npfuentefinanciamiento != null) {
+        		url += "&ff=" + $scope.objeto.npfuentefinanciamiento;
+        	}
+        	if ($scope.estadoFiltro != undefined && $scope.estadoFiltro != null) {
+        		url += "&estado=" + $scope.estadoFiltro;
+        	}
         	window.open(url, '_blank');
 /*
         	if ($scope.objeto.subactividadid != undefined && $scope.objeto.subactividadid != null) {

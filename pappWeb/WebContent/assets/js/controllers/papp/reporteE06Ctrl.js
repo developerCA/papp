@@ -391,6 +391,9 @@ app.controller('ReporteE06Controller', [ "$scope","$rootScope","$uibModal","Swee
         	if ($scope.objeto.actividadid != undefined && $scope.objeto.actividadid != null) {
         		url += "&actividad=" + $scope.objeto.actividadid;
         	}
+        	if ($scope.estadoFiltro != undefined && $scope.estadoFiltro != null) {
+        		url += "&estado=" + $scope.estadoFiltro;
+        	}
         	window.open(url, '_blank');
 /*
         	if ($scope.objeto.programaid != undefined && $scope.objeto.programaid != null) {
