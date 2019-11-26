@@ -796,8 +796,12 @@ public class ConsultasUtil {
 				System.out.println("fecha a comparar: " + reformalineaTO.getReforma().getFechacreacion());
 				//if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
 				if(reformalineaTO.getReforma().getEstado().equals("AP") ||reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")){
-					totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue()-reformalineaTO.getValordecremento().doubleValue();
+					totalreforma=totalreforma-reformalineaTO.getValordecremento().doubleValue();
 				}
+				if(reformalineaTO.getReforma().getEstado().equals("AP")){
+					totalreforma=totalreforma+reformalineaTO.getValorincremento().doubleValue();
+				}
+
 			}
 			double codificado=totalajustado+totalreforma;
 			System.out.println("totalajustad: " + totalajustado + "totalreforma: " + totalreforma);
