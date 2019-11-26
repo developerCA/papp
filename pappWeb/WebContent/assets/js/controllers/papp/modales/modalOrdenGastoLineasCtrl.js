@@ -111,6 +111,14 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","
                 angular.element('.ng-invalid[name=' + firstError + ']').focus();
                 return;
             } else {
+            	if (Number($scope.objeto.valor) < 0) {
+        			SweetAlert.swal(
+        					"Orden de gastos! - Linea",
+        					"El valor no puede ser numero negativo",
+        					"error"
+        			);
+        			return;
+            	}
             	var tObj = Object.assign({}, $scope.objeto);
             	//tObj.nivelactid = tObj.subitem;
             	delete tObj.subitem;
@@ -126,7 +134,7 @@ app.controller('ModalOrdenGastoLineasController', [ "$scope","$rootScope","ID","
 	 		             }
 	 		    		 $uibModalInstance.close(tObj);		
         			 }else{
-	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal("Orden de gastos! - Linea", resp.mensajes.msg, "error");
         			 }
         		})
         		//console.log($scope.objeto);

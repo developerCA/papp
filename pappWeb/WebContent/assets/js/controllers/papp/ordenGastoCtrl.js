@@ -535,6 +535,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			//console.log(obj);
 			if (obj != null) {
 				$scope.objeto.ordengastocontratoid = obj.id;
+			    noSalir = true;
 				$scope.form.submit(Form);
 			}
 		}, function() {
@@ -569,6 +570,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			//console.log(obj);//130
 		    $scope.detalles = obj.lineas;
 		    $scope.objeto.valortotal = obj.valortotal;
+		    noSalir = true;
 			$scope.form.submit(Form);
             SweetAlert.swal("Orden Gasto! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
@@ -602,6 +604,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 			//console.log(obj);
 		    $scope.detalles = obj.lineas;
 		    $scope.objeto.valortotal = obj.valortotal;
+		    noSalir = true;
 			$scope.form.submit(Form);
             SweetAlert.swal("Orden Gasto! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
@@ -630,6 +633,7 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
 					SweetAlert.swal("Orden Gasto! - Lineas!", "Eliminado satisfactoriamente!", "success");
 					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
 				    $scope.detalles.splice(index, 1);
+				    noSalir = true;
 				    $scope.form.submit(Form);
 	   			}else{
 		            SweetAlert.swal("Orden Gasto! - Lineas!", resp.mensajes.msg, "error");
@@ -658,6 +662,12 @@ app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","Swee
             } else {
             	ordenGastoFactory.guardar($scope.objeto).then(function(resp){
         			 if (resp.estado){
+    	   				 if (noSalir == true) {
+    						 noSalir = false;
+    						 $scope.objeto=resp.json.ordengasto;
+    						 $scope.detalles=resp.json.ordengastolineas;
+    						 return;
+    					 }
         				 if ($scope.nuevoar) {
 	      					 $scope.noeditar = false;
 	      					 $scope.nuevoar=false;

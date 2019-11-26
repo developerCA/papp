@@ -134,6 +134,14 @@ app.controller('ModalOrdenReversionLineasController', [ "$scope","$rootScope","o
 //            		);
 //            		return;
 //            	}
+            	if (Number($scope.objeto.valor) < 0) {
+        			SweetAlert.swal(
+        					"Orden Reversion! - Lineas",
+        					"El valor no puede ser numero negativo",
+        					"error"
+        			);
+        			return;
+            	}
             	if (tipo != 'F' && $scope.objeto.valor.toFixed(2) == $scope.objeto.npsaldo.toFixed(2)) {
                     SweetAlert.swal(
                 		"Orden Devengo! - Lineas",

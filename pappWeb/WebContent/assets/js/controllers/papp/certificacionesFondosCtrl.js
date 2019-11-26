@@ -442,6 +442,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		modalInstance.result.then(function(obj) {
 		    $scope.detalles = obj.lineas;
 		    $scope.objeto.valortotal = obj.valortotal;
+		    noSalir = true;
 		    $scope.form.submit(Form);
             SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
@@ -471,6 +472,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 		modalInstance.result.then(function(obj) {
 		    $scope.detalles = obj.lineas;
 		    $scope.objeto.valortotal = obj.valortotal;
+		    noSalir = true;
 		    $scope.form.submit(Form);
             SweetAlert.swal("Certificaciones de Fondos! - Lineas", "Registro guardado satisfactoriamente!", "success");
 		}, function() {
@@ -499,6 +501,7 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
 					SweetAlert.swal("Certificaciones de Fondos!", "Eliminado satisfactoriamente!", "success");
 					$scope.objeto.valortotal -= $scope.detalles[index].npvalor;
 				    $scope.detalles.splice(index, 1);
+				    noSalir = true;
 				    $scope.form.submit(Form);
 	   			}else{
 		            SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
@@ -585,10 +588,17 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
             } else {
             	certificacionesFondosFactory.guardar($scope.objeto).then(function(resp){
         			 if (resp.estado){
+        				 if (noSalir == true) {
+        					 noSalir = false;
+	      					 $scope.nuevoar = false;
+	      				     $scope.objeto = resp.json.certificacion;
+	      				     $scope.detalles = resp.json.certificacionlineas;
+        					 return;
+        				 }
         				 if ($scope.nuevoar) {
 	      					 $scope.noeditar = false;
-	      					 $scope.nuevoar=false;
-	      				     $scope.objeto=resp.json.certificacion;
+	      					 $scope.nuevoar = false;
+	      				     $scope.objeto = resp.json.certificacion;
         				 } else {
           		             form.$setPristine(true);
           		             $scope.edicion=false;
@@ -601,7 +611,11 @@ app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibM
       							 "success"
 						 );
         			 }else{
-	 		             SweetAlert.swal("Certificaciones de Fondos!", resp.mensajes.msg, "error");
+	 		             SweetAlert.swal(
+	 		            		 "Certificaciones de Fondos!",
+	 		            		 resp.mensajes.msg,
+	 		            		 "error"
+	            		 );
         			 }
         		})
             }

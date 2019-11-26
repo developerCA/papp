@@ -153,6 +153,14 @@ app.controller('ModalCertificacionesFondosLineasController', [ "$scope","$rootSc
         			);
         			return;
             	}
+            	if (Number($scope.objeto.valor) < 0) {
+        			SweetAlert.swal(
+        					"Certificaciones de Fondos!",
+        					"El valor no se numero negativo",
+        					"error"
+        			);
+        			return;
+            	}
             	var tObj = Object.assign({}, $scope.objeto);
             	if (tObj.nivelactid == 0) {
             	  tObj.nivelactid = tObj.subitem;

@@ -145,6 +145,14 @@ app.controller('ModalOrdenDevengoLineasController', [ "$scope","$rootScope","ord
             		);
             		return;
             	}
+            	if (Number($scope.objeto.valor) < 0) {
+        			SweetAlert.swal(
+        					"Orden Devengo! - Lineas",
+        					"El valor no puede ser numero negativo",
+        					"error"
+        			);
+        			return;
+            	}
             	var tObj = Object.assign({}, $scope.objeto);
             	if (tObj.nivelactid == 0) {
             		tObj.nivelactid = tObj.subitem;
