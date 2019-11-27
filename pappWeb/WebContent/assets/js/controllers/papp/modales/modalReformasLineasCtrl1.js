@@ -206,6 +206,14 @@ app.controller('ModalReformasLineasController1', [ "$scope","$rootScope","ID","u
     				);
             		return;
             	}
+            	if (tObj.valorincremento < 0 || tObj.valordecremento < 0) {
+            		SweetAlert.swal(
+            				"Reformas!",
+            				"Valor incremento o valor decremento no pueden ser negativos",
+            				"error"
+    				);
+            		return;
+            	}
             	tObj.saldo = $scope.saldo;
             	reformasFactory.guardarLinea(tObj).then(function(resp){
         			 if (resp.estado){
