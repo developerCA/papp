@@ -1136,16 +1136,16 @@ public class ReportesConsultas {
 				for(P02TO p02:p02tos){
 					row = sheet.createRow((short)fila);
 					cell = row.createCell(0);
-					cell.setCellValue(p02.getId().getItemid() + " - " +p02.getPlandescripcion());
+					cell.setCellValue(p02.getPlancodigo()+"-"+p02.getPlandescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(1);
-					cell.setCellValue(p02.getEstrategicodescripcion());
+					cell.setCellValue(p02.getEstrategicocodigo()+"-"+p02.getEstrategicodescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(2);
-					cell.setCellValue(p02.getOperativodescripcion());
+					cell.setCellValue(p02.getOperativocodigo()+"-"+p02.getOperativodescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(3);
-					cell.setCellValue(p02.getFuerzadescripcion());
+					cell.setCellValue(p02.getObjetivocodigo()+"-"+p02.getFuerzadescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(4);
 					cell.setCellValue(p02.getInstitucioincodigo() +" - " + p02.getInstitucionnombre());
@@ -1989,16 +1989,16 @@ public class ReportesConsultas {
 				for(P03TO p03:p03tos){
 					row = sheet.createRow((short)fila);
 					cell = row.createCell(0);
-					cell.setCellValue(p03.getPlandescripcion());
+					cell.setCellValue(p03.getPlancodigo()+"-"+p03.getPlandescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(1);
-					cell.setCellValue(p03.getEstrategicodescripcion());
+					cell.setCellValue(p03.getEstrategicocodigo()+"-"+p03.getEstrategicodescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(2);
-					cell.setCellValue(p03.getOperativodescripcion());
+					cell.setCellValue(p03.getOperativocodigo()+"-"+p03.getOperativodescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(3);
-					cell.setCellValue(p03.getFuerzadescripcion());
+					cell.setCellValue(p03.getObjetivocodigo()+"-"+p03.getFuerzadescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(4);
 					cell.setCellValue(p03.getInstitucioincodigo() +" - " + p03.getInstitucionnombre());
@@ -2370,7 +2370,7 @@ public class ReportesConsultas {
 				}
 			}
 			row = sheet.createRow((short)fila);
-			sheet.setColumnWidth(0, 256*40);
+			sheet.setColumnWidth(0, 256*10);
 			sheet.setColumnWidth(1, 256*40);
 			sheet.setColumnWidth(2, 256*40);
 			sheet.setColumnWidth(3, 256*40);
