@@ -84,7 +84,7 @@
                                     </a>
                                 </td>
                                 <td>{{data.codigo}}</td>
-                                <td>{{data.nombremostrado}}</td>
+                                <td>{{data.nombrecomercial}}</td>
                                 <td>
                                     <span ng-if="data.esproveedor=='1'">Si</span>
                                     <span ng-if="data.esproveedor=='0'">No</span>
@@ -146,8 +146,8 @@
                                         <span class="symbol required"></span>
                                     </label>
                                     <input type="text" placeholder="Ingrese el nombre"
-                                    	class="form-control" name="nombremostrado" required
-                                        ng-model="objeto.nombremostrado"
+                                    	class="form-control" name="nombrecomercial" required
+                                        ng-model="objeto.nombrecomercial"
                                         ng-disabled="objeto.id != null" />
                                     <span class="error text-small block"
 										ng-if="Form.nombremostrado.$dirty && Form.nombremostrado.$invalid">

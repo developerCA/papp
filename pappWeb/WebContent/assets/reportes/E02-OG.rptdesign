@@ -235,6 +235,7 @@
                 </structure>
                 <structure>
                     <property name="columnName">NUMEROOFICIO</property>
+                    <property name="analysis">dimension</property>
                     <text-property name="displayName">NUMEROOFICIO</text-property>
                     <text-property name="heading">NUMEROOFICIO</text-property>
                 </structure>
@@ -662,7 +663,16 @@
        cr.CLASEREGISTRONOMBRE AS CLASEREGISTRO,
        tdcd.TIPODOCUMENTOCLASEDOCNOMBRE AS CLASEDOCUMENTORESPALDO,
        td.TIPODOCUMENTONOMBRE AS TIPODOCUMENTORESPALDO,
-       CASE WHEN so.SOCIONEGOCIONOMBREMOSTRADO IS NOT NULL THEN so.SOCIONEGOCIONOMBREMOSTRADO ELSE so.SOCIONEGOCIONOMBRECOMERCIAL END AS BENEFICIARIO,
+       CASE
+           WHEN so.SOCIONEGOCIONOMBREMOSTRADO IS NOT NULL
+           THEN ---so.SOCIONEGOCIONOMBREMOSTRADO
+               CASE
+                   WHEN TRIM(so.SOCIONEGOCIONOMBREMOSTRADO) IS NOT NULL
+                   THEN so.SOCIONEGOCIONOMBREMOSTRADO
+                   ELSE so.SOCIONEGOCIONOMBRECOMERCIAL
+               END
+           ELSE so.SOCIONEGOCIONOMBRECOMERCIAL
+       END AS BENEFICIARIO,
        so.SOCIONEGOCIOCODIGO AS DOCUMENTOBENEFICIARIO,  
        'Programa: ' || pr.PROGRAMACODIGO || '-' || pr.PROGRAMADESCRIPCION || chr(10) ||
        'Proyecto: ' || py.PROYECTOCODIGO || '-' || py.PROYECTODESCRIPCION || chr(10) ||
