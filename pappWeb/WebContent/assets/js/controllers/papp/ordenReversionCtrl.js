@@ -3,6 +3,8 @@
 app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","ordenReversionFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, ordenReversionFactory) {
 
+	var noSalir = false;
+
 	$scope.rol=function(nombre) {
 		return ifRollPermiso(nombre);
 	}

@@ -3,6 +3,8 @@
 app.controller('OrdenGastoController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","ordenGastoFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, ordenGastoFactory) {
 
+	var noSalir = false;
+
 	$scope.rol=function(nombre) {
 		return ifRollPermiso(nombre);
 	}
