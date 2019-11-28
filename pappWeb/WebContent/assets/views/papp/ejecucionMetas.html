@@ -239,52 +239,22 @@
 													</tr>
 													<tr ng-repeat="obj in item.ejecuciondetalleacts">
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text" placeholder="Actividad"
-															            class="form-control" name="npactividad_{{$index}}"
-															            value="{{obj.codigoactividad}} {{obj.nombreactividad}}" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{obj.codigoactividad}} {{obj.nombreactividad}}
 														</td>
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text" placeholder="Descripci&oacute;n"
-															            class="form-control" name="npmetapl_{{$index}}"
-															            ng-model="obj.descripcion" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{ obj.descripcion }}
 														</td>
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text" placeholder="Unidad Medida"
-															            class="form-control" name="npunidadmedida_{{$index}}"
-															            ng-model="obj.unidadmedida" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{ obj.unidadmedida }}
 														</td>
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text" placeholder="Mes"
-															            class="form-control" name="npmes_{{$index}}"
-															            ng-model="obj.npMes" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{ obj.npMes }}
 														</td>
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text" placeholder="Valor Meta PL"
-															            class="form-control" name="npmetapl_{{$index}}"
-															            ng-model="obj.planificado" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{ obj.planificado }}
 														</td>
 														<td>
-															<div class="form-group">
+															<div class="form-group" style="margin-bottom: unset;">
 															    <div class="input-group">
 															        <input type="text" placeholder="Valor Meta EJ"
 															            class="form-control" name="npmetaej_{{$index}}"
@@ -293,7 +263,7 @@
 															</div>
 														</td>
 														<td>
-															<div class="form-group">
+															<div class="form-group" style="margin-bottom: unset;">
 															    <div class="input-group">
 															        <input type="text" placeholder="Descripci&oacute;n de la observaci&oacute;n"
 															            class="form-control" name="npobservacion_{{$index}}"
@@ -576,59 +546,25 @@
 													</tr>
 													<tr ng-repeat="obj in item.ejecuciondetallesubtareas">
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text" placeholder="Subtarea"
-															            class="form-control" name="nombresubactividad_{{$index}}"
-															            ng-model="obj.nombresubactividad" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{ obj.nombresubtarea }}
 														</td>
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text" placeholder="Descripci&oacute;n"
-															            class="form-control" name="descripcion_{{$index}}"
-															            ng-model="obj.descripcion" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{ obj.descripcion }}
 														</td>
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text" placeholder="Unidad Medida"
-															            class="form-control" name="unidadmedida_{{$index}}"
-															            ng-model="obj.unidadmedida" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{ obj.unidadmedida }}
 														</td>
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <!-- cerrar -->
-															    </div>
-															</div>
+													        <!-- cerrar -->
 														</td>
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text" placeholder="Mes"
-															            class="form-control" name="npMes_{{$index}}"
-															            ng-model="obj.npMes" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{ obj.npMes }}
 														</td>
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text" placeholder="Valor Meta PL"
-															            class="form-control" name="planificado_{{$index}}"
-															            ng-model="obj.planificado" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{ obj.planificado }}
 														</td>
 														<td>
-															<div class="form-group">
+															<div class="form-group" style="margin-bottom: unset;">
 															    <div class="input-group">
 															        <input type="text" placeholder="Valor Meta EJ"
 															            class="form-control" name="ejecutado_{{$index}}"
@@ -637,7 +573,7 @@
 															</div>
 														</td>
 														<td>
-															<div class="form-group">
+															<div class="form-group" style="margin-bottom: unset;">
 															    <div class="input-group">
 															        <input type="text" placeholder="Descripci&oacute;n de la observaci&oacute;n"
 															            class="form-control" name="observacion_{{$index}}"
@@ -646,13 +582,7 @@
 															</div>
 														</td>
 														<td>
-															<div class="form-group">
-															    <div class="input-group">
-															        <input type="text"
-															            class="form-control" name="observacioncierre_{{$index}}"
-															            ng-model="obj.observacioncierre" ng-disabled="true">
-															    </div>
-															</div>
+													    	{{ obj.observacioncierre }}
 														</td>
 														<td>
 															<a uib-tooltip="Guardar"

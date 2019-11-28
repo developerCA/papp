@@ -3,6 +3,8 @@
 app.controller('CertificacionesFondosController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","certificacionesFondosFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, certificacionesFondosFactory) {
 
+	var noSalir = false;
+
 	$scope.rol=function(nombre) {
 		return ifRollPermiso(nombre);
 	}
