@@ -958,7 +958,8 @@ public class EjecucionController {
 				//double total=ConsultasUtil.obtenertotalsubitem(nivelactividadTO.getTablarelacionid(),false);
 				//2. Obtengo el detalle del subitem
 //				SubitemunidadTO subitemunidadTO=UtilSession.planificacionServicio.transObtenerSubitemunidadTO(id);
-				double saldo=ConsultasUtil.obtenersaldodisponiblelineacertificacion(nivelactividadTO.getTablarelacionid(),certificacionlineaTO.getNivelactid(),certificacionlineaTO.getCertificacion().getFechacreacion(),certificacionlineaTO);
+				//double saldo=ConsultasUtil.obtenersaldodisponiblelineacertificacion(nivelactividadTO.getTablarelacionid(),certificacionlineaTO.getNivelactid(),certificacionlineaTO.getCertificacion().getFechacreacion(),certificacionlineaTO);
+				double saldo=ConsultasUtil.obtenersaldodisponibleactual(nivelactividadTO.getTablarelacionid(), certificacionlineaTO.getNivelactid())+certificacionlineaTO.getValor();
 				certificacionlineaTO.setNpvalorinicial(UtilGeneral.redondear(saldo,2));
 				jsonObject.put("certificacionlinea", (JSONObject)JSONSerializer.toJSON(certificacionlineaTO,certificacionlineaTO.getJsonConfig()));
 			}
@@ -1018,7 +1019,7 @@ public class EjecucionController {
 				//System.out.println("total***: " + total);
 				//2. Obtengo el detalle del subitem
 				//double saldo=ConsultasUtil.obtenersaldodisponible(total, id,id2,new Date());
-				double saldo=ConsultasUtil.obtenersaldodisponibleactual(id, id2, new Date());
+				double saldo=ConsultasUtil.obtenersaldodisponibleactual(id, id2);
 				System.out.println("saldo*** " + saldo);
 //				//2. traigo todas las certificaciones para saber cuanto es el saldo disponible
 //				double valorcertificacion=0.0;

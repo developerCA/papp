@@ -771,7 +771,7 @@ public class ConsultasUtil {
 	* @throws MyException
 	*/
 
-	public static Double obtenersaldodisponibleactual(Long idsubitem,Long nivelactividadid,Date fecha) throws MyException {
+	public static Double obtenersaldodisponibleactual(Long idsubitem,Long nivelactividadid) throws MyException {
 		try{
 			SubitemunidadacumuladorTO subitemunidadacumuladorTO=new SubitemunidadacumuladorTO();
 			subitemunidadacumuladorTO.getId().setId(idsubitem);
@@ -791,7 +791,6 @@ public class ConsultasUtil {
 			Collection<ReformalineaTO> reformalineaTOs=UtilSession.planificacionServicio.transObtienereformasnoelne(nivelactividadid);
 			System.out.println("reformalineatos: " + reformalineaTOs.size());
 			double totalreforma=0.0;
-			System.out.println("fecha creacion: " + fecha);
 			for(ReformalineaTO reformalineaTO:reformalineaTOs){
 				System.out.println("fecha a comparar: " + reformalineaTO.getReforma().getFechacreacion());
 				//if((reformalineaTO.getReforma().getEstado().equals("RE") || reformalineaTO.getReforma().getEstado().equals("SO")) && reformalineaTO.getReforma().getFechacreacion().compareTo(fecha)<=0){
