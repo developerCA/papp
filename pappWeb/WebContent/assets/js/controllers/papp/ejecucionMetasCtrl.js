@@ -3,6 +3,10 @@
 app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","SweetAlert","$filter", "ngTableParams","ejecucionMetasFactory",
 	function($scope,$rootScope,$uibModal,SweetAlert,$filter, ngTableParams, ejecucionMetasFactory) {
 
+	$scope.rol=function(nombre) {
+		return ifRollPermiso(nombre);
+	}
+
 	$scope.codigoFiltro=null;
 	$scope.nombreFiltro=null;
 	$scope.estadoFiltro=null;

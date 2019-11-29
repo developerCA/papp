@@ -117,6 +117,8 @@ app.controller('OrdenReversionController', [ "$scope","$rootScope","$uibModal","
 		index = $scope.calcularIndex(index);
 		if ($scope.rol('ROLE_APROBADOR')) {
 			$scope.noeditar = true;
+		} else if ($scope.rol('ROLE_CONSULTA')) {
+			$scope.noeditar = true;
 		} else {
 			$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 		}

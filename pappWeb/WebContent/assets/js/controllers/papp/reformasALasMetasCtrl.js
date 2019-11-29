@@ -121,6 +121,8 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 		//console.log($scope.data[index]);
 		if ($scope.rol('ROLE_APROBADOR')) {
 			$scope.noeditar = true;
+		} else if ($scope.rol('ROLE_CONSULTA')) {
+			$scope.noeditar = true;
 		} else {
 			$scope.noeditar = ($scope.data[index].npestado == "Registrado"? false: true);
 		}

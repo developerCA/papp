@@ -115,7 +115,7 @@
 					</div>
 
 					<a href="#" class="btn btn-sm btn-dark-azure" ng-click="nuevo();"
-						ng-if="!rol('ROLE_APROBADOR');">
+						ng-if="!rol('ROLE_APROBADOR') && !rol('ROLE_CONSULTA');">
 						<i class="fa fa-plus-square"></i>
 						Agregar
 					</a>

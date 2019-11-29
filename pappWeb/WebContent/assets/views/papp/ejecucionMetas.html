@@ -273,6 +273,7 @@
 														</td>
 														<td>
 															<a uib-tooltip="Guardar"
+																ng-if="!rol('ROLE_APROBADOR') && !rol('ROLE_CONSULTA');"
 																class="btn btn-sm"
 																ng-click="guardarLineActividad($parent.$index, $index)">
 																<i class="fa fa-floppy-o"></i>
@@ -586,6 +587,7 @@
 														</td>
 														<td>
 															<a uib-tooltip="Guardar"
+																ng-if="!rol('ROLE_APROBADOR') && !rol('ROLE_CONSULTA');"
 																class="btn btn-sm btn-danger"
 																ng-click="guardarLineSubtarea($parent.$index, $index)">
 																<i class="fa fa-floppy-o"></i>
