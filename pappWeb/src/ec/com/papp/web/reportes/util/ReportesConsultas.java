@@ -1160,7 +1160,7 @@ public class ReportesConsultas {
 					cell.setCellValue(p02.getProgramacodigo() + " - " + p02.getProgramadescripcion());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(8);
-					cell.setCellValue(p02.getProyectocodigo() + " - " + p02.getProgramadescripcion());
+					cell.setCellValue(p02.getProyectocodigo() + " - " + p02.getNombre());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(9);
 					cell.setCellValue(p02.getActividadcodigo() + " - " + p02.getActividaddescripcion());

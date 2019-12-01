@@ -620,7 +620,7 @@ public class ConsultasUtil {
 				certificacionOrdenVO.setDescripcion(parameters.get("descripcion").toUpperCase());
 			Collection<CertificacionOrdenVO> resultado=UtilSession.planificacionServicio.transObtenerCertificacionOrden(certificacionOrdenVO, principal.getName());
 			
-			log.println("certificaciones: " + resultado.size());
+			System.out.println("certificaciones: " + resultado.size());
 			HashMap<String, String>  totalMap=new HashMap<String, String>();
 			totalMap.put("valor", Integer.valueOf(resultado.size()).toString());
 			jsonObject.put("result", (JSONArray)JSONSerializer.toJSON(resultado,certificacionOrdenVO.getJsonConfig()));
