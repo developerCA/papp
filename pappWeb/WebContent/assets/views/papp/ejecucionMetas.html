@@ -257,7 +257,7 @@
 															<div class="form-group" style="margin-bottom: unset;">
 															    <div class="input-group">
 															        <input type="text" placeholder="Valor Meta EJ"
-															            class="form-control" name="npmetaej_{{$index}}"
+															            class="form-control" name="npmetaej_{{$parent.$index}}_{{$index}}"
 															            ng-model="obj.ejecutado">
 															    </div>
 															</div>
@@ -266,7 +266,7 @@
 															<div class="form-group" style="margin-bottom: unset;">
 															    <div class="input-group">
 															        <input type="text" placeholder="Descripci&oacute;n de la observaci&oacute;n"
-															            class="form-control" name="npobservacion_{{$index}}"
+															            class="form-control" name="npobservacion_{{$parent.$index}}_{{$index}}"
 															            ng-model="obj.observacion">
 															    </div>
 															</div>
@@ -275,7 +275,7 @@
 															<a uib-tooltip="Guardar"
 																ng-if="!rol('ROLE_APROBADOR') && !rol('ROLE_CONSULTA');"
 																class="btn btn-sm"
-																ng-click="guardarLineActividad($parent.$index, $index)">
+																ng-click="guardarLineActividad(obj)">
 																<i class="fa fa-floppy-o"></i>
 															</a>
 														</td>
@@ -568,7 +568,7 @@
 															<div class="form-group" style="margin-bottom: unset;">
 															    <div class="input-group">
 															        <input type="text" placeholder="Valor Meta EJ"
-															            class="form-control" name="ejecutado_{{$index}}"
+															            class="form-control" name="ejecutado_{{$parent.$index}}_{{$index}}"
 															            ng-model="obj.ejecutado">
 															    </div>
 															</div>
@@ -577,7 +577,7 @@
 															<div class="form-group" style="margin-bottom: unset;">
 															    <div class="input-group">
 															        <input type="text" placeholder="Descripci&oacute;n de la observaci&oacute;n"
-															            class="form-control" name="observacion_{{$index}}"
+															            class="form-control" name="observacion_{{$parent.$index}}_{{$index}}"
 															            ng-model="obj.observacion">
 															    </div>
 															</div>
@@ -589,7 +589,7 @@
 															<a uib-tooltip="Guardar"
 																ng-if="!rol('ROLE_APROBADOR') && !rol('ROLE_CONSULTA');"
 																class="btn btn-sm btn-danger"
-																ng-click="guardarLineSubtarea($parent.$index, $index)">
+																ng-click="guardarLineSubtarea(obj)">
 																<i class="fa fa-floppy-o"></i>
 															</a>
 														</td>

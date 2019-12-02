@@ -148,14 +148,14 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		})
 	}
 
-	$scope.guardarLineActividad = function(preIndex, index) {
-        ejecucionMetasFactory.guardarLineActividad($scope.listaDetalles[preIndex].ejecuciondetalleacts[index], $rootScope.ejefiscal).then(function(resp){
+	$scope.guardarLineActividad = function(obj) {
+        ejecucionMetasFactory.guardarLineActividad(obj, $rootScope.ejefiscal).then(function(resp){
 			 if (resp.estado){
-//	             SweetAlert.swal(
-//	            		 "EjecucionMetas!",
-//	            		 "Registro guardado satisfactoriamente!",
-//	            		 "success"
-//        		 );
+	             SweetAlert.swal(
+	            		 "EjecucionMetas!",
+	            		 "Registro guardado satisfactoriamente!",
+	            		 "success"
+        		 );
 			 }else{
 	             SweetAlert.swal(
 	            		 "EjecucionMetas!",
@@ -254,13 +254,21 @@ app.controller('EjecucionMetasController', [ "$scope","$rootScope","$uibModal","
 		})
 	}
 
-	$scope.guardarLineSubtarea = function(preIndex, index) {
-        ejecucionMetasFactory.guardarLineSubtarea($scope.listaDetalles[preIndex].ejecuciondetallesubtareas[index], $rootScope.ejefiscal).then(function(resp){
-             SweetAlert.swal(
-            		 "EjecucionMetas!",
-            		 resp.mensajes.msg,
-            		 "error"
-    		 );
+	$scope.guardarLineSubtarea = function(obj) {
+        ejecucionMetasFactory.guardarLineSubtarea(obj, $rootScope.ejefiscal).then(function(resp){
+			 if (resp.estado){
+	             SweetAlert.swal(
+	            		 "EjecucionMetas!",
+	            		 "Registro guardado satisfactoriamente!",
+	            		 "success"
+        		 );
+			 }else{
+	             SweetAlert.swal(
+	            		 "EjecucionMetas!",
+	            		 resp.mensajes.msg,
+	            		 "error"
+        		 );
+			 }
 		})
     };
 

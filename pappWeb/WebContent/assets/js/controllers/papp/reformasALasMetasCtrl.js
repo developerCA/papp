@@ -320,7 +320,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 			}
 		});
 		modalInstance.result.then(function(obj) {
-		    $scope.detalles = obj.reformametalineas;
+		    $scope.detalles = obj.reformametalinea;
 		    $scope.objeto.valorincremento = obj.valorincremento;
 		    $scope.objeto.valordecremento = obj.valordecremento;
 		    $scope.nuevoar = true;
@@ -358,7 +358,7 @@ app.controller('ReformasALasMetasController', [ "$scope","$rootScope","$uibModal
 			}
 		});
 		modalInstance.result.then(function(obj) {
-		    $scope.detalles = obj.reformametalineas;
+		    $scope.detalles = obj.reformametalinea;
 		    //$scope.objeto.valortotal = obj.valortotal;
 		    $scope.nuevoar = true;
 		    $scope.form.submit(Form);
