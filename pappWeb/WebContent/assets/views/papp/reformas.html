@@ -147,7 +147,8 @@
 										<i class="fa fa-pencil"></i>
 									</a>
 								</td>
-								<td width="32px" style="padding: 1px;">
+								<td width="32px" style="padding: 1px;"
+									ng-if="!rol('ROLE_APROBADOR') && !rol('ROLE_CONSULTA');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Solicitar"
 										ng-click="solicitar($index)">
@@ -186,7 +187,7 @@
 									</a>
 								</td>
 								<td width="32px" style="padding: 1px;"
-									ng-if="!rol('ROLE_APROBADOR');">
+									ng-if="!rol('ROLE_APROBADOR') && !rol('ROLE_CONSULTA');">
 									<a class="btn btn-sm btn-primary"
 										uib-tooltip="Eliminar"
 										ng-click="eliminar($index)">
