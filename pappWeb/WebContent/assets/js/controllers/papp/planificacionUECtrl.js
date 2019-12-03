@@ -463,7 +463,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					SweetAlert.swal("Planificacion UE! - Nueva Tarea", resp.mensajes.msg, "error");
 					return;
 				}
-				if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+//				if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+				if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
 					$scope.editar=true;
 				}
 				$scope.objeto=Object.assign({}, resp.json.tareaunidad);
@@ -483,7 +484,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					SweetAlert.swal("Planificacion UE! - Nueva Subtarea", resp.mensajes.msg, "error");
 					return;
 				}
-				if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+				if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
 					$scope.editar=true;
 				}
 				$scope.objUnidad=resp.json.subtareaunidad.subtareaunidadunidadid;
@@ -514,7 +515,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					SweetAlert.swal("Planificacion UE! - Nuevo Item", resp.mensajes.msg, "error");
 					return;
 				}
-				if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+				if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
 					$scope.editar=true;
 				}
 				$scope.objeto=Object.assign({}, resp.json.itemunidad);
@@ -535,7 +536,7 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 					SweetAlert.swal("Planificacion UE! - Nuevo Subitem", resp.mensajes.msg, "error");
 					return;
 				}
-				if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+				if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
 					$scope.editar=true;
 				}
 				$scope.objUnidad=resp.json.actividadunidad.id.unidadid;
