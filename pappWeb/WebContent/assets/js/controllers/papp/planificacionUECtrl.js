@@ -446,7 +446,8 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
 		$scope.editar=$scope.editarP; // ($scope.editarP || $scope.editarA);
 		$scope.objeto=null;
 		$scope.nodeActivo=node;
-		if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+//		if ($scope.rol('ROLE_GESTOR_GASTO') || $scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
+		if ($scope.rol('ROLE_ADMINISTRADOR_PROCESO')) {
 			$scope.editar=true;
 			$scope.editarP=true;
 			$scope.editarA=true;
