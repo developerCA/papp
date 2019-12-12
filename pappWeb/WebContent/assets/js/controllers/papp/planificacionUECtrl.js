@@ -1707,6 +1707,26 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
     		);
             return;
 		}
+		if ($scope.esnuevo) {
+	    	PlanificacionUEFactory.guardarActividades("SI",tObj).then(function(resp){
+	    		$scope.divPlanificacionAnual = false;
+				if (resp.estado) {
+					$scope.objeto.id = resp.json.subitemunidad.id;
+					for (var i = 0; i < $scope.detalles.length; i++) {
+						$scope.detalles[i].id.id = resp.json.subitemunidad.id;
+					}
+					$scope.esnuevo = false;
+					$scope.detallesPlanificada = null;
+	    			$scope.editarDistribucionPlanificado();
+	    			$scope.noCancelar = false;
+					return;
+				} else {
+					SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
+					return;
+				}
+			})
+			return;
+		}
 		if ($scope.npTotalPlanificado != $scope.detalles[$scope.mPlanificadaID].npvalor) {
             SweetAlert.swal(
         		"Planificacion UE! - Subitem",
@@ -1748,26 +1768,6 @@ app.controller('PlanificacionUEController', [ "$scope","$rootScope","$aside","$u
             $scope.divMetaDistribucionAjustada=false;
             $scope.divMetaDistribucionDevengo=true;
             return;
-		}
-		if ($scope.esnuevo) {
-	    	PlanificacionUEFactory.guardarActividades("SI",tObj).then(function(resp){
-	    		$scope.divPlanificacionAnual = false;
-				if (resp.estado) {
-					$scope.objeto.id = resp.json.subitemunidad.id;
-					for (var i = 0; i < $scope.detalles.length; i++) {
-						$scope.detalles[i].id.id = resp.json.subitemunidad.id;
-					}
-					$scope.esnuevo = false;
-					$scope.detallesPlanificada = null;
-	    			$scope.editarDistribucionPlanificado();
-	    			$scope.noCancelar = false;
-					return;
-				} else {
-					SweetAlert.swal("Planificacion UE! - Subitem", resp.mensajes.msg, "error");
-					return;
-				}
-			})
-			return;
 		}
     	PlanificacionUEFactory.guardarActividades("SI",tObj).then(function(resp){
 			if (resp.estado) {
