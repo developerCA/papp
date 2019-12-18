@@ -891,13 +891,20 @@ app.controller('ReformasController', [ "$scope","$rootScope","$uibModal","SweetA
                 var tObj = Object.assign({}, $scope.objeto);
                 tObj.incluyemeta = (tObj.incluyemeta? 1: 0);
             	reformasFactory.guardar(tObj).then(function(resp){
+    				 if (noSalir == true) {
+    					 noSalir = false;
+      				     $scope.objeto = resp.json.reforma;
+      				     $scope.detalles = resp.json.reformalineas;
+            			 if (!resp.estado){
+		 		             SweetAlert.swal(
+		 		            		 "Reformas!",
+		 		            		 resp.mensajes.msg,
+		 		            		 "error"
+		            		 );
+            			 }
+    					 return;
+    				 }
         			 if (resp.estado){
-        				 if (noSalir == true) {
-        					 noSalir = false;
-	      				     $scope.objeto = resp.json.reforma;
-	      				     $scope.detalles = resp.json.reformalineas;
-        					 return;
-        				 }
         				 if ($scope.nuevoar) {
 	      					 $scope.noeditar = false;
 	      					 $scope.nuevoar = false;

@@ -989,7 +989,6 @@
    AND (TO_NUMBER(si.SUBITEMID) = ? OR ? IS NULL)
    AND (TO_NUMBER(f.fuentefinanciamientoid) = ? OR ? IS NULL)
    AND (og.ORDENGASTOESTADO = ? OR ? IS NULL)
-   AND ROWNUM <= 5000
  GROUP BY
        ef.EJERCICIOFISCALANIO,
        i.INSTITUCIONCODIGO,
