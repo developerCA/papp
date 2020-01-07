@@ -880,7 +880,7 @@ public class PlanificacionController {
 									&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton())
 									&& nivelactividadTO2.getNpcodigoorganismo().equals(itemunidadTO.getNpcodigoorganismo())
 									&& nivelactividadTO2.getNpcodigoorgpres().equals(itemunidadTO.getNpcodigoorgpres()))){
-//								System.out.println("entro por 1");
+								System.out.println("entro por 1");
 								grabar=false;
 								break;
 							}
@@ -891,7 +891,7 @@ public class PlanificacionController {
 											&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton())
 											&& nivelactividadTO2.getNpcodigoorganismo().equals(itemunidadTO.getNpcodigoorganismo())
 											&& nivelactividadTO2.getNpcodigoorgpres().equals(itemunidadTO.getNpcodigoorgpres()))){
-//								System.out.println("entro por 2");
+								System.out.println("entro por 2");
 								grabar=false;
 								break;
 							}
@@ -1217,7 +1217,8 @@ public class PlanificacionController {
 					Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=new ArrayList<>();
 					Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorExiste);
 					SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
-					subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+1));
+					//subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+1));
+					subtareaunidadacumuladorTO.getId().setAcumid(1L);
 					//subtareaunidadacumuladorTO.getId().setId(id);
 					subtareaunidadacumuladorTO.setTotal(0.0);
 					subtareaunidadacumuladorTO.setNpValor(0.0);
@@ -1227,7 +1228,8 @@ public class PlanificacionController {
 
 					subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
 					//subtareaunidadacumuladorTO.getId().setId(id);
-					subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
+					//subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
+					subtareaunidadacumuladorTO.getId().setAcumid(2L);
 					subtareaunidadacumuladorTO.setNpValor(0.0);
 					subtareaunidadacumuladorTO.setTotal(0.0);
 					subtareaunidadacumuladorTO.setValor(100.0);
@@ -1740,7 +1742,8 @@ public class PlanificacionController {
 					ActividadunidadacumuladorTO actividadunidadacumuladorExiste=new ActividadunidadacumuladorTO();
 					actividadunidadacumuladorExiste.getId().setId(id);
 					Collection<ActividadunidadacumuladorTO> actividadunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerActividadunidadacumulador(actividadunidadacumuladorExiste);
-					actividadunidadacumuladorTO.getId().setAcumid(Long.valueOf(actividadunidadacumuladorExistentes.size()+1));
+					//actividadunidadacumuladorTO.getId().setAcumid(Long.valueOf(actividadunidadacumuladorExistentes.size()+1));
+					actividadunidadacumuladorTO.getId().setAcumid(1L);
 					actividadunidadacumuladorTO.getId().setId(id);
 					actividadunidadacumuladorTO.getId().setUnidadid(Long.valueOf(parameters.get("unidadid")));
 					actividadunidadacumuladorTO.setNpValor(0.0);
@@ -1750,7 +1753,8 @@ public class PlanificacionController {
 					actividadunidadacumuladorTO=new ActividadunidadacumuladorTO();
 					actividadunidadacumuladorTO.getId().setId(id);
 					actividadunidadacumuladorTO.getId().setUnidadid(Long.valueOf(parameters.get("unidadid")));
-					actividadunidadacumuladorTO.getId().setAcumid(Long.valueOf(actividadunidadacumuladorExistentes.size()+2));
+					actividadunidadacumuladorTO.getId().setAcumid(2L);
+					//actividadunidadacumuladorTO.getId().setAcumid(Long.valueOf(actividadunidadacumuladorExistentes.size()+2));
 					actividadunidadacumuladorTO.setNpValor(0.0);
 					actividadunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 					actividadunidadacumuladorTOs.add(actividadunidadacumuladorTO);
@@ -1812,7 +1816,8 @@ public class PlanificacionController {
 					SubtareaunidadacumuladorTO subtareaunidadacumuladorExiste=new SubtareaunidadacumuladorTO();
 					subtareaunidadacumuladorExiste.getId().setId(id);
 					Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorExiste);
-					subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+1));
+					//subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+1));
+					subtareaunidadacumuladorTO.getId().setAcumid(1L);
 					//subtareaunidadacumuladorTO.getId().setId(id);
 					subtareaunidadacumuladorTO.setNpValor(0.0);
 					subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
@@ -1820,7 +1825,8 @@ public class PlanificacionController {
 
 					subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
 					//subtareaunidadacumuladorTO.getId().setId(id);
-					subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
+					//subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
+					subtareaunidadacumuladorTO.getId().setAcumid(2L);
 					subtareaunidadacumuladorTO.setNpValor(0.0);
 					subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.ajustado"));
 					subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);

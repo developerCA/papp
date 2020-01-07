@@ -2518,6 +2518,9 @@ public class ReportesConsultas {
 							cell = row.createCell(1);
 							cell.setCellValue(p04to3.getResponsable());
 							cell.setCellStyle(styles.get("contenido"));
+							cell = row.createCell(2);
+							cell.setCellValue(p04to3.getGrado());
+							cell.setCellStyle(styles.get("contenido"));
 							fila++;
 							row = sheet.createRow((short)fila);
 							cell = row.createCell(0);
@@ -2798,6 +2801,9 @@ public class ReportesConsultas {
 						cell.setCellStyle(styles.get("titulo"));
 						cell = row.createCell(1);
 						cell.setCellValue(p04to2.getResponsable());
+						cell.setCellStyle(styles.get("contenido"));
+						cell = row.createCell(2);
+						cell.setCellValue(p04to3.getGrado());
 						cell.setCellStyle(styles.get("contenido"));
 						fila++;
 						row = sheet.createRow((short)fila);
