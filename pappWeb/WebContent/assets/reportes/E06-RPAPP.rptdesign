@@ -1349,7 +1349,7 @@ WHERE
                                     <property name="showIfBlank">false</property>
                                     <property name="canShrink">false</property>
                                     <property name="overflow">hidden</property>
-                                    <text-property name="text">Reporte E-06</text-property>
+                                    <text-property name="text">Reporte E-06 </text-property>
                                 </label>
                             </cell>
                         </row>
