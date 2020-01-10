@@ -707,7 +707,7 @@ Select sia1.SUBITEMUNIDADACUMTOTAL as VALORINICIAL
    AND (TO_NUMBER(py.PROYECTOID) = ? OR ? IS NULL)
    AND (TO_NUMBER(ac.ACTIVIDADID) = ? OR ? IS NULL)
    AND (TO_NUMBER(it.ITEMID) = ? OR ? IS NULL)
-   AND (TO_NUMBER(f.fuentefinanciamientoid) = ? OR ? IS NULL)
+   AND (TO_NUMBER(ff.fuentefinanciamientoid) = ? OR ? IS NULL)
    AND (r.REFORMAESTADO = ? OR ? IS NULL)
  GROUP BY
        r.REFORMACODIGO,

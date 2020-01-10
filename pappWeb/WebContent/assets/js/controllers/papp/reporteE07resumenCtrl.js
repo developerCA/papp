@@ -151,13 +151,13 @@ app.controller('ReporteE07resumenController', [ "$scope","$rootScope","$uibModal
 					return $scope.objeto.programaid;
 				},
 				npproyectoid : function() {
-					return $scope.objeto.programaid;
+					return $scope.objeto.proyectoid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.actividadid = obj.id;
-			$scope.objeto.npactividad = obj.codigo + ' - ' + obj.nombre;
+			$scope.objeto.npactividad = obj.codigo + ' - ' + obj.descripcion;
 			$scope.actividadActivo = true;
 		}, function() {
 		});
@@ -183,7 +183,7 @@ app.controller('ReporteE07resumenController', [ "$scope","$rootScope","$uibModal
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.subactividadid = obj.id;
-			$scope.objeto.npsubactividad = obj.codigo + ' - ' + obj.nombre;
+			$scope.objeto.npsubactividad = obj.codigo + ' - ' + obj.descripcion;
 			$scope.subactividadActivo = true;
 		}, function() {
 		});
@@ -209,7 +209,7 @@ app.controller('ReporteE07resumenController', [ "$scope","$rootScope","$uibModal
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.tareaid = obj.id;
-			$scope.objeto.nptarea = obj.codigo + ' - ' + obj.nombre;
+			$scope.objeto.nptarea = obj.codigo + ' - ' + obj.descripcion;
 			$scope.tareaActivo = true;
 		}, function() {
 		});
@@ -235,7 +235,7 @@ app.controller('ReporteE07resumenController', [ "$scope","$rootScope","$uibModal
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.subtareaid = obj.id;
-			$scope.objeto.npsubtarea = obj.codigo + ' - ' + obj.nombre;
+			$scope.objeto.npsubtarea = obj.codigo + ' - ' + obj.descripcion;
 			$scope.subtareaActivo = true;
 		}, function() {
 		});
@@ -261,7 +261,7 @@ app.controller('ReporteE07resumenController', [ "$scope","$rootScope","$uibModal
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.itemid = obj.id;
-			$scope.objeto.npitem = obj.codigo + ' - ' + obj.nombre;
+			$scope.objeto.npitem = obj.codigo + ' - ' + obj.descripcion;
 			$scope.itemsActivo = true;
 		}, function() {
 		});
@@ -287,7 +287,7 @@ app.controller('ReporteE07resumenController', [ "$scope","$rootScope","$uibModal
 		});
 		modalInstance.result.then(function(obj) {
 			$scope.objeto.subitemid = obj.id;
-			$scope.npsubitem = obj.codigo + ' - ' + obj.nombre;
+			$scope.npsubitem = obj.codigo + ' - ' + obj.descripcion;
 			$scope.subitemsActivo = true;
 		}, function() {
 		});
