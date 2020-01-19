@@ -10,6 +10,7 @@ app.controller('ModalUnidadActivasController', [ "$scope","$rootScope","$uibModa
 	$scope.edicion=false;
 	$scope.objeto={};
 	$scope.detalles=[];
+	$scope.data=[];
 	
 	var pagina = 1;
 	
