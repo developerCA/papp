@@ -742,7 +742,7 @@ public class EjecucionController {
 		String id="";
 		String accion="";
 		try {
-			//para la ejecucion de metas
+			//para la ejecucion de metas en ejecucion
 			if(clase.equals("cronogramaactividades")){
 				Ejecuciondetalleact ejecuciondetalleact= gson.fromJson(new StringReader(objeto), Ejecuciondetalleact.class);
 				//accion = (cronogramaTO.getId()==null)?"I":"U";
