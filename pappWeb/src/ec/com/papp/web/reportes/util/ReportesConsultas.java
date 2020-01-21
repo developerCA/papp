@@ -24,6 +24,7 @@ import ec.com.papp.reporte.to.P04TO;
 import ec.com.papp.reporte.to.P04pacTO;
 import ec.com.papp.reporte.to.P05TO;
 import ec.com.papp.reporte.to.S01TO;
+import ec.com.papp.reporte.to.S03TO;
 import ec.com.papp.web.comun.util.ExcelUtil;
 import ec.com.papp.web.comun.util.UtilSession;
 import ec.com.xcelsa.utilitario.exception.MyException;
@@ -625,6 +626,721 @@ public class ReportesConsultas {
 			sheet.setColumnWidth(25, 256*15);
 			
 
+			wb.write(response.getOutputStream());
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new MyException(e);
+		}
+	}
+
+	public static void generarS03(HttpServletRequest request, HttpServletResponse response,Map<String, String> parameters) throws MyException {
+		try{
+			S03TO s03TO=new S03TO();
+			s03TO.getId().setEjerciciofiscal(Long.valueOf(parameters.get("ejerciciofiscal")));
+			if(parameters.get("institucionid")!=null)
+				s03TO.getId().setInstitucionid(Long.valueOf(parameters.get("institucionid")));
+			if(parameters.get("institucionentid")!=null)
+				s03TO.getId().setInstitucionentid(Long.valueOf(parameters.get("institucionentid")));
+			if(parameters.get("unidadid")!=null)
+				s03TO.getId().setUnidadid(Long.valueOf(parameters.get("unidadid")));
+			if(parameters.get("programaid")!=null)
+				s03TO.getId().setProgramaid(Long.valueOf(parameters.get("programaid")));
+			if(parameters.get("proyectoid")!=null)
+				s03TO.getId().setProyectoid(Long.valueOf(parameters.get("proyectoid")));
+			if(parameters.get("actividadid")!=null)
+				s03TO.getId().setActividadid(Long.valueOf(parameters.get("actividadid")));
+			if(parameters.get("subactividadid")!=null)
+				s03TO.getId().setSubactividadid(Long.valueOf(parameters.get("subactividadid")));
+			if(parameters.get("tareaunidadid")!=null)
+				s03TO.getId().setTareaunidadid(Long.valueOf(parameters.get("tareaunidadid")));
+			if(parameters.get("subtareaunidadid")!=null)
+				s03TO.getId().setSubtareaunidadid(Long.valueOf(parameters.get("subtareaunidadid")));
+			if(parameters.get("itemid")!=null)
+				s03TO.getId().setItemid(Long.valueOf(parameters.get("itemid")));
+			if(parameters.get("subitemid")!=null)
+				s03TO.getId().setSubitemid(Long.valueOf(parameters.get("subitemid")));
+
+			Collection<S03TO> s03tos=UtilSession.reporteServicio.transObtenerS03(s03TO);
+			response.setContentType("application/vnd.ms-excel");
+			Calendar fecha = new GregorianCalendar();
+			fecha.setTime(new Date());
+			int mes=fecha.get(Calendar.MONTH)+1;
+			String nombrearchivo="S3"+fecha.get(Calendar.YEAR)+fecha.get(Calendar.DATE)+mes;
+			response.setHeader("Content-Disposition", "attachment; filename="+nombrearchivo+".xls");
+			HSSFWorkbook wb = new HSSFWorkbook();
+			HSSFSheet sheet = wb.createSheet("Hoja1");
+			Map<String, HSSFCellStyle> styles = ExcelUtil.createStyles(wb);
+			HSSFRow row = sheet.createRow((short)0);
+			//pestana aportes
+			HSSFCell cell = row.createCell(0);
+			int fila=0;
+			//Titulos de la grilla
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(0);
+			cell.setCellValue("COMANDO CONJUNTO DE LAS FF.AA.");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(0,0,0,55)); 
+			fila++;
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(0);
+			cell.setCellValue("ESTADO MAYOR INSTITUCIONAL");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(1,1,0,55)); 
+			fila++;
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(0);
+			cell.setCellValue("SEGUIMIENTO A LA EJECUCION DE LA PROGRAMACION ANUAL DE LA PLANIFICACION -S3");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(2,2,0,55)); 
+			fila++;
+
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(0);
+			cell.setCellValue("");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(3,3,0,19)); 
+			fila++;
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(20);
+			cell.setCellValue("ENERO");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,20,22)); 
+			cell = row.createCell(23);
+			cell.setCellValue("FEBRERO");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,23,25)); 
+			cell = row.createCell(26);
+			cell.setCellValue("MARZO");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,26,28)); 
+			cell = row.createCell(29);
+			cell.setCellValue("ABRIL");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,29,31)); 
+			cell = row.createCell(32);
+			cell.setCellValue("MAYO");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,32,34)); 
+			cell = row.createCell(35);
+			cell.setCellValue("JUNIO");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,35,37)); 
+			cell = row.createCell(38);
+			cell.setCellValue("JULIO");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,38,40)); 
+			cell = row.createCell(41);
+			cell.setCellValue("AGOSTO");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,41,43)); 
+			cell = row.createCell(44);
+			cell.setCellValue("SEPTIEMBRE");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,44,46)); 
+			cell = row.createCell(47);
+			cell.setCellValue("OCTUBRE");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,47,49)); 
+			cell = row.createCell(50);
+			cell.setCellValue("NOVIEMBRE");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,50,52)); 
+			cell = row.createCell(53);
+			cell.setCellValue("DICIEMBRE");
+			cell.setCellStyle(styles.get("treporteTitulo"));
+			sheet.addMergedRegion(new CellRangeAddress(4,4,53,55)); 
+			fila++;
+
+			row = sheet.createRow((short)fila);
+			cell = row.createCell(0);
+			cell.setCellValue("INSTITUCION");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(1);
+			cell.setCellValue("ENTIDAD");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(2);
+			cell.setCellValue("OBJ.MIDENA");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(3);
+			cell.setCellValue("OBJ. FF.AA.");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(4);
+			cell.setCellValue("UNIDAD");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(5);
+			cell.setCellValue("PROGRAMA");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(6);
+			cell.setCellValue("PROYECTO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(7);
+			cell.setCellValue("ACTIVIDAD");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(8);
+			cell.setCellValue("SUBACTIVDAD");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(9);
+			cell.setCellValue("TAREA");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(10);
+			cell.setCellValue("SUBTAREA");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(11);
+			cell.setCellValue("ITEM");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(12);
+			cell.setCellValue("DESCRIPCIONITEM");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(13);
+			cell.setCellValue("CORRELATIVO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(14);
+			cell.setCellValue("PRESTAMO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(15);
+			cell.setCellValue("SUBITEM");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(16);
+			cell.setCellValue("CANTON");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(17);
+			cell.setCellValue("FUENTE");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(18);
+			cell.setCellValue("DENOMINACION");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(19);
+			cell.setCellValue("CODIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(20);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(21);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(22);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(23);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(24);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(25);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(26);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(27);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(28);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(29);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(30);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(31);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(32);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(33);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(34);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(35);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(36);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(37);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(38);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(39);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(40);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(41);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(42);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(43);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(44);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(45);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(46);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(47);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(48);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(49);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(50);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(51);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(52);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(53);
+			cell.setCellValue("PLANIFICADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(54);
+			cell.setCellValue("COMPROMISO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+			cell = row.createCell(55);
+			cell.setCellValue("DEVENGO APROBADO");
+			cell.setCellStyle(styles.get("titulo"));
+
+			fila++;
+			double gasto=0.0;
+			double cyd=0.0;
+			double total=0.0;
+			for(S03TO s03to:s03tos){
+				row = sheet.createRow((short)fila);
+				cell = row.createCell(0);
+				cell.setCellValue(s03to.getInstitucioncodigo() +" - " + s03to.getInstitucionnombre());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(1);
+				cell.setCellValue(s03to.getInstitucionentcodigo() +" - " + s03to.getInstitucionentnombre());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(2);
+				cell.setCellValue(s03to.getEstrategicodescripcion());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(3);
+				cell.setCellValue(s03to.getOperativodescripcion());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(4);
+				cell.setCellValue(s03to.getUnidadcodigo() +" - " + s03to.getUnidadnombre());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(5);
+				cell.setCellValue(s03to.getProgramacodigo() +" - " + s03to.getProgramadescripcion());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(6);
+				cell.setCellValue(s03to.getProyectocodigo() +" - " + s03to.getProyectodescripcion());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(7);
+				cell.setCellValue(s03to.getActividadcodigo() +" - " + s03to.getActividaddescripcion());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(8);
+				cell.setCellValue(s03to.getSubactividadcodigo() +" - " + s03to.getSubactividaddescripcion());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(9);
+				cell.setCellValue(s03to.getTareacodigo() +" - " + s03to.getTarueadescripcion());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(10);
+				cell.setCellValue(s03to.getSubtareacodigo() +" - " + s03to.getSubtareadescripcion());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(11);
+				cell.setCellValue(s03to.getItemcodigo());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(12);
+				cell.setCellValue(s03to.getItemnombre());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(13);
+				cell.setCellValue(s03to.getOrganismocodigo());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(14);
+				cell.setCellValue(s03to.getOrganismoprestamocodigo());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(15);
+				cell.setCellValue(s03to.getSubitemcodigo());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(16);
+				cell.setCellValue(s03to.getDivisiongeograficacodigo().substring(2, 6));
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(17);
+				cell.setCellValue(s03to.getFuentecodigo());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(18);
+				cell.setCellValue(s03to.getSubitemnombre());
+				cell.setCellStyle(styles.get("contenido"));
+				cell = row.createCell(19);
+				double vreforma=0.0;
+				if(s03to.getReforma()!=null)
+					vreforma=s03to.getReforma();
+				double codificado=s03to.getValorinicial()+vreforma;
+				cell.setCellValue(UtilGeneral.redondear(codificado,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(20);
+				if(s03to.getEneroda()!=null)
+					cell.setCellValue(s03to.getEneroda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(21);
+				if(s03to.getCompromisoenero()!=null)
+					cell.setCellValue(s03to.getCompromisoenero());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(22);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastoenero()!=null)
+					gasto=s03to.getGastoenero();
+				if(s03to.getCydenero()!=null)
+					cyd=s03to.getCydenero();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(23);
+				if(s03to.getFebreroda()!=null)
+					cell.setCellValue(s03to.getFebreroda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(24);
+				if(s03to.getCompromisofebrero()!=null)
+					cell.setCellValue(s03to.getCompromisofebrero());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(25);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastofebrero()!=null)
+					gasto=s03to.getGastofebrero();
+				if(s03to.getCydfebrero()!=null)
+					cyd=s03to.getCydfebrero();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(26);
+				if(s03to.getMarzoda()!=null)
+					cell.setCellValue(s03to.getMarzoda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(27);
+				if(s03to.getCompromisomarzo()!=null)
+					cell.setCellValue(s03to.getCompromisomarzo());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(28);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastomarzo()!=null)
+					gasto=s03to.getGastomarzo();
+				if(s03to.getCydmarzo()!=null)
+					cyd=s03to.getCydmarzo();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(29);
+				if(s03to.getAbrilda()!=null)
+					cell.setCellValue(s03to.getAbrilda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(30);
+				if(s03to.getCompromisoabril()!=null)
+					cell.setCellValue(s03to.getCompromisoabril());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(31);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastoabril()!=null)
+					gasto=s03to.getGastoabril();
+				if(s03to.getCydabril()!=null)
+					cyd=s03to.getCydabril();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(32);
+				if(s03to.getMayoda()!=null)
+					cell.setCellValue(s03to.getMayoda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(33);
+				if(s03to.getCompromisomayo()!=null)
+					cell.setCellValue(s03to.getCompromisomayo());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(34);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastomayo()!=null)
+					gasto=s03to.getGastomayo();
+				if(s03to.getCydmayo()!=null)
+					cyd=s03to.getCydmayo();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(35);
+				if(s03to.getMayoda()!=null)
+					cell.setCellValue(s03to.getMayoda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(36);
+				if(s03to.getCompromisomayo()!=null)
+					cell.setCellValue(s03to.getCompromisomayo());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(37);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastomayo()!=null)
+					gasto=s03to.getGastomayo();
+				if(s03to.getCydmayo()!=null)
+					cyd=s03to.getCydmayo();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(38);
+				if(s03to.getJunioda()!=null)
+					cell.setCellValue(s03to.getJunioda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(39);
+				if(s03to.getCompromisojunio()!=null)
+					cell.setCellValue(s03to.getCompromisojunio());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(40);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastojunio()!=null)
+					gasto=s03to.getGastojunio();
+				if(s03to.getCydjunio()!=null)
+					cyd=s03to.getCydjunio();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(41);
+				if(s03to.getJulioda()!=null)
+					cell.setCellValue(s03to.getJulioda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(42);
+				if(s03to.getCompromisojulio()!=null)
+					cell.setCellValue(s03to.getCompromisojulio());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(43);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastoagosto()!=null)
+					gasto=s03to.getGastoagosto();
+				if(s03to.getCydagosto()!=null)
+					cyd=s03to.getCydagosto();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(44);
+				if(s03to.getSeptiembreda()!=null)
+					cell.setCellValue(s03to.getSeptiembreda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(45);
+				if(s03to.getCompromisoseptiembre()!=null)
+					cell.setCellValue(s03to.getCompromisoseptiembre());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(46);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastoseptiembre()!=null)
+					gasto=s03to.getGastoseptiembre();
+				if(s03to.getCydseptiembre()!=null)
+					cyd=s03to.getCydseptiembre();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(47);
+				if(s03to.getOctubreda()!=null)
+					cell.setCellValue(s03to.getOctubreda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(48);
+				if(s03to.getCompromisooctubre()!=null)
+					cell.setCellValue(s03to.getCompromisooctubre());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(49);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastooctubre()!=null)
+					gasto=s03to.getGastooctubre();
+				if(s03to.getCydoctubre()!=null)
+					cyd=s03to.getCydoctubre();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(50);
+				if(s03to.getNoviembreda()!=null)
+					cell.setCellValue(s03to.getNoviembreda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(51);
+				if(s03to.getCompromisonoviembre()!=null)
+					cell.setCellValue(s03to.getCompromisonoviembre());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(52);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastonoviembre()!=null)
+					gasto=s03to.getGastonoviembre();
+				if(s03to.getCydnoviembre()!=null)
+					cyd=s03to.getCydnoviembre();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(53);
+				if(s03to.getDiciembreda()!=null)
+					cell.setCellValue(s03to.getDiciembreda());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(54);
+				if(s03to.getCompromisodiciembre()!=null)
+					cell.setCellValue(s03to.getCompromisodiciembre());
+				else
+					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(55);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastodiciembre()!=null)
+					gasto=s03to.getGastodiciembre();
+				if(s03to.getCyddiciembre()!=null)
+					cyd=s03to.getCyddiciembre();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				fila++;
+			}
+
+			row = sheet.createRow((short)fila);
+			sheet.setColumnWidth(0, 256*40);
+			sheet.setColumnWidth(1, 256*40);
+			sheet.setColumnWidth(2, 256*40);
+			sheet.setColumnWidth(3, 256*40);
+			sheet.setColumnWidth(4, 256*15);
+			sheet.setColumnWidth(5, 256*15);
+			sheet.setColumnWidth(6, 256*15);
+			sheet.setColumnWidth(7, 256*15);
+			sheet.setColumnWidth(8, 256*15);
+			sheet.setColumnWidth(9, 256*15);
+			sheet.setColumnWidth(10, 256*15);
+			sheet.setColumnWidth(11, 256*15);
+			sheet.setColumnWidth(12, 256*15);
+			sheet.setColumnWidth(13, 256*15);
+			sheet.setColumnWidth(14, 256*15);
+			sheet.setColumnWidth(15, 256*15);
+			sheet.setColumnWidth(16, 256*15);
+			sheet.setColumnWidth(17, 256*15);
+			sheet.setColumnWidth(18, 256*20);
+			sheet.setColumnWidth(19, 256*15);
+			sheet.setColumnWidth(20, 256*15);
+			sheet.setColumnWidth(21, 256*15);
+			sheet.setColumnWidth(22, 256*15);
+			sheet.setColumnWidth(23, 256*15);
+			sheet.setColumnWidth(24, 256*15);
+			sheet.setColumnWidth(25, 256*15);
+			sheet.setColumnWidth(26, 256*15);
+			sheet.setColumnWidth(27, 256*15);
+			sheet.setColumnWidth(28, 256*15);
+			sheet.setColumnWidth(29, 256*15);
+			sheet.setColumnWidth(30, 256*15);
+			sheet.setColumnWidth(31, 256*15);
+			sheet.setColumnWidth(32, 256*15);
+			sheet.setColumnWidth(33, 256*15);
+			sheet.setColumnWidth(34, 256*15);
+			sheet.setColumnWidth(35, 256*15);
+			sheet.setColumnWidth(36, 256*15);
+			sheet.setColumnWidth(37, 256*15);
+			sheet.setColumnWidth(38, 256*15);
+			sheet.setColumnWidth(39, 256*15);
+			sheet.setColumnWidth(40, 256*15);
+			sheet.setColumnWidth(41, 256*15);
+			sheet.setColumnWidth(42, 256*15);
+			sheet.setColumnWidth(43, 256*15);
+			sheet.setColumnWidth(44, 256*15);
+			sheet.setColumnWidth(45, 256*15);
+			sheet.setColumnWidth(46, 256*15);
+			sheet.setColumnWidth(47, 256*15);
+			sheet.setColumnWidth(48, 256*15);
+			sheet.setColumnWidth(49, 256*15);
+			sheet.setColumnWidth(50, 256*15);
+			sheet.setColumnWidth(51, 256*15);
+			sheet.setColumnWidth(52, 256*15);
+			sheet.setColumnWidth(53, 256*15);
+			sheet.setColumnWidth(54, 256*15);
+			sheet.setColumnWidth(55, 256*15);
+			
 			wb.write(response.getOutputStream());
 		}catch(Exception e){
 			e.printStackTrace();
