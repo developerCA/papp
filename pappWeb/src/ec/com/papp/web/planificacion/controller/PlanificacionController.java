@@ -1808,8 +1808,10 @@ public class PlanificacionController {
 				jsonObject.put("subtareaunidad", (JSONObject)JSONSerializer.toJSON(subtareaunidadTO,subtareaunidadTO.getJsonConfigeditar()));
 				//traigo los datos de subtareaunidadacumulador
 				SubtareaunidadacumuladorTO subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
+				//System.out.println("id que va a buscar: " + id);
 				subtareaunidadacumuladorTO.getId().setId(id);
 				Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorTOs=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorTO);
+				//System.out.println("acumuladores: " + subtareaunidadacumuladorTOs.size());
 				//Si no existe debo crearlas
 				if(subtareaunidadacumuladorTOs==null || subtareaunidadacumuladorTOs.size()==0){
 					//obtengo la lista de subtareaunidadacumuladorTO existente para saber que acumulador toca
@@ -1818,13 +1820,13 @@ public class PlanificacionController {
 					Collection<SubtareaunidadacumuladorTO> subtareaunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerSubtareaunidadacumulador(subtareaunidadacumuladorExiste);
 					//subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+1));
 					subtareaunidadacumuladorTO.getId().setAcumid(1L);
-					//subtareaunidadacumuladorTO.getId().setId(id);
+					subtareaunidadacumuladorTO.getId().setId(id);
 					subtareaunidadacumuladorTO.setNpValor(0.0);
 					subtareaunidadacumuladorTO.setTipo(MensajesWeb.getString("presupuesto.planificado"));
 					subtareaunidadacumuladorTOs.add(subtareaunidadacumuladorTO);
 
 					subtareaunidadacumuladorTO=new SubtareaunidadacumuladorTO();
-					//subtareaunidadacumuladorTO.getId().setId(id);
+					subtareaunidadacumuladorTO.getId().setId(id);
 					//subtareaunidadacumuladorTO.getId().setAcumid(Long.valueOf(subtareaunidadacumuladorExistentes.size()+2));
 					subtareaunidadacumuladorTO.getId().setAcumid(2L);
 					subtareaunidadacumuladorTO.setNpValor(0.0);
