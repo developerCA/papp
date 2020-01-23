@@ -157,8 +157,9 @@ app.controller('ReporteE05Controller', [ "$scope","$rootScope","$uibModal","Swee
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.actividadid = obj.id;
-			$scope.objeto.npactividad = obj.codigo + ' - ' + obj.descripcion;
+			$scope.objeto.actividadid = obj.tablarelacionid;
+			$scope.objeto.npactividad = obj.npcodigo + ' - ' + obj.npdescripcion;
+			$scope.actividadid = obj.id;
 			$scope.actividadActivo = true;
 		}, function() {
 		});
@@ -178,13 +179,17 @@ app.controller('ReporteE05Controller', [ "$scope","$rootScope","$uibModal","Swee
 					return $scope.objeto.unidadid;
 				},
 				nivelactividadpadreid : function() {
+					return $scope.actividadid;
+				},
+				actividadid : function() {
 					return $scope.objeto.actividadid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.subactividadid = obj.id;
-			$scope.objeto.npsubactividad = obj.codigo + ' - ' + obj.descripcion;
+			$scope.objeto.subactividadid = obj.tablarelacionid;
+			$scope.objeto.npsubactividad = obj.npcodigo + ' - ' + obj.npdescripcion;
+			$scope.subactividadid = obj.id;
 			$scope.subactividadActivo = true;
 		}, function() {
 		});
@@ -204,13 +209,17 @@ app.controller('ReporteE05Controller', [ "$scope","$rootScope","$uibModal","Swee
 					return $scope.objeto.unidadid;
 				},
 				nivelactividadpadreid : function() {
+					return $scope.subactividadid;
+				},
+				actividadid : function() {
 					return $scope.objeto.actividadid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.tareaid = obj.id;
-			$scope.objeto.nptarea = obj.codigo + ' - ' + obj.descripcion;
+			$scope.objeto.tareaid = obj.tablarelacionid;
+			$scope.objeto.nptarea = obj.npcodigo + ' - ' + obj.npdescripcion;
+			$scope.tareaid = obj.id;
 			$scope.tareaActivo = true;
 		}, function() {
 		});
@@ -230,13 +239,17 @@ app.controller('ReporteE05Controller', [ "$scope","$rootScope","$uibModal","Swee
 					return $scope.objeto.unidadid;
 				},
 				nivelactividadpadreid : function() {
+					return $scope.tareaid;
+				},
+				actividadid : function() {
 					return $scope.objeto.actividadid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.subtareaid = obj.id;
-			$scope.objeto.npsubtarea = obj.codigo + ' - ' + obj.descripcion;
+			$scope.objeto.subtareaid = obj.tablarelacionid;
+			$scope.objeto.npsubtarea = obj.npcodigo + ' - ' + obj.npdescripcion;
+			$scope.subtareaid = obj.id;
 			$scope.subtareaActivo = true;
 		}, function() {
 		});
@@ -256,13 +269,17 @@ app.controller('ReporteE05Controller', [ "$scope","$rootScope","$uibModal","Swee
 					return $scope.objeto.unidadid;
 				},
 				nivelactividadpadreid : function() {
+					return $scope.subtareaid;
+				},
+				actividadid : function() {
 					return $scope.objeto.actividadid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.itemid = obj.id;
-			$scope.objeto.npitem = obj.codigo + ' - ' + obj.descripcion;
+			$scope.objeto.itemid = obj.tablarelacionid;
+			$scope.objeto.npitem = obj.npcodigo + ' - ' + obj.npdescripcion;
+			$scope.itemid = obj.id;
 			$scope.itemsActivo = true;
 		}, function() {
 		});
@@ -282,13 +299,17 @@ app.controller('ReporteE05Controller', [ "$scope","$rootScope","$uibModal","Swee
 					return $scope.objeto.unidadid;
 				},
 				nivelactividadpadreid : function() {
+					return $scope.itemid;
+				},
+				actividadid : function() {
 					return $scope.objeto.actividadid;
 				}
 			}
 		});
 		modalInstance.result.then(function(obj) {
-			$scope.objeto.subitemid = obj.id;
-			$scope.npsubitem = obj.codigo + ' - ' + obj.descripcion;
+			$scope.objeto.subitemid = obj.tablarelacionid;
+			$scope.objeto.npsubitem = obj.npcodigo + ' - ' + obj.npdescripcion;
+			$scope.subitemid = obj.id;
 			$scope.subitemsActivo = true;
 		}, function() {
 		});

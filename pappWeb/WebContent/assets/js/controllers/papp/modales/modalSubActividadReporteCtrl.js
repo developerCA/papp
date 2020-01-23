@@ -1,7 +1,7 @@
 'use strict';
 
-app.controller('ModalSubActividadReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","npunidad","nivelactividadpadreid","SweetAlert","$filter", "ngTableParams","subActividadReporteFactory",
-	function($scope,$uibModalInstance,$uibModal,ejefiscal,npunidad,nivelactividadpadreid,SweetAlert,$filter, ngTableParams, subActividadReporteFactory) {
+app.controller('ModalSubActividadReporteController', [ "$scope","$uibModalInstance","$uibModal","ejefiscal","npunidad","nivelactividadpadreid","actividadid","SweetAlert","$filter", "ngTableParams","subActividadReporteFactory",
+	function($scope,$uibModalInstance,$uibModal,ejefiscal,npunidad,nivelactividadpadreid,actividadid,SweetAlert,$filter, ngTableParams, subActividadReporteFactory) {
 
 	$scope.estado="A";
 	
@@ -14,7 +14,7 @@ app.controller('ModalSubActividadReporteController', [ "$scope","$uibModalInstan
 			ejefiscal,
 			nivelactividadpadreid,
 			npunidad,
-			$scope.estado
+			actividadid //$scope.estado
 		).then(function(resp){
 			if (resp.meta)
 				$scope.data=resp;
