@@ -925,6 +925,8 @@ public class ReportesConsultas {
 			double gasto=0.0;
 			double cyd=0.0;
 			double total=0.0;
+			double compromiso=0.0;
+			double reversion=0.0;
 			for(S03TO s03to:s03tos){
 				row = sheet.createRow((short)fila);
 				cell = row.createCell(0);
@@ -999,10 +1001,15 @@ public class ReportesConsultas {
 					cell.setCellValue(0.0);
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(21);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisoenero()!=null)
-					cell.setCellValue(s03to.getCompromisoenero());
-				else
-					cell.setCellValue(0.0);
+					compromiso=s03to.getCompromisoenero();
+				if(s03to.getReversionenero()!=null)
+					reversion=s03to.getReversionenero();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(22);
 				gasto=0.0;
@@ -1023,10 +1030,15 @@ public class ReportesConsultas {
 					cell.setCellValue(0.0);
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(24);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisofebrero()!=null)
-					cell.setCellValue(s03to.getCompromisofebrero());
-				else
-					cell.setCellValue(0.0);
+					compromiso=s03to.getCompromisofebrero();
+				if(s03to.getReversionfebrero()!=null)
+					reversion=s03to.getReversionfebrero();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(25);
 				gasto=0.0;
@@ -1041,16 +1053,26 @@ public class ReportesConsultas {
 				cell.setCellStyle(styles.get("contenidonumero"));
 
 				cell = row.createCell(26);
-				if(s03to.getMarzoda()!=null)
-					cell.setCellValue(s03to.getMarzoda());
-				else
-					cell.setCellValue(0.0);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
+				if(s03to.getCompromisomarzo()!=null)
+					compromiso=s03to.getCompromisomarzo();
+				if(s03to.getReversionmarzo()!=null)
+					reversion=s03to.getReversionmarzo();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(27);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisomarzo()!=null)
-					cell.setCellValue(s03to.getCompromisomarzo());
-				else
-					cell.setCellValue(0.0);
+					compromiso=s03to.getCompromisomarzo();
+				if(s03to.getReversionmarzo()!=null)
+					reversion=s03to.getReversionmarzo();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(28);
 				gasto=0.0;
@@ -1071,10 +1093,15 @@ public class ReportesConsultas {
 					cell.setCellValue(0.0);
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(30);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisoabril()!=null)
-					cell.setCellValue(s03to.getCompromisoabril());
-				else
-					cell.setCellValue(0.0);
+					compromiso=s03to.getCompromisoabril();
+				if(s03to.getReversionabril()!=null)
+					reversion=s03to.getReversionabril();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(31);
 				gasto=0.0;
@@ -1095,10 +1122,15 @@ public class ReportesConsultas {
 					cell.setCellValue(0.0);
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(33);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisomayo()!=null)
-					cell.setCellValue(s03to.getCompromisomayo());
-				else
-					cell.setCellValue(0.0);
+					compromiso=s03to.getCompromisomayo();
+				if(s03to.getReversionmayo()!=null)
+					reversion=s03to.getReversionmayo();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(34);
 				gasto=0.0;
@@ -1113,42 +1145,23 @@ public class ReportesConsultas {
 				cell.setCellStyle(styles.get("contenidonumero"));
 
 				cell = row.createCell(35);
-				if(s03to.getMayoda()!=null)
-					cell.setCellValue(s03to.getMayoda());
-				else
-					cell.setCellValue(0.0);
-				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(36);
-				if(s03to.getCompromisomayo()!=null)
-					cell.setCellValue(s03to.getCompromisomayo());
-				else
-					cell.setCellValue(0.0);
-				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(37);
-				gasto=0.0;
-				cyd=0.0;
-				total=0.0;
-				if(s03to.getGastomayo()!=null)
-					gasto=s03to.getGastomayo();
-				if(s03to.getCydmayo()!=null)
-					cyd=s03to.getCydmayo();
-				total=gasto+cyd;
-				cell.setCellValue(UtilGeneral.redondear(total,2));
-				cell.setCellStyle(styles.get("contenidonumero"));
-
-				cell = row.createCell(38);
 				if(s03to.getJunioda()!=null)
 					cell.setCellValue(s03to.getJunioda());
 				else
 					cell.setCellValue(0.0);
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(39);
+				cell = row.createCell(36);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisojunio()!=null)
-					cell.setCellValue(s03to.getCompromisojunio());
-				else
-					cell.setCellValue(0.0);
+					compromiso=s03to.getCompromisojunio();
+				if(s03to.getReversionjunio()!=null)
+					reversion=s03to.getReversionjunio();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(40);
+				cell = row.createCell(37);
 				gasto=0.0;
 				cyd=0.0;
 				total=0.0;
@@ -1160,17 +1173,51 @@ public class ReportesConsultas {
 				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 
-				cell = row.createCell(41);
+				cell = row.createCell(38);
 				if(s03to.getJulioda()!=null)
 					cell.setCellValue(s03to.getJulioda());
 				else
 					cell.setCellValue(0.0);
 				cell.setCellStyle(styles.get("contenidonumero"));
-				cell = row.createCell(42);
+				cell = row.createCell(39);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisojulio()!=null)
-					cell.setCellValue(s03to.getCompromisojulio());
+					compromiso=s03to.getCompromisojulio();
+				if(s03to.getReversionjulio()!=null)
+					reversion=s03to.getReversionjulio();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(40);
+				gasto=0.0;
+				cyd=0.0;
+				total=0.0;
+				if(s03to.getGastojulio()!=null)
+					gasto=s03to.getGastojulio();
+				if(s03to.getCydjulio()!=null)
+					cyd=s03to.getCydjulio();
+				total=gasto+cyd;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
+				cell.setCellStyle(styles.get("contenidonumero"));
+
+				cell = row.createCell(41);
+				if(s03to.getAgostoda()!=null)
+					cell.setCellValue(s03to.getAgostoda());
 				else
 					cell.setCellValue(0.0);
+				cell.setCellStyle(styles.get("contenidonumero"));
+				cell = row.createCell(42);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
+				if(s03to.getCompromisoagosto()!=null)
+					compromiso=s03to.getCompromisoagosto();
+				if(s03to.getReversionagosto()!=null)
+					reversion=s03to.getReversionagosto();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(43);
 				gasto=0.0;
@@ -1191,10 +1238,15 @@ public class ReportesConsultas {
 					cell.setCellValue(0.0);
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(45);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisoseptiembre()!=null)
-					cell.setCellValue(s03to.getCompromisoseptiembre());
-				else
-					cell.setCellValue(0.0);
+					compromiso=s03to.getCompromisoseptiembre();
+				if(s03to.getReversionseptiembre()!=null)
+					reversion=s03to.getReversionseptiembre();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(46);
 				gasto=0.0;
@@ -1215,10 +1267,15 @@ public class ReportesConsultas {
 					cell.setCellValue(0.0);
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(48);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisooctubre()!=null)
-					cell.setCellValue(s03to.getCompromisooctubre());
-				else
-					cell.setCellValue(0.0);
+					compromiso=s03to.getCompromisooctubre();
+				if(s03to.getReversionoctubre()!=null)
+					reversion=s03to.getReversionoctubre();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(49);
 				gasto=0.0;
@@ -1239,10 +1296,15 @@ public class ReportesConsultas {
 					cell.setCellValue(0.0);
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(51);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisonoviembre()!=null)
-					cell.setCellValue(s03to.getCompromisonoviembre());
-				else
-					cell.setCellValue(0.0);
+					compromiso=s03to.getCompromisonoviembre();
+				if(s03to.getReversionnoviembre()!=null)
+					reversion=s03to.getReversionnoviembre();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(52);
 				gasto=0.0;
@@ -1263,10 +1325,15 @@ public class ReportesConsultas {
 					cell.setCellValue(0.0);
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(54);
+				compromiso=0.0;
+				reversion=0.0;
+				total=0.0;
 				if(s03to.getCompromisodiciembre()!=null)
-					cell.setCellValue(s03to.getCompromisodiciembre());
-				else
-					cell.setCellValue(0.0);
+					compromiso=s03to.getCompromisodiciembre();
+				if(s03to.getReversiondiciembre()!=null)
+					reversion=s03to.getReversiondiciembre();
+				total=compromiso-reversion;
+				cell.setCellValue(UtilGeneral.redondear(total,2));
 				cell.setCellStyle(styles.get("contenidonumero"));
 				cell = row.createCell(55);
 				gasto=0.0;
