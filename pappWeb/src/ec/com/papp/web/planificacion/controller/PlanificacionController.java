@@ -884,17 +884,17 @@ public class PlanificacionController {
 								grabar=false;
 								break;
 							}
-							else if((itemunidadTO.getId()!=null && itemunidadTO.getId().longValue()!=0) 
-									&& (itemunidadTO.getId().longValue()!=nivelactividadTO2.getTablarelacionid().longValue())
-									&& (nivelactividadTO2.getNpcodigo().equals(itemunidadTO.getNpcodigoitem())
-											&& nivelactividadTO2.getNpcodigoobra().equals(itemunidadTO.getNpcodigoobra()) && nivelactividadTO2.getNpcodigofuente().equals(itemunidadTO.getNpcodigofuente())
-											&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton())
-											&& nivelactividadTO2.getNpcodigoorganismo().equals(itemunidadTO.getNpcodigoorganismo())
-											&& nivelactividadTO2.getNpcodigoorgpres().equals(itemunidadTO.getNpcodigoorgpres()))){
-								System.out.println("entro por 2");
-								grabar=false;
-								break;
-							}
+//							else if((itemunidadTO.getId()!=null && itemunidadTO.getId().longValue()!=0) 
+//									&& (itemunidadTO.getId().longValue()!=nivelactividadTO2.getTablarelacionid().longValue())
+//									&& (nivelactividadTO2.getNpcodigo().equals(itemunidadTO.getNpcodigoitem())
+//											&& nivelactividadTO2.getNpcodigoobra().equals(itemunidadTO.getNpcodigoobra()) && nivelactividadTO2.getNpcodigofuente().equals(itemunidadTO.getNpcodigofuente())
+//											&& nivelactividadTO2.getNpcodigocanton().equals(itemunidadTO.getNpcodigocanton())
+//											&& nivelactividadTO2.getNpcodigoorganismo().equals(itemunidadTO.getNpcodigoorganismo())
+//											&& nivelactividadTO2.getNpcodigoorgpres().equals(itemunidadTO.getNpcodigoorgpres()))){
+//								System.out.println("entro por 2");
+//								grabar=false;
+//								break;
+//							}
 					}
 				}
 				if(grabar) {
