@@ -1741,7 +1741,7 @@ public class PlanificacionController {
 					//obtengo la lista de actividadunidadacumuladorTO existente para saber que acumulador toca
 					ActividadunidadacumuladorTO actividadunidadacumuladorExiste=new ActividadunidadacumuladorTO();
 					actividadunidadacumuladorExiste.getId().setId(id);
-					Collection<ActividadunidadacumuladorTO> actividadunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerActividadunidadacumulador(actividadunidadacumuladorExiste);
+					//Collection<ActividadunidadacumuladorTO> actividadunidadacumuladorExistentes=UtilSession.planificacionServicio.transObtenerActividadunidadacumulador(actividadunidadacumuladorExiste);
 					//actividadunidadacumuladorTO.getId().setAcumid(Long.valueOf(actividadunidadacumuladorExistentes.size()+1));
 					actividadunidadacumuladorTO.getId().setAcumid(1L);
 					actividadunidadacumuladorTO.getId().setId(id);

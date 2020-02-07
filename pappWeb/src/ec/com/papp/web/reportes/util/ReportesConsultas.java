@@ -2450,7 +2450,20 @@ public class ReportesConsultas {
 					cell.setCellValue(p04pac.getSubitemcodigo());
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(16);
-					cell.setCellValue("BIEN");
+					if(p04pac.getItemtipobien()!=null){
+						if(p04pac.getItemtipobien().equals("T"))
+							cell.setCellValue("Sin Tipo");
+						else if(p04pac.getItemtipobien().equals("B"))
+							cell.setCellValue("Bien");
+						else if(p04pac.getItemtipobien().equals("S"))
+							cell.setCellValue("Servicio");
+						else if(p04pac.getItemtipobien().equals("O"))
+							cell.setCellValue("Obra");
+						else if(p04pac.getItemtipobien().equals("C"))
+							cell.setCellValue("Consultora");
+					}
+					else
+						cell.setCellValue("Sin Tipo");
 					cell.setCellStyle(styles.get("contenido"));
 					cell = row.createCell(17);
 					cell.setCellValue(p04pac.getSubitemnombre());
