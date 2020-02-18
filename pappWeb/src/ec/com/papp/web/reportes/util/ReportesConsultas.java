@@ -89,7 +89,7 @@ public class ReportesConsultas {
 			fila++;
 			row = sheet.createRow((short)fila);
 			cell = row.createCell(0);
-			cell.setCellValue("SEGUIMIENTO A LA EJECUCION DE LA PROGRAMACION ANUAL DE LA PLANIFICACION -S1");
+			cell.setCellValue("S-1 SEG. A LA EJECUCIÓN PAP - SUBITEM");
 			cell.setCellStyle(styles.get("treporteTitulo"));
 			sheet.addMergedRegion(new CellRangeAddress(2,2,0,23)); 
 			fila++;
@@ -406,7 +406,7 @@ public class ReportesConsultas {
 			fila++;
 			row = sheet.createRow((short)fila);
 			cell = row.createCell(0);
-			cell.setCellValue("SEGUIMIENTO A LA EJECUCION DE LA PROGRAMACION ANUAL DE LA PLANIFICACION -S2");
+			cell.setCellValue("S-2 SEG. A LA EJECUCIÓN PAP - ITEM");
 			cell.setCellStyle(styles.get("treporteTitulo"));
 			sheet.addMergedRegion(new CellRangeAddress(2,2,0,23)); 
 			fila++;
@@ -689,7 +689,7 @@ public class ReportesConsultas {
 			fila++;
 			row = sheet.createRow((short)fila);
 			cell = row.createCell(0);
-			cell.setCellValue("SEGUIMIENTO A LA EJECUCION DE LA PROGRAMACION ANUAL DE LA PLANIFICACION -S3");
+			cell.setCellValue("S-3 SEG. A LA EJECUCIÓN PAP - PLANIFICADO Vs EJECUTADO");
 			cell.setCellStyle(styles.get("treporteTitulo"));
 			sheet.addMergedRegion(new CellRangeAddress(2,2,0,55)); 
 			fila++;
@@ -1459,7 +1459,7 @@ public class ReportesConsultas {
 				p01TO=(P01TO)p01tos.iterator().next();
 				row = sheet.createRow((short)fila);
 				cell = row.createCell(0);
-				cell.setCellValue("PLANIFICACIÓN ESTRATÉGICA");
+				cell.setCellValue("P-1 MATRIZ PLANIFICACIÓN ESTRATÉGICA");
 				cell.setCellStyle(styles.get("treporteTitulo"));
 				sheet.addMergedRegion(new CellRangeAddress(2,2,0,12)); 
 				fila++;
@@ -1766,7 +1766,7 @@ public class ReportesConsultas {
 				p02TO=(P02TO)p02tos.iterator().next();
 				row = sheet.createRow((short)fila);
 				cell = row.createCell(0);
-				cell.setCellValue("PROGRAMACIÓN ANUAL DE LA PLANIFICACIÓN A NIVEL DE ITEM - " + p02TO.getEjerciciofiscalanio());
+				cell.setCellValue("P2- MATRIZ PAP - ITEM");
 				cell.setCellStyle(styles.get("treporteTitulo"));
 				sheet.addMergedRegion(new CellRangeAddress(2,2,0,12)); 
 				fila++;
@@ -2289,12 +2289,11 @@ public class ReportesConsultas {
 			cell.setCellStyle(styles.get("treporteTitulo"));
 			sheet.addMergedRegion(new CellRangeAddress(1,1,0,12)); 
 			fila++;
-			
 			if(p04pactos.size()>0){
 				p04pacTO=(P04pacTO)p04pactos.iterator().next();
 				row = sheet.createRow((short)fila);
 				cell = row.createCell(0);
-				cell.setCellValue("PLAN ANUAL DE CONTRATACIONES - " + p04pacTO.getEjerciciofiscalanio());
+				cell.setCellValue("P-4 MATRIZ RESUMEN PAP - METAS - PRESUPUESTO");
 				cell.setCellStyle(styles.get("treporteTitulo"));
 				sheet.addMergedRegion(new CellRangeAddress(2,2,0,12)); 
 				fila++;
@@ -2628,7 +2627,7 @@ public class ReportesConsultas {
 				p03TO=(P03TO)p03tos.iterator().next();
 				row = sheet.createRow((short)fila);
 				cell = row.createCell(0);
-				cell.setCellValue("PROGRAMACIÓN ANUAL DE LA PLANIFICACIÓN A NIVEL DE SUBITEMS -  - " + p03TO.getEjerciciofiscalanio());
+				cell.setCellValue("P-3 MATRIZ PAP - SUBITEM");
 				cell.setCellStyle(styles.get("treporteTitulo"));
 				sheet.addMergedRegion(new CellRangeAddress(2,2,0,12)); 
 				fila++;
@@ -3138,7 +3137,7 @@ public class ReportesConsultas {
 				p05TO=(P05TO)p05tos.iterator().next();
 				row = sheet.createRow((short)fila);
 				cell = row.createCell(0);
-				cell.setCellValue("RESUMEN POR ENTIDAD OPERATIVA DESCONCENTRADA  - " + p05TO.getEjerciciofiscalanio());
+				cell.setCellValue("P-5 MATRIZ RESUMEN EOD - UE" + p05TO.getEjerciciofiscalanio());
 				cell.setCellStyle(styles.get("treporteTitulo"));
 				sheet.addMergedRegion(new CellRangeAddress(2,2,0,12)); 
 				fila++;
@@ -3331,10 +3330,10 @@ public class ReportesConsultas {
 							cell.setCellValue("RESPONSABLE DE LA ACTIVIDAD:  ");
 							cell.setCellStyle(styles.get("tituloizquierda"));
 							cell = row.createCell(1);
-							cell.setCellValue(p04to3.getResponsable());
+							cell.setCellValue(p04to3.getGrado());
 							cell.setCellStyle(styles.get("contenido"));
 							cell = row.createCell(2);
-							cell.setCellValue(p04to3.getGrado());
+							cell.setCellValue(p04to3.getResponsable());
 							cell.setCellStyle(styles.get("contenido"));
 							fila++;
 							row = sheet.createRow((short)fila);
